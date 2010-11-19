@@ -50,6 +50,7 @@ SECRET_KEY = '*$#jqy%8ho+3-n9adsj@qjgq8-+h6oz8z3&2k5g5&9mzhx#tj('
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
+    "django.core.context_processors.media",
     "django.core.context_processors.request",
 )
 
