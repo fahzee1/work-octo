@@ -18,15 +18,35 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('django.views.generic.simple',
-    (r'^$', 'direct_to_template', 
-        {'template': 'index.html', 'extra_context': 
-            {'page_name': 'index'}}),
-    (r'^about-us/?$', 'direct_to_template', 
-        {'template': 'about_us.html', 'extra_context': 
-            {'page_name': 'about_us'}}),
+    url(r'^$', 'direct_to_template', 
+    	dict(template='index.html', extra_context={'page_name': 'index'}), 
+    	name='home'),
+    # Product Pages
+    url(r'^products/?$', 'direct_to_template', 
+    	dict(template='products/index.html', extra_context={'page_name': 'products'}), 
+    	name='products'),
+    url(r'^products/interactive-video/?$', 'direct_to_template', 
+    	dict(template='products/video.html', extra_context={'page_name': 'interactive-video'}), 
+    	name='interactive-video'),
+    # About Pages
+    url(r'^about-us/?$', 'direct_to_template', 
+    	dict(template='about-us/index.html', extra_context={'page_name': 'about-us'}), 
+    	name='about-us'),
+   	url(r'^about-us/profile/?$', 'direct_to_template', 
+    	dict(template='about-us/profile.html', extra_context={'page_name': 'profile'}), 
+    	name='profile'),
+    url(r'^about-us/charities/?$', 'direct_to_template', 
+    	dict(template='about-us/charities.html', extra_context={'page_name': 'charities'}), 
+    	name='charities'),
+    # Contact Pages
+    url(r'^contact-us/?$', 'direct_to_template', 
+    	dict(template='contact-us/index.html', extra_context={'page_name': 'contact-us'}), 
+    	name='contact-us'),
+
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     )
+

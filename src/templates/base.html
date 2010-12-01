@@ -25,7 +25,7 @@
 	</div>    
     <div id="header">
         <div>
-        	<a href="/">
+        	<a href="{% url home %}">
 	        	<div class="logo-icon"></div>
 		       	<div class="logotype">
 		       		<h3>Protect America</h3>
@@ -42,11 +42,11 @@
     <div id="navigation">
     	<ul>
     		<li class="homebutton">&nbsp;</li>
-    		<li ><a href="/pa/copper/home-security-systems" title="Home Security Systems and Products">Products</a></li>
-    		<li ><a href="/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
+    		<li ><a href="{% url products %}" title="Home Security Systems and Products">Products</a></li>
+    		<li ><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
 
     		<li ><a href="/pa/support/home-security-alarm-system" title="Technical Support and Help with your Home Security System">Support</a></li>
-    		<li ><a href="/pa/contact/" title="Contact Protect America">Contact Us</a></li>
+    		<li ><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
     	</ul>
     	<div class="search-area">
     		<form name="search" method="get" action="/pa/search">
@@ -61,15 +61,29 @@
 	<!-- END Left Side of Conent (CNT-L) -->
 	<!-- START  Right Side of Content (CNT-R) -->
 	<div id="right-content">  
-        {% block sidebar %}{% endblock %}
+        {% block sidebar %}
+        <div class="lead-form">
+        	<img src="/media/img/free-quote.png" />
+        	<label>Name:</label>
+        	<input type="text" />
+        	<label>Email Address:</label>
+        	<input type="text" />
+            <label>Phone Number:</label>
+        	<input type="text" />
+        	<input type="image" src="/media/img/get-quote-button.png" class="submit-button" />
+        </div>
+        <div class="content-box">
+        	<img src="/media/img/live-chat-button.jpg" />
+        </div>
+        {% endblock %}
 	</div>
 	<!-- END  Right Side of Content (CNT-R) -->
 	<div id="footer">
 		<ul class="navigation">
-			<li><a href="/pa/copper" title="View Copper Package details and compare to our other home security systems packages." >Products</a></li>
-			<li><a href="/pa/about" title="See what makes Protect America different from other home security companies." >About Us</a></li>
+			<li><a href="{% url products %}" title="View Copper Package details and compare to our other home security systems packages." >Products</a></li>
+			<li><a href="{% url about-us %}" title="See what makes Protect America different from other home security companies." >About Us</a></li>
 			<li><a href="/pa/support" title="">Protect America Customer Service</a></li>
-			<li><a href="/pa/contact" title="Contact Protect America about our GE home security systems." >Contact Us</a></li>
+			<li><a href="{% url contact-us %}" title="Contact Protect America about our GE home security systems." >Contact Us</a></li>
 			<li class="omega"><a href="/pa/do-not-call" title="default">Do Not Call</a></li>
 			<li><a href="/pa/affiliates" title="Learn about our wireless alarm affiliate program and partner with us today." >Affiliate Program</a></li>
 			<li><a href="/pa/license/" id="state_license_link">State Licenses</a></li>

@@ -18,6 +18,7 @@ body {
 	-moz-box-shadow: 0 3px 10px #999;
 	-webkit-box-shadow: 0 3px 10px #999;
 	box-shadow: 0 3px 10px #999;
+	z-index: 0;
 }
 #left-content {
 	width: 670px;
@@ -42,16 +43,35 @@ a:hover {
 }
 /********** Content Boxes **********/
 
-.content-box {
+#left-content .content-box {
 	width: 650px;
-	margin: 0 5px;
+	margin: 0 5px 15px;
 	float: left;
 
 }
-.content-box.half {
-	width: 325px;
-	margin: 0 5px;
+#left-content .content-box .outline-box {
+	margin: 10px;
+	border: 1px solid #999;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	width: 305px;
 
+}
+.bottom-rule {
+	border-bottom: 1px solid #eee;
+	margin-bottom: 20px;
+}
+.breaking {
+	overflow: visible;
+}
+#left-content .content-box.half {
+	width: 325px;
+	margin: 0 5px 20px;
+
+}
+#left-content .content-box.third {
+	width: 213px;
+	margin: 0 5px 20px;
 }
 #left-content .outline-box {
 	width: 658px;
@@ -70,18 +90,42 @@ a:hover {
 	border-radius: 10px;
 	float: left;
 }
+#right-content .content-box {
+	margin: 10px;
+	width: 270px;
+}
 #left-content .outline-box.half {
 	width: 323px;
 }
 
-
+/********** Grid / Image Adjustments ***********/
+img.image-break {
+	left: -150px;
+	position: absolute;
+	z-index: -50;
+}
 /********** Content Typography **********/
+h1 {
+	font-size: 34px;
+	line-height: 34px;
+	margin: 0 0 10px 10px;
+	color: #333;
+	font-weight: 800;
+}
+h1.bottom-rule {
+	padding-bottom: 10px;
+}
+strong {
+	font-weight: 800;
+}
 .content-box h2 {
 	color: #333;
 	font-size: 28px;
 	font-weight: normal;
 	line-height: 28px;
-	padding: 0 0 0 5px;
+	padding: 0 17px;
+	margin-bottom: 10px;
+	letter-spacing: -1px;
 }
 .outline-box h2 {
 	background: #DCE9EF;
@@ -105,15 +149,33 @@ a:hover {
 	border-bottom: 1px solid #eee;
 
 }
-.outline-box p {
+.content-box.third h4 {
+	text-align: center;
+	font-size: 14px;
+	font-weight: 800;
+	line-height: 15px;
+	margin: 0 5px 10px;
+}
+.content-box.third p {
+	font-size: 12px;
+	line-height: 16px;
+	padding: 0 10px;
+}
+.outline-box p, .content-box p {
 	padding: 0 10px;
 	text-align: justify;
+	line-height: 18px;
+	color: #333;
 }
-.outline-box h2 a {
+.content-box p {
+	padding: 0 20px;
+	margin-bottom: 10px;
+}
+.outline-box h2 a, .content-box h2 a {
 	text-decoration: none;
 	color:#333333;
 }
-.outline-box h2 a:hover {
+.outline-box h2 a:hover, .content-box h2 a:hover {
 	text-decoration: underline;
 }
 #left-content ul {
@@ -123,6 +185,46 @@ a:hover {
 }
 #left-content ul li {
 	margin-bottom: 10px;
+}
+#left-content .content-box .outline-box span {
+	background: #DCE9EF;
+	color: #333333;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 16px;
+	margin: 0 0 10px;
+	padding: 8px;
+	border-bottom: 1px solid #999;
+	-moz-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+	display: block;
+}
+#left-content .content-box .outline-box li {
+	margin-bottom: 0;
+	font-size: 11px;
+}
+#left-content .content-box .outline-box ul {
+	list-style-type: none;
+	margin: 0 0 10px 10px;
+	padding: 0;
+}
+.text_compensate_250 {
+	height: 250px;
+}
+.text_compensate_300 {
+	height: 300px;
+}
+.text_compensate_350 {
+	height: 350px;
+}
+.text_compensate_400 {
+	height: 400px;
+}
+.text_compensate_450 {
+	height: 450px;
+}
+.text_compensate_500 {
+	height: 500px;
 }
 
 /********** Header **********/
@@ -251,7 +353,7 @@ a:hover {
 	-webkit-box-shadow: 0 2px 5px #888;
 	box-shadow: 0 5px 5px #888;
 	z-index: 500;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 #navigation ul {
  	width: 680px;
@@ -273,7 +375,7 @@ a:hover {
 	text-decoration: none;
 	text-align: center;
 	-moz-border-radius: 5px;
-	-webkit-radius: 5px;
+	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	line-height: 22px;
 	height: 22px;
@@ -324,10 +426,65 @@ li.homebutton {
 	line-height: 21px;
 	font-size: 14px;
 }
-
+.sub-nav {
+	background: #eee;
+	border: 1px solid #ccc;
+	border-left: none;
+	margin: 0 10px 10px 0;
+	border-radius: 0px 10px 10px 0px;
+	-moz-border-radius: 0px 10px 10px 0px;
+	-webkit-border-top-right-radius: 10px;
+	-webkit-border-bottom-right-radius: 10px;
+}
+#left-content .sub-nav ul {
+	list-style-type: none;
+	padding: 0 10px;
+	margin: 0;
+}
+#left-content .sub-nav li {
+	float: left;
+	margin: 0;
+	font-size: 12px;
+	color: #666;
+	font-weight: 800;
+	padding: 2px 25px 2px 0;
+	
+}
+/********** Lead Form **********/
+.lead-form {
+	background: #dbe9ef;
+	margin-left: 10px;
+	padding: 10px 10px 10px 12px;
+	-moz-border-radius: 10px 0 0 10px;
+	border: 1px solid #93b5e0;
+	border-right: none;
+	-moz-box-shadow: 0 2px 5px #888;
+	-webkit-box-shadow: 0 2px 5px #888;
+	box-shadow: 0 5px 5px #888;
+}
+.lead-form input {
+	border:1px solid #93B5E0;
+	display:block;
+	height:24px;
+	width:250px;
+	line-height: 24px;
+	font-size: 18px;
+}
+.lead-form label {
+	display: block;
+	font-size: 16px;
+	color: #0049a1;
+	margin-top: 10px;
+}
+.lead-form input.submit-button {
+	width: 252px;
+	height: 48px;
+	border: none;
+	margin-top: 20px;
+}
 /********** Buttons **********/
 .button {
-	margin: 10px;
+	margin: 20px 10px;
 	text-align: center;
 }
 .button a {
@@ -423,7 +580,7 @@ tfoot tr td {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	color:#FFFFFF;
-	font-size:10px;
+	font-size:9px;
 	padding:3px;
 	text-decoration: none;
 }
