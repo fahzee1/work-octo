@@ -6,7 +6,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 /********** Main ***********/
 body {
-	background: #ccc;
+	background: #fff;
 	font: 0.8em/1.7em "Helvetica Neue", Arial, sans-serif;
 }
 #wrapper {
@@ -15,9 +15,6 @@ body {
 	position:relative;
 	width:960px;
 	padding-bottom: 10px;
-	-moz-box-shadow: 0 3px 10px #999;
-	-webkit-box-shadow: 0 3px 10px #999;
-	box-shadow: 0 3px 10px #999;
 	z-index: 0;
 }
 #left-content {
@@ -29,6 +26,7 @@ body {
 	float: left;
 
 }
+
 .clear { 
 	clear: both; 
 	height: 0; 
@@ -139,7 +137,7 @@ strong {
 	-moz-border-radius: 10px 10px 0 0;
 	border-radius: 10px 10px 0 0;
 }
-.outline-box h3 {
+.outline-box h3, .content-box h3 {
 	color:#0066B3;
 	font-size:20px;
 	font-weight: normal;
@@ -226,8 +224,33 @@ strong {
 .text_compensate_500 {
 	height: 500px;
 }
+/********** Contact Form **********/
+.contact-form {
+	background: #014C9F;
+	height: 130px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	opacity: .98;
+	-moz-box-shadow: -1px -3px 5px #ccc;
+	-webkit-box-shadow: -1px -3px 5px #ccc;
+	box-shadow: -1px -3px 5px #ccc;
+}
 
 /********** Header **********/
+.header-background {
+	/* fallback (Opera) */
+    background: #fff;
+    /* Mozilla: */
+    background: -moz-linear-gradient(top, #fff, #d8effc);
+    /* Chrome, Safari:*/
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#d8effc));
+}
+.header-wrapper {
+	width: 960px;
+	margin: 0 auto;
+	
+}
 .qnav-subheader {
 	float:left;
 	margin: 5px 0 0 15px;
@@ -266,12 +289,7 @@ strong {
 	background: url(/media/img/icon-set.png) no-repeat -61px -77px;
 }
 #header {
-	/* fallback (Opera) */
-    background: #fff;
-    /* Mozilla: */
-    background: -moz-linear-gradient(top, #fff, #d8effc);
-    /* Chrome, Safari:*/
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#d8effc));
+
 	height: 60px;
 	margin: 0;
 }
@@ -344,14 +362,15 @@ strong {
 	line-height: 36px;
 }
 /********** Navigation **********/
-#navigation {
+.navigation-background {
 	background: #014C9F;
+
+}
+#navigation {
 	height: 32px;
 	position: relative;
 	overflow: hidden;
-	-moz-box-shadow: 0 2px 5px #888;
-	-webkit-box-shadow: 0 2px 5px #888;
-	box-shadow: 0 5px 5px #888;
+
 	z-index: 500;
 	margin-bottom: 20px;
 }
@@ -613,7 +632,7 @@ tfoot tr td {
 }
 .extra-stuff {
 	width: 960px;
-	margin: 10px auto;
+	margin: 10px auto 135px;
 }
 .extra-stuff img {
 	padding-top: 10px;
