@@ -52,6 +52,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
+    'common.context_processors.is_business_time',
+    'common.context_processors.phone_number',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -65,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'affiliates.middleware.AffiliateMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -80,12 +83,16 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
 
+    'common',
+    'affiliates',
+    'sitemaps',
+    'adspace',
 )
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
-DEFAULT_PHONE = '8009515147'
+DEFAULT_PHONE = '8009515111'
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings

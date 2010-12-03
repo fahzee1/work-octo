@@ -18,15 +18,19 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('django.views.generic.simple',
-    (r'^$', 'direct_to_template', 
-        {'template': 'index.html', 'extra_context': 
-            {'page_name': 'index'}}),
-    (r'^about-us/?$', 'direct_to_template', 
-        {'template': 'about_us.html', 'extra_context': 
-            {'page_name': 'about_us'}}),
+    url(r'^$', 'direct_to_template', 
+    	dict(template='index.html', extra_context={'page_name': 'index'}), 
+    	name='home'),
+    url(r'^about-us/charities/?$', 'direct_to_template', 
+    	dict(template='about-us/charities.html', extra_context={'page_name': 'charities'}), 
+    	name='charities'),
+    url(r'^sitemap/?$', 'direct_to_template',
+        dict(template='sitemaps/static/sitemap.html', extra_context={'page_name': 'sitemap'}),
+        name='sitemap'),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     )
+
