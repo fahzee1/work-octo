@@ -1,0 +1,177 @@
+{% load content_filters %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>{% block page_title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css" />
+	<link rel="icon" href="/favicon.ico" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+{% block extra_css %}{% endblock %}
+{% block extra_javascript %}{% endblock %}
+</head>
+<body>
+<!-- Page Wrapper -->
+<<<<<<< HEAD
+<div id="wrapper">
+	<div>
+		<span class="qnav-subheader">
+            Interactive Wireless Security Systems
+        </span>
+		<ul class="qnav">
+			<li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;byhref=1&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson" target="chat34774121" onclick="javascript:window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson&amp;referrer='+escape(document.location),'chat34774121','width=472,height=320');return false;" class="chat">Live Chat</a></li>				
+			<li><a href="http://localhost:8888/agreement/help.php" title="Frequently Asked Questions" class="help">FAQs</a></li>
+			<li><a href="/agreement" title="Enter the Online Agreement"  class="doc">Agreement</a></li>
+		</ul>
+		<div class="clear"></div>
+	</div>    
+    <div id="header">
+        <div>
+        	<a href="/">
+	        	<div class="logo-icon"></div>
+		       	<div class="logotype">
+		       		<h3>Protect America</h3>
+		       		<h4>America's Home Security Experts</h4>
+		       	</div>
+	       	</a>
+        </div>  	
+        <div class="ge-logo"></div>
+        <div class="call-box">
+        	<p>Call Today and Save!</p>
+			<span class="dynamic-phone-number">{{ phone_number|format_number:"1-\1-\2-\3" }}</span>
+        </div>
+	</div>
+    <div id="navigation">
+    	<ul>
+    		<li class="homebutton">&nbsp;</li>
+    		<li ><a href="/pa/copper/home-security-systems" title="Home Security Systems and Products">Products</a></li>
+    		<li ><a href="/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
+=======
+<div class="header-background">
+	<div class="header-wrapper">
+		<div>
+			<span class="qnav-subheader">
+		        Interactive Wireless Security Systems
+		    </span>
+			<ul class="qnav">
+				<li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;byhref=1&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson" target="chat34774121" onclick="javascript:window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson&amp;referrer='+escape(document.location),'chat34774121','width=472,height=320');return false;" class="chat">Live Chat</a></li>				
+				<li><a href="http://localhost:8888/agreement/help.php" title="Frequently Asked Questions" class="help">FAQs</a></li>
+				<li><a href="/agreement" title="Enter the Online Agreement"  class="doc">Agreement</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>    
+		<div id="header">
+		    <div>
+		    	<a href="{% url home %}">
+		        	<div class="logo-icon"></div>
+			       	<div class="logotype">
+			       		<h3>Protect America</h3>
+			       		<h4>America's Home Security Experts</h4>
+			       	</div>
+		       	</a>
+		    </div>  	
+		    <div class="ge-logo"></div>
+		</div>
+>>>>>>> 9269a186e8d9bb89ebb9a475cc406a6583d5d3ef
+
+	</div>
+</div>
+<div class="navigation-background">
+	<div class="header-wrapper">
+		<div id="navigation">
+			<ul>
+				<li class="homebutton">&nbsp;</li>
+				<li ><a href="{% url products %}" title="Home Security Systems and Products">Products</a></li>
+				<li ><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
+		
+				<li ><a href="/pa/support/home-security-alarm-system" title="Technical Support and Help with your Home Security System">Support</a></li>
+				<li ><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
+			</ul>
+			<div class="search-area">
+				<form name="search" method="get" action="/pa/search">
+					<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="wrapper">
+        {% block content %}{% endblock %}
+	</div>
+	<div id="footer">
+		<div class="footer-wrapper">
+			<ul class="navigation">
+				<li><a href="{% url products %}" title="View Copper Package details and compare to our other home security systems packages." >Products</a></li>
+				<li><a href="{% url about-us %}" title="See what makes Protect America different from other home security companies." >About Us</a></li>
+				<li><a href="/pa/support" title="">Protect America Customer Service</a></li>
+				<li><a href="{% url contact-us %}" title="Contact Protect America about our GE home security systems." >Contact Us</a></li>
+				<li class="omega"><a href="/pa/do-not-call" title="default">Do Not Call</a></li>
+				<li><a href="/pa/affiliates" title="Learn about our wireless alarm affiliate program and partner with us today." >Affiliate Program</a></li>
+				<li><a href="/pa/license/" id="state_license_link">State Licenses</a></li>
+				<li><a href="/pa/priv_p" title="Protect America Privacy Policy" >Privacy Policy</a></li>
+				<li><a href="/pa/return-policy" title="Protect America Return Policy" >Return Policy</a></li>
+				<li class="omega"><a href="/pa/site_map" title="Detailed list of the Protect America homesite site map architecture." >Site Map</a></li>
+			</ul>
+			<div class="copyright">		
+				GE and GE Security logos are registered trademarks of General Electric.<br />
+				The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.<br />
+				Protect America is a trademark of Protect America, Inc. &copy; 1992 &ndash; 2010 Protect America, Inc. All rights reserved. 
+			</div>
+		</div>
+
+	</div>
+	<div class="clear"></div>
+<!-- End of Wrapper -->
+</div>
+
+<div class="extra-stuff">
+	<div>
+		<a href="http://www.alarm.org" class="external fl-left"><img src="https://www.protectamerica.com/images/nbfaa_logo.gif" width="75" height="25" border="0" alt="National Burglar &amp; Fire Alarm Association" /></a>
+		<div class="extra-copyright">
+			<sup>*</sup> <a href="http://localhost:8888/agreement/includes/mon_agreement.php?homesite=true&amp;TB_iframe=true&amp;width=780&amp;height=550" title="Standard Monitoring Agreement" class="thickbox">
+	        Standard home security alarm monitoring agreement
+		    </a> required with approved credit.
+		    <br />
+			Offer subject to change.  Void where prohibited.
+		    <br/>
+		    <!-- Hours of Operation: M-F: 8am-9pm CST, Sat: 8am-5pm CST, Sun: 9am-5pm CST. -->
+		    Hours of Operation: <span class="business_hours"><span>Mon - Fri: 08:00am - 09:00pm CT</span> <span>Sat: 08:00am - 05:00pm CT</span> <span>Sun: 09:00am - 05:00pm CT</span></span>	    
+		</div>
+		<div class="clear"></div>
+
+	</div>
+	<div class="disclaimer">
+		<sup>*</sup> Information used in home security alarm system comparisons (for ADT) was obtained from telephone price quotes and online research &mdash; November 2010. "Up Front" cost based on total up front, out-of-pocket expense to obtain services from ADT; "Up Front" costs for ADT is an installation fee based on similar equipment packages offered as quoted by ADT; "Up Front" costs shown for similar Bronze, Silver, Gold, and Platinum packages from ADT include one motion detector in the ADT packages; "Monitoring" price listed for ADT includes the additional "warranty" or "extended service plan".
+	</div>
+</div>
+<div class="contact-area">
+	<div class="contact-area-wrapper">
+		<div class="content-box third">
+			<strong class="quote">Free Home Security Quote</strong>
+			<p>Ready to protect your Home? <br />Receive a no-obligation security analysis.</p>
+			<div class="button"><a href="">Learn More</a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="content-box third">
+			<strong class="chat">Online Chat</strong>
+			<p>Need help? Just ask. Chat online with<br/>a security professional</p>
+			<div class="button"><a href="">Chat Now</a></div>
+			<div class="clear"></div>
+		</div>
+		<div class="content-box third">
+			<strong class="call">Call Today & Save!</strong>
+			<span class="dynamic-phone-number">1-800-951-5190</span>
+			<p>Call to talk with our knowledgeable<br />security professionals.</p>
+			<div class="clear"></div>
+		</div>	
+	</div>
+</div>		
+{% if use_call_measurement %}
+<script type="text/javascript">
+    var thisref = document.referrer.replace(/&/g, "zzzzz");
+    var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+    document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E"));
+</script>
+{% endif %}
+</body>
+</html>

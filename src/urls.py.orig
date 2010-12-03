@@ -21,6 +21,14 @@ urlpatterns += patterns('django.views.generic.simple',
     url(r'^$', 'direct_to_template', 
     	dict(template='index.html', extra_context={'page_name': 'index'}), 
     	name='home'),
+<<<<<<< HEAD
+    url(r'^about-us/charities/?$', 'direct_to_template', 
+    	dict(template='about-us/charities.html', extra_context={'page_name': 'charities'}), 
+    	name='charities'),
+    url(r'^sitemap/?$', 'direct_to_template',
+        dict(template='sitemaps/static/sitemap.html', extra_context={'page_name': 'sitemap'}),
+        name='sitemap'),
+=======
     # Product Pages
     url(r'^products/?$', 'direct_to_template', 
     	dict(template='products/index.html', extra_context={'page_name': 'products'}), 
@@ -47,6 +55,7 @@ urlpatterns += patterns('django.views.generic.simple',
     	dict(template='contact-us/index.html', extra_context={'page_name': 'contact-us'}), 
     	name='contact-us'),
 
+>>>>>>> 9269a186e8d9bb89ebb9a475cc406a6583d5d3ef
 )
 
 if settings.DEBUG:
