@@ -35,6 +35,11 @@ urlpatterns += patterns('django.views.generic.simple',
     url(r'^products/interactive-video/?$', 'direct_to_template', 
     	dict(template='products/video.html', extra_context={'page_name': 'interactive-video'}), 
     	name='interactive-video'),
+    # Equipment Pages
+    url(r'^products/security-equipment/?$', 'direct_to_template', 
+    	dict(template='products/equipment/index.html', extra_context={'page_name': 'equipment'}), 
+    	name='equipment'),
+    
     # About Pages
     url(r'^about-us/?$', 'direct_to_template', 
     	dict(template='about-us/index.html', extra_context={'page_name': 'about-us'}), 
