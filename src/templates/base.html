@@ -59,23 +59,16 @@
 		</div>
 	</div>
 </div>
+{% block subnav %}
 <div class="sub-nav">
-	<ul>
-		<li><a href="{% url interactive-video %}">Home Security Packages</a></li>
-
-		<li><a href="{% url interactive-video %}">Video Security</a></li>
-		<li><a href="{% url equipment %}">Security Equipment</a></li>
-		<li><a href="{% url equipment %}">Security System Monitoring</a></li>
-		<li><a href="{% url equipment %}">Existing Systems</a></li>
-		<li><a href="{% url equipment %}">GPS Vehicle Tracking</a></li>
-
-
-
-
-
-	</ul>
+	{% block subnav_parent %}
+	{% endblock %}
+	{% block subnav_child %}
+	{% endblock %}
 	<div class="clear"></div>
 </div>
+{% endblock %}
+
 <div id="wrapper">
         {% block content %}{% endblock %}
 	</div>

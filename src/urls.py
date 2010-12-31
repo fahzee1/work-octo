@@ -17,46 +17,59 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),    
 )
 
+# a simple direct_to_template wrapper
+def dtt(pattern, template, name, parent=None, ctx=None):
+	ctx = ctx or {}
+	
+	context = dict(page_name=name, parent=parent)
+	context.update(ctx)
+	
+	return url(pattern, 'direct_to_template',
+		dict(template=template, extra_context=context),
+		name=name)
+
+
 urlpatterns += patterns('django.views.generic.simple',
-    url(r'^$', 'direct_to_template', 
-    	dict(template='index.html', extra_context={'page_name': 'index'}), 
-    	name='home'),
-    # Product Pages
-    url(r'^products/?$', 'direct_to_template', 
-    	dict(template='products/index.html', extra_context={'page_name': 'products'}), 
-    	name='products'),
-    url(r'^products/packages/?$', 'direct_to_template', 
-    	dict(template='products/packages.html', extra_context={'page_name': 'security-packages'}), 
-    	name='security-packages'),
-    	# Products > Package Pages
-    	url(r'^products/packages/copper/?$', 'direct_to_template', 
-	    	dict(template='products/copper.html', extra_context={'page_name': 'copper'}), 
-	    	name='copper'),
-	    url(r'^products/packages/bronze/?$', 'direct_to_template', 
-	    	dict(template='products/bronze.html', extra_context={'page_name': 'bronze'}), 
-	    	name='bronze'),
-    url(r'^products/interactive-video/?$', 'direct_to_template', 
-    	dict(template='products/video.html', extra_context={'page_name': 'interactive-video'}), 
-    	name='interactive-video'),
-    # Equipment Pages
-    url(r'^products/security-equipment/?$', 'direct_to_template', 
-    	dict(template='products/equipment/index.html', extra_context={'page_name': 'equipment'}), 
-    	name='equipment'),
     
+    # Home Page
+   	dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+
+    # Product Pages
+   	dtt(r'^products/?$', 'products/index.html', 'products'),
+
+    	# Product > Packages
+
+   	   	dtt(r'^products/security-packages/?$', 'products/packages/index.html', 'security-packages', 'products'),
+
+   		dtt(r'^products/security-packages/copper/?$', 'products/packages/copper.html', 'copper', 'security-packages'),
+   		dtt(r'^products/security-packages/bronze/?$', 'products/packages/bronze.html', 'bronze', 'security-packages'),
+   		dtt(r'^products/security-packages/silver/?$', 'products/packages/silver.html', 'silver', 'security-packages'),
+   		dtt(r'^products/security-packages/gold/?$', 'products/packages/gold.html', 'gold', 'security-packages'),
+   		dtt(r'^products/security-packages/platinum/?$', 'products/packages/platinum.html', 'platinum', 'security-packages'),
+
+    	# Product > Equipment
+    	
+   		dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
+
+    	# Product > Video
+    	
+   		dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'interactive-video', 'products'),
+
     # About Pages
-    url(r'^about-us/?$', 'direct_to_template', 
-    	dict(template='about-us/index.html', extra_context={'page_name': 'about-us'}), 
-    	name='about-us'),
-   	url(r'^about-us/profile/?$', 'direct_to_template', 
-    	dict(template='about-us/profile.html', extra_context={'page_name': 'profile'}), 
-    	name='profile'),
-    url(r'^about-us/charities/?$', 'direct_to_template', 
-    	dict(template='about-us/charities.html', extra_context={'page_name': 'charities'}), 
-    	name='charities'),
+
+   	dtt(r'^about-us/?$', 'about-us/index.html', 'about-us'),
+   		
+   		# About > Profile
+   		
+   		dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
+
+   		# About > Charities
+
+   		dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
+
     # Contact Pages
-    url(r'^contact-us/?$', 'direct_to_template', 
-    	dict(template='contact-us/index.html', extra_context={'page_name': 'contact-us'}), 
-    	name='contact-us'),
+
+	dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
 
 )
 
