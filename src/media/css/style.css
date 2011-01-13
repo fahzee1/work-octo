@@ -44,9 +44,10 @@ a:hover {
 	width: 960px;
 	margin: 0 0 15px;
 	float: left;
+	position: relative;
 }
 .content-box .outline-box {
-	margin: 10px auto;
+	margin: 30px auto 10px;
 	border: 1px solid #999;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -108,10 +109,30 @@ img.image-break-right {
 	z-index: -50;
 }
 img.image-break-ribbon {
-	top: 0px;
-	right: -30px;
+	position: absolute;
+    right: -145px;
+    top: 0px;
+    z-index: -50;
+	
+}
+img.absolute {
 	position: absolute;
 	z-index: -50;
+	
+}
+img.flood-left {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: -50;
+
+}
+img.flood-right {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -50;
+
 }
 /********** Content Typography **********/
 strong {
@@ -135,6 +156,10 @@ strong {
 	margin-bottom: 10px;
 	letter-spacing: -1px;
 }
+.content-box h3 {
+	border-bottom: none;
+	padding: 0 10px;
+}
 .outline-box h2 {
 	background: #DCE9EF;
 	color:#333333;
@@ -148,13 +173,12 @@ strong {
 	border-radius: 10px 10px 0 0;
 }
 .outline-box h3, .content-box h3 {
-	color:#0066B3;
-	font-size:20px;
-	font-weight: normal;
-	line-height:24px;
-	margin:20px 0 5px;
-	padding: 0 0 0 10px;
-	border-bottom: 1px solid #eee;
+    color: #0066B3;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 15px;
+    margin: 20px 0 15px;
+    padding: 0 20px;
 
 }
 .content-box.third h4 {
@@ -169,12 +193,49 @@ strong {
 	line-height: 16px;
 	padding: 0 10px;
 }
-
+.content-box.fourth p {
+	font-size: 13px;
+	line-height: 20px;
+}
+.content-box.fourth h3 {
+	border-bottom: none;
+	text-align: center;
+	font-size: 18px;
+	line-height: 18px;
+	padding: 0 20px;
+	color: #333;
+}
+.content-box.fifth h3 {
+	border-bottom: none;
+	text-align: left;
+	font-size: 18px;
+	line-height: 18px;
+	padding: 0 20px;
+}
+.content-box.fifth p {
+	font-size: 13px;
+	line-height: 15px;
+	text-align: justify;
+}
+.content-box.sixth h2 {
+	font-size: 12px;
+	font-weight: 800;
+	line-height: 13px;
+	text-align: center;
+	color: #333;
+	letter-spacing: 0;
+}
+.content-box.sixth p {
+	font-size: 12px;
+	line-height: 15px;
+	text-align: center;
+}
 .outline-box p, .content-box p {
 	padding: 0 10px;
+	font-size: 14px;
 	text-align: justify;
-	line-height: 18px;
-	color: #333;
+	line-height: 22px;
+	color: #555;
 }
 .content-box p {
 	padding: 0 20px;
@@ -217,29 +278,41 @@ strong {
 	margin: 0 0 10px 10px;
 	padding: 0;
 }
-.text_compensate_250 {
+.text-compensate-250 {
 	height: 250px;
 }
-.text_compensate_300 {
+.text-compensate-300 {
 	height: 300px;
 }
-.text_compensate_350 {
+.text-compensate-350 {
 	height: 350px;
 }
-.text_compensate_400 {
+.text-compensate-400 {
 	height: 400px;
 }
-.text_compensate_450 {
+.text-compensate-450 {
 	height: 450px;
 }
-.text_compensate_500 {
+.text-compensate-500 {
 	height: 500px;
 }
-.text_bump_50 {
-	margin-top: 50px;
+.text-bump-25 {
+	padding-top: 25px;
 }
-.text_bump_100 {
-	margin-top: 100px;
+.text-bump-50 {
+	padding-top: 50px;
+}
+.text-bump-100 {
+	padding-top: 100px;
+}
+.text-bump-150 {
+	padding-top: 150px;
+}
+.text-bump-175 {
+	padding-top: 175px;
+}
+.text-bump-200 {
+	padding-top: 200px;
 }
 /********** Contact Area **********/
 .contact-area {
@@ -355,6 +428,11 @@ strong {
 #header a {
 	text-decoration: none;
 }
+.logo {
+	position: absolute;
+	left: -1px;
+	top: -24px;
+}
 .logo-icon {
 	background: url(/media/img/icon-set.png) no-repeat -5px -56px;
 	position: relative;
@@ -390,14 +468,15 @@ strong {
 	-webkit-transition: color 0.5s ease-in;
 }
 .logotype h4 {
-	color:#333333;
-	font-size:16px;
-	line-height: 28px;
-	padding:0 0 0 1px;
-	letter-spacing: .5px;
-	position: relative;
-	bottom: 5px;
-	font-weight: 800;
+	bottom: -14px;
+    color: #555555;
+    font-size: 18px;
+    font-weight: 300;
+    left: 76px;
+    letter-spacing: 1px;
+    line-height: 28px;
+    padding: 0 0 0 1px;
+    position: absolute;
 	
 }
 .ge-logo {
@@ -519,29 +598,49 @@ li.homebutton {
 	-moz-border-radius: 0 0 10px 10px;
 	-webkit-border-bottom-left-radius: 10px;
 	-webkit-border-bottom-right-radius: 10px;
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 	width: 960px;
+	text-align: center;
 }
 .sub-nav ul {
-	text-align: center;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    height: 88px;
 }
 ul.siblings {
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 5px;
+	height: 29px;
 }
 .sub-nav li {
-	display: inline-block;
+	display: block;
+	float: left;
 	padding: 0 3px;
-	-moz-border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
     background: none repeat scroll 0 0 #fff;
     border: 1px solid #D7D6D6;
-    margin: 10px 0 0 0px;
+    margin: 5px 6px 0;
     padding: 0;
-
+    width: 146px;
+}
+.sub-nav li.active, .sub-nav li.active:hover {
+	background: #AADCFF url(http://www.protectamerica.com/images/package_page/selected_package_bg.png) repeat-x;
+	border: 1px solid #3fb1f9;
+	-moz-box-shadow: 0 2px 5px #888;
+	-webkit-box-shadow: 0 2px 5px #888;
+}
+.sub-nav .active a, .sub-nav .active a:hover {
+	color: #555;
+	text-decoration: none;
+	font-weight: 800;
 }
 .sub-nav li:hover {
 	background: #f2fdff;
-	border: 1px solid #f2fdff;
+	border: 1px solid #89aed8;
 	-moz-box-shadow: 0 2px 5px #888;
 	-webkit-box-shadow: 0 2px 5px #888;
 }
@@ -564,40 +663,9 @@ ul.siblings {
 }
 .sub-nav img {
 	display: block;
-	margin: 0 auto;
+	margin: 3px auto 0;
 }
-/********** Lead Form **********/
-.lead-form {
-	background: #dbe9ef;
-	margin-left: 10px;
-	padding: 10px 10px 10px 12px;
-	-moz-border-radius: 10px 0 0 10px;
-	border: 1px solid #93b5e0;
-	border-right: none;
-	-moz-box-shadow: 0 2px 5px #888;
-	-webkit-box-shadow: 0 2px 5px #888;
-	box-shadow: 0 5px 5px #888;
-}
-.lead-form input {
-	border:1px solid #93B5E0;
-	display:block;
-	height:24px;
-	width:250px;
-	line-height: 24px;
-	font-size: 18px;
-}
-.lead-form label {
-	display: block;
-	font-size: 16px;
-	color: #0049a1;
-	margin-top: 10px;
-}
-.lead-form input.submit-button {
-	width: 252px;
-	height: 48px;
-	border: none;
-	margin-top: 20px;
-}
+
 /********** Buttons **********/
 .button {
 	margin: 20px 10px;
@@ -747,7 +815,7 @@ tfoot tr td {
 	color: #fff;
 	font-size: 9px;
 	line-height: 15px;
-	padding: 3px 12px 0 0;
+	padding: 3px 0 0 0;
 }
 .extra-stuff {
 	width: 960px;
@@ -770,6 +838,73 @@ tfoot tr td {
 	padding-top: 5px;
 	text-align: justify;
 }
+/********** Order Form	 **********/
+.big-blue-form {
+	background: #014C9F;
+	padding: 20px;
+	opacity: 0.98;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+		-moz-box-shadow: 0 2px 5px #333;
+	-webkit-box-shadow: 0 2px 5px #333;
+	box-shadow: 0 2px 5px #333;
+}
+.big-blue-form h1 {
+	color: #eee;
+}
+.big-blue-form p {
+	color: #ddd;
+	font-size: 12px;
+	
+}
+.big-blue-form input {
+    color: #CCCCCC;
+    font-size: 24px;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 20px 15px;
+    width: 450px;
+}
+.big-blue-form select {
+	margin: 0 20px 20px 5px;
+	font-size: 18px;
+	color: #555;
+	width: 250px;
+}
+.big-blue-form button {
+	margin: 0 auto 10px;
+	height: 38px;
+	width: 350px;
+	display: block;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-moz-box-shadow: 0 2px 5px #333;
+	-webkit-box-shadow: 0 2px 5px #333;
+	box-shadow: 0 2px 5px #333;
+	background: #367403;
+    border: 1px solid #005500;
+    font-size: 24px;
+    line-height: 38px;
+    color: #eee;
+    cursor: pointer;
+    cursor: hand;	
+}
+.big-blue-form label {
+	color: #fff;
+	font-size: 20px;
+    line-height: 28px;
+    margin-left: 20px;
+}
+.big-blue-form textarea {
+	margin: 0 0 10px 20px;
+	padding: 5px;
+	width: 444px;
+	font-size: 16px;
+	line-height: 18px;
+	color: #ccc;
+}
 /********** Package Pages **********/
 .package-price {
 	margin: 20px 0 50px;
@@ -786,7 +921,7 @@ tfoot tr td {
 	color: #555;
 }
 .package-contents p {
-	font-size: 12px;
+	font-size: 13px;
 	text-align: center;
 	line-height: 12px;
 	color: #555;
