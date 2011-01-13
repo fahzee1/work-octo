@@ -70,6 +70,10 @@ urlpatterns += patterns('django.views.generic.simple',
     # Contact Pages
 
 	dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
+	   	
+	   	# About > Profile
+   		
+   		dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
 )
 
