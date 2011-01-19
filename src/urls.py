@@ -46,6 +46,12 @@ urlpatterns += patterns('django.views.generic.simple',
    		dtt(r'^products/security-packages/silver/?$', 'products/packages/silver.html', 'silver', 'security-packages'),
    		dtt(r'^products/security-packages/gold/?$', 'products/packages/gold.html', 'gold', 'security-packages'),
    		dtt(r'^products/security-packages/platinum/?$', 'products/packages/platinum.html', 'platinum', 'security-packages'),
+   		
+   		# Product > Monitoring
+
+   	   	dtt(r'^products/alarm-monitoring/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
+
+   		dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
 
     	# Product > Equipment
     	
@@ -54,6 +60,14 @@ urlpatterns += patterns('django.views.generic.simple',
     	# Product > Video
     	
    		dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'interactive-video', 'products'),
+
+    	# Product > GPS Vehicle Tracking
+    	
+   		dtt(r'^products/gps-vehicle-tracking/?$', 'products/gps/index.html', 'gps', 'products'),
+    	
+    	# Product > Cell Takeover
+    	
+   		dtt(r'^products/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
 
     # About Pages
 
@@ -66,14 +80,29 @@ urlpatterns += patterns('django.views.generic.simple',
    		# About > Charities
 
    		dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
+   		
+   		# About > Testimonials
+
+   		dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
+
+    
+    # Order and Free Quote Pages
+    
+   	dtt(r'^products/order-package/?$', 'order/order-package.html', 'order-package'),
+
 
     # Contact Pages
 
 	dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
-	   	
-	   	# About > Profile
+	
+		# Contact > CEO Feedback
    		
-   		dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
+   		dtt(r'^contact-us/feedback-to-the-ceo/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
+   		
+   		# Contact > Find Us
+   		
+   		dtt(r'^contact-us/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+
 
 )
 
