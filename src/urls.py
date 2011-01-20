@@ -84,6 +84,10 @@ urlpatterns += patterns('django.views.generic.simple',
    		# About > Testimonials
 
    		dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
+   		
+   		# About > Testimonials
+
+   		dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials'),
 
     
     # Order and Free Quote Pages
