@@ -56,6 +56,10 @@ urlpatterns += patterns('django.views.generic.simple',
     	# Product > Equipment
     	
    		dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
+   		
+   		    		# Product > Equipment > Sensors
+    	
+   					dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
 
     	# Product > Video
     	
@@ -87,7 +91,7 @@ urlpatterns += patterns('django.views.generic.simple',
    		
    		# About > Testimonials
 
-   		dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials'),
+   		dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
 
     
     # Order and Free Quote Pages
