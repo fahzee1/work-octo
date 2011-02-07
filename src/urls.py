@@ -94,6 +94,15 @@ urlpatterns += patterns('django.views.generic.simple',
    		dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
 
     
+	# Security 101 Pages
+
+   	dtt(r'^security-101/?$', 'security/index.html', 'security-101'),
+   	
+   		# Security 101 > Security News
+   		
+   		dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
+
+
     # Order and Free Quote Pages
     
    	dtt(r'^products/order-package/?$', 'order/order-package.html', 'order-package'),
