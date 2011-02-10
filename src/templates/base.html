@@ -3,42 +3,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>{% block page_title %}{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css" />
+	<link rel="stylesheet/less" type="text/css" href="{{ MEDIA_URL }}css/style.less">
 	<link rel="icon" href="/favicon.ico" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="/media/js/less-1.0.41.min.js" type="text/javascript"></script>
 {% block extra_css %}{% endblock %}
 {% block extra_javascript %}{% endblock %}
 </head>
 <body>
 <!-- Page Wrapper -->
-<div class="header-background">
-	<div class="header-wrapper">
+<div id="header">
+	<div id="header-wrapper">
 		<div>
-			<ul class="qnav">
-				<li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;byhref=1&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson" target="chat34774121" onclick="javascript:window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson&amp;referrer='+escape(document.location),'chat34774121','width=472,height=320');return false;" class="chat">Live Chat</a></li>				
-				<li><a href="http://localhost:8888/agreement/help.php" title="Frequently Asked Questions" class="help">FAQs</a></li>
-				<li><a href="/agreement" title="Enter the Online Agreement"  class="doc">Agreement</a></li>
+			<ul id="quick-link-navigation">
+				<li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;byhref=1&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson" target="chat34774121" onclick="javascript:window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson&amp;referrer='+escape(document.location),'chat34774121','width=472,height=320');return false;" id="online-chat">Live Chat</a></li>				
+				<li><a href="http://localhost:8888/agreement/help.php" title="Frequently Asked Questions" id="tech-support">FAQs</a></li>
+				<li><a href="/agreement" title="Enter the Online Agreement" id="security-agreement">Agreement</a></li>
 			</ul>
-			<div class="clear"></div>
+			<!--<div class="clear"></div>-->
 		</div>    
-		<div id="header">
+		<div id="company-logo">
 		    <div>
 		    	<a href="{% url home %}">
-		        	<div class="logotype">
-   			        	<img src="/media/img/new-pa-logo3.png" class="logo" />
-
-			       		<h4>America's Home Security Experts</h4>
-			       	</div>
+		        	<img src="/media/img/new-pa-logo3.png" id="protect-america-logo" />
+		       		<h4>America's Home Security Experts</h4>
 		       	</a>
 		    </div>  	
-		    <div class="ge-logo"></div>
+		    <div id="ge-logo"></div>
 		</div>
 
 	</div>
 </div>
-<div class="navigation-background">
-	<div class="header-wrapper">
+<div id="main-navigation">
+	<div id="navigation-wrapper">
 		<div id="navigation">
 			<ul>
 				<li class="homebutton">&nbsp;</li>
@@ -48,7 +46,7 @@
 				<li ><a href="/pa/support/home-security-alarm-system" title="Technical Support and Help with your Home Security System">Support</a></li>
 				<li ><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
 			</ul>
-			<div class="search-area">
+			<div id="search-area">
 				<form name="search" method="get" action="/pa/search">
 					<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
 				</form>
@@ -57,12 +55,11 @@
 	</div>
 </div>
 {% block subnav %}
-<div class="sub-nav">
+<div id="sub-navigation">
 	{% block subnav_parent %}
 	{% endblock %}
 	{% block subnav_child %}
 	{% endblock %}
-	<div class="clear"></div>
 </div>
 {% endblock %}
 
