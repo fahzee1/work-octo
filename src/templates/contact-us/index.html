@@ -1,5 +1,14 @@
 {% extends "contact-us/base.html" %}
 {% block subnav_parent %}{% endblock %}
+{% block extra_javascript %}
+<script type="text/javascript" 
+    src="/media/js/jquery.placeholder.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input[type="text"],textarea').placeholder();
+    });
+</script>
+{% endblock %}
 {% block content %}
 <div>
 	<div class="content-box small text-bump-50">
@@ -15,29 +24,16 @@
 	<div class="content-box big text-bump-25">
 		<div class="big-blue-form">
 			<h1>Contact Us</h1>
-			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below or call: <strong>1-800-951-5111</strong></strong></p>
-			<form>
-				<label>Department: </label>
-				<select>
-				  <option value="copper">Customer Service</option>
-				  <option value="bronze">Sales</option>
-				  <option value="silver">Careers</option>
-				</select>
-				<input type="text" value="Name">
-				<input type="text" value="Email">
-				<input type="text" value="Phone">
-				<textarea rows="5">Enter your questions, comments, or concerns here.</textarea>
-				<button class="buyit">Submit & Finish</button>
-
-			</form>
+			<p>
+                One of our home security professionals is ready to 
+                guide you through protecting your home.  Please 
+                fill out the information below or call:
+                <strong>1-800-951-5111</strong></strong>
+            </p>
+            {% include "contact-us/forms/basic-contact-form.html" %}
 		</div>
 		<div class="clear"></div>
 	</div>
-
-
-
 </div>
 {% endblock %}  
-{{ block.super }}
-
 

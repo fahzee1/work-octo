@@ -14,7 +14,17 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls'))
 
     # Uncomment the next line to enable the admin:
-    (r'^admin/', include(admin.site.urls)),    
+    (r'^admin/', include(admin.site.urls)),
+    
+    #contact us
+    url(r'^contact-us/post/?$', 'contact.views.post'),
+    url(r'^contact-us/?$', 'contact.views.main', name='contact-us'),
+    url(r'^contact-us/feedback-to-the-ceo/?$', 'contact.views.ceo',
+        name='feedback-ceo'),
+    url(r'^contact-us/find-us/?$', 'contact.views.find_us', name='find-us'),
+    url(r'^products/order-package/?$', 'contact.views.order_form',
+        name='order-package'),
+
 )
 
 # a simple direct_to_template wrapper
@@ -101,25 +111,6 @@ urlpatterns += patterns('django.views.generic.simple',
    		# Security 101 > Security News
    		
    		dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
-
-
-    # Order and Free Quote Pages
-    
-   	dtt(r'^products/order-package/?$', 'order/order-package.html', 'order-package'),
-
-
-    # Contact Pages
-
-	dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
-	
-		# Contact > CEO Feedback
-   		
-   		dtt(r'^contact-us/feedback-to-the-ceo/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
-   		
-   		# Contact > Find Us
-   		
-   		dtt(r'^contact-us/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
-
 
 )
 

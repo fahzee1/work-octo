@@ -1,5 +1,14 @@
 {% extends "contact-us/base.html" %}
 {% block subnav_parent %}{% endblock %}
+{% block extra_javascript %}
+<script type="text/javascript" 
+    src="/media/js/jquery.placeholder.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('input[type="text"],textarea').placeholder();
+    });
+</script>
+{% endblock %}
 {% block content %}
 <div>
 	<div class="content-box small text-bump-50">
@@ -12,6 +21,7 @@
 		<div class="big-blue-form">
 			<h1>Send Thad a Message</h1>
 			<p>Please fill out the form below to provide feedback to our CEO. Be sure to choose the type of feedback, the department for which you are providing feedback, and if you know the name of the representative(s) that helped you, please enter that information as well.</p>
+            {% comment %}
 			<form>
 				<input type="text" value="Name">
 				<input type="text" value="Email">
@@ -42,6 +52,8 @@
 				<button class="buyit">Submit & Finish</button>
 
 			</form>
+            {% endcomment %}
+            {% include 'contact-us/forms/feedback-ceo-form.html' %}
 		</div>
 		<div class="clear"></div>
 	</div>

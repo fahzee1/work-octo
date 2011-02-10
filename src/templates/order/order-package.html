@@ -1,14 +1,69 @@
 {% extends "products/base.html" %}
+{% block extra_javascript %}
+<script type="text/javascript" 
+    src="/media/js/jquery.placeholder.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#product_images img').hide();
+        switch('{{ request.GET.package }}'){
+            case 'platinum':
+                $('#product_images img[alt="platinum"]').show();
+                break;
+            case 'gold':
+                $('#product_images img[alt="gold"]').show();
+                break;
+            case 'silver':
+                $('#product_images img[alt="silver"]').show();
+                break;
+            case 'bronze':
+                $('#product_images img[alt="bronze"]').show();
+                break;
+            case 'copper':
+            default:
+                $('#product_images img[alt="copper"]').show();
+                break;
+        }
+        $('input[type="text"],textarea').placeholder();
+        $('#id_package').change(function() {
+            var option = $(this).children('option:selected');
+            slide_product_image($('#product_images img:visible'), 
+                $('#product_images img[alt="'+option.val()+'"]'));
+        });
+        function slide_product_image(prev, next) {
+            // prev and next are both image jquery objects
+
+            $(prev).animate({
+                'left': "400px",
+                'opacity': 0
+            }, 800, function() {
+                $(prev).hide();
+
+            });
+            $(next).css('left', '-6000px');
+            $(next).show();
+            $(next).animate({
+                'left': '-150px',
+                'opacity': 1.0
+            }, 1500);
+        }
+    });
+</script>
+{% endblock %}
 {% block content %}
 
 <div>
-	<div class="content-box small text-bump-25">
-		<img src="/media/img/products/copper-package/copper-package-simon-3.jpg" class="image-break">
-	</div>
+	<div class="content-box small text-bump-25" id="product_images">
+		<img src="/media/img/products/copper-package/copper-package-simon-3.jpg" class="image-break" alt="copper" style="">
+        <img src="/media/img/products/bronze-package/bronze-package-simon-3.jpg" class="image-break" style="display: none;" alt="bronze">
+        <img src="/media/img/products/silver-package/silver-package.jpg" class="image-break" style="display: none;" alt="silver">
+        <img src="/media/img/products/bronze-package/bronze-package-simon-3.jpg" class="image-break" style="display: none;" alt="gold">
+        <img src="/media/img/products/silver-package/silver-package.jpg" class="image-break" style="display: none;" alt="platinum">
+    </div>
 	<div class="content-box big text-bump-25">
 		<div class="big-blue-form">
 			<h1>Thank You for Choosing Protect America</h1>
 			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below or call: <strong>1-800-951-5111</strong></strong></p>
+            {% comment %}
 			<form>
 				<input type="text" value="Name">
 				<input type="text" value="Email">
@@ -24,6 +79,8 @@
 				<button>Call Me</button>
 
 			</form>
+            {% endcomment %}
+            {% include 'contact-us/forms/order-form.html' %}
 		</div>
 		<div class="clear"></div>
 	</div>
