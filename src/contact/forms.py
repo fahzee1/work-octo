@@ -60,10 +60,16 @@ class CeoFeedback(PAContactForm):
 
     #d = dict(STATE_CHOICES)
     #STATE_CHOICES_ABBR = zip(d.keys(), d.keys())
-    
+
     state = CharField(required=True, widget=Select(
-        choices=STATE_CHOICES_ABBR))
+        choices=STATE_CHOICES_ABBR, attrs={'class': 'state'}))
+
+    department = CharField(required=True, widget=Select(
+        choices=Submission.DEPARTMENT_CHOICES))
+
+    city = CharField(required=True, widget=TextInput(
+        attrs={'placeholder':'City', 'class':'city'}))
 
     class Meta(PAContactForm.Meta):
         fields = ('name', 'email', 'phone', 'city', 'state', 
-            'feedback_type', 'department', 'rep_name', 'message')
+            'department', 'rep_name', 'message')

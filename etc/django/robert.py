@@ -8,3 +8,5 @@ DATABASE_NAME = '/Users/robert/Sites/proam/protectamerica.dev/database.db'
 DATABASE_USER = ''
 DATABASE_PASSWORD = ''
 
+# EMAIL information
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
