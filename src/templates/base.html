@@ -9,6 +9,38 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 {% block extra_css %}{% endblock %}
 {% block extra_javascript %}{% endblock %}
+<script type="text/javascript">
+    function raise_footer_bar() {
+        $('.contact-area').animate({'height': '130px'});
+        setCookie('footer_raise', 'true', 90);
+    }
+    function getCookie(c_name) {
+        var i,x,y,ARRcookies=document.cookie.split(";");
+        for (i=0;i<ARRcookies.length;i++) {
+            x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+            y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+            x=x.replace(/^\s+|\s+$/g,"");
+            if (x==c_name) {
+                return unescape(y);
+            }
+        }
+    }
+    function setCookie(c_name,value,exdays) {
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+        document.cookie=c_name + "=" + c_value;
+    }
+    
+    $(document).ready(function() {
+        var raise_footer_cookie = getCookie('footer_raise');
+        if(raise_footer_cookie == 'true') {
+            $('.contact-area').css('height', '130px');
+        } else {
+            var time_to_pop = setTimeout("raise_footer_bar()", 60000);
+        }
+    });
+</script>
 </head>
 <body>
 <!-- Page Wrapper -->
@@ -140,5 +172,6 @@
 		</div>
 	</div>
 </div>		
+
 </body>
 </html>
