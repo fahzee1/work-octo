@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>{% block page_title %}{% endblock %}</title>
@@ -11,7 +10,7 @@
 {% block extra_css %}{% endblock %}
 {% block extra_javascript %}{% endblock %}
 </head>
-<body>
+<body class="{{ page_name }}">
 <!-- Page Wrapper -->
 <div id="header">
 	<div id="header-wrapper">
@@ -35,22 +34,20 @@
 
 	</div>
 </div>
-<div id="main-navigation">
-	<div id="navigation-wrapper">
-		<div id="navigation">
-			<ul>
-				<li class="homebutton">&nbsp;</li>
-				<li ><a href="{% url products %}" title="Home Security Systems and Products">Products</a></li>
-				<li ><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
-				<li ><a href="{% url security-101 %}" title="Learn about Home Security">Security 101</a></li>
-				<li ><a href="/pa/support/home-security-alarm-system" title="Technical Support and Help with your Home Security System">Support</a></li>
-				<li ><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
-			</ul>
-			<div id="search-area">
-				<form name="search" method="get" action="/pa/search">
-					<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
-				</form>
-			</div>
+<div id="navigation-background">
+	<div id="navigation">
+		<ul>
+			<li class="homebutton">&nbsp;</li>
+			<li ><a href="{% url products %}" title="Home Security Systems and Products">Products</a></li>
+			<li ><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
+			<li ><a href="{% url security-101 %}" title="Learn about Home Security">Security 101</a></li>
+			<li ><a href="/pa/support/home-security-alarm-system" title="Technical Support and Help with your Home Security System">Support</a></li>
+			<li ><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
+		</ul>
+		<div id="search-area">
+			<form name="search" method="get" action="/pa/search">
+				<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
+			</form>
 		</div>
 	</div>
 </div>
@@ -112,21 +109,21 @@
 		<sup>*</sup> Information used in home security alarm system comparisons (for ADT) was obtained from telephone price quotes and online research &mdash; November 2010. "Up Front" cost based on total up front, out-of-pocket expense to obtain services from ADT; "Up Front" costs for ADT is an installation fee based on similar equipment packages offered as quoted by ADT; "Up Front" costs shown for similar Bronze, Silver, Gold, and Platinum packages from ADT include one motion detector in the ADT packages; "Monitoring" price listed for ADT includes the additional "warranty" or "extended service plan".
 	</div>
 </div>
-<div class="contact-area">
-	<div class="contact-area-wrapper">
-		<div class="content-box third">
+<div id="contact-boxes">
+	<div class="wrapper">
+		<div id="get-security-quote">
 			<strong class="quote">Free Home Security Quote</strong>
 			<p>Ready to protect your Home? <br />Receive a no-obligation security analysis.</p>
 			<div class="button"><a href="">Learn More</a></div>
 			<div class="clear"></div>
 		</div>
-		<div class="content-box third">
+		<div id="online-chat">
 			<strong class="chat">Online Chat</strong>
 			<p>Need help? Just ask. Chat online with<br/>a security professional</p>
 			<div class="button"><a href="">Chat Now</a></div>
 			<div class="clear"></div>
 		</div>
-		<div class="content-box third">
+		<div id="call-now">
 			<strong class="call">Call Today & Save!</strong>
 			<span class="dynamic-phone-number">1-800-951-5190</span>
 			<p>Call to talk with our knowledgeable<br />security professionals.</p>

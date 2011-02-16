@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-@import "products";
 
 
 /************************************
@@ -99,7 +98,9 @@ img.flood-right {
 
 }
 
-
+strong {
+	font-weight: 800;
+}
 /********** Main ***********/
 body {
 	background: @white;
@@ -126,6 +127,10 @@ a {
 a:hover {
 	color: @blue;
 	text-decoration: underline;
+}
+.bottom-rule {
+	border-bottom: 1px solid #eee;
+	margin-bottom: 20px;
 }
 /********** Content Boxes **********/
 
@@ -246,6 +251,87 @@ a:hover {
 	}
 }
 
+/************** Buttons ****************/
+
+.button {
+	margin: 20px 10px;
+	text-align: center;
+	a {
+		background: @blue url(/media/img/icon-set.png) no-repeat right -118px;
+		border: 1px solid @dark-blue;
+		padding: 5px 20px 5px 10px;
+		font-size: 12px;
+		color: @white;
+	    font-weight: 800;      
+		.border-radius;
+		.drop-shadow(0, 2px, 5px, #888);
+		text-decoration: none;
+	}
+	a:hover {
+	background: @v-light-grey url(/media/img/icon-set.png) no-repeat right -137px;
+	border: 1px solid @grey;
+	color: @link-blue;
+	}
+}
+.button.right {
+	text-align: right;
+	margin-right: 20px;
+}
+.button.absright {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.button.buyit {
+	a {
+		background: @green url(/media/img/icon-set.png) no-repeat right -118px;
+		border: 1px solid @dark-green;
+	}
+	a:hover {
+		background: @v-light-grey url(/media/img/icon-set.png) no-repeat right -137px;
+		border: 1px solid @grey;
+		color: @link-blue;
+	}
+
+}
+
+.button.absleft {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	a {
+		background: @blue url(/media/img/icon-set.png) no-repeat -164px -4px;
+		padding: 5px 10px 5px 20px;
+	
+	}
+	a:hover {
+		background: @v-light-grey url(/media/img/icon-set.png) no-repeat -164px -21px;
+		padding: 5px 10px 5px 20px;
+		border:1px solid @grey;
+		color:@link-blue;
+	
+	}
+
+}
+
+.button.ajax {
+	padding-bottom: 20px;
+	a {
+		font-size: 24px;
+		background: @v-light-grey;
+		color: @light-grey;
+		font-weight: normal;
+		border: none;
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		padding: 5px 30px;	
+	}
+	.button.ajax a:hover {
+		background: @light-grey;
+		color: @v-light-grey;
+	}
+}
 /************** Header ****************/
 #header {
 	// fallback (Opera)
@@ -326,50 +412,50 @@ a:hover {
 		height: 52px;
 	}
 }
-#main-navigation {
-	background: @dark-grey;
+#navigation-background {
+	background: @blue;
 }
-#navigation-wrapper {
+	
+#navigation {
 	width: 960px;
 	margin: 0 auto;	
-	#navigation {
-		height: 32px;
-		position: relative;
-		overflow: hidden;
-		z-index: 500;
-		margin-bottom: 0px;
-		
-		ul {
-		width: 714px;
-	 	float: left;
-	 	height: 32px;
-		 	li {
-				display: inline;
-				a {
-					color: @v-light-grey;
-					display: block;
-					font-size: 15px;
-					font-weight: bold;
-					margin: 0 19px 0 0;
-					outline: 0;
-					padding: 5px 16px;
-					text-decoration: none;
-					text-align: center;
-					.border-radius(5px, 5px, 5px, 5px);
-					line-height: 22px;
-					height: 22px;
-					float: left;
-					letter-spacing: .5px;
-				}
-				a:hover {
-					background: #fff;
-					color: @blue;
-					text-decoration: underline;
-				}
+	height: 32px;
+	position: relative;
+	overflow: hidden;
+	z-index: 500;
+	margin-bottom: 0px;
+	
+	ul {
+	width: 714px;
+ 	float: left;
+ 	height: 32px;
+	 	li {
+			display: inline;
+			a {
+				color: @v-light-grey;
+				display: block;
+				font-size: 15px;
+				font-weight: bold;
+				margin: 0 19px 0 0;
+				outline: 0;
+				padding: 5px 16px;
+				text-decoration: none;
+				text-align: center;
+				.border-radius(5px, 5px, 5px, 5px);
+				line-height: 22px;
+				height: 22px;
+				float: left;
+				letter-spacing: .5px;
 			}
-		}		
+			a:hover {
+				background: #fff;
+				color: @blue;
+				text-decoration: underline;
+			}
+		}
+	}		
 	}
-}
+
 li.homebutton {
 	.icon-set(-105px, -43px);
 	width: 52px;
@@ -474,7 +560,7 @@ li.homebutton {
 
 /************** Footer ****************/
 #footer {
-	background:none repeat scroll 0 0 #4a505a;
+	background:none repeat scroll 0 0 @blue;
 	clear:both;
 	height:52px;
 	margin-bottom: 10px;
@@ -520,31 +606,98 @@ li.homebutton {
 	} 
 }
 
-.extra-stuff {
+#extra-information {
 	width: 960px;
 	margin: 10px auto 135px;
-}
-.extra-stuff img {
-	padding-top: 10px;
-}
-.extra-copyright {
-	float: right;
-	width: 750px;
-	text-align: right;
-	font-size: 11px;
-	line-height: 16px;
-}
-.disclaimer {
-	color: #999; 
-	font-size: 10px; 
-	line-height: 1.2em; 
-	padding-top: 5px;
-	text-align: justify;
+	img {
+		padding-top: 10px;
+	}
+	#legal-text {
+		float: right;
+		width: 750px;
+		text-align: right;
+		font-size: 11px;
+		line-height: 16px;
+	}
+	#disclaimer {
+		color: #999; 
+		font-size: 10px; 
+		line-height: 1.2em; 
+		padding-top: 5px;
+		text-align: justify;
+	}
+
 }
 
 
+/********** Contact Area **********/
+#contact-boxes {
+	background: @blue;
+	height: 130px;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	opacity: .98;
+	.drop-shadow(-1px, -3px, 5px, #ccc);
+	#online-chat, #call-now, #get-security-quote {
+		.third-box;
+		height: 130px;
+		.border-radius(10px);
+		strong {
+			font-size: 19px;
+			color: #fff;
+			margin: 10px 10px;
+			padding: 5px 0 5px 40px;
+			display: block;
+		}
+		strong.quote {
+			background: url(/media/img/contact-icons.png) no-repeat 0px -64px;
+		}
+		strong.chat {
+			background: url(/media/img/contact-icons.png) no-repeat 0px -32px;
+		}
+		strong.call {
+			background: url(/media/img/contact-icons.png) no-repeat 0px 0px;
+		}
+		.button {
+			text-align: right;
+			margin: 10px 30px;
+			a {
+				background: @dark-blue url(/media/img/icon-set.png) no-repeat right -118px;
+				border: 1px solid @dark-blue;
+				.drop-shadow(0, 2px, 5px, #333);
+			}
+			a:hover {
+				background: @v-light-grey url(/media/img/icon-set.png) no-repeat right -137px;
+				border: 1px solid @grey;
+				color: @dark-grey;
+			}
 
+		}
+		span {
+			font-size: 38px;
+			font-weight: 800;
+			color: @white;
+			margin: 10px 10px;
+			display: block;
+		}
+		p {
+			font-size: 14px;
+			color: #eee;
+			padding: 0;
+			margin: 10px;
+		}
+	}
+	#online-chat:hover, #call-now:hover, #get-security-quote:hover {
+		background: @navy-blue;
+		cursor: pointer;
+		cursor: hand;
+	}
+}
 
+/********** Less Inclusions **********/
+
+@import "products";
 
 
 
