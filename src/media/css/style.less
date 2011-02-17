@@ -59,7 +59,19 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 .text-compensate (@compensation) {
 	height: @compensation;
 }
+.fade-slow {
+	-webkit-transition: background-color .7s ease-out;
+	-moz-transition: background-color .7s ease-out;
+	transition: background-color .7s ease-out;
 
+
+}
+.fade-fast {
+	-webkit-transition: background-color .3s ease-out;
+	-moz-transition: background-color .3s ease-out;
+	transition: background-color .3s ease-out;
+
+}
 
 img.image-break {
 	left: -150px;
@@ -157,6 +169,14 @@ a:hover {
 		padding: 0 20px;
 		margin-bottom: 10px;
 		letter-spacing: -1px;
+		a {
+			color: @black;
+			text-decoration: none;
+		}
+		a:hover {
+			color: @link-blue;
+			text-decoration: underline;
+		}
 	}
 	h3 {
 		border-bottom: none;
@@ -296,11 +316,13 @@ a:hover {
 		.border-radius;
 		.drop-shadow(0, 2px, 5px, #888);
 		text-decoration: none;
+		.fade-slow;
 	}
 	a:hover {
-	background: @v-light-grey url(/media/img/icon-set.png) no-repeat right -137px;
-	border: 1px solid @grey;
-	color: @link-blue;
+		background: @v-light-grey url(/media/img/icon-set.png) no-repeat right -137px;
+		border: 1px solid @grey;
+		color: @link-blue;
+		.fade-fast;
 	}
 }
 .button.right {
@@ -316,11 +338,13 @@ a:hover {
 	a {
 		background: @green url(/media/img/icon-set.png) no-repeat right -118px;
 		border: 1px solid @dark-green;
+		.fade-slow;
 	}
 	a:hover {
 		background: @v-light-grey url(/media/img/icon-set.png) no-repeat right -137px;
 		border: 1px solid @grey;
 		color: @link-blue;
+		.fade-fast;
 	}
 
 }
@@ -332,6 +356,7 @@ a:hover {
 	a {
 		background: @blue url(/media/img/icon-set.png) no-repeat -164px -4px;
 		padding: 5px 10px 5px 20px;
+		.fade-slow;
 	
 	}
 	a:hover {
@@ -339,7 +364,7 @@ a:hover {
 		padding: 5px 10px 5px 20px;
 		border:1px solid @grey;
 		color:@link-blue;
-	
+		.fade-fast;
 	}
 
 }
@@ -356,10 +381,12 @@ a:hover {
 		-webkit-box-shadow: none;
 		box-shadow: none;
 		padding: 5px 30px;	
+		.fade-slow;
 	}
 	.button.ajax a:hover {
 		background: @light-grey;
 		color: @v-light-grey;
+		.fade-fast;
 	}
 }
 /************** Header ****************/
@@ -476,11 +503,16 @@ a:hover {
 				height: 22px;
 				float: left;
 				letter-spacing: .5px;
+				.fade-slow;
+
+
 			}
 			a:hover {
 				background: #fff;
 				color: @blue;
 				text-decoration: underline;
+				.fade-fast;
+
 			}
 		}
 	}		
@@ -529,10 +561,9 @@ li.homebutton {
 	text-align: center;
 		ul {
 		    display: inline-block;
-		    overflow: hidden;
+		    overflow: visible;
 		    position: relative;
 		    text-align: center;
-		    height: 88px;
 		    
 		    a {
 			    color: @black+2;
@@ -542,10 +573,10 @@ li.homebutton {
 			    text-align: center;
 			    text-decoration: none;
 			    width: 146px;
-				.border-radius
+				.border-radius;
 			}
 			a:hover {
-				color: #014C9F;
+				color: @blue;
 				text-decoration: underline;
 			}
 		    img {
@@ -562,17 +593,20 @@ li.homebutton {
 			    margin: 5px 6px 0;
 			    padding: 0;
 			    width: 146px;
+			    .fade-slow;
 			}
 			li:hover {
 				background: @v-light-blue;
 				border: 1px solid #89aed8;
 				.drop-shadow(0, 2px, 5px, @grey);
+				.fade-slow;
 
 			}
 			li.active, li.active:hover {
 				background: #AADCFF url(http://www.protectamerica.com/images/package_page/selected_package_bg.png) repeat-x;
 				border: 1px solid #3fb1f9;
 				.drop-shadow(0, 2px, 5px, @grey);
+				.fade-fast;
 				
 				a {
 					color: #555;
@@ -599,7 +633,7 @@ li.homebutton {
 	width: 960px;
 	margin: 0 auto;
 	#footer-navigation {
-		width: 440px;
+		width: 450px;
 		padding: 2px 0 0 6px;
 		float: left;
 		
