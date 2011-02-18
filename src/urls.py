@@ -112,6 +112,10 @@ urlpatterns += patterns('django.views.generic.simple',
    		
    		dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
 
+
+   	dtt(r'^jeff/?$', 'jeff/index.html', 'jeff'),
+
+
 )
 
 if settings.DEBUG:
