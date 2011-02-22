@@ -390,56 +390,51 @@ a:hover {
 	}
 }
 /************** Header ****************/
-#header {
-	// fallback (Opera)
-    background: #fff;
-    // Mozilla: 
-    background: -moz-linear-gradient(top, #fff, #ddd);
-    // Chrome, Safari:*/
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
-}
+
 #header-wrapper {
 	width: 960px;
 	margin: 0 auto;
 	
 	#quick-link-navigation {
 		float:right;
-		margin: 4px 8px 2px 0;
+		margin: 0px 0 2px 0;
 		li {	
 			font-size:1em; 
 			font-weight:normal; 
 			list-style: none; 
 			float:left; 
 			display:inline;
-			color:@black+2; 
+			color:@black+2;
+			position: relative;
+			bottom: 3px; 
 	
 				a {
-					padding: 3px 10px 3px 25px;
+					padding: 3px 10px;
 					color:@black+2; 
 					text-decoration: none;
+					
+					background: @v-light-grey;
+    				color: @grey;
+    				font-size: 10px;
+    				font-weight: 800;
+   					margin: 0 0 0 5px;
+					.border-radius(0, 0, 10px, 10px);					
 				}
 				a:hover { 
-					color: @blue; 
-					background-color:inherit;
+					color: @white; 
+					background-color: @blue;
 					text-decoration: underline;
 				}
-		}
-		#online-chat {
-			.icon-set(-158px, -44px);
-		}
-		#security-agreement {
-			.icon-set(-158px, -74px);
-		}
-		#tech-support {
-			.icon-set(-61px, -77px);
 		}
 	}
 	
 	#company-logo {
-		height: 60px;
+		width: 300px;
+		height: 40px;
 		margin: 0;
 		clear: both;
 		position: relative;
+		float: left;
 		
 		a {
 			text-decoration: none;
@@ -457,8 +452,29 @@ a:hover {
 		}
 		#protect-america-logo {
 			position: absolute;
-			left: -1px;
-			top: -24px;
+			left: 13px;
+			top: -5px;
+		}
+	}
+	#phone-number {
+		color: @black;
+	    float: right;
+	    font-weight: 800;
+	    position: relative;
+	    text-align: right;
+	    width: 600px;
+	    bottom: 5px;
+		p {
+			font-size: 16px;
+			span {
+				font-size: 21px;
+				color: @red;
+			}
+		}
+		#protection-snippet {
+			font-size: 14px;
+			color: @grey;
+			font-weight: normal;
 		}
 	}
 	#ge-logo {
@@ -470,7 +486,7 @@ a:hover {
 	}
 }
 #navigation-background {
-	background: @blue;
+	background: @dark-grey;
 }
 	
 #navigation {
@@ -620,6 +636,38 @@ li.homebutton {
 			padding-bottom: 5px;
 			height: 29px;
 		}
+}
+/************** Quote Form ****************/
+#quote-form {
+	.content-box(280px);
+	margin-top: 20px; 
+	background: @blue;
+	padding: 10px;
+	.border-radius;
+	.drop-shadow(0, 2px, 5px, #333);
+	input {
+	    color: @light-grey;
+	    font-size: 18px;
+	    height: 28px;
+	    line-height: 28px;
+	    margin: 0 10px 15px;
+	    width: 255px;
+	}
+	button {
+	margin: 0 auto 10px;
+	height: 38px;
+	width: 280px;
+	display: block;
+	.border-radius;
+	.drop-shadow(0, 2px, 5px, #333);
+		background: @green;
+	    border: 1px solid @dark-green;
+	    font-size: 24px;
+	    line-height: 38px;
+	    color: @v-light-grey;
+	    cursor: pointer;
+	    cursor: hand;	
+	}
 }
 
 /************** Footer ****************/
