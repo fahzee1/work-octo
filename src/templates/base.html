@@ -1,143 +1,153 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>{% block page_title %}{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css" />
 	<link rel="icon" href="/favicon.ico" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-{% block extra_css %}{% endblock %}
-{% block extra_javascript %}{% endblock %}
-</head>
-<body>
-<!-- Page Wrapper -->
-<div class="header-background">
-	<div class="header-wrapper">
-		<div>
-			<ul class="qnav">
-				<li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;byhref=1&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson" target="chat34774121" onclick="javascript:window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&amp;file=visitorWantsToChat&amp;site=34774121&amp;SESSIONVAR!skill=Customer%20Service&amp;imageUrl=https://www.protectamerica.com/images/liveperson&amp;referrer='+escape(document.location),'chat34774121','width=472,height=320');return false;" class="chat">Live Chat</a></li>				
-				<li><a href="http://localhost:8888/agreement/help.php" title="Frequently Asked Questions" class="help">FAQs</a></li>
-				<li><a href="/agreement" title="Enter the Online Agreement"  class="doc">Agreement</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>    
-		<div id="header">
-		    <div>
-		    	<a href="{% url home %}">
-		        	<div class="logotype">
-   			        	<img src="/media/img/new-pa-logo3.png" class="logo" />
+{% block css %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css">
+{% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
 
-			       		<h4>America's Home Security Experts</h4>
-			       	</div>
-		       	</a>
-		       	<div class="call-box"><p>Call Today and Save! <span>1-800-951-5111</span></p></div>
-		    </div>  	
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5441302-11']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+{% endblock %}
+</head>
+<body class="{{ page_name }}">
+<!-- Page Wrapper -->
+<div id="header">
+	<div id="header-wrapper">
+		<div>
+			<ul id="quick-link-navigation">
+				<li><a href="/agreement" title="Enter the Online Agreement" id="security-agreement">Online Chat</a></li>
+
+				<li><a href="/agreement" title="Enter the Online Agreement" id="security-agreement">Agreement</a></li>
+			</ul>
+			<!--<div class="clear"></div>-->
+		</div>    
+		<div>
+			<div id="company-logo">
+			    <div>
+			    	<a href="{% url home %}">
+			        	<img src="/media/img/wireless-logo.png" id="protect-america-logo" />
+			  
+			       	</a>
+			    </div> 	
+			</div>
+			<div id="phone-number">
+				<p>Call <span>1-800-951-5111</span> to get a free home security quote.</p>
+                <p id="protection-snippet">We've protected over 1 Million homes and families just like yours since 1992.</p>
+			</div>
+			<div class="clear"></div>
 		</div>
+		
 
 	</div>
 </div>
-<div class="navigation-background">
-	<div class="header-wrapper">
-		<div id="navigation">
-			<ul>
-				<li class="homebutton">&nbsp;</li>
-				<li ><a href="{% url products %}" title="Home Security Systems and Products">Products</a></li>
-				<li ><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
-				<li ><a href="{% url security-101 %}" title="Learn about Home Security">Security 101</a></li>
-				<li ><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
-			</ul>
-			<div class="search-area">
-				<form name="search" method="get" action="/pa/search">
-					<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
-				</form>
-			</div>
+<div id="navigation-background">
+	<div id="navigation">
+		<ul>
+			<li class="homebutton">&nbsp;</li>
+			<li ><a href="{% url products %}" title="Home Security Systems and Products">Home Security</a></li>
+			<li ><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
+			<li ><a href="{% url security-101 %}" title="Learn about Home Security">Security 101</a></li>
+			<li ><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
+		</ul>
+		<div id="search-area">
+			<form name="search" method="get" action="/pa/search">
+				<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
+			</form>
 		</div>
 	</div>
 </div>
 {% block subnav %}
-<div class="sub-nav">
+<div id="sub-navigation">
 	{% block subnav_parent %}
 	{% endblock %}
 	{% block subnav_child %}
 	{% endblock %}
-	<div class="clear"></div>
 </div>
 {% endblock %}
 
+
+
 <div class="wrapper">
         {% block content %}{% endblock %}
+        <div class="clear"></div>
 </div>
 		{% block flooder %}{% endblock %}
-	<div id="footer">
-		<div class="footer-wrapper">
-			<ul class="navigation">
-				<li><a href="{% url products %}" title="View Copper Package details and compare to our other home security systems packages." >Products</a></li>
-				<li><a href="{% url about-us %}" title="See what makes Protect America different from other home security companies." >About Us</a></li>
-				<li><a href="/pa/support" title="">Protect America Customer Service</a></li>
-				<li><a href="{% url contact-us %}" title="Contact Protect America about our GE home security systems." >Contact Us</a></li>
-				<li class="omega"><a href="/pa/do-not-call" title="default">Do Not Call</a></li>
-				<li><a href="/pa/affiliates" title="Learn about our wireless alarm affiliate program and partner with us today." >Affiliate Program</a></li>
-				<li><a href="/pa/license/" id="state_license_link">State Licenses</a></li>
-				<li><a href="/pa/priv_p" title="Protect America Privacy Policy" >Privacy Policy</a></li>
-				<li><a href="/pa/return-policy" title="Protect America Return Policy" >Return Policy</a></li>
-				<li class="omega"><a href="/pa/site_map" title="Detailed list of the Protect America homesite site map architecture." >Site Map</a></li>
-			</ul>
-			<div class="copyright">		
-				GE and GE Security logos are registered trademarks of General Electric.<br />
-				The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.<br />
-				Protect America is a trademark of Protect America, Inc. &copy; 1992 &ndash; 2010 Protect America, Inc. All rights reserved. 
+
+<div id="footer">
+	<div class="bottom-rule">
+		<ul id="popular-topics">
+			<li><strong>Popular Topics</strong></li>
+			<li><a href="{% url products %}" title="Home Security Packages">Home Security Packages</a></li>
+			<li>Video Security</li>
+			<li>Crime Stats</li>
+			<li>Advantage Over ADT</li>
+			<li>Sexual Predator Finder</li>
+
+		</ul>
+		<ul id="about-us">
+			<li><strong>About Us</strong></li>
+			<li>Who is Protect America?</li>
+			<li>Protect America Reviews</li>
+			<li><a href="http://www.protectamericacares.org" title="Home Security Packages">Protect America Cares</a></li>
+			<li>Careers</li>
+			<li>Affliates</li>
+
+		</ul>
+		<ul id="help">
+			<li><strong>Help</strong></li>
+			<li>Privacy Policy</li>
+			<li>Do Not Call</li>
+			<li>State Licenses</li>
+			<li>Sitemap</li>
+			<li><strong>Hours of Operation</strong></li>
+			<li>Mon - Fri: 07:30am - 09:00pm CT</li>
+			<li>Sat: 08:00am - 05:00pm CT</li>
+		</ul>
+		<div id="awards">
+			
+			<div>
+				<img src="/media/img/external/top-consumer-logo-sml.png" />
+				<p>Five star rating three years in a row by online website: TopConsumerReviews.com</p>
+				<div class="clear"></div>
+			</div>
+			<div>
+				<img src="/media/img/external/consumer-digest-logo-sml.png" />
+
+				<p>Voted a Consumers Digest "Best Buy" for our Copper home security package</p>
+				<div class="clear"></div>
+
 			</div>
 		</div>
-
-	</div>
-	<div class="clear"></div>
-<!-- End of Wrapper -->
-
-<div class="extra-stuff">
-	<div>
-		<a href="http://www.alarm.org" class="external fl-left"><img src="https://www.protectamerica.com/images/nbfaa_logo.gif" width="75" height="25" border="0" alt="National Burglar &amp; Fire Alarm Association" /></a>
-	    <div class="ge-logo"></div>
-
-		<div class="extra-copyright">
-			<sup>*</sup> <a href="http://localhost:8888/agreement/includes/mon_agreement.php?homesite=true&amp;TB_iframe=true&amp;width=780&amp;height=550" title="Standard Monitoring Agreement" class="thickbox">
-	        Standard home security alarm monitoring agreement
-		    </a> required with approved credit.
-		    <br />
-			Offer subject to change.  Void where prohibited.
-		    <br/>
-		    <!-- Hours of Operation: M-F: 8am-9pm CST, Sat: 8am-5pm CST, Sun: 9am-5pm CST. -->
-		    Hours of Operation: <span class="business_hours"><span>Mon - Fri: 08:00am - 09:00pm CT</span> <span>Sat: 08:00am - 05:00pm CT</span> <span>Sun: 09:00am - 05:00pm CT</span></span>	    
-		</div>
 		<div class="clear"></div>
-
 	</div>
-	<div class="disclaimer">
-		<sup>*</sup> Information used in home security alarm system comparisons (for ADT) was obtained from telephone price quotes and online research &mdash; November 2010. "Up Front" cost based on total up front, out-of-pocket expense to obtain services from ADT; "Up Front" costs for ADT is an installation fee based on similar equipment packages offered as quoted by ADT; "Up Front" costs shown for similar Bronze, Silver, Gold, and Platinum packages from ADT include one motion detector in the ADT packages; "Monitoring" price listed for ADT includes the additional "warranty" or "extended service plan".
+	<p>Sister Companies</p>
+	<img src="/media/img/external/sister-companies.jpg" />
+</div>
+
+<div id="contact-boxes">
+	<div class="wrapper">
+		<p>Our Security Experts Are Here to Answer Your Questions. </p>
+		<span>Call 1-800-951-5111</span>
+		<div class="clear"></div>
 	</div>
 </div>
-<div class="contact-area">
-	<div class="contact-area-wrapper">
-		<div class="content-box third">
-			<strong class="call">Call Today & Save!</strong>
-			<span class="dynamic-phone-number">1-800-951-5190</span>
-			<p>Call to talk with our knowledgeable<br />home security expert.</p>
-			<div class="clear"></div>
-		</div>
+{% block extra_javascript %}{% endblock %}
 
-		<div class="content-box third">
-			<strong class="chat">Online Chat</strong>
-			<p>Need help? Just ask. Chat online with<br/>a home security expert.</p>
-			<div class="button"><a href="">Chat Now</a></div>
-			<div class="clear"></div>
-		</div>
-		<div class="content-box third">
-			<strong class="quote">Free Home Security Quote</strong>
-			<p>Ready to protect your Home? <br />Receive a no-obligation security analysis.</p>
-			<div class="button"><a href="">Learn More</a></div>
-			<div class="clear"></div>
-		</div>
-	</div>
-</div>		
 </body>
 </html>
