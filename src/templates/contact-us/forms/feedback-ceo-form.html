@@ -11,7 +11,9 @@
         {{ field.errors }}
 
         {% if field.field.widget|klass == 'Select' %}
+        {% if forloop.counter != 5 %}
         <label>{{ field.name|capfirst }}:</label>
+        {% endif %}
         {% endif %}
         
         {{ field }}
