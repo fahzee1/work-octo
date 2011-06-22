@@ -113,10 +113,6 @@ urlpatterns += patterns('django.views.generic.simple',
    		dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
 
 
-   	dtt(r'^jeff/?$', 'jeff/index.html', 'jeff'),
-	   	dtt(r'^jeff/shield/?$', 'jeff/shield.html', 'shield'),
-	   	dtt(r'^jeff/color/?$', 'jeff/color.html', 'color'),
-
 
 
 
