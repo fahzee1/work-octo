@@ -28,9 +28,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 @navy-blue: #2f394a;
 
 // Shades of Blood
+@light-red: #ffdfdf;
 @red: #cc0000;
+@dark-red: #8b0404;
 
 // Shades of Green
+@light-green: #DDF7B7;
 @green: #367403;
 @dark-green: #005500;
 
@@ -72,37 +75,41 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     transition: background-color .3s ease-out;
 
 }
-
 img.image-break {
     left: -150px;
     position: absolute;
     z-index: -50;
 }
-img.image-break-right {
-    right: 50;
+.image-break (@bumpness: -150px) {
+    left: @bumpness;
     position: absolute;
     z-index: -50;
 }
-img.image-break-ribbon {
+.image-break-right (@bumpness: 50px) {
+    right: @bumpness;
+    position: absolute;
+    z-index: -50;
+}
+.image-break-ribbon {
     position: absolute;
     right: -145px;
     top: 0px;
     z-index: -50;
 
 }
-img.absolute {
+.absolute {
     position: absolute;
     z-index: -50;
 
 }
-img.flood-left {
+.flood-left {
     position: absolute;
     right: 0;
     top: 0;
     z-index: -50;
 
 }
-img.flood-right {
+.flood-right {
     position: absolute;
     left: 0;
     top: 0;
