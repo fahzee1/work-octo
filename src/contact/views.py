@@ -17,6 +17,16 @@ def send_email(recipient):
     return True;
     
 
+def post(request):
+    
+    if request.method == "POST":
+        formset = PAContactForm(request.POST)
+        if formset.is_valid():
+            formset.save()
+
+    else:
+        return HttpResponseRedirect(reverse('contact-us'))
+
 
 def main(request):
     if request.method == "POST":
@@ -45,6 +55,10 @@ def ceo(request):
                               {'parent':'contact-us',
                                'formset': formset},
                               context_instance=RequestContext(request))
+
+
+def find_us(request):
+    pass
 
 
 def order_form(request):
