@@ -112,8 +112,14 @@ urlpatterns += patterns('django.views.generic.simple',
    		
    		dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
 
-    dtt(r'^contact-us/find-us/?$', 'contact-us/find-us.html',
-        'find-us', 'contact-us'),
+    # Help Pages
+        
+        # Help Pages > Privacy Policy
+            dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+        
+        # Help Pages > Privacy Policy
+            dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),
+
 
 )
 
