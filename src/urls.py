@@ -29,17 +29,18 @@ urlpatterns = patterns('',
 
 # a simple direct_to_template wrapper
 def dtt(pattern, template, name, parent=None, ctx=None):
-	ctx = ctx or {}
-	
-	context = dict(page_name=name, parent=parent)
-	context.update(ctx)
-	
-	return url(pattern, 'direct_to_template',
+    ctx = ctx or {}
+
+    	
+    context = dict(page_name=name, parent=parent)
+    context.update(ctx)
+
+    return url(pattern, 'common.views.simple_dtt',
 		dict(template=template, extra_context=context),
 		name=name)
 
 
-urlpatterns += patterns('django.views.generic.simple',
+urlpatterns += patterns('',
     
     # Home Page
    	dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
