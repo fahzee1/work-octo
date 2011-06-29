@@ -88,6 +88,7 @@ INSTALLED_APPS = (
     'sitemaps',
     'adspace',
     'contact',
+    'pricetable',
 )
 
 LOGIN_URL = '/login/'
