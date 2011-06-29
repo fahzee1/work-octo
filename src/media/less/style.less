@@ -423,6 +423,92 @@ a:hover {
         .fade-fast;
     }
 }
+
+/************** Tables ****************/
+
+table {
+    min-width: 940px;
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid @light-grey;
+    .drop-shadow(0px, 2px, 5px, @light-grey);
+    .border-radius;
+    thead{
+        th {
+            text-transform: uppercase;
+            font-weight: 800;
+            text-align: center;
+            padding: 5px 5px;
+            background: @light-blue;
+            border-bottom: 1px solid @light-grey;
+            border-right: 1px solid @light-grey;
+            cursor: pointer;
+            cursor: hand;
+            font-size: 12px;
+            span.up-arrow {
+                background: url(../images/up-arrow.png) right no-repeat;
+                padding-right: 15px;
+            }
+            span.down-arrow {
+                background: url(../images/down-arrow.png) right no-repeat;
+                padding-right: 15px;
+            }
+            &.alpha {
+                .border-radius(10px, 0, 0, 0);
+            }  
+            &.omega {
+                .border-radius(0, 10px, 0, 0);
+            }
+
+        }
+    }
+    tbody {
+
+        
+        tr {
+            .fade-slow;
+            font-size: 12px;
+            td {
+                text-align: center;
+                padding: 5px 0;
+                border-bottom: 1px solid @v-light-grey;
+                border-right: 1px solid @v-light-grey;
+                vertical-align: middle;
+                .fade-fast;
+                &:hover {
+                    background: @light-green+15;
+                    .fade-fast;
+                    color: @black;
+                    
+                    
+                }
+            }
+            
+            
+            &.alt {
+                background: @off-white;
+            }
+            &:hover {
+                background: @light-green;
+                .fade-fast;
+            }
+        }
+    }
+    tfoot {
+        background: @light-blue;
+        td {
+            padding: 5px 20px;
+            .border-radius(0, 0, 10px, 10px);
+            border-top: 1px solid @light-grey;
+            text-align: right;
+            font-size: 12px;    
+        }
+
+
+    }
+    
+
+}
 /************** Header ****************/
 
 #header-wrapper {
