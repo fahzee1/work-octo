@@ -53,6 +53,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     -webkit-box-shadow: @shadow-x @shadow-y @shadow-blur @shadow-color;
     box-shadow: @shadow-x @shadow-y @shadow-blur @shadow-color;
 }
+.inset-shadow (@shadow-x: 0px, @shadow-y: 0px, @shadow-blur: 5px, @shadow-color: @light-blue) {
+    -moz-box-shadow: inset @shadow-x @shadow-y @shadow-blur @shadow-color;
+    -webkit-box-shadow: inset @shadow-x @shadow-y @shadow-blur @shadow-color;
+    box-shadow: inset @shadow-x @shadow-y @shadow-blur @shadow-color;
+}
+
 .icon-set (@icon-x, @icon-y) {
     background: url(/media/img/icon-set.png) no-repeat @icon-x @icon-y;
 }
@@ -549,18 +555,33 @@ a:hover {
                 letter-spacing: .5px;
                 .fade-slow;
 
+                &:hover {
+                    background: @white;
+                    color: @blue;
+                    text-decoration: underline;
+                    .fade-fast;
 
+    
+                }
             }
-            a:hover {
-                background: #fff;
-                color: @blue;
-                text-decoration: underline;
-                .fade-fast;
+            &.active {
+                a {
+                    background: @dark-blue;
+                    .inset-shadow(0,0,5px, @blue);
+                    color: @light-blue;
+                    border: 1px solid @dark-blue;
+                    height: 20px;
+                    line-height: 20px;
+                    padding: 5px 15px;
+                    &:hover {
+                        text-decoration: none;
+                    }
 
+                }
             }
         }
     }
-    }
+}
 
 li.homebutton {
     .icon-set(-105px, -43px);
@@ -647,8 +668,8 @@ li.homebutton {
 
             }
             li.active, li.active:hover {
-                background: #AADCFF url(http://www.protectamerica.com/images/package_page/selected_package_bg.png) repeat-x;
-                border: 1px solid #3fb1f9;
+                background: @light-blue repeat-x;
+                border: 1px solid @link-blue;
                 .drop-shadow(0, 2px, 5px, @grey);
                 .fade-fast;
 
