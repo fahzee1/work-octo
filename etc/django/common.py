@@ -54,6 +54,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     'common.context_processors.is_business_time',
     'common.context_processors.phone_number',
+    'pricetable.context_processors.price_table',
 )
 
 # List of callables that know how to import templates from various sources.
