@@ -25,6 +25,8 @@ urlpatterns = patterns('',
     url(r'^products/order-package/?$', 'contact.views.order_form',
         name='order-package'),
 
+    url(r'^sitemap/$', 'sitemaps.views.index', name='sitemap'),
+
 )
 
 # a simple direct_to_template wrapper
