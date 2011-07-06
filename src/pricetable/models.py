@@ -4,7 +4,9 @@ from django.db import models
 class Package(models.Model):
     name = models.CharField(max_length=12)
     upfront = models.CharField(max_length=10)
+
     adt_upfront = models.CharField(max_length=10)
+    adt_monitoring = models.CharField(max_length=6, blank=True, null=True)
 
     standard_monitoring = models.CharField(max_length=6)
     landline_monitoring = models.CharField(max_length=6)
