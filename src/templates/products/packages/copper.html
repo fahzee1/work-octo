@@ -13,7 +13,7 @@
 	<div class="clear"></div>
     <div id="price-bar">
         <div id="copper-package-price">
-            <p><strong>Our Price:</strong> Free <span>Monitoring starting at: $29.95 per month</span></p>
+            <p><strong>Our Price:</strong> {{ pricetable.COPPER.upfront|default_if_none:"Free" }} <span>Monitoring starting at: {{ pricetable.COPPER.standard_monitoring }} per month</span></p>
         </div>
         <img src="/media/img/banners/low-price-guaranteed-bar.png">
         <img src="/media/img/banners/copper-savings-vs-adt-bar.png">
@@ -53,31 +53,31 @@
 <div id="copper-package-monitoring-rates">
 	<h2>Monitoring Options and Rates</h2>
 	<div class="landline-connection">
-		<img src="/media/img/products/monitoring/standard-landline.jpg">
+		<img src="/media/img/products/monitoring/standard-landline.png">
 		<h3>Standard Landline</h3>
-		<p><span><strong>Upfront Cost:</strong> Free</span></p>
-		<p><strong>Monthly Cost:</strong> $29.99</p>
+		<p><span><strong>Upfront Cost:</strong> {{ pricetable.COPPER.upfront|default_if_none:"Free" }}</span></p>
+		<p><strong>Monthly Cost:</strong> {{ pricetable.COPPER.standard_monitoring }}</p>
 
 	</div>
 	<div class="two-way-voice-connection">
-		<img src="/media/img/products/monitoring/two-way-voice.jpg">
+		<img src="/media/img/products/monitoring/two-way-voice.png">
 		<h3>Two-way Voice Landline</h3>
-		<p><span><strong>Upfront Cost:</strong> Free</span></p>
-		<p><strong>Monthly Cost:</strong> $34.99</p>
+		<p><span><strong>Upfront Cost:</strong> {{ pricetable.COPPER.upfront|default_if_none:"Free" }}</span></p>
+		<p><strong>Monthly Cost:</strong> {{ pricetable.COPPER.landline_monitoring }}</p>
 
 	</div>
 	<div class="broadband-connection">
-		<img src="/media/img/products/monitoring/broadband.jpg">
+		<img src="/media/img/products/monitoring/broadband.png">
 		<h3>Broadband</h3>
-		<p><span><strong>Upfront Cost:</strong> Free</span></p>
-		<p><strong>Monthly Cost:</strong> $37.99</p>
+		<p><span><strong>Upfront Cost:</strong> {{ pricetable.COPPER.upfront|default_if_none:"Free" }}</span></p>
+		<p><strong>Monthly Cost:</strong> {{ pricetable.COPPER.broadband_monitoring }}</p>
 
 	</div>
 	<div class="cellular-connection">
-		<img src="/media/img/products/monitoring/cellular.jpg">
+		<img src="/media/img/products/monitoring/cellular.png">
 		<h3>Cellular</h3>
-		<p><span><strong>Upfront Cost:</strong> Free</span></p>
-		<p><strong>Monthly Cost:</strong> $39.99</p>
+		<p><span><strong>Upfront Cost:</strong> {{ pricetable.COPPER.upfront|default_if_none:"Free" }}</span></p>
+		<p><strong>Monthly Cost:</strong> {{ pricetable.COPPER.cellular_monitoring }}</p>
 
 	</div>
 	<div class="clear"></div>
