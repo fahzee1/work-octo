@@ -92,11 +92,11 @@
 	<div class="bottom-rule">
 		<ul id="popular-topics">
 			<li><strong>Home Security Packages</strong></li>
-			<li><a href="{% url copper %}" title="Copper Home Security Package">Copper Package</a></li>
-			<li><a href="{% url bronze %}" title="Bronze Home Security Package">Bronze Package</a></li>
-			<li><a href="{% url silver %}" title="Silver Home Security Package">Silver Package</a></li>
-			<li><a href="{% url gold %}" title="Gold Home Security Package">Gold Package</a></li>
-			<li><a href="{% url platinum %}" title="Platinum Home Security Package">Platinum Package</a></li>
+			<li {% if 'copper' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Copper Home Security Package">Copper Package</a></li>
+			<li {% if 'bronze' in active_pages %}class="active"{% endif %}><a href="{% url bronze %}" title="Bronze Home Security Package">Bronze Package</a></li>
+			<li {% if 'silver' in active_pages %}class="active"{% endif %}><a href="{% url silver %}" title="Silver Home Security Package">Silver Package</a></li>
+			<li {% if 'gold' in active_pages %}class="active"{% endif %}><a href="{% url gold %}" title="Gold Home Security Package">Gold Package</a></li>
+			<li {% if 'platinum' in active_pages %}class="active"{% endif %}><a href="{% url platinum %}" title="Platinum Home Security Package">Platinum Package</a></li>
 
 		</ul>
 		<ul id="about-us">
@@ -108,11 +108,11 @@
 		</ul>
 		<ul id="help">
 			<li><strong>Help</strong></li>
-			<li><a href="{% url privacy-policy %}" title="Privacy Policy">Privacy Policy</a></li>
-			<li><a href="{% url return-policy %}" title="Return Policy">Return Policy</a></li>
+			<li {% if 'privacy-policy' in active_pages %}class="active"{% endif %}><a href="{% url privacy-policy %}" title="Privacy Policy">Privacy Policy</a></li>
+			<li {% if 'return-policy' in active_pages %}class="active"{% endif %}><a href="{% url return-policy %}" title="Return Policy">Return Policy</a></li>
 			<li>Do Not Call</li>
-			<li><a href="{% url state-licenses %}" title="State Licenses">State Licenses</a></li>
-			<li><a href="{% url sitemap %}" title="Sitemap">Sitemap</a></li>
+			<li {% if 'state-licenses' in active_pages %}class="active"{% endif %}><a href="{% url state-licenses %}" title="State Licenses">State Licenses</a></li>
+			<li>Sitemap</li>
 			<li><strong>Hours of Operation</strong></li>
 			<li>Mon - Fri: 07:30am - 09:00pm CT</li>
 			<li>Sat: 08:00am - 05:00pm CT</li>
