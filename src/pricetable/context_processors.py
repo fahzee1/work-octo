@@ -16,6 +16,7 @@ def price_table(request):
             'name': package.name,
             'upfront': return_none_if_zero(package.upfront),
             'adt_upfront':return_none_if_zero(package.adt_upfront),
+            'adt_monitoring':return_none_if_zero(package.adt_monitoring),
             'standard_monitoring':return_none_if_zero(package.standard_monitoring),
             'landline_monitoring':return_none_if_zero(package.landline_monitoring),
             'broadband_monitoring':return_none_if_zero(package.broadband_monitoring),
