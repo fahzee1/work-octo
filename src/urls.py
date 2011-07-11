@@ -118,6 +118,9 @@ urlpatterns += patterns('',
 
     # Help Pages
 
+    dtt(r'^help/?$', 'help/index.html', 'help'),
+
+
         # Help Pages > Privacy Policy
             dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
 
