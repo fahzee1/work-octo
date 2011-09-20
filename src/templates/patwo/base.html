@@ -1,3 +1,5 @@
+{% load content_tags %}
+{% load content_filters %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -46,10 +48,14 @@
 			       	</a>
 			    </div> 	
 			</div>
+            {% businesstime %}
 			<div id="phone-number">
-				<p>Call <span>1-800-951-5111</span> to get a free home security quote.</p>
+            {% if phone_number %}
+				<p>Call <span>{{ phone_number|format_number }}</span> to get a free home security quote.</p>
+            {% endif %}
                 <p id="protection-snippet">We've protected over 1 Million homes and families just like yours since 1992.</p>
 			</div>
+            {% endbusinesstime %}
 			<div class="clear"></div>
 		</div>
 		

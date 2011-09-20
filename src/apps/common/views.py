@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-
 def simple_dtt(request, template, extra_context):
     
     import urls
@@ -19,7 +18,6 @@ def simple_dtt(request, template, extra_context):
                 pass
         return pages
     pages = get_active(urls.urlpatterns, extra_context['page_name'])
-
     return render_to_response(template,
                               {'active_pages':pages, 'page_name':extra_context['page_name']},
                               context_instance=RequestContext(request))

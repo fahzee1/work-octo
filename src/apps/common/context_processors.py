@@ -49,7 +49,6 @@ def is_business_time(request):
 
 def phone_number(request):
     from django.conf import settings
-
     ctx = {'phone_number': settings.DEFAULT_PHONE,
             'use_call_measurement': False}
 
@@ -66,7 +65,7 @@ def phone_number(request):
         affiliate = request.GET.get('source', None)
 
     if affiliate:
-        from affiliates.models import Affiliate
+        from apps.affiliates.models import Affiliate
         try:
             affiliate = Affiliate.objects.get(agent_id=affiliate)
             ctx['phone_number'] = affiliate.phone
