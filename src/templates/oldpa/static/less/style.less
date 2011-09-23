@@ -1,0 +1,436 @@
+@charset "UTF-8";
+
+
+
+/************************************
+*   Reset                           *
+************************************/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}:focus{outline:0;}body{line-height:1;color:#000;background: #fff;}ol,ul{list-style:none;}table{border-collapse:separate;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}.container_full{overflow:hidden;width:100%;}.padding_10{padding:10px;}.center{text-align:center;}.absolute{position:absolute!important;}.relative{position:relative!important;}.text-center{text-align:center;}.float_left{float:left;}
+
+/********** Global Styles ***********/
+
+body {
+    background: #CCC;
+    color: #000;
+    font:.8em/1.7em Arial,Helvetica,sans-serif;
+    margin: 0 0 20px;
+    height: auto !important;
+    min-height: 100%;
+    
+}
+strong, b {
+    font-weight: bold;
+}
+em {
+    font-style: italic;
+}
+@white: #fff;
+@black: #000;
+
+@lightgrey: #EFF1F0;
+@lightblue: #0066B3;
+
+@grey: #EFEFEF;
+@red: #C70909;
+@blue: #00559A;
+@linkred: #BB3226;
+
+@darkblue: #014C9F;
+@darkgrey: #333333;
+
+/********** Mixins ***********/
+
+.bold() {
+    font-weight: bold;
+}
+.italic() {
+    font-style: italic;
+}
+
+// Mixin to add styles to make sure elements inside #wrapper have
+// appropriate styles to show the shadow
+.inside_wrapper() {
+    width: 940px;
+    margin-left: 5px;
+    padding: 0 12px;
+}
+
+.inline_list() {
+    display: inline;
+    float: left;
+}
+
+.sprite(@top, @left, @sprite: "/static/img/ico_sprites.png") {
+    background: url(@sprite) no-repeat scroll @top @left transparent;
+}
+
+.border_radius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+.top_border_radius(@radius: 5px) {
+    -moz-border-radius-topleft: @radius;
+    -moz-border-radius-topright: @radius;
+    -webkit-border-top-left-radius: @radius;
+    -webkit-border-top-right-radius: @radius;
+    border-top-left-radius: @radius;
+    border-top-right-radius: @radius;
+}
+.navigation_anchors(@fontsize: 16px, @vertpad: 5px, @horzpad: 16px, @mar: 32px) {
+    ul {
+        height: 32px;
+        width: 680px;
+        float: left;
+    }
+    ul li {
+        .inline_list;
+    }
+    ul li a {
+        .border_radius;
+        .bold;
+        font-size: @fontsize;
+        height: 22px;
+        line-height: 22px;
+        margin: 0 @mar 0 0;
+        padding: @vertpad @horzpad;
+        text-align: center;
+        text-decoration: none;
+        color: @lightgrey;
+        float: left;
+    }
+    ul li a.homebutton:hover {
+        background: @darkblue;
+    }
+    ul li a:hover {
+        background: @white;
+        text-decoration: underline;
+        color: @blue;
+    }
+}
+/********** Template Main ***********/
+
+#wrapper {
+    background: url(/static/img/sml_bg_shadow.gif) repeat-y scroll 0 0 transparent;
+    margin: 0 auto;
+    position: relative;
+    width: 974px;
+}
+.clear {
+    clear: both;
+}
+a {
+    color: @lightblue;
+    text-decoration: none;
+}
+a:hover {
+    color: @linkred;
+    text-decoration: underline;
+}
+.contentbox-dark {
+    .border_radius(10px);
+    border: 1px solid #999999;
+    background: #f2f2f2;
+
+    h3 {
+        .top_border_radius(10px);
+        .bold;
+        color: @white;
+        font-size: 20px;
+        background: @darkblue;
+        line-height: 28px;
+        letter-spacing: -1px;
+        padding: 8px;
+        border-bottom: 1px solid #999999;
+    }
+    form {
+        padding: 10px;
+        margin-top: 10px;
+    }
+}
+
+/********** Form Styles ***********/
+
+.ctrlHolder {
+    .bold;
+    margin: 0 0 5px;
+    padding: 5px;
+    clear: both;
+
+    label {
+        width: 42%;
+        margin: 0.3em 2% 0 0;
+        float: left;
+    }
+    input {
+        width: 50%;
+        border: 1px solid #999999;
+        background: #F9F977;
+        font: 1.2em Arial,Helvetica,sans-serif;
+        padding: 2px 4px;
+    }
+}
+
+#submit_lead {
+    .sprite(0, -1502px);
+    margin: 20px 0;
+    height: 33px;
+    width: 230px;
+
+    a {
+        text-indent: -9999px;
+        height: 25px;
+        width: 230px;
+        display: block;
+    }
+}
+
+/********** Header Styles ***********/
+
+#header {
+    .inside_wrapper;
+    background: url(/static/img/header_bg.jpg) repeat-x bottom;
+    padding-bottom: 5px;
+    span {
+        .bold;
+        .italic;
+        float: left;
+    }
+    #topnav {
+        float: right;
+
+        ul li {
+            .inline_list;
+            padding-right: 10px;
+        }
+        a {
+            color: #666;
+            text-decoration: none;
+        }
+        a:hover {
+            color: @linkred;
+            text-decoration: underline;
+        }
+        .plus-one {
+            margin-top: 3px;
+            padding-right: 0px;
+        }
+        .chat {
+            .sprite(-10px, -156px);
+            padding-left: 20px;
+        }
+        .faq {
+            .sprite(-10px, -227px);
+            padding-left: 20px;
+        }
+        .agreement {
+            .sprite(-10px, -263px);
+            padding-left: 20px;
+        }
+    }
+
+    #logo {
+        float: left;
+        #logo-icon {
+            .sprite(1px, -1451px);
+            height: 50px;
+            width: 55px;
+            float: left;
+        }
+        #logo-type {
+            float: left;
+            height: 50px;
+            width: 400px;
+            h1 {
+                color: @darkblue;
+                font-size: 36px;
+                font-weight: 800;
+                line-height: 26px;
+                letter-spacing: -1px;
+                margin-top: 6px;
+            }
+            h2 {
+                .bold;
+                color: @darkgrey;
+                font-size: 16px;
+                letter-spacing: 0.2px;
+                line-height: 20px;
+            }
+        }
+    }
+
+    #callnow {
+        float: right;
+        width: 385px;
+        p {
+            .bold;
+            font-size: 16px;
+            line-height: 16px;
+            float:right;
+        }
+        h4 {
+            .bold;
+            color: @red;
+            font-size: 32px;
+            line-height: 36px;
+            float:right;
+        }
+        #gelogo {
+            .sprite(-67px, -1450px);
+            float: right;
+            width: 149px;
+            height: 50px;
+            margin-left: 10px;
+        }
+    }  
+}
+
+/********** Navigation Styles ***********/
+
+#navigation {
+    .inside_wrapper;
+    background: @darkblue;
+    -moz-box-shadow: 0 5px 5px #888888;
+    -webkit-box-shadow:  0 5px 5px #888888;
+    box-shadow: 0 5px 5px #888888;
+    height: 32px;
+    .navigation_anchors;
+
+    #search {
+        .sprite(0, -1285px);
+        .border_radius(10px);
+        background-color: @grey;
+        float: left;
+        height: 26px;
+        width: 250px;
+        margin-top: 3px;
+
+        input {
+            .bold;
+            border: none;
+            background: @grey;
+            height: 21px;
+            margin-left: 30px;
+            margin-top: 1px;
+            width: 200px;
+            color: @darkgrey;
+            font-size: 1.2em;
+        }
+    }
+}
+
+/********** Content Styles ***********/
+
+#content {
+    .inside_wrapper;
+    background: @white; 
+    margin-top: 12px;
+    #main {
+        float: left;
+        position: relative;
+        width: 670px;
+    }
+    #sidebar {
+        float:left;
+        padding-left: 10px;
+        width: 250px;
+    }
+    #bottomnav {
+        ul {
+            float: right;
+
+            .chat {
+                .sprite(-10px, -156px);
+                padding-left: 20px;
+            }
+            .print {
+                .sprite(-10px, -423px);
+                padding-left: 20px;
+            }
+            .plus-one {
+                margin-top: 3px;
+                padding-right: 0px;
+            }
+            .up {
+                .sprite(-10px, -458px);
+                padding-left: 20px;
+            }
+            a {
+                color: #666;
+                text-decoration: none;
+            }
+            a:hover {
+                color: @linkred;
+                text-decoration: underline;
+            }
+            li {
+                .inline_list;
+                padding-right: 10px;
+            }
+        }
+    }
+
+}
+
+/********** Footer Styles ***********/
+
+#footer {
+    .inside_wrapper;
+    background:  @darkblue;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    .navigation_anchors(10px, 0px, 5px, 5px);
+    -moz-box-shadow: 0 5px 5px #888888;
+    -webkit-box-shadow:  0 5px 5px #888888;
+    box-shadow: 0 5px 5px #888888;
+    ul {
+        width: 460px;
+        li {
+            color: @lightgrey;
+            padding-right: 5px;
+            
+            a {
+                font-weight: normal;
+            }
+        }
+    }
+    #copyright {
+        float: right;
+        text-align: right;
+        color: @white;
+        font-size: .75em;
+        line-height: 1.25em;
+    }
+    
+}
+#footerend {
+    .inside_wrapper;
+    background: url(/static/img/sml_bottom_shadow.gif) no-repeat -4px 12px;
+    height: 12px;
+    padding-bottom: 2px;
+}
+#disclaimer {
+    margin: 0 auto;
+    position: relative;
+    width: 974px;
+    color: #666;
+    padding: 10px;    
+
+    #alarmimg {
+        padding-left: 10px;
+        float: left;
+    }
+    #agreementlink {
+        float: right;
+        padding-right: 10px;
+        text-align: right;
+    }
+    #disclaimertext {
+        font-size: smaller;
+        line-height: 1.2em;
+        padding-top: 10px;
+    }
+}
+
+
