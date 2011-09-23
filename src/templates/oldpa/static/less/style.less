@@ -8,6 +8,8 @@
 
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}:focus{outline:0;}body{line-height:1;color:#000;background: #fff;}ol,ul{list-style:none;}table{border-collapse:separate;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}.container_full{overflow:hidden;width:100%;}.padding_10{padding:10px;}.center{text-align:center;}.absolute{position:absolute!important;}.relative{position:relative!important;}.text-center{text-align:center;}.float_left{float:left;}
 
+@import "global.less";
+
 /********** Global Styles ***********/
 
 body {
@@ -25,28 +27,10 @@ strong, b {
 em {
     font-style: italic;
 }
-@white: #fff;
-@black: #000;
 
-@lightgrey: #EFF1F0;
-@lightblue: #0066B3;
-
-@grey: #EFEFEF;
-@red: #C70909;
-@blue: #00559A;
-@linkred: #BB3226;
-
-@darkblue: #014C9F;
-@darkgrey: #333333;
 
 /********** Mixins ***********/
 
-.bold() {
-    font-weight: bold;
-}
-.italic() {
-    font-style: italic;
-}
 
 // Mixin to add styles to make sure elements inside #wrapper have
 // appropriate styles to show the shadow
@@ -56,28 +40,10 @@ em {
     padding: 0 12px;
 }
 
-.inline_list() {
-    display: inline;
-    float: left;
-}
-
 .sprite(@top, @left, @sprite: "/static/img/ico_sprites.png") {
     background: url(@sprite) no-repeat scroll @top @left transparent;
 }
 
-.border_radius(@radius: 5px) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    border-radius: @radius;
-}
-.top_border_radius(@radius: 5px) {
-    -moz-border-radius-topleft: @radius;
-    -moz-border-radius-topright: @radius;
-    -webkit-border-top-left-radius: @radius;
-    -webkit-border-top-right-radius: @radius;
-    border-top-left-radius: @radius;
-    border-top-right-radius: @radius;
-}
 .navigation_anchors(@fontsize: 16px, @vertpad: 5px, @horzpad: 16px, @mar: 32px) {
     ul {
         height: 32px;
@@ -149,7 +115,27 @@ a:hover {
         margin-top: 10px;
     }
 }
-
+.button-cmn {
+    margin: 10px;
+    a {
+        background: url("/static/img/white-arrow.png") no-repeat scroll right center #014C9F;
+        border: 1px solid #00458C;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 0 2px 5px #888888;
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 800;
+        padding: 5px 20px 5px 10px;
+        
+    }
+    a:hover {
+        background: url("/static/img/blue-arrow.png") no-repeat scroll right center #EFEFEF;
+        border: 1px solid #BCC9D6;
+        box-shadow: 0 2px 5px #888888;
+        color: #045FA5;
+        
+    }
+}
 /********** Form Styles ***********/
 
 .ctrlHolder {
@@ -169,6 +155,15 @@ a:hover {
         background: #F9F977;
         font: 1.2em Arial,Helvetica,sans-serif;
         padding: 2px 4px;
+    }
+}
+
+#quoteform {
+    div.formextras {
+        width: 230px;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 10px;
     }
 }
 
@@ -433,4 +428,6 @@ a:hover {
     }
 }
 
+/********** AdSpace Styles ***********/
 
+@import "adspace.less";
