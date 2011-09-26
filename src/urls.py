@@ -17,15 +17,14 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     #contact us
-    url(r'^contact-us/post/?$', 'apps.contact.views.post'),
-    url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
-    url(r'^contact-us/feedback-to-the-ceo/?$', 'apps.contact.views.ceo',
-        name='feedback-ceo'),
-    url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
-    url(r'^products/order-package/?$', 'apps.contact.views.order_form',
-        name='order-package'),
-    url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
-
+    #url(r'^contact-us/post/?$', 'apps.contact.views.post'),
+    #url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
+    #url(r'^contact-us/feedback-to-the-ceo/?$', 'apps.contact.views.ceo',
+    #    name='feedback-ceo'),
+    #url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
+    #url(r'^products/order-package/?$', 'apps.contact.views.order_form',
+    #    name='order-package'),
+    #url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
 )
 
 # a simple direct_to_template wrapper
@@ -40,7 +39,12 @@ def dtt(pattern, template, name, parent=None, ctx=None):
 		dict(template=template, extra_context=context),
 		name=name)
 
+urlpatterns += patterns('',
 
+    # Home Page
+   	dtt(r'^$', 'home.html', 'home', ctx={'page_name': 'index'}),
+)
+"""
 urlpatterns += patterns('',
 
     # Home Page
@@ -128,9 +132,8 @@ urlpatterns += patterns('',
 
 
 )
+"""
 
 if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    )
-
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()

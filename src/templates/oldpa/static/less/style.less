@@ -1,14 +1,10 @@
 @charset "UTF-8";
 
-
-
 /************************************
 *   Reset                           *
 ************************************/
 
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}:focus{outline:0;}body{line-height:1;color:#000;background: #fff;}ol,ul{list-style:none;}table{border-collapse:separate;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}.container_full{overflow:hidden;width:100%;}.padding_10{padding:10px;}.center{text-align:center;}.absolute{position:absolute!important;}.relative{position:relative!important;}.text-center{text-align:center;}.float_left{float:left;}
-
-@import "global.less";
 
 /********** Global Styles ***********/
 
@@ -28,6 +24,47 @@ em {
     font-style: italic;
 }
 
+
+
+@white: #fff;
+@black: #000;
+
+@lightgrey: #EFF1F0;
+@lightblue: #0066B3;
+
+@grey: #EFEFEF;
+@red: #C70909;
+@blue: #00559A;
+@linkred: #BB3226;
+
+@darkblue: #014C9F;
+@darkgrey: #333333;
+
+/********** Global Mixins ***********/
+
+.bold() {
+    font-weight: bold;
+}
+.italic() {
+    font-style: italic;
+}
+.inline_list() {
+    display: inline;
+    float: left;
+}
+.border_radius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+.top_border_radius(@radius: 5px) {
+    -moz-border-radius-topleft: @radius;
+    -moz-border-radius-topright: @radius;
+    -webkit-border-top-left-radius: @radius;
+    -webkit-border-top-right-radius: @radius;
+    border-top-left-radius: @radius;
+    border-top-right-radius: @radius;
+}
 
 /********** Mixins ***********/
 
@@ -75,6 +112,52 @@ em {
         color: @blue;
     }
 }
+.contentbox() {
+    .border_radius(10px);
+    border: 1px solid #999999;
+    margin-bottom: 10px;
+    
+    h3 {
+        .top_border_radius(10px);
+        .bold;
+        color: @darkgrey;
+        background: #DCE9EF;
+        font-size: 28px;
+        line-height: 28px;
+        padding: 8px;
+        border-bottom: 1px solid #999999;
+    }
+}
+.halfblock() {
+    .contentbox;
+
+    width: 48.8%;
+    float: left;
+}
+.rightblock() {
+    .halfblock;
+    float: right;
+    margin-right: 0px;
+}
+.contentbox-dark() {
+    .border_radius(10px);
+    border: 1px solid #999999;
+    background: #f2f2f2;
+    margin-bottom: 10px;
+
+    h3 {
+        .top_border_radius(10px);
+        .bold;
+        color: @white;
+        font-size: 20px;
+        background: @darkblue;
+        line-height: 28px;
+        letter-spacing: -1px;
+        padding: 8px;
+        border-bottom: 1px solid #999999;
+    }
+}
+
 /********** Template Main ***********/
 
 #wrapper {
@@ -94,29 +177,10 @@ a:hover {
     color: @linkred;
     text-decoration: underline;
 }
-.contentbox-dark {
-    .border_radius(10px);
-    border: 1px solid #999999;
-    background: #f2f2f2;
-
-    h3 {
-        .top_border_radius(10px);
-        .bold;
-        color: @white;
-        font-size: 20px;
-        background: @darkblue;
-        line-height: 28px;
-        letter-spacing: -1px;
-        padding: 8px;
-        border-bottom: 1px solid #999999;
-    }
-    form {
-        padding: 10px;
-        margin-top: 10px;
-    }
-}
 .button-cmn {
     margin: 10px;
+    text-align: center;
+
     a {
         background: url("/static/img/white-arrow.png") no-repeat scroll right center #014C9F;
         border: 1px solid #00458C;
@@ -155,15 +219,6 @@ a:hover {
         background: #F9F977;
         font: 1.2em Arial,Helvetica,sans-serif;
         padding: 2px 4px;
-    }
-}
-
-#quoteform {
-    div.formextras {
-        width: 230px;
-        text-align: center;
-        padding: 10px;
-        margin-bottom: 10px;
     }
 }
 
@@ -318,6 +373,30 @@ a:hover {
 /********** Content Styles ***********/
 
 #content {
+    
+    h1, h2, h3, h4, h5, h6 {
+        clear: both;
+        font-weight: bold;
+        letter-spacing: -1px;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+    h2 {
+        color: #0066CC;
+        font-size: 1.6em;
+    }
+    p {
+        padding: 0 0 10px 15px;
+    }
+    ul {
+        margin-left: 0.75em;
+        margin-right: 0.5em;
+    }
+    ul, ol, dl {
+        margin-bottom: 15px;
+    }
+    
+
     .inside_wrapper;
     background: @white; 
     margin-top: 12px;
@@ -325,6 +404,21 @@ a:hover {
         float: left;
         position: relative;
         width: 670px;
+    }
+    #quoteform {
+        .contentbox-dark;
+
+        form {
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        div.formextras {
+            width: 230px;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
     }
     #sidebar {
         float:left;
@@ -425,6 +519,54 @@ a:hover {
         font-size: smaller;
         line-height: 1.2em;
         padding-top: 10px;
+    }
+}
+
+/********** Testimonial Styles ***********/
+
+.testimonial {
+    .sprite(0, -1536px); 
+    .border_radius;
+    height: 100px;
+    padding: 15px 20px 20px;
+    width: 628px;
+    word-wrap: break-word;
+    position: relative;
+
+    a {
+        font-style: italic;
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        width: 60px;
+    }
+
+    p {
+        font-size: 1.1em;
+        font-style: italic;
+        line-height: 1.25em;
+        margin: 7px 0 0;
+        padding: 0 15px;
+    }
+
+    span {
+        bottom: 5px;
+        color: #045FA5;
+        display: block;
+        font-size: 10px;
+        font-style: italic;
+        left: 425px;
+        position: absolute;
+        text-align: left;
+        width: 650px;
+
+        em {
+            display: block;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: bold;
+            line-height: 18px; 
+        }
     }
 }
 

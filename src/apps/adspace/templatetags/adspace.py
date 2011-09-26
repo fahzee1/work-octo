@@ -34,5 +34,5 @@ class AdspaceNode(template.Node):
         except Ad.DoesNotExist:
             return ''
         template = loader.get_template(ad.ad)
-        c = Context({})
+        c = Context(context)
         return template.render(c)
