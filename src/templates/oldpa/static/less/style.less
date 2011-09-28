@@ -336,40 +336,6 @@ a:hover {
     }  
 }
 
-/********** Navigation Styles ***********/
-
-#navigation {
-    .inside_wrapper;
-    background: @darkblue;
-    -moz-box-shadow: 0 5px 5px #888888;
-    -webkit-box-shadow:  0 5px 5px #888888;
-    box-shadow: 0 5px 5px #888888;
-    height: 32px;
-    .navigation_anchors;
-
-    #search {
-        .sprite(0, -1285px);
-        .border_radius(10px);
-        background-color: @grey;
-        float: left;
-        height: 26px;
-        width: 250px;
-        margin-top: 3px;
-
-        input {
-            .bold;
-            border: none;
-            background: @grey;
-            height: 21px;
-            margin-left: 30px;
-            margin-top: 1px;
-            width: 200px;
-            color: @darkgrey;
-            font-size: 1.2em;
-        }
-    }
-}
-
 /********** Content Styles ***********/
 
 #content {
@@ -460,6 +426,86 @@ a:hover {
         }
     }
 
+}
+
+/********** Navigation Styles ***********/
+
+#navigation {
+    .inside_wrapper;
+    background: @darkblue;
+    -moz-box-shadow: 0 5px 5px #888888;
+    -webkit-box-shadow:  0 5px 5px #888888;
+    box-shadow: 0 5px 5px #888888;
+    height: 32px;
+    .navigation_anchors;
+    position: relative;
+    z-index: 80;
+
+    #search {
+        .sprite(0, -1285px);
+        .border_radius(10px);
+        background-color: @grey;
+        float: left;
+        height: 26px;
+        width: 250px;
+        margin-top: 3px;
+
+        input {
+            .bold;
+            border: none;
+            background: @grey;
+            height: 21px;
+            margin-left: 30px;
+            margin-top: 1px;
+            width: 200px;
+            color: @darkgrey;
+            font-size: 1.2em;
+        }
+    }
+}
+
+#subnav {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-color: -moz-use-text-color #AAAAAA #AAAAAA;
+    border-radius: 0 0 10px 10px;
+    border-right: 1px solid #AAAAAA;
+    border-style: none solid solid;
+    border-width: medium 1px 1px;
+    box-shadow: 0 5px 5px #CCCCCC;
+    margin-bottom: 5px;
+    margin-top: -12px;
+    padding: 5px 0 1px;
+    text-align: center;
+    position: relative;
+    z-index: 40;
+
+    ul {
+        list-style: none outside none;
+        padding: 0px;
+        margin: 3px 0;
+        text-align: center;
+        
+        li {
+            border-right: 1px solid #CCCCCC;
+            display: inline;
+            padding: 3px;
+
+            a {
+                padding: 3px;
+            }
+            .current {
+                background-color: #0066B3;
+                .border_radius(3px);
+                color: @white;
+            }
+        }
+    }
+    
 }
 
 /********** Footer Styles ***********/

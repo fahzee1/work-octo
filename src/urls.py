@@ -43,6 +43,12 @@ urlpatterns += patterns('',
 
     # Home Page
    	dtt(r'^$', 'home.html', 'home', ctx={'page_name': 'index'}),
+
+    dtt(r'^products/?$', 'products/_base.html', 'products', ctx={'page_name': 'products'}),
+    
+    # Copper Page
+    dtt(r'^products/copper/?$', 'products/copper.html', 'copper', ctx={'page_name': 'copper'}, parent="products"),
+    dtt(r'^products/bronze/?$', 'products/bronze.html', 'bronze', ctx={'page_name': 'bronze'}, parent="products"),
 )
 """
 urlpatterns += patterns('',
