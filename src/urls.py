@@ -45,10 +45,14 @@ urlpatterns += patterns('',
    	dtt(r'^$', 'home.html', 'home', ctx={'page_name': 'index'}),
 
     dtt(r'^products/?$', 'products/_base.html', 'products', ctx={'page_name': 'products'}),
+
+    #packages
+    dtt(r'^products/packages/?$', 'products/_base.html', 'packages', ctx={'page_name': 'packages'}, parent="products"),
     
     # Copper Page
-    dtt(r'^products/copper/?$', 'products/copper.html', 'copper', ctx={'page_name': 'copper'}, parent="products"),
-    dtt(r'^products/bronze/?$', 'products/bronze.html', 'bronze', ctx={'page_name': 'bronze'}, parent="products"),
+    dtt(r'^products/packages/copper/?$', 'products/copper.html', 'copper', ctx={'page_name': 'copper'}, parent="packages"),
+    # Bronze Page
+    dtt(r'^products/packages/bronze/?$', 'products/bronze.html', 'bronze', ctx={'page_name': 'bronze'}, parent="packages"),
 )
 """
 urlpatterns += patterns('',

@@ -44,10 +44,10 @@ BUSINESS_HOURS = [{
     'end': '1700',
 },]
 
-WEBSITE_TEMPLATE = 'patwo'
+WEBSITE_TEMPLATE = 'oldpa'
 TEMPLATE_DIRS = (
     os.path.join(settings.PROJECT_ROOT, 'src', 'templates', WEBSITE_TEMPLATE),
 )
-STASTICFILES_DIRS = (
+STATICFILES_DIRS = (
     os.path.join(TEMPLATE_DIRS[0], 'static'),
 )
