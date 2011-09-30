@@ -55,7 +55,7 @@ STATICFILES_FINDERS = (
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = MEDIA_URL + 'grappelli/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '*$#jqy%8ho+3-n9adsj@qjgq8-+h6oz8z3&2k5g5&9mzhx#tj('
@@ -63,6 +63,7 @@ SECRET_KEY = '*$#jqy%8ho+3-n9adsj@qjgq8-+h6oz8z3&2k5g5&9mzhx#tj('
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
     "django.core.context_processors.media",
+    'django.core.context_processors.static',
     "django.core.context_processors.request",
     'apps.common.context_processors.is_business_time',
     'apps.common.context_processors.phone_number',
@@ -93,7 +94,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    'django.contrib.staticfiles',
     'django.contrib.admin',
 
     'apps.common',
