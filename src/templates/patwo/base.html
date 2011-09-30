@@ -1,0 +1,158 @@
+{% load content_tags %}
+{% load content_filters %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>{% block page_title %}{% endblock %}</title>
+	<link rel="icon" href="/favicon.ico" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+{% block css %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css">
+{% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5441302-11']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+{% endblock %}
+</head>
+<body class="{{ page_name }}">
+<!-- Page Wrapper -->
+<div id="header">
+	<div id="header-wrapper">
+		<div>
+			<ul id="quick-link-navigation">
+				<li><a href="/agreement" title="Enter the Online Agreement" id="security-agreement">Online Chat</a></li>
+
+				<li><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement">Agreement</a></li>
+			</ul>
+			<!--<div class="clear"></div>-->
+		</div>    
+		<div>
+			<div id="company-logo">
+			    <div>
+			    	<a href="{% url home %}">
+			        	<img src="/media/img/protect-america-home-security.png" id="protect-america-logo" />
+			  
+			       	</a>
+			    </div> 	
+			</div>
+            {% businesstime %}
+			<div id="phone-number">
+            {% if phone_number %}
+				<p>Call <span>{{ phone_number|format_number }}</span> to get a free home security quote.</p>
+            {% endif %}
+                <p id="protection-snippet">We've protected over 1 Million homes and families just like yours since 1992.</p>
+			</div>
+            {% endbusinesstime %}
+			<div class="clear"></div>
+		</div>
+		
+
+	</div>
+</div>
+<div id="navigation-background">
+	<div id="navigation">
+		<ul>
+			<li class="homebutton" onclick="javascript:window.location = '/';">&nbsp;</li>
+			<li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url products %}" title="Home Security Systems and Products">Home Security</a></li>
+			<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
+			<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Contact Us</a></li>
+		</ul>
+		<div id="search-area">
+			<form name="search" method="get" action="/pa/search">
+				<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
+			</form>
+		</div>
+	</div>
+</div>
+{% block subnav %}
+<div id="sub-navigation">
+	{% block subnav_parent %}
+	{% endblock %}
+	{% block subnav_child %}
+	{% endblock %}
+</div>
+{% endblock %}
+
+
+
+<div class="wrapper">
+        {% block content %}{% endblock %}
+        <div class="clear"></div>
+</div>
+{% block flooder %}
+
+<div id="footer">
+	<div class="bottom-rule">
+		<ul id="popular-topics">
+			<li><strong>Home Security Packages</strong></li>
+			<li {% if 'copper' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Copper Home Security Package">Copper Package</a></li>
+			<li {% if 'bronze' in active_pages %}class="active"{% endif %}><a href="{% url bronze %}" title="Bronze Home Security Package">Bronze Package</a></li>
+			<li {% if 'silver' in active_pages %}class="active"{% endif %}><a href="{% url silver %}" title="Silver Home Security Package">Silver Package</a></li>
+			<li {% if 'gold' in active_pages %}class="active"{% endif %}><a href="{% url gold %}" title="Gold Home Security Package">Gold Package</a></li>
+			<li {% if 'platinum' in active_pages %}class="active"{% endif %}><a href="{% url platinum %}" title="Platinum Home Security Package">Platinum Package</a></li>
+
+		</ul>
+		<ul id="about-us">
+			<li><strong>About Us</strong></li>
+			<li>Who is Protect America?</li>
+			<li><a href="http://www.protectamericacares.org" title="Home Security Packages">Protect America Cares</a></li>
+
+
+		</ul>
+		<ul id="help">
+			<li><strong>Help</strong></li>
+			<li {% if 'privacy-policy' in active_pages %}class="active"{% endif %}><a href="{% url privacy-policy %}" title="Privacy Policy">Privacy Policy</a></li>
+			<li {% if 'return-policy' in active_pages %}class="active"{% endif %}><a href="{% url return-policy %}" title="Return Policy">Return Policy</a></li>
+			<li>Do Not Call</li>
+			<li {% if 'state-licenses' in active_pages %}class="active"{% endif %}><a href="{% url state-licenses %}" title="State Licenses">State Licenses</a></li>
+			<li {% if 'sitemap' in active_pages %}class="active"{% endif %}><a href="{% url sitemap %}" title="Sitemap">Sitemap</a></li>
+			<li><strong>Hours of Operation</strong></li>
+			<li>Mon - Fri: 07:30am - 09:00pm CT</li>
+			<li>Sat: 08:00am - 05:00pm CT</li>
+		</ul>
+		<div id="awards">
+			
+			<div>
+				<img src="/media/img/external/top-consumer-logo-sml.jpg" />
+				<p>Five star rating four years in a row by online website: TopConsumerReviews.com</p>
+				<div class="clear"></div>
+			</div>
+			<div>
+				<img src="/media/img/external/consumer-digest-logo-sml.png" />
+
+				<p>Voted a Consumers Digest "Best Buy" for our Copper home security package</p>
+				<div class="clear"></div>
+
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<p>Sister Companies</p>
+	<img src="/media/img/external/sister-companies.jpg" />
+</div>
+{% endblock %}
+<div id="contact-boxes">
+	<div class="wrapper">
+		<p>Our Security Experts Are Here to Answer Your Questions. </p>
+		<span>Call 1-800-951-5111</span>
+		<div class="clear"></div>
+	</div>
+</div>
+{% block extra_javascript %}{% endblock %}
+
+
+</body>
+</html>
