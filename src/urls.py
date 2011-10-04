@@ -42,17 +42,8 @@ def dtt(pattern, template, name, parent=None, ctx=None):
 urlpatterns += patterns('',
 
     # Home Page
-   	dtt(r'^$', 'home.html', 'home', ctx={'page_name': 'index'}),
+   	dtt(r'^$', '_base.html', 'home', ctx={'page_name': 'index'}),
 
-    dtt(r'^products/?$', 'products/_base.html', 'products', ctx={'page_name': 'products'}),
-
-    #packages
-    dtt(r'^products/packages/?$', 'products/_base.html', 'packages', ctx={'page_name': 'packages'}, parent="products"),
-    
-    # Copper Page
-    dtt(r'^products/packages/copper/?$', 'products/copper.html', 'copper', ctx={'page_name': 'copper'}, parent="packages"),
-    # Bronze Page
-    dtt(r'^products/packages/bronze/?$', 'products/bronze.html', 'bronze', ctx={'page_name': 'bronze'}, parent="packages"),
 )
 """
 urlpatterns += patterns('',
