@@ -15,6 +15,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 @grey: #555;
 @black: #000;
 
+@light-red: #ffdfdf;
 @red: #e51b24;
 @blue: #0069aa;
 
@@ -382,6 +383,38 @@ body {
         }
         form {
             padding-top: 8px;
+            position: relative;
+            .ctrlHolder {
+                position: relative;
+            }
+            .error {
+                input {
+                    background: @light-red;
+                    border: 1px solid #c61111;
+                }
+                .formHint {
+                    background: @red;
+                    background-image: -moz-linear-gradient(top,@red,#aa141b); 
+                    background-image: -webkit-gradient(linear,left top,left bottom,from(@red),to(#aa141b));
+                    border: 1px solid #c61111;
+                    border-bottom: 1px solid #a90101;
+                    color: @white;
+                    margin: 4px 0;
+                    width: 110px;
+                    position: absolute;
+                    font-size: 10px;
+                    right: 116px;
+                    height: 20px;
+                    top: -1px;
+                    line-height: 21px;
+                    padding: 0 8px;
+                    text-align: center;
+                    border-radius: 5px 5px 0px 0px;
+                    -moz-border-radius: 5px 5px 0px 0px; 
+                    -webkit-border-radius: 5px 5px 0px 0px; 
+                }
+            }
+
             label {
                 display: block;
                 font-size: 14px;
