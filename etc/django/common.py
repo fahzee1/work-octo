@@ -68,6 +68,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.common.context_processors.is_business_time',
     'apps.common.context_processors.phone_number',
     'apps.pricetable.context_processors.price_table',
+    'sekizai.context_processors.sekizai',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -96,6 +97,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+
+    'sekizai',
 
     'apps.common',
     'apps.affiliates',

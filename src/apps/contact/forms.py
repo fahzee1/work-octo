@@ -10,14 +10,12 @@ class PAContactForm(ModelForm):
         model = Submission
 
         widgets = {
-            'name': TextInput(attrs={'placeholder':'Name'}),
-            'email': TextInput(attrs={'placeholder':'Email'}),
-            'phone': TextInput(attrs={'placeholder':'Phone'}),
-            'city': TextInput(attrs={'placeholder':'City',
-                'class':'city'}),
+            'name': TextInput(),
+            'email': TextInput(),
+            'phone': TextInput(),
+            'city': TextInput(attrs={'class':'city'}),
             'state': Select(attrs={'class':'state'}),
-            'rep_name': TextInput(attrs={
-                'placeholder':'Representative\'s Name'}),
+            'rep_name': TextInput(),
             'message': Textarea(attrs={'placeholder':
                 'Enter your questions, comments, or concerns here.', 
                 'rows':'5'}),

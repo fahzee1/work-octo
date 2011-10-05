@@ -1,7 +1,7 @@
 <div id="product_header">
     <ul>
-        <li class="first active">
-            <a href="#">
+        <li class="first {% if 'copper' in active_pages %} active{% endif %}">
+            <a href="{% url copper %}">
                 <div class="item_thumb copper"></div>
                 <strong>Copper Package</strong>
                 <span>Free</span>
@@ -10,8 +10,8 @@
                 </div>
             </a>
         </li>
-        <li>
-            <a href="#">
+        <li{% if 'bronze' in active_pages %} class="active"{% endif %}>
+            <a href="{% url bronze %}">
                 <div class="item_thumb bronze"></div>
                 <strong>Bronze Package</strong>
                 <span>Free</span>
@@ -20,7 +20,7 @@
                 </div>
             </a>
         </li>
-        <li>
+        <li{% if 'silver' in active_pages %} class="active"{% endif %}>
             <a href="#">
                 <div class="item_thumb silver"></div>
                 <strong>Silver Package</strong>
@@ -30,7 +30,7 @@
                 </div>
             </a>
         </li>
-        <li>
+        <li{% if 'gold' in active_pages %} class="active"{% endif %}>
             <a href="#">
                 <div class="item_thumb gold"></div>
                 <strong>Gold Package</strong>
@@ -40,7 +40,7 @@
                 </div>
             </a>
         </li>
-        <li>
+        <li{% if 'platinum' in active_pages %} class="active"{% endif %}>
             <a href="#">
                 <div class="item_thumb platinum"></div>
                 <strong>Platinum Package</strong>

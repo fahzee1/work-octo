@@ -1,0 +1,46 @@
+{% load sekizai_tags %}
+<form action="#" method="POST" id="basiccontactform">
+    <input type="hidden" name="form" value="basic" />
+    {% include "contact/formfield.html" with field=form.name %}
+    {% include "contact/formfield.html" with field=form.email %}
+    {% include "contact/formfield.html" with field=form.phone %}
+    <button id="basiccontactform_submit" type="button">Call Me </button>
+    <p>We never share your information with anyone.</p>
+</form>
+
+{% addtoblock "js" %}
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#basiccontactform_submit').click(function(e) {
+        e.preventDefault();
+        var form = jQuery('#basiccontactform');
+        clear_errors(form);
+        jQuery.ajax({
+            url: '/contact/ajaxpost/',
+            type: "POST",
+            data: form.serialize(),
+            dataType: 'json',
+            success: function(data) {
+                errors = data.errors
+                if(data.errors) {
+                    jQuery.each(data['errors'], function(index, value){
+                        append_error(index, value);
+                    });
+                }
+            }
+        });
+    });
+    function clear_errors(form) {
+        jQuery.each(jQuery(form).children('.ctrlHolder'), function(value) {
+            jQuery(this).children('ul').remove();
+            jQuery(this).removeClass('error');
+        });
+    }
+    function append_error(element, msg) {
+        var html = '<ul class="formHint"><li><strong>'+msg+'</strong></li></ul>';
+        jQuery('#ctrl-id_'+element).addClass('error');
+        jQuery('#ctrl-id_'+element+' input').after(html);
+    }
+});
+</script>
+{% endaddtoblock %}
