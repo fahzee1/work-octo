@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     #contact us
-    #url(r'^contact-us/post/?$', 'apps.contact.views.post'),
+    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
     #url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     #url(r'^contact-us/feedback-to-the-ceo/?$', 'apps.contact.views.ceo',
     #    name='feedback-ceo'),

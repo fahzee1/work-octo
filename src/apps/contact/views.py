@@ -1,8 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from django.template import RequestContext
 from django.core.mail import send_mail
+from django.utils import simplejson
 
 from apps.contact.forms import (PAContactForm, BasicContactForm, OrderForm, 
     CeoFeedback)
@@ -15,7 +17,23 @@ def send_email(recipient):
         fail_silently=False)
 
     return True;
-    
+
+
+def ajax_post(request):
+    if request.method != "POST":
+        return HttpResponseRedirect('/')
+    response_dict = {}
+    form_type = request.POST['form']
+    if form_type == 'basic':
+        form = PAContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            response_dict.update({'success': True})
+        else:
+            response_dict.update({'errors': form.errors})
+    return HttpResponse(simplejson.dumps(response_dict),
+        mimetype='application/javascript')
+
 
 def post(request):
     
