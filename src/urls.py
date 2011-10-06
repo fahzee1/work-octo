@@ -43,6 +43,7 @@ urlpatterns += patterns('',
 
     # Home Page
    	dtt(r'^$', '_base.html', 'home', ctx={'page_name': 'index'}),
+    dtt(r'^thank-you/$', 'thank-you.html', 'thankyou', ctx={'page_name': 'thankyou'}),
 
 )
 """
