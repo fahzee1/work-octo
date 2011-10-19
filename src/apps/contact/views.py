@@ -31,7 +31,6 @@ def ajax_post(request):
         conn.request("POST", "/scripts/go_lead_ajax.php", params, headers)
         response = conn.getresponse()
         data = response.read()
-        print data
         conn.close()
         
     response_dict = {}
