@@ -18,15 +18,32 @@ def send_email(recipient):
 
     return True;
 
-
 def ajax_post(request):
     if request.method != "POST":
         return HttpResponseRedirect('/')
+
+    def post_to_old_pa(data):
+        import httplib, urllib
+        params = urllib.urlencode(data)
+        headers = {"Content-type": "application/x-www-form-urlencoded",
+            "Accept": "text/plain"}
+        conn = httplib.HTTPConnection("www.protectamerica.com:80")
+        conn.request("POST", "/scripts/go_lead_ajax.php", params, headers)
+        response = conn.getresponse()
+        data = response.read()
+        print data
+        conn.close()
+        
     response_dict = {}
     form_type = request.POST['form']
     if form_type == 'basic':
         form = PAContactForm(request.POST)
         if form.is_valid():
+            fdata = form.cleaned_data
+            padata = {'l_fname': fdata['name'],
+                      'email_addr': fdata['email'],
+                      'l_phone1': fdata['phone']}
+            post_to_old_pa(padata)
             form.save()
             response_dict.update({'success': True})
         else:
