@@ -28,7 +28,7 @@ def ajax_post(request):
         headers = {"Content-type": "application/x-www-form-urlencoded",
             "Accept": "text/plain"}
         conn = httplib.HTTPConnection("www.protectamerica.com:80")
-        conn.request("POST", "/scripts/go_lead.php", params, headers)
+        conn.request("POST", "/scripts/go_lead_ajax.php", params, headers)
         response = conn.getresponse()
         data = response.read()
         conn.close()
