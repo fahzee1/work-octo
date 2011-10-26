@@ -19,11 +19,28 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 @red: #e51b24;
 
 @v-light-blue: #f2fdff;
+@light-blue: #d9f2ff;
+
 @blue: #0069aa;
 
 @radioshack-grey: #eae8e6;
 
 /********* Global **************/
+
+.fade-slow {
+    -webkit-transition: background-color .7s ease-out;
+    -moz-transition: background-color .7s ease-out;
+    transition: background-color .7s ease-out;
+
+
+}
+.fade-fast {
+    -webkit-transition: background-color .3s ease-out;
+    -moz-transition: background-color .3s ease-out;
+    transition: background-color .3s ease-out;
+
+}
+
 
 body {
     background: @radioshack-grey;
@@ -184,26 +201,43 @@ sup {
         background: @white;
         float: left;
         thead {
-            th {
-                padding: 8px 0;
-                border-bottom: 1px solid #ccc;
-                text-align: center;
-                span {
-                    display: block;
-                    color: @blue;
-                    font-weight: 800;
-                    padding-bottom: 4px;
+            tr {
+                th {
+                    padding: 8px 0;
+                    border-bottom: 1px solid #ccc;
+                    text-align: center;
+                    span {
+                        display: block;
+                        color: @blue;
+                        font-weight: 800;
+                        padding-bottom: 4px;
+                    }
+                    img {
+                        display: inline;
+                        margin: 0 auto;
+                    }
                 }
-                img {
-                    display: inline;
-                    margin: 0 auto;
+                &:hover {
+                    background: @white;
+                    .pa {
+                        background: @v-light-blue;
+                    }
                 }
             }
+
         }
-        td {
-            height: 32px;
-            line-height: 32px;
-            padding: 2px 0;
+        tr {
+            &:hover {
+                background: #efefef;
+                .pa {
+                    background: @light-blue;
+                }
+            }
+            td {
+                height: 32px;
+                line-height: 32px;
+                padding: 2px 0;
+            }
         }
         .title {
             font-size: 12px;
