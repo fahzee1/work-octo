@@ -28,25 +28,30 @@ def ajax_post(request):
         headers = {"Content-type": "application/x-www-form-urlencoded",
             "Accept": "text/plain"}
         conn = httplib.HTTPConnection("www.protectamerica.com:80")
-        conn.request("POST", "/scripts/go_lead_ajax.php", params, headers)
+        conn.request("POST", "/scripts/go_lead.php", params, headers)
         response = conn.getresponse()
         data = response.read()
         conn.close()
-        
+
     response_dict = {}
     form_type = request.POST['form']
+
     if form_type == 'basic':
         form = PAContactForm(request.POST)
         if form.is_valid():
             fdata = form.cleaned_data
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
-                      'l_phone1': fdata['phone']}
+                      'l_phone1': fdata['phone'],
+                      'agentid': 'A02596',
+                      'source': 'RADIO SHACK'
+                      }
             post_to_old_pa(padata)
             form.save()
             response_dict.update({'success': True})
         else:
             response_dict.update({'errors': form.errors})
+
     return HttpResponse(simplejson.dumps(response_dict),
         mimetype='application/javascript')
 
