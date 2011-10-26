@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 {% block css %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 {% endblock %}
 {% block google_analytics %}
 <script type="text/javascript">
@@ -24,10 +24,12 @@
   })();
 
 </script>
+<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
 {% endblock %}
 </head>
-<body class="{{ page_name }}">
+<body class="{{ page_name }} tk-facitweb">
 <!-- Page Wrapper -->
 <div id="header">
 	<div id="header-wrapper">
@@ -43,7 +45,7 @@
 			<div id="company-logo">
 			    <div>
 			    	<a href="{% url home %}">
-			        	<img src="/media/img/protect-america-home-security.png" id="protect-america-logo" />
+			        	<img src="/static/img/protect-america-home-security.png" id="protect-america-logo" />
 			  
 			       	</a>
 			    </div> 	
@@ -62,27 +64,49 @@
 
 	</div>
 </div>
-<div id="navigation-background">
-	<div id="navigation">
-		<ul>
-			<li class="homebutton" onclick="javascript:window.location = '/';">&nbsp;</li>
-			<li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url products %}" title="Home Security Systems and Products">Home Security</a></li>
-			<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
-			<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Contact Us</a></li>
-		</ul>
-		<div id="search-area">
-			<form name="search" method="get" action="/pa/search">
-				<input type="text" id="q" name="q" value="Enter Keywords" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
-			</form>
-		</div>
-	</div>
+<div id="navigation-wrapper">
+    <div id="navigation">
+    	<ul>
+    		<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url security-packages %}" title="Home Security Systems and Products">Home Security</a></li>
+    		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">Monitoring</a></li>
+    		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Products</a></li>
+    		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Company</a></li>
+
+    	</ul>
+    	<div id="search-area">
+    		<form name="search" method="get" action="/pa/search">
+    			<input type="text" id="q" name="q" onfocus="if (this.value == 'Enter Keywords') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Enter Keywords';}" />
+    		</form>
+    	</div>
+    </div>
 </div>
 {% block subnav %}
 <div id="sub-navigation">
 	{% block subnav_parent %}
 	{% endblock %}
+    <div id="share-this">
+        <div id="facebook-button">
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+            
+            <fb:like href="www.protectamerica.com" send="false" layout="button_count" width="450" show_faces="false"></fb:like>
+        </div>
+        <div id="plus-one">
+            <g:plusone size="small" annotation="bubble" width="120" href="http://www.protectamerica.com"></g:plusone>
+        </div>
+
+
+    </div>
 	{% block subnav_child %}
 	{% endblock %}
+
+
 </div>
 {% endblock %}
 
@@ -126,12 +150,12 @@
 		<div id="awards">
 			
 			<div>
-				<img src="/media/img/external/top-consumer-logo-sml.jpg" />
+				<img src="/static/img/external/top-consumer-logo-sml.jpg" />
 				<p>Five star rating four years in a row by online website: TopConsumerReviews.com</p>
 				<div class="clear"></div>
 			</div>
 			<div>
-				<img src="/media/img/external/consumer-digest-logo-sml.png" />
+				<img src="/static/img/external/consumer-digest-logo-sml.png" />
 
 				<p>Voted a Consumers Digest "Best Buy" for our Copper home security package</p>
 				<div class="clear"></div>
@@ -141,7 +165,7 @@
 		<div class="clear"></div>
 	</div>
 	<p>Sister Companies</p>
-	<img src="/media/img/external/sister-companies.jpg" />
+	<img src="/static/img/external/sister-companies.jpg" />
 </div>
 {% endblock %}
 <div id="contact-boxes">
@@ -151,7 +175,15 @@
 		<div class="clear"></div>
 	</div>
 </div>
-{% block extra_javascript %}{% endblock %}
+{% block extra_javascript %}
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{% endblock %}
 
 
 </body>
