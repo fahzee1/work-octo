@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/products.css">
+{% endblock %}
+{% block subnav_parent %}
+<ul>
+	<li {% if 'copper' in active_pages %}class="active"{% endif %}><a href="{% url copper %}">Copper Package</a></li>
+
+	<li {% if 'bronze' in active_pages %}class="active"{% endif %}><a href="{% url bronze %}">Bronze Package</a></li>
+	<li {% if 'silver' in active_pages %}class="active"{% endif %}><a href="{% url silver %}">Silver Package</a></li>
+	<li {% if 'gold' in active_pages %}class="active"{% endif %}><a href="{% url gold %}">Gold Package</a></li>
+	<li {% if 'platinum' in active_pages %}class="active"{% endif %}><a href="{% url platinum %}">Platinum Package</a></li>
+</ul>
+{% endblock %}
