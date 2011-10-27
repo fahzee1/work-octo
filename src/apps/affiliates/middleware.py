@@ -25,6 +25,7 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = affiliate.agent_id
                     response.set_cookie('refer_id',
                         value=affiliate.agent_id,
+                        domain='.protectamerica.com',
                         expires=datetime.now() + expire_time)
                 except Affiliate.DoesNotExist:
                     pass
@@ -33,5 +34,6 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = default_agent
                     response.set_cookie('refer_id',
                         value=default_agent,
+                        domain='.protectamerica.com',
                         expires=datetime.now() + expire_time)
         return response
