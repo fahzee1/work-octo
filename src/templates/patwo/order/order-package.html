@@ -1,0 +1,123 @@
+{% extends "products/base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/order.css">
+{% endblock %}
+{% block subnav %}
+{% endblock %}
+{% block extra_javascript %}
+<script type="text/javascript" 
+    src="/static/js/jquery.placeholder.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#product_images img').hide();
+        switch('{{ request.GET.package }}'){
+            case 'platinum':
+                $('#security-package-images #platinum-package').show();
+                break;
+            case 'gold':
+                $('#security-package-images #gold-package').show();
+                break;
+            case 'silver':
+                $('#security-package-images #silver-package').show();
+                break;
+            case 'bronze':
+                $('#security-package-images #bronze-package').show();
+                break;
+            case 'copper':
+            default:
+                $('#security-package-images #copper-package').show();
+                break;
+        }
+        $('input[type="text"],textarea').placeholder();
+        $('#id_package').change(function() {
+            var option = $(this).children('option:selected');
+            slide_product_image($('#security-package-images img:visible'), 
+                $('#security-package-images #'+option.val()+'-package'));
+        });
+        function slide_product_image(prev, next) {
+            // prev and next are both image jquery objects
+
+            $(prev).animate({
+                'left': "400px",
+                'opacity': 0
+            }, 800, function() {
+                $(prev).hide();
+
+            });
+            $(next).css('left', '-6000px');
+            $(next).show();
+            $(next).animate({
+                'left': '-75px',
+                'opacity': 1.0
+            }, 1500);
+        }
+    });
+</script>
+{% endblock %}
+{% block content %}
+
+<div id="order-security-package">
+	<div id="security-package-images">
+		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Copper Home Security Package" id="copper-package">
+    	<img src="/static/img/products/bronze-package/bronze-package-simon-xt.jpg" alt="Bronze Home Security Package" id="bronze-package">
+		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Silver Home Security Package" id="silver-package">
+		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Gold Home Security Package" id="gold-package">
+		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Platinum Home Security Package" id="platinum-package">
+    </div>
+	<div id="order-form">
+			<h1>Thank You for Choosing Protect America</h1>
+			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below or call: <strong>1-800-951-5111</strong></strong></p>
+            {% comment %}
+			<form>
+				<input type="text" value="Name">
+				<input type="text" value="Email">
+				<input type="text" value="Phone">
+				<label>Package: </label>
+				<select>
+				  <option value="copper">Copper Package</option>
+				  <option value="bronze">Bronze Package</option>
+				  <option value="silver">Silver Package</option>
+				  <option value="gold">Gold Package</option>
+				  <option value="platinum">Platinum Package</option>
+
+				</select>
+				<button>Call Me</button>
+
+			</form>
+            {% endcomment %}
+            {% include 'contact-us/forms/order-form.html' %}
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div id="order-reassurance">
+	<div id="lowest-price-guaranteed">
+		<h3>Lowest Price Guaranteed</h3>
+		<p>If you find a better offer, let us know.  We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p>
+	</div>
+	<div id="lifetime-warranty">
+		<h3>Lifetime Equipment Warranty</h3>
+		<p>As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free.  We want to make sure your home is always secure.</p>
+	</div>
+	<div id="homeowner-insurance-discount">
+		<h3>Homeowner's Insurance Discount</h3>
+		<p>Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</p>
+	</div>
+	<div id="relocation-kit">
+		<h3>Relocation Kit</h3>
+		<p>With Protect America, you own your security equipment. If you happen to move, we will send you a relocation kit to easily take your security system with you.</p>
+	</div>
+	<div id="free-tech-support">
+		<h3>Free Tech Support</h3>
+		<p>Included with your home security system is our knowledgeable technical support staff.  From simple operation to the advanced settings, they are here to help you.</p>
+	</div>
+</div>
+
+
+
+{% endblock %}  
+{{ block.super }}
+
+
+
+{% block subnav_parent %}{% endblock %}

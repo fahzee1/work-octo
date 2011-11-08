@@ -17,16 +17,14 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     #contact us
-    url(r'^contact-us/post/?$', 'contact.views.post'),
-    url(r'^contact-us/?$', 'contact.views.main', name='contact-us'),
-    url(r'^contact-us/feedback-to-the-ceo/?$', 'contact.views.ceo',
+    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
+    url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
+    url(r'^contact-us/feedback-to-the-ceo/?$', 'apps.contact.views.ceo',
         name='feedback-ceo'),
-    url(r'^contact-us/find-us/?$', 'contact.views.find_us', name='find-us'),
-    url(r'^products/order-package/?$', 'contact.views.order_form',
+    url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
+    url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
-
-    url(r'^sitemap/$', 'sitemaps.views.index', name='sitemap'),
-
+    url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
 )
 
 # a simple direct_to_template wrapper
@@ -37,28 +35,32 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     context = dict(page_name=name, parent=parent)
     context.update(ctx)
 
-    return url(pattern, 'common.views.simple_dtt',
+    return url(pattern, 'apps.common.views.simple_dtt',
 		dict(template=template, extra_context=context),
 		name=name)
 
+urlpatterns += patterns('',
 
+    # Home Page
+   	dtt(r'^$', '_base.html', 'home', ctx={'page_name': 'index'}),
+    dtt(r'^thank-you/$', 'thank-you.html', 'thankyou', ctx={'page_name': 'thankyou'}),
+
+)
+"""
 urlpatterns += patterns('',
 
     # Home Page
    	dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
 
-    # Product Pages
-   	dtt(r'^products/?$', 'products/index.html', 'products'),
+    # Home Security Packages
+   	dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
 
     	# Product > Packages
-
-   	   	dtt(r'^products/security-packages/?$', 'products/packages/index.html', 'security-packages', 'products'),
-
-   		dtt(r'^products/security-packages/copper/?$', 'products/packages/copper.html', 'copper', 'security-packages'),
-   		dtt(r'^products/security-packages/bronze/?$', 'products/packages/bronze.html', 'bronze', 'security-packages'),
-   		dtt(r'^products/security-packages/silver/?$', 'products/packages/silver.html', 'silver', 'security-packages'),
-   		dtt(r'^products/security-packages/gold/?$', 'products/packages/gold.html', 'gold', 'security-packages'),
-   		dtt(r'^products/security-packages/platinum/?$', 'products/packages/platinum.html', 'platinum', 'security-packages'),
+   		dtt(r'^home-security-packages/copper/?$', 'packages/copper.html', 'copper', 'security-packages'),
+   		dtt(r'^home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
+   		dtt(r'^home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'security-packages'),
+   		dtt(r'^home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'security-packages'),
+   		dtt(r'^home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
 
    		# Product > Monitoring
 
@@ -132,9 +134,7 @@ urlpatterns += patterns('',
 
 
 )
-
+"""
 if settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-    )
-
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()

@@ -4,7 +4,7 @@ import os
 
 import settings
 
-DEBUG = False 
+DEBUG = True 
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -40,10 +40,22 @@ MEDIA_ROOT = os.path.join(settings.PROJECT_ROOT, 'src', 'media')
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
+STATIC_ROOT = os.path.join(settings.PROJECT_ROOT, 'src', 'static')
+
+STATIC_URL = '/static/'
+
+STASTICFILES_DIRS = ()
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = MEDIA_URL + 'grappelli/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '*$#jqy%8ho+3-n9adsj@qjgq8-+h6oz8z3&2k5g5&9mzhx#tj('
@@ -51,10 +63,12 @@ SECRET_KEY = '*$#jqy%8ho+3-n9adsj@qjgq8-+h6oz8z3&2k5g5&9mzhx#tj('
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.auth",
     "django.core.context_processors.media",
+    'django.core.context_processors.static',
     "django.core.context_processors.request",
-    'common.context_processors.is_business_time',
-    'common.context_processors.phone_number',
-    'pricetable.context_processors.price_table',
+    'apps.common.context_processors.is_business_time',
+    'apps.common.context_processors.phone_number',
+    'apps.pricetable.context_processors.price_table',
+    'sekizai.context_processors.sekizai',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -68,7 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'affiliates.middleware.AffiliateMiddleware',
+    'apps.affiliates.middleware.AffiliateMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -81,15 +95,17 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    'django.contrib.staticfiles',
     'django.contrib.admin',
 
-    'common',
-    'affiliates',
-    'sitemaps',
-    'adspace',
-    'contact',
-    'pricetable',
+    'sekizai',
+
+    'apps.common',
+    'apps.affiliates',
+    'apps.sitemaps',
+    'apps.adspace',
+    'apps.contact',
+    'apps.pricetable',
 )
 
 LOGIN_URL = '/login/'
@@ -103,5 +119,3 @@ try:
     from etc.django.local import *
 except ImportError:
     pass
-
-

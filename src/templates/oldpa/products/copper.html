@@ -1,0 +1,66 @@
+{% extends "products/_base.html" %}
+
+{% load adspace %}
+{% load content_tags %}
+{% load content_filters %}
+
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/products.css" />
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+
+    <div id="package_area">
+        <div id="product_image">
+            <img src="{{ STATIC_URL }}img/products/copper-package-xt.jpg" />
+
+            <h2><strong>Our Price:</strong> Free</h2>
+            <h4>Save {{ pricetable.COPPER.adt_upfront }} compared to ADT</h4>
+            <h3><strong>Monitoring:</strong> {{ pricetable.COPPER.standard_monitoring }} per month</h3>
+        </div>
+        <div id="product_description">
+            <h1>The Copper Package</h1>
+            <div id="red_badge">
+                <p>Get it <span>FREE</span> today</p>
+            </div>
+            <ul>
+                <li>
+                    <a class="thickbox link" title="Door and Window Sensors" href="#TB_inline?height=350&width=670&inlineId=popSensors">
+                        <strong>3 Door Sensors</strong>
+                    </a>
+                </li>
+                <li><strong>1 Motion Detector</strong></li>
+                <li>GE Control Panel</li>
+                <li>Internal Siren and Door Chime</li>
+                <li>Battery Backup</li>
+                <li>One Button Arming</li>
+                <li>3 Window Decals</li>
+                <li>1 Yard Sign</li>
+            </ul>
+            <h2>Limited Time Offers</h2>
+            <div id="offers">
+                <ul>
+                    <li>Free Micro Sensor Upgrade</li>
+                </ul>
+            </div>
+            <div id="order_button">
+                <a title="Order your Home Security System Today" href="/pa/order">
+                    <img alt="Order your Home Security System Today" src="{{ STATIC_URL }}img/products/order_button.png">
+                 </a>
+                <br>
+                <a class="thickbox link" title="Call Now" href="#TB_inline?height=100&width=800&inlineId=phone_number_pop">
+                    {% businesstime %}
+                    <div class="phone-number-box">
+                        Call Toll-Free:
+                        <span class="dynamic-phone-number">{{ phone_number|format_number }}</span>
+                    </div>
+                    {% endbusinesstime %}
+                </a>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    {% adspace "home-banner" %}
+{% endblock %}
