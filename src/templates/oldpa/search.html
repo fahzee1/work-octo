@@ -35,7 +35,11 @@
         <link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
         {% if pages %}
         <div id="search_matches">
-            <h2>Suggested Results</h2>
+            {% if pages|length > 1 %}
+            <h2>Most Relevant Search Results</h2>
+            {% else %}
+            <h2>Most Relevant Search Result</h2>
+            {% endif %}
         {% for page in pages %}
             <div class="search_page">
                 <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
@@ -43,6 +47,7 @@
                 <span>{{ page.url }}</span>
             </div>
         {% endfor %}
+            <h2 class="border">Related Content</h2>
         </div>
         {% endif %}
     </div>

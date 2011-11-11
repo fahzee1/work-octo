@@ -15,6 +15,8 @@ def search(request):
             details = page.get_page_details()
             if details is not None:
                 pages.append({'title': details['title'],'description': details['description'],'url': details['url']})
-        height = ((len(pages) * 120) + 25)
+        height = 0
+        if pageObj:
+            height = ((len(pages) * 120) + 50)
 
     return render_to_response('search.html', {'pages': pages, 'height': height}, context_instance=RequestContext(request))
