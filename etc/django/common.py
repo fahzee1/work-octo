@@ -106,6 +106,7 @@ INSTALLED_APPS = (
     'apps.adspace',
     'apps.contact',
     'apps.pricetable',
+    'apps.search',
 )
 
 LOGIN_URL = '/login/'
