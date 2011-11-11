@@ -7,7 +7,7 @@ from urllib2 import urlopen
 class KeywordMatch(models.Model):
 
     keyword = models.CharField(max_length=128)
-    page = models.CharField(max_length=64)
+    page = models.CharField(max_length=128)
 
     def get_page_details(self):
         try:
