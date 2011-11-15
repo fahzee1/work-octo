@@ -1,15 +1,14 @@
 {% load sekizai_tags %}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 {% render_block "gwo" %}
 {% addtoblock "gwo" %}
 {% endaddtoblock %}
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<meta http-equiv="Pragma" content="no-cache" />
 <title>RadioShack - mobile phones, MP3 players, laptops, and more</title>
 <meta  name="description"  content="The Shack helps you get it right with the biggest brands and latest products"  />
 <meta  name="keywords"  content="RadioShack,Radio Shack,radio,shack,gps,camera,batteries,electronics,cellular,television,answers,home,home office,laptop,Alkaline,Amateur,Amplifier,Antenna,Audio,battery,cable,caller ID,camcorder,capacitor,cartridge,CB,CD,Cellular,Communication,Connector,Converter,Cordless,Desktop,Digital,Diode,Electronic,Enclosure,Flashlight,Game,Gift,Ham,Handheld,Headphone,Hi-fi,Home theater,Inverter,Laser,LED,Lighting,Meter,Microcontroller,Microphone,Monitor,Multimeter,Networking,Notebook,PC,PCS,Peripherals,Power,Radar,Radio,RC cars,Rechargeable,Remote Control,Satellite,Scanner,Security,Software,Solar,Solder,Speaker,Stereo,Surround Sound,Surveillance,Switch,Telephone,Equipment,Tools,Toys,games,TV,VCR,Walkie Talkie,Weather,Wire,Wireless "  />
-<link rel="shortcut icon" href="http://www.radioshack.com/favicon.ico">
 <script language="Javascript">
 function trimString (str) {
   while (str.charAt(0) == ' ')
@@ -21,6 +20,7 @@ function trimString (str) {
 function emailCheck(type) // not sure if anybody uses this, but just in case i'm leaving it functional
 {
  var email = trimString(document.emailForm.emailAddress.value);
+
     if (!validEmail(email))
 	{
         alert('Please enter a valid e-mail address.');
@@ -37,6 +37,7 @@ function validEmail(email)
     var vPeriod   = email.lastIndexOf('.')
     var vSpace    = email.indexOf(' ')
     var vLength   = email.length - 1   // Array is from 0 to length-1
+
     if (vAtSym < 1 ||                     // '@' cannot be in first position
     	vPeriod <= vAtSym + 1 ||          // Must be atleast one valid char btwn '@' and '.'
     	vPeriod == vLength  ||            // Must be atleast one valid char after '.'
@@ -46,16 +47,24 @@ function validEmail(email)
     }
 	return true;
 }
+
+
+
+
+
 function showCustomPopUp(thisUrl,thisName,theseParams)
 {
 	remote = open(thisUrl, thisName, theseParams);
 }
+
+
 //	verisign POP-UP WINDOW
 function popUp(url)
 {
 	sealWin=window.open(url,"win",'toolbar=0,location=0,directories=0,status=1,menubar=1,scrollbars=1,resizable=1,width=500,height=450');
 	self.name = "mainWin";
 }
+
 function jump(url)
 {
 	if (url != "" && url != null)
@@ -64,24 +73,64 @@ function jump(url)
 	}
 }
 </SCRIPT>
-	<!--  Do not edit/add css links here. Use the min-cat project. Config file: /ant-min-cat/site-head-css.xml -->
-<link href="http://rsk-uat06.uat.gsipartners.com/include/store.css" type="text/css" rel="stylesheet" />
 
+<!--  Do not edit/add css links here. Use the min-cat project. Config file: /ant-min-cat/site-head-css.xml -->
+<link href="http://RSK.imageg.net/include/store.css" type="text/css" rel="stylesheet" />
+<link href="http://RSK.imageg.net/css/cmsCategory.css" type="text/css" rel="stylesheet" />
+<link href="http://RSK.imageg.net/css/gridViewSystem.css" type="text/css" rel="stylesheet" />
+
+<link href="http://RSK.imageg.net/css/gridView.css" type="text/css" rel="stylesheet" />
+<link href="http://RSK.imageg.net/css/listView.css" type="text/css" rel="stylesheet" />
+<link href="http://RSK.imageg.net/css/cart.css" type="text/css" rel="stylesheet" />
+<!--  end min-cat section -->
+<!--  Do not edit/add js scripts here. Use the min-cat project. Config file: /ant-min-cat/site-head-js.xml -->
+<script src="http://RSK.imageg.net/js/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/js/prototype1_6.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/js/jquery.tools.overlay.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/include/swfobject.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/include/flashobject.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/include/dhtml_menus.js" type="text/javascript"></script>
+
+<script src="http://RSK.imageg.net/include/trackingpixel.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/js/rsk.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/js/newEmailOverlay.js" type="text/javascript"></script>
+<script src="http://RSK.imageg.net/js/emailOverlay.js" type="text/javascript"></script>
+<!--  end min-cat section -->
+<script type="text/javascript">
+	//dig up cookie - have they seen the pop yet today?
+	function getCookie(name){
+	var cname = name + "=";
+	var dc = document.cookie;
+    	if (dc.length > 0) {
+    		begin = dc.indexOf(cname);
+			if (begin != -1) {
+				begin += cname.length;
+				end = dc.indexOf(";", begin);
+				if (end == -1) end = dc.length;
+				return unescape(dc.substring(begin, end));
+			}
+		}
+	return null;
+	}
+	function newWindow(url){
+		popWindow = window.open(url, 'mapWin', 'width=310,height=255,scrollbars=yes,resizable=no');
+ popWindow.focus(); }
+/*
+	if(getCookie("rskseencookie") != "11/7/11"){
+		newWindow("sweeps_pop.jsp");
+}*/
+</script>
+
+<!--  Do not edit/add js scripts here. Use the min-cat project. Config file: /ant-min-cat/site-head-home-js.xml -->
+<script src="http://RSK.imageg.net/min-cat/site-head-home-js.xml.min.js" type="text/javascript"></script>
 <!--  end min-cat section -->
 
-	<!--  Do not edit/add js scripts here. Use the min-cat project. Config file: /ant-min-cat/site-head-js.xml -->
-<script src="http://rsk-uat06.uat.gsipartners.com/js/prototype1_6.js" type="text/javascript"></script>
-<script src="http://rsk-uat06.uat.gsipartners.com/js/jquery.tools.overlay.js" type="text/javascript"></script>
-<script src="http://rsk-uat06.uat.gsipartners.com/include/swfobject.js" type="text/javascript"></script>
-<script src="http://rsk-uat06.uat.gsipartners.com/include/flashobject.js" type="text/javascript"></script>
-<script src="http://rsk-uat06.uat.gsipartners.com/include/dhtml_menus.js" type="text/javascript"></script>
-<script src="http://rsk-uat06.uat.gsipartners.com/include/trackingpixel.js" type="text/javascript"></script>
-<script src="http://rsk-uat06.uat.gsipartners.com/js/rsk.js" type="text/javascript"></script>
-<script src="http://rsk-uat06.uat.gsipartners.com/js/newEmailOverlay.js" type="text/javascript"></script>
-
 <link rel="canonical" href="http://www.radioshack.com/home/index.jsp" />
-	<meta property="og:url" content="null" />
-	<meta property="og:image" content="null/images/rsk_logo_do_stuff.png" />		
+	<meta property="fb:page_id" content="101504357409"/>
+	<meta property="fb:app_id" content="203998659616415"/>
+	<meta property="og:site_name" content="RadioShack"/>
+	<meta property="og:url" content="http://www.radioshack.com" />
+	<meta property="og:image" content="http://www.radioshack.com/images/rsk_logo_do_stuff.png" />		
 	<meta property="og:type" content="website" />
     {% render_block "css" %}
     {% render_block "js" %}
@@ -415,20 +464,27 @@ function jump(url)
 
 <div id="anteriorFooter">
 	<div id="anteriorFooterWrapper">
-		<!-- intentionally empty -->
+		
+		
+		
 	</div>
 </div>
+
+
 <div class="footer">
 	<div class="inner clearfix">
+
 		<div class="about" id="about">
 
 				<h3 class="sprite">About</h3>
+
+				
 				<div class="content" style="display:none;" >
 					Whatever your electronic needs, you've come to the right place. The Shack has all the latest technology you need along with great <a href="http://www.radioshack.com/shop/index.jsp?categoryId=2056569">savings</a> on many in-demand products.
 
-If you are looking for the <a href="http://radioshackwireless.com/mobile/?r=radioshack&refcode1=RSK_0000_000_CELLTOP">latest mobile phones</a>, RadioShack.com carries cell phones from top wireless providers like <a href="http://radioshackwireless.com/mobile/at&t.aspx?referringdomain=radioshack">AT&T</a>, <a href="http://radioshackwireless.com/mobile/sprint.aspx?referringdomain=radioshack">Sprint</a>, and <a href="http://radioshackwireless.com/mobile/tmobile.aspx?referringdomain=radioshack">T-Mobile</a>. RadioShack.com also offers a wide variety of <a href="http://www.radioshack.com/family/index.jsp?categoryId=4314708&s=null">pay as you go mobile phones</a>, if contracts aren't really your thing.
+If you are looking for the <a href="http://radioshackwireless.com/mobile/?r=radioshack&refcode1=RSK_0000_000_CELLTOP">latest mobile phones</a>, RadioShack.com carries cell phones from top wireless providers like <a href="http://radioshackwireless.com/mobile/at&t.aspx?referringdomain=radioshack">AT&T</a>, <a href="http://radioshackwireless.com/mobile/sprint.aspx?referringdomain=radioshack">Sprint</a>, and <a href="http://radioshackwireless.com/mobile/verizon-wireless.aspx?referringdomain=radioshack">Verizon</a>. RadioShack.com also offers a wide variety of <a href="http://www.radioshack.com/family/index.jsp?categoryId=4314708&s=null">pay as you go mobile phones</a>, if contracts aren't really your thing.
 
-If youâ€™re looking to add a little more music to your life, RadioShack.com has <a href="http://www.radioshack.com/family/index.jsp?categoryId=4388388&s=null">karaoke systems</a>, <a href="http://www.radioshack.com/category/index.jsp?categoryId=4390406">MP3 players and iPods</a>, and <a href="http://www.radioshack.com/family/index.jsp?categoryId=4388387&s=">home theater systems</a> to liven things up a bit. Or if you want to make your next road trip a little more fun, RadioShack.comâ€™s got you covered with <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032320&sr=1&origkw=2032320">satellite radio</a>, <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032323&s=null">mobile video</a> and <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032322&s=null">GPS navigation</a>.
+If you're looking to add a little more music to your life, RadioShack.com has <a href="http://www.radioshack.com/family/index.jsp?categoryId=4388388&s=null">karaoke systems</a>, <a href="http://www.radioshack.com/category/index.jsp?categoryId=4390406">MP3 players and iPods</a>, and <a href="http://www.radioshack.com/family/index.jsp?categoryId=4388387&s=">home theater systems</a> to liven things up a bit. Or if you want to make your next road trip a little more fun, RadioShack.comâ€™s got you covered with <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032320&sr=1&origkw=2032320">satellite radio</a>, <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032323&s=null">mobile video</a> and <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032322&s=null">GPS navigation</a>.
 
 Or if you like to be a little innovative, RadioShack.com has a robust <a href="http://www.radioshack.com/category/index.jsp?categoryId=2032058"> hobbyist and do-it-yourself </a> selection as well. Whether you are an electronics hobbyist or fashion yourself a DIY expert, RadioShack.com has  the <a href="http://www.radioshack.com/category/index.jsp?categoryId=2032234">fuses</a>, <a href="http://www.radioshack.com/category/index.jsp?categoryId=2032231">connectors</a> and <a href="http://www.radioshack.com/category/index.jsp?categoryId=2032233">LEDs</a> to bring it all together. So whether you want to hook up your <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032183&s=null">speakers</a> and need <a href="http://www.radioshack.com/family/index.jsp?categoryId=2032241&s=null">speaker wire</a> or want <a href="http://www.radioshack.com/family/index.jsp?s=null&categoryId=2032313&pg=2&s=null">soldering tools</a> to build the perfect <a href="http://www.radioshack.com/search/index.jsp?kw=breadboards&kwCatId=&fbc=1&f=PAD%2FProduct+Type%2FBreadboards&fbn=Type%2FBreadboards&filterName=Type&filterValue=Breadboards">circuit board</a>, thereâ€™s something for every level of expertise. If your hobby is digging for buried treasure, RadioShack.com has something for that too. Be sure to check out our collection of <a href="http://www.radioshack.com/family/index.jsp?categoryId=4446520&s=null">metal detectors</a>.
 
@@ -436,8 +492,11 @@ And of course, RadioShack.com has all of the necessities that come in handy for 
 
 				</div>
 
+				
 		</div>
+    
 		<div class="column1">
+		
 			<div class="share">
 				<span class="sprite">THE SHACK wants to keep in touch</span>
 				<a href="http://www.twitter.com/radioshack" class="sprite twitter" title="Twitter">Twitter</a>
@@ -445,14 +504,15 @@ And of course, RadioShack.com has all of the necessities that come in handy for 
 				<div class="clear"></div>
 
 			</div>
+			
 			<div class="getOffers">
-				<h4>GET SPECIAL EMAIL OFFERS</h4>
+				<h4 class="email-offers hideText">GET SPECIAL EMAIL OFFERS</h4>
 				<div class="signUp">
 					 <form name="emailForm" action="http://www.radioshack.com/emailHandler/index.jsp" method="post" onsubmit="return valForm(this)">
 						
-						 <input type="hidden" name="contest" value="RSH_HomepageSignup" />
+						 <input type="hidden" name="contest" value="RSH_FooterSignup" />
 						 <input type="hidden" name="emailPref" value="Y" />
-						 <input type="hidden" name="targetPage" value="http://www.radioshack.com/emailThanks/index.jsp" />
+						 <input type="hidden" name="targetPage" value="../emailThanks/index.jsp" />
 
 						 <input type="text" title="Get Special Email Offers" onblur="if(this.value==''){this.value='Enter your e-mail address'};" onfocus="if(this.value=='Enter your e-mail address'){this.value=''};" value="Enter your e-mail address" class="sprite" name="emailAddress" id="footerEmailAddress" />
 						 <input type="submit" id="footerEmailSubmit" class="sprite" value="" title="Sign Up"/>
@@ -460,91 +520,136 @@ And of course, RadioShack.com has all of the necessities that come in handy for 
 					 </form>
 				</div>
 			</div>
+		  
 			<div class="blog">
 				<h4 class="sprite">VISIT OUR BLOG</h4>
 
 				<a href="http://blog.radioshack.com/" title="Special Offers, How-toâ€™s, Savings &amp; More!">Special Offers, How-to's, Savings &amp; More!</a>
 			</div>
+		  
 			<div class="team">
 				<h4 class="sprite">TEAM RADIOSHACK</h4>
 				<a href="http://www.livestrong.com/teamradioshack/" title="Support Lance Armstrong and RadioShack as we race to cure cancer.">Support Lance Armstrong and RadioShack as we race to cure cancer.</a>     
 			</div>
+
+		
 		</div>
 
+    
 		<div class="column2">
+				
 		  <div class="row1">
+			
 			<div class="box">
-				<h4>Where's Your Order</h4>
+				<h4 class="order hideText">Where's Your Order?</h4>
 				<a href="http://www.radioshack.com/checkout/index.jsp?process=orderTrackingLogin" title="View Your Order History">View Your Order History</a>
 				<a href="https://www.radioshack.com/coreg/index.jsp?step=ot&clickid=topnav_track_img&nav=o" title="How to Track Your Order">How to Track Your Order</a>
+
 				<a href="https://www.radioshack.com/coreg/index.jsp?step=register&clickid=footer_myacct_txt" title="Manage Your Account">Manage Your Account</a>      
 			</div>
 
 			<div class="box">
-			  <h4>Returns &amp; Refunds</h4>
+			  <h4 class="returns hideText">Returns &amp; Refunds</h4>
 			  <a href="http://www.radioshack.com/helpdesk/index.jsp?display=returns&amp;subdisplay=guarantee" title="30-Day Money Back Guarantee">30-Day Money Back Guarantee</a>
 			  <a href="http://www.radioshack.com/helpdesk/index.jsp?display=returns&amp;subdisplay=returns" title="Return Instructions">Return Instructions</a>
+
 			  <a href="http://www.radioshack.com/helpdesk/index.jsp?display=returns&amp;subdisplay=credit" title="Credit for Returns">Credit for Returns</a>
 			</div>
 
 			<div class="box">
-			  <h4>Need Assistance?</h4>
-			  Call: 1-800-843-7422
-			  Espa&#241;ol: 1-800-843-7422
-			  <a href="javascript:newWindow('http://www.radioshack.com/helpdesk/password-pop-up.jsp');" title="Forgot your password?">Forgot your password?</a>
-			  <a href="http://www.radioshack.com/sitemap/map.jsp?clickid=footer_sitemap_txt" title="See our site map">View Our Site Map</a>
-			  <a href="http://www.radioshack.com/uc/index.jsp?page=researchLibraryArticle&articleUrl=..%2Fgraphics%2Fuc%2Frsk%2FResearchLibrary%2FBuyersGuides%2Fresearch%2Fcredit.html" title="Credit Card Services">Credit Card Services</a>
-			</div>
-
-			<span style="display:block;" class="clear"></span>
-		  </div>
-		  <div class="row2">
-			<div class="box">
-			  <h4>Product Information</h4>
+			  <h4 class="product-info hideText">Product Information</h4>
 			  <a href="http://www.radioshack.com/uc/index.jsp?page=researchLibraryArticle&articleUrl=..%2Fgraphics%2Fuc%2Frsk%2FResearchLibrary%2FBuyersGuides%2Fresearch%2Frecall.html" class="footerlink" title="Product Safety">Product Safety</a>
 			  <a href="http://www.radioshack.com/category/index.jsp?categoryId=2047072" title="Product Rebate Center">Product Rebate Center</a>
 
 			</div>
+			<span style="display:block;" class="clear"></span>
+		  </div>
+
+			
+		  <div class="row2">
 			<div class="box">
-			  <h4>Business Services</h4>
+			  <h4 class="services hideText">Business Services</h4>
 			  <a href="http://www.radioshack.com/affiliate/index.jsp" title="Become an Affiliate">Become an Affiliate</a>
+
 			  <a href="http://www.radioshack.com/corp/commercialSales.jsp?clickid=footer_commercial_txt" title="Commercial Sales">Commercial Sales</a>
 			</div>
 			<div class="box">
 
-			  <h4>Corporate Info</h4>
+			  <h4 class="help hideText">Need Assistance?</h4>
+			  <a class="helpDeskFooterLink" href="http://www.radioshack.com/uc/index.jsp?page=researchLibraryArticle&articleUrl=..%2Fgraphics%2Fuc%2Frsk%2FUSContent%2FHTML%2Fpages%2Fhelpdesk.html&noBc=true" title="Help Center">Help Center</a>
+			  Call: 1-800-843-7422
+			  EspaÃ±ol: 1-800-843-7422
+			  <a href="javascript:newWindow('http://www.radioshack.com/helpdesk/password-pop-up.jsp');" title="Forgot your password?">Forgot your password?</a>
+
+			  <a href="http://www.radioshack.com/sitemap/map.jsp?clickid=footer_sitemap_txt" title="See our site map">View Our Site Map</a>
+			  <a href="http://www.radioshack.com/uc/index.jsp?page=researchLibraryArticle&articleUrl=..%2Fgraphics%2Fuc%2Frsk%2FResearchLibrary%2FBuyersGuides%2Fresearch%2Fcredit.html" title="Credit Card Services">Credit Card Services</a>
+			</div>
+
+			<div class="box">
+			  <h4 class="corp hideText">Corporate Info</h4>
 			  <a href="http://www.radioshackcorporation.com/" target="_blank" title="About Us">About Us</a>
+
 			  <a href="http://ir.radioshackcorporation.com/phoenix.zhtml?c=84525&p=irol-irhome" target="_blank" title="Investor Information">Investor Information</a>
 			  <a href="http://media.radioshackcorporation.com/phoenix.zhtml?c=242236&p=irol-overview" target="_blank" title="Press Center">Press Center</a>
 			  <a href="https://www.franchiseradioshack.com/" target="_blank" title="Franchise Opportunities">Franchise Opportunities</a>
+
 			  <a href="http://www.jobsatradioshack.com" target="_blank" title="Careers">Careers</a>
-
 			</div>
-		  </div>
-		</div>
-		<div class="column3">
-		  <div class="box weekly">
-			<h4 class="sprite">Weekly Ad</h4>
-			<a href="http://radioshack.shoplocal.com/radioshack/new_user_entry.aspx?adref=rs.com" title="Shop Now">Shop Now</a>
+		  
 		  </div>
 
-		  <span class="footerColumnSplitter"></span>
-		  <div class="box gifts">
-			<h4 class="sprite">GIFT CARDS</h4>
+		</div>
+    
+		<div class="column3">
+		
+		  <div class="box weekly">
+			<h4 class="sprite"><a href="http://radioshack.shoplocal.com/radioshack/new_user_entry.aspx?adref=rs.com">Weekly Ad</a></h4>
+
 			<a href="http://radioshack.shoplocal.com/radioshack/new_user_entry.aspx?adref=rs.com" title="Shop Now">Shop Now</a>
 		  </div>
+		  <span class="footerColumnSplitter"></span>
+
+		  <div class="box gifts">
+			<a href="http://www.radioshack.com/product/index.jsp?productId=2051492" style="margin-left:-10px;"><h4 class="sprite">GIFT CARDS</h4></a>
+			<a href="http://www.radioshack.com/product/index.jsp?productId=2051492" title="Shop Now">Shop Now</a>
+		  </div>
+
+		
 		</div>
 		<div class="clear"></div>
 		<p class="copy">Online prices and product selection may vary from our retail stores. All prices and offers are subject to change. Copyright RadioShack Corporation 2011. All rights reserved.</p>
 
+		
 		<ul class="legal">
 			<li><a href="http://www.radioshack.com/helpdesk/index.jsp?display=safety&subdisplay=privacy&clickid=privacy" title="Privacy Policy">Privacy Policy</a></li>
 			<li><a href="http://www.radioshack.com/helpdesk/index.jsp?display=safety&subdisplay=terms&clickid=footer_terms_txt" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
+
 			<li><a href="http://www.radioshack.com/uc/index.jsp?page=researchLibraryArticle&articleUrl=../graphics/uc/rsk/USContent/HTML/pages/Accessibility.html&noBc=true" title="Accessibility Statement">Accessibility Statement</a></li>
 		</ul>
 		<div class="clear"></div>
 
 	</div>
 </div>
+
+<div style="display:none;">
+	
+	
+		
+
+
+
+
+
+
+<!--You are running on secprd1_ws_11_4-->
+
+
+
+<!-- getRequestURI = /gsi/rsk/cart/shoppingcart.jsp --><!-- pageOrprocessName = cart -->
+
+
+
+</div>
 </body>
 </html>
+
