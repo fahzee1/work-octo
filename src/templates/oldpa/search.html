@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+
+{% load sekizai_tags %}
+
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/search.css" />
+{% endblock %}
+
+{% block content %}
+    {% addtoblock "css" %}
+<style type="text/css">
+    .gsc-wrapper {
+        margin-top: {{ height }}px;
+    }
+</style>
+    {% endaddtoblock "css" %}
+    <div id="search">
+        <div id="cse" style="width: 100%;">Loading</div>
+        <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+        <script type="text/javascript">
+          google.load('search', '1', {language : 'en'});
+          google.setOnLoadCallback(function() {
+            var customSearchControl = new google.search.CustomSearchControl('017011998053292680976:-4ba1klihus');
+            customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+            customSearchControl.draw('cse');
+            var byName = '{{ request.GET.q }}';
+            if(byName != undefined) {
+                customSearchControl.execute(byName);
+            }
+            customSearchControl.setSearchStartingCallback(this, function() {
+                window.location = '?q=' + $('form.gsc-search-box input').val();
+            });
+          }, true);
+        </script>
+        <link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
+        {% if pages %}
+        <div id="search_matches">
+            {% if pages|length > 1 %}
+            <h2>Most Relevant Search Results</h2>
+            {% else %}
+            <h2>Most Relevant Search Result</h2>
+            {% endif %}
+        {% for page in pages %}
+            <div class="search_page">
+                <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
+                <p>{{ page.description }}</p>
+                <span>{{ page.url }}</span>
+            </div>
+        {% endfor %}
+            <h2 class="border">Related Content</h2>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

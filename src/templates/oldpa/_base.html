@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 {% endcomment %}
-<!DOCTYPE html>
+{% load sekizai_tags %}<!DOCTYPE html>
 <html>
 <head>
     <title>{% block page_title %}{% endblock %}</title>
@@ -25,7 +25,9 @@
     {% block stylesheet %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
     {% endblock %}
+    {% render_block "css" %}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"></script>
 </head>
 <body>
 <div id="wrapper">
@@ -49,11 +51,7 @@
 
         <div id="logo">
             <a href="/">
-                <div id="logo-icon"></div>
-                <div id="logo-type">
-                    <h1>Protect America</h1>
-                    <h2>America's Home Security Experts</h2>
-                </div>
+                <img src="{{ STATIC_URL }}img/pa-logo.png" />
             </a>
         </div>
         <div id="callnow">
@@ -71,7 +69,7 @@
                     <img class="home-icon" width="26" height="25" alt="Go to the Protect America Home Security Homepage" src="{{ STATIC_URL }}img/house-icon.png"/>
                 </a>
             </li>
-            <li{% if 'products' in active_pages %} class="active"{% endif %}><a href="#">Products</a></li>
+            <li{% if 'products' in active_pages %} class="active"{% endif %}><a href="{% url copper %}">Products</a></li>
             <li{% if 'aboutus' in active_pages %} class="active"{% endif %}><a href="#">About Us</a></li>
             <li{% if 'suport' in active_pages %} class="active"{% endif %}><a href="#">Support</a></li>
             <li{% if 'contactus' in active_pages %} class="active"{% endif %}><a href="#">Contact Us</a></li>
@@ -156,5 +154,6 @@
 </div>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+{% render_block "js" %}
 </body>
 </html>
