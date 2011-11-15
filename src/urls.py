@@ -25,6 +25,13 @@ urlpatterns = patterns('',
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
+    
+    # affiliate urls
+    url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
+    url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
+
+    # search urls
+    url(r'^search/$', 'apps.search.views.search', name='search'),
 )
 
 # a simple direct_to_template wrapper

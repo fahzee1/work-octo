@@ -3,7 +3,6 @@
 # All templates require a index template.
 TEMPLATE_PAGES = (
     ('index', 'index.html'),
-    ('thank-you', 'thank-you.html'),
 )
 
 # Thank you redirect page, if the value is None it will redirect to 
