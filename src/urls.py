@@ -38,15 +38,17 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     return url(pattern, 'apps.common.views.simple_dtt',
 		dict(template=template, extra_context=context),
 		name=name)
-
+""""
 urlpatterns += patterns('',
 
     # Home Page
    	dtt(r'^$', '_base.html', 'home', ctx={'page_name': 'index'}),
+   	dtt(r'^test/$', '_base2.html', 'home', ctx={'page_name': 'index_2'}),
+
     dtt(r'^thank-you/$', 'thank-you.html', 'thankyou', ctx={'page_name': 'thankyou'}),
 
 )
-"""
+"""""
 urlpatterns += patterns('',
 
     # Home Page
@@ -134,7 +136,6 @@ urlpatterns += patterns('',
 
 
 )
-"""
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()

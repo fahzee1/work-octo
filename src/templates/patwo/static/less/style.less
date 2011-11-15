@@ -166,20 +166,18 @@ a:hover {
     position: relative;
 
     h1 {
-        color: @black;
-        font-size: 36px;
+        color: @blue;
+        font-size: 26px;
         font-weight: normal;
         line-height: 36px;
-        padding: 0 17px;
         margin-bottom: 10px;
         letter-spacing: -1px;
     }
     h2 {
         color: @black;
         font-size: 28px;
-        font-weight: normal;
+        font-weight: 300;
         line-height: 28px;
-        padding: 0 20px;
         margin-bottom: 10px;
         letter-spacing: -1px;
         a {
@@ -196,7 +194,6 @@ a:hover {
         padding: 0 10px;
     }
     p {
-        padding: 0 20px;
         margin-bottom: 10px;
         font-size: 14px;
         text-align: justify;
@@ -315,7 +312,52 @@ a:hover {
 }
 
 /************** Buttons ****************/
-
+a.button-link {
+    background: @blue;
+    color: @white;
+    padding: 4px 24px;
+    text-decoration: none;
+    background-image: -moz-linear-gradient(top,@blue,#005f9a);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#005f9a));
+    border: 1px solid transparent;
+    &:hover {
+        background-image: -moz-linear-gradient(center top , @blue, #00568b);
+        background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#00568b));
+        border: 1px solid #094182;
+        border-bottom: 1px solid @dark-blue;
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+    }
+}
+.button-link {
+    margin-top: 16px;
+    a {
+        background: @blue;
+        color: @white;
+        padding: 4px 24px;
+        text-decoration: none;
+        background-image: -moz-linear-gradient(top,@blue,#005f9a);
+        background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#005f9a));
+        border: 1px solid transparent;
+        &:hover {
+            background-image: -moz-linear-gradient(center top , @blue, #00568b);
+            background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#00568b));
+            border: 1px solid #094182;
+            border-bottom: 1px solid @dark-blue;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        }
+    }
+    span {
+        padding-left: 16px;
+        font-size: 12px;
+        strong {
+            color: @red;
+        }
+    }
+}
 .button {
     margin: 20px 10px;
     text-align: center;
@@ -518,7 +560,7 @@ table {
 #header-wrapper {
     width: 960px;
     margin: 0 auto;
-
+    position: relative;
     #quick-link-navigation {
         float:right;
         margin: 0px 0 2px 0;
@@ -577,22 +619,24 @@ table {
         #protect-america-logo {
             position: absolute;
             left: 6px;
-            top: -10px;
+            top: -7px;
         }
     }
     #phone-number {
         color: @black;
-        float: right;
         font-weight: 800;
-        position: relative;
+        position: absolute;
+        right: 171px;
         text-align: right;
         width: 600px;
-        bottom: 2px;
+        bottom: 4px;
         p {
             font-size: 16px;
             span {
-                font-size: 18px;
+                font-size: 32px;
                 color: @red;
+                display: block;
+                line-height: 37px;
             }
         }
         #protection-snippet {
@@ -602,9 +646,9 @@ table {
         }
     }
     #ge-logo {
-        .icon-set(8px, 4px);
-        float: right;
-        margin-right: 17px;
+        position: absolute;
+        right: -15px;
+        top: 24px;
         width: 175px;
         height: 52px;
     }
@@ -612,6 +656,8 @@ table {
 
 #navigation-wrapper {
     border-bottom: 5px solid @red;
+    background: @v-light-grey;
+
 
 }
 #navigation {
@@ -622,6 +668,7 @@ table {
     overflow: hidden;
     z-index: 500;
     margin-bottom: 0px;
+    
 
     ul {
     width: 714px;
@@ -631,34 +678,34 @@ table {
         li {
             display: inline;
             a {
-                color: @black;
+                color: #000;
                 display: block;
-                font-size: 12px;
-                font-weight: bold;
-                margin: 0 16px 0 0;
+                font-size: 14px;
+                font-weight: normal;
+                margin: 0;
                 outline: 0;
-                padding: 0px 16px;
+                padding: 0px 32px;
                 text-decoration: none;
                 text-align: center;
                 line-height: 24px;
                 height: 24px;
                 float: left;
                 letter-spacing: .5px;
-                border: 1px solid transparent;
+                border-right: 1px solid @light-grey;
+                .fade-slow;
 
                 &:hover {
                     background: @v-light-grey;
-                    background: @white;
+                    background: @off-white;
                     color: @blue;
-                    border: 1px solid @light-grey;
                     .fade-fast;
-
     
                 }
             }
             &.active {
                 a {
-                    color: @black;
+                    color: @white;
+                    background: @red;
                     border: 1px solid @red;
                     height: 23px;
                     line-height: 24px;
@@ -673,21 +720,22 @@ table {
     }
 }
 #search-area {
-    background: @white url(/static/img/search-icon.png) no-repeat 4px 2px;
+    background: rgba(255,255,255,.7) url(/static/img/search-icon.png) no-repeat 7px 5px;
     float:left;
     width: 244px;
-    height: 20px;
+    height: 24px;
     border: 1px solid @light-grey;
-    margin-bottom: 4px;
+    border-top: none;
+    border-bottom: none;
     input {
         background: transparent;
         border: none;
         color: @grey;
         font-weight: 800;
-        height: 17px;
-        margin-left: 24px;
+        height: 24px;
+        margin-left: 28px;
         width: 200px;
-        line-height: 17px;
+        line-height: 24px;
         font-size: 12px;
     }
 }
@@ -699,17 +747,25 @@ table {
     height: 32px;
     #share-this {
         float: left;
-        width: 225px;
-        padding: 4px 0 0;
+        width: 246px;
+        padding: 0 0 0;
+        position: relative;
         #plus-one {
             float: left;
             width: 120px;
             padding-top: 2px;
+
         }
-        #facebook-button, #share-this-button {
+        #facebook-button {
             float: left;
             width: 90px;
             margin-right: 8px;
+        }
+        #share-this-button {
+            float: left;
+            position: absolute;
+            right: 0px;
+            top: 2px;
         }
     }
     ul {
@@ -747,7 +803,6 @@ table {
                 }
                 &:hover {
                     color: @blue;
-                    border-bottom: 1px solid @light-grey;
                     .fade-fast;
         
         
@@ -760,56 +815,113 @@ table {
 /************** Quote Form ****************/
 #quote-form {
     .content-box(275px);
-    background: @blue;
-    padding: 8px 16px;
-    height: 304px;
-    p {
-        color: @v-light-grey;
-        font-size: 11px;
-        padding: 0 10px;
-        margin-bottom: 15px;
-        text-align: left;
-        span {
+    background: #0069aa;
+
+    height: 280px;
+    float: left;
+    margin-left: 16px;
+    position: relative;
+    padding-bottom: 40px;
+    #quote-form-error {
+        display: none;
+        position: absolute;
+        z-index: 999;
+        width: 185px;
+        background: @red;
+        top: 217px;
+        left: -215px;
+        border: 1px solid @dark-red;
+        .drop-shadow;
+        opacity: .95;
+        ul {
+            margin-bottom: 4px;
+            li {
+                text-align: left;
+                font-size: 12px;
+                line-height: 16px;
+                color: @white;
+                list-style-type: disc;
+                margin-left: 16px;
+                margin-bottom: 4px;
+    
+            }
+        }
+        strong {
+            font-size: 24px;
+            display: block;
+            line-height: 48px;
+            color: @white;
+            text-align: left;
+        }
+        #error-arrow {
+            position: absolute;
+            right: -24px;
+            top: 40px;
+        }
+    }
+    div {
+        background: @blue;
+        padding: 8px;
+        p {
             display: block;
             font-size: 26px;
             line-height: 32px;
             font-weight: 400;
+            text-align: center;
+            color: @white;
+            padding: 0;
         }
+        label {
+            color: @white;
+            padding: 0;
+        }
+        input {
+            color: @light-grey;
+            font-size: 18px;
+            height: 28px;
+            line-height: 28px;
+            margin: 0 0 8px;
+            width: 251px;
+        }
+        
     }
 
-    input {
-        color: @light-grey;
-        font-size: 18px;
-        height: 28px;
-        line-height: 28px;
-        margin: 0 10px 15px;
-        width: 255px;
-    }
     button {
         display: block;
-        background: #90af01;
+        background: @red;
         color: @white;
         text-decoration: none;
         height: 36px;
         line-height: 36px;
-        background-image: -moz-linear-gradient(top,#90af01,#829e01);
-        background-image: -webkit-gradient(linear,left top,left bottom,from(#90af01),to(#829e01));
+        background-image: -moz-linear-gradient(top, @red, #ba1615);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(@red), to(#ba1615));
         border: 1px solid transparent;
         font-size: 18px;
         padding: 0 24px;
-        width: 275px;
+        width: 257px;
         font-weight: 800;
-        margin-top: 21px;
         cursor: pointer;
         cursor: hand;
+        margin-left: 8px;
         &:hover {
-            background-image: -moz-linear-gradient(center top , #90af01, #687e01);
-            background-image: -webkit-gradient(linear,left top,left bottom,from(#90af01),to(#687e01));
-            border: 1px solid #768f03;
-            border-bottom: 1px solid #576902;
+            background-image: -moz-linear-gradient(center top, #e51a19, #920403);
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#e51a19), to(#920403));
+            border: 1px solid #8d0400;
+            border-bottom: 1px solid #6e0401;
             -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
             -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
             box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        }
+    }
+    a {
+        display: block;
+        text-align: center;
+        font-size: 10px;
+        padding-top: 4px;
+        text-decoration: none;
+        color: @white;
+        &:hover {
+            text-decoration: underline;
         }
     }
 
@@ -918,38 +1030,6 @@ table {
 }
 
 
-/********** Contact Area **********/
-#contact-boxes {
-    background: @dark-grey; /* for non-css3 browsers */
-
-    background: -webkit-gradient(linear, left top, left bottom, from(@dark-grey), to(@black)); /* for webkit browsers */
-    background: -moz-linear-gradient(top,  @dark-grey,  @black); /* for firefox 3.6+ */
-
-    height: 50px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    opacity: .98;
-    .drop-shadow(-1px, -3px, 5px, @grey);
-    p {
-        line-height: 40px;
-        font-size: 21px;
-        color: @white;
-        float: left;
-        margin: 5px 0;
-        padding-left: 20px;
-    }
-    span {
-        line-height: 40px;
-        color: @white;
-        margin: 5px 0 0 145px;
-        border-left: 2px solid @black;
-        display: block;
-        float: right;
-        font-size: 24px;
-        padding-left: 20px;
-    }
-}
 
 
 /********** Less Inclusions **********/
