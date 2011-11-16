@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
-
+    
     # affiliate urls
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
@@ -45,30 +45,17 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     return url(pattern, 'apps.common.views.simple_dtt',
 		dict(template=template, extra_context=context),
 		name=name)
-
+""""
 urlpatterns += patterns('',
 
     # Home Page
-    dtt(r'^$', 'home.html', 'home', ctx={'page_name': 'home'}),
+   	dtt(r'^$', '_base.html', 'home', ctx={'page_name': 'index'}),
+   	dtt(r'^test/$', '_base2.html', 'home', ctx={'page_name': 'index_2'}),
 
-    dtt(r'^products/?$', 'products/_base.html', 'products', ctx={'page_name': 'products'}),
-
-    #packages
-    dtt(r'^products/packages/?$', 'products/_base.html', 'packages', ctx={'page_name': 'packages'}, parent="products"),
-    
-    # Copper Page
-    dtt(r'^products/packages/copper/?$', 'products/copper.html', 'copper', ctx={'page_name': 'copper'}, parent="packages"),
-    # Bronze Page
-    dtt(r'^products/packages/bronze/?$', 'products/bronze.html', 'bronze', ctx={'page_name': 'bronze'}, parent="packages"),
-)
-"""
-urlpatterns += patterns('',
-
-    # Home Page
-   	dtt(r'^$', 'home.html', 'home', ctx={'page_name': 'index'}),
     dtt(r'^thank-you/$', 'thank-you.html', 'thankyou', ctx={'page_name': 'thankyou'}),
 
 )
+"""""
 urlpatterns += patterns('',
 
     # Home Page
@@ -156,8 +143,6 @@ urlpatterns += patterns('',
 
 
 )
-"""
-
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
