@@ -1,0 +1,120 @@
+{% load content_tags %}
+{% load content_filters %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<title>{% block page_title %}{% endblock %}</title>
+	<link rel="icon" href="/favicon.ico" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/default.css">
+    <link href="https://plus.google.com/113573642727337197280" rel="publisher" />
+{% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5441302-11']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+{% endblock %}
+</head>
+<body class="{{ page_name }} tk-facitweb">
+<!-- Page Wrapper -->
+<div id="header">
+	<div id="header-wrapper">  
+		<div>
+			<div id="company-logo">
+			    <div>
+			    	<a href="/">
+			        	<img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png" id="protect-america-logo" />
+			  
+			       	</a>
+			    </div> 	
+			</div>
+			<div id="phone-number">
+				<p>Call Today and Save! <span>1-800-951-5111</span></p>
+			</div>
+            <div id="ge-logo">
+                <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
+            </div>
+			<div class="clear"></div>
+		</div>
+		
+
+	</div>
+</div>
+<div id="navigation-wrapper">
+&nbsp;
+</div>
+<div class="wrapper">
+    <div id="left-column">
+        <div id="affordable-home-security">
+            <h1>The <strong>most affordable</strong> way to secure peace of mind.</h1>
+        </div>
+    </div>
+    <div id="right-column">
+        <form id="quote-form" method="post">
+        	<div>
+        		<p>Free Security Quote</p>
+        		<label>Name</label>
+        		<input type="text" name="l_fname" id="ffirstName" placeholder="Name" />
+        		<label>Email</label>
+        		<input type="text" name="email_addr" id="femailAddr" placeholder="Email" />
+        		<label>Phone Number</label>
+        		<input type="text" name="l_phone1" id="fphone" placeholder="Phone" />
+        		<label>Street Address</label>
+        		<input type="text" name="l_street1" id="fphone" placeholder="Street Address" />
+                <label>City</label>
+        		<input type="text" name="city" id="fcity" placeholder="City" />
+        		<div id="state-check">
+                    <label>State</label>
+            		<input type="text" name="city" id="fcity" placeholder="City" />
+
+        		</div>
+        		<div id="zip-check">
+                    <label>Zipcode</label>
+            		<input type="text" name="city" id="fcity" placeholder="City" />
+        		</div>
+        		<div class="clear"></div>
+        		<div id="homeowner-check">
+                    <label>Are you a Homeowner?</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <div class="clear"></div>
+        		</div>
+                <label>Describe Your Credit Rating</label>
+                <select id="referral_CreditRating" name="referral[CreditRating]">
+                    <option value="">Select One</option>
+                    <option value="Excellent">Excellent (720 or above)</option>
+                    <option value="Good">Good (660-719)</option>
+                    <option value="Average">Average (620-659)</option>
+                    <option value="Below Average">Below Average (580-619)</option>
+                    <option value="Poor">Poor (579 and below)</option>
+                </select>
+        	</div>
+        	<button type="button" class="redbutton">Get Quote ></button>
+            <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
+            <div id="quote-form-error">
+                <img src="/images/error-arrow.png" id="error-arrow" />
+                <strong>Whoops!</strong>
+                <ul></ul>
+            </div>
+        </form>
+
+    </div>
+    <div class="clear"></div>
+</div>

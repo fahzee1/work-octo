@@ -44,22 +44,16 @@
 		</div>    
 		<div>
 			<div id="company-logo">
-			    <div>
-			    	<a href="{% url home %}">
-			        	<img src="/static/img/base/protect-america-home-security.png" id="protect-america-logo" />
-			  
-			       	</a>
-			    </div> 	
+		    	<a href="/">
+		        	<img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png" id="protect-america-logo" />
+		  
+		       	</a>
 			</div>
-            {% businesstime %}
 			<div id="phone-number">
-            {% if phone_number %}
-				<p>Call Today and Save! <span>{{ phone_number|format_number }}</span></p>
-            {% endif %}
+				<p>Call Today and Save! <span>1-800-951-5111</span></p>
 			</div>
-            {% endbusinesstime %}
             <div id="ge-logo">
-                <img src="/static/img/external/ge-logo.png" />
+                <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
             </div>
 			<div class="clear"></div>
 		</div>
@@ -70,16 +64,14 @@
 <div id="navigation-wrapper">
     <div id="navigation">
     	<ul>
-    		<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url security-packages %}" title="Home Security Systems and Products">Home Security</a></li>
-    		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">Monitoring</a></li>
-    		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Products</a></li>
-       		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Support</a></li>
-
-    		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Company</a></li>
-
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+    		<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url security-packages %}" title="Home Security Systems and Products">Products</a></li>
+    		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
+    		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Support</a></li>
+       		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Contact Us</a></li>
     	</ul>
     	<div id="search-area">
-    		<form name="search" method="get" action="/pa/search">
+    		<form name="search2" method="get" action="/pa/search">
     			<input type="text" id="q" name="q" placeholder="Enter Keywords" />
     		</form>
     	</div>
