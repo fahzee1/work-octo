@@ -58,3 +58,33 @@ class LandingPage(models.Model):
         return None
     def __unicode__(self):
         return '%s - %s' % (self.affiliate, self.template)
+
+
+class Profile(models.Model):
+
+    PROFILE_STATUS = (
+        ('DECLINED', 'Declined'),
+        ('APPROVED', 'Approved'),
+        ('PENDING', 'Pending')
+    )
+
+    name = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, blank=True, null=True)
+    company_name = models.CharField(max_length=128)
+    taxid = models.CharField(max_length=12)
+    street_address = models.CharField(max_length=128)
+    city = models.CharField(max_length=128)
+    state = models.CharField(max_length=128)
+    zipcode = models.CharField(max_length=128)
+    phone = models.CharField(max_length=128)
+    fax = models.CharField(max_length=128)
+    email = models.EmailField()
+    website = models.CharField(max_length=128)
+    comments = models.TextField()
+    status = models.CharField(max_length=10, choices=PROFILE_STATUS,
+        default="PENDING")
+
+    affiliate = models.ForeignKey(Affiliate, blank=True, null=True)
+
+    def __unicode__(self):
+        return '%s' % self.name

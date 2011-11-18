@@ -1,51 +1,6 @@
-def is_business_time(request):
-    from datetime import datetime
-    BUSINESS_HOURS = [{   
-            #monday
-            'start': '0800',
-            'end': '2100',
-        },{
-            #tuesday
-            'start': '0800',
-            'end': '2100',
-        },{
-            #wednesday
-            'start': '0800',
-            'end': '2100',
-        },{
-            #thursday
-            'start': '0800',
-            'end': '2100',
-        },{
-            #friday
-            'start': '0800',
-            'end': '2100',
-        },{
-            #saturday
-            'start': '0800',
-            'end': '1700',
-        },]
-    today = datetime.today()
-    # day-month-year militarytime
-    try:
-        start = datetime.strptime('%s-%s-%s %s' % (
-            today.day,
-            today.month,
-            today.year,
-            BUSINESS_HOURS[today.weekday()]['start'],
-            ), '%d-%m-%Y %H%M')
-        end = datetime.strptime('%s-%s-%s %s' % (
-            today.day,
-            today.month,
-            today.year,
-            BUSINESS_HOURS[today.weekday()]['end'],
-            ), '%d-%m-%Y %H%M')
-        now = datetime.now()
-        if start <= now <= end:
-            return {'is_business_time': True}
-        return {'is_business_time': False}
-    except:
-        return {'is_business_time': False}
+from datetime import datetime
+
+from django.conf import settings
 
 def phone_number(request):
     from django.conf import settings
@@ -74,4 +29,68 @@ def phone_number(request):
             # just going to return the default context in this case
             pass
 
+    return ctx
+
+def business_hours(request):
+    ctx = {'business_hours': ''}
+
+    if not hasattr(settings, 'BUSINESS_HOURS'):
+        return ctx
+    today = datetime.today()
+    day_table = [
+        'mon',
+        'tues',
+        'wed',
+        'thurs',
+        'fri',
+        'sat',
+        'sun'
+    ]
+
+    day_format = {}
+    # First group unique times
+    for index, day in enumerate(settings.BUSINESS_HOURS):
+        gstr = '%s%s' % (day['start'], day['end'])
+        if gstr not in day_format:
+            day_format[gstr] = []
+        day_format[gstr].append(index)
+        
+
+    def itemgetter(*items):
+        if len(items) == 1:
+            item = items[0]
+            def g(obj):
+                return obj[item]
+        else:
+            def g(obj):
+                return tuple(obj[item] for item in items)
+        return g
+
+    
+    html = ''
+    for key, value in sorted(day_format.iteritems(), key=itemgetter(1)):
+        # get datetimes
+        start = key[:4]
+        end = key[4:]
+        stime = datetime(today.year,
+                         today.month,
+                         today.day,
+                         int(start[:2]),
+                         int(start[2:])).strftime('%I:%M%p')
+        etime = datetime(today.year,
+                         today.month,
+                         today.day,
+                         int(end[:2]),
+                         int(end[2:])).strftime('%I:%M%p')
+
+        # start html                 
+        element = '<li>'
+        element = element + '%s' % (day_table[value[0]].capitalize())
+        if len(value) > 1:
+            element = element + ' - %s' % (day_table[value[-1]].capitalize())
+        element = element + ': %s - %s' % (stime, etime)
+        element = element + ' CT</li>'
+
+        html = html + element
+    ctx['business_hours'] = html
     return ctx

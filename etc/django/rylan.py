@@ -44,10 +44,12 @@ BUSINESS_HOURS = [{
     'end': '1700',
 },]
 
-WEBSITE_TEMPLATE = 'radioshack'
+WEBSITE_TEMPLATE = 'patwo'
 TEMPLATE_DIRS = (
+    os.path.join(settings.PROJECT_ROOT, 'src', 'templates'),
     os.path.join(settings.PROJECT_ROOT, 'src', 'templates', WEBSITE_TEMPLATE),
+
 )
 STATICFILES_DIRS = (
-    os.path.join(TEMPLATE_DIRS[0], 'static'),
+    os.path.join(TEMPLATE_DIRS[1], 'static'),
 )
