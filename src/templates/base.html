@@ -36,7 +36,7 @@
 	<div id="header-wrapper">
 		<div>
 			<ul id="quick-link-navigation">
-				<li><a href="/agreement" title="Enter the Online Agreement" id="security-agreement">Online Chat</a></li>
+				<li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Enter the Online Agreement" id="security-agreement">Online Chat</a></li>
 
 				<li><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement">Agreement</a></li>
 			</ul>
@@ -49,9 +49,11 @@
 		  
 		       	</a>
 			</div>
+            {% businesstime %}
 			<div id="phone-number">
-				<p>Call Today and Save! <span>1-800-951-5111</span></p>
+				<p>Call Today and Save! <span>{{ phone_number|format_number }}</span></p>
 			</div>
+            {% endbusinesstime %}
             <div id="ge-logo">
                 <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
             </div>
@@ -65,14 +67,21 @@
     <div id="navigation">
     	<ul>
             <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+            {% comment %}
     		<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url security-packages %}" title="Home Security Systems and Products">Products</a></li>
     		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
     		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Support</a></li>
        		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Contact Us</a></li>
+            {% endcomment %}
+            <li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="/pa/copper/home-security-systems" title="Home Security Systems and Products">Products</a></li>
+    		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
+    		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="/pa/support/home-security-alarm-system" title="Contact Protect America">Support</a></li>
+       		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="/pa/contact/" title="Contact Protect America">Contact Us</a></li>
+
     	</ul>
     	<div id="search-area">
-    		<form name="search2" method="get" action="/pa/search">
-    			<input type="text" id="q" name="q" placeholder="Enter Keywords" />
+    		<form name="search2" method="GET" action="/search/">
+    			<input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
     		</form>
     	</div>
     </div>
@@ -153,8 +162,7 @@
 			<li><a href="http://www.protectamerica.com/pa/do-not-call" title="Do Not Call List">Do Not Call</a></li>
 			<li><a href="http://www.protectamerica.com/pa/site_map" title="Sitemap">Sitemap</a></li>
 			<li><strong>Hours of Operation</strong></li>
-			<li>Mon - Fri: 07:30am - 09:00pm CT</li>
-			<li>Sat: 08:00am - 05:00pm CT</li>
+            {{ business_hours|safe }}
 		</ul>
 		<div id="awards">
 			
