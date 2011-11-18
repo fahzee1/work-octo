@@ -40,11 +40,15 @@ def ajax_post(request):
         form = PAContactForm(request.POST)
         if form.is_valid():
             fdata = form.cleaned_data
+            agentid = request.COOKIES.get('refer_id', None)
+            affkey = request.COOKIES.get('affkey', None)
+            source = request.COOKIES.get('source', None)
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
                       'l_phone1': fdata['phone'],
-                      'agentid': 'A02596',
-                      'source': 'RADIO SHACK'
+                      'agentid': agentid,
+                      'source': source,
+                      'key3': affkey,
                       }
             post_to_old_pa(padata)
             form.save()

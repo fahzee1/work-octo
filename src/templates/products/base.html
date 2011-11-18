@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/products.css">
+{% endblock %}
+{% block subnav_child %}
+<ul>
+	<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url copper %}">Copper Package</a></li>
+
+	<li {% if 'interactive-video' in active_pages %}class="active"{% endif %}><a href="{% url interactive-video %}">Bronze Package</a></li>
+	<li {% if 'monitoring' in active_pages %}class="active"{% endif %}><a href="{% url monitoring %}">Silver Package</a></li>
+	<li {% if 'cell-takeover' in active_pages %}class="active"{% endif %}><a href="{% url cell-takeover %}">Gold Package</a></li>
+	<li {% if 'gps' in active_pages %}class="active"{% endif %}><a href="{% url gps %}">Platinum Package</a></li>
+</ul>
+{% endblock %}
+{% block subnav_parent %}
+<ul class="siblings">
+	<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url copper %}">Copper Package</a></li>
+	<li {% if 'interactive-video' in active_pages %}class="active"{% endif %}><a href="{% url interactive-video %}">Bronze Package</a></li>
+	<li {% if 'monitoring' in active_pages %}class="active"{% endif %}><a href="{% url monitoring %}">Silver Package</a></li>
+	<li {% if 'cell-takeover' in active_pages %}class="active"{% endif %}><a href="{% url cell-takeover %}">Gold Package</a></li>
+	<li {% if 'gps' in active_pages %}class="active"{% endif %}><a href="{% url gps %}">Platinum Package</a></li>
+</ul>
+{% endblock %}
