@@ -1,0 +1,18 @@
+{% load content_filters %}
+<form action="" method="POST" id="quote_form">
+    {% csrf_token %}
+    {% for field in formset.hidden_fields %}
+        {{ field }}
+    {% endfor %}
+    {% for field in formset.visible_fields %}
+
+        {{ field.errors }}
+
+        {% if field.field.widget|klass == 'Select' %}
+        <label>{{ field.name|capfirst }}:</label>
+        {% endif %}
+
+        {{ field }}
+    {% endfor %}
+    <button class="buyit">Submit &amp; Finish</button>
+</form>

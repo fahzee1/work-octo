@@ -53,6 +53,7 @@ urlpatterns += patterns('',
    	dtt(r'^test/$', '_base2.html', 'home', ctx={'page_name': 'index_2'}),
 
     dtt(r'^thank-you/$', 'thank-you.html', 'thankyou', ctx={'page_name': 'thankyou'}),
+    dtt(r'^cswitch/$', 'content_switch.html', 'cswitch', ctx={'page_name': 'index'}),
 
 )
 """""
