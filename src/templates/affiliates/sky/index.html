@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load sekizai_tags %}
+
+{% block subnav %}{% endblock %}
+{% block content %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/delta-sky.css">
+    {% endaddtoblock "css" %}
+    <div id="worry-free-vacation">
+        <h1><strong>a secured home</strong> means a worry free vacation.</h1>
+    </div>
+    {% include "order/quote-form.html" with formset=forms.basic %}
+    <div class="clear"></div>
+    <div id="check-in-anywhere">
+        <h2><strong>Check in at home from wherever you may be</strong> with Protect America Interactive Security</h2>
+
+
+
+    </div>
+</div>
+    <div id="postcards">
+        <div id="interactive-demo">
+            <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/iphone-hand.png" id="iphone" />
+            <div id="app-screens">
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-disarmed.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-main-menu.png" />
+
+            </div>
+
+        </div>
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard2.jpg" class="postcard1" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard3.jpg" class="postcard2" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/test-postcard.jpg" class="postcard3" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard3.jpg" class="postcard4" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard2.jpg" class="postcard5" />
+    </div>
+<div class="wrapper">
+    <div class="clear"></div>
+        <div id="call-box">
+            <p>Get Started Now, <strong>Call Today! 1-800-951-5111</strong></p>
+        </div>
+    <div class="clear"></div>
+</div>
+    {% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}/js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#app-screens').cycle({
+		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+	});
+});
+</script>
+    {% endaddtoblock "js" %}
+{% endblock %}
