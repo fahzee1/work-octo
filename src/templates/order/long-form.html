@@ -1,54 +1,106 @@
 {% load sekizai_tags %}
 <form id="quote-form" method="post">
-        	<div>
-        		<p>Free Security Quote</p>
-        		<label>Name</label>
-        		{{ form.name }}
+    <div>
+        <p>Free Security Quote</p>
+        <label>Name</label>
+        {{ form.name }}
 
-                <label>Email</label>
-        		{{ form.email }}
+        <label>Email</label>
+        {{ form.email }}
 
-        		<label>Phone Number</label>
-        		{{ form.phone }}
-                
-                <label>Street Address</label>
-        		{{ form.address }}
+        <label>Phone Number</label>
+        {{ form.phone }}
+        
+        <label>Street Address</label>
+        {{ form.address }}
 
-                <label>City</label>
-        		{{ form.city }}
+        <label>City</label>
+        {{ form.city }}
 
-        		<div id="state-check">
-                    <label>State</label>
-            		{{ form.state }}
-        		</div>
+        <div id="state-check">
+            <label>State</label>
+            {{ form.state }}
+        </div>
 
-        		<div id="zip-check">
-                    <label>Zipcode</label>
-            		{{ form.zipcode }}
-                </div>
-        		<div class="clear"></div>
-        		<div id="homeowner-check">
-                    <label>Are you a Homeowner?</label>
-                    {{ form.homeowner }}
-                    <div class="clear"></div>
-        		</div>
-        		<div class="clear"></div>
-                <div id="credit-rating">
-                    <label>Describe Your Credit Rating</label>
-                    {{ form.creditrating }}
-                </div>
+        <div id="zip-check">
+            <label>Zipcode</label>
+            {{ form.zipcode }}
+        </div>
+        <div class="clear"></div>
+        <div id="homeowner-check">
+            <label>Are you a Homeowner?</label>
+            {{ form.homeowner }}
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div id="credit-rating">
+            <label>Describe Your Credit Rating</label>
+            {{ form.creditrating }}
+        </div>
 
-                <div id="agreement-check">
-                    {{ form.consent }}
-                    <label>By checking this box, I expressly give consent to be contacted according to the Terms and Conditions</label>
-                    <div class="clear"></div>
+        <div id="agreement-check">
+            {{ form.consent }}
+            <label>By checking this box, I expressly give consent to be contacted according to the Terms and Conditions</label>
+            <div class="clear"></div>
 
-                </div>
-        	</div>
-        	<button type="button" class="redbutton">Get Quote ></button>
-            <div id="quote-form-error">
-                <img src="/images/error-arrow.png" id="error-arrow" />
-                <strong>Whoops!</strong>
-                <ul></ul>
-            </div>
-        </form>
+        </div>
+    </div>
+    <button type="button" class="redbutton">Get Quote ></button>
+    <div id="quote-form-error">
+        <img src="/images/error-arrow.png" id="error-arrow" />
+        <strong>Whoops!</strong>
+        <ul></ul>
+    </div>
+</form>
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#quote-form button').click(function() {
+        $('#quote-form div').removeClass('.error-state');
+        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
+        $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess
+        });
+
+        function newFormSuccess(json) {
+            if(json.success) {
+                window.location = "/pa/thank-you";
+            }
+        if(json.errors) {
+            $("#quote-form-error").show();
+            $("#quote-form-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quote-form-error ul").html(error_string);
+            } else $("#quote-form-error").hide();
+
+        }
+        return false;
+        });
+    }); 
+</script>
+{% endaddtoblock "js" %}
