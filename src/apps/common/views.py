@@ -27,4 +27,3 @@ def simple_dtt(request, template, extra_context):
                                'page_name':extra_context['page_name'],
                                'forms': forms},
                               context_instance=RequestContext(request))
-
