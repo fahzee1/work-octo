@@ -31,10 +31,8 @@ class AffiliateMiddleware(object):
                     pass
             else:
                 if default_agent is not None:
+                    # dont set the cookie to default
                     request.session['refer_id'] = default_agent
-                    response.set_cookie('refer_id',
-                        value=default_agent,
-                        expires=datetime.now() + expire_time)
 
         if 'affkey' in request.GET:
             request.session['affkey'] = request.GET['affkey']

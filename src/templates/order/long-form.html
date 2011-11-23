@@ -55,6 +55,13 @@
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {
+
+    $('#quote-form input').keypress(function(e){
+        if(e.which == 13){
+            $('#quote-form button').click();
+        }
+    });
+
     $('#quote-form button').click(function() {
         $('#quote-form div').removeClass('.error-state');
         var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
