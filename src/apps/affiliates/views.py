@@ -14,4 +14,5 @@ def affiliate_view(request, affiliate, page_name=None):
     landingpage = LandingPage.objects.get(affiliate=affiliate)
     htmlfilename = 'affiliates/%s/%s' % (landingpage.template.folder, landingpage.get_filename(page_name))
 
-    return simple_dtt(request, htmlfilename, {'page_name': page_name})
+    return simple_dtt(request, htmlfilename, {'page_name': page_name,
+        'agent_id': affiliate.agent_id})

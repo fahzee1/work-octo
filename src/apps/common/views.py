@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -19,12 +21,22 @@ def simple_dtt(request, template, extra_context):
             except:
                 pass
         return pages
+
+    expire_time = timedelta(days=90)
+
     pages = get_active(urls.urlpatterns, extra_context['page_name'])
     forms = {}
     forms['basic'] = PAContactForm()
     forms['long'] = AffiliateLongForm()
-    return render_to_response(template,
+    response = render_to_response(template,
                               {'active_pages':pages,
                                'page_name':extra_context['page_name'],
                                'forms': forms},
                               context_instance=RequestContext(request))
+
+    if 'agent_id' in extra_context:
+        response.set_cookie('refer_id',
+                        value=extra_context['agent_id'],
+                        expires=datetime.now() + expire_time)
+
+    return response
