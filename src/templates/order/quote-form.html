@@ -4,13 +4,13 @@
 	<div>
 		<p>Free Security Quote</p>
 		<label>Name</label>
-        {{ formset.name }}
+        {{ form.name }}
 
 		<label>Email</label>
-        {{ formset.email }}
+        {{ form.email }}
 		
         <label>Phone Number</label>
-        {{ formset.phone }}
+        {{ form.phone }}
 
 
 	</div>
@@ -25,6 +25,13 @@
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {
+    $('#quote-form input').keypress(function(e){
+        if(e.which == 13){
+            $('#quote-form button').click();
+        }
+    });
+
+
     $('#quote-form button').click(function() {
         $('#quote-form div').removeClass('.error-state');
         var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
@@ -38,7 +45,7 @@ $(document).ready(function() {
 
         function newFormSuccess(json) {
             if(json.success) {
-                window.location = "{% url security-packages %}";
+                window.location = "/pa/thank-you";
             }
         if(json.errors) {
             $("#quote-form-error").show();
