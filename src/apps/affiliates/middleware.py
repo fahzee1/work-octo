@@ -22,7 +22,7 @@ class AffiliateMiddleware(object):
         if not current_cookie:
             if 'agent' in request.GET:
                 try:
-                    affiliate = Affiliate.objects.get(agent_id=request.GET['source'])
+                    affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])
                     request.session['refer_id'] = affiliate.agent_id
                     response.set_cookie('refer_id',
                         value=affiliate.agent_id,
@@ -31,10 +31,9 @@ class AffiliateMiddleware(object):
                     pass
             else:
                 if default_agent is not None:
+                    # dont set the cookie to default
                     request.session['refer_id'] = default_agent
-                    response.set_cookie('refer_id',
-                        value=default_agent,
-                        expires=datetime.now() + expire_time)
+
         if 'affkey' in request.GET:
             request.session['affkey'] = request.GET['affkey']
             # Allow overwriting of affkey cookie
@@ -42,9 +41,9 @@ class AffiliateMiddleware(object):
                 value=request.GET['affkey'],
                 expires=datetime.now() + expire_time)
         if 'source' in request.GET:
-            request.session['affkey'] = request.GET['affkey']
+            request.session['source'] = request.GET['source']
             # Allow overwriting of affkey cookie
-            response.set_cookie('affkey',
-                value=request.GET['affkey'],
+            response.set_cookie('source',
+                value=request.GET['source'],
                 expires=datetime.now() + expire_time)
         return response

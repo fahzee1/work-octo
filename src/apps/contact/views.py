@@ -41,8 +41,17 @@ def ajax_post(request):
         if form.is_valid():
             fdata = form.cleaned_data
             agentid = request.COOKIES.get('refer_id', None)
+            if agentid is None:
+                agentid = request.session.get('refer_id', None)
+
             affkey = request.COOKIES.get('affkey', None)
+            if affkey is None:
+                affkey = request.session.get('affkey', None)
+
             source = request.COOKIES.get('source', None)
+            if source is None:
+                source = request.session.get('source', None)
+
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
                       'l_phone1': fdata['phone'],
