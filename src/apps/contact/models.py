@@ -31,8 +31,8 @@ class Submission(models.Model):
     phone = PhoneNumberField()
     city = models.CharField(max_length=32, blank=True, null=True)
     state = USStateField(blank=True, null=True)
-    address = models.CharField(max_length=128)
-    zipcode = models.CharField(max_length=12)
+    address = models.CharField(max_length=128, blank=True, null=True)
+    zipcode = models.CharField(max_length=12, blank=True, null=True)
     package = models.CharField(max_length=24, blank=True, null=True)
     feedback_type = models.CharField(max_length=32, blank=True, null=True)
 
