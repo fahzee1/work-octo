@@ -65,7 +65,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     'django.core.context_processors.static',
     "django.core.context_processors.request",
-    'apps.common.context_processors.is_business_time',
+    'apps.common.context_processors.business_hours',
     'apps.common.context_processors.phone_number',
     'apps.pricetable.context_processors.price_table',
     'sekizai.context_processors.sekizai',

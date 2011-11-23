@@ -32,6 +32,28 @@ class BasicContactForm(PAContactForm):
     class Meta(PAContactForm.Meta):
         fields = ('department', 'name', 'email', 'phone', 'message')
 
+class AffiliateLongForm(PAContactForm):
+    class Meta(PAContactForm.Meta):
+        fields = ('name',
+                  'email',
+                  'phone',
+                  'address',
+                  'city',
+                  'state',
+                  'zipcode',
+                  'homeowner',
+                  'creditrating',
+                  'consent')
+
+        widgets = {
+            'name': TextInput(attrs={'placeholder':'Name'}),
+            'email': TextInput(attrs={'placeholder':'Email'}),
+            'phone': TextInput(attrs={'placeholder':'Phone'}),
+            'city': TextInput(attrs={'class':'city', 'placeholder': 'City'}),
+            'state': TextInput(attrs={'placeholder': 'State'}),
+            'zipcode': TextInput(attrs={'placeholder':'Zipcode'}),
+            'address': TextInput(attrs={'placeholder':'Street Address'}),
+        }
         
 class OrderForm(PAContactForm):
     PACKAGE_CHOICES = (
