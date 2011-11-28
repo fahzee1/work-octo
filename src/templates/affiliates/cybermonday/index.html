@@ -1,67 +1,13 @@
-{% load content_tags content_filters sekizai_tags %}
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-	<title>{% block page_title %}{% endblock %}</title>
-	<link rel="icon" href="/favicon.ico" />
-	<link rel="shortcut icon" href="/favicon.ico" />
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cybermonday.css">
-    <link href="https://plus.google.com/113573642727337197280" rel="publisher" />
-{% endblock %}
-{% render_block "css" %}
-{% block google_analytics %}
-<script type="text/javascript">
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-5441302-11']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-{% endblock %}
-</head>
-<body class="{{ page_name }} tk-facitweb">
-<!-- Page Wrapper -->
-<div id="header">
-	<div id="header-wrapper">  
-		<div>
-			<div id="company-logo">
-			    <div>
-			    	<a href="/">
-			        	<img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png" id="protect-america-logo" />
-			  
-			       	</a>
-			    </div> 	
-			</div>
-			<div id="phone-number">
-				<p>Call Today and Save! <span>1-800-951-5111</span></p>
-			</div>
-            <div id="ge-logo">
-                <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
-            </div>
-			<div class="clear"></div>
-		</div>
-		
-
-	</div>
-</div>
-<div id="navigation-wrapper">
-&nbsp;
-</div>
-<div class="wrapper">
+{% block subnav %}{% endblock %}
+{% block content %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cybermonday.css">
+    {% endaddtoblock "css" %}
     <div id="left-column">
         <div id="affordable-home-security">
-            <h1>The <strong>most affordable</strong> way to secure peace of mind.</h1>
         </div>
         <div class="clear"></div>
 
@@ -87,15 +33,21 @@
         </ul>
         <p id="price-tag">Price Today:<strong>Free</strong><span>with 3-year monitoring agreement*</span></p>
     </div>
+    {% businesstime %}
     <div id="call-box">
-        <p>Get Started Now, <strong>Call Today! 1-800-951-5111</strong></p>
+        <p><strong>Call Today! {{ phone_number|format_number }}</strong></p>
+        <img src="{{ STATIC_URL }}/img/affiliates/cybermonday/call-in-banner.png" id="call-in-banner" />
     </div>
+    {% endbusinesstime %}
+
     <div class="clear"></div>
     <div id="why-protect-america">
         <img src="{{ STATIC_URL }}img/protect-america-logo2.png" id="pa-logo" title="Protect America Home Security" />
         <div id="about-protect-america">
             <p>A pioneer of self-installed home security systems, Protect America has served more than 350,000 people since its founding in 1992. Our dedication to affordable, quality security has helped to make us one of the nation's largest home security companies. People trust Protect America. And with good reason. We're an award-winning company that has also earned a Five-Star Rating from Top Consumer Reviews. Get a GE home security system today and experience a more secure life with Protect America.</p>
-            <div class="phone-alt"><p>call <strong>1-800-951-5167</strong> to receive a free security analysis</p></div>
+            {% businesstime %}
+                <div class="phone-alt"><p>call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
+            {% endbusinesstime %}
             <div class="clear"></div>
         </div>
         <div id="awards">
@@ -139,9 +91,14 @@
         </div>
     </div>
 </div>
-<div id="small-footer">
-    <p>*Call for information on Protect America's monitoring fees and other terms. Standard thirty-six month monitoring agreement required with approved credit. Must be a U.S. Resident. Applicable taxes and fees not included. Cannot be combined with any other offer. Package offered on this coupon includes a master control panel with back-up battery, siren, keypad, fifteen door or window sensors, one motion detector, one yard sign, and three window decals. Offer subject to change. Limited parts replacement warranty valid for as long as customer is monitored. Not available to existing Protect America customers. Other restrictions apply. GE and GE Security logos are registered trademarks of General Electric. Protect America, Inc., 5100 N IH-35, Suite B, Round Rock, TX 78681. We provide our service in all 50 states. Licenses: AL: 10-027; AR: E 2001-0538; AZ: ROC114856 (L-67), ROC114855 (C-12); CA: ACO 4115; DE: 06-204; FL: EG-0000192; GA: LVA205875; IA: AC-0081; IL: 127-001092; LA: F492; MD: 107-670; MI: 8714 Huckleberry Lane, Lansing MI. 48917. Lic #3601202409; MS: 15005347; NC: 635-CSA; NJ: Burglar alarm and fire alarm bus. Lic. #34BF00023700; NM: 60519; OK: 739; PA: PA023169; SC: BAC 5432, FAC 3104; TN: 00000265; TX: B16272, ACR-1204; UT: 345548-6501; VA: 11-3129; WA: PROTEAI962LD; WV: WV032962.</p>
-</div>
-{% render_block "js" %}
-</body>
-</html>
+    {% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}/js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#app-screens').cycle({
+		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+	});
+});
+</script>
+    {% endaddtoblock "js" %}
+{% endblock %}

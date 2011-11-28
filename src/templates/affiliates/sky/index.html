@@ -37,7 +37,10 @@
 <div class="wrapper">
     <div class="clear"></div>
         <div id="call-box">
-            <p><strong>Call Today! 1-800-951-5111</strong><img src="{{ STATIC_URL }}img/affiliates/sky/sky-giftcard.png" /></p>
+            <p>{% businesstime %}
+                <strong>Call Today! {{ phone_number|format_number }}</strong>
+            {% endbusinesstime %}
+            <img src="{{ STATIC_URL }}img/affiliates/sky/sky-giftcard.png" /></p>
         </div>
     <div class="clear"></div>
     <div id="package-content">
@@ -90,7 +93,9 @@
         <div id="call-us">
             <h3>Give us a Call:</h3>
             <p>Call Protect America today and start a discussion about the security of your home. One of our security experts will go over the details of your home to determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call Protect America now and secure what matters most!</p>
-            <h4><span>Call Today!</span> 1-800-951-5167</h4>
+            {% businesstime %}
+                <h4><span>Call Today!</span> {{ phone_number|format_number }}</h4>
+            {% endbusinesstime %}
         </div>
         <div id="call-you">
             <h3>We'll Call You:</h3>
