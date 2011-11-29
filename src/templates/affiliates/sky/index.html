@@ -5,16 +5,21 @@
 {% block content %}
     {% addtoblock "css" %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/delta-sky.css">
-        <link rel="stylesheet" media="only screen and (max-width: 480px)" href="{{ STATIC_URL }}css/affiliates/delta-sky-mobile.css">
+        {% if is_mobile %}
+
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/delta-sky-mobile.css">
+        {% endif %}
     {% endaddtoblock "css" %}
+    {% if not is_mobile %}
     <div id="top-content">
         <div id="worry-free-vacation">
             <h1><strong>a secured home</strong> means a worry free vacation.</h1>
         </div>
         {% include "order/quote-form.html" with form=forms.basic %}
     </div>
-
+    
     <div class="clear"></div>
+    {% endif %}
     <div id="check-in-anywhere">
         <h2><strong>Check in at home from wherever you may be</strong> with Protect America Interactive Security</h2>
 
