@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     # affiliate urls
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
+    url(r'^sky/$', 'apps.affiliates.views.delta_sky', name='sky'),
 
     # search urls
     url(r'^search/$', 'apps.search.views.search', name='search'),
