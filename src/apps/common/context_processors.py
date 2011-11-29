@@ -2,6 +2,21 @@ from datetime import datetime
 
 from django.conf import settings
 
+from mobile.sniffer.detect import detect_mobile_browser
+from mobile.sniffer.utilities import get_user_agent
+
+
+def mobile_check(request):
+    ua = get_user_agent(request)
+    is_mobile = False
+    if ua:
+        # Apply reg
+        if detect_mobile_browser(ua):
+            # Redirect the visitor from a web site to a mobile site
+            is_mobile = True
+    return {'is_mobile':is_mobile} 
+
+
 def phone_number(request):
     from django.conf import settings
     ctx = {'phone_number': settings.DEFAULT_PHONE,
@@ -30,6 +45,7 @@ def phone_number(request):
             pass
 
     return ctx
+
 
 def business_hours(request):
     ctx = {'business_hours': ''}
