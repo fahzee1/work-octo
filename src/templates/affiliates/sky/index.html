@@ -1,15 +1,19 @@
 {% extends "base.html" %}
 {% load sekizai_tags content_tags content_filters %}
-
+{% block page_title %}Protect America Interactive Home Security | As Seen in Delta Sky Magazine{% endblock %}
 {% block subnav %}{% endblock %}
 {% block content %}
     {% addtoblock "css" %}
         <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/delta-sky.css">
+        <link rel="stylesheet" media="only screen and (max-width: 480px)" href="{{ STATIC_URL }}css/affiliates/delta-sky-mobile.css">
     {% endaddtoblock "css" %}
-    <div id="worry-free-vacation">
-        <h1><strong>a secured home</strong> means a worry free vacation.</h1>
+    <div id="top-content">
+        <div id="worry-free-vacation">
+            <h1><strong>a secured home</strong> means a worry free vacation.</h1>
+        </div>
+        {% include "order/quote-form.html" with form=forms.basic %}
     </div>
-    {% include "order/quote-form.html" with form=forms.basic %}
+
     <div class="clear"></div>
     <div id="check-in-anywhere">
         <h2><strong>Check in at home from wherever you may be</strong> with Protect America Interactive Security</h2>
@@ -87,6 +91,15 @@
         </div>
         <div class="clear"></div>
 
+    </div>
+    <div id="giftcard-promotion">
+        <img src="{{ STATIC_URL }}img/affiliates/sky/100-amex-giftcard.png" title="$100 AMEX Giftcard" />
+
+        <div id="promotion-content">
+            <h2>Get a $100 AMEX Gift Card<sup>&dagger;</sup></h2>
+            <p>Do you want a bunch of money to spend on the latest electronics? Whether you're a fan of remote control cars or simply need a new smart phone, Protect America wants give back to our techie customers. Order your Protect America home security system today and receive a $100 AMEX gift card. Just remember to set your alarm after filling your house with cool, new toys.</p>
+        </div>
+        <div class="clear"></div>
     </div>
     <div id="contact-form">
         <h2>Security is An Amazing Conversation Piece.</h2>
