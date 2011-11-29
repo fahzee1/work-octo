@@ -67,6 +67,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     'apps.common.context_processors.business_hours',
     'apps.common.context_processors.phone_number',
+    'apps.common.context_processors.mobile_check',
     'apps.pricetable.context_processors.price_table',
     'sekizai.context_processors.sekizai',
 )
