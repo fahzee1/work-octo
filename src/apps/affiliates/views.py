@@ -16,3 +16,6 @@ def affiliate_view(request, affiliate, page_name=None):
 
     return simple_dtt(request, htmlfilename, {'page_name': page_name,
         'agent_id': affiliate.agent_id})
+
+def delta_sky(request):
+    return affiliate_view(request, 'a03005')
