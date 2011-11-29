@@ -50,6 +50,8 @@ class Submission(models.Model):
 
     consent = models.BooleanField(default=False, help_text="By checking this box, I expressly give consent to be contacted according to the Terms and Conditions")
 
+    referer_page = models.CharField(max_length=256, blank=True, null=True)
+
     date_created = models.DateTimeField(auto_now_add=True)
 
     

@@ -52,6 +52,7 @@ def ajax_post(request):
             if source is None:
                 source = request.session.get('source', None)
 
+
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
                       'l_phone1': fdata['phone'],
@@ -60,7 +61,12 @@ def ajax_post(request):
                       'key3': affkey,
                       }
             post_to_old_pa(padata)
-            form.save()
+            formset = form.save(commit=False)
+
+            if request.META['HTTP_REFERER'] is not None:
+                formset.referer_page = request.META['HTTP_REFERER']
+            
+            formset.save()
             response_dict.update({'success': True})
         else:
             response_dict.update({'errors': form.errors})
