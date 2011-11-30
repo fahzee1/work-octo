@@ -31,17 +31,22 @@
         <div id="interactive-demo">
             <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/iphone-hand.png" id="iphone" />
             <div id="app-screens">
-                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-disarmed.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-armed.png" />
                 <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-main-menu.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-disarmed.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-cameras.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-history.png" />
+
+
 
             </div>
 
         </div>
-        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard2.jpg" class="postcard1" />
-        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard3.jpg" class="postcard2" />
-        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/test-postcard.jpg" class="postcard3" />
-        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard3.jpg" class="postcard4" />
-        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/tes-postcard2.jpg" class="postcard5" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/hawaii-postcard.jpg" class="postcard1" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/savannah-ga-postcard.jpg" class="postcard2" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/austin-tx-postcard.jpg" class="postcard3" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/new-york-postcard.jpg" class="postcard4" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/hawaii-postcard.jpg" class="postcard5" />
     </div>
 <div class="wrapper">
     <div class="clear"></div>
@@ -111,7 +116,7 @@
 
         <div id="promotion-content">
             <h2>Get a $100 AMEX Gift Card<sup>&dagger;</sup></h2>
-            <p>Do you want a bunch of money to spend on the latest electronics? Whether you're a fan of remote control cars or simply need a new smart phone, Protect America wants give back to our techie customers. Order your Protect America home security system today and receive a $100 AMEX gift card. Just remember to set your alarm after filling your house with cool, new toys.</p>
+            <p>Do you want a bunch of money? Whether you’re a fan of shopping or need some extra cash for your vacation, Protect America wants to give back to our customers. Order your home security system today and receive a $100 AMEX gift card. Just remember to set your alarm after leaving the house for your night out!</p>
         </div>
         <div class="clear"></div>
     </div>
@@ -148,13 +153,22 @@
 
 </div>
     {% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}/js/jqueryrotate.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/jquery.cycle.all.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#app-screens').cycle({
 		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-	});
+	}).rotate(7.75);
+    $('.postcard1').rotate(-3);
+    $('.postcard2').rotate(2);
+    $('.postcard3').rotate(-1);
+    $('.postcard4').rotate(3);
+    $('.postcard5').rotate(-2);
 });
 </script>
     {% endaddtoblock "js" %}
+{% endblock %}
+{% block extra_terms %}
+    <p>&dagger;Standard thirty-six month monitoring agreement required with approved credit. Applicable taxes and fees not included. Cannot be combined with any other offer. Offer subject to change. Not available to existing Protect America customers. Other restrictions apply. Void where prohibited. Protect America, Inc., 3800 Quick Hill Road, Building 1-100, Austin, TX 78728. </p>
 {% endblock %}
