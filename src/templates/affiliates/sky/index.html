@@ -148,12 +148,18 @@
 
 </div>
     {% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}/js/jqueryrotate.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}/js/jquery.cycle.all.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#app-screens').cycle({
 		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-	});
+	}).rotate(7.75);
+    $('.postcard1').rotate(-3);
+    $('.postcard2').rotate(2);
+    $('.postcard3').rotate(-1);
+    $('.postcard4').rotate(3);
+    $('.postcard5').rotate(-2);
 });
 </script>
     {% endaddtoblock "js" %}
