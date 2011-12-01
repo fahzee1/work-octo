@@ -1,4 +1,6 @@
 {% extends "packages/base.html" %}
+{% load content_filters content_tags %}
+{% block title %}Copper Package | Home Security Packages | Protect America Home Security{% endblock %}
 
 {% block content %}
 <div id="affordable-home-security">
@@ -46,7 +48,7 @@
 </div>
 <div class="clear"></div>
 <div id="call-box">
-    <p>Get Started Now, <strong>Call Today! 1-800-951-5111</strong></p>
+    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
 </div>
 <div class="clear"></div>
 
@@ -63,7 +65,7 @@
         <li>
             <img src="/static/img/products/monitoring/homepulse-icon.png">
             <h3>HomePulse</h3>
-            <p><sup>$</sup>36<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>37<span>99</span><strong>/mo</strong></p>
             <a href="http://www.protectamerica.com/pa/broadband-monitoring" class="button-link" title="Learn About Homepulse Monitoring">Learn More ></a>
         </li>
         <li>
