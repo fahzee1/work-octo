@@ -4,6 +4,75 @@
 // Styles for the Products Pages
 
 /************** Packages ****************/
+#sub-navigation {
+    #packages-navigation {
+        li {
+            width: 190px;
+            border: 1px solid @light-grey;
+            border-right: none;
+            background: @v-light-grey url(/static/img/products/packages-sprite.png) 21px 0 no-repeat;
+            background-position-y: -4px;
+            height: 112px;
+            margin: 4px 0 12px 0;
+            position: relative;
+            .fade-slow;
+
+            a {
+                padding: 80px 0 0;
+                float: none;
+                border-bottom: 0;
+                line-height: 16px;
+                font-weight: 800;
+                span {
+                    display: block;
+                    font-size: 8px;
+                    line-height: 10px;
+                    font-weight: normal;
+                    color: @grey;
+                }
+            }
+            &.active {
+                background-color: @light-grey;
+                a {
+                    color: @black;
+                    span {
+                        color: @dark-grey;
+                    }
+                }
+                #package-active-arrow {
+                    position: absolute;
+                    left: 85px;
+                    bottom: -8px;
+                }
+                &:hover {
+                    background-color: @light-grey;
+                }
+            }
+            &.omega {
+                border-right: 1px solid @light-grey;
+            }
+            &:hover {
+                background-color: @white;
+                .fade-fast;
+            }
+            &.copper {
+                background-position-x: 21px;
+            }
+            &.bronze {
+                background-position-x: -133px;
+            }
+            &.silver {
+                background-position-x: -283px;
+            }
+            &.gold {
+                background-position-x: -440px;
+            }
+            &.platinum {
+                background-position-x: -603px;
+            }
+        }
+    }
+}
 /**** The Copper Package ***/
 #affordable-home-security {
     background: @white url(/static/img/products/copper-package/little-girl-sleeping.jpg) no-repeat;
@@ -31,11 +100,17 @@
     .content-box;
     margin-bottom: 0;
     h3 {
-        font-size: 18px;
+        font-size: 24px;
         font-weight: 300;
-        float: left;
         padding: 8px 48px 0 0;
         color: @dark-grey;
+    }
+    em {
+        float: none;
+        display: block;
+        text-decoration: line-through;
+        color: @grey;
+        font-size: 10px;
     }
     #main-package-image {
         .image-break(-75px);
