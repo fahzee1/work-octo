@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 {% load sekizai_tags content_tags content_filters %}
 {% block page_title %}Protect America Interactive Home Security | As Seen in Delta Sky Magazine{% endblock %}
-{% block subnav %}{% endblock %}
+{% block navigation %}
+    <div id="navigation">
+    	<ul>
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+    		<li><a href="#affiliate-reports">Reports</a></li>
+    		<li><a href="#aff-logos">Logos</a></li>
+    		<li><a href="#aff-banners">Web Banners</a></li>
+
+    	</ul>
+    	<div id="search-area">
+    		<form name="search2" method="GET" action="/search/">
+    			<input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
+    		</form>
+    	</div>
+    </div>
+{% endblock %}
 {% block content %}
     {% addtoblock "css" %}
     
@@ -32,7 +47,7 @@
     </table>
     <div class="button-link"><a href="http://www.protectamerica.com/reports/" target="_top">Click Here to Access Affiliate Reports</a></div>
 </div>
-<div class="content-area">
+<div class="content-area" id="aff-logos">
     <h2>Approved Logos</h2>
     
     <div class="dl-item">
@@ -63,7 +78,7 @@
     </div>
     <div class="clear"></div>
 </div>
-<div class="content-area">
+<div class="content-area" id="aff-banners">
     <h2>Web Banners</h2>
     <p>To Download, right click the image and select "Save Image As..."</p>
 
@@ -107,3 +122,4 @@
     <img src="{{ STATIC_URL }}/img/banners/728x90/728x90-superhero.jpg" />
 </div>
 {% endblock %}
+{% block footer %}{% endblock %}

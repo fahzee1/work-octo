@@ -65,6 +65,7 @@
 	</div>
 </div>
 <div id="navigation-wrapper">
+    {% block navigation %}
     <div id="navigation">
     	<ul>
             <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
@@ -86,6 +87,7 @@
     		</form>
     	</div>
     </div>
+    {% endblock %}
 </div>
 {% block subnav %}
 <div id="sub-navigation">
@@ -127,7 +129,7 @@ test
         {% block content %}{% endblock %}
         <div class="clear"></div>
 </div>
-{% block flooder %}
+{% block footer %}
 
 <div id="footer">
 	<div class="bottom-rule">
