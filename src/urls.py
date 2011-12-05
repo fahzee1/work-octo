@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
     # affiliate urls
+    url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
@@ -143,6 +144,9 @@ urlpatterns += patterns('',
         # Help Pages > State Licenses
             dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
+    # Affiliate Resources
+    
+    #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
 
 )
 if settings.DEBUG:
