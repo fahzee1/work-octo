@@ -19,3 +19,6 @@ def affiliate_view(request, affiliate, page_name=None):
 
 def delta_sky(request):
     return affiliate_view(request, 'a03005')
+    
+def resources(request):
+    return simple_dtt(request, 'affiliates/resources.html', {'page_name': 'affiliate_resources'})
