@@ -1,9 +1,9 @@
 // VERSION: 1.8 LAST UPDATE: 9.03.2011
-/* 
+/*
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Made by Wilq32, wilq32@gmail.com, Wroclaw, Poland, 01.2009
- * Website: http://code.google.com/p/jqueryrotate/ 
+ * Website: http://code.google.com/p/jqueryrotate/
  */
 
 // Documentation removed from script file (was kinda useless and outdated)
@@ -20,8 +20,8 @@ ImageRotate:function(parameters)
 {
 ﻿  // If this element is already a Wilq32.PhotoEffect object, skip creation
 ﻿  if (this.Wilq32&&this.Wilq32.PhotoEffect) return;
-﻿  // parameters might be applied to many objects - so because we use them later - a fresh instance is needed 
-﻿  var paramClone = $.extend(true, {}, parameters); 
+﻿  // parameters might be applied to many objects - so because we use them later - a fresh instance is needed
+﻿  var paramClone = $.extend(true, {}, parameters);
 ﻿  return (new Wilq32.PhotoEffect(this.get(0),paramClone))._rootObj;
 },
 rotate:function(parameters)
@@ -32,9 +32,9 @@ rotate:function(parameters)
 ﻿  for (var i=0,i0=this.length;i<i0;i++)
 ﻿  {
 ﻿      var element=this.get(i);﻿  
-﻿  ﻿  if (typeof element.Wilq32 == "undefined") 
+﻿  ﻿  if (typeof element.Wilq32 == "undefined")
 ﻿  ﻿  ﻿  returned.push($($(element).ImageRotate(parameters)));
-﻿  ﻿  else 
+﻿  ﻿  else
             element.Wilq32.PhotoEffect._handleRotation(parameters);
 ﻿  }
 ﻿  return returned;
@@ -77,36 +77,36 @@ Wilq32.PhotoEffect.prototype={
 ﻿  ﻿  this._parameters = this._parameters || {};
         if (typeof this._angle !== "number") this._angle = 0 ;
         if (typeof parameters.angle==="number") this._angle = parameters.angle;
-        this._parameters.animateTo = (typeof parameters.animateTo==="number") ? (parameters.animateTo) : (this._angle); 
+        this._parameters.animateTo = (typeof parameters.animateTo==="number") ? (parameters.animateTo) : (this._angle);
 
 ﻿  ﻿  this._parameters.easing = parameters.easing || this._parameters.easing || function (x, t, b, c, d) { return -c * ((t=t/d-1)*t*t*t - 1) + b; }
 ﻿  ﻿  this._parameters.duration = parameters.duration || this._parameters.duration || 1000;
         this._parameters.callback = parameters.callback || this._parameters.callback || function(){};
-        if (parameters.bind && parameters.bind != this._parameters.bind) this._BindEvents(parameters.bind); 
+        if (parameters.bind && parameters.bind != this._parameters.bind) this._BindEvents(parameters.bind);
 ﻿  },
 ﻿  _handleRotation : function(parameters){
           this._setupParameters(parameters);
           if (this._angle==this._parameters.animateTo) {
               this._rotate(this._angle);
           }
-          else { 
+          else {
               this._animateStart();          
           }
 ﻿  },
 
 ﻿  _BindEvents:function(events){
-﻿  ﻿  if (events && this._eventObj) 
+﻿  ﻿  if (events && this._eventObj)
 ﻿  ﻿  {
             // Unbinding previous Events
             if (this._parameters.bind){
                 var oldEvents = this._parameters.bind;
-                for (var a in oldEvents) if (oldEvents.hasOwnProperty(a)) 
+                for (var a in oldEvents) if (oldEvents.hasOwnProperty(a))
                         // TODO: Remove jQuery dependency
                         jQuery(this._eventObj).unbind(a,oldEvents[a]);
             }
 
             this._parameters.bind = events;
-﻿  ﻿  ﻿  for (var a in events) if (events.hasOwnProperty(a)) 
+﻿  ﻿  ﻿  for (var a in events) if (events.hasOwnProperty(a))
 ﻿  ﻿  ﻿  ﻿  // TODO: Remove jQuery dependency
 ﻿  ﻿  ﻿  ﻿  ﻿  jQuery(this._eventObj).bind(a,events[a]);
 ﻿  ﻿  }
@@ -150,11 +150,11 @@ _animate:function()
          var checkEnd = actualTime - this._animateStartTime > this._parameters.duration;
 
          // TODO: Bug for animatedGif for static rotation ? (to test)
-         if (checkEnd && !this._parameters.animatedGif) 
+         if (checkEnd && !this._parameters.animatedGif)
          {
              clearTimeout(this._timer);
          }
-         else 
+         else
          {
              if (this._canvas||this._vimage||this._img) {
                  var angle = this._parameters.easing(0, actualTime - this._animateStartTime, this._animateStartAngle, this._parameters.animateTo - this._animateStartAngle, this._parameters.duration);
@@ -201,3 +201,4 @@ _animate:function()
 ﻿  })()
 }
 })(jQuery);
+
