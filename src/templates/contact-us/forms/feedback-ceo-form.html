@@ -5,27 +5,24 @@
         {{ field }}
     {% endfor %}
     {% for field in formset.visible_fields %}
-        {% if forloop.counter == 4 %}
-        <div class="bottom-rule">
-        {% endif %}
-        {{ field.errors }}
-
-        {% if field.field.widget|klass == 'Select' %}
-        {% if forloop.counter != 5 %}
-        <label>{{ field.name|capfirst }}:</label>
-        {% endif %}
-        {% endif %}
+    <div id="ctrl-{{ field.auto_id }}" class='ctrlHolder {{ div_class }} {% if field.errors %}error{% endif %}'>
+        {{ field.label_tag }}
         
         {{ field }}
-        {% if forloop.counter == 5 %}
-        </div>
-		<p>
-            Please provide as much detailed information as possible
-            regarding the nature of your feedback, especially if you
-            still have an outstanding issue or complaint that you 
-            need resolved.
-        </p>
+        {% if field.help_text %}
+            <span class='helptext'>
+            {{ field.help_text }}
+            </span>
         {% endif %}
+        {% if field.errors %}
+            <ul class='formHint'>
+            {% for error in field.errors %}
+                <li><strong>{{ error }}</strong></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="clear"></div>
+    </div>
     {% endfor %}
     <button class="buyit">Submit &amp; Finish</button>
 </form>

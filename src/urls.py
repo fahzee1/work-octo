@@ -19,13 +19,16 @@ urlpatterns = patterns('',
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
-    url(r'^contact-us/feedback-to-the-ceo/?$', 'apps.contact.views.ceo',
-        name='feedback-ceo'),
+    
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
+    url(r'^contact-us/feedback-to-the-ceo/?$',
+        'apps.testimonials.views.ceofeedback',
+        name='feedback-ceo'),
+
     # affiliate urls
     url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
