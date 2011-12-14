@@ -331,6 +331,10 @@ a.button-link {
         -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
         box-shadow: 0 1px 1px rgba(0,0,0,.3);
     }
+
+}
+.phone-alt {
+    display: inline;
 }
 .button-link {
     margin-top: 16px;
@@ -359,34 +363,35 @@ a.button-link {
             color: @red;
         }
     }
-}
-.button {
-    margin: 20px 10px;
-    text-align: center;
-    a {
-        display: block;
-        float: left;
-        background: @red;
-        color: @white;
-        text-decoration: none;
-        height: 24px;
-        line-height: 24px;
-        background-image: -moz-linear-gradient(top,@red,#ce1821); 
-        background-image: -webkit-gradient(linear,left top,left bottom,from(@red),to(#ce1821));
-        border: 1px solid transparent;
-        font-size: 14px;
-        padding: 0 24px;
-        &:hover {
-            background-image: -moz-linear-gradient(top,@red,#aa141b); 
-            background-image: -webkit-gradient(linear,left top,left bottom,from(@red),to(#aa141b));
-            border: 1px solid #c61111;
-            border-bottom: 1px solid #a90101;
-            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-    
+    p.phone-alt {
+        display: inline;
+        padding-left: 8px;
+        font-size: 12px !important;
+        color: @dark-grey !important;
+        strong {
+            color: @red;
         }
     }
 }
+.button-submit {
+    .button-link;
+    a {
+        background: #90af01;
+        background-image: -moz-linear-gradient(top, #90af01, #829e01);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#829e01));
+        border: 1px solid transparent;
+        &:hover {
+            background-image: -moz-linear-gradient(center top, #90af01, #687e01);
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#687e01));
+            border: 1px solid #768f03;
+            border-bottom: 1px solid #576902;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        }
+    }
+}
+
 
 /************** Tables ****************/
 
@@ -470,6 +475,37 @@ table.data {
 
     }
     
+
+}
+table#licenses-table {
+    font-size: 10px;
+    padding: 0 0 8px;
+    border-bottom: 1px solid @v-light-grey;
+    display: none;
+    thead {
+        padding-bottom: 8px;
+        th {
+            padding: 0 8px 0; 
+            font-weight: 800;
+            font-size: 12px;
+        }
+    }
+    tr {
+        &:hover {
+            background: @light-green;
+        }
+        td {
+            padding: 0 8px;
+            &:hover {
+                background: @light-green+15;
+            }
+        }
+        &.license-requirement {
+            td {
+                font-size: 13px;
+            }
+        }
+    }
 
 }
 /************** Header ****************/
