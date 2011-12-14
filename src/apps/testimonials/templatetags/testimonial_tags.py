@@ -1,3 +1,5 @@
+import re
+
 from django import template
 from django.conf import settings
 
@@ -23,13 +25,19 @@ class TestimonialSearchNode(template.Node):
         try:
             testimonials = Testimonial.objects.filter(testimonial__icontains=self.search_term)
             html = ''
+            
             for testimonial in testimonials:
+                testimonial_html = re.sub(self.search_term,
+                    '<strong>%s</strong>' % self.search_term,
+                    testimonial.testimonial)
+
                 html = html + '<li><div class="customer-name"> \
                 <h4>%s %s <span>of %s, %s </span></h4> \
                 <strong>%s</strong> \
                 <a href="/pa/testimonials" class="button-link" \
                 >Read More Testimonials</a></div> \
-                <p><img src="%simg/extra/testimonial-arrow.png" /> %s \
+                <p><img src="%simg/extra/testimonial-arrow.png" \
+                class="testimonial-arrow"/> %s \
                 </p> \
                 </li>' % (testimonial.first_name,
                           testimonial.last_name,
@@ -37,7 +45,7 @@ class TestimonialSearchNode(template.Node):
                           testimonial.state,
                           testimonial.date_created.strftime("%m/%d/%Y"),
                           settings.STATIC_URL,
-                          testimonial.testimonial)
+                          testimonial_html)
             return html
         except:
             return ''
