@@ -19,13 +19,16 @@ urlpatterns = patterns('',
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
-    url(r'^contact-us/feedback-to-the-ceo/?$', 'apps.contact.views.ceo',
-        name='feedback-ceo'),
+    
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
+    url(r'^contact-us/feedback-to-the-ceo/?$',
+        'apps.testimonials.views.ceofeedback',
+        name='feedback-ceo'),
+
     # affiliate urls
     url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
@@ -47,108 +50,110 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     return url(pattern, 'apps.common.views.simple_dtt',
 		dict(template=template, extra_context=context),
 		name=name)
-""""
-urlpatterns += patterns('',
 
-    # Home Page
-   	dtt(r'^$', '_base.html', 'home', ctx={'page_name': 'index'}),
-   	dtt(r'^test/$', '_base2.html', 'home', ctx={'page_name': 'index_2'}),
+# Radioshack URLS
+if settings.SITE_ID == 2:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/radioshack/_base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
+        dtt(r'^thank-you/$', 'affiliates/radioshack/thank-you.html', 'thankyou', ctx={'page_name': 'thankyou', 'agent_id': 'a02596'}),
+        dtt(r'^cswitch/$', 'affiliates/radioshack/content_switch.html', 'cswitch', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
 
-    dtt(r'^thank-you/$', 'thank-you.html', 'thankyou', ctx={'page_name': 'thankyou'}),
-    dtt(r'^cswitch/$', 'content_switch.html', 'cswitch', ctx={'page_name': 'index'}),
+    )
+# Paid landing site
+elif settings.SITE_ID == 3:
+    pass
+else:
 
-)
-"""""
-urlpatterns += patterns('',
+    urlpatterns += patterns('',
 
-    # Home Page
-   	dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+        # Home Page
+        dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
 
-    # Home Security Packages
-   	dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
+        # Home Security Packages
+        dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
 
-    	# Product > Packages
-   		dtt(r'^home-security-packages/copper/?$', 'packages/copper.html', 'copper', 'security-packages'),
-   		dtt(r'^home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
-   		dtt(r'^home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'security-packages'),
-   		dtt(r'^home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'security-packages'),
-   		dtt(r'^home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
+            # Product > Packages
+            dtt(r'^home-security-packages/copper/?$', 'packages/copper.html', 'copper', 'security-packages'),
+            dtt(r'^home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
+            dtt(r'^home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'security-packages'),
+            dtt(r'^home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'security-packages'),
+            dtt(r'^home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
 
-   		# Product > Monitoring
+            # Product > Monitoring
 
-   	   	dtt(r'^products/alarm-monitoring/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
+            dtt(r'^products/alarm-monitoring/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
 
-   		dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
+            dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
 
-    	# Product > Equipment
+            # Product > Equipment
 
-   		dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
+            dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
 
-   		    		# Product > Equipment > Sensors
+                        # Product > Equipment > Sensors
 
-   					dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
 
-    	# Product > Video
+            # Product > Video
 
-   		dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'interactive-video', 'products'),
+            dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'interactive-video', 'products'),
 
-    	# Product > GPS Vehicle Tracking
+            # Product > GPS Vehicle Tracking
 
-   		dtt(r'^products/gps-vehicle-tracking/?$', 'products/gps/index.html', 'gps', 'products'),
+            dtt(r'^products/gps-vehicle-tracking/?$', 'products/gps/index.html', 'gps', 'products'),
 
-    	# Product > Cell Takeover
+            # Product > Cell Takeover
 
-   		dtt(r'^products/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
+            dtt(r'^products/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
 
-    # About Pages
+        # About Pages
 
-   	dtt(r'^about-us/?$', 'about-us/index.html', 'about-us'),
+        dtt(r'^about-us/?$', 'about-us/index.html', 'about-us'),
 
-   		# About > Profile
+            # About > Profile
 
-   		dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
+            dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
-   		# About > Charities
+            # About > Charities
 
-   		dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
+            dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
 
-   		# About > Testimonials
+            # About > Testimonials
 
-   		dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
+            dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
 
-   		# About > Testimonials
+            # About > Testimonials
 
-   		dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
-
-
-	# Security 101 Pages
-
-   	dtt(r'^security-101/?$', 'security/index.html', 'security-101'),
-
-   		# Security 101 > Security News
-
-   		dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
+            dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
 
 
-    # Help Pages
+        # Security 101 Pages
 
-    dtt(r'^help/?$', 'help/index.html', 'help'),
+        dtt(r'^security-101/?$', 'security/index.html', 'security-101'),
+
+            # Security 101 > Security News
+
+            dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
 
 
-        # Help Pages > Privacy Policy
-            dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+        # Help Pages
 
-        # Help Pages > Return Policy
-            dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),
+        dtt(r'^help/?$', 'help/index.html', 'help'),
 
-        # Help Pages > State Licenses
-            dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
-    # Affiliate Resources
-    
-    #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
+            # Help Pages > Privacy Policy
+                dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
 
-)
+            # Help Pages > Return Policy
+                dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),
+
+            # Help Pages > State Licenses
+                dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
+
+        # Affiliate Resources
+        
+        #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
+
+    )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
