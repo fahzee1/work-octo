@@ -51,14 +51,17 @@ def dtt(pattern, template, name, parent=None, ctx=None):
 		dict(template=template, extra_context=context),
 		name=name)
 
+# Radioshack URLS
 if settings.SITE_ID == 2:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/radioshack/_base.html', 'home', ctx={'page_name': 'index'}),
-        dtt(r'^thank-you/$', 'affiliates/radioshack/thank-you.html', 'thankyou', ctx={'page_name': 'thankyou'}),
-        dtt(r'^cswitch/$', 'affiliates/radioshack/content_switch.html', 'cswitch', ctx={'page_name': 'index'}),
+        dtt(r'^$', 'affiliates/radioshack/_base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
+        dtt(r'^thank-you/$', 'affiliates/radioshack/thank-you.html', 'thankyou', ctx={'page_name': 'thankyou', 'agent_id': 'a02596'}),
+        dtt(r'^cswitch/$', 'affiliates/radioshack/content_switch.html', 'cswitch', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
 
     )
-
+# Paid landing site
+elif settings.SITE_ID == 3:
+    pass
 else:
 
     urlpatterns += patterns('',
