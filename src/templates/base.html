@@ -6,8 +6,11 @@
 	<link rel="icon" href="/favicon.ico" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <link rel="stylesheet" media="print" href="{{ STATIC_URL }}css/print.css">
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
     <link href="https://plus.google.com/113573642727337197280" rel="publisher" />
 {% endblock %}
 {% render_block "css" %}
@@ -93,7 +96,6 @@
 {% block subnav %}
 <div id="sub-navigation">
 	{% block subnav_parent %}{% endblock %}
-    {% comment %}
     <div id="share-this">
         <div id="facebook-button">
             <div id="fb-root"></div>
@@ -105,16 +107,14 @@
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
             
-            <fb:like href="www.protectamerica.com" send="false" layout="button_count" width="450" show_faces="false"></fb:like>
+            <fb:like href="www.protectamerica.com" send="false" layout="button_count" width="90" show_faces="false"></fb:like>
         </div>
         <div id="plus-one">
             <g:plusone size="small" annotation="bubble" width="120" href="http://www.protectamerica.com"></g:plusone>
         </div>
-        <a href="http://www.protectamerica.com/pa/cust_ref" title="Tell your friends & Family about Protect America"><img src="/static/img/base/share-this-button.png" id="share-this-button" /></a>
-
-
     </div>
-    {% endcomment %}
+    <div class="clear"></div>
+
 	{% block subnav_child %}{% endblock %}
 
 
