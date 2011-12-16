@@ -22,6 +22,7 @@ class TestimonialSearchNode(template.Node):
         self.search_term = search_term
     
     def render(self, context):
+        testimonial_array = []
         try:
             testimonials = Testimonial.objects.filter(testimonial__icontains=self.search_term)
             html = ''
@@ -31,22 +32,17 @@ class TestimonialSearchNode(template.Node):
                     '<strong>%s</strong>' % self.search_term,
                     testimonial.testimonial)
 
-                html = html + '<li><div class="customer-name"> \
-                <h4>%s %s <span>of %s, %s </span></h4> \
-                <strong>%s</strong> \
-                <a href="/pa/testimonials" class="button-link" \
-                >Read More Testimonials</a></div> \
-                <p><img src="%simg/extra/testimonial-arrow.png" \
-                class="testimonial-arrow"/> %s \
-                </p> \
-                </li>' % (testimonial.first_name,
-                          testimonial.last_name,
-                          testimonial.city,
-                          testimonial.state,
-                          testimonial.date_created.strftime("%m/%d/%Y"),
-                          settings.STATIC_URL,
-                          testimonial_html)
-            return html
+                testimonial_array.append({'first_name': testimonial.first_name,
+                  'last_name': testimonial.last_name,
+                  'city': testimonial.city,
+                  'state': testimonial.state,
+                  'date_created': testimonial.date_created.strftime("%m/%d/%Y"),
+                  'testimonial': testimonial_html})
+                t = template.loader.get_template('testimonials/testimonial_search_tag.html')
+                c = template.Context({
+                    'testimonials': testimonial_array,
+                })
+            return t.render(c)
         except:
             return ''
 register.tag('testimonial_search', testimonial_search)
