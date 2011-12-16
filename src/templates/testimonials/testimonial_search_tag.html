@@ -1,0 +1,10 @@
+{% for testimonial in testimonials %}
+<li>
+    <div class="customer-name"> 
+        <h4>{{ testimonial.first_name }} {{ testimonial.last_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }} </span></h4>
+        <strong>{{ testimonial.date_created }}</strong>
+        <a href="/pa/testimonials" class="button-link">Read More ></a>
+    </div>
+    <p><img src="/static/img/extra/testimonial-arrow.png" class="testimonial-arrow"/> {{ testimonial.testimonial|safe|truncatewords_html:"35" }}</p>
+</li>
+{% endfor %}

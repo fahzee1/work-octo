@@ -6,8 +6,11 @@
 	<link rel="icon" href="/favicon.ico" />
 	<link rel="shortcut icon" href="/favicon.ico" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <link rel="stylesheet" media="print" href="{{ STATIC_URL }}css/print.css">
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
     <link href="https://plus.google.com/113573642727337197280" rel="publisher" />
 {% endblock %}
 {% render_block "css" %}
@@ -37,11 +40,13 @@
 <div id="header">
 	<div id="header-wrapper">
 		<div>
+            {% block quick-links %}
 			<ul id="quick-link-navigation">
 				<li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Enter the Online Agreement" id="security-agreement">Online Chat</a></li>
 
 				<li><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement">Agreement</a></li>
 			</ul>
+			{% endblock %}
 			<!--<div class="clear"></div>-->
 		</div>    
 		<div>
@@ -94,7 +99,6 @@
 {% block subnav %}
 <div id="sub-navigation">
 	{% block subnav_parent %}{% endblock %}
-    {% comment %}
     <div id="share-this">
         <div id="facebook-button">
             <div id="fb-root"></div>
@@ -106,16 +110,14 @@
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
             
-            <fb:like href="www.protectamerica.com" send="false" layout="button_count" width="450" show_faces="false"></fb:like>
+            <fb:like href="www.protectamerica.com" send="false" layout="button_count" width="90" show_faces="false"></fb:like>
         </div>
         <div id="plus-one">
             <g:plusone size="small" annotation="bubble" width="120" href="http://www.protectamerica.com"></g:plusone>
         </div>
-        <a href="http://www.protectamerica.com/pa/cust_ref" title="Tell your friends & Family about Protect America"><img src="/static/img/base/share-this-button.png" id="share-this-button" /></a>
-
-
     </div>
-    {% endcomment %}
+    <div class="clear"></div>
+
 	{% block subnav_child %}{% endblock %}
 
 
@@ -180,7 +182,7 @@ test
 				<div class="clear"></div>
 			</div>
 			<div>
-				<img src="{{ STATIC_URL }}img/external/consumer-digest-logo-sml.png" />
+				<img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo-sml.png" />
 
 				<p>Voted a Consumers Digest "Best Buy" for our Copper home security package</p>
 				<div class="clear"></div>

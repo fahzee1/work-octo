@@ -61,7 +61,9 @@ if settings.SITE_ID == 2:
     )
 # Paid landing site
 elif settings.SITE_ID == 3:
-    pass
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/sem-landing-page/home.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
+    )
 else:
 
     urlpatterns += patterns('',
