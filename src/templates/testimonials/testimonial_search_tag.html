@@ -1,0 +1,28 @@
+{% if template == None or template == 'default' %}
+{% for testimonial in testimonials %}
+<li>
+    <div class="customer-name"> 
+        <h4>{{ testimonial.first_name }} {{ testimonial.last_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }} </span></h4>
+        <strong>{{ testimonial.date_created }}</strong>
+        <a href="/pa/testimonials" class="button-link">Read More ></a>
+    </div>
+    <p><img src="/static/img/extra/testimonial-arrow.png" class="testimonial-arrow"/> {% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+</li>
+{% endfor %}
+{% endif %}
+{% if template == 'sidebar' %}
+{% for testimonial in testimonials %}
+<li>
+    <p><img src="/static/img/extra/testimonial-arrow-down.png" class="testimonial-arrow" />{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+    <div class="customer-name">
+        <h4>{{ testimonial.first_name }} {{ testimonial.last_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}</span></h4>
+        <strong>{{ testimonial.date_created }}</strong>
+        <div class="button-link">
+            <a href="/pa/testimonials">Read More ></a>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</li>
+{% endfor %}
+{% endif %}

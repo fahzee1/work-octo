@@ -17,11 +17,13 @@
 </script>
 <!-- End of Google Website Optimizer Tracking Script for Copper Page test -->
 {% endaddtoblock "js" %}
-<div id="affordable-home-security">
-    <h1>The <strong>most affordable</strong> way to secure peace of mind.</h1>
-
+<div id="top-content">
+    <div id="affordable-home-security">
+        <h1>The <strong>most affordable</strong> way to secure peace of mind.</h1>
+    
+    </div>
+    {% include "order/quote-form.html" with form=forms.basic %}
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
 <div id="the-copper-package">
     <img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" id="main-package-image">
@@ -29,7 +31,7 @@
         <h1>The Copper Package</h1>
         <p>Most homes in the United States have three or less outside doors and most break-ins occur through an outside door. With the Copper Package, you receive three door/window sensors to cover all the outside doors and then a infrared motion detector for interior protection. Place the motion detector either in the most common living area or a central hallway in the home. You can customize your system by adding additional equipment at the time the order is placed or anytime in the future.</p>
         <h3>Equipment & Installation Price: <strong>Free*</strong> </h3>
-        <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>1-800-951-5167</strong> to receive a free security analysis</p></div>
+        <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
     </div>
     <div id="included-equipment">
     	<h2>What's Included:</h2>
@@ -69,7 +71,55 @@
 </div>
 <div class="clear"></div>
 
+<div id="adt-comparison">
 
+    <div id="adt-price-chart">
+        <h2>Comparison Chart:</h2>
+        <table class="data">
+            <thead>
+                <th class="alpha">&nbsp;</th>
+                <th>Protect America</th>
+                <th class="omega">ADT</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Upfront Cost</strong></td>
+                    <td class="call-out">FREE*</td>
+                    <td>$379</td>
+                </tr>
+                <tr class="alt">
+                    <td><strong>Monthly Cost</strong></td>
+                    <td class="call-out">$29.99</td>
+                    <td>$42.99</td>
+                </tr>
+                <tr>
+                    <td><strong>Contract Length</strong></td>
+                    <td class="call-out">36 Months</td>
+                    <td>36 Months</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    
+    <div id="extra-benefits">
+        <h2>Extra Protect America Benefits:</h2>
+        <ul>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/wireless-sensors.png" />Wireless sensors are easy to install and don't require drilling.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/save-money.png" />Homes with security systems save up to 20% on homeowner's insurance.</li>
+
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/free-relocation-kit.png" />You own your home security system. Moving to a new home is easy with our free relocation kit.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />Your system will always work with our included lifetime replacement parts warranty</li>
+
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+</div>
 <div id="monitoring-options">
     <h2>Flexible Monitoring Options:</h2>
     <ul id="monitoring-rates">
@@ -95,64 +145,10 @@
     
     </ul>
 </div>
-<div id="adt-comparison">
 
-    <div id="adt-price-chart">
-        <h2>Comparison Chart:</h2>
-        <table class="data">
-            <thead>
-                <th class="alpha">&nbsp;</th>
-                <th>Protect America</th>
-                <th class="omega">ADT</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Upfront Cost</strong></td>
-                    <td>FREE*</td>
-                    <td>$379</td>
-                </tr>
-                <tr class="alt">
-                    <td><strong>Monthly Cost</strong></td>
-                    <td>$29.99</td>
-                    <td>$42.99</td>
-                </tr>
-                <tr>
-                    <td><strong>Contract Length</strong></td>
-                    <td>36 Months</td>
-                    <td>36 Months</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">&nbsp;</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    
-    <div id="extra-benefits">
-        <h2>Extra Protect America Benefits:</h2>
-        <table>
-            <tr>
-                <td>&nbsp;</td>
-                <td>Wireless Sensors with Easy Installation</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>Lifetime Replacement Parts Warranty</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>Take your system with you with our Free Relocation Kit</td>
-            </tr>
-        </table>
-    </div>
-    <div class="clear"></div>
-
-</div>
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
-    <ul>
+    <ul id="main-testimonials">
 {% comment %}
         <li>
             <div class="customer-name">
@@ -161,12 +157,24 @@
                 <a  href="http://localhost:8888/pa/testimonials" class="button-link">Read More Testimonials ></a>
             </div>
             <p><img src="{{ STATIC_URL }}/img/extra/testimonial-arrow.png" class="testimonial-arrow" />Amanda got me set up with your <strong>copper package</strong>.  She talked me through the package and it was a great deal, so I couldn't refuse it. She patiently answered all of my questions, and at a remarkable speed.  I work for a customer service call center so I know that she was juggling multiple things at once, and did a fantastic job at it.</p>
+            <div class="clear"></div>
         </li>
 {% endcomment %}
-    {% testimonial_search "copper" %}
+    {% testimonial_search "affordable" "limit=4&words=50" %}
     </ul>
 </div>
-
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 
 {% endblock %}  
+
 

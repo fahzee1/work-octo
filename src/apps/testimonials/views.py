@@ -25,10 +25,10 @@ def post_testimonial(request):
     # old system and the new system so that when the change is made
     # we do not miss any testimonials
     if request.method == 'POST':
-        # the post must have 'first_name', 'last_name', 
+        # the post must have 'first_name', 
         # 'city', 'state', 'testimonial' in the submission
         testimonial = TestimonialForm(request.POST)
         if testimonial.is_valid():
             testimonial.save()
     else:
-        return Http404
+        raise Http404
