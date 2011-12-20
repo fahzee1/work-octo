@@ -37,6 +37,9 @@ urlpatterns = patterns('',
 
     # search urls
     url(r'^search/$', 'apps.search.views.search', name='search'),
+
+    url(r'^testimonials/', include('apps.testimonials.urls',
+        namespace='testimonials')),
 )
 
 # a simple direct_to_template wrapper

@@ -86,7 +86,7 @@
                 <div class="clear"></div>
             </li>
             {% endcomment %}
-        {% testimonial_search "affordable" %}
+        {% testimonial_search "affordable" "limit=4&words=25" %}
         </ul>
     </div>
     
@@ -273,6 +273,7 @@
     <div id="sidebar-testimonials">
         <h2>Testimonials</h2>
         <ul>
+            {% comment %}
             <li>
 
                 <p><img src="{{ STATIC_URL }}/img/extra/testimonial-arrow-down.png" class="testimonial-arrow" />Amanda got me set up with your <strong>copper package</strong>.  She talked me through the package and it was a great deal, so I couldn't refuse it. She patiently answered all of my questions, and at a remarkable speed.  I [...]</p>
@@ -299,6 +300,8 @@
                 </div>
                 <div class="clear"></div>
             </li>
+            {% endcomment %}
+            {% testimonial_search "affordable" "limit=3&template=sidebar&words=30" %}
         </ul>    
     </div>
 </div>
