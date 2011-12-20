@@ -43,10 +43,9 @@ class TestimonialSearchNode(template.Node):
     def render(self, context):
         testimonial_array = []
 
-        testimonials = Testimonial.objects.filter(testimonial__icontains=self.search_term)
+        testimonials = Testimonial.objects.filter(testimonial__icontains=self.search_term).order_by('-date_created')
         if 'limit' in self.kwargs:
             testimonials = testimonials[:self.kwargs['limit'][0]]
-        print testimonials
 
         for testimonial in testimonials:
             testimonial_html = re.sub(self.search_term,
