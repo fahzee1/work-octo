@@ -115,7 +115,7 @@ INSTALLED_APPS = (
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
-DEFAULT_PHONE = '8009515111'
+DEFAULT_PHONE = '8009515190'
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings

@@ -51,6 +51,10 @@ def ajax_post(request):
             source = request.COOKIES.get('source', None)
             if source is None:
                 source = request.session.get('source', None)
+            
+            leadid = request.COOKIES.get('leadid', None)
+            if leadid is None:
+                leadid = request.session.get('leadid', None)
 
 
             padata = {'l_fname': fdata['name'],
@@ -59,6 +63,7 @@ def ajax_post(request):
                       'agentid': agentid,
                       'source': source,
                       'key3': affkey,
+                      'leadid': leadid,
                       }
             post_to_old_pa(padata)
             formset = form.save(commit=False)
