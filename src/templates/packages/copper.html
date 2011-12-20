@@ -31,7 +31,7 @@
         <h1>The Copper Package</h1>
         <p>Most homes in the United States have three or less outside doors and most break-ins occur through an outside door. With the Copper Package, you receive three door/window sensors to cover all the outside doors and then a infrared motion detector for interior protection. Place the motion detector either in the most common living area or a central hallway in the home. You can customize your system by adding additional equipment at the time the order is placed or anytime in the future.</p>
         <h3>Equipment & Installation Price: <strong>Free*</strong> </h3>
-        <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>1-800-951-5167</strong> to receive a free security analysis</p></div>
+        <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
     </div>
     <div id="included-equipment">
     	<h2>What's Included:</h2>
@@ -71,7 +71,54 @@
 </div>
 <div class="clear"></div>
 
+<div id="adt-comparison">
 
+    <div id="adt-price-chart">
+        <h2>Comparison Chart:</h2>
+        <table class="data">
+            <thead>
+                <th class="alpha">&nbsp;</th>
+                <th>Protect America</th>
+                <th class="omega">ADT</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Upfront Cost</strong></td>
+                    <td class="call-out">FREE*</td>
+                    <td>$379</td>
+                </tr>
+                <tr class="alt">
+                    <td><strong>Monthly Cost</strong></td>
+                    <td class="call-out">$29.99</td>
+                    <td>$42.99</td>
+                </tr>
+                <tr>
+                    <td><strong>Contract Length</strong></td>
+                    <td class="call-out">36 Months</td>
+                    <td>36 Months</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    
+    <div id="extra-benefits">
+        <h2>Extra Protect America Benefits:</h2>
+        <ul>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/wireless-sensors.png" />Wireless sensors are easy to install and don't require drilling.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/free-relocation-kit.png" />You own your home security system. Moving to a new home is easy with our free relocation kit.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/save-money.png" />Homes with security systems save up to 20% on homeowner's insurance.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />Your system will always work with our included lifetime replacement parts warranty</li>
+
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+</div>
 <div id="monitoring-options">
     <h2>Flexible Monitoring Options:</h2>
     <ul id="monitoring-rates">
@@ -97,56 +144,10 @@
     
     </ul>
 </div>
-<div id="adt-comparison">
 
-    <div id="adt-price-chart">
-        <h2>Comparison Chart:</h2>
-        <table class="data">
-            <thead>
-                <th class="alpha">&nbsp;</th>
-                <th>Protect America</th>
-                <th class="omega">ADT</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Upfront Cost</strong></td>
-                    <td>FREE*</td>
-                    <td>$379</td>
-                </tr>
-                <tr class="alt">
-                    <td><strong>Monthly Cost</strong></td>
-                    <td>$29.99</td>
-                    <td>$42.99</td>
-                </tr>
-                <tr>
-                    <td><strong>Contract Length</strong></td>
-                    <td>36 Months</td>
-                    <td>36 Months</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3">&nbsp;</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-    
-    <div id="extra-benefits">
-        <h2>Extra Protect America Benefits:</h2>
-        <ul>
-            <li>Wireless Sensors means no drilling and easy installation</li>
-            <li>Lifetime Replacement Parts means your system always works</li>
-            <li>Moving your system is a snap with our Free Relocation Kit</li>
-            <li>Save money with 20% off your Homeowner's Insurance</li>
-        </ul>
-    </div>
-    <div class="clear"></div>
-
-</div>
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
-    <ul>
+    <ul id="main-testimonials">
 {% comment %}
         <li>
             <div class="customer-name">
@@ -158,10 +159,21 @@
             <div class="clear"></div>
         </li>
 {% endcomment %}
-    {% testimonial_search "copper" %}
+    {% testimonial_search "affordable" %}
     </ul>
 </div>
-
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 
 {% endblock %}  
+
 
