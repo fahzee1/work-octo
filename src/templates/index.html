@@ -2,19 +2,26 @@
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
 {% endblock %}
-{% load adspace %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block extra_javascript %}
 <script type="text/javascript" src="/static/js/jquery.cycle.all.min.js"></script>
 {% endblock %}
 {% block subnav %}
 {% endblock %}
 {% block content %}
-<div class="content-box">
-	{% adspace "hero-banner" %}
-	{% include "order/quote-form.html" %}
+    <div id="hero-banner">
+
+    </div>
+
+
+    {% include "order/quote-form.html" with form=forms.basic %}
+<div class="clear"></div>
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "protect america" %}
+    </ul>
 </div>
-
-
 <div id="protect-america-difference">
 	<div>
 		<h2>Protect America Home Security</h2>
@@ -97,17 +104,88 @@
 			</tr>
 		</tbody>
 	</table>
-	<div id="advantage-disclaimer">
-		<p>* Information used in home security alarm system comparisons (for ADT) was obtained from online research in March 2011. "Up Front" cost based on total up front, out-of-pocket expense to obtain services from ADT; "Up Front" costs for ADT is an installation fee based on similar equipment packages offered as quoted by ADT; "Up Front" costs shown for similar Bronze,
-Silver, Gold, and Platinum packages from ADT include one motion detector in the ADT packages; "Monitoring" price listed for ADT includes the additional "warranty" or "extended service plan".</p>
-	</div>
 	<div class="clear"></div>
 </div>
-
-
+<div id="call-box">
+    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
+</div>
+<div id="extra-security-content">
+    <div id="home-security-statistics">
+        <h2>Home Security Statistics</h2>
+        <p>There is no better time than the present to get a monitored home security system to protect your home and family. With our affordable GE wireless home security system and award winning home security monitoring service, there is no better solution than Protect America. Protect America offers a low-price guarantee so you can be confident you're getting the best deal. Our home security experts are standing by to assist you, so call today for a free home security analysis and we will help you protect your home and family with a solution that meets your needs!</p>
+    </div>
+    <div id="home-security-news">
+        <h2>Home Security News</h2>
+        <div class="news-article">
+            <p class="date"><span>Feb</span> 28</p>
+            <div class="news-content">
+                <h3>California city crime rate increased two-fold last year</h3>
+                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
+            </div>
+        </div>
+        <div class="news-article">
+            <p class="date"><span>Feb</span> 28</p>
+            <div class="news-content">
+                <h3>California city crime rate increased two-fold last year</h3>
+                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
+            </div>
+        </div>
+        <div class="news-article">
+            <p class="date"><span>Feb</span> 28</p>
+            <div class="news-content">
+                <h3>California city crime rate increased two-fold last year</h3>
+                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
+            </div>
+        </div>
+        <div class="button-link">
+            <a href="">Read More Home Security News ></a>
+        </div>
+    </div>
+</div>
+<div id="fbi-statistics">
+    <div id="three-times-more">
+        <img src="{{ STATIC_URL }}img/extra/3x-icon.png" />
+        <p>Your home is <strong>three times less likely to be burglarized</strong> when you have a home security system with monitoring. If you're serious about protecting your home and family, getting a home security system should be the first thing you do.</p>
+        <div class="clear"></div>
+    </div>
+    <div id="burglary-every-14-seconds">
+        <img src="{{ STATIC_URL }}img/extra/stopwatch-icon.jpg" />
+        <p>According to the FBI Unified Crime Reports, <strong>a burglary occurs every 14 seconds</strong> in the United States. It's scary to think that since you've been reading this page, 7 burglaries have occurred through the United States.</p>
+        <div class="clear"></div>
+    </div>
+    <div id="burglary-during-day">
+        <img src="{{ STATIC_URL }}img/extra/sun-icon.jpg" />
+        <p>Most burglaries actually take place in the daytime. <strong>The average burglary occurs from 6am to 6pm.</strong> Arm your security system during the day to help protect while you are at work.</p>
+        <div class="clear"></div>
+    </div>
+    <div id="average-amount-lost">
+        <img src="{{ STATIC_URL }}img/extra/lost-icon.png" />
+        <p><strong>Average amount lost</strong> in a residential burglary <strong>is $2,096.</strong></p>
+        <div class="clear"></div>
+    </div>
+    <div id="through-front-door">
+        <img src="{{ STATIC_URL }}img/extra/front-door-icon.jpg" />
+        <p>According to the FBI Unified Crime Reports, <strong>a burglary occurs every 14 seconds</strong> in the United States.</p>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
 <div class="clear"></div>
-{% endblock %}
-{% block sidebar %}
-{{ block.super }}
-
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#hero-banner').cycle({
+            fx: 'fade',
+            timeout: 6000
+        });
+    });
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}
