@@ -5,7 +5,6 @@ from django import template
 from django.conf import settings
 
 from apps.testimonials.models import Testimonial
-from apps.common.functions import parse_kw_args
 
 register = template.Library()
 
