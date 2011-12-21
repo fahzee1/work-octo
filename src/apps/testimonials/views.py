@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import Http404
+from django.http import Http404, HttpResponse
 
 from apps.testimonials.models import Testimonial
 from apps.testimonials.forms import TestimonialForm, CEOForm
