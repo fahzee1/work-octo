@@ -101,7 +101,6 @@
     #familyofcompanies, #security {
         .content-box (670px);
         .outlined-box;
-        border-top: 1px solid @v-light-grey;
         margin-top: 16px;
 
     }
@@ -165,51 +164,96 @@
         }
     }
 }
+#how-safe-is-your-neighborhood {
+    background: @red;
+    .content-box(262px);
+    padding: 0 8px;
+    text-align: left;
+    h3 {
+        color: @white;
+        text-align: left;
+        font-size: 48px;
+        font-weight: 800;
+        line-height: 48px;
+        span {
+            font-size: 24px;
+            display: block;
+            font-weight: 800;
+            line-height: 24px;
+        }
+    }
+    p {
+        color: @v-light-grey;
+        font-size: 12px;
+        line-height: 14px;
+    }
+    input {
+        height: 24px;
+        width: 175px;
+        font-size: 20px;
+        line-height: 24px;
+        position: relative;
+        top: 1px;
+        margin-right: 4px;
+    }
+    button {
+        background: @v-light-grey;
+        color: @black;
+        font-size: 16px;
+        padding: 5px 20px;
+        text-decoration: none;
+        background-image: -moz-linear-gradient(top,@off-white,@light-grey);
+        background-image: -webkit-gradient(linear,left top,left bottom,from(@off-white),to(@light-grey));
+        border: 1px solid transparent;
+        &:hover {
+            background-image: -moz-linear-gradient(center top , @v-light-grey, @grey);
+            background-image: -webkit-gradient(linear,left top,left bottom,from(@v-light-grey),to(@grey));
+            border: 1px solid #094182;
+            border-bottom: 1px solid @dark-blue;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        }
+    }
+    .fbi-stats {
+        padding: 4px 0;
+        color: @light-grey;
+        font-size: 10px;
+        a {
+            color: @white;
+            text-decoration: none;
+        }
+    }
+}
 #sidebar-testimonials {
     .content-box (275px);
+    .outlined-box;
     padding-bottom: 0;
     margin-bottom: 24px;
     ul {
         li {
-            padding: 0;
-            margin: 0 0 24px 0;
+            background: url(/static/img/affiliates/sem-landing-page/quote-symbol.png) top left no-repeat;
+
+            padding: 8px;
+            margin: 0 8px;
             h2 {
                 margin-bottom: 16px;
             }
-            .customer-name {
-                margin: 24px 0 0 0;
-                text-align: left;
-                h4 {
-                    color: @blue;
-                    font-weight: 300;
-                    font-size: 24px;
-                    text-transform: uppercase;
-                    text-align: left;
-                    line-height: 28px;
-                    span {
-                        display: block;
-                        font-size: 16px;
-                        line-height: 18px;
-                        color: @dark-grey;
-                        font-weight: normal;
-                    }
-                }
-                strong {
-                    display: block;
-                    margin-bottom: 16px;
-                    font-size: normal;
-                    color: @dark-grey;
-                    font-size: 12px;
-                }
+            h4 {
+                color: @blue;
+                font-weight: 800;
+                font-size: 14px;
+                text-align: right;
+                line-height: 20px;
+                padding-bottom: 16px;
+
             }
             p {
-                padding: 16px;
-                border: 1px solid @light-grey;
-                font-size: 16px;
-                color: @dark-grey;
-                line-height: 32px;
+                padding: 16px 16px 0;
+                font-size: 13px;
+                color: @black;
+                line-height: 20px;
                 font-weight: normal;
-                width: 241px;
                 text-align: justify;
                 position: relative;
                 .testimonial-arrow {
@@ -219,23 +263,6 @@
                     
                 }
             }
-            &.alt {
-                .customer-name {
-                    text-align: right;
-                    h4 {
-                        text-align: right;
-                    }
-                }
-                p {
-                    .testimonial-arrow {
-                        position: absolute;
-                        left: 200px;
-                        bottom: -17px;
-                    
-                    }
-                }
-            }
-
         }
     }
 

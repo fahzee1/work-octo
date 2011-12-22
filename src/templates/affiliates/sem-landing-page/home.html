@@ -16,23 +16,7 @@
 		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
 
 	</ul>
-<div id="share-this">
-        <div id="facebook-button">
-            <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) {return;}
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-            
-            <fb:like href="www.protectamerica.com" send="false" layout="button_count" width="90" show_faces="false"></fb:like>
-        </div>
-        <div id="plus-one">
-            <g:plusone size="small" annotation="bubble" width="120" href="http://www.protectamerica.com"></g:plusone>
-        </div>
-    </div>
+
 
 </div>
 {% endblock %}
@@ -262,6 +246,19 @@
             <a title="View Copper Package details. Compare to our other home security systems packages." href="#">Copper Package ></a>
         </div>
     </div>
+    <div class="clear"></div>
+    <div id="how-safe-is-your-neighborhood">
+        	<h3>How Safe <span>is your Neighborhood?</span></h3>
+        	<p>enter your zip to find sexual predators and crime statistics in your area:</p>
+        	<form action="/crime-rate/" method="GET" name="predator_form" id="predator_form">
+        		<input name="search">
+        		<button type="submit">GO</button>
+        		<input type="hidden" name="widget" value="true">
+        	</form>
+        	<p class="fbi-stats"><a href="http://www.protectamerica.com/crime-rate/">FBI Crime stats</a> provided by <a href="http://www.protectamerica.com/">Protect America</a></p>
+
+        
+    </div>
     <div id="sidebar-testimonials">
         <h2>Testimonials</h2>
         <ul>
@@ -293,7 +290,7 @@
                 <div class="clear"></div>
             </li>
             {% endcomment %}
-            {% testimonial_search "affordable" "limit=3&template=sidebar&words=30" %}
+            {% testimonial_search "affordable" "limit=3&template=sidebar-old&words=30" %}
         </ul>    
     </div>
 </div>

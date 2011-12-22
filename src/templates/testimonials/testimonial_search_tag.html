@@ -26,3 +26,15 @@
 </li>
 {% endfor %}
 {% endif %}
+{% if template == 'sidebar-old' %}
+{% for testimonial in testimonials %}
+<li>
+    <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+    <div class="customer-name">
+        <h4>&mdash; {{ testimonial.first_name }} {{ testimonial.last_name }} of {{ testimonial.city }}, {{ testimonial.state }}</h4>
+
+    </div>
+    <div class="clear"></div>
+</li>
+{% endfor %}
+{% endif %}
