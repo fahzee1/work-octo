@@ -65,7 +65,10 @@ if settings.SITE_ID == 2:
 # Paid landing site
 elif settings.SITE_ID == 3:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/sem-landing-page/home.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
+        url(r'^$', 'apps.affiliates.views.semlanding_home'),
+        url(r'^google/$', 'apps.affiliates.views.semlanding_google'),
+        url(r'^grbanner/$', 'apps.affiliates.views.semlanding_google'),
+        url(r'^msn/$', 'apps.affiliates.views.semlanding_bing'),
     )
 else:
 
