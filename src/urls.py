@@ -83,6 +83,13 @@ else:
             dtt(r'^home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'security-packages'),
             dtt(r'^home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'security-packages'),
             dtt(r'^home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
+            # Product > Packages B
+            dtt(r'^home-security-systems/copper/?$', 'packages/copper-b.html', 'copper-b', 'security-packages'),
+            dtt(r'^home-security-systems/bronze/?$', 'packages/bronze-b.html', 'bronze-b', 'security-packages'),
+            dtt(r'^home-security-systems/silver/?$', 'packages/silver-b.html', 'silver-b', 'security-packages'),
+            dtt(r'^home-security-systems/gold/?$', 'packages/gold-b.html', 'gold-b', 'security-packages'),
+            dtt(r'^home-security-systems/platinum/?$', 'packages/platinum-b.html', 'platinum-b', 'security-packages'),
+
 
             # Product > Monitoring
 

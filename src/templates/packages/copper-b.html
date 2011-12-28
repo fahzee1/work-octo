@@ -1,4 +1,4 @@
-{% extends "packages/base.html" %}
+{% extends "packages/base-b.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Copper Package | Home Security Packages | Protect America Home Security{% endblock %}
 
@@ -18,17 +18,33 @@
 <!-- End of Google Website Optimizer Tracking Script for Copper Page test -->
 {% endaddtoblock "js" %}
 <div id="top-content">
-    <div id="affordable-home-security">
-        <h1>The <strong>most affordable</strong> way to secure peace of mind.</h1>
-    
+    <div id="copper-package-topper">
+        <h1>The Copper Package</h1>
+        <img src="/static/img/products/copper-package/copper-package-simon-xt-no-medal.jpg" id="topper-main-image" />
+        <ul>
+            <li>GE Simon XT Control Panel</li>
+            <li>3 Security Stickers</li>
+            <li>3 Door / Window Stickers</li>
+            <li>1 Security Yard Sign </li>
+            <li>1 Motion Detector</li>
+            <li>Owner's Manual</li>
+        </ul>
+        <div id="copper-package-best-buy">
+            <img src="/static/img/external/consumer-digest/consumer-digest-logo-transparent.png" />
+            <p>Voted a Consumers Digest "Best Buy" for 2012</p>
+        </div>
+        <span>Price Today: <strong>FREE<sup>*</sup></strong></span>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
 <div class="clear"></div>
+
+    {% include "banners/limited-time-offer.html" %}
+
 <div id="the-copper-package">
     <img src="/static/img/products/copper-package/in-the-home.jpg" id="main-package-image">
     <div id="copper-package-content">
-        <h1>The Copper Package</h1>
+        <h1>In Your Home: The Copper Package</h1>
         <p>Most homes in the United States have three or less outside doors and most break-ins occur through an outside door. With the Copper Package, you receive three door/window sensors to cover all the outside doors and then a infrared motion detector for interior protection. Place the motion detector either in the most common living area or a central hallway in the home. You can customize your system by adding additional equipment at the time the order is placed or anytime in the future.</p>
         <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
     </div>
