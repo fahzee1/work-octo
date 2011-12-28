@@ -1,88 +1,170 @@
 {% extends "packages/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Silver Package | Home Security Packages | Protect America Home Security{% endblock %}
 
 {% block content %}
-<div id="the-silver-package">
-	<div id="silver-package-image">
-		<img src="/static/img/products/silver-package/silver-package-simon-xt.jpg" class="image-break">
-	</div>
-	<div id="silver-package-content">
-		<h1>The Silver Package</h1>
-		<p>The most affordable home security package available with no up front costs and low priced monthly service.</p>
-	</div>
-	{% include "order/quote-form.html" %}
-	<div class="clear"></div>
-    <div id="price-bar">
-        <div id="silver-package-price">
-            <p><strong>Our Price:</strong> {{ pricetable.SILVER.upfront|default_if_none:"Free" }} <span>Monitoring starting at: {{ pricetable.SILVER.standard_monitoring }} per month</span></p>
-        </div>
-        <img src="/static/img/banners/low-price-guaranteed-bar.png">
-        <img src="/static/img/banners/silver-savings-vs-adt-bar.png">
-        <img src="/static/img/banners/top-consumer-reviews-bar.jpg">
+{% addtoblock "js" %}
 
-        <div class="clear"></div>
+{% endaddtoblock "js" %}
+<div id="top-content">
+    <div id="complete-perimeter-home-security">
+        <h1>The <strong>perfect solution</strong> to secure your starter home.</h1>
+    
     </div>
+    {% include "order/quote-form.html" with form=forms.basic %}
 </div>
-<div id="silver-package-included-equipment">
-	<h2>What's Included:</h2>
-	<div id="simon-xt">
-		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" />
-		<p><span>One (1)</span> Simon XT Control Panel</p>
-	</div> 
-	<div id="door-window-sensor">
-		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" />
-		<p><span>Three (3)</span> Door / Window Sensors</p>
-	</div> 
-	<div id="motion-detector">
-		<img src="/static/img/products/equipment/motion-detector-icon.jpg" />
-		<p><span>One (1)</span> Motion Detector</p>
-	</div> 
-	<div id="installation-manual">
-		<p><span>One (1)</span> Owner's / Installation Manual & DVD</p>
-
-	</div> 
-	<div id="security-window-stickers">
-		<img src="/static/img/products/accessories/security-window-stickers.jpg" />
-		<p><span>Three (3)</span> Security Window Stickers</p>
-	</div> 
-	<div id="security-yard-sign">
-		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" />
-		<p><span>One (1)</span> Security Yard Sign</p>
-	</div> 
-	<div class="clear"></div>
-</div>
-<div id="silver-package-monitoring-rates">
-	<h2>Monitoring Options and Rates</h2>
-	<div class="landline-connection">
-		<img src="/static/img/products/monitoring/standard-landline.png">
-		<h3>Standard Landline</h3>
-		<p><span><strong>Upfront Cost:</strong> {{ pricetable.SILVER.upfront|default_if_none:"Free" }}</span></p>
-		<p><strong>Monthly Cost:</strong> {{ pricetable.SILVER.standard_monitoring }}</p>
-
-	</div>
-	<div class="two-way-voice-connection">
-		<img src="/static/img/products/monitoring/two-way-voice.png">
-		<h3>Two-way Voice Landline</h3>
-		<p><span><strong>Upfront Cost:</strong> {{ pricetable.SILVER.upfront|default_if_none:"Free" }}</span></p>
-		<p><strong>Monthly Cost:</strong> {{ pricetable.SILVER.landline_monitoring }}</p>
-
-	</div>
-	<div class="broadband-connection">
-		<img src="/static/img/products/monitoring/broadband.png">
-		<h3>Broadband</h3>
-		<p><span><strong>Upfront Cost:</strong> {{ pricetable.SILVER.upfront|default_if_none:"Free" }}</span></p>
-		<p><strong>Monthly Cost:</strong> {{ pricetable.SILVER.broadband_monitoring }}</p>
-
-	</div>
-	<div class="cellular-connection">
-		<img src="/static/img/products/monitoring/cellular.png">
-		<h3>Cellular</h3>
-		<p><span><strong>Upfront Cost:</strong> {{ pricetable.SILVER.upfront|default_if_none:"Free" }}</span></p>
-		<p><strong>Monthly Cost:</strong> {{ pricetable.SILVER.cellular_monitoring }}</p>
-
-	</div>
-	<div class="clear"></div>
-</div>
-
 <div class="clear"></div>
+<div id="the-silver-package">
+    <img src="/static/img/products/silver-package/silver-package.jpg" id="main-package-image">
+    <div id="silver-package-content">
+        <h1>The Silver Package</h1>
+        <p>Designed for a small home, the Bronze Package allows for protection of up to 7 doors or windows. It also includes a motion detector that is used inside the home in case of intrusion.</p>
+        <h3>Equipment & Installation Price: <strong>Free*</strong> </h3>
+        <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
+    </div>
+    <div class="clear"></div>
+    <div id="included-equipment">
+    	<h2>What's Included:</h2>
+		<a href="http://www.protectamerica.com/pa/ge_simon_xt/ge-simon-xt" title="GE Simon XT Control Panel" id="simon-xt">
+    		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" />
+    		<strong>One (1)</strong> Simon XT Control Panel
+		</a>
+		<a href="http://www.protectamerica.com/pa/security_sensors/home-security-sensors#door-sensor" title="Door / Window Sensors" id="door-window-sensors">
+    		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" />
+    		<strong>Three (10)</strong> Door / Window Sensors
+		</a>
+		<a href="http://www.protectamerica.com/pa/security_sensors/home-security-sensors#motion-detector" title="Motion Detector" id="motion-detector">
+       		<img src="/static/img/products/equipment/motion-detector-icon.jpg" />
+    		<strong>One (1)</strong> Motion Detector
+		</a>
+
+		<a href="http://www.protectamerica.com/pa/operation/monitoring-security" title="Owner's Manual" id="owner-manual">
+            <img src="/static/img/products/accessories/installation-manual-icon.jpg" />
+            <strong>One (1)</strong> Owner's / Installation Manual & DVD
+		</a>
+
+		<a href="http://www.protectamerica.com/pa/home_security_accessories/home-security-accessories#protect-america-home-security-sign" title="Security Window Stickers" id="window-stickers">
+    		<img src="/static/img/products/accessories/security-window-stickers-icon.jpg" />
+    		<strong>Three (3)</strong> Security Window Stickers
+		</a>
+
+		<a href="http://www.protectamerica.com/pa/home_security_accessories/home-security-accessories#protect-america-window-stickers" title="Security Yard Sign" id="security-yard-sign">
+    		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" />
+    		<strong>One (1)</strong> Security Yard Sign
+		</a>
+    </div>
+
+</div>
+<div class="clear"></div>
+<div id="call-box">
+    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
+</div>
+<div class="clear"></div>
+
+<div id="adt-comparison">
+
+    <div id="adt-price-chart">
+        <h2>Comparison Chart:</h2>
+        <table class="data">
+            <thead>
+                <th class="alpha">&nbsp;</th>
+                <th>Protect America</th>
+                <th class="omega">ADT</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Upfront Cost</strong></td>
+                    <td class="call-out">FREE*</td>
+                    <td>$379</td>
+                </tr>
+                <tr class="alt">
+                    <td><strong>Monthly Cost</strong></td>
+                    <td class="call-out">$29.99</td>
+                    <td>$42.99</td>
+                </tr>
+                <tr>
+                    <td><strong>Contract Length</strong></td>
+                    <td class="call-out">36 Months</td>
+                    <td>36 Months</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    
+    <div id="extra-benefits">
+        <h2>Extra Protect America Benefits:</h2>
+        <ul>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/wireless-sensors.png" />Wireless sensors are easy to install and don't require drilling.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/save-money.png" />Homes with security systems save up to 20% on homeowner's insurance.</li>
+
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/free-relocation-kit.png" />You own your home security system. Moving to a new home is easy with our free relocation kit.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />Your system will always work with our included lifetime replacement parts warranty</li>
+
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+</div>
+<div id="monitoring-options">
+    <h2>Flexible Monitoring Options:</h2>
+    <ul id="monitoring-rates">
+        <li>
+            <img src="/static/img/products/monitoring/landline-icon.png">
+            <h3>Landline</h3>
+            <p><sup>$</sup>29<span>99</span><strong>/mo</strong></p>
+            <a href="http://www.protectamerica.com/pa/landline-monitoring" class="button-link" title="Learn About Landline Monitoring">Learn More ></a>
+        </li>
+        <li>
+            <img src="/static/img/products/monitoring/homepulse-icon.png">
+            <h3>Broadband</h3>
+            <p><sup>$</sup>37<span>99</span><strong>/mo</strong></p>
+            <a href="http://www.protectamerica.com/pa/broadband-monitoring" class="button-link" title="Learn About Homepulse Monitoring">Learn More ></a>
+        </li>
+        <li>
+            <img src="/static/img/products/monitoring/cellular-icon.png">
+            <h3>Cellular</h3>
+            <p><sup>$</sup>41<span>99</span><strong>/mo</strong></p>
+            <a href="http://www.protectamerica.com/pa/cellular-monitoring" class="button-link" title="Learn About Cellular Monitoring">Learn More ></a>
+        </li>
+        <div class="clear"></div>
+    
+    </ul>
+</div>
+
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+{% comment %}
+        <li>
+            <div class="customer-name">
+                <h4>Robert Johnson <span>of Topeka, KS</span></h4>
+                <strong>03/01/2010</strong>
+                <a  href="http://localhost:8888/pa/testimonials" class="button-link">Read More Testimonials ></a>
+            </div>
+            <p><img src="{{ STATIC_URL }}/img/extra/testimonial-arrow.png" class="testimonial-arrow" />Amanda got me set up with your <strong>copper package</strong>.  She talked me through the package and it was a great deal, so I couldn't refuse it. She patiently answered all of my questions, and at a remarkable speed.  I work for a customer service call center so I know that she was juggling multiple things at once, and did a fantastic job at it.</p>
+            <div class="clear"></div>
+        </li>
+{% endcomment %}
+    {% testimonial_search "affordable" "limit=4&words=50" %}
+    </ul>
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+
 {% endblock %}  
+
 
