@@ -42,6 +42,7 @@ def semlanding_response(request, agentid):
     
     current_cookie = request.COOKIES.get('refer_id', None)
     if not current_cookie:
+        request.session['refer_id'] = agentid
         response.set_cookie('refer_id',
                             value=agentid,
                             expires=datetime.now() + expire_time)
