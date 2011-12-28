@@ -21,7 +21,6 @@ def testimonial_search(parser, token, *args, **kwargs):
             tag_name, search_term, kwargs = token.split_contents()
             if kwargs != '':
                kwargs_dict = parse_qs(kwargs[1:-1])
-               print kwargs_dict
         except ValueError:
             raise template.TemplateSyntaxError(
                 "%r tag at least one argument" % 
@@ -59,11 +58,11 @@ class TestimonialSearchNode(template.Node):
               'state': testimonial.state,
               'date_created': testimonial.date_created.strftime("%m/%d/%Y"),
               'testimonial': testimonial_html})
-            t = template.loader.get_template('testimonials/testimonial_search_tag.html')
-            c = template.Context({
-                'testimonials': testimonial_array,
-                'template': self.template,
-                'words': self.words
-            })
+        t = template.loader.get_template('testimonials/testimonial_search_tag.html')
+        c = template.Context({
+            'testimonials': testimonial_array,
+            'template': self.template,
+            'words': self.words
+        })
         return t.render(c)
 register.tag(testimonial_search)
