@@ -54,7 +54,6 @@ class TestimonialSearchNode(template.Node):
         # filter the testimonials by state
         if 'state' in self.kwargs:
             testimonials = testimonials.filter(state=self.kwargs['state'][0])
-        print testimonials
         # limit the testimonials by the kwarg
         if 'limit' in self.kwargs:
             testimonials = testimonials[:self.kwargs['limit'][0]]

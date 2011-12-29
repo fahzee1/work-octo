@@ -56,6 +56,16 @@ class AffiliateMiddleware(object):
                     return (engine, network, term)
         return (None, network, None)
     
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        if settings.SITE_ID == 3:
+            viewname = view_func.__name__
+            if viewname == 'semlanding_home':
+                request.session['refer_id'] = 'SEM ORGANIC'
+            elif viewname == 'semlanding_google':
+                request.session['refer_id'] = 'GOOGLE PPC'
+            elif viewname == 'semlanding_msn':
+                request.session['refer_id'] = 'BING PPC'
+
     def process_response(self, request, response):
 
         expire_time = timedelta(days=90)

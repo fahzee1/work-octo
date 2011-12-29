@@ -66,9 +66,9 @@ if settings.SITE_ID == 2:
 elif settings.SITE_ID == 3:
     urlpatterns += patterns('',
         url(r'^$', 'apps.affiliates.views.semlanding_home'),
-        url(r'^google/$', 'apps.affiliates.views.semlanding_google'),
-        url(r'^grbanner/$', 'apps.affiliates.views.semlanding_google'),
-        url(r'^msn/$', 'apps.affiliates.views.semlanding_bing'),
+        url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
+        url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
+        url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
     )
 else:
 
