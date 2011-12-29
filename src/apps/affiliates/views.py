@@ -31,7 +31,7 @@ def resources(request):
 
 
 # SEM Landing Page Views
-def semlanding_response(request, agentid):
+def semlanding_response(request):
     expire_time = timedelta(days=90)
 
     forms = {}
@@ -40,19 +40,14 @@ def semlanding_response(request, agentid):
                                   {'forms': forms},
                                   context_instance=RequestContext(request))
     
-    current_cookie = request.COOKIES.get('refer_id', None)
-    if not current_cookie:
-        request.session['refer_id'] = agentid
-        response.set_cookie('refer_id',
-                            value=agentid,
-                            expires=datetime.now() + expire_time)
     return response
 
+# used in the middleware to know what session to set
 def semlanding_home(request):
-    return semlanding_response(request, 'SEM ORGANIC')
+    return semlanding_response(request)
 
 def semlanding_google(request):
-    return semlanding_response(request, 'GOOGLE PPC')
+    return semlanding_response(request)
 
 def semlanding_bing(request):
-    return semlanding_response(request, 'BING PPC')
+    return semlanding_response(request)
