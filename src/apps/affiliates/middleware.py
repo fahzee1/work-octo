@@ -85,6 +85,7 @@ class AffiliateMiddleware(object):
 
                 response.set_cookie('refer_id',
                         value=request.session['refer_id'],
+                        domain='.protectamerica.com',
                         expires=datetime.now() + expire_time)
                     
             if 'agent' in request.GET:
