@@ -60,7 +60,7 @@ class AffiliateMiddleware(object):
         if settings.SITE_ID == 3:
             viewname = view_func.__name__
             if viewname == 'semlanding_home':
-                request.session['refer_id'] = 'SEMORGANIC'
+                request.session['refer_id'] = 'SEMDIRECT'
             elif viewname == 'semlanding_google':
                 request.session['refer_id'] = 'GOOGLEPPC'
             elif viewname == 'semlanding_bing':
@@ -81,7 +81,7 @@ class AffiliateMiddleware(object):
         current_cookie = request.COOKIES.get('refer_id', None)
         if not current_cookie:
             refer_id = request.session.get('refer_id', None)
-            if refer_id in ['GOOGLEPPC', 'BINGPPC', 'SEMORGANIC']:
+            if refer_id in ['GOOGLEPPC', 'BINGPPC', 'SEMDIRECT']:
 
                 response.set_cookie('refer_id',
                         value=request.session['refer_id'],
