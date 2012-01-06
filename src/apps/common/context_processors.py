@@ -29,11 +29,12 @@ def phone_number(request):
     # `source` GET var is set), or they do not have a source
     # So, first we check the cookie. If it doesn't exist, we check
     # the GET var. If neither of those exist, there is no affiliate
-    affiliate = request.session.get('refer_id', None)
+    affiliate = request.COOKIES.get('refer_id', None)
     if not affiliate:
-        affiliate = request.COOKIES.get('refer_id', None)
+        # try pulling the affiliate from the session
+        affiliate = request.session.get('refer_id', None)
     if not affiliate:
-        # try pulling the affiliate from the ?source=
+        # still if the affiliate isn't found pull it form the agent
         affiliate = request.GET.get('agent', None)
 
     if affiliate:

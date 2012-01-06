@@ -79,6 +79,7 @@ class AffiliateMiddleware(object):
             default_agent = None
 
         current_cookie = request.COOKIES.get('refer_id', None)
+        print current_cookie
         if not current_cookie:
             refer_id = request.session.get('refer_id', None)
             if refer_id in ['GOOGLEPPC', 'BINGPPC', 'SEMDIRECT']:
