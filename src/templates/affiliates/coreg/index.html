@@ -43,9 +43,11 @@
 			       	</a>
 			    </div> 	
 			</div>
+			{% businesstime %}
 			<div id="phone-number">
-				<p>Call Today and Save! <span>1-800-951-5111</span></p>
+				<p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
 			</div>
+            {% endbusinesstime %}
             <div id="ge-logo">
                 <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
             </div>
@@ -144,15 +146,18 @@
         {% endcomment %}
     </div>
 
+    {% businesstime %}
     <div id="call-box">
-        <p>Get Started Now, <strong>Call Today! 1-800-951-5111</strong></p>
+        <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
     </div>
+    {% endbusinesstime %}
+
     <div class="clear"></div>
     <div id="why-protect-america">
         <img src="{{ STATIC_URL }}img/protect-america-logo2.png" id="pa-logo" title="Protect America Home Security" />
         <div id="about-protect-america">
             <p>A pioneer of self-installed home security systems, Protect America has served more than 350,000 people since its founding in 1992. Our dedication to affordable, quality security has helped to make us one of the nation's largest home security companies. People trust Protect America. And with good reason. We're an award-winning company that has also earned a Five-Star Rating from Top Consumer Reviews. Get a GE home security system today and experience a more secure life with Protect America.</p>
-            <div class="phone-alt"><p>call <strong>1-800-951-5167</strong> to receive a free security analysis</p></div>
+            {% businesstime %}<div class="phone-alt"><p>call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p></div>{% endbusinesstime %}
             <div class="clear"></div>
         </div>
         <div id="awards">
