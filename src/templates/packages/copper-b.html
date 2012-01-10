@@ -18,10 +18,10 @@
 <!-- End of Google Website Optimizer Tracking Script for Copper Page test -->
 {% endaddtoblock "js" %}
 <div id="top-content">
-    <div id="copper-package-offer">
-        <h1>The Copper Package</h1>
-        <img src="/static/img/products/copper-package/copper-package-simon-xt-no-medal.jpg" id="offer-main-image" />
-        <ul>
+    <div id="copper-package-offer" itemscope itemtype="http://schema.org/Product">
+        <h1 itemprop="name">The Copper Package</h1>
+        <img src="/static/img/products/copper-package/copper-package-simon-xt-no-medal.jpg" id="offer-main-image" itemprop="image" />
+        <ul itemprop="description">
             <li>GE Simon XT Control Panel</li>
             <li>3 Security Stickers</li>
             <li>3 Door / Window Sensors</li>
@@ -33,7 +33,7 @@
             <img src="/static/img/external/consumer-digest/consumer-digest-logo-transparent.png" />
             <p>Voted a Consumers Digest "Best Buy" for 2012</p>
         </div>
-        <span>Price Today: <strong>FREE<sup>*</sup></strong></span>
+        <span>Price Today: <strong itemprop="price">FREE<sup>*</sup></strong></span>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -46,7 +46,7 @@
     <div id="copper-package-content">
         <h1>In Your Home: The Copper Package</h1>
         <p>The average home in the United States has three or less outside doors. Though burglars will enter your home any way they can, most break-ins occur through an outside door. With three door / window sensors, the Copper Package has been designed to meet the basic security needs of most America houses. This package also includes an infrared motion detector to increase your home's interior protection. Simply place the motion detector in a central hallway or the most commonly used living area of your home. Ask one of our home security experts today how to customize your system with additional security accessories, like smoke detectors and interactive cameras.</p>
-        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Copper-B']);">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Copper-B']);">Order Now ></a><p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p></div>
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
@@ -83,10 +83,7 @@
 
 </div>
 <div class="clear"></div>
-<div id="call-box">
-    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
-</div>
-<div class="clear"></div>
+    {% include "order/call-box.html" %}
 
 <div id="adt-comparison">
 
@@ -133,6 +130,8 @@
             <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
 
         </ul>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to get started</p></div>
+
     </div>
     <div class="clear"></div>
 
@@ -175,18 +174,18 @@
             <h2>The Copper Package</h2>
             <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $29.99/mo</p>
             <div class="button-submit">
-                <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
+                <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
             </div>
         </div>
         <div id="footer-call-now">
             <h3>Give us a call.</h3>
             <p>Call Protect America today to learn which package best meets your needs. Call Protect America now and secure what matters most!</p>
-            <span>{{ phone_number|format_number }}</span>
+            <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
         </div>
         <div id="footer-chat-now">
             <h3>Chat online.</h3>
             <p>Have a question about a system? Ready to order? Our security professionals are available to chat online right now.</p>
-            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Platinum-B']);">Online Chat ></a></div>
+            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Copper-B']);">Online Chat ></a></div>
         </div>
     </div>
 {% endbusinesstime %}

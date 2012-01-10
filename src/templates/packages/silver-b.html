@@ -46,7 +46,7 @@
     <div id="silver-package-content">
         <h1>In Your Home: The Silver Package</h1>
         <p>The second level of Protect America perimeter protection, the Silver Package provides enough door/window sensors to cover each point of entry on homes less than 2500 sq ft. Included with each Silver Package are 10 door/window sensors to offer complete protection around the perimeter of your home. The Silver Package also contains a motion detector for added security inside of your home. With the Silver Package and Protect America, your home is protected inside and out! Want even more security? Simply ask one of our home security experts how you can customize your new security system with awesome accessories, like smoke detectors or interactive security cameras.</p>
-        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Silver-B']);">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Silver-B']);">Order Now ></a><p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p></div>
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
@@ -82,11 +82,8 @@
 
 
 </div>
-<div class="clear"></div>
-<div id="call-box">
-    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
-</div>
-<div class="clear"></div>
+    {% include "order/call-box.html" %}
+
 
 <div id="adt-comparison">
 
@@ -117,7 +114,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3"><img src="{{ STATIC_URL }}/img/external/lowest-price-banner-stacked.png" alt="Protect America Guarantee's the Lowest Price for this Package" /></td>
+                    <td colspan="3"><a href="http://www.protectamerica.com/pa/low-price-guarantee/GE-Security-System"><img src="{{ STATIC_URL }}/img/external/lowest-price-banner-stacked.png" alt="Protect America Guarantee's the Lowest Price for this Package" /></a></td>
                 </tr>
             </tfoot>
         </table>
@@ -133,6 +130,8 @@
             <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
 
         </ul>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Silver-B']);">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to get started</p></div>
+
     </div>
     <div class="clear"></div>
 
@@ -173,20 +172,20 @@
     <div id="order-footer">
         <div id="footer-package-section">
             <h2>The Silver Package</h2>
-            <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $42.99/mo</p>
+            <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $37.99/mo</p>
             <div class="button-submit">
-                <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
+                <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
             </div>
         </div>
         <div id="footer-call-now">
             <h3>Give us a call.</h3>
             <p>Call Protect America today to learn which package best meets your needs. Call Protect America now and secure what matters most!</p>
-            <span>{{ phone_number|format_number }}</span>
+            <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
         </div>
         <div id="footer-chat-now">
             <h3>Chat online.</h3>
             <p>Have a question about a system? Ready to order? Our security professionals are available to chat online right now.</p>
-            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Platinum-B']);">Online Chat ></a></div>
+            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Silver-B']);">Online Chat ></a></div>
         </div>
     </div>
 {% endbusinesstime %}

@@ -46,7 +46,7 @@
     <div id="bronze-package-content">
         <h1>In Your Home: The Bronze Package</h1>
         <p>The first of four levels of perimeter protection offered by Protect America, the Bronze Package was designed to provide protection at each point of entry into your home. Ideal for houses under 1200 sq. ft, the Bronze Package features enough sensors to cover up to 7 doors and windows. Along with 7 door/window sensors, the Bronze Package also protects inside your home with a motion detector for use in heavily used rooms or hallways. Security systems from Protect America are incredibly easy to customize. Just ask one of our salespeople how you can add a garage door sensor or smoke detectors to your Bronze Package!  </p>
-        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to start securing your home and family</p></div>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now ></a><p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p></div>
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
@@ -83,10 +83,8 @@
 
 </div>
 <div class="clear"></div>
-<div id="call-box">
-    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
-</div>
-<div class="clear"></div>
+    {% include "order/call-box.html" %}
+
 
 <div id="adt-comparison">
 
@@ -133,7 +131,7 @@
             <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
 
         </ul>
-        <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to get started</p></div>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Bronze-B']);">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to get started</p></div>
     </div>
     <div class="clear"></div>
 
@@ -182,7 +180,7 @@
         <div id="footer-call-now">
             <h3>Give us a call.</h3>
             <p>Call Protect America today to learn which package best meets your needs. Call Protect America now and secure what matters most!</p>
-            <span>{{ phone_number|format_number }}</span>
+            <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
         </div>
         <div id="footer-chat-now">
             <h3>Chat online.</h3>
