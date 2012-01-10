@@ -30,9 +30,14 @@ $(document).ready(function() {
             $('#quote-form button').click();
         }
     });
-
+    var submitting = false;
 
     $('#quote-form button').click(function() {
+        console.log(submitting);
+        if(submitting==true) {
+            return false;
+        }
+        submitting = true;
         $('#quote-form div').removeClass('.error-state');
         var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
         $.ajax({
@@ -44,8 +49,9 @@ $(document).ready(function() {
         });
 
         function newFormSuccess(json) {
+            submitting = false;
             if(json.success) {
-                window.location = "/pa/thank_you";
+                window.location = "http://www.protectamerica.com/pa/thank_you";
             }
         if(json.errors) {
             $("#quote-form-error").show();

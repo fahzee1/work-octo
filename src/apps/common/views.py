@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta
 
+from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.conf import settings
 
 from apps.contact.forms import PAContactForm, AffiliateLongForm
 
@@ -28,13 +30,18 @@ def simple_dtt(request, template, extra_context):
     forms = {}
     forms['basic'] = PAContactForm()
     forms['long'] = AffiliateLongForm()
+
+    affiliate = request.COOKIES.get('refer_id', None)
+    if not affiliate:
+        request.session['refer_id'] = extra_context['agent_id']
+
     response = render_to_response(template,
                               {'active_pages':pages,
                                'page_name':extra_context['page_name'],
                                'forms': forms},
                               context_instance=RequestContext(request))
 
-    if 'agent_id' in extra_context:
+    if 'agent_id' in extra_context and not affiliate:
         response.set_cookie('refer_id',
                         value=extra_context['agent_id'],
                         expires=datetime.now() + expire_time)

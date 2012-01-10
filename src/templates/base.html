@@ -19,7 +19,7 @@
 
  var _gaq = _gaq || [];
  _gaq.push(['_setAccount', 'UA-5441302-2']);
- _gaq.push(['_setDomainName', 'protectamerica.com']);
+ _gaq.push(['_setDomainName', '.protectamerica.com']);
  _gaq.push(['_trackPageview']);
 
  (function() {
@@ -60,7 +60,7 @@
             </div>
             {% businesstime %}
 			<div id="phone-number">
-				<p>Call Today and Save! <span>{{ phone_number|format_number }}</span></p>
+				<p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
 			</div>
             {% endbusinesstime %}
 
@@ -385,7 +385,36 @@ test
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
 </script>
+{% if use_call_measurement %}
+<script type="text/javascript"> 
+    var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use
+    var thisref = document.referrer.replace(/&/g, "zzzzz");
+    var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+    document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
+</script>
+{% endif %}
 {% endblock %}
 {% render_block "js" %}
+<!-- Google Code for Home Page Visit Remarketing List -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1072079179;
+var google_conversion_language = "en";
+var google_conversion_format = "1";
+var google_conversion_color = "666666";
+var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- End Remarketing Code -->
+
 </body>
 </html>
