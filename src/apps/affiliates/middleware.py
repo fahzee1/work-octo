@@ -56,6 +56,17 @@ class AffiliateMiddleware(object):
                     return (engine, network, term)
         return (None, network, None)
     
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        if settings.SITE_ID == 3:
+            viewname = view_func.__name__
+            if viewname == 'semlanding_home':
+                request.session['refer_id'] = 'SEMDIRECT'
+            elif viewname == 'semlanding_google':
+                request.session['refer_id'] = 'GOOGLEPPC'
+            elif viewname == 'semlanding_bing':
+                request.session['refer_id'] = 'BINGPPC'
+        return None
+
     def process_response(self, request, response):
 
         expire_time = timedelta(days=90)
@@ -68,7 +79,16 @@ class AffiliateMiddleware(object):
             default_agent = None
 
         current_cookie = request.COOKIES.get('refer_id', None)
+        print current_cookie
         if not current_cookie:
+            refer_id = request.session.get('refer_id', None)
+            if refer_id in ['GOOGLEPPC', 'BINGPPC', 'SEMDIRECT']:
+
+                response.set_cookie('refer_id',
+                        value=request.session['refer_id'],
+                        domain='.protectamerica.com',
+                        expires=datetime.now() + expire_time)
+                    
             if 'agent' in request.GET:
                 try:
                     affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])

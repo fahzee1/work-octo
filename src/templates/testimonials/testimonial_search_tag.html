@@ -1,3 +1,5 @@
+{% load sekizai_tags %}
+
 {% if template == None or template == 'default' %}
 {% for testimonial in testimonials %}
 <li>
@@ -36,5 +38,15 @@
     </div>
     <div class="clear"></div>
 </li>
+{% endfor %}
+{% endif %}
+{% if template == 'old' %}
+{% for testimonial in testimonials %}
+<div>
+    <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+    <span>&mdash; &nbsp;{{ testimonial.first_name }} {{ testimonial.last_name }} 
+        <em>{{ testimonial.city }}, {{ testimonial.state }} on {{ testimonial.date_created }}</em>
+    </span>
+</div>
 {% endfor %}
 {% endif %}

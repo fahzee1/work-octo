@@ -56,6 +56,13 @@ def ajax_post(request):
             if leadid is None:
                 leadid = request.session.get('leadid', None)
 
+            # Special Handling for SEM Landing pages
+            # All agent ids should be HOMESITE and the SOURCE
+            # should become the agent ID
+
+            if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC']:
+                source = agentid
+                agentid = 'HOMESITE'
 
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],

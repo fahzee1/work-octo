@@ -31,7 +31,10 @@ def phone_number(request):
     # the GET var. If neither of those exist, there is no affiliate
     affiliate = request.COOKIES.get('refer_id', None)
     if not affiliate:
-        # try pulling the affiliate from the ?source=
+        # try pulling the affiliate from the session
+        affiliate = request.session.get('refer_id', None)
+    if not affiliate:
+        # still if the affiliate isn't found pull it form the agent
         affiliate = request.GET.get('agent', None)
 
     if affiliate:

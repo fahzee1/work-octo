@@ -43,21 +43,34 @@ class TestimonialSearchNode(template.Node):
     def render(self, context):
         testimonial_array = []
 
-        testimonials = Testimonial.objects.filter(testimonial__icontains=self.search_term)
+        if self.search_term == '':
+            testimonials = Testimonial.objects.filter(can_post=True,
+                display=True).order_by('-date_created')
+        else:
+            testimonials = Testimonial.objects.filter(can_post=True,
+                display=True, testimonial__icontains=self.search_term
+                ).order_by('-date_created')
+        
+        # filter the testimonials by state
+        if 'state' in self.kwargs:
+            testimonials = testimonials.filter(state=self.kwargs['state'][0])
+        # limit the testimonials by the kwarg
         if 'limit' in self.kwargs:
             testimonials = testimonials[:self.kwargs['limit'][0]]
 
+        # bold the search term
         for testimonial in testimonials:
-            testimonial_html = re.sub(self.search_term,
-                '<strong>%s</strong>' % self.search_term,
-                testimonial.testimonial)
+            if self.search_term != '':
+                testimonial.testimonial = re.sub(self.search_term,
+                    '<strong>%s</strong>' % self.search_term,
+                    testimonial.testimonial)
 
             testimonial_array.append({'first_name': testimonial.first_name,
               'last_name': testimonial.last_name,
               'city': testimonial.city,
               'state': testimonial.state,
               'date_created': testimonial.date_created.strftime("%m/%d/%Y"),
-              'testimonial': testimonial_html})
+              'testimonial': testimonial.testimonial})
         t = template.loader.get_template('testimonials/testimonial_search_tag.html')
         c = template.Context({
             'testimonials': testimonial_array,
