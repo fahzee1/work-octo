@@ -7,8 +7,8 @@
 
 {% endaddtoblock "js" %}
 <div id="top-content">
-    <div id="average-american-home-security">
-        <h1>Designed to secure the <strong>average American home.</strong></h1>
+    <div id="most-comprehensive-security">
+        <h1>Our <strong>most comprehensive</strong> security system package</strong></h1>
     
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
@@ -17,7 +17,7 @@
 {% include "banners/limited-time-offer.html" %}
 
 <div id="the-platinum-package">
-    <img src="/static/img/products/silver-package/silver-package.jpg" id="main-package-image">
+    <img src="/static/img/products/platinum-package/platinum-package-simon-xt-lowest-price.jpg" id="main-package-image">
     <div id="platinum-package-content">
         <h1>The Platinum Package</h1>
         <p>The Platinum Package from Protect America is the most comprehensive perimeter protection offered in the home security industry. Each Platinum Package features 15 door/window sensors for coverage at every point of entry into your home. The Platinum Package also protects inside your home with a motion detector for your use in heavily used rooms or hallways. It's really easy to customize the Platinum Package to the unique needs of your home. Just ask how to add an interactive security camera or a smoke detector to your new home security system!</p>
@@ -58,10 +58,8 @@
 
 </div>
 <div class="clear"></div>
-<div id="call-box">
-    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
-</div>
-<div class="clear"></div>
+    {% include "order/call-box.html" %}
+
 
 <div id="adt-comparison">
 
@@ -108,6 +106,8 @@
             <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />Your system will always work with our included lifetime replacement parts warranty</li>
 
         </ul>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Platinum']);">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to get started</p></div>
+
     </div>
     <div class="clear"></div>
 
@@ -141,20 +141,30 @@
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
     <ul id="main-testimonials">
-{% comment %}
-        <li>
-            <div class="customer-name">
-                <h4>Robert Johnson <span>of Topeka, KS</span></h4>
-                <strong>03/01/2010</strong>
-                <a  href="http://localhost:8888/pa/testimonials" class="button-link">Read More Testimonials ></a>
-            </div>
-            <p><img src="{{ STATIC_URL }}/img/extra/testimonial-arrow.png" class="testimonial-arrow" />Amanda got me set up with your <strong>copper package</strong>.  She talked me through the package and it was a great deal, so I couldn't refuse it. She patiently answered all of my questions, and at a remarkable speed.  I work for a customer service call center so I know that she was juggling multiple things at once, and did a fantastic job at it.</p>
-            <div class="clear"></div>
-        </li>
-{% endcomment %}
-    {% testimonial_search "silver" "limit=4&words=50" %}
+    {% testimonial_search "platinum" "limit=4&words=50" %}
     </ul>
 </div>
+{% businesstime %}
+    <div id="order-footer">
+        <div id="footer-package-section">
+            <h2>The Platinum Package</h2>
+            <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $42.99/mo</p>
+            <div class="button-submit">
+                <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum']);">Order Now ></a>
+            </div>
+        </div>
+        <div id="footer-call-now">
+            <h3>Give us a call.</h3>
+            <p>Call Protect America today to learn which package best meets your needs. Call Protect America now and secure what matters most!</p>
+            <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+        </div>
+        <div id="footer-chat-now">
+            <h3>Chat online.</h3>
+            <p>Have a question about a system? Ready to order? Our security professionals are available to chat online right now.</p>
+            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Platinum']);">Online Chat ></a></div>
+        </div>
+    </div>
+{% endbusinesstime %}
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
