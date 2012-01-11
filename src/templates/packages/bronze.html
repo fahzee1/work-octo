@@ -25,13 +25,15 @@
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
 <div class="clear"></div>
+{% include "banners/limited-time-offer.html" %}
+
 <div id="the-bronze-package">
-    <img src="/static/img/products/bronze-package/bronze-package-simon-xt.jpg" id="main-package-image">
+    <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" id="main-package-image">
     <div id="bronze-package-content">
         <h1>The Bronze Package</h1>
-        <p>Designed for a small home, the Bronze Package allows for protection of up to 7 doors or windows. It also includes a motion detector that is used inside the home in case of intrusion.</p>
+        <p>The first of four levels of perimeter protection offered by Protect America, the Bronze Package was designed to provide protection at each point of entry into your home. Ideal for houses under 1200 sq. ft, the Bronze Package features enough sensors to cover up to 7 doors and windows. Along with 7 door/window sensors, the Bronze Package also protects inside your home with a motion detector for use in heavily used rooms or hallways. Security systems from Protect America are incredibly easy to customize. Just ask one of our salespeople how you can add a garage door sensor or smoke detectors to your Bronze Package!  </p>
         <h3>Equipment & Installation Price: <strong>Free*</strong> </h3>
-        <div class="button-submit"><a href="">Order Now ></a><p class="phone-alt">or call <strong>{{ phone_number|format_number }}</strong> to receive a free security analysis</p></div>
+<div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}</div>
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
@@ -42,7 +44,7 @@
 		</a>
 		<a href="http://www.protectamerica.com/pa/security_sensors/home-security-sensors#door-sensor" title="Door / Window Sensors" id="door-window-sensors">
     		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" />
-    		<strong>Three (7)</strong> Door / Window Sensors
+    		<strong>Seven (7)</strong> Door / Window Sensors
 		</a>
 		<a href="http://www.protectamerica.com/pa/security_sensors/home-security-sensors#motion-detector" title="Motion Detector" id="motion-detector">
        		<img src="/static/img/products/equipment/motion-detector-icon.jpg" />
@@ -67,10 +69,8 @@
 
 </div>
 <div class="clear"></div>
-<div id="call-box">
-    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
-</div>
-<div class="clear"></div>
+    {% include "order/call-box.html" %}
+
 
 <div id="adt-comparison">
 
@@ -101,7 +101,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">&nbsp;</td>
+                    <td colspan="3"><a href="http://www.protectamerica.com/pa/low-price-guarantee/GE-Security-System"><img src="{{ STATIC_URL }}/img/external/lowest-price-banner-stacked.png" alt="Protect America Guarantee's the Lowest Price for this Package" /></td>
                 </tr>
             </tfoot>
         </table>
@@ -117,6 +117,7 @@
             <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />Your system will always work with our included lifetime replacement parts warranty</li>
 
         </ul>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
     </div>
     <div class="clear"></div>
 
@@ -127,19 +128,19 @@
         <li>
             <img src="/static/img/products/monitoring/landline-icon.png">
             <h3>Landline</h3>
-            <p><sup>$</sup>29<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>35<span>99</span><strong>/mo</strong></p>
             <a href="http://www.protectamerica.com/pa/landline-monitoring" class="button-link" title="Learn About Landline Monitoring">Learn More ></a>
         </li>
         <li>
             <img src="/static/img/products/monitoring/homepulse-icon.png">
             <h3>Broadband</h3>
-            <p><sup>$</sup>37<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>43<span>99</span><strong>/mo</strong></p>
             <a href="http://www.protectamerica.com/pa/broadband-monitoring" class="button-link" title="Learn About Homepulse Monitoring">Learn More ></a>
         </li>
         <li>
             <img src="/static/img/products/monitoring/cellular-icon.png">
             <h3>Cellular</h3>
-            <p><sup>$</sup>41<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>47<span>99</span><strong>/mo</strong></p>
             <a href="http://www.protectamerica.com/pa/cellular-monitoring" class="button-link" title="Learn About Cellular Monitoring">Learn More ></a>
         </li>
         <div class="clear"></div>
@@ -150,20 +151,30 @@
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
     <ul id="main-testimonials">
-{% comment %}
-        <li>
-            <div class="customer-name">
-                <h4>Robert Johnson <span>of Topeka, KS</span></h4>
-                <strong>03/01/2010</strong>
-                <a  href="http://localhost:8888/pa/testimonials" class="button-link">Read More Testimonials ></a>
-            </div>
-            <p><img src="{{ STATIC_URL }}/img/extra/testimonial-arrow.png" class="testimonial-arrow" />Amanda got me set up with your <strong>copper package</strong>.  She talked me through the package and it was a great deal, so I couldn't refuse it. She patiently answered all of my questions, and at a remarkable speed.  I work for a customer service call center so I know that she was juggling multiple things at once, and did a fantastic job at it.</p>
-            <div class="clear"></div>
-        </li>
-{% endcomment %}
-    {% testimonial_search "affordable" "limit=4&words=50" %}
+        {% testimonial_search "bronze" "limit=4&words=50" %}
     </ul>
 </div>
+{% businesstime %}
+    <div id="order-footer">
+        <div id="footer-package-section">
+            <h2>The Bronze Package</h2>
+            <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $35.99/mo</p>
+            <div class="button-submit">
+                <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze']);">Order Now ></a>
+            </div>
+        </div>
+        <div id="footer-call-now">
+            <h3>Give us a call.</h3>
+            <p>Call Protect America today to learn which package best meets your needs. Call Protect America now and secure what matters most!</p>
+            <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+        </div>
+        <div id="footer-chat-now">
+            <h3>Chat online.</h3>
+            <p>Have a question about a system? Ready to order? Our security professionals are available to chat online right now.</p>
+            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Bronze']);">Online Chat ></a></div>
+        </div>
+    </div>
+{% endbusinesstime %}
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
