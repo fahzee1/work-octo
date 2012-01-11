@@ -32,7 +32,7 @@ def simple_dtt(request, template, extra_context):
     forms['long'] = AffiliateLongForm()
 
     affiliate = request.COOKIES.get('refer_id', None)
-    if not affiliate:
+    if not affiliate and 'agent_id' in extra_context:
         request.session['refer_id'] = extra_context['agent_id']
 
     response = render_to_response(template,
