@@ -64,6 +64,12 @@ def ajax_post(request):
                 source = agentid
                 agentid = 'HOMESITE'
 
+            # Special Handling for the AffKey for the package test
+            package_test_cookie = request.COOKIES.get('package_test', None)
+            if package_test_cookie is not None and affkey is None:
+                affkey = 'PACKAGETEST:%s' % package_test_cookie
+            
+
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
                       'l_phone1': fdata['phone'],

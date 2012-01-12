@@ -37,11 +37,12 @@ def simple_dtt(request, template, extra_context):
         if re.search(r'-b', extra_context['page_name']):
             B_PAGE = True
         if package_test == 'a' and B_PAGE:
-            return HttpResponseRedirect(reverse(
+            return HttpResponseRedirect('http://www.protectamerica.com%s' % reverse(
                 extra_context['page_name'].split('-b')[0]))
         elif package_test == 'b' and not B_PAGE:
-            return HttpResponseRedirect(reverse(
+            return HttpResponseRedirect('http://www.protectamerica.com%s' % reverse(
                 '%s-b' % extra_context['page_name']))
+        
 
     expire_time = timedelta(days=90)
 
