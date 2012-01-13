@@ -46,7 +46,7 @@ def ajax_post(request):
 
             affkey = request.COOKIES.get('affkey', None)
             if affkey is None:
-                affkey = request.session.get('affkey', None)
+                affkey = request.session.get('affkey', '')
 
             source = request.COOKIES.get('source', None)
             if source is None:
