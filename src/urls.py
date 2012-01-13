@@ -23,6 +23,8 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
+    url(r'^products/order-package/?package=silver$', 'apps.contact.views.order_form',
+        name='order-copper'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
     url(r'^contact-us/feedback-to-the-ceo/?$',

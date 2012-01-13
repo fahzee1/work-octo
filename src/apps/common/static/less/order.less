@@ -4,9 +4,8 @@
 // Styles for the Ordering Pages
 #order-form {
     .half-box;
-    .border-radius;
     .drop-shadow;
-   	background: #014C9F;
+   	background: @blue;
 	padding: 20px;
 	opacity: 0.98;
 	h1 {
@@ -16,15 +15,38 @@
 	   color: @light-grey;
        font-size: 12px;
 	}
+	form {
+        padding-bottom: 12px;
+        border-bottom: 1px solid @dark-blue; 
+        a {
+            color: @white;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 10px;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+	}
 	input {
         color: @light-grey;
         font-size: 24px;
         height: 28px;
         line-height: 28px;
         margin: 0 20px 15px;
-        width: 450px;
+        width: 432px;
     }
     label {
+        display: block;
+        color: @white;
+        font-size: 12px;
+        line-height: 12px;
+        margin-left: 20px;
+    }
+    label.select {
+        display: inline;
     	color: @white;
     	font-size: 20px;
         line-height: 28px;
@@ -37,42 +59,113 @@
     	width: 250px;
     }
     button {
-        .button-submit;
+        display: block;
+        background: #90af01;
+        color: @white;
+        text-decoration: none;
+        height: 36px;
+        line-height: 36px;
+        background-image: -moz-linear-gradient(top, #90af01, #829e01);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#829e01));
+        border: 1px solid transparent;
+        font-size: 18px;
+        padding: 0 24px;
+        width: 350px;
+        font-weight: 800;
+        cursor: pointer;
+        cursor: hand;
+        margin: 8px auto 0;
+        &:hover {
+            background-image: -moz-linear-gradient(center top, #90af01, #687e01);
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#687e01));
+            border: 1px solid #768f03;
+            border-bottom: 1px solid #576902;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        }
     }
 }
 #third-party {
-    table {
-        width: 100%;
+    margin: 16px 16px 0;
+    .border-radius;
+    background: @white;
+    padding: 8px 8px;
+
+    .hackersafe {
+        width: 47%;
+        height: 45px;
+        padding: 0 6px;
+        border-right: 1px solid @v-light-grey;
         text-align: center;
+        float: left;
+        a {
+            position: relative;
+            top: 5px;
+        }
+    }
+    .truste {
+        width: 47%;
+        height: 45px;
+        padding: 0 6px;
+        text-align: center;
+        float: left;
+
+    }
+}
+#top-consumer-review-medal {
+    position: absolute;
+    left: 56px;
+    top: 400px;
+    background: @v-light-grey;
+    border: 1px solid @light-grey;
+    font-weight: 800;
+    width: 290px;
+    .border-radius(5px, 5px, 5px, 5px);
+    line-height: 16px;
+    font-size: 14px;
+    p {
+        padding: 20px 0;
+    }
+    img {
+        float: left;
+        padding: 0 8px;
     }
 }
 #order-security-package {
     margin-top: 25px;
     #security-package-images {
         .small-box;
+        top: 60px;
         #copper-package {
             .image-break;
-            left: -75px;
-            top: 50px;
             display: none;
+            padding-left: 48px;
+            left: -75px;
         }
         #bronze-package {
             .image-break;
             display: none;
-            left: -100px;
-            top: 50px;
+            left: -75px;
+
         }
         #silver-package {
             .image-break;
             display: none;
+            left: -75px;
+
         }
         #gold-package {
             .image-break;
             display: none;
+            left: -75px;
+
         }
         #platinum-package {
             .image-break;
             display: none;
+            left: -75px;
+
         }
     }
 }
@@ -82,6 +175,7 @@
     padding-top: 20px;
     #lowest-price-guaranteed, #lifetime-warranty, #homeowner-insurance-discount, #relocation-kit, #free-tech-support {
         .fifth-box;
+        text-align: center;
         h3 {
             font-size: 16px;
             font-weight: 800;
@@ -89,7 +183,8 @@
             margin-bottom: 10px;
         }
         p {
-            font-size: 12px;
+            font-size: 11px;
+            padding: 0 12px;
         }
     }
 }
