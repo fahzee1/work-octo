@@ -1,4 +1,7 @@
+
 {% extends "products/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Order Your Home Security System | Home Security Packages | Protect America Home Security{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/order.css">
 {% endblock %}
@@ -58,15 +61,19 @@
 
 <div id="order-security-package">
 	<div id="security-package-images">
-		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Copper Home Security Package" id="copper-package">
-    	<img src="/static/img/products/bronze-package/bronze-package-simon-xt.jpg" alt="Bronze Home Security Package" id="bronze-package">
-		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Silver Home Security Package" id="silver-package">
-		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Gold Home Security Package" id="gold-package">
-		<img src="/static/img/products/copper-package/copper-package-simon-xt.jpg" alt="Platinum Home Security Package" id="platinum-package">
+		<img src="{{ STATIC_URL }}/img/products/copper-package/copper-package-simon-xt.jpg" alt="Copper Home Security Package" id="copper-package">
+    	<img src="{{ STATIC_URL }}/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" alt="Bronze Home Security Package" id="bronze-package">
+		<img src="{{ STATIC_URL }}/img/products/silver-package/silver-package-simon-xt-lowest-price.jpg" alt="Silver Home Security Package" id="silver-package">
+		<img src="{{ STATIC_URL }}/img/products/gold-package/gold-package-simon-xt-lowest-price.jpg" alt="Gold Home Security Package" id="gold-package">
+		<img src="{{ STATIC_URL }}/img/products/platinum-package/platinum-package-simon-xt-lowest-price.jpg" alt="Platinum Home Security Package" id="platinum-package">
+    </div>
+    <div id="top-consumer-review-medal">
+        <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" />
+        <p>Five star rating in 2012 by TopConsumerReviews.com</p>
     </div>
 	<div id="order-form">
 			<h1>Thank You for Choosing Protect America</h1>
-			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below or call: <strong>1-800-951-5111</strong></strong></p>
+			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below or call: <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></strong></p>
             {% comment %}
 			<form>
 				<input type="text" value="Name">
@@ -87,32 +94,50 @@
             {% endcomment %}
             {% include 'contact-us/forms/order-form.html' %}
 		<div class="clear"></div>
+		<div id="third-party">
+		    <div class="hackersafe">
+    		    <a target="_blank" href="https://www.mcafeesecure.com/RatingVerify?ref=www.protectamerica.com"><img width="115" height="32" border="0" src="//images.scanalert.com/meter/www.protectamerica.com/12.gif" alt="McAfee SECURE sites help keep you safe from identity theft, credit card fraud, spyware, spam, viruses and online scams" oncontextmenu="alert('Copying Prohibited by Law - McAfee SECURE is a Trademark of McAfee, Inc.'); return false;"></a>
+		    </div>
+		    <div class="truste">
+                <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
+		    </div>
+		    <div class="clear"></div>
+		</div>
 	</div>
 	<div class="clear"></div>
 </div>
 <div id="order-reassurance">
 	<div id="lowest-price-guaranteed">
+    	<img src="/static/img/extra/dollar-sign-token.png" />
+
 		<h3>Lowest Price Guaranteed</h3>
 		<p>If you find a better offer, let us know.  We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p>
 	</div>
 	<div id="lifetime-warranty">
+    	<img src="/static/img/extra/hammer-token.png" />
 		<h3>Lifetime Equipment Warranty</h3>
 		<p>As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free.  We want to make sure your home is always secure.</p>
 	</div>
 	<div id="homeowner-insurance-discount">
+    	<img src="/static/img/extra/20-percent-token.png" />
 		<h3>Homeowner's Insurance Discount</h3>
 		<p>Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</p>
 	</div>
 	<div id="relocation-kit">
+    	<img src="/static/img/extra/free-relocation-kit.png" />
+
 		<h3>Relocation Kit</h3>
 		<p>With Protect America, you own your security equipment. If you happen to move, we will send you a relocation kit to easily take your security system with you.</p>
 	</div>
 	<div id="free-tech-support">
+    	<img src="/static/img/extra/tech-support-token.png" />
+
 		<h3>Free Tech Support</h3>
 		<p>Included with your home security system is our knowledgeable technical support staff.  From simple operation to the advanced settings, they are here to help you.</p>
 	</div>
 </div>
-
+<div class="clear"></div>
+    {% include "order/call-box.html" %}
 
 
 {% endblock %}  
