@@ -1,3 +1,5 @@
+from string import Template
+
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
@@ -17,6 +19,33 @@ def send_email(recipient):
         fail_silently=False)
 
     return True;
+
+def send_leadimport(data):
+    subject = 'Hello, Thank you for your interest!'
+    message = Template("[header]\n\n \
+[data]\n \
+agent_id=$agentid \
+source=$source \
+customername=$name \
+phone1=$phone \
+phone2= \
+address1= \
+city= \
+state= \
+zip= \
+email=$email \
+creditrating= \
+affkey=$affkey \
+homeowner= \
+status=X \
+formlocation=$formlocation \
+searchengine= \
+searchkeywords=")
+    send_mail(subject, message.safe_substitute(data),
+        'robert@protectamerica.com', ['robrocker7@gmail.com'], fail_silently=False)
+
+    return True
+
 
 def ajax_post(request):
     if request.method != "POST":
