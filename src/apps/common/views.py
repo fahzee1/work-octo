@@ -10,8 +10,6 @@ from django.core.urlresolvers import reverse
 
 from apps.contact.forms import PAContactForm, AffiliateLongForm
 
-TESTING_PAGES = ['copper', 'bronze', 'silver', 'gold', 'platinum', 'copper-b', 'bronze-b', 'silver-b', 'gold-b', 'platinum-b']
-
 def simple_dtt(request, template, extra_context):
     
     import urls
@@ -28,21 +26,6 @@ def simple_dtt(request, template, extra_context):
             except:
                 pass
         return pages
-
-    #redirect to correct page if test
-    package_test = request.COOKIES.get('package_test', None)
-    if extra_context['page_name'] in TESTING_PAGES:
-        # check to see if the page is a -b page
-        B_PAGE = False;
-        if re.search(r'-b', extra_context['page_name']):
-            B_PAGE = True
-        if package_test == 'a' and B_PAGE:
-            return HttpResponseRedirect('http://www.protectamerica.com%s' % reverse(
-                extra_context['page_name'].split('-b')[0]))
-        elif package_test == 'b' and not B_PAGE:
-            return HttpResponseRedirect('http://www.protectamerica.com%s' % reverse(
-                '%s-b' % extra_context['page_name']))
-        
 
     expire_time = timedelta(days=90)
 
@@ -64,10 +47,6 @@ def simple_dtt(request, template, extra_context):
     if 'agent_id' in extra_context and not affiliate:
         response.set_cookie('refer_id',
                         value=extra_context['agent_id'],
-                        expires=datetime.now() + expire_time)
-    if 'package_test' in extra_context and not package_test:
-        response.set_cookie('package_test',
-                        value=extra_context['package_test'],
                         expires=datetime.now() + expire_time)
 
     return response
