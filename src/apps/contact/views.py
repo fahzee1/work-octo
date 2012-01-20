@@ -1,3 +1,5 @@
+from string import Template
+
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
@@ -17,6 +19,33 @@ def send_email(recipient):
         fail_silently=False)
 
     return True;
+
+def send_leadimport(data):
+    subject = 'Hello, Thank you for your interest!'
+    message = Template("[header]\n\n \
+[data]\n \
+agent_id=$agentid \
+source=$source \
+customername=$name \
+phone1=$phone \
+phone2= \
+address1= \
+city= \
+state= \
+zip= \
+email=$email \
+creditrating= \
+affkey=$affkey \
+homeowner= \
+status=X \
+formlocation=$formlocation \
+searchengine= \
+searchkeywords=")
+    send_mail(subject, message.safe_substitute(data),
+        'robert@protectamerica.com', ['robrocker7@gmail.com'], fail_silently=False)
+
+    return True
+
 
 def ajax_post(request):
     if request.method != "POST":
@@ -46,7 +75,7 @@ def ajax_post(request):
 
             affkey = request.COOKIES.get('affkey', None)
             if affkey is None:
-                affkey = request.session.get('affkey', '')
+                affkey = request.session.get('affkey', None)
 
             source = request.COOKIES.get('source', None)
             if source is None:
@@ -63,12 +92,6 @@ def ajax_post(request):
             if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC']:
                 source = agentid
                 agentid = 'HOMESITE'
-
-            # Special Handling for the AffKey for the package test
-            package_test_cookie = request.COOKIES.get('package_test', None)
-            if package_test_cookie is not None and affkey is None:
-                affkey = 'PACKAGETEST:%s' % package_test_cookie
-            
 
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
