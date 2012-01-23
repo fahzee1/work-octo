@@ -95,12 +95,6 @@ else:
         # Home Security Packages
         dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
 
-            # Product > Packages
-            dtt(r'^home-security-packages/copper/?$', 'packages/copper.html', 'copper', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'security-packages', ctx={'package_test': 'a'}),
             # Product > Packages B
             dtt(r'^home-security-systems/copper/?$', 'packages/copper-b.html', 'copper-b', 'security-packages', ctx={'package_test': 'b'}),
             dtt(r'^home-security-systems/bronze/?$', 'packages/bronze-b.html', 'bronze-b', 'security-packages', ctx={'package_test': 'b'}),
