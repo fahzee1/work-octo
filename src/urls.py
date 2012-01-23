@@ -149,7 +149,10 @@ else:
 
             dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
 
+        # Crime Stats
 
+        dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
+        
         # Security 101 Pages
 
         dtt(r'^security-101/?$', 'security/index.html', 'security-101'),
