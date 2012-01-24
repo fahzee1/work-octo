@@ -1,5 +1,5 @@
-{% load content_filters %}
-<form action="" method="POST">
+{% load content_filters sekizai_tags %}
+<form action="" method="POST" id="package-form">
     {% csrf_token %}
     {% for field in formset.hidden_fields %}
         {{ field }}
@@ -16,5 +16,75 @@
     {% endfor %}
     <button class="buyit">Continue ></button>
     <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
-
+    <div id="quote-form-error">
+        <img src="{{ STATIC_URL }}/img/base/error-arrow.png" id="error-arrow" />
+        <strong>Whoops!</strong>
+        <ul></ul>
+    </div>
 </form>
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#package-form input').keypress(function(e){
+        if(e.which == 13){
+            $('#package-form button').click();
+        }
+    });
+    var submitting = false;
+
+    $('#package-form button').click(function() {
+        console.log(submitting);
+        if(submitting==true) {
+            return false;
+        }
+        submitting = true;
+        $('#package-form div').removeClass('.error-state');
+        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
+        $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess
+        });
+
+        function newFormSuccess(json) {
+            submitting = false;
+            if(json.success) {
+                window.location = "http://www.protectamerica.com/pa/thank_you";
+            }
+        if(json.errors) {
+            $("#quote-form-error").show();
+            $("#quote-form-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quote-form-error ul").html(error_string);
+            } else $("#quote-form-error").hide();
+
+        }
+        return false;
+        });
+    }); 
+</script>
+{% endaddtoblock "js" %}
+
