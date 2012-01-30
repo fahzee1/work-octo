@@ -23,8 +23,6 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
-    url(r'^products/order-package/?package=silver$', 'apps.contact.views.order_form',
-        name='order-copper'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
     url(r'^contact-us/feedback-to-the-ceo/?$',
@@ -42,6 +40,10 @@ urlpatterns = patterns('',
 
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
+
+    # crime stats
+    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s]+)/?', 'apps.crimedatamodels.views.crime_stats',
+        name='crime-stats'),
 )
 
 # a simple direct_to_template wrapper
