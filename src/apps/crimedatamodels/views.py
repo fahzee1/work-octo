@@ -1,3 +1,6 @@
+import urllib
+from xml.dom.minidom import parseString
+
 from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -38,6 +41,19 @@ def crime_stats(request, state, city):
         years.append(year)
 
     years.sort(reverse=True)
+
+
+    # Google Weather API
+    weather_info = {}
+    weather_xml = urllib.urlopen(
+        'http://www.google.com/ig/api?weather=%s,%s' % (
+            city.city_name, state.abbreviation))
+    dom = parseString(weather_xml.read())
+    weather = dom.getElementsByTagName('weather')
+    current_conditions = weather[0].getElementsByTagName('current_conditions')[0]
+    weather_info['temp'] = current_conditions.childNodes[1].getAttribute('data')
+    weather_info['description'] = current_conditions.childNodes[0].getAttribute('data')
+
     forms = {}
     forms['basic'] = PAContactForm()
     return render_to_response('crime-stats/crime-stats.html',
@@ -48,6 +64,7 @@ def crime_stats(request, state, city):
                                'city': city.city_name,
                                'lat': city.latitude,
                                'long': city.longitude,
+                               'weather_info': weather_info,
                                'forms': forms},
                               context_instance=RequestContext(request))
 

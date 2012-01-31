@@ -5,7 +5,7 @@
 {% block content %}
 <div id="city-bar">
     <h1>{{ city }}, {{ state }} </h1>
-    <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> 36&deg;F</span>
+    <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> {{ weather_info.temp }}&deg;F</span>
     <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
     <div id="share-buttons">
         <span  class='st_facebook_vcount' displayText='Facebook'></span>
@@ -123,7 +123,7 @@
     </div>
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Murder Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Murder and non negligent manslaughter is defined as the willful killing of one human being by another. </p>
         <table>
             <thead>
                 <tr>
@@ -150,7 +150,7 @@
     </div>
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Forcible Rape Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Forcible Rape is an assault on another human being involving sexual intercourse without that person's consent. </p>
         <table>
             <thead>
                 <tr>
@@ -177,7 +177,7 @@
     </div>
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Robbery Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Robbery is when someone steals someone else's property through violence or intimidation rather then stealth or fraud.</p>
         <table>
             <thead>
                 <tr>
@@ -204,7 +204,7 @@
     </div>
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Aggravated Assault Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>An assault is considered an aggravated assault when a person attempts to cause serious bodily injury to another person, attempts to have sexual activity with another person under the age of 14, or attempts bodily injury to another person with a deadly weapon. </p>
         <table>
             <thead>
                 <tr>
@@ -231,7 +231,7 @@
     </div>
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Auto Theft Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Motor vehicle theft or grand theft auto is the criminal act of stealing or attempting to steal a motor vehicle, including an automobile, truck, bus, coach, motorcycle, snowmobile, trailer or any other motorized vehicle.</p>
         <table>
             <thead>
                 <tr>
@@ -258,7 +258,7 @@
     </div>
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Larceny Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Larceny is a common law crime involving theft. It is defined as taking and carrying away (stealing) another person's physical property with the intent to deprive him or her of its possession permanently.</p>
         <table>
             <thead>
                 <tr>
@@ -285,7 +285,19 @@
     </div>
 </div>
 {% addtoblock "js" %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript"> 
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            if($(document).scrollTop() >= 208) {
+                $('#city-bar').css({'position':'fixed',
+                                    'top': '0px',
+                                    'z-index': '1000'});
+            } else {
+                $('#city-bar').css({'position':'relative'});
+            }
+        });
+    });
+    </script>
 {% endaddtoblock "js" %}
 
 {% endblock %}  
