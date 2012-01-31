@@ -44,6 +44,10 @@ urlpatterns = patterns('',
     # crime stats
     url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s]+)/?', 'apps.crimedatamodels.views.crime_stats',
         name='crime-stats'),
+    url(r'crime-rate/(?P<state>[A-Z]{2})/?', 'apps.crimedatamodels.views.choose_city',
+        name='choose-city'),
+    url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
+        name='choose-state'),
 )
 
 # a simple direct_to_template wrapper
