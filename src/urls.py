@@ -23,8 +23,6 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
-    url(r'^products/order-package/?package=silver$', 'apps.contact.views.order_form',
-        name='order-copper'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
     url(r'^contact-us/feedback-to-the-ceo/?$',
@@ -42,6 +40,14 @@ urlpatterns = patterns('',
 
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
+
+    # crime stats
+    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s]+)/?', 'apps.crimedatamodels.views.crime_stats',
+        name='crime-stats'),
+    url(r'crime-rate/(?P<state>[A-Z]{2})/?', 'apps.crimedatamodels.views.choose_city',
+        name='choose-city'),
+    url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
+        name='choose-state'),
 )
 
 # a simple direct_to_template wrapper
@@ -95,12 +101,6 @@ else:
         # Home Security Packages
         dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
 
-            # Product > Packages
-            dtt(r'^home-security-packages/copper/?$', 'packages/copper.html', 'copper', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'security-packages', ctx={'package_test': 'a'}),
-            dtt(r'^home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'security-packages', ctx={'package_test': 'a'}),
             # Product > Packages B
             dtt(r'^home-security-systems/copper/?$', 'packages/copper-b.html', 'copper-b', 'security-packages', ctx={'package_test': 'b'}),
             dtt(r'^home-security-systems/bronze/?$', 'packages/bronze-b.html', 'bronze-b', 'security-packages', ctx={'package_test': 'b'}),
@@ -155,7 +155,10 @@ else:
 
             dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
 
+        # Crime Stats
 
+        dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
+        
         # Security 101 Pages
 
         dtt(r'^security-101/?$', 'security/index.html', 'security-101'),
