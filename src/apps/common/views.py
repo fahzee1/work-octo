@@ -10,6 +10,8 @@ from django.core.urlresolvers import reverse
 
 from apps.contact.forms import PAContactForm, AffiliateLongForm
 
+TESTING_PAGES = ['copper-b', 'bronze-b', 'silver-b', 'gold-b', 'platinum-b']
+
 def simple_dtt(request, template, extra_context):
     
     import urls
@@ -48,5 +50,12 @@ def simple_dtt(request, template, extra_context):
         response.set_cookie('refer_id',
                         value=extra_context['agent_id'],
                         expires=datetime.now() + expire_time)
+
+    package_test = request.COOKIES.get('package_test', None)
+    if 'package_test' in extra_context and not package_test:
+        response.set_cookie('package_test',
+                        value=extra_context['package_test'],
+                        expires=datetime.now() + expire_time)
+    
 
     return response

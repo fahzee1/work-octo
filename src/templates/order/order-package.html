@@ -34,7 +34,7 @@
         $('input[type="text"],textarea').placeholder();
         $('#id_package').change(function() {
             var option = $(this).children('option:selected');
-            slide_product_image($('#security-package-images img:visible'), 
+            slide_product_image($('#security-package-images img:visible'),
                 $('#security-package-images #'+option.val()+'-package'));
         });
         function slide_product_image(prev, next) {
@@ -56,6 +56,7 @@
         }
     });
 </script>
+
 {% endblock %}
 {% block content %}
 
@@ -74,25 +75,7 @@
 	<div id="order-form">
 			<h1>Thank You for Choosing Protect America</h1>
 			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below or call: <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></strong></p>
-            {% comment %}
-			<form>
-				<input type="text" value="Name">
-				<input type="text" value="Email">
-				<input type="text" value="Phone">
-				<label>Package: </label>
-				<select>
-				  <option value="copper">Copper Package</option>
-				  <option value="bronze">Bronze Package</option>
-				  <option value="silver">Silver Package</option>
-				  <option value="gold">Gold Package</option>
-				  <option value="platinum">Platinum Package</option>
-
-				</select>
-				<button>Call Me</button>
-
-			</form>
-            {% endcomment %}
-            {% include 'contact-us/forms/order-form.html' %}
+        {% include 'contact-us/forms/order-form.html' %}
 		<div class="clear"></div>
 		<div id="third-party">
 		    <div class="hackersafe">

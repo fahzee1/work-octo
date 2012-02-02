@@ -1,0 +1,53 @@
+{% extends "crime-stats/base.html" %}
+{% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
+
+{% block page_title %}{{ state }} Crime Statstics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+
+{% block content %}
+<div id="city-list">
+    <ul id="letters">
+        <li {% if cities.A %}class="has-cities"{% endif %}>A</li>
+        <li {% if cities.B %}class="has-cities"{% endif %}>B</li>
+        <li {% if cities.C %}class="has-cities"{% endif %}>C</li>
+        <li {% if cities.D %}class="has-cities"{% endif %}>D</li>
+        <li {% if cities.E %}class="has-cities"{% endif %}>E</li>
+        <li {% if cities.F %}class="has-cities"{% endif %}>F</li>
+        <li {% if cities.G %}class="has-cities"{% endif %}>G</li>
+        <li {% if cities.H %}class="has-cities"{% endif %}>H</li>
+        <li {% if cities.I %}class="has-cities"{% endif %}>I</li>
+        <li {% if cities.J %}class="has-cities"{% endif %}>J</li>
+        <li {% if cities.K %}class="has-cities"{% endif %}>K</li>
+        <li {% if cities.L %}class="has-cities"{% endif %}>L</li>
+        <li {% if cities.M %}class="has-cities"{% endif %}>M</li>
+        <li {% if cities.N %}class="has-cities"{% endif %}>N</li>
+        <li {% if cities.O %}class="has-cities"{% endif %}>O</li>
+        <li {% if cities.P %}class="has-cities"{% endif %}>P</li>
+        <li {% if cities.Q %}class="has-cities"{% endif %}>Q</li>
+        <li {% if cities.R %}class="has-cities"{% endif %}>R</li>
+        <li {% if cities.S %}class="has-cities"{% endif %}>S</li>
+        <li {% if cities.T %}class="has-cities"{% endif %}>T</li>
+        <li {% if cities.U %}class="has-cities"{% endif %}>U</li>
+        <li {% if cities.V %}class="has-cities"{% endif %}>V</li>
+        <li {% if cities.W %}class="has-cities"{% endif %}>W</li>
+        <li {% if cities.X %}class="has-cities"{% endif %}>X</li>
+        <li {% if cities.Y %}class="has-cities"{% endif %}>Y</li>
+        <li {% if cities.Z %}class="has-cities"{% endif %}>Z</li>
+    </ul>
+</div>
+{% for key, value in cities.iteritems %}
+<div id="{{ key }}_cities">
+    <ul>
+    {% for city in value %}
+        <li><a href="{{ city.get_absolute_url }}">{{ city.city_name }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endfor %}
+<div class="sidebar">    
+    {% include "order/quote-form.html" with form=forms.basic %}
+    <div class="side-ad">
+        <img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png"/>
+    </div>
+</div>
+<div class="clear"></div>
+{% endblock %}
