@@ -1093,7 +1093,7 @@ ul#child-navigation li.active.active a {
   float: left;
   margin-left: 16px;
   position: relative;
-  padding-bottom: 12px;
+  padding-bottom: 4px;
 }
 #quote-form h1 {
   color: #0069aa;
@@ -1132,46 +1132,46 @@ ul#child-navigation li.active.active a {
   line-height: 22px;
   color: #353535;
 }
-#quote-form #third-party {
-  margin-top: 4px;
-  padding: 0px;
-  width: 275px;
-  z-index: 100;
-}
-#quote-form #third-party.vsign {
-  margin-bottom: 10px;
-}
-#quote-form #third-party.vsign table {
-  margin: 0 auto 10px;
-  border-radius: 10px 10px 10px 10px;
-  -moz-border-radius: 10px 10px 10px 10px;
-  -webkit-border-top-left-radius: 10px;
-  -webkit-border-top-right-radius: 10px;
-  -webkit-border-bottom-left-radius: 10px;
-  -webkit-border-bottom-right-radius: 10px;
+#quote-form #third-party-container {
+  background: #ffffff;
+  width: 96%;
+  margin: 0 auto 8px;
   text-align: center;
-  width: 150px;
-  background: #ffffff;
-}
-#quote-form #third-party.vsign table a {
-  position: relative;
-  bottom: 4px;
-  padding: 0px 5px;
-  margin: 0px;
-  margin-bottom: -15px;
-}
-#quote-form #third-party.hackersafe a img {
+  padding: 0;
   border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-top-left-radius: 10px;
   -webkit-border-top-right-radius: 10px;
   -webkit-border-bottom-left-radius: 10px;
   -webkit-border-bottom-right-radius: 10px;
-  padding: 10px;
-  background: #ffffff;
+  overflow: hidden;
+}
+#quote-form #third-party-container .third-party-badge {
+  margin: 0 auto;
+  width: 135px;
+  padding: 0;
+  float: left;
+}
+#quote-form #third-party-container .third-party-badge a {
+  padding-top: 0;
+}
+#quote-form #third-party-container .third-party-badge div {
+  padding: 0;
+  background: none;
+}
+#quote-form #third-party-container .third-party-badge.truste {
+  width: 126px;
+  position: relative;
+  top: 18px;
+}
+#quote-form #third-party-container .third-party-badge.truste img {
+  width: 100%;
+}
+#quote-form #third-party-container .third-party-badge.vsign {
+  position: relative;
+  right: 5px;
 }
 #quote-form div {
-  background: #0069aa;
   padding: 8px;
 }
 #quote-form div p {
@@ -1222,6 +1222,21 @@ ul#child-navigation li.active.active a {
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
+#quote-form button.redbutton {
+  background: #E51A19;
+  color: white;
+  background-image: -moz-linear-gradient(top, #e51a19, #ba1615);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e51a19), to(#ba1615));
+}
+#quote-form button.redbutton:hover {
+  background-image: -moz-linear-gradient(center top, #e51a19, #920403);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e51a19), to(#920403));
+  border: 1px solid #8d0400;
+  border-bottom: 1px solid #6e0401;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
 #quote-form a {
   display: block;
   text-align: center;
@@ -1237,15 +1252,17 @@ ul#child-navigation li.active.active a {
   display: none;
   position: absolute;
   z-index: 999;
-  width: 185px;
+  width: 250px;
   background: #e51b24;
-  top: 217px;
-  left: -215px;
+  bottom: 20%;
+  left: -275px;
   border: 1px solid #8b0404;
+  padding: 8px;
   -moz-box-shadow: 0px 2px 5px #4a505a;
   -webkit-box-shadow: 0px 2px 5px #4a505a;
   box-shadow: 0px 2px 5px #4a505a;
   opacity: .95;
+  background: #e51b24;
 }
 #quote-form-error ul {
   margin-bottom: 4px;
@@ -1269,7 +1286,7 @@ ul#child-navigation li.active.active a {
 #quote-form-error #error-arrow {
   position: absolute;
   right: -24px;
-  top: 40px;
+  top: 32%;
 }
 /************** Call Box ****************/
 #call-box {
