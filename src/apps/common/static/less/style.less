@@ -338,6 +338,29 @@ a.button-link {
 .phone-alt {
     display: inline;
 }
+button.button-link {
+    display: block;
+    background: #90af01;
+    color: @white;
+    text-decoration: none;
+    background: @blue;
+    background-image: -moz-linear-gradient(top,@blue,#005f9a);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#005f9a));
+    border: 1px solid transparent;
+    padding: 4px 24px;
+    cursor: pointer;
+    cursor: hand;
+    font-size: 12px;
+    &:hover {
+        background-image: -moz-linear-gradient(center top , @blue, #00568b);
+        background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#00568b));
+        border: 1px solid #094182;
+        border-bottom: 1px solid @dark-blue;
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+    }
+}
 .button-link {
     margin-top: 16px;
     a {
@@ -806,40 +829,42 @@ ul#child-navigation {
     margin-left: 16px;
     position: relative;
     padding-bottom: 4px;
-    #third-party {
-        margin-top: 4px;
-        padding: 0px;
-        width: 275px;
-        z-index: 100;
-
-        &.vsign {
-            margin-bottom: 0px;
-            table {
-                margin: 0 auto 10px;
-                .border-radius;
-                text-align: center;
-                width: 150px;
-                background: @white;
-                a {
-                    position: relative;
-                    bottom: 4px;
-                    padding: 0px 5px;
-                    margin: 0px;
-                    margin-bottom: -15px;
-                }
-            }
-        }
-        &.hackersafe {
+    
+    #third-party-container {
+        background: @white;
+        width: 96%;
+        margin: 0 auto 8px;
+        text-align: center;
+        padding: 0;
+        .border-radius;
+        overflow: hidden;
+        .third-party-badge {
+            margin: 0 auto; 
+            width: 135px; 
+            padding: 0; 
+            float: left;
             a {
-                img{
-                .border-radius;
-                padding: 10px;
-                background: @white;
+                padding-top: 0;
+            } 
+            div {
+                padding: 0;
+                background: none;
+            }
+            &.truste {
+                width: 126px;
+                position: relative;
+                top: 18px;
+                img {
+                    width: 100%;
                 }
+
+            }
+            &.vsign {
+                position: relative;
+                right: 5px;
             }
         }
     }
-
     div {
         padding: 8px;
         p {
@@ -891,6 +916,21 @@ ul#child-navigation {
             -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
             -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
             box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        }
+        &.redbutton {
+            background: #E51A19;
+            color: white;
+            background-image: -moz-linear-gradient(top, #e51a19, #ba1615);
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#e51a19), to(#ba1615));
+            &:hover {
+                background-image: -moz-linear-gradient(center top, #e51a19, #920403);
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#e51a19), to(#920403));
+                border: 1px solid #8d0400;
+                border-bottom: 1px solid #6e0401;
+                -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+            }
         }
     }
     a {

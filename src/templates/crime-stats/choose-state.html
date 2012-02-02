@@ -1,0 +1,22 @@
+{% extends "crime-stats/base.html" %}
+{% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
+
+{% block page_title %}{{ state }} Crime Statstics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+
+{% block content %}
+<div id="state-list">
+    <ul>
+    {% for state in states %}
+        <li><a href="{{ state.get_absolute_url }}">{{ state.name }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+<div class="sidebar">    
+    {% include "order/quote-form.html" with form=forms.basic %}
+    <div class="side-ad">
+        <img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png"/>
+    </div>
+</div>
+<div class="clear"></div>
+{% endblock %}
+
