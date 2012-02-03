@@ -98,6 +98,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.sites',
+    'django.contrib.humanize',
 
     'south',
     'sekizai',
@@ -110,6 +111,7 @@ INSTALLED_APPS = (
     'apps.pricetable',
     'apps.search',
     'apps.testimonials',
+    'apps.crimedatamodels',
 )
 
 LOGIN_URL = '/login/'
