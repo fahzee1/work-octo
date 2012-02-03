@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Error 404: Page Not Found{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/404.css">
+{% endblock %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block extra_javascript %}
+<script type="text/javascript" src="/static/js/jquery.cycle.all.min.js"></script>
+{% endblock %}
+{% block subnav %}
+{% endblock %}
+{% block content %}
+<div id="box-404">
+     <img src="/static/img/products/platinum-package/platinum-package-oh-no.jpg" alt="Oh No! 404 Page" />
+    <div id="box-content">
+        <h1><span>404</span>Page Not Found</h1>
+        <p>The page you requested can't be found. No need to call the police, it hasn't been stolen. We have been notified of the issue and working to address the problem. In the mean time, visit our <a href="{% url home %}">homepage</a> to learn how Protect America can secure your home while saving you money.  </p>
+        <div class="button-link"><a href="{% url home %}">Protect America Homepage ></a></div>
+    </div>
+    <div class="clear"></div>
+</div>
+{% businesstime %}
+    <div id="order-footer">
+        <div id="footer-package-section">
+            <h3>Search Our Site.</h3>
+            <p>Try searching our site to find what you are looking for.</p>
+            <form id="search-form" method="GET" action="http://homesecurity.protectamerica.com/search/">
+                <input type="text" id="q" name="q" placeholder="Enter Keywords"></input>
+                <button class="button-link" onClick="_gaq.push(['_trackEvent', 'Search', '404 Search Button', '404']);">Search Now ></button>
+            </form>
+        </div>
+        <div id="footer-call-now">
+            <h3>Give us a call.</h3>
+            <p>Our security professionals are here to answer any questions and help you protect your home and family today.</p>
+            <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+        </div>
+        <div id="footer-chat-now">
+            <h3>Chat online.</h3>
+            <p>Have a question about a system? Ready to order? Our security professionals are available to chat online right now.</p>
+            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Copper-B']);">Online Chat ></a></div>
+        </div>
+    </div>
+{% endbusinesstime %}
+
+{% endblock %}
