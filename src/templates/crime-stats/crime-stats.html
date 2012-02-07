@@ -4,15 +4,25 @@
 
 {% block content %}
 <div id="city-bar">
-    <h1>{{ city }}, {{ state }} </h1>
-    <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> {{ weather_info.temp }}&deg;F</span>
-    <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
-    <div id="share-buttons">
-        <span  class='st_facebook_vcount' displayText='Facebook'></span>
-        <span class='st_twitter_vcount'></span>
-        <span class='st_sharethis_vcount'></span>
-        <span class='st_plusone_vcount'></span>
+    <div id="city-bar-info">
+        <h1>{{ city }}, {{ state }} </h1>
+        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> {{ weather_info.temp }}&deg;F</span>
+        <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
+        <div id="share-buttons">
+            <span  class='st_facebook_vcount' displayText='Facebook'></span>
+            <span class='st_twitter_vcount'></span>
+            <span class='st_sharethis_vcount'></span>
+            <span class='st_plusone_vcount'></span>
 
+        </div>
+    </div>
+    <div id="city-search">
+        <h2>Find your City:</h2>
+        <form action="/crime-rate/search/" method="GET">
+            <input value="{{ request.GET.q }}" name="q" />
+            <button class="button-link">Find City ></button>
+            <a href="#" class="cancel-find">Cancel</a>
+        </form>
     </div>
     <div class="clear"></div>
 </div>
@@ -296,10 +306,18 @@
                 $('#city-bar').css({'position':'relative'});
             }
         });
+
+        $('.change-city').click(function(e) {
+            e.preventDefault();
+            $('#city-bar-info').hide();
+            $('#city-search').fadeIn();
+        });
+        $('.cancel-find').click(function(e) {
+            e.preventDefault();
+            $('#city-search').hide();
+            $('#city-bar-info').fadeIn();
+        });
     });
     </script>
 {% endaddtoblock "js" %}
-
-{% endblock %}  
-
-
+{% endblock %}

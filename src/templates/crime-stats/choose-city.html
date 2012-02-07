@@ -6,8 +6,8 @@
 {% block content %}
 <div id="city-bar" class="select">
     <h1>Find your City:</h1>
-    <form>
-        <input />
+    <form action="/crime-rate/search/" method="GET">
+        <input value="{{ request.GET.q }}" name="q" />
         <button class="button-link">Find City ></button>
         
     </form>
@@ -63,4 +63,19 @@
     </div>
 </div>
 <div class="clear"></div>
+{% addtoblock "js" %}
+    <script type="text/javascript"> 
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            if($(document).scrollTop() >= 208) {
+                $('#city-bar').css({'position':'fixed',
+                                    'top': '0px',
+                                    'z-index': '1000'});
+            } else {
+                $('#city-bar').css({'position':'relative'});
+            }
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}

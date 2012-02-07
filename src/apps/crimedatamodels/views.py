@@ -1,7 +1,7 @@
 import urllib
 from xml.dom.minidom import parseString
 
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -10,7 +10,8 @@ from apps.contact.forms import PAContactForm
 from apps.crimedatamodels.models import (CrimesByCity,
                                          CityCrimeStats,
                                          State,
-                                         CityLocation)
+                                         CityLocation,
+                                         ZipCode)
 
 def crime_stats(request, state, city):
     # validate city and state
@@ -42,6 +43,13 @@ def crime_stats(request, state, city):
 
     years.sort(reverse=True)
 
+    # get population type
+    if crimesbycity.population <= 40000:
+        pop_type = 'TOWN'
+    elif crimesbycity.population > 40000 and crimesbycity.population <= 750000:
+        pop_type = 'CITY'
+    else:
+        pop_type = 'METROPOLIS'
 
     # Google Weather API
     weather_info = {}
@@ -65,6 +73,7 @@ def crime_stats(request, state, city):
                                'lat': city.latitude,
                                'long': city.longitude,
                                'weather_info': weather_info,
+                               'pop_type': pop_type,
                                'forms': forms},
                               context_instance=RequestContext(request))
 
@@ -96,4 +105,71 @@ def choose_state(request):
     return render_to_response('crime-stats/choose-state.html',
                               {'states': states,
                                'forms': forms,},
+                              context_instance=RequestContext(request))
+
+def find_city(request):
+    ctx = {}
+    if 'q' in request.GET:
+        try:
+            # check to see if q is a int to assume a zipcode
+            zipcode = int(request.GET['q'])
+            # now check to see if the zip finds an ZipCode object
+            try:
+                zip_obj = ZipCode.objects.get(zip=zipcode)
+                city_obj = CityLocation.objects.get(
+                    city_name=zip_obj.city, state=zip_obj.state)
+                return HttpResponseRedirect(city_obj.get_absolute_url())
+            except ZipCode.DoesNotExist:
+                ctx['error'] = 'zip_not_found'
+        except:
+            # assume its a string and try to find a city state match
+            terms = request.GET['q'].split(',')
+            terms = [term.strip() for term in terms]
+            # check to see if terms[0] is a state
+            try:
+                state = State.objects.get(name=terms[0])
+            except State.DoesNotExist:
+                try:
+                    state = State.objects.get(abbreviation__iexact=terms[0])
+                except State.DoesNotExist:
+                    state = None
+            
+            # if state is not "None" and terms is more than 1 try to
+            # find a city otherwise redirect to the state page
+            if state is not None and len(terms) > 1:
+                try:
+                    city_obj = CityLocation.objects.get(
+                        state=state.abbreviation, city_name__iexact=terms[1])
+                    return HttpResponseRedirect(city_obj.get_absolute_url())
+                except CityLocation.DoesNotExist:
+                    ctx['error'] = 'city_not_found'
+            elif state is not None:
+                return HttpResponseRedirect(
+                    state.get_absolute_url() + '?q=%s' % request.GET['q']) 
+
+            # check to see if terms[0] is a city
+            cities = CityLocation.objects.filter(city_name__iexact=terms[0])
+            if len(cities) > 1 and len(terms) > 1:
+                try:
+                    state = State.objects.get(name=terms[1])
+                except State.DoesNotExist:
+                    try:
+                        state = State.objects.get(abbreviation__iexact=terms[1])
+                    except State.DoesNotExist:
+                        state = None
+                if state is not None:
+                    cities = cities.get(state=state.abbreviation)
+                    return HttpResponseRedirect(cities.get_absolute_url())
+            
+            # if cities == 1 then redirect
+            if len(cities) == 1:
+                return HttpResponseRedirect(cities[0].get_absolute_url())
+            ctx['matches'] = cities
+    forms = {}
+    forms['basic'] = PAContactForm()
+    ctx['forms'] = forms
+    states = State.objects.order_by('name')
+    ctx['states'] = states
+    return render_to_response('crime-stats/choose-state.html',
+                              ctx,
                               context_instance=RequestContext(request))
