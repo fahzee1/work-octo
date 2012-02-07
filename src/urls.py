@@ -93,6 +93,9 @@ else:
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
         dtt(r'404/?$', '404.html', '404', ctx={'page_name': '404'}),
 
+        # Local Pages
+        dtt(r'^local/?$', 'local-pages/index.html', 'local-pages'),
+
 
         # Home Security Packages
         dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
