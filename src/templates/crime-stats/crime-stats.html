@@ -4,15 +4,25 @@
 
 {% block content %}
 <div id="city-bar">
-    <h1>{{ city }}, {{ state }} </h1>
-    <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> {{ weather_info.temp }}&deg;F</span>
-    <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
-    <div id="share-buttons">
-        <span  class='st_facebook_vcount' displayText='Facebook'></span>
-        <span class='st_twitter_vcount'></span>
-        <span class='st_sharethis_vcount'></span>
-        <span class='st_plusone_vcount'></span>
+    <div id="city-bar-info">
+        <h1>{{ city }}, {{ state }} </h1>
+        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" alt="{{ weather_info.description }}"/> {{ weather_info.temp }}&deg;F</span>
+        <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
+        <div id="share-buttons">
+            <span  class='st_facebook_vcount' displayText='Facebook'></span>
+            <span class='st_twitter_vcount'></span>
+            <span class='st_sharethis_vcount'></span>
+            <span class='st_plusone_vcount'></span>
 
+        </div>
+    </div>
+    <div id="city-search">
+        <h2>Find your City:</h2>
+        <form action="/crime-rate/search/" method="GET">
+            <input value="{{ request.GET.q }}" name="q" />
+            <button class="button-link">Find City ></button>
+            <a href="#" class="cancel-find">Cancel</a>
+        </form>
     </div>
     <div class="clear"></div>
 </div>
@@ -30,16 +40,16 @@
         </thead>
         <tbody>
             <tr>
-                <td>Offender's Home</td>
-                <td>Offender's Home</td>
-                <td>Offender's Home</td>
-                <td class="omega">Offender's Home</td>
+                <td><span style="background: #FF0000">&nbsp;</span>Offender's Home</td>
+                <td><span style="background: yellow">&nbsp;</span>Offender's Home</td>
+                <td><span style="background: #0000FF">&nbsp;</span>Offender's Home</td>
+                <td class="omega"><span style="background: #00FF00">&nbsp;</span>Offender's Home</td>
             </tr>
             <tr>
-                <td>Offender's Workplace</td>
-                <td>Offender's Workplace</td>
-                <td>Offender's Workplace</td>
-                <td class="omega">Offender's Workplace</td>
+                <td><span style="background: #800000">&nbsp;</span>Offender's Workplace</td>
+                <td><span style="background: #fff">&nbsp;</span>Offender's Workplace</td>
+                <td><span style="background: #000080">&nbsp;</span>Offender's Workplace</td>
+                <td class="omega"><span style="background: #008000">&nbsp;</span>Offender's Workplace</td>
             </tr>
         </tbody>
     </table>
@@ -48,7 +58,7 @@
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
     <div class="side-ad">
-        <img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png"/>
+        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
     </div>
 </div>
 <div class="clear"></div>
@@ -58,7 +68,7 @@
         <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade }}-big.png" id="overall-grade" />
         <div id="scorecard-content">
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
-            <p>The security grade for Pflugerville, Texas is a B. This means you are living in a city that has crime rates below the national average. Crime rates vary from one part of a city to another, however. Just like any major city, some areas where you live are simply safer than others. Regardless of the statistics in your city, it is important that you feel safe in your home. To help keep your home and family safe, we highly recommend getting a home security system from Protect America.</p>
+            <p>{{ content }}</p>
             <div id="crime-grades">
                 <div id="burglary-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade }}-sml.png" />
@@ -296,10 +306,18 @@
                 $('#city-bar').css({'position':'relative'});
             }
         });
+
+        $('.change-city').click(function(e) {
+            e.preventDefault();
+            $('#city-bar-info').hide();
+            $('#city-search').fadeIn();
+        });
+        $('.cancel-find').click(function(e) {
+            e.preventDefault();
+            $('#city-search').hide();
+            $('#city-bar-info').fadeIn();
+        });
     });
     </script>
 {% endaddtoblock "js" %}
-
-{% endblock %}  
-
-
+{% endblock %}

@@ -42,6 +42,8 @@ urlpatterns = patterns('',
         namespace='testimonials')),
 
     # crime stats
+    url(r'crime-rate/search/?', 'apps.crimedatamodels.views.find_city',
+        name='crime-search'),
     url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s]+)/?', 'apps.crimedatamodels.views.crime_stats',
         name='crime-stats'),
     url(r'crime-rate/(?P<state>[A-Z]{2})/?', 'apps.crimedatamodels.views.choose_city',
