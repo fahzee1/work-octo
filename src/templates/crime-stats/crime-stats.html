@@ -1,6 +1,6 @@
 {% extends "crime-stats/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
-{% block page_title %}{{ city }}, {{ state }} Crime Statstics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+{% block page_title %}{{ city }}, {{ state }} Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
 
 {% block content %}
 <div id="city-bar">
@@ -57,9 +57,11 @@
 </div>
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
+    {% comment %}
     <div class="side-ad">
         <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
     </div>
+    {% endcomment %}
 </div>
 <div class="clear"></div>
 <div id="crime-statistics">
@@ -68,7 +70,7 @@
         <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade }}-big.png" id="overall-grade" />
         <div id="scorecard-content">
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
-            <p>{{ content }}</p>
+            <p>{{ content|safe }}</p>
             <div id="crime-grades">
                 <div id="burglary-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade }}-sml.png" />

@@ -44,7 +44,7 @@ urlpatterns = patterns('',
     # crime stats
     url(r'crime-rate/search/?', 'apps.crimedatamodels.views.find_city',
         name='crime-search'),
-    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s]+)/?', 'apps.crimedatamodels.views.crime_stats',
+    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.crimedatamodels.views.crime_stats',
         name='crime-stats'),
     url(r'crime-rate/(?P<state>[A-Z]{2})/?', 'apps.crimedatamodels.views.choose_city',
         name='choose-city'),
@@ -79,7 +79,6 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
-        
     )
 else:
 

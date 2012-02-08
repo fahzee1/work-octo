@@ -1,7 +1,7 @@
 {% extends "crime-stats/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
 
-{% block page_title %}{{ state }} Crime Statstics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+{% block page_title %}{{ state }} Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
 
 {% block content %}
 <div id="city-bar" class="select">
@@ -58,9 +58,11 @@
 
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
+    {% comment %}
     <div class="side-ad">
-        <img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png"/>
+        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
     </div>
+    {% endcomment %}
 </div>
 <div class="clear"></div>
 {% addtoblock "js" %}

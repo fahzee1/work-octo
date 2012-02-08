@@ -45,6 +45,7 @@ def crime_stats(request, state, city):
     except State.DoesNotExist:
         raise Http404
     try:
+        city = city.replace('+', ' ')
         city = CityLocation.objects.get(city_name=city,
             state=state.abbreviation)
     except CityLocation.DoesNotExist:
@@ -94,7 +95,6 @@ def crime_stats(request, state, city):
     weather_info['icon'] = '%s-icon.png' % weather_icon
 
     forms = {}
-    print content.render(city)
     forms['basic'] = PAContactForm()
     return render_to_response('crime-stats/crime-stats.html',
                               {'crime_stats': crime_stats,
