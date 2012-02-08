@@ -102,8 +102,10 @@
                 </div>
                 <div class="clear"></div>
             </div>
+            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}
+            </div>
         </div>
-        <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}</div>
+
         <div class="clear"></div>
     </div>
     <div id="burglary-crime-statistics">
@@ -299,16 +301,17 @@
 {% addtoblock "js" %}
     <script type="text/javascript"> 
     $(document).ready(function() {
-        $(window).scroll(function() {
-            if($(document).scrollTop() >= 208) {
-                $('#city-bar').css({'position':'fixed',
-                                    'top': '0px',
-                                    'z-index': '1000'});
-            } else {
-                $('#city-bar').css({'position':'relative'});
-            }
-        });
-
+        if(!($.browser.msie && $.browser.version == '7.0')) {
+            $(window).scroll(function() {
+                if($(document).scrollTop() >= 208) {
+                    $('#city-bar').css({'position':'fixed',
+                                        'top': '0px',
+                                        'z-index': '1000'});
+                } else {
+                    $('#city-bar').css({'position':'relative'});
+                }
+            });
+        }
         $('.change-city').click(function(e) {
             e.preventDefault();
             $('#city-bar-info').hide();
