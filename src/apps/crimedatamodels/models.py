@@ -202,5 +202,9 @@ class CrimeContent(models.Model):
     grade = models.CharField(max_length=1, choices=GRADE_CHOICES)
     content = models.TextField()
 
+    def render(self, obj):
+        content = self.content.replace('[TOWN]', obj.city_name).replace('[STATE]', obj.state)
+        return content
+
     def __unicode__(self):
         return '%s - %s' % (self.population_type, self.grade)

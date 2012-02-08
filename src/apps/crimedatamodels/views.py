@@ -11,7 +11,32 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          CityCrimeStats,
                                          State,
                                          CityLocation,
-                                         ZipCode)
+                                         ZipCode,
+                                         CrimeContent)
+
+WEATHER_MAP = {
+    'sunny.gif': 'sunny',
+    'mostly_sunny.gif': 'partly-cloudy',
+    'partly_sunny.gif': 'partly-cloudy',
+    'mostly_cloudy.gif': 'cloudy',
+    'chance_of_storm.gif': 'lightning',
+    'rain.gif': 'rain',
+    'chance_of_rain.gif': 'rain',
+    'chance_of_snow.gif': 'snow',
+    'cloudy.gif': 'cloudy',
+    'mist.gif': 'smoke',
+    'storm.gif': 'lightning',
+    'thunderstorm.gif': 'lightning',
+    'chance_of_tstorm.gif': 'lightning',
+    'sleet.gif': 'snow',
+    'snow.gif': 'snow',
+    'icy.gif': 'snow',
+    'dust.gif': 'dust',
+    'fog.gif': 'smoke',
+    'smoke.gif': 'smoke',
+    'haze.gif': 'smoke',
+    'flurries.gif': 'snow',
+}
 
 def crime_stats(request, state, city):
     # validate city and state
@@ -51,6 +76,9 @@ def crime_stats(request, state, city):
     else:
         pop_type = 'METROPOLIS'
 
+    # get content
+    content = CrimeContent.objects.get(grade=crime_stats[years[0]]['stats'].average_grade,population_type=pop_type)
+
     # Google Weather API
     weather_info = {}
     weather_xml = urllib.urlopen(
@@ -61,8 +89,12 @@ def crime_stats(request, state, city):
     current_conditions = weather[0].getElementsByTagName('current_conditions')[0]
     weather_info['temp'] = current_conditions.childNodes[1].getAttribute('data')
     weather_info['description'] = current_conditions.childNodes[0].getAttribute('data')
+    google_icon = current_conditions.childNodes[4].getAttribute('data')
+    weather_icon = WEATHER_MAP[google_icon.split('/')[-1]]
+    weather_info['icon'] = '%s-icon.png' % weather_icon
 
     forms = {}
+    print content.render(city)
     forms['basic'] = PAContactForm()
     return render_to_response('crime-stats/crime-stats.html',
                               {'crime_stats': crime_stats,
@@ -74,6 +106,7 @@ def crime_stats(request, state, city):
                                'long': city.longitude,
                                'weather_info': weather_info,
                                'pop_type': pop_type,
+                               'content': content.render(city),
                                'forms': forms},
                               context_instance=RequestContext(request))
 

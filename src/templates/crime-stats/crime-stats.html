@@ -6,7 +6,7 @@
 <div id="city-bar">
     <div id="city-bar-info">
         <h1>{{ city }}, {{ state }} </h1>
-        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> {{ weather_info.temp }}&deg;F</span>
+        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" alt="{{ weather_info.description }}"/> {{ weather_info.temp }}&deg;F</span>
         <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
         <div id="share-buttons">
             <span  class='st_facebook_vcount' displayText='Facebook'></span>
@@ -58,7 +58,7 @@
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
     <div class="side-ad">
-        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
+        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
     </div>
 </div>
 <div class="clear"></div>
@@ -68,7 +68,7 @@
         <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade }}-big.png" id="overall-grade" />
         <div id="scorecard-content">
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
-            <p>The security grade for Pflugerville, Texas is a B. This means you are living in a city that has crime rates below the national average. Crime rates vary from one part of a city to another, however. Just like any major city, some areas where you live are simply safer than others. Regardless of the statistics in your city, it is important that you feel safe in your home. To help keep your home and family safe, we highly recommend getting a home security system from Protect America.</p>
+            <p>{{ content }}</p>
             <div id="crime-grades">
                 <div id="burglary-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade }}-sml.png" />
