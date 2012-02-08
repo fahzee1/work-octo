@@ -6,7 +6,7 @@
 <div id="city-bar">
     <div id="city-bar-info">
         <h1>{{ city }}, {{ state }} </h1>
-        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" alt="{{ weather_info.description }}"/> {{ weather_info.temp }}&deg;F</span>
+        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" alt="{{ weather_info.description }}" title="{{ weather_info.description }}"/> {{ weather_info.temp }}&deg;F</span>
         <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
         <div id="share-buttons">
             <span  class='st_facebook_vcount' displayText='Facebook'></span>
@@ -73,37 +73,39 @@
             <p>{{ content|safe }}</p>
             <div id="crime-grades">
                 <div id="burglary-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade|lower }}-sml.png" />
                     <p>Burglary</p>
                 </div>
                 <div id="murder-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade|lower }}-sml.png" />
                     <p>Murder</p>
                 </div>
                 <div id="rape-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade|lower }}-sml.png" />
                     <p>Forcible Rape</p>
                 </div>
                 <div id="robbery-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade|lower }}-sml.png" />
                     <p>Robbery</p>
                 </div>
                 <div id="assault-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade|lower }}-sml.png" />
                     <p>Aggravated Assault</p>
                 </div>
                 <div id="auto-theft-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade|lower }}-sml.png" />
                     <p>Auto Theft</p>
                 </div>
                 <div id="larceny-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade|lower }}-sml.png" />
                     <p>Larceny</p>
                 </div>
                 <div class="clear"></div>
             </div>
+            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}
+            </div>
         </div>
-        <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}</div>
+
         <div class="clear"></div>
     </div>
     <div id="burglary-crime-statistics">
@@ -299,16 +301,17 @@
 {% addtoblock "js" %}
     <script type="text/javascript"> 
     $(document).ready(function() {
-        $(window).scroll(function() {
-            if($(document).scrollTop() >= 208) {
-                $('#city-bar').css({'position':'fixed',
-                                    'top': '0px',
-                                    'z-index': '1000'});
-            } else {
-                $('#city-bar').css({'position':'relative'});
-            }
-        });
-
+        if(!($.browser.msie && $.browser.version == '7.0')) {
+            $(window).scroll(function() {
+                if($(document).scrollTop() >= 208) {
+                    $('#city-bar').css({'position':'fixed',
+                                        'top': '0px',
+                                        'z-index': '1000'});
+                } else {
+                    $('#city-bar').css({'position':'relative'});
+                }
+            });
+        }
         $('.change-city').click(function(e) {
             e.preventDefault();
             $('#city-bar-info').hide();
