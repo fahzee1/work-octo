@@ -1,9 +1,151 @@
 {% extends "packages/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security Packages | Protect America Home Security{% endblock %}
 {% block content %}
 
+<div id="package-fan">
+    <div id="copper-card" class="card">
+        <h2>Copper</h2>
+        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
+        <p>The <strong>most affordable</strong> way to secure peace of mind.</p>
+        <h3><sup>$</sup>42.99/month</h3>
+
+
+        <ul>
+            <li><strong>1</strong> GE Simon XT Control Panel</li>
+            <li><strong>3</strong> Door / Window Sensors</li>
+            <li><strong>1</strong> Motion Detector</li>
+        </ul>
+        <h4>Upfront Price: <strong>Free</strong></h4>
+        <div class="button-link"><a href="#">Find Out More ></a></div>
+    </div>
+    <div id="bronze-card" class="mid card">
+        <h2>Bronze</h2>
+        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
+
+        <p>The <strong>perfect solution</strong> to secure your starter home.</p>
+        <h3><sup>$</sup>42.99/month</h3>
+
+
+        <ul>
+            <li><strong>1</strong> GE Simon XT Control Panel</li>
+            <li><strong>7</strong> Door / Window Sensors</li>
+            <li><strong>1</strong> Motion Detector</li>
+        </ul>
+        <h4>Upfront Price: <strong>Free</strong></h4>
+        <div class="button-link"><a href="#">Find Out More ></a></div>
+    </div>
+    <div id="silver-card" class="big card">
+        <h2>Silver</h2>
+        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
+
+        <p><strong>Perimeter protection</strong> for the average American home</p>
+        <h3><sup>$</sup>42.99/month</h3>
+
+
+        <ul>
+            <li><strong>1</strong> GE Simon XT Control Panel</li>
+            <li><strong>10</strong> Door / Window Sensors</li>
+            <li><strong>1</strong> Motion Detector</li>
+        </ul>
+        <h4>Upfront Price: <strong>Free</strong></h4>
+        <div class="button-link"><a href="#">Find Out More ></a></div>
+    </div>
+    <div id="gold-card" class="mid card">
+        <h2>Gold</h2>
+        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
+        <p><strong>Unmatched security</strong> for larger sized homes</p>
+        <h3><sup>$</sup>42.99/month</h3>
+
+
+        <ul>
+            <li><strong>1</strong> GE Simon XT Control Panel</li>
+            <li><strong>12</strong> Door / Window Sensors</li>
+            <li><strong>1</strong> Motion Detector</li>
+        </ul>
+        <h4>Upfront Price: <strong>Free</strong></h4>
+        <div class="button-link"><a href="#">Find Out More ></a></div>
+    </div>
+    <div id="platinum-card" class="card">
+        <h2>Platinum</h2>
+        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
+
+        <p>Our <strong>most comprehensive</strong> security system package</strong></p>
+
+        <h3><sup>$</sup>42.99/month</h3>
+
+
+        <ul>
+            <li><strong>1</strong> GE Simon XT Control Panel</li>
+            <li><strong>15</strong> Door / Window Sensors</li>
+            <li><strong>1</strong> Motion Detector</li>
+        </ul>
+        <h4>Upfront Price: <strong>Free</strong></h4>
+        <div class="button-link"><a href="#">Find Out More ></a></div>
+    </div>
+
+</div>
+<div class="clear"></div>
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "affordable" "limit=4&words=50" %}
+    </ul>
+</div>
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.effects.js"></script>
+<script type="text/javascript">
+    var inT = false;
+
+    $('#package-fan div.card').mouseenter(function () {
+        console.log(inT);
+        if(inT == true) {
+            return false;
+        }
+        obj = $(this);
+        inT = true;
+        runTransition(this);
+    });
+    var td = 0;
+    function cTransition() {
+        td++;
+        console.log(td);
+        if(td == 4){
+            inT = false;
+            td = 0;
+        }
+        return;
+    }
+    function runTransition(obj) {
+        var pE = $(obj).prev();
+        var nE = $(obj).next();
+        var cE = $(obj);
+        console.log(cE.index());
+        if(!cE.hasClass('big')) {
+            $('#package-fan div.card').each(function(i) {
+                cClass='';
+                obj = $(this);
+                if(obj.hasClass('mid')) {
+                    cClass = 'mid';
+                } else if(obj.hasClass('big')) {
+                    cClass = 'big';
+                }
+                console.log('obj: ' + obj.index() + ' currentClass: ' + cClass);
+                if(i == pE.index()){
+                    obj.switchClass(cClass, 'mid', 100, function() {
+                        
+                    });
+                } else if(i == nE.index()) {
+                    obj.switchClass(cClass, 'mid', 100, function() {cTransition();});
+                } else if(i == cE.index()) {
+                    obj.switchClass(cClass, 'big', 100, function() {cTransition();});
+                } else {
+                    obj.switchClass(cClass, '', 100, function() {cTransition();});
+                }
+            });
+        }
+    }
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}  
-{% block sidebar %}
-{{ block.super }}
 
-
-{% endblock %}
