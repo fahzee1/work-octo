@@ -4,7 +4,7 @@
 {% endblock %}
 {% block subnav_child %}
 <ul>
-	<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url copper %}">Copper Package</a></li>
+	<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url copper-b %}">Copper Package</a></li>
 
 	<li {% if 'interactive-video' in active_pages %}class="active"{% endif %}><a href="{% url interactive-video %}">Bronze Package</a></li>
 	<li {% if 'monitoring' in active_pages %}class="active"{% endif %}><a href="{% url monitoring %}">Silver Package</a></li>
@@ -13,12 +13,15 @@
 </ul>
 {% endblock %}
 {% block subnav_parent %}
-<ul id="packages-navigation">
-	<li class="copper {% if 'copper' in active_pages %}active{% endif %}"><a href="{% url copper %}">Copper Package<span>3 Doors / Windows &bull; Motion Detector</span></a>{% if 'copper' in active_pages %}<img src="{{ STATIC_URL }}/img/products/package-nav-arrow.png" id="package-active-arrow" />{% endif %}</li>
+<ul id="sub-nav-parent">
+    <li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/packages" title="View all of our alarms packages and choose the right package and service for your home.">Packages</a></li>
+	<li {% if 'equipment' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/equipment" title="View all the available GE wireless home security system equipment and how it works.">Equipment</a></li>
+	<li><a href="http://www.protectamerica.com/pa/monitoring" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">Monitoring</a></li>
+	<li><a href="http://www.protectamerica.com/pa/existing-home-security-system" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">Existing Systems</a></li>
+	<li><a href="http://www.protectamerica.com/pa/wireless-security-camera" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">Cameras</a></li>
+	<li><a href="http://www.protectamerica.com/pa/vehicle-gps-tracking" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">GPS</a></li>
+	<li><a href="http://www.protectamerica.com/pa/advantage" title="Compare Protect America to ADT Security and other security companies.">Our Advantage</a></li>
+	<li><a href="http://www.protectamerica.com/pa/order" title="Order your Protect America Home Security System Today!">Order Now</a></li>
 
-	<li class="bronze {% if 'bronze' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/pa/bronze">Bronze Package<span>7 Doors / Windows &bull; Motion Detector</span></a></li>
-	<li class="silver {% if 'silver' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/pa/silver">Silver Package<span>10 Doors / Windows &bull; Motion Detector</span></a></li>
-	<li class="gold {% if 'gold' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/pa/gold">Gold Package<span>12 Doors / Windows &bull; Motion Detector</span></a></li>
-	<li class="platinum omega {% if 'platinum' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/pa/platinum">Platinum Package<span>15 Doors / Windows &bull; Motion Detector</span></a></li>
 </ul>
 {% endblock %}
