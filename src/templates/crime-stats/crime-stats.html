@@ -9,10 +9,10 @@
         <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" alt="{{ weather_info.description }}" title="{{ weather_info.description }}"/> {{ weather_info.temp }}&deg;F</span>
         <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
         <div id="share-buttons">
-            <span  class='st_facebook_vcount' displayText='Facebook'></span>
-            <span class='st_twitter_vcount'></span>
-            <span class='st_sharethis_vcount'></span>
-            <span class='st_plusone_vcount'></span>
+            <span class='st_facebook_vcount' displayText='Facebook' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Facebook', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_twitter_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Twitter', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_sharethis_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Share', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_plusone_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Google PlusOne', '{{ city }}, {{ state }} Crime Stats']);"></span>
 
         </div>
     </div>
