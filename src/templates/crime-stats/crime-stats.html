@@ -67,7 +67,7 @@
 <div id="crime-statistics">
     <h2>Crime Grade and Statistics Scorecard</h2>
     <div id="crime-grade-scorecard">
-        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade }}-big.png" id="overall-grade" />
+        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade|lower }}-big.png" id="overall-grade" />
         <div id="scorecard-content">
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
             <p>{{ content|safe }}</p>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}
+            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protecting your home and family</p>{% endbusinesstime %}
             </div>
         </div>
 
@@ -110,7 +110,7 @@
     </div>
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Burglary Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the gambit of burglary. </p>
         <table>
             <thead>
                 <tr>
