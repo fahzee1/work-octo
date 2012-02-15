@@ -93,11 +93,11 @@ else:
         dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
 
             # Product > Packages B
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper-b.html', 'copper-b', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze-b.html', 'bronze-b', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver-b.html', 'silver-b', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold-b.html', 'gold-b', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum-b.html', 'platinum-b', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
             
 
 
