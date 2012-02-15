@@ -23,10 +23,10 @@
             {{ weather_info.temp }}&deg;F {% if city == "Forks" and state == "WA" %}&bull; Beware of Werewolves!{% endif %}</span>
         <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
         <div id="share-buttons">
-            <span  class='st_facebook_vcount' displayText='Facebook'></span>
-            <span class='st_twitter_vcount'></span>
-            <span class='st_sharethis_vcount'></span>
-            <span class='st_plusone_vcount'></span>
+            <span class='st_facebook_vcount' displayText='Facebook' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Facebook', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_twitter_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Twitter', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_sharethis_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Share', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_plusone_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Google PlusOne', '{{ city }}, {{ state }} Crime Stats']);"></span>
 
         </div>
     </div>
@@ -81,42 +81,42 @@
 <div id="crime-statistics">
     <h2>Crime Grade and Statistics Scorecard</h2>
     <div id="crime-grade-scorecard">
-        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade }}-big.png" id="overall-grade" />
+        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade|lower }}-big.png" id="overall-grade" />
         <div id="scorecard-content">
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
             <p>{{ content|safe }}</p>
             <div id="crime-grades">
                 <div id="burglary-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade|lower }}-sml.png" />
                     <p>Burglary</p>
                 </div>
                 <div id="murder-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade|lower }}-sml.png" />
                     <p>Murder</p>
                 </div>
                 <div id="rape-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade|lower }}-sml.png" />
                     <p>Forcible Rape</p>
                 </div>
                 <div id="robbery-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade|lower }}-sml.png" />
                     <p>Robbery</p>
                 </div>
                 <div id="assault-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade|lower }}-sml.png" />
                     <p>Aggravated Assault</p>
                 </div>
                 <div id="auto-theft-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade|lower }}-sml.png" />
                     <p>Auto Theft</p>
                 </div>
                 <div id="larceny-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade|lower }}-sml.png" />
                     <p>Larceny</p>
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}
+            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protecting your home and family</p>{% endbusinesstime %}
             </div>
         </div>
 
@@ -126,7 +126,7 @@
 
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Burglary Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the gambit of burglary. </p>
         <table>
             <thead>
                 <tr>

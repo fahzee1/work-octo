@@ -18,6 +18,7 @@ WEATHER_MAP = {
     'sunny.gif': 'sunny',
     'mostly_sunny.gif': 'partly-cloudy',
     'partly_sunny.gif': 'partly-cloudy',
+    'partly_cloudy.gif': 'partly-cloudy',
     'mostly_cloudy.gif': 'cloudy',
     'chance_of_storm.gif': 'lightning',
     'rain.gif': 'rain',
