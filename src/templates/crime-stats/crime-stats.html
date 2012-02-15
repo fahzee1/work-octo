@@ -6,13 +6,27 @@
 <div id="city-bar">
     <div id="city-bar-info">
         <h1>{{ city }}, {{ state }} </h1>
-        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" alt="{{ weather_info.description }}" title="{{ weather_info.description }}"/> {{ weather_info.temp }}&deg;F</span>
+        <span id="city-info">
+            <strong>
+                Population: {{ latest_year.info.population|intcomma }} 
+                {% if city == "Forks" and state == "WA" %}&bull; Vampires: 8{% endif %}
+                {% if city == "Roswell" and state == "NM" %}&bull; Alien Abductions: 11.4{% endif %}
+            </strong>
+            Current Temp: 
+            {% if city == "Philadelphia" and state == "PA" %}
+            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/sunny-icon.png" title="It's always sunny in Philadelphia!" alt="It's always sunny in Philadelphia!"/> 
+
+            {% else %}
+            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" title="{{ weather_info.description }}" alt="{{ weather_info.description }}"/> 
+            {% endif %}
+
+            {{ weather_info.temp }}&deg;F {% if city == "Forks" and state == "WA" %}&bull; Beware of Werewolves!{% endif %}</span>
         <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
         <div id="share-buttons">
-            <span  class='st_facebook_vcount' displayText='Facebook'></span>
-            <span class='st_twitter_vcount'></span>
-            <span class='st_sharethis_vcount'></span>
-            <span class='st_plusone_vcount'></span>
+            <span class='st_facebook_vcount' displayText='Facebook' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Facebook', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_twitter_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Twitter', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_sharethis_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Share', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_plusone_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Google PlusOne', '{{ city }}, {{ state }} Crime Stats']);"></span>
 
         </div>
     </div>
@@ -67,7 +81,7 @@
 <div id="crime-statistics">
     <h2>Crime Grade and Statistics Scorecard</h2>
     <div id="crime-grade-scorecard">
-        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade }}-big.png" id="overall-grade" />
+        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade|lower }}-big.png" id="overall-grade" />
         <div id="scorecard-content">
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
             <p>{{ content|safe }}</p>
@@ -102,15 +116,17 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}
+            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protecting your home and family</p>{% endbusinesstime %}
             </div>
         </div>
 
         <div class="clear"></div>
     </div>
+</div>
+
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Burglary Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the gambit of burglary. </p>
         <table>
             <thead>
                 <tr>
@@ -189,6 +205,8 @@
         </table>
         <div class="clear"></div>
     </div>
+{% include "order/generic-call-box.html" %}
+
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Robbery Crime Statistics</h2>
         <p>Robbery is when someone steals someone else's property through violence or intimidation rather then stealth or fraud.</p>
@@ -298,6 +316,8 @@
         <div class="clear"></div>
     </div>
 </div>
+<div class="clear"></div>
+
 {% addtoblock "js" %}
     <script type="text/javascript"> 
     $(document).ready(function() {
