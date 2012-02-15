@@ -11,6 +11,18 @@ from django.utils import simplejson
 from apps.contact.forms import (PAContactForm, BasicContactForm, OrderForm, 
     CeoFeedback)
 
+def post_to_old_pa(data):
+    import httplib, urllib
+    params = urllib.urlencode(data)
+    headers = {"Content-type": "application/x-www-form-urlencoded",
+        "Accept": "text/plain"}
+    conn = httplib.HTTPConnection("www.protectamerica.com:80")
+    conn.request("POST", "/scripts/go_lead_ajax.php", params, headers)
+    response = conn.getresponse()
+    data = response.read()
+    conn.close()
+
+
 def send_email(recipient):
     # send emails to submitter and to the dialer 
 
@@ -51,17 +63,6 @@ def ajax_post(request):
     if request.method != "POST":
         return HttpResponseRedirect('/')
 
-    def post_to_old_pa(data):
-        import httplib, urllib
-        params = urllib.urlencode(data)
-        headers = {"Content-type": "application/x-www-form-urlencoded",
-            "Accept": "text/plain"}
-        conn = httplib.HTTPConnection("www.protectamerica.com:80")
-        conn.request("POST", "/scripts/go_lead_ajax.php", params, headers)
-        response = conn.getresponse()
-        data = response.read()
-        conn.close()
-
     response_dict = {}
     form_type = request.POST['form']
 
@@ -92,6 +93,13 @@ def ajax_post(request):
             if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC']:
                 source = agentid
                 agentid = 'HOMESITE'
+
+            # Special Handling for 5LYNX pages
+            # All 5LYNX leads should have their source
+            # changed to 5LYNX
+
+            if agentid == 'a01526':
+                source = '5LYNX'
 
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
@@ -132,7 +140,7 @@ def main(request):
         formset = BasicContactForm(request.POST)
         if formset.is_valid():
             formset.save()
-            send_email(formset.cleaned_data['email'])
+            # send_email(formset.cleaned_data['email'])
     else:
         formset = BasicContactForm()
 
@@ -146,7 +154,7 @@ def ceo(request):
         formset = CeoFeedback(request.POST)
         if formset.is_valid():
             formset.save()
-            send_email(formset.cleaned_data['email'])
+            # send_email(formset.cleaned_data['email'])
     else:
         formset = CeoFeedback()
 
@@ -164,8 +172,55 @@ def order_form(request):
     if request.method == "POST":
         formset = OrderForm(request.POST)
         if formset.is_valid():
-            formset.save()
-            send_email(formset.cleaned_data['email'])
+            fdata = formset.cleaned_data
+            agentid = request.COOKIES.get('refer_id', None)
+            if agentid is None:
+                agentid = request.session.get('refer_id', None)
+
+            affkey = request.COOKIES.get('affkey', None)
+            if affkey is None:
+                affkey = request.session.get('affkey', None)
+
+            source = request.COOKIES.get('source', None)
+            if source is None:
+                source = request.session.get('source', None)
+            
+            leadid = request.COOKIES.get('leadid', None)
+            if leadid is None:
+                leadid = request.session.get('leadid', None)
+
+            # Special Handling for SEM Landing pages
+            # All agent ids should be HOMESITE and the SOURCE
+            # should become the agent ID
+
+            if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC']:
+                source = agentid
+                agentid = 'HOMESITE'
+
+            # Special Handling for 5LYNX pages
+            # All 5LYNX leads should have their source
+            # changed to 5LYNX
+
+            if agentid == 'a01526':
+                source = '5LYNX'
+
+            padata = {'l_fname': fdata['name'],
+                      'email_addr': fdata['email'],
+                      'l_phone1': fdata['phone'],
+                      'agentid': agentid,
+                      'source': source,
+                      'key3': affkey,
+                      'leadid': leadid,
+                      }
+            post_to_old_pa(padata)
+            form = formset.save(commit=False)
+
+            if request.META['HTTP_REFERER'] is not None:
+                form.referer_page = request.META['HTTP_REFERER']
+            
+            form.save()
+            # send_email(formset.cleaned_data['email'])
+            return HttpResponseRedirect('http://www.protectamerica.com/pa/thank_you')
     else:
         formset = OrderForm()
 
