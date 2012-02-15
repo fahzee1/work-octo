@@ -6,7 +6,21 @@
 <div id="city-bar">
     <div id="city-bar-info">
         <h1>{{ city }}, {{ state }} </h1>
-        <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" alt="{{ weather_info.description }}"/> {{ weather_info.temp }}&deg;F</span>
+        <span id="city-info">
+            <strong>
+                Population: {{ latest_year.info.population|intcomma }} 
+                {% if city == "Forks" and state == "WA" %}&bull; Vampires: 8{% endif %}
+                {% if city == "Roswell" and state == "NM" %}&bull; Alien Abductions: 11.4{% endif %}
+            </strong>
+            Current Temp: 
+            {% if city == "Philadelphia" and state == "PA" %}
+            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/sunny-icon.png" title="It's always sunny in Philadelphia!" alt="It's always sunny in Philadelphia!"/> 
+
+            {% else %}
+            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" title="{{ weather_info.description }}" alt="{{ weather_info.description }}"/> 
+            {% endif %}
+
+            {{ weather_info.temp }}&deg;F {% if city == "Forks" and state == "WA" %}&bull; Beware of Werewolves!{% endif %}</span>
         <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
         <div id="share-buttons">
             <span  class='st_facebook_vcount' displayText='Facebook'></span>
