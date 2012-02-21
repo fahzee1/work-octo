@@ -79,6 +79,7 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
+
     )
 else:
 
@@ -86,11 +87,14 @@ else:
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+        # Local Pages
+        dtt(r'^local/?$', 'local-pages/index.html', 'local-pages'),
 
         # Home Security Packages
-        dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
+        dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
 
             # Product > Packages B
+
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'security-packages'),

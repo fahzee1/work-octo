@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block css %}
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/local-pages.css">
+{% endblock %}
+    {% block navigation %}
+    <div id="navigation">
+    	<ul>
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+    		<li><a href="http://www.protectamerica.com/homesite?affKey=LocalSearch&g=copper" title="Home Security Systems and Products">Products</a></li>
+    		<li><a href="http://www.protectamerica.com/homesite?affKey=LocalSearch&g=equipment" title="Protect America Home Security Equipment">Equipment</a></li>
+    		<li><a href="http://www.protectamerica.com/homesite?affKey=LocalSearch&g=monitoring" title="Contact Protect America">Monitoring</a></li>
+       		<li><a href="http://www.protectamerica.com/homesite?affKey=LocalSearch&g=order" title="Contact Protect America">Order Now</a></li>
+    	</ul>
+    	<div id="search-area">
+    		<form name="search2" method="GET" action="http://homesecurity.protectamerica.com/search/">
+    			<input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
+    		</form>
+    	</div>
+    </div>
+    {% endblock %}
+{% block subnav_parent %}
+{% endblock %}
+
+{% block subnav_child %}
+
+{% endblock %}
