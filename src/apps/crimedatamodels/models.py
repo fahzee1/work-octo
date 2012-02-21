@@ -2,6 +2,18 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
+GRADE_CHOICES = (
+    ('A', 'A'),
+    ('B', 'B'),
+    ('C', 'C'),
+    ('D', 'D'),
+    ('F', 'F'),
+)
+POPULATION_TYPES = (
+    ('TOWN', 'Town'),
+    ('CITY', 'City'),
+    ('METROPOLIS', 'Metropolis'),
+)
 
 class ZipCode(models.Model):
     zip = models.CharField(primary_key=True, max_length=5, unique=True)
@@ -41,6 +53,10 @@ class CityLocation(models.Model):
     def get_absolute_url(self):
         return reverse('crime-stats', args=[self.state,
             self.city_name])
+
+    def __unicode__(self):
+        return '%s, %s' % (self.city_name, self.state)
+
 
 class CrimesByCity(models.Model):
     fbi_city_name = models.CharField(max_length=64)
@@ -179,3 +195,16 @@ class StateCrimeStats(models.Model):
         if val is None:
             return val
         return 1e5*val/max(1.0, self.population)
+
+class CrimeContent(models.Model):
+    population_type = models.CharField(max_length=10,
+        choices=POPULATION_TYPES)
+    grade = models.CharField(max_length=1, choices=GRADE_CHOICES)
+    content = models.TextField()
+
+    def render(self, obj):
+        content = self.content.replace('[TOWN]', obj.city_name).replace('[STATE]', obj.state)
+        return content
+
+    def __unicode__(self):
+        return '%s - %s' % (self.population_type, self.grade)

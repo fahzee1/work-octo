@@ -1,18 +1,42 @@
 {% extends "crime-stats/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
-{% block page_title %}{{ city }}, {{ state }} Crime Statstics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+{% block page_title %}{{ city }}, {{ state }} Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
 
 {% block content %}
 <div id="city-bar">
-    <h1>{{ city }}, {{ state }} </h1>
-    <span id="city-info"><strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> {{ weather_info.temp }}&deg;F</span>
-    <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
-    <div id="share-buttons">
-        <span  class='st_facebook_vcount' displayText='Facebook'></span>
-        <span class='st_twitter_vcount'></span>
-        <span class='st_sharethis_vcount'></span>
-        <span class='st_plusone_vcount'></span>
+    <div id="city-bar-info">
+        <h1>{{ city }}, {{ state }} </h1>
+        <span id="city-info">
+            <strong>
+                Population: {{ latest_year.info.population|intcomma }} 
+                {% if city == "Forks" and state == "WA" %}&bull; Vampires: 8{% endif %}
+                {% if city == "Roswell" and state == "NM" %}&bull; Alien Abductions: 11.4{% endif %}
+            </strong>
+            Current Temp: 
+            {% if city == "Philadelphia" and state == "PA" %}
+            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/sunny-icon.png" title="It's always sunny in Philadelphia!" alt="It's always sunny in Philadelphia!"/> 
 
+            {% else %}
+            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" title="{{ weather_info.description }}" alt="{{ weather_info.description }}"/> 
+            {% endif %}
+
+            {{ weather_info.temp }}&deg;F {% if city == "Forks" and state == "WA" %}&bull; Beware of Werewolves!{% endif %}</span>
+        <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
+        <div id="share-buttons">
+            <span class='st_facebook_vcount' displayText='Facebook' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Facebook', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_twitter_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Twitter', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_sharethis_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Share', '{{ city }}, {{ state }} Crime Stats']);"></span>
+            <span class='st_plusone_vcount' onClick="_gaq.push(['_trackEvent', 'Share This Buttons', 'Google PlusOne', '{{ city }}, {{ state }} Crime Stats']);"></span>
+
+        </div>
+    </div>
+    <div id="city-search">
+        <h2>Find your City:</h2>
+        <form action="/crime-rate/search/" method="GET">
+            <input value="{{ request.GET.q }}" name="q" />
+            <button class="button-link">Find City ></button>
+            <a href="#" class="cancel-find">Cancel</a>
+        </form>
     </div>
     <div class="clear"></div>
 </div>
@@ -47,56 +71,62 @@
 </div>
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
+    {% comment %}
     <div class="side-ad">
-        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
+        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
     </div>
+    {% endcomment %}
 </div>
 <div class="clear"></div>
 <div id="crime-statistics">
     <h2>Crime Grade and Statistics Scorecard</h2>
     <div id="crime-grade-scorecard">
-        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade }}-big.png" id="overall-grade" />
+        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade|lower }}-big.png" id="overall-grade" />
         <div id="scorecard-content">
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
-            <p>The security grade for Pflugerville, Texas is a B. This means you are living in a city that has crime rates below the national average. Crime rates vary from one part of a city to another, however. Just like any major city, some areas where you live are simply safer than others. Regardless of the statistics in your city, it is important that you feel safe in your home. To help keep your home and family safe, we highly recommend getting a home security system from Protect America.</p>
+            <p>{{ content|safe }}</p>
             <div id="crime-grades">
                 <div id="burglary-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade|lower }}-sml.png" />
                     <p>Burglary</p>
                 </div>
                 <div id="murder-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade|lower }}-sml.png" />
                     <p>Murder</p>
                 </div>
                 <div id="rape-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade|lower }}-sml.png" />
                     <p>Forcible Rape</p>
                 </div>
                 <div id="robbery-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade|lower }}-sml.png" />
                     <p>Robbery</p>
                 </div>
                 <div id="assault-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade|lower }}-sml.png" />
                     <p>Aggravated Assault</p>
                 </div>
                 <div id="auto-theft-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade|lower }}-sml.png" />
                     <p>Auto Theft</p>
                 </div>
                 <div id="larceny-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade }}-sml.png" />
+                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade|lower }}-sml.png" />
                     <p>Larceny</p>
                 </div>
                 <div class="clear"></div>
             </div>
+            <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protecting your home and family</p>{% endbusinesstime %}
+            </div>
         </div>
-        <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protect your home and family</p>{% endbusinesstime %}</div>
+
         <div class="clear"></div>
     </div>
+</div>
+
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Burglary Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the gambit of burglary. </p>
         <table>
             <thead>
                 <tr>
@@ -175,6 +205,8 @@
         </table>
         <div class="clear"></div>
     </div>
+{% include "order/generic-call-box.html" %}
+
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Robbery Crime Statistics</h2>
         <p>Robbery is when someone steals someone else's property through violence or intimidation rather then stealth or fraud.</p>
@@ -284,22 +316,33 @@
         <div class="clear"></div>
     </div>
 </div>
+<div class="clear"></div>
+
 {% addtoblock "js" %}
     <script type="text/javascript"> 
     $(document).ready(function() {
-        $(window).scroll(function() {
-            if($(document).scrollTop() >= 208) {
-                $('#city-bar').css({'position':'fixed',
-                                    'top': '0px',
-                                    'z-index': '1000'});
-            } else {
-                $('#city-bar').css({'position':'relative'});
-            }
+        if(!($.browser.msie && $.browser.version == '7.0')) {
+            $(window).scroll(function() {
+                if($(document).scrollTop() >= 208) {
+                    $('#city-bar').css({'position':'fixed',
+                                        'top': '0px',
+                                        'z-index': '1000'});
+                } else {
+                    $('#city-bar').css({'position':'relative'});
+                }
+            });
+        }
+        $('.change-city').click(function(e) {
+            e.preventDefault();
+            $('#city-bar-info').hide();
+            $('#city-search').fadeIn();
+        });
+        $('.cancel-find').click(function(e) {
+            e.preventDefault();
+            $('#city-search').hide();
+            $('#city-bar-info').fadeIn();
         });
     });
     </script>
 {% endaddtoblock "js" %}
-
-{% endblock %}  
-
-
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Bronze Package | Home Security Packages | Protect America Home Security{% endblock %}
+{% block page_title %}Bronze Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
 
 {% block content %}
 {% addtoblock "js" %}
@@ -18,54 +18,63 @@
 <!-- End of Google Website Optimizer Tracking Script for Copper Page test -->
 {% endaddtoblock "js" %}
 <div id="top-content">
-    <div id="starter-home-security">
-        <h1>The <strong>perfect solution</strong> to secure your starter home.</h1>
-    
+    <div id="bronze-package-offer" itemscope itemtype="http://schema.org/Product">
+        <h1 itemprop="name">Bronze Security Package</h1>
+        <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" width="504" height="317" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Bronze Security Package" />
+        <ul itemprop="description">
+            <li>GE Simon XT Control Panel</li>
+            <li>3 Security Stickers</li>
+            <li>7 Door / Window Sensors</li>
+            <li>1 Security Yard Sign </li>
+            <li>1 Motion Detector</li>
+            <li>Owner's Manual</li>
+        </ul>
+        <div id="top-consumer-review-medal">
+            <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
+            <p>Five star rating in 2012 by TopConsumerReviews.com</p>
+        </div>
+        <span>Our Price: <strong itemprop="price">FREE<sup>*</sup></strong></span>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
 <div class="clear"></div>
 
-<div id="the-bronze-package">
-    <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" id="main-package-image">
-    <div id="bronze-package-content">
-        <h1>The Bronze Package</h1>
-        <p>The first of four levels of perimeter protection offered by Protect America, the Bronze Package was designed to provide protection at each point of entry into your home. Ideal for houses under 1200 sq. ft, the Bronze Package features enough sensors to cover up to 7 doors and windows. Along with 7 door/window sensors, the Bronze Package also protects inside your home with a motion detector for use in heavily used rooms or hallways. Security systems from Protect America are incredibly easy to customize. Just ask one of our salespeople how you can add a garage door sensor or smoke detectors to your Bronze Package!  </p>
-        <h3>Equipment & Installation Price: <strong>Free*</strong> </h3>
-<div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}</div>
+    {% include "banners/limited-time-offer.html" %}
 
+<div id="the-bronze-package">
+    <img src="/static/img/products/bronze-package/in-the-home.jpg"  width="512" height="352" id="main-package-image" alt="Securing a home with up to seven doors or windows">
+    <div id="bronze-package-content">
+        <h1>In Your Home: Bronze Security</h1>
+        <p>The first of four levels of perimeter protection offered by Protect America, the Bronze Home Security System was designed to provide protection at each point of entry into your home. Ideal for houses under 1200 sq. ft, the Bronze Security Package features enough sensors to cover up to 7 doors and windows. Along with 7 door/window sensors, the Bronze Security Package also protects inside your home with a motion detector for use in heavily used rooms or hallways. Security systems from Protect America are incredibly easy to customize. Just ask one of our salespeople how you can add a garage door sensor or smoke detectors to your Bronze Package!  </p>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}</div>
     </div>
     <div class="clear"></div>
-    {% include "banners/limited-time-offer.html" %}
     <div id="included-equipment">
     	<h2>What's Included:</h2>
-		<a href="http://www.protectamerica.com/pa/ge_simon_xt/ge-simon-xt" title="GE Simon XT Control Panel" id="simon-xt">
-    		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" />
+        <div>
+    		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Home Security Panel" />
     		<strong>One (1)</strong> Simon XT Control Panel
-		</a>
-		<a href="http://www.protectamerica.com/pa/security_sensors/home-security-sensors#door-sensor" title="Door / Window Sensors" id="door-window-sensors">
-    		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" />
+		</div>
+		<div>
+    		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
     		<strong>Seven (7)</strong> Door / Window Sensors
-		</a>
-		<a href="http://www.protectamerica.com/pa/security_sensors/home-security-sensors#motion-detector" title="Motion Detector" id="motion-detector">
-       		<img src="/static/img/products/equipment/motion-detector-icon.jpg" />
+   		</div>
+   		<div>
+       		<img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
     		<strong>One (1)</strong> Motion Detector
-		</a>
-
-		<a href="http://www.protectamerica.com/pa/operation/monitoring-security" title="Owner's Manual" id="owner-manual">
-            <img src="/static/img/products/accessories/installation-manual-icon.jpg" />
+        </div>
+        <div>
+            <img src="/static/img/products/accessories/installation-manual-icon.jpg" width="160" height="131" alt="Protect America Home Security Installation Manual" />
             <strong>One (1)</strong> Owner's / Installation Manual & DVD
-		</a>
-
-		<a href="http://www.protectamerica.com/pa/home_security_accessories/home-security-accessories#protect-america-home-security-sign" title="Security Window Stickers" id="window-stickers">
-    		<img src="/static/img/products/accessories/security-window-stickers-icon.jpg" />
+        </div>
+        <div>
+    		<img src="/static/img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Protect America Home Security Window Stickers" />
     		<strong>Three (3)</strong> Security Window Stickers
-		</a>
-
-		<a href="http://www.protectamerica.com/pa/home_security_accessories/home-security-accessories#protect-america-window-stickers" title="Security Yard Sign" id="security-yard-sign">
-    		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" />
+        </div>
+    	<div>	
+    		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Protect America Home Security Yard Sign" />
     		<strong>One (1)</strong> Security Yard Sign
-		</a>
+        </div>
     </div>
 
 </div>
@@ -87,11 +96,11 @@
                 <tr>
                     <td><strong>Upfront Cost</strong></td>
                     <td class="call-out">FREE*</td>
-                    <td>$379</td>
+                    <td>$699</td>
                 </tr>
                 <tr class="alt">
                     <td><strong>Monthly Cost</strong></td>
-                    <td class="call-out">$29.99</td>
+                    <td class="call-out">$35.99</td>
                     <td>$42.99</td>
                 </tr>
                 <tr>
@@ -102,7 +111,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3"><a href="http://www.protectamerica.com/pa/low-price-guarantee/GE-Security-System"><img src="{{ STATIC_URL }}/img/external/lowest-price-banner-stacked.png" alt="Protect America Guarantee's the Lowest Price for this Package" /></td>
+                    <td colspan="3"><a href="http://www.protectamerica.com/pa/low-price-guarantee/GE-Security-System"><img src="{{ STATIC_URL }}/img/external/lowest-price-banner-stacked.png" alt="Protect America Guarantee's the Lowest Price for this Package" /></a></td>
                 </tr>
             </tfoot>
         </table>
@@ -111,14 +120,15 @@
     <div id="extra-benefits">
         <h2>Extra Protect America Benefits:</h2>
         <ul>
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/wireless-sensors.png" />Wireless sensors are easy to install and don't require drilling.</li>
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/save-money.png" />Homes with security systems save up to 20% on homeowner's insurance.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/wireless-sensors.png" width="40" height="40" alt="Wireless Home Security" />Wireless sensors are <strong>easy to install</strong> and don't require drilling.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/save-money.png" width="40" height="40" alt="Save up to 20% on Homeowner's Insurance" />Homes with security systems <strong>save up to 20%</strong> on homeowner's insurance.</li>
 
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/free-relocation-kit.png" />You own your home security system. Moving to a new home is easy with our free relocation kit.</li>
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png" />Your system will always work with our included lifetime replacement parts warranty</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/free-relocation-kit.png"  width="40" height="40" alt="Free Moving Relocation Kit" />You <strong>own your security system</strong>. Moving to a new home is easy with our <strong>free relocation kit</strong>.</li>
+            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png"  width="40" height="40" alt="Free Replacement Parts Warranty" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
 
         </ul>
-        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
+        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);" title="Order a Protect America Home Security System">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
+
     </div>
     <div class="clear"></div>
 
@@ -152,30 +162,10 @@
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
     <ul id="main-testimonials">
-        {% testimonial_search "bronze" "limit=4&words=50" %}
+    {% testimonial_search "bronze" "limit=4&words=50" %}
     </ul>
 </div>
-{% businesstime %}
-    <div id="order-footer">
-        <div id="footer-package-section">
-            <h2>The Bronze Package</h2>
-            <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $35.99/mo</p>
-            <div class="button-submit">
-                <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze']);">Order Now ></a>
-            </div>
-        </div>
-        <div id="footer-call-now">
-            <h3>Give us a call.</h3>
-            <p>Call Protect America today to learn which package best meets your needs. Call Protect America now and secure what matters most!</p>
-            <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
-        </div>
-        <div id="footer-chat-now">
-            <h3>Chat online.</h3>
-            <p>Have a question about a system? Ready to order? Our security professionals are available to chat online right now.</p>
-            <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', 'Bronze']);">Online Chat ></a></div>
-        </div>
-    </div>
-{% endbusinesstime %}
+</div>
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
@@ -190,4 +180,10 @@
 
 {% endblock %}  
 
-
+{% block page-product %}
+    <h2>Bronze Security Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $35.99/mo</p>
+    <div class="button-submit">
+        <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
+    </div>
+{% endblock %}

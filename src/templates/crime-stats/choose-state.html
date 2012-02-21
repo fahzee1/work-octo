@@ -1,13 +1,13 @@
 {% extends "crime-stats/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
 
-{% block page_title %}{{ state }} Crime Statstics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+{% block page_title %}Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
 
 {% block content %}
 <div id="city-bar" class="select">
     <h1>Find your City:</h1>
-    <form>
-        <input />
+    <form action="/crime-rate/search/" method="GET">
+        <input value="{{ request.GET.q }}" name="q" />
         <button class="button-link">Find City ></button>
         
     </form>
@@ -15,6 +15,17 @@
 
 </div>
 <div id="state-list">
+    {% if matches %}
+    <div id="search-results">
+        <h2>Did you mean?</h2>
+        <ul>
+        {% for city in matches %}
+            <li><a href="{{ city.get_absolute_url }}">{{ city }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}    
+    
     <h2>Select Your State:</h2>
     <ul>
     {% for state in states %}

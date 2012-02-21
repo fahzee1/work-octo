@@ -74,7 +74,7 @@
     </div>
 	<div id="order-form">
 			<h1>Thank You for Choosing Protect America</h1>
-			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below or call: <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></strong></p>
+			<p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below {% businesstime %}or call: <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></strong>{% endbusinesstime %}</p>
         {% include 'contact-us/forms/order-form.html' %}
 		<div class="clear"></div>
 		<div id="third-party">
@@ -124,7 +124,7 @@
 
 
 {% endblock %}  
-{{ block.super }}
+{% block order-footer %}{% endblock %}
 
 
 

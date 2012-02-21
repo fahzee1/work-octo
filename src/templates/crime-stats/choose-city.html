@@ -1,17 +1,17 @@
 {% extends "crime-stats/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
 
-{% block page_title %}{{ state }} Crime Statstics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+{% block page_title %}{{ state }} Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
 
 {% block content %}
 <div id="city-bar" class="select">
     <h1>Find your City:</h1>
-    <form>
-        <input />
+    <form action="/crime-rate/search/" method="GET">
+        <input value="{{ request.GET.q }}" name="q" />
         <button class="button-link">Find City ></button>
-        
+        <div class="clear"></div>
+
     </form>
-    <div class="clear"></div>
     <ul id="letters">
         <li {% if cities.A %}class="has-cities"{% endif %}><a href="#A_cities">A</a></li>
         <li {% if cities.B %}class="has-cities"{% endif %}><a href="#B_cities">B</a></li>
@@ -39,6 +39,7 @@
         <li {% if cities.X %}class="has-cities"{% endif %}><a href="#X_cities">X</a></li>
         <li {% if cities.Y %}class="has-cities"{% endif %}><a href="#Y_cities">Y</a></li>
         <li {% if cities.Z %}class="has-cities"{% endif %}><a href="#Z_cities">Z</a></li>
+        <div class="clear"></div>
     </ul>
 </div>
 <div class="clear"></div>
@@ -58,9 +59,26 @@
 
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
+    {% comment %}
     <div class="side-ad">
-        <img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png"/>
+        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
     </div>
+    {% endcomment %}
 </div>
 <div class="clear"></div>
+{% addtoblock "js" %}
+    <script type="text/javascript"> 
+    $(document).ready(function() {
+            $(window).scroll(function() {
+                if($(document).scrollTop() >= 208) {
+                    $('#city-bar').css({'position':'fixed',
+                                        'top': '0px',
+                                        'z-index': '1000'});
+                } else {
+                    $('#city-bar').css({'position':'relative'});
+                }
+            });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}
