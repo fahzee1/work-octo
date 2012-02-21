@@ -1,18 +1,34 @@
 {% extends "local-pages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Platinum Package | Home Security in Austin, TX | Protect America Home Security{% endblock %}
+    {% block quick-links %}
+	<ul id="quick-link-navigation">
 
+
+        <li><span id="city-info">{{ city }}, {{ state }}:<strong>Population: 256,000</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/sunny-icon.png"/> 75&deg;F</span></li>
+        <li><a href="https://homesecuritysystems.protectamerica.com" title="See Home Security Deals in your Area" id="change-local-city">Change City</a></li>
+	</ul>
+	{% endblock %}
 {% block content %}
-    <div id="hero-banner">
 
+    <div id="left-content">
+        <div id="hero-banner">
+            {% include "banners/669x320/top-consumer-reviews-compact.html" %}
+        </div>
     </div>
+
 
 
     {% include "order/quote-form.html" with form=forms.basic %}
 <div id="protect-america-difference">
 	<div>
 		<h2>Protect America Home Security</h2>
-		<p>No matter where you live, even in CITY, STATE, Protect America has a security system that fits your home security needs and, most importantly, your budget. Here are just a few reasons to trust your home security with Protect America:</p>
+		<p>Even in a growing city like {{ city }}, Protect America has a Home Security System that will fulfill your home security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your home security with Protect America:</p>
+	</div>
+	<div id="best-priced-home-security">
+    	<img src="/static/img/extra/dollar-sign-token.png" />
+		<h3>The Best Priced Home Security System</h3>
+		<p>Tailored to *CITY*, you get the best price around guaranteed</p>
 	</div>
 	<div id="all-day-monitoring">
 		<img src="/static/img/extra/24-7-token.png" />
@@ -24,23 +40,19 @@
 		<img src="/static/img/extra/wireless-token.png" />
 
 		<h3>Simple to Use Wireless GE Security</h3>
-		<p>Trusted top of the line security equipment</p>
+		<p>Trusted UL listed top of the line security equipment</p>
 	</div>
 	<div id="save-on-homeowners-insurance">
     	<img src="/static/img/extra/20-percent-token.png" />
-		<h3>Save up to 20% on Homeowner's Insurance</h3>
-		<p>Protecting your home and saving money</p>
+		<h3>Discounted Homeowner's Insurance in {{ city }}</h3>
+		<p>Protecting your home and saving you money</p>
 	</div>
 	<div id="replacement-parts-warranty">
     	<img src="/static/img/extra/hammer-token.png" />
 		<h3>Lifetime Replacement Parts Warranty</h3>
 		<p>Making sure you are always safe and secure</p>
 	</div>
-	<div id="best-priced-home-security">
-    	<img src="/static/img/extra/dollar-sign-token.png" />
-		<h3>The Best Priced Home Security System</h3>
-		<p>Tailored to *CITY*, you get the best price around guaranteed</p>
-	</div>
+
 
 </div>
 <div id="crime-statistics">
@@ -137,7 +149,39 @@
 	</table>
 	<div class="clear"></div>
 </div>
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "state=TX&limit=10&words=50" %}
+    </ul>
+</div>
+<div id="protect-america-content">
+    <div id="more-choices">
+        <h2>More Home Security. More Choices.</h2>
+        <p>When it comes to choices, you will find that Protect America is the best for home security. We are an authorized dealer of premium GE home security hardware and products. We also have the most flexible range of monitoring services including: cellular monitoring, two-way voice monitoring, HomePulse broadband monitoring, and our standard monitoring over landline.</p>
+        <p>Our home security packages are designed to fit most any budget while providing the excellence and security you deserve. That's why we're the only home security company to receive the Top Consumer Reviews 5-star Rating for home security. Let us help you secure your home and find the right system for your needs.</p>
+        <div class="button-link"><a href="http://www.protectamerica.com/homesite?affKey=LocalSearch&g=monitoring">Flexible Monitoring Solutions ></a></div>
 
+    </div>
+    <div id="unrivaled-security">
+        <h2>Unrivaled Home Security Commitment</h2>
+        <p>With all the different security companies out there, you might ask yourself, "Why choose Protect America?" We have looked at many families from around the United States including many different homes in Douglas, AL. From this, we have created a range of GE Home Security packages that are designed to secure and protect your home. And being ranked the best home security company by Top Consumers Review makes us the best choice for a world-class security system. We are a company that is dedicated to serving your home security needs.</p>
+        <p>We strive to provide you with the most affordable and best home security system. Just check out our Copper Package for Douglas, it is the best way to begin securing your home today. And it being named a Consumers Digest "Best Buy" doesn't hurt either.</p>
+        <div class="button-link"><a href="http://www.protectamerica.com/homesite?affKey=LocalSearch&g=copper">The Copper Package ></a></div>
+    </div>
+</div>
+
+
+{% addtoblock "js" %}
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
+<script>
+var options={ "publisher": "e120b57d-de18-41e4-9f08-4c602e36df66", "position": "left", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "google", "email", "sharethis"]}};
+var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}  
+
 
 
