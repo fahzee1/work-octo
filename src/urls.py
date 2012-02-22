@@ -102,7 +102,6 @@ else:
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
             
 
-
             # Product > Monitoring
 
             dtt(r'^products/alarm-monitoring/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
