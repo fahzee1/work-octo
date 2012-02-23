@@ -88,7 +88,7 @@
 
     	</ul>
     	<div id="search-area">
-    		<form name="search2" method="GET" action="http://homesecurity.protectamerica.com/search/">
+    		<form name="search2" method="GET" action="http://www.protectamerica.com/search/">
     			<input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
     		</form>
     	</div>
@@ -128,8 +128,8 @@
 
 
 <div class="wrapper">
-        {% block content %}{% endblock %}
-        <div class="clear"></div>
+    {% block content %}{% endblock %}
+    <div class="clear"></div>
 </div>
 {% block order-footer %}
     {% businesstime %}
@@ -163,13 +163,14 @@
 
 <div id="footer">
 	<div class="bottom-rule">
+        {% block popular-topics %}
 		<ul id="popular-topics">
 			<li><strong>Home Security Packages</strong></li>
-			<li><a href="http://www.protectamerica.com/pa/copper/home-security-systems" title="Copper Home Security Package">Copper Package</a></li>
-			<li><a href="http://www.protectamerica.com/pa/bronze/security-systems" title="Bronze Home Security Package">Bronze Package</a></li>
-			<li><a href="http://www.protectamerica.com/pa/silver/alarm" title="Silver Home Security Package">Silver Package</a></li>
-			<li><a href="http://www.protectamerica.com/pa/gold/alarm-systems" title="Gold Home Security Package">Gold Package</a></li>
-			<li><a href="http://www.protectamerica.com/pa/platinum/alarm-system" title="Platinum Home Security Package">Platinum Package</a></li>
+			<li><a href="{% url copper %}" title="Copper Home Security System">Copper Security</a></li>
+			<li><a href="{% url bronze %}" title="Bronze Home Security System">Bronze Security</a></li>
+			<li><a href="{% url silver %}" title="Silver Home Security System">Silver Security</a></li>
+			<li><a href="{% url gold %}" title="Gold Home Security System">Gold Security</a></li>
+			<li><a href="{% url platinum %}" title="Platinum Home Security System">Platinum Security</a></li>
             <li><strong>Social Media</strong></li>
             <li id="social-media">
                 <a href="http://www.facebook.com/protectamerica" title="Visit our Facebook Page" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'Facebook']);"><img src="{{ STATIC_URL }}img/external/FaceBook_32x32.png" /></a>
@@ -179,6 +180,7 @@
             </li>
 
 		</ul>
+        {% endblock %}
 		<ul id="about-us">
 			<li><strong>About Us</strong></li>
 			<li><a href="http://www.protectamerica.com/pa/about" title="About Protect America">Who is Protect America?</a></li>
