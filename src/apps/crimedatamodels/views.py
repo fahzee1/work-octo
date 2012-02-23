@@ -134,6 +134,7 @@ def query_by_state_city(state, city):
            'years': years[:3],
            'latest_year': crime_stats[years[0]],
            'state': state.abbreviation,
+           'state_long': state.name,
            'city': city.city_name,
            'lat': city.latitude,
            'long': city.longitude,
@@ -146,7 +147,7 @@ def crime_stats(request, state, city):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    crime_stats_ctx.update(forms)
+    crime_stats_ctx['forms'] = forms
     return render_to_response('crime-stats/crime-stats.html',
                               crime_stats_ctx,
                               context_instance=RequestContext(request))
