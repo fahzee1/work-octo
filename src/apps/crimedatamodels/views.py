@@ -1,6 +1,7 @@
 import urllib
-from xml.dom.minidom import parseString
 
+from django.core.cache import cache
+from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -14,32 +15,76 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          ZipCode,
                                          CrimeContent)
 
-WEATHER_MAP = {
-    'sunny.gif': 'sunny',
-    'mostly_sunny.gif': 'partly-cloudy',
-    'partly_sunny.gif': 'partly-cloudy',
-    'partly_cloudy.gif': 'partly-cloudy',
-    'mostly_cloudy.gif': 'cloudy',
-    'chance_of_storm.gif': 'lightning',
-    'rain.gif': 'rain',
-    'chance_of_rain.gif': 'rain',
-    'chance_of_snow.gif': 'snow',
-    'cloudy.gif': 'cloudy',
-    'mist.gif': 'smoke',
-    'storm.gif': 'lightning',
-    'thunderstorm.gif': 'lightning',
-    'chance_of_tstorm.gif': 'lightning',
-    'sleet.gif': 'snow',
-    'snow.gif': 'snow',
-    'icy.gif': 'snow',
-    'dust.gif': 'dust',
-    'fog.gif': 'smoke',
-    'smoke.gif': 'smoke',
-    'haze.gif': 'smoke',
-    'flurries.gif': 'snow',
+WEATHER_CODE_MAP = {
+    '395':'snow',
+    '392':'snow',
+    '389':'rain',
+    '386':'rain',
+    '377':'snow',
+    '374':'snow',
+    '371':'snow',
+    '368':'rain',
+    '365':'rain',
+    '362':'snow',
+    '359':'rain',
+    '356':'rain',
+    '353':'rain',
+    '350':'snow',
+    '338':'snow',
+    '335':'snow',
+    '332':'snow',
+    '329':'snow',
+    '326':'snow',
+    '323':'snow',
+    '320':'rain',
+    '317':'rain',
+    '314':'rain',
+    '311':'rain',
+    '308':'rain',
+    '305':'rain',
+    '302':'rain',
+    '299':'rain',
+    '296':'rain',
+    '293':'rain',
+    '284':'rain',
+    '281':'rain',
+    '266':'rain',
+    '263':'rain',
+    '260':'smoke',
+    '248':'smoke',
+    '230':'snow',
+    '227':'snow',
+    '200':'lightning',
+    '185':'rain',
+    '182':'rain',
+    '179':'rain',
+    '176':'rain',
+    '143':'smoke',
+    '122':'partly-cloudy',
+    '119':'cloudy',
+    '116':'partly-cloudy',
+    '113':'sunny',
 }
 
-def crime_stats(request, state, city):
+def query_weather(latitude, longitude, city, state):
+    # first try to get cache
+    weather_info = cache.get('WEATHER:%s%s' % (city.lower(), state.lower()))
+    if weather_info is None:
+        url = 'http://free.worldweatheronline.com/feed/weather.ashx?q=%s,%s&format=json&num_of_days=2&key=1bed272811220539122102' % (latitude, longitude)
+        result = simplejson.load(urllib.urlopen(url))
+        if 'Error' in result:
+            return None
+        
+        weather_info = {}
+        condition = result['data']['current_condition'][0]
+
+        weather_info['temp'] = condition['temp_F']
+        weather_info['desc'] = condition['weatherDesc'][0]['value']
+        weather_info['icon'] = WEATHER_CODE_MAP[condition['weatherCode']]
+        cache.set('WEATHER:%s%s' % (city.lower(),state.lower()), weather_info, 60*60)
+    return weather_info
+
+def query_by_state_city(state, city):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
@@ -82,33 +127,28 @@ def crime_stats(request, state, city):
     content = CrimeContent.objects.get(grade=crime_stats[years[0]]['stats'].average_grade,population_type=pop_type)
 
     # Google Weather API
-    weather_info = {}
-    weather_xml = urllib.urlopen(
-        'http://www.google.com/ig/api?weather=%s,%s' % (
-            city.city_name, state.abbreviation))
-    dom = parseString(weather_xml.read())
-    weather = dom.getElementsByTagName('weather')
-    current_conditions = weather[0].getElementsByTagName('current_conditions')[0]
-    weather_info['temp'] = current_conditions.childNodes[1].getAttribute('data')
-    weather_info['description'] = current_conditions.childNodes[0].getAttribute('data')
-    google_icon = current_conditions.childNodes[4].getAttribute('data')
-    weather_icon = WEATHER_MAP[google_icon.split('/')[-1]]
-    weather_info['icon'] = '%s-icon.png' % weather_icon
+    weather_info = query_weather(city.latitude, city.longitude,
+        city.city_name, state.abbreviation)
+    
+    return {'crime_stats': crime_stats,
+           'years': years[:3],
+           'latest_year': crime_stats[years[0]],
+           'state': state.abbreviation,
+           'city': city.city_name,
+           'lat': city.latitude,
+           'long': city.longitude,
+           'weather_info': weather_info,
+           'pop_type': pop_type,
+           'content': content.render(city)}  
+
+def crime_stats(request, state, city):
+    crime_stats_ctx = query_by_state_city(state, city)
 
     forms = {}
     forms['basic'] = PAContactForm()
+    crime_stats_ctx.update(forms)
     return render_to_response('crime-stats/crime-stats.html',
-                              {'crime_stats': crime_stats,
-                               'years': years[:3],
-                               'latest_year': crime_stats[years[0]],
-                               'state': state.abbreviation,
-                               'city': city.city_name,
-                               'lat': city.latitude,
-                               'long': city.longitude,
-                               'weather_info': weather_info,
-                               'pop_type': pop_type,
-                               'content': content.render(city),
-                               'forms': forms},
+                              crime_stats_ctx,
                               context_instance=RequestContext(request))
 
 def choose_city(request, state):
