@@ -3,20 +3,6 @@
 {% block page_title %}Platinum Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
 
 {% block content %}
-{% addtoblock "js" %}
-<!-- Google Website Optimizer Tracking Script for Copper Page test -->
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['gwo._setAccount', 'UA-5441302-7']);
-  _gaq.push(['gwo._trackPageview', '/1002533533/test']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-<!-- End of Google Website Optimizer Tracking Script for Copper Page test -->
-{% endaddtoblock "js" %}
 <div id="top-content">
     <div id="platinum-package-offer" itemscope itemtype="http://schema.org/Product">
         <h1 itemprop="name">Platinum Security Package</h1>
@@ -46,7 +32,7 @@
     <div id="platinum-package-content">
         <h1>In Your Home: Platinum Security</h1>
         <p>The Platinum Security Package from Protect America is the most comprehensive perimeter protection offered in the home security industry. Each alarm system features 15 door/window sensors for coverage at every point of entry into your home. The Platinum Security also protects inside your home with a motion detector for your use in heavily used rooms or hallways. It's also really easy to customize to the unique needs of your home. Just ask how to add an interactive security camera or a smoke detector to your new home security system!</p>
-        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Platinum-B']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
+        <div class="button-submit"><a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Platinum-B']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
@@ -122,14 +108,14 @@
     <div id="extra-benefits">
         <h2>Extra Protect America Benefits:</h2>
         <ul>
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/wireless-sensors.png" width="40" height="40" alt="Wireless Home Security" />Wireless sensors are <strong>easy to install</strong> and don't require drilling.</li>
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/save-money.png" width="40" height="40" alt="Save up to 20% on Homeowner's Insurance" />Homes with security systems <strong>save up to 20%</strong> on homeowner's insurance.</li>
+            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/wireless-sensors.png" width="40" height="40" alt="Wireless Home Security" />Wireless sensors are <strong>easy to install</strong> and don't require drilling.</li>
+            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/save-money.png" width="40" height="40" alt="Save up to 20% on Homeowner's Insurance" />Homes with security systems <strong>save up to 20%</strong> on homeowner's insurance.</li>
 
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/free-relocation-kit.png"  width="40" height="40" alt="Free Moving Relocation Kit" />You <strong>own your security system</strong>. Moving to a new home is easy with our <strong>free relocation kit</strong>.</li>
-            <li><img src="{{ STATIC_URL }}/img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png"  width="40" height="40" alt="Free Replacement Parts Warranty" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
+            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/free-relocation-kit.png"  width="40" height="40" alt="Free Moving Relocation Kit" />You <strong>own your security system</strong>. Moving to a new home is easy with our <strong>free relocation kit</strong>.</li>
+            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png"  width="40" height="40" alt="Free Replacement Parts Warranty" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
 
         </ul>
-        <div class="button-submit"><a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);" title="Order a Protect America Home Security System">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
+        <div class="button-submit"><a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);" title="Order a Protect America Home Security System">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
 
     </div>
     <div class="clear"></div>
@@ -187,6 +173,6 @@
     <h2>Platinum Security Package</h2>
     <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $42.99/mo</p>
     <div class="button-submit">
-        <a href="http://www.protectamerica.com/pa/order" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
+        <a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
     </div>
 {% endblock %}

@@ -50,6 +50,10 @@ urlpatterns = patterns('',
         name='choose-city'),
     url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
         name='choose-state'),
+
+    # local pages
+    url(r'local/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.local.views.local_page',
+        name='local-page')
 )
 
 # a simple direct_to_template wrapper
