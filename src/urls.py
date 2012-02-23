@@ -153,6 +153,8 @@ else:
 
         dtt(r'^news/?$', 'news/index.html', 'security-news'),
 
+            # Home Security News > Single Article
+                dtt(r'^news/article/?$', 'news/single-article.html', 'single-news-article', 'security-news'),
 
 
         # Help Pages
