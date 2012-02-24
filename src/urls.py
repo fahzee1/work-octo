@@ -149,13 +149,12 @@ else:
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
-        # Security 101 Pages
+        # Home Security News
 
-        dtt(r'^security-101/?$', 'security/index.html', 'security-101'),
+        dtt(r'^news/?$', 'news/index.html', 'security-news'),
 
-            # Security 101 > Security News
-
-            dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
+            # Home Security News > Single Article
+                dtt(r'^news/article/?$', 'news/single-article.html', 'single-news-article', 'security-news'),
 
 
         # Help Pages
