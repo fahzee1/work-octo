@@ -123,15 +123,23 @@ class CityCrimeStats(models.Model):
 
     @property
     def average_grade(self):
+
+        def get_grade_or_None(grade):
+            try:
+                return GRADE_MAP[grade]
+            except:
+                return 0
+
         used_fields_for_avg = [
-            GRADE_MAP[self.aggravated_assault_grade],
-            GRADE_MAP[self.burglary_grade],
-            GRADE_MAP[self.forcible_rape_grade],
-            GRADE_MAP[self.larceny_theft_grade],
-            GRADE_MAP[self.motor_vehicle_theft_grade],
-            GRADE_MAP[self.murder_and_nonnegligent_manslaughter_grade],
-            GRADE_MAP[self.robbery_grade],
+            get_grade_or_None(self.aggravated_assault_grade),
+            get_grade_or_None(self.burglary_grade),
+            get_grade_or_None(self.forcible_rape_grade),
+            get_grade_or_None(self.larceny_theft_grade),
+            get_grade_or_None(self.motor_vehicle_theft_grade),
+            get_grade_or_None(self.murder_and_nonnegligent_manslaughter_grade),
+            get_grade_or_None(self.robbery_grade),
         ]
+        used_fields_for_avg = [x for x in used_fields_for_avg if x != 0]
         ag = int(round(float(sum(used_fields_for_avg)) / float(len(used_fields_for_avg))))
         return [k for k, v in GRADE_MAP.iteritems() if v == ag][0]
 
