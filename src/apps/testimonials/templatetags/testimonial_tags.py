@@ -39,7 +39,7 @@ class TestimonialSearchNode(template.Node):
         self.words = None
         if 'words' in kwargs:
             self.words = self.kwargs['words'][0]
-    
+
     def render(self, context):
         testimonial_array = []
 
@@ -61,8 +61,9 @@ class TestimonialSearchNode(template.Node):
         # bold the search term
         for testimonial in testimonials:
             if self.search_term != '':
-                testimonial.testimonial = re.sub(self.search_term,
-                    '<strong>%s</strong>' % self.search_term,
+                pattern = re.compile(r'(%s)' % self.search_term, re.I)
+                testimonial.testimonial = re.sub(pattern,
+                    r'<strong>\1</strong>',
                     testimonial.testimonial)
 
             testimonial_array.append({'first_name': testimonial.first_name,

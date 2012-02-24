@@ -50,6 +50,10 @@ urlpatterns = patterns('',
         name='choose-city'),
     url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
         name='choose-state'),
+
+    # local pages
+    url(r'local/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.local.views.local_page',
+        name='local-page')
 )
 
 # a simple direct_to_template wrapper
@@ -79,6 +83,7 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
+
     )
 else:
 
@@ -86,18 +91,20 @@ else:
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+        # Local Pages
+        dtt(r'^local/?$', 'local-pages/index.html', 'local-pages'),
 
         # Home Security Packages
-        dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
+        dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
 
             # Product > Packages B
+
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
             
-
 
             # Product > Monitoring
 
