@@ -152,7 +152,10 @@ else:
         # Home Security News
 
         url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
-        url(r'^news/brafton-import/?$', 'apps.news.views.import_articles', name='news-import'),
+        url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
+            name='news-import'),
+        url(r'^news/load-more/(?P<last_id>\d)/?',
+            'apps.news.load_more_articles', name="load-more-articles"),
 
             # Home Security News > Single Article
                 dtt(r'^news/article/?$', 'news/single-article.html', 'single-news-article', 'security-news'),

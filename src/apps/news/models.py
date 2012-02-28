@@ -13,7 +13,7 @@ class Article(models.Model):
     content = models.TextField()
     summary = models.TextField()
 
-    image = models.ImageField(upload_to='brafton/', blank=True, null=True)
+    image = models.ImageField(upload_to='brafton/',max_length=256, blank=True, null=True)
     image_caption = models.CharField(max_length=128, blank=True, null=True)
 
     categories = models.ManyToManyField(Category)

@@ -2,24 +2,37 @@
 
 {% block subnav_parent %}{% endblock %}
 {% block content %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+});
+</script>
+{% endaddtoblock "js" %}
 <div id="security-news-headline" class="news-headline">
+    {% if headline.image %}
     <div id="headline-image">
-        <img src="http://pictures.directnews.co.uk/liveimages/increased+use+of+video+surveillance+has+led+to+a+sharp+rise+in+the+number+of+shoplifting+arrests+in+one+illinois+town_3514_800709590_0_0_14042035_500.jpg" />
+        <img src="{{ MEDIA_URL }}{{ headline.image }}" alt="{{ headline.image_caption }}" title="{{ headline.image_caption }}" />
     </div>
-    {% comment %}
+    {% else %}
     <div class="news-date">
-        <p>Feb<span>28</span><strong>2011</strong></p>
+        <p>{{ headline.date_created|date:"M" }}<span>{{ headline.date_created|date:"d" }}</span><strong>{{ headline.date_created|date:"Y" }}</strong></p>
     </div>
-    {% endcomment %}
+    {% endif %}
     <div id="headline-article">
         <h1>Latest Home Security News</h1>
-        <h2>Security cameras, increased security lead to uptick in shoplifting arrests</h2>
-        <p>A concerted effort on the part of local businesses to increase security has led to a significant increase in the number of shop-lifting arrests in Granite City, Illinois.</p>
+        <h2>{{ headline.heading }}</h2>
+        {% comment %}
+        <p>{{ headline.summary }}</p>
         <p>City-wide shoplifting arrests hit 204 during 2011, more than a 50 percent increase over 2010, when there were 133 such arrests, according to the St. Louis Post-Dispatch...</p>
+        {% endcomment %}
+        <p>{{ headline.content|truncatewords_html:40|safe }}</p>
         <div class="button-link"><a href="">Read More From This Article ></a></div>
         <ul>
             Topics:
-            <li><a href="">Video Security</a></li>
+            {% for category in headline.categories.all %}
+            <li><a href="">{{ category.name }}</a></li>
+            {% endfor %}
         </ul>
     </div>
 
@@ -29,61 +42,7 @@
 
 <div class="clear"></div>
 <div>
-    <div class="news-article">
-        <div class="image-container">
-            <img src="http://pictures.directnews.co.uk/liveimages/a+would+be+thief+broke+into+a+new+jersey+scrap+metal+recycling+plant+only+to+trip+the+burglar+alarm+and+be+arrested+on+the+spot_3514_800712704_0_0_14899_500.jpg" />
-        </div>
-        <h3>Scrap metal thief foiled</h3>
-        <p>A New Jersey man was caught red-handed recently trying to rob a local scrap metal recycling business...</p>
-        <ul>
-            Topics:
-            <li><a href="">Crime News</a></li>
-            <li><a href="">Video Security</a></li>
-
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-
-
-    </div>
-    <div class="news-article">
-        <div class="news-date">
-            <p>Feb<span>28</span><strong>2011</strong></p>
-        </div>
-        <h3>Multiple burglary victim installs cameras, uses Facebook to catch suspects</h3>
-        <p>The Enterprise Ledger in Alabama reports a homeowner purchased home security cameras after her house was robbed twice in two ...</p>
-        <ul>
-            Topics:
-            <li><a href="">Crime News</a></li>
-            <li><a href="">Video Security</a></li>
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-
-    </div>
-    <div class="news-article">
-        <div class="image-container">
-            <img src="http://pictures.directnews.co.uk/liveimages/new+apps+let+business+owners+monitor+security+cameras+from+their+iphones_3514_800711385_0_0_14216_500.jpg" />
-        </div>
-        <h3>Security cameras on smartphones? There's an app for that</h3>
-        <p>Wireless security systems are going mobile, according to a rundown of some of the new security camera monitoring applications available for cellphones and tablet computers...</p>
-        <ul>
-            Topics:
-            <li><a href="">Home Security Equipment</a></li>
-            <li><a href="">Video Security</a></li>
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-    </div>
-    <div class="news-article">
-        <div class="image-container">
-            <img src="http://pictures.directnews.co.uk/liveimages/researchers+at+arizona+state+university+are+creating+more+effective+infrared+technology+which+could+be+used+to+improve+home+security+systems_3514_800709913_0_0_7018842_500.jpg" />
-        </div>
-        <h3>New infrared technology could bolster home security systems</h3>
-        <p>Home security systems could soon become much more sophisticated thanks to new research into nanomaterials from Arizona State University.</p>
-        <ul>
-            Topics:
-            <li><a href="">Home Security News</a></li>
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-    </div>
+    {% include "news/_partial/news_article_index_snippet.html" with articles=articles %} 
     <div class="clear"></div>
 </div>
 <div class="button-ajax"><a href="">Click to Load More Articles</a></div>

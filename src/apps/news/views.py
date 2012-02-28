@@ -3,20 +3,38 @@ import urllib
 from xml.dom.minidom import parseString
 
 from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.template import RequestContext, Context, loader
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.utils import simplejson
 
 from apps.news.models import Category, Article
 from apps.contact.forms import PAContactForm
 
 
 def news_home(request):
+    articles = Article.objects.order_by('-date_created')[:5]
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('news/index.html', {'forms': forms},
+    return render_to_response('news/index.html',
+        {'forms': forms,
+         'headline': articles[0],
+         'articles': articles[1:]},
         context_instance=RequestContext(request))
+
+def load_more_articles(request, last_id):
+    articles = Article.objects.filter(pk__lt=last_id)[:4]
+    t = loader.get_template('news/_partial/news_article_index_snippet.html')
+    c = Context({
+        'articles': articles,
+    })
+    html = t.render(c)
+    response_data = {'html': html, 'response': 'success'}
+    return HttpResponse(simplejson.dumps(response_data),
+        mimetype="application/json")
+    
+    
 
 def import_articles(request):
 
@@ -58,7 +76,7 @@ def import_articles(request):
                 picture_url = picture_url.replace('_300.jpg', '_500.jpg')
                 picture_name = picture_url.split('/')[-1]
                 local_url = os.path.join(settings.MEDIA_ROOT, 'brafton', picture_name)
-                relative_path = os.path.join(settings.MEDIA_URL, 'brafton', picture_name)
+                relative_path = os.path.join('brafton', picture_name)
                 urllib.urlretrieve(picture_url, local_url)
                 article_obj.image = relative_path
                 article_obj.image_caption = picture_tag
