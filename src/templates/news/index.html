@@ -1,14 +1,10 @@
 {% extends "news/base.html" %}
 
+{% load sekizai_tags %}
+
 {% block subnav_parent %}{% endblock %}
 {% block content %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-$(document).ready(function() {
 
-});
-</script>
-{% endaddtoblock "js" %}
 <div id="security-news-headline" class="news-headline">
     {% if headline.image %}
     <div id="headline-image">
@@ -41,9 +37,8 @@ $(document).ready(function() {
 {% include "order/quote-form.html" with form=forms.basic %}
 
 <div class="clear"></div>
-<div>
-    {% include "news/_partial/news_article_index_snippet.html" with articles=articles %} 
-    <div class="clear"></div>
+<div id="article-container">
+    {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
 </div>
 <div class="button-ajax"><a href="">Click to Load More Articles</a></div>
 <div id="extra-content">
@@ -112,16 +107,16 @@ $(document).ready(function() {
     <div id="news-topics">
         <h2>Hot Topics</h2>
         <ul>
-            <li class="odd"><a href="/news/category/34-video-security/">Video Security </a></li> 
-            <li class="even"><a href="/news/category/28-home-security-tips/">Home Security Tips</a></li> 
-            <li class="odd"><a href="/news/category/30-home-security-news/">Home Security News</a></li> 
-            <li class="even"><a href="/news/category/36-home-security-installation/">Home Security Installation</a></li> 
-            <li class="odd"><a href="/news/category/32-home-security-equipment/">Home Security Equipment</a></li> 
-            <li class="even"><a href="/news/category/31-home-alarm-monitoring/">Home Alarm Monitoring</a></li> 
-            <li class="odd"><a href="/news/category/35-gps-tracking/">GPS Tracking</a></li> 
-            <li class="even"><a href="/news/category/33-diy-security-systems/">DIY Security Systems</a></li> 
-            <li class="odd"><a href="/news/category/29-crime-statistics/">Crime Statistics</a></li> 
-            <li class="even"><a href="/news/category/27-crime-news/">Crime News </a></li> 
+            <li class="odd"><a href="/news/category/34-video-security/">Video Security </a></li>
+            <li class="even"><a href="/news/category/28-home-security-tips/">Home Security Tips</a></li>
+            <li class="odd"><a href="/news/category/30-home-security-news/">Home Security News</a></li>
+            <li class="even"><a href="/news/category/36-home-security-installation/">Home Security Installation</a></li>
+            <li class="odd"><a href="/news/category/32-home-security-equipment/">Home Security Equipment</a></li>
+            <li class="even"><a href="/news/category/31-home-alarm-monitoring/">Home Alarm Monitoring</a></li>
+            <li class="odd"><a href="/news/category/35-gps-tracking/">GPS Tracking</a></li>
+            <li class="even"><a href="/news/category/33-diy-security-systems/">DIY Security Systems</a></li>
+            <li class="odd"><a href="/news/category/29-crime-statistics/">Crime Statistics</a></li>
+            <li class="even"><a href="/news/category/27-crime-news/">Crime News </a></li>
         </ul>
         <div class="button-link">
             <a href="">View All Topics ></a>
@@ -129,8 +124,28 @@ $(document).ready(function() {
     </div>
 
 </div>
-
-{% endblock %}  
-{{ block.super }}
-
-
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var last_id = '{{ last_id }}';
+    function load_articles() {
+        var url = '{% url load-more-articles last_id=9999999 %}';
+        $.get(url.replace('9999999', last_id),
+        function(data) {
+            if(data.response == 'success') {
+                $('#article-container').append(data.html);
+                if(data.can_load_more == false) {
+                    $('.button-ajax').remove();
+                }
+                last_id = data.last_id;
+            }
+        });
+    }
+    $('.button-ajax').click(function(e) {
+        e.preventDefault();
+        load_articles();
+    });
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}

@@ -17,20 +17,38 @@ def news_home(request):
     articles = Article.objects.order_by('-date_created')[:5]
     forms = {}
     forms['basic'] = PAContactForm()
+    
+    # grab videos from youtube
+    yt_feed = 'http://gdata.youtube.com/feeds/api/playlists/371901C9D9882FB8?v=2'
+    xml_feed = urllib.urlopen(yt_feed)
+    dom = parseString(xml_feed.read())
+    entries = dom.getElementsByTagName('entry')
+    print entries
     return render_to_response('news/index.html',
         {'forms': forms,
          'headline': articles[0],
-         'articles': articles[1:]},
+         'articles': articles[1:],
+         'last_id': articles[4].pk},
         context_instance=RequestContext(request))
 
 def load_more_articles(request, last_id):
-    articles = Article.objects.filter(pk__lt=last_id)[:4]
+    articles = Article.objects.filter(pk__lt=last_id).order_by('-pk')[:4]
+    # check if there are more articles to load
+    last_id = 0
+    for article in articles:
+        last_id = article.pk
+    marticles = Article.objects.filter(pk__lt=last_id).count()
+    can_load_more = False
+    if marticles > 0:
+        can_load_more = True
     t = loader.get_template('news/_partial/news_article_index_snippet.html')
     c = Context({
         'articles': articles,
+        'MEDIA_URL': settings.MEDIA_URL
     })
     html = t.render(c)
-    response_data = {'html': html, 'response': 'success'}
+    response_data = {'html': html, 'response': 'success',
+        'can_load_more': can_load_more, 'last_id': last_id}
     return HttpResponse(simplejson.dumps(response_data),
         mimetype="application/json")
     
