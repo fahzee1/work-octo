@@ -119,6 +119,8 @@ else:
                         # Product > Equipment > Sensors
 
                         dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/door-window-sensor?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+
 
             # Product > Video
 
