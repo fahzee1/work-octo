@@ -151,7 +151,8 @@ else:
         
         # Home Security News
 
-        dtt(r'^news/?$', 'news/index.html', 'security-news'),
+        url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
+        url(r'^news/brafton-import/?$', 'apps.news.views.import_articles', name='news-import'),
 
             # Home Security News > Single Article
                 dtt(r'^news/article/?$', 'news/single-article.html', 'single-news-article', 'security-news'),
@@ -179,3 +180,10 @@ else:
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
+    
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )
+    
