@@ -68,7 +68,7 @@ WEATHER_CODE_MAP = {
 
 def query_weather(latitude, longitude, city, state):
     # first try to get cache
-    weather_info = cache.get('WEATHER:%s%s' % (city.lower(), state.lower()))
+    weather_info = cache.get('WEATHER:%s%s' % (city.lower().replace(' ', ''), state.lower()))
     if weather_info is None:
         url = 'http://free.worldweatheronline.com/feed/weather.ashx?q=%s,%s&format=json&num_of_days=2&key=1bed272811220539122102' % (latitude, longitude)
         result = simplejson.load(urllib.urlopen(url))
@@ -81,7 +81,7 @@ def query_weather(latitude, longitude, city, state):
         weather_info['temp'] = condition['temp_F']
         weather_info['desc'] = condition['weatherDesc'][0]['value']
         weather_info['icon'] = WEATHER_CODE_MAP[condition['weatherCode']]
-        cache.set('WEATHER:%s%s' % (city.lower(),state.lower()), weather_info, 60*60)
+        cache.set('WEATHER:%s%s' % (city.lower().replace(' ', ''),state.lower()), weather_info, 60*60)
     return weather_info
 
 def query_by_state_city(state, city):
