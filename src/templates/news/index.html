@@ -44,61 +44,46 @@
 <div id="extra-content">
     <div id="news-videos">
         <h2>Videos</h2>
+        {% for video in videos %}
+        {% if forloop.first %}
         <div class="big video">
-            <iframe width="300" height="200" src="http://www.youtube.com/embed/DK6h91nhVnE" frameborder="0" allowfullscreen></iframe>
-            <h3>Sh*t Burglars Say</h3>
-            <span>2500 views</span>
-            <p>Ever wonder how a burglar spends his time when breaking into a house? Here's what we think they might say.</p>
+            <iframe width="300" height="200" src="http://www.youtube.com/embed/{{ video.id }}" frameborder="0" allowfullscreen></iframe>
+            <h3>{{ video.title }}</h3>
+            <span>{{ video.views }} views</span>
+            <p class="short-description">{{ video.description|truncatewords:15 }} <a href="#" class="read-description">[read more]</a></p>
+            <p class="full-description" style="display: none;">{{ video.description|linebreaksbr }}</p>
             <div class="clear"></div>
 
         </div>
+        {% else %}
+        <a href="{{ video.link }}" target="_blank" title="{{ video.title }}">
         <div class="video">
-            <img src="http://i4.ytimg.com/vi/s9mSXuH_qus/default.jpg" />
-            <h3>Happy Holidays from Protect America</h3>
-            <span>123 views</span>
+            <img src="http://img.youtube.com/vi/{{ video.id }}/2.jpg" />
+            <h3>{{ video.title }}</h3>
+            <span>{{ video.views }} views</span>
             <div class="clear"></div>
 
         </div>
-        <div class="video">
-            <img src="http://i4.ytimg.com/vi/poBIKns1yIE/default.jpg" />
-            <h3>Halloween Open House 2011 Hosted by Protect America Home Security</h3>
-            <span>312 views</span>
-            <div class="clear"></div>
-        </div>
+        </a>
+        {% endif %}
+        {% endfor %}
         <div class="button-link">
-            <a href="">View More Videos ></a>
+            <a href="http://www.youtube.com/playlist?list=PL371901C9D9882FB8&feature=plcp">View More Videos ></a>
         </div>
     </div>
     <div id="news-archives">
         <h2>News From the Archives</h2>
+        {% for article in random_articles %}
+        <a href="#">
         <div class="archived-article">
-            <p class="date"><span>Feb</span> 2011</p>
+            <p class="date"><span>{{ article.date_created|date:"M" }}</span> {{ article.date_created|date:"Y" }}</p>
             <div class="news-content">
-                <h3>California city crime rate increased two-fold last year</h3>
-                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
+                <h3>{{ article.heading }}</h3>
+                <p>{{ article.summary }} <span>[Read More]</span></p>
             </div>
         </div>
-        <div class="archived-article">
-            <p class="date"><span>Feb</span> 2012</p>
-            <div class="news-content">
-                <h3>California city crime rate increased two-fold last year</h3>
-                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
-            </div>
-        </div>
-        <div class="archived-article">
-            <p class="date"><span>Feb</span> 2012</p>
-            <div class="news-content">
-                <h3>California city crime rate increased two-fold last year</h3>
-                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
-            </div>
-        </div>
-        <div class="archived-article">
-            <p class="date"><span>Feb</span> 2012</p>
-            <div class="news-content">
-                <h3>California city crime rate increased two-fold last year</h3>
-                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
-            </div>
-        </div>
+        </a>
+        {% endfor %}
 
         <div class="button-link">
             <a href="">View the News Archives ></a>
@@ -118,11 +103,7 @@
             <li class="odd"><a href="/news/category/29-crime-statistics/">Crime Statistics</a></li>
             <li class="even"><a href="/news/category/27-crime-news/">Crime News </a></li>
         </ul>
-        <div class="button-link">
-            <a href="">View All Topics ></a>
-        </div>
     </div>
-
 </div>
 {% addtoblock "js" %}
 <script type="text/javascript">
@@ -144,6 +125,11 @@ $(document).ready(function() {
     $('.button-ajax').click(function(e) {
         e.preventDefault();
         load_articles();
+    });
+    $('.read-description').click(function(e) {
+        e.preventDefault();
+        $('.short-description').remove();
+        $('.full-description').slideDown();
     });
 });
 </script>

@@ -1,4 +1,5 @@
 import os
+import re
 import urllib
 from xml.dom.minidom import parseString
 
@@ -13,22 +14,44 @@ from apps.news.models import Category, Article
 from apps.contact.forms import PAContactForm
 
 
+def get_text(node):
+    return node[0].firstChild.nodeValue
+
 def news_home(request):
+    # latest 5 articles
     articles = Article.objects.order_by('-date_created')[:5]
     forms = {}
     forms['basic'] = PAContactForm()
+
+    # random 4 articles from archive
+    random_articles = Article.objects.order_by('?')[:4]
     
     # grab videos from youtube
     yt_feed = 'http://gdata.youtube.com/feeds/api/playlists/371901C9D9882FB8?v=2'
     xml_feed = urllib.urlopen(yt_feed)
     dom = parseString(xml_feed.read())
     entries = dom.getElementsByTagName('entry')
-    print entries
+
+    videos = []
+    for entry in entries:
+        description = get_text(entry.getElementsByTagName('media:description'))
+        title = get_text(entry.getElementsByTagName('title'))
+        views = entry.getElementsByTagName('yt:statistics')[0].getAttribute('viewCount')
+        link = entry.getElementsByTagName('link')[0].getAttribute('href')
+        video_group = re.search(r'v=(?P<video_id>.*)&', link, re.I)
+        videos.append({'description': description,
+                       'title': title,
+                       'views': views,
+                       'link': link,
+                       'id': video_group.groups()[0]})
+
     return render_to_response('news/index.html',
         {'forms': forms,
          'headline': articles[0],
          'articles': articles[1:],
-         'last_id': articles[4].pk},
+         'last_id': articles[4].pk,
+         'videos': videos[:3],
+         'random_articles': random_articles,},
         context_instance=RequestContext(request))
 
 def load_more_articles(request, last_id):
@@ -55,9 +78,6 @@ def load_more_articles(request, last_id):
     
 
 def import_articles(request):
-
-    def get_text(node):
-        return node[0].firstChild.nodeValue
 
     def get_or_none(model, **kwargs):
         try:
