@@ -1,0 +1,23 @@
+{% for article in articles %}
+ <div class="news-article">
+    {% if article.image %}
+    <div class="image-container">
+        <img src="{{ MEDIA_URL }}{{ article.image }}" alt="{{ article.image_caption }}" title="{{ article.image_caption }}" />
+    </div>
+    {% else %}
+    <div class="news-date">
+        <p>{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</strong></p>
+    </div>
+    {% endif %}
+    <h3>{{ article.heading }}</h3>
+    <p>{{ article.summary }}</p>
+    <ul>
+        Topics:
+        {% for category in article.categories.all %}
+        <li><a href="">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <div class="button-link"><a href="">Read More ></a></div>
+</div>
+{% endfor %}
+<div class="clear"></div>

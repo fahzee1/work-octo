@@ -160,10 +160,12 @@ else:
         
         # Home Security News
 
-        dtt(r'^news/?$', 'news/index.html', 'security-news'),
-
-            # Home Security News > Single Article
-                dtt(r'^news/article/?$', 'news/single-article.html', 'single-news-article', 'security-news'),
+        url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
+        url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
+            name='news-import'),
+        url(r'^news/load-more/(?P<last_id>\d)/?',
+            'apps.news.views.load_more_articles', name="load-more-articles"),
+        url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)-(?P<article_id>\d)/?$', 'apps.news.views.article', name="news-article"),
 
 
         # Help Pages
@@ -188,3 +190,10 @@ else:
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
+    
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )
+    
