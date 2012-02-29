@@ -53,7 +53,16 @@ urlpatterns = patterns('',
 
     # local pages
     url(r'local/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.local.views.local_page',
-        name='local-page')
+        name='local-page'),
+
+    # Home Security News
+
+    url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
+    url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
+        name='news-import'),
+    url(r'^news/load-more/(?P<last_id>\d)/?',
+        'apps.news.views.load_more_articles', name="load-more-articles"),
+    url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
 )
 
 # a simple direct_to_template wrapper
@@ -86,7 +95,6 @@ elif settings.SITE_ID == 3:
 
     )
 else:
-
     urlpatterns += patterns('',
 
         # Home Page
@@ -158,14 +166,6 @@ else:
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
-        # Home Security News
-
-        url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
-        url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
-            name='news-import'),
-        url(r'^news/load-more/(?P<last_id>\d)/?',
-            'apps.news.views.load_more_articles', name="load-more-articles"),
-        url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)-(?P<article_id>\d)/?$', 'apps.news.views.article', name="news-article"),
 
 
         # Help Pages

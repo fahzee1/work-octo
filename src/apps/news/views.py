@@ -60,8 +60,13 @@ def article(request, article_title, article_id):
     except Article.DoesNotExist:
         raise Http404
 
-    print article
-    pass
+    forms = {}
+    forms['basic'] = PAContactForm()
+
+    return render_to_response('news/single-article.html',
+        {'forms': forms,
+         'article': article},
+        context_instance=RequestContext(request))
 
 def load_more_articles(request, last_id):
     articles = Article.objects.filter(pk__lt=last_id).order_by('-pk')[:4]

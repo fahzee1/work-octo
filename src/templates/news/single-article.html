@@ -10,31 +10,26 @@
 {% endaddtoblock "js" %}
 <div id="single-article">
     <div id="article-header">
-        <img src="http://pictures.directnews.co.uk/liveimages/a+would+be+thief+broke+into+a+new+jersey+scrap+metal+recycling+plant+only+to+trip+the+burglar+alarm+and+be+arrested+on+the+spot_3514_800712704_0_0_14899_500.jpg" />
+        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" title="{{ article.image_caption }}" />
         <div class="news-date">
-            <p>Feb<span>28</span><strong>2011</strong></p>
+            <p>{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</strong></p>
         </div>
 
     </div>
 
-    <h1>Security cameras, increased security lead to uptick in shoplifting arrests</h1>
+    <h1>{{ article.heading }}</h1>
     
-    <p>A concerted effort on the part of local businesses to increase security has led to a significant increase in the number of shop-lifting arrests in Granite City, Illinois.</p>
-    <p>City-wide shoplifting arrests hit 204 during 2011, more than a 50 percent increase over 2010, when there were 133 such arrests, according to the St. Louis Post-Dispatch. The main reason behind the surge in arrests is increased security at area businesses, local police say.</p>
-    <p>Area big-box retailers Walmart and K-mart have each increased the number of security cameras in their stores. At K-mart, arrests rose from 34 in 2010 to 45 last year. The numbers at Walmart were even more dramatic, nearly doubling from 49 to 93 over the same time period, according to the news source.</p>
-    <p>Smaller area stores have also been adding video surveillance equipment to their store security systems.</p>
-    <p>Granite City is a close suburb of St. Louis, which can routinely be found on the list of top 10 most dangerous cities in America as determined by FBI statistics. During 2011, St. Louis slid to fourth place, down from its No. 1 spot in 2010.</p>
-    <p>This article is brought to you by Protect America - the leading distributor of state-of-the-art GE Wireless Home Security Systems. Protect America protects homes across the US from intrusion, theft, fire, flooding, medical emergencies and more with 24/7 Cellular, Broadband and Landline Monitoring and cutting edge technology.
-    </p>
+    <p>{{ article.content|safe }}</p>
     <ul id="article-breadcrumb">
         <li class="right-slash"><a href="">Home Security News</a></li>
         <li class="right-slash left-slash"><a href="">Articles</a></li>
-        <li class="left-slash omega page-turn">Home security robots? Not in this lifetime</li>
+        <li class="left-slash omega page-turn">{{ article.heading }}</li>
     </ul>
     <ul id="article-topics">
         Topics:
-        <li><a href="">Crime News</a></li>
-        <li><a href="">Video Security</a></li>
+        {% for category in article.categories.all %}
+        <li><a href="">{{ category.name }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 <div id="right-column">

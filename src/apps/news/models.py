@@ -1,4 +1,6 @@
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.template import defaultfilters
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
@@ -18,6 +20,15 @@ class Article(models.Model):
 
     categories = models.ManyToManyField(Category)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def related(self):
+        pass
+
+    def get_absolute_url(self):
+        return reverse('news-article', kwargs={
+            'article_title': defaultfilters.slugify(self.heading),
+            'article_id': self.id,
+        })
 
     def __unicode__(self):
         return '%s - %s' % (self.heading, self.brafton_id)
