@@ -165,9 +165,7 @@ else:
             name='news-import'),
         url(r'^news/load-more/(?P<last_id>\d)/?',
             'apps.news.views.load_more_articles', name="load-more-articles"),
-
-            # Home Security News > Single Article
-                dtt(r'^news/article/?$', 'news/single-article.html', 'single-news-article', 'security-news'),
+        url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)-(?P<article_id>\d)/?$', 'apps.news.views.article', name="news-article"),
 
 
         # Help Pages

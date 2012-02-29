@@ -54,6 +54,15 @@ def news_home(request):
          'random_articles': random_articles,},
         context_instance=RequestContext(request))
 
+def article(request, article_title, article_id):
+    try:
+        article = Article.objects.get(pk=article_id)
+    except Article.DoesNotExist:
+        raise Http404
+
+    print article
+    pass
+
 def load_more_articles(request, last_id):
     articles = Article.objects.filter(pk__lt=last_id).order_by('-pk')[:4]
     # check if there are more articles to load
