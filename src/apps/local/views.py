@@ -106,7 +106,7 @@ def local_state(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('local/choose-state.html',
+    return render_to_response('local-pages/choose-state.html',
                               {'states': states,
                                'forms': forms,},
                               context_instance=RequestContext(request))
