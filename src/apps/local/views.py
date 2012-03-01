@@ -110,3 +110,23 @@ def local_state(request):
                               {'states': states,
                                'forms': forms,},
                               context_instance=RequestContext(request))
+
+def local_city(request, state):
+    try:
+        state = State.objects.get(abbreviation=state)
+    except State.DoesNotExist:
+        raise Http404
+    
+    cities = CityLocation.objects.filter(state=state.abbreviation)
+    city_by_first_letter = {}
+    for city in cities:
+        if city.city_name[0] not in city_by_first_letter:
+            city_by_first_letter[city.city_name[0]] = []
+        city_by_first_letter[city.city_name[0]].append(city)
+    forms = {}
+    forms['basic'] = PAContactForm()
+    return render_to_response('local-pages/choose-city.html',
+                              {'cities': city_by_first_letter,
+                               'forms': forms,
+                               'state': state.abbreviation,},
+                              context_instance=RequestContext(request))
