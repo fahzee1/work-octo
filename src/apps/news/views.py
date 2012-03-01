@@ -62,7 +62,8 @@ def articles(request):
 
     return render_to_response('news/article-index.html',
         {'forms': forms,
-         'articles': articles},
+         'headline': articles[0],
+         'articles': articles[1:9]},
         context_instance=RequestContext(request))
 
 def articles_by_year(request, year):
@@ -76,7 +77,7 @@ def articles_by_day(request, year, month, day):
 
 def category(request, category_name, category_id):
     try:
-        category = Category.objects.get(pk=article_id)
+        category = Category.objects.get(pk=category_id)
     except Category.DoesNotExist:
         raise Http404
 

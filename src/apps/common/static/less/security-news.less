@@ -108,6 +108,12 @@
       }
     }
 }
+#article-container {
+    .content-box;
+    border-top: 1px solid @v-light-grey;
+    padding-top: 8px;
+    
+}
 .news-article {
     .text-bump(20px);
     .fourth-box;
@@ -148,6 +154,10 @@
             left: -25%;
             top: -25%;
         }
+    }
+    h3:hover {
+        text-decoration: underline;
+        color: @link-blue;
     }
     a  {
         text-decoration: none;
@@ -511,4 +521,126 @@
         }
     }
 
+}
+/************* Select Archive Date ***************/
+#archive-bar.select {
+    width: 960px;
+    background: @v-light-blue;
+    padding: 4px 0;
+    margin-bottom: 8px;
+    h1 {
+        color: @black;
+        font-size: 20px;
+        line-height: 22px;
+        margin: 12px 0 8px 16px;
+        letter-spacing: 0;
+        float: left;
+    }
+    form {
+        margin-top: 11px;        
+        height: 36px;
+        input {
+            height: 20px;
+            margin: 0 16px 0px 16px;
+            float: left;
+            width: 600px;
+        }
+        button {
+            float: left;
+            margin-top: 0;
+        }
+    }
+    ul {
+        width: 936px;
+        margin: 4px auto;
+        li {
+            float: left;
+            a {
+                display: block;
+                margin: 0 2px;
+                font-weight: 800;
+                text-align: center;
+                background: @light-blue;
+                color: @v-light-blue;
+                .border-radius;
+                cursor: default;
+                text-decoration: none;
+                border: 1px solid transparent;
+                padding: 0 4px;
+
+            }
+            &.has-data {
+                a {
+    
+                    background: @blue;
+                    color: @white;
+                    background-image: -moz-linear-gradient(top,@blue,#005f9a);
+                    background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#005f9a));
+                    cursor: pointer;
+                    cursor: hand;
+                    text-decoration: none;
+                    color: @white;
+                    .fade-fast;
+                    &:hover {
+                        background-image: -moz-linear-gradient(center top , @blue, #00568b);
+                        background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#00568b));
+                        border: 1px solid #094182;
+                        border-bottom: 1px solid @dark-blue;
+                        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                    }
+                }
+                &.active {
+                    a {
+                        background: @light-green;
+                        color: @green;
+                        border: 1px solid @green;
+                        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        cursor: default;
+                        .fade-slow;
+                        &:hover {
+                            background: @light-green;
+                            color: @green;
+                            border: 1px solid @green;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#city-content, #state-list, #search-results {
+     .content-box(648px);
+    margin-right: 4px;
+    padding: 8px;
+    .alphabet-content {
+        float: left;
+        padding-top: 32px;
+        h2 {
+            .bottom-rule;
+            padding: 0 0 4px 4px;
+            float: none;
+        }
+
+    }
+        ul {
+            li {
+                display: inline;
+                padding-right: 12px;
+                font-size: 12px;
+                line-height: 24px;
+            }
+        }
+}
+#search-results {
+    background: @off-white;
+    ul {
+        li {
+            font-size: 14px;
+            font-weight: 800;
+        }
+    }
 }
