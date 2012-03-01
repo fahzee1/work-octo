@@ -1,15 +1,18 @@
+<div>
 {% for article in articles %}
  <div class="news-article">
     {% if article.image %}
-    <div class="image-container">
-        <img src="{{ MEDIA_URL }}{{ article.image }}" alt="{{ article.image_caption }}" title="{{ article.image_caption }}" />
-    </div>
-    {% else %}
-    <div class="news-date">
-        <p>{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</strong></p>
-    </div>
-    {% endif %}
-    <h3>{{ article.heading }}</h3>
+    <a href="{{ article.get_absolute_url }}" title="{{ article.heading }}">
+        <div class="image-container">
+            <img src="{{ MEDIA_URL }}{{ article.image }}" alt="{{ article.image_caption }}" title="{{ article.image_caption }}" />
+        </div>
+        {% else %}
+        <div class="news-date">
+            <p>{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</strong></p>
+        </div>
+        {% endif %}
+        <h3>{{ article.heading }}</h3>
+    </a>
     <p>{{ article.summary }}</p>
     <ul>
         Topics:
@@ -17,7 +20,12 @@
         <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
-    <div class="button-link"><a href="{{ article.get_absolute_url }}">Read More ></a></div>
+    <div class="button-link"><a href="{{ article.get_absolute_url }}" title="Read Full Article: {{ article.heading }}">Read More ></a></div>
 </div>
-{% endfor %}
+{% if forloop.counter|divisibleby:4 %}
 <div class="clear"></div>
+</div>
+<div>
+{% endif %}
+{% endfor %}
+</div>
