@@ -113,6 +113,7 @@ INSTALLED_APPS = (
     'apps.search',
     'apps.testimonials',
     'apps.crimedatamodels',
+    'apps.news',
 )
 
 LOGIN_URL = '/login/'
