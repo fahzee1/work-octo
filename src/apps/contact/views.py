@@ -101,6 +101,14 @@ def ajax_post(request):
             if agentid == 'a01526':
                 source = '5LYNX'
 
+            # Special Handling for LocalSearch pages
+            # Change localsearch to HOMESITE and make
+            # the source LocalSearch
+
+            if agentid == 'LocalSearch':
+                source = agentid
+                agentid = 'HOMESITE'
+
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
                       'l_phone1': fdata['phone'],

@@ -8,6 +8,9 @@ from django.template import RequestContext
 
 from apps.contact.forms import PAContactForm
 from apps.crimedatamodels.views import query_by_state_city
+from apps.crimedatamodels.models import (State,
+                                         CityLocation,
+                                         ZipCode)
 
 
 TIMEZONES = {
@@ -87,6 +90,23 @@ def local_page(request, state, city):
 
     crime_stats_ctx['background_time'] = background_time
     
-    return render_to_response('local-pages/index.html',
+    response = render_to_response('local-pages/index.html',
                               crime_stats_ctx,
+                              context_instance=RequestContext(request))
+
+    expire_time = datetime.timedelta(days=90)
+    response.set_cookie('affkey',
+                    value='%s:%s' % (city.replace(' ', ''), state),
+                    domain='.protectamerica.com',
+                    expires=datetime.datetime.now() + expire_time)
+    return response
+
+def local_state(request):
+    states = State.objects.order_by('name')
+
+    forms = {}
+    forms['basic'] = PAContactForm()
+    return render_to_response('local/choose-state.html',
+                              {'states': states,
+                               'forms': forms,},
                               context_instance=RequestContext(request))

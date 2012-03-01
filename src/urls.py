@@ -51,10 +51,6 @@ urlpatterns = patterns('',
     url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
         name='choose-state'),
 
-    # local pages
-    url(r'local/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.local.views.local_page',
-        name='local-page'),
-
     # Home Security News
 
     url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
@@ -93,6 +89,12 @@ elif settings.SITE_ID == 3:
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
 
+    )
+elif settings.SITE_ID == 4:
+    urlpatterns += patterns('',
+        # local pages
+        url(r'(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.local.views.local_page',
+        name='local-page'),
     )
 else:
     urlpatterns += patterns('',
