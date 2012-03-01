@@ -6,6 +6,12 @@ class Category(models.Model):
     name = models.CharField(max_length=64)
     brafton_id = models.IntegerField()
 
+    def get_absolute_url(self):
+        return reverse('news-category', kwargs={
+            'category_name': defaultfilters.slugify(self.name),
+            'category_id': self.id
+        })
+
     def __unicode__(self):
         return '%s' % self.name
 
@@ -22,7 +28,10 @@ class Article(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def related(self):
-        pass
+        articles = []
+        for category in self.categories.all():
+            [articles.append(a) for a in category.article_set.all() if a.pk != self.pk]
+        return articles
 
     def get_absolute_url(self):
         return reverse('news-article', kwargs={

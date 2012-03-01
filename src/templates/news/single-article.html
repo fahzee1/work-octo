@@ -21,14 +21,14 @@
     
     <p>{{ article.content|safe }}</p>
     <ul id="article-breadcrumb">
-        <li class="right-slash"><a href="">Home Security News</a></li>
-        <li class="right-slash left-slash"><a href="">Articles</a></li>
+        <li class="right-slash"><a href="{% url news-home %}">Home Security News</a></li>
+        <li class="right-slash left-slash"><a href="{% url news-articles %}">Articles</a></li>
         <li class="left-slash omega page-turn">{{ article.heading }}</li>
     </ul>
     <ul id="article-topics">
         Topics:
         {% for category in article.categories.all %}
-        <li><a href="">{{ category.name }}</a></li>
+        <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
 </div>
@@ -49,63 +49,7 @@
 {% include "order/generic-call-box.html" %}
 
 <div>
-    <div class="news-article">
-        <div class="image-container">
-            <img src="http://pictures.directnews.co.uk/liveimages/a+would+be+thief+broke+into+a+new+jersey+scrap+metal+recycling+plant+only+to+trip+the+burglar+alarm+and+be+arrested+on+the+spot_3514_800712704_0_0_14899_500.jpg" />
-        </div>
-        <h3>Scrap metal thief foiled</h3>
-        <p>A New Jersey man was caught red-handed recently trying to rob a local scrap metal recycling business...</p>
-        <ul>
-            Topics:
-            <li><a href="">Crime News</a></li>
-            <li><a href="">Video Security</a></li>
-
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-
-
-    </div>
-    <div class="news-article">
-        <div class="news-date">
-            <p>Feb<span>28</span><strong>2011</strong></p>
-        </div>
-        <h3>Multiple burglary victim installs cameras, uses Facebook to catch suspects</h3>
-        <p>The Enterprise Ledger in Alabama reports a homeowner purchased home security cameras after her house was robbed twice in two ...</p>
-        <ul>
-            Topics:
-            <li><a href="">Crime News</a></li>
-            <li><a href="">Video Security</a></li>
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-
-    </div>
-    <div class="news-article">
-        <div class="image-container">
-            <img src="http://pictures.directnews.co.uk/liveimages/new+apps+let+business+owners+monitor+security+cameras+from+their+iphones_3514_800711385_0_0_14216_500.jpg" />
-        </div>
-        <h3>Security cameras on smartphones? There's an app for that</h3>
-        <p>Wireless security systems are going mobile, according to a rundown of some of the new security camera monitoring applications available for cellphones and tablet computers...</p>
-
-        <ul>
-            Topics:
-            <li><a href="">Home Security Equipment</a></li>
-            <li><a href="">Video Security</a></li>
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-    </div>
-    <div class="news-article">
-        <div class="image-container">
-            <img src="http://pictures.directnews.co.uk/liveimages/researchers+at+arizona+state+university+are+creating+more+effective+infrared+technology+which+could+be+used+to+improve+home+security+systems_3514_800709913_0_0_7018842_500.jpg" />
-        </div>
-        <h3>New infrared technology could bolster home security systems</h3>
-        <p>Home security systems could soon become much more sophisticated thanks to new research into nanomaterials from Arizona State University.</p>
-        <ul>
-            Topics:
-            <li><a href="">Home Security News</a></li>
-        </ul>
-        <div class="button-link"><a href="">Read More ></a></div>
-    </div>
-    <div class="clear"></div>
+    {% include "news/_partial/news_article_index_snippet.html" with articles=related %}
 </div>
 {% endblock %}  
 {{ block.super }}
