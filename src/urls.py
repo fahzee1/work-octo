@@ -51,9 +51,22 @@ urlpatterns = patterns('',
     url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
         name='choose-state'),
 
-    # local pages
-    url(r'local/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.local.views.local_page',
-        name='local-page')
+    # Home Security News
+
+    url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
+    url(r'^news/article/?$', 'apps.news.views.articles', name='news-articles'),
+    url(r'^news/article/(?P<category_id>[0-9]{4})/?$',
+        'apps.news.views.articles_by_year', name='news-articles-by-year'),
+    url(r'^news/article/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/?$',
+        'apps.news.views.articles_by_month', name='news-articles-by-month'),
+    url(r'^news/article/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/?$',
+        'apps.news.views.articles_by_day', name='news-articles-by-day'),
+    url(r'^news/category/(?P<category_name>[a-zA-Z\-\_0-9\s+]+)_(?P<category_id>[0-9]+)/?$', 'apps.news.views.category', name='news-category'),
+    url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
+        name='news-import'),
+    url(r'^news/load-more/(?P<last_id>\d)/?',
+        'apps.news.views.load_more_articles', name="load-more-articles"),
+    url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
 )
 
 # a simple direct_to_template wrapper
@@ -85,15 +98,20 @@ elif settings.SITE_ID == 3:
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
 
     )
+elif settings.SITE_ID == 4:
+    urlpatterns += patterns('',
+        # local pages
+        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?$', 'apps.local.views.local_page',
+        name='local-page'),
+        url(r'^(?P<state>[A-Z]{2})/?$', 'apps.local.views.local_city',
+        name='choose-city'), 
+        url(r'^$', 'apps.local.views.local_state', name='local-state'),
+    )
 else:
-
     urlpatterns += patterns('',
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
-        # Local Pages
-        dtt(r'^local/?$', 'local-pages/index.html', 'local-pages'),
-
         # Home Security Packages
         dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
 
@@ -158,14 +176,6 @@ else:
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
-        # Home Security News
-
-        url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
-        url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
-            name='news-import'),
-        url(r'^news/load-more/(?P<last_id>\d)/?',
-            'apps.news.views.load_more_articles', name="load-more-articles"),
-        url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)-(?P<article_id>\d)/?$', 'apps.news.views.article', name="news-article"),
 
 
         # Help Pages

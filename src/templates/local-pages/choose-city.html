@@ -1,4 +1,4 @@
-{% extends "crime-stats/base.html" %}
+{% extends "local-pages/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
 
 {% block page_title %}{{ state }} Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
@@ -6,12 +6,7 @@
 {% block content %}
 <div id="city-bar" class="select">
     <h1>Find your City:</h1>
-    <form action="/crime-rate/search/" method="GET">
-        <input value="{{ request.GET.q }}" name="q" />
-        <button class="button-link">Find City ></button>
-        <div class="clear"></div>
-
-    </form>
+    <div class="clear"></div>
     <ul id="letters">
         <li {% if cities.A %}class="has-cities"{% endif %}><a href="#A_cities">A</a></li>
         <li {% if cities.B %}class="has-cities"{% endif %}><a href="#B_cities">B</a></li>
@@ -49,7 +44,7 @@
         <h2>{{ key }}</h2>
         <ul>
         {% for city in value %}
-            <li><a href="{{ city.get_absolute_url }}">{{ city.city_name }}</a></li>
+            <li><a href="/{{ state }}/{{ city.city_name }}/">{{ city.city_name }}</a></li>
         {% endfor %}
         </ul>
     </div>
@@ -59,11 +54,6 @@
 
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
-    {% comment %}
-    <div class="side-ad">
-        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
-    </div>
-    {% endcomment %}
 </div>
 <div class="clear"></div>
 {% addtoblock "js" %}
@@ -82,4 +72,3 @@
     </script>
 {% endaddtoblock "js" %}
 {% endblock %}
-

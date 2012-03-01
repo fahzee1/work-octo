@@ -49,12 +49,5 @@ def simple_dtt(request, template, extra_context):
                         value=extra_context['agent_id'],
                         expires=datetime.now() + expire_time)
 
-    package_test = request.COOKIES.get('package_test', None)
-    if 'package_test' in extra_context and not package_test:
-        response.set_cookie('package_test',
-                        value=extra_context['package_test'],
-                        domain='protectamerica.com',
-                        expires=datetime.now() + expire_time)
-    
 
     return response

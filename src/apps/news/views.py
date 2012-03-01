@@ -54,14 +54,68 @@ def news_home(request):
          'random_articles': random_articles,},
         context_instance=RequestContext(request))
 
+def articles(request):
+    articles = Article.objects.all()[:10]
+
+    forms = {}
+    forms['basic'] = PAContactForm()
+
+    return render_to_response('news/article-index.html',
+        {'forms': forms,
+         'articles': articles},
+        context_instance=RequestContext(request))
+
+def articles_by_year(request, year):
+    pass
+
+def articles_by_month(request, year, month):
+    pass
+
+def articles_by_day(request, year, month, day):
+    pass
+
+def category(request, category_name, category_id):
+    try:
+        category = Category.objects.get(pk=article_id)
+    except Category.DoesNotExist:
+        raise Http404
+
+    articles = category.article_set.all()
+
+    forms = {}
+    forms['basic'] = PAContactForm()
+
+    return render_to_response('news/category.html',
+        {'forms': forms,
+         'category': category,
+         'articles': articles},
+        context_instance=RequestContext(request))
+
+
 def article(request, article_title, article_id):
     try:
         article = Article.objects.get(pk=article_id)
     except Article.DoesNotExist:
         raise Http404
 
-    print article
-    pass
+    # get 4 related articles if there are not 4 related grab
+    # the difference in latest articles
+    related = article.related()[:4]
+    if len(related) < 4:
+        drelated = Article.objects.exclude(pk=article.pk).exclude(
+            pk__in=[a.pk for a in related]).order_by(
+            '-date_created')[:(4-len(related))]
+
+        [related.append(d) for d in drelated]
+
+    forms = {}
+    forms['basic'] = PAContactForm()
+
+    return render_to_response('news/single-article.html',
+        {'forms': forms,
+         'article': article,
+         'related': related,},
+        context_instance=RequestContext(request))
 
 def load_more_articles(request, last_id):
     articles = Article.objects.filter(pk__lt=last_id).order_by('-pk')[:4]
