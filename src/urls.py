@@ -112,6 +112,7 @@ else:
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+
         # Home Security Packages
         dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
 
