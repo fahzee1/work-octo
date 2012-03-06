@@ -1,6 +1,18 @@
 {% extends "news/base.html" %}
 
 {% load sekizai_tags %}
+{% block page_title %}{{ category.name }} | Home Security News | Protect America{% endblock %}
+{% addtoblock "css" %}
+	<meta name="description" content="Home Security News in {{ category.name }} brought to you by Protect America - the leading distributor of state-of-the-art GE Wireless Home Security Systems" />	
+	<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+	<meta name="rating" content="general" />
+	<meta name="copyright" content="Copyright &copy; 2010 Protect America, Inc., all rights reserved" />
+	<meta name="author" content="Protect America" />
+	<meta name="contact_addr" content="webmaster@protectamerica.com" />
+	<meta name="distribution" content="global" />
+	<meta name="resource-type" content="document" />
+	<meta http-equiv="imagetoolbar" content="false" />
+{% endaddtoblock "css" %}
 
 {% block subnav_parent %}{% endblock %}
 {% block content %}
@@ -42,7 +54,7 @@
 </div>
 {% include "order/generic-call-box.html" %}
 
-<div class="button-ajax"><a href="">Click to Load More Articles</a></div>
+<div class="button-ajax"><a href="#" title="Load More Articles">Click to Load More Articles</a></div>
 
 {% addtoblock "js" %}
 <script type="text/javascript">
