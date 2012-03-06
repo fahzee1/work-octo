@@ -272,3 +272,73 @@ def import_articles(request):
                 article_obj.categories.add(category_obj)
 
     return HttpResponse('imported')
+
+"""
+def temp_import(request):
+    
+    import csv
+    articles = csv.reader(open('/Users/robert/Desktop/news_articles.csv', 'rb'), delimiter=',', quotechar='"')
+
+    categories = csv.reader(open('/Users/robert/Desktop/news_categories.csv', 'rb'), delimiter=',', quotechar='"')
+
+    article2cats = csv.reader(open('/Users/robert/Desktop/c2a.csv', 'rb'), delimiter=',', quotechar='"')
+
+
+    count = 0
+    for category in categories:
+        if count > 0:
+            
+            name = category[2]
+            b_id = category[3]
+
+            try:
+                c = Category.objects.get(brafton_id=b_id)
+            except Category.DoesNotExist:
+                c = Category()
+                c.name = name
+                c.brafton_id = b_id
+                c.save()
+        count = count + 1
+    
+    count = 0
+    for article in articles:
+        if count > 0:
+            b_id = article[1]
+            location = article[2]
+            headline = article[4]
+            summary = article[5]
+            html = article[6]
+            date_submitted = article[8]
+            
+            try:
+                a = Article.objects.get(brafton_id=b_id)
+            except Article.DoesNotExist:
+                a = Article()
+                a.brafton_id = b_id
+                a.heading = headline
+                a.content = html
+                a.summary = summary
+                try:
+                    dc = datetime.datetime.strptime(date_submitted, "%Y-%m-%d %H:%M:%S")
+                except:
+                    dc = datetime.datetime.strptime('2010-05-20 14:20:01', "%Y-%m-%d %H:%M:%S")
+                a.save()
+                a.date_created = dc
+                a.save()
+        count = count + 1
+    
+    count = 0
+    for a2c in article2cats:
+        if count > 0:
+            cb_id = a2c[1]
+            article_id = a2c[2]
+            category_id = a2c[3]
+            ab_id = a2c[4]
+            try:
+                c = Category.objects.get(brafton_id=cb_id)
+                a = Article.objects.get(brafton_id=ab_id)
+                a.categories.add(c)
+            except:
+                pass
+        count = count + 1
+"""

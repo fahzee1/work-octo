@@ -67,6 +67,7 @@ urlpatterns = patterns('',
     url(r'^news/load-more/(?P<last_id>\d+)/?',
         'apps.news.views.load_more_articles', name="load-more-articles"),
     url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
+
 )
 
 # a simple direct_to_template wrapper
