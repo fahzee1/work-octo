@@ -50,6 +50,24 @@ urlpatterns = patterns('',
         name='choose-city'),
     url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
         name='choose-state'),
+
+    # Home Security News
+
+    url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
+    url(r'^news/archive/?$', 'apps.news.views.articles', name='news-articles'),
+    url(r'^news/archive/(?P<year>[0-9]{4})/?$',
+        'apps.news.views.articles_by_year', name='news-articles-by-year'),
+
+    url(r'^news/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/?$',
+        'apps.news.views.articles_by_month', name='news-articles-by-month'),
+    
+    url(r'^news/category/(?P<category_name>[a-zA-Z\-\_0-9\s+]+)_(?P<category_id>[0-9]+)/?$', 'apps.news.views.category', name='news-category'),
+    url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
+        name='news-import'),
+    url(r'^news/load-more/(?P<last_id>\d+)/?',
+        'apps.news.views.load_more_articles', name="load-more-articles"),
+    url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
+
 )
 
 # a simple direct_to_template wrapper
@@ -79,25 +97,34 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
+
+    )
+elif settings.SITE_ID == 4:
+    urlpatterns += patterns('',
+        # local pages
+        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?$', 'apps.local.views.local_page',
+        name='local-page'),
+        url(r'^(?P<state>[A-Z]{2})/?$', 'apps.local.views.local_city',
+        name='choose-city'), 
+        url(r'^$', 'apps.local.views.local_state', name='local-state'),
     )
 else:
-
     urlpatterns += patterns('',
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
 
         # Home Security Packages
-        dtt(r'^home-security-packages/?$', 'packages/index.html', 'security-packages'),
+        dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
 
             # Product > Packages B
+
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'security-packages'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
             
-
 
             # Product > Monitoring
 
@@ -112,6 +139,8 @@ else:
                         # Product > Equipment > Sensors
 
                         dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/door-window-sensor?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+
 
             # Product > Video
 
@@ -149,13 +178,6 @@ else:
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
-        # Security 101 Pages
-
-        dtt(r'^security-101/?$', 'security/index.html', 'security-101'),
-
-            # Security 101 > Security News
-
-            dtt(r'^security-101/security-news/?$', 'security/security-news.html', 'security-news', 'security-101'),
 
 
         # Help Pages
@@ -180,3 +202,10 @@ else:
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
+    
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+   )
+    

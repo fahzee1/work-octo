@@ -65,6 +65,9 @@ class AffiliateMiddleware(object):
                 request.session['refer_id'] = 'GOOGLEPPC'
             elif viewname == 'semlanding_bing':
                 request.session['refer_id'] = 'BINGPPC'
+        elif settings.SITE_ID == 4:
+            request.session['refer_id'] = 'LocalSearch'
+
         return None
 
     def process_response(self, request, response):
@@ -81,7 +84,7 @@ class AffiliateMiddleware(object):
         current_cookie = request.COOKIES.get('refer_id', None)
         if not current_cookie:
             refer_id = request.session.get('refer_id', None)
-            if refer_id in ['GOOGLEPPC', 'BINGPPC', 'SEMDIRECT']:
+            if refer_id in ['GOOGLEPPC', 'BINGPPC', 'SEMDIRECT', 'LocalSearch']:
 
                 response.set_cookie('refer_id',
                         value=request.session['refer_id'],

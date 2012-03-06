@@ -11,7 +11,6 @@
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 
-    <link href="http://plus.google.com/113573642727337197280" rel="publisher" />
 {% endblock %}
 {% render_block "css" %}
 {% block google_analytics %}
@@ -58,7 +57,7 @@
             {% block third-party-nav %}
 
             <div id="ge-logo">
-                <img src="{{ STATIC_URL }}/img/external/ge-logo.png" width="160" height="48" />
+                <p>GE Security Authorized Dealer</p>
             </div>
             {% endblock %}
 
@@ -132,8 +131,8 @@
 
 
 <div class="wrapper">
-        {% block content %}{% endblock %}
-        <div class="clear"></div>
+    {% block content %}{% endblock %}
+    <div class="clear"></div>
 </div>
 {% block order-footer %}
     {% businesstime %}
@@ -177,10 +176,10 @@
 			<li><a href="http://www.protectamerica.com/pa/platinum/alarm-system" title="Platinum Home Security Package">Platinum Security</a></li>
             <li><strong>Social Media</strong></li>
             <li id="social-media">
-                <a href="http://www.facebook.com/protectamerica" title="Visit our Facebook Page" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'Facebook']);"><img src="{{ STATIC_URL }}img/external/FaceBook_32x32.png" /></a>
-                <a href="http://www.twitter.com/protectamerica" title="Visit our Twitter Page" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'Twitter']);"><img src="{{ STATIC_URL }}img/external/Twitter_32x32.png" /></a>
-                <a href="http://www.youtube.com/user/protectamerica" title="Visit our YouTube Page" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'YouTube']);"><img src="{{ STATIC_URL }}img/external/Youtube_32x32.png" /></a>
-                <a href="http://plus.google.com/113573642727337197280?prsrc=3" title="Visit our Google+ Page" style="text-decoration:none;" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'Google Plus']);"><img src="http://ssl.gstatic.com/images/icons/gplus-32.png" alt="" style="border:0;width:30px;height:30px;position:relative;bottom: 1px;"/></a>
+                <a href="http://www.facebook.com/protectamerica" title="Visit our Facebook Page" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'Facebook']);" id="facebook-button"><p>Facebook</p></a>
+                <a href="http://www.twitter.com/protectamerica" title="Visit our Twitter Page" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'Twitter']);" id="twitter-button"><p>Twitter</p></a>
+                <a href="http://www.youtube.com/user/protectamerica" title="Visit our YouTube Page" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'YouTube']);" id="youtube-button"><p>YouTube</p></a>
+                <a href="http://plus.google.com/113573642727337197280?prsrc=3" title="Visit our Google+ Page" style="text-decoration:none;" onClick="_gaq.push(['_trackEvent', 'Social Media', 'Footer Click', 'Google Plus']);" id="google-plus-button"><p>Google +</p></a>
             </li>
 
 		</ul>
@@ -208,13 +207,13 @@
 		</ul>
 		<div id="awards">
 			
-			<div>
-				<img src="{{ STATIC_URL }}img/external/top-consumer-logo-sml.jpg" />
+			<div id="top-consumer-award">
+                <h4><span>Top Consumer Reviews 5-Star Rating</span></h4>
 				<p>Five star rating five years in a row by online website: TopConsumerReviews.com</p>
 				<div class="clear"></div>
 			</div>
-			<div>
-				<img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo-sml.png" />
+			<div id="best-buy-award">
+                <h4><span>Consumer Digest "Best Buy"</span></h4>
 
 				<p>Voted a Consumers Digest "Best Buy" for our Copper home security package</p>
 				<div class="clear"></div>
@@ -409,13 +408,6 @@
 {% endif %}
 
 
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'http://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
 {% if use_call_measurement %}
 <script type="text/javascript"> 
     var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use

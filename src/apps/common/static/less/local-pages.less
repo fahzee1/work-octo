@@ -1,0 +1,232 @@
+@import "home";
+
+body {
+    background-image: url(../img/local-pages/city-partly-cloudy-day-left.jpg), url(../img/local-pages/city-partly-cloudy-day-right.jpg);
+    background-position: left bottom, right bottom;
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+    font: 0.8em/1.7em "Helvetica Neue", Arial, sans-serif;
+    color: @black;
+}
+#header, #legal-bit {
+    background: @white;
+}
+.wrapper {
+    background: rgba(255,255,255,.85);
+
+    margin:0 auto;
+    position:relative;
+    width:960px;
+    padding: 0 8px;
+    padding-bottom: 10px;
+    z-index: 0;
+    clear: both;
+}
+#quick-link-navigation {
+    li {
+        .fb-like {
+            position: relative;
+            top: 4px;
+            text-align: right;
+        }
+        span {
+            font-size: 10px;
+            line-height: 11px;
+
+            strong {
+                padding-right: 8px;
+                color: @grey;
+            }
+            img {
+                position: relative;
+                top: 4px;
+            }
+        }
+    }
+}
+#crime-statistics {
+    .content-box;
+    #crime-grade-scorecard {
+        background: @off-white 0px 100px no-repeat;
+        border: 1px solid @v-light-grey;
+        padding: 8px 16px 0;
+        #overall-grade {
+            float: left;
+            margin-right: 16px;
+        }
+        #scorecard-content {
+            .content-box(560px);
+            margin-top: 16px;
+            margin-right: 14px;
+        }
+        #crime-grades{
+            background: rgba(255,255,255,.5);
+            _background: @white;
+            height: 96px;
+            overflow: hidden;
+            #burglary-grade, #murder-grade, #rape-grade, #robbery-grade, #assault-grade, #auto-theft-grade, #larceny-grade {
+                float: left;
+                width: 64px;
+                padding: 4px 8px 0;
+                .fade-fast;
+                p {
+                    text-align: center;
+                    font-size: 10px;
+                    font-weight: bold;
+                    line-height: 11px;
+                    position: relative;
+                    bottom: 8px;
+                }
+                &:hover {
+                    background: @light-blue;
+                    .fade-slow;
+                }
+            }
+        }
+        .button-link {
+            margin-right: 16px;
+        }
+    }
+}
+#protect-america-content {
+    .content-box;
+    #more-choices, #unrivaled-security {
+        .content-box(448px);
+        padding: 0 16px;
+        .button-link {
+            text-align: center;
+        }
+    }
+}
+#quote-form {
+    margin-top: 8px;
+}
+#left-content {
+    float: left;
+    width: 669px;
+    margin-top: 8px;
+}
+/*************** Select City Page *******************/
+#city-bar.select {
+    width: 960px;
+    background: @v-light-blue;
+    h1 {
+        color: @black;
+        font-size: 20px;
+        line-height: 22px;
+        margin: 12px 0 8px 16px;
+        letter-spacing: 0;
+        float: left;
+    }
+    form {
+        margin-top: 11px;        
+        height: 36px;
+        input {
+            height: 20px;
+            margin: 0 16px 0px 16px;
+            float: left;
+            width: 600px;
+        }
+        button {
+            float: left;
+            margin-top: 0;
+        }
+    }
+    ul#letters {
+        width: 936px;
+        margin: 0 auto;
+        padding-bottom: 8px;
+        li {
+            float: left;
+            a {
+                display: block;
+                width: 30px;
+                margin: 0 2px;
+                font-weight: bold;
+                text-align: center;
+                background: @light-blue;
+                color: @v-light-blue;
+                .border-radius;
+                cursor: default;
+                text-decoration: none;
+                border: 1px solid transparent;
+
+            }
+            &.has-cities {
+                a {
+    
+                    background: @blue;
+                    color: @white;
+                    background-image: -moz-linear-gradient(top,@blue,#005f9a);
+                    background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#005f9a));
+                    cursor: pointer;
+                    cursor: hand;
+                    text-decoration: none;
+                    color: @white;
+                    .fade-fast;
+                    &:hover {
+                        background-image: -moz-linear-gradient(center top , @blue, #00568b);
+                        background-image: -webkit-gradient(linear,left top,left bottom,from(@blue),to(#00568b));
+                        border: 1px solid #094182;
+                        border-bottom: 1px solid @dark-blue;
+                        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                    }
+                }
+                &.active {
+                    a {
+                        background: @light-green;
+                        color: @green;
+                        border: 1px solid @green;
+                        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        cursor: default;
+                        .fade-slow;
+                        &:hover {
+                            background: @light-green;
+                            color: @green;
+                            border: 1px solid @green;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+#city-content, #state-list, #search-results {
+     .content-box(648px);
+    margin-right: 4px;
+    padding: 8px;
+    .alphabet-content {
+        float: left;
+        padding-top: 32px;
+        h2 {
+            .bottom-rule;
+            padding: 0 0 4px 4px;
+            float: none;
+        }
+
+    }
+        ul {
+            li {
+                display: inline;
+                padding-right: 12px;
+                font-size: 12px;
+                line-height: 24px;
+            }
+        }
+}
+#search-results {
+    background: @off-white;
+    ul {
+        li {
+            font-size: 14px;
+            font-weight: bold;
+        }
+    }
+}
+
+/******************* BANNER IMPORTS ******************/
+@import "banners/669x320/top-consumer-reviews-compact";

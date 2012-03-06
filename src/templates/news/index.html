@@ -1,0 +1,141 @@
+{% extends "news/base.html" %}
+
+{% load sekizai_tags %}
+{% block page_title %}Home Security News | Protect America{% endblock %}
+{% addtoblock "css" %}
+	<meta name="description" content="Protect America News provides the latest home security news mixed with a bit of advice from top law enforcement and security experts. From technology to true crime, Protect America News features stories that highlight the rapid changes in home security. Protect America News breaks down crime statistics and expert commentary to give anyone a basic understanding of the home security industry." />	
+	<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+	<meta name="rating" content="general" />
+	<meta name="copyright" content="Copyright &copy; 2010 Protect America, Inc., all rights reserved" />
+	<meta name="author" content="Protect America" />
+	<meta name="contact_addr" content="webmaster@protectamerica.com" />
+	<meta name="distribution" content="global" />
+	<meta name="resource-type" content="document" />
+	<meta http-equiv="imagetoolbar" content="false" />
+{% endaddtoblock "css" %}
+{% block subnav_parent %}{% endblock %}
+{% block content %}
+
+<div id="security-news-headline" class="news-headline">
+    {% if headline.image %}
+    <div id="headline-image">
+        <a href="{{ headline.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ headline.image }}" alt="{{ headline.image_caption }}" title="{{ headline.image_caption }}" /></a>
+    </div>
+    {% else %}
+    <div class="news-date">
+        <p>{{ headline.date_created|date:"M" }}<span>{{ headline.date_created|date:"d" }}</span><strong>{{ headline.date_created|date:"Y" }}</strong></p>
+    </div>
+    {% endif %}
+    <div id="headline-article">
+        <h1>Latest Home Security News</h1>
+        <h2><a href="{{ headline.get_absolute_url }}" title="{{ headline.heading }}">{{ headline.heading }}</a></h2>
+        {% comment %}
+        <p>{{ headline.summary }}</p>
+        <p>City-wide shoplifting arrests hit 204 during 2011, more than a 50 percent increase over 2010, when there were 133 such arrests, according to the St. Louis Post-Dispatch...</p>
+        {% endcomment %}
+        <p>{{ headline.content|truncatewords_html:40|safe }}</p>
+        <div class="button-link"><a href="{{ headline.get_absolute_url }}" title="Read Full Article: {{ headline.heading }}">Read More From This Article ></a></div>
+        <ul>
+            Topics:
+            {% for category in headline.categories.all %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="clear"></div>
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+
+<div class="clear"></div>
+<div id="article-container">
+    {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
+</div>
+<div class="button-ajax"><a href="">Click to Load More Articles</a></div>
+<div id="extra-content">
+    <div id="news-videos">
+        <h2>Videos</h2>
+        {% for video in videos %}
+        {% if forloop.first %}
+        <div class="big video">
+            <iframe width="300" height="200" src="http://www.youtube.com/embed/{{ video.id }}" frameborder="0" allowfullscreen></iframe>
+            <h3>{{ video.title }}</h3>
+            <span>{{ video.views }} views</span>
+            <p class="short-description">{{ video.description|truncatewords:15 }} <a href="#" class="read-description">[read more]</a></p>
+            <p class="full-description" style="display: none;">{{ video.description|linebreaksbr }}</p>
+            <div class="clear"></div>
+
+        </div>
+        {% else %}
+        <a href="{{ video.link }}" target="_blank" title="{{ video.title }}">
+        <div class="video">
+            <img src="http://img.youtube.com/vi/{{ video.id }}/2.jpg" />
+            <h3>{{ video.title }}</h3>
+            <span>{{ video.views }} views</span>
+            <div class="clear"></div>
+
+        </div>
+        </a>
+        {% endif %}
+        {% endfor %}
+        <div class="button-link">
+            <a href="http://www.youtube.com/playlist?list=PL371901C9D9882FB8&feature=plcp">View More Videos ></a>
+        </div>
+    </div>
+    <div id="news-archives">
+        <h2>News From the Archives</h2>
+        {% for article in random_articles %}
+        <a href="{{ article.get_absolute_url }}">
+        <div class="archived-article">
+            <p class="date"><span>{{ article.date_created|date:"M" }}</span> {{ article.date_created|date:"Y" }}</p>
+            <div class="news-content">
+                <h3>{{ article.heading }}</h3>
+                <p>{{ article.summary }} <span>[Read More]</span></p>
+            </div>
+        </div>
+        </a>
+        {% endfor %}
+
+        <div class="button-link">
+            <a href="{% url news-articles %}">View the News Archives ></a>
+        </div>
+    </div>
+    <div id="news-topics">
+        <h2>Hot Topics</h2>
+        <ul>
+            {% for category in categories %}
+            <li class="{% cycle 'even' 'odd' %}"><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var last_id = '{{ last_id }}';
+    function load_articles() {
+        var url = '{% url load-more-articles last_id=9999999 %}';
+        $.get(url.replace('9999999', last_id),
+        function(data) {
+            if(data.response == 'success') {
+                $('#article-container').append(data.html);
+                if(data.can_load_more == false) {
+                    $('.button-ajax').remove();
+                }
+                last_id = data.last_id;
+            }
+        });
+    }
+    $('.button-ajax').click(function(e) {
+        e.preventDefault();
+        load_articles();
+    });
+    $('.read-description').click(function(e) {
+        e.preventDefault();
+        $('.short-description').remove();
+        $('.full-description').slideDown();
+    });
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
