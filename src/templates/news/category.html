@@ -53,8 +53,9 @@
     {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
     {% include "order/generic-call-box.html" %}
 </div>
-
-<div class="button-ajax"><a href="#" title="Load More Articles">Click to Load More Articles</a></div>
+{% if articles|length == 8 %}
+<div class="button-ajax"><a href="#"  title="Load More Articles">Click to Load More Articles</a></div>
+{% endif %}
 
 {% addtoblock "js" %}
 <script type="text/javascript">
