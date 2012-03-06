@@ -41,6 +41,9 @@ def news_home(request):
 
     # random 4 articles from archive
     random_articles = Article.objects.order_by('?')[:4]
+
+    # grab categories
+    categories = Category.objects.order_by('pk')
     
     # grab videos from youtube
     yt_feed = 'http://gdata.youtube.com/feeds/api/playlists/371901C9D9882FB8?v=2'
@@ -67,7 +70,8 @@ def news_home(request):
          'articles': articles[1:],
          'last_id': articles[4].pk,
          'videos': videos[:3],
-         'random_articles': random_articles,},
+         'random_articles': random_articles,
+         'categories': categories},
         context_instance=RequestContext(request))
 
 def articles(request, **kwargs):
@@ -132,13 +136,17 @@ def category(request, category_name, category_id):
 
     forms = {}
     forms['basic'] = PAContactForm()
+    
+    last_id = 0
+    for article in articles:
+        last_id = article.pk
 
     return render_to_response('news/category.html',
         {'forms': forms,
          'category': category,
          'headline': articles[0],
          'articles': articles[1:],
-         'last_id': articles[8].pk},
+         'last_id': last_id},
         context_instance=RequestContext(request))
 
 
