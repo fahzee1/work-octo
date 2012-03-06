@@ -1,0 +1,68 @@
+{% extends "news/base.html" %}
+{% load content_filters content_tags sekizai_tags  %}
+{% block page_title %}{{ article.heading }} | Home Security News | Protect America{% endblock %}
+{% block subnav_parent %}{% endblock %}
+{% block content %}
+{% addtoblock "css" %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="{{ article.summary }}" />
+    <meta name="ROBOTS" content="INDEX,FOLLOW"/>
+    <meta name="rating" content="general" />
+    <meta name="copyright" content="Copyright &copy; 2010 Protect America, Inc., all rights reserved" />
+    <meta name="author" content="Protect America" />
+    <meta name="contact_addr" content="webmaster@protectamerica.com" />
+    <meta name="distribution" content="global" />
+    <meta name="resource-type" content="document" />
+{% endaddtoblock "css" %}
+{% addtoblock "js" %}
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "e120b57d-de18-41e4-9f08-4c602e36df66"}); </script>
+{% endaddtoblock "js" %}
+<div id="single-article">
+    <div id="article-header">
+        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" title="{{ article.image_caption }}" />
+        <div class="news-date">
+            <p>{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</strong></p>
+        </div>
+
+    </div>
+
+    <h1>{{ article.heading }}</h1>
+    
+    <p>{{ article.content|safe }}</p>
+    <ul id="article-breadcrumb">
+        <li class="right-slash"><a href="{% url news-home %}">Home Security News</a></li>
+        <li class="right-slash left-slash"><a href="{% url news-articles %}">Articles</a></li>
+        <li class="left-slash omega page-turn">{{ article.heading }}</li>
+    </ul>
+    <ul id="article-topics">
+        Topics:
+        {% for category in article.categories.all %}
+        <li><a href="{{ category.get_absolute_url }}" title="Read more articles about {{ category.name }}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div id="right-column">
+    {% include "order/quote-form.html" with form=forms.basic %}
+    <div id="social-media">
+        <h3>Share this with Friends:</h3>
+        <span class='st_facebook_vcount' displayText='Facebook'></span>
+        <span class='st_twitter_vcount' displayText='Tweet'></span>
+        <span class='st_email_vcount' displayText='Email'></span>
+        <span class='st_plusone_vcount' displayText='Google +1'></span>
+        <div class="clear"></div>
+    </div>
+    <a href="http://www.protectamerica.com" title="Get a Free Home Security System with Protect America"><img src="{{ STATIC_URL }}img/banners/250x250/250x250-superhero.jpg" alt="Even Superheroes have Security Systems" width="250" height="250" class="security-ad" /></a>
+</div>
+
+<div class="clear"></div>
+{% include "order/generic-call-box.html" %}
+
+<div id="article-container">
+    {% include "news/_partial/news_article_index_snippet.html" with articles=related %}
+</div>
+{% endblock %}  
+{{ block.super }}
+
+
