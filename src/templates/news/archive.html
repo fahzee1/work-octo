@@ -6,26 +6,16 @@
 {% block content %}
 <div id="archive-bar" class="select">
     <ul id="years">
-        <li {% if year == '2012' %}class="has-data"{% endif %}><a href="{% url news-articles-by-year 2012 %}">2012</a></li>
-        <li {% if year == '2011' %}class="has-data"{% endif %}><a href="{% url news-articles-by-year 2011 %}">2011</a></li>
-        <li {% if year == '2010' %}class="has-data"{% endif %}><a href="{% url news-articles-by-year 2010 %}">2010</a></li>
-
+        {% for ayear in article_years %}
+        <li {% if ayear.year|stringformat:"s" == year %}class="has-data"{% endif %}><a href="{% url news-articles-by-year ayear.year %}">{{ ayear.year }}</a></li>
+        {% endfor %}
         <div class="clear"></div>
     </ul>
     {% if year %}
     <ul id="months">
-        <li class="has-data"><a href="{% url news-articles-by-month year "01" %}">January</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "02" %}">February</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "03" %}">March</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "04" %}">April</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "05" %}">May</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "06" %}">June</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "07" %}">July</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "08" %}">August</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "09" %}">September</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "10" %}">October</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "11" %}">November</a></li>
-        <li class="has-data"><a href="{% url news-articles-by-month year "12" %}">December</a></li>
+        {% for amonth in article_months %}
+        <li class="has-data"><a href="{% url news-articles-by-month year amonth|date:"m" %}">{{ amonth|date:"F" }}</a></li>
+        {% endfor %}
         <div class="clear"></div>
     </ul>
     {% endif %}
@@ -53,7 +43,7 @@
         <ul>
             Topics:
             {% for category in headline.categories.all %}
-            <li><a href="">{{ category.name }}</a></li>
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
             {% endfor %}
         </ul>
     </div>
