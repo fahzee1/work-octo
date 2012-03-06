@@ -1,6 +1,7 @@
 import os
 import re
 import urllib
+import datetime
 from xml.dom.minidom import parseString
 
 from django.shortcuts import render_to_response
@@ -13,6 +14,21 @@ from django.utils import simplejson
 from apps.news.models import Category, Article
 from apps.contact.forms import PAContactForm
 
+
+MONTH_MAP = {
+    1:'January',
+    2:'February',
+    3:'March',
+    4:'April',
+    5:'May',
+    6:'June',
+    7:'July',
+    8:'August',
+    9:'September',
+    10:'October',
+    11:'November',
+    12:'December',
+}
 
 def get_text(node):
     return node[0].firstChild.nodeValue
@@ -54,26 +70,48 @@ def news_home(request):
          'random_articles': random_articles,},
         context_instance=RequestContext(request))
 
-def articles(request):
-    articles = Article.objects.all()[:10]
+def articles(request, **kwargs):
+    articles = Article.objects.order_by('-date_created')
+    
+    if 'year' in kwargs:
+        year = kwargs['year']
+    else:
+        year = '2012'
+    articles = articles.filter(date_created__year=year)
+
+    month = False
+    if 'month' in kwargs:
+        articles = articles.filter(date_created__month=kwargs['month'])
+        month = kwargs['month']
+
+    # order them by month
+    months = {}
+    for article in articles[1:]:
+        a_month = article.date_created.month
+        if a_month not in months:
+            months[a_month] = []
+        months[a_month].append(article)
+    m_nums = sorted(months.keys(), reverse=True)
 
     forms = {}
     forms['basic'] = PAContactForm()
 
-    return render_to_response('news/article-index.html',
+    return render_to_response('news/archive.html',
         {'forms': forms,
+         'year': year,
+         'month': month,
          'headline': articles[0],
-         'articles': articles[1:9]},
+         'articles': articles[1:9],
+         'months': months,
+         'm_nums': m_nums,
+         'map': MONTH_MAP,},
         context_instance=RequestContext(request))
 
 def articles_by_year(request, year):
-    pass
+    return articles(request, year=year)
 
 def articles_by_month(request, year, month):
-    pass
-
-def articles_by_day(request, year, month, day):
-    pass
+    return articles(request, year=year, month=month)
 
 def category(request, category_name, category_id):
     try:
@@ -119,7 +157,15 @@ def article(request, article_title, article_id):
         context_instance=RequestContext(request))
 
 def load_more_articles(request, last_id):
-    articles = Article.objects.filter(pk__lt=last_id).order_by('-pk')[:4]
+    articles = Article.objects.filter(pk__lt=last_id)
+    # if there are options in the get run them here
+    if 'year' in request.GET and request.GET['year'] != '':
+        articles = articles.filter(date_created__year=request.GET['year'])
+    if 'month' in request.GET and request.GET['month'] != '':
+        articles = articles.filter(date_created__month=request.GET['month'])
+    # cut the slice
+    articles = articles.order_by('-pk')[:4]
+
     # check if there are more articles to load
     last_id = 0
     for article in articles:

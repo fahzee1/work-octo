@@ -1,32 +1,34 @@
 {% extends "news/base.html" %}
 
-{% load sekizai_tags %}
+{% load sekizai_tags crime_stats_filters %}
 
 {% block subnav_parent %}{% endblock %}
 {% block content %}
 <div id="archive-bar" class="select">
     <ul id="years">
-        <li {% if cities.A %}class="has-cities"{% endif %}><a href="#A_cities">2012</a></li>
-        <li {% if cities.B %}class="has-cities"{% endif %}><a href="#B_cities">2011</a></li>
-        <li {% if cities.B %}class="has-cities"{% endif %}><a href="#B_cities">2010</a></li>
+        <li {% if year == '2012' %}class="has-data"{% endif %}><a href="{% url news-articles-by-year 2012 %}">2012</a></li>
+        <li {% if year == '2011' %}class="has-data"{% endif %}><a href="{% url news-articles-by-year 2011 %}">2011</a></li>
+        <li {% if year == '2010' %}class="has-data"{% endif %}><a href="{% url news-articles-by-year 2010 %}">2010</a></li>
 
         <div class="clear"></div>
     </ul>
+    {% if year %}
     <ul id="months">
-        <li class="has-data"><a href="#A_cities">January</a></li>
-        <li class="has-data"><a href="#B_cities">February</a></li>
-        <li class="has-data"><a href="#C_cities">March</a></li>
-        <li class="has-data"><a href="#D_cities">April</a></li>
-        <li class="has-data"><a href="#E_cities">May</a></li>
-        <li class="has-data"><a href="#F_cities">June</a></li>
-        <li class="has-data"><a href="#G_cities">July</a></li>
-        <li class="has-data"><a href="#H_cities">August</a></li>
-        <li class="has-data"><a href="#I_cities">September</a></li>
-        <li class="has-data"><a href="#J_cities">October</a></li>
-        <li class="has-data"><a href="#K_cities">November</a></li>
-        <li class="has-data"><a href="#L_cities">December</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "01" %}">January</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "02" %}">February</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "03" %}">March</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "04" %}">April</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "05" %}">May</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "06" %}">June</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "07" %}">July</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "08" %}">August</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "09" %}">September</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "10" %}">October</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "11" %}">November</a></li>
+        <li class="has-data"><a href="{% url news-articles-by-month year "12" %}">December</a></li>
         <div class="clear"></div>
     </ul>
+    {% endif %}
 </div>
 <div class="clear"></div>
 <div id="security-news-headline" class="news-headline">
@@ -62,19 +64,23 @@
 
 <div class="clear"></div>
 <div id="article-container">
-    <h2>February 2012</h2>
+{% for month in m_nums %}
+    <h2>{{ map|hash:month }} {{ year }}</h2>
+    {% with months|hash:month as articles %}
     {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
+    {% endwith %}
+    <div class="clear"></div>
+    {% include "order/generic-call-box.html" %}
+{% endfor %}
+    
 </div>
-{% include "order/generic-call-box.html" %}
-
-<div class="button-ajax"><a href="">Click to Load More Articles</a></div>
 
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {
     var last_id = '{{ last_id }}';
     function load_articles() {
-        var url = '{% url load-more-articles last_id=9999999 %}';
+        var url = '{% url load-more-articles last_id=9999999 %}?year={{ request.GET.year }}%month={{ request.GET.month }}';
         $.get(url.replace('9999999', last_id),
         function(data) {
             if(data.response == 'success') {
