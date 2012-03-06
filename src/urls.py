@@ -54,17 +54,17 @@ urlpatterns = patterns('',
     # Home Security News
 
     url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
-    url(r'^news/article/?$', 'apps.news.views.articles', name='news-articles'),
-    url(r'^news/article/(?P<category_id>[0-9]{4})/?$',
+    url(r'^news/archive/?$', 'apps.news.views.articles', name='news-articles'),
+    url(r'^news/archive/(?P<year>[0-9]{4})/?$',
         'apps.news.views.articles_by_year', name='news-articles-by-year'),
-    url(r'^news/article/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/?$',
+
+    url(r'^news/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/?$',
         'apps.news.views.articles_by_month', name='news-articles-by-month'),
-    url(r'^news/article/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<day>[0-9]{2})/?$',
-        'apps.news.views.articles_by_day', name='news-articles-by-day'),
+    
     url(r'^news/category/(?P<category_name>[a-zA-Z\-\_0-9\s+]+)_(?P<category_id>[0-9]+)/?$', 'apps.news.views.category', name='news-category'),
     url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
         name='news-import'),
-    url(r'^news/load-more/(?P<last_id>\d)/?',
+    url(r'^news/load-more/(?P<last_id>\d+)/?',
         'apps.news.views.load_more_articles', name="load-more-articles"),
     url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
 )

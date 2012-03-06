@@ -92,6 +92,13 @@ TEMPLATE_DIRS = (
     os.path.join(settings.PROJECT_ROOT, 'src', 'templates'),
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
