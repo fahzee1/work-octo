@@ -39,7 +39,7 @@
         <ul>
             Topics:
             {% for category in headline.categories.all %}
-            <li><a href="">{{ category.name }}</a></li>
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -51,8 +51,8 @@
 <div class="clear"></div>
 <div id="article-container">
     {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
+    {% include "order/generic-call-box.html" %}
 </div>
-{% include "order/generic-call-box.html" %}
 
 <div class="button-ajax"><a href="#" title="Load More Articles">Click to Load More Articles</a></div>
 
@@ -60,16 +60,25 @@
 <script type="text/javascript">
 $(document).ready(function() {
     var last_id = '{{ last_id }}';
+    var article_load_count = 1;
     function load_articles() {
-        var url = '{% url load-more-articles last_id=9999999 %}';
+        var url = '{% url load-more-articles last_id=9999999 %}?category={{ category.pk }}';
         $.get(url.replace('9999999', last_id),
         function(data) {
             if(data.response == 'success') {
                 $('#article-container').append(data.html);
+                if( article_load_count == 2) {
+                    article_load_count = 0;
+                    var callbox = $('#call-box').clone();
+                    $('#article-container').append(callbox);
+                } else {
+                    article_load_count++;
+                }
                 if(data.can_load_more == false) {
                     $('.button-ajax').remove();
                 }
                 last_id = data.last_id;
+                
             }
         });
     }
