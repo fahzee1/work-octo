@@ -71,6 +71,10 @@ def news_home(request):
         context_instance=RequestContext(request))
 
 def articles(request, **kwargs):
+    # get all years and months that have articles
+    article_years = Article.objects.dates('date_created',
+        'year', order="DESC")
+
     articles = Article.objects.order_by('-date_created')
     
     if 'year' in kwargs:
@@ -78,6 +82,9 @@ def articles(request, **kwargs):
     else:
         year = '2012'
     articles = articles.filter(date_created__year=year)
+
+    article_months = articles.dates('date_created',
+        'month', order="DESC")
 
     month = False
     if 'month' in kwargs:
@@ -100,6 +107,8 @@ def articles(request, **kwargs):
         {'forms': forms,
          'year': year,
          'month': month,
+         'article_years': article_years,
+         'article_months': article_months,
          'headline': articles[0],
          'articles': articles[1:9],
          'months': months,
@@ -119,7 +128,7 @@ def category(request, category_name, category_id):
     except Category.DoesNotExist:
         raise Http404
 
-    articles = category.article_set.all()
+    articles = category.article_set.order_by('-pk')[:9]
 
     forms = {}
     forms['basic'] = PAContactForm()
@@ -127,7 +136,9 @@ def category(request, category_name, category_id):
     return render_to_response('news/category.html',
         {'forms': forms,
          'category': category,
-         'articles': articles},
+         'headline': articles[0],
+         'articles': articles[1:],
+         'last_id': articles[8].pk},
         context_instance=RequestContext(request))
 
 
@@ -163,6 +174,12 @@ def load_more_articles(request, last_id):
         articles = articles.filter(date_created__year=request.GET['year'])
     if 'month' in request.GET and request.GET['month'] != '':
         articles = articles.filter(date_created__month=request.GET['month'])
+    if 'category' in request.GET and request.GET['category'] != '':
+        try:
+            category = Category.objects.get(pk=request.GET['category'])
+            articles = articles.filter(categories=category)
+        except:
+            pass
     # cut the slice
     articles = articles.order_by('-pk')[:4]
 
