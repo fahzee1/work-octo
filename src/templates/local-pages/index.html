@@ -12,8 +12,8 @@
 
 <style type="text/css">
     body {
-        background-image: url({{ STATIC_URL }}img/local-pages/{{ pop_type }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg),url({{ STATIC_URL }}img/local-pages/{{ pop_type }}-{{ weather_info.icon }}-{{ background_time }}-right.jpg);
-        background: #fff url({{ STATIC_URL }}img/local-pages/{{ pop_type }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg) left bottom fixed no-repeat\9;
+        background-image: url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg),url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-right.jpg);
+        background: #fff url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg) left bottom fixed no-repeat\9;
     }
     .wrapper {
         background: #fff\9;
@@ -109,7 +109,7 @@
 
         </div>
         
-        <div class="button-link"><a href="{% url crime-stats state=state city=city %}" title="View Crime Stats in {{ city }}" alt="View Crime Stats in {{ city }}, {{ state }}">View Crime Stats in {{ city }} ></a></div>
+        <div class="button-link"><a href="http://www.protectamerica.com{% url crime-stats state=state city=city %}" title="View Crime Stats in {{ city }}" alt="View Crime Stats in {{ city }}, {{ state }}">View Crime Stats in {{ city }} ></a></div>
         <div class="clear"></div>
     </div>
 </div>

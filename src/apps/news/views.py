@@ -273,6 +273,26 @@ def import_articles(request):
 
     return HttpResponse('imported')
 
+def redirect_old(request, article_id):
+    from apps.news.redirect import REDIRECT_MAP
+    try:
+        b_id = REDIRECT_MAP[article_id]
+        article = Article.objects.get(brafton_id=b_id)
+        return HttpResponseRedirect(article.get_absolute_url())
+    except:
+        raise Http404
+    raise Http404
+
+def redirect_old_category(request, category_id):
+    from apps.news.redirect import REDIRECT_MAP_CATEGORIES
+    try:
+        b_id = REDIRECT_MAP_CATEGORIES[category_id]
+        category = Category.objects.get(brafton_id=b_id)
+        return HttpResponseRedirect(category.get_absolute_url())
+    except:
+        raise Http404
+    raise Http404
+
 """
 def temp_import(request):
     

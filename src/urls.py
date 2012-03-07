@@ -68,6 +68,10 @@ urlpatterns = patterns('',
         'apps.news.views.load_more_articles', name="load-more-articles"),
     url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
 
+    # redirect old urls
+    url(r'^news/article/(?P<article_id>\d+)-(.*)/?$', 'apps.news.views.redirect_old', name='news-article-redirect'),
+    url(r'^news/category/(?P<category_id>\d+)-(.*)/?$', 'apps.news.views.redirect_old_category', name='news-category-redirect'),
+
 )
 
 # a simple direct_to_template wrapper
