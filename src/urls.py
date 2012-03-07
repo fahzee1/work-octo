@@ -44,7 +44,7 @@ urlpatterns = patterns('',
     # crime stats
     url(r'crime-rate/search/?', 'apps.crimedatamodels.views.find_city',
         name='crime-search'),
-    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.crimedatamodels.views.crime_stats',
+    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s\(\),\'+]+)/?', 'apps.crimedatamodels.views.crime_stats',
         name='crime-stats'),
     url(r'crime-rate/(?P<state>[A-Z]{2})/?', 'apps.crimedatamodels.views.choose_city',
         name='choose-city'),
@@ -67,6 +67,10 @@ urlpatterns = patterns('',
     url(r'^news/load-more/(?P<last_id>\d+)/?',
         'apps.news.views.load_more_articles', name="load-more-articles"),
     url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
+
+    # redirect old urls
+    url(r'^news/article/(?P<article_id>\d+)-(.*)/?$', 'apps.news.views.redirect_old', name='news-article-redirect'),
+    url(r'^news/category/(?P<category_id>\d+)-(.*)/?$', 'apps.news.views.redirect_old_category', name='news-category-redirect'),
 
 )
 
@@ -102,7 +106,7 @@ elif settings.SITE_ID == 3:
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
-        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?$', 'apps.local.views.local_page',
+        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\']+)/?$', 'apps.local.views.local_page',
         name='local-page'),
         url(r'^(?P<state>[A-Z]{2})/?$', 'apps.local.views.local_city',
         name='choose-city'), 
