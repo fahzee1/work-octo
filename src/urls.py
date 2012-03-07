@@ -44,7 +44,7 @@ urlpatterns = patterns('',
     # crime stats
     url(r'crime-rate/search/?', 'apps.crimedatamodels.views.find_city',
         name='crime-search'),
-    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?', 'apps.crimedatamodels.views.crime_stats',
+    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s\(\),\'+]+)/?', 'apps.crimedatamodels.views.crime_stats',
         name='crime-stats'),
     url(r'crime-rate/(?P<state>[A-Z]{2})/?', 'apps.crimedatamodels.views.choose_city',
         name='choose-city'),
@@ -106,7 +106,7 @@ elif settings.SITE_ID == 3:
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
-        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+]+)/?$', 'apps.local.views.local_page',
+        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\']+)/?$', 'apps.local.views.local_page',
         name='local-page'),
         url(r'^(?P<state>[A-Z]{2})/?$', 'apps.local.views.local_city',
         name='choose-city'), 
