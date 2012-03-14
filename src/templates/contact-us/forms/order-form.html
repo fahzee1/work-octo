@@ -5,14 +5,26 @@
         {{ field }}
     {% endfor %}
     {% for field in formset.visible_fields %}
-        {{ field.errors }}
-        
-        {% if field.field.widget|klass == 'Select' %}
-        <label class="select">{{ field.name|capfirst }}:</label>
-        {% else %}
-        <label>{{ field.name|capfirst }}:</label>
-        {% endif %}
-        {{ field }}
+        <div class="order-form-field">
+            {{ field.errors }}
+            
+            {% if field.field.widget|klass == 'Select' %}
+            <label class="select">{{ field.name|capfirst }}:</label>
+            <img src="{{ STATIC_URL }}img/extra/form-check.png" alt="Nice Job, This Looks Good!" width="40" height="40" class="form-check-select" />
+            <img src="{{ STATIC_URL }}img/extra/form-check-error.png" alt="Whoa, Something Doesn't Look Right Here" width="40" height="40" class="form-check-select" />
+
+
+            {% else %}
+            <label>{{ field.name|capfirst }}:</label>
+            <img src="{{ STATIC_URL }}img/extra/form-check.png" alt="Nice Job, This Looks Good!" width="40" height="40" class="form-check" />
+            <img src="{{ STATIC_URL }}img/extra/form-check.png" alt="Whoa, Something Doesn't Look Right Here" width="40" height="40" class="form-check" />
+
+
+            {% endif %}
+            {{ field }}
+        </div>
+
+
     {% endfor %}
     <button class="buyit">Continue ></button>
     <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
