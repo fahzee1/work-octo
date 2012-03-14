@@ -1,0 +1,108 @@
+{% extends "news/base.html" %}
+
+{% load sekizai_tags crime_stats_filters %}
+{% block page_title %}Home Security News Archive | Home Security News | Protect America{% endblock %}
+{% addtoblock "css" %}
+	<meta name="description" content="Review and find resources, news articles, and stories in Home Security News Archives." />	
+	<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+	<meta name="rating" content="general" />
+	<meta name="copyright" content="Copyright &copy; 2010 Protect America, Inc., all rights reserved" />
+	<meta name="author" content="Protect America" />
+	<meta name="contact_addr" content="webmaster@protectamerica.com" />
+	<meta name="distribution" content="global" />
+	<meta name="resource-type" content="document" />
+	<meta http-equiv="imagetoolbar" content="false" />
+{% endaddtoblock "css" %}
+{% block subnav_parent %}{% endblock %}
+{% block content %}
+<div id="archive-bar" class="select">
+    <ul id="years">
+        {% for ayear in article_years %}
+        <li {% if ayear.year|stringformat:"s" == year %}class="has-data"{% endif %}><a href="{% url news-articles-by-year ayear.year %}">{{ ayear.year }}</a></li>
+        {% endfor %}
+        <div class="clear"></div>
+    </ul>
+    {% if year %}
+    <ul id="months">
+        {% for amonth in article_months %}
+        <li class="has-data"><a href="{% url news-articles-by-month year amonth|date:"m" %}">{{ amonth|date:"F" }}</a></li>
+        {% endfor %}
+        <div class="clear"></div>
+    </ul>
+    {% endif %}
+</div>
+<div class="clear"></div>
+<div id="security-news-headline" class="news-headline">
+    {% if headline.image %}
+    <div id="headline-image">
+        <a href="{{ headline.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ headline.image }}" alt="{{ headline.image_caption }}" title="{{ headline.image_caption }}" /></a>
+    </div>
+    {% else %}
+    <div class="news-date">
+        <p>{{ headline.date_created|date:"M" }}<span>{{ headline.date_created|date:"d" }}</span><strong>{{ headline.date_created|date:"Y" }}</strong></p>
+    </div>
+    {% endif %}
+    <div id="headline-article">
+        <h1>Home Security News Archive: <br />{{ headline.date_created|date:"N d, Y" }}</h1>
+        <h2><a href="{{ headline.get_absolute_url }}" title="{{ headline.heading }}">{{ headline.heading }}</a></h2>
+        {% comment %}
+        <p>{{ headline.summary }}</p>
+        <p>City-wide shoplifting arrests hit 204 during 2011, more than a 50 percent increase over 2010, when there were 133 such arrests, according to the St. Louis Post-Dispatch...</p>
+        {% endcomment %}
+        <p>{{ headline.content|truncatewords_html:30|safe }}</p>
+        <div class="button-link"><a href="{{ headline.get_absolute_url }}" title="Read Full Article: {{ headline.heading }}">Read More From This Article ></a></div>
+        <ul>
+            Topics:
+            {% for category in headline.categories.all %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="clear"></div>
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+
+<div class="clear"></div>
+<div id="article-container">
+{% for month in m_nums %}
+    <h2>{{ map|hash:month }} {{ year }}</h2>
+    {% with months|hash:month as articles %}
+    {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
+    {% endwith %}
+    <div class="clear"></div>
+    {% include "order/generic-call-box.html" %}
+{% endfor %}
+    
+</div>
+
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var last_id = '{{ last_id }}';
+    function load_articles() {
+        var url = '{% url load-more-articles last_id=9999999 %}?year={{ request.GET.year }}%month={{ request.GET.month }}';
+        $.get(url.replace('9999999', last_id),
+        function(data) {
+            if(data.response == 'success') {
+                $('#article-container').append(data.html);
+                if(data.can_load_more == false) {
+                    $('.button-ajax').remove();
+                }
+                last_id = data.last_id;
+            }
+        });
+    }
+    $('.button-ajax').click(function(e) {
+        e.preventDefault();
+        load_articles();
+    });
+    $('.read-description').click(function(e) {
+        e.preventDefault();
+        $('.short-description').remove();
+        $('.full-description').slideDown();
+    });
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}

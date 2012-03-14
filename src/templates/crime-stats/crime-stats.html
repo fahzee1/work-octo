@@ -17,7 +17,7 @@
             <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/sunny-icon.png" title="It's always sunny in Philadelphia!" alt="It's always sunny in Philadelphia!"/> 
 
             {% else %}
-            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}" title="{{ weather_info.description }}" alt="{{ weather_info.description }}"/> 
+            <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" title="{{ weather_info.desc }}" alt="{{ weather_info.desc }}"/> 
             {% endif %}
 
             {{ weather_info.temp }}&deg;F {% if city == "Forks" and state == "WA" %}&bull; Beware of Werewolves!{% endif %}</span>
@@ -86,34 +86,48 @@
             <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
             <p>{{ content|safe }}</p>
             <div id="crime-grades">
+                {% if latest_year.stats.burglary_grade %}
                 <div id="burglary-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade|lower }}-sml.png" />
                     <p>Burglary</p>
                 </div>
+                {% endif %}
+                {% if latest_year.stats.murder_and_nonnegligent_manslaughter_grade %}
                 <div id="murder-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade|lower }}-sml.png" />
                     <p>Murder</p>
                 </div>
+                {% endif %}
+                {% if latest_year.stats.forcible_rape_grade %}
                 <div id="rape-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade|lower }}-sml.png" />
                     <p>Forcible Rape</p>
                 </div>
+                {% endif %}
+                {% if latest_year.stats.robbery_grade %}
                 <div id="robbery-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade|lower }}-sml.png" />
                     <p>Robbery</p>
                 </div>
+                {% endif %}
+                {% if latest_year.stats.aggravated_assault_grade %}
                 <div id="assault-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade|lower }}-sml.png" />
                     <p>Aggravated Assault</p>
                 </div>
+                {% endif %}
+                {% if latest_year.stats.motor_vehicle_theft_grade %}
                 <div id="auto-theft-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade|lower }}-sml.png" />
                     <p>Auto Theft</p>
                 </div>
+                {% endif %}
+                {% if latest_year.stats.larceny_theft_grade %}
                 <div id="larceny-grade">
                     <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade|lower }}-sml.png" />
                     <p>Larceny</p>
                 </div>
+                {% endif %}
                 <div class="clear"></div>
             </div>
             <div class="button-link"><a href="http://www.protectamerica.com/pa/copper">Secure your Home ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start protecting your home and family</p>{% endbusinesstime %}
@@ -123,7 +137,7 @@
         <div class="clear"></div>
     </div>
 </div>
-
+    {% if latest_year.stats.burglary_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Burglary Crime Statistics</h2>
         <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the gambit of burglary. </p>
@@ -151,6 +165,8 @@
         </table>
         <div class="clear"></div>
     </div>
+    {% endif %}
+    {% if latest_year.stats.murder_and_nonnegligent_manslaughter_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Murder Crime Statistics</h2>
         <p>Murder and non negligent manslaughter is defined as the willful killing of one human being by another. </p>
@@ -178,6 +194,8 @@
         </table>
         <div class="clear"></div>
     </div>
+    {% endif %}
+    {% if latest_year.stats.forcible_rape_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Forcible Rape Crime Statistics</h2>
         <p>Forcible Rape is an assault on another human being involving sexual intercourse without that person's consent. </p>
@@ -205,8 +223,9 @@
         </table>
         <div class="clear"></div>
     </div>
+    {% endif %}
 {% include "order/generic-call-box.html" %}
-
+    {% if latest_year.stats.robbery_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Robbery Crime Statistics</h2>
         <p>Robbery is when someone steals someone else's property through violence or intimidation rather then stealth or fraud.</p>
@@ -234,6 +253,8 @@
         </table>
         <div class="clear"></div>
     </div>
+    {% endif %}
+    {% if latest_year.stats.aggravated_assault_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Aggravated Assault Crime Statistics</h2>
         <p>An assault is considered an aggravated assault when a person attempts to cause serious bodily injury to another person, attempts to have sexual activity with another person under the age of 14, or attempts bodily injury to another person with a deadly weapon. </p>
@@ -261,6 +282,8 @@
         </table>
         <div class="clear"></div>
     </div>
+    {% endif %}
+    {% if latest_year.stats.motor_vehicle_theft_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Auto Theft Crime Statistics</h2>
         <p>Motor vehicle theft or grand theft auto is the criminal act of stealing or attempting to steal a motor vehicle, including an automobile, truck, bus, coach, motorcycle, snowmobile, trailer or any other motorized vehicle.</p>
@@ -288,6 +311,8 @@
         </table>
         <div class="clear"></div>
     </div>
+    {% endif %}
+    {% if latest_year.stats.larceny_theft_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Larceny Crime Statistics</h2>
         <p>Larceny is a common law crime involving theft. It is defined as taking and carrying away (stealing) another person's physical property with the intent to deprive him or her of its possession permanently.</p>
@@ -315,6 +340,7 @@
         </table>
         <div class="clear"></div>
     </div>
+    {% endif %}
 </div>
 <div class="clear"></div>
 

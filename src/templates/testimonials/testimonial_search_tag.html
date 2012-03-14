@@ -7,7 +7,8 @@
         <h4>{{ testimonial.first_name }} {{ testimonial.last_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }} </span></h4>
         <strong>{{ testimonial.date_created }}</strong>
     </div>
-    <p><img src="/static/img/extra/testimonial-arrow.png" class="testimonial-arrow"/> {% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+    <p><span class="testimonial-arrow">&nbsp;</span>
+{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
 </li>
 {% endfor %}
 {% endif %}

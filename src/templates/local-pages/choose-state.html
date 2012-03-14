@@ -1,0 +1,20 @@
+{% extends "local-pages/base.html" %}
+{% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
+
+{% block page_title %}Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
+
+{% block content %}
+<div id="state-list">
+    <h2>Select Your State:</h2>
+    <ul>
+    {% for state in states %}
+        <li><a href="/{{ state.abbreviation }}/">{{ state.name }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+<div class="sidebar">    
+    {% include "order/quote-form.html" with form=forms.basic %}
+</div>
+<div class="clear"></div>
+{% endblock %}
+
