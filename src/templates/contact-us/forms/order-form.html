@@ -5,14 +5,26 @@
         {{ field }}
     {% endfor %}
     {% for field in formset.visible_fields %}
-        {{ field.errors }}
-        
-        {% if field.field.widget|klass == 'Select' %}
-        <label class="select">{{ field.name|capfirst }}:</label>
-        {% else %}
-        <label>{{ field.name|capfirst }}:</label>
-        {% endif %}
-        {{ field }}
+        <div class="order-form-field">
+            {{ field.errors }}
+            
+            {% if field.field.widget|klass == 'Select' %}
+            <label class="select">{{ field.name|capfirst }}:</label>
+            <img src="{{ STATIC_URL }}img/extra/form-check.png" alt="Nice Job, This Looks Good!" width="40" height="40" class="form-check-select yes" />
+            <img src="{{ STATIC_URL }}img/extra/form-check-error.png" alt="Whoa, Something Doesn't Look Right Here" width="40" height="40" class="form-check-select no" />
+
+
+            {% else %}
+            <label>{{ field.name|capfirst }}:</label>
+            <img src="{{ STATIC_URL }}img/extra/form-check.png" alt="Nice Job, This Looks Good!" width="40" height="40" class="form-check yes" />
+            <img src="{{ STATIC_URL }}img/extra/form-check-error.png" alt="Whoa, Something Doesn't Look Right Here" width="40" height="40" class="form-check no" />
+
+
+            {% endif %}
+            {{ field }}
+        </div>
+
+
     {% endfor %}
     <button class="buyit">Continue ></button>
     <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
@@ -23,6 +35,57 @@
     </div>
 </form>
 {% addtoblock "js" %}
+{% comment %}
+<script type="text/javascript">
+    $(document).ready(function() {
+    function setMark(ele, yes) {
+        if((ele.hasClass('yes-check') && yes) || (ele.hasClass('no-check') && !yes)) {
+            return false;
+        }
+        // clear styles
+        ele.removeClass('no-check yes-check').siblings('.form-check').hide();
+        if(yes) {
+            // its good to go
+            ele.addClass('yes-check').siblings('.form-check.yes').fadeIn(350);
+        } else {
+            ele.addClass('no-check').siblings('.form-check.no').fadeIn(350);
+        }
+
+    }
+    $('#package-form input').blur(function() {
+        if($(this).val() == '') {
+            return false;
+        }
+        if($(this).attr('id') == 'id_name') {
+            if(/^[^\d]+$/.test($(this).val())) {
+                setMark($(this), true);
+            } else {
+                setMark($(this), false);
+            }
+        }
+        if($(this).attr('id') == 'id_email') {
+            var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(filter.test($(this).val())){
+                setMark($(this), true);
+            } else {
+                setMark($(this), false);
+            }
+        }
+        if($(this).attr('id') == 'id_phone') {
+            var filter = /^\(?(\d{3})\)?[- \.]?(\d{3})[- \.]?(\d{4})$/;
+            if(filter.test($(this).val())){
+                setMark($(this), true);
+            } else {
+                setMark($(this), false);
+            }
+        }
+
+    });
+    });
+</script>
+{% endcomment %}
+<script>utmx_section("Javascript for User Feedback")</script>
+</noscript>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#package-form input').keypress(function(e){
@@ -30,10 +93,10 @@ $(document).ready(function() {
             $('#package-form button').click();
         }
     });
+    
     var submitting = false;
 
     $('#package-form button').click(function() {
-        console.log(submitting);
         if(submitting==true) {
             return false;
         }
