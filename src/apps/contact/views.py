@@ -90,7 +90,7 @@ def ajax_post(request):
             # All agent ids should be HOMESITE and the SOURCE
             # should become the agent ID
 
-            if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC']:
+            if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC', 'YAHOOPPC']:
                 source = agentid
                 agentid = 'HOMESITE'
 

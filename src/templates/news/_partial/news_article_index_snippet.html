@@ -1,8 +1,8 @@
 <div>
 {% for article in articles %}
  <div class="news-article">
-    {% if article.image %}
     <a href="{{ article.get_absolute_url }}" title="{{ article.heading }}">
+        {% if article.image %}
         <div class="image-container">
             <img src="{{ MEDIA_URL }}{{ article.image }}" alt="{{ article.image_caption }}" title="{{ article.image_caption }}" />
         </div>
