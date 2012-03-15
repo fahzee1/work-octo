@@ -75,6 +75,11 @@ elif settings.SITE_ID == 4:
         name='choose-city'), 
         url(r'^$', 'apps.local.views.local_state', name='local-state'),
     )
+# 5 Linx landing site
+elif settings.SITE_ID == 5:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/five-linx/index.html', 'home'),
+    )
 else:
     urlpatterns += patterns('',
 
