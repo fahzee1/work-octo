@@ -97,7 +97,7 @@
         {% endfor %}
 
         <div class="button-link">
-            <a href="{% url news-articles %}">View the News Archives ></a>
+            <a href="{% url news:news-articles %}">View the News Archives ></a>
         </div>
     </div>
     <div id="news-topics">
@@ -114,7 +114,7 @@
 $(document).ready(function() {
     var last_id = '{{ last_id }}';
     function load_articles() {
-        var url = '{% url load-more-articles last_id=9999999 %}';
+        var url = '{% url news:load-more-articles last_id=9999999 %}';
         $.get(url.replace('9999999', last_id),
         function(data) {
             if(data.response == 'success') {

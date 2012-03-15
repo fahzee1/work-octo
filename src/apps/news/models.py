@@ -7,7 +7,7 @@ class Category(models.Model):
     brafton_id = models.IntegerField()
 
     def get_absolute_url(self):
-        return reverse('news-category', kwargs={
+        return reverse('news:news-category', kwargs={
             'category_name': defaultfilters.slugify(self.name),
             'category_id': self.id
         })
@@ -34,7 +34,7 @@ class Article(models.Model):
         return articles
 
     def get_absolute_url(self):
-        return reverse('news-article', kwargs={
+        return reverse('news:news-article', kwargs={
             'article_title': defaultfilters.slugify(self.heading),
             'article_id': self.id,
         })
