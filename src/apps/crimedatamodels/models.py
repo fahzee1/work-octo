@@ -37,7 +37,7 @@ class State(models.Model):
         db_table = 'states'
 
     def get_absolute_url(self):
-        return reverse('choose-city', args=[self.abbreviation])
+        return reverse('crime-rate:choose-city', args=[self.abbreviation])
 
 class CityLocation(models.Model):
     city_name = models.CharField(max_length=64)
@@ -51,7 +51,7 @@ class CityLocation(models.Model):
         unique_together = (('city_name', 'state'),)
 
     def get_absolute_url(self):
-        return reverse('crime-stats', args=[self.state,
+        return reverse('crime-rate:crime-stats', args=[self.state,
             self.city_name])
 
     def __unicode__(self):

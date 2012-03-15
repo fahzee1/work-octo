@@ -35,43 +35,6 @@ urlpatterns = patterns('',
     url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
 
-    # search urls
-    url(r'^search/$', 'apps.search.views.search', name='search'),
-
-    url(r'^testimonials/', include('apps.testimonials.urls',
-        namespace='testimonials')),
-
-    # crime stats
-    url(r'crime-rate/search/?', 'apps.crimedatamodels.views.find_city',
-        name='crime-search'),
-    url(r'crime-rate/(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s\(\),\'+]+)/?', 'apps.crimedatamodels.views.crime_stats',
-        name='crime-stats'),
-    url(r'crime-rate/(?P<state>[A-Z]{2})/?', 'apps.crimedatamodels.views.choose_city',
-        name='choose-city'),
-    url(r'crime-rate/?', 'apps.crimedatamodels.views.choose_state',
-        name='choose-state'),
-
-    # Home Security News
-
-    url(r'^news/?$', 'apps.news.views.news_home', name='news-home'),
-    url(r'^news/archive/?$', 'apps.news.views.articles', name='news-articles'),
-    url(r'^news/archive/(?P<year>[0-9]{4})/?$',
-        'apps.news.views.articles_by_year', name='news-articles-by-year'),
-
-    url(r'^news/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/?$',
-        'apps.news.views.articles_by_month', name='news-articles-by-month'),
-    
-    url(r'^news/category/(?P<category_name>[a-zA-Z\-\_0-9\s+]+)_(?P<category_id>[0-9]+)/?$', 'apps.news.views.category', name='news-category'),
-    url(r'^news/brafton-import/?$', 'apps.news.views.import_articles',
-        name='news-import'),
-    url(r'^news/load-more/(?P<last_id>\d+)/?',
-        'apps.news.views.load_more_articles', name="load-more-articles"),
-    url(r'^news/article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/?$', 'apps.news.views.article', name="news-article"),
-
-    # redirect old urls
-    url(r'^news/article/(?P<article_id>\d+)-(.*)/?$', 'apps.news.views.redirect_old', name='news-article-redirect'),
-    url(r'^news/category/(?P<category_id>\d+)-(.*)/?$', 'apps.news.views.redirect_old_category', name='news-category-redirect'),
-
 )
 
 # a simple direct_to_template wrapper
@@ -202,7 +165,13 @@ else:
         
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
 
-    )
+    url(r'^news/', include('apps.news.urls', namespace='news')),
+    url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
+    url(r'^search/$', 'apps.search.views.search', name='search'),
+    url(r'^testimonials/', include('apps.testimonials.urls',
+        namespace='testimonials')),
+
+)
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
