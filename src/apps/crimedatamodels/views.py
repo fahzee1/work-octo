@@ -70,8 +70,11 @@ def query_weather(latitude, longitude, city, state):
     # first try to get cache
     weather_info = cache.get('WEATHER:%s%s' % (city.lower().replace(' ', ''), state.lower()))
     if weather_info is None:
-        url = 'http://free.worldweatheronline.com/feed/weather.ashx?q=%s,%s&format=json&num_of_days=2&key=1bed272811220539122102' % (latitude, longitude)
-        result = simplejson.load(urllib.urlopen(url))
+        try:
+            url = 'http://free.worldweatheronline.com/feed/weather.ashx?q=%s,%s&format=json&num_of_days=2&key=1bed272811220539122102' % (latitude, longitude)
+            result = simplejson.load(urllib.urlopen(url))
+        except:
+            return None
         if 'Error' in result:
             return None
         

@@ -18,14 +18,14 @@
 <div id="archive-bar" class="select">
     <ul id="years">
         {% for ayear in article_years %}
-        <li {% if ayear.year|stringformat:"s" == year %}class="has-data"{% endif %}><a href="{% url news-articles-by-year ayear.year %}">{{ ayear.year }}</a></li>
+        <li {% if ayear.year|stringformat:"s" == year %}class="has-data"{% endif %}><a href="{% url news:news-articles-by-year ayear.year %}">{{ ayear.year }}</a></li>
         {% endfor %}
         <div class="clear"></div>
     </ul>
     {% if year %}
     <ul id="months">
         {% for amonth in article_months %}
-        <li class="has-data"><a href="{% url news-articles-by-month year amonth|date:"m" %}">{{ amonth|date:"F" }}</a></li>
+        <li class="has-data"><a href="{% url news:news-articles-by-month year amonth|date:"m" %}">{{ amonth|date:"F" }}</a></li>
         {% endfor %}
         <div class="clear"></div>
     </ul>
@@ -81,7 +81,7 @@
 $(document).ready(function() {
     var last_id = '{{ last_id }}';
     function load_articles() {
-        var url = '{% url load-more-articles last_id=9999999 %}?year={{ request.GET.year }}%month={{ request.GET.month }}';
+        var url = '{% url news:load-more-articles last_id=9999999 %}?year={{ request.GET.year }}%month={{ request.GET.month }}';
         $.get(url.replace('9999999', last_id),
         function(data) {
             if(data.response == 'success') {

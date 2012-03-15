@@ -63,7 +63,7 @@ $(document).ready(function() {
     var last_id = '{{ last_id }}';
     var article_load_count = 1;
     function load_articles() {
-        var url = '{% url load-more-articles last_id=9999999 %}?category={{ category.pk }}';
+        var url = '{% url news:load-more-articles last_id=9999999 %}?category={{ category.pk }}';
         $.get(url.replace('9999999', last_id),
         function(data) {
             if(data.response == 'success') {
