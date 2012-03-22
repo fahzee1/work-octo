@@ -65,8 +65,6 @@ class AffiliateMiddleware(object):
                 request.session['refer_id'] = 'GOOGLEPPC'
             elif viewname == 'semlanding_bing':
                 request.session['refer_id'] = 'BINGPPC'
-        elif settings.SITE_ID == 4:
-            request.session['refer_id'] = 'LocalSearch'
 
         return None
 
