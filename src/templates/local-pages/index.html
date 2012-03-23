@@ -2,7 +2,16 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
     {% block quick-links %}
 	<ul id="quick-link-navigation">
-        <li><span id="city-info">{{ city }}, {{ state }}: <strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" alt="{{ weather_info.desc }}" title="{{ weather_info.desc }}"/> {{ weather_info.temp }}&deg;F</span></li>
+        <li class="city-info"><span id="city-info">{{ city }}, {{ state }}: <strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" alt="{{ weather_info.desc }}" title="{{ weather_info.desc }}"/> {{ weather_info.temp }}&deg;F</span></li>
+        <li id="quick-social">                
+            <div id="google-button">
+                <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
+            </div>
+            <div id="facebook-button">
+                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.protectamerica.com&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=133351296712555" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Quick Social', '{{ page_name }}']);"></iframe>
+            </div>
+            <div class="clear"></div>
+        </li>
         <li><a href="https://homesecuritysystems.protectamerica.com" title="See Home Security Deals in your Area" id="change-local-city">Change City</a></li>
 	</ul>
 	{% endblock %}
@@ -109,7 +118,7 @@
 
         </div>
         
-        <div class="button-link"><a href="http://www.protectamerica.com{% url crime-stats state=state city=city %}" title="View Crime Stats in {{ city }}" alt="View Crime Stats in {{ city }}, {{ state }}">View Crime Stats in {{ city }} ></a></div>
+        <div class="button-link"><a href="http://www.protectamerica.com/crime-rate/{{ state }}/{{ city }}/" title="View Crime Stats in {{ city }}" alt="View Crime Stats in {{ city }}, {{ state }}">View Crime Stats in {{ city }} ></a></div>
         <div class="clear"></div>
     </div>
 </div>

@@ -85,6 +85,8 @@ else:
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+        dtt(r'^thank-you/?$', 'thank-you/index.html', 'thank-you', ctx={'page_name': 'thank-you'}),
+
 
         # Home Security Packages
         dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
