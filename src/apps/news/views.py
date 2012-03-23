@@ -6,7 +6,7 @@ from xml.dom.minidom import parseString
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext, Context, loader
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils import simplejson
@@ -278,7 +278,7 @@ def redirect_old(request, article_id):
     try:
         b_id = REDIRECT_MAP[article_id]
         article = Article.objects.get(brafton_id=b_id)
-        return HttpResponseRedirect(article.get_absolute_url())
+        return HttpResponsePermanentRedirect(article.get_absolute_url())
     except:
         raise Http404
     raise Http404
@@ -288,7 +288,7 @@ def redirect_old_category(request, category_id):
     try:
         b_id = REDIRECT_MAP_CATEGORIES[category_id]
         category = Category.objects.get(brafton_id=b_id)
-        return HttpResponseRedirect(category.get_absolute_url())
+        return HttpResponsePermanentRedirect(category.get_absolute_url())
     except:
         raise Http404
     raise Http404
