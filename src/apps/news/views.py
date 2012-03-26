@@ -56,8 +56,13 @@ def news_home(request):
         description = get_text(entry.getElementsByTagName('media:description'))
         title = get_text(entry.getElementsByTagName('title'))
         views = entry.getElementsByTagName('yt:statistics')[0].getAttribute('viewCount')
-        link = entry.getElementsByTagName('link')[0].getAttribute('href')
+        links = entry.getElementsByTagName('link')
+        for ylink in links:
+            if ylink.getAttribute('rel') == 'alternate':
+                link = ylink.getAttribute('href')
+
         video_group = re.search(r'v=(?P<video_id>.*)&', link, re.I)
+
         videos.append({'description': description,
                        'title': title,
                        'views': views,
