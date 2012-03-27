@@ -66,7 +66,8 @@
   })();
 </script>
 <!-- End of Google Website Optimizer Tracking Script -->
-{% endaddtoblock "css" %}    
+{% endaddtoblock "css" %}
+{% if request.META.REMOTE_ADDR != '12.201.194.50' and request.META.REMOTE_ADDR != '207.200.35.18' and request.META.REMOTE_ADDR != '127.0.0.1' %}
 {% addtoblock "js" %}
 {% comment %}
 All the crappy footer includes
@@ -166,5 +167,6 @@ All the crappy footer includes
     <!-- End MSN Code -->
 
 {% endaddtoblock "js" %}
+{% endif %}
 {% endblock %}  
 
