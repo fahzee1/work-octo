@@ -1,4 +1,5 @@
 <!doctype html>
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
 
 <!-- 
 320 and Up boilerplate extension
@@ -34,8 +35,8 @@ License: http://creativecommons.org/licenses/MIT
 <!-- For progressively larger displays -->
 <link rel="stylesheet" media="only screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/five-linx/480.css">
 <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/five-linx/600.css">
-<link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/768.css">
-<link rel="stylesheet" media="only screen and (min-width: 992px)" href="{{ STATIC_URL }}css/992.css">
+<link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/five-linx/768.css">
+<link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/five-linx/960.css">
 <!-- For Retina displays -->
 <link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)" href="{{ STATIC_URL }}css/2x.css">
 {% endblock %}
@@ -67,8 +68,43 @@ License: http://creativecommons.org/licenses/MIT
 </head>
 
 <body class="clearfix">
-{% block content %}
-{% endblock %}
+<div class="wrapper">
+    <div class="callbox">
+        <h3>Protect Your Family Now:</h3>
+        <h4><a href="tel:+{{ phone_number|format_number }}" title="Call 5-Linx Home Security today to Order your Home Security System">{{ phone_number|format_number }}</a></h4>
+        <p>Agent ID: L100000</p>
+    </div>
+    <div id="navigation">
+        <ul>
+            <li class="first"><a href="">Security Systems</a></li>
+            <li class="business-security"><a href="">Business Security</a></li>
+            <li class="video-security"><a href="">Video Security</a></li>
+            <li class="gps-tracking {% if 'gps' in active_pages %}active{% endif %}"><a href="{% url gps %}">GPS</a></li>
+
+        </ul>
+        <a href="{% url home %}"><img src="{{ STATIC_URL }}img/affiliates/five-linx/5-linx-nav-logo.jpg" alt="5-linx-nav-logo" width="144" height="136" /></a>
+    </div>
+    
+    {% block content %}
+    {% endblock %}
+    <div id="bottom-form">
+        <h2>Security is An Amazing Conversation Piece.</h2> 
+
+        <div id="call-us">
+            <h3>Give us a Call</h3>
+            <p>Call Protect America today and start a discussion about the security of your home. One of our security experts will go over the details of your home to determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call Protect America now and secure what matters most!</p>  
+            <h4><span>Call Today!</span><a href="tel:+{{ phone_number|format_number }}" title="Call 5-Linx Home Security today to Order your Home Security System">{{ phone_number|format_number }}</a></h4>
+        </div>
+        {% include "order/quote-form.html" with form=forms.basic %}
+
+    </div>
+    <div class="callbox">
+        <h3>Protect Your Family Now:</h3>
+        <h4><a href="tel:+{{ phone_number|format_number }}" title="Call 5-Linx Home Security today to Order your Home Security System">{{ phone_number|format_number }}</a></h4>
+        <p>Agent ID: L100000</p>
+    </div>
+</div>
+
 
 
 <!-- Scripts -->

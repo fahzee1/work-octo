@@ -58,10 +58,24 @@ body {
         position: relative;
         ul {
             display: none;
+            li {
+                a {
+                    padding: 16px 0;
+                }
+            }
+            .business-security, .gps-tracking {
+                display: none;
+            }
         }
     }
     #silver-package {
         text-align: left;
+        #quote-form {
+            display: none;
+        }
+        .button-link {
+            text-align: center;
+        }
         .package-image {
             width: 304px;
         }
@@ -119,6 +133,32 @@ body {
                 font-size: 14px;
             }
         }
+
+    }
+    #encouragement {
+        #all-day-protection, #unbeatable-price, #wireless-security, #ge-logo {
+            padding: 8px;
+            img {
+                float: left;
+                width: 100px;
+            }
+            h2 {
+                font-size: 16px;
+                font-weight: bold;
+                text-align: left;
+                line-height: 18px;
+                padding: 8px 0;
+                
+            }
+            p {
+                font-size: 12px;
+                text-align: left;
+                padding: 0 8px 0 0;
+            }
+        }
+        #ge-logo {
+            display: none;
+        }
     }
     .other-packages-header {
         padding: 32px 0 8px;
@@ -130,10 +170,13 @@ body {
         border: 1px solid #99b1c8;
         padding-bottom: 8px;
         .drop-shadow(0,2px,5px,@light-grey);
+        img {
+            display: none;
+        }
         h3 {
             text-align: center;
             color: @black;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             padding: 8px;
             margin: 0;
@@ -153,6 +196,9 @@ body {
                 margin: 0;
             }
         }
+        span {
+            display: none;
+        }
         p {
             color: @blue;
             text-align: right;
@@ -168,69 +214,118 @@ body {
                 margin: 0;
             }
         }
+        .button-link {
+            display: none;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            a {
+                .background-gradient(#e22204, #b71c03); 
+                color: @white;
+                padding: 4px 24px;
+                text-decoration: none;
+                border: 1px solid transparent;
+                font-size: 14px;
+                font-weight: bold;
+                -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                &:hover {
+                    .background-gradient(#e02204, #a81900);
+                    border: 1px solid #9c1400;
+                    border-bottom: 1px solid #670d00;
+                    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.6);
+                    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.6);
+                    box-shadow: 0 1px 1px rgba(0,0,0,.6);
+                }
+            }
+            span {
+                font-size: 12px;
+                strong {
+                    color: @red;
+                }
+            }
+            p.phone-alt {
+                display: inline;
+                padding-left: 8px;
+                font-size: 12px !important;
+                color: @dark-grey !important;
+                strong {
+                    color: @red;
+                }
+            }
+        }
         &:hover {
             .background-gradient(@white, @v-light-blue);
         }
     }
 }
-#quote-form {
-    width: 304px;
-    .background-gradient(@blue, #123763);
-    margin: 16px auto 32px;
-    padding-bottom: 8px;
-    p {
-        font-weight: bold;
-        font-size: 24px;
-        color: @white;
-        line-height: 42px;
-    }
-    input {
-        margin: 0 8px;
-        display: block;
-        height: 28px;
-        font-size: 20px;
-        line-height: 28px;
-        width: 281px;
-    }
-    label {
-        text-align: left;
-        padding: 0 8px;
-        color: @white;
-        display: block;
-        padding-top: 8px;
-        font-size: 14px;
-    }
-    button {
-        display: block;
-        .background-gradient(#e22204, #b71c03); 
-        margin: 0 auto;
-        color: @white;
-        padding: 10px 75px;
-        text-decoration: none;
-        border: 1px solid transparent;
-        font-size: 18px;
-        font-weight: bold;
-        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-        box-shadow: 0 1px 1px rgba(0,0,0,.3);
-        width: 287px;
-        margin-top: 16px;
-    }
-    #quote-form-error {
+#bottom-form {
+    h2 {
         display: none;
     }
-    a {
-        font-size: 10px;
-        color: @white;
-        text-decoration: none;
-        :hover {
-            text-decoration: underline;
+    #call-us {
+        display: none;
+    }
+    #quote-form {
+        width: 304px;
+        .background-gradient(@blue, #123763);
+        margin: 16px auto 32px;
+        padding-bottom: 8px;
+        p {
+            font-weight: bold;
+            font-size: 24px;
+            color: @white;
+            line-height: 42px;
+        }
+        input {
+            margin: 0 8px;
+            display: block;
+            height: 28px;
+            font-size: 20px;
+            line-height: 28px;
+            width: 281px;
+        }
+        label {
+            text-align: left;
+            padding: 0 8px;
+            color: @white;
+            display: block;
+            padding-top: 8px;
+            font-size: 14px;
+        }
+        button {
+            display: block;
+            .background-gradient(#e22204, #b71c03); 
+            margin: 0 auto;
+            color: @white;
+            padding: 10px 75px;
+            text-decoration: none;
+            border: 1px solid transparent;
+            font-size: 18px;
+            font-weight: bold;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            width: 287px;
+            margin-top: 16px;
+        }
+        #quote-form-error {
+            display: none;
+        }
+        a {
+            font-size: 10px;
+            color: @white;
+            text-decoration: none;
+            :hover {
+                text-decoration: underline;
+            }
+        }
+        #third-party-container {
+            padding: 4px 0;
         }
     }
-    #third-party-container {
-        padding: 4px 0;
-    }
 }
+
 .button-link {
     margin-top: 16px;
     margin-bottom: 24px;
@@ -269,4 +364,11 @@ body {
             color: @red;
         }
     }
+}
+/****************** GPS ****************/
+#location-found {
+    width: 100%;
+    height: 300px;
+    background: url(/static/img/products/gps/location-found.jpg) -485px top no-repeat;
+
 }

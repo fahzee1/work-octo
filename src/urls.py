@@ -79,6 +79,7 @@ elif settings.SITE_ID == 4:
 elif settings.SITE_ID == 5:
     urlpatterns += patterns('',
         dtt(r'^$', 'affiliates/five-linx/index.html', 'home'),
+        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps'),
     )
 else:
     urlpatterns += patterns('',
