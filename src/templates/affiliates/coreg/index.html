@@ -71,7 +71,7 @@
         </div>
         <div class="clear"></div>
         <div id="package-content">
-            <img src="{{ STATIC_URL }}/img/products/platinum-package/platinum-package-lowest-price.jpg" id="platinum-package" />
+            <img src="{{ STATIC_URL }}/img/products/platinum-package/platinum-package-lowest-price2.jpg" id="platinum-package" />
             
             <h2>GE Wireless <span>Home Security System</span></h2>
             <ul>​
@@ -150,11 +150,14 @@
         {% endcomment %}
     </div>
 
-    {% businesstime %}
-    <div id="call-box">
-        <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
-    </div>
-    {% endbusinesstime %}
+    {% if phone_number %}
+
+        {% businesstime %}
+        <div id="call-box">
+            <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+        </div>
+        {% endbusinesstime %}
+    {% endif %}
 
     <div class="clear"></div>
     <div id="why-protect-america">
