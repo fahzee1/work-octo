@@ -69,9 +69,9 @@ elif settings.SITE_ID == 3:
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
-        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/?$', 'apps.local.views.local_page',
+        url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/$', 'apps.local.views.local_page',
         name='local-page'),
-        url(r'^(?P<state>[A-Z]{2})/?$', 'apps.local.views.local_city',
+        url(r'^(?P<state>[A-Z]{2})/$', 'apps.local.views.local_city',
         name='choose-city'), 
         url(r'^$', 'apps.local.views.local_state', name='local-state'),
     )

@@ -11,7 +11,7 @@ class Affiliate(models.Model):
     use_call_measurement = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return '%s' % (self.name,)
+        return '%s (%s)' % (self.name, self.agent_id)
 
 
 class AffTemplate(models.Model):
