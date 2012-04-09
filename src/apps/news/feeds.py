@@ -31,7 +31,7 @@ class RssNewsFeed(Feed):
             image_url = obj.image.url
             image_size = obj.image.size
         return {
-            'image': 'http://127.0.0.1:8000%s' % image_url,
+            'image': 'http://www.protectamerica.com%s' % image_url,
             'image_size': str(image_size),
             }    
 
