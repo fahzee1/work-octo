@@ -2,6 +2,7 @@ from django.conf.urls.defaults import *
 from django.views.generic.simple import redirect_to
 
 from apps.news.sitemaps import ArticleSitemap
+from apps.news.feeds import RssNewsFeed
 
 news_sitemap = {
     'news_articles': ArticleSitemap,
@@ -36,5 +37,6 @@ urlpatterns = patterns('apps.news.views',
 
 urlpatterns += patterns('',
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': news_sitemap}),
+    url(r'^rss/$', RssNewsFeed()),
 
 )
