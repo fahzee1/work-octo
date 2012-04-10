@@ -2,20 +2,14 @@
 
 {% load sekizai_tags %}
 {% block page_title %}Home Security News | Protect America{% endblock %}
-{% addtoblock "css" %}
-	<meta name="description" content="Protect America News provides the latest home security news mixed with a bit of advice from top law enforcement and security experts. From technology to true crime, Protect America News features stories that highlight the rapid changes in home security. Protect America News breaks down crime statistics and expert commentary to give anyone a basic understanding of the home security industry." />	
-	<meta name="ROBOTS" content="INDEX,FOLLOW"/>
-	<meta name="rating" content="general" />
-	<meta name="copyright" content="Copyright &copy; 2010 Protect America, Inc., all rights reserved" />
-	<meta name="author" content="Protect America" />
-	<meta name="contact_addr" content="webmaster@protectamerica.com" />
-	<meta name="distribution" content="global" />
-	<meta name="resource-type" content="document" />
-	<meta http-equiv="imagetoolbar" content="false" />
-{% endaddtoblock "css" %}
 {% block subnav_parent %}{% endblock %}
 {% block content %}
 
+{% addtoblock "css" %}
+	<meta name="description" content="Protect America News provides the latest home security news mixed with a bit of advice from top law enforcement and security experts. From technology to true crime, Protect America News features stories that highlight the rapid changes in home security. Protect America News breaks down crime statistics and expert commentary to give anyone a basic understanding of the home security industry." />	
+	<meta name="ROBOTS" content="INDEX,FOLLOW"/>
+    <link rel="alternate" type="application/rss+xml" title="Protect America Home Security News RSS Feed" href="/news/rss/" />
+{% endaddtoblock "css" %}
 <div id="security-news-headline" class="news-headline">
     {% if headline.image %}
     <div id="headline-image">
@@ -36,7 +30,6 @@
         <p>{{ headline.content|truncatewords_html:40|safe }}</p>
         <div class="button-link"><a href="{{ headline.get_absolute_url }}" title="Read Full Article: {{ headline.heading }}">Read More From This Article ></a></div>
         <ul>
-            Topics:
             {% for category in headline.categories.all %}
             <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
             {% endfor %}
