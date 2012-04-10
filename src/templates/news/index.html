@@ -30,7 +30,6 @@
         <p>{{ headline.content|truncatewords_html:40|safe }}</p>
         <div class="button-link"><a href="{{ headline.get_absolute_url }}" title="Read Full Article: {{ headline.heading }}">Read More From This Article ></a></div>
         <ul>
-            Topics:
             {% for category in headline.categories.all %}
             <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
             {% endfor %}
