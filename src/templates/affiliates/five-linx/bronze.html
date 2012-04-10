@@ -4,13 +4,13 @@
 {% block content %}
     <div id="main-package">
         <div id="the-main-package">
-            <img src="{{ STATIC_URL }}/img/products/silver-package/silver-package-simon-xt.jpg" alt="silver-package-simon-xt" class="package-image" />
+            <img src="{{ STATIC_URL }}/img/products/bronze-package/bronze-package-simon-xt.jpg" alt="Bronze Package" class="package-image" />
             <div id="package-info">
-                <h2>Free Silver Package</h2>
+                <h2>Free Bronze Package</h2>
                 <h1>Home Security System</h1>
                 <ul>
                     <li>Simon XT Control Panel</li>
-                    <li>10 Door / Window Sensors</li>
+                    <li>7 Door / Window Sensors</li>
                     <li>1 Motion Detector</li>
                     <li>Siren &amp; Door Chime</li>
                     <li>3 Window Decals</li>
@@ -24,53 +24,57 @@
                 </div>
                 <div id="package-price">
                     <p>Price Today <strong>Free</strong></p>
-                    <span>{{ pricetable.SILVER.standard_monitoring }} per month</span>
+                    <span>{{ pricetable.BRONZE.standard_monitoring }} per month</span>
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
             <div class="big-button-link">
-                <a href="">Order Now ></a>
+                <a href="{% url order %}" title="Order the Bronze Package">Order Now ></a>
             </div>
         </div>
         {% include "order/quote-form.html" with form=forms.basic %}
 
     </div>
-
     <div class="clear"></div>
+    <div id="in-your-home">
+        <img src="{{ STATIC_URL }}img/products/bronze-package/in-the-home.jpg" alt="In the Home: Bronze Package" />
+        <p>The Bronze Home Security System is the first of four levels of perimeter protection offered by 5Linx. Designed to provide protection at each point of entry into your home, the Bronze Home Security System is ideal for houses under 1200 square feet. The Bronze Home Security System includes 7 door/window sensors and a motion detector for use in rooms or hallways. Don't forget to ask one of our salespeople how you can customize your system with smoke detectors or other great accessories.</p>
+    </div>
     <div id="encouragement">
-        <div id="all-day-protection">
-            <img src="{{ STATIC_URL }}img/affiliates/five-linx/lock.png" alt="lock"  />
-            <h2>24/7 Security Protection</h2>
+        <div id="wireless-security">
+            <img src="{{ STATIC_URL }}img/affiliates/five-linx/wireless-security-icon.png" alt="Easy to Use Wireless Security" />
+            <h2>Easy to Use Wireless Security</h2>
             <p>Keep your family safe and secure day and night.</p>
             <div class="clear"></div>
         </div>
-        <div id="unbeatable-price">
-            <img src="{{ STATIC_URL }}img/affiliates/five-linx/dollar-sign.png" alt="dollar-sign"  />
-            <h2>Unbeatable Low Price</h2>
-            <p>Dollars go further without loss of security.</p>
+        <div id="homeowners-insurance">
+            <img src="{{ STATIC_URL }}img/affiliates/five-linx/dollar-sign.png" alt="Save on Home Owner's Insurance"  />
+            <h2>Save on Home Owner's Insurance</h2>
+            <p>Get extra savings when you own a home security system.</p>
             <div class="clear"></div>
         </div>
-        <div id="wireless-security">
-            <img src="{{ STATIC_URL }}img/affiliates/five-linx/wireless-security-icon.png" alt="wireless-security-icon" />
-            <h2>Easy to Use Wireless Security</h2>
-            <p>No holes and no drilling, just peace of mind</p>
+        <div id="owned-system">
+            <img src="{{ STATIC_URL }}img/affiliates/five-linx/owned-system.png" alt="Own your Security System" />
+            <h2>A System You Own</h2>
+            <p>The Security System goes with you. Moving to a new home is easy with our free relocation kit.</p>
             <div class="clear"></div>
         </div>
-        <div id="ge-logo">
-            <img src="{{ STATIC_URL }}img/affiliates/five-linx/ge-logo.png" alt="wireless-security-icon" />
-            <h2>Certified GE Quality</h2>
-            <p>Alarm panels from GE home security</p>
+        <div id="lifetime-warranty">
+            <img src="{{ STATIC_URL }}img/affiliates/five-linx/lifetime-warranty.png" alt="Lifetime Replacement Parts Warranty" />
+            <h2>Lifetime Replacement Parts Warranty</h2>
+            <p>If anything breaks or dies we'll replace it for free, even batteries.</p>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
 
     </div>
-    <img src="{{ STATIC_URL }}img/affiliates/five-linx/other-packages-header.png" alt="other-packages-header" width="288" height="24" class="other-packages-header" />
+    <img src="{{ STATIC_URL }}img/affiliates/five-linx/other-packages-header.png" alt="Other Security Packages Header" width="288" height="24" class="other-packages-header" />
     <div class="clear"></div>
-    <a href="{% url copper %}">
+    <a href="{% url copper %}" title="Copper Security Package">
+
     <div class="other-package">
-        <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-simon-xt-no-medal.jpg" alt="copper-package-simon-xt-no-medal" />
+        <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-simon-xt.jpg" alt="Copper Security Package" />
         <h3>Copper Package</h3>
         <ul>
             <li>3 Door / Window Sensors</li>
@@ -83,31 +87,15 @@
         </p>
         <div class="clear"></div>
         <div class="button-link">
-            <a href="{% url copper %}">Order Now ></a>
+            <a href="{% url order %}" title="Order the Copper Package">Order Now ></a>
         </div>
         <div class="clear"></div>
     </div>
     </a>
-    <div class="other-package">
-        <img src="{{ STATIC_URL }}img/products/bronze-package/bronze-package-simon-xt.jpg" alt="bronze-package-simon-xt" />
-        <h3>Bronze Package</h3>
-        <ul>
-            <li>7 Door / Window Sensors</li>
-            <li>1 Motion Detector</li>
-        </ul>
-        <span>FREE TODAY!</span>
-        <p>
-            Monthly Monitoring:
-            <strong>{{ pricetable.BRONZE.standard_monitoring }}/mo</strong>
-        </p>
-        <div class="clear"></div>
-        <div class="button-link">
-            <a href="">Order Now ></a>
-        </div>
-        <div class="clear"></div>
-    </div>
+    <a href="{% url silver %}" title="Silver Security Package">
+
     <div class="other-package silver-package">
-        <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-simon-xt.jpg" alt="bronze-package-simon-xt" />
+        <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-simon-xt.jpg" alt="Silver Security Package" />
 
         <h3>Silver Package</h3>
         <ul>
@@ -121,12 +109,15 @@
         </p>
         <div class="clear"></div>
         <div class="button-link">
-            <a href="">Order Now ></a>
+            <a href="{% url order %}" title="Order the Silver Package">Order Now ></a>
         </div>
         <div class="clear"></div>
     </div>
+    </a>
+    <a href="{% url gold %}" title="Gold Security Package">
+
     <div class="other-package">
-        <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-simon-xt.jpg" alt="bronze-package-simon-xt" />
+        <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-simon-xt.jpg" alt="Gold Security Package" />
 
         <h3>Gold Package</h3>
         <ul>
@@ -141,12 +132,14 @@
         </p>
         <div class="clear"></div>
         <div class="button-link">
-            <a href="">Order Now ></a>
+            <a href="{% url order %}" title="Order the Gold Package">Order Now ></a>
         </div>
         <div class="clear"></div>
     </div>
+    </a>
+    <a href="{% url platinum %}" title="Platinum Security Package">
     <div class="other-package">
-        <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-simon-xt.jpg" alt="bronze-package-simon-xt" />
+        <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-simon-xt.jpg" alt="Platinum Security Package" />
 
         <h3>Platinum Package</h3>
         <ul>
@@ -161,10 +154,11 @@
         </p>
         <div class="clear"></div>
         <div class="button-link">
-            <a href="">Order Now ></a>
+            <a href="{% url order %}" title="Order the Platinum Package">Order Now ></a>
         </div>
         <div class="clear"></div>
     </div>
+    </a>
     <div class="clear"></div>
 
 

@@ -20,7 +20,7 @@ License: http://creativecommons.org/licenses/MIT
 <head>
 <meta charset="utf-8">
 
-<title>{% block page-title %}5-Linx Home Security Systems{% endblock %}</title>
+<title>{% block page-title %}5LINX Home Security Systems{% endblock %}</title>
 <meta name="description" content="{% block page-description %}320 and Up{% endblock %}">
 <meta name="author" content="www.forkandsite.com - Your Restaurant's Website on a Silver Platter">
 
@@ -67,22 +67,23 @@ License: http://creativecommons.org/licenses/MIT
 <link rel="canonical" href="/">
 </head>
 
-<body class="clearfix">
+<body class="{{ page_name }} clearfix">
 <div class="wrapper">
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
-        <h4><a href="tel:+{{ phone_number|format_number }}" title="Call 5-Linx Home Security today to Order your Home Security System">{{ phone_number|format_number }}</a></h4>
+        <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
         <p>Agent ID: L100000</p>
     </div>
     <div id="navigation">
         <ul>
-            <li class="first"><a href="">Security Systems</a></li>
-            <li class="business-security"><a href="">Business Security</a></li>
-            <li class="video-security"><a href="">Video Security</a></li>
+            <li class="first {% if 'security-packages' in active_pages %}active{% endif %}"><a href="{% url copper %}">Security Systems</a></li>
+            <li class="video-security {% if 'video' in active_pages %}active{% endif %}"><a href="{% url video %}">Video Security</a></li>
             <li class="gps-tracking {% if 'gps' in active_pages %}active{% endif %}"><a href="{% url gps %}">GPS</a></li>
+            <li class="place-order {% if 'order' in active_pages %}active{% endif %}"><a href="">Order Now</a></li>
+
 
         </ul>
-        <a href="{% url home %}"><img src="{{ STATIC_URL }}img/affiliates/five-linx/5-linx-nav-logo.jpg" alt="5-linx-nav-logo" width="144" height="136" /></a>
+        <a href="{% url home %}"><img src="{{ STATIC_URL }}img/affiliates/five-linx/5-linx-nav-logo.jpg" alt="5-linx-nav-logo" /></a>
     </div>
     
     {% block content %}
@@ -92,15 +93,15 @@ License: http://creativecommons.org/licenses/MIT
 
         <div id="call-us">
             <h3>Give us a Call</h3>
-            <p>Call Protect America today and start a discussion about the security of your home. One of our security experts will go over the details of your home to determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call Protect America now and secure what matters most!</p>  
-            <h4><span>Call Today!</span><a href="tel:+{{ phone_number|format_number }}" title="Call 5-Linx Home Security today to Order your Home Security System">{{ phone_number|format_number }}</a></h4>
+            <p>Call 5LINX to start a discussion about the security of your home today. One of our security experts will help determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call 5Linx now and secure what matters most!</p>  
+            <h4><span>Call Today!</span><a href="tel:+{{ phone_number|format_number }}" title="Call 5LINX Home Security today to Order your Home Security System">{{ phone_number|format_number }}</a></h4>
         </div>
         {% include "order/quote-form.html" with form=forms.basic %}
 
     </div>
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
-        <h4><a href="tel:+{{ phone_number|format_number }}" title="Call 5-Linx Home Security today to Order your Home Security System">{{ phone_number|format_number }}</a></h4>
+        <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
         <p>Agent ID: L100000</p>
     </div>
 </div>

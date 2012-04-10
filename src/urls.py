@@ -79,7 +79,18 @@ elif settings.SITE_ID == 4:
 elif settings.SITE_ID == 5:
     urlpatterns += patterns('',
         dtt(r'^$', 'affiliates/five-linx/index.html', 'home'),
+        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages'),
+        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages'),
+        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages'),
+        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages'),
+        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages'),
+
+        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video'),
+
         dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps'),
+        
+        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order'),
+
     )
 else:
     urlpatterns += patterns('',
