@@ -7,43 +7,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="{{ article.summary }}" />
     <meta name="ROBOTS" content="INDEX,FOLLOW"/>
-    <meta name="rating" content="general" />
-    <meta name="copyright" content="Copyright &copy; 2010 Protect America, Inc., all rights reserved" />
-    <meta name="author" content="Protect America" />
-    <meta name="contact_addr" content="webmaster@protectamerica.com" />
-    <meta name="distribution" content="global" />
-    <meta name="resource-type" content="document" />
 {% endaddtoblock "css" %}
 {% addtoblock "js" %}
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "e120b57d-de18-41e4-9f08-4c602e36df66"}); </script>
 {% endaddtoblock "js" %}
-<div id="single-article">
+<div id="single-article" itemscope itemtype="http://schema.org/Article">
     <div id="article-header">
         {% if article.image %}
-        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" title="{{ article.image_caption }}" />
+        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" title="{{ article.image_caption }}" itemprop="image" />
         {% endif %}
         <div class="news-date">
-            <p>{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</strong></p>
+            <p><time itemprop="dateCreated" datetime="{{ article.date_created|date:"Y-m-d" }}">{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</time></strong></p>
+            
         </div>
 
     </div>
 
-    <h1>{{ article.heading }}</h1>
+    <h1 itemprop="name">{{ article.heading }}</h1>
     
-    <p>{{ article.content|safe }}</p>
+    <p itemprop="articleBody">{{ article.content|safe }}</p>
     <ul id="article-breadcrumb">
         <li class="right-slash"><a href="{% url news:news-home %}">Home Security News</a></li>
         <li class="right-slash left-slash"><a href="{% url news:news-articles %}">Articles</a></li>
         <li class="left-slash omega page-turn">{{ article.heading }}</li>
     </ul>
     <ul id="article-topics">
-        Topics:
         {% for category in article.categories.all %}
-        <li><a href="{{ category.get_absolute_url }}" title="Read more articles about {{ category.name }}">{{ category.name }}</a></li>
+        <li itemprop="articleSection"><a href="{{ category.get_absolute_url }}" title="Read more articles about {{ category.name }}">{{ category.name }}</a></li>
         {% endfor %}
     </ul>
+    <meta itemprop="wordCount" content="{{ article.content|wordcount }}" />
+    <meta itemprop="sourceOrganization" content="Protect America" />
+    <meta itemprop="inLanguage" content="English" />
+
 </div>
 <div id="right-column">
     {% include "order/quote-form.html" with form=forms.basic %}

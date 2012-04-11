@@ -38,3 +38,8 @@ class RssNewsFeed(Feed):
     def items(self):
         return Article.objects.order_by('-date_created')[:10]
 
+    def item_description(self, item):
+        return item.summary
+    
+    def item_title(self, item):
+        return item.heading
