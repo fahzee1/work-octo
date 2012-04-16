@@ -9,6 +9,10 @@ class Affiliate(models.Model):
     name = models.CharField(max_length=64, unique=True)
     phone = models.CharField(max_length=10, blank=True, null=True)
     use_call_measurement = models.BooleanField(default=False)
+    homesite_override = models.BooleanField(default=False,
+        help_text='Check this if the affiliate should be under the HOMESITE agent_id')
+    pixels = models.TextField(blank=True, null=True,
+        help_text='Add HTML here for affiliate Pixels')
 
     def __unicode__(self):
         return '%s (%s)' % (self.name, self.agent_id)

@@ -14,6 +14,9 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls'))
 
     # Uncomment the next line to enable the admin:
+    # Custom Admin Url
+    (r'^django-admin/affiliates/add-affiliate/$',
+        'apps.affiliates.views.add_affiliate'),
     (r'^django-admin/', include(admin.site.urls)),
 
     #contact us

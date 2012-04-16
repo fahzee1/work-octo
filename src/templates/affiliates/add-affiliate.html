@@ -1,0 +1,46 @@
+{% extends "admin/base_site.html" %}
+{% block bodyclass %}{{ block.super }} change-form{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/forms.css" />
+{% endblock %}
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#link').hide();
+        $('#id_agent_id').keyup(function(e) {
+            $('#link span').html($(this).val().toLowerCase());
+        });
+        $('#link').toggle(
+            function() {
+                $('#link').show();
+            },function() {
+                $('#link').hide();
+            }
+        );
+        $('#id_landing_page').click(function() {
+            $('#link').toggle();
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+<form action="" method="POST">
+<fieldset class="module aligned">
+{% for field in form.visible_fields %}
+{% include "_partials/formfield.html" with field=field %}
+{% endfor %}
+</fieldset>
+<button type="submit">Add Affiliate</button>
+</form>
+<div id="link">
+    <strong>Affiliate Link:</strong>
+    http://www.protectamerica.com/affiliate/<span></span>/
+</div>
+</div>
+{% endblock %}
