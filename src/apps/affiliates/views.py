@@ -20,7 +20,6 @@ def post_to_old_pa(data):
     conn.request("POST", "/admin/scripts/edit_tracking.php", params, headers)
     response = conn.getresponse()
     data = response.read()
-    print data
     conn.close()
 
 def affiliate_view(request, affiliate, page_name=None):
