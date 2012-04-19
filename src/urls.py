@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.views.generic.simple import redirect_to
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -77,6 +78,10 @@ elif settings.SITE_ID == 4:
         url(r'^(?P<state>[A-Z]{2})/$', 'apps.local.views.local_city',
         name='choose-city'), 
         url(r'^$', 'apps.local.views.local_state', name='local-state'),
+# 301 perm redirect from / to non-/ on article pages
+        ('^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)$',
+            redirect_to, {'url': '/%(state)s/%(city)s/', 'permanent': True}),
+        
     )
 else:
     urlpatterns += patterns('',
