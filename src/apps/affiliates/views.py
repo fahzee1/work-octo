@@ -113,6 +113,31 @@ def edit_affiliate(request, affiliate_id):
 
     if request.method == 'POST':
         form = AddAffiliateForm(request.POST, instance=affiliate)
+        if form.is_valid():
+            data = form.cleaned_data
+            aff_obj = form.save(commit=False)
+            aff_obj.save()
+            if data['landing_page']:
+                # just set default coreg template
+                coreg = AffTemplate.objects.get(folder='coreg')
+
+                landingpage = LandingPage()
+                landingpage.affiliate = aff_obj
+                landingpage.template = coreg
+                landingpage.save()
+            pa_data = {
+                'affil_id': aff_obj.agent_id,
+                'name': aff_obj.name,
+                'incentive': '',
+                'email': '',
+                'phone_number': aff_obj.phone,
+                'pixel': aff_obj.pixels,
+                'deposit': '199',
+                'content': '',
+                'edit': True,
+            }
+            post_to_old_pa(pa_data)
+            return HttpResponseRedirect('/django-admin/affiliates/affiliate/')
     else:
         form = AddAffiliateForm(instance=affiliate)
 
