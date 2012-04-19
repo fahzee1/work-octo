@@ -101,5 +101,21 @@ def add_affiliate(request):
     else:
         form = AddAffiliateForm()
     return render_to_response('affiliates/add-affiliate.html',
-                                  {'form': form},
-                                  context_instance=RequestContext(request))
+        {'form': form},
+        context_instance=RequestContext(request))
+
+@staff_member_required
+def edit_affiliate(request, affiliate_id):
+    try:
+        affiliate = Affiliate.objects.get(id=affiliate_id)
+    except Affiliate.DoesNotExist:
+        raise Http404
+
+    if request.method == 'POST':
+        form = AddAffiliateForm(request.POST, instance=affiliate)
+    else:
+        form = AddAffiliateForm(instance=affiliate)
+
+    return render_to_response('affiliates/add-affiliate.html',
+        {'form': form, 'affiliate': affiliate},
+        context_instance=RequestContext(request))

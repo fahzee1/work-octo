@@ -1,6 +1,21 @@
 {% extends "admin/base_site.html" %}
 {% block bodyclass %}{{ block.super }} change-form{% endblock %}
 
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="../../../">Home</a>
+    ›
+    <a href="../../">Affiliates</a>
+    ›
+    <a href="../">Affiliates</a>
+    ›
+    {% if affiliate %}
+    {{ affiliate }}
+    {% else %}
+    Add affiliate
+    {% endif %}
+</div>
+{% endblock %}
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/forms.css" />
@@ -39,6 +54,9 @@
         $('#id_landing_page').click(function() {
             $('#landing_page').toggle();
         });
+        if($('#id_landing_page').attr('checked') == true) {
+            $('#landing_page').toggle();
+        }
     });
     </script>
 {% endblock %}
