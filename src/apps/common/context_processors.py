@@ -4,6 +4,7 @@ from django.conf import settings
 
 from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
+from apps.affiliates.models import Affiliate
 
 
 def mobile_check(request):
@@ -17,6 +18,29 @@ def mobile_check(request):
     return {'is_mobile':is_mobile} 
 
 
+def get_affiliate_from_request(request):
+    affiliate = request.COOKIES.get('refer_id', None)
+    if not affiliate:
+        # try pulling the affiliate from the session
+        affiliate = request.session.get('refer_id', None)
+    if not affiliate:
+        # still if the affiliate isn't found pull it form the agent
+        affiliate = request.GET.get('agent', None)
+    try:
+        affiliate = Affiliate.objects.get(agent_id=affiliate)
+        return affiliate
+    except Affiliate.DoesNotExist:
+        pass
+    return None
+
+def tracking_pixels(request):
+    affiliate = get_affiliate_from_request(request)
+    
+    ctx = {'pixels': None}
+    if affiliate:
+        ctx['pixels'] = affiliate.pixels
+    return ctx
+
 def phone_number(request):
     from django.conf import settings
     ctx = {'phone_number': settings.DEFAULT_PHONE,
@@ -29,23 +53,11 @@ def phone_number(request):
     # `source` GET var is set), or they do not have a source
     # So, first we check the cookie. If it doesn't exist, we check
     # the GET var. If neither of those exist, there is no affiliate
-    affiliate = request.COOKIES.get('refer_id', None)
-    if not affiliate:
-        # try pulling the affiliate from the session
-        affiliate = request.session.get('refer_id', None)
-    if not affiliate:
-        # still if the affiliate isn't found pull it form the agent
-        affiliate = request.GET.get('agent', None)
+    affiliate = get_affiliate_from_request(request)
 
     if affiliate:
-        from apps.affiliates.models import Affiliate
-        try:
-            affiliate = Affiliate.objects.get(agent_id=affiliate)
-            ctx['phone_number'] = affiliate.phone
-            ctx['use_call_measurement'] = affiliate.use_call_measurement
-        except Affiliate.DoesNotExist:
-            # just going to return the default context in this case
-            pass
+        ctx['phone_number'] = affiliate.phone
+        ctx['use_call_measurement'] = affiliate.use_call_measurement
 
     return ctx
 

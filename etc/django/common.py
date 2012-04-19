@@ -67,6 +67,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.common.context_processors.business_hours',
     'apps.common.context_processors.phone_number',
     'apps.common.context_processors.mobile_check',
+    'apps.common.context_processors.tracking_pixels',
     'apps.pricetable.context_processors.price_table',
     'sekizai.context_processors.sekizai',
 )

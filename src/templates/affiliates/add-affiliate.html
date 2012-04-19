@@ -4,25 +4,40 @@
 {% block extrastyle %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/forms.css" />
+    <style type="text/css">
+        textarea { display: block; }
+        .hint {
+            margin: 10px 0; 
+            font-size: 10px;
+            font-style: italic;
+        }
+        #link div {
+            margin: 10px;
+        }
+        #link div.alink {
+            margin-left: 60px;
+        }
+    </style>
 {% endblock %}
 {% block extrahead %}
     {{ block.super }}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#link').hide();
+        $('#landing_page').hide();
+        $('#link span').html($('#id_agent_id').val().toLowerCase());
         $('#id_agent_id').keyup(function(e) {
             $('#link span').html($(this).val().toLowerCase());
         });
-        $('#link').toggle(
+        $('#landing_page').toggle(
             function() {
-                $('#link').show();
+                $('#landing_page').show();
             },function() {
-                $('#link').hide();
+                $('#landing_page').hide();
             }
         );
         $('#id_landing_page').click(function() {
-            $('#link').toggle();
+            $('#landing_page').toggle();
         });
     });
     </script>
@@ -36,11 +51,36 @@
 {% include "_partials/formfield.html" with field=field %}
 {% endfor %}
 </fieldset>
+<div class="hint">* indicates a required field</div>
 <button type="submit">Add Affiliate</button>
 </form>
-<div id="link">
-    <strong>Affiliate Link:</strong>
-    http://www.protectamerica.com/affiliate/<span></span>/
-</div>
+    <div id="link">
+        <div id="old_system">
+            <strong>Affiliate Tracking Link for Old System</strong>
+            <div class="alink">http://www.protectamerica.com/<span></span>?affKey=XXXXX</div>
+        </div>
+        {% comment %}
+        <div id="new_system">
+            <strong>Affiliate Tracking Link for New System</strong>
+            <div class="alink">http://www.protectamerica.com/?agent=<span></span>&amp;affkey=XXXXX</div>
+        </div>
+        {% endcomment %}
+        <div id="resources">
+            <strong>Affiliate Resources</strong>
+            <div class="alink">http://www.protectamerica.com/affiliate/resources/</div>
+        </div>
+        <div id="landing_page">
+            <strong>Affiliate Landing PageLink:</strong>
+            <div class="alink">http://www.protectamerica.com/affiliate/<span></span>/?affkey=XXXXX</div>
+        </div>
+        <div class="hint">
+            <ul>
+                <li>The XXXXX can be changed to whatever tracking string is requested.</li>
+                {% comment %}
+                <li>On the <strong>new system</strong> the source can be overwritten by adding &amp;source=XXXXX to the url string.</li>
+                {% endcomment %}
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}
