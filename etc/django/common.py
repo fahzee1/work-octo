@@ -85,6 +85,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'apps.affiliates.middleware.AffiliateMiddleware',
+    'apps.common.middleware.DetectMobileBrowser',
 )
 
 ROOT_URLCONF = 'urls'
