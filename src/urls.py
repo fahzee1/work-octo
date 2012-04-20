@@ -36,10 +36,11 @@ urlpatterns = patterns('',
         name='feedback-ceo'),
 
     # affiliate urls
-    url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
-    url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
-    url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
+    #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
+    #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
+    #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
+    url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
 
 )
 
