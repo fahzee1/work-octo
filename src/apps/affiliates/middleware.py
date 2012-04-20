@@ -57,6 +57,21 @@ class AffiliateMiddleware(object):
                     return (engine, network, term)
         return (None, network, None)
     
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        if 'agent' not in request.GET:
+            if settings.SITE_ID == 3:
+                viewname = view_func.__name__
+                if viewname == 'semlanding_home':
+                    request.session['refer_id'] = 'SEMDIRECT'
+                elif viewname == 'semlanding_google':
+                    request.session['refer_id'] = 'GOOGLEPPC'
+                elif viewname == 'semlanding_bing':
+                    request.session['refer_id'] = 'BINGPPC'
+            if settings.SITE_ID == 4:
+                request.session['refer_id'] = 'LocalSearch'
+
+        return None
+
     def process_response(self, request, response):
 
         expire_time = timedelta(days=90)
@@ -103,7 +118,6 @@ class AffiliateMiddleware(object):
             else:
                 if default_agent is not None and current_cookie is None:
                     # dont set the cookie to default
-                    print 'test'
                     request.session['refer_id'] = default_agent
 
                     response.set_cookie('refer_id',

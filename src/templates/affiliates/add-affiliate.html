@@ -70,7 +70,7 @@
 {% endfor %}
 </fieldset>
 <div class="hint">* indicates a required field</div>
-<button type="submit">Add Affiliate</button>
+<button type="submit">{% if affiliate %}Edit{% else %}Add{% endif %} Affiliate</button>
 </form>
     <div id="link">
         <div id="old_system">
@@ -93,7 +93,7 @@
         </div>
         <div class="hint">
             <ul>
-                <li>The XXXXX can be changed to whatever tracking string is requested.</li>
+                <li>The XXXXX can be changed to whatever for sub campaign tracking.</li>
                 {% comment %}
                 <li>On the <strong>new system</strong> the source can be overwritten by adding &amp;source=XXXXX to the url string.</li>
                 {% endcomment %}
