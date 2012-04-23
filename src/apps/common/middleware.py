@@ -8,7 +8,9 @@ reg_v = re.compile(r"1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er
 class DetectMobileBrowser():
     def process_request(self, request):
         request.mobile = False
-        if request.META.has_key('HTTP_USER_AGENT'):
+        current_cookie = request.COOKIES.get('redirect_mobile', None)
+
+        if request.META.has_key('HTTP_USER_AGENT') and not current_cookie:
             user_agent = request.META['HTTP_USER_AGENT']
             b = reg_b.search(user_agent)
             v = reg_v.search(user_agent[0:4])
