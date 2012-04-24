@@ -94,7 +94,8 @@ else:
         dtt(r'^thank-you/?$', 'thank-you/index.html', 'thank-you', ctx={'page_name': 'thank-you'}),
 
         # pay it forward page
-        dtt(r'^payitforward/$', 'payitforward.html', 'payitforward', ctx={'page_name': 'payitforward'}),
+        url(r'^payitforward/$', 'apps.common.views.payitforward',
+            name='payitforward'),
 
         # Home Security Packages
         dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),

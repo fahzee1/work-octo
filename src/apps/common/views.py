@@ -51,3 +51,43 @@ def simple_dtt(request, template, extra_context):
 
 
     return response
+
+def payitforward(request):
+
+    videos = []
+    videos.append({
+        'charity': 'Hosanna House',
+        'team': 'MSU Team: Movement Advertising',
+        'url': 'http://www.youtube.com/watch?v=z9VxKbxjNsU',
+    })
+    videos.append({
+        'charity': 'Help A Willing Kid',
+        'team': 'MSU Team: Top Hat Media',
+        'url': 'http://vimeo.com/38477884',
+    })
+    videos.append({
+        'charity': 'Beekman Therapeutic Riding Center',
+        'team': 'MSU Team: Five Star Media',
+        'url': 'http://www.youtube.com/watch?v=IyR82vQDAKA',
+    })
+    videos.append({
+        'charity': 'For Better Independence',
+        'team': 'MSU Team: Inifinite Solutions',
+        'url': 'http://www.youtube.com/watch?v=lAGzVtBliCo',
+    })
+    videos.append({
+        'charity': 'Pay It Forward Challenge',
+        'team': 'Protect America',
+        'url': 'http://www.youtube.com/watch?v=HFhmcJiIZtQ',
+    })
+
+    forms = {}
+    forms['basic'] = PAContactForm()
+    forms['long'] = AffiliateLongForm() 
+
+    return render_to_response('payitforward.html',
+        {
+            'page_name': 'payitforward',
+            'forms': forms,
+            'videos': videos,
+        }, context_instance=RequestContext(request))
