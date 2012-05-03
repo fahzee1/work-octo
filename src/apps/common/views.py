@@ -1,5 +1,6 @@
 import re
 from datetime import datetime, timedelta
+from urllib import urlencode
 
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
@@ -7,8 +8,15 @@ from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.views.generic.simple import redirect_to
 
 from apps.contact.forms import PAContactForm, AffiliateLongForm
+
+def redirect_wrapper(request, agent_id):
+    get = request.GET.copy()
+    get['agent_id'] = agent_id
+
+    return HttpResponseRedirect('/?%s' % urlencode(get))
 
 def simple_dtt(request, template, extra_context):
     

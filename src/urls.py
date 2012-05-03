@@ -186,7 +186,8 @@ else:
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
-
+    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
+            'apps.common.views.redirect_wrapper'),
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns

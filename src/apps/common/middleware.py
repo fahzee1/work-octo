@@ -8,7 +8,6 @@ reg_v = re.compile(r"1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er
 
 class DetectMobileBrowser():
     def process_request(self, request):
-        print settings.SITE_ID
         if settings.SITE_ID != 1:
             return None
         request.mobile = False
