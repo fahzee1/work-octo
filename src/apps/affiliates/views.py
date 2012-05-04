@@ -82,6 +82,7 @@ def add_affiliate(request):
         if form.is_valid():
             data = form.cleaned_data
             aff_obj = form.save(commit=False)
+
             aff_obj.save()
             if data['landing_page']:
                 # just set default coreg template

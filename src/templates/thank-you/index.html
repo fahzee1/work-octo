@@ -60,44 +60,23 @@
 {% comment %}
 All the crappy footer includes
 {% endcomment %}
+{% if not custom_url %}
     <!-- simpl.fi -->
     <script src="http://i.simpli.fi/dpx.js?cid=70&conversion=10&campaign_id=763"></script>
     <!-- End simpl.fi -->
-    <!-- Google Website Optimizer Conversion Script -->
+    <!-- Google Website Optimizer Tracking Script FOR HOMEPAGE OPTIMZATION -->
     <script type="text/javascript">
-    if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
-    (document.location.protocol=='https:'?'s://ssl':'://www')+
-    '.google-analytics.com/ga.js"></sc'+'ript>')</script>
-    <script type="text/javascript">
-    try {
-    var gwoTracker=_gat._getTracker("UA-5441302-7");
-    gwoTracker._trackPageview("/0972724697/goal");
-    }catch(err){}</script>
-    <!-- End of Google Website Optimizer Conversion Script -->
-    <!-- Google Website Optimizer Conversion Script -->
-    <script type="text/javascript">
-    if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
-    (document.location.protocol=='https:'?'s://ssl':'://www')+
-    '.google-analytics.com/ga.js"></sc'+'ript>')</script>
-    <script type="text/javascript">
-    try {
-    var gwoTracker=_gat._getTracker("UA-5441302-7");
-    gwoTracker._trackPageview("/3586932009/goal");
-    }catch(err){}</script>
-    <!-- End of Google Website Optimizer Conversion Script -->
-
-    <!-- Google Website Optimizer Conversion Script -->
-    <script type="text/javascript">
-    if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
-    (document.location.protocol=='https:'?'s://ssl':'://www')+
-    '.google-analytics.com/ga.js"></sc'+'ript>')</script>
-    <script type="text/javascript">
-    try {
-    var gwoTracker=_gat._getTracker("UA-5441302-7");
-    gwoTracker._trackPageview("/3487076876/goal");
-    }catch(err){}</script>
-    <!-- End of Google Website Optimizer Conversion Script -->
-    
+      var _gaq = _gaq || [];
+      _gaq.push(['gwo._setAccount', 'UA-5441302-7']);
+      _gaq.push(['gwo._trackPageview', '/1003684611/goal']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <!-- End of Google Website Optimizer Tracking Script -->
+       
     <!-- Google Code for Converted Remarketing List -->
     <script type="text/javascript">
     <!--
@@ -134,6 +113,7 @@ All the crappy footer includes
     <img height="1" width="1" border="0" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=lead&amp;script=0"/>
     </noscript>
     <!-- End Google Code -->
+
     <!-- Yahoo Code for Lead Conversion-->
     <SCRIPT language="JavaScript" type="text/javascript">
     <!-- Yahoo! Inc.
@@ -166,7 +146,7 @@ All the crappy footer includes
     <img src="//secure.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Quote+Confirmation" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
     </noscript>
     <!-- End Quantcast tag -->
-
+{% endif %}
 {% endaddtoblock "js" %}
 {% endif %}
 {% endblock %}
