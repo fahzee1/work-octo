@@ -15,10 +15,11 @@ class AddAffiliateForm(forms.ModelForm):
         data = self.cleaned_data['agent_id'].lower()
         return data
 
-    def __init__(self, user=None, *args, **kwargs):
-        self.user = user
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        
         super(AddAffiliateForm, self).__init__(*args, **kwargs)
-        if user and not user.is_superuser:
+        if self.user and not self.user.is_superuser:
             del self.fields['homesite_override']
             del self.fields['use_call_measurement']
 
