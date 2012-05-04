@@ -14,7 +14,7 @@ from apps.contact.forms import PAContactForm, AffiliateLongForm
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
-    get['agent_id'] = agent_id
+    get['agent'] = agent_id
 
     return HttpResponseRedirect('/?%s' % urlencode(get))
 

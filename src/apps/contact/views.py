@@ -85,29 +85,30 @@ def ajax_post(request):
             leadid = request.COOKIES.get('leadid', None)
             if leadid is None:
                 leadid = request.session.get('leadid', None)
+            
+            # get the aff from the database
+            try:
+                agent = Affiliate.objects.get(agent_id=agentid)
+            except Affiliate.DoesNotExist:
+                agent = None
 
-            # Special Handling for SEM Landing pages
-            # All agent ids should be HOMESITE and the SOURCE
-            # should become the agent ID
+            # If there is an agent lets check some special handling
+            if agent:
 
-            if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC', 'YAHOOPPC']:
-                source = agentid
-                agentid = 'HOMESITE'
+                # If the agent needs to be a homesite and the source
+                # needs to be the agent ID we check to see if the
+                # homesite_override is true
+                if agent.homesite_override:
+                    source = agentid
+                    agentid = 'HOMESITE'
 
-            # Special Handling for 5LYNX pages
-            # All 5LYNX leads should have their source
-            # changed to 5LYNX
+                # Special 5LINX catch
+                if agent.agent_id == 'a01526':
+                    source = '5LINX'
 
-            if agentid == 'a01526':
-                source = '5LINX'
-
-            # Special Handling for LocalSearch pages
-            # Change localsearch to HOMESITE and make
-            # the source LocalSearch
-
-            if agentid == 'LocalSearch':
-                source = agentid
-                agentid = 'HOMESITE'
+            formset = form.save(commit=False)
+            if request.META['HTTP_REFERER'] is not None:
+                formset.referer_page = request.META['HTTP_REFERER']
 
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
@@ -116,12 +117,10 @@ def ajax_post(request):
                       'source': source,
                       'key3': affkey,
                       'leadid': leadid,
+                      'form_location': formset.referer_page,
                       }
             post_to_old_pa(padata)
-            formset = form.save(commit=False)
 
-            if request.META['HTTP_REFERER'] is not None:
-                formset.referer_page = request.META['HTTP_REFERER']
             
             formset.save()
             response_dict.update({'success': True})

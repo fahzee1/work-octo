@@ -78,7 +78,7 @@ def semlanding_bing(request):
 @staff_member_required
 def add_affiliate(request):
     if request.method == 'POST':
-        form = AddAffiliateForm(request.POST)
+        form = AddAffiliateForm(request.POST, user=request.user)
         if form.is_valid():
             data = form.cleaned_data
             aff_obj = form.save(commit=False)
@@ -105,7 +105,7 @@ def add_affiliate(request):
             post_to_old_pa(pa_data)
             return HttpResponseRedirect('/django-admin/affiliates/affiliate/')
     else:
-        form = AddAffiliateForm()
+        form = AddAffiliateForm(user=request.user)
     return render_to_response('affiliates/add-affiliate.html',
         {'form': form},
         context_instance=RequestContext(request))
@@ -118,7 +118,7 @@ def edit_affiliate(request, affiliate_id):
         raise Http404
 
     if request.method == 'POST':
-        form = AddAffiliateForm(request.POST, instance=affiliate)
+        form = AddAffiliateForm(request.POST, instance=affiliate, user=request.user)
         if form.is_valid():
             data = form.cleaned_data
             aff_obj = form.save(commit=False)
@@ -145,7 +145,7 @@ def edit_affiliate(request, affiliate_id):
             post_to_old_pa(pa_data)
             return HttpResponseRedirect('/django-admin/affiliates/affiliate/')
     else:
-        form = AddAffiliateForm(instance=affiliate)
+        form = AddAffiliateForm(instance=affiliate, user=request.user)
 
     return render_to_response('affiliates/add-affiliate.html',
         {'form': form, 'affiliate': affiliate},

@@ -9,16 +9,19 @@ class AddAffiliateForm(forms.ModelForm):
 
     class Meta:
         model = Affiliate
-        exclude = ('homesite_override', 'use_call_measurement')
-
     
     def clean_agent_id(self):
         super(AddAffiliateForm, self).clean()
         data = self.cleaned_data['agent_id'].lower()
         return data
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user=None, *args, **kwargs):
+        self.user = user
         super(AddAffiliateForm, self).__init__(*args, **kwargs)
+        if user and not user.is_superuser:
+            del self.fields['homesite_override']
+            del self.fields['use_call_measurement']
+
         # try to get the landing page
         lp = False
         # print self.instance
