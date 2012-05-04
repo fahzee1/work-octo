@@ -13,6 +13,10 @@ class Affiliate(models.Model):
         help_text='Check this if the affiliate should be under the HOMESITE agent_id')
     pixels = models.TextField(blank=True, null=True,
         help_text='Add HTML here for affiliate Pixels')
+    thank_you = models.CharField(max_length=128,blank=True, null=True,
+        help_text='If the affiliate has a custom thank you page ender the URL after /thank-you here')
+    conversion_pixels = models.TextField(blank=True, null=True,
+        help_text='Add HTML here for affiliate conversion Pixels')
 
     def __unicode__(self):
         return '%s (%s)' % (self.name, self.agent_id)

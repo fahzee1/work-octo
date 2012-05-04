@@ -18,6 +18,10 @@ def redirect_wrapper(request, agent_id):
 
     return HttpResponseRedirect('/?%s' % urlencode(get))
 
+def thank_you(request, custom_url=None):
+    c = {'page_name': 'thank-you', 'custom_url': custom_url}
+    return simple_dtt(request, 'thank-you/index.html', c)
+
 def simple_dtt(request, template, extra_context):
     
     import urls

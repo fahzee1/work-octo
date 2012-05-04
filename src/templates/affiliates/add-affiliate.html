@@ -39,10 +39,32 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
+        {% if request.user.is_superuser %}
+        var auto_lowercase = false;
+        {% else %}
+        var auto_lowercase = true;
+        {% endif %}
         $('#landing_page').hide();
-        $('#link span').html($('#id_agent_id').val().toLowerCase());
+        var agent_id = $('#id_agent_id').val();
+        if(auto_lowercase) {
+            agent_id.toLowerCase();
+        }
+        $('#link span').html(agent_id);
+
+        function update_hrefs() {
+            $('.alink a').each(function() {
+                url = $(this).html().replace(/<\/?span>/g, '').replace('&amp;', '&');
+                $(this).attr('href', encodeURI(url));
+            });
+        }
+        update_hrefs();
         $('#id_agent_id').keyup(function(e) {
-            $('#link span').html($(this).val().toLowerCase());
+            tagent = $(this).val();
+            if(auto_lowercase) {
+                tagent = tagent.toLowerCase();
+            }
+            $('#link span').html(tagent);
+            update_hrefs();
         });
         $('#landing_page').toggle(
             function() {
@@ -75,7 +97,7 @@
     <div id="link">
         <div id="old_system">
             <strong>Affiliate Tracking Link</strong>
-            <div class="alink">http://www.protectamerica.com/?agent=<span></span>&amp;affkey=XXXXX</div>
+            <div class="alink"><a href="http://www.protectamerica.com/">http://www.protectamerica.com/?agent=<span></span>&amp;affkey=XXXXX</a></div>
         </div>
         {% comment %}
         <div id="new_system">
@@ -85,11 +107,11 @@
         {% endcomment %}
         <div id="resources">
             <strong>Affiliate Resources</strong>
-            <div class="alink">http://www.protectamerica.com/affiliate/resources/</div>
+            <div class="alink"><a href="http://www.protectamerica.com/">http://www.protectamerica.com/affiliate/resources/</a></div>
         </div>
         <div id="landing_page">
             <strong>Affiliate Landing PageLink:</strong>
-            <div class="alink">http://www.protectamerica.com/affiliate/<span></span>/?affkey=XXXXX</div>
+            <div class="alink"><a href="http://www.protectamerica.com/">http://www.protectamerica.com/affiliate/<span></span>/?affkey=XXXXX</a></div>
         </div>
         <div class="hint">
             <ul>

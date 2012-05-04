@@ -91,7 +91,10 @@ else:
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
-        dtt(r'^thank-you/?$', 'thank-you/index.html', 'thank-you', ctx={'page_name': 'thank-you'}),
+        url(r'^thank-you/?$', 'apps.common.views.thank_you',
+            name='thank_you'),
+        url(r'^thank-you/(?P<custom_url>.*)/?$',
+        'apps.common.views.thank_you', name='custom_thank_you'),
 
         # pay it forward page
         url(r'^payitforward/$', 'apps.common.views.payitforward',

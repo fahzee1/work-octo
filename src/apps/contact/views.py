@@ -71,6 +71,7 @@ def ajax_post(request):
         form = PAContactForm(request.POST)
         if form.is_valid():
             fdata = form.cleaned_data
+            thank_you_url = '/thank-you'
             agentid = request.COOKIES.get('refer_id', None)
             if agentid is None:
                 agentid = request.session.get('refer_id', None)
@@ -98,6 +99,9 @@ def ajax_post(request):
 
                 if not source:
                     source = agent.name
+
+                if agent.thank_you:
+                    thank_you_url = thank_you_url + agent.thank_you
 
                 # If the agent needs to be a homesite and the source
                 # needs to be the agent ID we check to see if the
@@ -127,7 +131,8 @@ def ajax_post(request):
 
             
             formset.save()
-            response_dict.update({'success': True})
+            response_dict.update({'success': True,
+                'thank_you': thank_you_url})
         else:
             response_dict.update({'errors': form.errors})
 
