@@ -171,4 +171,8 @@ All the crappy footer includes
 {% endif %}
 {% endblock %}
 
-{% block extra_pixels %}{% endblock %}
+{% block extra_pixels %}
+{% if affiliate_obj %}
+{{ affiliate_obj.conversion_pixels|safe }}
+{% endif %}
+{% endblock %}

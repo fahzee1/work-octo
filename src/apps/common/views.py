@@ -11,6 +11,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 
 from apps.contact.forms import PAContactForm, AffiliateLongForm
+from apps.affiliates.models import Affiliate
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -19,7 +20,15 @@ def redirect_wrapper(request, agent_id):
     return HttpResponseRedirect('/?%s' % urlencode(get))
 
 def thank_you(request, custom_url=None):
-    c = {'page_name': 'thank-you', 'custom_url': custom_url}
+    agent_id = request.COOKIES.get('refer_id', None)
+    affiliate_obj = None
+    try:
+        affiliate_obj = Affiliate.objects.get(agent_id=agent_id)
+    except Affiliate.DoesNotExist:
+        pass
+    c = {'page_name': 'thank-you',
+         'custom_url': custom_url,
+         'affiliate_obj': affiliate_obj}
     return simple_dtt(request, 'thank-you/index.html', c)
 
 def simple_dtt(request, template, extra_context):
@@ -45,15 +54,16 @@ def simple_dtt(request, template, extra_context):
     forms = {}
     forms['basic'] = PAContactForm()
     forms['long'] = AffiliateLongForm()
+    
+    extra_context['forms'] = forms
+    extra_context['active_pages'] = pages
 
     affiliate = request.COOKIES.get('refer_id', None)
     if not affiliate and 'agent_id' in extra_context:
         request.session['refer_id'] = extra_context['agent_id']
 
     response = render_to_response(template,
-                              {'active_pages':pages,
-                               'page_name':extra_context['page_name'],
-                               'forms': forms},
+                              extra_context,
                               context_instance=RequestContext(request))
 
     if 'agent_id' in extra_context and not affiliate:
