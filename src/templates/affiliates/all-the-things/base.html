@@ -1,9 +1,11 @@
+
 {% comment %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 {% endcomment %}
+
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 <!DOCTYPE html>
 <html>
@@ -41,48 +43,52 @@
 <body>
 <div class="wrapper">
     <div id="secure-all-the-things">
-        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/secure-all-the-things.png" id="secure-title" alt="secure-all-the-things" width="912" height="88" />
-        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/secure-guy.png" id="secure-guy" alt="secure-guy" width="504" height="360" />
+        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/secure-all-the-things.png" id="secure-title" alt="Protect All The Things" width="912" height="88" />
+        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/secure-guy.png" id="secure-guy" alt="All the Things Guy" width="504" height="360" />
         <p>Protect America is the ONLY home security company in the United States that lets you secure all the things! Don’t settle for half-assed security. We provide enough door/window sensors to cover every point of entry into your home. And we give it to you for free!</p>
         {% include "order/quote-form.html" with form=forms.basic %}
 
     </div>
+    <div id="main-buttons">
+        <a href="http://www.youtube.com/protectamerica"><img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/watch-the-video.jpg" alt="Watch The Video" width="464" height="152" /></a>
+        <a href="#nintendo-64"><img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/win-a-nintendo64.jpg" alt="Create a Security Meme for a chance to win a Nintendo 64" width="464" height="152" /></a>
+    </div>
     <div id="haz-cat">
         <p></p>
         <div id="haz-cat-picture">
-            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/haz-security-cat.jpg" alt="haz-security-cat" width="264" height="344" />
+            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/haz-security-cat.jpg" alt="I can Haz Security Cat" width="264" height="344" />
         </div>
         <div id="haz-cat-content">
-            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/haz-security-title.png" alt="haz-security-title" width="552" height="64" />
+            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/haz-security-title.png" alt="I can haz security?" width="552" height="64" />
             <p>Yes, you can haz security. In fact, we can all haz security! Protect America is one of the nation’s largest and most trusted home security companies. In our 20 years of operations, we’ve provided over 400,000 customers with affordable and reliable home security. We put home security in the reach of every American family by offering free equipment and forgetting about the unnecessary fees. Everyday is Caturday at Protect America… we’re not sure how but, you know, the Internet! Cats!</p>
             <div class="button-submit"><a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Haz Cat']);">Get Your Security ></a>{% businesstime %}<p class="phone-alt">Calls 2day: <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to gets a fwee secougity analzizis</p>{% endbusinesstime %}</div>
         </div>
     </div>
     <div id="protect-america-difference">
     	<div id="all-day-monitoring">
-    		<img src="/static/img/extra/24-7-token.png" />
+    		<img src="/static/img/extra/24-7-token.png" alt="Affordable 24/7 Home Security Monitoring" />
     
     		<h3>Affordable 24/7 Home Security Monitoring</h3>
     		<p>The only hands in your pockets should be your own</p>
     	</div>
     	<div id="ge-wireless-equipment">
-    		<img src="/static/img/extra/wireless-token.png" />
+    		<img src="/static/img/extra/wireless-token.png" alt="Idiot-Proof Wireless GE Security" />
     
     		<h3>Idiot-Proof Wireless GE Security</h3>
     		<p>Our equipment is more reliable than Santa Claus under oath</p>
     	</div>
     	<div id="save-on-homeowners-insurance">
-        	<img src="/static/img/affiliates/secure-all-the-things/narwhal-defense.png" />
+        	<img src="/static/img/affiliates/secure-all-the-things/narwhal-defense.png" alt="Complete Narwhal Defense" />
     		<h3>Complete Narwhal Defense</h3>
     		<p>Finally, we can stop the bacon from narwhalling at midnight!</p>
     	</div>
     	<div id="replacement-parts-warranty">
-        	<img src="/static/img/extra/hammer-token.png" />
+        	<img src="/static/img/extra/hammer-token.png" alt="Lifetime Broke Parts Warranty" />
     		<h3>Lifetime Broke Parts Warranty</h3>
     		<p>Broke? We fix it. Not that hard to understand...</p>
     	</div>
     	<div id="best-priced-home-security">
-        	<img src="/static/img/extra/dollar-sign-token.png" />
+        	<img src="/static/img/extra/dollar-sign-token.png" alt="Free Home Security" />
     		<h3>$Free.99 </h3>
     		<p>It’s hard to beat a better price than nothing!</p>
     	</div>
@@ -91,20 +97,19 @@
     <div class="clear"></div>
     <div id="peanut-butter-time">
         <div id="peanut-butter-content">
-            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/peanut-butter-title.png" alt="peanut-butter-title" width="472" height="136" />
+            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/peanut-butter-title.png" alt="It's Peanut Butter Security Time" width="472" height="136" />
             <p>It’s peanut butter security time! It’s peanut butter security time! It’s peanut butter security time! Alright, security has too many syllables for that to actually work but, with Protect America, it’s always security time! And we do have more peanut butter around than we should…</p>    
             <p>When it’s time for home security, Protect America gives you choices. Protect America customers can choose from a number of security packages that can meet the needs of any home. Our monitoring solutions can fit the pre-existing technology of any household. Still have a landline? We got you covered. Are the only wires in your home for broadband? We got that too. Protect America even offers an advanced cellular connection that is quickly becoming the new standard in home security. Get Protect America and get the protection you need</p>
-            <div class="button-submit"><a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Peanut Butter Security Time']);">Make It Security Time ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}</div>
+            <div class="button-submit"><a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Peanut Butter Security Time']);">Make It Security Time ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to secure your home</p>{% endbusinesstime %}</div>
         </div>
         <div id="peanut-butter-picture">
-            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/banana-man.jpg" alt="banana-man" width="461" height="563" />
+            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/banana-man.jpg" alt="Banana Man" width="461" height="563" />
         </div>
     </div>
     <div class="clear"></div>
     <div id="package-fan">
         <div id="copper-card" class="card">
             <h2>Copper</h2>
-            <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
             <p>The <strong>most affordable</strong> way to secure peace of mind.</p>
             <h3><sup>$</sup>29.99/month</h3>
     
@@ -119,7 +124,6 @@
         </div>
         <div id="bronze-card" class="card">
             <h2>Bronze</h2>
-            <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
     
             <p>The <strong>perfect solution</strong> to secure your starter home.</p>
             <h3><sup>$</sup>35.99/month</h3>
@@ -135,7 +139,6 @@
         </div>
         <div id="silver-card" class="card">
             <h2>Silver</h2>
-            <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
     
             <p><strong>Perimeter protection</strong> for the average American home</p>
             <h3><sup>$</sup>37.99/month</h3>
@@ -151,7 +154,6 @@
         </div>
         <div id="gold-card" class="card">
             <h2>Gold</h2>
-            <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
             <p><strong>Unmatched security</strong> for larger sized homes</p>
             <h3><sup>$</sup>39.99/month</h3>
     
@@ -166,7 +168,6 @@
         </div>
         <div id="platinum-card" class="card">
             <h2>Platinum</h2>
-            <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
     
             <p>Our <strong>most comprehensive</strong> security system package</strong></p>
     
@@ -185,13 +186,13 @@
     </div>
     <div class="clear"></div>
     <div id="pirate-vs-ninja">
-        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/pirate-ninja-title.png" alt="pirate-ninja-title" width="960" height="136" />
+        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/pirate-ninja-title.png" alt="Pirates Vs. Ninjas" width="960" height="136" />
         <p>For much of recorded history, the world’s greatest minds have pondered one, truly important question: who would win in a fight, pirates or ninjas? Sure, pirates have guns and wicked awesome swords but ninjas are… ninjas. You can’t out ninja a ninja but everyone has a little pirate in them, unless Capt. Morgan commercials are lying to me.</p>
         <p>When it comes to home security, the greatest minds have already come to one conclusion: Protect America offers a superior, more affordable service over ADT. In fact, one could say they slash prices like ninjas slash samurai. Protect America gives you free home security equipment. ADT charges a boat load. Protect America waives activation and installation fees like a pirate waives the Jolly Roger. ADT charges so much you’ll have to dig up your booty to cover the cost. Debate pirates vs. ninjas or bacon vs. burgers but there’s no debate between Protect America and the other guy.</p>
-        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/pirate-vs-ninja.jpg" alt="pirate-vs-ninja" width="960" height="584" />
+        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/pirate-vs-ninja.jpg" alt="The Lifelong Debate: Pirates vs. Ninjas" width="960" height="584" />
     </div>
     <div id="security-that-cares">
-        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/security-thet-cares-title.png" alt="security-thet-cares-title" width="960" height="64" />
+        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/security-thet-cares-title.png" alt="Get the Security That Cares" width="960" height="64" />
         <div id="contact-form">
             <div id="call-us">
                 <h3>Give us a Call:</h3>
@@ -217,25 +218,28 @@
                 {% endcomment %}
                 {% include "order/quote-form.html" with form=forms.basic %}
             </div>
-            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/stuperman.png" class="stuperman" alt="superman" width="623" height="324" />
+            <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/stuperman.png" class="stuperman" alt="Some companies just don't care" width="623" height="324" />
             <div class="clear"></div>
         </div>
     </div>
+    <div class="clear"></div>
     <div id="watch-all-the-things">
-        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/watch-all-the-things.png" alt="watch-all-the-things" width="952" height="64" />
+        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/watch-all-the-things.png" alt="Watch all the original things" width="952" height="64" />
         <p>Many famous (and not so famous) memes inspired this website and our Protect America Home Security Ad.  Below is just a sample of the original memes we drew inspiration from:</p>
         <iframe width="960" height="518" src="http://www.youtube.com/embed/videoseries?list=PL35062B753747F9E1&amp;hl=en_US" frameborder="0" allowfullscreen></iframe>
     </div>
     <div id="nintendo-64">
-        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/nintendo-64-title.png" alt="nintendo-64-title" width="960" height="304" />
+        <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/nintendo-64-title.png" alt="Create a Security Meme " width="960" height="304" />
         <p>We wouldn’t feel right about playing with the Internet if we didn’t run some kind of contest. So, Like our Facebook page and create your own security-themed meme. The creator of the best one (as decided by our crack team of Internet specialists) will win a Nintendo 64 package complete with 4 controllers and classic games, such as GoldenEye, Mario Cart, and Starfox! </p>
         <a href="http://www.quickmeme.com/make" target="_top"><img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/step-one.png" class="step" alt="step-one" width="264" height="96" /></a>
         <a href="http://www.facebook.com/ProtectAmerica" target="_top"><img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/step-two.png" class="step" alt="step-one" width="264" height="96" /></a>
         <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/step-three.png" class="step" alt="step-one" width="264" height="96" />
     </div>
+    <div class="clear"></div>
     <div id="double-rainbow">
         <img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/double-rainbow.jpg" alt="double-rainbow" />
     </div>
+    <div class="clear"></div>
 </div>
 {% render_block "js" %}
 </body>
