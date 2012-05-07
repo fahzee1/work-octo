@@ -1,13 +1,4 @@
-
-{% comment %}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-{% endcomment %}
-
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
-<!DOCTYPE html>
+{% load content_filters content_tags sekizai_tags testimonial_tags %}<!DOCTYPE html>
 <html>
 <head>
 <!-- 
@@ -50,7 +41,7 @@
 
     </div>
     <div id="main-buttons">
-        <a href="http://www.youtube.com/protectamerica"><img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/watch-the-video.jpg" alt="Watch The Video" width="464" height="152" /></a>
+        <a href="http://www.youtube.com/watch?v=r6Kk3QvW2_M"><img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/watch-the-video.jpg" alt="Watch The Video" width="464" height="152" /></a>
         <a href="#nintendo-64"><img src="{{ STATIC_URL }}img/affiliates/secure-all-the-things/win-a-nintendo64.jpg" alt="Create a Security Meme for a chance to win a Nintendo 64" width="464" height="152" /></a>
     </div>
     <div id="haz-cat">
@@ -197,7 +188,11 @@
             <div id="call-us">
                 <h3>Give us a Call:</h3>
                 <p>Why do people choose Protect America? Because we care. Protect America will secure your home and find you a date for prom. Don’t care? Alright, Protect America will also massage your cat and make your case for a promotion to your boss. Ok maybe we can’t do all that, but we can help protect your newly created pillow fort, bacon, plants, and anything else in your home.</p>
-                <h4><span>Call Today!</span> 1-800-951-5167</h4>
+                {% if phone_number %}
+                {% businesstime %}
+                <h4><span>Call Today!</span> {{ phone_number|format_number }}</h4>
+                {% endbusinesstime %}
+                {% endif %}
             </div>
             <div id="call-you">
                 <h3>We'll Call You:</h3>

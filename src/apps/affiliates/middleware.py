@@ -74,6 +74,27 @@ class AffiliateMiddleware(object):
 
     def process_response(self, request, response):
 
+        # first get the domain parts and information
+        domain_parts = request.get_host().split('.')
+        if (len(domain_parts) > 2):
+            subdomain = domain_parts[0]
+            if (subdomain.lower() == 'www'):
+                subdomain = None
+            domain = '.'.join(domain_parts[1:])
+        else:
+            subdomain = None
+            domain = request.get_host()
+
+        # try to get the port main for development
+        try:
+            domain, port = domain.split(':')
+        except ValueError:
+            port = None
+
+        cookie_domain = '.%s' % domain
+        # set the cookie_domain to the request object
+        request.cookie_domain = cookie_domain
+
         expire_time = timedelta(days=90)
 
         # get default agent id from settings
@@ -91,14 +112,14 @@ class AffiliateMiddleware(object):
 
                 response.set_cookie('refer_id',
                         value=request.session['refer_id'],
-                        domain='.protectamerica.com',
+                        domain=cookie_domain,
                         expires=datetime.now() + expire_time)
             elif refer_id is not None:
                 try:
                     affiliate = Affiliate.objects.get(agent_id=refer_id)
                     response.set_cookie('refer_id',
                         value=refer_id,
-                        domain='.protectamerica.com',
+                        domain=cookie_domain,
                         expires=datetime.now() + expire_time)
                 
                 except Affiliate.DoesNotExist:
@@ -110,7 +131,7 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = affiliate.agent_id
                     response.set_cookie('refer_id',
                         value=affiliate.agent_id,
-                        domain='.protectamerica.com',
+                        domain=cookie_domain,
                         expires=datetime.now() + expire_time)
                 except Affiliate.DoesNotExist:
                     pass
@@ -122,7 +143,7 @@ class AffiliateMiddleware(object):
 
                     response.set_cookie('refer_id',
                         value=request.session['refer_id'],
-                        domain='.protectamerica.com',
+                        domain=cookie_domain,
                         expires=datetime.now() + expire_time)
 
         if 'affkey' in request.GET:

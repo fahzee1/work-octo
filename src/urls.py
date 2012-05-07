@@ -88,7 +88,7 @@ elif settings.SITE_ID == 4:
     )
 elif settings.SITE_ID == 5:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index'}),
+        dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'AllTheThings'}),
     )
 else:
     urlpatterns += patterns('',
