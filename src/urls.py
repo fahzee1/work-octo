@@ -86,6 +86,10 @@ elif settings.SITE_ID == 4:
             redirect_to, {'url': '/%(state)s/%(city)s/', 'permanent': True}),
         
     )
+elif settings.SITE_ID == 5:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index'}),
+    )
 else:
     urlpatterns += patterns('',
 
