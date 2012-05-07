@@ -26,6 +26,12 @@ def thank_you(request, custom_url=None):
         affiliate_obj = Affiliate.objects.get(agent_id=agent_id)
     except Affiliate.DoesNotExist:
         pass
+
+    # until the new lead system is ready go ahead and manually redirect
+    # to new landing page here
+    if affiliate_obj and affiliate_obj.thank_you and not custom_url:
+        return HttpResponseRedirect('/thank-you/%s' % affiliate_obj.thank_you)
+
     c = {'page_name': 'thank-you',
          'custom_url': custom_url,
          'affiliate_obj': affiliate_obj}

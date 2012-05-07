@@ -82,7 +82,8 @@ def add_affiliate(request):
         if form.is_valid():
             data = form.cleaned_data
             aff_obj = form.save(commit=False)
-
+            if not request.user.is_superuser and not aff_obj.homesite_override:
+                aff_obj.thank_you = '/affiliate/'
             aff_obj.save()
             if data['landing_page']:
                 # just set default coreg template
