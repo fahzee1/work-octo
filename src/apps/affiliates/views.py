@@ -1,19 +1,40 @@
+import re
 from datetime import datetime, timedelta
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import Http404
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.utils import simplejson
 
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
+from apps.affiliates.forms import AddAffiliateForm
 
+def json_response(x):
+    return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
+                        content_type='application/json; charset=UTF-8')
+
+def post_to_old_pa(data):
+    import httplib, urllib
+    params = urllib.urlencode(data)
+    headers = {"Content-type": "application/x-www-form-urlencoded",
+        "Accept": "text/plain"}
+    conn = httplib.HTTPConnection("www.protectamerica.com:80")
+    conn.request("POST", "/admin/scripts/edit_tracking.php", params, headers)
+    response = conn.getresponse()
+    data = response.read()
+    conn.close()
 
 def affiliate_view(request, affiliate, page_name=None):
     if page_name is None:
         page_name = 'index'
     try:
         affiliate = Affiliate.objects.get(agent_id=affiliate)
+        request.session['refer'] = affiliate.name
+        request.session['source'] = affiliate.name
     except Affiliate.DoesNotExist:
         raise Http404
 
@@ -51,3 +72,109 @@ def semlanding_google(request):
 
 def semlanding_bing(request):
     return semlanding_response(request)
+
+
+# custom admin view for adding affiliates
+@staff_member_required
+def add_affiliate(request):
+    if request.method == 'POST':
+        form = AddAffiliateForm(request.POST, user=request.user)
+        if form.is_valid():
+            data = form.cleaned_data
+            aff_obj = form.save(commit=False)
+            if not request.user.is_superuser and not aff_obj.homesite_override:
+                aff_obj.thank_you = '/affiliate/'
+            aff_obj.save()
+            if data['landing_page']:
+                # just set default coreg template
+                coreg = AffTemplate.objects.get(folder='coreg')
+
+                landingpage = LandingPage()
+                landingpage.affiliate = aff_obj
+                landingpage.template = coreg
+                landingpage.save()
+            pa_data = {
+                'affil_id': aff_obj.agent_id,
+                'name': aff_obj.name,
+                'incentive': '',
+                'email': '',
+                'phone_number': aff_obj.phone,
+                'pixel': aff_obj.pixels,
+                'deposit': '199',
+                'content': '',
+                'add': True,
+            }
+            post_to_old_pa(pa_data)
+            return HttpResponseRedirect('/django-admin/affiliates/affiliate/')
+    else:
+        form = AddAffiliateForm(user=request.user)
+    return render_to_response('affiliates/add-affiliate.html',
+        {'form': form},
+        context_instance=RequestContext(request))
+
+@staff_member_required
+def edit_affiliate(request, affiliate_id):
+    try:
+        affiliate = Affiliate.objects.get(id=affiliate_id)
+    except Affiliate.DoesNotExist:
+        raise Http404
+
+    if request.method == 'POST':
+        form = AddAffiliateForm(request.POST, instance=affiliate, user=request.user)
+        if form.is_valid():
+            data = form.cleaned_data
+            aff_obj = form.save(commit=False)
+            aff_obj.save()
+            if data['landing_page']:
+                # just set default coreg template
+                coreg = AffTemplate.objects.get(folder='coreg')
+
+                landingpage = LandingPage()
+                landingpage.affiliate = aff_obj
+                landingpage.template = coreg
+                landingpage.save()
+            pa_data = {
+                'affil_id': aff_obj.agent_id,
+                'name': aff_obj.name,
+                'incentive': '',
+                'email': '',
+                'phone_number': aff_obj.phone,
+                'pixel': aff_obj.pixels,
+                'deposit': '199',
+                'content': '',
+                'edit': True,
+            }
+            post_to_old_pa(pa_data)
+            return HttpResponseRedirect('/django-admin/affiliates/affiliate/')
+    else:
+        form = AddAffiliateForm(instance=affiliate, user=request.user)
+
+    return render_to_response('affiliates/add-affiliate.html',
+        {'form': form, 'affiliate': affiliate},
+        context_instance=RequestContext(request))
+
+def request_agent_id(request):
+    latest_agent = Affiliate.objects.latest('agent_id')
+    
+    def increment(agent_id):
+        poped = []
+        for char in agent_id:
+            if char == 'a':
+                poped.append(char)
+                break
+            if int(char) not in [1, 2, 3, 4, 5, 6, 7, 8 ,9]:
+                poped.append(char)
+            else:
+                break
+        agent_id = agent_id.replace(''.join(poped), '')
+        agent_id = int(agent_id) + 1
+        return '%s%s' % (''.join(poped), agent_id)
+
+    new_id = increment(latest_agent.agent_id)
+
+    # check for duplicate
+    try:
+        agent = Afffiliate.objects.get(agent_id=new_id)
+    except:
+        return json_response({'success': True, 'agent_id': new_id})
+    return json_response({'success': False})
