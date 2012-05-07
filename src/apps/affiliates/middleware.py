@@ -83,6 +83,7 @@ class AffiliateMiddleware(object):
         except AttributeError:
             default_agent = None
 
+        affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
         if not current_cookie:
             refer_id = request.session.get('refer_id', None)
@@ -92,8 +93,18 @@ class AffiliateMiddleware(object):
                         value=request.session['refer_id'],
                         domain='.protectamerica.com',
                         expires=datetime.now() + expire_time)
-                    
-            if 'agent' in request.GET:
+            elif refer_id is not None:
+                try:
+                    affiliate = Affiliate.objects.get(agent_id=refer_id)
+                    response.set_cookie('refer_id',
+                        value=refer_id,
+                        domain='.protectamerica.com',
+                        expires=datetime.now() + expire_time)
+                
+                except Affiliate.DoesNotExist:
+                    pass
+                
+            elif 'agent' in request.GET:
                 try:
                     affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])
                     request.session['refer_id'] = affiliate.agent_id
@@ -103,8 +114,9 @@ class AffiliateMiddleware(object):
                         expires=datetime.now() + expire_time)
                 except Affiliate.DoesNotExist:
                     pass
+                    
             else:
-                if default_agent is not None:
+                if default_agent is not None and current_cookie is None:
                     # dont set the cookie to default
                     request.session['refer_id'] = default_agent
 
@@ -133,3 +145,4 @@ class AffiliateMiddleware(object):
             request.session['search_keywords'] = term
         
         return response
+

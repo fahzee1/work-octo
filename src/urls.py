@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.views.generic.simple import redirect_to
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -14,6 +15,11 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls'))
 
     # Uncomment the next line to enable the admin:
+    # Custom Admin Url
+    (r'^django-admin/affiliates/affiliate/add/$',
+        'apps.affiliates.views.add_affiliate'),
+    (r'^django-admin/affiliates/affiliate/(?P<affiliate_id>\d+)/$',
+        'apps.affiliates.views.edit_affiliate'),
     (r'^django-admin/', include(admin.site.urls)),
 
     #contact us
@@ -30,10 +36,11 @@ urlpatterns = patterns('',
         name='feedback-ceo'),
 
     # affiliate urls
-    url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
-    url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
-    url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
+    #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
+    #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
+    #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
+    url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
 
 )
 
@@ -74,14 +81,28 @@ elif settings.SITE_ID == 4:
         url(r'^(?P<state>[A-Z]{2})/$', 'apps.local.views.local_city',
         name='choose-city'), 
         url(r'^$', 'apps.local.views.local_state', name='local-state'),
+# 301 perm redirect from / to non-/ on article pages
+        ('^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)$',
+            redirect_to, {'url': '/%(state)s/%(city)s/', 'permanent': True}),
+        
+    )
+elif settings.SITE_ID == 5:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index'}),
     )
 else:
     urlpatterns += patterns('',
 
         # Home Page
         dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
-        dtt(r'^thank-you/?$', 'thank-you/index.html', 'thank-you', ctx={'page_name': 'thank-you'}),
+        url(r'^thank-you/?$', 'apps.common.views.thank_you',
+            name='thank_you'),
+        url(r'^thank-you/(?P<custom_url>.*)/?$',
+        'apps.common.views.thank_you', name='custom_thank_you'),
 
+        # pay it forward page
+        url(r'^payitforward/$', 'apps.common.views.payitforward',
+            name='payitforward'),
 
         # Home Security Packages
         dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
@@ -172,7 +193,8 @@ else:
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
-
+    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
+            'apps.common.views.redirect_wrapper'),
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns

@@ -23,6 +23,10 @@ urlpatterns = patterns('apps.news.views',
         name='news-import'),
     url(r'^load-more/(?P<last_id>\d+)/',
         'load_more_articles', name="load-more-articles"),
+    # 301 perm redirect from / to non-/ on article pages
+    ('^article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/$',
+        redirect_to, {'url': '/news/article/%(article_title)s_%(article_id)s', 'permanent': True}),
+    
     url(r'^article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)$', 'article', name="news-article"),
 
     # redirect old urls

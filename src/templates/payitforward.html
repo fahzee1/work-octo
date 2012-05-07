@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% load sekizai_tags %}
+{% block page_title %}Protect America Presents The Protect America Cares Pay It Forward Challenge {% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/thank-you.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/payitforward.css">
+{% endblock %}
+{% block subnav_parent %}
+
+{% endblock %}
+
+{% block subnav_child %}
+{% endblock %}
+
+{% block content %}
+<div id="top">
+    <div class="top-left">
+        <div class="heart-area">
+            <img src="{{ STATIC_URL }}img/payitforward/pacares-heart.png" alt="pacares-heart" width="198px" height="174px" />
+        </div>
+        <div class="headline-area">
+            <div class="pay">Pay It Forward Challenge</div>
+            <div class="helping">Helping Others Takes</div>
+            <div class="forward"> Forward Thinking</div>
+            <div class="date">January 19th &mdash; April 10th, 2012</div>
+        </div>
+        <div class="para">
+            35 Advertising &amp; Marketing students from MSU accepted the Protect America Cares Pay It Forward Challenge.
+        </div>
+    </div>
+    <div class="volunteer">
+        <img src="{{ STATIC_URL }}img/payitforward/volunteer.jpg" alt="volunteer" width="399" height="255" />
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="video-main-container">
+    <div class="video-left-container">
+        <div class="boxing" id="video_thumbnail">
+            <div id="video_container"></div>
+            <div class="red">
+                <div class="button" rel="http://www.youtube.com/watch?v=HFhmcJiIZtQ">
+                    <img src="{{ STATIC_URL }}img/payitforward/play-button.png" alt="play-button" width="50" height="50" />
+                </div>
+                <h1>Watch The Video</h1>
+                <h3>Protect America Presents The Protect America Cares Pay It Forward Challenge </h3>
+            </div>
+        </div>
+    </div>
+    <div class="video-right-container">
+        <ul>
+            {% for video in videos %}
+            <li>
+                <div class="button" rel="{{ video.url }}">
+                    <img src="{{ STATIC_URL }}img/payitforward/play-button.png" alt="play-button" width="50" height="50" />
+                </div>
+                <strong>Charity:</strong>
+                <em>{{ video.charity }}</em>
+                <p>{{ video.team }}</p>
+            </li>
+            {% if forloop.counter|divisibleby:3 %}
+        </ul>
+        <ul>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="clear"></div>
+
+    <div class="video-base">
+        <ul>
+        </ul>
+        {% comment %}
+        <div class="video-base-continue">
+            <div class="white-circle1">
+                <div class="active">
+                    <p>1</p>
+                </div>
+            </div>
+            <div class="white-circle1">
+                <p>2</p>
+            </div>
+            <div class="white-circle1">
+                <p>3</p>
+            </div>
+        </div>
+        {% endcomment %}
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="base">
+    <div class="left_container">
+        <div class="challenge">
+            <h3>The Challenge:</h3>
+            <p>Protect America Cares (the charitable organization of home security company, Protect America, Inc.) recently teamed up with students at Michigan State University to raise money and awareness for charities in the Lansing area. Guided by advertising professor David Regan, the students were divided into 7 groups and given $500 seed money from Protect America to create marketing campaigns that help local charities improve fundraising.</p>
+        </div>
+        <div class="donate">
+            <h3>Would you like to donate to one of these charities?</h3>
+            <ul>
+                <li><a href="http://www.helpawillingkid.org/" target="_blank">www.helpawillingkid.org</a></li>
+                <li><a href="http://www.hosannahousemi.org/" target="_blank">www.hosannahousemi.org</a></li>
+                <li><a href="http://www.havenhouseel.org/index.php" target="_blank">www.havenhouseel.org</a></li>
+                <li><a href="http://www.fbidogs.org/home0.aspx" target="_blank">www.fbidogs.org</a></li>
+                <li><a href="http://sleeptightsite.org/" target="_blank">www.sleeptightsite.org</a></li>
+                <li><a href="http://www.beekmanriding.org/BTRC/index.html" target="_blank">www.beekmanriding.org</a></li>
+                <li><a href="http://www.icrclansing.org/" target="_blank">www.icrclansing.org</a></li>
+            </ul>
+        </div>
+        <div class="participate">
+            <h3>Would you like to Pay It Forward?</h3>
+            <p>Do you know of a charity that could use a little extra help? Protect  America wants to continue the Protect America Cares Pay It Forward Challenge but we can't do it without you! If your school or organization wants to provide  assistance to worthwhile charities in your area, please contact Shawne Groves at 1-800-951-5111 extension 8208 or send her an email to shawne@protectamerica.com.</p>
+        </div>
+    </div>
+    <div class="right_container">
+        <div class="total_container">
+            <div>Total Funds Raised</div>
+            <div>$10,563.51</div>
+            <div>Total Food Raised:</div>
+            <div>318+ lbs.</div>
+        </div>
+        <ul class="total">    
+            <li>
+                <strong>Top Hat Media:</strong>
+                <span>Helping a willing kid</span>
+                <em>(HAWK) Foundation</em>
+                <p>$3,175 + 318lbs. of food</p>
+            </li>
+            <li>
+                <strong>Five Star Media:</strong>
+                <span>Beekman Therapeutic</span>
+                <em> Riding Center</em>
+                <p>$2,255.51</p>
+            </li>
+            <li>
+                <strong>Evolve Media:</strong>
+                <span>Haven House</span>
+                <p>$2,000</p>
+            </li>
+            <li>
+                <strong>Wanderlust Media:</strong>
+                <span>Sleep Tight</span>
+                <p>$1,200</p>
+            </li>
+        </ul>
+        <ul class="total">
+            <li>
+                <strong>Visionary Media:</strong>
+                <span>Hungry Hands</span>
+                <p>$813 &amp; a large supply of food</p>
+            </li>
+            <li>
+                <strong>Movement Advertising:</strong>
+                <span>Hosanna House</span>
+                <p>$620 Earned</p>
+            </li>
+            <li>
+                <strong>Infinite Solutions:</strong>
+                <span>For Better Independence</span>
+                <em>assistance Dogs</em>
+                <p>$500 Earned</p>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div> 
+    <div class="clear"></div>
+</div>
+{% addtoblock "js" %}
+<script type="text/javascript">
+    function showThumb(data){
+        //var id_img = "#vimeo-" + data[0].id;
+        var id_img = '#video_thumbnail';
+        console.log(data[0].thumbnail_large);
+        setThumb(data[0].thumbnail_large);
+    }
+    function setThumb(url) {
+        $('.video-right-container').css('background-image','url('+url+')');
+    }
+    $(document).ready(function() {
+        function vimeo_embed(video_id) {
+            return '<iframe src="http://player.vimeo.com/video/'+video_id+'" width="561" height="315" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+        }
+        function youtube_embed(video_id) {
+            return '<iframe width="561" height="315" src="http://www.youtube.com/embed/'+video_id+'" frameborder="0" allowfullscreen></iframe>'
+        }
+
+        function vimeoLoadingThumb(id){    
+            var url = "http://vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
+
+            //var id_img = "#vimeo-" + id;
+            var id_img = '#video_thumbnail';
+            var script = document.createElement( 'script' );
+            script.type = 'text/javascript';
+            script.src = url;
+
+            $(id_img).before(script);
+        }
+        function hide_red() {
+            $('#video_thumbnail .red').fadeOut('fast');
+            $('#video_thumbnail').css('background', '#000');
+        }
+        
+        $('.button').click(function() {
+            var url = $(this).attr('rel');
+            if(url.indexOf('vimeo') != -1) {
+                var type = 'vimeo';
+                var re = /\.com\/([\d]+)/g
+                var video_id = re.exec(url)[1];
+                var embed_code = vimeo_embed(video_id);
+                vimeoLoadingThumb(video_id);
+            }else if (url.indexOf('youtube') != -1) {
+                var type = 'youtube';
+                var re = /watch\?v\=([a-zA-Z0-9]+)/g;
+                var video_id = re.exec(url)[1];
+                setThumb('http://img.youtube.com/vi/'+video_id+'/0.jpg');
+                if($(this).parent().parent().attr('id') == 'video_thumbnail') {
+                    video_id = video_id + '?autoplay=1';
+                }
+                var embed_code = youtube_embed(video_id); 
+            } else {
+                var type = null;
+            }
+            hide_red();
+            $('#video_container').html(embed_code);
+
+        });
+        $('#video_container iframe').click(function() {
+            hide_red();
+        });
+        $('.video-base ul li').live('click', function() {
+            console.log($(this).index());
+            pager_change($(this).index());
+        });
+        function populate_pager() {
+            $('.video-right-container ul').each(function(i) {
+                var li = $('<li/>').html(i+1);
+                if(i == 0) {
+                    li.addClass('active');
+                }
+                $('.video-base ul').append(li);
+            });
+        }
+        function pager_change(index) {
+            $('.video-base ul li').removeClass('active');
+            $('.video-base ul li:eq('+index+')').addClass('active');
+            $('.video-right-container ul').hide();
+            $('.video-right-container ul:eq('+index+')').show();
+        }
+        $('.video-right-container ul:eq(0)').show();
+        if($('.video-right-container ul').length > 1) {
+            populate_pager();
+            $('.video-base ul').show();
+        }
+    });
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
