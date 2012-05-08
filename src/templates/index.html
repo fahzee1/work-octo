@@ -10,171 +10,249 @@
 {% endblock %}
 
 {% block content %}
+
+<div id="main">
     <div id="hero-banner">
-
+        <a href="http://www.protectamerica.com/pa/copper/home-security-systems" class="top-consumers">
+            <span>For the Fourth Consecutive Year</span>
+            <img width="349" height="190" alt="Best Home Security System - 5 Stars from Top Consumer Reviews" src="/static/img/banners/hero-banners/top-consumer-reviews/top-consumer-reviews.png">
+            <h3>
+                "Protect America provides the
+                <strong>best home security</strong>
+                solution available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are]
+                <strong>top-notch</strong>."
+            </h3>
+            <p>-Top Consumer Reviews 2011</p>
+        </a>
+        <a href="http://www.protectamerica.com/pa/copper/home-security-systems" class="consumer-digest-best-buy">
+            <img alt="The Best Protection - Consumer Digest Best Buy for the Copper Package" src="/static/img/banners/hero-banners/consumer-digest-banner.jpg" />
+        </a>
     </div>
 
-
-    {% include "order/quote-form.html" with form=forms.basic %}
-<div class="clear"></div>
-<iframe width="400" height="501" src="http://memegenerator.net/Memes/embed?languageCode=en&watermark=protectamerica.com" frameborder="0" />
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "protect america" "limit=4&words=75&state=TX" %}
-    </ul>
-</div>
-<div id="protect-america-difference">
-	<div>
-		<h2>Protect America Home Security</h2>
-		<p>To protect your home and family, you want the best home security technology available without top home security prices. Protect America offers innovation in home security with GE security systems that are cutting-edge, simple to use and affordable. Not only will a Protect America home security system provide you with reliability and peace of mind, but it can also save you hundreds of dollars on alarm equipment over other brands like ADT.</p>
-	</div>
-	<div id="all-day-monitoring">
-		<img src="/static/img/extra/24-7-token.png" />
-
-		<h3>Affordable 24/7 Home Security Monitoring</h3>
-		<p>Keeping your home protected day and night</p>
-	</div>
-	<div id="ge-wireless-equipment">
-		<img src="/static/img/extra/wireless-token.png" />
-
-		<h3>Simple to Use Wireless GE Security</h3>
-		<p>Trusted top of the line security equipment</p>
-	</div>
-	<div id="save-on-homeowners-insurance">
-    	<img src="/static/img/extra/20-percent-token.png" />
-		<h3>Save up to 20% on Homeowner's Insurance</h3>
-		<p>Protecting your home and saving money</p>
-	</div>
-	<div id="replacement-parts-warranty">
-    	<img src="/static/img/extra/hammer-token.png" />
-		<h3>Lifetime Replacement Parts Warranty</h3>
-		<p>Making sure you are always safe and secure</p>
-	</div>
-	<div id="best-priced-home-security">
-    	<img src="/static/img/extra/dollar-sign-token.png" />
-		<h3>The Best Priced Home Security System</h3>
-		<p>Compare & save, you get the best priced guaranteed</p>
-	</div>
-
-</div>
-<div id="home-security-advantage">
-	<div id="protect-america-advantage">
-		<div id="advantage-background">
-
-		</div>
-		<div id="protect-america-advantage-content">
-			<h2>Protect America's Home Security Advantage</h2>
-			<p>Protecting your home and family is about more than money. But if you can get a state-of-the-art GE home security system, 24/7 nationwide monitoring and top-notch customer service for less, why wouldn't you?</p>
-			<p>Protect America offers trusted home security options for hundreds of dollars less than the competition. And with a variety of monitoring options, you can get complete home protection for as low as $1/day. Take a look below at the huge savings Protect America offers versus what you'd pay up-front for ADT:</p>
-			<div class="clear"></div>
-		</div>
-	</div>
-	<table id="protect-america-vs-adt">
-		<thead>
-			<tr>
-				<th id="blank-box"></th>
-				<th id="protect-america-table-title">Protect America</th>
-				<th id="adt-table-title">ADT*</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td id="copper-package"><span>Copper Package</span>3 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="copper-package-protect-america-price"><span>{{ pricetable.COPPER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.COPPER.standard_monitoring }}/monthly)</td>
-				<td id="copper-package-adt-price"><span>{{ pricetable.COPPER.adt_upfront }}</span>({{ pricetable.COPPER.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="bronze-package"><span>Bronze Package</span>7 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="bronze-package-protect-america-price"><span>{{ pricetable.BRONZE.upfront|default_if_none:"FREE" }}</span>({{ pricetable.BRONZE.standard_monitoring }}/monthly)</td>
-				<td id="bronze-package-adt-price"><span>{{ pricetable.BRONZE.adt_upfront }}</span>({{ pricetable.BRONZE.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="silver-package"><span>Silver Package</span>10 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="silver-package-protect-america-price"><span>{{ pricetable.SILVER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.SILVER.standard_monitoring }}/monthly)</td>
-				<td id="silver-package-adt-price"><span>{{ pricetable.SILVER.adt_upfront }}</span>({{ pricetable.SILVER.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="gold-package"><span>Gold Package</span>12 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="gold-package-protect-america-price"><span>{{ pricetable.GOLD.upfront|default_if_none:"FREE" }}</span>({{ pricetable.GOLD.standard_monitoring }}/monthly)</td>
-				<td id="gold-package-adt-price"><span>{{ pricetable.GOLD.adt_upfront }}</span>({{ pricetable.GOLD.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="platinum-package"><span>Platinum Package</span>15 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="platinum-package-protect-america-price"><span>{{ pricetable.PLATINUM.upfront|default_if_none:"FREE" }}</span>({{ pricetable.PLATINUM.standard_monitoring }}/monthly)</td>
-				<td id="platinum-package-adt-price"><span>{{ pricetable.PLATINUM.adt_upfront }}</span>({{ pricetable.PLATINUM.adt_monitoring }}/monthly)</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="clear"></div>
-</div>
-<div id="call-box">
-    <p>Get Started Now, <strong>Call Today! {{ phone_number|format_number }}</strong></p>
-</div>
-<div id="extra-security-content">
-    <div id="home-security-statistics">
-        <h2>Home Security Statistics</h2>
-        <p>There is no better time than the present to get a monitored home security system to protect your home and family. With our affordable GE wireless home security system and award winning home security monitoring service, there is no better solution than Protect America. Protect America offers a low-price guarantee so you can be confident you're getting the best deal. Our home security experts are standing by to assist you, so call today for a free home security analysis and we will help you protect your home and family with a solution that meets your needs!</p>
+    <a href="#">
+        <img width="670" height="144" title="Free Simon XT Touchscreen when ordering Two-Way Voice or HomePulse monitoring" src="{{ STATIC_URL }}img/banners/promos/touchscreen-banner.jpg">
+    </a>
+    <div id="customer-testimonials">
+        <div class="ts_testimonial">
+            <h3>What our customers say...</h3>
+            <a href="http://www.protectamerica.com/pa/testimonials/">Read More ></a>
+            {% comment %}
+            <div>
+                <p>Fantastic 5 star customer service!! Gloria knows her stuff! Thank you!</p>
+                <span>&mdash; &nbsp;Paul 
+                    <em>Austell, GA on November 30, 2011</em>
+                </span>
+            </div>
+            {% endcomment %}
+            <div class="test_testimonial_box">
+            {% testimonial_search "" "limit=5&template=old&words=30" %}
+            </div>
+        </div>
     </div>
-    <div id="home-security-news">
-        <h2>Home Security News</h2>
-        <div class="news-article">
-            <p class="date"><span>Feb</span> 28</p>
-            <div class="news-content">
-                <h3>California city crime rate increased two-fold last year</h3>
-                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
-            </div>
-        </div>
-        <div class="news-article">
-            <p class="date"><span>Feb</span> 28</p>
-            <div class="news-content">
-                <h3>California city crime rate increased two-fold last year</h3>
-                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
-            </div>
-        </div>
-        <div class="news-article">
-            <p class="date"><span>Feb</span> 28</p>
-            <div class="news-content">
-                <h3>California city crime rate increased two-fold last year</h3>
-                <p>Residents of St. Helena, California, may be wise to purchase a home security system and GPS tracking for their vehicles, as ... [Read More]</p>
-            </div>
-        </div>
+    
+    <div id="protection">
+        <h2>100% Protection</h2>
+        <p>Whether you want protection for your home or even a small business, the GE Home Security System from Protect America will fulfill your home security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your home security with a GE Home Security System from Protect America:</p>
+        <ul>
+            <li><a href="#" title="Compare Protect America to ADT Security and other home security system companies." >BEST Price in Home Security</a> - Compare &amp; Save!</li>
+
+            <li>BEST Home Security System in the Industry</li>
+            <li><a href="#" title="View available GE wireless home security system equipment and learn how it works." >State-of-the-art UL Listed Security Equipment</a></li>
+            <li>Protect Your Home with 24/7 Security Monitoring</li>
+            <li>Guaranteed Locked in Security Monitoring Rates</li>
+            <li>Super Flexible <a href="#" title="View all of our alarms packages and choose the right package and service for your home." >Home Security Packages</a></li>
+            <li>Lifetime <a href="#" title="Lifetime monitoring home security system equipment warranty for our valued customers." >Alarm System Replacement Parts Warranty</a></li>
+
+            <li>Up to 20% Off Homeowners Insurance</li>
+            <li>Peace of Mind When It Comes to Your Family &amp; Home</li>
+        </ul>
         <div class="button-link">
-            <a href="">Read More Home Security News ></a>
+            <a title="View Copper Security Package details and compare to our other home security systems packages." href="#">Home Security Packages ></a>
         </div>
+        
     </div>
-</div>
-<div id="fbi-statistics">
-    <div id="three-times-more">
-        <img src="{{ STATIC_URL }}img/extra/3x-icon.png" />
-        <p>Your home is <strong>three times less likely to be burglarized</strong> when you have a home security system with monitoring. If you're serious about protecting your home and family, getting a home security system should be the first thing you do.</p>
-        <div class="clear"></div>
-    </div>
-    <div id="burglary-every-14-seconds">
-        <img src="{{ STATIC_URL }}img/extra/stopwatch-icon.jpg" />
-        <p>According to the FBI Unified Crime Reports, <strong>a burglary occurs every 14 seconds</strong> in the United States. It's scary to think that since you've been reading this page, 7 burglaries have occurred through the United States.</p>
-        <div class="clear"></div>
-    </div>
-    <div id="burglary-during-day">
-        <img src="{{ STATIC_URL }}img/extra/sun-icon.jpg" />
-        <p>Most burglaries actually take place in the daytime. <strong>The average burglary occurs from 6am to 6pm.</strong> Arm your security system during the day to help protect while you are at work.</p>
-        <div class="clear"></div>
-    </div>
-    <div id="average-amount-lost">
-        <img src="{{ STATIC_URL }}img/extra/lost-icon.png" />
-        <p><strong>Average amount lost</strong> in a residential burglary <strong>is $2,096.</strong></p>
-        <div class="clear"></div>
-    </div>
-    <div id="through-front-door">
-        <img src="{{ STATIC_URL }}img/extra/front-door-icon.jpg" />
-        <p>In more than a third of all burglaries, <strong>the burglar enters the front door</strong> (and most of the time does so forcefully).</p>
-        <div class="clear"></div>
+    <div id="advantage">
+        <h2>The Protect America Security Advantage</h2>
+        <p>Protection for your home and family is not an easy decision. The home security system packages from Protect America combine the best price with the best equipment and service. Compare how our packages stack up against other leaders in the home security industry below to help make the decision easier.</p>
+
+        <table summary="Small comparison chart detailing Protect America pricing versus major competitors.">
+        	<thead>
+        		<tr>
+        			<td colspan="3"><strong><a name="home-security-systems-comparison">Home Security Systems Comparison</a></strong></td>
+        		</tr>
+        	</thead>
+        	<tfoot>
+        		<tr>
+        			<td colspan="3">
+                        Information regarding home security system comparisons obtained via telephone quotations and Internet research 
+                        on Sep 01, 2011.
+                    </td>
+        		</tr>
+        	</tfoot>
+        	<tbody>
+        		<tr>
+        			<th>Package</th>
+        			<th>Our Price</th>
+        			<th>ADT Price</th>
+        		</tr>
+        		<tr class="odd">
+        			<td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/copper">Copper Security Package</a><br>3 Door Sensors, 1 Motion Detector</td>
+        
+        			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
+        			<td headers="adt"><sup>$</sup>379</td>
+        		</tr>
+        		<tr>
+        			<td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/bronze">Bronze Security Package</a><br>3 Door Sensors, 4 Window Sensors, 1 Motion Detector</td>
+        
+        			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
+        			<td headers="adt"><sup>$</sup>699</td>
+        		</tr>
+        		<tr class="odd">
+        			<td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/silver">Silver Security Package</a><br>3 Door Sensors, 7 Window Sensors, 1 Motion Detector</td>
+        
+        			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
+        			<td headers="adt"><sup>$</sup>939</td>
+        		</tr>
+        		<tr>
+        			<td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/gold">Gold Package</a><br>3 Door Sensors, 9 Window Sensors, 1 Motion Detector</td>
+        
+        			<td class="highlight" headers="pa">
+                        <span class="red">FREE<sup>*</sup></span>
+                    </td>
+        			<td headers="adt"><sup>$</sup>1,099</td>
+        		</tr>
+        		<tr class="odd">
+        			<td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/platinum">Platinum Package</a><br>3 Door Sensors, 12 Window Sensors, 1 Motion Detector</td>
+        
+        			<td class="highlight" headers="pa">
+                        <span class="red">FREE<sup>*</sup></span>
+                    </td>
+        			<td headers="adt"><sup>$</sup>1,339</td>
+        		</tr>
+        	</tbody>
+        </table>
+        <div class="button-link">
+            <a title="View Copper Security Package details and compare to our other home security systems packages." href="#">Security Advantage ></a>
+        </div>
     </div>
     <div class="clear"></div>
+    <div id="familyofcompanies">
+        <h2>Sister Companies</h2>
+        <img src="{{ STATIC_URL }}img/external/650-sister-companies.jpg" width="650" height="80" alt="Protect America's sister companies: Cleveland Cavaliers, Fathead, Quicken Loans, In House Realty, Quizzle."/> 
+    </div>
+    <div id="security">
+        <h2>Protect America Home Security</h2>
+        <h3>Home Security Commitment</h3>
+        <p>
+            Protect America is committed to excellence and affordability when it comes to securing
+            your home. That's why we're a Consumers Digest Best Buy&trade; for home security and the best
+            choice for a world-class security system backed by a company that is dedicated to serving
+            your home security needs. Your family is your top priority. Your home is probably your largest
+            investment. Why not take the extra precaution of providing a home security system and security
+            monitoring for your residence? Protect America is committed to helping you meet your home
+            security needs and providing you with service you can depend on.
+        </p>
+
+        <h3>Home Security Value</h3>
+        <p>
+            The average yearly home insurance premium in the U.S. costs over $800. The good news is that
+            many plans offer discounts up to 20% on home insurance for homes with security systems. You
+            could save $14 or more per month on your insurance with a <a href='http://www.protectamerica.com/pa/gold/alarm-systems'>GE home alarm system</a>. For many, 
+            the monthly cost of a Protect America GE home security system would be less than $16 per
+            month once a home insurance discount is applied. For 50 cents a day, you can have the peace
+            of mind knowing that your family and home will have the extra protection of a residential
+            security system. Our wireless GE home security system is one investment you can't afford to 
+            ignore.
+        </p>
+
+        <h3>Home Security Choices</h3>
+        <p>
+            Protect America offers the <a href="http://www.protectamerica.com/pa/packages" title="View all of our alarms packages and choose the right package and service for your home." >best home security system and monitoring</a> deal you'll find. We install
+            premium security hardware with GE home security products, and have the most flexible range
+            of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse
+            broadband monitoring, or standard talking command station monitoring over landline. We
+            provide an extensive selection of GE <a href='http://www.protectamerica.com/pa/equipment/wireless-home-security-system'>wireless home security</a> components. And, our home
+            security packages are designed to fit most any budget. Let us help you find the right system
+            for your needs, so you can start protecting your home and family today.
+
+        </p>
+
+        <h3>Home Security Statistics</h3>
+        <p>
+            <strong>Facts about Burglary, Property Crimes, and Home Security Alarms</strong>
+            <br/><br/>
+            
+            2007 FBI Crime Statistics:
+        </p>
+        <ul style='padding-left:25px;list-style-type:square;'>
+            <li>Each year in the United States, a burglary occurs every 14 seconds.</li>
+
+            <li>Most burglaries occur during the day between 6am and 6pm.</li>
+            <li>The average residential burglary victim lost $1,991.</li>
+        </ul>
+        <p>
+            There is no better time than today to protect your residence with a monitored home security alarm
+            system, and there is no more affordable solution than Protect America's wireless GE home security
+            system. Wherever you live, we have a home security alarm solution for you and with our unique,
+            low-price guarantee, you can be confident in your choice. Sign up today for a <a href='http://www.protectamerica.com/pa/copper/home-security-systems'>free home security 
+            system</a> and get our low-price guarantee, a lifetime alarm equipment warranty, free movers program, 
+            dedicated support, and award winning home security monitoring from Protect America.
+        </p>
+        <ul style='padding-left:25px;list-style-type:square;'>
+            <li>
+
+                In more than a third of all burglaries, the burglar enters the front door (and most of the time 
+                does so forcefully).
+            </li>
+            <li>
+                Homes without a monitored security alarm system are 3 times more likely to be burglarized or 
+                robbed than those with a monitored home security system.
+            </li>
+            <li>
+                There is sufficient evidence to show that in the past, when the economy has suffered, burglary 
+                and property crime has increased in parallel.
+            </li>
+        </ul>
+        
+    </div>
 </div>
-<div class="clear"></div>
-{% block order-footer %}
-{% endblock %}
+<div id="sidebar">
+    {% include "order/quote-form.html" with form=forms.basic %}
+    <div id="how-safe-is-your-neighborhood">
+        	<h3>How Safe <span>is your Neighborhood?</span></h3>
+        	<p>enter your zip to find sexual predators and crime statistics in your area:</p>
+            <form action="http://www.protectamerica.com/crime-rate/search/" method="GET" name="predator_form" id="predator_form">
+        		<input name="q" />        	
+        		<button type="submit">GO</button>
+        		<input type="hidden" name="widget" value="true">
+        	</form>
+        	<p class="fbi-stats"><a href="http://www.protectamerica.com/crime-rate/">FBI Crime stats</a> provided by <a href="http://www.protectamerica.com/">Protect America</a></p>
+
+        
+    </div>
+    <div id="cellupgrade">
+        <a title="Click Here If You Already Have a Home Security System" href="http://www.protectamerica.com/pa/existing-home-security-system/cellular-monitoring">
+            <img width="251" height="286" alt="Click Here If You Already Have a Home Security System" src="{{ STATIC_URL }}/img/banners/promos/already-have-system-sidebar.jpg">
+        </a>
+    </div>
+
+    <div id="copperbestbuy">
+        <h2>Copper Package: Consumers Digest Best Buy</h2>
+        <img class="centered" width="108" height="200" alt="Copper Package" src="{{ STATIC_URL }}img/external/consumer-digest/copper-package-consumer-digest-ribbon.png">
+        <div class="button-link">
+            <a title="View Copper Package details. Compare to our other home security systems packages." href="http://www.protectamerica.com/pa/copper">Copper Package ></a>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+    <div id="sidebar-testimonials">
+        <h2>Testimonials</h2>
+        <ul>
+            {% testimonial_search "affordable" "limit=3&template=sidebar-old&words=30" %}
+        </ul>    
+    </div>
+</div>
+
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
@@ -183,13 +261,17 @@
             fx: 'fade',
             timeout: 6000
         });
-    });
-    $(document).ready(function() {
         $('#main-testimonials').cycle({
             fx: 'fade',
             timeout: 9000
         });
+        $('.test_testimonial_box').cycle({
+            fx: 'fade',
+            timeout: 6000
+        });
     });
     </script>
 {% endaddtoblock "js" %}
+{% endblock %}
+{% block order-footer %}
 {% endblock %}
