@@ -89,14 +89,8 @@
     {% block navigation %}
     <div id="navigation">
     	<ul>
-            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
-            {% comment %}
-    		<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url security-packages %}" title="Home Security Systems and Products">Products</a></li>
-    		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
-    		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Support</a></li>
-       		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Contact Protect America">Contact Us</a></li>
-            {% endcomment %}
-            <li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/copper/home-security-systems" title="Home Security Systems and Products">Products</a></li>
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="{% url home %}" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Home Security Systems and Products">Products</a></li>
     		<li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
     		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/support/home-security-alarm-system" title="Contact Protect America">Support</a></li>
        		<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/contact/" title="Contact Protect America">Contact Us</a></li>
