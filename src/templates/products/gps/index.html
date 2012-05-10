@@ -1,6 +1,6 @@
 {% extends "products/gps/base.html" %}
 {% block content %}
-<div>
+<div id="vehicle-gps">
 	<div id="gps-tracking-car">
 		<img src="/static/img/products/gps/big-red-car.jpg">
 	</div>
@@ -13,6 +13,9 @@
 	</div>
 	<div class="clear"></div>
 </div>
+{% include "order/quote-form.html" with form=forms.basic %}
+
+<div class="clear"></div>
 <div id="location-found-image">
 	<img src="/static/img/products/gps/location-found.jpg" class="absolute">
 
@@ -34,6 +37,8 @@
 	<div class="clear"></div>
 
 </div>
+    {% include "order/call-box.html" %}
+
 <div>
 	<div id="access-from-computer">
 		<img src="/static/img/products/gps/gps-laptop.jpg">
@@ -62,8 +67,10 @@
 
 </div>
 {% endblock %}  
-{% block sidebar %}
-{{ block.super }}
-
-
+{% block page-product %}
+    <h2>GPS Vehicle Tracking</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $10.00/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
+    </div>
 {% endblock %}
