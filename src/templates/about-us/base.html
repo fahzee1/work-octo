@@ -3,17 +3,10 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/about-us.css">
 {% endblock %}
 {% block subnav_child %}
-<ul>
-	<li {% if 'profile' in active_pages %}class="active"{% endif %}><a href="{% url profile %}"><img src="/static/img/nav-icons/about-profile.png" alt="About Us: Company Profile" />Company Profile</a></li>
 
-	<li {% if 'charities' in active_pages %}class="active"{% endif %}><a href="{% url charities %}"><img src="/static/img/nav-icons/about-charities.png" alt="About Us: Supported Charities" />Supported Charities</a></li>
-
-</ul>
 {% endblock %}
 {% block subnav_parent %}
-<ul class="siblings">
-	<li><a href="{% url profile %}">Company Profile</a></li>
-	<li><a href="{% url charities %}">Supported Charities</a></li>
-
+<ul id="sub-nav-parent">
+    <li {% if 'profile' in active_pages %}class="active"{% endif %}><a href="{% url profile %}" title="Learn about Protect America Inc.">Profile</a></li>
 </ul>
 {% endblock %}
