@@ -1,0 +1,124 @@
+{% extends "admin/base_site.html" %}
+{% block bodyclass %}{{ block.super }} change-form{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <a href="../../../">Home</a>
+    ›
+    <a href="../../">Affiliates</a>
+    ›
+    <a href="../">Affiliates</a>
+    ›
+    {% if affiliate %}
+    {{ affiliate }}
+    {% else %}
+    Add affiliate
+    {% endif %}
+</div>
+{% endblock %}
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}admin/css/forms.css" />
+    <style type="text/css">
+        textarea { display: block; }
+        .hint {
+            margin: 10px 0; 
+            font-size: 10px;
+            font-style: italic;
+        }
+        #link div {
+            margin: 10px;
+        }
+        #link div.alink {
+            margin-left: 60px;
+        }
+    </style>
+{% endblock %}
+{% block extrahead %}
+    {{ block.super }}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        {% if request.user.is_superuser %}
+        var auto_lowercase = false;
+        {% else %}
+        var auto_lowercase = true;
+        {% endif %}
+        $('#landing_page').hide();
+        var agent_id = $('#id_agent_id').val();
+        if(auto_lowercase) {
+            agent_id.toLowerCase();
+        }
+        $('#link span').html(agent_id);
+
+        function update_hrefs() {
+            $('.alink a').each(function() {
+                url = $(this).html().replace(/<\/?span>/g, '').replace('&amp;', '&');
+                $(this).attr('href', encodeURI(url));
+            });
+        }
+        update_hrefs();
+        $('#id_agent_id').keyup(function(e) {
+            tagent = $(this).val();
+            if(auto_lowercase) {
+                tagent = tagent.toLowerCase();
+            }
+            $('#link span').html(tagent);
+            update_hrefs();
+        });
+        $('#landing_page').toggle(
+            function() {
+                $('#landing_page').show();
+            },function() {
+                $('#landing_page').hide();
+            }
+        );
+        $('#id_landing_page').click(function() {
+            $('#landing_page').toggle();
+        });
+        if($('#id_landing_page').attr('checked') == true) {
+            $('#landing_page').toggle();
+        }
+    });
+    </script>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+<form action="" method="POST">
+<fieldset class="module aligned">
+{% for field in form.visible_fields %}
+{% include "_partials/formfield.html" with field=field %}
+{% endfor %}
+</fieldset>
+<div class="hint">* indicates a required field</div>
+<button type="submit">{% if affiliate %}Edit{% else %}Add{% endif %} Affiliate</button>
+</form>
+    <div id="link">
+        <div id="old_system">
+            <strong>Affiliate Tracking Link</strong>
+            <div class="alink"><a href="http://www.protectamerica.com/">http://www.protectamerica.com/?agent=<span></span>&amp;affkey=XXXXX</a></div>
+        </div>
+        {% comment %}
+        <div id="new_system">
+            <strong>Affiliate Tracking Link for New System</strong>
+            <div class="alink">http://www.protectamerica.com/?agent=<span></span>&amp;affkey=XXXXX</div>
+        </div>
+        {% endcomment %}
+        <div id="resources">
+            <strong>Affiliate Resources</strong>
+            <div class="alink"><a href="http://www.protectamerica.com/">http://www.protectamerica.com/affiliate/resources/</a></div>
+        </div>
+        <div id="landing_page">
+            <strong>Affiliate Landing PageLink:</strong>
+            <div class="alink"><a href="http://www.protectamerica.com/">http://www.protectamerica.com/affiliate/<span></span>/?affkey=XXXXX</a></div>
+        </div>
+        <div class="hint">
+            <ul>
+                <li>The XXXXX can be changed to whatever for sub campaign tracking.</li>
+                <li>Also the source can be overwritten by adding &amp;source=XXXXX to the url string.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

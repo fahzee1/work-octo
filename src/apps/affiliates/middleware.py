@@ -4,6 +4,7 @@ import re
 from datetime import datetime, timedelta
 
 from django.conf import settings
+import settings as temp_settings
 
 from apps.affiliates.models import Affiliate
 
@@ -57,16 +58,17 @@ class AffiliateMiddleware(object):
         return (None, network, None)
     
     def process_view(self, request, view_func, view_args, view_kwargs):
-        if settings.SITE_ID == 3:
-            viewname = view_func.__name__
-            if viewname == 'semlanding_home':
-                request.session['refer_id'] = 'SEMDIRECT'
-            elif viewname == 'semlanding_google':
-                request.session['refer_id'] = 'GOOGLEPPC'
-            elif viewname == 'semlanding_bing':
-                request.session['refer_id'] = 'BINGPPC'
-        elif settings.SITE_ID == 4:
-            request.session['refer_id'] = 'LocalSearch'
+        if 'agent' not in request.GET:
+            if settings.SITE_ID == 3:
+                viewname = view_func.__name__
+                if viewname == 'semlanding_home':
+                    request.session['refer_id'] = 'SEMDIRECT'
+                elif viewname == 'semlanding_google':
+                    request.session['refer_id'] = 'GOOGLEPPC'
+                elif viewname == 'semlanding_bing':
+                    request.session['refer_id'] = 'BINGPPC'
+            if settings.SITE_ID == 4:
+                request.session['refer_id'] = 'LocalSearch'
 
         return None
 
@@ -77,10 +79,11 @@ class AffiliateMiddleware(object):
         # get default agent id from settings
 
         try:
-            default_agent = settings.DEFAULT_AGENTID
+            default_agent = settings.DEFAULT_AGENT
         except AttributeError:
             default_agent = None
 
+        affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
         if not current_cookie:
             refer_id = request.session.get('refer_id', None)
@@ -90,20 +93,37 @@ class AffiliateMiddleware(object):
                         value=request.session['refer_id'],
                         domain='.protectamerica.com',
                         expires=datetime.now() + expire_time)
-                    
-            if 'agent' in request.GET:
+            elif refer_id is not None:
+                try:
+                    affiliate = Affiliate.objects.get(agent_id=refer_id)
+                    response.set_cookie('refer_id',
+                        value=refer_id,
+                        domain='.protectamerica.com',
+                        expires=datetime.now() + expire_time)
+                
+                except Affiliate.DoesNotExist:
+                    pass
+                
+            elif 'agent' in request.GET:
                 try:
                     affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])
                     request.session['refer_id'] = affiliate.agent_id
                     response.set_cookie('refer_id',
                         value=affiliate.agent_id,
+                        domain='.protectamerica.com',
                         expires=datetime.now() + expire_time)
                 except Affiliate.DoesNotExist:
                     pass
+                    
             else:
-                if default_agent is not None:
+                if default_agent is not None and current_cookie is None:
                     # dont set the cookie to default
                     request.session['refer_id'] = default_agent
+
+                    response.set_cookie('refer_id',
+                        value=request.session['refer_id'],
+                        domain='.protectamerica.com',
+                        expires=datetime.now() + expire_time)
 
         if 'affkey' in request.GET:
             request.session['affkey'] = request.GET['affkey']
@@ -125,3 +145,4 @@ class AffiliateMiddleware(object):
             request.session['search_keywords'] = term
         
         return response
+

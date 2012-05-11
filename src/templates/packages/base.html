@@ -1,7 +1,22 @@
 {% extends "base.html" %}
+
+{% load sekizai_tags %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/packages-b.css">
+{% addtoblock "js" %}
+<!-- Start Quantcast Tag -->
+<script type="text/javascript">
+_qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Product Page"};
+</script>
+<script type="text/javascript" src="//secure.quantserve.com/quant.js"></script>
+<noscript>
+<img src="//secure.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Product+Page" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+{% endaddtoblock "js" %}
 {% endblock %}
+
 {% block subnav_parent %}
 <ul id="sub-nav-parent">
 	<li class="active"><a href="http://www.protectamerica.com/pa/packages" title="View all of our alarms packages and choose the right package and service for your home.">Packages</a></li>

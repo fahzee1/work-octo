@@ -5,13 +5,21 @@ import re
 from django.db import models
 
 class Affiliate(models.Model):
-    agent_id = models.CharField(max_length=12, unique=True)
+    agent_id = models.CharField(max_length=16, unique=True)
     name = models.CharField(max_length=64, unique=True)
     phone = models.CharField(max_length=10, blank=True, null=True)
     use_call_measurement = models.BooleanField(default=False)
+    homesite_override = models.BooleanField(default=False,
+        help_text='Check this if the affiliate should be under the HOMESITE agent_id')
+    pixels = models.TextField(blank=True, null=True,
+        help_text='Add HTML here for affiliate Pixels')
+    thank_you = models.CharField(max_length=128,blank=True, null=True,
+        help_text='If the affiliate has a custom thank you page ender the URL after /thank-you here')
+    conversion_pixels = models.TextField(blank=True, null=True,
+        help_text='Add HTML here for affiliate conversion Pixels')
 
     def __unicode__(self):
-        return '%s' % (self.name,)
+        return '%s (%s)' % (self.name, self.agent_id)
 
 
 class AffTemplate(models.Model):

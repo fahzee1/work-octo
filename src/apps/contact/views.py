@@ -10,6 +10,7 @@ from django.utils import simplejson
 
 from apps.contact.forms import (PAContactForm, BasicContactForm, OrderForm, 
     CeoFeedback)
+from apps.affiliates.models import Affiliate
 
 def post_to_old_pa(data):
     import httplib, urllib
@@ -70,6 +71,7 @@ def ajax_post(request):
         form = PAContactForm(request.POST)
         if form.is_valid():
             fdata = form.cleaned_data
+            thank_you_url = '/thank-you'
             agentid = request.COOKIES.get('refer_id', None)
             if agentid is None:
                 agentid = request.session.get('refer_id', None)
@@ -85,29 +87,36 @@ def ajax_post(request):
             leadid = request.COOKIES.get('leadid', None)
             if leadid is None:
                 leadid = request.session.get('leadid', None)
+            
+            # get the aff from the database
+            try:
+                agent = Affiliate.objects.get(agent_id=agentid)
+            except Affiliate.DoesNotExist:
+                agent = None
 
-            # Special Handling for SEM Landing pages
-            # All agent ids should be HOMESITE and the SOURCE
-            # should become the agent ID
+            # If there is an agent lets check some special handling
+            if agent:
 
-            if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC', 'YAHOOPPC']:
-                source = agentid
-                agentid = 'HOMESITE'
+                if not source:
+                    source = agent.name
 
-            # Special Handling for 5LYNX pages
-            # All 5LYNX leads should have their source
-            # changed to 5LYNX
+                if agent.thank_you:
+                    thank_you_url = thank_you_url + agent.thank_you
 
-            if agentid == 'a01526':
-                source = '5LINX'
+                # If the agent needs to be a homesite and the source
+                # needs to be the agent ID we check to see if the
+                # homesite_override is true
+                if agent.homesite_override:
+                    source = agentid
+                    agentid = 'HOMESITE'
 
-            # Special Handling for LocalSearch pages
-            # Change localsearch to HOMESITE and make
-            # the source LocalSearch
+                # Special 5LINX catch
+                if agent.agent_id == 'a01526':
+                    source = '5LINX'
 
-            if agentid == 'LocalSearch':
-                source = agentid
-                agentid = 'HOMESITE'
+            formset = form.save(commit=False)
+            if request.META['HTTP_REFERER'] is not None:
+                formset.referer_page = request.META['HTTP_REFERER']
 
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
@@ -116,15 +125,14 @@ def ajax_post(request):
                       'source': source,
                       'key3': affkey,
                       'leadid': leadid,
+                      'form_location': formset.referer_page,
                       }
             post_to_old_pa(padata)
-            formset = form.save(commit=False)
 
-            if request.META['HTTP_REFERER'] is not None:
-                formset.referer_page = request.META['HTTP_REFERER']
             
             formset.save()
-            response_dict.update({'success': True})
+            response_dict.update({'success': True,
+                'thank_you': thank_you_url})
         else:
             response_dict.update({'errors': form.errors})
 
@@ -197,20 +205,29 @@ def order_form(request):
             if leadid is None:
                 leadid = request.session.get('leadid', None)
 
-            # Special Handling for SEM Landing pages
-            # All agent ids should be HOMESITE and the SOURCE
-            # should become the agent ID
+           # get the aff from the database
+            try:
+                agent = Affiliate.objects.get(agent_id=agentid)
+            except Affiliate.DoesNotExist:
+                agent = None
 
-            if agentid in ['SEMDIRECT', 'BINGPPC', 'GOOGLEPPC']:
-                source = agentid
-                agentid = 'HOMESITE'
+            # If there is an agent lets check some special handling
+            if agent:
 
-            # Special Handling for 5LYNX pages
-            # All 5LYNX leads should have their source
-            # changed to 5LYNX
+                # If the agent needs to be a homesite and the source
+                # needs to be the agent ID we check to see if the
+                # homesite_override is true
+                if agent.homesite_override:
+                    source = agentid
+                    agentid = 'HOMESITE'
 
-            if agentid == 'a01526':
-                source = '5LYNX'
+                # Special 5LINX catch
+                if agent.agent_id == 'a01526':
+                    source = '5LINX'
+
+            formset = form.save(commit=False)
+            if request.META['HTTP_REFERER'] is not None:
+                formset.referer_page = request.META['HTTP_REFERER']
 
             padata = {'l_fname': fdata['name'],
                       'email_addr': fdata['email'],
@@ -219,13 +236,10 @@ def order_form(request):
                       'source': source,
                       'key3': affkey,
                       'leadid': leadid,
+                      'form_location': formset.referer_page,
                       }
-            post_to_old_pa(padata)
-            form = formset.save(commit=False)
+            post_to_old_pa(padata)            
 
-            if request.META['HTTP_REFERER'] is not None:
-                form.referer_page = request.META['HTTP_REFERER']
-            
             form.save()
             # send_email(formset.cleaned_data['email'])
             return HttpResponseRedirect('http://www.protectamerica.com/pa/thank_you')
