@@ -91,7 +91,7 @@ elif settings.SITE_ID == 5:
         dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index'}),
     )
 # 5 Linx landing site
-elif settings.SITE_ID == 5:
+elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
         dtt(r'^$', 'affiliates/five-linx/index.html', 'home'),
         dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages'),
