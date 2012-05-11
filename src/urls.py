@@ -152,6 +152,10 @@ else:
 
             dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
+            # About > Family of Companies
+
+            dtt(r'^about-us/family-of-companiess/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
+
             # About > Charities
 
             dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
