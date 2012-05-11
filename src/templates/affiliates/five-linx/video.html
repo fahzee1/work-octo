@@ -1,0 +1,31 @@
+{% extends "affiliates/five-linx/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block content %}
+<div id="top-content">
+    <div id="interactive-video-overview">
+        <img src="{{ STATIC_URL }}img/products/video/laptop-and-interactive-camera.jpg" alt="laptop-and-interactive-camera" />
+        <div id="video-overview-content">
+            <h1>Interactive Video Services</h1>
+            <p>Get a clear picture of your home or business 24/7 with on-demand video from 5LINX. Our pan and tilt video cameras enhance your security with event notifications, archived clips, and automatic recording when movement is detected. Reassurance is just a quick click away with 5LINX security videos services.</p>
+            <div class="button-link"><a href="{% url order %}">Order Interactive Video Now ></a></div>
+        </div>
+    </div>
+    {% include "order/quote-form.html" with form=forms.basic %}
+
+</div>
+<div id="home-business-security">
+    <div id="home-video-security">
+        <img src="{{ STATIC_URL }}img/products/video/video-residential.jpg" alt="video-residential" />
+        <h2>In your Home</h2>
+        <p>With security video services from 5LINX in your home, you can easily keep an eye on maintenance workers, babysitters, or anyone else you let into your home while you're away. Access your video feed from anywhere at any time and get instant peace of mind at work or on vacation.</p>
+    </div>
+    <div id="business-video-security">
+        <img src="{{ STATIC_URL }}img/products/video/video-business.jpg" alt="video-residential" />
+
+        <h2>For Your Business</h2>
+        <p>Protect your business with security video services from 5LINX. Catch shoplifters or watch employees anywhere and anytime! 5LINX video services allow you to watch your business from anywhere in the world. You can even set your cameras to activate when motion is detected. With 5LINX video services in your business, there's one less thing to worry about!</p>
+    </div>
+</div>
+<div class="clear"></div>
+{% endblock %}
