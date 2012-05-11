@@ -93,18 +93,27 @@ elif settings.SITE_ID == 5:
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/five-linx/index.html', 'home'),
-        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages'),
-        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages'),
-        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages'),
-        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages'),
-        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages'),
+        dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
 
-        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video'),
+        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
+            'agent_id': 'a01526'}),
 
-        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps'),
+        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
+            'agent_id': 'a01526'}),
         
-        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order'),
+        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
+            'agent_id': 'a01526'}),
 
     )
 else:

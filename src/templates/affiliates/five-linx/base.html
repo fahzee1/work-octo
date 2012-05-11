@@ -72,11 +72,11 @@ License: http://creativecommons.org/licenses/MIT
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>Agent ID: L100000</p>
+        <p>{% if request.GET.affkey %}Agent ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Agent ID: {{ request.COOKIES.affkey }}{% else %}Agent ID: L100000{% endif %}{% endif %}</p>
     </div>
     <div id="navigation">
         <ul>
-            <li class="first {% if 'security-packages' in active_pages %}active{% endif %}"><a href="{% url copper %}">Security Systems</a></li>
+            <li class="first {% if 'copper' in active_pages %}active{% endif %}{% if 'bronze' in active_pages %}active{% endif %}{% if 'silver' in active_pages %}active{% endif %}{% if 'gold' in active_pages %}active{% endif %}{% if 'platinum' in active_pages %}active{% endif %}"><a href="{% url copper %}">Security Systems</a></li>
             <li class="video-security {% if 'video' in active_pages %}active{% endif %}"><a href="{% url video %}">Video Security</a></li>
             <li class="gps-tracking {% if 'gps' in active_pages %}active{% endif %}"><a href="{% url gps %}">GPS</a></li>
             <li class="place-order {% if 'order' in active_pages %}active{% endif %}"><a href="{% url order %}">Order Now</a></li>
@@ -102,7 +102,7 @@ License: http://creativecommons.org/licenses/MIT
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>Agent ID: L100000</p>
+        <p>{% if request.GET.affkey %}Agent ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Agent ID: {{ request.COOKIES.affkey }}{% else %}Agent ID: L100000{% endif %}{% endif %}</p>
     </div>
 </div>
 
@@ -113,7 +113,7 @@ License: http://creativecommons.org/licenses/MIT
 <script src="{{ STATIC_URL }}js/plugins.js"></script>
 <script src="{{ STATIC_URL }}js/script.js"></script>
 <script src="{{ STATIC_URL }}js/helper.js"></script>
-
+{% render_block "js" %}
 <!--[if (lt IE 9) & (!IEMobile)]>
 <script src="js/imgsizer.js"></script>
 <![endif]-->
@@ -125,7 +125,7 @@ MBP.scaleFix();
 // Respond.js
 yepnope({
 	test : Modernizr.mq('(only all)'),
-	nope : ['js/libs/respond.min.js']
+	nope : ['{{ STATIC_URL }}js/respond.min.js']
 });
 </script>
 
