@@ -60,6 +60,10 @@ $(document).ready(function() {
             submitting = false;
             if(json.success) {
                 url = json.thank_you
+                if(json.lead_id) {
+                    url = url + '?leadid=' + json.lead_id;
+                }
+                console.log(url);
                 window.location = "http://www.protectamerica.com" + url;
             }
         if(json.errors) {

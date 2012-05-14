@@ -69,15 +69,7 @@
       })();
     </script>
     <!-- End of Google Website Optimizer Tracking Script -->
-{% comment %}
-All the crappy footer includes
-{% endcomment %}
-{% if not custom_url %}
-    <!-- simpl.fi -->
-    <script src="http://i.simpli.fi/dpx.js?cid=70&conversion=10&campaign_id=763"></script>
-    <!-- End simpl.fi -->
-    
-       
+
     <!-- Google Code for Converted Remarketing List -->
     <script type="text/javascript">
     <!--
@@ -97,7 +89,15 @@ All the crappy footer includes
     </div>
     </noscript>
     <!-- End Google Remarketing Conversion Code -->
-    
+
+{% comment %}
+All the crappy footer includes
+{% endcomment %}
+{% if not custom_url %}
+    <!-- simpl.fi -->
+    <script src="http://i.simpli.fi/dpx.js?cid=70&conversion=10&campaign_id=763"></script>
+    <!-- End simpl.fi -->
+        
     <!-- Google Code for Lead Conversion Page -->
     <script language="JavaScript" type="text/javascript">
     <!--
@@ -155,6 +155,17 @@ All the crappy footer includes
     <script id='hiconversion_head_script'
                  type='text/javascript'>if (typeof hiconversion_head_update == 'function') hiconversion_head_update()</script>
     <!-- End Hiconversion Head Enabling -->
+
+    <!-- Start Quantcast Tag -->
+    <script type="text/javascript">
+    _qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Quote Confirmation",meta:"orderID={{ request.GET.leadid }}"};
+    </script>
+    <script type="text/javascript" src="//secure.quantserve.com/quant.js"></script>
+    <noscript>
+    <img src="//secure.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Quote+Confirmation&meta=orderID={{ request.GET.leadid }}" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    </noscript>
+    <!-- End Quantcast tag -->
+        
     
 {% endif %}
 {% endaddtoblock "js" %}

@@ -121,6 +121,9 @@ def basic_post_login(request):
             referer_page = request.META['HTTP_REFERER']
         formset.referer_page = referer_page
 
+        if request_data['leadid'] is None:
+            request_data['leadid'] = formset.id
+
         emaildata = {
             'agent_id': request_data['agentid'],
             'source': request_data['source'],
@@ -143,7 +146,7 @@ def basic_post_login(request):
 def ajax_post(request):
     if request.method != "POST":
         return HttpResponseRedirect('/')
-    print request.COOKIES
+
     response_dict = {}
     form_type = request.POST['form']
 
@@ -151,7 +154,8 @@ def ajax_post(request):
         form, success = basic_post_login(request)
         if success:
             response_dict.update({'success': True,
-                'thank_you': form.thank_you_url})
+                'thank_you': form.thank_you_url,
+                'lead_id': form.id})
         else:
             response_dict.update({'errors': form.errors})
 
@@ -207,7 +211,7 @@ def order_form(request):
     if request.method == "POST":
         formset, success = basic_post_login(request)         
         if success:
-            return HttpResponseRedirect('http://www.protectamerica.com%s' % formset.thank_you_url)
+            return HttpResponseRedirect('http://www.protectamerica.com%s?leadid=%s' % (formset.thank_you_url, formset.id))
     else:
         formset = OrderForm()
 
