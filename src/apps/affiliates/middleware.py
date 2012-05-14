@@ -158,6 +158,9 @@ class AffiliateMiddleware(object):
             response.set_cookie('source',
                 value=request.GET['source'],
                 expires=datetime.now() + expire_time)
+        # for lead testing, don't set cookie
+        if 'leadid' in request.GET:
+            request.session['leadid'] = request.GET['leadid']
 
         referrer = request.META.get('HTTP_REFERER')
         engine, domain, term = self.parse_search(referrer)

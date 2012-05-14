@@ -4,13 +4,15 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
-from django.template import RequestContext
-from django.core.mail import send_mail
+from django.template import RequestContext, loader, Context
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
+from django.conf import settings
 
 from apps.contact.forms import (PAContactForm, BasicContactForm, OrderForm, 
     CeoFeedback)
 from apps.affiliates.models import Affiliate
+from django.template.loader import render_to_string
 
 def post_to_old_pa(data):
     import httplib, urllib
@@ -24,115 +26,132 @@ def post_to_old_pa(data):
     conn.close()
 
 
-def send_email(recipient):
-    # send emails to submitter and to the dialer 
-
-    send_mail('Email sent', 'Here is the message.', 
-        'robert@protectamerica.com', [recipient], 
-        fail_silently=False)
-
-    return True;
-
 def send_leadimport(data):
-    subject = 'Hello, Thank you for your interest!'
-    message = Template("[header]\n\n \
-[data]\n \
-agent_id=$agentid \
-source=$source \
-customername=$name \
-phone1=$phone \
-phone2= \
-address1= \
-city= \
-state= \
-zip= \
-email=$email \
-creditrating= \
-affkey=$affkey \
-homeowner= \
-status=X \
-formlocation=$formlocation \
-searchengine= \
-searchkeywords=")
-    send_mail(subject, message.safe_substitute(data),
-        'robert@protectamerica.com', ['robrocker7@gmail.com'], fail_silently=False)
+    subject = '%s Lead Submission' % data['agent_id']
+    t = loader.get_template('_partials/lead_submission_email.html')
+    c = Context(data)
+    send_mail(subject, t.render(c),
+        'Protect America <noreply@protectamerica.com>', ['robert@protectamerica.com'], fail_silently=False)
 
     return True
 
+def send_thankyou(data):
+    subject = 'Hello, Thank you for your interest!'
+    t = loader.get_template('emails/thank_you.html')
+    c = Context(data)
+    msg = EmailMultiAlternatives(subject, t.render(c),
+        'Protect America <noreply@protectamerica.com>', [data['email']])
+    msg.attach_alternative(t.render(c), 'text/html')
+    msg.send()
+
+    return True
+
+def prepare_data_from_request(request):
+    thank_you_url = '/thank-you'
+    agentid = request.COOKIES.get('refer_id', None)
+    if agentid is None:
+        agentid = request.session.get('refer_id', None)
+    if not agentid and 'agent_id' in request.POST:
+        agentid = request.POST['agent_id']
+
+    affkey = request.COOKIES.get('affkey', None)
+    if affkey is None:
+        affkey = request.session.get('affkey', None)
+    if not affkey and 'affkey' in request.POST:
+        affkey = request.POST['affkey']
+
+    source = request.COOKIES.get('source', None)
+    if source is None:
+        source = request.session.get('source', None)
+    if not source and 'source' in request.POST:
+        source = request.POST['source']
+    
+    leadid = request.COOKIES.get('leadid', None)
+    if leadid is None:
+        leadid = request.session.get('leadid', None)
+    if leadid is None and settings.DEBUG:
+        leadid = 'TEST'
+    
+    # get the aff from the database
+    try:
+        agent = Affiliate.objects.get(agent_id=agentid)
+    except Affiliate.DoesNotExist:
+        agent = None
+
+    # If there is an agent lets check some special handling
+    if agent:
+
+        if not source:
+            source = agent.name
+
+        if agent.thank_you:
+            thank_you_url = thank_you_url + agent.thank_you
+
+        # If the agent needs to be a homesite and the source
+        # needs to be the agent ID we check to see if the
+        # homesite_override is true
+        if agent.homesite_override:
+            source = agentid
+            agentid = 'HOMESITE'
+
+        # Special 5LINX catch
+        if agent.agent_id == 'a01526':
+            source = '5LINX'
+    return {
+            'agentid': agentid,
+            'affkey': affkey,
+            'source': source,
+            'leadid': leadid,
+            'agent': agent,
+            'thank_you_url': thank_you_url,
+        }
+
+def basic_post_login(request):
+    form = PAContactForm(request.POST)
+    if form.is_valid():
+        fdata = form.cleaned_data
+        
+        request_data = prepare_data_from_request(request)
+
+        formset = form.save(commit=False)
+        referer_page = None
+        if 'referer_page' in request.POST:
+            referer_page = request.POST['referer_page']
+        if not referer_page and 'HTTP_REFERER' in request.META:
+            referer_page = request.META['HTTP_REFERER']
+        formset.referer_page = referer_page
+
+        emaildata = {
+            'agent_id': request_data['agentid'],
+            'source': request_data['source'],
+            'customername': fdata['name'],
+            'phone': fdata['phone'],
+            'email': fdata['email'],
+            'affkey': request_data['affkey'],
+            'formlocation': formset.referer_page,
+            'searchengine': request.session.get('search_engine', ''),
+            'searchkeywords': request.session.get('search_keywords', ''),
+            'leadid': request_data['leadid'],
+        }
+        send_leadimport(emaildata)
+        send_thankyou(emaildata)
+        formset.save()
+        formset.thank_you_url = request_data['thank_you_url']
+        return (formset, True)
+    return (form, False)
 
 def ajax_post(request):
     if request.method != "POST":
         return HttpResponseRedirect('/')
-
+    print request.COOKIES
     response_dict = {}
     form_type = request.POST['form']
 
     if form_type == 'basic':
-        form = PAContactForm(request.POST)
-        if form.is_valid():
-            fdata = form.cleaned_data
-            thank_you_url = '/thank-you'
-            agentid = request.COOKIES.get('refer_id', None)
-            if agentid is None:
-                agentid = request.session.get('refer_id', None)
-
-            affkey = request.COOKIES.get('affkey', None)
-            if affkey is None:
-                affkey = request.session.get('affkey', None)
-
-            source = request.COOKIES.get('source', None)
-            if source is None:
-                source = request.session.get('source', None)
-            
-            leadid = request.COOKIES.get('leadid', None)
-            if leadid is None:
-                leadid = request.session.get('leadid', None)
-            
-            # get the aff from the database
-            try:
-                agent = Affiliate.objects.get(agent_id=agentid)
-            except Affiliate.DoesNotExist:
-                agent = None
-
-            # If there is an agent lets check some special handling
-            if agent:
-
-                if not source:
-                    source = agent.name
-
-                if agent.thank_you:
-                    thank_you_url = thank_you_url + agent.thank_you
-
-                # If the agent needs to be a homesite and the source
-                # needs to be the agent ID we check to see if the
-                # homesite_override is true
-                if agent.homesite_override:
-                    source = agentid
-                    agentid = 'HOMESITE'
-
-                # Special 5LINX catch
-                if agent.agent_id == 'a01526':
-                    source = '5LINX'
-
-            formset = form.save(commit=False)
-            if request.META['HTTP_REFERER'] is not None:
-                formset.referer_page = request.META['HTTP_REFERER']
-
-            padata = {'l_fname': fdata['name'],
-                      'email_addr': fdata['email'],
-                      'l_phone1': fdata['phone'],
-                      'agentid': agentid,
-                      'source': source,
-                      'key3': affkey,
-                      'leadid': leadid,
-                      'form_location': formset.referer_page,
-                      }
-            post_to_old_pa(padata)
-
-            
-            formset.save()
+        form, success = basic_post_login(request)
+        if success:
             response_dict.update({'success': True,
-                'thank_you': thank_you_url})
+                'thank_you': form.thank_you_url})
         else:
             response_dict.update({'errors': form.errors})
 
@@ -186,63 +205,9 @@ def find_us(request):
 
 def order_form(request):
     if request.method == "POST":
-        formset = OrderForm(request.POST)
-        if formset.is_valid():
-            fdata = formset.cleaned_data
-            agentid = request.COOKIES.get('refer_id', None)
-            if agentid is None:
-                agentid = request.session.get('refer_id', None)
-
-            affkey = request.COOKIES.get('affkey', None)
-            if affkey is None:
-                affkey = request.session.get('affkey', None)
-
-            source = request.COOKIES.get('source', None)
-            if source is None:
-                source = request.session.get('source', None)
-            
-            leadid = request.COOKIES.get('leadid', None)
-            if leadid is None:
-                leadid = request.session.get('leadid', None)
-
-           # get the aff from the database
-            try:
-                agent = Affiliate.objects.get(agent_id=agentid)
-            except Affiliate.DoesNotExist:
-                agent = None
-
-            # If there is an agent lets check some special handling
-            if agent:
-
-                # If the agent needs to be a homesite and the source
-                # needs to be the agent ID we check to see if the
-                # homesite_override is true
-                if agent.homesite_override:
-                    source = agentid
-                    agentid = 'HOMESITE'
-
-                # Special 5LINX catch
-                if agent.agent_id == 'a01526':
-                    source = '5LINX'
-
-            formset = form.save(commit=False)
-            if request.META['HTTP_REFERER'] is not None:
-                formset.referer_page = request.META['HTTP_REFERER']
-
-            padata = {'l_fname': fdata['name'],
-                      'email_addr': fdata['email'],
-                      'l_phone1': fdata['phone'],
-                      'agentid': agentid,
-                      'source': source,
-                      'key3': affkey,
-                      'leadid': leadid,
-                      'form_location': formset.referer_page,
-                      }
-            post_to_old_pa(padata)            
-
-            form.save()
-            # send_email(formset.cleaned_data['email'])
-            return HttpResponseRedirect('http://www.protectamerica.com/pa/thank_you')
+        formset, success = basic_post_login(request)         
+        if success:
+            return HttpResponseRedirect('http://www.protectamerica.com%s' % formset.thank_you_url)
     else:
         formset = OrderForm()
 
