@@ -31,7 +31,7 @@ def send_leadimport(data):
     t = loader.get_template('_partials/lead_submission_email.html')
     c = Context(data)
     send_mail(subject, t.render(c),
-        'Protect America <noreply@protectamerica.com>', ['robert@protectamerica.com'], fail_silently=False)
+        'Protect America <noreply@protectamerica.com>', ['leadimport@protectamerica.com'], fail_silently=False)
 
     return True
 
