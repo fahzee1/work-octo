@@ -24,7 +24,6 @@ urlpatterns = patterns('',
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
-    url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
@@ -147,6 +146,10 @@ else:
 
                         dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
                         dtt(r'^products/security-equipment/sensors/door-window-sensor?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+                        
+                        # Product > Equipment > Touch Screen
+                        
+                        dtt(r'^products/security-equipment/accessories/touchscreen?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
 
 
             # Product > Video
@@ -176,6 +179,14 @@ else:
             # About > Charities
 
             dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
+            
+            # About > How it Works
+
+            dtt(r'^about-us/how-it-works/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
+
+            # About > Learn About Security
+
+            dtt(r'^about-us/learn-about-security/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
             # About > Testimonials
 
@@ -189,7 +200,9 @@ else:
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
+        # Contact Pages
 
+        dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
 
         # Help Pages
 
@@ -205,6 +218,10 @@ else:
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
+        # Support Pages
+        
+        dtt(r'^support/?$', 'support/index.html', 'support'),
+        
         # Affiliate Resources
         
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
