@@ -200,9 +200,20 @@ else:
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
+        # Complete Home Security 
+        
+        dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
+        
         # Contact Pages
 
         dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
+        
+        # Contact Pages > Find Us
+        dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+        
+        # Contact Pages > Department Listing
+        dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
+
 
         # Help Pages
 
