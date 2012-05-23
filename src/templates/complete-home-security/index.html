@@ -1,9 +1,10 @@
 {% extends "complete-home-security/base.html" %}
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
 {% block page_title %}Home Security Packages | Protect America Home Security{% endblock %}
 {% block content %}
 
 <div id="package-fan">
+    <h1>Which House is Yours? <strong>We'll Protect it Affordably.</strong></h1>
     <div id="copper-card" class="card">
         <img src="{{ STATIC_URL }}img/extra/copper-home-icon.png" alt="silver-home-icon" width="176" height="160" />
         <h3>3 Doors <br/> or Windows</h3>
@@ -11,7 +12,7 @@
 
         <h4>Upfront Price: <strong>Free</strong>
             <br/>
-            Monthly Price: <strong>$32.99</strong>
+            Monthly Price: <strong>{{ pricetable.COPPER.standard_monitoring }}</strong>
         </h4>
         <div class="button-submit"><a href="#">Order Now ></a></div>
     </div>
@@ -23,7 +24,7 @@
 
         <h4>Upfront Price: <strong>Free</strong>
             <br/>
-            Monthly Price: <strong>$32.99</strong>
+            Monthly Price: <strong>{{ pricetable.BRONZE.standard_monitoring }}</strong>
         </h4>
         <div class="button-submit"><a href="#">Order Now ></a></div>
     </div>
@@ -34,7 +35,7 @@
 
         <h4>Upfront Price: <strong>Free</strong>
             <br/>
-            Monthly Price: <strong>$32.99</strong>
+            Monthly Price: <strong>{{ pricetable.SILVER.standard_monitoring }}</strong>
         </h4>
 
         <div class="button-submit"><a href="#">Order Now ></a></div>
@@ -46,7 +47,7 @@
 
         <h4>Upfront Price: <strong>Free</strong>
             <br/>
-            Monthly Price: <strong>$32.99</strong>
+            Monthly Price: <strong>{{ pricetable.GOLD.standard_monitoring }}</strong>
         </h4>
         <div class="button-submit"><a href="#">Order Now ></a></div>
     </div>
@@ -58,7 +59,7 @@
 
         <h4>Upfront Price: <strong>Free</strong>
             <br/>
-            Monthly Price: <strong>$32.99</strong>
+            Monthly Price: <strong>{{ pricetable.PLATINUM.standard_monitoring }}</strong>
         </h4>
         <div class="button-submit"><a href="#">Order Now ></a></div>
     </div>
@@ -66,7 +67,81 @@
 </div>
 <div class="clear"></div>
     {% include "order/call-box.html" %}
+
+<div id="home-security-advantage">
+	<div id="protect-america-advantage">
+		<div id="advantage-background">
+
+		</div>
+		<div id="protect-america-advantage-content">
+			<h2>Protect America's Home Security Advantage</h2>
+			<p>Homes need security. And not just a couple doors and a window.  Your home needs every entry covered. When deciding the best security solution for your home, choose a company that combines comprehensive protection with unbeatable value. Protect America will provide you with enough sensors to monitor <strong>every door and window on your home</strong>. With Protect America, you get complete home security without leaving any opening vulnerable. The best part? We’ll even provide the equipment for free! There’s nothing easier and nothing more secure! When choosing home security, the choice is easy, Protect America.</p>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<table id="protect-america-vs-adt">
+		<thead>
+			<tr>
+				<th id="blank-box"></th>
+				<th id="protect-america-table-title">Protect America</th>
+				<th id="adt-table-title">ADT*</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="copper-package"><span>Copper Package</span>3 Door / Window Sensors<br />1 Motion Detector</td>
+				<td id="copper-package-protect-america-price"><span>{{ pricetable.COPPER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.COPPER.standard_monitoring }}/monthly)</td>
+				<td id="copper-package-adt-price"><span>{{ pricetable.COPPER.adt_upfront }}</span>({{ pricetable.COPPER.adt_monitoring }}/monthly)</td>
+			</tr>
+			<tr>
+				<td id="bronze-package"><span>Bronze Package</span>7 Door / Window Sensors<br />1 Motion Detector</td>
+				<td id="bronze-package-protect-america-price"><span>{{ pricetable.BRONZE.upfront|default_if_none:"FREE" }}</span>({{ pricetable.BRONZE.standard_monitoring }}/monthly)</td>
+				<td id="bronze-package-adt-price"><span>{{ pricetable.BRONZE.adt_upfront }}</span>({{ pricetable.BRONZE.adt_monitoring }}/monthly)</td>
+			</tr>
+			<tr>
+				<td id="silver-package"><span>Silver Package</span>10 Door / Window Sensors<br />1 Motion Detector</td>
+				<td id="silver-package-protect-america-price"><span>{{ pricetable.SILVER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.SILVER.standard_monitoring }}/monthly)</td>
+				<td id="silver-package-adt-price"><span>{{ pricetable.SILVER.adt_upfront }}</span>({{ pricetable.SILVER.adt_monitoring }}/monthly)</td>
+			</tr>
+			<tr>
+				<td id="gold-package"><span>Gold Package</span>12 Door / Window Sensors<br />1 Motion Detector</td>
+				<td id="gold-package-protect-america-price"><span>{{ pricetable.GOLD.upfront|default_if_none:"FREE" }}</span>({{ pricetable.GOLD.standard_monitoring }}/monthly)</td>
+				<td id="gold-package-adt-price"><span>{{ pricetable.GOLD.adt_upfront }}</span>({{ pricetable.GOLD.adt_monitoring }}/monthly)</td>
+			</tr>
+			<tr>
+				<td id="platinum-package"><span>Platinum Package</span>15 Door / Window Sensors<br />1 Motion Detector</td>
+				<td id="platinum-package-protect-america-price"><span>{{ pricetable.PLATINUM.upfront|default_if_none:"FREE" }}</span>({{ pricetable.PLATINUM.standard_monitoring }}/monthly)</td>
+				<td id="platinum-package-adt-price"><span>{{ pricetable.PLATINUM.adt_upfront }}</span>({{ pricetable.PLATINUM.adt_monitoring }}/monthly)</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="clear"></div>
+</div>
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "affordable" "limit=4&words=50" %}
+    </ul>
+</div>
+<div id="trusted-name">
+    <div id="trusted-name-content">
+        <h2>The Name You Can Trust</h2>
+        <p>Protect America is proud to use certified GE wireless home security for our alarm system panels — meaning we use the same trusted and recognized security systems as other leading security companies such as ADT, but sell them for a great deal less. We are confident that you can't find a better home security system anywhere else. And our prices are the best in the industry — we guarantee it!</p>
+    </div>
+
+</div>
+
 {% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
 {% endaddtoblock "js" %}
+
 {% endblock %}  
 
