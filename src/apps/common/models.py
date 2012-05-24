@@ -8,3 +8,14 @@ class SpunContent(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.url, self.name,)
+
+# 5LINX conference 
+class LinxContext(models.Model):
+    name = models.CharField(max_length=256)
+    email = models.EmailField(max_length=128)
+    phone = models.CharField(max_length=15)
+    rin = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return '%s - %s - %s - %s' % (self.name,
+            self.rin, self.phone, self.email)

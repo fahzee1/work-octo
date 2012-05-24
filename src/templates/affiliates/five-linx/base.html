@@ -48,14 +48,22 @@ License: http://creativecommons.org/licenses/MIT
 <!-- JavaScript -->
 <script src="{{ STATIC_URL }}js/modernizr-2.0.6.min.js"></script>
 {% block favicons %}
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}img/h/apple-touch-icon.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}img/m/apple-touch-icon.png">
-<link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}img/l/apple-touch-icon-precomposed.png">
-<link rel="shortcut icon" href="{{ STATIC_URL }}img/l/apple-touch-icon.png">
-<link rel="shortcut icon" href="/favicon.ico">
+<!-- For iPhone 4 -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ STATIC_URL }}img/affiliates/five-linx/h/apple-touch-icon.png">
+<!-- For iPad 1-->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ STATIC_URL }}img/affiliates/five-linx/m/apple-touch-icon.png">
+<!-- For the new iPad -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ STATIC_URL }}img/affiliates/five-linx/h/apple-touch-icon-144x144-precomposed.png">
+<!-- For iPhone 3G, iPod Touch and Android -->
+<link rel="apple-touch-icon-precomposed" href="{{ STATIC_URL }}img/affiliates/five-linx/l/apple-touch-icon-precomposed.png">
+<!-- For Nokia -->
+<link rel="shortcut icon" href="{{ STATIC_URL }}img/affiliates/five-linx/l/apple-touch-icon.png">
+<!-- For everything else -->
+<!--iOS -->
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="apple-touch-startup-image" href="{{ STATIC_URL }}img/splash.png">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-startup-image" href="{{ STATIC_URL }}img/affiliates/five-linx/splash.png">
+<script>(function(){var p,l,r=window.devicePixelRatio;if(navigator.platform==="iPad"){p=r===2?"{{ STATIC_URL }}img/affiliates/five-linx/startup/startup-tablet-portrait-retina.png":"{{ STATIC_URL }}img/affiliates/five-linx/startup/startup-tablet-portrait.png";l=r===2?"{{ STATIC_URL }}img/affiliates/five-linx/startup/startup-tablet-landscape-retina.png":"{{ STATIC_URL }}img/affiliates/five-linx/startup/startup-tablet-landscape.png";document.write('<link rel="apple-touch-startup-image" href="'+l+'" media="screen and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="'+p+'" media="screen and (orientation: portrait)"/>');}else{p=r===2?"{{ STATIC_URL }}img/affiliates/five-linx/startup/startup-retina.png":"{{ STATIC_URL }}img/affiliates/five-linx/startup/startup.png";document.write('<link rel="apple-touch-startup-image" href="'+p+'"/>');}})()</script>
 {% endblock %}
 
 <!--Microsoft. Delete if not required -->
@@ -72,7 +80,7 @@ License: http://creativecommons.org/licenses/MIT
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>{% if request.GET.affkey %}Agent ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Agent ID: {{ request.COOKIES.affkey }}{% else %}Agent ID: L100000{% endif %}{% endif %}</p>
+        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}</p>
     </div>
     <div id="navigation">
         <ul>
@@ -102,7 +110,7 @@ License: http://creativecommons.org/licenses/MIT
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>{% if request.GET.affkey %}Agent ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Agent ID: {{ request.COOKIES.affkey }}{% else %}Agent ID: L100000{% endif %}{% endif %}</p>
+        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}</p>
     </div>
 </div>
 

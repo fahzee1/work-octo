@@ -32,6 +32,7 @@
     </div>
 </form>
 {% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#quote-form input').keypress(function(e){
@@ -60,6 +61,9 @@ $(document).ready(function() {
             submitting = false;
             if(json.success) {
                 url = json.thank_you
+                if(json.lead_id) {
+                    setCookie('leadid', json.lead_id);
+                }
                 window.location = "http://www.protectamerica.com" + url;
             }
         if(json.errors) {
