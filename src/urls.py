@@ -117,6 +117,10 @@ elif settings.SITE_ID == 6:
         
         dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
             'agent_id': 'a01526'}),
+            
+        dtt(r'^thank-you/affiliate/fivelinx$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
+            'agent_id': 'a01526'}),
+
 
     )
 else:
