@@ -105,6 +105,8 @@ elif settings.SITE_ID == 6:
         dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps'),
         
         dtt(r'^order$', 'affiliates/five-linx/order.html', 'order'),
+        dtt(r'^thank-you/affiliate/fivelinx$', 'affiliates/five-linx/thank-you.html', 'thank-you'),
+
 
     )
 else:
