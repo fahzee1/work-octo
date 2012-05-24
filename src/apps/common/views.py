@@ -12,6 +12,7 @@ from django.views.generic.simple import redirect_to
 
 from apps.contact.forms import PAContactForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
+from apps.common.forms import LinxContextForm
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -39,6 +40,11 @@ def thank_you(request, custom_url=None):
          'custom_url': custom_url,
          'affiliate_obj': affiliate_obj}
     return simple_dtt(request, 'thank-you/index.html', c)
+
+def fivelinxcontest(request):
+    form = LinxContextForm()
+    c = {'form': form,'page_name':'contest'}
+    return simple_dtt(request, 'affiliates/five-linx/contest.html', c)
 
 def simple_dtt(request, template, extra_context):
     

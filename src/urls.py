@@ -95,6 +95,9 @@ elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
         dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
             'agent_id': 'a01526'}),
+        
+        url(r'^contest/$', 'apps.common.views.fivelinxcontest'),
+        
         dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
             'agent_id': 'a01526'}),
         dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
