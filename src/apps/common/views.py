@@ -6,7 +6,7 @@ from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 
@@ -42,9 +42,20 @@ def thank_you(request, custom_url=None):
     return simple_dtt(request, 'thank-you/index.html', c)
 
 def fivelinxcontest(request):
-    form = LinxContextForm()
+    if request.method == 'POST':
+        form = LinxContextForm(request.POST)
+        if form.is_valid():
+            form.save() 
+            return HttpResponseRedirect('/contest/thanks/')
+    else:
+        form = LinxContextForm()
     c = {'form': form,'page_name':'contest'}
     return simple_dtt(request, 'affiliates/five-linx/contest.html', c)
+
+def fivelinxwinner(request):
+    from apps.common.models import LinxContext
+    winner = LinxContext.objects.order_by('?')
+    return HttpResponse('%s' % winner[0])
 
 def simple_dtt(request, template, extra_context):
     
