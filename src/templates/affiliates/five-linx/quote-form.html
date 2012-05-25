@@ -49,10 +49,8 @@ $(document).ready(function() {
         }
         submitting = true;
         $('#quote-form div').removeClass('.error-state');
-        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
         var data = $(this).parent().serialize();
-        console.log(data);
-        /*
+        
         $.ajax({
             type: "POST",
             url: "/contact/ajaxpost/",
@@ -60,7 +58,7 @@ $(document).ready(function() {
             dataType: "json",
             success: newFormSuccess
         });
-        */
+        
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
