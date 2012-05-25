@@ -100,6 +100,7 @@ elif settings.SITE_ID == 6:
         
         dtt(r'^contest/thanks/?$', 'affiliates/five-linx/contest-thanks.html', 'contest-thanks', 'contest', ctx={
             'agent_id': 'a01526'}),        
+        url(r'^contest/winner/$', 'apps.common.views.fivelinxwinner'),
         dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
             'agent_id': 'a01526'}),
         dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
@@ -120,7 +121,7 @@ elif settings.SITE_ID == 6:
         dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
             'agent_id': 'a01526'}),
             
-        dtt(r'^thank-you/affiliate/fivelinx$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
+        dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
 
 
