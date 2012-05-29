@@ -1,18 +1,21 @@
 {% extends "products/gps/base.html" %}
 {% block content %}
-<div>
+<div id="vehicle-gps">
 	<div id="gps-tracking-car">
 		<img src="/static/img/products/gps/big-red-car.jpg">
 	</div>
 	<div id="gps-tracking-overview">
 		<h1>GPS Vehicle Tracking</h1>
 		<p>Protect America allows you to instantly locate and follow your car with real-time GPS vehicle tracking. With this free equipment it is easy to keep a "virtual eye" on your vehicle through its intuitive web interface. Protect America also provides you with the safety and security of knowing where your teenager is while driving. Get customizable alerts via email or text if your teenager is speeding or if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college. Protect America's vehicle tracking brings an added level of security and control to your vehicle.</p>
-		<div class="button right buyit">
-			<a href="">Get GPS Vehicle Tracking</a>
+		<div class="button-link">
+			<a href="{% url order-package %}">Get GPS Vehicle Tracking ></a>
 		</div>
 	</div>
 	<div class="clear"></div>
 </div>
+{% include "order/quote-form.html" with form=forms.basic %}
+
+<div class="clear"></div>
 <div id="location-found-image">
 	<img src="/static/img/products/gps/location-found.jpg" class="absolute">
 
@@ -34,6 +37,8 @@
 	<div class="clear"></div>
 
 </div>
+    {% include "order/call-box.html" %}
+
 <div>
 	<div id="access-from-computer">
 		<img src="/static/img/products/gps/gps-laptop.jpg">
@@ -62,8 +67,10 @@
 
 </div>
 {% endblock %}  
-{% block sidebar %}
-{{ block.super }}
-
-
+{% block page-product %}
+    <h2>GPS Vehicle Tracking</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $10.00/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
+    </div>
 {% endblock %}

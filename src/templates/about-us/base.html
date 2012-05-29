@@ -3,17 +3,17 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/about-us.css">
 {% endblock %}
 {% block subnav_child %}
-<ul>
-	<li {% if 'profile' in active_pages %}class="active"{% endif %}><a href="{% url profile %}"><img src="/static/img/nav-icons/about-profile.png" alt="About Us: Company Profile" />Company Profile</a></li>
 
-	<li {% if 'charities' in active_pages %}class="active"{% endif %}><a href="{% url charities %}"><img src="/static/img/nav-icons/about-charities.png" alt="About Us: Supported Charities" />Supported Charities</a></li>
-
-</ul>
 {% endblock %}
 {% block subnav_parent %}
-<ul class="siblings">
-	<li><a href="{% url profile %}">Company Profile</a></li>
-	<li><a href="{% url charities %}">Supported Charities</a></li>
+<ul id="sub-nav-parent">
+    <li {% if 'profile' in active_pages %}class="active"{% endif %}><a href="{% url profile %}" title="Learn about Protect America Inc.">Profile</a></li>
+    <li {% if 'family' in active_pages %}class="active"{% endif %}><a href="{% url family %}" title="Click to Learn about Our Family of Companies">Family of Companies</a></li>
+    <li {% if 'charities' in active_pages %}class="active"{% endif %}><a href="{% url charities %}" title="Click to Learn about All the Charities Protect America Supports or has helped over the years">Charities</a></li>
+    <li {% if 'how-it-works' in active_pages %}class="active"{% endif %}><a href="{% url how-it-works %}" title="Click to Learn how Protect America Home Security Systems Work">How It Works</a></li>
+    <li {% if 'learn-about-security' in active_pages %}class="active"{% endif %}><a href="{% url learn-about-security %}" title="Click to Learn About Home Security">Learn About Security</a></li>
+
+
 
 </ul>
 {% endblock %}
