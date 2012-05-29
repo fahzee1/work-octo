@@ -208,11 +208,18 @@ else:
 
         dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
         
-        # Contact Pages > Find Us
-        dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
-        
-        # Contact Pages > Department Listing
-        dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
+            # Contact Pages > Find Us
+            dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+            
+            # Contact Pages > Department Listing
+            dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
+
+            # Contact Pages > Affiliate Program
+            dtt(r'^contact/affiliate-program?$', 'contact-us/affiliate-program.html', 'affiliate-program', 'contact-us'),
+
+            # Contact Pages > Feedback to CEO
+            dtt(r'^contact/send-thad-a-message?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
+
 
 
         # Help Pages
@@ -228,6 +235,9 @@ else:
 
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
+
+            # Help Pages > Do Not Call
+                dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
 
         # Support Pages
         

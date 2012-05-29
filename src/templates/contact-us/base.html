@@ -4,6 +4,10 @@
 {% endblock %}
 {% block subnav_parent %}
 <ul id="sub-nav-parent">
+    <li {% if 'department-listing' in active_pages %}class="active"{% endif %}><a href="{% url department-listing %}" title="Click to contact various departments as Protect America">Department Listings</a></li>
+    <li {% if 'find-us' in active_pages %}class="active"{% endif %}><a href="{% url find-us %}" title="Click to find our Company Headquarters">Find Us</a></li>
+    <li {% if 'feedback-ceo' in active_pages %}class="active"{% endif %}><a href="{% url feedback-ceo %}" title="Send your Feedback Straight to our CEO">Feedback to the CEO</a></li>
+
     <li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Click to order a home security system from Protect America">Place Order</a></li>
 </ul>
 
