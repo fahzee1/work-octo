@@ -131,6 +131,8 @@ LOGOUT_URL = '/logout/'
 
 DEFAULT_PHONE = '8009515190'
 
+GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
+
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
 try:
