@@ -1,5 +1,5 @@
 {% load sekizai_tags %}
-<form id="quote-form" method="post" action="">
+<form id="quote-form" method="post" action="" class="form-quote">
     {% csrf_token %}
     <input type="hidden" name="form" value="basic" />
 	<div>
@@ -36,19 +36,19 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#quote-form input').keypress(function(e){
+    $('.form-quote input').keypress(function(e){
         if(e.which == 13){
-            $('#quote-form button').click();
+            $('.form-quote button').click();
         }
     });
     var submitting = false;
 
-    $('#quote-form button').click(function() {
+    $('.form-quote button').click(function() {
         if(submitting==true) {
             return false;
         }
         submitting = true;
-        $('#quote-form div').removeClass('.error-state');
+        $('.form-quote div').removeClass('.error-state');
         var data = $(this).parent().serialize();
         
         $.ajax({

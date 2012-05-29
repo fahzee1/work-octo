@@ -24,7 +24,6 @@ urlpatterns = patterns('',
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
-    url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
@@ -141,20 +140,20 @@ else:
             name='payitforward'),
 
         # Home Security Packages
-        dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
+        dtt(r'^home-security-systems/?$', 'packages/index.html', 'products'),
 
             # Product > Packages B
 
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'security-packages'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'products'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'products'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'products'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'products'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
             
 
             # Product > Monitoring
 
-            dtt(r'^products/alarm-monitoring/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
+            dtt(r'^pa/monitoring/security-system/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
 
             dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
 
@@ -166,11 +165,15 @@ else:
 
                         dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
                         dtt(r'^products/security-equipment/sensors/door-window-sensor?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+                        
+                        # Product > Equipment > Touch Screen
+                        
+                        dtt(r'^products/security-equipment/accessories/touchscreen?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
 
 
             # Product > Video
 
-            dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'interactive-video', 'products'),
+            dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'video', 'products'),
 
             # Product > GPS Vehicle Tracking
 
@@ -188,9 +191,21 @@ else:
 
             dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
+            # About > Family of Companies
+
+            dtt(r'^about-us/family-of-companiess/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
+
             # About > Charities
 
             dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
+            
+            # About > How it Works
+
+            dtt(r'^about-us/how-it-works/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
+
+            # About > Learn About Security
+
+            dtt(r'^about-us/learn-about-security/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
             # About > Testimonials
 
@@ -204,6 +219,19 @@ else:
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
+        # Complete Home Security 
+        
+        dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
+        
+        # Contact Pages
+
+        dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
+        
+        # Contact Pages > Find Us
+        dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+        
+        # Contact Pages > Department Listing
+        dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
 
         # Help Pages
@@ -220,6 +248,10 @@ else:
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
+        # Support Pages
+        
+        dtt(r'^support/?$', 'support/index.html', 'support'),
+        
         # Affiliate Resources
         
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
