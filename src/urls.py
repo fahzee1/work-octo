@@ -225,7 +225,8 @@ else:
         
         # Contact Pages
 
-        dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
+        #dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
+        url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
         
         # Contact Pages > Find Us
         dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),

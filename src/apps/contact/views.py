@@ -1,3 +1,4 @@
+import urls
 from string import Template
 
 from django.http import HttpResponseRedirect
@@ -12,6 +13,7 @@ from django.conf import settings
 from apps.contact.forms import (PAContactForm, BasicContactForm, OrderForm, 
     CeoFeedback)
 from apps.affiliates.models import Affiliate
+from apps.common.views import get_active
 from django.template.loader import render_to_string
 
 def post_to_old_pa(data):
@@ -175,6 +177,9 @@ def post(request):
 
 
 def main(request):
+    pages = get_active(urls.urlpatterns, 'contact-us')
+    forms = {}
+    forms['basic'] = PAContactForm()
     if request.method == "POST":
         formset = BasicContactForm(request.POST)
         if formset.is_valid():
@@ -185,7 +190,8 @@ def main(request):
 
     return render_to_response('contact-us/index.html', 
                               {'parent':'contact-us',
-                               'formset': formset}, 
+                               'formset': formset,
+                               'forms': forms}, 
                               context_instance=RequestContext(request))
 
 def ceo(request):

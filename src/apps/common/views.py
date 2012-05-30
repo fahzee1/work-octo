@@ -1,4 +1,5 @@
 import re
+import urls
 from datetime import datetime, timedelta
 from urllib import urlencode
 
@@ -10,7 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 
-from apps.contact.forms import PAContactForm, AffiliateLongForm
+from apps.contact.forms import PAContactForm, AffiliateLongForm, BasicContactForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 
@@ -57,23 +58,20 @@ def fivelinxwinner(request):
     winner = LinxContext.objects.order_by('?')
     return HttpResponse('%s' % winner[0])
 
-def simple_dtt(request, template, extra_context):
-    
-    import urls
- 
-    def get_active(urllist, name, pages=None):
-        if pages is None:
-            pages = []
-        for entry in urllist:
-            try:
-                pname = entry.default_args['extra_context']['page_name']
-                if pname == name:
-                    pages.append(pname)
-                    return get_active(urllist, entry.default_args['extra_context']['parent'], pages)
-            except:
-                pass
-        return pages
+def get_active(urllist, name, pages=None):
+    if pages is None:
+        pages = []
+    for entry in urllist:
+        try:
+            pname = entry.default_args['extra_context']['page_name']
+            if pname == name:
+                pages.append(pname)
+                return get_active(urllist, entry.default_args['extra_context']['parent'], pages)
+        except:
+            pass
+    return pages
 
+def simple_dtt(request, template, extra_context):
     expire_time = timedelta(days=90)
 
     pages = get_active(urls.urlpatterns, extra_context['page_name'])

@@ -30,7 +30,7 @@ class BasicContactForm(PAContactForm):
         choices=Submission.DEPARTMENT_CHOICES))
 
     class Meta(PAContactForm.Meta):
-        fields = ('department', 'name', 'email', 'phone', 'message')
+        fields = ('name', 'email', 'phone','department', 'message')
 
 class AffiliateLongForm(PAContactForm):
     class Meta(PAContactForm.Meta):
