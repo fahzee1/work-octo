@@ -140,7 +140,7 @@ else:
             name='payitforward'),
 
         # Home Security Packages
-        dtt(r'^home-security-systems/?$', 'packages/index.html', 'products'),
+        dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
 
             # Product > Packages B
 
@@ -159,7 +159,7 @@ else:
 
             # Product > Equipment
 
-            dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
+            dtt(r'^pa/equipment/wireless-home-security-system/?$', 'products/equipment/index.html', 'equipment', 'products'),
 
                         # Product > Equipment > Sensors
 
@@ -173,43 +173,43 @@ else:
 
             # Product > Video
 
-            dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'video', 'products'),
+            dtt(r'^pa/wireless-security-camera/ip-security-cameras/?$', 'products/video/index.html', 'video', 'products'),
 
             # Product > GPS Vehicle Tracking
 
-            dtt(r'^products/gps-vehicle-tracking/?$', 'products/gps/index.html', 'gps', 'products'),
+            dtt(r'^pa/vehicle-gps-tracking/gps-services/?$', 'products/gps/index.html', 'gps', 'products'),
 
             # Product > Cell Takeover
 
-            dtt(r'^products/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
+            dtt(r'^pa/existing-home-security-system/cellular-monitoring/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
 
         # About Pages
 
-        dtt(r'^about-us/?$', 'about-us/index.html', 'about-us'),
+        dtt(r'^pa/about/home-security-companies/?$', 'about-us/index.html', 'about-us'),
 
             # About > Profile
 
-            dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
+            dtt(r'^pa/profile/home-alarm-systems/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
             # About > Family of Companies
 
-            dtt(r'^about-us/family-of-companiess/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
+            dtt(r'^pa/family-of-companies/america-protect/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
 
             # About > Charities
 
-            dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
+            dtt(r'^pa/charities/america-protect/?$', 'about-us/charities.html', 'charities', 'about-us'),
             
             # About > How it Works
 
-            dtt(r'^about-us/how-it-works/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
+            dtt(r'^pa/how_it_works/ge-security-systems/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
 
             # About > Learn About Security
 
-            dtt(r'^about-us/learn-about-security/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
+            dtt(r'^pa/learn/alarm-companies/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
             # About > Testimonials
 
-            dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
+            dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
 
             # About > Testimonials
 
@@ -226,7 +226,7 @@ else:
         # Contact Pages
 
         #dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
-        url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
+        url(r'^pa/contact/?$', 'apps.contact.views.main', name='contact-us'),
         
         # Contact Pages > Find Us
         dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),

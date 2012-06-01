@@ -176,6 +176,7 @@ def post(request):
         return HttpResponseRedirect(reverse('contact-us'))
 
 
+# This is the main contact us form page
 def main(request):
     pages = get_active(urls.urlpatterns, 'contact-us')
     forms = {}
