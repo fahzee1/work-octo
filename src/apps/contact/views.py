@@ -71,8 +71,6 @@ def prepare_data_from_request(request):
     leadid = request.COOKIES.get('leadid', None)
     if leadid is None:
         leadid = request.session.get('leadid', None)
-    if leadid is None and settings.DEBUG:
-        leadid = 'TEST'
     
     # get the aff from the database
     try:
@@ -123,6 +121,10 @@ def basic_post_login(request):
             referer_page = request.META['HTTP_REFERER']
         formset.referer_page = referer_page
 
+        formset.save()
+        formset.thank_you_url = request_data['thank_you_url']
+        
+        # send emails after formset
         if request_data['leadid'] is None:
             request_data['leadid'] = formset.id
 
@@ -140,8 +142,6 @@ def basic_post_login(request):
         }
         send_leadimport(emaildata)
         send_thankyou(emaildata)
-        formset.save()
-        formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
 
@@ -191,7 +191,9 @@ def main(request):
     return render_to_response('contact-us/index.html', 
                               {'parent':'contact-us',
                                'formset': formset,
-                               'forms': forms}, 
+                               'forms': forms,
+                               'page_name': 'contact-us',
+                               'active_pages': pages}, 
                               context_instance=RequestContext(request))
 
 def ceo(request):
