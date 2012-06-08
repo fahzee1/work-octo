@@ -1,4 +1,10 @@
 {% extends "about-us/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Company Profile | GE Alarm System | GE Security | Protect America{% endblock %}
+{% block page_keywords %}home alarm systems, security, home security, home security systems, security systems{% endblock %}
+{% block page_description %}Founded by Thad Paschall, Protect America has been providing state-of-the-art home alarm systems since 1992. Great service, great alarms equals great protection.{% endblock %}
+
 {% block content %}
 <div id="about-protect-america">
 	<img src="{{ STATIC_URL }}img/extra/protect-america-home-symbol.png" alt="protect-america-home-symbol" width="200" height="200" />
@@ -11,7 +17,22 @@
 </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
-<img src="/static/img/products/equipment/sensors-layout.jpg" id="security-equipment" />
-
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "best" "limit=10&words=100" %}
+    </ul>
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 
 {% endblock %}  

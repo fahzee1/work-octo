@@ -1,4 +1,10 @@
 {% extends "about-us/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}About Us | Alarm Monitoring | Security Alarms | Protect America{% endblock %}
+{% block page_keywords %}home security companies, security, security system, home security system, home security{% endblock %}
+{% block page_description %}Protect America is a growing premier alarm monitoring service that ensures the best home security system to protect your family and home from criminal activity.{% endblock %}
+
 {% block content %}
 <div id="about-us-content">
     <h1>Protect America Values Customers and Community</h1>
@@ -9,7 +15,24 @@
     <p>Make sure you are prepared in the event of an emergency anytime day or night. Defend your home and family against the threat of invasion, burglary and forced entry with a <a href="http://www.protectamerica.com/pa/equipment" title="GE Wireless Home Security Companies Systems">GE Wireless Home Security System</a> from one of the best home security companies around!</p>
 </div>
 {% include "order/quote-form.html" with form=forms.basic %}
-
+<div class="clear"></div>
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "protect america" "limit=10&words=100" %}
+    </ul>
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}  
 
 

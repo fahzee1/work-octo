@@ -123,6 +123,11 @@ else:
         # Home Security Packages
         dtt(r'^home-security-systems/?$', 'packages/index.html', 'products'),
 
+            # Product > Advantage
+
+            dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
+
+
             # Product > Packages B
 
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'products'),
@@ -163,6 +168,10 @@ else:
             # Product > Cell Takeover
 
             dtt(r'^products/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
+            
+            # Product > Interactive Control
+
+            dtt(r'^products/interactive-control/?$', 'products/interactive/index.html', 'interactive-control', 'products'),
 
         # About Pages
 
@@ -188,13 +197,10 @@ else:
 
             dtt(r'^about-us/learn-about-security/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
-            # About > Testimonials
-
-            dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
 
             # About > Testimonials
 
-            dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
+            dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us '),
 
         # Crime Stats
 
@@ -229,6 +235,9 @@ else:
 
             # Help Pages > Privacy Policy
                 dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+                
+            # Help Pages > Low Price Guarantee
+                dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),
 
             # Help Pages > Return Policy
                 dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),

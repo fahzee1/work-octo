@@ -483,6 +483,110 @@ body.products {
     }
 
 }
+/**** The Advantage Page ***/
+body.advantage {
+    #package-comparison-chart {
+        .content-box;
+        margin-top: 16px;
+        table {
+            width: 100%;
+            margin: 8px 0 32px;
+            td {
+                text-align: center;
+                vertical-align: middle;
+                padding: 15px 0;
+                border: 1px solid @light-grey;
+                border-left: none;
+                border-top: none;
+                font-size: 16px;
+                text-transform: uppercase;
+                line-height: 16px;
+                font-weight: 800;
+                .fade-fast;
+                &:hover {
+                  background: @v-light-blue+10;
+                  .fade-fast;
+                }
+                span {
+                    font-size: 10px;
+                    display: block;
+                    font-weight: normal;
+                }
+                &.button {
+                    border-right: none;
+                }
+                &.omega {
+                    border-bottom: none;
+                }
+                &.call-out {
+                    background: #fffee4;
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+                .strike {
+                    text-decoration: line-through;
+                }
+                .free {
+                    color: @red;
+                }
+                &.company {
+                    font-size: 12px;
+                    width: 100px;
+                }
+                &.upfront {
+                    width: 100px;
+                }
+                &.third-party {
+                    width: 200px;
+                }
+                &.na {
+                    font-size: 10px;
+                    color: @light-grey;
+                }
+            }
+            tr {
+                .fade-slow;
+                &.alt {
+                    background: @off-white;
+                    
+                }
+                &:hover {
+                    background: @v-light-blue;
+                    .fade-fast;   
+                }
+
+                
+            }
+            .blank-box {
+                border-right: 1px solid @light-grey;
+            }
+            th {
+                background: @light-blue;
+                border: 1px solid @light-grey;
+                padding: 5px;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 10px;
+                font-weight: bold;
+                border-left: none;
+                line-height: 12px;
+                text-transform: uppercase;
+                &.alpha {
+                    background: none;
+                    border-top: none;
+                    border-bottom: none;
+                }
+                &.omega {
+                    background: none;
+                    border-top: none;
+                    border-right: none;
+                    border-bottom: none;
+                }
+            }
+            
+        }
+    }
+}
 /**** The Copper Package ***/
 #affordable-home-security, #starter-home-security, #average-american-home-security, #complete-perimeter-home-security, #most-comprehensive-security {
     background: @white url(/static/img/products/copper-package/little-girl-sleeping.jpg) no-repeat;
@@ -721,73 +825,24 @@ body.products {
         }
     }
 }
-/************** Monitoring Solutions ****************/
-#alarm-monitoring-intro {
-    .content-box;
-    margin-top: 20px;
-    #alarm-monitoring-solutions {
-        .half-box;
-        margin: 20px 235px 70px;
-        h1 {
-            text-align: center;
-        }
-    }
-    #monitoring-company-image {
-        .image-break(-50px);
-    }
-    #protected-home-image {
-        .image-break-right(-6px);
-    }
-}
-#alarm-monitoring-options {
-    border: 1px solid @light-blue;
-    .drop-shadow(0px, 2px, 5px, @light-grey);
-    .border-radius(20px,20px,20px,20px);
-    
-    #landline-monitoring-option, #broadband-monitoring-option, #two-way-monitoring-option, #cellular-monitoring-option {
-        .fourth-box;
-        padding-top: 20px;
-        margin-top: 10px;
-        height: 442px;
-        p {
-            margin-top: 10px;
-        }
-        &:hover {
-            background: @light-blue;
-            .border-radius;
-        }
-    }
-    
-}
-#picking-alarm-monitoring {
-    .content-box;
-    margin-top: 20px;
-    .bottom-rule;
-    h2 {
-        margin-top: 55px;
-    }
-    img {
-        float: left;
-    }
-}
-#alarm-monitoring-confidence {
-    #trusted-home-monitoring, #redundent-security-backup, #on-the-level-pricing {
-        .third-box;
-    }
-}
+
 /************** Existing Systems ****************/
 body.cell-takeover {
+    #existing-systems {
+        .content-box(664px);
+    }
     #existing-system-overview {
-        .big-box;
+        .content-box(400px);
         .text-compensate(300px);
-        .text-bump(50px);
+        padding-left: 250px;
+        padding-top: 16px;
     }
     #old-security-system-image {
-        .small-box;
+        .image-break(-300px);
     }
     #cellular-connection {
         .half-box;
-        .text-bump(100px);
+        .text-bump(120px);
     }
     #cut-wire-image {
         .half-box;
@@ -797,9 +852,16 @@ body.cell-takeover {
         .text-compensate(300px);
     }
     #nationwide-coverage, #helpful-tech-support, #save-money {
-        .fourth-box;
+        .third-box;
+        text-align: center;
         h3 {
           margin-bottom: 10px;
+          padding: 0 16px;
+        }
+        p {
+            padding: 0 16px;
+            font-size: 14px;
+            line-height: 22px;
         }
     }
 }
@@ -845,21 +907,38 @@ body.gps {
     }
 }
 /************** Interactive Video Security ****************/
-body.interactive-video {
+body.video {
     #interactive-video-overview {
-        .bottom-rule;
-
+        .content-box(664px);
         #laptop-and-camera-image {
-            .small-box
+            .image-break;
+            top: 50px;
         }
         #interactive-video-overview-content {
-            .big-box;
+            .content-box(400px);
             .text-compensate(300px);
             .text-bump(50px);
+            padding-left: 250px;
         }
     }
     #video-security-for-your-home, #video-security-for-your-business {
         .half-box;
+        h2 {
+            padding: 0 32px;
+        }
+        p {
+            padding: 0 32px;
+        }
+    }
+    #video-security-for-your-home {
+        h2, p {
+            padding-left: 0;
+        }
+    }
+    #video-security-for-your-business {
+        h2, p {
+            padding-right: 0;
+        }
     }
     #video-security-anywhere {
         .half-box;
@@ -871,6 +950,16 @@ body.interactive-video {
     }
     #already-own-system, #wifi-compatible, #online-archived-video {
         .third-box;
+        text-align: center;
+        h3 {
+          margin-bottom: 10px;
+          padding: 0 16px;
+        }
+        p {
+            padding: 0 16px;
+            font-size: 14px;
+            line-height: 22px;
+        }
     }
 }
 

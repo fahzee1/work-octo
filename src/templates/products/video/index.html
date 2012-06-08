@@ -1,4 +1,9 @@
 {% extends "products/video/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Security Cameras | Wireless Security Camera | Interactive Video{% endblock %}
+{% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
+{% block page_description %}Watch over your house without even being home using Protect America Interactive Video Home Security Services. Get 24/7 on-demand video with automatic recording cued by movement.{% endblock %}
+
 {% block content %}
 <div id="interactive-video-overview">
 	<div id="laptop-and-camera-image">
@@ -7,12 +12,14 @@
 	<div id="interactive-video-overview-content">
 		<h1>Interactive Video<br>Home Security Services</h1>
 		<p>Protect America allows you to gain a true picture of what is happening in your home or business with 24 / 7 on-demand video. Get enhanced security with our pan and tilt video cameras, archived clips, event notifications, and automatic recording when movement is detected. With Protect America's video services, peace of mind is just an instant click away.  </p>
-		<div class="button right buyit">
-			<a href="">Get Interactive Video Security</a>
+		<div class="button-submit">
+			<a href="">Get Interactive Video Security ></a>
 		</div>
 	</div>
 	<div class="clear"></div>
 </div>
+{% include "order/quote-form.html" with form=forms.basic %}
+
 <div>
 	<div id="video-security-for-your-home">
 		<img src="/static/img/products/video/video-residential.jpg" />
@@ -28,6 +35,9 @@
 	</div>
 	<div class="clear"></div>
 </div>
+<div class="clear"></div>
+    {% include "order/call-box.html" %}
+
 <div>
 	<div id="video-security-anywhere">		
 		<h2>Video Home Security<br>Here, There, Everywhere.</h2>
@@ -38,27 +48,41 @@
 	</div>
 	<div class="clear"></div>
 </div>
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "video" "limit=10&words=100" %}
+    </ul>
+</div>
+
 <div>
 	<div id="already-own-system">		
 		<img src="/static/img/products/platinum-package/platinum-sml.jpg" alt="Interactive Video works perfectly with other Protect America security systems">			
-		<h4>Already Own a Protect America Home Security System?</h4>
+		<h3>Already Own a Protect America Home Security System?</h4>
 		<p>No Problem. Our interactive video system is designed to in conjunction with your home security system. It is the perfect way to add video surveillance and security to any home.</p>
 	</div>
 	<div id="wifi-compatible">	
 		<img src="/static/img/external/wifi-logo.jpg" alt="Cameras connect wirelessly for easy set-up">
-		<h4>Wirelessly Connected. WiFi Compatible.</h4>			
+		<h3>Wirelessly Connected. WiFi Compatible.</h4>			
 		<p>WiFi compatible cameras give you true freedom of placing your cameras where they would be the most effective. You don't have to worry about drilling or awkward wires.</p>
 	</div>
 	<div id="online-archived-video">		
 		<img src="/static/img/products/video/archived-video-sml.jpg" alt="Store recorded video clips online for later viewing">			
-		<h4>Online Storage and Archived Video</h4>
+		<h3>Online Storage and Archived Video</h4>
 		<p>Our video home security comes with an automated archiving feature that allows you to store your videos when an event is triggered. This means that you can view it on your time and access your stored videos when you need them.</p>
 	</div>	
 	<div class="clear"></div>
 </div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}  
-{% block sidebar %}
-{{ block.super }}
 
-
-{% endblock %}

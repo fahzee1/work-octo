@@ -1,4 +1,9 @@
 {% extends "products/gps/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}GPS Vehicle Tracking | GPS Tracking | Protect America{% endblock %}
+{% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
+{% block page_description %}Keep a virtual eye on your vehicle using the intuitive web interface offered by Protect America's GPS vehicle tracking. Know your vehicle's location and speed.{% endblock %}
+
 {% block content %}
 <div id="vehicle-gps">
 	<div id="gps-tracking-car">
@@ -38,7 +43,12 @@
 
 </div>
     {% include "order/call-box.html" %}
-
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "care" "limit=10&words=100" %}
+    </ul>
+</div>
 <div>
 	<div id="access-from-computer">
 		<img src="/static/img/products/gps/gps-laptop.jpg">
@@ -66,6 +76,18 @@
 	</div>
 
 </div>
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}  
 {% block page-product %}
     <h2>GPS Vehicle Tracking</h2>
