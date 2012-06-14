@@ -925,6 +925,17 @@ body.video {
         .half-box;
         h2 {
             padding: 0 32px;
+            text-decoration: none;
+        }
+        a {
+            text-decoration: none;
+            h2 {
+                text-decoration: none;
+                &:hover {
+                    color: @blue;
+                    text-decoration: underline;
+                }
+            }
         }
         p {
             padding: 0 32px;
@@ -962,7 +973,118 @@ body.video {
         }
     }
 }
+body.video-home, body.video-business {
+    #interactive-video-home-overview, #interactive-video-business-overview {
+        .content-box(664px);
+        padding: 32px 0 0;
+        #home-overview-image, #business-overview-image {
+            .content-box(300px);
+        }
+    }
+    #nanny-cam, #employee-watch {
+        .content-box;
+        img {
+            float: left;
+        }
+        #babysitter-content, #employee-content {
+            .big-box;
+            padding: 32px 0 0 32px;
+            
+        }
+    }
+    #child-safety, #elderly-parents, #check-on-pets, #after-hours, #employee-theft, #deter-shoplifters {
+        .third-box;
+        text-align: center;
+        h3 {
+          margin-bottom: 10px;
+          padding: 0 16px;
+        }
+        p {
+            padding: 0 16px;
+            font-size: 14px;
+            line-height: 22px;
+        }
+    }
+    #camera-callout {
+        .content-box;
+        img {
+            float: left;
+        }
+        #camera-callout-content {
+            .content-box(480px);
+            padding: 48px 0 0 32px;
+        }
+        table {
+            td {
+                width: 20%;
+                vertical-align: middle;
+                padding: 15px 0;
+                border: 1px solid @light-grey;
+                border-top: none;
+                padding: 16px;
+                font-size: 10px;
+                line-height: 12px;
+                li {
+                    padding-bottom: 12px;
+                }
+                .fade-fast;
+                &:hover {
+                  background: @v-light-blue+10;
+                  .fade-fast;
+                }
+                span {
+                    font-size: 16px;
+                    display: block;
+                    font-weight: bold;
+                }
+                &.button {
+                    border-right: none;
+                }
+                &.omega {
+                    border-bottom: none;
+                }
+                &.call-out {
+                    background: #fffee4;
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+            }
+            tr {
+                .fade-slow;
+                &:hover {
+                    background: @v-light-blue;
+                    .fade-fast;   
+                }
+                
+            }
+            .blank-box {
+                border-right: 1px solid @light-grey;
+            }
+            th {
+                background: @light-blue;
+                border: 1px solid @light-grey;
+                padding: 5px;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 15px;
+                font-weight: bold;
+                &.alpha {
+                    background: none;
+                    border-top: none;
+                    border-bottom: none;
+                }
+                &.omega {
+                    background: none;
+                    border-top: none;
+                    border-right: none;
+                    border-bottom: none;
+                }
+            }
+        }
 
+    }
+
+}
 /************** Equipment ****************/
 body.equipment {
     #simon-xt-control-panel-overview {
@@ -998,6 +1120,134 @@ body.equipment {
             width: 240px;
             float: left;
             text-align: center;
+        }
+    }
+}
+body.touchscreen {
+    #touchscreen-main {
+        .content-box(664px);
+        #main-image {
+            width: 325px;
+            .image-break(-160px);
+        }
+        #main-content {
+            width: 339px;
+            float: left;
+            padding-left: 300px;
+        }
+    }
+    #touchscreen-features {
+        .content-box;
+        text-align: center;
+        h2 {
+            text-align: left;
+        }
+        p {
+            text-align: left;
+        }
+        img {
+            position: relative;
+            right: 100px;
+        }
+        #tech-specs {
+            position: absolute;
+            width: 309px;
+            bottom: 0px;
+            right: 0px;
+            font-size: 10px;
+            line-height: 12px;
+            background: rgba(255,255,255,.5);
+            z-index: 50;
+            tr {
+                th {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 16px;
+                    padding: 4px;
+                    background: @light-blue;
+                    border: 1px solid @v-light-grey;
+
+                }
+                td {
+                    padding: 4px;
+                    vertical-align: middle;
+                    border: 1px solid @v-light-grey;
+                    border-top: none;
+                    border-right: none;
+                    &.omega {
+                        border-right: 1px solid @v-light-grey;
+                    }
+                }
+            }
+        }
+    }
+}
+#equipment-features {
+    position: relative;
+    .equipment-feature {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        z-index: 250;
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: @blue;
+            .drop-shadow(0px, 2px, 5px, @black);
+            .border-radius(10px, 10px, 10px, 10px);
+            border: 2px solid @light-blue;
+            z-index: 100;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: @white;
+            font-weight: bold;
+            cursor: pointer;
+            cursor: hand;
+            &:hover {
+                .background-gradient(@blue, #00568b);
+                border: 2px solid @light-blue;
+            }
+            &.active {
+                background: @red;
+                border: 2px solid @dark-red;
+                &:hover {
+                    .background-gradient(#e51a19, #ba1615);
+                }
+            }
+        }
+        .feature-content {
+            position: absolute;
+            width: 250px;
+            background: @v-light-grey;
+            .background-gradient(@off-white, @v-light-grey);
+            border: 1px solid @light-grey;
+            top: 50%;
+            .drop-shadow(0px, 2px, 5px, @grey);
+            padding: 8px;
+            .border-radius(5px, 5px, 5px, 5px);
+            z-index: 50;
+            display: none;
+            &.first-open {
+                display: block;
+            }
+            &.right {
+                right: 12px;
+            }
+            &.left {
+                left: 12px;
+            }
+            h3 {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            p {
+                font-size: 13px;
+                line-height: 16px;
+                text-align: justify;
+                color: @black;
+            }
         }
     }
 }

@@ -1,10 +1,13 @@
 {% extends "products/equipment/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
+{% block page_keywords %}wireless home security system, home security, home security monitoring, x10 home automation, homepulse, latchkey feature, pan{% endblock %}
+{% block page_description %}Wireless home security system equipment by GE uses state-of-the-art wireless home security system technology to provide the reliability our customers know they can trust. Get a GE wireless home security system from Protect America today.{% endblock %}
 
 {% block content %}
 <div id="touchscreen-main">
     <div id="main-image">
-        <img src="{{ STATIC_URL }}img/products/equipment/touchscreen/touchscreen.jpg" alt="touchscreen" width="548" height="413" />
+        <img src="{{ STATIC_URL }}img/products/equipment/touchscreen/touchscreen.jpg" alt="touchscreen" width="450" />
     </div>
     <div id="main-content">
         <h1>GE Simon XT Touch Screen</h1>
@@ -14,108 +17,119 @@
 </div>
 {% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
-<div id="door-window-video">
-    <h2>How the Door / Window Security Sensors Work:</h2>
-    <div id="main-video">
-        <iframe width="520" height="300" src="http://www.youtube.com/embed/7i0luaNTZHo" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div id="other-videos">
-        <h3>Other Videos:</h3>
-        <ul>
-            <li>
-                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/how-to-install-door-window-sensor-video.jpg" alt="Video: How to Install a Door / Window Security Sensor" width="120" height="90" />
-                <p>Installation of the GE Wireless Door and Window Sensors</p>
-                <div class="button-link"><a href="">Watch Video ></a></div>
-                <div class="clear"></div>
-            </li>
-            <li><img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/maintenance-door-window-sensor-video.jpg" alt="Maintence on your Door / Window Sensors" width="120" height="90" /><p>Maintenance of the GE Wireless Door and Window Sensors</p></li>
-            <div class="button-link"><a href="">Watch Video ></a></div>
-            <div class="clear"></div>
-        </ul>
-    </div>
-</div>
-<div class="clear"></div>
-{% include "order/call-box.html" %}
-<div id="about-door-sensor">
-    <div id="front-door-content">
-        <h2>The Front Door: A Burglar's Main Target</h2>
-        <p>Your home starts at the front door. So should your home security.</p>
-        <p>In nearly 24 percent of burglaries, forcible entry was used on the front door to gain access to the home. In total, more than a third of all burglaries involve the front door.  
-It's clearly important to secure your front door with quality locks and a home security system. Houses with alarm systems are 3 times less likely to fall victim to burglary. It's just common sense protection. Obviously, criminals avoid the unwanted attention of loud alarms!</p>
-        <p>Defend your home, and front door, with a wireless GE Simon XT alarm system from Protect America. You and your family deserve to be safe.</p>
-        <div class="button-submit"><a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Copper-B']);">Order Home Security ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
-    </div>
-    <div id="big-front-door">
-        <img src="{{ STATIC_URL }}/img/products/equipment/door-window-sensor/front-door.jpg" alt="front-door" width="264" height="592" />
-    </div>
-
-</div>
-<div id="in-your-home">
-    <h2>How Many Door / Window Sensors for Your Home?</h2>
-    <p>Our home security packages are designed to provide complete protection for almost any sized home. As a general rule, there should be one sensor per accessible door and window. Check out the chart below to figure out which home security package works best for your home:</p>
-    <table>
-        <thead>
-            <tr>
-                <th class="alpha">&nbsp;</th>
-                <th>Door / Window Sensors</th>
-                <th>Motion Detector</th>
-                <th>Home Size</th>
-                <th class="omega">&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span>Copper Package</span>Starting at: {{ pricetable.COPPER.standard_monitoring }}/monthly</td>
-                <td class="call-out">3</td>
-                <td>1</td>
-                <td>~900 sq. ft.</td>
-                <td class="button"><a href="" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Bronze Package</span>Starting at: {{ pricetable.BRONZE.standard_monitoring }}/monthly</td>
-                <td class="call-out">7</td>
-                <td>1</td>
-                <td>~1200 sq. ft.</td>
-                <td class="button"><a href="" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Silver Package</span>Starting at: {{ pricetable.SILVER.standard_monitoring }}/monthly</td>
-                <td class="call-out">10</td>
-                <td>1</td>
-                <td>~2300 sq. ft.</td>
-                <td class="button"><a href="" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Gold Package</span>Starting at: {{ pricetable.GOLD.standard_monitoring }}/monthly</td>
-                <td class="call-out">12</td>
-                <td>1</td>
-                <td>~3500 sq. ft.</td>
-                <td class="button"><a href="" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Platinum Package</span>Starting at: {{ pricetable.PLATINUM.standard_monitoring }}/monthly</td>
-                <td class="call-out">15</td>
-                <td>1</td>
-                <td>~4500 sq. ft.</td>
-                <td class="button omega"><a href="" class="button-link">Learn More ></a></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
     
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
     <ul id="main-testimonials">
-    {% testimonial_search "affordable" "limit=4&words=50" %}
+    {% testimonial_search "equipment" "limit=10&words=100" %}
     </ul>
+</div>
+<div class="clear"></div>
+
+<div id="touchscreen-features">
+    <h2>Explore the Simon XT Touchscreen Features:</h2>
+    <p>Featuring an easy-to-install wireless design, the GE Simon XT Touch Screen gives users greater and more streamlined access to their GE Simon XT home security systems. An ideal solution for more flexible system control, the Simon XT Touch Screen includes one-touch arming and disarming, panic alarm, and a vibrant 3.5 inch LCD screen. The Simon XT Touch Screen from GE will simplify the use of your security system while maintaining the highest standards of protection for your home and family. <strong>Click the "+" Icons on the Simon XT Touchscreen to Learn More</strong></p>
+    <div id="equipment-features">
+        <div class="equipment-feature" style="left: 165px; top: 260px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>Built-In Digital Voice Commands</h3>
+                <p>Convenient voice functionality warns users when the system has been activated or deactivated. The reassuring voice features of the Simon XT Touch Screen can also warn homeowners whenever a door or window opens.</p>
+            </div>
+        </div>
+
+        <div class="equipment-feature" style="left: 323px; top: 176px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3>Door & Window Supervision</h3>
+                <p>Open doors and windows attract burglars, even when you and your family are home. A green checkmark on the touch screen reassures homeowners that all monitored doors and windows into the home are closed and secured. When users see a red exclamation mark, they know an entry point is unsecure. Nothing could be easier!</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 381px; top: 216px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>3.5-inch Color LCD Screen</h3>
+                <p>The vibrant display of the GE Simon XT Touch Screen makes using your Simon XT home security system easier than ever before. The Simon XT Touch Screen is bright but designed to be energy efficient and plugs into a standard 110 Volt electrical outlets. In case of emergency, the Simon XT Touch Screen can also be use four AAA batteries.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 479px; top: 176px;">
+            <div class="feature-icon active">x</div>
+            <div class="feature-content left first-open">
+                <h3>One-Button Arming/Disarming</h3>
+                <p>Using your Simon XT home security system is as easy as pushing a button. This feature activates or deactivates all sensors associated with your alarm system. The easy-to-understand graphical interface clearly displays when the system is armed.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 490px; top: 123px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>Simple Status Updates</h3>
+                <p>With a quick glance, accurately gauge your home's security status. The easy-to-use graphical interface helps users keep tabs on open entry points and system diagnostics. The Simon XT Touch Screen also tells homeowners whether the system is active or not.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 140px; top: 123px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>GE Security Equipment</h3>
+                <p>All of our systems feature GE Security Certified products. This means that you get the reliability and flexibility known throughout the security industry for GE alarm systems.  And with the GE Touchscreen, the system comes pre-built to work perfectly and conjunction with your Simon XT Control Panel</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 256px; top: 123px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3>24-Hour Emergency Panic Button</h3>
+                <p>The Simon XT Touch Screen includes a distress signal that can be sent with the single push of button. This feature is intended for use during non-medical emergencies.</p>
+            </div>
+        </div>
+    </div>
+    <table id="tech-specs">
+        <thead>
+            <tr>
+                <th colspan="2">Technical Specifications</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr class="alt">
+                <td>Compatibility</td>
+                <td class="omega">Simon XT (version 1.3 or later)</td>
+            </tr>
+            <tr>
+                <td>Power</td>
+                <td class="omega">6 VDC, 500 mA</td>
+            </tr>
+            <tr class="alt">
+                <td>Batteries</td>
+                <td class="omega">Four 1.5 V, Alkaline, AAA</td>
+            </tr>
+            <tr>
+                <td>Dimensions (W x H x D)</td>
+                <td class="omega">5.5 x 3.6 x 1.1 in. (140 x 92 x 28 mm)</td>
+                
+            </tr>
+            <tr class="alt">
+                <td>Operating Environment</td>
+                <td class="omega">32 to 104°F (0 to 40°C)</td>
+            </tr>
+        </tbody>
+    </table>
+    <img src="{{ STATIC_URL }}img/products/equipment/touchscreen/touchscreen.jpg" alt="touchscreen" class="equipment-bg" />
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $('#main-testimonials').cycle({
             fx: 'fade',
             timeout: 9000
+        });
+        $('.feature-icon').click(function(){
+            var icon = $(this).clone();
+            $('.feature-icon').removeClass('active').html('+');
+            $('.feature-content').slideUp(250, 'easeOutBounce');
+            if(!$(icon).hasClass('active')) {
+                $(this).addClass('active').html('x').next('.feature-content').slideDown(250, 'easeOutBounce');
+            }
         });
     });
     </script>
@@ -123,10 +137,10 @@ It's clearly important to secure your front door with quality locks and a home s
 {% endblock %}  
 
 {% block page-product %}
-    <h2>Door / Window Security Sensors</h2>
+    <h2>GE Simon XT Touch Screen</h2>
     <p><span>Add to your Package: <strong>$39.50 each</strong></span></p>
     <div class="button-submit">
-        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
+        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Simon XT Touchscreen']);">Order Now ></a>
     </div>
 {% endblock %}
 

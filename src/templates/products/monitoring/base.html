@@ -5,10 +5,9 @@
 {% endblock %}
 {% block subnav_child %}
 <ul>
-	<li><a href="">Landline</a></li>
-
-	<li><a href="">Broadband</a></li>
-	<li><a href="">Cellular</a></li>
+	<li><a href="">Interactive Cellular</a></li>
+    <li {% if 'broadband' in active_pages %}class="active"{% endif %}><a href="{% url broadband %}" title="">Interactive Broadband</a></li>
+    <li {% if 'landline' in active_pages %}class="active"{% endif %}><a href="{% url landline %}" title="">Standard Landline</a></li>
 
 	<li><a href="">Interactive Monitoring Features</a></li>
 

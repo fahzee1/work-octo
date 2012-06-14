@@ -141,7 +141,11 @@ else:
 
             dtt(r'^pa/monitoring/security-system/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
 
-            dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
+                dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
+                dtt(r'^products/alarm-monitoring/broadband/?$', 'products/monitoring/broadband.html', 'broadband', 'monitoring'),
+                dtt(r'^products/alarm-monitoring/cellular/?$', 'products/monitoring/cellular.html', 'cellular', 'monitoring'),
+
+
 
             # Product > Equipment
 
@@ -160,6 +164,12 @@ else:
             # Product > Video
 
             dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'video', 'products'),
+
+                # Product > Video > Home
+                dtt(r'^products/interactive-video/home-video-cameras?$', 'products/video/video-home.html', 'video-home', 'video'),
+
+                # Product > Video > Business
+                dtt(r'^products/interactive-video/business-video-cameras?$', 'products/video/video-business.html', 'video-business', 'video'),
 
             # Product > GPS Vehicle Tracking
 
@@ -221,7 +231,7 @@ else:
             dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
             # Contact Pages > Affiliate Program
-            dtt(r'^contact/affiliate-program?$', 'contact-us/affiliate-program.html', 'affiliate-program', 'contact-us'),
+            dtt(r'^contact/affiliate-program?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
 
             # Contact Pages > Feedback to CEO
             dtt(r'^contact/send-thad-a-message?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
@@ -248,9 +258,15 @@ else:
             # Help Pages > Do Not Call
                 dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
 
+            # Help Pages > 
+                dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
+
         # Support Pages
         
         dtt(r'^support/?$', 'support/index.html', 'support'),
+
+            # Support Pages > Installation Videos
+                dtt(r'^support/installation/?$', 'support/installation.html', 'installation', 'support'),
         
         # Affiliate Resources
         
