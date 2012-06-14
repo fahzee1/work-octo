@@ -125,6 +125,8 @@ elif settings.SITE_ID == 6:
 
 
     )
+elif settings.SITE_ID == 7:
+    url(r'^', include('apps.blogredirects.urls')),
 else:
     urlpatterns += patterns('',
 
