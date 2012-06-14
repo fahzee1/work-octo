@@ -153,12 +153,12 @@ else:
 
                         # Product > Equipment > Sensors
 
-                        dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
-                        dtt(r'^products/security-equipment/sensors/door-window-sensor?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
                         
                         # Product > Equipment > Touch Screen
                         
-                        dtt(r'^products/security-equipment/accessories/touchscreen?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
+                        dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
 
 
             # Product > Video
@@ -225,16 +225,16 @@ else:
         dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
         
             # Contact Pages > Find Us
-            dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+            dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
             
             # Contact Pages > Department Listing
-            dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
+            dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
             # Contact Pages > Affiliate Program
-            dtt(r'^contact/affiliate-program?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+            dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
 
             # Contact Pages > Feedback to CEO
-            dtt(r'^contact/send-thad-a-message?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
+            dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
 
 
 
@@ -256,9 +256,6 @@ else:
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
             # Help Pages > Do Not Call
-                dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
-
-            # Help Pages > 
                 dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
 
         # Support Pages
