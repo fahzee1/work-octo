@@ -3,6 +3,7 @@ import os
 import re
 
 from django.db import models
+from django.contrib.localflavor.us.us_states import STATE_CHOICES
 
 class Affiliate(models.Model):
     agent_id = models.CharField(max_length=16, unique=True)
@@ -82,16 +83,18 @@ class Profile(models.Model):
     taxid = models.CharField(max_length=12)
     street_address = models.CharField(max_length=128)
     city = models.CharField(max_length=128)
-    state = models.CharField(max_length=128)
+    state = models.CharField(max_length=128, choices=STATE_CHOICES)
     zipcode = models.CharField(max_length=128)
     phone = models.CharField(max_length=128)
-    fax = models.CharField(max_length=128)
+    fax = models.CharField(max_length=128, blank=True, null=True)
     email = models.EmailField()
     website = models.CharField(max_length=128)
     comments = models.TextField()
     status = models.CharField(max_length=10, choices=PROFILE_STATUS,
         default="PENDING")
 
+    agreed_to_terms = models.BooleanField(default=False)
+    sign = models.CharField(max_length=200)
     affiliate = models.ForeignKey(Affiliate, blank=True, null=True)
 
     def __unicode__(self):

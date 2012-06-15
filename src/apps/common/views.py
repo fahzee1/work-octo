@@ -74,7 +74,12 @@ def get_active(urllist, name, pages=None):
 def simple_dtt(request, template, extra_context):
     expire_time = timedelta(days=90)
 
-    pages = get_active(urls.urlpatterns, extra_context['page_name'])
+    if 'pages' in extra_context:
+        pages = extra_context['pages']
+        pages.append(extra_context['page_name'])
+    else:
+        pages = get_active(urls.urlpatterns, extra_context['page_name'])
+
     forms = {}
     forms['basic'] = PAContactForm()
     forms['long'] = AffiliateLongForm()

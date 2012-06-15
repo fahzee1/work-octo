@@ -11,7 +11,7 @@ from django.utils import simplejson
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
-from apps.affiliates.forms import AddAffiliateForm
+from apps.affiliates.forms import AddAffiliateForm, AffiliateSignup
 
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
@@ -178,3 +178,22 @@ def request_agent_id(request):
     except:
         return json_response({'success': True, 'agent_id': new_id})
     return json_response({'success': False})
+
+def signup(request): 
+    ctx = {}
+    ctx['page_name'] = 'affiliate-program'
+    ctx['pages'] = ['contact-us']
+
+    if request.method == 'POST':
+        form = AffiliateSignup(request.POST)
+        if form.is_valid():
+            form.save()
+            # send email to biz dev
+
+            return HttpResponse('thank you page')
+    else:
+        form = AffiliateSignup()
+
+    ctx['affform'] = form
+
+    return simple_dtt(request, 'contact-us/affiliates.html', ctx)

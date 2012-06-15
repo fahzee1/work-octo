@@ -245,7 +245,9 @@ else:
         # Contact Pages
 
         #dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
-        url(r'^pa/contact/?$', 'apps.contact.views.main', name='contact-us'),
+        url(r'^pa/contact/?$', 'apps.contact.views.main',
+            name='contact-us'),
+
         
             # Contact Pages > Find Us
             dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
@@ -254,7 +256,9 @@ else:
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
             # Contact Pages > Affiliate Program
-            dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+            #dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+            url(r'^contact/affiliate-program/$',
+                'apps.affiliates.views.signup', name='affiliate-program'),
 
             # Contact Pages > Feedback to CEO
             dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),

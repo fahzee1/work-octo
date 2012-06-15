@@ -1,7 +1,14 @@
 from django.conf.urls.defaults import *
 from django.views.generic.simple import redirect_to
 
-urlspatterns = patterns('',
+urlpatterns = patterns('',
+    url('^$',
+        redirect_to, {'url': 'http://www.protectamerica.com/home-security-blog/', 'permanent': True}),
+    url('^category/(?P<category>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/$',
+        redirect_to, {'url': 'http://www.protectamerica.com/home-security-blog/category/%(category)s/', 'permanent': True}),
+    url('^tag/(?P<tag>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/$',
+        redirect_to, {'url': 'http://www.protectamerica.com/home-security-blog/tag/%(tag)s/', 'permanent': True}),
+
     url('2011/07/21/introducing-the-security-blanket/',
         redirect_to, {'url': 'http://www.protectamerica.com/home-security-blog/home/introducing-the-security-blanket_800', 'permanent': True}),
     url('2011/07/26/crime-statistics-describe-how-burglars-break-in/',
@@ -88,3 +95,4 @@ urlspatterns = patterns('',
     url('2012/04/26/crime-statistics-by-neighborhood/',
         redirect_to, {'url': 'http://www.protectamerica.com/home-security-blog/home-security/home-security-information/crime-statistics-by-neighborhood_809', 'permanent': True}),
 )    
+

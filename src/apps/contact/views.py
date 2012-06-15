@@ -13,7 +13,7 @@ from django.conf import settings
 from apps.contact.forms import (PAContactForm, BasicContactForm, OrderForm, 
     CeoFeedback)
 from apps.affiliates.models import Affiliate
-from apps.common.views import get_active
+from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
 
 def post_to_old_pa(data):
@@ -178,7 +178,6 @@ def post(request):
 
 # This is the main contact us form page
 def main(request):
-    pages = get_active(urls.urlpatterns, 'contact-us')
     forms = {}
     forms['basic'] = PAContactForm()
     if request.method == "POST":
@@ -189,13 +188,11 @@ def main(request):
     else:
         formset = BasicContactForm()
 
-    return render_to_response('contact-us/index.html', 
-                              {'parent':'contact-us',
+    return simple_dtt(request, 'contact-us/index.html', {
+                               'parent':'contact-us',
                                'formset': formset,
                                'forms': forms,
-                               'page_name': 'contact-us',
-                               'active_pages': pages}, 
-                              context_instance=RequestContext(request))
+                               'page_name': 'contact-us'}) 
 
 def ceo(request):
     if request.method == "POST":
