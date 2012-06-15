@@ -1,0 +1,62 @@
+{% extends "products/interactive/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}{% endblock %}
+{% block page_keywords %}{% endblock %}
+{% block page_description %}{% endblock %}
+
+{% block content %}
+<div id="vehicle-gps">
+
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+
+<div class="clear"></div>
+    <div id="check-in-anywhere">
+        <h2><strong>Check in at home from wherever you may be</strong> with Protect America Interactive Security</h2>
+    </div>
+</div>
+<div id="postcards">
+    <div id="interactive-demo">
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/iphone-hand.png" id="iphone" />
+        <div id="app-screens">
+            <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-armed.png" />
+            <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-main-menu.png" />
+            <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-disarmed.png" />
+            <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-cameras.png" />
+            <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-history.png" />
+
+
+
+        </div>
+
+    </div>
+    <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/hawaii-postcard.jpg" class="postcard1" />
+    <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/savannah-ga-postcard.jpg" class="postcard2" />
+    <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/austin-tx-postcard.jpg" class="postcard3" />
+    <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/new-york-postcard.jpg" class="postcard4" />
+    <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/hawaii-postcard.jpg" class="postcard5" />
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/jqueryrotate.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#app-screens').cycle({
+    		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+    	}).rotate(7.75);
+        $('.postcard1').rotate(-3);
+        $('.postcard2').rotate(2);
+        $('.postcard3').rotate(-1);
+        $('.postcard4').rotate(3);
+        $('.postcard5').rotate(-2);
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
+{% block page-product %}
+    <h2>GPS Vehicle Tracking</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $10.00/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
+    </div>
+{% endblock %}

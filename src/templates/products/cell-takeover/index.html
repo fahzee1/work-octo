@@ -1,4 +1,9 @@
 {% extends "products/cell-takeover/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Cellular Monitoring | Existing Home Security System Activation | Protect America{% endblock %}
+{% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
+{% block page_description %}Protect America offers the best wireless home alarm services on pre-installed alarm systems, which ensures no cut phone lines and no new alarm equipment to buy.{% endblock %}
+
 {% block content %}
 <div>
 	<div id="existing-systems">
@@ -39,7 +44,12 @@
 	<div class="clear"></div>
 </div>
     {% include "order/call-box.html" %}
-
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "art" "limit=10&words=100" %}
+    </ul>
+</div>
 <div>
 	<div id="helpful-tech-support">
 		<img src="/static/img/products/cell-takeover/hi-bubble.jpg">
@@ -59,11 +69,21 @@
 		<h3>Full Nationwide Coverage</h3>
 		<p>Protect America is proud to serve all 50 states with a commitment to excellence and affordability when it comes to securing your home. We are one of the fastest growing home security companies in America with customers coast to coast!.</p>
 	</div>
-	<div class="fourth-box">
-		<h3></h3>
-	</div>
 
 </div>
+
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 
 {% endblock %}  
 {% block sidebar %}

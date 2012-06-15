@@ -146,6 +146,11 @@ else:
         # Home Security Packages
         dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
 
+            # Product > Advantage
+
+            dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
+
+
             # Product > Packages B
 
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'products'),
@@ -159,7 +164,11 @@ else:
 
             dtt(r'^pa/monitoring/security-system/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
 
-            dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
+                dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
+                dtt(r'^products/alarm-monitoring/broadband/?$', 'products/monitoring/broadband.html', 'broadband', 'monitoring'),
+                dtt(r'^products/alarm-monitoring/cellular/?$', 'products/monitoring/cellular.html', 'cellular', 'monitoring'),
+
+
 
             # Product > Equipment
 
@@ -167,17 +176,23 @@ else:
 
                         # Product > Equipment > Sensors
 
-                        dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
-                        dtt(r'^products/security-equipment/sensors/door-window-sensor?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
                         
                         # Product > Equipment > Touch Screen
                         
-                        dtt(r'^products/security-equipment/accessories/touchscreen?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
+                        dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
 
 
             # Product > Video
 
             dtt(r'^pa/wireless-security-camera/ip-security-cameras/?$', 'products/video/index.html', 'video', 'products'),
+
+                # Product > Video > Home
+                dtt(r'^products/interactive-video/home-video-cameras?$', 'products/video/video-home.html', 'video-home', 'video'),
+
+                # Product > Video > Business
+                dtt(r'^products/interactive-video/business-video-cameras?$', 'products/video/video-business.html', 'video-business', 'video'),
 
             # Product > GPS Vehicle Tracking
 
@@ -185,7 +200,11 @@ else:
 
             # Product > Cell Takeover
 
-            dtt(r'^pa/existing-home-security-system/cellular-monitoring/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
+            dtt(r'^products/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
+            
+            # Product > Interactive Control
+
+            dtt(r'^products/interactive-control/?$', 'products/interactive/index.html', 'interactive-control', 'products'),
 
         # About Pages
 
@@ -211,13 +230,9 @@ else:
 
             dtt(r'^pa/learn/alarm-companies/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
-            # About > Testimonials
 
             dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
 
-            # About > Testimonials
-
-            dtt(r'^about-us/textimonials/?$', 'about-us/textimonials.html', 'textimonials', 'testimonials  '),
 
         # Crime Stats
 
@@ -232,11 +247,18 @@ else:
         #dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
         url(r'^pa/contact/?$', 'apps.contact.views.main', name='contact-us'),
         
-        # Contact Pages > Find Us
-        dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
-        
-        # Contact Pages > Department Listing
-        dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
+            # Contact Pages > Find Us
+            dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+            
+            # Contact Pages > Department Listing
+            dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
+
+            # Contact Pages > Affiliate Program
+            dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+
+            # Contact Pages > Feedback to CEO
+            dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
+
 
 
         # Help Pages
@@ -246,6 +268,9 @@ else:
 
             # Help Pages > Privacy Policy
                 dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+                
+            # Help Pages > Low Price Guarantee
+                dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),
 
             # Help Pages > Return Policy
                 dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),
@@ -253,9 +278,15 @@ else:
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
+            # Help Pages > Do Not Call
+                dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
+
         # Support Pages
         
         dtt(r'^support/?$', 'support/index.html', 'support'),
+
+            # Support Pages > Installation Videos
+                dtt(r'^support/installation/?$', 'support/installation.html', 'installation', 'support'),
         
         # Affiliate Resources
         
