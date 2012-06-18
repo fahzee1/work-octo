@@ -210,7 +210,11 @@ else:
 
             # About > Testimonials
 
-            dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us '),
+            dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
+
+            # About > Tell a Friend
+
+            dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
 
         # Crime Stats
 
@@ -262,8 +266,10 @@ else:
         
         dtt(r'^support/?$', 'support/index.html', 'support'),
 
-            # Support Pages > Installation Videos
+            # Support Pages > Installation
                 dtt(r'^support/installation/?$', 'support/installation.html', 'installation', 'support'),
+            # Support Pages > Operation
+                dtt(r'^support/operation/?$', 'support/operation.html', 'operation', 'support'),
         
         # Affiliate Resources
         

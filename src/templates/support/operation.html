@@ -1,27 +1,25 @@
 {% extends "support/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Installation | GE Wireless Security System | Wireless Home Security{% endblock %}
-{% block page_keywords %}installation, install, install security system, install alarm{% endblock %}
-{% block page_description %}With Protect America installation of the GE Home Security Wireless System is a very easy and affordable process. Resources available by phone, PDF and video.{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_keywords %}{% endblock %}
+{% block page_description %}{% endblock %}
 {% block subnav_child %}
 <ul>
-    <li><a href="{% url installation %}#motion-detector-installation" title="Learn how to install your Motion Detector">Motion Detector Installation</a></li>
-    <li><a href="{% url installation %}#door-sensor-installation" title="Learn how to install your Door Sensors">Door Sensor Installation</a></li>
-    <li><a href="{% url installation %}#window-sensor-installation" title="Learn how to install your Window Sensors">Window Sensor Installation</a></li>
+    <li><a href="" title="Learn how to program your master code">Programming Your Master Code</a></li>
+    <li><a href="" title="Learn how to install your Door Sensors">Door Sensor Installation</a></li>
+    <li><a href="n" title="Learn how to install your Window Sensors">Window Sensor Installation</a></li>
 
 </ul>
 {% endblock %}
 
 {% block content %}
-<div id="installation-video">
-    <iframe width="960" height="540" src="http://www.youtube.com/embed/8t4pXGxBhqg?rel=0" frameborder="0" allowfullscreen></iframe>
-
+<div id="operation-support">
+    <h1>Help with Security System Operation</h1>
 </div>
-<div class="clear"></div>
-<div id="installation-content">
-    <h1>Installation Support</h1>
-    <p>Installing and activating your <a href="http://www.protectamerica.com/pa/equipment" title="GE Home Security Wireless System">GE Home Security Wireless System</a> is a very easy process that usually takes less than one hour.  Our customer installation specialists are available to help you step by step on the phone and you can view our step by step instructions right on our website.</p>
+{% include "order/quote-form.html" with form=forms.basic %}
 
+<div class="clear"></div>
+<div id="tech-support">
     <div id="simon-xt-manual">
         <div id="simon-xt-image">
             <img src="{{ STATIC_URL }}img/products/security-panels/ge-simon-xt-on-grey-small.jpg" alt="GE Simon XT Installation Manual" />
@@ -42,7 +40,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div id="installation-department">
+    <div id="support-department">
         <h3>Customer Installation Help</h3>
         <p class="phone-number"><strong>1-800-951-5111, Option 6</strong></p>
         <p class="email-address"><a href="mailto:cust_inst@protectamerica.com">cust_inst@protectamerica.com</a></p>
@@ -51,7 +49,7 @@
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
     <ul id="main-testimonials">
-    {% testimonial_search "installation" "limit=10&words=100" %}
+    {% testimonial_search "operation" "limit=10&words=100" %}
     </ul>
 </div>
 <div class="clear"></div>
