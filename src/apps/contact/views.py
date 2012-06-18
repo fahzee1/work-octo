@@ -1,4 +1,5 @@
 import urls
+from datetime import datetime, timedelta
 from string import Template
 
 from django.http import HttpResponseRedirect
@@ -161,8 +162,14 @@ def ajax_post(request):
         else:
             response_dict.update({'errors': form.errors})
 
-    return HttpResponse(simplejson.dumps(response_dict),
+    response = HttpResponse(simplejson.dumps(response_dict),
         mimetype='application/javascript')
+
+    expire_time = timedelta(days=90)
+    response.set_cookie('lead_id', value=form.id,
+        expires=datetime.now() + expire_time)
+    
+    return response
 
 
 def post(request):
