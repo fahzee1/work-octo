@@ -1,9 +1,9 @@
 <div id="ctrl-{{ field.auto_id }}" class='form-row ctrlHolder {{ div_class }} {% if field.errors %}error{% endif %}'>
     <div>
-    {% if field.field.required %}*{% endif %}{{ field.label_tag }}
+    <label for="{{ field.name }}" class="{% if field.field.required %}required{% endif %}">{{ field.label }}:</label>
 
     {% if field.help_text %}
-    <span class='helptext'>
+    <p class='form-help'>
             {{ field.help_text }}
     </span>
     {% endif %}

@@ -187,9 +187,10 @@ def signup(request):
     if request.method == 'POST':
         form = AffiliateSignup(request.POST)
         if form.is_valid():
-            form.save()
+            aff = form.save(commit=False)
+            aff.save()
             # send email to biz dev
-
+            aff.send_signup_to_bizdev()
             return HttpResponse('thank you page')
     else:
         form = AffiliateSignup()

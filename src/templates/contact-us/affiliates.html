@@ -26,66 +26,27 @@
 
     <p>Required fields denoted by <strong>bold text</strong>.</p>
     <fieldset id="general-information">
-        <div class="ctrlHolder">
-            <label for="contactPerson" class="required">Name of <abbr title="Independent Referral Agent">IR Agent</abbr>:</label>
-            {{ affform.name }}
-        </div>
 
+        {% include "_partials/formfield.html" with field=affform.name %}
+        {% include "_partials/formfield.html" with field=affform.title %}
+        {% include "_partials/formfield.html" with field=affform.company_name %}
+        {% include "_partials/formfield.html" with field=affform.taxid %}
         
-        <div class="ctrlHolder">
-            <label for="contactTitle">Title:</label>
-            {{ affform.title }}
-        </div>
-        
-        <div class="ctrlHolder">
-            <label for="companyName" class="required">Company Name:</label>
-            {{ affform.company_name }}
-        </div>
-
-        
-        <div class="ctrlHolder">
-            <label for="taxID" class="required">Federal Tax ID # (Format: 12-3456789):</label>
-            {{ affform.taxid }}
-        </div>
     </fieldset>
     <fieldset id="address-information">
-        <div class="ctrlHolder">
-
-            <label for="address" class="required">Street Address:</label>
-            {{ affform.street_address }}
-        </div>
-        <div class="ctrlHolder">
-            <label for="city" class="required">City:</label>
-            {{ affform.city }}
-        </div>
-        <div class="ctrlHolder">
-
-            <label for="state" class="required">State:</label>
-            {{ affform.state }}
-        </div>
-        <div class="ctrlHolder">
-            <label for="zip" class="required">Zipcode:</label>
-            {{ affform.zipcode }}
-        </div>
+        {% include "_partials/formfield.html" with field=affform.street_address %}
+        {% include "_partials/formfield.html" with field=affform.city %}
+        {% include "_partials/formfield.html" with field=affform.state %}
+        {% include "_partials/formfield.html" with field=affform.zipcode %}
     </fieldset>
     <div class="clear"></div>
     <fieldset id="contact-information">
-
-        <div class="ctrlHolder">
-            <label for="phone" class="required">Phone:</label>
-            {{ affform.phone }}
-        </div>
-        <div class="ctrlHolder">
-            <label for="fax" class="">Fax:</label>
-            {{ affform.fax }}
-        </div>
-
-        <div class="ctrlHolder">
-            <label for="email" class="required">Email:</label>
-            {{ affform.email }}
-        </div>
+        {% include "_partials/formfield.html" with field=affform.phone %}
+        {% include "_partials/formfield.html" with field=affform.fax %}
+        {% include "_partials/formfield.html" with field=affform.email %}
     </fieldset>
     <fieldset id="website-information">
+        {% include "_partials/formfield.html" with field=affform.website %}
         <div class="ctrlHolder">  
             <label for="url" class="required">Website URL:</label>
             {{ affform.website }}
