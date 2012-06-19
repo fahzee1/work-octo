@@ -24,6 +24,7 @@ urlpatterns = patterns('',
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
+    url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
@@ -125,6 +126,40 @@ elif settings.SITE_ID == 6:
 
 
     )
+elif settings.SITE_ID == 7:
+    urlpatterns += patterns('',
+        url(r'^', include('apps.blogredirects.urls')),
+    )
+# Tomboy Tools landing site
+elif settings.SITE_ID == 8:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/tomboy-tools/index.html', 'home', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^copper$', 'affiliates/tomboy-tools/copper.html', 'copper', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^bronze$', 'affiliates/tomboy-tools/bronze.html', 'bronze', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^silver$', 'affiliates/tomboy-tools/silver.html', 'silver', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^gold$', 'affiliates/tomboy-tools/gold.html', 'gold', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^platinum$', 'affiliates/tomboy-tools/platinum.html', 'platinum', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+
+        dtt(r'^video$', 'affiliates/tomboy-tools/video.html', 'video', ctx={
+            'agent_id': 'a03169'}),
+
+        dtt(r'^gps$', 'affiliates/tomboy-tools/gps.html', 'gps', ctx={
+            'agent_id': 'a03169'}),
+        
+        dtt(r'^order$', 'affiliates/tomboy-tools/order.html', 'order', ctx={
+            'agent_id': 'a03169'}),
+            
+        dtt(r'^thank-you/tomboy-tools/$', 'affiliates/tomboy-tools/thank-you.html', 'thank-you', ctx={
+            'agent_id': 'a03169'}),
+
+
+    )
 else:
     urlpatterns += patterns('',
 
@@ -140,20 +175,20 @@ else:
             name='payitforward'),
 
         # Home Security Packages
-        dtt(r'^home-security-systems/?$', 'packages/index.html', 'products'),
+        dtt(r'^home-security-systems/?$', 'packages/index.html', 'security-packages'),
 
             # Product > Packages B
 
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'products'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'products'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'products'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'products'),
-            dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'security-packages'),
+            dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'security-packages'),
             
 
             # Product > Monitoring
 
-            dtt(r'^pa/monitoring/security-system/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
+            dtt(r'^products/alarm-monitoring/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
 
             dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
 
@@ -165,15 +200,11 @@ else:
 
                         dtt(r'^products/security-equipment/sensors/flood-sensor?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
                         dtt(r'^products/security-equipment/sensors/door-window-sensor?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
-                        
-                        # Product > Equipment > Touch Screen
-                        
-                        dtt(r'^products/security-equipment/accessories/touchscreen?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
 
 
             # Product > Video
 
-            dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'video', 'products'),
+            dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'interactive-video', 'products'),
 
             # Product > GPS Vehicle Tracking
 
@@ -191,21 +222,9 @@ else:
 
             dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
-            # About > Family of Companies
-
-            dtt(r'^about-us/family-of-companiess/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
-
             # About > Charities
 
             dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
-            
-            # About > How it Works
-
-            dtt(r'^about-us/how-it-works/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
-
-            # About > Learn About Security
-
-            dtt(r'^about-us/learn-about-security/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
             # About > Testimonials
 
@@ -222,17 +241,6 @@ else:
         # Complete Home Security 
         
         dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
-        
-        # Contact Pages
-
-        dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
-        
-        # Contact Pages > Find Us
-        dtt(r'^contact/find-us?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
-        
-        # Contact Pages > Department Listing
-        dtt(r'^contact/department-listing?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
-
 
         # Help Pages
 
@@ -248,10 +256,6 @@ else:
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
-        # Support Pages
-        
-        dtt(r'^support/?$', 'support/index.html', 'support'),
-        
         # Affiliate Resources
         
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
@@ -273,4 +277,3 @@ if settings.DEBUG:
             'document_root': settings.MEDIA_ROOT,
         }),
    )
-    
