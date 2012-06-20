@@ -236,6 +236,10 @@ else:
 
             # Contact Pages > Affiliate Program
             dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+            
+
+            # Contact Pages > Careers
+            dtt(r'^contact/careers/?$', 'contact-us/careers.html', 'careers', 'contact-us'),
 
             # Contact Pages > Feedback to CEO
             dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
