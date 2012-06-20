@@ -125,6 +125,9 @@ INSTALLED_APPS = (
     'apps.testimonials',
     'apps.crimedatamodels',
     'apps.news',
+
+    # sitemaps by opm
+    'apps.pa-sitemaps',
 )
 
 LOGIN_URL = '/login/'

@@ -297,6 +297,7 @@ else:
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
 
     url(r'^news/', include('apps.news.urls', namespace='news')),
+    url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
