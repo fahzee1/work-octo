@@ -133,7 +133,7 @@ else:
     urlpatterns += patterns('',
 
         # Home Page
-        dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+        url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         url(r'^thank-you/(?P<custom_url>.*)/?$',

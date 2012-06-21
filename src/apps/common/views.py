@@ -14,6 +14,7 @@ from django.views.generic.simple import redirect_to
 from apps.contact.forms import PAContactForm, AffiliateLongForm, BasicContactForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
+from apps.news.models import Article
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -142,3 +143,13 @@ def payitforward(request):
             'forms': forms,
             'videos': videos,
         }, context_instance=RequestContext(request))
+
+def index(request): 
+    ctx = {}
+    ctx['page_name'] = 'index'
+    ctx['pages'] = ['index']
+
+    latest_news = Article.objects.order_by('-date_created')[:3]
+    ctx['latest_news'] = latest_news
+
+    return simple_dtt(request, 'index.html', ctx)
