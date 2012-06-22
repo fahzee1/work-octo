@@ -24,6 +24,7 @@ urlpatterns = patterns('',
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
+    url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
@@ -129,6 +130,36 @@ elif settings.SITE_ID == 7:
     urlpatterns += patterns('',
         url(r'^', include('apps.blogredirects.urls')),
     )
+# Tomboy Tools landing site
+elif settings.SITE_ID == 8:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/tomboy-tools/index.html', 'home', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^copper$', 'affiliates/tomboy-tools/copper.html', 'copper', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^bronze$', 'affiliates/tomboy-tools/bronze.html', 'bronze', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^silver$', 'affiliates/tomboy-tools/silver.html', 'silver', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^gold$', 'affiliates/tomboy-tools/gold.html', 'gold', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^platinum$', 'affiliates/tomboy-tools/platinum.html', 'platinum', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+
+        dtt(r'^video$', 'affiliates/tomboy-tools/video.html', 'video', ctx={
+            'agent_id': 'a03169'}),
+
+        dtt(r'^gps$', 'affiliates/tomboy-tools/gps.html', 'gps', ctx={
+            'agent_id': 'a03169'}),
+        
+        dtt(r'^order$', 'affiliates/tomboy-tools/order.html', 'order', ctx={
+            'agent_id': 'a03169'}),
+            
+        dtt(r'^thank-you/tomboy-tools/$', 'affiliates/tomboy-tools/thank-you.html', 'thank-you', ctx={
+            'agent_id': 'a03169'}),
+
+
+    )
 else:
     urlpatterns += patterns('',
 
@@ -146,11 +177,6 @@ else:
         # Home Security Packages
         dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
 
-            # Product > Advantage
-
-            dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
-
-
             # Product > Packages B
 
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'products'),
@@ -167,8 +193,6 @@ else:
                 dtt(r'^products/alarm-monitoring/landline/?$', 'products/monitoring/landline.html', 'landline', 'monitoring'),
                 dtt(r'^products/alarm-monitoring/broadband/?$', 'products/monitoring/broadband.html', 'broadband', 'monitoring'),
                 dtt(r'^products/alarm-monitoring/cellular/?$', 'products/monitoring/cellular.html', 'cellular', 'monitoring'),
-
-
 
             # Product > Equipment
 
