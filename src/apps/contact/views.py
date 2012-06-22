@@ -165,9 +165,10 @@ def ajax_post(request):
     response = HttpResponse(simplejson.dumps(response_dict),
         mimetype='application/javascript')
 
-    expire_time = timedelta(days=90)
-    response.set_cookie('lead_id', value=form.id,
-        expires=datetime.now() + expire_time)
+    if 'success' in response_dict and response_dict['success']:
+        expire_time = timedelta(days=90)
+        response.set_cookie('lead_id', value=form.id,
+            expires=datetime.now() + expire_time)
     
     return response
 
