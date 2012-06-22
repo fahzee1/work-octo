@@ -150,11 +150,12 @@ else:
             # Product > Equipment
 
             dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
+                
+                        # Product > Equipment > Security Sensors
 
-                        # Product > Equipment > Sensors
-
-                        dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
-                        dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+                        dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
+                            dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
+                            dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
                         
                         # Product > Equipment > Touch Screen
                         
@@ -265,6 +266,12 @@ else:
 
             # Help Pages > Do Not Call
                 dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
+
+            # Help Pages > Security of Information
+                dtt(r'^help/security-of-information/?$', 'help/security-of-information.html', 'security-of-information', 'help'),
+
+            # Help Pages > Warranty
+                dtt(r'^help/warranty/?$', 'help/warranty.html', 'warranty', 'help'),
 
         # Support Pages
         

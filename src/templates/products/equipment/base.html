@@ -4,14 +4,11 @@
 {% endblock %}
 {% block subnav_child %}
 <ul>
-	<li><a href="">GE Alarm Panels</a></li>
-
-	<li><a href="http://www.protectamerica.com/pa/security_sensors/">Security Sensors</a></li>
-	<li><a href="">Fire & Smoke</a></li>
-
-	<li><a href="{% url video %}">Video Cameras</a></li>
-	<li><a href="{% url gps %}">GPS Vehicle Tracking</a></li>
-	<li><a href="http://www.protectamerica.com/pa/home_security_accessories/">Security Accessories</a></li>
+	<li><a href="">GE Simon XT</a></li>
+	<li {% if 'sensors' in active_pages %}class="active"{% endif %}><a href="{% url sensors %}" title="Learn about our Home Security Sensors">Security Sensors</a></li>
+	<li {% if 'video' in active_pages %}class="active"{% endif %}><a href="{% url video %}" title="Learn about our Wireless Video Cameras">Video Cameras</a></li>
+	<li {% if 'gps' in active_pages %}class="active"{% endif %}><a href="{% url gps %}" title="Learn about our GPS Vehicle Tracking">GPS Vehicle Tracking</a></li>
+	<li><a href="">Security Accessories</a></li>
 	<li><a href="">Alarm Moving Kit</a></li>
 
 </ul>
