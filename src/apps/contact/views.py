@@ -168,6 +168,7 @@ def ajax_post(request):
     if 'success' in response_dict and response_dict['success']:
         expire_time = timedelta(days=90)
         response.set_cookie('lead_id', value=form.id,
+            domain='.protectamerica.com',
             expires=datetime.now() + expire_time)
     
     return response
