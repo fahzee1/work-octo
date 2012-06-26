@@ -27,3 +27,7 @@ def crm_login(request):
 	return render_to_response('crm/login.html', {
 			'form': form,
 		}, context_instance=RequestContext(request))
+
+def crm_main(request):
+	return render_to_response('crm/index.html', {
+		}, context_instance=RequestContext(request))
