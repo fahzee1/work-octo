@@ -270,6 +270,8 @@ else:
 
 
             dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
+                dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
+
 
 
             # About > Tell a Friend
