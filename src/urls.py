@@ -294,9 +294,10 @@ else:
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
             # Contact Pages > Affiliate Program
-            dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+            #dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+            url(r'^contact/affiliate-program/$',
+                'apps.affiliates.views.signup', name='affiliate-program'),
             
-
             # Contact Pages > Careers
             dtt(r'^contact/careers/?$', 'contact-us/careers.html', 'careers', 'contact-us'),
 
