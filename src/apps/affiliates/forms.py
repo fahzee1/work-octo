@@ -1,6 +1,6 @@
 from django import forms
 
-from apps.affiliates.models import Affiliate, LandingPage
+from apps.affiliates.models import Affiliate, LandingPage, Profile
 
 class AddAffiliateForm(forms.ModelForm):
     landing_page = forms.BooleanField(initial=False, required=False,
@@ -35,3 +35,29 @@ class AddAffiliateForm(forms.ModelForm):
         except:
             pass
         self.fields['landing_page'].initial = lp
+
+class AffiliateSignup(forms.ModelForm):
+    
+    class Meta:
+        model = Profile
+
+        fields = ('name',
+                  'title',
+                  'company_name',
+                  'taxid',
+                  'street_address',
+                  'city',
+                  'state',
+                  'zipcode',
+                  'phone',
+                  'fax',
+                  'email',
+                  'website',
+                  'comments',
+                  'agreed_to_terms',
+                  'sign')
+
+    def __init__(self, *args, **kwargs):
+        super(AffiliateSignup, self).__init__(*args, **kwargs)
+
+        self.fields['agreed_to_terms'].widget.attrs['class'] = 'checkbox'

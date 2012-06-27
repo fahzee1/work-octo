@@ -253,6 +253,17 @@
             {% testimonial_search "affordable" "limit=3&template=sidebar-old&words=30" %}
         </ul>    
     </div>
+    <div id="sidebar-news">
+        <h2>Latest News</h2>
+        <ul>
+        {% for article in latest_news %}
+            <li>
+                <h3>{{ article.heading }}</h3>
+                <p><span>{{ article.date_created|date:"M d Y" }}</span> -- {{ article.summary }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 </div>
 
 {% addtoblock "js" %}

@@ -1,4 +1,19 @@
 {% extends "local-pages/base.html" %}
+
+{% block page_description %}{{ city }} {{ state }} Home Security Systems from Protect America. Voted #1 Home Security Company by Top Consumer Reviews{% endblock %}
+
+{% block page_keywords %}{{ city }} Home Security, Home Security {{ city }}, {{ city }} Alarm Monitoring, Home Security {{ city }} {{ state_long }}, {{ city }} Alarm Systems, {{ city }} Security Alarms, {{ city }} Alarm Security, {{ city }} Alarm Companies, {{ city }} Alarms, Alarms {{ city }} {{ state_long }}, {{ city }} Alarm, {{ city }} Smart Home, {{ city }} Home Automation, Home Security Systems {{ city }}, Security Systems {{ city }}, {{ city }} Alarm Company, Alarm Monitoring {{ city }}{% endblock %}
+
+{% block css %}
+{{ block.super }}
+<meta name="robots" content="FOLLOW,INDEX"/>
+<meta name="revisit-after" content="2 days"/>
+<meta name="geo.region" content="US-{{ state }}" />
+<meta name="geo.placename" content="{{ city }}" />
+<meta name="geo.position" content="{{ lat }};{{ long }}" />
+<meta name="ICBM" content="{{ lat }}, {{ long }}" />
+{% endblock %}
+
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
     {% block quick-links %}
 	<ul id="quick-link-navigation">
@@ -20,10 +35,6 @@
 <meta name="description" content="Protect America {% content_spinner "meta3" "looked at|talked with|gathered feedback from|collected the opinions of" %} many families from around {{ city }}, regarding their home security system needs and goals. We are proud to offer {% content_spinner "meta2" "affordable|low priced|top of the line" %} {% content_spinner 'meta1' 'alarm systems|home security systems|securtiy systems|GE systems| GE wireless home security systems' %} that will fulfill your home security needs and most importantly, fit your budget." />
 
 <style type="text/css">
-    body {
-        background-image: url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg),url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-right.jpg);
-        background: #fff url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg) left bottom fixed no-repeat\9;
-    }
     .wrapper {
         background: #fff\9;
     }
@@ -202,6 +213,10 @@ $(document).ready(function() {
         fx: 'fade',
         timeout: 9000
     });
+    $('body').css({
+        backgroundImage: 'url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg),url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-right.jpg)',
+        background: '#fff url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg) left bottom fixed no-repeat\9',
+    });
 });
 </script>
 <script type="text/javascript">var switchTo5x=true;</script>
@@ -213,6 +228,3 @@ var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
 </script>
 {% endaddtoblock "js" %}
 {% endblock %}  
-
-
-

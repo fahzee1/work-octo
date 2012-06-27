@@ -24,6 +24,7 @@ urlpatterns = patterns('',
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
+    url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
@@ -87,30 +88,83 @@ elif settings.SITE_ID == 4:
     )
 elif settings.SITE_ID == 5:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index'}),
+        dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'AllTheThings'}),
     )
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/five-linx/index.html', 'home'),
-        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages'),
-        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages'),
-        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages'),
-        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages'),
-        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages'),
-
-        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video'),
-
-        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps'),
+        dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
+            'agent_id': 'a01526'}),
         
-        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order'),
+        url(r'^contest/$', 'apps.common.views.fivelinxcontest'),
+        
+        dtt(r'^contest/thanks/?$', 'affiliates/five-linx/contest-thanks.html', 'contest-thanks', 'contest', ctx={
+            'agent_id': 'a01526'}),        
+        url(r'^contest/winner/$', 'apps.common.views.fivelinxwinner'),
+        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
+            'agent_id': 'a01526'}),
+
+        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
+            'agent_id': 'a01526'}),
+
+        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
+            'agent_id': 'a01526'}),
+        
+        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
+            'agent_id': 'a01526'}),
+            
+        dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
+            'agent_id': 'a01526'}),
+
+
+    )
+elif settings.SITE_ID == 7:
+    urlpatterns += patterns('',
+        url(r'^', include('apps.blogredirects.urls')),
+    )
+# Tomboy Tools landing site
+elif settings.SITE_ID == 8:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'affiliates/tomboy-tools/index.html', 'home', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^copper$', 'affiliates/tomboy-tools/copper.html', 'copper', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^bronze$', 'affiliates/tomboy-tools/bronze.html', 'bronze', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^silver$', 'affiliates/tomboy-tools/silver.html', 'silver', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^gold$', 'affiliates/tomboy-tools/gold.html', 'gold', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+        dtt(r'^platinum$', 'affiliates/tomboy-tools/platinum.html', 'platinum', 'security-packages', ctx={
+            'agent_id': 'a03169'}),
+
+        dtt(r'^video$', 'affiliates/tomboy-tools/video.html', 'video', ctx={
+            'agent_id': 'a03169'}),
+
+        dtt(r'^gps$', 'affiliates/tomboy-tools/gps.html', 'gps', ctx={
+            'agent_id': 'a03169'}),
+        
+        dtt(r'^order$', 'affiliates/tomboy-tools/order.html', 'order', ctx={
+            'agent_id': 'a03169'}),
+            
+        dtt(r'^thank-you/tomboy-tools/$', 'affiliates/tomboy-tools/thank-you.html', 'thank-you', ctx={
+            'agent_id': 'a03169'}),
+
 
     )
 else:
     urlpatterns += patterns('',
 
         # Home Page
-        dtt(r'^$', 'index.html', 'home', ctx={'page_name': 'index'}),
+        url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         url(r'^thank-you/(?P<custom_url>.*)/?$',
@@ -121,12 +175,7 @@ else:
             name='payitforward'),
 
         # Home Security Packages
-        dtt(r'^home-security-systems/?$', 'packages/index.html', 'products'),
-
-            # Product > Advantage
-
-            dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
-
+        dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
 
             # Product > Packages B
 
@@ -145,13 +194,9 @@ else:
                 dtt(r'^products/alarm-monitoring/broadband/?$', 'products/monitoring/broadband.html', 'broadband', 'monitoring'),
                 dtt(r'^products/alarm-monitoring/cellular/?$', 'products/monitoring/cellular.html', 'cellular', 'monitoring'),
 
-
-
             # Product > Equipment
 
-            dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
-                
-                        # Product > Equipment > Control Panels
+            dtt(r'^pa/equipment/wireless-home-security-system/?$', 'products/equipment/index.html', 'equipment', 'products'),
 
                         dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
                             dtt(r'^products/security-equipment/control-panels/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'control-panel'),
@@ -175,7 +220,7 @@ else:
 
             # Product > Video
 
-            dtt(r'^products/interactive-video/?$', 'products/video/index.html', 'video', 'products'),
+            dtt(r'^pa/wireless-security-camera/ip-security-cameras/?$', 'products/video/index.html', 'video', 'products'),
 
                 # Product > Video > Home
                 dtt(r'^products/interactive-video/home-video-cameras?$', 'products/video/video-home.html', 'video-home', 'video'),
@@ -185,7 +230,7 @@ else:
 
             # Product > GPS Vehicle Tracking
 
-            dtt(r'^products/gps-vehicle-tracking/?$', 'products/gps/index.html', 'gps', 'products'),
+            dtt(r'^pa/vehicle-gps-tracking/gps-services/?$', 'products/gps/index.html', 'gps', 'products'),
 
             # Product > Cell Takeover
 
@@ -197,32 +242,31 @@ else:
 
         # About Pages
 
-        dtt(r'^about-us/?$', 'about-us/index.html', 'about-us'),
+        dtt(r'^pa/about/home-security-companies/?$', 'about-us/index.html', 'about-us'),
 
             # About > Profile
 
-            dtt(r'^about-us/company-profile/?$', 'about-us/profile.html', 'profile', 'about-us'),
+            dtt(r'^pa/profile/home-alarm-systems/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
             # About > Family of Companies
 
-            dtt(r'^about-us/family-of-companiess/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
+            dtt(r'^pa/family-of-companies/america-protect/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
 
             # About > Charities
 
-            dtt(r'^about-us/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
+            dtt(r'^pa/charities/america-protect/?$', 'about-us/charities.html', 'charities', 'about-us'),
             
             # About > How it Works
 
-            dtt(r'^about-us/how-it-works/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
+            dtt(r'^pa/how_it_works/ge-security-systems/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
 
             # About > Learn About Security
 
-            dtt(r'^about-us/learn-about-security/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
+            dtt(r'^pa/learn/alarm-companies/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
 
-            # About > Testimonials
+            dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
 
-            dtt(r'^about-us/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
 
             # About > Tell a Friend
 
@@ -238,7 +282,10 @@ else:
         
         # Contact Pages
 
-        dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
+        #dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
+        url(r'^pa/contact/?$', 'apps.contact.views.main',
+            name='contact-us'),
+
         
             # Contact Pages > Find Us
             dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
@@ -304,6 +351,7 @@ else:
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
 
     url(r'^news/', include('apps.news.urls', namespace='news')),
+    url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',

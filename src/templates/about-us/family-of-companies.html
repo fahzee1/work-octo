@@ -1,5 +1,7 @@
 {% extends "about-us/base.html" %}
 
+{% load sekizai_tags %}
+
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
 {% block page_keywords %}family, trust, public service, charity work, protect america, community{% endblock %}
 {% block page_description %}Since early 2010, Protect America Inc. has been another thread in the patchwork of Rockbridge Growth Equity. Owned by Dan Gilbert, our family of companies includes leading online mortgage lender Quicken Loans, the Cleveland Cavaliers of the National{% endblock %}
@@ -15,7 +17,18 @@
 </div>
 {% include "order/quote-form.html" with form=forms.basic %}
 
-<div>
+<div id="family-of-companies-container">
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $.getJSON('http://media.quickenloans.com/threadnation/public/companies.json?callback=?',
+    function(json_response) {
+        console.log(json_response);
+    });
+});
+</script>
+{% endaddtoblock "js" %}
+    {% comment %}
 	<div id="biotechnology">
 		<h2>Biotechnology</h2>
 		<div class="family-company">
@@ -454,6 +467,7 @@
         </div>
         <div class="clear"></div>
     </div>
+    {% endcomment %}
 </div>
 
 

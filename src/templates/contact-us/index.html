@@ -22,7 +22,18 @@
 		<div class="big-blue-form">
 			<h2>Ask us Anything!</h2>
 			<p></p>
-            <form>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div id="form-left-side">
+                    {% include "_partials/contact-us-field.html" with field=formset.name %}
+                    {% include "_partials/contact-us-field.html" with field=formset.email %}
+                    {% include "_partials/contact-us-field.html" with field=formset.phone %}
+                </div>
+                <div id="form-right-side">
+                    {% include "_partials/contact-us-field.html" with field=formset.department %}
+                    {% include "_partials/contact-us-field.html" with field=formset.message %}
+                </div>
+                {% comment %}
                 <div id="form-left-side">
                     <label>Name:</label>
                     <input type="text" />
@@ -45,6 +56,7 @@
                     <label>Your Question:</label>
                     <textarea></textarea>
                 </div>
+                {% endcomment %}
                 <div class="clear"></div>
                 <button>Send Us Your Question ></button>
                 <div class="clear"></div>

@@ -84,6 +84,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'apps.affiliates.middleware.AffiliateMiddleware',
     'apps.common.middleware.DetectMobileBrowser',
 )
@@ -124,12 +125,17 @@ INSTALLED_APPS = (
     'apps.testimonials',
     'apps.crimedatamodels',
     'apps.news',
+
+    # sitemaps by opm
+    'apps.pa-sitemaps',
 )
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 DEFAULT_PHONE = '8009515190'
+
+GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings

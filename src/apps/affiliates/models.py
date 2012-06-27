@@ -3,6 +3,9 @@ import os
 import re
 
 from django.db import models
+from django.core.mail import send_mail
+from django.template import loader, Context
+from django.contrib.localflavor.us.us_states import STATE_CHOICES
 
 class Affiliate(models.Model):
     agent_id = models.CharField(max_length=16, unique=True)
@@ -82,17 +85,39 @@ class Profile(models.Model):
     taxid = models.CharField(max_length=12)
     street_address = models.CharField(max_length=128)
     city = models.CharField(max_length=128)
-    state = models.CharField(max_length=128)
+    state = models.CharField(max_length=128, choices=STATE_CHOICES)
     zipcode = models.CharField(max_length=128)
     phone = models.CharField(max_length=128)
-    fax = models.CharField(max_length=128)
+    fax = models.CharField(max_length=128, blank=True, null=True)
     email = models.EmailField()
     website = models.CharField(max_length=128)
-    comments = models.TextField()
+    comments = models.TextField(help_text='Please include background information about your company and how you feel that we can work together to achieve mutual success through our affiliate program.')
     status = models.CharField(max_length=10, choices=PROFILE_STATUS,
         default="PENDING")
 
+    agreed_to_terms = models.BooleanField(default=False)
+    sign = models.CharField(max_length=200)
     affiliate = models.ForeignKey(Affiliate, blank=True, null=True)
+
+    def send_signup_to_bizdev(self):
+        subject = 'Protect America Affiliate Program'
+        t = loader.get_template('emails/new_affiliate_signup.html')
+        c = Context({
+            'name': self.name,
+            'title': self.title,
+            'company_name': self.company_name,
+            'website': self.website,
+            'phone': self.phone,
+            'fax': self.fax,
+            'email': self.email,
+            'taxid': self.taxid,
+            'street_address': self.street_address,
+            'city': self.city,
+            'state': self.state,
+            'zipcode': self.zipcode,
+            'comments': self.comments,
+        })
+        send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>', ['busdev@protectamerica.com'], fail_silently=True)
 
     def __unicode__(self):
         return '%s' % self.name

@@ -9,7 +9,26 @@ body {
     font-family: Helvetica Neue, Arial, sans-serif;
     border-top: 3px solid @blue;
 }
-
+button {
+    cursor: pointer;
+    cursor: hand;
+}
+.quote-form-error {
+    display: none;
+    background: @white;
+    margin: 8px 8px;
+    height: 100px;
+    padding: 8px;
+    .border-radius;
+    strong {
+        font-size: 24px;
+        padding-top: 4px;
+        color: @blue;
+    }
+    .error-arrow {
+        display: none;
+    }
+}
 .wrapper {
     background: @white;
     width: 304px;
@@ -71,7 +90,7 @@ body {
     }
     #main-package {
         text-align: left;
-        #quote-form {
+        #quote-form, .form-quote {
             display: none;
         }
         .button-link {
@@ -250,6 +269,8 @@ body {
                     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.6);
                     -moz-box-shadow: 0 1px 1px rgba(0,0,0,.6);
                     box-shadow: 0 1px 1px rgba(0,0,0,.6);
+                    cursor: pointer;
+                    cursor: hand;
                 }
             }
             span {
@@ -280,7 +301,7 @@ body {
     #call-us {
         display: none;
     }
-    #quote-form {
+    #quote-form, .form-quote {
         width: 304px;
         .background-gradient(@blue, #123763);
         margin: 16px auto 32px;
@@ -322,9 +343,11 @@ body {
             box-shadow: 0 1px 1px rgba(0,0,0,.3);
             width: 287px;
             margin-top: 16px;
+                                cursor: pointer;
+                    cursor: hand;
         }
-        #quote-form-error {
-            display: none;
+        .quote-form-error {
+
         }
         a {
             font-size: 10px;
@@ -450,7 +473,7 @@ body {
         }
         padding: 0 16px;
     }
-    #quote-form {
+    #quote-form, .form-quote {
         display: none;
         float: left;
         width: 304px;
@@ -498,7 +521,7 @@ body {
             width: 287px;
             margin-top: 16px;
         }
-        #quote-form-error {
+        .quote-form-error {
             display: none;
         }
         a {
@@ -537,5 +560,35 @@ body {
         padding: 0 16px;
 
     }
-
+}
+/*********** Thank-you **************/
+#thank-you-top {
+    .content-box(272px);
+    padding: 0 16px;
+}
+#what-next {
+    margin-top: 16px;
+    padding-top: 8px;
+    border-top: 1px solid @v-light-grey;
+    .content-box;
+    h2 {
+        font-weight: bold;
+    }
+    #security-professional, #build-system, #secured-home {
+        .content-box(320px);
+        text-align: center;
+        display: block;
+        h3 {
+            font-weight: bold;
+            font-size: 28px;
+            line-height: 32px;
+        }
+        p {
+            padding: 0 32px;
+            font-size: 14px;
+            color: @dark-grey;
+            text-align: center;
+            line-height: 18px;
+        }
+    }
 }

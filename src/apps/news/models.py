@@ -30,7 +30,7 @@ class Article(models.Model):
     def related(self):
         articles = []
         for category in self.categories.all():
-            [articles.append(a) for a in category.article_set.all() if a.pk != self.pk]
+            [articles.append(a) for a in category.article_set.order_by('-pk') if a.pk != self.pk]
         return articles
 
     def get_absolute_url(self):
