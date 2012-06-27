@@ -1,0 +1,242 @@
+{% extends "support/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Moving Kit | Security Moving Kit | Home Security Systems{% endblock %}
+{% block page_keywords %}security moving kit{% endblock %}
+{% block page_description %}Protect America allows for easily moving GE wireless security systems from house to house. Fill out a brief form and PA will send you a Moving Kit.{% endblock %}
+
+{% block content %}
+<div id="moving-kit-overview">
+    <h1>Moving Kit</h1>
+    <p>Are you moving? <a href="{% url home %}" title="Update Protect America Home Security">Protect America</a> customers who use our GE wireless security system are able to transfer their system and service very easily.  Simply fill out this form and we will send you a relocation kit for free so you will be able to take your security system with you to your new home.  You will be able to use the relocation kit to install your system in your new home and then you will need to make sure to contact customer service to update all of your account information and re-activate the system at your new location.  If you have questions about moving, please contact a representative at 1-800-951-5111, Option 1.</p>
+</div>
+<div class="clear"></div>
+<form id="moving-kit-form">
+    <div id="account-info">
+        <h2>Current Account Information:</h2>
+        <label class="required">Name of Primary Account Holder</label>
+        <input type="text" value="Name">
+        <label class="required">Your Email:</label>
+        <input type="text" value="Email">
+        <label class="required">Your Phone Number:</label>
+        <input type="text" value="Phone">
+        <label class="required">Your Address:</label>
+        <input type="text" value="Street Address">
+        <label class="required">City / State / Zip</label>
+        <input type="text" value="City" class="city">
+        <select id="state" name="state" tabindex="7">
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DC">Washington D.C.</option>
+            <option value="DE">Delaware</option>
+
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+
+        </select>
+        <input type="text" value="Zip" class="zip">
+    </div>
+    <div id="new-home-info">
+        <h2>New Home Information (Optional):</h2>
+        <label>Your Phone Number:</label>
+        <input type="text" value="Phone">
+        <label>Your New Address:</label>
+        <input type="text" value="Street Address">
+        <label>City / State / Zip</label>
+        <input type="text" value="City" class="city">
+        <select id="state" name="state" tabindex="7">
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DC">Washington D.C.</option>
+            <option value="DE">Delaware</option>
+
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+
+        </select>
+        <input type="text" value="Zip" class="zip">
+
+    </div>
+    <div id="same-as-account">
+        <input checked="checked" type="checkbox" />
+        <label>Send Moving Kit to Current Account Address</label>
+    </div>
+    <div class="clear"></div>
+    <div id="shipping-address">
+        <h2>Shipping Address</h2>
+        <label>Your New Address:</label>
+        <input type="text" value="Street Address">
+        <label>City / State / Zip</label>
+        <input type="text" value="City" class="city">
+        <select id="state" name="state" tabindex="7">
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DC">Washington D.C.</option>
+            <option value="DE">Delaware</option>
+
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+
+        </select>
+        <input type="text" value="Zip" class="zip">
+    </div>
+    <div class="clear"></div>
+    <button class="buyit">Submit your Information ></button>
+
+</form>
+{% endblock %}  

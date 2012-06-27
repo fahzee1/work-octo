@@ -122,33 +122,66 @@
     }
 }
 /********** Landline *************/
-body.landline, body.broadband {
-    #landline-overview, #broadband-overview {
+body.landline, body.broadband, body.cellular {
+    #landline-overview, #broadband-overview, #cellular-overview {
         .content-box(664px);
         padding-top: 16px;
-        #landline-image, #broadband-image {
+        #landline-image, #broadband-image, #cellular-image {
             float: left;
             width: 200px;
             padding-top: 32px;
         }
-        #landline-content, #broadband-content {
+        #landline-content, #broadband-content, #cellular-content {
             .content-box(420px);
             padding-left: 40px;
         }
-    
+
     }
-    #landline-telephone, #broadband-connection {
+    #cut-wire-image {
+        .half-box;
+    }
+    #no-phone-line {
+        .half-box;
+        .text-compensate(300px);
+    }
+    #cellular-connected {
+        .half-box;
+        .text-bump(120px);
+        img {
+            padding-right: 0;
+        }
+    }
+    #landline-telephone, #broadband-connection, #cellular-connection {
         padding-top: 16px;
-        #landline-benefits, #broadband-benefits {
+        #landline-benefits, #broadband-benefits, #cellular-benefits {
             .content-box(480px);
+            ul {
+                margin-left: 16px;
+                padding-top: 16px;
+                li {
+                    margin-left: 16px;
+                    list-style-type: disc;
+                    font-size: 16px;
+                    line-height: 18px;
+                    color: @dark-grey;
+                    padding-bottom: 8px;
+                }
+            }
         }
         img {
             float: left;
             padding-left: 100px;
         }
+        
     }
-    #two-way-voice, #no-phone-required, #interactive-call-out {
-        #upgrade-voice, #no-phone-content, #app-for-that {
+    #cellular-connection {
+        img {
+            padding-right: 100px;
+            padding-left: 0;
+        }
+    }
+    #two-way-voice, #no-phone-required, #interactive-call-out, #interactive-laptop {
+        #upgrade-voice, #no-phone-content, #app-for-that, #online-control {
             .content-box(540px);
         }
         #no-phone-content {
@@ -157,6 +190,19 @@ body.landline, body.broadband {
         img {
             float: left;
             margin-right: 32px;
+        }
+        .no-phone-img {
+            margin-left: 32px;
+        }
+    }
+    #interactive-laptop {
+        border-top: 1px solid @v-light-grey;
+        padding-top: 16px;
+        #online-control {
+            padding-top: 16px;
+        }
+        img {
+            margin-left: 32px;
         }
     }
     #interactive-call-out {

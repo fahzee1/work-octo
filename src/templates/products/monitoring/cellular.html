@@ -1,0 +1,104 @@
+{% extends "products/monitoring/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Wireless Home Security | Protect America | Cellular Monitoring Solutions{% endblock %}
+{% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
+{% block page_description %}Experience an extra level of protection with Cellular Monitoring built right into a home security system. The alarm contacts the monitoring facility through a GSM cellular device.{% endblock %}
+
+{% block content %}
+
+<div id="cellular-overview">
+    <div id="cellular-image">
+        <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="broadband-icon-big" width="199" height="200" />
+    </div>
+    <div id="cellular-content">
+        <h1>No Phone, No Problem with Cellular Monitoring.</h1>
+        <p>With our Cellular Monitoring Solution, you receive true flexibility for your home security monitoring service. There is no need for any type of landline home phone or internet connection. And since it is a cellular connection, the alarm system doesn't require any extra wires to work. Simply plug the command station into a power outlet and everything else is completely wireless. This service is not available in all areas and requires adequate cellular phone coverage in your area.</p>
+    </div>
+    <div class="clear"></div>
+    <img src="{{ STATIC_URL }}img/products/monitoring/cellular-step-by-step.png" alt="landline-monitoring-step-by-step" width="640" height="145" />
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+<div class="clear"></div>
+<div id="cellular-connection">
+    <img src="{{ STATIC_URL }}img/products/monitoring/cell-phone.png" alt="broadband-globe" />
+
+    <div id="cellular-benefits">
+        <h2>The Interactive Cellular Advantage</h2>
+        <ul>
+			<li>No landline phone or internet required.</li>
+			<li>All communication is via cellular towers, which means no extra wires to the alarm system. </li>
+			<li>Can also be used in conjunction with a landline as a back-up connection.</li>
+			<li>Access to <strong>ProtectAmericaInteractive.com</strong>—anytime, anywhere alarm management. Call today for details!</li>
+	   </ul>
+    </div>
+</div>
+<div class="clear"></div>
+<div>
+	<div id="cellular-connected">
+		<img src="/static/img/products/cell-takeover/black-wire.jpg" class="flood-left">
+
+		<h2>Cellular Connection.<br/>No Cut Phone Line.</h2>
+		<p>With Interactive Cellular Monitoring, your home security system works just like a cell phone. If the alarm goes off, authorities are notified without the need of a land line. This eliminates the opportunity for thieves to bypass your protection by simply cutting the wires that lead to your home.</p>
+	</div>
+	<div id="cut-wire-image">
+		<img src="/static/img/products/cell-takeover/wire-cutters.jpg" class="absolute">
+
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div>
+	<div id="no-phone-line">
+		<h2>No Phone Line?<br />No Problem.</h2>
+		<p>These days, many people are giving up their home phone in place of a cell phone. But with most alarm systems, giving up your phone means giving up your protection - as they usually require a phone line to dial out to their monitoring station. We say, ditch the phone line and switch to cellular. Cellular monitoring means your alarm system will work just like a cell phone - wirelessly contacting our monitoring station during any sign of trouble.</p>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="clear"></div>
+    {% include "order/call-box.html" %}
+<div id="customer-testimonials">
+    <h2>Real Customers Talking about Protect America:</h2>
+    <ul id="main-testimonials">
+    {% testimonial_search "broadband" "limit=10&words=100" %}
+    </ul>
+</div>
+<div class="clear"></div>
+<div id="interactive-laptop">
+    <div id="online-control">
+        <h2>Alarm Control At Home, and Online.</h2>
+        <p>When connecting your home security system through our cellular monitoring, you have the option to upgrade your service to include ProtectAmericaInteractive.com. Arm your system, request notifications, manage contacts, and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm? No problem, just arm it while sipping your morning coffee at work.</p>
+    </div>
+    <img src="{{ STATIC_URL }}img/products/monitoring/myprotectam-laptop.png" />
+</div>
+<div id="interactive-call-out">
+    <img src="{{ STATIC_URL }}img/products/monitoring/app-for-that.jpg" alt="app-for-that" width="220" height="322" />
+    <div id="app-for-that">
+        <h2>There's A <strong>Free</strong> App For That.</h2>
+        <p>With Protect America's broadband and cellular monitoring you have free direct access to your security system anytime through our interactive monitoring. This includes our mobile app, where you can arm or disarm your system, see which windows or doors are currently open, and access a complete history of your systems events.</p>
+        <p>This feature also offers real-time notifications to your mobile phone. This means your system will notify you when your children have come home from school, the housekeeper arrives (and what time the housekeeper left!), and if your medicine cabinet, liquor cabinet, or garage door has been opened (for this monitors will need to be placed on the cabinet and garage door).</p>
+    </div>
+</div>
+
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+
+{% endblock %}  
+{% block page-product %}
+    <h2>Interactive Cellular Monitoring</h2>
+    <p>Monthly monitoring starting at $41.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
+    </div>
+{% endblock %}
+

@@ -198,14 +198,24 @@ else:
 
             dtt(r'^pa/equipment/wireless-home-security-system/?$', 'products/equipment/index.html', 'equipment', 'products'),
 
-                        # Product > Equipment > Sensors
+                        dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
+                            dtt(r'^products/security-equipment/control-panels/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'control-panel'),
+                            dtt(r'^products/security-equipment/control-panels/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'control-panel'),
 
-                        dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
-                        dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
+
+                        # Product > Equipment > Security Sensors
+
+                        dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
+                            dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
+                            dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
                         
-                        # Product > Equipment > Touch Screen
-                        
-                        dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
+                        # Product > Equipment > Accessories
+                        dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'equipment'),
+                            dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
+                            dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
+                            dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
+
+
 
 
             # Product > Video
@@ -258,6 +268,10 @@ else:
             dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
 
 
+            # About > Tell a Friend
+
+            dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
+
         # Crime Stats
 
         dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
@@ -280,9 +294,11 @@ else:
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
             # Contact Pages > Affiliate Program
-            #dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
-            url(r'^contact/affiliate-program/$',
-                'apps.affiliates.views.signup', name='affiliate-program'),
+            dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
+            
+
+            # Contact Pages > Careers
+            dtt(r'^contact/careers/?$', 'contact-us/careers.html', 'careers', 'contact-us'),
 
             # Contact Pages > Feedback to CEO
             dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
@@ -309,12 +325,26 @@ else:
             # Help Pages > Do Not Call
                 dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
 
+            # Help Pages > Security of Information
+                dtt(r'^help/security-of-information/?$', 'help/security-of-information.html', 'security-of-information', 'help'),
+
+            # Help Pages > Warranty
+                dtt(r'^help/warranty/?$', 'help/warranty.html', 'warranty', 'help'),
+
         # Support Pages
         
         dtt(r'^support/?$', 'support/index.html', 'support'),
 
-            # Support Pages > Installation Videos
+            # Support Pages > Installation
                 dtt(r'^support/installation/?$', 'support/installation.html', 'installation', 'support'),
+            # Support Pages > Operation
+                dtt(r'^support/operation/?$', 'support/operation.html', 'operation', 'support'),
+            # Support Pages > Troubleshooting
+                dtt(r'^support/troubleshooting/?$', 'support/troubleshooting.html', 'troubleshooting', 'support'),
+            # Support Pages > FAQs
+                dtt(r'^support/faq/?$', 'support/faq.html', 'faq', 'support'),
+            # Support Pages > Moving Kit
+                dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
         
         # Affiliate Resources
         
@@ -331,11 +361,14 @@ else:
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    urlpatterns += staticfiles_urlpatterns()
-    
+    urlpatterns += staticfiles_urlpatterns() 
+    def template_view(request, path):
+        from django.views.generic.simple import direct_to_template
+        return direct_to_template(request, path)
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
         }),
+        url(r'^templates/(?P<path>.*)$', template_view),
    )
     
