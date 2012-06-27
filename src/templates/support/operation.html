@@ -1,20 +1,26 @@
 {% extends "support/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}{% endblock %}
-{% block page_keywords %}{% endblock %}
-{% block page_description %}{% endblock %}
+{% block page_title %}Wireless System Operation | Alarm Monitoring | Alarm System{% endblock %}
+{% block page_keywords %}operate, operation, engage, monitoring security, alarm, security, security system, home security, home security system{% endblock %}
+{% block page_description %}Find answers to all operation and programming questions regarding your GE wireless home security system and its peripherals and learn to avoid false alarms.{% endblock %}
 {% block subnav_child %}
 <ul>
-    <li><a href="" title="Learn how to program your master code">Programming Your Master Code</a></li>
-    <li><a href="" title="Learn how to install your Door Sensors">Door Sensor Installation</a></li>
-    <li><a href="n" title="Learn how to install your Window Sensors">Window Sensor Installation</a></li>
+    <li><a href="#master-code" title="Learn how to Program your Master Code">Programming Your Master Code</a></li>
+    <li><a href="#false-alarm-prevention" title="Learn how to Prevent False Alarms">False Alarm Prevention</a></li>
+    <li><a href="#accidental-alarm" title="Learn what to do when you Accidentally set off your Alarm">Accidental Alarms</a></li>
+    <li><a href="#test-system" title="Learn how to Test your System">System Test</a></li>
+    <li><a href="#reference-guide" title="Read our Reference Guide">Reference Guide</a></li>
 
 </ul>
 {% endblock %}
 
 {% block content %}
 <div id="operation-support">
-    <h1>Help with Security System Operation</h1>
+    <img src="{{ STATIC_URL }}img/products/security-panels/simon-xt-medium.jpg" alt="simon-xt-medium" width="350" height="297" />
+    <div id="operation-overview">
+        <h1>Help with Security System Operation</h1>
+        <p>Wireless home security systems from Protect America are the simple and convenient solution for your home protection. To get the most from a new alarm system, customers should become acquainted with its features and operation. The most useful features to learn include learning about the emergency panic button and how to arm/disarm the system. It’s also important for new security system owners to know about performing monthly service tests and how to handle false alarms. </p>
+    </div>
 </div>
 {% include "order/quote-form.html" with form=forms.basic %}
 
@@ -40,11 +46,12 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div id="support-department">
-        <h3>Customer Installation Help</h3>
-        <p class="phone-number"><strong>1-800-951-5111, Option 6</strong></p>
-        <p class="email-address"><a href="mailto:cust_inst@protectamerica.com">cust_inst@protectamerica.com</a></p>
-    </div>
+
+</div>
+<div id="support-department">
+    <h3>Customer Service</h3>
+    <p class="phone-number"><strong>1-800-951-5111, Option 2</strong></p>
+    <p class="email-address"><a href="mailto:support@protectamerica.com">support@protectamerica.com</a></p>
 </div>
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
@@ -145,6 +152,54 @@
     </ul>
     
     <h2>You can make a difference and be part of the solution!</h2>    
+</div>
+<div id="accidental-alarm">
+    <h2>What to do if you set off your alarm by accident:</h2>
+    <p><strong>First, don't panic!</strong> Carefully enter your disarm code to reset your system. Call your central monitoring station, 877-274-0604, immediately. Tell them you had an accidental alarm activation and need to cancel the alarm dispatch. Give your name, phone number, address, and password. Do not leave your home or business until you have talked with your monitoring station. Do not call 911 to cancel an alarm activation. You must call the monitoring station. You can arrange to have the monitoring station call you or another designated person BEFORE the police, fire, or medical personnel are called whenever your alarm is activated. Then if you are aware of a problem with the system you can cancel the alarm dispatch.</p>
+</div>
+<div id="test-system">
+    <h2>Testing Your System:</h2>
+    <h3>Testing Your System for the first time after Installation is complete.</h4>
+    <p>Before testing your system you must call (800)951-5111, option 6.</p>
+    <p>Have your Sensor Information Worksheet and a pen or pencil ready.  The packing slip that came with the system will be used as a checklist for testing the sensors and devices in your system.</p>
+    <p>Close all doors and windows that have sensors attached to them.  Arm the system by pressing the Doors and Windows button.  Wait 60 seconds.  After the 60-second exit delay the Command Station will beep letting you know the system is armed.</p>
+    <p>In the next step the siren will sound steadily.  It will continue sounding during the remainder of the test.  Do not disarm the system.  If you disarm the system before the test is complete, you will have to begin again.</p>
+    
+    <p>Open all doors with <a href="{% url door-window-sensor %}" title="Click to learn about our Door / Window Sensors">sensors</a>.  Wait 3 to 5 seconds then close the door.  When the doors are opened, the 60-second entry delay will now begin.  The alarm will not sound.  This is normal.  Once the 60-second entry delay has expired, the alarm will sound and send the signal to the monitoring station.</p>
+    <p>With the alarm still sounding walk in front of the <a href="{% url sensors %}#motion-detector" title="Click to learn about our Motion Detectors">motion detector</a>*.</p>  
+    <p>With the alarm still sounding, open all windows that have sensors attached.  Wait 3 to 5 seconds then close each window.  The signals for these sensors have now been sent to the monitoring station.</p>
+    <p>Now open the panel cover with the alarm still sounding.  This activates the Command Station Tamper.  When the Command Station starts talking close the cover.</p>
+    <p>Disarm the system with the 4-digit temporary ID code (1234).  The System Status light will be on and the Command Station will say, "System disarmed."</p>
+    <p>Press the System Status button until the Command Station indicates by voice that each individual sensor has been activated.  For example the Command Station will say, "Sensor 1(front door) alarm, Sensor 2 (garage door) alarm, Sensor 3(back door) alarm, Sensor 4 (motion alarm)."  Listen carefully to make sure each sensor is mentioned.  As each sensor is mentioned, place a checkmark on your Sensor Information Worksheet by that sensor.</p>
+    <p>If any sensors are not mentioned in the alarm memory, refer to the beginning of this section and re-test only those sensors.   After re-testing those sensors, enter the temporary 4-digit ID code (1234) to disarm the system. The Command Station will confirm, "System disarmed."</p>
+    <h4>Testing the Emergency Buttons</h4>
+    <p>Press and hold the Emergency Aux Button for three seconds.  Then press and hold the Emergency Police button for three seconds.  Repeat this step on the second Emergency Aux button as well.</p>
+</div>
+<div id="reference-guide">
+    <h2>Quick Reference Guide</h2>
+	<h3>Checking the System Status Light</h3>
+	<p>If System Status light is on, it could be one of three reasons:</p>
+	<ol>
+		<li>A sensor is open.</li>
+		<li>The alarm system was activated during the day.</li>
+		<li>There is a problem with the system.</li>
+	</ol>	
+	<p>Press the system status button.  Once the panel indicates the condition, refer to the troubleshooting articles.</p>
+	<h3>Arming the System to leave</h3>
+	<p>Press the Doors and Windows button once.  Press Motion Sensors once*.  You now have 45-seconds to leave the premise before the system is activated.  When you return home you must enter through an entry/exit door.  These doors have been programmed with a 45-second entry delay.</p>
+	<p class="footnote">*There is no need to press Motion Sensors if one is not present.</p>
+	<h3>Disarming the System</h3>
+	<p>Enter your 4-digit ID code to disarm the alarm system.  The Command Station will say, "System disarmed."</p>
+	<h3>Arming the System at Bedtime</h3>
+	<p>Press the Doors and Windows button twice.  This allows a 45-second exit time but no entry delay time.  The alarm will sound immediately when the door is opened.</p>
+	<h3>Chime Feature</h3>
+	<p>Press Doors Chime to active or deactivate the chime feature.  The system will chime every time a door or window sensor is opened.</p>
+	<h3>Emergency Panic Button</h3>
+	<p>In the event of an emergency, press and hold the Police panic button for 3 seconds.  The signal is sent to the monitoring station.  There will be no confirmation call from the monitoring station and the proper authorities will be notified.</p>
+	<p>Enter the 4-digit temporary ID code to disarm system.  The Command Station will say, "System disarmed."</p>
+	<p>Press System Status button.  The Command Station will indicate by voice that each individual sensor has been activated.  If  the Emergency buttons have been properly activated, the Command Station will say, "System panic alarm."  The signal has now been sent to the monitoring station.</p>
+	<p>Now, all the signals for all the sensors have been verified in your home.  The alarm memory needs to be cleared.  Press the System Status button and immediately press the "Disarm" button.  The System Status light should now be off.</p>
+	<p><strong>If the System Status light is lit, press System Status button.</strong>  This will indicate either an open sensor or a problem with the system.  If a sensor is open, close that sensor.  The System Status light should be off.</p>
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>

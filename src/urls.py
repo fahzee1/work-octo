@@ -151,15 +151,26 @@ else:
 
             dtt(r'^products/security-equipment/?$', 'products/equipment/index.html', 'equipment', 'products'),
                 
+                        # Product > Equipment > Control Panels
+
+                        dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
+                            dtt(r'^products/security-equipment/control-panels/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'control-panel'),
+                            dtt(r'^products/security-equipment/control-panels/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'control-panel'),
+
+
                         # Product > Equipment > Security Sensors
 
                         dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
                             dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
                             dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
                         
-                        # Product > Equipment > Touch Screen
-                        
-                        dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
+                        # Product > Equipment > Accessories
+                        dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'equipment'),
+                            dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
+                            dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
+                            dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
+
+
 
 
             # Product > Video
@@ -281,6 +292,12 @@ else:
                 dtt(r'^support/installation/?$', 'support/installation.html', 'installation', 'support'),
             # Support Pages > Operation
                 dtt(r'^support/operation/?$', 'support/operation.html', 'operation', 'support'),
+            # Support Pages > Troubleshooting
+                dtt(r'^support/troubleshooting/?$', 'support/troubleshooting.html', 'troubleshooting', 'support'),
+            # Support Pages > FAQs
+                dtt(r'^support/faq/?$', 'support/faq.html', 'faq', 'support'),
+            # Support Pages > Moving Kit
+                dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
         
         # Affiliate Resources
         
@@ -296,11 +313,14 @@ else:
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    urlpatterns += staticfiles_urlpatterns()
-    
+    urlpatterns += staticfiles_urlpatterns() 
+    def template_view(request, path):
+        from django.views.generic.simple import direct_to_template
+        return direct_to_template(request, path)
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
         }),
+        url(r'^templates/(?P<path>.*)$', template_view),
    )
     
