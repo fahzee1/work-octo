@@ -174,6 +174,10 @@ else:
         url(r'^payitforward/$', 'apps.common.views.payitforward',
             name='payitforward'),
 
+        # Product > Advantage
+
+        dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
+
         # Home Security Packages
         dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
 
