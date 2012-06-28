@@ -31,10 +31,6 @@ urlpatterns = patterns('',
         name='order-package'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
-    url(r'^contact-us/feedback-to-the-ceo/?$',
-        'apps.testimonials.views.ceofeedback',
-        name='feedback-ceo'),
-
     # affiliate urls
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
@@ -278,8 +274,14 @@ else:
             dtt(r'^pa/learn/alarm-companies/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
 
-            dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
-                dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
+            #dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
+            url(r'^pa/testimonials/?$',
+                'apps.testimonials.views.view_testimonials',
+                name='testimonials'),
+                #dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
+                url(r'^pa/share-your-testimonial/?$',
+                    'apps.testimonials.views.send_testimonial', 
+                    name='send-testimonial'),
 
 
 
@@ -315,7 +317,9 @@ else:
             dtt(r'^contact/careers/?$', 'contact-us/careers.html', 'careers', 'contact-us'),
 
             # Contact Pages > Feedback to CEO
-            dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
+            #dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
+            url(r'^pa/feedback/?$', 'apps.contact.views.ceo',
+                name='feedback-ceo'),
 
 
 
@@ -358,7 +362,9 @@ else:
             # Support Pages > FAQs
                 dtt(r'^support/faq/?$', 'support/faq.html', 'faq', 'support'),
             # Support Pages > Moving Kit
-                dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
+                #dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
+                url(r'^pa/request-moving-kit/security-moving-kit/?$',
+                    'apps.contact.views.moving_kit', name='moving-kit'),
         
         # Affiliate Resources
         

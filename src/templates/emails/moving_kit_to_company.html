@@ -1,0 +1,27 @@
+Name: {{ sub.name }}
+Email: {{ sub.email }}
+
+Current Information:
+ - Phone: {{ sub.current_phone }}
+ - Address: {{ sub.current_address }}
+ - City: {{ sub.current_city }}
+ - State: {{ sub.current_state }}
+ - ZipCode: {{ sub.current_zipcode }}
+
+New Information:
+ - Phone: {{ sub.new_phone }}
+ - Address: {{ sub.new_address }}
+ - City: {{ sub.new_city }}
+ - State: {{ sub.new_state }}
+ - ZipCode: {{ sub.new_zipcode }}
+
+Instructions:
+{% if sub.send_to_current_address %}
+ - Send the new system to the current address
+{% else %}
+ - Send to the following address:
+ - Address: {{ sub.shipping_address }}
+ - City: {{ sub.shipping_city }}
+ - State: {{ sub.shipping_state }}
+ - ZipCode: {{ sub.shipping_zipcode }}
+{% endif %}
