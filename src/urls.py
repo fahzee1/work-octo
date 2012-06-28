@@ -167,8 +167,17 @@ else:
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
+            
+        # Thank You Pages
+        dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
+        dtt(r'^thank-you/ceo/?$', 'thank-you/ceo-thank-you.html', 'ceo-thank-you', 'thank-you'),
+        dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
+
+        
         url(r'^thank-you/(?P<custom_url>.*)/?$',
         'apps.common.views.thank_you', name='custom_thank_you'),
+
+
 
         # pay it forward page
         url(r'^payitforward/$', 'apps.common.views.payitforward',
@@ -278,9 +287,7 @@ else:
 
             dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
 
-        # Crime Stats
 
-        dtt(r'^crime-rate/TX/Pflugerville/?$', 'crime-stats/crime-stats.html', 'crime-stats'),
         
         # Complete Home Security 
         
