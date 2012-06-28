@@ -31,10 +31,6 @@ urlpatterns = patterns('',
         name='order-package'),
     url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
     
-    url(r'^contact-us/feedback-to-the-ceo/?$',
-        'apps.testimonials.views.ceofeedback',
-        name='feedback-ceo'),
-
     # affiliate urls
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
@@ -279,7 +275,10 @@ else:
 
 
             dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
-                dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
+                #dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
+                url(r'^pa/share-your-testimonial/?$',
+                    'apps.testimonials.views.send_testimonial', 
+                    name='send-testimonial'),
 
 
 

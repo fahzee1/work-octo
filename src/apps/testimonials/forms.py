@@ -1,6 +1,6 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, ValidationError
 
-from apps.testimonials.models import Testimonial
+from apps.testimonials.models import Testimonial, Textimonial
 
 class TestimonialForm(ModelForm):
     class Meta:
@@ -24,20 +24,14 @@ class TestimonialForm(ModelForm):
         self.fields['experience'].choices = EXPERIENCE_CHOICES
         self.fields['email'].help_text = 'If you would like to have a way for Protect America to contact you please leave your email'
 
-class CEOForm(ModelForm):
+class TextimonialForm(ModelForm):
     class Meta:
-        model = Testimonial
-        fields = ('first_name',
-              'last_name',
-              'city',
-              'state',
-              'email',
-              'experience',
-              'department',
-              'rep',
-              'testimonial',
-              'can_post')
+      model = Textimonial
+
     def __init__(self, *args, **kwargs):
-        super(CEOForm, self).__init__(*args, **kwargs)
-        self.fields['testimonial'].label = 'Feedback'
-        self.fields['testimonial'].help_text = 'Please provide as much detailed information as possible regarding the nature of your feedback, especially if you still have an outstanding issue or complaint that you need resolved.'
+        # Only allow Positive or Negative feedback options
+        super(TextimonialForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs['class'] = 'half-box alpha'
+        self.fields['last_name'].widget.attrs['class'] = 'half-box omega'
+        self.fields['city'].widget.attrs['class'] = 'half-box'
+        self.fields['message'].label = 'Your Testimonial'

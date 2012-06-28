@@ -236,13 +236,13 @@ def moving_kit(request):
             form.save()
             form.email_company()
 
-            return HttpResponseRedirect(reverse('ceo-thank-you'))
+            return HttpResponseRedirect(reverse('contact-thank-you'))
             # send_email(formset.cleaned_data['email'])
     else:
         formset = MovingKitForm()
 
     return simple_dtt(request, 'support/moving-kit.html', {
-                               'parent':'contact-us',
+                               'parent':'support',
                                'formset': formset,
                                'page_name': 'moving-kit'})
 

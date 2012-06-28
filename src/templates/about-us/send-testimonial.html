@@ -13,85 +13,25 @@
 {% endblock %}
 {% block content %}
 <img src="{{ STATIC_URL }}img/extra/big-person-icon.png" alt="big-person-icon" width="368" height="264" id="testimonial-person" />
-<form id="testimonial-form">
+<form id="testimonial-form" method="POST">
+    {% csrf_token %}
     <h1>Share your Testimonial with Protect America</h1>
     <p>Enter your information and personal story to add a testimonial of crime prevention or how Protect America has aided in securing your home and family.</p>
     <fieldset>
         <label>Name:</label>
-        <input type="text" placeholder="First Name" class="half-box" />
-        <input type="text" placeholder="Last Name" class="half-box omega" />
+        {% include "_partials/formfield_nolabel.html" with field=formset.first_name %}
+        {% include "_partials/formfield_nolabel.html" with field=formset.last_name %}
     </fieldset>
     <fieldset>
-        <label>Email Address:</label>
-        <input type="text" placeholder="Email Address" />
+        {% include "_partials/formfield.html" with field=formset.email %}
     </fieldset>
     <fieldset>
-        <label>City & State:</label>
-        <input type="text" placeholder="City" class="half-box" />
-        <select id="state" name="state" tabindex="7">
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-            <option value="AZ">Arizona</option>
-
-            <option value="AR">Arkansas</option>
-            <option value="CA">California</option>
-            <option value="CO">Colorado</option>
-            <option value="CT">Connecticut</option>
-            <option value="DC">Washington D.C.</option>
-            <option value="DE">Delaware</option>
-
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="HI">Hawaii</option>
-            <option value="ID">Idaho</option>
-            <option value="IL">Illinois</option>
-            <option value="IN">Indiana</option>
-
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="MT">Montana</option>
-
-            <option value="NE">Nebraska</option>
-            <option value="NV">Nevada</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NM">New Mexico</option>
-            <option value="NY">New York</option>
-
-            <option value="NC">North Carolina</option>
-            <option value="ND">North Dakota</option>
-            <option value="OH">Ohio</option>
-            <option value="OK">Oklahoma</option>
-            <option value="OR">Oregon</option>
-            <option value="PA">Pennsylvania</option>
-
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="SD">South Dakota</option>
-            <option value="TN">Tennessee</option>
-            <option value="TX">Texas</option>
-            <option value="UT">Utah</option>
-
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WA">Washington</option>
-            <option value="WV">West Virginia</option>
-            <option value="WI">Wisconsin</option>
-            <option value="WY">Wyoming</option>
-
-        </select>
+        <label>City &amp; State:</label>
+        {% include "_partials/formfield_nolabel.html" with field=formset.city %}
+        {% include "_partials/formfield_nolabel.html" with field=formset.state %}
     </fieldset>
     <fieldset id="star-rating">
+        {{ formset.rating.as_hidden }}
         <div class="star-container">
             <div class="star-button" id="1-star">&nbsp;</div>
             <div class="star-button" id="2-star">&nbsp;</div>
@@ -99,20 +39,35 @@
             <div class="star-button" id="4-star">&nbsp;</div>
             <div class="star-button" id="5-star">&nbsp;</div>
         </div>
+        {% if formset.rating.errors %}
+        <ul class="formHint">
+            {% for error in formset.rating.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         <div class="clear"></div>
     </fieldset>
     <fieldset>
-        <label>Your Testimonial:</label>
-        <textarea rows="5" placeholder="Enter your Testimonial"></textarea>
+        {% include "_partials/formfield.html" with field=formset.message %}
     </fieldset>
     <fieldset id="marketing-checkbox">
-        <input type="checkbox" class="checkbox" checked="checked" />
+        {% include "_partials/formfield_nolabel.html" with field=formset.permission_to_post %}
         <label>By checking this box, I am giving express written permission for Protect America to use my testimonial for marketing purposes.</label>
     </fieldset>
     <button>Send Us Your Testimonial ></button>
 </form>
 {% addtoblock "js" %}
 <script type="text/javascript">
+    $(document).ready(function() {
+        if($('#id_rating').val()) {
+            $('.star-button').each(function(i){
+                if(i <= $('#id_rating').val()){
+                    $('#'+i+'-star').addClass('active');
+                }
+            });
+        }
+    });
     $('.star-button').css('cursor','pointer').click(function() {
         $('.star-button').removeClass('active');
         $('.star-button').removeClass('hover');
@@ -126,6 +81,7 @@
             $("#"+ starChange + '-star').addClass('active');
             starChange++;
         }
+        $('#id_rating').val(starChange-1);
     });
     $('.star-button').css('cursor','pointer').mouseenter(function() {
         $('.star-button').removeClass('hover');

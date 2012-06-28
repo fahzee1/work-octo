@@ -93,11 +93,8 @@ class ContactUs(models.Model):
             'Contact Form Submission',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
+            ['feedback@protectamerica.com'],
             ['"Robert Johnson" <robert@protectamerica.com>'],
-            ['thad@protectamerica.com',
-             'lawrence@protectamerica.com',
-             'james@protectamerica.com',
-             'support@protectamerica.com'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
 
@@ -129,7 +126,7 @@ class MovingKit(models.Model):
         t = loader.get_template('emails/moving_kit_to_company.html')
         c = Context({'sub': self})
         email = EmailMessage(
-            'Moving Kit',
+            'New Moving Kit Request',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
             ['shipping@protectamerica.com'],
@@ -159,11 +156,8 @@ class CEOFeedback(models.Model):
             'CEO Feedback: %s' % self.feedback_type,
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
+            ['feedback@protectamerica.com'],
             ['"Robert Johnson" <robert@protectamerica.com>'],
-            ['thad@protectamerica.com',
-             'lawrence@protectamerica.com',
-             'james@protectamerica.com',
-             'support@protectamerica.com'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
 

@@ -1,22 +1,10 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 
 from apps.testimonials.models import Testimonial
-from apps.testimonials.forms import TestimonialForm, CEOForm
-
-def ceofeedback(request):
-    if request.method == 'POST':
-        formset = CEOForm(request.POST)
-        if formset.is_valid():
-            formset.save()
-    else:
-        formset = CEOForm()
-
-    return render_to_response('contact-us/feedback-ceo.html',
-                              {'parent':'contact-us',
-                               'formset': formset},
-                              context_instance=RequestContext(request))
+from apps.testimonials.forms import TestimonialForm, TextimonialForm
+from apps.common.views import simple_dtt
 
 def post_testimonial(request):
     # this view is to post a testimonial to the website
@@ -32,3 +20,21 @@ def post_testimonial(request):
             testimonial.save()
     else:
         raise Http404
+
+def send_testimonial(request):
+    if request.method == "POST":
+        formset = TextimonialForm(request.POST)
+        if formset.is_valid():
+            form = formset.save(commit=False)
+            form.save()
+            form.email_company()
+
+            return HttpResponseRedirect(reverse('contact-thank-you'))
+            # send_email(formset.cleaned_data['email'])
+    else:
+        formset = TextimonialForm()
+
+    return simple_dtt(request, 'about-us/send-testimonial.html', {
+                               'parent':'about-us',
+                               'formset': formset,
+                               'page_name': 'send-testimonial'})
