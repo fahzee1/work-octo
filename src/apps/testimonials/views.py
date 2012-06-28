@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 
-from apps.testimonials.models import Testimonial
+from apps.testimonials.models import Testimonial, Textimonial
 from apps.testimonials.forms import TestimonialForm, TextimonialForm
 from apps.common.views import simple_dtt
 
@@ -38,3 +38,29 @@ def send_testimonial(request):
                                'parent':'about-us',
                                'formset': formset,
                                'page_name': 'send-testimonial'})
+
+def view_testimonials(request):
+    testimonials = Testimonial.objects.order_by('-date_created')
+    left = []
+    middle = []
+    right = []
+    loop_counter = 0
+    for testimonial in testimonials:
+        if loop_counter == 0:
+            left.append(testimonial)
+        elif loop_counter == 1:
+            middle.append(testimonial)
+        elif loop_counter == 2:
+            right.append(testimonial)
+
+        if loop_counter == 2:
+            loop_counter = 0
+        else:
+            loop_counter = loop_counter + 1
+
+    return simple_dtt(request, 'about-us/testimonials.html', {
+                               'parent':'about-us',
+                               'left_ts': left,
+                               'middle_ts': middle,
+                               'right_ts': right,
+                               'page_name': 'testimonial'})

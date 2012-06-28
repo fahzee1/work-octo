@@ -14,6 +14,15 @@
 </div>
 <div id="customer-testimonial-boxes">
 	<div class="testimonial-column left">
+		{% for test in left_ts %}
+		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
+			<h3><span>{{ test.first_name }} writes:</span> from {{ test.city }}, {{ test.state }}</h3>
+			<p>{{ test.testimonial }}</p>
+			<div class="button-link"><a href="">Read the Entire Story</a></div>
+			<div class="clear"></div>
+		</div>
+		{% endfor %}
+		{% comment %}
 		<div class="customer-testimonial-box alt">
 			<img src="/static/img/uploads/brian-williamsburg-va.jpg" class="testimonial-image" style="-moz-transform: rotate(-2deg);" />
 			<h3><span>Brian writes:</span> from Williamsburg, VA</h3>
@@ -31,10 +40,20 @@
 			<div class="button-link"><a href="">Read the Entire Story</a></div>
 
 		</div>
+		{% endcomment %}
 		<div class="clear"></div>
 	</div>
 	
 	<div class="testimonial-column">
+		{% for test in middle_ts %}
+		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
+			<h3><span>{{ test.first_name }} writes:</span> from {{ test.city }}, {{ test.state }}</h3>
+			<p>{{ test.testimonial }}</p>
+			<div class="button-link"><a href="">Read the Entire Story</a></div>
+			<div class="clear"></div>
+		</div>
+		{% endfor %}
+		{% comment %}
 		<div class="customer-testimonial-box">
 			<h3><span>PJ writes:</span> from Kensington, CA</h3>
 			<p>Hello, I am a very new PA customer, I switched from ADT. Let me say that everyone I have dealt with has been professional patient and really great to work with. Today I wanted to upgrade my system to a two way voice, which is what Jackie helped me with. It was a very simple process made a bit more...</p>
@@ -51,10 +70,20 @@
 			<h3><span>Delbert writes:</span> from Doniphan, MO</h3>
 			<p>Ordered my system on Monday, received it on Wednesday and we got it installed that afternoon. No runs drips or errors so far. I been playing with it all day as instructed. Everyone has been very cooperative and friendly & professional. If this keeps up, I definitely made the right choice!</p>
 		</div>
+		{% endcomment %}
 		<div class="clear"></div>
 	</div>
 	
 	<div class="testimonial-column right">
+		{% for test in right_ts %}
+		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
+			<h3><span>{{ test.first_name }} writes:</span> from {{ test.city }}, {{ test.state }}</h3>
+			<p>{{ test.testimonial }}</p>
+			<div class="button-link"><a href="">Read the Entire Story</a></div>
+			<div class="clear"></div>
+		</div>
+		{% endfor %}
+		{% comment %}
 		<div class="customer-testimonial-box alt">
 			<h3><span>Randall writes:</span> from Peoria, IL</h3>
 			<p>Needed to test system. She was excellent in checking my motion detector. Thanks.</p>
@@ -74,15 +103,15 @@
 			<div class="button-link"><a href="">Read the Entire Story</a></div>
 
 		</div>
+		{% endcomment %}
 		<div class="clear"></div>
 
 	</div>
 </div>
 
 
-{% endblock %}  
+{% endblock %}
+
 {% block sidebar %}
 {{ block.super }}
-
-
 {% endblock %}
