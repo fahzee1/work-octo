@@ -3,7 +3,7 @@ import re
 from django.forms import ModelForm, Textarea, TextInput, CharField, Select
 from django.contrib.localflavor.us.us_states import STATE_CHOICES
 
-from apps.contact.models import Submission, CEOFeedback, DEPARTMENT_CHOICES, ContactUs
+from apps.contact.models import Submission, CEOFeedback, DEPARTMENT_CHOICES, ContactUs, MovingKit
 
 class PAContactForm(ModelForm):
     class Meta:
@@ -60,6 +60,23 @@ class OrderForm(PAContactForm):
     class Meta(PAContactForm.Meta):
         fields = ('name', 'email', 'phone', 'package')
 
+
+class MovingKitForm(ModelForm):
+    class Meta:
+        model = MovingKit
+    def __init__(self, *args, **kwargs):
+        super(MovingKitForm, self).__init__(*args, **kwargs)
+        self.fields['current_state'].widget.attrs['class'] = 'state'
+        self.fields['current_city'].widget.attrs['class'] = 'city'
+        self.fields['current_zipcode'].widget.attrs['class'] = 'zip'
+
+        self.fields['new_state'].widget.attrs['class'] = 'state'
+        self.fields['new_city'].widget.attrs['class'] = 'city'
+        self.fields['new_zipcode'].widget.attrs['class'] = 'zip'
+
+        self.fields['shipping_state'].widget.attrs['class'] = 'state'
+        self.fields['shipping_city'].widget.attrs['class'] = 'city'
+        self.fields['shipping_zipcode'].widget.attrs['class'] = 'zip'
 
 class ContactUsForm(ModelForm):
     class Meta:

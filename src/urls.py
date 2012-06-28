@@ -360,7 +360,9 @@ else:
             # Support Pages > FAQs
                 dtt(r'^support/faq/?$', 'support/faq.html', 'faq', 'support'),
             # Support Pages > Moving Kit
-                dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
+                #dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
+                url(r'^pa/request-moving-kit/security-moving-kit/?$',
+                    'apps.contact.views.moving_kit', name='moving-kit'),
         
         # Affiliate Resources
         

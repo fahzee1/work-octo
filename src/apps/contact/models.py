@@ -84,6 +84,8 @@ class ContactUs(models.Model):
     department = models.CharField(max_length=32, choices=DEPARTMENT_CHOICES)
     message = models.TextField()
 
+    date_created = models.DateTimeField(auto_now_add=True)
+
     def email_company(self):
         t = loader.get_template('emails/contact_us_to_company.html')
         c = Context({'sub': self})
@@ -99,6 +101,42 @@ class ContactUs(models.Model):
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
 
+class MovingKit(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+
+    current_phone = PhoneNumberField()
+    current_city = models.CharField(max_length=32)
+    current_state = USStateField()
+    current_address = models.CharField(max_length=128)
+    current_zipcode = models.CharField(max_length=12)
+
+    new_phone = PhoneNumberField(blank=True, null=True)
+    new_city = models.CharField(max_length=32, blank=True, null=True)
+    new_state = USStateField(blank=True, null=True)
+    new_address = models.CharField(max_length=128, blank=True, null=True)
+    new_zipcode = models.CharField(max_length=12, blank=True, null=True)
+
+    send_to_current_address = models.BooleanField(default=True)
+    shipping_city = models.CharField(max_length=32, blank=True, null=True)
+    shipping_state = USStateField(blank=True, null=True)
+    shipping_address = models.CharField(max_length=128, blank=True, null=True)
+    shipping_zipcode = models.CharField(max_length=12, blank=True, null=True)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def email_company(self):
+        t = loader.get_template('emails/moving_kit_to_company.html')
+        c = Context({'sub': self})
+        email = EmailMessage(
+            'Moving Kit',
+            t.render(c),
+            '"Protect America" <noreply@protectamerica.com>',
+            ['shipping@protectamerica.com'],
+            ['"Robert Johnson" <robert@protectamerica.com>'],
+             headers = {'Reply-To': 'noreply@protectamerica.com'})
+        email.send()
+
 class CEOFeedback(models.Model):
 
     name = models.CharField(max_length=128)
@@ -111,6 +149,8 @@ class CEOFeedback(models.Model):
     department = models.CharField(max_length=32, choices=DEPARTMENT_CHOICES)
     rep_name = models.CharField(max_length=128, blank=True, null=True)
     message = models.TextField()
+
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def email_company(self):
         t = loader.get_template('emails/ceo_feedback_to_company.html')
