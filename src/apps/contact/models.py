@@ -1,17 +1,28 @@
 from django.db import models
 from django.contrib.localflavor.us.models import (PhoneNumberField, 
     USStateField)
-
+from django.template import loader, Context
+from django.core.mail import EmailMessage
 
 # Create your models here.
+DEPARTMENT_CHOICES = (
+    ('billing', 'Billing'),
+    ('customer_installations', 'Customer Installations'),
+    ('customer_service', 'Customer Service'),
+    ('monitoring_station', 'Monitoring Station'),
+    ('monitoring_agreement', 'Monitoring Agreement'),
+    ('other', 'Other'),
+    ('sales', 'Sales'), 
+)
+
+FEEDBACK_CHOICES = (
+    ('general', 'General Feedback'),
+    ('positive', 'Positive Feedback'),
+    ('negative', 'Negative Feedback'),
+    ('other', 'Other'),
+)
 
 class Submission(models.Model):
-
-    DEPARTMENT_CHOICES = (
-        ('customer_service', 'Customer Service'),
-        ('sales', 'Sales'),
-        ('careers', 'Carriers'),
-    )
 
     HOMEOWNER_CHOICES = (
         ('YES', 'Yes'),
@@ -65,3 +76,56 @@ class Submission(models.Model):
 
     def __unicode__(self):
         return '%s : %s' % (self.name, self.phone,)
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+    phone = PhoneNumberField()
+    department = models.CharField(max_length=32, choices=DEPARTMENT_CHOICES)
+    message = models.TextField()
+
+    def email_company(self):
+        t = loader.get_template('emails/contact_us_to_company.html')
+        c = Context({'sub': self})
+        email = EmailMessage(
+            'Contact Form Submission',
+            t.render(c),
+            '"Protect America" <noreply@protectamerica.com>',
+            ['"Robert Johnson" <robert@protectamerica.com>'],
+            ['thad@protectamerica.com',
+             'lawrence@protectamerica.com',
+             'james@protectamerica.com',
+             'support@protectamerica.com'],
+             headers = {'Reply-To': 'noreply@protectamerica.com'})
+        email.send()
+
+class CEOFeedback(models.Model):
+
+    name = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+    phone = PhoneNumberField()
+    city = models.CharField(max_length=32, blank=True, null=True)
+    state = USStateField(blank=True, null=True)
+    feedback_type = models.CharField(max_length=32, choices=FEEDBACK_CHOICES)
+
+    department = models.CharField(max_length=32, choices=DEPARTMENT_CHOICES)
+    rep_name = models.CharField(max_length=128, blank=True, null=True)
+    message = models.TextField()
+
+    def email_company(self):
+        t = loader.get_template('emails/ceo_feedback_to_company.html')
+        c = Context({'sub': self})
+        email = EmailMessage(
+            'CEO Feedback: %s' % self.feedback_type,
+            t.render(c),
+            '"Protect America" <noreply@protectamerica.com>',
+            ['"Robert Johnson" <robert@protectamerica.com>'],
+            ['thad@protectamerica.com',
+             'lawrence@protectamerica.com',
+             'james@protectamerica.com',
+             'support@protectamerica.com'],
+             headers = {'Reply-To': 'noreply@protectamerica.com'})
+        email.send()
+
+    def __unicode__(self):
+        return '%s : %s - %s' % (self.name, self.phone, self.feedback_type)

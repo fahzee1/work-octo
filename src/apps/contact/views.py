@@ -11,8 +11,8 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
 from django.conf import settings
 
-from apps.contact.forms import (PAContactForm, BasicContactForm, OrderForm, 
-    CeoFeedback)
+from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
+    CeoFeedbackForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
@@ -190,12 +190,16 @@ def main(request):
     forms = {}
     forms['basic'] = PAContactForm()
     if request.method == "POST":
-        formset = BasicContactForm(request.POST)
+        formset = ContactUsForm(request.POST)
         if formset.is_valid():
-            formset.save()
+            form = formset.save(commit=False)
+            form.save()
+            form.email_company()
+
+            HttpResponseRedirect(reverse('contact-thank-you'))
             # send_email(formset.cleaned_data['email'])
     else:
-        formset = BasicContactForm()
+        formset = ContactUsForm()
 
     return simple_dtt(request, 'contact-us/index.html', {
                                'parent':'contact-us',
@@ -203,19 +207,24 @@ def main(request):
                                'forms': forms,
                                'page_name': 'contact-us'}) 
 
+# This is the send feedback to CEO form
 def ceo(request):
     if request.method == "POST":
-        formset = CeoFeedback(request.POST)
+        formset = CeoFeedbackForm(request.POST)
         if formset.is_valid():
-            formset.save()
+            form = formset.save(commit=False)
+            form.save()
+            form.email_company()
+
+            HttpResponseRedirect(reverse('ceo-thank-you'))
             # send_email(formset.cleaned_data['email'])
     else:
-        formset = CeoFeedback()
+        formset = CeoFeedbackForm()
 
-    return render_to_response('contact-us/feedback-ceo.html',
-                              {'parent':'contact-us',
-                               'formset': formset},
-                              context_instance=RequestContext(request))
+    return simple_dtt(request, 'contact-us/feedback-ceo.html', {
+                               'parent':'contact-us',
+                               'formset': formset,
+                               'page_name': 'feedback-ceo'})
 
 
 def find_us(request):

@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 
-from apps.contact.forms import PAContactForm, AffiliateLongForm, BasicContactForm
+from apps.contact.forms import PAContactForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
