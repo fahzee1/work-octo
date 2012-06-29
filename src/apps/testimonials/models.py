@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.localflavor.us.models import (PhoneNumberField, 
     USStateField)
 from django.template import loader, Context
+from django.core.urlresolvers import reverse
 from django.core.mail import EmailMessage
 
 class Testimonial(models.Model):
@@ -45,6 +46,9 @@ class Testimonial(models.Model):
 
     display = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
+    
+    def get_absolute_url(self):
+        return reverse('single-testimonial', kwargs={'testimonial_id': self.id})
 
     def __unicode__(self):
         return '%s %s on %s' % (self.first_name,
@@ -73,3 +77,6 @@ class Textimonial(models.Model):
             ['robert@protectamerica.com'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
+
+    def get_absolute_url(self):
+        return reverse('single-testimonial', kwargs={'testimonial_id': self.id})

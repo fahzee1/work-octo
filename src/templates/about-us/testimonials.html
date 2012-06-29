@@ -16,8 +16,9 @@
 	<div class="testimonial-column left">
 		{% for test in left_ts %}
 		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
-			<h3><span>{{ test.first_name }} writes:</span> from <strong>{{ test.city }}{% if test.state %}, {{ test.state }}{% endif %}</strong></h3>
-			<p>{{ test.testimonial|safe }}</p>
+			<h3><span>{{ test.first_name }} writes:</span> from {{ test.city }}, {{ test.state }}</h3>
+			<p>{{ test.testimonial }}</p>
+			<div class="button-link"><a href="{{ test.get_absolute_url }}">Read the Entire Story</a></div>
 			<div class="clear"></div>
 		</div>
 		{% endfor %}
@@ -26,9 +27,10 @@
 	
 	<div class="testimonial-column">
 		{% for test in middle_ts %}
-		<div class="customer-testimonial-box {% cycle '' 'alt' %}">
-			<h3><span>{{ test.first_name }} writes:</span> from <strong>{{ test.city }}{% if test.state %}, {{ test.state }}{% endif %}</strong></h3>
-			<p>{{ test.testimonial|safe }}</p>
+		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
+			<h3><span>{{ test.first_name }} writes:</span> from {{ test.city }}, {{ test.state }}</h3>
+			<p>{{ test.testimonial }}</p>
+			<div class="button-link"><a href="{{ test.get_absolute_url }}">Read the Entire Story</a></div>
 			<div class="clear"></div>
 		</div>
 		{% endfor %}
@@ -40,6 +42,7 @@
 		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
 			<h3><span>{{ test.first_name }} writes:</span> from <strong>{{ test.city }}{% if test.state %}, {{ test.state }}{% endif %}</strong></h3>
 			<p>{{ test.testimonial|safe }}</p>
+			<div class="button-link"><a href="{{ test.get_absolute_url }}">Read the Entire Story</a></div>
 			<div class="clear"></div>
 		</div>
 		{% endfor %}
