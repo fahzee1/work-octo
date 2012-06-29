@@ -1,4 +1,7 @@
 {% extends "contact-us/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
 {% block page_title %}Contact Us | GE Home Security System | Home Security Systems{% endblock %}
 {% block page_keywords %}ge home security systems,security,home security,security system,security systems{% endblock %}
 {% block page_description %}Contact Protect America today about premium GE home security systems and alarm services to get the expertise and solution necessary to protect your home.{% endblock %}
@@ -8,7 +11,7 @@
         <h1>Contact Us at Protect America: We're happy to talk to you!</h1>
 		<p>We offer GE home security systems at an affordable price for homes and small businesses. Each department is in place to offer you assistance concerning any question you might have about our GE home security systems In order for us to provide you with the most efficient assistance possible, please visit the Department Listing page to contact the appropriate department for your inquiry about our GE home security systems. For information on our affiliate program and other business development inquiries, please visit our Home Security Opportunities page. </p>
 		<h2>Need a Home Security System?</h2>
-		<p>We will be happy to assist you in finding the best security system for your home. Call us toll-free today at 1-800-951-5167 during our normal business hours:</p>
+		<p>We will be happy to assist you in finding the best security system for your home. Call us toll-free today at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> during our normal business hours:</p>
 		<h3>Mon - Fri: 08:00am - 09:00pm CT</h3>
 		<h3>Sat: 08:00am - 05:00pm CT </h3>
 		<h3>Sun: 09:00am - 05:00pm CT </h3>
