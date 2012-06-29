@@ -117,17 +117,13 @@ It's clearly important to secure your front door with quality locks and a home s
         </tbody>
     </table>
 </div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "sensor" "limit=4&words=50" %}
-    </ul>
-</div>
+{% testimonial_search "sensor" "limit=10&words=75" %}
+
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

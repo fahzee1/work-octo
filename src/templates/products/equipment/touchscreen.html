@@ -18,12 +18,8 @@
 {% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
     
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "equipment" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "equipment" "limit=10&words=75" %}
+
 <div class="clear"></div>
 
 <div id="touchscreen-features">
@@ -119,7 +115,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

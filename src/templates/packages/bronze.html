@@ -145,18 +145,14 @@
     </ul>
 </div>
 
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "bronze" "limit=4&words=50" %}
-    </ul>
-</div>
+<div class="clear"></div>
+{% testimonial_search "bronze" "limit=10&words=75" %}
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

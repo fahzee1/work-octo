@@ -43,12 +43,8 @@
 
 </div>
     {% include "order/call-box.html" %}
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "care" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "care" "limit=10&words=75" %}
+
 <div>
 	<div id="access-from-computer">
 		<img src="/static/img/products/gps/gps-laptop.jpg">
@@ -81,7 +77,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

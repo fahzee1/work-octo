@@ -34,7 +34,7 @@
     <div id="video-security-for-your-business">
         <img src="/static/img/products/video/video-business.jpg" />
 
-        <h2><a title="24 / 7 Video Security For Your Business" href="{% video-business %}">24 / 7 Video Security<br>For Your Business</a></h2>
+        <h2><a title="24 / 7 Video Security For Your Business" href="{% url video-business %}">24 / 7 Video Security<br>For Your Business</a></h2>
         <p>Deter shoplifters, watch employees, or keep an eye on your company safe by accessing your business' secure video feed online, anywhere and at anytime. With Protect America, you can easily keep an extra eye on your business with our video security services.</p>
         <div class="button-link">
             <a href="{% url video-business %}" title="Click to See how to use video cameras for your business"> Interactive Business Video Cameras > </a>
@@ -55,12 +55,8 @@
     </div>
     <div class="clear"></div>
 </div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "video" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "video" "limit=10&words=75" %}
+
 
 <div>
     <div id="already-own-system">       
@@ -84,7 +80,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });
