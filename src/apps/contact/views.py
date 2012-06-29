@@ -256,7 +256,7 @@ def order_form(request):
     if request.method == "POST":
         formset, success = basic_post_login(request)         
         if success:
-            return HttpResponseRedirect('http://www.protectamerica.com%s?leadid=%s' % (formset.thank_you_url, formset.id))
+            return HttpResponseRedirect('http://www.protectamerica.com%s' % formset.thank_you_url)
     else:
         formset = OrderForm()
 

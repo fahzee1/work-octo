@@ -49,8 +49,8 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     context.update(ctx)
 
     return url(pattern, 'apps.common.views.simple_dtt',
-		dict(template=template, extra_context=context),
-		name=name)
+        dict(template=template, extra_context=context),
+        name=name)
 
 # Radioshack URLS
 if settings.SITE_ID == 2:
@@ -259,7 +259,10 @@ else:
 
             # About > Family of Companies
 
-            dtt(r'^pa/family-of-companies/america-protect/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
+            #dtt(r'^pa/family-of-companies/america-protect/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
+            url(r'^pa/family-of-companies/america-protect/?$',
+                'apps.common.views.family_of_companies', 
+                name='family'),
 
             # About > Charities
 
@@ -278,6 +281,7 @@ else:
             url(r'^pa/testimonials/?$',
                 'apps.testimonials.views.view_testimonials',
                 name='testimonials'),
+                
                 url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
                     'apps.testimonials.views.testimonial', 
                     name='single-testimonial'),
@@ -372,7 +376,7 @@ else:
         # Affiliate Resources
         
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
-
+    
     url(r'^news/', include('apps.news.urls', namespace='news')),
     url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
@@ -381,6 +385,19 @@ else:
         namespace='testimonials')),
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
             'apps.common.views.redirect_wrapper'),
+)
+# redirect urls
+urlpatterns += patterns('',
+    ('^pa/two-way-monitoring/Home-Security-System-Monitoring/?$',
+        redirect_to, {'url': '/products/alarm-monitoring/landline', 'permanent': True}),
+    ('^pa/two-way-monitoring/?$',
+        redirect_to, {'url': '/products/alarm-monitoring/landline', 'permanent': True}),
+    ('^pa/affiliates/?$',
+        redirect_to, {'url': '/contact/affiliate-program/', 'permanent': True}),
+    ('^pa/home-security-opportunities/home-security/?$',
+        redirect_to, {'url': '/contact/careers/', 'permanent': True}),
+    ('^pa/home-security-opportunities/?$',
+        redirect_to, {'url': '/contact/careers/', 'permanent': True}),
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
