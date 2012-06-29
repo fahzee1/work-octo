@@ -1,15 +1,18 @@
 import re
 import urls
+import urllib2
 from datetime import datetime, timedelta
 from urllib import urlencode
 
+from django.core.cache import cache
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
+from django.utils import simplejson
 
 from apps.contact.forms import PAContactForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
@@ -153,3 +156,31 @@ def index(request):
     ctx['latest_news'] = latest_news
 
     return simple_dtt(request, 'index.html', ctx)
+
+def family_of_companies(request):
+    ctx = {}
+    ctx['page_name'] = 'family'
+    ctx['pages'] = ['about-us']
+    
+    family_json_obj = cache.get('FAMILYJSON')
+    if family_json_obj is None:
+        try:
+            family_json_url = 'http://media.quickenloans.com/threadnation/public/companies.json'
+            family_data = urllib2.urlopen(family_json_url)
+            family_json_obj = simplejson.loads(family_data.read())
+        except:
+            return None
+        if 'Error' in family_json_obj:
+            return None
+
+        cache.set('FAMILYJSON', family_json_obj, 60*60*60)
+
+    # group by industry
+    industry_dict = {}
+    for family in family_json_obj:
+        if family['industry'] not in industry_dict:
+            industry_dict[family['industry']] = []
+        industry_dict[family['industry']].append(family)
+
+    ctx['industries'] = industry_dict 
+    return simple_dtt(request, 'about-us/family-of-companies.html', ctx)
