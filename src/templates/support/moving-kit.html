@@ -40,10 +40,12 @@
     <div id="shipping-address">
         <h2>Shipping Address</h2>
         {% include "_partials/formfield.html" with field=formset.shipping_address %}
-        <label>City / State / Zip</label>
-        {% include "_partials/formfield_nolabel.html" with field=formset.shipping_city %}
-        {% include "_partials/formfield_nolabel.html" with field=formset.shipping_state %}
-        {% include "_partials/formfield_nolabel.html" with field=formset.shipping_zipcode %}
+        <div id="shipping-city">
+            <label>City / State / Zip</label>
+            {% include "_partials/formfield_nolabel.html" with field=formset.shipping_city %}
+            {% include "_partials/formfield_nolabel.html" with field=formset.shipping_state %}
+            {% include "_partials/formfield_nolabel.html" with field=formset.shipping_zipcode %}
+        </div>
     </div>
     <div class="clear"></div>
     <button class="buyit">Submit your Information ></button>
