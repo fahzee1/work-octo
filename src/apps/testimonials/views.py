@@ -37,6 +37,7 @@ def send_testimonial(request):
     return simple_dtt(request, 'about-us/send-testimonial.html', {
                                'parent':'about-us',
                                'formset': formset,
+                               'pages': ['about-us', 'testimonials'],
                                'page_name': 'send-testimonial'})
 
 def view_testimonials(request):
@@ -63,4 +64,17 @@ def view_testimonials(request):
                                'left_ts': left,
                                'middle_ts': middle,
                                'right_ts': right,
+                               'pages': ['about-us', 'testimonials'],
                                'page_name': 'testimonial'})
+
+def testimonial(request, testimonial_id):
+    try:
+        testimonial = Testimonial.objects.get(id=testimonial_id)
+    except Testimonial.DoesNotExist:
+        raise Http404
+
+    return simple_dtt(request, 'about-us/single-testimonial.html', {
+                               'parent':'about-us',
+                               'testimonial': testimonial,
+                               'pages': ['about-us', 'testimonials'],
+                               'page_name': 'single-testimonial'})

@@ -205,6 +205,7 @@ def main(request):
                                'parent':'contact-us',
                                'formset': formset,
                                'forms': forms,
+                               'pages': ['contact-us'],
                                'page_name': 'contact-us'}) 
 
 # This is the send feedback to CEO form
@@ -224,6 +225,7 @@ def ceo(request):
     return simple_dtt(request, 'contact-us/feedback-ceo.html', {
                                'parent':'contact-us',
                                'formset': formset,
+                               'pages': ['contact-us'],
                                'page_name': 'feedback-ceo'})
 
 
@@ -261,7 +263,8 @@ def order_form(request):
     if 'package' in request.GET:
         formset.fields['package'].initial = request.GET['package']
 
-    return render_to_response('order/order-package.html',
-                              {'parent': 'packages',
-                               'formset': formset},
-                              context_instance=RequestContext(request))
+    return simple_dtt(request, 'order/order-package.html', {
+                               'parent':'packages',
+                               'formset': formset,
+                               'pages': ['contact-us'],
+                               'page_name': 'moving-kit'})
