@@ -178,7 +178,7 @@ class TellAFriend(models.Model):
         t = loader.get_template('emails/tell_a_friend.html')
         c = Context({'sub': self})
         email = EmailMessage(
-            'Your friend %s told Protect America you\'d'  % self.name,
+            'Info About Our Neighborhood Security',
             t.render(c),
             '"%s" <noreply@protectamerica.com>' % self.name,
             [self.friend_email],
