@@ -294,8 +294,10 @@ else:
 
             # About > Tell a Friend
 
-            dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
-
+            #dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
+            url(r'^pa/cust_ref/?$',
+                'apps.contact.views.tell_a_friend', 
+                name='tell-a-friend'),
 
         
         # Complete Home Security 

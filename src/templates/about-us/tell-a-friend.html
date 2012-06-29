@@ -16,38 +16,25 @@
 </div>
 {% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
-<form id="tell-friend-form">
+<form id="tell-friend-form" action="" method="POST">
+    {% csrf_token %}
     <img src="{{ STATIC_URL }}img/extra/you-icon.png" alt="you-icon" width="120" height="112" id="you-icon" />
     <img src="{{ STATIC_URL }}img/extra/your-friend-icon.png" alt="you-icon" width="120" height="112" id="friend-icon" />
 	<fieldset id="customer-information">
 
         <h2>Hello, Friend!</h2>
 
-		<div class="ctrlHolder">
-            <label for="customerName" class="required">Your Name:</label>
-            <input name="customerName" id="customerName" value="" size="35" maxlength="50" tabindex="1" type="text" class="textInput">
-        </div>
-		<div class="ctrlHolder">
-            <label class="required">Your Email:</label>
-            <input type="text">
-        </div>
+		{% include "_partials/formfield.html" with field=formset.name %}
+		{% include "_partials/formfield.html" with field=formset.email %}
 	</fieldset>
 
 	<fieldset id="friend-information">
         <h2>Good Day, Buddy!</h2>
 
-		<div class="ctrlHolder">
-            <label for="customerName" class="required">Friend's Name:</label>
-            <input name="customerName" id="customerName" value="" size="35" maxlength="50" tabindex="1" type="text" class="textInput">
-        </div>
-		<div class="ctrlHolder">
-            <label class="required">Friend's Email:</label>
-            <input type="text">
-
-        </div>
+		{% include "_partials/formfield.html" with field=formset.friend_name %}
+		{% include "_partials/formfield.html" with field=formset.friend_email %}
 	</fieldset>
     <button type="submit" tabindex="16" class="positive check">Send to Your Friend ></button>
 
 </form>
-
 {% endblock %}  
