@@ -1,8 +1,13 @@
 {% extends "base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
 {% endblock %}
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security Systems | Home Alarm Systems | Protect America{% endblock %}
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
+{% block page_description %}Get a free home security system for your entire home. Sign up for alarm monitoring and get a complete GE Simon home alarm at no cost. Protect your home and family now!{% endblock %}
+
 {% block extra_javascript %}
 <script type="text/javascript" src="/static/js/jquery.cycle.all.min.js"></script>
 {% endblock %}
@@ -13,7 +18,7 @@
 
 <div id="main">
     <div id="hero-banner">
-        <a href="http://www.protectamerica.com/pa/copper/home-security-systems" class="top-consumers">
+        <a href="{% url copper %}" class="top-consumers">
             <span>For the Fourth Consecutive Year</span>
             <img width="349" height="190" alt="Best Home Security System - 5 Stars from Top Consumer Reviews" src="/static/img/banners/hero-banners/top-consumer-reviews/top-consumer-reviews.png">
             <h3>
@@ -63,13 +68,13 @@
             <li>Protect Your Home with 24/7 Security Monitoring</li>
             <li>Guaranteed Locked in Security Monitoring Rates</li>
             <li>Super Flexible <a href="{% url products %}" title="View all of our alarms packages and choose the right package and service for your home." >Home Security Packages</a></li>
-            <li>Lifetime <a href="{% url monitoring %}" title="Lifetime monitoring home security system equipment warranty for our valued customers." >Alarm System Replacement Parts Warranty</a></li>
+            <li>Lifetime <a href="{% url warranty %}" title="Lifetime monitoring home security system equipment warranty for our valued customers." >Alarm System Replacement Parts Warranty</a></li>
 
             <li>Up to 20% Off Homeowners Insurance</li>
             <li>Peace of Mind When It Comes to Your Family &amp; Home</li>
         </ul>
         <div class="button-link">
-            <a title="View Copper Security Package details and compare to our other home security systems packages." href="{% url copper %}">Home Security Packages ></a>
+            <a title="View Copper Security Package details and compare to our other home security systems packages." href="{% url products %}">Home Security Packages ></a>
         </div>
         
     </div>
@@ -80,7 +85,7 @@
         <table summary="Small comparison chart detailing Protect America pricing versus major competitors.">
         	<thead>
         		<tr>
-        			<td colspan="3"><strong><a name="home-security-systems-comparison">Home Security Systems Comparison</a></strong></td>
+        			<td colspan="3"><strong><a href="{% url advantage %}" title="Home Security Systems Comparison">Home Security Systems Comparison</a></strong></td>
         		</tr>
         	</thead>
         	<tfoot>
@@ -98,25 +103,25 @@
         			<th>ADT Price</th>
         		</tr>
         		<tr class="odd">
-        			<td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="{% url copper %}">Copper Security Package</a><br>3 Door Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="{% url copper %}">Copper Security</a><br>3 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
         			<td headers="adt"><sup>$</sup>379</td>
         		</tr>
         		<tr>
-        			<td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="{% url bronze %}">Bronze Security Package</a><br>3 Door Sensors, 4 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="{% url bronze %}">Bronze Security</a><br>7 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
         			<td headers="adt"><sup>$</sup>699</td>
         		</tr>
         		<tr class="odd">
-        			<td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="{% url silver %}">Silver Security Package</a><br>3 Door Sensors, 7 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="{% url silver %}">Silver Security</a><br>10 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
         			<td headers="adt"><sup>$</sup>939</td>
         		</tr>
         		<tr>
-        			<td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="{% url gold %}">Gold Package</a><br>3 Door Sensors, 9 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="{% url gold %}">Gold Security</a><br>12 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight" headers="pa">
                         <span class="red">FREE<sup>*</sup></span>
@@ -124,7 +129,7 @@
         			<td headers="adt"><sup>$</sup>1,099</td>
         		</tr>
         		<tr class="odd">
-        			<td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="{% url platinum %}">Platinum Package</a><br>3 Door Sensors, 12 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="{% url platinum %}">Platinum Security</a><br>15 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight" headers="pa">
                         <span class="red">FREE<sup>*</sup></span>
