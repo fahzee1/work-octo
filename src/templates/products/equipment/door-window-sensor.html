@@ -28,21 +28,22 @@
         <h3>Other Videos:</h3>
         <ul>
             <li class="active">
-                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/how-to-install-door-window-sensor-video.jpg" alt="Video: How to Install a Door / Window Security Sensor" width="120" height="90" />
-                <p>Installation of the GE Wireless Door and Window Sensors</p>
-                <div class="button-link"><a href="http://www.youtube.com/embed/7i0luaNTZHo">Now Playing</a></div>
+                
+                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/how-the-door-window-sensor-works.jpg" alt="Video: How the GE Wireless Door and Window Sensors Work" width="120" height="90" />
+                <p>How the GE Wireless Door and Window Sensors Work</p>
+                <div class="button-link video-link"><a href="http://www.youtube.com/embed/7i0luaNTZHo">Now Playing</a></div>
                 <div class="clear"></div>
             </li>
             <li>
                 <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/how-to-install-door-window-sensor-video.jpg" alt="Video: How to Install a Door / Window Security Sensor" width="120" height="90" />
                 <p>Installation of the GE Wireless Door and Window Sensors</p>
-                <div class="button-link"><a href="http://www.youtube.com/embed/OK_JY_Hm2YA">Watch Video ></a></div>
+                <div class="button-link video-link"><a href="http://www.youtube.com/embed/OK_JY_Hm2YA">Watch Video ></a></div>
                 <div class="clear"></div>
             </li>
             <li>
                 <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/maintenance-door-window-sensor-video.jpg" alt="Maintence on your Door / Window Sensors" width="120" height="90" />
                 <p>Maintenance of the GE Wireless Door and Window Sensors</p>
-                <div class="button-link"><a href="http://www.youtube.com/embed/sIiPPE7H9j8">Watch Video ></a></div>
+                <div class="button-link video-link"><a href="http://www.youtube.com/embed/sIiPPE7H9j8">Watch Video ></a></div>
                 <div class="clear"></div>
             </li>
         </ul>
@@ -116,7 +117,6 @@ It's clearly important to secure your front door with quality locks and a home s
         </tbody>
     </table>
 </div>
-    
 <div id="customer-testimonials">
     <h2>Real Customers Talking about Protect America:</h2>
     <ul id="main-testimonials">
@@ -131,15 +131,15 @@ It's clearly important to secure your front door with quality locks and a home s
             fx: 'fade',
             timeout: 9000
         });
-        $('.button-link').click(function(e) {
+        $('.video-link').click(function(e) {
             e.preventDefault();
-            $('.button-link').removeClass('active');
-            $('.button-link a').html('Watch Now >');
+            $('.video-link').parent().removeClass('active');
+            $('.video-link a').html('Watch Now >');
             
             var video_url = $(this).children('a').attr('href');
             $('#main-video iframe').attr('src', video_url);
 
-            $(this).addClass('active');
+            $(this).parent().addClass('active');
             $(this).children('a').html('Now Playing');
         });
     });
