@@ -34,12 +34,8 @@
     <p class="email-address"><a href="mailto:support@protectamerica.com">support@protectamerica.com</a></p>
 </div>
 <div class="clear"></div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "trouble" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "trouble" "limit=10&words=75" %}
+
 <div id="ac-power">
     <h3>AC Power Failure</h3>
     <ul>
@@ -147,7 +143,7 @@ If the connections look like they are connected properly or if you need assistan
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

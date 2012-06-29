@@ -17,17 +17,13 @@
 </div>
 {% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "protect america" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "protect america" "limit=10&words=75" %}
+
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

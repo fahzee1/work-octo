@@ -2,6 +2,7 @@ import re
 from urlparse import parse_qs
 
 from django import template
+from sekizai.context import SekizaiContext
 from django.conf import settings
 
 from apps.testimonials.models import Testimonial
@@ -75,9 +76,11 @@ class TestimonialSearchNode(template.Node):
               'city': testimonial.city,
               'state': testimonial.state,
               'date_created': testimonial.date_created.strftime("%m/%d/%Y"),
-              'testimonial': testimonial.testimonial})
+              'testimonial': testimonial.testimonial,
+              'get_absolute_url': testimonial.get_absolute_url(),
+              'date_created': testimonial.date_created})
         t = template.loader.get_template('testimonials/testimonial_search_tag.html')
-        c = template.Context({
+        c = SekizaiContext({
             'testimonials': testimonial_array,
             'template': self.template,
             'words': self.words
