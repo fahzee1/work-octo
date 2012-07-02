@@ -163,3 +163,26 @@ class CEOFeedback(models.Model):
 
     def __unicode__(self):
         return '%s : %s - %s' % (self.name, self.phone, self.feedback_type)
+
+class TellAFriend(models.Model):
+
+    name = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+
+    friend_name = models.CharField(max_length=128)
+    friend_email = models.EmailField(max_length=128)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def email_friend(self):
+        t = loader.get_template('emails/tell_a_friend.html')
+        c = Context({'sub': self})
+        email = EmailMessage(
+            'Info About Our Neighborhood Security',
+            t.render(c),
+            '"%s" <noreply@protectamerica.com>' % self.name,
+            [self.friend_email],
+            ['"Robert Johnson" <robert@protectamerica.com>'],
+             headers = {'Reply-To': 'noreply@protectamerica.com'})
+        email.send()
+        

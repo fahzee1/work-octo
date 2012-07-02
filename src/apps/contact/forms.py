@@ -3,7 +3,12 @@ import re
 from django.forms import ModelForm, Textarea, TextInput, CharField, Select
 from django.contrib.localflavor.us.us_states import STATE_CHOICES
 
-from apps.contact.models import Submission, CEOFeedback, DEPARTMENT_CHOICES, ContactUs, MovingKit
+from apps.contact.models import (Submission,
+                                 CEOFeedback,
+                                 DEPARTMENT_CHOICES,
+                                 ContactUs, 
+                                 MovingKit,
+                                 TellAFriend)
 
 class PAContactForm(ModelForm):
     class Meta:
@@ -91,3 +96,6 @@ class CeoFeedbackForm(ModelForm):
         self.fields['state'].widget.attrs['id'] = 'state'
         self.fields['city'].widget.attrs['class'] = 'city'
     
+class TellAFriendForm(ModelForm):
+    class Meta:
+        model = TellAFriend

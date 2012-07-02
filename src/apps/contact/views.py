@@ -12,7 +12,7 @@ from django.utils import simplejson
 from django.conf import settings
 
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
-    CeoFeedbackForm, MovingKitForm)
+    CeoFeedbackForm, MovingKitForm, TellAFriendForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
@@ -194,10 +194,9 @@ def main(request):
         if formset.is_valid():
             form = formset.save(commit=False)
             form.save()
-            #form.email_company()
+            form.email_company()
 
             return HttpResponseRedirect(reverse('contact-thank-you'))
-            # send_email(formset.cleaned_data['email'])
     else:
         formset = ContactUsForm()
 
@@ -218,7 +217,6 @@ def ceo(request):
             form.email_company()
 
             return HttpResponseRedirect(reverse('ceo-thank-you'))
-            # send_email(formset.cleaned_data['email'])
     else:
         formset = CeoFeedbackForm()
 
@@ -239,18 +237,36 @@ def moving_kit(request):
             form.email_company()
 
             return HttpResponseRedirect(reverse('contact-thank-you'))
-            # send_email(formset.cleaned_data['email'])
     else:
         formset = MovingKitForm()
 
     return simple_dtt(request, 'support/moving-kit.html', {
                                'parent':'support',
                                'formset': formset,
+                               'pages': ['support'],
                                'page_name': 'moving-kit'})
 
 def find_us(request):
     pass
 
+def tell_a_friend(request):
+    if request.method == "POST":
+        formset = TellAFriendForm(request.POST)
+        if formset.is_valid():
+            form = formset.save(commit=False)
+            form.save()
+            form.email_friend()
+
+            return HttpResponseRedirect(reverse('contact-thank-you'))
+
+    else:
+        formset = TellAFriendForm()
+
+    return simple_dtt(request, 'about-us/tell-a-friend.html', {
+                               'parent':'support',
+                               'formset': formset,
+                               'pages': ['about-us'],
+                               'page_name': 'tell-a-friend'})
 
 def order_form(request):
     if request.method == "POST":
