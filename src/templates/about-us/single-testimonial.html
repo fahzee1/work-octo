@@ -25,26 +25,32 @@
 {% endblock %}
 {% block content %}
 </div>
-<ul id="single-testimonial-box">
-    <li class="one-testimonial">
-        <h1>{{ testimonial.first_name }} {{ testimonial.last_name }} of {{ testimonial.city }}, {{ testimonial.state }} Writes:</h1>
-        <p class="extra-info">on <strong>{{ testimonial.date_created|date:"F d, Y" }}</strong></p>
-        <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
-        {% if testimonial.rating %}
-        <div class="star-container">
-            <div class="star {% if testimonial.rating <= 1 %}active{% endif %}">&nbsp;</div>
-            <div class="star {% if testimonial.rating <= 2 %}active{% endif %}">&nbsp;</div>
-            <div class="star {% if testimonial.rating <= 3 %}active{% endif %}">&nbsp;</div>
-            <div class="star {% if testimonial.rating <= 4 %}active{% endif %}">&nbsp;</div>
-            <div class="star {% if testimonial.rating <= 5 %}active{% endif %}">&nbsp;</div>
-            <div class="clear"></div>
-        </div>
-        {% endif %}
-        <div class="button-link">
-            <a href="{% url testimonials %}" title="Read More Testimonials">Read More Testimonials ></a>
-        </div>
-    </li>
-</ul>
+<div class="clear"></div>
+<div id="testimonial-wrapper">
+    <ul id="search-testimonial-box">
+            <li class="one-testimonial">
+                <img src="/static/img/base/testimonial-guy.png" alt="Testimonial Icon" width="208" height="160" class="testimonial-guy" />
+
+                <h1>{{ testimonial.first_name }} {{ testimonial.last_name }} of {{ testimonial.city }}, {{ testimonial.state }} Writes:</h1>
+                <p class="extra-info">on <strong>{{ testimonial.date_created|date:"F d, Y" }}</strong></p>
+                <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+                {% if testimonial.rating %}
+                <div class="star-container">
+                    <div class="star {% if testimonial.rating <= 1 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 2 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 3 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 4 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 5 %}active{% endif %}">&nbsp;</div>
+                    <div class="clear"></div>
+                </div>
+                {% endif %}
+
+                <div class="button-link">
+                    <a href="{% url testimonials %}" title="Read More Testimonials">Read More Testimonials ></a>
+                </div>
+            </li>
+    </ul>
+</div>
 
 
 {% endblock %}
