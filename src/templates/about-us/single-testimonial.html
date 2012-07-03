@@ -4,22 +4,10 @@
 {% block page_keywords %}crime prevention, security, security system, home security, home security system{% endblock %}
 {% block page_description %}Crime prevention tips will help protect your home and family. The best crime prevention tool for your home is a home security system. Get a GE home security...{% endblock %}
 
-{{ testimonial.first_name }}
-{{ testimonial.last_name }}
-{{ testimonial.city }}
-{{ testimonial.state }}
-{{ testimonial.email }}
-{% if testimonial.rating %}
-{{ testimonial.rating }}
-{% endif %}
-{{ testimonial.message }}
-{{ testimonial.permission_to_post }}
-{{ testimonial.date_created|date:"m-d-Y H:i:s" }}
-
 {% block subnav_child %}
 <ul>
     <li class="active"><a href="{% url testimonials %}">All Testimonials</a></li>
-	<li><a href="">Video Testimonials</a></li>
+	<li><a href="{% url vidimonials %}">Video Testimonials</a></li>
 	<li><a href="{% url send-testimonial %}" title="Share Your Own Protect America Testimonial with Us!">Tell Us Your Testimonial</a></li>
 </ul>
 {% endblock %}

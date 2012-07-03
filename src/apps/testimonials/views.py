@@ -1,8 +1,9 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
+from itertools import chain
 
-from apps.testimonials.models import Testimonial, Textimonial
+from apps.testimonials.models import Testimonial, Textimonial, Vidimonial
 from apps.testimonials.forms import TestimonialForm, TextimonialForm
 from apps.common.views import simple_dtt
 
@@ -42,17 +43,63 @@ def send_testimonial(request):
 
 def view_testimonials(request):
     testimonials = Testimonial.objects.order_by('-date_created')
+    vidimonials = Vidimonial.objects.order_by('-date_created')
+
+    result_list = sorted(
+        chain(testimonials, vidimonials),
+        key=lambda instance: instance.date_created, reverse=True)
+
+    left = []
+    middle = []
+    right = []
+    loop_counter = 0
+    
+    for testimonial in result_list:
+        if loop_counter == 0:
+            left.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
+        elif loop_counter == 1:
+            middle.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
+        elif loop_counter == 2:
+            right.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
+
+        if loop_counter == 2:
+            loop_counter = 0
+        else:
+            loop_counter = loop_counter + 1
+    
+    return simple_dtt(request, 'about-us/testimonials.html', {
+                               'parent':'about-us',
+                               'left_ts': left,
+                               'middle_ts': middle,
+                               'right_ts': right,
+                               'pages': ['about-us', 'testimonials'],
+                               'page_name': 'testimonials'})
+
+def testimonial(request, testimonial_id):
+    try:
+        testimonial = Testimonial.objects.get(id=testimonial_id)
+    except Testimonial.DoesNotExist:
+        raise Http404
+
+    return simple_dtt(request, 'about-us/single-testimonial.html', {
+                               'parent':'about-us',
+                               'testimonial': testimonial,
+                               'pages': ['about-us', 'testimonials'],
+                               'page_name': 'single-testimonial'})
+
+def view_vidimonials(request):
+    testimonials = Vidimonial.objects.order_by('-date_created')
     left = []
     middle = []
     right = []
     loop_counter = 0
     for testimonial in testimonials:
         if loop_counter == 0:
-            left.append(testimonial)
+            left.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
         elif loop_counter == 1:
-            middle.append(testimonial)
+            middle.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
         elif loop_counter == 2:
-            right.append(testimonial)
+            right.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
 
         if loop_counter == 2:
             loop_counter = 0
@@ -65,15 +112,15 @@ def view_testimonials(request):
                                'middle_ts': middle,
                                'right_ts': right,
                                'pages': ['about-us', 'testimonials'],
-                               'page_name': 'testimonial'})
+                               'page_name': 'vidimonials'})
 
-def testimonial(request, testimonial_id):
+def vidimonial(request, testimonial_id):
     try:
-        testimonial = Testimonial.objects.get(id=testimonial_id)
-    except Testimonial.DoesNotExist:
+        testimonial = Vidimonial.objects.get(id=testimonial_id)
+    except Vidimonial.DoesNotExist:
         raise Http404
 
-    return simple_dtt(request, 'about-us/single-testimonial.html', {
+    return simple_dtt(request, 'about-us/video-testimonial.html', {
                                'parent':'about-us',
                                'testimonial': testimonial,
                                'pages': ['about-us', 'testimonials'],
