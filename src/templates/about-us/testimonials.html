@@ -5,47 +5,71 @@
 
 {% block subnav_child %}
 <ul>
-    <li class="active"><a href="{% url testimonials %}">All Testimonials</a></li>
-	<li><a href="">Video Testimonials</a></li>
-	<li><a href="{% url send-testimonial %}" title="Share Your Own Protect America Testimonial with Us!">Tell Us Your Testimonial</a></li>
+    <li {% if page_name == 'testimonials'%}class="active"{% endif %}><a href="{% url testimonials %}">All Testimonials</a></li>
+    <li {% if page_name == 'vidimonials'%}class="active"{% endif %}><a href="{% url vidimonials %}">Video Testimonials</a></li>
+    <li><a href="{% url send-testimonial %}" title="Share Your Own Protect America Testimonial with Us!">Tell Us Your Testimonial</a></li>
 </ul>
 {% endblock %}
 {% block content %}
 </div>
 <div id="customer-testimonial-boxes">
-	<div class="testimonial-column left">
-		{% for test in left_ts %}
-		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
-			<h3><span>{{ test.first_name }} writes:</span> from <strong>{{ test.city }}, {{ test.state }}</strong></h3>
-			<p>{{ test.testimonial|safe }}</p>
-			<div class="clear"></div>
-		</div>
-		{% endfor %}
-		<div class="clear"></div>
-	</div>
-	
-	<div class="testimonial-column">
-		{% for test in middle_ts %}
-		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
-			<h3><span>{{ test.first_name }} writes:</span> from <strong>{{ test.city }}, {{ test.state }}</strong></h3>
-			<p>{{ test.testimonial|safe }}</p>
-			<div class="clear"></div>
-		</div>
-		{% endfor %}
-		<div class="clear"></div>
-	</div>
-	
-	<div class="testimonial-column right">
-		{% for test in right_ts %}
-		<div class="customer-testimonial-box {% cycle 'alt' '' %}">
-			<h3><span>{{ test.first_name }} writes:</span> from <strong>{{ test.city }}{% if test.state %}, {{ test.state }}{% endif %}</strong></h3>
-			<p>{{ test.testimonial|safe }}</p>
-			<div class="clear"></div>
-		</div>
-		{% endfor %}
-		<div class="clear"></div>
+    <div class="testimonial-column left">
+        {% for test in left_ts %}
+        {% with testimonial=test.obj %}
+        <div class="customer-testimonial-box {% cycle 'alt' '' %}">
+        {% if test.type == 'Testimonial' %}
+            <h3><span>{{ testimonial.first_name }} writes:</span> from <strong>{{ testimonial.city }}, {{ testimonial.state }}</strong></h3>
+            <p>{{ testimonial.testimonial|safe }}</p>
+            <div class="clear"></div>
+        {% else %}
+        {% if test.type == 'Vidimonial' %}
+            <iframe width="100%" height="340px" src="http://www.youtube.com/embed/{{ testimonial.video_url }}" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+        {% endif %}
+        </div>
+        {% endwith %}
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+    
+    <div class="testimonial-column">
+        {% for test in middle_ts %}
+        {% with testimonial=test.obj %}
+        <div class="customer-testimonial-box {% cycle 'alt' '' %}">
+        {% if test.type == 'Testimonial' %}
+            <h3><span>{{ testimonial.first_name }} writes:</span> from <strong>{{ testimonial.city }}, {{ testimonial.state }}</strong></h3>
+            <p>{{ testimonial.testimonial|safe }}</p>
+            <div class="clear"></div>
+        {% else %}
+        {% if test.type == 'Vidimonial' %}
+            <iframe width="100%" height="340px" src="http://www.youtube.com/embed/{{ testimonial.video_url }}" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+        {% endif %}
+        </div>
+        {% endwith %}
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+    
+    <div class="testimonial-column right">
+        {% for test in right_ts %}
+        {% with testimonial=test.obj %}
+        <div class="customer-testimonial-box {% cycle 'alt' '' %}">
+        {% if test.type == 'Testimonial' %}
+            <h3><span>{{ testimonial.first_name }} writes:</span> from <strong>{{ testimonial.city }}, {{ testimonial.state }}</strong></h3>
+            <p>{{ testimonial.testimonial|safe }}</p>
+            <div class="clear"></div>
+        {% else %}
+        {% if test.type == 'Vidimonial' %}
+            <iframe width="100%" height="340px" src="http://www.youtube.com/embed/{{ testimonial.video_url }}" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+        {% endif %}
+        </div>
+        {% endwith %}
+        {% endfor %}
+        <div class="clear"></div>
 
-	</div>
+    </div>
 </div>
 
 

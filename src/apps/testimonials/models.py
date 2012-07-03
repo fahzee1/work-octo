@@ -80,3 +80,10 @@ class Textimonial(models.Model):
 
     def get_absolute_url(self):
         return reverse('single-testimonial', kwargs={'testimonial_id': self.id})
+
+class Vidimonial(models.Model):
+    video_url = models.CharField(max_length=256)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('video-testimonial', kwargs={'testimonial_id': self.id})
