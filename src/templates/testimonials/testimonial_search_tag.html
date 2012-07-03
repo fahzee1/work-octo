@@ -75,7 +75,7 @@
 
     <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %} </p>
     <span>&mdash; &nbsp;{{ testimonial.first_name }} {{ testimonial.last_name }} 
-        <em>{{ testimonial.city }}, {{ testimonial.state }} on {{ testimonial.date_created }}</em>
+        <em>{{ testimonial.city }}, {{ testimonial.state }} on {{ testimonial.date_created|date:"F d, Y" }}</em>
     </span>
 </div>
 {% endfor %}
