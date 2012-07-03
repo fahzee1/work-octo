@@ -236,7 +236,7 @@ def moving_kit(request):
             form.save()
             form.email_company()
 
-            return HttpResponseRedirect(reverse('contact-thank-you'))
+            return HttpResponseRedirect(reverse('moving-kit-thank-you'))
     else:
         formset = MovingKitForm()
 
@@ -257,7 +257,7 @@ def tell_a_friend(request):
             form.save()
             form.email_friend()
 
-            return HttpResponseRedirect(reverse('contact-thank-you'))
+            return HttpResponseRedirect(reverse('contact-tell-friend'))
 
     else:
         formset = TellAFriendForm()
