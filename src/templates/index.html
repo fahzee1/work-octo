@@ -254,9 +254,6 @@
         <ul>
         {% for article in latest_news %}
             <li>
-                {% if article.image %}
-                <a href="{{ article.get_absolute_url }}" title="{{ article.heading }}"><img src="{{ MEDIA_URL }}{{ article.image }}" alt="{{ article.image_caption }}" title="{{ article.image_caption }}" /></a>
-                {% endif %}
                 <h3><a href="{{ article.get_absolute_url }}" title="{{ article.heading }}">{{ article.heading }}</a></h3>
                 <p><span>{{ article.date_created|date:"M d Y" }}</span> -- {{ article.summary }}</p>
             </li>
