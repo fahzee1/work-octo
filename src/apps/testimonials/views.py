@@ -97,6 +97,11 @@ def testimonial(request, testimonial_id):
 
 def view_vidimonials(request):
     testimonials = Vidimonial.objects.order_by('-date_created')
+
+    paginator = Paginator(result_list, 3)
+    page_num = request.GET.get('page', 1)
+    page = paginator.page(page_num)
+
     left = []
     middle = []
     right = []
@@ -119,6 +124,7 @@ def view_vidimonials(request):
                                'left_ts': left,
                                'middle_ts': middle,
                                'right_ts': right,
+                               'paginator': page,
                                'pages': ['about-us', 'testimonials'],
                                'page_name': 'video-testimonials'})
 
