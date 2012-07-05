@@ -18,7 +18,8 @@ def index(request):
                     pages = pages + '<li'
                     if parent:
                         pages = pages + ' class="child"'
-                    pages = pages + '> %s ' % (page_name)
+                    pages = pages + '> <a href="%s">%s</a> ' % (
+                        reverse(context['page_name']), page_name)
                     cpages = sort_urls(urllist, parent=context['page_name'])
                     pages = pages + cpages
                     pages = pages + '</li>'
