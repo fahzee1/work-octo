@@ -112,7 +112,7 @@ def view_vidimonials(request):
                                'middle_ts': middle,
                                'right_ts': right,
                                'pages': ['about-us', 'testimonials'],
-                               'page_name': 'vidimonials'})
+                               'page_name': 'video-testimonials'})
 
 def vidimonial(request, testimonial_id):
     try:

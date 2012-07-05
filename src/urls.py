@@ -195,6 +195,8 @@ else:
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/silver-package/?$', 'packages/silver.html', 'silver', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
+            dtt(r'^ge-simon-security-systems/wireless-business-security/business-package/?$', 'packages/business.html', 'business', 'products'),
+
             
 
             # Product > Monitoring
@@ -283,16 +285,16 @@ else:
             url(r'^pa/testimonials/?$',
                 'apps.testimonials.views.view_testimonials',
                 name='testimonials'),
-            url(r'^pa/vidimonials/?$',
+            url(r'^video-testimonials/?$',
                 'apps.testimonials.views.view_vidimonials',
-                name='vidimonials'),
+                name='video-testimonials'),
                 
                 url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
                     'apps.testimonials.views.testimonial', 
                     name='single-testimonial'),
-                url(r'^pa/vidimonials/(?P<testimonial_id>\d+)/?$',
+                url(r'^video-testimonials/(?P<testimonial_id>\d+)/?$',
                     'apps.testimonials.views.vidimonial', 
-                    name='video-testimonial'),
+                    name='single-video-testimonial'),
                 #dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
                 url(r'^pa/share-your-testimonial/?$',
                     'apps.testimonials.views.send_testimonial', 
