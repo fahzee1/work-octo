@@ -57,6 +57,8 @@ class OrderForm(PAContactForm):
         ('silver', 'Silver'),
         ('gold', 'Gold'),
         ('platinum', 'Platinum'),
+        ('business', 'Business'),
+
     )
 
     package = CharField(required=True, widget=Select(
