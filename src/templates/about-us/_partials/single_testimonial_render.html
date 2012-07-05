@@ -1,0 +1,11 @@
+<div class="customer-testimonial-box {% cycle 'alt' '' %}">
+    {% if test.type == 'Textimonial' %}
+        <h3><span>{{ testimonial.first_name }} writes:</span> from <strong>{{ testimonial.city }}, {{ testimonial.state }}</strong></h3>
+        <p>{{ testimonial.message|safe }}</p>
+        <div class="clear"></div>
+    {% else %}
+    {% if test.type == 'Vidimonial' %}
+        <iframe width="100%" height="340px" src="http://www.youtube.com/embed/{{ testimonial.video_url }}" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+    {% endif %}
+</div>
