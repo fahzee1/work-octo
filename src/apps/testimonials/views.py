@@ -1,7 +1,10 @@
-from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.http import Http404, HttpResponse, HttpResponseRedirect
 from itertools import chain
+
+from django.shortcuts import render_to_response
+from django.template import RequestContext, loader, Context
+from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.core.paginator import Paginator
+from django.utils import simplejson
 
 from apps.testimonials.models import Testimonial, Textimonial, Vidimonial
 from apps.testimonials.forms import TestimonialForm, TextimonialForm
@@ -42,19 +45,23 @@ def send_testimonial(request):
                                'page_name': 'send-testimonial'})
 
 def view_testimonials(request):
-    testimonials = Testimonial.objects.order_by('-date_created')
+    testimonials = Textimonial.objects.order_by('-date_created')
     vidimonials = Vidimonial.objects.order_by('-date_created')
 
     result_list = sorted(
         chain(testimonials, vidimonials),
         key=lambda instance: instance.date_created, reverse=True)
 
+    paginator = Paginator(result_list, 20)
+    page_num = request.GET.get('page', 1)
+    page = paginator.page(page_num)
+
     left = []
     middle = []
     right = []
     loop_counter = 0
     
-    for testimonial in result_list:
+    for testimonial in page.object_list:
         if loop_counter == 0:
             left.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
         elif loop_counter == 1:
@@ -72,12 +79,13 @@ def view_testimonials(request):
                                'left_ts': left,
                                'middle_ts': middle,
                                'right_ts': right,
+                               'paginator': page,
                                'pages': ['about-us', 'testimonials'],
                                'page_name': 'testimonials'})
 
 def testimonial(request, testimonial_id):
     try:
-        testimonial = Testimonial.objects.get(id=testimonial_id)
+        testimonial = Textimonial.objects.get(id=testimonial_id)
     except Testimonial.DoesNotExist:
         raise Http404
 

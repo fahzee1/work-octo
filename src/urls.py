@@ -173,7 +173,7 @@ else:
 
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
-        'apps.common.views.thank_you', name='custom_thank_you'),
+        'apps.common.views.thank_you', name='custom_thank_you',),
 
 
 
@@ -265,7 +265,7 @@ else:
 
             #dtt(r'^pa/family-of-companies/america-protect/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
             url(r'^pa/family-of-companies/america-protect/?$',
-                'apps.common.views.family_of_companies', 
+                'apps.common.views.family_of_companies',
                 name='family'),
 
             # About > Charities
