@@ -9,8 +9,7 @@ news_sitemap = {
 }
 urlpatterns = patterns('apps.news.views',
 
-    url(r'^$', 'news_home', dict(name='news-home',
-        extra_context={'page_name': 'news-home', 'parent': 'support'}),
+    url(r'^$', 'news_home', name='news-home'),
 
     url(r'^archive/$', 'articles', name='news-articles'),
     url(r'^archive/(?P<year>[0-9]{4})/$',
