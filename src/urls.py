@@ -173,13 +173,14 @@ else:
 
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
-        'apps.common.views.thank_you', name='custom_thank_you'),
+        'apps.common.views.thank_you', name='custom_thank_you',),
 
 
 
         # pay it forward page
-        url(r'^payitforward/$', 'apps.common.views.payitforward',
-            name='payitforward'),
+        url(r'^payitforward/$', 'apps.common.views.payitforward', dict( 
+            name='payitforward',
+            extra_context={'page_name': 'payitforward', 'parent': 'about-us'})),
 
         # Product > Advantage
 
@@ -263,8 +264,9 @@ else:
 
             #dtt(r'^pa/family-of-companies/america-protect/?$', 'about-us/family-of-companies.html', 'family', 'about-us'),
             url(r'^pa/family-of-companies/america-protect/?$',
-                'apps.common.views.family_of_companies', 
-                name='family'),
+                'apps.common.views.family_of_companies', dict( 
+                        name='family',
+                        extra_context={'page_name': 'family', 'parent': 'about-us'})),
 
             # About > Charities
 
@@ -281,22 +283,25 @@ else:
 
             #dtt(r'^pa/testimonials/?$', 'about-us/testimonials.html', 'testimonials', 'about-us'),
             url(r'^pa/testimonials/?$',
-                'apps.testimonials.views.view_testimonials',
-                name='testimonials'),
+                'apps.testimonials.views.view_testimonials', dict( 
+                        name='testimonials',
+                        extra_context={'page_name': 'testimonials', 'parent': 'about-us'})),
             url(r'^pa/vidimonials/?$',
-                'apps.testimonials.views.view_vidimonials',
-                name='vidimonials'),
+                'apps.testimonials.views.view_vidimonials', dict( 
+                        name='video-testimonials',
+                        extra_context={'page_name': 'video-testimonials', 'parent': 'about-us'})),
                 
                 url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
-                    'apps.testimonials.views.testimonial', 
-                    name='single-testimonial'),
+                    'apps.testimonials.views.testimonial',  
+                        name='single-testimonial'),
                 url(r'^pa/vidimonials/(?P<testimonial_id>\d+)/?$',
                     'apps.testimonials.views.vidimonial', 
-                    name='video-testimonial'),
+                        name='video-testimonial'),
                 #dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
                 url(r'^pa/share-your-testimonial/?$',
-                    'apps.testimonials.views.send_testimonial', 
-                    name='send-testimonial'),
+                    'apps.testimonials.views.send_testimonial', dict( 
+                        name='send-testimonial',
+                        extra_context={'page_name': 'send-testimonial', 'parent': 'about-us'})),
 
 
 
@@ -304,8 +309,9 @@ else:
 
             #dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
             url(r'^pa/cust_ref/?$',
-                'apps.contact.views.tell_a_friend', 
-                name='tell-a-friend'),
+                'apps.contact.views.tell_a_friend', dict( 
+                    name='tell-a-friend',
+                    extra_context={'page_name': 'tell-a-friend', 'parent': 'about-us'})),
 
         
         # Complete Home Security 
@@ -315,8 +321,9 @@ else:
         # Contact Pages
 
         #dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
-        url(r'^pa/contact/?$', 'apps.contact.views.main',
-            name='contact-us'),
+        url(r'^pa/contact/?$', 'apps.contact.views.main', dict( 
+            name='contact-us',
+            extra_context={'page_name': 'contact-us', 'parent': 'about-us'})),
 
         
             # Contact Pages > Find Us
@@ -328,15 +335,18 @@ else:
             # Contact Pages > Affiliate Program
             #dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
             url(r'^contact/affiliate-program/$',
-                'apps.affiliates.views.signup', name='affiliate-program'),
+                'apps.affiliates.views.signup', dict( 
+                    name='affiliate-program',
+                    extra_context={'page_name': 'affiliate-program', 'parent': 'contact-us'})),
             
             # Contact Pages > Careers
             dtt(r'^contact/careers/?$', 'contact-us/careers.html', 'careers', 'contact-us'),
 
             # Contact Pages > Feedback to CEO
             #dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
-            url(r'^pa/feedback/?$', 'apps.contact.views.ceo',
-                name='feedback-ceo'),
+            url(r'^pa/feedback/?$', 'apps.contact.views.ceo', dict( 
+                name='feedback-ceo',
+                extra_context={'page_name': 'feedback-ceo', 'parent': 'contact-us'})),
 
 
 
