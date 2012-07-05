@@ -69,9 +69,9 @@ def prepare_data_from_request(request):
     if not source and 'source' in request.POST:
         source = request.POST['source']
     
-    leadid = request.COOKIES.get('leadid', None)
-    if leadid is None:
-        leadid = request.session.get('leadid', None)
+    lead_id = request.COOKIES.get('lead_id', None)
+    if lead_id is None:
+        lead_id = request.session.get('lead_id', None)
     
     # get the aff from the database
     try:
@@ -102,7 +102,7 @@ def prepare_data_from_request(request):
             'agentid': agentid,
             'affkey': affkey,
             'source': source,
-            'leadid': leadid,
+            'lead_id': lead_id,
             'agent': agent,
             'thank_you_url': thank_you_url,
         }
@@ -121,14 +121,11 @@ def basic_post_login(request):
         if not referer_page and 'HTTP_REFERER' in request.META:
             referer_page = request.META['HTTP_REFERER']
         formset.referer_page = referer_page
-
         formset.save()
-        formset.thank_you_url = request_data['thank_you_url']
         
-        # send emails after formset
-        if request_data['leadid'] is None:
-            request_data['leadid'] = formset.id
-
+        if request_data['lead_id'] is None:
+            request_data['lead_id'] = formset.id
+        
         emaildata = {
             'agent_id': request_data['agentid'],
             'source': request_data['source'],
@@ -139,10 +136,12 @@ def basic_post_login(request):
             'formlocation': formset.referer_page,
             'searchengine': request.session.get('search_engine', ''),
             'searchkeywords': request.session.get('search_keywords', ''),
-            'leadid': request_data['leadid'],
+            'lead_id': formset.id,
         }
         send_leadimport(emaildata)
         send_thankyou(emaildata)
+        
+        formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
 
