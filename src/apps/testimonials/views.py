@@ -98,7 +98,7 @@ def testimonial(request, testimonial_id):
 def view_vidimonials(request):
     testimonials = Vidimonial.objects.order_by('-date_created')
 
-    paginator = Paginator(result_list, 3)
+    paginator = Paginator(testimonials, 3)
     page_num = request.GET.get('page', 1)
     page = paginator.page(page_num)
 
@@ -106,7 +106,7 @@ def view_vidimonials(request):
     middle = []
     right = []
     loop_counter = 0
-    for testimonial in testimonials:
+    for testimonial in page.object_list:
         if loop_counter == 0:
             left.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
         elif loop_counter == 1:
