@@ -277,56 +277,74 @@ body.warranty {
 #sitemap {
     .content-box;
     ul {
+
         li {
-            font-size: 28px;
-            display: block;
-            width: 209px;
-            background: @v-light-grey;
-            .border-radius;
-            padding: 10px 5px 10px 10px;
-            margin: 0 5px 10px;
-            .fade-slow;
-            .drop-shadow(0, 2px, 5px, @light-grey);
-            ul {
-                margin-top: 20px;
+            font-size: 24px;
+            line-height: 28px;
+            margin: 8px;
+            padding: 8px;
+            background: @off-white;
+            border: 1px solid transparent;
+            &:hover {
+                .drop-shadow(0,2px,5px, @v-light-grey);
+            }
+            a {
+                text-decoration: none;
                 display: block;
+                &:hover {
+                    text-decoration: underline;
+                    color: @blue;
+                }
+            }
+            ul {
+                margin-left: 24px;
+                padding: 4px;
                 li {
-                    font-size: 18px;
-                    background: @off-white;
-                    padding: 5px;
-                    margin: 5px 0;
-                    width: 195px;
-                    .drop-shadow(0px,0px,0px,@white);
+                    font-size: 16px;
+                    line-height: 18px;
+                    margin: 0;
+                    padding: 4px;
+                    background: transparent;
+                    a {
+                        color: @dark-grey;
+                    }
+                    &:hover {
+                        background: @v-light-grey;
+                        border: 1px solid @light-grey;
+
+                    }
                     ul {
-                        margin-top: 0;
                         li {
-                            background: @light-blue;
-                            width: 185px;
                             font-size: 14px;
-
+                            line-height: 16px;
+                            padding: 4px;
+                            &:hover {
+                                background: @v-light-blue;
+                                border: 1px solid @light-blue;
+                            }
+                            a {
+                                color: @navy-blue;
+                            }
+                            ul {
+                                li {
+                                    font-size: 12px;
+                                    line-height: 14px;
+                                    a {
+                                        color: @grey;
+                                    }
+                                    &:hover {
+                                        background: @white;
+                                        border: 1px solid @off-white;
+                                    }
+                                }
+                            }
                         }
+                        
                     }
+                    
                 }
             }
         }
-    }
-    ul:hover {
-        li:hover {
-            background: @light-grey;
-            .fade-fast;
-            ul:hover {
-                li:hover {
-                    background: @grey;
-
-                    ul:hover {
-                        li:hover {
-                            background: @blue;
-                            color: @white;
-
-                        }
-                    }
-                }
-            }
-        }
+        
     }
 }
