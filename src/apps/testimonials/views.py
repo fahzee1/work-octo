@@ -46,7 +46,7 @@ def send_testimonial(request):
                                'page_name': 'send-testimonial'})
 
 def view_testimonials(request):
-    testimonials = Textimonial.objects.order_by('-date_created')
+    testimonials = Textimonial.objects.filter(display=True).order_by('-date_created')
     vidimonials = Vidimonial.objects.order_by('-date_created')
 
     result_list = sorted(

@@ -46,11 +46,11 @@ class TestimonialSearchNode(template.Node):
 
         if self.search_term == '':
             testimonials = Textimonial.objects.filter(permission_to_post=True,
-                ).order_by('-date_created')
+                display=True).order_by('-date_created')
         else:
             testimonials = Textimonial.objects.filter(permission_to_post=True,
                 message__icontains=self.search_term
-                ).order_by('-date_created')
+                display=True).order_by('-date_created')
         
         # filter the testimonials by state
         if 'state' in self.kwargs:

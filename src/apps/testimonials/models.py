@@ -63,6 +63,7 @@ class Textimonial(models.Model):
     rating = models.CharField(max_length=4)
     message = models.TextField()
     permission_to_post = models.BooleanField(default=True)
+    display = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True)
 
