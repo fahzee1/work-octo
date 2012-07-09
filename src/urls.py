@@ -6,6 +6,18 @@ from django.views.generic.simple import redirect_to
 from django.contrib import admin
 admin.autodiscover()
 
+# a simple direct_to_template wrapper
+def dtt(pattern, template, name, parent=None, ctx=None):
+    ctx = ctx or {}
+
+
+    context = dict(page_name=name, parent=parent)
+    context.update(ctx)
+
+    return url(pattern, 'apps.common.views.simple_dtt',
+        dict(template=template, extra_context=context),
+        name=name)
+
 urlpatterns = patterns('',
     # Example:
     # (r'^protectamerica/', include('protectamerica.foo.urls')),
@@ -37,20 +49,16 @@ urlpatterns = patterns('',
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
     url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
+    
+    # GLOBAL PAGES
+    # Help Pages > Privacy Policy
+    dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+    
+    url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
+                    'apps.testimonials.views.testimonial', 
+                    name='single-testimonial'),
 
 )
-
-# a simple direct_to_template wrapper
-def dtt(pattern, template, name, parent=None, ctx=None):
-    ctx = ctx or {}
-
-
-    context = dict(page_name=name, parent=parent)
-    context.update(ctx)
-
-    return url(pattern, 'apps.common.views.simple_dtt',
-        dict(template=template, extra_context=context),
-        name=name)
 
 # Radioshack URLS
 if settings.SITE_ID == 2:
@@ -289,9 +297,6 @@ else:
                 'apps.testimonials.views.view_vidimonials',
                 name='video-testimonials'),
                 
-                url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
-                    'apps.testimonials.views.testimonial', 
-                    name='single-testimonial'),
                 url(r'^video-testimonials/(?P<testimonial_id>\d+)/?$',
                     'apps.testimonials.views.vidimonial', 
                     name='single-video-testimonial'),
@@ -347,8 +352,7 @@ else:
         dtt(r'^help/?$', 'help/index.html', 'help'),
 
 
-            # Help Pages > Privacy Policy
-                dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+            
                 
             # Help Pages > Low Price Guarantee
                 dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),
@@ -423,4 +427,3 @@ if settings.DEBUG:
         }),
         url(r'^templates/(?P<path>.*)$', template_view),
    )
-    

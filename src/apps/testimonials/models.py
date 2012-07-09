@@ -81,6 +81,12 @@ class Textimonial(models.Model):
     def get_absolute_url(self):
         return reverse('single-testimonial', kwargs={'testimonial_id': self.id})
 
+    def __unicode__(self):
+        return '%s %s - %s - %s' % (self.first_name,
+                                    self.last_name,
+                                    self.state,
+                                    self.rating)
+
 class Vidimonial(models.Model):
     video_url = models.CharField(max_length=256)
     date_created = models.DateTimeField(auto_now_add=True)
