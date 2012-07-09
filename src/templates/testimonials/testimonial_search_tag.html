@@ -24,7 +24,7 @@
                 {% endif %}
 
                 <div class="button-link">
-                    <a href="{{ testimonial.get_absolute_url }}" title="Read More Testimonials">Read {{ testimonial.first_name }}'s Testimonial ></a>
+                    <a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read More Testimonials">Read {{ testimonial.first_name }}'s Testimonial ></a>
                 </div>
             </li>
         {% endfor %}
@@ -46,7 +46,7 @@
         <h4>{{ testimonial.first_name }} {{ testimonial.last_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}</span></h4>
         <strong>{{ testimonial.date_created }}</strong>
         <div class="button-link">
-            <a href="{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name|pluralize }} testimonial">Read More ></a>
+            <a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name|pluralize }} testimonial">Read More ></a>
         </div>
 
     </div>
@@ -56,7 +56,7 @@
 {% endif %}
 {% if template == 'sidebar-old' %}
 {% for testimonial in testimonials %}
-<a href="{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name }}'s testimonial">
+<a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name }}'s testimonial">
 <li>
     <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
     <div class="customer-name">
@@ -71,7 +71,7 @@
 {% if template == 'old' %}
 {% for testimonial in testimonials %}
 <div>
-    <a href="{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name|pluralize }} testimonial" class="read-more-button">Read More ></a>
+    <a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name|pluralize }} testimonial" class="read-more-button">Read More ></a>
 
     <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %} </p>
     <span>&mdash; &nbsp;{{ testimonial.first_name }} {{ testimonial.last_name }} 

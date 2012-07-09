@@ -219,7 +219,7 @@ else:
 
             dtt(r'^pa/equipment/wireless-home-security-system/?$', 'products/equipment/index.html', 'equipment', 'products'),
 
-                        dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
+                        #dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
                             dtt(r'^products/security-equipment/control-panels/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'control-panel'),
                             dtt(r'^products/security-equipment/control-panels/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'control-panel'),
 
@@ -414,6 +414,18 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/contact/careers/', 'permanent': True}),
     ('^pa/home-security-opportunities/?$',
         redirect_to, {'url': '/contact/careers/', 'permanent': True}),
+    ('^pa/support/?$',
+        redirect_to, {'url': '/support/', 'permanent': True}),
+    ('^pa/about/?$',
+        redirect_to, {'url': '/pa/about/home-security-companies/', 'permanent': True}),
+    ('^pa/priv_p/protect-america/?$',
+        redirect_to, {'url': '/help/privacy-policy/', 'permanent': True}),
+    ('^pa/return-policy/Home-Security/?$',
+        redirect_to, {'url': '/help/return-policy/', 'permanent': True}),
+    ('^pa/do-not-call/?$',
+        redirect_to, {'url': '/help/do-not-call/', 'permanent': True}),
+    ('^pa/site_map/?$',
+        redirect_to, {'url': '/sitemap/', 'permanent': True}),
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -427,3 +439,4 @@ if settings.DEBUG:
         }),
         url(r'^templates/(?P<path>.*)$', template_view),
    )
+    
