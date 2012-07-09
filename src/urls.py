@@ -439,4 +439,3 @@ if settings.DEBUG:
         }),
         url(r'^templates/(?P<path>.*)$', template_view),
    )
-    
