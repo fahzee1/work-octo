@@ -12,7 +12,7 @@ from django.utils import simplejson
 from django.conf import settings
 
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
-    CeoFeedbackForm, MovingKitForm, TellAFriendForm)
+    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
@@ -283,3 +283,22 @@ def order_form(request):
                                'formset': formset,
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
+
+def donotcall(request):
+    if request.method == "POST":
+        formset = DoNotCallForm(request.POST)
+        if formset.is_valid():
+            form = formset.save(commit=False)
+            form.save()
+            form.email_company()
+
+            return HttpResponseRedirect(reverse('contact-thank-you'))
+
+    else:
+        formset = DoNotCallForm()
+
+    return simple_dtt(request, 'help/do-not-call.html', {
+                               'parent':'help',
+                               'formset': formset,
+                               'pages': ['support', 'help'],
+                               'page_name': 'tell-a-friend'})

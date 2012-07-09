@@ -364,8 +364,9 @@ else:
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
             # Help Pages > Do Not Call
-                dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
-
+                #dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
+                url(r'^help/do-not-call/?$', 'apps.contact.views.donotcall',
+                    name='do-not-call'),
             # Help Pages > Security of Information
                 dtt(r'^help/security-of-information/?$', 'help/security-of-information.html', 'security-of-information', 'help'),
 

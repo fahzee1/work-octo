@@ -8,7 +8,8 @@ from apps.contact.models import (Submission,
                                  DEPARTMENT_CHOICES,
                                  ContactUs, 
                                  MovingKit,
-                                 TellAFriend)
+                                 TellAFriend,
+                                 DoNotCall)
 
 class PAContactForm(ModelForm):
     class Meta:
@@ -101,3 +102,7 @@ class CeoFeedbackForm(ModelForm):
 class TellAFriendForm(ModelForm):
     class Meta:
         model = TellAFriend
+
+class DoNotCallForm(ModelForm):
+    class Meta:
+        model = DoNotCall
