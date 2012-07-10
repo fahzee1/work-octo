@@ -168,7 +168,7 @@ else:
     urlpatterns += patterns('',
 
         # Test Pages
-        dtt(r'^test/hic/?$', 'tests/hi-c-index-test.html', 'hic-test', 'tests'),
+        dtt(r'^test/hic/?$', 'tests/hi-c-index-test.html', 'hic-test', 'home'),
 
             
 
