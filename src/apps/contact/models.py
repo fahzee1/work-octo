@@ -98,6 +98,9 @@ class ContactUs(models.Model):
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
 
+    def __unicode__(self):
+        return '%s : %s' % (self.name, self.phone,)
+
 class MovingKit(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
@@ -133,6 +136,9 @@ class MovingKit(models.Model):
             ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
+
+    def __unicode__(self):
+        return '%s : %s' % (self.name, self.current_phone,)
 
 class CEOFeedback(models.Model):
 
@@ -186,3 +192,27 @@ class TellAFriend(models.Model):
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
         
+    def __unicode__(self):
+        return '%s -> %s' % (self.name, self.friend_name,)
+
+class DoNotCall(models.Model):
+
+    name = models.CharField(max_length=128)
+    phone = PhoneNumberField()
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def email_company(self):
+        t = loader.get_template('emails/do-not-call.html')
+        c = Context({'sub': self})
+        email = EmailMessage(
+            'New Do Not Call Request',
+            t.render(c),
+            '"Protect America" <noreply@protectamerica.com>',
+            ['feedback@protectamerica.com'],
+            ['"Robert Johnson" <robert@protectamerica.com>'],
+             headers = {'Reply-To': 'noreply@protectamerica.com'})
+        email.send()
+
+    def __unicode__(self):
+        return '%s : %s' % (self.name, self.phone,)

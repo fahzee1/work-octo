@@ -140,7 +140,8 @@ class AffiliateMiddleware(object):
                 if default_agent is not None and current_cookie is None:
                     # dont set the cookie to default
                     request.session['refer_id'] = default_agent
-
+                    #request.session['source'] = 'PROTECT AMERICA'
+                    
                     response.set_cookie('refer_id',
                         value=request.session['refer_id'],
                         domain=cookie_domain,

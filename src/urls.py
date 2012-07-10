@@ -6,6 +6,18 @@ from django.views.generic.simple import redirect_to
 from django.contrib import admin
 admin.autodiscover()
 
+# a simple direct_to_template wrapper
+def dtt(pattern, template, name, parent=None, ctx=None):
+    ctx = ctx or {}
+
+
+    context = dict(page_name=name, parent=parent)
+    context.update(ctx)
+
+    return url(pattern, 'apps.common.views.simple_dtt',
+        dict(template=template, extra_context=context),
+        name=name)
+
 urlpatterns = patterns('',
     # Example:
     # (r'^protectamerica/', include('protectamerica.foo.urls')),
@@ -37,20 +49,16 @@ urlpatterns = patterns('',
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
     url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
+    
+    # GLOBAL PAGES
+    # Help Pages > Privacy Policy
+    dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+    
+    url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
+                    'apps.testimonials.views.testimonial', 
+                    name='single-testimonial'),
 
 )
-
-# a simple direct_to_template wrapper
-def dtt(pattern, template, name, parent=None, ctx=None):
-    ctx = ctx or {}
-
-
-    context = dict(page_name=name, parent=parent)
-    context.update(ctx)
-
-    return url(pattern, 'apps.common.views.simple_dtt',
-        dict(template=template, extra_context=context),
-        name=name)
 
 # Radioshack URLS
 if settings.SITE_ID == 2:
@@ -211,7 +219,7 @@ else:
 
             dtt(r'^pa/equipment/wireless-home-security-system/?$', 'products/equipment/index.html', 'equipment', 'products'),
 
-                        dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
+                        #dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
                             dtt(r'^products/security-equipment/control-panels/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'control-panel'),
                             dtt(r'^products/security-equipment/control-panels/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'control-panel'),
 
@@ -289,9 +297,6 @@ else:
                 'apps.testimonials.views.view_vidimonials',
                 name='video-testimonials'),
                 
-                url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
-                    'apps.testimonials.views.testimonial', 
-                    name='single-testimonial'),
                 url(r'^video-testimonials/(?P<testimonial_id>\d+)/?$',
                     'apps.testimonials.views.vidimonial', 
                     name='single-video-testimonial'),
@@ -347,8 +352,7 @@ else:
         dtt(r'^help/?$', 'help/index.html', 'help'),
 
 
-            # Help Pages > Privacy Policy
-                dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
+            
                 
             # Help Pages > Low Price Guarantee
                 dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),
@@ -360,8 +364,9 @@ else:
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
 
             # Help Pages > Do Not Call
-                dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
-
+                #dtt(r'^help/do-not-call/?$', 'help/do-not-call.html', 'do-not-call', 'help'),
+                url(r'^help/do-not-call/?$', 'apps.contact.views.donotcall',
+                    name='do-not-call'),
             # Help Pages > Security of Information
                 dtt(r'^help/security-of-information/?$', 'help/security-of-information.html', 'security-of-information', 'help'),
 
@@ -395,6 +400,8 @@ else:
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
+    ('^radioshack/?$',
+        redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
             'apps.common.views.redirect_wrapper'),
 )
@@ -410,6 +417,77 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/contact/careers/', 'permanent': True}),
     ('^pa/home-security-opportunities/?$',
         redirect_to, {'url': '/contact/careers/', 'permanent': True}),
+    ('^pa/support/?$',
+        redirect_to, {'url': '/support/', 'permanent': True}),
+    ('^pa/about/?$',
+        redirect_to, {'url': '/pa/about/home-security-companies/', 'permanent': True}),
+    ('^pa/priv_p/?$',
+        redirect_to, {'url': '/help/privacy-policy/', 'permanent': True}),
+    ('^pa/priv_p/protect-america/?$',
+        redirect_to, {'url': '/help/privacy-policy/', 'permanent': True}),
+    ('^pa/return-policy/Home-Security/?$',
+        redirect_to, {'url': '/help/return-policy/', 'permanent': True}),
+    ('^pa/do-not-call/?$',
+        redirect_to, {'url': '/help/do-not-call/', 'permanent': True}),
+    ('^pa/site_map/?$',
+        redirect_to, {'url': '/sitemap/', 'permanent': True}),
+    ('^secretkeypad/?$',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/ge_simon_xt/?$',
+        redirect_to, {'url': '/products/security-equipment/control-panels/ge-simon-xt/', 'permanent': True}),
+    ('^pa/ge_simon_3/?$',
+        redirect_to, {'url': '/products/security-equipment/control-panels/ge-simon-3/', 'permanent': True}),
+    ('^pa/learn/?$',
+        redirect_to, {'url': '/pa/learn/alarm-companies/', 'permanent': True}),
+    ('^pa/operation/?$',
+        redirect_to, {'url': '/support/operation/', 'permanent': True}),
+    ('^pa/advantage/?$',
+        redirect_to, {'url': '/security-advantage/', 'permanent': True}),
+    ('^pa/troubleshooting/?$',
+        redirect_to, {'url': '/support/troubleshooting/', 'permanent': True}),
+    ('^pa/security_sensors/?$',
+        redirect_to, {'url': '/products/security-equipment/sensors/', 'permanent': True}),
+    ('^pa/faq/?$',
+        redirect_to, {'url': '/support/faq/', 'permanent': True}),
+    ('^pa/install/?$',
+        redirect_to, {'url': '/support/installation/', 'permanent': True}),
+    ('^pa/equipment/?$',
+        redirect_to, {'url': '/pa/equipment/wireless-home-security-system/', 'permanent': True}),
+    ('^pa/license/?$',
+        redirect_to, {'url': '/help/state-licenses/', 'permanent': True}),
+    ('^pa/profile/?$',
+        redirect_to, {'url': '/pa/profile/home-alarm-systems/', 'permanent': True}),
+    ('^pa/charities/?$',
+        redirect_to, {'url': '/pa/charities/america-protect/', 'permanent': True}),
+    ('^pa/how_it_works/?$',
+        redirect_to, {'url': '/pa/how_it_works/ge-security-systems/', 'permanent': True}),
+    ('^pa/warranty/?$',
+        redirect_to, {'url': '/help/warranty/', 'permanent': True}),
+    ('^pa/monitoring/?$',
+        redirect_to, {'url': '/pa/monitoring/security-system/', 'permanent': True}),
+    ('^pa/installv/?$',
+        redirect_to, {'url': '/support/installation/', 'permanent': True}),
+    ('^local-directory/?$',
+        redirect_to, {'url': 'http://homesecuritysystems.protectamerica.com/', 'permanent': True}),
+    ('^pa/safer_at_home/?$',
+        redirect_to, {'url': '/pa/learn/alarm-companies/', 'permanent': True}),
+    ('^pa/products/?$',
+        redirect_to, {'url': '/pa/packages/alarms/', 'permanent': True}),
+    ('^careers.php$',
+        redirect_to, {'url': '/contact/careers/', 'permanent': True}),
+    ('^pa/map/?$',
+        redirect_to, {'url': '/contact/find-us/', 'permanent': True}),
+    ('^pa/careers/?$',
+        redirect_to, {'url': '/contact/careers/', 'permanent': True}),
+    ('^pa/packages/?$',
+        redirect_to, {'url': '/pa/packages/alarms/', 'permanent': True}),
+    ('^pa/mistakes/?$',
+        redirect_to, {'url': '/pa/learn/alarm-companies/', 'permanent': True}),
+    ('^pa/home_security_accessories/?$',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/home_automation/?$',
+        redirect_to, {'url': '/products/security-equipment/accessories/home-automation/', 'permanent': True}),
+
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -423,4 +501,3 @@ if settings.DEBUG:
         }),
         url(r'^templates/(?P<path>.*)$', template_view),
    )
-    

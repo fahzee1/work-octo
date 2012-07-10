@@ -5,7 +5,7 @@ from django import template
 from sekizai.context import SekizaiContext
 from django.conf import settings
 
-from apps.testimonials.models import Testimonial
+from apps.testimonials.models import Testimonial, Textimonial
 
 register = template.Library()
 
@@ -45,12 +45,12 @@ class TestimonialSearchNode(template.Node):
         testimonial_array = []
 
         if self.search_term == '':
-            testimonials = Testimonial.objects.filter(can_post=True,
+            testimonials = Textimonial.objects.filter(permission_to_post=True,
                 display=True).order_by('-date_created')
         else:
-            testimonials = Testimonial.objects.filter(can_post=True,
-                display=True, testimonial__icontains=self.search_term
-                ).order_by('-date_created')
+            testimonials = Textimonial.objects.filter(permission_to_post=True,
+                message__icontains=self.search_term,
+                display=True).order_by('-date_created')
         
         # filter the testimonials by state
         if 'state' in self.kwargs:
@@ -67,16 +67,16 @@ class TestimonialSearchNode(template.Node):
         for testimonial in testimonials:
             if self.search_term != '':
                 pattern = re.compile(r'(%s)' % self.search_term, re.I)
-                testimonial.testimonial = re.sub(pattern,
+                testimonial.message = re.sub(pattern,
                     r'<strong>\1</strong>',
-                    testimonial.testimonial)
+                    testimonial.message)
 
             testimonial_array.append({'first_name': testimonial.first_name,
               'last_name': testimonial.last_name,
               'city': testimonial.city,
               'state': testimonial.state,
               'date_created': testimonial.date_created.strftime("%m/%d/%Y"),
-              'testimonial': testimonial.testimonial,
+              'testimonial': testimonial.message,
               'get_absolute_url': testimonial.get_absolute_url(),
               'date_created': testimonial.date_created})
         t = template.loader.get_template('testimonials/testimonial_search_tag.html')
