@@ -22,7 +22,7 @@
                 <h1>{{ testimonial.first_name }} {{ testimonial.last_name }} of {{ testimonial.city }}, {{ testimonial.state }} Writes:</h1>
                 <p class="extra-info">on <strong>{{ testimonial.date_created|date:"F d, Y" }}</strong></p>
                 <p>{{ testimonial.message|safe }}</p>
-                {% if testimonial.rating %}
+                {% if testimonial.rating > 0%}
                 <div class="star-container">
                     <div class="star {% if testimonial.rating <= 1 %}active{% endif %}">&nbsp;</div>
                     <div class="star {% if testimonial.rating <= 2 %}active{% endif %}">&nbsp;</div>

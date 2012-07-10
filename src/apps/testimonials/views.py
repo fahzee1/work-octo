@@ -5,6 +5,7 @@ from django.template import RequestContext, loader, Context
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator
 from django.utils import simplejson
+from django.core.urlresolvers import reverse
 
 from apps.testimonials.models import Testimonial, Textimonial, Vidimonial
 from apps.testimonials.forms import TestimonialForm, TextimonialForm
@@ -45,7 +46,7 @@ def send_testimonial(request):
                                'page_name': 'send-testimonial'})
 
 def view_testimonials(request):
-    testimonials = Textimonial.objects.order_by('-date_created')
+    testimonials = Textimonial.objects.filter(display=True).order_by('-date_created')
     vidimonials = Vidimonial.objects.order_by('-date_created')
 
     result_list = sorted(
@@ -97,11 +98,16 @@ def testimonial(request, testimonial_id):
 
 def view_vidimonials(request):
     testimonials = Vidimonial.objects.order_by('-date_created')
+
+    paginator = Paginator(testimonials, 3)
+    page_num = request.GET.get('page', 1)
+    page = paginator.page(page_num)
+
     left = []
     middle = []
     right = []
     loop_counter = 0
-    for testimonial in testimonials:
+    for testimonial in page.object_list:
         if loop_counter == 0:
             left.append({'type': testimonial.__class__.__name__, 'obj': testimonial})
         elif loop_counter == 1:
@@ -119,6 +125,7 @@ def view_vidimonials(request):
                                'left_ts': left,
                                'middle_ts': middle,
                                'right_ts': right,
+                               'paginator': page,
                                'pages': ['about-us', 'testimonials'],
                                'page_name': 'video-testimonials'})
 

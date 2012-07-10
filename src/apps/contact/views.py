@@ -12,7 +12,7 @@ from django.utils import simplejson
 from django.conf import settings
 
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
-    CeoFeedbackForm, MovingKitForm, TellAFriendForm)
+    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
@@ -34,7 +34,8 @@ def send_leadimport(data):
     t = loader.get_template('_partials/lead_submission_email.html')
     c = Context(data)
     send_mail(subject, t.render(c),
-        'Protect America <noreply@protectamerica.com>', ['leadimport@protectamerica.com'], fail_silently=False)
+        'Protect America <noreply@protectamerica.com>',
+        ['leadimport@protectamerica.com'], fail_silently=False)
 
     return True
 
@@ -48,6 +49,14 @@ def send_thankyou(data):
     msg.send()
 
     return True
+
+def send_error(data):
+    subject = 'Lead Submission Error'
+    t = loader.get_template('emails/lead_submission_error.html')
+    c = Context(data)
+    send_mail(subject, t.render(c),
+        'Protect America <noreply@protectamerica.com>',
+        ['robert@protectamerica.com'], fail_silently=False)
 
 def prepare_data_from_request(request):
     thank_you_url = '/thank-you'
@@ -69,9 +78,9 @@ def prepare_data_from_request(request):
     if not source and 'source' in request.POST:
         source = request.POST['source']
     
-    leadid = request.COOKIES.get('leadid', None)
-    if leadid is None:
-        leadid = request.session.get('leadid', None)
+    lead_id = request.COOKIES.get('lead_id', None)
+    if lead_id is None:
+        lead_id = request.session.get('lead_id', None)
     
     # get the aff from the database
     try:
@@ -102,7 +111,7 @@ def prepare_data_from_request(request):
             'agentid': agentid,
             'affkey': affkey,
             'source': source,
-            'leadid': leadid,
+            'lead_id': lead_id,
             'agent': agent,
             'thank_you_url': thank_you_url,
         }
@@ -121,13 +130,28 @@ def basic_post_login(request):
         if not referer_page and 'HTTP_REFERER' in request.META:
             referer_page = request.META['HTTP_REFERER']
         formset.referer_page = referer_page
-
         formset.save()
-        formset.thank_you_url = request_data['thank_you_url']
         
-        # send emails after formset
-        if request_data['leadid'] is None:
-            request_data['leadid'] = formset.id
+        if request_data['lead_id'] is None:
+            request_data['lead_id'] = formset.id
+        
+        if request_data['agentid'] == 'HOMESITE' and request_data['source'] == '':
+            # check if the refer page has agent in the url
+            try:
+                search = re.search(r'agent=([A-Za-z0-9\_-]+)',
+                    formset.referer_page)
+            except TypeError:
+                search = None
+
+            if search:
+                agent = search.group(1)
+                send_error({
+                        'name': fdata['name'],
+                        'phone': fdata['phone'],
+                        'email': fdata['email'],
+                        'agent': agent,
+                        'page': formset.referer_page,
+                    })
 
         emaildata = {
             'agent_id': request_data['agentid'],
@@ -139,10 +163,12 @@ def basic_post_login(request):
             'formlocation': formset.referer_page,
             'searchengine': request.session.get('search_engine', ''),
             'searchkeywords': request.session.get('search_keywords', ''),
-            'leadid': request_data['leadid'],
+            'lead_id': formset.id,
         }
         send_leadimport(emaildata)
         send_thankyou(emaildata)
+        
+        formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
 
@@ -284,3 +310,22 @@ def order_form(request):
                                'formset': formset,
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
+
+def donotcall(request):
+    if request.method == "POST":
+        formset = DoNotCallForm(request.POST)
+        if formset.is_valid():
+            form = formset.save(commit=False)
+            form.save()
+            form.email_company()
+
+            return HttpResponseRedirect(reverse('contact-thank-you'))
+
+    else:
+        formset = DoNotCallForm()
+
+    return simple_dtt(request, 'help/do-not-call.html', {
+                               'parent':'help',
+                               'formset': formset,
+                               'pages': ['support', 'help'],
+                               'page_name': 'tell-a-friend'})
