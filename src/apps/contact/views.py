@@ -34,7 +34,8 @@ def send_leadimport(data):
     t = loader.get_template('_partials/lead_submission_email.html')
     c = Context(data)
     send_mail(subject, t.render(c),
-        'Protect America <noreply@protectamerica.com>', ['leadimport@protectamerica.com'], fail_silently=False)
+        'Protect America <noreply@protectamerica.com>',
+        ['leadimport@protectamerica.com'], fail_silently=False)
 
     return True
 
@@ -48,6 +49,14 @@ def send_thankyou(data):
     msg.send()
 
     return True
+
+def send_error(data):
+    subject = 'Lead Submission Error'
+    t = loader.get_template('emails/lead_submission_error.html')
+    c = Context(data)
+    send_mail(subject, t.render(c),
+        'Protect America <noreply@protectamerica.com>',
+        ['robert@protectamerica.com'], fail_silently=False)
 
 def prepare_data_from_request(request):
     thank_you_url = '/thank-you'
@@ -126,6 +135,24 @@ def basic_post_login(request):
         if request_data['lead_id'] is None:
             request_data['lead_id'] = formset.id
         
+        if request_data['agentid'] == 'HOMESITE' and request_data['source'] == '':
+            # check if the refer page has agent in the url
+            try:
+                search = re.search(r'agent=([A-Za-z0-9\_-]+)',
+                    formset.referer_page)
+            except TypeError:
+                search = None
+
+            if search:
+                agent = search.group(1)
+                send_error({
+                        'name': fdata['name'],
+                        'phone': fdata['phone'],
+                        'email': fdata['email'],
+                        'agent': agent,
+                        'page': formset.referer_page,
+                    })
+
         emaildata = {
             'agent_id': request_data['agentid'],
             'source': request_data['source'],

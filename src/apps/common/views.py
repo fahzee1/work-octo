@@ -23,6 +23,8 @@ def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
     get['agent'] = agent_id
 
+    request.session['refer_id'] = agent_id
+
     return HttpResponseRedirect('/?%s' % urlencode(get))
 
 def thank_you(request, custom_url=None):
@@ -93,15 +95,20 @@ def simple_dtt(request, template, extra_context):
 
     affiliate = request.COOKIES.get('refer_id', None)
     if not affiliate and 'agent_id' in extra_context:
-        request.session['refer_id'] = extra_context['agent_id']
+        affiliate = extra_context['agent_id']
+    elif not affiliate and 'agent' in request.GET:
+        affiliate = request.GET['agent']
+
+    if affiliate:
+        request.session['refer_id'] = affiliate
 
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
 
-    if 'agent_id' in extra_context and not affiliate:
+    if affiliate:
         response.set_cookie('refer_id',
-                        value=extra_context['agent_id'],
+                        value=affiliate,
                         expires=datetime.now() + expire_time)
 
 
