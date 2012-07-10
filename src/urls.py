@@ -167,6 +167,11 @@ elif settings.SITE_ID == 8:
 else:
     urlpatterns += patterns('',
 
+        # Test Pages
+        dtt(r'^test/hic/?$', 'tests/hi-c-index-test.html', 'hic-test', 'tests'),
+
+            
+
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
