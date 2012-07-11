@@ -41,6 +41,10 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
+    url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template', {
+            'template': 'sitemaps/index.xml',
+            'mimetype': 'application/xml',
+        }, name='index'),
     url(r'^sitemap/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     
     # affiliate urls
