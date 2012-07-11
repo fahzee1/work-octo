@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
-
-urlpatterns = patterns('django.views.generic.simple',
+urlpatterns = patterns('',
+    url(r'^$', 'apps.sitemaps.views.index', name='sitemap'),
+)
+urlpatterns += patterns('django.views.generic.simple',
     url(r'^index.xml$', 'direct_to_template', {
             'template': 'sitemaps/index.xml',
             'mimetype': 'application/xml',

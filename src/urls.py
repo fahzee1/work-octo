@@ -41,7 +41,7 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
-    url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
+    url(r'^sitemap/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     
     # affiliate urls
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
