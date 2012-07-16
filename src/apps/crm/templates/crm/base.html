@@ -1,4 +1,4 @@
-{% load sekizai_tags %}<!DOCTYPE html>
+{% load sekizai_tags crm_tags %}<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -72,7 +72,35 @@
       </div>
     </div>
     <div class="container">
-{% block content %}{% endblock %}
+        <div class="row">
+        {% block sidebar %}
+        {% with c_page=request.META.PATH_INFO %}
+        {% url crm:index as home_page %}
+            <div class="span3">
+                <div class="well" style="padding: 8px 0;">
+                <ul class="nav nav-list">
+                    <li{% if c_page == home_page %} class="active"{% endif %}>
+                        <a href="{{ home_page }}">Home</a>
+                    </li>
+                    {% ifusergroup AFFILIATE %}
+                    {% url crm:affiliates as aff_page %}
+                    <li class="nav-header"> Affiliate Pages </li>
+                    <li{% if c_page == aff_page %} class="active"{% endif %}>
+                        <a href="{{ aff_page }}">Affiliates</a>
+                    </li>
+                    <li{% if c_page == home_page %} class="active"{% endif %}>
+                        <a href="#">Requests</a>
+                    </li>
+                    {% endifusergroup %}
+                </ul>
+                </div>
+            </div>
+        {% endwith %}
+        {% endblock %}
+            <div class="span8 offset1">
+        {% block content %}{% endblock %}
+            </div>
+        </div>
     </div>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}crm/js/bootstrap.js"></script>

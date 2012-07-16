@@ -1,0 +1,41 @@
+{% extends "crm/base.html" %}
+
+{% block content %}
+<div class="row">
+    <h1>Affiliates</h1>
+    <hr/>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>Agent ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th></th>
+    </tr>
+    {% for affiliate in affiliates.object_list %}
+    <tr>
+        <td>{{ affiliate.agent_id }}</td>
+        <td>{{ affiliate.name }}</td>
+        <td>{{ affiliate.phone }}</td>
+        <td style="text-align: center;">
+            <a href="{% url crm:affiliates_edit affiliate.id %}" class="btn">
+                <i class="icon-pencil"></i>
+                Edit
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<ul class="pager">
+    {% if affiliates.has_previous %}
+    <li class="previous">
+        <a href="?page={{ affiliates.previous_page_number }}">&larr; Older</a>
+    </li>
+    {% endif %}
+    {% if affiliates.has_next %}
+    <li class="next">
+        <a href="?page={{ affiliates.next_page_number }}">Newer &rarr;</a>
+    </li>
+    {% endif %}
+</ul>
+</div>
+{% endblock %}

@@ -2,6 +2,8 @@
 from django import forms
 from django.contrib.auth.models import User
 
+from apps.affiliates.models import Affiliate, LandingPage
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=30)
@@ -20,3 +22,19 @@ class LoginForm(forms.Form):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = 'span4'
         self.fields['password'].widget.attrs['class'] = 'span4'
+
+class AffiliateForm(forms.ModelForm):
+
+    has_landing_page = forms.BooleanField(initial=False)
+
+    class Meta:
+        model = Affiliate
+
+        fields = ('agent_id', 'name', 'phone', 'has_landing_page')
+
+    def __init__(self, *args, **kwargs):
+        super(AffiliateForm, self).__init__(*args, **kwargs)
+        instance = kwargs.get('instance', None)
+        if instance:
+            if instance.has_landing_page():
+                self.fields['has_landing_page'].initial = True

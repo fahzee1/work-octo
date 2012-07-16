@@ -21,6 +21,14 @@ class Affiliate(models.Model):
     conversion_pixels = models.TextField(blank=True, null=True,
         help_text='Add HTML here for affiliate conversion Pixels')
 
+    def has_landing_page(self):
+        try:
+            lp = LandingPage.objects.get(affiliate=self)
+            return True
+        except:
+            pass
+        return False
+
     def __unicode__(self):
         return '%s (%s)' % (self.name, self.agent_id)
 
