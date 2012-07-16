@@ -1,4 +1,9 @@
 from django.db import models
+from django.contrib.localflavor.us.models import (PhoneNumberField, 
+    USStateField)
+from django.template import loader, Context
+from django.core.urlresolvers import reverse
+from django.core.mail import EmailMessage
 
 class Testimonial(models.Model):
 
@@ -15,7 +20,7 @@ class Testimonial(models.Model):
         ('SERVICE', 'Customer Service'),
         ('MONITORING', 'Monitoring Station'),
         ('AGREEMENT', 'Monitoring Agreement'),
-        ('OTHER', 'Other/Unkown'),
+        ('OTHER', 'Other/Unknown'),
         ('SALES', 'Sales'),
     )
 
@@ -41,7 +46,51 @@ class Testimonial(models.Model):
 
     display = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
+    
+    def get_absolute_url(self):
+        return reverse('single-testimonial', kwargs={'testimonial_id': self.id})
 
     def __unicode__(self):
         return '%s %s on %s' % (self.first_name,
             self.last_name, self.date_created)
+
+class Textimonial(models.Model):
+    first_name = models.CharField(max_length=36)
+    last_name = models.CharField(max_length=36)
+    city = models.CharField(max_length=24)
+    state = USStateField(max_length=24)
+    email = models.EmailField()
+    rating = models.CharField(max_length=4)
+    message = models.TextField()
+    permission_to_post = models.BooleanField(default=True)
+    display = models.BooleanField(default=False)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def email_company(self):
+        t = loader.get_template('emails/testimonial_to_company.html')
+        c = Context({'sub': self})
+        email = EmailMessage(
+            'Testimonial Submission',
+            t.render(c),
+            '"Protect America" <noreply@protectamerica.com>',
+            ['feedback@protectamerica.com'],
+            ['robert@protectamerica.com'],
+             headers = {'Reply-To': 'noreply@protectamerica.com'})
+        email.send()
+
+    def get_absolute_url(self):
+        return reverse('single-testimonial', kwargs={'testimonial_id': self.id})
+
+    def __unicode__(self):
+        return '%s %s - %s - %s' % (self.first_name,
+                                    self.last_name,
+                                    self.state,
+                                    self.rating)
+
+class Vidimonial(models.Model):
+    video_url = models.CharField(max_length=256)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse('video-testimonial', kwargs={'testimonial_id': self.id})

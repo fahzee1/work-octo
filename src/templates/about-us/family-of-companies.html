@@ -28,7 +28,24 @@ $(document).ready(function() {
 });
 </script>
 {% endaddtoblock "js" %}
-    {% comment %}
+{% for industry, families in industries.iteritems %}
+    <div id="{{ industry|slugify }}">
+        <h2>{{ industry }}</h2>
+        {% for family in families %}
+        <div class="family-company">
+            <img src="http://media.quickenloans.com/threadnation/public/{{ family.webLogoUrl }}">
+            <div class="company-about">
+                <h3>{{ family.name }}</h3>
+                <p>
+                    {{ family.description|safe }}
+                </p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+{% comment %}
 	<div id="biotechnology">
 		<h2>Biotechnology</h2>
 		<div class="family-company">
@@ -467,7 +484,7 @@ $(document).ready(function() {
         </div>
         <div class="clear"></div>
     </div>
-    {% endcomment %}
+{% endcomment %}
 </div>
 
 

@@ -1,0 +1,40 @@
+{% extends "about-us/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Tell a Friend | Cheap Security | Protect America Home Security{% endblock %}
+{% block page_keywords %}cheap security,security,home security,home security system,security system{% endblock %}
+{% block page_description %}Protect friends, family and neighbors by referring them to the free home security systems and the best, most reliable home alarm services offered by Protect America.{% endblock %}
+
+{% block content %}
+
+<div id="tell-friend-content">
+	<h1>Tell a Friend About Protect America</h1>
+	<p>Protect America, Inc. offers affordable home security so that you can protect your home without draining your wallet.  Don't be fooled by our competitor's high prices.  It is possible to get affordable home security without sacrificing quality and reliability.  Our mission is to provide everyone the opportunity to protect their family with reliable and affordable home security.</p>
+	<p>Fill in the fields below to email a link to Protect America's website to your friends, family, and neighbors.  They will receive an email from you that includes a link to our website so that they can protect their homes families with a <a href="{% url products %}" title="GE Home Security System | Affordable and Cheap Security">GE home security system</a> as well.</p>
+	<h2>Refer Your Friends, Family, and Neighbors to Protect America today!</h2>
+
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+<div class="clear"></div>
+<form id="tell-friend-form" action="" method="POST">
+    {% csrf_token %}
+    <img src="{{ STATIC_URL }}img/extra/you-icon.png" alt="you-icon" width="120" height="112" id="you-icon" />
+    <img src="{{ STATIC_URL }}img/extra/your-friend-icon.png" alt="you-icon" width="120" height="112" id="friend-icon" />
+	<fieldset id="customer-information">
+
+        <h2>Hello, Friend!</h2>
+
+		{% include "_partials/formfield.html" with field=formset.name %}
+		{% include "_partials/formfield.html" with field=formset.email %}
+	</fieldset>
+
+	<fieldset id="friend-information">
+        <h2>Good Day, Buddy!</h2>
+
+		{% include "_partials/formfield.html" with field=formset.friend_name %}
+		{% include "_partials/formfield.html" with field=formset.friend_email %}
+	</fieldset>
+    <button type="submit" tabindex="16" class="positive check">Send to Your Friend ></button>
+
+</form>
+{% endblock %}  

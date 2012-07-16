@@ -13,8 +13,8 @@
     	<div id="existing-system-overview">
     		<h1>Already have an Existing Security System?</h1>
     		<p>Protect America provides dedicated home security monitoring for almost any type of pre-installed alarm system. Did you just buy a home with an alarm? Or perhaps you are looking to reactivate your unused home security system? We can help. By using our cellular conversion device, we can take your current home security system and upgrade it with our state-of-the-art cellular monitoring. And there is no need to buy new equipment. With Protect America, you can be assured you get premium home security with a company that is committed to excellence and affordability when it comes to securing your home.</p>
-    		<div class="button-link">
-    			<a href="">Get Security for your Existing Alarm System ></a>
+    		<div class="button-submit">
+    			<a href="{% url order-package %}" title="Click to Upgrade your Existing Alarm System">Get Security for your Existing Alarm System ></a>
     		</div>
     	</div>
 	</div>
@@ -27,7 +27,7 @@
 		<img src="/static/img/products/cell-takeover/black-wire.jpg" class="flood-left">
 
 		<h2>Cellular Connection.<br/>No Cut Phone Line.</h2>
-		<p>When switching to Protect America, your security system is upgraded to connect via a cellular connection. Meaning your home security system works just like a cell phone. If the alarm goes off, authorities are notified without the need of a land line. This eliminates the opportunity for thieves to bypass your protection by simply cutting the wires that lead to your home.</p>
+		<p>When switching to Protect America, your security system is upgraded to connect via a cellular connection. Meaning your home security system works just like a cell phone. If the alarm goes off, authorities are notified without the need of a landline. This eliminates the opportunity for thieves to bypass your protection by simply cutting the wires that lead to your home.</p>
 	</div>
 	<div id="cut-wire-image">
 		<img src="/static/img/products/cell-takeover/wire-cutters.jpg" class="absolute">
@@ -44,12 +44,8 @@
 	<div class="clear"></div>
 </div>
     {% include "order/call-box.html" %}
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "art" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "art" "limit=10&words=75" %}
+
 <div>
 	<div id="helpful-tech-support">
 		<img src="/static/img/products/cell-takeover/hi-bubble.jpg">
@@ -77,7 +73,7 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

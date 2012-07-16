@@ -19,7 +19,7 @@
             <li><strong>3</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
         <div class="button-link"><a href="{% url copper %}">Find Out More ></a></div>
     </div>
     <div id="bronze-card" class="mid card">
@@ -34,7 +34,7 @@
             <li><strong>7</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
         <div class="button-link"><a href="{% url bronze %}">Find Out More ></a></div>
     </div>
     <div id="silver-card" class="big card">
@@ -49,7 +49,7 @@
             <li><strong>10</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
         <div class="button-link"><a href="{% url silver %}">Find Out More ></a></div>
     </div>
     <div id="gold-card" class="mid card">
@@ -63,7 +63,7 @@
             <li><strong>12</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
         <div class="button-link"><a href="{% url gold %}">Find Out More ></a></div>
     </div>
     <div id="platinum-card" class="card">
@@ -79,18 +79,14 @@
             <li><strong>15</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
         <div class="button-link"><a href="{% url platinum %}">Find Out More ></a></div>
     </div>
 
 </div>
 <div class="clear"></div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "package" "limit=10&words=50" %}
-    </ul>
-</div>
+{% testimonial_search "package" "limit=10&words=75" %}
+
 <div class="clear"></div>
 {% include "banners/limited-time-offer.html" %}
 <div class="clear"></div>
@@ -168,19 +164,19 @@
     {% include "order/call-box.html" %}
 <div id="extra-features">
     <div id="lifetime-warranty">
-        <h2>Lifetime Warranty and Homeowner's Insurance Guarantee</h2>
-        <p>&dagger; For as long as your home is monitored by Protect America, Inc.'s authorized UL listed monitoring facility, Protect America will provide a Lifetime Guaranteed Parts Replacement Warranty on all Packages AND Protect America will cover up to $250 of your Homeowner's Insurance Deductible in the event of a burglary.</p>
+        <h2>Lifetime Replacement Parts Warranty and Homeowner's Insurance Guarantee</h2>
+        <p>For as long as your home is monitored by Protect America, Inc.'s authorized UL listed monitoring facility, Protect America will provide a Lifetime Replacement Parts Warranty on all Packages AND Protect America will cover up to $250 of your Homeowner's Insurance Deductible in the event of a burglary.</p>
     </div>
     <div id="insurance-discount">
         <h2>Homeowner's Insurance Discount</h2>
-        <p>Protect America's affordable solutions for your home security and protection are very important.  However, another great benefit to having a <a href="http://www.protectamerica.com/pa/monitoring" title="Protect America's Monitored Home Security offer more options than ADT Security Alarms">monitored home security system</a> is that most insurance companies will give you a discount on your homeowner's or renter's insurance premium.  After your system is activated, we will provide you with a certificate of installation.  You simply provide this certificate to your insurance company as proof that you have a monitored security system, and they will provide you with their standard home security discount.</p>
+        <p>Protect America's affordable solutions for your home security and protection are very important.  However, another great benefit to having a <a href="{% url monitoring %}" title="Protect America's Monitored Home Security offer more options than ADT Security Alarms">monitored home security system</a> is that most insurance companies will give you a discount on your homeowner's or renter's insurance premium.  After your system is activated, we will provide you with a certificate of installation.  You simply provide this certificate to your insurance company as proof that you have a monitored security system, and they will provide you with their standard home security discount.</p>
     </div>
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

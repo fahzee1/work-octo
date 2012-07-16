@@ -99,6 +99,10 @@ class Profile(models.Model):
     sign = models.CharField(max_length=200)
     affiliate = models.ForeignKey(Affiliate, blank=True, null=True)
 
+    class Meta:
+        verbose_name = 'Affiliate Request'
+        verbose_name_plural = 'Affiliate Requests'
+
     def send_signup_to_bizdev(self):
         subject = 'Protect America Affiliate Program'
         t = loader.get_template('emails/new_affiliate_signup.html')
@@ -117,7 +121,8 @@ class Profile(models.Model):
             'zipcode': self.zipcode,
             'comments': self.comments,
         })
-        send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>', ['busdev@protectamerica.com'], fail_silently=True)
+        send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
+            ['BusinessDevelopment@protectamerica.com'], fail_silently=True)
 
     def __unicode__(self):
         return '%s' % self.name

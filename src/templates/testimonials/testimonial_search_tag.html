@@ -1,17 +1,43 @@
 {% load sekizai_tags %}
 
 {% if template == None or template == 'default' %}
-{% for testimonial in testimonials %}
-<li>
-    <div class="customer-name"> 
-        <h4>{{ testimonial.first_name }} {{ testimonial.last_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }} </span></h4>
-        <strong>{{ testimonial.date_created }}</strong>
-    </div>
-    <p><span class="testimonial-arrow">&nbsp;</span>
-{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
-</li>
-{% endfor %}
+</div>
+<div class="clear"></div>
+<div id="testimonial-wrapper">
+    <ul id="search-testimonial-box">
+        {% for testimonial in testimonials %}
+            <li class="one-testimonial">
+                <img src="/static/img/base/testimonial-guy.png" alt="Testimonial Icon" width="208" height="160" class="testimonial-guy" />
+
+                <h1>{{ testimonial.first_name }} {{ testimonial.last_name }} of {{ testimonial.city }}, {{ testimonial.state }} Writes:</h1>
+                <p class="extra-info">on <strong>{{ testimonial.date_created|date:"F d, Y" }}</strong></p>
+                <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+                {% if testimonial.rating %}
+                <div class="star-container">
+                    <div class="star {% if testimonial.rating <= 1 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 2 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 3 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 4 %}active{% endif %}">&nbsp;</div>
+                    <div class="star {% if testimonial.rating <= 5 %}active{% endif %}">&nbsp;</div>
+                    <div class="clear"></div>
+                </div>
+                {% endif %}
+
+                <div class="button-link">
+                    <a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read More Testimonials">Read {{ testimonial.first_name }}'s Testimonial ></a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="wrapper">
 {% endif %}
+
+
+
+
+
 {% if template == 'sidebar' %}
 {% for testimonial in testimonials %}
 <li>
@@ -20,7 +46,7 @@
         <h4>{{ testimonial.first_name }} {{ testimonial.last_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}</span></h4>
         <strong>{{ testimonial.date_created }}</strong>
         <div class="button-link">
-            <a href="http://www.protectamerica.com/pa/testimonials">Read More ></a>
+            <a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name|pluralize }} testimonial">Read More ></a>
         </div>
 
     </div>
@@ -30,6 +56,7 @@
 {% endif %}
 {% if template == 'sidebar-old' %}
 {% for testimonial in testimonials %}
+<a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name }}'s testimonial">
 <li>
     <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
     <div class="customer-name">
@@ -38,14 +65,17 @@
     </div>
     <div class="clear"></div>
 </li>
+</a>
 {% endfor %}
 {% endif %}
 {% if template == 'old' %}
 {% for testimonial in testimonials %}
 <div>
-    <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+    <a href="http://www.protectamerica.com{{ testimonial.get_absolute_url }}" title="Read more of {{ testimonial.first_name|pluralize }} testimonial" class="read-more-button">Read More ></a>
+
+    <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %} </p>
     <span>&mdash; &nbsp;{{ testimonial.first_name }} {{ testimonial.last_name }} 
-        <em>{{ testimonial.city }}, {{ testimonial.state }} on {{ testimonial.date_created }}</em>
+        <em>{{ testimonial.city }}, {{ testimonial.state }} on {{ testimonial.date_created|date:"F d, Y" }}</em>
     </span>
 </div>
 {% endfor %}

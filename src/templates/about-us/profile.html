@@ -9,25 +9,21 @@
 <div id="about-protect-america">
 	<img src="{{ STATIC_URL }}img/extra/protect-america-home-symbol.png" alt="protect-america-home-symbol" width="200" height="200" />
 
-	<h1>Providing Monitored Home Alarm Systems to American Families and Homes since 1992</h1>
+	<h1>Monitoring Home Alarm Systems for American Families Since 1992</h1>
 	<p>In 1992 Thad Paschall founded Round Rock, TX, based Protect America, Inc. Since 1992, Protect America has been providing state-of-the-art home alarm systems to American families.</p>
-	<p>Protect America started as a small home security provider and has become one of the fastest growing security companies in America with customers coast to coast! Already, Protect America, Inc. has protected over 240,000 families nationwide and is <strong>ranked in the top 10</strong> of residential home alarm systems installations!</p>
+	<p>Protect America started as a small home security provider and has become one of the fastest growing security companies in America with customers coast to coast! Already, Protect America, Inc. has protected nearly half a million families nationwide and is <strong>ranked in the top 10</strong> of residential home alarm systems installations!</p>
 	<p>Why is Protect America, Inc. experiencing unprecedented growth? Our philosophy has always been that if we can provide our customers with the best home alarm systems in the industry and focus on excellent customer service, that we will earn your business every day and keep it forever. When you combine our dedication to provide great service with the advanced technology of the GE home alarm systems, you can rest assured that your home is protected with the peace of mind you deserve!
 </p>
 </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "best" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "best" "limit=10&words=75" %}
+
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

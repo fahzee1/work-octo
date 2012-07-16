@@ -86,6 +86,7 @@
 {% block content %}
 <div id="content-main">
 <form action="" method="POST">
+{% csrf_token %}
 <fieldset class="module aligned">
 {% for field in form.visible_fields %}
 {% include "_partials/formfield.html" with field=field %}

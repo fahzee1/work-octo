@@ -1,17 +1,20 @@
 import re
 import urls
+import urllib2
 from datetime import datetime, timedelta
 from urllib import urlencode
 
+from django.core.cache import cache
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
 from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
+from django.utils import simplejson
 
-from apps.contact.forms import PAContactForm, AffiliateLongForm, BasicContactForm
+from apps.contact.forms import PAContactForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
@@ -19,6 +22,8 @@ from apps.news.models import Article
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
     get['agent'] = agent_id
+
+    request.session['refer_id'] = agent_id
 
     return HttpResponseRedirect('/?%s' % urlencode(get))
 
@@ -90,15 +95,20 @@ def simple_dtt(request, template, extra_context):
 
     affiliate = request.COOKIES.get('refer_id', None)
     if not affiliate and 'agent_id' in extra_context:
-        request.session['refer_id'] = extra_context['agent_id']
+        affiliate = extra_context['agent_id']
+    elif not affiliate and 'agent' in request.GET:
+        affiliate = request.GET['agent']
+
+    if affiliate:
+        request.session['refer_id'] = affiliate
 
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
 
-    if 'agent_id' in extra_context and not affiliate:
+    if affiliate:
         response.set_cookie('refer_id',
-                        value=extra_context['agent_id'],
+                        value=affiliate,
                         expires=datetime.now() + expire_time)
 
 
@@ -153,3 +163,31 @@ def index(request):
     ctx['latest_news'] = latest_news
 
     return simple_dtt(request, 'index.html', ctx)
+
+def family_of_companies(request):
+    ctx = {}
+    ctx['page_name'] = 'family'
+    ctx['pages'] = ['about-us']
+    
+    family_json_obj = cache.get('FAMILYJSON')
+    if family_json_obj is None:
+        try:
+            family_json_url = 'http://media.quickenloans.com/threadnation/public/companies.json'
+            family_data = urllib2.urlopen(family_json_url)
+            family_json_obj = simplejson.loads(family_data.read())
+        except:
+            return None
+        if 'Error' in family_json_obj:
+            return None
+
+        cache.set('FAMILYJSON', family_json_obj, 60*60*60)
+
+    # group by industry
+    industry_dict = {}
+    for family in family_json_obj:
+        if family['industry'] not in industry_dict:
+            industry_dict[family['industry']] = []
+        industry_dict[family['industry']].append(family)
+
+    ctx['industries'] = industry_dict 
+    return simple_dtt(request, 'about-us/family-of-companies.html', ctx)

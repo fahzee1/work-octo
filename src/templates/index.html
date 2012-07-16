@@ -1,8 +1,28 @@
 {% extends "base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='11866140-3',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"></sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
+
 {% endblock %}
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Get Free Home Security Systems by Protect America | Call {{ phone_number|format_number }}{% endblock %}
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
+{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
+
 {% block extra_javascript %}
 <script type="text/javascript" src="/static/js/jquery.cycle.all.min.js"></script>
 {% endblock %}
@@ -13,7 +33,7 @@
 
 <div id="main">
     <div id="hero-banner">
-        <a href="http://www.protectamerica.com/pa/copper/home-security-systems" class="top-consumers">
+        <a href="{% url copper %}" class="top-consumers">
             <span>For the Fourth Consecutive Year</span>
             <img width="349" height="190" alt="Best Home Security System - 5 Stars from Top Consumer Reviews" src="/static/img/banners/hero-banners/top-consumer-reviews/top-consumer-reviews.png">
             <h3>
@@ -22,30 +42,21 @@
                 solution available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are]
                 <strong>top-notch</strong>."
             </h3>
-            <p>-Top Consumer Reviews 2011</p>
+            <p>-Top Consumer Reviews 2012</p>
         </a>
-        <a href="{% url complete-home-security %}" id="affordable-security-banner">
+        <a href="{% url complete-home-security %}" title="Click Here to see how we make security affordable and custom to your Home." id="affordable-security-banner">
             <img src="{{ STATIC_URL }}img/banners/hero-banners/affordable-security/affordable-security-bg.jpg" alt="Affordable Security. Customized For You." width="671" height="251" />
             <button class="button-link">Secure Your Home ></button>
         </a>
 
     </div>
 
-    <a href="#">
-        <img width="670" height="144" title="Free Simon XT Touchscreen when ordering Two-Way Voice or HomePulse monitoring" src="{{ STATIC_URL }}img/banners/promos/touchscreen-banner.jpg">
+    <a href="{% url touchscreen %}" title="Get a Free Simon XT Touch Screen with Cellular, Broadband, or Two-Way Voice Monitoring">
+        <img src="{{ STATIC_URL }}img/banners/promos/touchscreen-banner.png" alt="Get a Free Simon XT Touch Screen with Cellular, Broadband, or Two-Way Voice Monitoring" width="670" height="144" />
     </a>
     <div id="customer-testimonials">
         <div class="ts_testimonial">
-            <h3>What our customers say...</h3>
-            <a href="http://www.protectamerica.com/pa/testimonials/">Read More ></a>
-            {% comment %}
-            <div>
-                <p>Fantastic 5 star customer service!! Gloria knows her stuff! Thank you!</p>
-                <span>&mdash; &nbsp;Paul 
-                    <em>Austell, GA on November 30, 2011</em>
-                </span>
-            </div>
-            {% endcomment %}
+            <h1>Our Customers Love Our Home Security Systems</h1>
             <div class="test_testimonial_box">
             {% testimonial_search "" "limit=5&template=old&words=30" %}
             </div>
@@ -56,20 +67,20 @@
         <h2>100% Protection</h2>
         <p>Whether you want protection for your home or even a small business, the GE Home Security System from Protect America will fulfill your home security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your home security with a GE Home Security System from Protect America:</p>
         <ul>
-            <li><a href="#" title="Compare Protect America to ADT Security and other home security system companies." >BEST Price in Home Security</a> - Compare &amp; Save!</li>
+            <li><a href="{% url advantage %}" title="Compare Protect America to ADT Security and other home security system companies." >BEST Price in Home Security</a> - Compare &amp; Save!</li>
 
             <li>BEST Home Security System in the Industry</li>
-            <li><a href="#" title="View available GE wireless home security system equipment and learn how it works." >State-of-the-art UL Listed Security Equipment</a></li>
+            <li><a href="{% url equipment %}" title="View available GE wireless home security system equipment and learn how it works." >State-of-the-art UL Listed Security Equipment</a></li>
             <li>Protect Your Home with 24/7 Security Monitoring</li>
             <li>Guaranteed Locked in Security Monitoring Rates</li>
-            <li>Super Flexible <a href="#" title="View all of our alarms packages and choose the right package and service for your home." >Home Security Packages</a></li>
-            <li>Lifetime <a href="#" title="Lifetime monitoring home security system equipment warranty for our valued customers." >Alarm System Replacement Parts Warranty</a></li>
+            <li>Super Flexible <a href="{% url products %}" title="View all of our alarms packages and choose the right package and service for your home." >Home Security Packages</a></li>
+            <li>Lifetime <a href="{% url warranty %}" title="Lifetime monitoring home security system equipment warranty for our valued customers." >Alarm System Replacement Parts Warranty</a></li>
 
             <li>Up to 20% Off Homeowners Insurance</li>
             <li>Peace of Mind When It Comes to Your Family &amp; Home</li>
         </ul>
         <div class="button-link">
-            <a title="View Copper Security Package details and compare to our other home security systems packages." href="#">Home Security Packages ></a>
+            <a title="View Copper Security Package details and compare to our other home security systems packages." href="{% url products %}">Home Security Packages ></a>
         </div>
         
     </div>
@@ -80,7 +91,7 @@
         <table summary="Small comparison chart detailing Protect America pricing versus major competitors.">
         	<thead>
         		<tr>
-        			<td colspan="3"><strong><a name="home-security-systems-comparison">Home Security Systems Comparison</a></strong></td>
+        			<td colspan="3"><strong><a href="{% url advantage %}" title="Home Security Systems Comparison">Home Security Systems Comparison</a></strong></td>
         		</tr>
         	</thead>
         	<tfoot>
@@ -98,25 +109,25 @@
         			<th>ADT Price</th>
         		</tr>
         		<tr class="odd">
-        			<td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/copper">Copper Security Package</a><br>3 Door Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="{% url copper %}">Copper Security</a><br>3 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
         			<td headers="adt"><sup>$</sup>379</td>
         		</tr>
         		<tr>
-        			<td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/bronze">Bronze Security Package</a><br>3 Door Sensors, 4 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="{% url bronze %}">Bronze Security</a><br>7 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
         			<td headers="adt"><sup>$</sup>699</td>
         		</tr>
         		<tr class="odd">
-        			<td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/silver">Silver Security Package</a><br>3 Door Sensors, 7 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="{% url silver %}">Silver Security</a><br>10 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
         			<td headers="adt"><sup>$</sup>939</td>
         		</tr>
         		<tr>
-        			<td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/gold">Gold Package</a><br>3 Door Sensors, 9 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="{% url gold %}">Gold Security</a><br>12 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight" headers="pa">
                         <span class="red">FREE<sup>*</sup></span>
@@ -124,7 +135,7 @@
         			<td headers="adt"><sup>$</sup>1,099</td>
         		</tr>
         		<tr class="odd">
-        			<td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="http://www.protectamerica.com/pa/platinum">Platinum Package</a><br>3 Door Sensors, 12 Window Sensors, 1 Motion Detector</td>
+        			<td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="{% url platinum %}">Platinum Security</a><br>15 Door / Window Sensors, 1 Motion Detector</td>
         
         			<td class="highlight" headers="pa">
                         <span class="red">FREE<sup>*</sup></span>
@@ -134,7 +145,7 @@
         	</tbody>
         </table>
         <div class="button-link">
-            <a title="View Copper Security Package details and compare to our other home security systems packages." href="#">Security Advantage ></a>
+            <a title="View Copper Security Package details and compare to our other home security systems packages." href="{% url advantage %}">Security Advantage ></a>
         </div>
     </div>
     <div class="clear"></div>
@@ -159,7 +170,7 @@
         <p>
             The average yearly home insurance premium in the U.S. costs over $800. The good news is that
             many plans offer discounts up to 20% on home insurance for homes with security systems. You
-            could save $14 or more per month on your insurance with a <a href='http://www.protectamerica.com/pa/gold/alarm-systems'>GE home alarm system</a>. For many, 
+            could save $14 or more per month on your insurance with a <a href='{% url gold %}' title="Learn More about the Gold Home Security Package">GE home alarm system</a>. For many, 
             the monthly cost of a Protect America GE home security system would be less than $16 per
             month once a home insurance discount is applied. For 50 cents a day, you can have the peace
             of mind knowing that your family and home will have the extra protection of a residential
@@ -169,11 +180,11 @@
 
         <h3>Home Security Choices</h3>
         <p>
-            Protect America offers the <a href="http://www.protectamerica.com/pa/packages" title="View all of our alarms packages and choose the right package and service for your home." >best home security system and monitoring</a> deal you'll find. We install
+            Protect America offers the <a href="{% url products %}" title="View all of our alarms packages and choose the right package and service for your home." >best home security system and monitoring</a> deal you'll find. We install
             premium security hardware with GE home security products, and have the most flexible range
             of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse
             broadband monitoring, or standard talking command station monitoring over landline. We
-            provide an extensive selection of GE <a href='http://www.protectamerica.com/pa/equipment/wireless-home-security-system'>wireless home security</a> components. And, our home
+            provide an extensive selection of GE <a href='{% url equipment %}' title="Learn about our Wireless Home Security Components">wireless home security</a> components. And, our home
             security packages are designed to fit most any budget. Let us help you find the right system
             for your needs, so you can start protecting your home and family today.
 
@@ -196,7 +207,7 @@
             There is no better time than today to protect your residence with a monitored home security alarm
             system, and there is no more affordable solution than Protect America's wireless GE home security
             system. Wherever you live, we have a home security alarm solution for you and with our unique,
-            low-price guarantee, you can be confident in your choice. Sign up today for a <a href='http://www.protectamerica.com/pa/copper/home-security-systems'>free home security 
+            low-price guarantee, you can be confident in your choice. Sign up today for a <a href='{% url copper %}' title="Free Copper Home Security Package">free home security 
             system</a> and get our low-price guarantee, a lifetime alarm equipment warranty, free movers program, 
             dedicated support, and award winning home security monitoring from Protect America.
         </p>
@@ -228,12 +239,12 @@
         		<button type="submit">GO</button>
         		<input type="hidden" name="widget" value="true">
         	</form>
-        	<p class="fbi-stats"><a href="http://www.protectamerica.com/crime-rate/">FBI Crime stats</a> provided by <a href="http://www.protectamerica.com/">Protect America</a></p>
+        	<p class="fbi-stats"><a href="http://www.protectamerica.com/crime-rate/">FBI Crime stats</a> provided by <a href="{% url home %}" title="Protect America Home Security">Protect America</a></p>
 
         
     </div>
     <div id="cellupgrade">
-        <a title="Click Here If You Already Have a Home Security System" href="http://www.protectamerica.com/pa/existing-home-security-system/cellular-monitoring">
+        <a title="Click Here If You Already Have a Home Security System" href="{% url cell-takeover %}">
             <img width="251" height="286" alt="Click Here If You Already Have a Home Security System" src="{{ STATIC_URL }}/img/banners/promos/already-have-system-sidebar.jpg">
         </a>
     </div>
@@ -242,7 +253,7 @@
         <h2>Copper Package: Consumers Digest Best Buy</h2>
         <img class="centered" width="108" height="200" alt="Copper Package" src="{{ STATIC_URL }}img/external/consumer-digest/copper-package-consumer-digest-ribbon.png">
         <div class="button-link">
-            <a title="View Copper Package details. Compare to our other home security systems packages." href="http://www.protectamerica.com/pa/copper">Copper Package ></a>
+            <a title="View Copper Package details. Compare to our other home security systems packages." href="{% url copper %}">Copper Package ></a>
         </div>
     </div>
     <div class="clear"></div>
@@ -258,7 +269,7 @@
         <ul>
         {% for article in latest_news %}
             <li>
-                <h3>{{ article.heading }}</h3>
+                <h3><a href="{{ article.get_absolute_url }}" title="{{ article.heading }}">{{ article.heading }}</a></h3>
                 <p><span>{{ article.date_created|date:"M d Y" }}</span> -- {{ article.summary }}</p>
             </li>
         {% endfor %}

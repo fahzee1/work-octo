@@ -8,11 +8,11 @@
 {% block content %}
 <div id="support-content">
     <h1>Protect America Customer Support</h1>
-    <p>If you are having problems with your <a href="http://www.protectamerica.com/pa/troubleshooting" title="Troubleshooting Home Security Alarm System">home security alarm system</a>, or if you simply have questions regarding your home security alarm system, please contact us. Our customer support staff is here to help you with any issue concerning your home security alarm system.  In addition, answers to frequently asked questions can be found on our <a href="http://www.protectamerica.com/pa/faq" title="Frequently Asked Home Security Alarm System Questions">FAQs sheet</a>.</p>
+    <p>If you are having problems with your <a href="{% url troubleshooting %}" title="Troubleshooting Home Security Alarm System">home security alarm system</a>, or if you simply have questions regarding your home security alarm system, please contact us. Our customer support staff is here to help you with any issue concerning your home security alarm system.  In addition, answers to frequently asked questions can be found on our <a href="{% url faq %}" title="Frequently Asked Home Security Alarm System Questions">FAQs sheet</a>.</p>
     <h2>Contact our Customer Support Staff</h2>
     <div id="customer-support-hours">
-        <h3>Mon - Fri: 07:00am - 11:00pm CT</h3>
-    	<h3>Sat: 08:00am - 5:00pm CT </h3>
+        <h3>Mon - Fri: 07:00am - 10:00pm CT</h3>
+    	<h3>Sat & Sun: 08:00am - 6:00pm CT </h3>
     </div>
     <div id="customer-support-contact">
         <p><strong>1-800-951-5111, Option 2</strong></p>
@@ -22,18 +22,14 @@
 </div>
 {% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "support" "limit=10&words=100" %}
-    </ul>
-</div>
+{% testimonial_search "support" "limit=10&words=75" %}
+
 
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#main-testimonials').cycle({
+        $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
         });

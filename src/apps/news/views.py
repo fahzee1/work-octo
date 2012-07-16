@@ -13,7 +13,7 @@ from django.utils import simplejson
 
 from apps.news.models import Category, Article
 from apps.contact.forms import PAContactForm
-
+from apps.common.views import simple_dtt
 
 MONTH_MAP = {
     1:'January',
@@ -36,8 +36,6 @@ def get_text(node):
 def news_home(request):
     # latest 5 articles
     articles = Article.objects.order_by('-date_created')[:5]
-    forms = {}
-    forms['basic'] = PAContactForm()
 
     # random 4 articles from archive
     random_articles = Article.objects.order_by('?')[:4]
@@ -69,15 +67,15 @@ def news_home(request):
                        'link': link,
                        'id': video_group.groups()[0]})
 
-    return render_to_response('news/index.html',
-        {'forms': forms,
-         'headline': articles[0],
-         'articles': articles[1:],
-         'last_id': articles[4].pk,
-         'videos': videos[:3],
-         'random_articles': random_articles,
-         'categories': categories},
-        context_instance=RequestContext(request))
+    return simple_dtt(request, 'news/index.html', {
+        'headline': articles[0],
+        'articles': articles[1:],
+        'last_id': articles[4].pk,
+        'videos': videos[:3],
+        'random_articles': random_articles,
+        'categories': categories,
+        'pages': ['support'],
+        'page_name': 'news-home'})
 
 def articles(request, **kwargs):
     # get all years and months that have articles
@@ -109,21 +107,20 @@ def articles(request, **kwargs):
         months[a_month].append(article)
     m_nums = sorted(months.keys(), reverse=True)
 
-    forms = {}
-    forms['basic'] = PAContactForm()
 
-    return render_to_response('news/archive.html',
-        {'forms': forms,
-         'year': year,
-         'month': month,
-         'article_years': article_years,
-         'article_months': article_months,
-         'headline': articles[0],
-         'articles': articles[1:9],
-         'months': months,
-         'm_nums': m_nums,
-         'map': MONTH_MAP,},
-        context_instance=RequestContext(request))
+    return simple_dtt(request, 'news/archive.html', {
+        'year': year,
+        'month': month,
+        'article_years': article_years,
+        'article_months': article_months,
+        'headline': articles[0],
+        'articles': articles[1:9],
+        'months': months,
+        'm_nums': m_nums,
+        'map': MONTH_MAP,
+        'pages': ['support'],
+        'page_name': 'news-home'})
+
 
 def articles_by_year(request, year):
     return articles(request, year=year)
@@ -146,14 +143,13 @@ def category(request, category_name, category_id):
     for article in articles:
         last_id = article.pk
 
-    return render_to_response('news/category.html',
-        {'forms': forms,
-         'category': category,
-         'headline': articles[0],
-         'articles': articles[1:],
-         'last_id': last_id},
-        context_instance=RequestContext(request))
-
+    return simple_dtt(request, 'news/category.html', {
+        'category': category,
+        'headline': articles[0],
+        'articles': articles[1:],
+        'last_id': last_id,
+        'pages': ['support'],
+        'page_name': 'news-home'})
 
 def article(request, article_title, article_id):
     try:
@@ -171,14 +167,12 @@ def article(request, article_title, article_id):
 
         [related.append(d) for d in drelated]
 
-    forms = {}
-    forms['basic'] = PAContactForm()
 
-    return render_to_response('news/single-article.html',
-        {'forms': forms,
-         'article': article,
-         'related': related,},
-        context_instance=RequestContext(request))
+    return simple_dtt(request, 'news/single-article.html', {
+        'article': article,
+        'related': related,
+        'pages': ['support'],
+        'page_name': 'news-home'})
 
 def load_more_articles(request, last_id):
     articles = Article.objects.filter(pk__lt=last_id)
@@ -297,73 +291,3 @@ def redirect_old_category(request, category_id):
     except:
         raise Http404
     raise Http404
-
-"""
-def temp_import(request):
-    
-    import csv
-    articles = csv.reader(open('/Users/robert/Desktop/news_articles.csv', 'rb'), delimiter=',', quotechar='"')
-
-    categories = csv.reader(open('/Users/robert/Desktop/news_categories.csv', 'rb'), delimiter=',', quotechar='"')
-
-    article2cats = csv.reader(open('/Users/robert/Desktop/c2a.csv', 'rb'), delimiter=',', quotechar='"')
-
-
-    count = 0
-    for category in categories:
-        if count > 0:
-            
-            name = category[2]
-            b_id = category[3]
-
-            try:
-                c = Category.objects.get(brafton_id=b_id)
-            except Category.DoesNotExist:
-                c = Category()
-                c.name = name
-                c.brafton_id = b_id
-                c.save()
-        count = count + 1
-    
-    count = 0
-    for article in articles:
-        if count > 0:
-            b_id = article[1]
-            location = article[2]
-            headline = article[4]
-            summary = article[5]
-            html = article[6]
-            date_submitted = article[8]
-            
-            try:
-                a = Article.objects.get(brafton_id=b_id)
-            except Article.DoesNotExist:
-                a = Article()
-                a.brafton_id = b_id
-                a.heading = headline
-                a.content = html
-                a.summary = summary
-                try:
-                    dc = datetime.datetime.strptime(date_submitted, "%Y-%m-%d %H:%M:%S")
-                except:
-                    dc = datetime.datetime.strptime('2010-05-20 14:20:01', "%Y-%m-%d %H:%M:%S")
-                a.save()
-                a.date_created = dc
-                a.save()
-        count = count + 1
-    
-    count = 0
-    for a2c in article2cats:
-        if count > 0:
-            cb_id = a2c[1]
-            article_id = a2c[2]
-            category_id = a2c[3]
-            ab_id = a2c[4]
-            try:
-                c = Category.objects.get(brafton_id=cb_id)
-                a = Article.objects.get(brafton_id=ab_id)
-                a.categories.add(c)
-            except:
-                pass
-        count = count + 1
-"""
