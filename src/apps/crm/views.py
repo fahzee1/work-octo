@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from apps.crm.forms import LoginForm, AffiliateForm
-from apps.affiliates.models import Affiliate
+from apps.affiliates.models import Affiliate, Profile
 
 def crm_login(request):
     if request.method == "POST":
@@ -55,10 +55,30 @@ def index(request):
         }, context_instance=RequestContext(request))
 
 # affiliate pages
+
+def affiliate_requests(request):
+
+    request_list = Profile.objects.all()
+    paginator = Paginator(request_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        requests = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        requests = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        requests = paginator.page(paginator.num_pages)
+
+    return render_to_response('crm/requests.html', {
+            'requests': requests,
+        }, context_instance=RequestContext(request))
+
 def affiliates(request):
 
     affiliate_list = Affiliate.objects.all()
-    paginator = Paginator(affiliate_list, 25) # Show 25 contacts per page
+    paginator = Paginator(affiliate_list, 20)
 
     page = request.GET.get('page', '')
     try:
