@@ -409,6 +409,7 @@ else:
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
+    url(r'^crm/', include('apps.crm.urls', namespace='crm')),
     ('^radioshack/?$',
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

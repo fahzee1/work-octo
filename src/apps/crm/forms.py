@@ -15,3 +15,8 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("This user does not exist.")
 
         return username
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['class'] = 'span4'
+        self.fields['password'].widget.attrs['class'] = 'span4'
