@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from apps.affiliates.models import Affiliate, LandingPage
+from apps.affiliates.models import Affiliate, LandingPage, Profile
 
 
 class LoginForm(forms.Form):
@@ -35,9 +35,17 @@ class AffiliateForm(forms.ModelForm):
         fields = ('agent_id', 'name', 'phone', 'has_landing_page',
             'pixels', 'conversion_pixels')
 
+    def clean_agent_id(self):
+        agent_id = self.cleaned_data.get('agent_id', None)
+        return agent_id.lower()
+
     def __init__(self, *args, **kwargs):
         super(AffiliateForm, self).__init__(*args, **kwargs)
         instance = kwargs.get('instance', None)
         if instance:
             if instance.has_landing_page():
                 self.fields['has_landing_page'].initial = True
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile

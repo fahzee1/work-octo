@@ -17,23 +17,27 @@
         <td>{{ affiliate.company_name }}</td>
         <td>{{ affiliate.email }}</td>
         <td style="text-align: center;">
-            <a href="{% url crm:affiliates_edit affiliate.id %}" class="btn">
-                <i class="icon-pencil"></i>
-                Edit
+            <a href="{% url crm:affiliate_requests_edit affiliate.id %}" class="btn">
+                <i class="icon-eye-open"></i>
+                View
             </a>
         </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4" style="text-align: center;"> No Affiliates to View </td>
     </tr>
     {% endfor %}
 </table>
 <ul class="pager">
     {% if requests.has_previous %}
     <li class="previous">
-        <a href="?page={{ requests.previous_page_number }}">&larr; Older</a>
+        <a href="?page={{ requests.previous_page_number }}">&larr; Newer</a>
     </li>
     {% endif %}
     {% if requests.has_next %}
     <li class="next">
-        <a href="?page={{ requests.next_page_number }}">Newer &rarr;</a>
+        <a href="?page={{ requests.next_page_number }}">Older &rarr;</a>
     </li>
     {% endif %}
 </ul>

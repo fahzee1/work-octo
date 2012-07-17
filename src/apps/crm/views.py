@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 
-from apps.crm.forms import LoginForm, AffiliateForm
+from apps.crm.forms import LoginForm, AffiliateForm, ProfileForm
 from apps.affiliates.models import Affiliate, Profile
 
 def crm_login(request):
@@ -59,7 +59,7 @@ def index(request):
 
 def affiliate_requests(request):
 
-    request_list = Profile.objects.all()
+    request_list = Profile.objects.filter(status='PENDING').order_by('-date_created')
     paginator = Paginator(request_list, 20)
 
     page = request.GET.get('page', '')
@@ -76,9 +76,45 @@ def affiliate_requests(request):
             'requests': requests,
         }, context_instance=RequestContext(request))
 
+def affiliate_requests_decline(request, profile_id):
+    try:
+        profile = Profile.objects.get(id=profile_id)
+    except:
+        raise Http404
+
+    profile.decline_affiliate()
+    messages.success(request,
+        'You have successfully declined the affiliate.')
+    return HttpResponseRedirect(reverse('crm:requests'))
+
+def affiliate_requests_edit(request, profile_id):
+
+    try:
+        profile = Profile.objects.get(id=profile_id)
+    except:
+        raise Http404
+
+    if request.method == "POST":
+        form = AffiliateForm(request.POST)
+        if form.is_valid():
+            affiliate = form.save(commit=False)
+            new_aff = profile.accept_affiliate(affiliate.agent_id, affiliate.name,
+                affiliate.phone)
+            messages.success(request,
+                'You have successfully approved your affiliate.')
+            return HttpResponseRedirect(reverse('crm:affiliates_edit',
+                kwargs={'affiliate_id': new_aff.id}))
+    else:
+        form = AffiliateForm()
+
+    return render_to_response('crm/request_edit.html', {
+            'form': form,
+            'profile': profile,
+        }, context_instance=RequestContext(request))
+
 def affiliates(request):
 
-    affiliate_list = Affiliate.objects.all()
+    affiliate_list = Affiliate.objects.order_by('-date_created', 'agent_id')
     paginator = Paginator(affiliate_list, 20)
 
     page = request.GET.get('page', '')
@@ -94,6 +130,17 @@ def affiliates(request):
     return render_to_response('crm/affiliates.html', {
             'affiliates': affiliates,
         }, context_instance=RequestContext(request))
+
+def affiliates_delete(request, affiliate_id):
+    try:
+        affiliate = Affiliate.objects.get(id=affiliate_id)
+    except:
+        raise Http404
+
+    messages.success(request,
+        'You have successfully deleted affiliate: %s' % affiliate.agent_id)
+    affiliate.delete()
+    return HttpResponseRedirect(reverse('crm:affiliates'))
 
 def affiliates_edit(request, affiliate_id):
 

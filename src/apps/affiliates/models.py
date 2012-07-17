@@ -21,6 +21,8 @@ class Affiliate(models.Model):
     conversion_pixels = models.TextField(blank=True, null=True,
         help_text='Add HTML here for affiliate conversion Pixels')
 
+    date_created = models.DateTimeField(auto_now_add=True)
+
     def has_landing_page(self):
         try:
             lp = LandingPage.objects.get(affiliate=self)
@@ -126,9 +128,31 @@ class Profile(models.Model):
     sign = models.CharField(max_length=200)
     affiliate = models.ForeignKey(Affiliate, blank=True, null=True)
 
+    date_created = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         verbose_name = 'Affiliate Request'
         verbose_name_plural = 'Affiliate Requests'
+
+    def accept_affiliate(self, agent_id, name, phone=None):
+        # send email to affiliate
+        aff = Affiliate()
+        aff.agent_id = agent_id
+        aff.name = name
+        if phone is not None:
+            aff.phone = phone
+        aff.save()
+
+        self.status = 'APPROVED'
+        self.affiliate = aff
+        self.save()
+        return aff
+
+    def decline_affiliate(self):
+        # send email to affiliate
+        self.status = 'DECLINED'
+        self.save()
+        return True
 
     def send_signup_to_bizdev(self):
         subject = 'Protect America Affiliate Program'

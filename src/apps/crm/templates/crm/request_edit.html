@@ -1,0 +1,115 @@
+{% extends "crm/base.html" %}
+
+{% load sekizai_tags %}
+
+{% block content %}
+<form action="" method="POST">
+{% csrf_token %}
+<div class="row">
+    <div class="span8">
+        <h2> Affiliate Request Information </h2>
+        <hr/>
+        <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th width="20%">Name: </th><td>{{ profile.name }}</td>
+            </tr>
+            <tr>
+                <th>Title: </th><td>{{ profile.title }}</td>
+            </tr>
+            <tr>
+                <th>Company Name: </th><td>{{ profile.company_name }}</td>
+            </tr>
+            <tr>
+                <th>Tax ID: </th><td>{{ profile.taxid }}</td>
+            </tr>
+            <tr>
+                <th>Street Address: </th><td>{{ profile.street_address }}</td>
+            </tr>
+            <tr>
+                <th>City: </th><td>{{ profile.city }}</td>
+            </tr>
+            <tr>
+                <th>State: </th><td>{{ profile.state }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode: </th><td>{{ profile.zipcode }}</td>
+            </tr>
+            <tr>
+                <th>Phone: </th><td>{{ profile.phone }}</td>
+            </tr>
+            <tr>
+                <th>Fax: </th><td>{{ profile.fax }}</td>
+            </tr>
+            <tr>
+                <th>Email: </th><td>{{ profile.email }}</td>
+            </tr>
+            <tr>
+                <th>Website: </th><td>{{ profile.website }}</td>
+            </tr>
+            <tr>
+                <th>Comments: </th><td>{{ profile.comments }}</td>
+            </tr>
+
+        </table> 
+    </div>
+</div>
+<div class="row">
+    <div class="span8">
+        <div class="form-actions">
+            <button class="btn btn-success" id="approve-btn">Approve</button>
+            <a href="{% url crm:affiliates %}" class="btn">Cancel</a>
+            <button class="btn btn-danger" id='decline-btn' style="float: right;">Decline</button>
+        </div>
+    </div>
+</div>
+</form>
+<div class="modal hide fade" id="decline_confirm">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Are you sure... ?</h3>
+    </div>
+    <div class="modal-body">
+        <p>Declining this Affiliate will send them an email telling them they were declined.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <a href="{% url crm:affiliate_requests_decline profile.id %}" class="btn btn-danger">Confirm Decline</a>
+    </div>
+</div>
+<div class="modal hide fade" id="approve_confirm">
+    <form action="" method="POST">
+    {% csrf_token %}
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>We need some more information!</h3>
+    </div>
+    <div class="modal-body">
+        <p>To approve this Affiliate we need you to give us some information about the affiliate!</p>
+        {% include "crm/_partials/formfield.html" with field=form.agent_id %}
+        {% include "crm/_partials/formfield.html" with field=form.name %}
+        {% include "crm/_partials/formfield.html" with field=form.phone %}
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <button class="btn btn-success">Approve Affiliate</a>
+    </div>
+    </form>
+</div>
+{% addtoblock "js" %}
+<script type='text/javascript'>
+$(document).ready(function() {
+    $('#decline-btn').click(function(e) {
+        e.preventDefault();
+        $('#decline_confirm').modal('show');
+    });
+    $('#approve-btn').click(function(e) {
+        e.preventDefault();
+        $('#approve_confirm').modal('show');
+    });
+    {% if form.errors %}
+    $('#approve_confirm').modal('show');
+    {% endif %}
+});
+</script>
+{% endaddtoblock %}
+{% endblock %}
