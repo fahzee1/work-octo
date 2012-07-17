@@ -1,0 +1,55 @@
+{% extends "affiliates/generic-review-page/base.html" %}
+
+{% load sekizai_tags %}
+
+{% block page_title %}Protect America Reviews and Testimonials | Protect America Home Security | Testimonials{% endblock %}
+{% block page_keywords %}crime prevention, security, security system, home security, home security system{% endblock %}
+{% block page_description %}Crime prevention tips will help protect your home and family. The best crime prevention tool for your home is a home security system. Get a GE home security...{% endblock %}
+
+{% block content %}
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.infinitescroll.js"></script>
+<script type="text/javascript">
+
+
+$('#customer-testimonial-boxes').infinitescroll({
+ 
+    navSelector  : "div.pagination",            
+                   // selector for the paged navigation (it will be hidden)
+    nextSelector : "div.pagination a.next",    
+                   // selector for the NEXT link (to page 2)
+    itemSelector : "#customer-testimonial-boxes div.testimonial_page"          
+                   // selector for all items you'll retrieve
+    });
+
+
+</script>
+{% endaddtoblock "js" %}
+{% comment %}
+The reason this div is ending here is because the content 
+needs to be out of the wrapper. So we break the div and then style a wrapper
+that expands
+{% endcomment %}
+<div id="testimonial-header">
+    <h1>Protect America Reviews and Testimonials
+</div>
+</div>
+<div id="customer-testimonial-boxes">
+    {% include "about-us/_partials/testimonial_columns.html" with left_column=left_ts middle_column=middle_ts right_column=right_ts %} 
+    <div class="pagination">
+    <span class="step-links">
+        {% if paginator.has_previous %}
+            <a href="?page={{ paginator.previous_page_number }}" class="prev">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ paginator.number }} of {{ paginator.paginator.num_pages }}.
+        </span>
+
+        {% if paginator.has_next %}
+            <a href="?page={{ paginator.next_page_number }}" class="next">next</a>
+        {% endif %}
+    </span>
+    </div>
+</div>
+{% endblock %}

@@ -1,78 +1,7 @@
+{% extends "affiliates/generic-review-page/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-    <title>{% block page_title %}{% endblock %}</title>
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/generic-review-page/generic-review-page.css">
-    <link href="https://plus.google.com/113573642727337197280" rel="publisher" />
-{% endblock %}
-{% block google_analytics %}
-<script type="text/javascript">
 
- var _gaq = _gaq || [];
- _gaq.push(['_setAccount', 'UA-5441302-2']);
- _gaq.push(['_setDomainName', '.protectamerica.com']);
- _gaq.push(['_trackPageview']);
-
- (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
- })();
-
-</script>
-
-<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-{% endblock %}
-</head>
-<body class="{{ page_name }} tk-facitweb">
-<!-- Page Wrapper -->
-<div id="header">
-    <div id="header-wrapper">  
-        <div>
-            <div id="company-logo">
-                <div>
-                    <a href="/">
-                        <img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png" id="protect-america-logo" />
-              
-                    </a>
-                </div>  
-            </div>
-            {% businesstime %}
-            {% if phone_number %}
-            <div id="phone-number">
-                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
-            </div>
-            {% endif %}
-            
-            {% endbusinesstime %}
-            <div id="ge-logo">
-                <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
-            </div>
-            <div class="clear"></div>
-        </div>
-        
-
-    </div>
-</div>
-<div id="navigation-wrapper">
-    {% block navigation %}
-    <div id="navigation">
-        <ul>
-            <li class="home-button active"><a href="" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon-white.png" alt="home alarm companies" /></a></li>
-            <li><a href="" title="Testimonials">Testimonials</a></li>
-            <li><a href="" title="About Protect America Home Security Systems">Equipment</a></li>
-        </ul>
-    </div>
-    {% endblock %}
-</div>
+{% block content %}
 <div class="wrapper">
     <div class="left-column main-content">
         <h2>According to A Secure Life,</h2>
@@ -186,31 +115,5 @@
     {% endaddtoblock "js" %}
 
 </div>
-<div class="clear"></div>
 
-<div id="small-footer">
-    <p>*Call for information on Protect America's monitoring fees and other terms. Standard thirty-six month monitoring agreement required with approved credit. Must be a U.S. Resident. Applicable taxes and fees not included. Cannot be combined with any other offer. Package offered on this coupon includes a master control panel with back-up battery, siren, keypad, fifteen door or window sensors, one motion detector, one yard sign, and three window decals. Offer subject to change. Limited parts replacement warranty valid for as long as customer is monitored. Not available to existing Protect America customers. Other restrictions apply. GE and GE Security logos are registered trademarks of General Electric. Protect America, Inc., 3800 Quick Hill Road, Building 1-100, Austin, TX 78728. We provide our service in all 50 states. Licenses: AL: 12-027; AR: E 2001-0538; AZ: ROC114856 (L-67), ROC114855 (C-12); CA: ACO 4115; DE: 06-204; FL: EG-0000192; GA: LVA205875; IA: AC-0081; IL: 127-001092; LA: F492; MD: 107-670; MI: 8714 Huckleberry Lane, Lansing MI. 48917. Lic #3601202409; MS: 15005347; NC: 635-CSA; NJ: Burglar alarm and fire alarm bus. Lic. #34BF00023700; NM: 60519; OK: 739; PA: PA023169; SC: BAC 5432, FAC 3104; TN: 00000265; TX: B16272, ACR-1204; UT: 345548-6501; VA: 11-3129; WA: PROTEAI962LD; WV: WV032962.</p>
-</div>
-{% render_block "js" %}
-<!-- Google Code for Home Page Visit Remarketing List -->
-<script type="text/javascript">
-<!--
-var google_conversion_id = 1072079179;
-var google_conversion_language = "en";
-var google_conversion_format = "1";
-var google_conversion_color = "666666";
-var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
-var google_conversion_value = 0;
-//-->
-</script>
-<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
-{{ pixels|safe }}
-<!-- End Remarketing Code -->
-</body>
-</html>
+{% endblock %}
