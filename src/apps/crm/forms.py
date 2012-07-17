@@ -25,12 +25,15 @@ class LoginForm(forms.Form):
 
 class AffiliateForm(forms.ModelForm):
 
-    has_landing_page = forms.BooleanField(initial=False)
+    has_landing_page = forms.BooleanField(initial=False, required=False,
+        help_text="Enable this if you would like to equip your affiliate \
+        with a landing page.")
 
     class Meta:
         model = Affiliate
 
-        fields = ('agent_id', 'name', 'phone', 'has_landing_page')
+        fields = ('agent_id', 'name', 'phone', 'has_landing_page',
+            'pixels', 'conversion_pixels')
 
     def __init__(self, *args, **kwargs):
         super(AffiliateForm, self).__init__(*args, **kwargs)

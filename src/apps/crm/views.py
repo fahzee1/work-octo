@@ -10,6 +10,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 from apps.crm.forms import LoginForm, AffiliateForm
 from apps.affiliates.models import Affiliate, Profile
@@ -39,7 +40,7 @@ def index(request):
     # rss -> https://github.com/batcave/protectamerica/commits/master.atom
 
     changes = feedparser.parse(
-        'https://github.com/batcave/protectamerica/commits/master.atom?login=robrocker7&token=60952c2cdb279c500b7c8f14545e0531')
+        'https://github.com/robrocker7/protectamerica/commits/master.atom?login=robrocker7&token=60952c2cdb279c500b7c8f14545e0531')
     change_list = []
     for entry in changes.entries[:10]:
         change = {
@@ -103,6 +104,25 @@ def affiliates_edit(request, affiliate_id):
 
     if request.method == 'POST':
         form = AffiliateForm(request.POST, instance=affiliate)
+        if form.is_valid():
+            cdata = form.cleaned_data
+            # we want to add a landing page object if the affiliate
+            # doesn't have one already
+            if not affiliate.has_landing_page():
+                if cdata['has_landing_page']:
+                    affiliate.add_landing_page()
+            # if the checkbox is off check to see if we should remove the 
+            # landing page object
+            if not cdata['has_landing_page']:
+                if affiliate.has_landing_page():
+                    affiliate.remove_landing_page()
+            form.save()
+            messages.success(request,
+                'You have successfully updated the affiliates information.')
+            return HttpResponseRedirect(reverse('crm:affiliates_edit',
+                kwargs={'affiliate_id': affiliate.id}))
+        messages.error(request,
+            'It seems that there was an error trying to update the affiliates information')
     else:
         form = AffiliateForm(instance=affiliate)
 

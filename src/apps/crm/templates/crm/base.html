@@ -84,12 +84,13 @@
                     </li>
                     {% ifusergroup AFFILIATE %}
                     {% url crm:affiliates as aff_page %}
+                    {% url crm:requests as req_aff_page %}
                     <li class="nav-header"> Affiliate Pages </li>
                     <li{% if c_page == aff_page %} class="active"{% endif %}>
                         <a href="{{ aff_page }}">Affiliates</a>
                     </li>
-                    <li{% if c_page == home_page %} class="active"{% endif %}>
-                        <a href="#">Requests</a>
+                    <li{% if c_page == req_aff_page %} class="active"{% endif %}>
+                        <a href="{{ req_aff_page }}">Requests</a>
                     </li>
                     {% endifusergroup %}
                 </ul>
@@ -98,6 +99,7 @@
         {% endwith %}
         {% endblock %}
             <div class="span8 offset1">
+                {% include "crm/_partials/message_box.html" %}
         {% block content %}{% endblock %}
             </div>
         </div>

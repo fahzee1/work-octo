@@ -29,6 +29,25 @@ class Affiliate(models.Model):
             pass
         return False
 
+    def add_landing_page(self):
+        if self.has_landing_page():
+            return False
+        lp = LandingPage()
+        temp = AffTemplate.objects.get(folder='coreg')
+        lp.template = temp
+        lp.affiliate = self
+        lp.save()
+        return True
+
+    def remove_landing_page(self):
+        try:
+            lp = LandingPage.objects.get(affiliate=self)
+            lp.delete()
+            return True
+        except:
+            pass
+        return False
+
     def __unicode__(self):
         return '%s (%s)' % (self.name, self.agent_id)
 
