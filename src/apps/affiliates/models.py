@@ -150,10 +150,11 @@ class Profile(models.Model):
         self.send_approval_email()
         return aff
 
-    def decline_affiliate(self):
+    def decline_affiliate(self, decline_message):
         # send email to affiliate
         self.status = 'DECLINED'
         self.save()
+        self.send_decline_email(decline_message)
         return True
 
     def send_signup_to_bizdev(self):
@@ -202,6 +203,16 @@ class Profile(models.Model):
         subject = 'Protect America Affiliate Program Status Updated'
         t = loader.get_template('emails/send_affiliate_approval.html')
         c = Context({'aff': self})
+        send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
+            [self.email], fail_silently=True)
+
+    def send_decline_email(self, message):
+        subject = 'Protect America Affiliate Program Status Updated'
+        t = loader.get_template('emails/send_affiliate_decline.html')
+        c = Context({
+            'aff': self,
+            'message': message,
+        })
         send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
             [self.email], fail_silently=True)
 

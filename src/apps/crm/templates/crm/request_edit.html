@@ -64,17 +64,26 @@
 </div>
 </form>
 <div class="modal hide fade" id="decline_confirm">
+    <form action="{% url crm:affiliate_requests_decline profile.id %}" method="POST">
+        {% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>Are you sure... ?</h3>
     </div>
     <div class="modal-body">
-        <p>Declining this Affiliate will send them an email telling them they were declined.</p>
+        <p>Please give a reason why you are declining this affiliate. (This is optional)</p>
+        <div class="control-group">
+            <label class="control-label">Decline Message</label>
+            <div class="controls">
+                <textarea name="decline_message" class="span4"></textarea>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>
-        <a href="{% url crm:affiliate_requests_decline profile.id %}" class="btn btn-danger">Confirm Decline</a>
+        <button class="btn btn-danger">Confirm Decline</button>
     </div>
+    </form>
 </div>
 <div class="modal hide fade" id="approve_confirm">
     <form action="" method="POST">

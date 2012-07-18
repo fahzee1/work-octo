@@ -86,8 +86,11 @@
                     {% url crm:affiliates as aff_page %}
                     {% url crm:requests as req_aff_page %}
                     <li class="nav-header"> Affiliate Pages </li>
-                    <li{% if c_page == aff_page %} class="active"{% endif %}>
-                        <a href="{{ aff_page }}">Affiliates</a>
+                    <li{% if c_page == aff_page and not request.GET.all %} class="active"{% endif %}>
+                        <a href="{{ aff_page }}">My Affiliates</a>
+                    </li>
+                    <li{% if c_page == aff_page and request.GET.all %} class="active"{% endif %}>
+                        <a href="{{ aff_page }}?all=true">All Affiliates</a>
                     </li>
                     <li{% if c_page == req_aff_page %} class="active"{% endif %}>
                         <a href="{{ req_aff_page }}">Pending Requests</a>
@@ -95,6 +98,7 @@
                     {% endifusergroup %}
                 </ul>
                 </div>
+                {% block extra_sidebar %}{% endblock %}
             </div>
         {% endwith %}
         {% endblock %}

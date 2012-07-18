@@ -60,9 +60,7 @@ def index(request):
 def affiliate_requests(request):
 
     request_list = Profile.objects.filter(status='PENDING').order_by('-date_created')
-    mine = request.GET.get('mine', None)
-    if mine:
-        request_list = request_list.filter(manager=request.user)
+    
     paginator = Paginator(request_list, 20)
 
     page = request.GET.get('page', '')
@@ -85,10 +83,14 @@ def affiliate_requests_decline(request, profile_id):
         profile = Profile.objects.get(id=profile_id)
     except:
         raise Http404
-
-    profile.decline_affiliate()
-    messages.success(request,
-        'You have successfully declined the affiliate.')
+    if request.method == 'POST':
+        message = request.POST.get('decline_message', None)
+        profile.decline_affiliate(message)
+        messages.success(request,
+            'You have successfully declined the affiliate.')
+    else:
+        messages.error(request,
+            'Seems you tried to request this decline without a post. >.<')
     return HttpResponseRedirect(reverse('crm:requests'))
 
 @login_required(login_url='/crm/login/')
@@ -122,6 +124,10 @@ def affiliate_requests_edit(request, profile_id):
 def affiliates(request):
 
     affiliate_list = Affiliate.objects.order_by('-date_created', 'agent_id')
+    mine = request.GET.get('all', None)
+    if not mine:
+        affiliate_list = affiliate_list.filter(manager=request.user)
+
     paginator = Paginator(affiliate_list, 20)
 
     page = request.GET.get('page', '')

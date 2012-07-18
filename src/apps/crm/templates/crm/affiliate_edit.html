@@ -1,6 +1,12 @@
 {% extends "crm/base.html" %}
 
-{% load sekizai_tags %}
+{% load sekizai_tags comments %}
+
+{% block extra_sidebar %}
+{% render_comment_list for affiliate %}
+{% get_comment_form for affiliate as commentform %}
+{% include "crm/_partials/comment_form.html" with form=commentform %}
+{% endblock %}
 
 {% block content %}
 <form action="" method="POST">
