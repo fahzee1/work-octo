@@ -1,6 +1,6 @@
 # Forms for crm 
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 from apps.affiliates.models import Affiliate, LandingPage, Profile
 
@@ -33,7 +33,7 @@ class AffiliateForm(forms.ModelForm):
         model = Affiliate
 
         fields = ('agent_id', 'name', 'phone', 'has_landing_page',
-            'pixels', 'conversion_pixels')
+            'pixels', 'conversion_pixels', 'manager')
 
     def clean_agent_id(self):
         agent_id = self.cleaned_data.get('agent_id', None)
@@ -45,6 +45,9 @@ class AffiliateForm(forms.ModelForm):
         if instance:
             if instance.has_landing_page():
                 self.fields['has_landing_page'].initial = True
+        affiliate_group = Group.objects.get(name="AFFILIATE")
+        users = User.objects.filter(groups=affiliate_group)
+        self.fields['manager'].queryset = users
 
 class ProfileForm(forms.ModelForm):
     class Meta:

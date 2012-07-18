@@ -34,6 +34,7 @@ def crm_login(request):
             'form': form,
         }, context_instance=RequestContext(request))
 
+@login_required(login_url='/crm/login/')
 def index(request):
 
     # Display Latest Changes to the Website
@@ -45,21 +46,23 @@ def index(request):
     for entry in changes.entries[:10]:
         change = {
             'title': entry.title,
-            'date': entry.updated,
+            'date': datetime.strptime(entry.updated.split('T')[0], '%Y-%m-%d'),
             'author': entry.author,
             'author_pic': entry.media_thumbnail[0]['url'],
         }
         change_list.append(change)
-
     return render_to_response('crm/index.html', {
             'change_list': change_list,
         }, context_instance=RequestContext(request))
 
 # affiliate pages
-
+@login_required(login_url='/crm/login/')
 def affiliate_requests(request):
 
     request_list = Profile.objects.filter(status='PENDING').order_by('-date_created')
+    mine = request.GET.get('mine', None)
+    if mine:
+        request_list = request_list.filter(manager=request.user)
     paginator = Paginator(request_list, 20)
 
     page = request.GET.get('page', '')
@@ -76,6 +79,7 @@ def affiliate_requests(request):
             'requests': requests,
         }, context_instance=RequestContext(request))
 
+@login_required(login_url='/crm/login/')
 def affiliate_requests_decline(request, profile_id):
     try:
         profile = Profile.objects.get(id=profile_id)
@@ -87,6 +91,7 @@ def affiliate_requests_decline(request, profile_id):
         'You have successfully declined the affiliate.')
     return HttpResponseRedirect(reverse('crm:requests'))
 
+@login_required(login_url='/crm/login/')
 def affiliate_requests_edit(request, profile_id):
 
     try:
@@ -100,6 +105,7 @@ def affiliate_requests_edit(request, profile_id):
             affiliate = form.save(commit=False)
             new_aff = profile.accept_affiliate(affiliate.agent_id, affiliate.name,
                 affiliate.phone)
+            new_aff.manager = request.user
             messages.success(request,
                 'You have successfully approved your affiliate.')
             return HttpResponseRedirect(reverse('crm:affiliates_edit',
@@ -112,6 +118,7 @@ def affiliate_requests_edit(request, profile_id):
             'profile': profile,
         }, context_instance=RequestContext(request))
 
+@login_required(login_url='/crm/login/')
 def affiliates(request):
 
     affiliate_list = Affiliate.objects.order_by('-date_created', 'agent_id')
@@ -131,6 +138,7 @@ def affiliates(request):
             'affiliates': affiliates,
         }, context_instance=RequestContext(request))
 
+@login_required(login_url='/crm/login/')
 def affiliates_delete(request, affiliate_id):
     try:
         affiliate = Affiliate.objects.get(id=affiliate_id)
@@ -142,6 +150,7 @@ def affiliates_delete(request, affiliate_id):
     affiliate.delete()
     return HttpResponseRedirect(reverse('crm:affiliates'))
 
+@login_required(login_url='/crm/login/')
 def affiliates_edit(request, affiliate_id):
 
     try:
