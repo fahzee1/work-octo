@@ -16,6 +16,11 @@
             <li>Lifetime Replacement Parts Warranty</li>
         </ul>
     </div>
+    <div class="right-column">
+            {% include "order/quote-form.html" with form=forms.basic %}
+
+    </div>
+    {% comment %}
     <div class="right-column quote-form">
         <h3>3 Easy Steps</h3>
         <p>1. Choose your property size</p>
@@ -49,6 +54,7 @@
             <div class="clear"></div>
         </div>
     </div>
+    {% endcomment %}
     {% testimonial_search "protect america" "limit=10&words=64" %}
     <div class="clear"></div>
     {% include "order/call-box.html" %}
@@ -86,9 +92,6 @@
         </ul>
         <p id="price-tag">Price Today:<strong>Free</strong><span>with 3-year monitoring agreement*</span></p>
         <div class="clear"></div>
-        <div class="button-submit">
-            <a href="{% url order-package %}?package=platinum">Order Here ></a>
-        </div>
     </div>
     <div class="clear"></div>
     <div id="main-features">
