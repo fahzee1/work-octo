@@ -79,6 +79,7 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
+        dtt(r'^test/touchscreen/$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
 
     )
 elif settings.SITE_ID == 4:
@@ -173,6 +174,8 @@ else:
 
         # Test Pages
         dtt(r'^test/hic/?$', 'tests/hi-c-index-test.html', 'hic-test', 'home'),
+        dtt(r'^test/touchscreen/?$', 'tests/touchscreen-banner-test.html', 'touchscreen-test', 'home'),
+
 
             
 
