@@ -3,62 +3,32 @@
 {% load sekizai_tags %}
 
 {% block content %}
-<form action="" method="POST">
+<form action="?profile" method="POST">
 {% csrf_token %}
 <div class="row">
     <div class="span8">
         <h2> Affiliate Request Information </h2>
         <hr/>
-        <table class="table table-striped table-bordered table-condensed">
-            <tr>
-                <th width="20%">Name: </th><td>{{ profile.name }}</td>
-            </tr>
-            <tr>
-                <th>Title: </th><td>{{ profile.title }}</td>
-            </tr>
-            <tr>
-                <th>Company Name: </th><td>{{ profile.company_name }}</td>
-            </tr>
-            <tr>
-                <th>Tax ID: </th><td>{{ profile.taxid }}</td>
-            </tr>
-            <tr>
-                <th>Street Address: </th><td>{{ profile.street_address }}</td>
-            </tr>
-            <tr>
-                <th>City: </th><td>{{ profile.city }}</td>
-            </tr>
-            <tr>
-                <th>State: </th><td>{{ profile.state }}</td>
-            </tr>
-            <tr>
-                <th>Zipcode: </th><td>{{ profile.zipcode }}</td>
-            </tr>
-            <tr>
-                <th>Phone: </th><td>{{ profile.phone }}</td>
-            </tr>
-            <tr>
-                <th>Fax: </th><td>{{ profile.fax }}</td>
-            </tr>
-            <tr>
-                <th>Email: </th><td>{{ profile.email }}</td>
-            </tr>
-            <tr>
-                <th>Website: </th><td>{{ profile.website }}</td>
-            </tr>
-            <tr>
-                <th>Comments: </th><td>{{ profile.comments }}</td>
-            </tr>
-
-        </table> 
+        {% include "crm/_partials/profile_form_html.html" %} 
+    </div>
+    <div class="row">
+        <div class="span8" style="margin-left: 56px;">
+            <p>Affiliate Comment:</p>
+            <blockquote>{{ profile.comments }}</blockquote>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="span8">
         <div class="form-actions">
-            <button class="btn btn-success" id="approve-btn">Approve</button>
+            <button class="btn btn-primary" type="submit">Update Information</button>
             <a href="{% url crm:affiliates %}" class="btn">Cancel</a>
-            <button class="btn btn-danger" id='decline-btn' style="float: right;">Decline</button>
+            <div class="btn-group pull-right">
+                <a href="#" class="btn btn-success"
+                    id="approve-btn">Approve</a>
+                <a href="#" class="btn btn-danger"
+                    id='decline-btn'>Decline</a>
+            </div>
         </div>
     </div>
 </div>
@@ -86,7 +56,7 @@
     </form>
 </div>
 <div class="modal hide fade" id="approve_confirm">
-    <form action="" method="POST">
+    <form action="?approved" method="POST">
     {% csrf_token %}
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
@@ -100,7 +70,7 @@
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>
-        <button class="btn btn-success">Approve Affiliate</a>
+        <button class="btn btn-success" type="submit">Approve Affiliate</a>
     </div>
     </form>
 </div>

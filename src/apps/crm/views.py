@@ -102,6 +102,7 @@ def affiliate_requests_decline(request, profile_id):
         profile = Profile.objects.get(id=profile_id)
     except:
         raise Http404
+
     if request.method == 'POST':
         message = request.POST.get('decline_message', None)
         profile.decline_affiliate(message)
@@ -121,23 +122,40 @@ def affiliate_requests_edit(request, profile_id):
         raise Http404
 
     if request.method == "POST":
-        form = AffiliateForm(request.POST)
-        if form.is_valid():
-            affiliate = form.save(commit=False)
-            new_aff = profile.accept_affiliate(affiliate.agent_id, affiliate.name,
-                affiliate.phone)
-            new_aff.manager = request.user
-            new_aff.save()
-            messages.success(request,
-                'You have successfully approved your affiliate.')
-            return HttpResponseRedirect(reverse('crm:affiliates_edit',
-                kwargs={'affiliate_id': new_aff.id}))
+        if 'profile' in request.GET:
+            print 'profile'
+            profileform = ProfileForm(request.POST, instance=profile,
+                prefix="profile")
+            form = AffiliateForm(prefix="affiliate") 
+            if profileform.is_valid():
+                profileform.save()
+                messages.success(request,
+                    'You have successfully updated the request information.')
+                return HttpResponseRedirect(reverse('crm:affiliate_requests_edit',
+                    kwargs={'profile_id': profile.id}))
+            print 'not valid'
+        elif 'approved' in request.GET:
+            print 'affiliate'
+            profileform = ProfileForm(instance=profile,
+                prefix="profile")
+            form = AffiliateForm(request.POST, prefix="affiliate")
+            if form.is_valid():
+                affiliate = form.save(commit=False)
+                new_aff = profile.accept_affiliate(affiliate.agent_id, affiliate.name,
+                    affiliate.phone)
+                new_aff.manager = request.user
+                new_aff.save()
+                messages.success(request,
+                    'You have successfully approved your affiliate.')
+                return HttpResponseRedirect(reverse('crm:affiliates_edit',
+                    kwargs={'affiliate_id': new_aff.id}))
     else:
-        form = AffiliateForm()
-
+        profileform = ProfileForm(instance=profile, prefix="profile")
+        form = AffiliateForm(prefix="affiliate")
 
     return crm_render_wrapper(request, 'crm/request_edit.html', {
             'form': form,
+            'profileform': profileform,
             'profile': profile,
         })
 
@@ -206,11 +224,18 @@ def affiliates_edit(request, affiliate_id):
 
     try:
         affiliate = Affiliate.objects.get(id=affiliate_id)
-    except:
+    except Affiliate.DoesNotExist:
         raise Http404
+    try:
+        profile = Profile.objects.get(affiliate=affiliate)
+    except Profile.DoesNotExist:
+        profile = None
 
     if request.method == 'POST':
-        form = AffiliateForm(request.POST, instance=affiliate)
+        form = AffiliateForm(request.POST, instance=affiliate,
+            prefix="affiliate")
+        profileform = ProfileForm(request.POST, instance=profile,
+            prefix="profile")
         if form.is_valid():
             cdata = form.cleaned_data
             # we want to add a landing page object if the affiliate
@@ -231,11 +256,14 @@ def affiliates_edit(request, affiliate_id):
         messages.error(request,
             'It seems that there was an error trying to update the affiliates information')
     else:
-        form = AffiliateForm(instance=affiliate)
+        form = AffiliateForm(instance=affiliate, prefix="affiliate")
+        profileform = ProfileForm(instance=profile, prefix="profile")
 
     return crm_render_wrapper(request, 'crm/affiliate_edit.html', {
             'form': form,
             'affiliate': affiliate,
+            'profileform': profileform,
+            'profile': profile,
         })
 
 def comment_posted(request):
