@@ -44,6 +44,8 @@ def index(request):
         'https://github.com/robrocker7/protectamerica/commits/master.atom?login=robrocker7&token=60952c2cdb279c500b7c8f14545e0531')
     change_list = []
     for entry in changes.entries[:10]:
+        if 'Merge' in entry.title:
+            continue
         change = {
             'title': entry.title,
             'date': datetime.strptime(entry.updated.split('T')[0], '%Y-%m-%d'),
