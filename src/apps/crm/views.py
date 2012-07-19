@@ -236,7 +236,7 @@ def affiliates_edit(request, affiliate_id):
             prefix="affiliate")
         profileform = ProfileForm(request.POST, instance=profile,
             prefix="profile")
-        if form.is_valid():
+        if form.is_valid() and profileform.is_valid():
             cdata = form.cleaned_data
             # we want to add a landing page object if the affiliate
             # doesn't have one already
@@ -249,6 +249,9 @@ def affiliates_edit(request, affiliate_id):
                 if affiliate.has_landing_page():
                     affiliate.remove_landing_page()
             form.save()
+
+            profileform.save()
+            
             messages.success(request,
                 'You have successfully updated the affiliates information.')
             return HttpResponseRedirect(reverse('crm:affiliates_edit',
