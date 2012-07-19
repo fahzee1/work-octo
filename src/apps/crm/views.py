@@ -2,7 +2,7 @@ import urllib2
 import feedparser
 from datetime import datetime
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render_to_response
@@ -11,6 +11,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from django.contrib.comments.models import Comment
+from django.utils import simplejson
 
 from apps.crm.forms import LoginForm, AffiliateForm, ProfileForm
 from apps.affiliates.models import Affiliate, Profile
@@ -34,6 +36,20 @@ def crm_login(request):
             'form': form,
         }, context_instance=RequestContext(request))
 
+def crm_render_wrapper(request, template, context):
+    # get Affiliate counts
+    counts = {}
+    if request.user.groups.filter(name='AFFILIATE').count() == 1:
+        my_aff_count = Affiliate.objects.filter(manager=request.user).count()
+        total_aff_count = Affiliate.objects.all().count()
+        total_pending = Profile.objects.filter(status='PENDING').count()
+        counts['affiliates'] = (my_aff_count, total_aff_count, total_pending)
+
+    context['counts'] = counts
+
+    return render_to_response(template, context,
+        context_instance=RequestContext(request))
+
 @login_required(login_url='/crm/login/')
 def index(request):
 
@@ -53,9 +69,9 @@ def index(request):
             'author_pic': entry.media_thumbnail[0]['url'],
         }
         change_list.append(change)
-    return render_to_response('crm/index.html', {
+    return crm_render_wrapper(request, 'crm/index.html', {
             'change_list': change_list,
-        }, context_instance=RequestContext(request))
+        })
 
 # affiliate pages
 @login_required(login_url='/crm/login/')
@@ -75,9 +91,10 @@ def affiliate_requests(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         requests = paginator.page(paginator.num_pages)
 
-    return render_to_response('crm/requests.html', {
+    return crm_render_wrapper(request, 'crm/requests.html', {
             'requests': requests,
-        }, context_instance=RequestContext(request))
+        })
+
 
 @login_required(login_url='/crm/login/')
 def affiliate_requests_decline(request, profile_id):
@@ -110,6 +127,7 @@ def affiliate_requests_edit(request, profile_id):
             new_aff = profile.accept_affiliate(affiliate.agent_id, affiliate.name,
                 affiliate.phone)
             new_aff.manager = request.user
+            new_aff.save()
             messages.success(request,
                 'You have successfully approved your affiliate.')
             return HttpResponseRedirect(reverse('crm:affiliates_edit',
@@ -117,15 +135,23 @@ def affiliate_requests_edit(request, profile_id):
     else:
         form = AffiliateForm()
 
-    return render_to_response('crm/request_edit.html', {
+
+    return crm_render_wrapper(request, 'crm/request_edit.html', {
             'form': form,
             'profile': profile,
-        }, context_instance=RequestContext(request))
+        })
 
 @login_required(login_url='/crm/login/')
 def affiliates(request):
 
     affiliate_list = Affiliate.objects.order_by('-date_created', 'agent_id')
+
+    # create affiliate_list to use for typeahead
+    typeahead = []
+    for affiliate in affiliate_list:
+        typeahead.append(affiliate.agent_id)
+
+    typehead_src = simplejson.dumps(typeahead)
     mine = request.GET.get('all', None)
     if not mine:
         affiliate_list = affiliate_list.filter(manager=request.user)
@@ -142,9 +168,26 @@ def affiliates(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         affiliates = paginator.page(paginator.num_pages)
 
-    return render_to_response('crm/affiliates.html', {
+    return crm_render_wrapper(request, 'crm/affiliates.html', {
             'affiliates': affiliates,
-        }, context_instance=RequestContext(request))
+            'typeahead_src': typehead_src,
+        })
+
+@login_required(login_url='/crm/login/')
+def affiliates_search(request):
+    query = request.GET.get('q', None)
+    if not query:
+        messages.error(request,
+            'The affiliate you searched for doesn\'t exist: query')
+        return HttpResponseRedirect(reverse('crm:affiliates'))
+    try:
+        affiliate = Affiliate.objects.get(agent_id=query)
+    except Affiliate.DoesNotExist:
+        messages.error(request,
+            'The affiliate you searched for doesn\'t exist: database')
+        return HttpResponseRedirect(reverse('crm:affiliates'))
+    return HttpResponseRedirect(reverse('crm:affiliates_edit',
+        kwargs={'affiliate_id': affiliate.id}))
 
 @login_required(login_url='/crm/login/')
 def affiliates_delete(request, affiliate_id):
@@ -190,7 +233,17 @@ def affiliates_edit(request, affiliate_id):
     else:
         form = AffiliateForm(instance=affiliate)
 
-    return render_to_response('crm/affiliate_edit.html', {
+    return crm_render_wrapper(request, 'crm/affiliate_edit.html', {
             'form': form,
             'affiliate': affiliate,
-        }, context_instance=RequestContext(request))
+        })
+
+def comment_posted(request):
+    comment_id = request.GET.get('c', None)
+    if not comment_id:
+        return HttpResponseRedirect(reverse('crm:index'))
+    comment = Comment.objects.get(id=comment_id)
+    messages.success(request,
+        'You have successfully submitted your comment.')
+    return HttpResponseRedirect(reverse('crm:affiliates_edit',
+        kwargs={'affiliate_id': comment.object_pk}))

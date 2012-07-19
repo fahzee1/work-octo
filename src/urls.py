@@ -412,6 +412,8 @@ else:
     # CRM urls
     url(r'^crm/', include('apps.crm.urls', namespace='crm')),
     # comments urls
+    url(r'^comments/posted/$', 'apps.crm.views.comment_posted',
+        name='comments-comment-done'),
     (r'^comments/', include('django.contrib.comments.urls')),
 
     ('^radioshack/?$',
