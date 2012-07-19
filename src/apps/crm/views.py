@@ -43,7 +43,9 @@ def crm_render_wrapper(request, template, context):
         my_aff_count = Affiliate.objects.filter(manager=request.user).count()
         total_aff_count = Affiliate.objects.all().count()
         total_pending = Profile.objects.filter(status='PENDING').count()
-        counts['affiliates'] = (my_aff_count, total_aff_count, total_pending)
+        total_declined = Profile.objects.filter(status='DECLINED').count()
+        counts['affiliates'] = (my_aff_count, total_aff_count, total_pending,
+            total_declined)
 
     context['counts'] = counts
 
@@ -77,8 +79,15 @@ def index(request):
 @login_required(login_url='/crm/login/')
 def affiliate_requests(request):
 
-    request_list = Profile.objects.filter(status='PENDING').order_by('-date_created')
+    request_list = Profile.objects.all()
+    pfilter = request.GET.get('filter', None)
     
+    if pfilter == 'declined':
+        request_list = request_list.filter(status='DECLINED')
+    else:
+        request_list = request_list.filter(status='PENDING')
+
+    request_list = request_list.order_by('-date_created') 
     paginator = Paginator(request_list, 20)
 
     page = request.GET.get('page', '')
@@ -251,7 +260,7 @@ def affiliates_edit(request, affiliate_id):
             form.save()
 
             profileform.save()
-            
+
             messages.success(request,
                 'You have successfully updated the affiliates information.')
             return HttpResponseRedirect(reverse('crm:affiliates_edit',

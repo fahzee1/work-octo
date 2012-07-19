@@ -94,9 +94,13 @@
                         <span class="badge pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.1 }}</span>
                         <a href="{{ aff_page }}?all=true">All Affiliates</a>
                     </li>
-                    <li{% if c_page == req_aff_page %} class="active"{% endif %}>
+                    <li{% if c_page == req_aff_page and not request.GET.filter %} class="active"{% endif %}>
                         <span class="badge badge-important pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.2 }}</span>
                         <a href="{{ req_aff_page }}">Pending Requests</a>
+                    </li>
+                    <li{% if c_page == req_aff_page and request.GET.filter == 'declined' %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.3 }}</span>
+                        <a href="{{ req_aff_page }}?filter=declined">Declined Requests</a>
                     </li>
                     {% endifusergroup %}
                 </ul>
