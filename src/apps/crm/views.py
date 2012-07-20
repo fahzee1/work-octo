@@ -142,7 +142,6 @@ def affiliate_requests_edit(request, profile_id):
                     'You have successfully updated the request information.')
                 return HttpResponseRedirect(reverse('crm:affiliate_requests_edit',
                     kwargs={'profile_id': profile.id}))
-            print 'not valid'
         elif 'approved' in request.GET:
             print 'affiliate'
             profileform = ProfileForm(instance=profile,
@@ -240,31 +239,56 @@ def affiliates_edit(request, affiliate_id):
     except Profile.DoesNotExist:
         profile = None
 
+
     if request.method == 'POST':
-        form = AffiliateForm(request.POST, instance=affiliate,
-            prefix="affiliate")
-        profileform = ProfileForm(request.POST, instance=profile,
-            prefix="profile")
-        if form.is_valid() and profileform.is_valid():
-            cdata = form.cleaned_data
-            # we want to add a landing page object if the affiliate
-            # doesn't have one already
-            if not affiliate.has_landing_page():
-                if cdata['has_landing_page']:
-                    affiliate.add_landing_page()
-            # if the checkbox is off check to see if we should remove the 
-            # landing page object
-            if not cdata['has_landing_page']:
-                if affiliate.has_landing_page():
-                    affiliate.remove_landing_page()
-            form.save()
+        if profile:
+            form = AffiliateForm(request.POST, instance=affiliate,
+                prefix="affiliate")
+            profileform = ProfileForm(request.POST, instance=profile,
+                prefix="profile")
+            if form.is_valid() and profileform.is_valid():
+                cdata = form.cleaned_data
+                # we want to add a landing page object if the affiliate
+                # doesn't have one already
+                if not affiliate.has_landing_page():
+                    if cdata['has_landing_page']:
+                        affiliate.add_landing_page()
+                # if the checkbox is off check to see if we should remove the 
+                # landing page object
+                if not cdata['has_landing_page']:
+                    if affiliate.has_landing_page():
+                        affiliate.remove_landing_page()
+                form.save()
 
-            profileform.save()
+                profileform.save()
 
-            messages.success(request,
-                'You have successfully updated the affiliates information.')
-            return HttpResponseRedirect(reverse('crm:affiliates_edit',
-                kwargs={'affiliate_id': affiliate.id}))
+                messages.success(request,
+                    'You have successfully updated the affiliates information.')
+                return HttpResponseRedirect(reverse('crm:affiliates_edit',
+                    kwargs={'affiliate_id': affiliate.id}))
+        else:
+            form = AffiliateForm(request.POST, instance=affiliate,
+                prefix="affiliate")
+            profileform = ProfileForm(instance=profile,
+                prefix="profile")
+            if form.is_valid():
+                cdata = form.cleaned_data
+                # we want to add a landing page object if the affiliate
+                # doesn't have one already
+                if not affiliate.has_landing_page():
+                    if cdata['has_landing_page']:
+                        affiliate.add_landing_page()
+                # if the checkbox is off check to see if we should remove the 
+                # landing page object
+                if not cdata['has_landing_page']:
+                    if affiliate.has_landing_page():
+                        affiliate.remove_landing_page()
+                form.save()
+
+                messages.success(request,
+                    'You have successfully updated the affiliates information.')
+                return HttpResponseRedirect(reverse('crm:affiliates_edit',
+                    kwargs={'affiliate_id': affiliate.id}))
         messages.error(request,
             'It seems that there was an error trying to update the affiliates information')
     else:
