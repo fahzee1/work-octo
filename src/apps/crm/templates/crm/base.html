@@ -1,0 +1,122 @@
+{% load sekizai_tags crm_tags %}<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Protect America CRM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}crm/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    {% comment %}
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    {% endcomment %}
+  </head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="#">Protect America</a>
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i>
+                    {% if request.user.is_authenticated %}
+                    {{ request.user.username }}
+                    {% else %}
+                    Anonymous
+                    {% endif %}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Profile</a></li>
+                <li class="divider"></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="#">Sign Out</a></li>
+                {% else %}
+                <li><a href="{% url crm:login %}">Login</a>
+                {% endif %}
+            </ul>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="{% url crm:index %}">Home</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+        <div class="row">
+        {% block sidebar %}
+        {% with c_page=request.META.PATH_INFO %}
+        {% url crm:index as home_page %}
+            <div class="span3">
+                <div class="well" style="padding: 8px 0;">
+                <ul class="nav nav-list">
+                    <li{% if c_page == home_page %} class="active"{% endif %}>
+                        <a href="{{ home_page }}">Home</a>
+                    </li>
+                    {% ifusergroup AFFILIATE %}
+                    {% url crm:affiliates as aff_page %}
+                    {% url crm:requests as req_aff_page %}
+                    <li class="nav-header"> Affiliate Pages </li>
+                    <li{% if c_page == aff_page and not request.GET.all %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.0 }}</span>
+                        <a href="{{ aff_page }}">My Affiliates</a>
+                    </li>
+                    <li{% if c_page == aff_page and request.GET.all %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.1 }}</span>
+                        <a href="{{ aff_page }}?all=true">All Affiliates</a>
+                    </li>
+                    <li{% if c_page == req_aff_page and not request.GET.filter %} class="active"{% endif %}>
+                        <span class="badge badge-important pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.2 }}</span>
+                        <a href="{{ req_aff_page }}">Pending Requests</a>
+                    </li>
+                    <li{% if c_page == req_aff_page and request.GET.filter == 'declined' %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.3 }}</span>
+                        <a href="{{ req_aff_page }}?filter=declined">Declined Requests</a>
+                    </li>
+                    {% endifusergroup %}
+                </ul>
+                </div>
+                {% block extra_sidebar %}{% endblock %}
+            </div>
+        {% endwith %}
+        {% endblock %}
+            <div class="span8 offset1">
+                {% include "crm/_partials/message_box.html" %}
+        {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}crm/js/bootstrap.js"></script>
+{% render_block "js" %}
+</body>
+</html>

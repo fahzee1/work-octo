@@ -409,6 +409,13 @@ else:
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
+    # CRM urls
+    url(r'^crm/', include('apps.crm.urls', namespace='crm')),
+    # comments urls
+    url(r'^comments/posted/$', 'apps.crm.views.comment_posted',
+        name='comments-comment-done'),
+    (r'^comments/', include('django.contrib.comments.urls')),
+
     ('^radioshack/?$',
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

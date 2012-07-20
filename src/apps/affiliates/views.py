@@ -7,6 +7,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import simplejson
+from django.core.urlresolvers import reverse
 
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
 from apps.common.views import simple_dtt
@@ -191,7 +192,8 @@ def signup(request):
             aff.save()
             # send email to biz dev
             aff.send_signup_to_bizdev()
-            return HttpResponse('thank you page')
+            aff.send_signup_email()
+            return HttpResponseRedirect(reverse('affiliate-enroll'))
     else:
         form = AffiliateSignup()
 

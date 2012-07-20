@@ -6,6 +6,7 @@ from django.db import models
 from django.core.mail import send_mail
 from django.template import loader, Context
 from django.contrib.localflavor.us.us_states import STATE_CHOICES
+from django.contrib.auth.models import User
 
 class Affiliate(models.Model):
     agent_id = models.CharField(max_length=16, unique=True)
@@ -20,6 +21,35 @@ class Affiliate(models.Model):
         help_text='If the affiliate has a custom thank you page ender the URL after /thank-you here')
     conversion_pixels = models.TextField(blank=True, null=True,
         help_text='Add HTML here for affiliate conversion Pixels')
+    manager = models.ForeignKey(User, blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def has_landing_page(self):
+        try:
+            lp = LandingPage.objects.get(affiliate=self)
+            return True
+        except:
+            pass
+        return False
+
+    def add_landing_page(self):
+        if self.has_landing_page():
+            return False
+        lp = LandingPage()
+        temp = AffTemplate.objects.get(folder='coreg')
+        lp.template = temp
+        lp.affiliate = self
+        lp.save()
+        return True
+
+    def remove_landing_page(self):
+        try:
+            lp = LandingPage.objects.get(affiliate=self)
+            lp.delete()
+            return True
+        except:
+            pass
+        return False
 
     def __unicode__(self):
         return '%s (%s)' % (self.name, self.agent_id)
@@ -99,9 +129,33 @@ class Profile(models.Model):
     sign = models.CharField(max_length=200)
     affiliate = models.ForeignKey(Affiliate, blank=True, null=True)
 
+    date_created = models.DateTimeField(auto_now_add=True)
+
     class Meta:
         verbose_name = 'Affiliate Request'
         verbose_name_plural = 'Affiliate Requests'
+
+    def accept_affiliate(self, agent_id, name, phone=None):
+        # send email to affiliate
+        aff = Affiliate()
+        aff.agent_id = agent_id
+        aff.name = name
+        if phone is not None:
+            aff.phone = phone
+        aff.save()
+
+        self.status = 'APPROVED'
+        self.affiliate = aff
+        self.save()
+        self.send_approval_email()
+        return aff
+
+    def decline_affiliate(self, decline_message):
+        # send email to affiliate
+        self.status = 'DECLINED'
+        self.save()
+        self.send_decline_email(decline_message)
+        return True
 
     def send_signup_to_bizdev(self):
         subject = 'Protect America Affiliate Program'
@@ -123,6 +177,44 @@ class Profile(models.Model):
         })
         send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
             ['BusinessDevelopment@protectamerica.com'], fail_silently=True)
+
+    def send_signup_email(self):
+        subject = 'Protect America Affiliate Enrollment'
+        t = loader.get_template('emails/send_affiliate_signup.html')
+        c = Context({
+            'name': self.name,
+            'title': self.title,
+            'company_name': self.company_name,
+            'website': self.website,
+            'phone': self.phone,
+            'fax': self.fax,
+            'email': self.email,
+            'taxid': self.taxid,
+            'street_address': self.street_address,
+            'city': self.city,
+            'state': self.state,
+            'zipcode': self.zipcode,
+            'comments': self.comments,
+        })
+        send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
+            [self.email], fail_silently=True)
+
+    def send_approval_email(self):
+        subject = 'Protect America Affiliate Program Status Updated'
+        t = loader.get_template('emails/send_affiliate_approval.html')
+        c = Context({'aff': self})
+        send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
+            [self.email], fail_silently=True)
+
+    def send_decline_email(self, message):
+        subject = 'Protect America Affiliate Program Status Updated'
+        t = loader.get_template('emails/send_affiliate_decline.html')
+        c = Context({
+            'aff': self,
+            'message': message,
+        })
+        send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
+            [self.email], fail_silently=True)
 
     def __unicode__(self):
         return '%s' % self.name

@@ -1,0 +1,19 @@
+<div class="control-group{% if field.errors %} error{% endif %}" id="ctrl-{{ field.auto_id }}">
+	<label class="control-label" for="field-{{ field.auto_id }}">{{ field.label }}</label>
+	<div class="controls">
+		{{ field }}
+		{% if field.errors %}
+		<p class="help-block">
+			{% for error in field.errors %}
+			{% if not forloop.first %}<br/>{% endif %}
+			{{ error }}
+			{% endfor %}
+		</p>
+		{% else %}
+			{% if field.help_text %}
+		<p class="help-block">{{ field.help_text }}</p>
+			{% endif %}
+		{% endif %}
+
+	</div>
+</div>
