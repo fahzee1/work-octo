@@ -66,3 +66,18 @@ class ProfileForm(forms.ModelForm):
             'email',
             'website'
         )
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['name'].required = False
+        self.fields['title'].required = False
+        self.fields['company_name'].required = False
+        self.fields['taxid'].required = False
+        self.fields['street_address'].required = False
+        self.fields['city'].required = False
+        self.fields['state'].required = False
+        self.fields['zipcode'].required = False
+        self.fields['phone'].required = False
+        self.fields['fax'].required = False
+        self.fields['email'].required = False
+        self.fields['website'].required = False

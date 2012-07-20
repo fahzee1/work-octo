@@ -7,6 +7,7 @@ urlpatterns = patterns('apps.crm.views',
 
     # affiliates
     url(r'affiliates/$', 'affiliates', name='affiliates'),
+    url(r'affiliates/add/$', 'affiliates_add', name='affiliates_add'),
     url(r'affiliates/(?P<affiliate_id>\d+)/edit/$', 'affiliates_edit',
         name='affiliates_edit'),
     url(r'affiliates/(?P<affiliate_id>\d+)/delete/$', 'affiliates_delete',
