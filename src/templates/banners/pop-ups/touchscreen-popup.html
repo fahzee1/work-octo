@@ -1,0 +1,13 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+<div id="popup-wrapper">
+    <div id="touchscreen-popup">
+        <div id="popup-callbox">
+            {% if phone_number %}
+               <p><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+            {% endif %}
+        </div>
+        <div id="popup-close">&nbsp;</div>
+    </div>
+</div>
+
