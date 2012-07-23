@@ -165,9 +165,10 @@ class AffiliateMiddleware(object):
 
         referrer = request.META.get('HTTP_REFERER')
         engine, domain, term = self.parse_search(referrer)
-        if engine is not None:
-            request.session['search_engine'] = engine
-            request.session['search_keywords'] = term
+        request.search_referrer_engine = engine
+        request.search_referrer_domain = domain
+        request.search_referrer_term = term
+
         
         return response
 
