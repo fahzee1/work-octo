@@ -87,7 +87,7 @@ def view_testimonials(request):
 def testimonial(request, testimonial_id):
     try:
         testimonial = Textimonial.objects.get(id=testimonial_id)
-    except Testimonial.DoesNotExist:
+    except Textimonial.DoesNotExist:
         raise Http404
 
     return simple_dtt(request, 'about-us/single-testimonial.html', {

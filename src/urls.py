@@ -41,7 +41,11 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
-    url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
+    url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template', {
+            'template': 'sitemaps/index.xml',
+            'mimetype': 'application/xml',
+        }, name='index'),
+    url(r'^sitemap/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     
     # affiliate urls
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
@@ -177,6 +181,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
             
+
+        # SEO Content Pages
+        dtt(r'^home-security-systems/?$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
+
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
         dtt(r'^thank-you/ceo/?$', 'thank-you/ceo-thank-you.html', 'ceo-thank-you', 'thank-you'),
@@ -405,6 +413,13 @@ else:
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
+    # CRM urls
+    url(r'^crm/', include('apps.crm.urls', namespace='crm')),
+    # comments urls
+    url(r'^comments/posted/$', 'apps.crm.views.comment_posted',
+        name='comments-comment-done'),
+    (r'^comments/', include('django.contrib.comments.urls')),
+
     ('^radioshack/?$',
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

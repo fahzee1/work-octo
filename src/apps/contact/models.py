@@ -209,7 +209,7 @@ class DoNotCall(models.Model):
             'New Do Not Call Request',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
-            ['feedback@protectamerica.com'],
+            ['donotcall@protectamerica.com'],
             ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()

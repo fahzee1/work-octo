@@ -1,0 +1,26 @@
+{% extends "crm/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="span4">
+        sdf
+    </div>
+    <div class="span4">
+        <h3> <i class="icon-bullhorn"></i> Recent ProtectAmerica.com Changes </h3>
+        <hr/>
+        <ul class="unstyled">
+        {% for change in change_list %}
+            <li style="margin-bottom: 8px;">
+                <div style="float:left;">
+                    <img src="{{ change.author_pic }}" class="thumbnail" />
+                </div>
+                <div style="margin-left: 48px;">
+                   {{ change.date|date:"m-d-Y" }}<br/> <strong>{{ change.title }}</strong> 
+                </div>
+                <div style="clear:both;"></div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

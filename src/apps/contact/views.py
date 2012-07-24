@@ -161,8 +161,8 @@ def basic_post_login(request):
             'email': fdata['email'],
             'affkey': request_data['affkey'],
             'formlocation': formset.referer_page,
-            'searchengine': request.session.get('search_engine', ''),
-            'searchkeywords': request.session.get('search_keywords', ''),
+            'searchengine': request.search_referrer_engine,
+            'searchkeywords': request.search_referrer_term,
             'lead_id': formset.id,
         }
         send_leadimport(emaildata)
