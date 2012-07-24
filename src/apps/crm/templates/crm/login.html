@@ -1,0 +1,21 @@
+{% extends "crm/base.html" %}
+
+{% block sidebar %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="span4 offset4">
+        <img src="{{ STATIC_URL }}img/extra/protect-america-home-symbol.png"
+            style="margin-left: 90px;" width="200px" height="200px" />
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% include "crm/_partials/formfield.html" with field=form.username %}
+        {% include "crm/_partials/formfield.html" with field=form.password %}
+        <div class="form-actions">
+            <button class="btn btn-success" type="submit">Save changes</button>
+            <button class="btn">Cancel</button>
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock %}

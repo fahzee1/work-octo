@@ -85,8 +85,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'apps.affiliates.middleware.AffiliateMiddleware',
-    'apps.common.middleware.DetectMobileBrowser',
+    #'apps.common.middleware.DetectMobileBrowser',
 )
 
 ROOT_URLCONF = 'urls'
@@ -111,6 +112,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.messages',
+    'django.contrib.comments',
 
     'south',
     'sekizai',
@@ -125,6 +128,7 @@ INSTALLED_APPS = (
     'apps.testimonials',
     'apps.crimedatamodels',
     'apps.news',
+    'apps.crm',
 
     # sitemaps by opm
     'apps.pa-sitemaps',
