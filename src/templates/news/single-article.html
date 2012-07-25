@@ -15,7 +15,7 @@
 <div id="single-article" itemscope itemtype="http://schema.org/Article">
     <div id="article-header">
         {% if article.image %}
-        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" title="{{ article.image_caption }}" itemprop="image" />
+        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" alt="{{ article.image_caption }}" itemprop="image" />
         {% endif %}
         <div class="news-date">
             <p><time itemprop="dateCreated" datetime="{{ article.date_created|date:"Y-m-d" }}">{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</time></strong></p>
