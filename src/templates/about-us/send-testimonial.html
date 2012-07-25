@@ -1,0 +1,106 @@
+{% extends "about-us/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Send a Protect America Testimonial{% endblock %}
+{% block page_keywords %}protect america, home security, review, testimonial, alarm system review, share, thoughts{% endblock %}
+{% block page_description %}Share your thoughts and reviews of Protect America by sending us your own testimonial.{% endblock %}
+
+{% block subnav_child %}
+<ul>
+    <li><a href="{% url testimonials %}" title="View all of our Customer Submitted Testimonials">All Testimonials</a></li>
+	<li><a href="{% url video-testimonials %}" title="Watch all our Customer Submitted Video Testimonials">Video Testimonials</a></li>
+	<li class="active"><a href="{% url send-testimonial %}" title="Share Your Own Protect America Testimonial with Us!">Tell Us Your Testimonial</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<img src="{{ STATIC_URL }}img/extra/big-person-icon.png" alt="big-person-icon" width="368" height="264" id="testimonial-person" />
+<form id="testimonial-form" method="POST">
+    {% csrf_token %}
+    <h1>Share your Testimonial with Protect America</h1>
+    <p>Enter your information and personal story to add a testimonial of crime prevention or how Protect America has aided in securing your home and family.</p>
+    <fieldset>
+        <label>Name:</label>
+        {% include "_partials/formfield_nolabel.html" with field=formset.first_name %}
+        {% include "_partials/formfield_nolabel.html" with field=formset.last_name %}
+    </fieldset>
+    <fieldset>
+        {% include "_partials/formfield.html" with field=formset.email %}
+    </fieldset>
+    <fieldset>
+        <label>City &amp; State:</label>
+        {% include "_partials/formfield_nolabel.html" with field=formset.city %}
+        {% include "_partials/formfield_nolabel.html" with field=formset.state %}
+    </fieldset>
+    <fieldset id="star-rating">
+        {{ formset.rating.as_hidden }}
+        <div class="star-container">
+            <div class="star-button" id="1-star">&nbsp;</div>
+            <div class="star-button" id="2-star">&nbsp;</div>
+            <div class="star-button" id="3-star">&nbsp;</div>
+            <div class="star-button" id="4-star">&nbsp;</div>
+            <div class="star-button" id="5-star">&nbsp;</div>
+        </div>
+        {% if formset.rating.errors %}
+        <ul class="formHint">
+            {% for error in formset.rating.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="clear"></div>
+    </fieldset>
+    <fieldset>
+        {% include "_partials/formfield.html" with field=formset.message %}
+    </fieldset>
+    <fieldset id="marketing-checkbox">
+        {% include "_partials/formfield_nolabel.html" with field=formset.permission_to_post %}
+        <label>By checking this box, I am giving express written permission for Protect America to use my testimonial for marketing purposes.</label>
+    </fieldset>
+    <button>Send Us Your Testimonial ></button>
+</form>
+{% addtoblock "js" %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        if($('#id_rating').val()) {
+            $('.star-button').each(function(i){
+                if(i <= $('#id_rating').val()){
+                    $('#'+i+'-star').addClass('active');
+                }
+            });
+        }
+    });
+    $('.star-button').css('cursor','pointer').click(function() {
+        $('.star-button').removeClass('active');
+        $('.star-button').removeClass('hover');
+
+        var UnsplitId = $(this).attr('id');
+        var n=UnsplitId.split("-");
+        var maxStar = n[0];
+        var starChange = 1;
+        while (starChange <= maxStar) {
+            changeIt = starChange +"-star"
+            $("#"+ starChange + '-star').addClass('active');
+            starChange++;
+        }
+        $('#id_rating').val(starChange-1);
+    });
+    $('.star-button').css('cursor','pointer').mouseenter(function() {
+        $('.star-button').removeClass('hover');
+
+        var UnsplitId = $(this).attr('id');
+        var n=UnsplitId.split("-");
+        var maxStar = n[0];
+        var starChange = 1;
+        while (starChange <= maxStar) {
+            changeIt = starChange +"-star"
+            $("#"+ starChange + '-star').addClass('hover');
+            starChange++;
+        }
+    });
+    $('.star-button').css('cursor','pointer').mouseleave(function() {
+        $('.star-button').removeClass('hover');
+    });
+
+</script>
+{% endaddtoblock "js" %}
+
+{% endblock %}  

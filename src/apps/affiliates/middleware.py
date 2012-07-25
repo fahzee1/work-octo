@@ -74,6 +74,27 @@ class AffiliateMiddleware(object):
 
     def process_response(self, request, response):
 
+        # first get the domain parts and information
+        domain_parts = request.get_host().split('.')
+        if (len(domain_parts) > 2):
+            subdomain = domain_parts[0]
+            if (subdomain.lower() == 'www'):
+                subdomain = None
+            domain = '.'.join(domain_parts[1:])
+        else:
+            subdomain = None
+            domain = request.get_host()
+
+        # try to get the port main for development
+        try:
+            domain, port = domain.split(':')
+        except ValueError:
+            port = None
+
+        cookie_domain = '.%s' % domain
+        # set the cookie_domain to the request object
+        request.cookie_domain = cookie_domain
+
         expire_time = timedelta(days=90)
 
         # get default agent id from settings
@@ -83,6 +104,7 @@ class AffiliateMiddleware(object):
         except AttributeError:
             default_agent = None
 
+        affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
         if not current_cookie:
             refer_id = request.session.get('refer_id', None)
@@ -90,27 +112,39 @@ class AffiliateMiddleware(object):
 
                 response.set_cookie('refer_id',
                         value=request.session['refer_id'],
-                        domain='.protectamerica.com',
+                        domain=cookie_domain,
                         expires=datetime.now() + expire_time)
-                    
-            if 'agent' in request.GET:
+            elif refer_id is not None:
+                try:
+                    affiliate = Affiliate.objects.get(agent_id=refer_id)
+                    response.set_cookie('refer_id',
+                        value=refer_id,
+                        domain=cookie_domain,
+                        expires=datetime.now() + expire_time)
+                
+                except Affiliate.DoesNotExist:
+                    pass
+                
+            elif 'agent' in request.GET:
                 try:
                     affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])
                     request.session['refer_id'] = affiliate.agent_id
                     response.set_cookie('refer_id',
                         value=affiliate.agent_id,
-                        domain='.protectamerica.com',
+                        domain=cookie_domain,
                         expires=datetime.now() + expire_time)
                 except Affiliate.DoesNotExist:
                     pass
+                    
             else:
-                if default_agent is not None:
+                if default_agent is not None and current_cookie is None:
                     # dont set the cookie to default
                     request.session['refer_id'] = default_agent
-
+                    #request.session['source'] = 'PROTECT AMERICA'
+                    
                     response.set_cookie('refer_id',
                         value=request.session['refer_id'],
-                        domain='.protectamerica.com',
+                        domain=cookie_domain,
                         expires=datetime.now() + expire_time)
 
         if 'affkey' in request.GET:
@@ -125,11 +159,16 @@ class AffiliateMiddleware(object):
             response.set_cookie('source',
                 value=request.GET['source'],
                 expires=datetime.now() + expire_time)
+        # for lead testing, don't set cookie
+        if 'leadid' in request.GET:
+            request.session['leadid'] = request.GET['leadid']
 
         referrer = request.META.get('HTTP_REFERER')
         engine, domain, term = self.parse_search(referrer)
-        if engine is not None:
-            request.session['search_engine'] = engine
-            request.session['search_keywords'] = term
+        request.search_referrer_engine = engine
+        request.search_referrer_domain = domain
+        request.search_referrer_term = term
+
         
         return response
+

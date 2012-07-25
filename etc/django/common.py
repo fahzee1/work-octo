@@ -67,6 +67,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.common.context_processors.business_hours',
     'apps.common.context_processors.phone_number',
     'apps.common.context_processors.mobile_check',
+    'apps.common.context_processors.tracking_pixels',
     'apps.pricetable.context_processors.price_table',
     'sekizai.context_processors.sekizai',
 )
@@ -83,7 +84,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'apps.affiliates.middleware.AffiliateMiddleware',
+    #'apps.common.middleware.DetectMobileBrowser',
 )
 
 ROOT_URLCONF = 'urls'
@@ -108,6 +112,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.sitemaps',
+    'django.contrib.messages',
+    'django.contrib.comments',
 
     'south',
     'sekizai',
@@ -122,12 +128,18 @@ INSTALLED_APPS = (
     'apps.testimonials',
     'apps.crimedatamodels',
     'apps.news',
+    'apps.crm',
+
+    # sitemaps by opm
+    'apps.pa-sitemaps',
 )
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 DEFAULT_PHONE = '8009515190'
+
+GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings

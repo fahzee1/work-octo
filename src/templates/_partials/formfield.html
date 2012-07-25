@@ -1,0 +1,22 @@
+<div id="ctrl-{{ field.auto_id }}" class='form-row ctrlHolder {{ div_class }} {% if field.errors %}error{% endif %}'>
+    <div>
+    <label for="{{ field.name }}" class="{% if field.field.required %}required{% endif %}">{{ field.label }}:</label>
+
+    {% if field.help_text %}
+    <p class='form-help'>
+            {{ field.help_text }}
+    </p>
+    {% endif %}
+    
+    {{ field }}
+    
+        <ul class='formHint'>
+        {% for error in field.errors %}
+            <li><strong>{{ error }}</strong></li>
+        {% endfor %}
+        </ul>
+    <div class="clear"></div>
+    </div>
+</div>
+
+

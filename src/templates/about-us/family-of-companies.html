@@ -1,0 +1,491 @@
+{% extends "about-us/base.html" %}
+
+{% load sekizai_tags %}
+
+{% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
+{% block page_keywords %}family, trust, public service, charity work, protect america, community{% endblock %}
+{% block page_description %}Since early 2010, Protect America Inc. has been another thread in the patchwork of Rockbridge Growth Equity. Owned by Dan Gilbert, our family of companies includes leading online mortgage lender Quicken Loans, the Cleveland Cavaliers of the National{% endblock %}
+
+{% block content %}
+<div id="family-companies-overview">
+    <img src="{{ STATIC_URL }}img/about-us/family-of-companies.png" alt="family-of-companies" />
+    <div id="overview-content">
+        <h1>Protect America Family of Companies</h1>
+        
+        <p>Protect America is a part of a larger family of companies owned and operated by the Rockbridge Growth Equity. Since joining the Rockbridge Family of companies in 2010, Protect America has continued to strengthen its reputation as one of the nation’s most affordable and reliable home security providers. Rockbridge has a long history of operating diverse and innovative companies with unique approaches to time tested products. Along with Protect America, the Rockbridge family of companies includes Quicken Loans, the Cleveland Cavaliers, and Fathead.</p>
+    </div>
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+
+<div id="family-of-companies-container">
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $.getJSON('http://media.quickenloans.com/threadnation/public/companies.json?callback=?',
+    function(json_response) {
+        console.log(json_response);
+    });
+});
+</script>
+{% endaddtoblock "js" %}
+{% for industry, families in industries.iteritems %}
+    <div id="{{ industry|slugify }}">
+        <h2>{{ industry }}</h2>
+        {% for family in families %}
+        <div class="family-company">
+            <img src="http://media.quickenloans.com/threadnation/public/{{ family.webLogoUrl }}">
+            <div class="company-about">
+                <h3>{{ family.name }}</h3>
+                <p>
+                    {{ family.description|safe }}
+                </p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+{% comment %}
+	<div id="biotechnology">
+		<h2>Biotechnology</h2>
+		<div class="family-company">
+   			<img src="{{ STATIC_URL }}img/external/logo_cellerant.png">
+            <div class="company-about">
+                <h3>Cellerant Therapeutics</h3>
+                <p><a href="http://cellerant.com/">Cellerant Therapeutics</a> is a San Carlos, California-based biopharmaceutical company developing novel therapies for life-threatening blood disorders and cancer. The company's lead product, CLT-008, is currently in two Phase 1 clinical trials in patients with hematological malignancies. Cellerant is also developing CLT-008 as a nuclear countermeasure for treatment of Acute Radiation Syndrome (ARS) under a U.S. Government contract valued at up to $153 million over five years with the Biomedical Advanced Research &amp; Development Authority. There is no FDA-approved medical countermeasure to treat ARS. If licensed by the FDA, the federal government could purchase CLT-008 for the Strategic National Stockpile.</p>
+            </div>
+
+		</div>
+	</div>
+    <div id="business-services">
+        <h2>Business Services</h2>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_are_you_a_human.png">
+            <div class="company-about">
+    
+            	<h3 id="are_you_a_human">Are You a Human?</h3>
+                <p><a href="http://www.areyouahuman.com/">Are You a Human?</a> has developed a game-based human authentication platform that replaces the distorted text images known as CAPTCHAs. These games solve the three main pains associated with CAPTCHAs: awful user experience, poor security and reduced conversions by being simple, intuitive and more secure. Our games can be customized to incorporate effective brand messaging in an engaging way.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_bedrock.png">
+            <div class="company-about">
+    
+                <h3 id="bedrock_real-estate">Bedrock Real Estate Services</h3>
+                <p><a href="http://bedrockmgt.com/">Bedrock Real Estate Services</a> offers full property management and real estate services with the highest standard of service to its investors and tenants.  With over 25 years of experience in developing, acquiring, financing, leasing, managing, renovating and marketing office, retail, industrial, hotel and mixed-use properties, Bedrock is a one-stop shop for Quicken Loans and its related companies' growing real estate investments as well as third-party owners.</p>
+                
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_bodypartchart.png">
+            <div class="company-about">
+    
+                <h3 id="bodypartchart">BodyPartChart.com</h3>
+                <p><a href="http://www.bodypartchart.com/">BodyPartChart</a> is much more than the average anatomical poster or paper sign; it's a revolutionary teaching aid and patient education tool.  BodyPartChart was brought to life and inspired by encouraging patient-health care provider interaction and dialogue. BodyPartCharts are designed to create visual impact and enhance the educational experience in exam rooms, waiting areas, class rooms, dorm rooms and any other areas where patient education and learning is a priority.  Perfect for hospitals, doctors' offices, health care providers, pharmaceutical companies, and educators, BodyPartChart offers a durable vinyl and unique low-tack adhesive technology, powered by Fathead, which enables it to stick to most smooth surfaces.  No need for expensive framing, tape, thumbtacks, nails, lamination, unsightly damage to walls, fading and yellowing, these free-form, oversized images can create an upscale feel in any setting.</p>
+                
+            </div>
+            <div class="clear"></div>
+
+        </div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_campus_commandos.png">
+            <div class="company-about">
+    
+                <h3 id="campus_commandos">Campus Commandos</h3>
+                <p>Campus Commandos connects college students with brands in a way that's engaging, authentic and builds brand loyalty. Specializing in <a href="http://www.campuscommandos.com">Campus Rep</a> programs, Campus Commandos' battle-tested reps can infiltrate every aspect of campus life, using targeted, results-oriented strategies to build lifelong brand loyalty. With a strong commitment to excellence, a real understanding of the issues that affect clients and a genuine enthusiasm for hard work, Campus Commandos strives to build a long-term relationship with each customer. Campus Commandos is a Bizdom U business. </p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_core_merchant.png">
+            <div class="company-about">
+                <h3 id="core_merchant">Core Merchant</h3>
+                <p>Core Merchant provides custom payment solutions for businesses to help them accept payments wherever and whenever they need - at rates they can both understand and afford. Core Merchant, a Bizdom U business, was created to simplify the process of accepting credit or debit cards for your product or service, providing easy and convenient payment solutions where and when you need them - at the most affordable rates possible. Whether it's over the internet, at your office, or on the go through your mobile phone, Core Merchant has a payment solution for your business that makes sense.  Even if you're already accepting credit and debit cards, Core Merchant can help you save at least 10% over your current fees, guaranteed.  Whether a new or existing business, contact Core Merchant today at 1.888.534.CORE for all your <a href="http://coremerchant.com">credit and debit card processing</a> needs!</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_detroit_labs.png">
+            <div class="company-about">
+    
+                <h3 id="detroitlabs">Detroit Labs</h3>
+                <p><a href="http://detroitlabs.com/">Detroit Labs</a> is a Detroit-based technology launch pad, specializing in the creation of iPhone, iPad, Android and Web Applications.  Born out of an entrepreneurial spirit and forged in the heart of Detroit, the company is the technology backbone of the city's rebirth. Since its launch in the spring of 2011, Detroit Labs has completed projects for several large companies, including Quicken Loans, Stryker Medical and Caesars Entertainment.</p>
+                
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_eprize.png">
+            <div class="company-about">
+             	<h3 id="eprize">ePrize</h3>
+                <p><a href="http://www.eprize.com">ePrize</a> is the global leader in the interactive promotions industry. ePrize helps brands drive engagement with their consumers via multiple channels: online, mobile, and within the social media landscape. With a focus on motivating specific consumer behaviors, campaigns range from online sweepstakes and instant win games to global, points-based loyalty programs; from mobile promotions to social media apps; and from user generated contests to social networking management. Since 1999, ePrize has successfully launched more than 6,000 promotions in 47 countries for 76 of the top 100 brands. Some of these brands include Coca-Cola, Microsoft, Valvoline, The Gap, MillerCoors, Yahoo!, P&amp;G, and AT&amp;T. ePrize was named to Red Herring's Global 100 in 2010. Red Herring celebrates innovations and technologies and ePrize was recognized as one of the leading private companies of North America, Europe, and Asia. Professionals across the country are dedicated to extraordinary service, along with immediate, measurable results. Headquartered in Detroit, ePrize also has offices in New York, Chicago, Los Angeles, Dallas, and Atlanta.</p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_one_on_one.png">
+            <div class="company-about">
+    
+                <h3 id="one_on_one">One on One Marketing</h3>
+                <p><a href="http://www.1on1.com/">One On One Marketing</a> is a premier provider of high quality leads currently focused in the education, mortgage, insurance and home security verticals. Think of them as the match maker but without the awkward first date. One On One has become a powerhouse in the industry using their special sauce: hire PASSIONATE people, generate leads through a VARIETY of traffic channels, LEVERAGE content-rich online portals and proprietary call verified process and sell DIRECT to clients.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_sociocast.png">
+            <div class="company-about">
+    
+                <h3 id="sociocast">Sociocast</h3>
+                <p><a href="http://www.sociocast.com">Sociocast</a> is the leading provider of real-time audience data to the marketplace. Sociocast works with publishers and content companies to provide audience insights, measurement, and monetization, as well as with online advertising partners and platforms to significantly enhance real-time targeting and audience discovery. The company's headquarters are in New York City.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_testify_comm.png">
+            <div class="company-about">
+    
+                <h3 id="testify_comm">Testify Communications</h3>
+                <p><a href="http://www.testifycommunications.com">Testify Communications</a> offers web-based communication and donation options to non-profit organizations to help them effectively communicate with—and receive donations from—members and donors. Testify's web-based text, email, and online giving platforms can be accessed any time and anywhere. To give, donors simply visit the organization's website and click an online giving link. In addition to providing tools that are easy-to-implement, Testify Communications helps clients create marketing strategies for text and email usage, and on-site training for each platform. The company's communication and online donation systems are currently being used in churches and schools in Metropolitan Detroit.</p>
+                
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    <div id="consumer-services">
+        <h2>Consumer Services</h2>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_circa1837.png">
+            <div class="company-about">
+    
+                <h3>Circa 1837</h3>
+                <p><a href="http://www.c1837.com/">Circa 1837</a> connects professional women with their Historically Black College &amp; University (HBCU) Alma Maters, Historically Black Sororities, and other service and social organizations. The web-based apparel and accessories company was created to provide these women an opportunity to display their school and organizational spirit with class and style through a collection of officially-licensed collegiate and sorority merchandise. The first HBCU was established in 1837 and today this community boasts 105 schools, millions of graduates, and some of the top global leaders across many industries. Circa 1837 celebrates the rich history of HBCUs and is committed to furthering their legacy. Circa 1837 is a Bizdom U business based in Detroit, MI. </p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_connect_america.png">
+            <div class="company-about">
+    
+                <h3>Connect America</h3>
+                <p><a href="http://www.connectamerica.com/">Connect America</a> markets, sells and monitors medical alert systems that allow the elderly and ill to live a more enjoyable mobile life without the fear of not being able to get to their phone if they have an emergency.  Connect America has 75,000 clients from all over the country.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_doodle_home.png">
+            <div class="company-about">
+    
+                <h3>Doodle Home</h3>
+                <p><a href="http://www.doodlehome.com/">Doodle Home</a> LLC is a web-based interior design destination serving consumers, interior designers and mid- to high-end manufacturers of luxury home furnishings.  Founded in 2010, Doodle Home revolutionizes the way interior design is practiced in the 21st century.  Through interactive and immersive technology, Doodle Home will simplify the interior design process.  More than just a website, Doodle Home is an interior design experience, allowing consumers and professionals alike to create and visualize finished designs and interact with award-winning designers.  Doodle Home provides its members access to trade-only furnishings and the opportunity to search, discover and ultimately purchase from a finely curated selection of exceptional and cutting-edge products.  Doodle Home is a privately held company based in Detroit, Michigan.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_fathead.png">
+            <div class="company-about">
+    
+                <h3>Fathead LLC</h3>
+                <p><a href="http://www.fathead.com">Fathead LLC</a> is the industry leader of authentic, officially licensed sports and entertainment graphic products. Fathead gives fans the opportunity to "FEEL the REAL" by bringing their favorite passion or inspiration to life. Fathead's signature line, Real.Big., offers life-size, high definition wall graphics of professional athletes, animated heroes, entertainment characters, team stadiums, helmets and logos. Fathead maintains more than 400 licenses with leading consumer brands across many industries and professional sports leagues, including NFL, MLB, NBA, WNBA, MLS, NHL, NASCAR, WWE, UFC, AHL, MML, Live Nation, Lucasfilm, Marvel, DC Comics, Hasbro, Disney, Nickelodeon, Warner Brothers, and many more. Fathead selections also include top-selling Fathead Customs, available in vinyl cut-outs, murals or mounted canvas prints.  Fathead has been featured extensively on a variety of television outlets, including Extreme Makeover Home Edition, The Price is Right, Today Show, Good Morning America, ESPN, CNN, Extra, 30 Rock, House and Big Bang Theory. Fathead is based in Southeast Michigan and manufacturers its products in the USA. Fathead was recently named to the Detroit Free Press' "Top Workplaces of 2010" list.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_flud.png">
+            <div class="company-about">
+    
+                <h3>FLUD News</h3>
+                <p>Made by Rabbit, Inc., is a disruptive SoCal-based team that develops applications and communities that are focused on converting users into influencers. Their first product, <a href="http://theflud.com/">FLUD News</a>, is an application for all of us to follow, share and discover hyper-relevant news content via mobile devices.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_gumshoe.png">
+            <div class="company-about">
+                <h3>Gumshoe</h3>
+                <p><a href="http://playgumshoe.com">Gumshoe</a> is life's gaming platform. It creates a new layer of mystery and intrigue that quickly transforms a fleeting "check-in" into a rich alternate reality. Highly engaging, Gumshoe weaves everyday social posts, check-ins and friendships into a world of personalized mysteries. Complete with clues, hidden agendas and the occasional double-cross. Players are armed with a complete toolkit to engage in a game that is highly customized to their interests, social behaviors and level of participation. Compete against friends and a community of sleuths to gain badges, social cred and the occasional real life reward along the way.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_hired_my_way.png">
+            <div class="company-about">
+                <h3>Hired My Way</h3>
+                <p><a href="http://www.hiredmyway.com">HiredMyWay</a> offers a simple solution to the biggest problem facing the online job search industry: overcrowding. Job seekers buy MYtokens that they use to post their resumes, ensuring that they only post resumes to job listings for which their skills and interests are a strong match. Employers get quality resumes, not just quantity. Job seekers have a higher likelihood of getting noticed. Everybody wins.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_jimmy_kicks.png">
+            <div class="company-about">
+                <h3>Jimmy Kicks</h3>
+                <p><a href="http://www.jimmykicks.com/">Jimmy Kicks</a> is a limited-edition sneaker company selling 250 to 500 numbered pairs of sneakers per design. New sneaker concepts are submitted by independent artists, then the online community votes on their favorite shoes on a quarterly basis and the top designs are manufactured and made available for purchase on the website. Jimmy Kicks, a Bizdom U business, combines online retail with social media, encouraging interaction between the Jimmy Kicks team, graphic artists and consumers. Not just another sneaker brand, Jimmy Kicks is an experience for those who want "sole" discretion to define their style.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_krysalis_fit.png">
+            <div class="company-about">
+    
+                <h3 id="krysalis_fit">Krysalis Fit</h3>
+                <p>With the mission to empower women, both physically and financially, <a href="http://www.krysalisfit.com">Krysalis Fit</a> uses the home party model to provide women with light weight fitness gear, accessories, education, and clothing so they can live healthier, more active lives... and do it in style!  At Krysalis Parties, women have the opportunity to browse through a variety of the most popular products while the consultants demonstrate how to use them. Guests can even get up and try the products out for themselves. In addition, Krysalis Fit offers women the opportunity to start their own businesses by becoming sales consultants; ultimate flexibility, unlimited income, and control of their futures, are just a few of the many perks!  Krysalis Fit is based in Detroit, Michigan, and is quickly expanding into states across the country.</p>
+                
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_picket_report.png">
+            <div class="company-about">
+                <h3>Picket Report</h3>
+                <p>The Picket Report is an online neighborhood research tool that helps people who are moving or relocating identify which neighborhood they want to live in. The website provides nationwide lifestyle information based on <a href="http://www.picketreport.com/">neighborhood demographics</a>, crime and safety, schools and the "walkability" of an area - all in an easy-to-use, visually appealing format.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_protect_america.png">
+            <div class="company-about">
+                <h3>Protect America</h3>
+                <p>Founded in 1992 by Thad Paschall, Protect  America is one of the nation's largest home security companies providing comprehensive home security systems and service in all 50 states.  Based in Austin, Texas, <a href="http://www.protectamerica.com/">Protect America home security systems</a> provides consumers a flexible, affordable and reliable home security solution utilizing GE's state of the art wireless technology. Offering landline, Broadband, and cellular monitoring, Protect America also features options with interactive access that allow users to control their alarm systems remotely via the Internet and smart phone applications. Protect America also provides interactive security cameras, GPS vehicle tracking, and a money-saving, cellular takeover option that creates a more secure connection to our monitoring center.  Protect America was named a Consumers Digest Best Buy for home security from 2008 to 2011. Also, TopConsumerReviews.com has awarded Protect America the distinction of being the number one home security company in America for the fourth consecutive year.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_stylecaster.png">
+            <div class="company-about">
+                <h3>StyleCaster</h3>
+                <p><a href="http://www.stylecaster.com">StyleCaster Media Group</a> is the social media company for people who have a passion for style. The disruptive digital media company empowers style enthusiasts and the brands that want to reach them. StyleCaster combines the art of traditional media with the science of new media to create premium content, engaging experiences and integrated advertising solutions for all of its online destinations. TechCrunch has called StyleCaster "a one-stop shop for fashionistas" and AOL named it one of the five best startups of 2009. The privately held company was founded in January 2008 and is based in New York City.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_wedit.png">
+            <div class="company-about">
+                <h3>WedIt</h3>
+                <p>Wedit gives couples awesome <a href="http://www.wedit.com/example-videos">wedding videos</a> for an amazing price. On the bride and groom's special day, Wedit delivers five HD Flip video cameras and lets the guests film, allowing loved ones to capture fun and candid moments that a professional videographer is likely to miss - and at a fraction of the cost. After the wedding, the couple simply sends the cameras back to Wedit, where they have the option of having their wedding video professionally edited. Videos are then uploaded to the couple's personal video website, where they can share their wedding videos with friends and family. Wedit is a Bizdom U business and is based in Detroit, Michigan.</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="education-training">
+        <h2>Education &amp; Training</h2>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_bizdom.png">
+            <div class="company-about">
+                <h3>Bizdom U</h3>
+                <p><a href="http://www.bizdom.com">Bizdom U</a> is a comprehensive, non-profit, entrepreneurship boot camp that trains, mentors and partners with aspiring entrepreneurs to launch and grow successful businesses. The program has been launched in Detroit, Michigan and Cleveland, Ohio by Dan Gilbert in January 2007 and May 2011, respectively. Local entrepreneurs and professionals who share their real-world experiences participate in the training. During the initial four month full-time program, entrepreneurs prepare plans for a business which must be located within the city's downtown core. Entrepreneurs whose plans are approved can receive up to $100,000 of start-up funding from the non-profit Bizdom fund. Bizdom U maintains a share of ownership in each business, using its share of the proceeds to fund future entrepreneurs that will launch more innovative businesses in these cities.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_launch_learning.png">
+            <div class="company-about">
+                <h3>Launch Learning Group</h3>
+                <p><a href="http://www.launchlg.com/">Launch Learning Group</a> specializes in innovative insurance licensing courses that are state-certified and taught by experienced and licensed trainers. The courses are infused with technology and use competitive games, animated videos and proven test-taking strategies that appeal to adult learning styles. Our passing rates are over 80% for first time test-takers and all courses prepare individuals to pass the state exam, a requirement to sell insurance or receive commissions in the State of Michigan. LLG also assists individuals who successfully complete the training courses obtain jobs with the top insurance companies in Michigan.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_ncu.png">
+            <div class="company-about">
+                <h3>Northcentral University</h3>
+                <p><a href="http://www.ncu.edu/">Northcentral University</a> is a 100 percent online university providing doctoral, master's and bachelor's degree programs in business and technology management, education, and behavioral and health sciences.  Northcentral is regionally accredited by the Higher Learning Commission, the most respected and recognized level of accreditation for any school, whether online or campus based. More than 94 percent of its faculty members have a doctoral degree or the highest degree in their field.  More than 8,000 students from all 50 states and 82 countries are enrolled in Northcentral programs. The University headquarters is located in Prescott Valley, Arizona.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="financial-services">
+        <h2>Financial Services</h2>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_inhouse_realty.png">
+            <div class="company-about">
+                <h3>In-House Realty</h3>
+                <p>In-House Realty is the affiliated real estate company of Quicken Loans, the nation's #1 online mortgage lender. In-House Realty delivers the highest quality real estate experience by connecting consumers with one of the 7,000+ <a href="http://www.inhouserealty.com/">real estate agents</a> in their nationwide network, providing access to a purchase mortgage expert from Quicken Loans and facilitating the entire purchase process to ensure a fast, smooth and easy home transaction. Headquartered in Detroit, Michigan with 50+ team members, In-House Realty has grown to be the only real estate solutions resource of its kind. </p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_my_insurance_expert.png">
+            <div class="company-about">
+    
+                <h3 id="myinsuranceexpert">MyInsuranceExpert.com</h3>
+                <p><a href="http://myinsuranceexpert.com/">MyInsuranceExpert.com</a> has been in the online insurance market since 2007. Within three years, the company became the second largest online health insurance agency in the country. In July of 2010, MyInsuranceExpert.com pivoted into the online life insurance market with a goal to become the #1 agency within 24 months. MyInsuranceExpert.com combines the speed and efficiency of the Internet and real-time access to hundreds of insurance plans and instant quotes. The Advisor Advantage program connects clients with a licensed advisor who can help sort through overwhelming insurance information and talk through personal needs to find the best plan for every family, budget and individual situation.
+ 
+	</p><p>MyInsuranceExpert.com is consistently honored as a Detroit Free Press Top Work Place, one of Metropolitan Detroit's 101 Best and Brightest Companies to work for, and most recently, one of the Michigan 50 Companies to Watch in 2011.</p><p>
+                
+            </p></div>
+            <div class="clear"></div>
+
+        </div>
+    	<div class="family-company">
+	           	<img src="{{ STATIC_URL }}img/external/logo_one_reverse_mortgage.png">
+	            <div class="company-about">
+	                <h3>One Reverse Mortgage</h3>
+	                <p>One Reverse Mortgage LLC is the nation's third largest retail provider of <a href="http://www.onereversemortgage.com">reverse mortgage</a> home loans in the United States. The company specializes in allowing homeowners, 62 years and older, the opportunity to convert some of the equity in their homes into tax-free cash without having to make any monthly mortgage payments.  One Reverse Mortgage was founded in 2001, operates in 45 states and the District of Columbia, and is a Quicken Loans company.</p>
+	            </div>
+				<div class="clear"></div>
+	    </div>
+    	<div class="family-company">
+	           	<img src="{{ STATIC_URL }}img/external/logo_quicken_loans.png">
+	            <div class="company-about">
+	                <h3>Quicken Loans</h3>
+	                <p>For more than a quarter century, Quicken Loans has been creating innovative <a href="http://www.quickenloans.com">mortgage</a> solutions for clients in all 50 states. The result: exclusive technology and the fastest, easiest mortgage available anywhere.</p>
+    
+    <p>Since mortgages are all we do, we've been able to simplify the process, leading the industry in service and mortgage technology. We're proud our commitment to clients had earned us an A+ with the Better Business Bureau, and the "Highest in Customer Satisfaction for Primary Mortgage Origination" distinction from J.D. Power and Associates. Over the years, we've financed more than a million loans with unparalleled attention to personalized service, growing into the #1 online lender and the #5 retail mortgage lender in America.</p>
+    
+    <p>We strive to help every client improve their personal financial situation, and put a strong emphasis on giving back to the community. We look forward to providing American communities with the very best products and service in the mortgage industry.</p>
+	            </div>
+				<div class="clear"></div>
+	    </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_qlms.png">
+            <div class="company-about">
+                <h3>Quicken Loans Mortgage Services</h3>
+                <p><a href="http://www.qlmortgageservices.com">Quicken Loans Mortgage Services</a> (QLMS), a division of Quicken Loans Inc., provides home financing programs, technology and marketing support to financial institutions across the country. Those who partner with QLMS can offer a wide variety of mortgage programs, including conventional (Fannie Mae and Freddie Mac), FHA, VA and Fannie Mae HomePath mortgages to their customers. QLMS takes a unique approach to the lending process by managing the third-party vendor items necessary to complete the loan yet ensuring the bank or credit union remains the point-of-contact for the client receiving the mortgage.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_quizzle.png">
+            <div class="company-about">
+                <h3>Quizzle</h3>
+                <p>Quizzle LLC is an innovative website that helps consumers get a better understanding of their credit — and have a little fun doing it. Located in Detroit, Quizzle began as a project inside of Quicken Loans and spun off into its own company in September 2009. At Quizzle.com, consumers learn the specific actions to improve their financial health with helpful tools and information, including a free credit report and score, <a href="http://www.quizzle.com">credit improvement</a> resources, personalized home loan recommendations and debt management plans. Quizzle ranked #1 on the Detroit Free Press' 'Top Workplaces of 2010' List.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_ready_debit.png">
+            <div class="company-about">
+                <h3>Ready Financial Group</h3>
+                <p>Ready Financial Group offers the innovative <a href="https://www.readydebit.com/">READYdebit Visa Prepaid Debit Card</a> and Path3Credit credit building and repair program, which provides an integrated, low-cost alternative to a traditional checking account, credit cards, short-term loans and other credit products. READYdebit is specifically designed with no overdraft fees, potentially saving American consumers billions in fees annually. The READYdebit card is accepted everywhere Visa debit cards are accepted worldwide and all deposits are insured by the FDIC. In addition to these direct consumer products, Ready Financial offers a number of business solutions including the READYperks incentive card program and no hassle payroll cards. The company is based in Boise, Idaho.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_title_source.png">
+            <div class="company-about">
+                <h3>Title Source</h3>
+                <p><a href="http://www.titlesource.com">Title Source</a> is one of the nation's leading providers of title insurance, property valuations and settlement services. As one of the largest independent title agencies in the nation, we are an authorized agent of the highest rated title insurers in the industry. Five of the top fifteen Fortune 100 companies trust Title Source with their business. Title Source is a preferred provider to four of the top five residential mortgage institutions, as well as smaller community-based lenders. The company ranked 15th in the Detroit Free Press' 'Top Workplaces of 2010' List. Title Source is based in Troy, Michigan and retains regional service centers in Michigan, California and Texas. We are a select partner and an affiliate of Quicken Loans.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="investment-companies">
+        <h2>Investment Companies</h2>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_dvp.png">
+            <div class="company-about">
+                <h3>Detroit Venture Companies</h3>
+                <p><a href="http://www.DetroitVenturePartners.com">Detroit Venture Partners</a> is a Detroit-based Venture Capital firm on a crazed mission. We back seed and early-stage technology companies who have a purpose.</p>
+    
+    <p>Our purpose is to help rebuild the Detroit area through entrepreneurial fire. We view business building as a palette for creative expression and an opportunity to make a difference and change the world. If not, why bother?</p>
+    
+    <p>We are creative business builders, not money managers. We are entrepreneurs helping other entrepreneurs build and grow meaningful companies.</p>
+
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_rock_companies.png">
+            <div class="company-about">
+                <h3>Rock Companies</h3>
+                <p><a href="http://www.RockCompanies.com">Rock Companies</a> is a real estate investment, development, construction and management company that focuses on commercial, residential single and multi-family investments in Florida, Michigan, North Carolina and Ohio.  Rock Companies, based in Detroit, also provides consulting and project management to Quicken Loans Arena, Cleveland Clinic Courts, the Cleveland Cavaliers and other affiliated companies.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_rockbridge.png">
+            <div class="company-about">
+                <h3>Rockbridge Growth Equity</h3>
+                <p><a href="http://www.rbequity.com">Rockbridge Growth Equity</a> is a private equity firm that has dedicated capital focusing on transactions in the financial services, consumer-direct marketing, business services, and sports, media &amp; entertainment industries. Based in Detroit, Rockbridge's current portfolio includes equity stakes in Ready Financial Group, Protect America, Northcentral University, Connect America, One Reverse Mortgage and One On One Marketing.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="sports">
+        <h2>Sports &amp; Entertainment</h2>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_cleveland_cavaliers.png">
+            <div class="company-about">
+                <h3>Cleveland Cavaliers (NBA)</h3>
+                <p>On March 1, 2005, the NBA approved the purchase of the <a href="http://www.cavs.com">Cleveland Cavaliers</a> by an investor group led by Dan Gilbert, the chairman and founder of Quicken Loans, Inc., the nation's largest online home mortgage lender. With the new ownership, came a new era to the Cavaliers/Quicken Loans Arena organization and the #1 goal of delivering an NBA Championship to the city of Cleveland.  Gilbert put all of the pieces in place and all the wheels in motion to create an environment that focuses on excellence at all levels and instills a true "championship culture." This is what drives the Cavaliers organization to stand out from others, and today the Cleveland Cavaliers are considered one of the most successful franchises in the NBA, and Quicken Loans Arena one of the most exciting venues in the country. The Cavaliers became the only team to be named in the top five for two consecutive years in 2009 and 2010 for the Sports Business Journal's prestigious Pro Sports Team of the Year award category. The annual award recognizes innovation and excellence in business operations among all NBA, NFL, NHL, MLB and MLS franchises.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_lake_erie_monsters.png">
+            <div class="company-about">
+                <h3>Lake Erie Monsters</h3>
+                <p>The <a href="http://www.lakeeriemonsters.com">Lake Erie Monsters</a> are an American Hockey League franchise based out of Cleveland, Ohio.  The Monsters are the top affiliate team of the National Hockey League's Colorado Avalanche and have seen dozens of players go up top to "the show" to play in the NHL. Launched by Dan Gilbert, the team played its first season in 2007-2008 at Quicken Loans Arena in Cleveland. The team has continued to build success both on the ice and in the stands. Most recently, the Monsters finished their fourth and most successful season in franchise history, setting numerous records, including most wins and most points in a season. The team also made their first-ever appearance in the AHL Calder Cup Playoffs in 2011. For the second straight year, the Monsters finished sixth in average attendance in the 30-team AHL, after finishing ninth in their second year and 11th in the inaugural season of 2007-08.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_rock_gaming.png">
+            <div class="company-about">
+                <h3>Rock Gaming</h3>
+                <p><a href="http://www.rock-gaming.com/">Rock Gaming</a> LLC is a Midwest-based gaming partnership formed with an initial focus to develop first-class casinos in two of Ohio's largest cities, as well as to explore other potential gaming opportunities. Rock Gaming has partnered with Caesars Entertainment, the world's largest and most successful gaming company, to develop and operate full-service casinos in downtown Cincinnati and downtown Cleveland under the Horseshoe brand. Combined, Horseshoe Casino Cincinnati and Horseshoe Casino Cleveland will generate 11 million visits to the urban cores and add to both cities' already impressive offering of sports, entertainment, dining and cultural attractions.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_quicken_loans_arena.png">
+            <div class="company-about">
+                <h3>The Quicken Loans Arena</h3>
+                <p>
+    </p><p>Northeast Ohio's premier sports and entertainment destination, <a href="http://www.theqarena.com">Quicken Loans Arena</a>, also known as The Q, is home to the NBA's Cleveland Cavaliers, the American Hockey League's Lake Erie Monsters, the Arena Football League's Cleveland Gladiators and host to the best entertainment in the region. Each year "The Q" welcomes nearly 1.5 million people at 200 plus events that include Cavaliers basketball, Monsters hockey, world-class concerts, family shows and signature sporting events like the Mid-American Conference's (MAC) men's and women's post-season basketball tournaments. The Q recently played host to the second and third rounds of the 2011 NCAA Division I Men's Basketball Championships and has also hosted the NBA All-Star game, the NCAA Women's Final Four and the United States Figure Skating Championships.</p>
+    
+    <p>Quicken Loans Arena is operated by a group led by Cavaliers majority owner Dan Gilbert, the chairman and founder of Quicken Loans, Inc., the nation's largest online home mortgage lender. Since 2005, Gilbert has led the ownership group's $40+ million investment in renovations and upgrades at Quicken Loans Arena featuring new seats, state-of-the-art scoreboards, new lighting technology, an enhanced sound system, remodeled team locker room and more. In addition, in October 2010, a re-designed and expanded multi-million dollar Cavaliers Team Shop opened inside The Q and is now one of the largest and contemporary in the NBA.  These investments reflect Gilbert's commitment to operating the Cavaliers, Monsters and Quicken Loans Arena in a fan-centric way that is second to none.</p>
+    
+    <p>With the addition of Veritix's Flash Seats for digital, paperless ticketing for arena entry, transfer or resale, and the arena's upgraded concessions offerings that include Food Network star Michael Symon's two restaurant concepts, The Q is focused on providing the best fan experience, technology and venue in all of sports and entertainment.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_veritix.png">
+            <div class="company-about">
+    
+                <h3 id="veritix">Veritix</h3>
+                <p>Veritix provides the most dynamic paperless ticketing, event marketing, and relationship management applications to artists, professional sports teams, universities, arts organizations, and entertainment venues. Through the only patent-protected, fully-integrated paperless ticketing platform — <a href="http://www.flashseats.com">Flash Seats</a> — the company has revolutionized the sports and live entertainment industry by enabling paperless venue access while allowing artists, team owners and venue operators to regain control of their secondary market. Veritix is based in Cleveland, Ohio. The Cleveland Cavaliers were the first team in professional sports to use this new technology. Other Veritix clients include Quicken Loans Arena, the Houston Rockets, the Houston Toyota Center, the Denver Nuggets and Colorado Avalanche, the Pepsi Center, the Utah Jazz and Energy Solutions Arena, the NCAA, Dover Motor Sports, Boise State University and Texas A&amp;M University.</p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    	<div class="family-company">
+           	<img src="{{ STATIC_URL }}img/external/logo_xenith.png">
+            <div class="company-about">
+                <h3>Xenith</h3>
+                <p><a href="http://www.xenith.com">Xenith LLC</a> has developed an innovative helmet technology that reduces the risk and severity of concussions and other traumatic brain injuries. Founded in 2004, and based in Lowell, Massachusetts, Xenith is working to address the issues of sports safety, activity and health through innovation and education. Xenith staff and advisors include leading sports medicine, sports management and product development veterans committed to providing superior products, service and information.</p>
+            </div>
+			<div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endcomment %}
+</div>
+
+
+{% endblock %}  

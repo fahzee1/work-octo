@@ -1,22 +1,15 @@
 {% extends "base.html" %}
-{% block subnav_child %}
-<ul>
-	<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url security-packages %}"><img src="/static/img/nav-icons/contact-directory.png" alt="View the Corporate Office Directory" />Department Listing</a></li>
-	<li {% if 'interactive-video' in active_pages %}class="active"{% endif %}><a href="{% url interactive-video %}"><img src="/static/img/nav-icons/contact-affiliates.png" alt="Become an Affiliate of Protect America and Start Earning" />Affiliate Program</a></li>
-	<li {% if 'equipment' in active_pages %}class="active"{% endif %}><a href="{% url equipment %}"><img src="/static/img/nav-icons/contact-careers.png" alt="Start your Protect America Career Today!" />Careers</a></li>
-	<li {% if 'feedback-ceo' in active_pages %}class="active"{% endif %}><a href="{% url feedback-ceo %}">Send Feedback to CEO</a></li>
-	<li {% if 'find-us' in active_pages %}class="active"{% endif %}><a href="{% url find-us %}"><img src="/static/img/nav-icons/contact-find-us.png" alt="Find Our Corporate Office in Round Rock, TX" />Find Us</a></li>
-	<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}"><img src="/static/img/nav-icons/contact-order.png" alt="Order a Home Security System" />Order a System</a></li>
-</ul>
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/contact-us.css">
 {% endblock %}
 {% block subnav_parent %}
-<ul class="siblings">
-	<li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="{% url security-packages %}">Department Listing</a></li>
-	<li {% if 'interactive-video' in active_pages %}class="active"{% endif %}><a href="{% url interactive-video %}">Affiliate Program</a></li>
-	<li {% if 'equipment' in active_pages %}class="active"{% endif %}><a href="{% url equipment %}">Careers</a></li>
-	<li {% if 'feedback-ceo' in active_pages %}class="active"{% endif %}><a href="{% url feedback-ceo %}">Send Feedback to CEO</a></li>
-	<li {% if 'find-us' in active_pages %}class="active"{% endif %}><a href="{% url find-us %}">Find Us</a></li>
-	<li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}">Order a System</a></li>
+<ul id="sub-nav-parent">
+    <li {% if 'department-listing' in active_pages %}class="active"{% endif %}><a href="{% url department-listing %}" title="Click to contact various departments as Protect America">Department Listings</a></li>
+    <li {% if 'find-us' in active_pages %}class="active"{% endif %}><a href="{% url find-us %}" title="Click to find our Company Headquarters">Find Us</a></li>
+    <li {% if 'feedback-ceo' in active_pages %}class="active"{% endif %}><a href="{% url feedback-ceo %}" title="Send your Feedback Straight to our CEO">Feedback to the CEO</a></li>
+    <li {% if 'careers' in active_pages %}class="active"{% endif %}><a href="{% url careers %}" title="Join our Team! View the exciting home security opportunities at Protect America">Careers</a></li>
+    <li {% if 'affiliate-program' in active_pages %}class="active"{% endif %}><a href="{% url affiliate-program %}" title="Become an affiliate of Protect America to use your website to make money">Become an Affiliate</a></li>
+    <li {% if 'order-package' in active_pages %}class="active"{% endif %}><a href="{% url order-package %}" title="Click to order a home security system from Protect America">Place Order</a></li>
 </ul>
 
 {% endblock %}

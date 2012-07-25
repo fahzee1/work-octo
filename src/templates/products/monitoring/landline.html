@@ -1,16 +1,86 @@
 {% extends "products/monitoring/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Alarm System Without Phone Line | Protect America | Broadband Monitoring Solutions{% endblock %}
+{% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
+{% block page_description %}Anytime your alarm is triggered PA's monitoring facility is notified through your broadband connection of immediate danger using the HomePulse Broadband Monitoring system.{% endblock %}
+
 {% block content %}
 
+<div id="landline-overview">
+    <div id="landline-image">
+        <img src="{{ STATIC_URL }}img/products/monitoring/landline-icon-big.png" alt="landline-icon-big" width="199" height="200" />
+    </div>
+    <div id="landline-content">
+        <h1>Landline Monitoring Connection</h1>
+        <p>When choosing a landline connection, your GE control panel uses your standard landline telephone connection to communicate with our monitoring facility. This is the standard connection for most security systems. Anytime the security system is triggered, the command station sends a signal through the landline phone to our monitoring facility and notifies us about a problem in your home.
+Depending on the nature of the problem, our monitoring facility will respond to your alarm and dispatch the emergency authorities to your home if necessary.</p>
+    </div>
+    <div class="clear"></div>
+    <img src="{{ STATIC_URL }}img/products/monitoring/landline-monitoring-step-by-step.jpg" alt="landline-monitoring-step-by-step" width="640" height="145" />
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+<div class="clear"></div>
+<div id="landline-telephone">
+    <div id="landline-benefits">
+        <h2>Benefits to a Landline Solution</h2>
+        <p>With Protect America, its all about choice and what fits your home. With all of our monitoring solutions, you get the GE Simon XT control panel. This means top of the line security that connects up to 40 zones or sensors to help secure your home. Using landline monitoring requires no extra set up and simply connects right into your current home telephone line. This is perfect for homes that are in cell dead-zones or lack high speed internet. It is also the cheapest monitoring solution available with our <a href="{% url copper %}">Copper Package</a> starting at $29.99.</p>
+    </div>
+    <img src="{{ STATIC_URL }}img/products/monitoring/landline-telephone.gif" alt="landline-telephone" width="252" height="260" />
+
+</div>
+<div class="clear"></div>
+    {% include "order/call-box.html" %}
 <div>
-	<div class="content-box half">
-	
+	<div id="helpful-tech-support">
+		<img src="{{ STATIC_URL }}img/products/monitoring/hi-bubble.jpg" alt="Our techinical support professional are always here to help.">	
+		<h3>Friendly and Helpful Step-By-Step Tech Support</h4>
+		<p>As a Protect America customer, you have access to our technical support professionals to help you with whatever home security questions you may have.  We want to make sure you are safe and comfortable in your home.</p>
 	</div>
-	<div class="content-box half">
-		<h1>Standard Landline Alarm Monitoring</h1>
-		<p>When choosing a landline connection, your GE control panel uses your landline telephone connection to communicate with our monitoring facility. For years, this has been the standard connection for most security systems and therefore, the most cost effective. Anytime the security system is triggered, the command station sends a signal through your phonelines to our monitoring facility and notifies us about a problem in your home.</p>
-		<p>Depending on the nature of the problem, our monitoring facility will respond to your alarm and dispatch the emergency authorities to your home if necessary. Please visit the How It Works page to learn more on the steps we take when responding to an alarm at your home.</p>
+	<div id="save-money">
+		<img src="{{ STATIC_URL }}img/products/monitoring/piggy-bank.jpg" alt="Save big bucks with our great monitoring rates">	
+
+		<h3>Protecting your Family while Saving Money</h4>
+		<p>Compared to the leading home security companies, we have some of the best monitoring rates around.  There is no extra equipment to buy.</p>
 	</div>
+	<div id="nationwide-coverage">
+		<img src="{{ STATIC_URL }}img/products/monitoring/us-map.jpg" alt="Nationwide Coverage">	
+
+		<h3>Full Nationwide Coverage</h4>
+		<p>Protect America is proud to serve all 50 states with a commitment to excellence and affordability when it comes to securing your home. We are one of the fastest growing home security companies in America with customers coast to coast!.</p>
+	</div>
+
+</div>
+{% testimonial_search "landline" "limit=10&words=75" %}
+
+<div class="clear"></div>
+<div id="two-way-voice">
+    <img src="{{ STATIC_URL }}img/products/security-panels/simon-xt-medium.jpg" alt="simon-xt-medium" width="350" height="297" />
+    <div id="upgrade-voice">
+        <h2>Upgrade to Two-Way Voice<br />on any Landline Monitored Security System</h2>
+        <p>Two-way Voice is an extra feature available to landline monitoring security system. Two-Way Voice allows you to communicate directly through a built-in microphone to our monitoring station when you need it the most. When the alarm is triggered at your home, the security system uses your landline phone to send the signal to our monitoring facility. Once we have received that signal, our monitoring facility will be able to communicate with you directly through the talking command station to verify the problem and respond accordingly. This gives you have direct access to our monitoring station in case of an emergency and a helpful and knowledgeable real-life person is waiting to help you.</p>
+    </div>
 </div>
 
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+
 {% endblock %}  
+{% block page-product %}
+    <h2>Standard Landline Monitoring</h2>
+    <p>Monthly monitoring starting at $29.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
+    </div>
+{% endblock %}
 

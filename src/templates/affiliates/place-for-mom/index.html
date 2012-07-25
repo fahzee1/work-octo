@@ -1,0 +1,256 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>{% block page_title %}{% endblock %}</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/place-for-mom/place-for-mom.css">
+    <link href="https://plus.google.com/113573642727337197280" rel="publisher" />
+{% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-5441302-2']);
+ _gaq.push(['_setDomainName', '.protectamerica.com']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+
+<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+{% endblock %}
+</head>
+<body class="{{ page_name }} tk-facitweb">
+<!-- Page Wrapper -->
+<div id="header">
+    <div id="header-wrapper">  
+        <div>
+            <div id="company-logo">
+                <div>
+                    <a href="/">
+                        <img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png" id="protect-america-logo" />
+              
+                    </a>
+                </div>  
+            </div>
+            {% businesstime %}
+            {% if phone_number %}
+            <div id="phone-number">
+                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+            </div>
+            {% endif %}
+            
+            {% endbusinesstime %}
+            <div id="ge-logo">
+                <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+
+    </div>
+</div>
+<div id="navigation-wrapper">
+&nbsp;
+</div>
+<div class="wrapper">
+    <div id="right-column">
+    {% include "order/quote-form.html" with form=forms.basic %}
+    </div>
+    <div id="left-column">
+        <div id="offer-section">
+            <h1>GE Wireless <strong>Home Security System</strong></h1>
+            <img src="{{ STATIC_URL }}img/affiliates/place-for-mom/3-benefits-graphic.png" alt="3-benefits-graphic" width="342" height="36">
+            <p id="price-tag">Price Today:<strong>Free</strong><span>with 3-year monitoring agreement*</span>
+</p>
+        </div>
+    </div>
+
+
+    {% if phone_number %}
+
+        {% businesstime %}
+        <div id="call-box">
+            <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+        </div>
+        {% endbusinesstime %}
+    {% endif %}
+
+    <div class="clear"></div>
+    <div id="included-equipment">
+        <h2>What's Included:</h2>
+        <div>
+            <img src="{{ STATIC_URL }}img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Home Security Panel" />
+            <strong>One (1)</strong> Simon XT Control Panel
+        </div>
+        <div>
+            <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
+            <strong>Three (3)</strong> Door / Window Sensors
+        </div>
+        <div>
+            <img src="{{ STATIC_URL }}img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
+            <strong>One (1)</strong> Motion Detector
+        </div>
+        <div>
+            <img src="{{ STATIC_URL }}img/products/equipment/medical-panic-pendent/medical-panic-pendent-icon.jpg" alt="Medical Panic Pendent" width="160" height="131">
+            <strong>One (1) Exclusive</strong> Medical Panic Pendent
+        </div>
+        <div>
+            <img src="{{ STATIC_URL }}img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Protect America Home Security Window Stickers" />
+            <strong>Three (3)</strong> Security Window Stickers
+        </div>
+        <div>   
+            <img src="{{ STATIC_URL }}img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Protect America Home Security Yard Sign" />
+            <strong>One (1)</strong> Security Yard Sign
+        </div>
+    </div>
+
+    <div>
+        <div id="security-protection">
+           <img src="{{ STATIC_URL }}img/affiliates/place-for-mom/copper-package.jpg" alt="copper-package" width="324" height="190">
+            <h3>24/7 Security Protection</h3>
+            <p>With three door/ window sensors, this security system has been designed to meet the basic needs of most American homes. Place the motion detector in a central hallway or the most commonly used living area of your home for interior protection.</p>
+        </div>
+        <div id="medical-protection">
+            <img src="{{ STATIC_URL }}img/affiliates/place-for-mom/medical-panic-pendent.jpg" alt="medical-panic-pendent" width="324" height="190">
+    
+            <h3>24/7 Medical Protection</h3>
+            <p>Worn as a necklace or on your waist like a pager, the medical panic pendant sends an emergency signal when the button is pressed to summon medical response.</p>
+        </div>
+        <div id="save-money">
+            <img src="{{ STATIC_URL }}img/affiliates/place-for-mom/save-tons-of-money.jpg" alt="save-tons-of-money" width="324" height="190">
+            <h3>Lowest Price Guaranteed</h3>
+            <p>We guarantee we have the lowest price in home security. Our equipment is free* and our monthly monitoring starts at under a dollar a day. If you find someplace cheaper, we will meet it or beat it.</p>
+        </div>
+    
+    </div>
+    <div class="clear"></div>
+    {% if phone_number %}
+
+        {% businesstime %}
+        <div id="call-box">
+            <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+        </div>
+        {% endbusinesstime %}
+    {% endif %}
+    <div class="clear"></div>
+    <div id="why-protect-america">
+        <img src="{{ STATIC_URL }}img/protect-america-logo2.png" id="pa-logo" title="Protect America Home Security" />
+        <div id="about-protect-america">
+            <p>A pioneer of self-installed home security systems, Protect America has served more than 350,000 people since its founding in 1992. Our dedication to affordable, quality security has helped to make us one of the nation's largest home security companies. People trust Protect America. And with good reason. We're an award-winning company that has also earned a Five-Star Rating from Top Consumer Reviews. Get a GE home security system today and experience a more secure life with Protect America.</p>
+            {% businesstime %}<div class="phone-alt"><p>call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p></div>{% endbusinesstime %}
+            <div class="clear"></div>
+        </div>
+        <div id="awards">
+
+            <p id="top-consumer-reviews">Five star rating four years in a row by online website: TopConsumerReviews.com</p>
+
+            
+
+            <p id="consumer-digest">Named Consumers Digest "Best Buy" for our Copper home security package</p>
+
+        </div>
+        <div class="clear"></div>
+        <div id="confidence-builders">
+            <div id="all-day-monitoring">
+                <img src="{{ STATIC_URL }}img/extra/always-on-monitoring.png" title="24/7 Monitored Home Security" />
+                <h3>Affordable 24/7 Home Security Monitoring</h3>
+                <p>Keep your loved ones secure day and night</p>
+            </div>
+            <div id="wireless-home-security">
+                <img src="{{ STATIC_URL }}img/extra/wireless-home-security.png" title="GE Wireless Home Security Systems" />
+                <h3>Simple to Use Wireless GE Security</h3>
+                <p>Trusted top of the line security equipment</p>
+            </div>
+            <div id="twenty-off-home-insurance">
+                <img src="{{ STATIC_URL }}img/extra/20-off-homeowners-insurance.png" title="20% off your Homeowner Insurance" />
+                <h3>Save up to 20% on Homeowner's Insurance</h3>
+                <p>Protecting your home while saving you money</p>
+            </div>
+            <div id="lifetime-warranty">
+                <img src="{{ STATIC_URL }}img/extra/lifetime-warranty.png" title="Lifetime Warranty with your Security System" />
+                <h3>Lifetime Replacement Parts Warranty</h3>
+                <p>Making sure you are always safe and secure</p>
+            </div>
+            <div id="lowest-price-guaranteed">
+                <img src="{{ STATIC_URL }}img/extra/lowest-price-home-security.png" title="Lowest Priced Home Security System" />
+                <h3>The Best Priced Home Security System</h3>
+                <p>Compare & save, get the best priced guaranteed</p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+{% testimonial_search "affordable" "limit=10&words=64" %}
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+<div id="order-footer">
+    <div id="footer-package-section">
+        <h2>Home Security Package</h2>
+        <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $29.99/mo</p>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper']);">Order Now ></a>
+        </div>
+    </div>
+    <div id="footer-call-now">
+        <h3>Give us a call.</h3>
+        <p>Our security professionals are here to answer any questions and help you protect your home and family today.</p>
+        <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+    </div>
+    <div id="footer-chat-now">
+        <h3>Limited Time Offer!</h3>
+        <p>This is a limited time offer and is only available exclusively through A Place for Mom. Order Now!</p>
+    </div>
+    <div class="clear"></div>
+
+</div>
+<div id="small-footer">
+    <p>*Call for information on Protect America's monitoring fees and other terms. Standard thirty-six month monitoring agreement required with approved credit. Must be a U.S. Resident. Applicable taxes and fees not included. Cannot be combined with any other offer. Package offered on this coupon includes a master control panel with back-up battery, siren, keypad, fifteen door or window sensors, one motion detector, one yard sign, and three window decals. Offer subject to change. Limited parts replacement warranty valid for as long as customer is monitored. Not available to existing Protect America customers. Other restrictions apply. GE and GE Security logos are registered trademarks of General Electric. Protect America, Inc., 3800 Quick Hill Road, Building 1-100, Austin, TX 78728. We provide our service in all 50 states. Licenses: AL: 12-027; AR: E 2001-0538; AZ: ROC114856 (L-67), ROC114855 (C-12); CA: ACO 4115; DE: 06-204; FL: EG-0000192; GA: LVA205875; IA: AC-0081; IL: 127-001092; LA: F492; MD: 107-670; MI: 8714 Huckleberry Lane, Lansing MI. 48917. Lic #3601202409; MS: 15005347; NC: 635-CSA; NJ: Burglar alarm and fire alarm bus. Lic. #34BF00023700; NM: 60519; OK: 739; PA: PA023169; SC: BAC 5432, FAC 3104; TN: 00000265; TX: B16272, ACR-1204; UT: 345548-6501; VA: 11-3129; WA: PROTEAI962LD; WV: WV032962.</p>
+</div>
+{% render_block "js" %}
+<!-- Google Code for Home Page Visit Remarketing List -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1072079179;
+var google_conversion_language = "en";
+var google_conversion_format = "1";
+var google_conversion_color = "666666";
+var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+{{ pixels|safe }}
+<!-- End Remarketing Code -->
+</body>
+</html>

@@ -1,52 +1,62 @@
-
 {% extends "about-us/base.html" %}
+
+{% load sekizai_tags %}
+
+{% block page_title %}Protect America Reviews and Testimonials | Protect America Home Security | Testimonials{% endblock %}
+{% block page_keywords %}crime prevention, security, security system, home security, home security system{% endblock %}
+{% block page_description %}Crime prevention tips will help protect your home and family. The best crime prevention tool for your home is a home security system. Get a GE home security...{% endblock %}
+
 {% block subnav_child %}
 <ul>
-	<li><a href="{% url profile %}"><img src="/static/img/nav-icons/testimonials-video.png" alt="Customer Video Testimonials" />Video Testimonials</a></li>
-
-	<li><a href="{% url textimonials %}"><img src="/static/img/nav-icons/testimonials-textimonials.png" alt="Customer Submitted Textimonials" />Textimonials</a></li>
-	<li><a href="{% url testimonials %}"><img src="/static/img/nav-icons/testimonials-tell-story.png" alt="Tell Us Your Protect America Story" />Tell Us Your Story</a></li>
-
+    <li {% if page_name == 'testimonials'%}class="active"{% endif %}><a href="{% url testimonials %}" title="View all our Customer Submitted Testimonials">All Reviews and Testimonials</a></li>
+    <li {% if page_name == 'video-testimonials'%}class="active"{% endif %}><a href="{% url video-testimonials %}" title="Watch all our Customer Submitted Video Testimonials">Video Reviews and Testimonials</a></li>
+    <li><a href="{% url send-testimonial %}" title="Share Your Own Protect America Testimonial with Us!">Tell Us Your Testimonial</a></li>
 </ul>
 {% endblock %}
 {% block content %}
-<div id="video-testimonials">
-	<div id="newest-video-testimonial">
-		<object width="535" height="332"><param name="movie" value="http://www.youtube.com/v/5beZMznwIpg&hl=en_US&feature=player_embedded&version=3"></param><param name="allowFullScreen" value="true"></param><param name="allowScriptAccess" value="always"></param><embed src="http://www.youtube.com/v/5beZMznwIpg&hl=en_US&feature=player_embedded&version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="535" height="332"></embed></object>
-	</div>
-	<div id="video-selection-cube" class="content-box small text-bump-25 image-cube text-compensate-350">
-		<img src="http://i.ytimg.com/vi/5beZMznwIpg/default.jpg" class="active" />
-		<img src="http://i.ytimg.com/vi/bs4vRNDCw7I/default.jpg" />
-		<img src="http://i.ytimg.com/vi/H3b9tTxuC1A/default.jpg" />
-		<img src="http://i.ytimg.com/vi/nt292JpjC_w/default.jpg" />
-		<img src="http://i.ytimg.com/vi/KqfWDaww4D4/default.jpg" />
-		<img src="http://i.ytimg.com/vi/sdWC_LzvmsY/default.jpg" />
-		<img src="http://i.ytimg.com/vi/UysUGJW-2VY/default.jpg" />
-		<img src="http://i.ytimg.com/vi/dJMrmMt-m_M/default.jpg" />
-		<img src="http://i.ytimg.com/vi/1c2jkB8GyU8/default.jpg" />
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.infinitescroll.js"></script>
+<script type="text/javascript">
 
-		<div class="button absleft"><a href="">Previous Videos</a></div>
-		<div class="button absright"><a href="">More Videos</a></div>
-	</div>
-	<div class="clear"></div>
+
+$('#customer-testimonial-boxes').infinitescroll({
+ 
+    navSelector  : "div.pagination",            
+                   // selector for the paged navigation (it will be hidden)
+    nextSelector : "div.pagination a.next",    
+                   // selector for the NEXT link (to page 2)
+    itemSelector : "#customer-testimonial-boxes div.testimonial_page"          
+                   // selector for all items you'll retrieve
+    });
+
+
+</script>
+{% endaddtoblock "js" %}
+{% comment %}
+The reason this div is ending here is because the content 
+needs to be out of the wrapper. So we break the div and then style a wrapper
+that expands
+{% endcomment %}
+<div id="testimonial-header">
+    <h1>Protect America Reviews and Testimonials
 </div>
-<div>
-	<div id="protect-america-reviews" class="content-box half">
-		<h1>Protect America Reviews & Testimonials</h1>
-		<p>Real life emergencies happen everyday. That is why Protect America is proud to serve our customers each and every day. We know that the number one tool for crime prevention is having a home security system. And we know that with our GE Home alarm systems, we are helping protect the lives of American families just like yours. Below we have collected just some of the stories our real life customers have shared with us on their experiences with us here at Protect America.</p>
-	</div>
 </div>
-<div>
-	<div id="share-your-story" class="content-box half">
-		<h2>Share Your Protect America Story</h2>
-		<p>Here at Protect America, we are amazed by all the wonderful people that we are able to help each and everyday. We are entirely grateful that you have chosen us to protect your home and family. We would love to hear how we at Protect America have helped you. If you would like to send us your Protect America story, please click the button below. </p>
-		<div class="button right"><a href="">Share your Protect America Story</a></div>
-	</div>
+<div id="customer-testimonial-boxes">
+    {% include "about-us/_partials/testimonial_columns.html" with left_column=left_ts middle_column=middle_ts right_column=right_ts %} 
+    <div class="pagination">
+    <span class="step-links">
+        {% if paginator.has_previous %}
+            <a href="?page={{ paginator.previous_page_number }}" class="prev">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ paginator.number }} of {{ paginator.paginator.num_pages }}.
+        </span>
+
+        {% if paginator.has_next %}
+            <a href="?page={{ paginator.next_page_number }}" class="next">next</a>
+        {% endif %}
+    </span>
+    </div>
 </div>
-
-{% endblock %}  
-{% block sidebar %}
-{{ block.super }}
-
-
 {% endblock %}

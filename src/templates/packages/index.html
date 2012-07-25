@@ -1,14 +1,17 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Packages | Protect America Home Security{% endblock %}
+{% block page_keywords %}alarms, security, home security, home security system, security system, security systems{% endblock %}
+{% block page_description %}Protect America offers a wide variety of GE wireless home alarm packages. These home security packages include: Copper, Bronze, Silver, Gold and Platinum.{% endblock %}
 {% block content %}
+{% block subnav_child %}{% endblock %}
+
 
 <div id="package-fan">
     <div id="copper-card" class="card">
         <h2>Copper</h2>
-        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
         <p>The <strong>most affordable</strong> way to secure peace of mind.</p>
-        <h3><sup>$</sup>42.99/month</h3>
+        <h3><sup>$</sup>29.99/month</h3>
 
 
         <ul>
@@ -16,15 +19,14 @@
             <li><strong>3</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
-        <div class="button-link"><a href="#">Find Out More ></a></div>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
+        <div class="button-link"><a href="{% url copper %}">Find Out More ></a></div>
     </div>
     <div id="bronze-card" class="mid card">
         <h2>Bronze</h2>
-        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
 
         <p>The <strong>perfect solution</strong> to secure your starter home.</p>
-        <h3><sup>$</sup>42.99/month</h3>
+        <h3><sup>$</sup>35.99/month</h3>
 
 
         <ul>
@@ -32,15 +34,14 @@
             <li><strong>7</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
-        <div class="button-link"><a href="#">Find Out More ></a></div>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
+        <div class="button-link"><a href="{% url bronze %}">Find Out More ></a></div>
     </div>
     <div id="silver-card" class="big card">
         <h2>Silver</h2>
-        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
 
         <p><strong>Perimeter protection</strong> for the average American home</p>
-        <h3><sup>$</sup>42.99/month</h3>
+        <h3><sup>$</sup>37.99/month</h3>
 
 
         <ul>
@@ -48,14 +49,13 @@
             <li><strong>10</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
-        <div class="button-link"><a href="#">Find Out More ></a></div>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
+        <div class="button-link"><a href="{% url silver %}">Find Out More ></a></div>
     </div>
     <div id="gold-card" class="mid card">
         <h2>Gold</h2>
-        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
         <p><strong>Unmatched security</strong> for larger sized homes</p>
-        <h3><sup>$</sup>42.99/month</h3>
+        <h3><sup>$</sup>39.99/month</h3>
 
 
         <ul>
@@ -63,12 +63,11 @@
             <li><strong>12</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
-        <div class="button-link"><a href="#">Find Out More ></a></div>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
+        <div class="button-link"><a href="{% url gold %}">Find Out More ></a></div>
     </div>
     <div id="platinum-card" class="card">
         <h2>Platinum</h2>
-        <img src="{{ STATIC_URL }}/img/extra/gloss.png" class="gloss" />
 
         <p>Our <strong>most comprehensive</strong> security system package</strong></p>
 
@@ -80,72 +79,124 @@
             <li><strong>15</strong> Door / Window Sensors</li>
             <li><strong>1</strong> Motion Detector</li>
         </ul>
-        <h4>Upfront Price: <strong>Free</strong></h4>
-        <div class="button-link"><a href="#">Find Out More ></a></div>
+        <h4>Upfront Price: <strong>Free*</strong></h4>
+        <div class="button-link"><a href="{% url platinum %}">Find Out More ></a></div>
     </div>
 
 </div>
 <div class="clear"></div>
-<div id="customer-testimonials">
-    <h2>Real Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "affordable" "limit=4&words=50" %}
-    </ul>
+{% testimonial_search "package" "limit=10&words=75" %}
+
+<div class="clear"></div>
+{% include "banners/limited-time-offer.html" %}
+<div class="clear"></div>
+<div id="comparison-intro">
+    <h1>GE Wireless Home Alarms Package Comparison</h1>
+    <p><a href="{% url equipment %}" title="Protect America GE Wireless Home Security Alarms">Home security alarms</a> are an essential part of increasing the safety of your home. With all of the alarms on the market, it can be hard to find the right one for you. Protect America simplifies your process of shopping for alarms by using the <strong>Protect America Wireless Alarms Packages</strong> chart below. This chart shows you a side-by-side comparison of each our most commonly selected home security configurations. You can view the details on each package and even compare the prices of our alarms to our competition. Once you choose the perfect package for your home and family, you also have the option to customize your package with additional pieces of equipment to meet your security needs.</p>
+</div>
+<div id="package-comparison-chart">
+    <table>
+        <thead>
+            <tr>
+                <th class="alpha">&nbsp;</th>
+                <th>Copper</th>
+                <th>Bronze</th>
+                <th>Silver</th>
+                <th>Gold</th>
+                <th>Platinum</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span>Door / Window Sensors</span></td>
+                <td>3</td>
+                <td class="alt">7</td>
+                <td>10</td>
+                <td class="alt">12</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <td><span>Motion Detector</span></td>
+                <td>1</td>
+                <td class="alt">1</td>
+                <td>1</td>
+                <td class="alt">1</td>
+                <td>1</td>
+
+            </tr>
+            <tr>
+                <td><span>Lifetime Equipment Warranty</span></td>
+                <td><img src="{{ STATIC_URL }}img/extra/form-check.png" alt="form-check" width="40" height="40" /></td>
+                <td class="alt"><img src="{{ STATIC_URL }}img/extra/form-check.png" alt="form-check" width="40" height="40" /></td>
+                <td><img src="{{ STATIC_URL }}img/extra/form-check.png" alt="form-check" width="40" height="40" /></td>
+                <td class="alt"><img src="{{ STATIC_URL }}img/extra/form-check.png" alt="form-check" width="40" height="40" /></td>
+                <td><img src="{{ STATIC_URL }}img/extra/form-check.png" alt="form-check" width="40" height="40" /></td>
+            </tr>
+            <tr>
+                <td class="call-out"><span>Promotional Price</span></td>
+                <td class="call-out"><strong class="strike">$295</strong> <span class="free">FREE*</span></td>
+                <td class="call-out alt"><strong class="strike">$449</strong> <span class="free">FREE*</span></td>
+                <td class="call-out"><strong class="strike">$694</strong> <span class="free">FREE*</span></td>
+                <td class="call-out alt"><strong class="strike">$895</strong> <span class="free">FREE*</span></td>
+                <td class="call-out"><strong class="strike">$1195</strong> <span class="free">FREE*</span></td>
+            </tr>
+            <tr>
+                <td><span>Savings over ADT</span></td>
+                <td >$379</td>
+                <td class="alt">$699</td>
+                <td class="">$939</td>
+                <td class="alt">$1099</td>
+                <td class="">$1339</td>
+            </tr>
+            <tr>
+                <td class="button omega">&nbsp;</td>
+                <td class="button omega"><a href="{% url order-package %}?package=copper" class="button-link">Order Now ></a></td>
+                <td class="button omega"><a href="{% url order-package %}?package=bronze" class="button-link">Order Now ></a></td>
+                <td class="button omega"><a href="{% url order-package %}?package=silver" class="button-link">Order Now ></a></td>
+                <td class="button omega"><a href="{% url order-package %}?package=gold" class="button-link">Order Now ></a></td>
+                <td class="button omega"><a href="{% url order-package %}?package=platinum" class="button-link">Order Now ></a></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="clear"></div>
+    {% include "order/call-box.html" %}
+<div id="extra-features">
+    <div id="lifetime-warranty">
+        <h2>Lifetime Replacement Parts Warranty and Homeowner's Insurance Guarantee</h2>
+        <p>For as long as your home is monitored by Protect America, Inc.'s authorized UL listed monitoring facility, Protect America will provide a Lifetime Replacement Parts Warranty on all Packages AND Protect America will cover up to $250 of your Homeowner's Insurance Deductible in the event of a burglary.</p>
+    </div>
+    <div id="insurance-discount">
+        <h2>Homeowner's Insurance Discount</h2>
+        <p>Protect America's affordable solutions for your home security and protection are very important.  However, another great benefit to having a <a href="{% url monitoring %}" title="Protect America's Monitored Home Security offer more options than ADT Security Alarms">monitored home security system</a> is that most insurance companies will give you a discount on your homeowner's or renter's insurance premium.  After your system is activated, we will provide you with a certificate of installation.  You simply provide this certificate to your insurance company as proof that you have a monitored security system, and they will provide you with their standard home security discount.</p>
+    </div>
 </div>
 {% addtoblock "js" %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.ui.effects.js"></script>
-<script type="text/javascript">
-    var inT = false;
-
-    $('#package-fan div.card').mouseenter(function () {
-        console.log(inT);
-        if(inT == true) {
-            return false;
-        }
-        obj = $(this);
-        inT = true;
-        runTransition(this);
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+        $('#copper-card').css('cursor','pointer').click(function() {
+            window.location = '{% url copper %}';
+    	});
+        $('#bronze-card').css('cursor','pointer').click(function() {
+            window.location = '{% url bronze %}';
+    	});
+        $('#silver-card').css('cursor','pointer').click(function() {
+            window.location = '{% url silver %}';
+    	});
+        $('#gold-card').css('cursor','pointer').click(function() {
+            window.location = '{% url gold %}';
+    	});
+        $('#platinum-card').css('cursor','pointer').click(function() {
+            window.location = '{% url platinum %}';
+    	});
     });
-    var td = 0;
-    function cTransition() {
-        td++;
-        console.log(td);
-        if(td == 4){
-            inT = false;
-            td = 0;
-        }
-        return;
-    }
-    function runTransition(obj) {
-        var pE = $(obj).prev();
-        var nE = $(obj).next();
-        var cE = $(obj);
-        console.log(cE.index());
-        if(!cE.hasClass('big')) {
-            $('#package-fan div.card').each(function(i) {
-                cClass='';
-                obj = $(this);
-                if(obj.hasClass('mid')) {
-                    cClass = 'mid';
-                } else if(obj.hasClass('big')) {
-                    cClass = 'big';
-                }
-                console.log('obj: ' + obj.index() + ' currentClass: ' + cClass);
-                if(i == pE.index()){
-                    obj.switchClass(cClass, 'mid', 100, function() {
-                        
-                    });
-                } else if(i == nE.index()) {
-                    obj.switchClass(cClass, 'mid', 100, function() {cTransition();});
-                } else if(i == cE.index()) {
-                    obj.switchClass(cClass, 'big', 100, function() {cTransition();});
-                } else {
-                    obj.switchClass(cClass, '', 100, function() {cTransition();});
-                }
-            });
-        }
-    }
-</script>
+    </script>
 {% endaddtoblock "js" %}
 {% endblock %}  
 

@@ -1,0 +1,233 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>{% block page_title %}{% endblock %}</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/homes/homes.css">
+    <link href="https://plus.google.com/113573642727337197280" rel="publisher" />
+{% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-5441302-2']);
+ _gaq.push(['_setDomainName', '.protectamerica.com']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+
+<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+{% endblock %}
+</head>
+<body class="{{ page_name }} tk-facitweb">
+<!-- Page Wrapper -->
+<div id="header">
+    <div id="header-wrapper">  
+        <div>
+            <div id="company-logo">
+                <div>
+                    <a href="/">
+                        <img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png" id="protect-america-logo" />
+              
+                    </a>
+                </div>  
+            </div>
+            {% businesstime %}
+            {% if phone_number %}
+            <div id="phone-number">
+                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+            </div>
+            {% endif %}
+            
+            {% endbusinesstime %}
+            <div id="ge-logo">
+                <img src="{{ STATIC_URL }}/img/external/ge-logo.png" />
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+
+    </div>
+</div>
+<div id="navigation-wrapper">
+&nbsp;
+</div>
+<div class="wrapper">
+
+    <div class="left-column main-offer">
+        <h1>Protect your New Home for <strong>FREE*</strong></h1>
+    </div>
+    <div class="right-column">
+    {% include "order/quote-form.html" with form=forms.basic %}
+    </div>
+
+    {% if phone_number %}
+
+        {% businesstime %}
+        <div id="call-box">
+            <p>Get Started Now, <strong>Reserve Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+        </div>
+        {% endbusinesstime %}
+    {% endif %}
+
+    <div class="clear"></div>
+    <div id="confidence-builders">
+        <div id="all-day-monitoring">
+            <img src="{{ STATIC_URL }}img/extra/always-on-monitoring.png" title="24/7 Monitored Home Security" />
+            <h3>Affordable 24/7 Home Security Monitoring</h3>
+            <p>Keep your loved ones secure day and night</p>
+        </div>
+        <div id="wireless-home-security">
+            <img src="{{ STATIC_URL }}img/extra/wireless-home-security.png" title="GE Wireless Home Security Systems" />
+            <h3>Simple to Use Wireless GE Security</h3>
+            <p>Trusted top of the line security equipment</p>
+        </div>
+        <div id="twenty-off-home-insurance">
+            <img src="{{ STATIC_URL }}img/extra/20-off-homeowners-insurance.png" title="20% off your Homeowner Insurance" />
+            <h3>Save up to 20% on Homeowner's Insurance</h3>
+            <p>Protecting your home while saving you money</p>
+        </div>
+        <div id="lifetime-warranty">
+            <img src="{{ STATIC_URL }}img/extra/free-relocation-kit.png" title="Get a Free Moving Kit" />
+            <h3>Free Moving Kit</h3>
+            <p>Protecting your new home is quick and easy</p>
+        </div>
+        <div id="lowest-price-guaranteed">
+            <img src="{{ STATIC_URL }}img/extra/lowest-price-home-security.png" title="Lowest Priced Home Security System" />
+            <h3>The Best Priced Home Security System</h3>
+            <p>Compare & save, get the best priced guaranteed</p>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+    <div class="left-column">
+        <div id="platinum-package-offer">
+            <h1 itemprop="name">Platinum Security Package</h1>
+            <img src="/static/img/products/platinum-package/platinum-package-simon-xt-lowest-price.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Platinum Security Package" />
+            <ul itemprop="description">
+                <li>GE Simon XT Control Panel</li>
+                <li>3 Security Stickers</li>
+                <li>15 Door / Window Sensors</li>
+                <li>1 Security Yard Sign </li>
+                <li>1 Motion Detector</li>
+                <li>Owner's Manual</li>
+            </ul>
+            <div id="top-consumer-review-medal">
+                <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
+                <p>Five star rating in 2012 by TopConsumerReviews.com</p>
+            </div>
+            <span>Our Price: <strong>FREE<sup>*</sup></strong></span>
+        </div>
+    </div>
+    <div class="right-column">
+        <img src="{{ STATIC_URL }}img/affiliates/homes/free-interactive-banner.jpg" alt="free-interactive-banner" width="288" height="328">
+    </div>
+    <div class="clear"></div>
+    {% if phone_number %}
+
+        {% businesstime %}
+        <div id="call-box">
+            <p>Get Started Now, <strong>Reserve Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+        </div>
+        {% endbusinesstime %}
+    {% endif %}
+    <div class="clear"></div>
+    <div id="the-platinum-package">
+        <img src="{{ STATIC_URL }}img/products/platinum-package/in-the-home.jpg" id="main-package-image" alt="Securing a home with up to fifteen doors or windows">
+        <div id="platinum-package-content">
+            <h1>In Your Home: Platinum Security</h1>
+            <p>The Platinum Security Package from Protect America is the most comprehensive perimeter protection offered in the home security industry. Each alarm system features 15 door/window sensors for coverage at every point of entry into your home. The Platinum Security also protects inside your home with a motion detector for your use in heavily used rooms or hallways. It's also really easy to customize to the unique needs of your home. Just ask how to add an interactive security camera or a smoke detector to your new home security system!</p>
+            <div class="button-submit"><a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Platinum-B']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="included-equipment">
+    	<h2>What's Included:</h2>
+        <div>
+    		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Home Security Panel" />
+    		<strong>One (1)</strong> Simon XT Control Panel
+		</div>
+		<div>
+    		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
+    		<strong>Fifteen (15)</strong> Door / Window Sensors
+   		</div>
+   		<div>
+       		<img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
+    		<strong>One (1)</strong> Motion Detector
+        </div>
+        <div>
+            <img src="/static/img/products/accessories/installation-manual-icon.jpg" width="160" height="131" alt="Protect America Home Security Installation Manual" />
+            <strong>One (1)</strong> Owner's / Installation Manual & DVD
+        </div>
+        <div>
+    		<img src="/static/img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Protect America Home Security Window Stickers" />
+    		<strong>Three (3)</strong> Security Window Stickers
+        </div>
+    	<div>	
+    		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Protect America Home Security Yard Sign" />
+    		<strong>One (1)</strong> Security Yard Sign
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+
+<div id="order-footer">
+    <div id="footer-package-section">
+        <h2>Platinum Package</h2>
+        <p><span>Price Today: <strong>FREE*</strong></span></p>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Realtor Footer Click', 'Platinum']);">Order Now ></a>
+        </div>
+    </div>
+    <div id="footer-call-now">
+        <h3>Give us a call.</h3>
+        <p>Our security professionals are here to answer any questions and help you protect your home and family today.</p>
+        <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+    </div>
+    <div id="footer-chat-now">
+        <h3>Limited Time Offer!</h3>
+        <p>This is a limited time offer and is only available exclusively through Homes.com. Order Now!</p>
+    </div>
+    <div class="clear"></div>
+
+</div>
+<div id="small-footer">
+    <p>*Call for information on Protect America's monitoring fees and other terms. Standard thirty-six month monitoring agreement required with approved credit. Must be a U.S. Resident. Applicable taxes and fees not included. Cannot be combined with any other offer. Package offered on this coupon includes a master control panel with back-up battery, siren, keypad, fifteen door or window sensors, one motion detector, one yard sign, and three window decals. Offer subject to change. Limited parts replacement warranty valid for as long as customer is monitored. Not available to existing Protect America customers. Other restrictions apply. GE and GE Security logos are registered trademarks of General Electric. Protect America, Inc., 3800 Quick Hill Road, Building 1-100, Austin, TX 78728. We provide our service in all 50 states. Licenses: AL: 12-027; AR: E 2001-0538; AZ: ROC114856 (L-67), ROC114855 (C-12); CA: ACO 4115; DE: 06-204; FL: EG-0000192; GA: LVA205875; IA: AC-0081; IL: 127-001092; LA: F492; MD: 107-670; MI: 8714 Huckleberry Lane, Lansing MI. 48917. Lic #3601202409; MS: 15005347; NC: 635-CSA; NJ: Burglar alarm and fire alarm bus. Lic. #34BF00023700; NM: 60519; OK: 739; PA: PA023169; SC: BAC 5432, FAC 3104; TN: 00000265; TX: B16272, ACR-1204; UT: 345548-6501; VA: 11-3129; WA: PROTEAI962LD; WV: WV032962.</p>
+</div>
+{% render_block "js" %}
+<!-- Google Code for Home Page Visit Remarketing List -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1072079179;
+var google_conversion_language = "en";
+var google_conversion_format = "1";
+var google_conversion_color = "666666";
+var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
+var google_conversion_value = 0;
+//-->
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+{{ pixels|safe }}
+<!-- End Remarketing Code -->
+</body>
+</html>

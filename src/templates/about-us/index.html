@@ -1,12 +1,35 @@
 {% extends "about-us/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}About Us | Alarm Monitoring | Security Alarms | Protect America{% endblock %}
+{% block page_keywords %}home security companies, security, security system, home security system, home security{% endblock %}
+{% block page_description %}Protect America is a growing premier alarm monitoring service that ensures the best home security system to protect your family and home from criminal activity.{% endblock %}
+
 {% block content %}
+<div id="about-us-content">
+    <img src="{{ STATIC_URL }}img/extra/protect-america-office.jpg" alt="Protect America Headquarters - Austin, TX" width="664" height="232" />
+    <h1>Protect America Values Customers and Community</h1>
+    <p>Protect America, Inc has protected nearly half a million families nationwide with the state-of-the-art <a href="{% url equipment %}" title="GE Wireless Home Security Companies Systems">GE Wireless Home Security System</a>. We are one of the fastest growing <a href="{% url profile %}" title="Home Security Companies">home security companies</a> in America with customers coast to coast!</p>
+    
+    <p>Among other home security companies, Protect America, Inc. has ranked in the Top 10 in volume of residential security system installations for the last three years according to SDM Magazine. As one of the fastest growing home security companies nationwide, we use cutting-edge computer technology to provide instantaneous product support and <strong>24-hour protection</strong> of your home and family.</p>
+    
+    <p>Make sure you are prepared in the event of an emergency anytime day or night. Defend your home and family against the threat of invasion, burglary and forced entry with a <a href="{% url equipment %}" title="GE Wireless Home Security Companies Systems">GE Wireless Home Security System</a> from one of the best home security companies around!</p>
+</div>
+{% include "order/quote-form.html" with form=forms.basic %}
+<div class="clear"></div>
+{% testimonial_search "protect america" "limit=10&words=75" %}
 
-
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}  
-{% block sidebar %}
-{{ block.super }}
 
 
-{% endblock %}
-
-{% block subnav_parent %}{% endblock %}

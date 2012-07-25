@@ -1,9 +1,17 @@
-{% extends "base.html" %}
+{% extends "products/base.html" %}
 
 {% load sekizai_tags %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/packages-b.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/products.css">
+    <!-- Begin Hiconversion Head Enabling. Do NOT move. Must come directly before the closing head tag -->
+    <script id='hiconversion_head_include'
+                 type='text/javascript'
+                 src='http://www.hiconversion.com/enabling/update.jsp?external=&version=1.0'>
+    </script>
+    <script id='hiconversion_head_script'
+                 type='text/javascript'>if (typeof hiconversion_head_update == 'function') hiconversion_head_update()</script>
+    <!-- End Hiconversion Head Enabling -->
 {% addtoblock "js" %}
 <!-- Start Quantcast Tag -->
 <script type="text/javascript">
@@ -14,21 +22,12 @@ _qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Product Page"};
 <img src="//secure.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Product+Page" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
 </noscript>
 <!-- End Quantcast tag -->
+<!-- Begin Hiconversion Body Enabling. Do NOT move. Must come directly before the closing body tag -->
+    <script id='hiconversion_body_script'
+             type='text/javascript'>if (typeof hiconversion_body_update == 'function') hiconversion_body_update()</script>
+<!-- End Hiconversion Body Enabling -->
+
 {% endaddtoblock "js" %}
-{% endblock %}
-
-{% block subnav_parent %}
-<ul id="sub-nav-parent">
-	<li class="active"><a href="http://www.protectamerica.com/pa/packages" title="View all of our alarms packages and choose the right package and service for your home.">Packages</a></li>
-	<li><a href="http://www.protectamerica.com/pa/equipment" title="View all the available GE wireless home security system equipment and how it works.">Equipment</a></li>
-	<li><a href="http://www.protectamerica.com/pa/monitoring" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">Monitoring</a></li>
-	<li><a href="http://www.protectamerica.com/pa/existing-home-security-system" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">Existing Systems</a></li>
-	<li><a href="http://www.protectamerica.com/pa/wireless-security-camera" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">Cameras</a></li>
-	<li><a href="http://www.protectamerica.com/pa/vehicle-gps-tracking" title="Learn how the GE home security system allows our customers flexible monitoring solutions.">GPS</a></li>
-	<li><a href="http://www.protectamerica.com/pa/advantage" title="Compare Protect America to ADT Security and other security companies.">Our Advantage</a></li>
-	<li><a href="http://www.protectamerica.com/pa/order" title="Order your Protect America Home Security System Today!">Order Now</a></li>
-
-</ul>
 {% endblock %}
 
 {% block subnav_child %}
