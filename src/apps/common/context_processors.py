@@ -45,6 +45,14 @@ def phone_number(request):
     from django.conf import settings
     ctx = {'phone_number': settings.DEFAULT_PHONE,
             'use_call_measurement': False}
+    # we want to set the phone number in the session to keep from hVaving 
+    # more than 1 databasecall
+    session_num = request.session.get('phone_number', None)
+    session_call_measurement = request.session.get('call_measurement', None)
+    if session_num is not None and session_call_measurement is not None:
+        ctx['phone_number'] = session_num
+        ctx['use_call_measurement'] = session_call_measurement
+        return ctx
 
     # the affiliate cookie is not available on the first request
     # because of the nature of http. what this does is first check
@@ -55,9 +63,12 @@ def phone_number(request):
     # the GET var. If neither of those exist, there is no affiliate
     affiliate = get_affiliate_from_request(request)
 
+
     if affiliate:
         ctx['phone_number'] = affiliate.phone
         ctx['use_call_measurement'] = affiliate.use_call_measurement
+        request.session['phone_number'] = affiliate.phone
+        request.session['call_measurement'] = affiliate.use_call_measurement
 
     return ctx
 

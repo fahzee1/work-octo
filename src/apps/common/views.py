@@ -94,24 +94,16 @@ def simple_dtt(request, template, extra_context):
     extra_context['active_pages'] = pages
 
     affiliate = request.COOKIES.get('refer_id', None)
+    newaffiliate = None
     if not affiliate and 'agent_id' in extra_context:
-        affiliate = extra_context['agent_id']
-    elif not affiliate and 'agent' in request.GET:
-        affiliate = request.GET['agent']
+        newaffiliate = extra_context['agent_id']
 
-    if affiliate:
-        request.session['refer_id'] = affiliate
+    if newaffiliate:
+        request.session['refer_id'] = newaffiliate
 
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
-
-    if affiliate:
-        response.set_cookie('refer_id',
-                        value=affiliate,
-                        expires=datetime.now() + expire_time)
-
-
     return response
 
 def payitforward(request):
