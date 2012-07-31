@@ -1,0 +1,24 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+<div id="popup-wrapper">
+    <div id="shipping-popup">
+        <img src="{{ STATIC_URL }}img/banners/pop-ups/shipping-popup/free-shipping-box.jpg" alt="Free Shipping if you Call Now!" id="shipping-image" width="312" height="272" />
+        <div id="popup-content">
+            <h3>Call in the Next 5 Minutes</h3>
+            <p>Receive <span>Free</span> Shipping with your Order!*</p>
+            <strong>Promo Code: FS026</strong>
+            <div id="popup-timer">
+                Time Remaining <span>05:50</span>
+            </div>
+        </div>
+        <strong>Security Experts are Standing By, Call Now!</strong>
+        <div id="popup-callbox">
+            {% if phone_number %}
+               <p><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+            {% endif %}
+        </div>
+        <span class="popup-terms">*Free shipping offer only valid for ground shipping.</span>
+        <div id="popup-close"><img src="{{ STATIC_URL }}img/banners/pop-ups/x-button.png" alt="x-button" width="32" height="32" /></div>
+    </div>
+</div>
+
