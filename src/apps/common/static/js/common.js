@@ -95,3 +95,4 @@ function load_popup(element) {
 jQuery('#popup-close').live('click', function() {
     $(this).parent().parent().hide();
 });
+initiate_popup();
