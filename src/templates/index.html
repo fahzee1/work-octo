@@ -16,29 +16,50 @@
 {% endblock %}
 
 {% block content %}
-
-<div id="main">
-    <div id="hero-banner">
-        <a href="{% url copper %}" class="top-consumers">
-            <span>For the Fourth Consecutive Year</span>
-            <img width="349" height="190" alt="Best Home Security System - 5 Stars from Top Consumer Reviews" src="/static/img/banners/hero-banners/top-consumer-reviews/top-consumer-reviews.png">
-            <h3>
-                "Protect America provides the
-                <strong>best home security</strong>
-                solution available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are]
-                <strong>top-notch</strong>."
-            </h3>
-            <p>-Top Consumer Reviews 2012</p>
-        </a>
-        <a href="{% url complete-home-security %}" title="Click Here to see how we make security affordable and custom to your Home." id="affordable-security-banner">
-            <img src="{{ STATIC_URL }}img/banners/hero-banners/affordable-security/affordable-security-bg.jpg" alt="Affordable Security. Customized For You." width="671" height="251" />
-            <button class="button-link">Secure Your Home ></button>
-        </a>
-
+</div>
+<div id="top-content">
+    <div class="wrapper">
+        <div id="top-hero-banner-controls">
+            <div id="hero-left-arrow"><</div>
+            <div id="pager-container">
+                <ul>
+                    <li class="activeSlide">&bull;</li>
+                    <li>&bull;</li>
+                    <li>&bull;</li>
+                </ul>
+            </div>
+            <div id="hero-right-arrow">></div>
+            
+            
+        </div>
+        <div id="top-hero-banner">
+            <div id="keychain-banner">
+                <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/2-keychains-hero-image.jpg" id="keychain-image" alt="Get 2 Keychain Remotes Free when you order a security system" width="280" height="360" />
+                <div id="keychain-banner-content">
+                    <h2>Security Made Easy. <span>One Button Arming from your Keychain</span></h2>
+                    <p>Two <strong>FREE*</strong> Keychain Remotes <span>when you order any home security system.</span></p>
+                    <div class="button-submit">
+                        <a href="" title="Order Now and Get Two Free Keychain Remotes">Order Now ></a>
+                    </div>
+                    <em>*Restrictions apply. Expires August 31, 2012</em>
+                </div>
+            </div>
+            <div id="touchscreen-banner">
+            
+            </div>
+            <div id="interactive-banner">
+            </div>
+        </div>
+        {% include "order/quote-form.html" with form=forms.basic %}
     </div>
+</div>
+<div class="clear"></div>
+<div class="wrapper">
+<div id="main">
 
-    <a href="{% url touchscreen %}" title="Get a Free Simon XT Touch Screen with Cellular, Broadband, or Two-Way Voice Monitoring">
-        <img src="{{ STATIC_URL }}img/banners/promos/touchscreen-banner.png" alt="Get a Free Simon XT Touch Screen with Cellular, Broadband, or Two-Way Voice Monitoring" width="670" height="144" />
+
+    <a href="{% url copper %}" title="Protect America has been rated 5-Stars by TopConsumerReviews.com for the past 5 years">
+            <img src="{{ STATIC_URL }}img/banners/670x144/top-consumer-reviews-banner.png" alt="Protect America has been rated 5-Stars by TopConsumerReviews.com for the past 5 years" width="670" height="144" />
     </a>
     <div id="customer-testimonials">
         <div class="ts_testimonial">
@@ -48,7 +69,8 @@
             </div>
         </div>
     </div>
-    
+
+
     <div id="protection">
         <h2>100% Protection</h2>
         <p>Whether you want protection for your home or even a small business, the GE Home Security System from Protect America will fulfill your home security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your home security with a GE Home Security System from Protect America:</p>
@@ -216,7 +238,6 @@
     </div>
 </div>
 <div id="sidebar">
-    {% include "order/quote-form.html" with form=forms.basic %}
     <div id="how-safe-is-your-neighborhood">
         	<h3>How Safe <span>is your Neighborhood?</span></h3>
         	<p>enter your zip to find sexual predators and crime statistics in your area:</p>
