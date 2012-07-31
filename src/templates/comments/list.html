@@ -1,0 +1,13 @@
+<div class="row-fluid">
+    <div class="span12">
+        <h3> <i class="icon-comment"></i> Comments </h3>
+        {% for comment in comment_list %}
+        <div id="c{{ comment.id }}">
+            <span><strong>{{ comment.name }}</strong> at {{ comment.submit_date }}</span>
+            <blockquote>{{ comment.comment }}</blockquote>
+        </div>
+        {% empty %}
+        No Comments on this Affiliate
+        {% endfor %}
+    </div>
+</div>

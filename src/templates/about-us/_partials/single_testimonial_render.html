@@ -2,6 +2,16 @@
     {% if test.type == 'Textimonial' %}
         <h3><span>{{ testimonial.first_name }} writes:</span> from <strong>{{ testimonial.city }}, {{ testimonial.state }}</strong></h3>
         <p>{{ testimonial.message|safe }}</p>
+        {% if testimonial.rating > '0' %}
+        <div class="star-container">
+            <div class="star {% if testimonial.rating >= '1' %}active{% endif %}">&nbsp;</div>
+            <div class="star {% if testimonial.rating >= '2' %}active{% endif %}">&nbsp;</div>
+            <div class="star {% if testimonial.rating >= '3' %}active{% endif %}">&nbsp;</div>
+            <div class="star {% if testimonial.rating >= '4' %}active{% endif %}">&nbsp;</div>
+            <div class="star {% if testimonial.rating >= '5' %}active{% endif %}">&nbsp;</div>
+            <div class="clear"></div>
+        </div>
+        {% endif %}
         <div class="clear"></div>
     {% else %}
     {% if test.type == 'Vidimonial' %}

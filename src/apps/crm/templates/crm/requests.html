@@ -1,0 +1,45 @@
+{% extends "crm/base.html" %}
+
+{% block content %}
+<div class="row">
+    <h1>Affiliate Requests</h1>
+    <hr/>
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>Agent ID</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th></th>
+    </tr>
+    {% for affiliate in requests.object_list %}
+    <tr>
+        <td>{{ affiliate.name }}</td>
+        <td>{{ affiliate.company_name }}</td>
+        <td>{{ affiliate.email }}</td>
+        <td style="text-align: center;">
+            <a href="{% url crm:affiliate_requests_edit affiliate.id %}" class="btn">
+                <i class="icon-eye-open"></i>
+                View
+            </a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4" style="text-align: center;"> No Affiliates to View </td>
+    </tr>
+    {% endfor %}
+</table>
+<ul class="pager">
+    {% if requests.has_previous %}
+    <li class="previous">
+        <a href="?page={{ requests.previous_page_number }}">&larr; Newer</a>
+    </li>
+    {% endif %}
+    {% if requests.has_next %}
+    <li class="next">
+        <a href="?page={{ requests.next_page_number }}">Older &rarr;</a>
+    </li>
+    {% endif %}
+</ul>
+</div>
+{% endblock %}

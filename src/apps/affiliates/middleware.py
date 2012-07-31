@@ -106,21 +106,14 @@ class AffiliateMiddleware(object):
 
         affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
+        current_source = request.COOKIES.get('source', None)
         if not current_cookie:
             refer_id = request.session.get('refer_id', None)
-            if refer_id in ['GOOGLEPPC', 'BINGPPC', 'SEMDIRECT', 'LocalSearch']:
-
-                response.set_cookie('refer_id',
-                        value=request.session['refer_id'],
-                        domain=cookie_domain,
-                        expires=datetime.now() + expire_time)
-            elif refer_id is not None:
+            if refer_id is not None:
                 try:
                     affiliate = Affiliate.objects.get(agent_id=refer_id)
-                    response.set_cookie('refer_id',
-                        value=refer_id,
-                        domain=cookie_domain,
-                        expires=datetime.now() + expire_time)
+                    request.session['refer_id'] = affiliate.agent_id
+                    request.session['source'] = affiliate.name
                 
                 except Affiliate.DoesNotExist:
                     pass
@@ -129,45 +122,49 @@ class AffiliateMiddleware(object):
                 try:
                     affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])
                     request.session['refer_id'] = affiliate.agent_id
-                    response.set_cookie('refer_id',
-                        value=affiliate.agent_id,
-                        domain=cookie_domain,
-                        expires=datetime.now() + expire_time)
+                    request.session['source'] = affiliate.name
                 except Affiliate.DoesNotExist:
                     pass
                     
             else:
                 if default_agent is not None and current_cookie is None:
-                    # dont set the cookie to default
+                    # we are going to assume that because there is no
+                    # default agent and that the current_cookie is None
+                    # that the visitor is organic
                     request.session['refer_id'] = default_agent
-                    #request.session['source'] = 'PROTECT AMERICA'
+                    request.session['source'] = 'PROTECT AMERICA'
                     
-                    response.set_cookie('refer_id',
-                        value=request.session['refer_id'],
-                        domain=cookie_domain,
-                        expires=datetime.now() + expire_time)
+                    
 
         if 'affkey' in request.GET:
             request.session['affkey'] = request.GET['affkey']
             # Allow overwriting of affkey cookie
-            response.set_cookie('affkey',
-                value=request.GET['affkey'],
-                expires=datetime.now() + expire_time)
-        if 'source' in request.GET:
+
+        if 'source' in request.GET and not current_source:
             request.session['source'] = request.GET['source']
-            # Allow overwriting of affkey cookie
-            response.set_cookie('source',
-                value=request.GET['source'],
-                expires=datetime.now() + expire_time)
+
         # for lead testing, don't set cookie
         if 'leadid' in request.GET:
             request.session['leadid'] = request.GET['leadid']
 
+        # set the cookies here
+        if 'refer_id' in request.session and request.session['refer_id'] != '' and not current_cookie:
+            response.set_cookie('refer_id',
+                value=request.session['refer_id'],
+                domain=cookie_domain,
+                expires=datetime.now() + expire_time)
+        if 'source' in request.session and request.session['source'] != '' and not current_source:
+            response.set_cookie('source',
+                value=request.session['source'],
+                domain=cookie_domain,
+                expires=datetime.now() + expire_time)
+
         referrer = request.META.get('HTTP_REFERER')
         engine, domain, term = self.parse_search(referrer)
-        if engine is not None:
-            request.session['search_engine'] = engine
-            request.session['search_keywords'] = term
+        request.session['search_engine'] = engine
+        request.session['search_domain'] = domain
+        request.session['search_term'] = term
+
         
         return response
 

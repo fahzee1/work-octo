@@ -41,7 +41,11 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
-    url(r'^sitemap/$', 'apps.sitemaps.views.index', name='sitemap'),
+    url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template', {
+            'template': 'sitemaps/index.xml',
+            'mimetype': 'application/xml',
+        }, name='index'),
+    url(r'^sitemap/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     
     # affiliate urls
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
@@ -177,6 +181,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
             
+
+        # SEO Content Pages
+        dtt(r'^home-security-systems/?$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
+
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
         dtt(r'^thank-you/ceo/?$', 'thank-you/ceo-thank-you.html', 'ceo-thank-you', 'thank-you'),
@@ -405,6 +413,13 @@ else:
     url(r'^search/$', 'apps.search.views.search', name='search'),
     url(r'^testimonials/', include('apps.testimonials.urls',
         namespace='testimonials')),
+    # CRM urls
+    url(r'^crm/', include('apps.crm.urls', namespace='crm')),
+    # comments urls
+    url(r'^comments/posted/$', 'apps.crm.views.comment_posted',
+        name='comments-comment-done'),
+    (r'^comments/', include('django.contrib.comments.urls')),
+
     ('^radioshack/?$',
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
@@ -492,7 +507,44 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
     ('^pa/home_automation/?$',
         redirect_to, {'url': '/products/security-equipment/accessories/home-automation/', 'permanent': True}),
-
+    ('^pa/copper/home-security-systems/?$',
+        redirect_to, {'url': '/ge-simon-security-systems/wireless-home-alarm/copper-package', 'permanent': True}),
+    ('^pa/home_automation/home-automation-devices/?$',
+        redirect_to, {'url': '/products/security-equipment/accessories/home-automation', 'permanent': True}),
+    ('^pa/advantage/adt-security/?$',
+        redirect_to, {'url': '/security-advantage', 'permanent': True}),
+    ('^pa/platinum/alarm-system/?$',
+        redirect_to, {'url': '/ge-simon-security-systems/wireless-home-alarm/platinum-package', 'permanent': True}),
+    ('^pa/gold/alarm-systems/?$',
+        redirect_to, {'url': '/ge-simon-security-systems/wireless-home-alarm/gold-package', 'permanent': True}),
+    ('^pa/silver/alarm/?$',
+        redirect_to, {'url': '/ge-simon-security-systems/wireless-home-alarm/silver-package', 'permanent': True}),
+    ('^pa/bronze/security-systems/?$',
+        redirect_to, {'url': '/ge-simon-security-systems/wireless-home-alarm/bronze-package', 'permanent': True}),
+    ('^pa/existing-home-security-system/cellular-monitoring/?$',
+        redirect_to, {'url': '/products/existing-security-system', 'permanent': True}),
+    ('^pa/install/home-security-wireless/?$',
+        redirect_to, {'url': '/support/installation', 'permanent': True}),
+    ('^pa/ge_simon_xt/ge-simon-xt/?$',
+        redirect_to, {'url': '/products/security-equipment/control-panels/ge-simon-xt', 'permanent': True}),
+    ('^pa/broadband-monitoring/Alarm-System-Without-Phone-Line/?$',
+        redirect_to, {'url': '/products/alarm-monitoring/broadband', 'permanent': True}),
+    ('^pa/landline-monitoring/Home-Security-Monitoring-Service/?$',
+        redirect_to, {'url': '/products/alarm-monitoring/landline', 'permanent': True}),
+    ('^pa/troubleshooting/protect-america/?$',
+        redirect_to, {'url': '/support/troubleshooting', 'permanent': True}),
+    ('^pa/home_security_accessories/home-security-accessories/?$',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/security_sensors/home-security-sensors/?$',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/cellular-monitoring/Wireless-Home-Security/?$',
+        redirect_to, {'url': '/products/alarm-monitoring/cellular', 'permanent': True}),
+    ('^pa/simon-xt-touchscreen/ge-simon-xt-touchscreen/?$',
+        redirect_to, {'url': '/products/security-equipment/accessories/touchscreen', 'permanent': True}),
+    ('^pa/return-policy/?$',
+        redirect_to, {'url': '/help/return-policy/', 'permanent': True}),
+    ('^pa/request-moving-kit/?$',
+        redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns

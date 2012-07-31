@@ -69,13 +69,34 @@ class Submission(models.Model):
     def get_first_name(self):
         return self.name.split(' ')[0]
 
-
     def get_last_name(self):
         return self.name.split(' ')[-1]
 
-
     def __unicode__(self):
         return '%s : %s' % (self.name, self.phone,)
+
+class GoogleExperiment(models.Model):
+    google_id = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return '%s : %s' % (self.google_id, self.name,)
+
+class Lead(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+    phone = PhoneNumberField()
+
+    agent_id = models.CharField(max_length=24)
+    source = models.CharField(max_length=64)
+    affkey = models.CharField(max_length=64)
+
+    referer_page = models.CharField(max_length=256, blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return '%s - %s : %s %s' % (self.agent_id, self.source, self.name, self.phone)
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=128)
@@ -209,7 +230,7 @@ class DoNotCall(models.Model):
             'New Do Not Call Request',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
-            ['feedback@protectamerica.com'],
+            ['donotcall@protectamerica.com'],
             ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()

@@ -33,10 +33,10 @@ class Migration(SchemaMigration):
         db.send_create_signal('contact', ['MovingKit'])
 
         # Adding field 'ContactUs.date_created'
-        db.add_column('contact_contactus', 'date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default='', blank=True), keep_default=False)
+        db.add_column('contact_contactus', 'date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime.today(), blank=True), keep_default=False)
 
         # Adding field 'CEOFeedback.date_created'
-        db.add_column('contact_ceofeedback', 'date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default='', blank=True), keep_default=False)
+        db.add_column('contact_ceofeedback', 'date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime.today(), blank=True), keep_default=False)
 
 
     def backwards(self, orm):
