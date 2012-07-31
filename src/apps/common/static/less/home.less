@@ -44,37 +44,40 @@
         height: 400px;
         position: relative;
     }
+
     #top-hero-banner-controls {
         position: absolute;
-        left: 48%;
+        left: 33%;
         bottom: 4px;
+        z-index: 999;
         #hero-left-arrow, #hero-right-arrow {
+            background: url(/static/img/extra/nav-items.png) 0px 0px no-repeat;
+            width: 7px;
+            height: 13px;
             float: left;
-            font-weight: bold;
-            font-size: 20px;
-            padding: 0 8px;
-            color: @black;
+            margin: 0 4px;
+            cursor: pointer;
+            cursor: hand;
+        }
+        #hero-right-arrow {
+            background: url(/static/img/extra/nav-items.png) -22px 0px no-repeat;
         }
         #pager-container {
             float: left;
             margin-top: 3px;
             ul {
+                width: 30px;
                 li {
-                    padding-top: 4px;
-                    display: inline;
-                    text-shadow:
-                        -1px -1px 0 @grey,  
-                        1px -1px 0 @grey,
-                        -1px 1px 0 @grey,
-                        1px 1px 0 @grey;
-                    color: @white;
+                    width: 8px;
+                    height: 8px;
+                    background: url(/static/img/extra/nav-items.png) -7px -3px no-repeat;
+                    display: block;
+                    float: left;
+                    margin: 0px 1px;
+                    cursor: pointer;
+                    cursor: hand;
                     &.activeSlide {
-                        color: @black;
-                        text-shadow:
-                            -1px -1px 0 @black,  
-                            1px -1px 0 @black,
-                            -1px 1px 0 @black,
-                            1px 1px 0 @black;
+                        background: url(/static/img/extra/nav-items.png) -15px -3px no-repeat;
                     }
                 }
             }
@@ -83,29 +86,30 @@
     #top-hero-banner {
         float: left;
         width: 685px;
-
+        position: relative;
         #keychain-banner {
+            display: none;
             #keychain-image {
-                float: left;
-                width: 280px;
-                padding-top: 16px;
+                position: absolute;
+                left: 0;
             }
             #keychain-banner-content {
                 float: left;
-                width: 373px;
+                width: 380px;
                 margin: 16px;
+                margin-left: 285px;
                 h2 {
+                    font-weight: lighter;
                     font-weight: 100;
-                    font-size: 42px;
-                    line-height: 42px;
+                    font-size: 40px;
+                    line-height: 40px;
                     margin-top: 24px;
                     span {
                         font-size: 19px;
                         line-height: 22px;
                         color: @blue;
                         font-weight: normal;
-                        position: relative;
-                        bottom: 16px;
+                        display: block;
                     }
                 }
                 p {
@@ -139,7 +143,72 @@
                 }
             }
         }
+        #interactive-banner, #touchscreen-banner {
+            position: relative;
+            height: 400px;
+            width: 685px;
+            display: none;
+            h2 {
+                font-weight: 100;
+                font-size: 42px;
+                line-height: 42px;
+                margin-top: 8px;
+                display: block;
+                text-align: center;
+                span {
+                    font-size: 19px;
+                    line-height: 22px;
+                    color: @blue;
+                    font-weight: normal;
+                    display: block;
+                    text-align: center;
+                }
+            }
+            #interactive-image {
+                position: absolute;
+                bottom: 48px;
+                left: -138px;
+            }
+            #touchscreen-image {
+                position: absolute;
+                bottom: 16px;
+                left: -32px;
+            }
+            #interactive-banner-content, #touchscreen-banner-content {
+                position: absolute;
+                right: 16px;
+                p {
+                    font-size: 30px;
+                    font-weight: 100;
+                    padding-top: 70px;
+                    strong {
+                        font-weight: bold;
+                        color: @red;
+                    }
+                    span {
+                        display: block;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 28px;
+                    }
+                }
+                .button-link {
+                    text-align: left;
+                }
+                em {
+                    font-size: 10px;
+                    display: block;
+                    padding-top: 50px;
+                }
+            }
+            #touchscreen-banner-content {
+                right: 32px;
+            }
+        }
     }
+}
+#call-box {
+    margin: 0;
 }
 #main {
     float:left;
