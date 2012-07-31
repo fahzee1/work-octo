@@ -45,12 +45,22 @@
                 </div>
             </div>
             <div id="touchscreen-banner">
+                <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
+                <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
                 
+                <div id="touchscreen-banner-content">
+                    <p>Price Today: <strong>$115</strong> <span>when you order any security system</span></p>
+                    <div class="button-link">
+                        <a href="{% url touchscreen %}" title="Add a GE Simon XT Touch Screen to any package today">Learn More ></a>
+                    </div>
+                </div>
             </div>
             <div id="interactive-banner">
+                <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
                 <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
+                
                 <div id="interactive-banner-content">
-                    <p>Included <strong>FREE*</strong> with cellular or broadband monitoring.</p>
+                    <p>Included <strong>FREE*</strong> <span>with cellular or broadband monitoring.</span></p>
                     <div class="button-link">
                         <a href="{% url cellular %}" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
                     </div>
@@ -61,8 +71,9 @@
         {% include "order/quote-form.html" with form=forms.basic %}
     </div>
 </div>
-<div class="clear"></div>
+
 <div class="wrapper">
+    {% include "order/call-box.html" %}
 <div id="main">
 
 
@@ -298,9 +309,10 @@
     $(document).ready(function() {
         $('#top-hero-banner').before('<div id="pager-container">') 
             .cycle({ 
-                fx:     'fade', 
+                fx:     'fade',
+                pause: 1, 
                 speed:  'fast', 
-                timeout: 3000, 
+                timeout: 7000, 
                 pager:  '#pager-container ul',
                 pagerAnchorBuilder: function(idx, slide) { 
                     // return selector string for existing anchor 

@@ -46,14 +46,17 @@
     }
     #top-hero-banner-controls {
         position: absolute;
-        left: 48%;
+        left: 33%;
         bottom: 4px;
+        z-index: 999;
         #hero-left-arrow, #hero-right-arrow {
             float: left;
             font-weight: bold;
             font-size: 20px;
             padding: 0 8px;
             color: @black;
+            cursor: pointer;
+            cursor: hand;
         }
         #pager-container {
             float: left;
@@ -68,6 +71,8 @@
                         -1px 1px 0 @grey,
                         1px 1px 0 @grey;
                     color: @white;
+                    cursor: pointer;
+                    cursor: hand;
                     &.activeSlide {
                         color: @black;
                         text-shadow:
@@ -83,7 +88,7 @@
     #top-hero-banner {
         float: left;
         width: 685px;
-
+        position: relative;
         #keychain-banner {
             display: none;
             #keychain-image {
@@ -140,12 +145,15 @@
                 }
             }
         }
-        #interactive-banner {
+        #interactive-banner, #touchscreen-banner {
+            position: relative;
+            height: 400px;
+            width: 685px;
             h2 {
                 font-weight: 100;
                 font-size: 42px;
                 line-height: 42px;
-                margin-top: 24px;
+                margin-top: 8px;
                 display: block;
                 text-align: center;
                 span {
@@ -157,8 +165,51 @@
                     text-align: center;
                 }
             }
+            #interactive-image {
+                position: absolute;
+                bottom: 48px;
+                left: -138px;
+            }
+            #touchscreen-image {
+                position: absolute;
+                bottom: 16px;
+                left: -32px;
+            }
+            #interactive-banner-content, #touchscreen-banner-content {
+                position: absolute;
+                right: 16px;
+                p {
+                    font-size: 30px;
+                    font-weight: 100;
+                    padding-top: 70px;
+                    strong {
+                        font-weight: bold;
+                        color: @red;
+                    }
+                    span {
+                        display: block;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 28px;
+                    }
+                }
+                .button-link {
+                    text-align: left;
+                }
+                em {
+                    font-size: 10px;
+                    display: block;
+                    padding-top: 50px;
+                }
+            }
+            #touchscreen-banner-content {
+                right: 32px;
+            }
         }
     }
+}
+#call-box {
+    margin: 0;
 }
 #main {
     float:left;
