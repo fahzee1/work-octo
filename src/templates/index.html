@@ -23,7 +23,7 @@
             <div id="hero-left-arrow"><</div>
             <div id="pager-container">
                 <ul>
-                    <li class="activeSlide">&bull;</li>
+                    <li>&bull;</li>
                     <li>&bull;</li>
                     <li>&bull;</li>
                 </ul>
@@ -45,9 +45,10 @@
                 </div>
             </div>
             <div id="touchscreen-banner">
-            
+            sdf
             </div>
             <div id="interactive-banner">
+                asdf
             </div>
         </div>
         {% include "order/quote-form.html" with form=forms.basic %}
@@ -288,11 +289,20 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#hero-banner').cycle({
-            fx: 'fade',
-            timeout: 6000
-        });
-        $('#main-testimonials').cycle({
+        $('#top-hero-banner').before('<div id="pager-container">') 
+            .cycle({ 
+                fx:     'fade', 
+                speed:  'fast', 
+                timeout: 3000, 
+                pager:  '#pager-container ul',
+                pagerAnchorBuilder: function(idx, slide) { 
+                    // return selector string for existing anchor 
+                    return '#pager-container ul li:eq(' + idx + ')'; 
+                },
+                next: '#hero-right-arrow',
+                prev: '#hero-left-arrow'
+            });
+            $('#main-testimonials').cycle({
             fx: 'fade',
             timeout: 9000
         });
