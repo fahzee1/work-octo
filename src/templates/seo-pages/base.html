@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Alarm Systems by Protect America{% endblock %}
+{% block page_keywords %}alarm home security systems, best home security system, free home security, free home security system, ge home security systems, home security alarms, home security systems{% endblock %}
+{% block page_description %}Discover how Protect America provides you with peace of mind by helping you feel safer and more secure with one of our inexpensive home security systems.{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/seo-content-pages.css">
+
+{% endblock %}
+
+
+    {% include "order/call-box.html" %}
+{% block content %}
+</div>
+
+<div id="top-content">
+    <div class="wrapper">
+        <div id="top-hero-banner-controls">
+            <div id="hero-left-arrow">&nbsp;</div>
+            <div id="pager-container">
+                <ul>
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                </ul>
+            </div>
+            <div id="hero-right-arrow">&nbsp;</div>
+            
+            
+        </div>
+        <div id="top-hero-banner">
+            <div id="keychain-banner">
+                <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/2-keychains-hero-image.jpg" id="keychain-image" alt="Get 2 Keychain Remotes Free when you order a security system" width="280" height="360" />
+                <div id="keychain-banner-content">
+                    <h2>Security Made Easy. <span>One Button Arming from your Keychain</span></h2>
+                    <p>Two <strong>FREE*</strong> Keychain Remotes <span>when you order any home security system.</span></p>
+                    <div class="button-submit">
+                        <a href="{% url order-package %}" title="Order Now and Get Two Free Keychain Remotes">Order Now ></a>
+                    </div>
+                    <em>*Restrictions apply. Expires August 31, 2012</em>
+                </div>
+            </div>
+            <div id="touchscreen-banner">
+                <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
+                <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
+                
+                <div id="touchscreen-banner-content">
+                    <p>Price Today: <strong>$115</strong> <span>when you order any security system</span></p>
+                    <div class="button-link">
+                        <a href="{% url touchscreen %}" title="Add a GE Simon XT Touch Screen to any package today">Learn More ></a>
+                    </div>
+                </div>
+            </div>
+            <div id="interactive-banner">
+                <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
+                <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
+                
+                <div id="interactive-banner-content">
+                    <p>Included <strong>FREE*</strong> <span>with cellular or broadband monitoring.</span></p>
+                    <div class="button-link">
+                        <a href="{% url cellular %}" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% include "order/quote-form.html" with form=forms.basic %}
+    </div>
+</div>
+
+<div class="wrapper">
+    {% include "order/call-box.html" %}
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#top-hero-banner').before('<div id="pager-container">') 
+            .cycle({ 
+                fx:     'fade',
+                pause: 1, 
+                speed:  'fast', 
+                timeout: 7000, 
+                pager:  '#pager-container ul',
+                pagerAnchorBuilder: function(idx, slide) { 
+                    // return selector string for existing anchor 
+                    return '#pager-container ul li:eq(' + idx + ')'; 
+                },
+                next: '#hero-right-arrow',
+                prev: '#hero-left-arrow'
+            });
+            $('#main-testimonials').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+        $('#top-hero-banner > div').click(function(e) {
+            var href = $(this).find('.button-link');
+            if(href.length == 0) {
+                href = $(this).find('.button-submit');
+            }
+            _gaq.push([  
+                    '_trackEvent',
+                    'Hero Banner',
+                    'Front Page Hero Banner Click',
+                    $(this).attr('id')
+                ]);
+            if(href.children('a').attr('href')) {
+                window.location = href.children('a').attr('href');
+                return;
+            }
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}
+{% block page-product %}
+    <h2>Silver Security Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $37.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
+    </div>
+{% endblock %}
+
