@@ -94,5 +94,11 @@ function load_popup(element) {
 }
 jQuery('#popup-close').live('click', function() {
     $(this).parent().parent().hide();
+    _gaq.push([  
+            '_trackEvent',
+            'Popup Box',
+            'Close Popup Box Click',
+            'Close Box'
+        ]);
 });
 initiate_popup();

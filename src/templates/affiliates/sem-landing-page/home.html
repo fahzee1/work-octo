@@ -346,6 +346,12 @@
             if(href.length == 0) {
                 href = $(this).find('.button-submit');
             }
+            _gaq.push([  
+                    '_trackEvent',
+                    'Hero Banner',
+                    'Paid Page Hero Banner Click',
+                    $(this).attr('id')
+                ]);
             if(href.children('a').attr('href')) {
                 window.location = href.children('a').attr('href');
                 return;
