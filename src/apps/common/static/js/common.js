@@ -89,7 +89,13 @@ function load_popup(element) {
         }
         );
         element.show();
-        setCookie('popup_offer', 'true', 999)
+        setCookie('popup_offer', 'true', 999);
+        _gaq.push([  
+            '_trackEvent',
+            'Popup Box',
+            'Popup Box Open',
+            '2 Minute Popup'
+        ]);
     }
 }
 jQuery('#popup-close').live('click', function() {
