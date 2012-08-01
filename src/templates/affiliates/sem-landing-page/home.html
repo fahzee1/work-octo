@@ -59,7 +59,7 @@
                     <h2>Security Made Easy. <span>One Button Arming from your Keychain</span></h2>
                     <p>Two <strong>FREE*</strong> Keychain Remotes <span>when you order any home security system.</span></p>
                     <div class="button-submit">
-                        <a href="" title="Order Now and Get Two Free Keychain Remotes">Order Now ></a>
+                        <a href="http://www.protectamerica.com/products/order-package" title="Order Now and Get Two Free Keychain Remotes">Order Now ></a>
                     </div>
                     <em>*Restrictions apply. Expires August 31, 2012</em>
                 </div>
@@ -71,7 +71,7 @@
                 <div id="touchscreen-banner-content">
                     <p>Price Today: <strong>$115</strong> <span>when you order any security system</span></p>
                     <div class="button-link">
-                        <a href="}" title="Add a GE Simon XT Touch Screen to any package today">Learn More ></a>
+                        <a href="http://www.protectamerica.com/products/security-equipment/accessories/touchscreen" title="Add a GE Simon XT Touch Screen to any package today">Learn More ></a>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                 <div id="interactive-banner-content">
                     <p>Included <strong>FREE*</strong> <span>with cellular or broadband monitoring.</span></p>
                     <div class="button-link">
-                        <a href="" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
+                        <a href="http://www.protectamerica.com/products/alarm-monitoring/cellular" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
                     </div>
                 </div>
 
@@ -341,7 +341,16 @@
                 next: '#hero-right-arrow',
                 prev: '#hero-left-arrow'
             });
-
+        $('#top-hero-banner > div').click(function(e) {
+            var href = $(this).find('.button-link');
+            if(href.length == 0) {
+                href = $(this).find('.button-submit');
+            }
+            if(href.children('a').attr('href')) {
+                window.location = href.children('a').attr('href');
+                return;
+            }
+        });
         $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000

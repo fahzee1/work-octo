@@ -325,6 +325,16 @@
             fx: 'fade',
             timeout: 9000
         });
+        $('#top-hero-banner > div').click(function(e) {
+            var href = $(this).find('.button-link');
+            if(href.length == 0) {
+                href = $(this).find('.button-submit');
+            }
+            if(href.children('a').attr('href')) {
+                window.location = href.children('a').attr('href');
+                return;
+            }
+        });
         $('.test_testimonial_box').cycle({
             fx: 'fade',
             timeout: 6000
