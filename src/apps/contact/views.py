@@ -110,7 +110,7 @@ def prepare_data_from_request(request):
             source = '5LINX'
 
     # we want to put the google experiment id if there is no affkey
-    google_id = request.GET.get('utm_expid', None)
+    google_id = request.COOKIES.get('utm_expid', None)
     if affkey is None and google_id is not None:
         try:
             googleexp = GoogleExperiment.objects.get(google_id=google_id)

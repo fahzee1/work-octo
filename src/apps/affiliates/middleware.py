@@ -112,6 +112,11 @@ class AffiliateMiddleware(object):
                 value=request.session['source'],
                 domain=cookie_domain,
                 expires=datetime.now() + expire_time)
+        if 'utm_expid' in request.GET:
+            response.set_cookie('utm_expid',
+                value=request.GET['utm_expid'],
+                domain=cookie_domain,
+                expires=datetime.now() + expire_time)
 
         
         return response
