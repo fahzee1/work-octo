@@ -87,7 +87,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'apps.affiliates.middleware.AffiliateMiddleware',
-    #'apps.common.middleware.DetectMobileBrowser',
+    'apps.common.middleware.SearchEngineReferrerMiddleware',
 )
 
 ROOT_URLCONF = 'urls'

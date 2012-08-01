@@ -77,7 +77,7 @@ class Submission(models.Model):
 
 class GoogleExperiment(models.Model):
     google_id = models.CharField(max_length=64)
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
