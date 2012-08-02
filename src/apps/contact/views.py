@@ -11,6 +11,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
 from django.conf import settings
 
+from apps.contact.models import GoogleExperiment
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
     CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm)
 from apps.affiliates.models import Affiliate
@@ -107,6 +108,16 @@ def prepare_data_from_request(request):
         # Special 5LINX catch
         if agent.agent_id == 'a01526':
             source = '5LINX'
+
+    # we want to put the google experiment id if there is no affkey
+    google_id = request.COOKIES.get('utm_expid', None)
+    if affkey is None and google_id is not None:
+        try:
+            googleexp = GoogleExperiment.objects.get(google_id=google_id)
+            affkey = googleexp.name
+        except:
+            pass
+
     return {
             'agentid': agentid,
             'affkey': affkey,
