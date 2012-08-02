@@ -187,7 +187,7 @@ else:
         dtt(r'^alarm-systems/$', 'seo-pages/alarm-systems.html', 'seo-alarm-systems', 'about-us'),
         dtt(r'^ge-home-security/$', 'seo-pages/ge-home-security.html', 'seo-ge-home-security', 'about-us'),
         dtt(r'^ge-home-security-systems/$', 'seo-pages/ge-home-security-systems.html', 'seo-ge-home-security-systems', 'about-us'),
-        dtt(r'^home-alarm-systems/$', 'seo-pages/home-alarm-systems.html', 'seo-home-alarm-systems', 'about-us'),
+        dtt(r'^home-alarm-systems/$', 'seo-pages/home-alarm-system.html', 'seo-home-alarm-systems', 'about-us'),
 
 
         # Thank You Pages
