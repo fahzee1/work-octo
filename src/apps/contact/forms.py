@@ -9,7 +9,8 @@ from apps.contact.models import (Submission,
                                  ContactUs, 
                                  MovingKit,
                                  TellAFriend,
-                                 DoNotCall)
+                                 DoNotCall,
+                                 Lead)
 
 class PAContactForm(ModelForm):
     class Meta:
@@ -27,6 +28,15 @@ class PAContactForm(ModelForm):
                 'rows':'5'}),
             }
 
+class LeadForm(ModelForm):
+    class Meta:
+        model = Lead
+        fields = ('name', 'email', 'phone')
+        widgets = {
+                'name': TextInput(attrs={'placeholder':'Name'}),
+                'email': TextInput(attrs={'placeholder':'Email'}),
+                'phone': TextInput(attrs={'placeholder':'Phone'}),
+            }
 
 class AffiliateLongForm(PAContactForm):
     class Meta(PAContactForm.Meta):

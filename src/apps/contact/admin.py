@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.contact.models import Submission, ContactUs, MovingKit, CEOFeedback, TellAFriend, GoogleExperiment
+from apps.contact.models import Submission, ContactUs, MovingKit, CEOFeedback, TellAFriend, GoogleExperiment, Lead
 
 class SubmissionAdmin(admin.ModelAdmin):
     model = Submission
@@ -24,3 +24,7 @@ admin.site.register(TellAFriend, TellAFriendAdmin)
 class GoogleExperimentAdmin(admin.ModelAdmin):
     model = GoogleExperiment
 admin.site.register(GoogleExperiment, GoogleExperimentAdmin)
+
+class LeadAdmin(admin.ModelAdmin):
+    model = Lead
+admin.site.register(Lead, LeadAdmin)
