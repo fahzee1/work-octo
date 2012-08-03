@@ -110,11 +110,12 @@ def prepare_data_from_request(request):
             source = '5LINX'
 
     if agent is None:
-        send_error({
-                'agent': agentid,
-                'source': source,
-                'affkey': affkey, 
-            })
+        if agentid != 'HOMESITE' and source != 'PROTECT AMERICA':
+            send_error({
+                    'agent': agentid,
+                    'source': source,
+                    'affkey': affkey, 
+                })
 
     # we want to put the google experiment id if there is no affkey
     google_id = request.COOKIES.get('utm_expid', None)
@@ -151,6 +152,14 @@ def basic_post_login(request):
         formset.agent_id = request_data['agentid']
         formset.source = request_data['source']
         formset.affkey = request_data['affkey']
+
+        searchkeywords = request.session.get('search_term', None)
+        cikw = request.COOKIES.get('cikw', None)
+        if searchkeywords is None and cikw is not None:
+            searchkeywords = cikw
+        
+        formset.search_engine = request.session['search_engine']
+        formset.search_keywords = searchkeywords
         formset.save()
         
         if request_data['lead_id'] is None:
@@ -165,7 +174,7 @@ def basic_post_login(request):
             'affkey': request_data['affkey'],
             'formlocation': formset.referer_page,
             'searchengine': request.session['search_engine'],
-            'searchkeywords': request.session['search_term'],
+            'searchkeywords': searchkeywords,
             'lead_id': formset.id,
         }
         send_leadimport(emaildata)

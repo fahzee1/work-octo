@@ -92,6 +92,9 @@ class Lead(models.Model):
     source = models.CharField(max_length=64, blank=True, null=True)
     affkey = models.CharField(max_length=64, blank=True, null=True)
 
+    search_engine = models.CharField(max_length=128, blank=True, null=True)
+    search_keywords = models.CharField(max_length=128, blank=True, null=True)
+
     referer_page = models.CharField(max_length=256, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
