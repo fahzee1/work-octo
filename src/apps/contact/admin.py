@@ -3,6 +3,7 @@ from apps.contact.models import Submission, ContactUs, MovingKit, CEOFeedback, T
 
 class SubmissionAdmin(admin.ModelAdmin):
     model = Submission
+    search_fields = ['id', 'phone', 'email']
 admin.site.register(Submission, SubmissionAdmin)
 
 class ContactUsAdmin(admin.ModelAdmin):
@@ -27,4 +28,6 @@ admin.site.register(GoogleExperiment, GoogleExperimentAdmin)
 
 class LeadAdmin(admin.ModelAdmin):
     model = Lead
+    list_filter = ('agent_id',)
+    search_fields = ['id', 'agent_id', 'phone', 'email', 'search_keywords']
 admin.site.register(Lead, LeadAdmin)
