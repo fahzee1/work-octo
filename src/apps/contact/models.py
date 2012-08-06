@@ -178,7 +178,7 @@ class CEOFeedback(models.Model):
     rep_name = models.CharField(max_length=128, blank=True, null=True)
     message = models.TextField()
 
-    rating = models.CharField(max_length=4)
+    rating = models.CharField(max_length=4, default='0')
 
     date_created = models.DateTimeField(auto_now_add=True)
 
