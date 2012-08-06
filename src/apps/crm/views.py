@@ -270,7 +270,6 @@ def affiliates_edit(request, affiliate_id):
         profile = Profile()
         profile.affiliate = affiliate
 
-
     if request.method == 'POST':
         form = AffiliateForm(request.POST, instance=affiliate,
             prefix="affiliate")

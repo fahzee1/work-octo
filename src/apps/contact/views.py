@@ -11,8 +11,9 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
 from django.conf import settings
 
+from apps.contact.models import GoogleExperiment
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
-    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm)
+    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
@@ -51,7 +52,7 @@ def send_thankyou(data):
     return True
 
 def send_error(data):
-    subject = 'Lead Submission Error'
+    subject = 'Affiliate Not In Database'
     t = loader.get_template('emails/lead_submission_error.html')
     c = Context(data)
     send_mail(subject, t.render(c),
@@ -107,6 +108,24 @@ def prepare_data_from_request(request):
         # Special 5LINX catch
         if agent.agent_id == 'a01526':
             source = '5LINX'
+
+    if agent is None:
+        if agentid != 'HOMESITE' and source != 'PROTECT AMERICA':
+            send_error({
+                    'agent': agentid,
+                    'source': source,
+                    'affkey': affkey, 
+                })
+
+    # we want to put the google experiment id if there is no affkey
+    google_id = request.COOKIES.get('utm_expid', None)
+    if affkey is None and google_id is not None:
+        try:
+            googleexp = GoogleExperiment.objects.get(google_id=google_id)
+            affkey = googleexp.name
+        except:
+            pass
+
     return {
             'agentid': agentid,
             'affkey': affkey,
@@ -117,7 +136,7 @@ def prepare_data_from_request(request):
         }
 
 def basic_post_login(request):
-    form = PAContactForm(request.POST)
+    form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
         
@@ -130,28 +149,21 @@ def basic_post_login(request):
         if not referer_page and 'HTTP_REFERER' in request.META:
             referer_page = request.META['HTTP_REFERER']
         formset.referer_page = referer_page
+        formset.agent_id = request_data['agentid']
+        formset.source = request_data['source']
+        formset.affkey = request_data['affkey']
+
+        searchkeywords = request.session.get('search_term', None)
+        cikw = request.COOKIES.get('cikw', None)
+        if searchkeywords is None and cikw is not None:
+            searchkeywords = cikw
+        
+        formset.search_engine = request.session['search_engine']
+        formset.search_keywords = searchkeywords
         formset.save()
         
         if request_data['lead_id'] is None:
             request_data['lead_id'] = formset.id
-        
-        if request_data['agentid'] == 'HOMESITE' and request_data['source'] == '':
-            # check if the refer page has agent in the url
-            try:
-                search = re.search(r'agent=([A-Za-z0-9\_-]+)',
-                    formset.referer_page)
-            except TypeError:
-                search = None
-
-            if search:
-                agent = search.group(1)
-                send_error({
-                        'name': fdata['name'],
-                        'phone': fdata['phone'],
-                        'email': fdata['email'],
-                        'agent': agent,
-                        'page': formset.referer_page,
-                    })
 
         emaildata = {
             'agent_id': request_data['agentid'],
@@ -161,8 +173,8 @@ def basic_post_login(request):
             'email': fdata['email'],
             'affkey': request_data['affkey'],
             'formlocation': formset.referer_page,
-            'searchengine': request.search_referrer_engine,
-            'searchkeywords': request.search_referrer_term,
+            'searchengine': request.session['search_engine'],
+            'searchkeywords': searchkeywords,
             'lead_id': formset.id,
         }
         send_leadimport(emaildata)

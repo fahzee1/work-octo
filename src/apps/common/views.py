@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
 
-from apps.contact.forms import PAContactForm, AffiliateLongForm
+from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
@@ -87,31 +87,23 @@ def simple_dtt(request, template, extra_context):
         pages = get_active(urls.urlpatterns, extra_context['page_name'])
 
     forms = {}
-    forms['basic'] = PAContactForm()
+    forms['basic'] = LeadForm()
     forms['long'] = AffiliateLongForm()
     
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
 
     affiliate = request.COOKIES.get('refer_id', None)
+    newaffiliate = None
     if not affiliate and 'agent_id' in extra_context:
-        affiliate = extra_context['agent_id']
-    elif not affiliate and 'agent' in request.GET:
-        affiliate = request.GET['agent']
+        newaffiliate = extra_context['agent_id']
 
-    if affiliate:
-        request.session['refer_id'] = affiliate
+    if newaffiliate:
+        request.session['refer_id'] = newaffiliate
 
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
-
-    if affiliate:
-        response.set_cookie('refer_id',
-                        value=affiliate,
-                        expires=datetime.now() + expire_time)
-
-
     return response
 
 def payitforward(request):
