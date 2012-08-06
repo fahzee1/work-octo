@@ -1,10 +1,12 @@
 {% extends "news/base.html" %}
 {% load content_filters content_tags sekizai_tags  %}
 {% block page_title %}{{ article.heading }} | Home Security News | Protect America{% endblock %}
+{% block page_keywords %}{% for category in article.categories.all %}{{ category.name }}, {% endfor %}{% endblock %}
+{% block page_description %}{{ article.summary }}{% endblock %}
+
 {% block content %}
 {% addtoblock "css" %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="{{ article.summary }}" />
     <meta name="ROBOTS" content="INDEX,FOLLOW"/>
 {% endaddtoblock "css" %}
 {% addtoblock "js" %}
@@ -15,7 +17,7 @@
 <div id="single-article" itemscope itemtype="http://schema.org/Article">
     <div id="article-header">
         {% if article.image %}
-        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" title="{{ article.image_caption }}" itemprop="image" />
+        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" alt="{{ article.image_caption }}" itemprop="image" />
         {% endif %}
         <div class="news-date">
             <p><time itemprop="dateCreated" datetime="{{ article.date_created|date:"Y-m-d" }}">{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</time></strong></p>
