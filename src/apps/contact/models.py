@@ -88,15 +88,19 @@ class Lead(models.Model):
     email = models.EmailField(max_length=128)
     phone = PhoneNumberField()
 
-    agent_id = models.CharField(max_length=24)
-    source = models.CharField(max_length=64)
-    affkey = models.CharField(max_length=64)
+    agent_id = models.CharField(max_length=24, blank=True, null=True)
+    source = models.CharField(max_length=64, blank=True, null=True)
+    affkey = models.CharField(max_length=64, blank=True, null=True)
+
+    search_engine = models.CharField(max_length=128, blank=True, null=True)
+    search_keywords = models.CharField(max_length=128, blank=True, null=True)
 
     referer_page = models.CharField(max_length=256, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return '%s - %s : %s %s' % (self.agent_id, self.source, self.name, self.phone)
+        return '%s | %s - %s : %s %s' % (self.id,
+            self.agent_id, self.source, self.name, self.phone)
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=128)
@@ -173,6 +177,8 @@ class CEOFeedback(models.Model):
     department = models.CharField(max_length=32, choices=DEPARTMENT_CHOICES)
     rep_name = models.CharField(max_length=128, blank=True, null=True)
     message = models.TextField()
+
+    rating = models.CharField(max_length=4, default='0')
 
     date_created = models.DateTimeField(auto_now_add=True)
 

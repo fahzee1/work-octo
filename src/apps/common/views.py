@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
 
-from apps.contact.forms import PAContactForm, AffiliateLongForm
+from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
@@ -87,7 +87,7 @@ def simple_dtt(request, template, extra_context):
         pages = get_active(urls.urlpatterns, extra_context['page_name'])
 
     forms = {}
-    forms['basic'] = PAContactForm()
+    forms['basic'] = LeadForm()
     forms['long'] = AffiliateLongForm()
     
     extra_context['forms'] = forms
