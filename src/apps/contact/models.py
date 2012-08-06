@@ -99,7 +99,8 @@ class Lead(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return '%s - %s : %s %s' % (self.agent_id, self.source, self.name, self.phone)
+        return '%s | %s - %s : %s %s' % (self.id,
+            self.agent_id, self.source, self.name, self.phone)
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=128)
