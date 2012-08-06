@@ -1,4 +1,7 @@
 {% extends "contact-us/base.html" %}
+
+{% load sekizai_tags %}
+
 {% block page_title %}Send Feedback to our CEO | Protect America | Home Security{% endblock %}
 {% block page_keywords %}protect america{% endblock %}
 {% block page_description %}Protect America aims for 100% customer satisfaction on all home security systems and home security services. Send feedback directly to the CEO with any issues.{% endblock %}
@@ -30,6 +33,24 @@
             {% include "_partials/formfield.html" with field=formset.feedback_type %}
             {% include "_partials/formfield.html" with field=formset.department %}
             {% include "_partials/formfield.html" with field=formset.rep_name %}
+            <fieldset id="star-rating">
+                {{ formset.rating.as_hidden }}
+                <div class="star-container">
+                    <div class="star-button" id="1-star">&nbsp;</div>
+                    <div class="star-button" id="2-star">&nbsp;</div>
+                    <div class="star-button" id="3-star">&nbsp;</div>
+                    <div class="star-button" id="4-star">&nbsp;</div>
+                    <div class="star-button" id="5-star">&nbsp;</div>
+                </div>
+                {% if formset.rating.errors %}
+                <ul class="formHint">
+                    {% for error in formset.rating.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="clear"></div>
+        </fieldset>
         </div>
         <div class="clear"></div>
         {% include "_partials/formfield.html" with field=formset.message %}
@@ -43,5 +64,49 @@
 
 </div>
 
+{% addtoblock "js" %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        if($('#id_rating').val()) {
+            $('.star-button').each(function(i){
+                if(i <= $('#id_rating').val()){
+                    $('#'+i+'-star').addClass('active');
+                }
+            });
+        }
+    });
+    $('.star-button').css('cursor','pointer').click(function() {
+        $('.star-button').removeClass('active');
+        $('.star-button').removeClass('hover');
 
+        var UnsplitId = $(this).attr('id');
+        var n=UnsplitId.split("-");
+        var maxStar = n[0];
+        var starChange = 1;
+        while (starChange <= maxStar) {
+            changeIt = starChange +"-star"
+            $("#"+ starChange + '-star').addClass('active');
+            starChange++;
+        }
+        $('#id_rating').val(starChange-1);
+    });
+    $('.star-button').css('cursor','pointer').mouseenter(function() {
+        $('.star-button').removeClass('hover');
+
+        var UnsplitId = $(this).attr('id');
+        var n=UnsplitId.split("-");
+        var maxStar = n[0];
+        var starChange = 1;
+        while (starChange <= maxStar) {
+            changeIt = starChange +"-star"
+            $("#"+ starChange + '-star').addClass('hover');
+            starChange++;
+        }
+    });
+    $('.star-button').css('cursor','pointer').mouseleave(function() {
+        $('.star-button').removeClass('hover');
+    });
+
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}  
