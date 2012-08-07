@@ -56,11 +56,11 @@
             <div id="keychain-banner">
                 <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/2-keychains-hero-image.jpg" id="keychain-image" alt="Get 2 Keychain Remotes Free when you order a security system" width="280" height="360" />
                 <div id="keychain-banner-content">
-                    {% if request.session.search_term or request.COOKIES.cikw %}
+                    {% if request.GET.cikw or request.COOKIES.cikw %}
                         <h1>
                         You searched for 
-                        {% if request.session.search_term %}
-                            {{ request.session.search_term }}
+                        {% if request.GET.cikw %}
+                            <strong>{{ request.GET.cikw|truncatewords:6 }}</strong>
                         {% else %}
                             {% if request.COOKIES.cikw %}
                                 <strong>{{ request.COOKIES.cikw|truncatewords:6 }}</strong>
