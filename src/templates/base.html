@@ -11,7 +11,11 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <link rel="stylesheet" media="print" href="{{ STATIC_URL }}css/print.css">
     <meta property="fb:admins" content="586942929" />
+    {% if request.GET.agent %}
+    <meta name="ROBOTS" content="NOINDEX, FOLLOW"/>
+    {% else %}
     <meta name="ROBOTS" content="INDEX, FOLLOW"/>
+    {% endif %}
     <meta name="rating" content="general" />
     <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
     <meta name="author" content="Protect America" />
