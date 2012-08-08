@@ -88,6 +88,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'apps.affiliates.middleware.AffiliateMiddleware',
     'apps.common.middleware.SearchEngineReferrerMiddleware',
+    'apps.common.middleware.CommonMiddlewareWrapper'
 )
 
 ROOT_URLCONF = 'urls'

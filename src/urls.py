@@ -188,6 +188,12 @@ else:
         dtt(r'^ge-home-security/$', 'seo-pages/ge-home-security.html', 'seo-ge-home-security', 'about-us'),
         dtt(r'^ge-home-security-systems/$', 'seo-pages/ge-home-security-systems.html', 'seo-ge-home-security-systems', 'about-us'),
         dtt(r'^home-alarm-systems/$', 'seo-pages/home-alarm-system.html', 'seo-home-alarm-systems', 'about-us'),
+        dtt(r'^security-systems/$', 'seo-pages/security-systems.html', 'seo-security-systems', 'about-us'),
+        dtt(r'^home-security-system/$', 'seo-pages/home-security-system.html', 'seo-home-security-system', 'about-us'),
+        dtt(r'^best-home-security-system/$', 'seo-pages/best-home-security-system.html', 'seo-best-home-security-system', 'about-us'),
+        dtt(r'^home-security-companies/$', 'seo-pages/home-security-companies.html', 'seo-home-security-companies', 'about-us'),
+
+
 
 
         # Thank You Pages
@@ -427,6 +433,9 @@ else:
 
     ('^radioshack/?$',
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
+    ('^feedback/?$',
+        redirect_to, {'url': '/pa/contact', 'permanent': True}),
+    
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
             'apps.common.views.redirect_wrapper'),
 )
