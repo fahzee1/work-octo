@@ -172,6 +172,7 @@ else:
         # Test Pages
         dtt(r'^test/hic/?$', 'tests/hi-c-index-test.html', 'hic-test', 'home'),
         dtt(r'^test/touchscreen/?$', 'tests/touchscreen-banner-test.html', 'touchscreen-test', 'home'),
+        dtt(r'^test/new-lineup/?$', 'tests/new-lineup-test.html', 'new-lineup-test', 'home'),
 
 
             
