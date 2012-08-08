@@ -14,7 +14,11 @@
     {% if request.GET.agent %}
     <meta name="ROBOTS" content="NOINDEX, FOLLOW"/>
     {% else %}
+    {% if request.is_secure %}
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+    {% else %}
     <meta name="ROBOTS" content="INDEX, FOLLOW"/>
+    {% endif %}
     {% endif %}
     <meta name="rating" content="general" />
     <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
