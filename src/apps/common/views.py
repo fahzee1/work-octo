@@ -104,6 +104,14 @@ def simple_dtt(request, template, extra_context):
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
+
+
+    pageview_cookie = request.COOKIES.get('pageviews', 0)
+    response.set_cookie('pageviews',
+                value=(int(pageview_cookie) + 1),
+                domain='.protectamerica.com',
+                expires=datetime.now() + expire_time)
+
     return response
 
 def payitforward(request):
