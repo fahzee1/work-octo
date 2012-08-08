@@ -433,6 +433,9 @@ else:
 
     ('^radioshack/?$',
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
+    ('^feedback/?$',
+        redirect_to, {'url': '/pa/contact', 'permanent': True}),
+    
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
             'apps.common.views.redirect_wrapper'),
 )
