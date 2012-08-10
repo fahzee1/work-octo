@@ -138,8 +138,7 @@ def payitforward(request):
     })
 
     forms = {}
-    forms['basic'] = PAContactForm()
-    forms['long'] = AffiliateLongForm() 
+    forms['basic'] = LeadForm()
 
     return render_to_response('payitforward.html',
         {
