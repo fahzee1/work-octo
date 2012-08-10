@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import redirect_to
+from django.views.decorators.cache import cache_page
+from apps.common.views import simple_dtt
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -14,7 +16,7 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     context = dict(page_name=name, parent=parent)
     context.update(ctx)
 
-    return url(pattern, 'apps.common.views.simple_dtt',
+    return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
 
