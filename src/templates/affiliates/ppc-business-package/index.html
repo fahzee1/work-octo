@@ -8,10 +8,22 @@
 {% block order-footer %}
 {% endblock %}
 
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/ppc-business-package/ppc-business-package.css">
 {% endblock %}
-
+{% block navigation %}
+<div id="navigation">
+    <ul>
+        <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+        <li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Home Security Systems and Products">Products</a></li>
+        <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
+    </ul>
+</div>
+{% endblock %}
 {% block content %}
         {% include "order/quote-form.html" with form=forms.basic %}
             <div id="main-container">
@@ -276,7 +288,17 @@
             </div>
             {% testimonial_search "" "limit=10&words=64" %}
         </div>
+
 {% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#search-testimonial-box').cycle({
+        fx: 'fade',
+        timeout: 9000
+    });
+});
+</script>
 <script type="text/javascript">
 $(document).ready(function() {
     var max_slides = $('.product').length
