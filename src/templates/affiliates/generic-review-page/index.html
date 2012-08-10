@@ -1,6 +1,17 @@
-{% extends "affiliates/generic-review-page/base.html" %}
+{% extends "base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Free GE Home Security Systems and Home Alarms | Protect America{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/generic-review-page/generic-review-page.css">
+<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block robot_tags %}
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+{% endblock %}
+{% block quick-links %}
+{% endblock %}
 {% block content %}
 <div class="wrapper">
     <div class="left-column main-content">
@@ -55,9 +66,13 @@
         </div>
     </div>
     {% endcomment %}
-    {% testimonial_search "protect america" "limit=10&words=64" %}
     <div class="clear"></div>
     {% include "order/call-box.html" %}
+
+</div>
+    {% testimonial_search "protect america" "limit=10&words=64" %}
+    <div class="clear"></div>
+<div class="wrapper">
     <div class="clear"></div>
     <div class="left-column text">
         <h2>How We Exceed Above the Rest</h2>
@@ -94,6 +109,10 @@
         <div class="clear"></div>
     </div>
     <div class="clear"></div>
+    
+    {% include "order/call-box.html" %}
+    
+    <div class="clear"></div>
     <div id="main-features">
         <h2>The Best Home Security Systems and Accessories</h2>
         <p>Protect America only uses high quality security systems made by GE. Our products are so reliable, we offer a Lifetime Replacement Parts Warranty with each security system sold. If a part breaks, we replace it. No limitations or tricks, unlike some companies that only offer a 2-year, limited warranty.</p>
@@ -103,8 +122,6 @@
         <h2>Protect America is "the company to beat!"</h2>
         <p>A Secure Life has noticed it and you should too! No company can match Protect America’s affordability and quality. That’s why A Secure Life said, "Customers who choose Protect America over comparable systems from many other home security providers save money and receive products that have more options."</p>
     </div>
-    <div class="clear"></div>
-    {% include "order/call-box.html" %}
     {% addtoblock "js" %}
         <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
         <script type="text/javascript">
@@ -119,4 +136,11 @@
 
 </div>
 
+{% endblock %}
+{% block page-product %}
+    <h2>Platinum Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $42.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
+    </div>
 {% endblock %}
