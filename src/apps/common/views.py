@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from urllib import urlencode
 
 from django.core.cache import cache
+from django.views.decorators.cache import cache_page
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -104,6 +105,7 @@ def simple_dtt(request, template, extra_context):
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
+
     return response
 
 def payitforward(request):
@@ -136,8 +138,7 @@ def payitforward(request):
     })
 
     forms = {}
-    forms['basic'] = PAContactForm()
-    forms['long'] = AffiliateLongForm() 
+    forms['basic'] = LeadForm()
 
     return render_to_response('payitforward.html',
         {
@@ -146,6 +147,7 @@ def payitforward(request):
             'videos': videos,
         }, context_instance=RequestContext(request))
 
+@cache_page(60 * 60 * 4)
 def index(request): 
     ctx = {}
     ctx['page_name'] = 'index'

@@ -2,7 +2,9 @@
 import re
 import urlparse
 import cgi
-from django.http import HttpResponseRedirect
+
+from django.utils.http import urlquote
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.conf import settings
 
 reg_b = re.compile(r"android.+mobile|avantgo|bada\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\/|plucker|pocket|psp|symbian|treo|up\\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino", re.I|re.M)
@@ -91,3 +93,38 @@ class SearchEngineReferrerMiddleware(object):
         request.session['search_engine'] = engine
         request.session['search_domain'] = domain
         request.session['search_term'] = term
+
+class CommonMiddlewareWrapper(object):
+    """
+    Copying the code from django but wrapping it so that it will only fire
+    if we are not in debug mode and the SITE_ID = 1
+    """
+
+    def process_request(self, request):
+        """
+        Check for denied User-Agents and rewrite the URL based on
+        settings.APPEND_SLASH and settings.PREPEND_WWW
+        """
+        if settings.SITE_ID != 1 or settings.DEBUG == True:
+            return
+        # Check for a redirect based on settings.APPEND_SLASH
+        # and settings.PREPEND_WWW
+        host = request.get_host()
+        old_url = [host, request.path]
+        new_url = old_url[:]
+
+        if (old_url[0] and not old_url[0].startswith('www.')):
+            new_url[0] = 'www.' + old_url[0]
+
+        if new_url == old_url:
+            # No redirects required.
+            return
+        if new_url[0]:
+            newurl = "%s://%s%s" % (
+                request.is_secure() and 'https' or 'http',
+                new_url[0], urlquote(new_url[1]))
+        else:
+            newurl = urlquote(new_url[1])
+        if request.META.get('QUERY_STRING', ''):
+            newurl += '?' + request.META['QUERY_STRING']
+        return HttpResponsePermanentRedirect(newurl)

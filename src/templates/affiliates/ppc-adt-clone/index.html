@@ -1,19 +1,70 @@
 {% extends "base.html" %}
 
-{% load testimonial_tags %}
+{% load testimonial_tags sekizai_tags %}
 
 {% block page_title %}Home Security Systems | Protect America{% endblock %}
 {% block page_keywords %}{% endblock %}
 {% block page_description %}Discover how Protect America provides you with peace of mind by helping you feel safer and more secure with one of our inexpensive home security systems.{% endblock %}
 
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/ppc-adt-clone/ppc-adt-clone.css">
+    <style type="text/css">
+    .slide {
+        display: none;
+    }
+    .active {
+        display: block;
+    }
+    </style>
 {% endblock %}
 
 {% block navigation %}
 {% endblock %}
 
 {% block content %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    function activate_slide(slide_num) {
+        var arrow = $('.controls');
+        switch(slide_num) {
+            case 1:
+                var arrow_margin = '162px';
+                var slide = $('.slide:eq(1)');
+                break;
+            case 2:
+                var arrow_margin = '273px';
+                var slide = $('.slide:eq(2)');
+                break;
+            case 3:
+                var arrow_margin = '383px';
+                var slide = $('.slide:eq(3)');
+                break;
+            case 4:
+                var arrow_margin = '494px';
+                var slide = $('.slide:eq(4)');
+                break;
+            case 0:
+            default:
+                var arrow_margin = '46px';
+                var slide = $('.slide:eq(0)');
+                break;
+        }
+        arrow.css('margin-left', arrow_margin);
+        $('.slide:visible'). removeClass('active');
+        slide.addClass('active')
+    }
+    $('#header li').click(function() {
+        activate_slide($(this).index());
+    });
+    activate_slide(0);
+});
+</script>
+{% endaddtoblock "js" %}
 <div id="main-container">
     <div id="header">
         <h1>Free GE Wireless <p class="homesecurity">Home Security System</p></h1>
@@ -33,29 +84,28 @@
     </div>
     <div class="middle-container">
         <div class="call-out-description">
-        <div class="control-moving">
-            <h1>Moving?</h1><h2>No Problem. No Fees!
-            <p>Our wireless GE products can be moved from your old house to your new home. Just call us to transfer your service and receive your free relocation kit. No relocation or reactivation fees!</p></h2>
-            </div>
-        <!--<div class="control-247">
-                <img src="{{ STATIC_URL }}img/affiliates/ppc-adt-clone/carrot.png" alt="carrot" width="29" height="19" />
+            <div class="control-moving slide active">
+                <h1>Moving?</h1><h2>No Problem. No Fees!
+                <p>Our wireless GE products can be moved from your old house to your new home. Just call us to transfer your service and receive your free relocation kit. No relocation or reactivation fees!</p></h2>
+                </div>
+            <div class="control-247 slide">
                 <h1>24/7 Monitoring</h1><h2>We're there when your not.
                 <p>Protect America offers the lowest monitoring rates in the country! Other companies charge more for less comprehensive security coverage but Protect America won't leave its customers vulnerable. Our security solutions meet the budget of any American family.</p></h2>
-            </div> //-->
-        <!--<div class="control-lifetime">
+            </div>
+            <div class="control-lifetime slide">
                 <h1>Lifetime Warranty</h1><h2>UL Listed.
                 <p>As long as you're a Protect America customer, your home security will work! If any part breaks, we replace it. No shipping costs. No stocking fees. Just a guarantee that the home security service you pay for works as promised.</p></h2>
-            </div> //-->
-        <!--<div class="control-twenty-percent">
+            </div>
+            <div class="control-twenty-percent slide">
                 <h1>20% Discount</h1><h2>On Home Insurance
                 <p>Home security systems are great for protection but they're also a great way to save! By simply installing a security system in your home, you can receive a discount on your homeowner's insurance of up to 20 percent.
                 </p></h2>
-            </div> //-->
-        <!--<div class="control-lowest-price">
+            </div>
+            <div class="control-lowest-price slide">
                 <h1>Affordable?</h1><h2>How Does Free Sound? 
                 <p>You can't beat free! When you order one of Protect America's award-winning monitoring solutions, we'll send you a FREE GE Simon XT wireless home security system. No upfront costs! No activation or installation fees!
                 </p></h2>
-            </div> //-->
+            </div>
         </div>
         <div class="check-mark-container">
             <ul>
@@ -84,4 +134,5 @@
         <p>Get Started Now,&nbsp;<strong>Call Today<span> 1-800-888-8888</span></strong></p>
     </div>
 </div>
+
 {% endblock %}
