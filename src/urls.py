@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import redirect_to
+from django.views.decorators.cache import cache_page
+from apps.common.views import simple_dtt
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -14,7 +16,7 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     context = dict(page_name=name, parent=parent)
     context.update(ctx)
 
-    return url(pattern, 'apps.common.views.simple_dtt',
+    return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
 
@@ -80,6 +82,7 @@ elif settings.SITE_ID == 3:
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^test/touchscreen/$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
+        dtt(r'^business/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
 
     )
 elif settings.SITE_ID == 4:
@@ -172,6 +175,7 @@ else:
         # Test Pages
         dtt(r'^test/hic/?$', 'tests/hi-c-index-test.html', 'hic-test', 'home'),
         dtt(r'^test/touchscreen/?$', 'tests/touchscreen-banner-test.html', 'touchscreen-test', 'home'),
+        dtt(r'^test/new-lineup/?$', 'tests/new-lineup-test.html', 'new-lineup-test', 'home'),
 
 
             

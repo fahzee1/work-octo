@@ -139,7 +139,7 @@ def basic_post_login(request):
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
-        
+
         request_data = prepare_data_from_request(request)
 
         formset = form.save(commit=False)
@@ -165,6 +165,12 @@ def basic_post_login(request):
         if request_data['lead_id'] is None:
             request_data['lead_id'] = formset.id
 
+        # notes field information
+        package = request.POST.get('package', None)
+        notes = ''
+        if package:
+            notes = 'Package Requested: %s' % package
+
         emaildata = {
             'agent_id': request_data['agentid'],
             'source': request_data['source'],
@@ -176,6 +182,7 @@ def basic_post_login(request):
             'searchengine': request.session['search_engine'],
             'searchkeywords': searchkeywords,
             'lead_id': formset.id,
+            'notes': notes
         }
         send_leadimport(emaildata)
         send_thankyou(emaildata)
