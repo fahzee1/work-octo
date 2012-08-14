@@ -107,6 +107,8 @@
                     {% ifusergroup TESTIMONIAL %}
                     {% url crm:textimonials as text_page %}
                     {% url crm:textimonials_unread as text_unread_page %}
+                    {% url crm:textimonials_display as text_display_page %}
+                    {% url crm:textimonials_dont_display as text_dont_display_page %}
                     <li class="nav-header">Textimonal Pages</li>
                     <li{% if c_page == text_page %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.3 }}</span>
@@ -115,6 +117,14 @@
                     <li{% if c_page == text_unread_page %} class="active"{% endif %}>
                         <span class="badge badge-important pull-right" style="margin-top: 3px;">{{ counts.textimonials.0 }}</span>
                         <a href="{{ text_unread_page }}">Unread Textimonials</a>
+                    </li>
+                    <li{% if c_page == text_display_page %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.1 }}</span>
+                        <a href="{{ text_display_page }}">View Textimonials on Display</a>
+                    </li>
+                    <li{% if c_page == text_dont_display_page %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.2 }}</span>
+                        <a href="{{ text_dont_display_page }}">Textimonials not Displayed</a>
                     </li>
                     {% endifusergroup %}
                 </ul>

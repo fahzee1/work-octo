@@ -370,6 +370,44 @@ def textimonials_unread(request):
         })
 
 @login_required(login_url='/crm/login/')
+def textimonials_display(request):
+    textimonial_list = Textimonial.objects.filter(display=True).order_by('-date_created')
+    paginator = Paginator(textimonial_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        textimonials = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        textimonials = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        textimonials = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/textimonial_list.html', {
+            'textimonials': textimonials,
+        })
+
+@login_required(login_url='/crm/login/')
+def textimonials_dont_display(request):
+    textimonial_list = Textimonial.objects.filter(display=False).order_by('-date_created')
+    paginator = Paginator(textimonial_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        textimonials = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        textimonials = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        textimonials = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/textimonial_list.html', {
+            'textimonials': textimonials,
+        })
+
+@login_required(login_url='/crm/login/')
 def textimonial_view(request, textimonial_id):
     try:
         textimonial = Textimonial.objects.get(id=textimonial_id)
