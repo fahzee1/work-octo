@@ -12,7 +12,6 @@ admin.autodiscover()
 def dtt(pattern, template, name, parent=None, ctx=None):
     ctx = ctx or {}
 
-
     context = dict(page_name=name, parent=parent)
     context.update(ctx)
 
@@ -178,14 +177,10 @@ else:
         # Test Pages
         dtt(r'^test/top-consumer/?$', 'tests/top-consumer-test.html', 'top-consumer-test', 'home'),
 
-
-            
-
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
-            
 
         # SEO Content Pages
         dtt(r'^home-security-systems/$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
@@ -198,21 +193,15 @@ else:
         dtt(r'^best-home-security-system/$', 'seo-pages/best-home-security-system.html', 'seo-best-home-security-system', 'about-us'),
         dtt(r'^home-security-companies/$', 'seo-pages/home-security-companies.html', 'seo-home-security-companies', 'about-us'),
 
-
-
-
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
         dtt(r'^thank-you/ceo/?$', 'thank-you/ceo-thank-you.html', 'ceo-thank-you', 'thank-you'),
         dtt(r'^thank-you/moving-kit/?$', 'thank-you/moving-kit.html', 'moving-kit-thank-you', 'thank-you'),
         dtt(r'^thank-you/tell-friend/?$', 'thank-you/tell-friend.html', 'contact-tell-friend', 'thank-you'),
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
-
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
         'apps.common.views.thank_you', name='custom_thank_you',),
-
-
 
         # pay it forward page
         url(r'^payitforward/$', 'apps.common.views.payitforward',
@@ -234,8 +223,6 @@ else:
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-business-security/business-package/?$', 'packages/business.html', 'business', 'products'),
 
-            
-
             # Product > Monitoring
 
             dtt(r'^pa/monitoring/security-system/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
@@ -252,7 +239,6 @@ else:
                             dtt(r'^products/security-equipment/control-panels/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'control-panel'),
                             dtt(r'^products/security-equipment/control-panels/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'control-panel'),
 
-
                         # Product > Equipment > Security Sensors
 
                         dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
@@ -264,9 +250,6 @@ else:
                             dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
                             dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
                             dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
-
-
-
 
             # Product > Video
 
@@ -334,8 +317,6 @@ else:
                     'apps.testimonials.views.send_testimonial', 
                     name='send-testimonial'),
 
-
-
             # About > Tell a Friend
 
             #dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
@@ -374,15 +355,10 @@ else:
             url(r'^pa/feedback/?$', 'apps.contact.views.ceo',
                 name='feedback-ceo'),
 
-
-
         # Help Pages
 
         dtt(r'^help/?$', 'help/index.html', 'help'),
 
-
-            
-                
             # Help Pages > Low Price Guarantee
                 dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),
 

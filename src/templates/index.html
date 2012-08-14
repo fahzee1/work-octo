@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
 <!-- Google Analytics Content Experiment code -->
 <script>function utmx_section(){}function utmx(){}(function(){var
-k='11866140-8',d=document,l=d.location,c=d.cookie;
+k='11866140-9',d=document,l=d.location,c=d.cookie;
 if(l.search.indexOf('utm_expid='+k)>0)return;
 function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
 indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
@@ -47,7 +47,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             
         </div>
         <div id="top-hero-banner">
-            <div id="touchscreen-banner">
+            <div id="touchscreen-banner" data-url="{% url touchscreen %}">
                 <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
                 <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
                 
@@ -60,7 +60,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                     </div>
                 </div>
             </div>
-            <div id="interactive-banner">
+            <div id="interactive-banner" data-url="{% url cellular %}">
                 <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
                 <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
                 
@@ -71,7 +71,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                     </div>
                 </div>
             </div>
-            <div id="keychain-banner">
+            <div id="keychain-banner" data-url="{% url order-package %}">
                 <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/2-keychains-hero-image.jpg" id="keychain-image" alt="Get 2 Keychain Remotes Free when you order a security system" width="280" height="360" />
                 <div id="keychain-banner-content">
                     <h2>Security Made Easy. <span>One Button Arming from your Keychain</span></h2>
@@ -315,18 +315,14 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             timeout: 9000
         });
         $('#top-hero-banner > div').click(function(e) {
-            var href = $(this).find('.button-link');
-            if(href.length == 0) {
-                href = $(this).find('.button-submit');
-            }
-            _gaq.push([  
+            if($(this).attr('data-url')) {
+                window.location = $(this).attr('data-url');
+                _gaq.push([  
                     '_trackEvent',
                     'Hero Banner',
                     'Front Page Hero Banner Click',
                     $(this).attr('id')
                 ]);
-            if(href.children('a').attr('href')) {
-                window.location = href.children('a').attr('href');
                 return;
             }
         });

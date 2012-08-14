@@ -33,7 +33,7 @@
             
         </div>
         <div id="top-hero-banner">
-            <div id="top-consumer-banner" data-url="{% url copper %">
+            <div id="top-consumer-banner" data-url="{% url copper %}">
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
                 <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
                 <div id="top-consumer-content">
@@ -41,7 +41,7 @@
                     <em>&ndash; Top Consumer Reviews, 2012</em>
                 </div>
             </div>
-            <div id="touchscreen-banner" data-url="{% url touchscreen %">
+            <div id="touchscreen-banner" data-url="{% url touchscreen %}">
                 <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
                 <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
                 
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div id="interactive-banner" data-url="{% url cellular %">
+            <div id="interactive-banner" data-url="{% url cellular %}">
                 <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
                 <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
                 
@@ -325,25 +325,17 @@
             fx: 'fade',
             timeout: 9000
         });
-        $('#top-hero-banner > div').click(function(e) {
-            var href = $(this).find('.button-link');
-            if(href.length == 0) {
-                href = $(this).find('.button-submit');
-            }
-            _gaq.push([  
+       $('#top-hero-banner > div').click(function(e) {
+            if($(this).attr('data-url')) {
+                window.location = $(this).attr('data-url');
+                _gaq.push([  
                     '_trackEvent',
                     'Hero Banner',
                     'Front Page Hero Banner Click',
                     $(this).attr('id')
                 ]);
-            if(href.children('a').attr('href')) {
-                window.location = href.children('a').attr('href');
                 return;
             }
-        });
-        $('.test_testimonial_box').cycle({
-            fx: 'fade',
-            timeout: 6000
         });
     });
     </script>
