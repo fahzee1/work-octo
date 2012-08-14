@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.localflavor.us.models import (PhoneNumberField, 
     USStateField)
@@ -181,6 +183,7 @@ class CEOFeedback(models.Model):
     rating = models.CharField(max_length=4, default='0')
 
     date_created = models.DateTimeField(auto_now_add=True)
+    date_read = models.DateTimeField(null=True, blank=True)
 
     def email_company(self):
         t = loader.get_template('emails/ceo_feedback_to_company.html')
@@ -193,6 +196,15 @@ class CEOFeedback(models.Model):
             ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
+
+    def mark_as_read(self):
+        if self.date_read:
+            return
+    
+        self.date_read = datetime.now()
+        self.save()
+        return True
+
 
     def __unicode__(self):
         return '%s : %s - %s' % (self.name, self.phone, self.feedback_type)

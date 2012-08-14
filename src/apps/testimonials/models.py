@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.localflavor.us.models import (PhoneNumberField, 
     USStateField)
@@ -66,6 +68,7 @@ class Textimonial(models.Model):
     display = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True)
+    date_read = models.DateTimeField(null=True, blank=True)
 
     def email_company(self):
         t = loader.get_template('emails/testimonial_to_company.html')
@@ -78,6 +81,14 @@ class Textimonial(models.Model):
             ['robert@protectamerica.com'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
+
+    def mark_as_read(self):
+        if self.date_read:
+            return
+    
+        self.date_read = datetime.now()
+        self.save()
+        return True
 
     def get_absolute_url(self):
         return reverse('single-testimonial', kwargs={'testimonial_id': self.id})

@@ -1,0 +1,77 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Textimonial #{{ textimonial.id }}</h3>
+</div>
+<div class="modal-body">
+    <table class="textimonial_{{ textimonial.id }}">
+        <tr>
+            <td width="50%" style="vertical-align: top;">
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                        <th>Contact Information</th>
+                    </tr>
+                    <tr>
+                        <td>
+                {{ textimonial.first_name }} {{ textimonial.last_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ textimonial.city }}, {{ textimonial.state }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ textimonial.email|default:"No Email" }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ textimonial.date_created }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="50%" style="vertical-align: top;">
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                        <th>Textimonial</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ textimonial.message }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="star-container" style="margin-left: 10%;">
+                                {% with rating=textimonial.rating %}
+                                <div class="star-button{% if rating >= '1' %} active{% endif %}" id="1-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '2' %} active{% endif %}" id="2-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '3' %} active{% endif %}" id="3-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '4' %} active{% endif %}" id="4-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '5' %} active{% endif %}" id="5-star">&nbsp;</div>
+                                {% endwith %}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="btn-group">
+                {% if textimonial.display %}
+                {% include "crm/_partials/textimonial_approved_actions.html" with textimonial=textimonial %}
+            {% else %}
+                {% include "crm/_partials/textimonial_nonapproved_actions.html" with textimonial=textimonial %}
+            {% endif %}
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn btn-primary">Save changes</a>
+</div>
