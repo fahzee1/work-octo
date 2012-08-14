@@ -64,6 +64,9 @@ urlpatterns = patterns('',
                     'apps.testimonials.views.testimonial', 
                     name='single-testimonial'),
 
+    url(r'^support/clear-my-cookies/$', 'apps.common.views.clear_my_cookies',
+        name='clear-my-cookies'),
+
 )
 
 # Radioshack URLS
