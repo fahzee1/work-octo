@@ -14,6 +14,20 @@ urlpatterns = patterns('apps.crm.views',
         name='affiliates_delete'),
     url(r'affiliates/search/$', 'affiliates_search', name='affiliates_search'),
 
+    # textimonials
+    url(r'textimonials/$', 'textimonials', name='textimonials'),
+    url(r'textimonials/unread/$', 'textimonials_unread', name='textimonials_unread'),
+    url(r'textimonial/display/$', 'textimonials_display',
+        name='textimonials_display'),
+    url(r'textimonial/dont-display/$', 'textimonials_dont_display',
+            name='textimonials_dont_display'),
+    url(r'textimonial/(?P<textimonial_id>\d+)/view/$', 'textimonial_view',
+        name='textimonial_view'),
+    url(r'textimonial/(?P<textimonial_id>\d+)/approve/$', 'textimonial_approve',
+        name='textimonial_approve'),
+    url(r'textimonial/(?P<textimonial_id>\d+)/dont-display/$', 'textimonial_dont_display',
+        name='textimonial_dont_display'),
+
     # profiles
     url(r'requests/$', 'affiliate_requests', name='requests'),
     url(r'requests/(?P<profile_id>\d+)/$', 'affiliate_requests_edit',
