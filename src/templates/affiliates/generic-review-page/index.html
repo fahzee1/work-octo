@@ -1,11 +1,24 @@
-{% extends "affiliates/generic-review-page/base.html" %}
+{% extends "base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Free GE Home Security Systems and Home Alarms | Protect America{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/generic-review-page/generic-review-page.css">
+<script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block robot_tags %}
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+{% endblock %}
+{% block quick-links %}
+{% endblock %}
 {% block content %}
 <div class="wrapper">
     <div class="left-column main-content">
-        <h2>According to A Secure Life,</h2>
-        <h1>"...Protect America is the company to beat."</h1>
+        {% block top-content %}
+            <h2>According to A Secure Life,</h2>
+            <h1>"...Protect America is the company to beat."</h1>
+        {% endblock %}
         <img src="{{ STATIC_URL }}img/affiliates/generic-review-page/woman-with-app.jpg" alt="woman-with-app" width="280" height="424" class="main-woman">
         <span>&nbsp;</span>
         <ul>
@@ -55,9 +68,13 @@
         </div>
     </div>
     {% endcomment %}
-    {% testimonial_search "protect america" "limit=10&words=64" %}
     <div class="clear"></div>
     {% include "order/call-box.html" %}
+
+</div>
+    {% testimonial_search "protect america" "limit=10&words=64" %}
+    <div class="clear"></div>
+<div class="wrapper">
     <div class="clear"></div>
     <div class="left-column text">
         <h2>How We Exceed Above the Rest</h2>
@@ -92,7 +109,14 @@
         </ul>
         <p id="price-tag">Price Today:<strong>Free</strong><span>with 3-year monitoring agreement*</span></p>
         <div class="clear"></div>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=platinum" title="Order the Platinum Package">Order Now ></a>
+        </div>
     </div>
+    <div class="clear"></div>
+    
+    {% include "order/call-box.html" %}
+    
     <div class="clear"></div>
     <div id="main-features">
         <h2>The Best Home Security Systems and Accessories</h2>
@@ -100,11 +124,11 @@
         <h2>Award-Winning Security Monitoring</h2>
         <p>Quality security service at an affordable price draws attention… and awards.</p>
         <p>Protect America has received the coveted 5-star rating from TopConsumerReviews.com for the last 5 years. In addition, our Copper Security Package has been named a Consumer’s Digest Best Buy since 2008. Other companies can’t beat our prices and service. Most won’t even try!</p>
-        <h2>Protect America is "the company to beat!"</h2>
-        <p>A Secure Life has noticed it and you should too! No company can match Protect America’s affordability and quality. That’s why A Secure Life said, "Customers who choose Protect America over comparable systems from many other home security providers save money and receive products that have more options."</p>
+        {% block bottom-content %}
+            <h2>Protect America is "the company to beat!"</h2>
+            <p>A Secure Life has noticed it and you should too! No company can match Protect America’s affordability and quality. That’s why A Secure Life said, "Customers who choose Protect America over comparable systems from many other home security providers save money and receive products that have more options."</p>
+        {% endblock %}
     </div>
-    <div class="clear"></div>
-    {% include "order/call-box.html" %}
     {% addtoblock "js" %}
         <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
         <script type="text/javascript">
@@ -119,4 +143,11 @@
 
 </div>
 
+{% endblock %}
+{% block page-product %}
+    <h2>Platinum Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $42.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
+    </div>
 {% endblock %}

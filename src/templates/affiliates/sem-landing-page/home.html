@@ -53,7 +53,15 @@
             
         </div>
         <div id="top-hero-banner">
-            <div id="touchscreen-banner">
+            <div id="top-consumer-banner" data-url="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
+                <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
+                <div id="top-consumer-content">
+                    <p>"Protect America provides the <strong>best home security solution</strong> available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are] <strong>top-notch.</strong>"</p>
+                    <em>&ndash; Top Consumer Reviews, 2012</em>
+                </div>
+            </div>
+            <div id="touchscreen-banner" data-url="http://www.protectamerica.com/products/security-equipment/accessories/touchscreen">
                 <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
                 <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
                 
@@ -66,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <div id="interactive-banner">
+            <div id="interactive-banner" data-url="http://www.protectamerica.com/products/alarm-monitoring/cellular">
                 <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
                 <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
                 
@@ -78,29 +86,7 @@
                 </div>
 
             </div>
-            <div id="keychain-banner">
-                <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/2-keychains-hero-image.jpg" id="keychain-image" alt="Get 2 Keychain Remotes Free when you order a security system" width="280" height="360" />
-                <div id="keychain-banner-content">
-                    {% if request.session.search_term or request.COOKIES.cikw %}
-                        <h1>
-                        You searched for 
-                        {% if request.session.search_term %}
-                            {{ request.session.search_term }}
-                        {% else %}
-                            {% if request.COOKIES.cikw %}
-                                <strong>{{ request.COOKIES.cikw|truncatewords:6 }}</strong>
-                            {% endif %}
-                        {% endif %}
-                        </h1>
-                    {% endif %}
-                    <h2>Security Made Easy. <span>One Button Arming from your Keychain</span></h2>
-                    <p>Two <strong>FREE*</strong> Keychain Remotes <span>when you order any home security system.</span></p>
-                    <div class="button-submit">
-                        <a href="http://www.protectamerica.com/products/order-package" title="Order Now and Get Two Free Keychain Remotes">Order Now ></a>
-                    </div>
-                    <em>*Restrictions apply. Expires August 31, 2012</em>
-                </div>
-            </div>
+
 
         </div>
     </div>
@@ -147,8 +133,9 @@
     </div>
 </div>
 <div id="main">
-    <a href="" title="Protect America has been rated 5-Stars by TopConsumerReviews.com for the past 5 years">
-            <img src="{{ STATIC_URL }}img/banners/670x144/top-consumer-reviews-banner.png" alt="Protect America has been rated 5-Stars by TopConsumerReviews.com for the past 5 years" width="670" height="144" />
+        <a href="{% url order-package %}?package=silver" title="Order Now and get Two Free Keychains">
+            <img src="{{ STATIC_URL }}img/banners/keychain-remote-banner.jpg" alt="Two Free Keychains with Purchase" width="670" height="88" />
+    </a>
     </a>
     <div id="customer-testimonials">
         <div class="ts_testimonial">
