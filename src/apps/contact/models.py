@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.contrib.localflavor.us.models import (PhoneNumberField, 
     USStateField)
@@ -179,8 +181,10 @@ class CEOFeedback(models.Model):
     message = models.TextField()
 
     rating = models.CharField(max_length=4, default='0')
+    converted = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True)
+    date_read = models.DateTimeField(null=True, blank=True)
 
     def email_company(self):
         t = loader.get_template('emails/ceo_feedback_to_company.html')
@@ -193,6 +197,44 @@ class CEOFeedback(models.Model):
             ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
+
+    def convert_to_textimonial(self):
+        from apps.testimonials.models import Textimonial
+
+        t = Textimonial()
+        names = self.name.split(' ')
+        if len(names) > 1:
+            t.first_name = names[0]
+            t.last_name = names[-1]
+        else:
+            t.first_name = names[0]
+            t.last_name = ''
+
+        t.city = self.city
+        t.state = self.state
+        t.email = self.email
+        t.rating = self.rating
+        t.message = self.message
+        t.permission_to_post = True
+        t.display = True
+        t.save()
+
+        t.date_read = self.date_read
+        t.converted_from = self
+        t.save()
+
+        self.converted = True
+        self.save()
+
+
+    def mark_as_read(self):
+        if self.date_read:
+            return
+    
+        self.date_read = datetime.now()
+        self.save()
+        return True
+
 
     def __unicode__(self):
         return '%s : %s - %s' % (self.name, self.phone, self.feedback_type)

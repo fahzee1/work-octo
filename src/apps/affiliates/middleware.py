@@ -48,6 +48,7 @@ class AffiliateMiddleware(object):
         cookie_domain = '.%s' % domain
         # set the cookie_domain to the request object
         request.cookie_domain = cookie_domain
+        request.session['domain'] = domain
 
         expire_time = timedelta(days=90)
 

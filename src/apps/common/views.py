@@ -49,6 +49,14 @@ def thank_you(request, custom_url=None):
          'affiliate_obj': affiliate_obj}
     return simple_dtt(request, 'thank-you/index.html', c)
 
+def clear_my_cookies(request):
+    response = render_to_response('support/clear-my-cookies.html',
+        {}, context_instance=RequestContext(request))
+    response.delete_cookie('refer_id', domain='.protectamerica.com') 
+    response.delete_cookie('affkey', domain='.protectamerica.com')
+    response.delete_cookie('source', domain='.protectamerica.com')
+    return response
+
 def fivelinxcontest(request):
     if request.method == 'POST':
         form = LinxContextForm(request.POST)
