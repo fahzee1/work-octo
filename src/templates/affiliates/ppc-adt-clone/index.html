@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+ {% extends "base.html" %}
 
 {% load testimonial_tags sekizai_tags %}
 
@@ -23,6 +23,10 @@
 {% endblock %}
 
 {% block navigation %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block order-footer %}
 {% endblock %}
 
 {% block content %}
@@ -130,9 +134,10 @@ $(document).ready(function() {
                 </div>
             </div>
     </div>
-    <div id="call-box">
-        <p>Get Started Now,&nbsp;<strong>Call Today<span> 1-800-888-8888</span></strong></p>
+    {% include "order/call-box.html" %}
+    <div id="small-footer">
+        <p>*Call for information on Protect America's monitoring fees and other terms. Standard thirty-six month monitoring agreement required with approved credit. Must be a U.S. Resident. Applicable taxes and fees not included. Cannot be combined with any other offer. Package offered on this coupon includes a master control panel with back-up battery, siren, keypad, fifteen door or window sensors, one motion detector, one yard sign, and three window decals. Offer subject to change. Limited parts replacement warranty valid for as long as customer is monitored. Not available to existing Protect America customers. Other restrictions apply. GE and GE Security logos are registered trademarks of General Electric. Protect America, Inc., 3800 Quick Hill Road, Building 1-100, Austin, TX 78728. We provide our service in all 50 states. Licenses: AL: 12-027; AR: E 2001-0538; AZ: ROC114856 (L-67), ROC114855 (C-12); CA: ACO 4115; DE: 06-204; FL: EG-0000192; GA: LVA205875; IA: AC-0081; IL: 127-001092; LA: F492; MD: 107-670; MI: 8714 Huckleberry Lane, Lansing MI. 48917. Lic #3601202409; MS: 15005347; NC: 635-CSA; NJ: Burglar alarm and fire alarm bus. Lic. #34BF00023700; NM: 60519; OK: 739; PA: PA023169; SC: BAC 5432, FAC 3104; TN: 00000265; TX: B16272, ACR-1204; UT: 345548-6501; VA: 11-3129; WA: PROTEAI962LD; WV: WV032962.
+        </p>
     </div>
 </div>
-
 {% endblock %}
