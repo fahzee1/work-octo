@@ -6,6 +6,7 @@ from django.contrib.localflavor.us.models import (PhoneNumberField,
 from django.template import loader, Context
 from django.core.urlresolvers import reverse
 from django.core.mail import EmailMessage
+from apps.contact.models import CEOFeedback
 
 class Testimonial(models.Model):
 
@@ -69,6 +70,8 @@ class Textimonial(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
+
+    converted_from = models.ForeignKey(CEOFeedback, null=True, blank=True)
 
     def email_company(self):
         t = loader.get_template('emails/testimonial_to_company.html')

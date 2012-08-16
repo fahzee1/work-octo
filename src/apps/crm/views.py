@@ -13,12 +13,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.comments.models import Comment
 from django.utils import simplejson
+from django.views.decorators.cache import never_cache
 
 from apps.crm.forms import LoginForm, AffiliateForm, ProfileForm
 from apps.affiliates.models import Affiliate, Profile
 from apps.contact.models import CEOFeedback
 from apps.testimonials.models import Textimonial
 
+@never_cache
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
                         content_type='application/json; charset=UTF-8')
@@ -42,6 +44,7 @@ def crm_login(request):
             'form': form,
         }, context_instance=RequestContext(request))
 
+@never_cache
 def crm_render_wrapper(request, template, context):
     # get Affiliate counts
     counts = {}
@@ -452,6 +455,72 @@ def textimonial_dont_display(request, textimonial_id):
     t = loader.get_template('crm/_partials/textimonial_nonapproved_actions.html')
     return json_response({'success': True,
         'id': textimonial.id, 'html': t.render(c)})
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks(request):
+    ceo_feedback_list = CEOFeedback.objects.order_by('-date_created')
+    paginator = Paginator(ceo_feedback_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        ceo_feedbacks = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        ceo_feedbacks = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        ceo_feedbacks = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
+            'ceo_feedbacks': ceo_feedbacks,
+        })
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_unread(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(date_read=None).order_by('-date_created')
+    paginator = Paginator(ceo_feedback_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        ceo_feedbacks = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        ceo_feedbacks = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        ceo_feedbacks = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
+            'ceo_feedbacks': ceo_feedbacks,
+        })
+
+@login_required(login_url='/crm/login/')
+def feedback_view(request, feedback_id):
+    try:
+        feedback = CEOFeedback.objects.get(id=feedback_id)
+    except CEOFeedback.DoesNotExist:
+        return json_response({'success': False, 'errors': ['no_feedback']})
+
+    feedback.mark_as_read()
+
+    c = Context({'feedback': feedback})
+    t = loader.get_template('crm/_partials/feedback_ajax.html')
+    return json_response({'success': True, 'html': t.render(c)})
+
+@login_required(login_url='/crm/login/')
+def feedback_convert(request, feedback_id):
+    try:
+        feedback = CEOFeedback.objects.get(id=feedback_id)
+    except CEOFeedback.DoesNotExist:
+        return json_response({'success': False, 'errors': ['no_feedback']})
+
+    feedback.mark_as_read()
+    feedback.convert_to_textimonial()
+
+    c = Context({'feedback': feedback})
+    t = loader.get_template('crm/_partials/feedback_convert_actions.html')
+    return json_response({'success': True,
+        'id': feedback.id, 'html': t.render(c)})
 
 def comment_posted(request):
     comment_id = request.GET.get('c', None)

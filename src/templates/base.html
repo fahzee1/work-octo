@@ -21,9 +21,9 @@
     <meta name="MSSmartTagsPreventParsing" content="true" />
     <link rel="icon" href="http://www.protectamerica.com/favicon.ico" />
     <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico" />
-    {% if request.session.domain == 'protectamerica.com' %}
+    {% block canonical %}{% if request.session.domain == 'protectamerica.com' %}
     <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
-    {% endif %}{% block css %}
+    {% endif %}{% endblock %}{% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 
 {% endblock %}
