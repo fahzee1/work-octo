@@ -407,6 +407,8 @@ else:
         namespace='testimonials')),
     # CRM urls
     url(r'^crm/', include('apps.crm.urls', namespace='crm')),
+    # Email URLS
+    url(r'^email/', include('apps.emails.urls', namespace='emails')),
     # comments urls
     url(r'^comments/posted/$', 'apps.crm.views.comment_posted',
         name='comments-comment-done'),

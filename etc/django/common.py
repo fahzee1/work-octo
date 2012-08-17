@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'apps.crimedatamodels',
     'apps.news',
     'apps.crm',
+    'apps.emails',
 
     # sitemaps by opm
     'apps.pa-sitemaps',
