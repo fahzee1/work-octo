@@ -3,9 +3,23 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/generic-landing-page/style.css">
 {% endblock %}
 
-{% block quick-links %}
+{% block robots_tag %}
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
 {% endblock %}
 
+{% block quick-links %}
+{% endblock %}
+{% block company-logo %}
+    <div id="company-logo">
+        <a href="http://www.protectamerica.com/" title="Protect America Home Security">
+            <img src="{{ STATIC_URL }}/img/affiliates/generic-landing-page/protect-america-logo-transparent.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
+    
+        </a>
+    </div>
+{% endblock %}
+{% block third-party-nav %}
+    <img src="{{ STATIC_URL }}img/external/ge-logo-transparent.png" alt="ge-logo-transparent" width="160" height="48" style="float: right;" />
+{% endblock %}
 {% block content %}
     <div id="top-wrapper">
         <div id="left-wrapper">
@@ -15,12 +29,12 @@
         <div id="quote-area">
             {% include "order/quote-form.html" with form=forms.basic %}
         </div>
-        <div class="clear"></div>
+        {% include "order/call-box.html" %}
+
     </div>
-    {% include "order/call-box.html" %}
 
     <div id="five-blocks">
-        <div class="assurance-block" id="assurance-block-one">
+        <div class="assurance-block active" id="assurance-block-one">
             {% block assurance-block-one %}
             {% endblock %}
         </div>
@@ -33,9 +47,10 @@
             {% endblock %}
         </div>
         <div class="assurance-block" id="assurance-block-four">
-        </div>
             {% block assurance-block-four %}
             {% endblock %}
+        </div>
+
         <div class="assurance-block" id="assurance-block-five">
             {% block assurance-block-five %}
             {% endblock %}
