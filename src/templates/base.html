@@ -45,7 +45,8 @@
 </script>
 {% endblock %}
 </head>
-<body class="{{ page_name }} tk-facitweb">
+<body class="{{ page_name }} {% block typekit %}tk-facitweb{% endblock %}">
+
 <!-- Page Wrapper -->
 <div id="header">
     <div id="header-wrapper">
@@ -71,12 +72,14 @@
             <!--<div class="clear"></div>-->
         </div>    
         <div>
+            {% block company-logo %}
             <div id="company-logo">
                 <a href="http://www.protectamerica.com/" title="Protect America Home Security">
                     <img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
           
                 </a>
             </div>
+            {% endblock %}
             {% block third-party-nav %}
 
             <div id="ge-logo" title="GE Logo">
