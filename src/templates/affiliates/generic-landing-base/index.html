@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+
+{% load sekizai_tags %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/generic-landing-page/style.css">
 {% endblock %}
@@ -80,4 +83,23 @@
             {% endblock %}
         </div>
     </div>
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    function switch_card(num) {
+        $('.assurance-card:visible').hide();
+        $('.assurance-card:eq('+num+')').show();
+        // move arrow here
+        var left_pos = (196 * num) + 66; 
+        $('#selector-arrow').css('left', left_pos+'px');
+    }
+    $('.assurance-block').click(function (e){
+        e.preventDefault();
+        switch_card($(this).index());
+        $('.assurance-block').removeClass('active');
+        $(this).addClass('active');
+    });
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
