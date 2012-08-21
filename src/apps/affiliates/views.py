@@ -203,22 +203,22 @@ def signup(request):
 
 def accept_affiliate(request):
     # API listener to accept affiliate submissions
-    #if request.method != "POST":
-    #    raise Http404
+    if request.method != "POST":
+        raise Http404
 
     errors = []
 
     # check to make sure all required information is available
-    agent_id = request.GET.get('agentid', False)
-    name = request.GET.get('source', False)
-    phone = request.GET.get('phone', '')
-    pixels = request.GET.get('tracking_pixels', '')
-    conversion_pixels = request.GET.get('conversion_pixels', '')
+    agent_id = request.POST.get('agentid', False)
+    name = request.POST.get('source', False)
+    phone = request.POST.get('phone', '')
+    pixels = request.POST.get('tracking_pixels', '')
+    conversion_pixels = request.POST.get('conversion_pixels', '')
 
     if not agent_id:
-        errors.append('no_agentid_in_post')
+        errors.append('no_agentid_in_request')
     if not name:
-        errors.append('no_source_in_post')
+        errors.append('no_source_in_request')
 
     # check for duplicate agent_id
     if Affiliate.objects.filter(agent_id=agent_id).count() > 0:
