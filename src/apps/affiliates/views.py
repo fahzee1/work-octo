@@ -238,3 +238,41 @@ def accept_affiliate(request):
     affiliate.save()
 
     return json_response({'success': True})
+
+def accept_affiliate_update(request, affiliate_id):
+    if request.method != "POST":
+        raise Http404
+
+    try:
+        affiliate = Affiliate.objects.get(id=affiliate_id)
+    except Affiliate.DoesNotExist:
+        raise Http404
+
+    agent_id = request.POST.get('agentid', None)
+    name = request.POST.get('source', None)
+    phone = request.POST.get('phone', None)
+    pixels = request.POST.get('tracking_pixels', None)
+    conversion_pixels = request.POST.get('conversion_pixels', None)
+
+    if agent_id is not None:
+        if Affiliate.objects.filter(agent_id=agent_id).count() > 0:
+            errors.append('duplicate_agentid')
+        else:
+            affiliate.agent_id = agent_id
+    if name is not None:
+        if Affiliate.objects.filter(name=name).count() > 0:
+            errors.append('duplicate_source')
+        else:
+            affiliate.name = name
+    if phone is not None:
+        affiliate.phone = phone
+    if pixels is not None:
+        affiliate.pixels = pixels
+    if conversion_pixels is not None:
+        affiliate.conversion_pixels = conversion_pixels
+
+    if len(errors):
+        return json_response({'success': False, 'errors': errors})
+
+    affiliate.save()
+    return json_response({'success': True})

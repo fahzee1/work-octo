@@ -399,7 +399,9 @@ else:
         
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
    
-    url(r'^api/add-affiliate/$', 'apps.affiliates.views.accept_affiliate'),
+    url(r'^api/affiliate/$', 'apps.affiliates.views.accept_affiliate'),
+    url(r'^api/affiliate/(?P<affiliate_id>\d+)/$',
+        'apps.affiliates.views.accept_affiliate_update'),
 
     url(r'^news/', include('apps.news.urls', namespace='news')),
     url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
