@@ -1,0 +1,96 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>CEO Feedback #{{ feedback.id }}</h3>
+</div>
+<div class="modal-body">
+    <table class="feedback_{{ feedback.id }}">
+        <tr>
+            <td width="50%" style="vertical-align: top;">
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                        <th>Contact Information</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.city }}, {{ feedback.state }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.email|default:"No Email" }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.date_created }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="50%" style="vertical-align: top;">
+                <table class="table table-bordered table-condensed">
+                    <tr>
+                        <th>Feedback</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.feedback_type }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.rep_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.department }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{ feedback.message }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="star-container" style="margin-left: 10%;">
+                                {% with rating=feedback.rating %}
+                                <div class="star-button{% if rating >= '1' %} active{% endif %}" id="1-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '2' %} active{% endif %}" id="2-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '3' %} active{% endif %}" id="3-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '4' %} active{% endif %}" id="4-star">&nbsp;</div>
+                                <div class="star-button{% if rating >= '5' %} active{% endif %}" id="5-star">&nbsp;</div>
+                                {% endwith %}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="btn-group">
+                {% if feedback.converted %}
+                    {% include "crm/_partials/feedback_convert_actions.html" with feedback=feedback %} 
+                {% else %}
+                    <a href="{% url crm:feedback_view feedback.id %}" class="btn feedback_view">
+                        <i class="icon-eye-open"></i>
+                    </a>
+                    <a href="{% url crm:feedback_convert feedback.id %}" class="btn btn-success feedback_convert">
+                        <i class="icon-share-alt icon-white"></i>
+                    </a>
+                {% endif %}
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+</div>

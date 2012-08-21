@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from urllib import urlencode
 
 from django.core.cache import cache
+from django.views.decorators.cache import cache_page
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -47,6 +48,14 @@ def thank_you(request, custom_url=None):
          'custom_url': custom_url,
          'affiliate_obj': affiliate_obj}
     return simple_dtt(request, 'thank-you/index.html', c)
+
+def clear_my_cookies(request):
+    response = render_to_response('support/clear-my-cookies.html',
+        {}, context_instance=RequestContext(request))
+    response.delete_cookie('refer_id', domain='.protectamerica.com') 
+    response.delete_cookie('affkey', domain='.protectamerica.com')
+    response.delete_cookie('source', domain='.protectamerica.com')
+    return response
 
 def fivelinxcontest(request):
     if request.method == 'POST':
@@ -104,6 +113,7 @@ def simple_dtt(request, template, extra_context):
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
+
     return response
 
 def payitforward(request):
@@ -136,8 +146,7 @@ def payitforward(request):
     })
 
     forms = {}
-    forms['basic'] = PAContactForm()
-    forms['long'] = AffiliateLongForm() 
+    forms['basic'] = LeadForm()
 
     return render_to_response('payitforward.html',
         {
@@ -146,6 +155,7 @@ def payitforward(request):
             'videos': videos,
         }, context_instance=RequestContext(request))
 
+@cache_page(60 * 60 * 4)
 def index(request): 
     ctx = {}
     ctx['page_name'] = 'index'

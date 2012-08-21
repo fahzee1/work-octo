@@ -80,6 +80,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,6 +89,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'apps.affiliates.middleware.AffiliateMiddleware',
     'apps.common.middleware.SearchEngineReferrerMiddleware',
+    'apps.common.middleware.CommonMiddlewareWrapper',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -129,6 +132,7 @@ INSTALLED_APPS = (
     'apps.crimedatamodels',
     'apps.news',
     'apps.crm',
+    'apps.emails',
 
     # sitemaps by opm
     'apps.pa-sitemaps',
