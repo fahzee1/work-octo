@@ -84,14 +84,26 @@
         </div>
     </div>
 {% addtoblock "js" %}
+<script type="text/javascript" src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    var animatedAction = false;
     function switch_card(num) {
-        $('.assurance-card:visible').hide();
-        $('.assurance-card:eq('+num+')').show();
+        
+        if(animatedAction) {
+            return false;
+        }
+
+        animatedAction = true;
+        $('.assurance-card:visible').fadeOut('fast');
+        $('.assurance-card:eq('+num+')').fadeIn();
         // move arrow here
         var left_pos = (196 * num) + 66; 
-        $('#selector-arrow').css('left', left_pos+'px');
+        $('#selector-arrow').animate({
+            'left': left_pos+'px',
+        }, 500, 'easeOutBack');
+        animatedAction = false;
+        return true;
     }
     $('.assurance-block').click(function (e){
         e.preventDefault();
