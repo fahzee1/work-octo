@@ -200,3 +200,41 @@ def signup(request):
     ctx['affform'] = form
 
     return simple_dtt(request, 'contact-us/affiliates.html', ctx)
+
+def accept_affiliate(request):
+    # API listener to accept affiliate submissions
+    #if request.method != "POST":
+    #    raise Http404
+
+    errors = []
+
+    # check to make sure all required information is available
+    agent_id = request.GET.get('agentid', False)
+    name = request.GET.get('source', False)
+    phone = request.GET.get('phone', '')
+    pixels = request.GET.get('tracking_pixels', '')
+    conversion_pixels = request.GET.get('conversion_pixels', '')
+
+    if not agent_id:
+        errors.append('no_agentid_in_post')
+    if not name:
+        errors.append('no_source_in_post')
+
+    # check for duplicate agent_id
+    if Affiliate.objects.filter(agent_id=agent_id).count() > 0:
+        errors.append('duplicate_agentid')
+    if Affiliate.objects.filter(name=name).count() > 0:
+        errors.append('duplicate_source')
+
+    if len(errors):
+        return json_response({'success': False, 'errors': errors})
+
+    affiliate = Affiliate()
+    affiliate.agent_id = agent_id
+    affiliate.name = name
+    affiliate.phone = phone
+    affiliate.pixels = pixels
+    affiliate.conversion_pixels = conversion_pixels
+    affiliate.save()
+
+    return json_response({'success': True})

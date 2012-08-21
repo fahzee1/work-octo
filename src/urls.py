@@ -398,7 +398,9 @@ else:
         # Affiliate Resources
         
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
-    
+   
+    url(r'^api/add-affiliate/$', 'apps.affiliates.views.accept_affiliate'),
+
     url(r'^news/', include('apps.news.urls', namespace='news')),
     url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
