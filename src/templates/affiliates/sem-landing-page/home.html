@@ -25,6 +25,17 @@
         <li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Home Security Systems and Products">Products</a></li>
         <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
     </ul>
+    {% if request.session.search_term or request.COOKIES.cikw %}
+        <p>You searched for 
+            {% if request.session.search_term %}
+                <strong>{{ request.session.search_term|truncatewords:6 }}</strong>
+            {% else %}
+                {% if request.COOKIES.cikw %}
+                    <strong>{{ request.COOKIES.cikw|truncatewords:6 }}</strong>
+                {% endif %}
+            {% endif %}
+        </p>
+    {% endif %}
 </div>
 {% endblock %}
 {% block subnav %}{% endblock %}
@@ -140,14 +151,7 @@
     <div id="customer-testimonials">
         <div class="ts_testimonial">
             <h3>What our customers say...</h3>
-            {% comment %}
-            <div>
-                <p>Fantastic 5 star customer service!! Gloria knows her stuff! Thank you!</p>
-                <span>&mdash; &nbsp;Paul 
-                    <em>Austell, GA on November 30, 2011</em>
-                </span>
-            </div>
-            {% endcomment %}
+
             <div class="test_testimonial_box">
             {% testimonial_search "" "limit=5&template=old&words=30" %}
             </div>
