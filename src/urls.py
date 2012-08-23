@@ -85,6 +85,7 @@ elif settings.SITE_ID == 3:
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^test/touchscreen/$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
         dtt(r'^business/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^special/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
 
     )
 elif settings.SITE_ID == 4:
