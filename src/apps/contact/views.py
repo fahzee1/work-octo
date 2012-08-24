@@ -72,6 +72,8 @@ def prepare_data_from_request(request):
         affkey = request.session.get('affkey', None)
     if not affkey and 'affkey' in request.POST:
         affkey = request.POST['affkey']
+    if not affkey and 'affkey' in request.GET:
+        affkey = request.GET['affkey']
 
     source = request.COOKIES.get('source', None)
     if source is None:
