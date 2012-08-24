@@ -48,7 +48,6 @@ function setTestCookieB() {
     var cookie = getCookie('utm_expid');
     var has_set = getCookie('has_set_test_b');
     if(cookie && !has_set) {
-        setCookie('utm_expid', cookie + ' B');
         setCookie('has_set_test_b', true);
     }
 }

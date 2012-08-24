@@ -203,7 +203,7 @@ else:
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
-        'apps.common.views.thank_you', name='custom_thank_you',),
+            'apps.common.views.thank_you', name='custom_thank_you',),
 
         # pay it forward page
         url(r'^payitforward/$', 'apps.common.views.payitforward',
@@ -548,6 +548,10 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/help/return-policy/', 'permanent': True}),
     ('^pa/request-moving-kit/?$',
         redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
+    ('^home-security/business-security-systems$',
+        redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
+    ('^home-security/business-security-systems$',
+        redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
