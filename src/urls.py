@@ -214,8 +214,14 @@ else:
 
 
         # pay it forward page
-        url(r'^payitforward/$', 'apps.common.views.payitforward',
-            name='payitforward'),
+        dtt(r'^payitforward/?$', 'payitforward/payitforward.html', 'payitforward'),
+        dtt(r'^payitforward/about/?$', 'payitforward/about.html', 'payitforward-about', 'payitforward'),
+        dtt(r'^payitforward/rules/?$', 'payitforward/rules.html', 'payitforward-rules', 'payitforward'),
+        dtt(r'^payitforward/contact/?$', 'payitforward/contact.html', 'payitforward-contact', 'payitforward'),
+        dtt(r'^payitforward/gallery/?$', 'payitforward/gallery.html', 'payitforward-gallery', 'payitforward'),
+        dtt(r'^payitforward/involved/?$', 'payitforward/involved.html', 'payitforward-involved', 'payitforward'),
+        dtt(r'^payitforward/point-tracking/?$', 'payitforward/point-tracking.html', 'payitforward-point-tracking', 'payitforward'),
+
 
         # Product > Advantage
 
@@ -564,6 +570,7 @@ urlpatterns += patterns('',
     ('^pa/request-moving-kit/?$',
         redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
 )
+
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns() 
