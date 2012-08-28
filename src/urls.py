@@ -84,8 +84,6 @@ elif settings.SITE_ID == 3:
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^test/touchscreen/$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
-        dtt(r'^business/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
-
     )
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
@@ -182,6 +180,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
 
+        # PAID LANDING PAGES
+        dtt(r'^home-security/business-security-systems/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^home-security/free-home-security-system/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
+
         # SEO Content Pages
         dtt(r'^home-security-systems/$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
         dtt(r'^alarm-systems/$', 'seo-pages/alarm-systems.html', 'seo-alarm-systems', 'about-us'),
@@ -201,7 +203,7 @@ else:
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
-        'apps.common.views.thank_you', name='custom_thank_you',),
+            'apps.common.views.thank_you', name='custom_thank_you',),
 
         # pay it forward page
         url(r'^payitforward/$', 'apps.common.views.payitforward',
@@ -546,6 +548,10 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/help/return-policy/', 'permanent': True}),
     ('^pa/request-moving-kit/?$',
         redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
+    ('^home-security/business-security-systems$',
+        redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
+    ('^home-security/business-security-systems$',
+        redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
 )
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns

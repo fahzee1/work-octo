@@ -72,6 +72,8 @@ def prepare_data_from_request(request):
         affkey = request.session.get('affkey', None)
     if not affkey and 'affkey' in request.POST:
         affkey = request.POST['affkey']
+    if not affkey and 'affkey' in request.GET:
+        affkey = request.GET['affkey']
 
     source = request.COOKIES.get('source', None)
     if source is None:
@@ -120,9 +122,12 @@ def prepare_data_from_request(request):
     # we want to put the google experiment id if there is no affkey
     google_id = request.COOKIES.get('utm_expid', None)
     if affkey is None and google_id is not None:
+        test_b = request.COOKIES.get('has_set_test_b', False)
         try:
             googleexp = GoogleExperiment.objects.get(google_id=google_id)
             affkey = googleexp.name
+            if test_b:
+                affkey = affkey + ' B'
         except:
             pass
 

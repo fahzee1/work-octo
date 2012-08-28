@@ -2,13 +2,9 @@
 
 {% load testimonial_tags sekizai_tags %}
 
-{% block page_title %}Home Security Systems | Protect America{% endblock %}
+{% block page_title %}Free Home Security System | Free GE Home Alarm | Best Home Security{% endblock %}
 {% block page_keywords %}{% endblock %}
-{% block page_description %}Discover how Protect America provides you with peace of mind by helping you feel safer and more secure with one of our inexpensive home security systems.{% endblock %}
-
-{% block robots_tag %}
-<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
-{% endblock %}
+{% block page_description %}Protect America provides affordable home security monitoring services to millions of Americans. Learn more about our low rates and get a quote today!{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/ppc-adt-clone/ppc-adt-clone.css">
@@ -63,6 +59,8 @@ $(document).ready(function() {
         slide.addClass('active')
     }
     $('#header li').click(function() {
+        activate_slide($(this).index());
+    }).hover(function(){
         activate_slide($(this).index());
     });
     activate_slide(0);
