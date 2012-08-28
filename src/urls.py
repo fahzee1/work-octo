@@ -221,6 +221,9 @@ else:
         dtt(r'^payitforward/gallery/?$', 'payitforward/gallery.html', 'payitforward-gallery', 'payitforward'),
         dtt(r'^payitforward/involved/?$', 'payitforward/involved.html', 'payitforward-involved', 'payitforward'),
         dtt(r'^payitforward/point-tracking/?$', 'payitforward/point-tracking.html', 'payitforward-point-tracking', 'payitforward'),
+        dtt(r'^payitforward/awareness/?$', 'payitforward/awareness.html', 'payitforward-awareness', 'payitforward'),
+        dtt(r'^payitforward/point-scale/?$', 'payitforward/point-scale.html', 'payitforward-point-scale', 'payitforward'),
+        dtt(r'^payitforward/revenue/?$', 'payitforward/revenue.html', 'payitforward-revenue', 'payitforward'),
 
 
         # Product > Advantage

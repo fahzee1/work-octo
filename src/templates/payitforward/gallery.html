@@ -25,6 +25,14 @@ $(document).ready(function() {
     });
 });
 </script>//-->
+<style type="text/css">
+.slide-row {
+    display: none;
+}
+.active {
+    display: block;
+}
+</style>
 {% endblock %}
 
 {% block navigation %}
@@ -37,6 +45,23 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.next-row-button').click(function() {
+        var current_row = $(this).parent().children('.slide-row:visible');
+        var row_count = $(this).parent().children('.slide-row').length;
+        if(current_row.index() == (row_count - 1) ) {
+            var next_slide = $(this).parent().children('.slide-row:eq(0)');
+        } else {
+            var next_slide = $(this).parent().children('.slide-row:eq('+(current_row.index() + 1)+')');
+        }
+        $(this).parent().children('.slide-row:visible').removeClass('active')
+        next_slide.addClass('active');
+    });
+});
+</script>
+{% endaddtoblock "js" %}
 <div id="grunge">
     <div id="top-container">
         <div class="pacares-logo">
@@ -67,16 +92,105 @@ $(document).ready(function() {
         </ul>
     </div>
     <div id="body-container">
-        <div class="about">
+        <div class="gallery">
             <ul>
-                <li><h2>The 411!</h2><p>For the past two semesters Protect America has been taking an initiative to help marketing students at Michigan State University to learn real life experiences while helping charities in the process. The challenge is designed to create a learning experience for students while creating a platform for charities to benefit from. </p>
-                    <p>Students are separated into teams and create their own marketing agency with that team. Each team then chooses a charity in their community to help. Once the teams are set up with their charity, then they are given a $500 stipend contributed by Protect America. These funds then are used by each team to generate more funds and awareness for the charity they choose.</p><p>The students are given the creative freedom to design and build their agency with their team and are challenged to find different resources for their team to help their charity.</p>
+                <li class="active slide-row">
+                    <ul>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-16.jpg" alt="gallery-16" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-1.jpg" alt="gallery-1" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-2.jpg" alt="gallery-2" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-3.jpg" alt="gallery-3" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-4.jpg" alt="gallery-4" width="174" height="135" /></li>
+                    </ul>
                 </li>
-                <li><p>They are able to build an identity and create a team name while responding to the Pay It Forward initiative. Once they create their team and have chosen a charity, they start the challenge by creating awareness and generating funds for the charity. Creatively each team will respond to the challenge differently and create a unique experience. Each team will learn what works for them and will be able to learn and adapt by having limited resources.</p><p>The Pay It Forward Challenge is a great opportunity for students to learn about the marketing and advertising world while learning about business and helping others all at the same time.</p><p>Protect America is excited to be part of this great challenge and will continue to challenge students for years to come.</p><p>Learn how to get involved and be a part of the challenge. Click here.</p>
+                <li class="slide-row">
+                    <ul>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-33.jpg" alt="gallery-33" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-24.jpg" alt="gallery-24" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}/img/payitforward/gallery-30.jpg" alt="gallery-30" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-26.jpg" alt="gallery-26" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-32.jpg" alt="gallery-32" width="174" height="135" /></li>
+                    </ul>
+                </li>
+                <li style="margin-top: 50px; text-decoration:underline;" class="tk-kremlin-pro-web-expanded next-row-button">
+                    Next
                 </li>
             </ul>
+            <ul>
+                <li class="active slide-row">
+                    <ul>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-15.jpg" alt="gallery-15" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}/img/payitforward/gallery-7.jpg" alt="gallery-7" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-14.jpg" alt="gallery-14" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-11.jpg" alt="gallery-11" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-10.jpg" alt="gallery-10" width="174" height="135" /></li>
+                    </ul>
+                </li>
+                <li class="slide-row">
+                    <ul>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-43.jpg" alt="gallery-43" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-39.jpg" alt="gallery-39" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-421.jpg" alt="gallery-421" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-38.jpg" alt="gallery-38" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-41.jpg" alt="gallery-41" width="174" height="135" /></li>
+                    </ul>
+                </li>
+                <li style="margin-top: 50px; text-decoration:underline;" class="tk-kremlin-pro-web-expanded next-row-button">
+                    Next
+                </li>
+            </ul>
+            <ul>
+                <li class="active slide-row">
+                    <ul>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-21.jpg" alt="gallery-21" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-17.jpg" alt="gallery-17" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-18.jpg" alt="gallery-18" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-19.jpg" alt="gallery-19" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-20.jpg" alt="gallery-20" width="174" height="135" /></li>
+                    </ul>
+                </li>
+                <li class="slide-row">
+                    <ul>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-61.jpg" alt="gallery-61" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-53.jpg" alt="gallery-53" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-54.jpg" alt="gallery-54" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-55.jpg" alt="gallery-55" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-56.jpg" alt="gallery-56" width="174" height="135" /></li>
+                    </ul>
+                </li>
+                <li class="slide-row">
+                    <ul>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-44.jpg" alt="gallery-44" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-49.jpg" alt="gallery-49" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-47.jpg" alt="gallery-47" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-48.jpg" alt="gallery-48" width="174" height="135" /></li>
+                        <li><img src="{{ STATIC_URL }}img/payitforward/gallery-50.jpg" alt="gallery-50" width="174" height="135" /></li>
+                    </ul>
+                </li>
+                <li style="margin-top: 50px; text-decoration:underline;" class="tk-kremlin-pro-web-expanded next-row-button">
+                    Next
+                </li>
+            </ul>
+            <!--
+            <ul>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-15.jpg" alt="gallery-15" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}/img/payitforward/gallery-7.jpg" alt="gallery-7" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-8.jpg" alt="gallery-8" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-9.jpg" alt="gallery-9" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-10.jpg" alt="gallery-10" width="174" height="135" /></li>
+                <li style="margin-top: 50px; text-decoration:underline;" class="tk-kremlin-pro-web-expanded">Next</li>
+            </ul>
+            <ul>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-21.jpg" alt="gallery-21" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-17.jpg" alt="gallery-17" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-18.jpg" alt="gallery-18" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-19.jpg" alt="gallery-19" width="174" height="135" /></li>
+                <li><img src="{{ STATIC_URL }}img/payitforward/gallery-20.jpg" alt="gallery-20" width="174" height="135" /></li>
+                <li style="margin-top: 50px; text-decoration:underline;" class="tk-kremlin-pro-web-expanded">Next</li>
+            </ul>
+            //-->
         </div>
-        <!--<div id="control_arrow">
+       <!-- <div id="control_arrow">
             <img style="margin-left: 800px;" src="{{ STATIC_URL }}img/payitforward/arrow.png" alt="arrow" width="25" height="25" />
         </div>//-->
     </div>
@@ -117,9 +231,9 @@ $(document).ready(function() {
     </div>
     <div class="tail-urls">
         <ul>
-            <li class="tk-kremlin-pro-web-expanded"><a target="_blank"  href="{% url home %}">PROTECTAMERICA.COM</a></li>
-            <li class="tk-kremlin-pro-web-expanded"><a target="_blank"  href="http://www.protectamericacares.org/">PROTECTAMERICACARES.COM</a></li>
-            <li class="tk-kremlin-pro-web-expanded"><a target="_blank" href="http://www.socialfirefly.com">SOCIALFIREFLY.COM</a></li>
+            <li class="tk-kremlin-pro-web-expanded"><a target="_blank" href="http://www.twitter.com/protectamerica"><img src="{{ STATIC_URL }}img/payitforward/Twitter%20Icon.png" alt="Twitter%20Icon" width="36" height="36" /></a><a target="_blank" href="http://www.facebook.com/protectamerica"><img src="{{ STATIC_URL }}img/payitforward/facebook%20icon.png" alt="facebook%20icon" width="36" height="36" /></a><a target="_blank"  href="{% url home %}">PROTECTAMERICA.COM</a></li>
+            <li class="tk-kremlin-pro-web-expanded"><a target="_target" href="http://www.twitter.com/pasecurity"><img src="{{ STATIC_URL }}img/payitforward/Twitter%20Icon.png" alt="Twitter%20Icon" width="36" height="36" /></a><a target="_blank" href="http://www.facebook.com/protectamericacares"><img src="{{ STATIC_URL }}img/payitforward/facebook%20icon.png" alt="facebook%20icon" width="36" height="36" /></a><a target="_blank"  href="http://www.protectamericacares.org/">PROTECTAMERICACARES.COM</a></li>
+            <li class="tk-kremlin-pro-web-expanded"><a target="_blank" href="http://www.twitter.com/socialfirefly_"><img src="{{ STATIC_URL }}img/payitforward/Twitter%20Icon.png" alt="Twitter%20Icon" width="36" height="36" /></a><a target="_blank" href="http://www.facebook.com/socialfireflyapp"><img src="{{ STATIC_URL }}img/payitforward/facebook%20icon.png" alt="facebook%20icon" width="36" height="36" /></a><a target="_blank" href="http://www.socialfirefly.com">SOCIALFIREFLY.COM</a></li>
         </ul>
     </div>
     <div class="pa-logo">
