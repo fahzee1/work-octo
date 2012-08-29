@@ -10,7 +10,8 @@ from apps.contact.models import (Submission,
                                  MovingKit,
                                  TellAFriend,
                                  DoNotCall,
-                                 Lead)
+                                 Lead,
+                                 PayItForward)
 
 class PAContactForm(ModelForm):
     class Meta:
@@ -116,3 +117,7 @@ class TellAFriendForm(ModelForm):
 class DoNotCallForm(ModelForm):
     class Meta:
         model = DoNotCall
+
+class PayItForwardForm(ModelForm):
+    class Meta:
+        model = PayItForward

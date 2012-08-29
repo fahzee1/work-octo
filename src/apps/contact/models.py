@@ -285,3 +285,13 @@ class DoNotCall(models.Model):
 
     def __unicode__(self):
         return '%s : %s' % (self.name, self.phone,)
+
+class PayItForward(models.Model):
+
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    email = models.EmailField(max_length=128)
+    comments = models.TextField()
+
+    def __unicode__(self):
+        return '%s %s - %s' % (self.first_name, self.last_name, self.email)
