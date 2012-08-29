@@ -46,89 +46,87 @@
     }
     #navigation {
         width: 960px;
-        margin-left: 55px;
+        margin-left: 100px;
         height: 24px;
         position: relative;
         overflow: visible;
         z-index: 500;
-        border: none;
+        #nav{
+            list-style:none;
+            font-weight:bold;
+            float:left;
+            width:100%;
+            margin-left: 25px;
+        }
+        #nav li{
+            float:left;
+            margin-right:50px;
+            position:relative;
+        }
+        #nav a{
+            display:block;
+            padding:5px;
+            color:#fff;
+            text-decoration:none;
+            border: none;
+        }
+        #nav a:hover{
+            color:#fff;
+            background:#333;
+            text-decoration:underline;
+            border: none;
+        }
+    
+    /*--- DROPDOWN ---*/
+        #nav ul{
+            list-style:none;
+            position:absolute;
+            left:-9999px;
+            z-index: 999;
+            top: 30px;
+        }
+        #nav ul li{
+            padding-top:1px;
+            float:none;
+        }
+        #nav ul a{
+            white-space:nowrap;
+    
+        }
+        #nav li:hover ul{
+            left:0;
+        }
+        #nav li:hover a{
+            background:#333;
+            text-decoration:underline;
+        }
+        #nav li:hover ul a{         
+            text-decoration:none;
+            border-right: white solid 1px;
+        }
+        #nav li:hover ul li a:hover{
+            background:@dark-grey;
+            border-right: white solid 1px;
+        }
     }    
-    #nav{
-        list-style:none;
-        font-weight:bold;
-        margin-bottom:10px;
-        float:left;
-        width:100%;
-        margin-left: 25px;
-        border: none;
-    }
-    #nav li{
-        float:left;
-        margin-right:30px;
-        position:relative;
-        border: none;
-    }
-    #nav a{
-        display:block;
-        padding:5px;
-        color:#fff;
-        background:#333;
-        text-decoration:none;
-    }
-    #nav a:hover{
-        color:#fff;
-        background:#6b0c36;
-        text-decoration:underline;
-    }
-
-/*--- DROPDOWN ---*/
-    #nav ul{
-        background:#fff;
-        background:rgba(255,255,255,0); 
-        list-style:none;
-        position:absolute;
-        left:-9999px;
-        z-index: 999;
-        top: 25px;
-    }
-    #nav ul li{
-        padding-top:1px;
-        float:none;
-    }
-    #nav ul a{
-        white-space:nowrap;
-    }
-    #nav li:hover ul{
-        left:0;
-    }
-    #nav li:hover a{
-        background:#6b0c36;
-        text-decoration:underline;
-    }
-    #nav li:hover ul a{         
-        text-decoration:none;
-    }
-    #nav li:hover ul li a:hover{
-        background:#333;
-    }
     #body-container {
         background-color: white;
         width: 930px;
         height: 470px;
         margin-left: 50px;
+        margin-top: 15px;
         h2 {
             font-size: 45px;
             padding-top: 35px;
             padding-left: 25px;
         }
         h3 {
-            margin-top: 25px;
             color: #e51b24;
             margin-bottom: -13px;
         }
         p {
             font-size: 14px;
-            line-height: 25px;
+            line-height: 23px;
             padding-top: 15px;
             font-weight: 200;
             text-align:justify;
@@ -143,6 +141,14 @@
             padding-left: 35px;
             width: 400px;
             height: 465px;
+            ul {
+                li {
+                    font-size: 14px;
+                    line-height: 25px;
+                    font-weight: 200;
+                    text-align:justify;
+                }
+            }
         }
         .body-right {
             width:400px;
@@ -152,10 +158,81 @@
             z-index: 1;
             padding-right: 40px;
             ul {
-                margin-top: -65px;
                 li {
-                    font-size: 9pt;
-                    line-height: 15px;
+                    font-size: 14px;
+                    line-height: 25px;
+                    font-weight: 200;
+                    text-align:justify;
+                }
+            }
+            a {
+                padding:5px;
+                color: black;
+                text-decoration:underline;
+                border: none;
+                &:hover {
+                    background-color:#6b0c36;
+                    cursor:pointer;
+                    color:white;
+                }
+                &.active {
+                    background-color:#6b0c36;
+                    cursor:pointer;
+                    color:white;
+                }
+                &:visited {
+                    background-color:#6b0c36;
+                    color:white;
+                }
+            }
+            .form {
+                background-color: white;
+                border: solid @light-grey 1px;
+                .drop-shadow(5px, 5px, 5px, @grey);
+                margin-top: 20px;
+                padding: 15px 25px 15px 25px;
+                width: 240px;
+                height: 250px;
+                line-height: 35px;
+            }
+            .fund-jar {
+                width: 500px;
+                .list {
+                    position: absolute;
+                    line-height: 18px;
+                    ul {
+                        position: absolute;
+                        margin-top: 25px;
+                        margin-left: 150px;
+                        width: 250px;
+                        li {
+                            font-size: 12px;
+                            line-height: 25px;
+                            font-weight:200;
+                            a {
+                                padding:5px;
+                                color: black;
+                                text-decoration:underline;
+                                border: none;
+                                &:hover {
+                                    background-color:#6b0c36;
+                                    cursor:pointer;
+                                    color:white;
+                                }
+                                &.active {
+                                    background-color:#6b0c36;
+                                    cursor:pointer;
+                                    color:white;
+                                }
+                                &:visited {
+                                    background-color:#6b0c36;
+                                    color: black;
+                                    text-decoration:underline;
+                                    border: none;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -241,17 +318,15 @@
                     color: @white;
                     text-decoration: none;
                     &:hover {
-                        background-color:#e6fbff;
                         cursor:pointer;
                         color: @white;
+                        text-decoration: underline;
                     }
                     &.active {
-                        background-color:#e6fbff;
                         cursor:pointer;
                         color: @white;
                     }
                     &:visited {
-                        background-color:#e6fbff;
                         color: @white;
                     }
                 }
