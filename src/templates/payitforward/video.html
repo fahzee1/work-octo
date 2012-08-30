@@ -1,4 +1,4 @@
- {% extends "base.html" %}
+   {% extends "base.html" %}
 
 {% load testimonial_tags sekizai_tags %}
 
@@ -25,6 +25,14 @@ $(document).ready(function() {
     });
 });
 </script>//-->
+<style type="text/css">
+.slide-row {
+    display: none;
+}
+.active {
+    display: block;
+}
+</style>
 {% endblock %}
 
 {% block navigation %}
@@ -37,6 +45,23 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.next-row-button').click(function() {
+        var current_row = $(this).parent().children('.slide-row:visible');
+        var row_count = $(this).parent().children('.slide-row').length;
+        if(current_row.index() == (row_count - 1) ) {
+            var next_slide = $(this).parent().children('.slide-row:eq(0)');
+        } else {
+            var next_slide = $(this).parent().children('.slide-row:eq('+(current_row.index() + 1)+')');
+        }
+        $(this).parent().children('.slide-row:visible').removeClass('active')
+        next_slide.addClass('active');
+    });
+});
+</script>
+{% endaddtoblock "js" %}
 <div id="grunge">
     <div id="top-container">
         <div class="pacares-logo">
@@ -75,9 +100,30 @@ $(document).ready(function() {
     </div>
     <div class="clear"></div>
     <div id="body-container">
-        <div class="body-left">
-            <h2 class="tk-kremlin-pro-web-expanded">Video Rules</h2>
-        </div>
+        <h2 style="width: 400px; line-height: 35px;" class="tk-kremlin-pro-web-expanded">Videos!</h2> 
+        <h3 style="width: 300px; margin-left: 25px;" class="tk-kremlin-pro-web-expanded">For video Rules and general guidelines, download 
+            <a href="{{ STATIC_URL }}pdf/Pay_It_Forward_Challenge_Video_Guidelines.pdf" target="_blank">this!</a></h2>
+        <h3 class="tk-kremlin-pro-web-expanded" style="margin-top: 125px; margin-left: 225px; width: 150px; font-size: 23px; color: black;">Check out last years videos!</h3>
+        <img style="margin-top: 15px; margin-left: 260px;" src="{{ STATIC_URL }}img/payitforward/arrow-hndwrtg.jpg" alt="arrow-hndwrtg" width="89" height="41" />
+            <div class="videos" style="margin-left: 370px; margin-top: -260px;">
+                <ul>
+                    <li class="active slide-row">
+                        <iframe width="560" height="315" src="http://www.youtube.com/embed/vxheqVyYZA8" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li class="slide-row">
+                        <iframe width="560" height="315" src="http://www.youtube.com/embed/IyR82vQDAKA" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li class="slide-row">
+                        <iframe width="560" height="315" src="http://www.youtube.com/embed/lAGzVtBliCo" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li class="slide-row">
+                        <iframe width="560" height="315" src="http://www.youtube.com/embed/z9VxKbxjNsU" frameborder="0" allowfullscreen></iframe>
+                    </li>
+                    <li style="text-decoration:underline; cursor:pointer;" class="tk-kremlin-pro-web-expanded next-row-button">
+                        Next
+                    </li>
+                </ul>
+            </div>
     </div>
 </div>
 <div class="clear"></div>
