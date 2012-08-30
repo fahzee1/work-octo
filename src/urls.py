@@ -206,8 +206,18 @@ else:
             'apps.common.views.thank_you', name='custom_thank_you',),
 
         # pay it forward page
-        url(r'^payitforward/$', 'apps.common.views.payitforward',
-            name='payitforward'),
+        dtt(r'^payitforward/?$', 'payitforward/payitforward.html', 'payitforward'),
+        dtt(r'^payitforward/about/?$', 'payitforward/about.html', 'payitforward-about', 'payitforward'),
+        dtt(r'^payitforward/rules/?$', 'payitforward/rules.html', 'payitforward-rules', 'payitforward'),
+        dtt(r'^payitforward/contact/?$', 'payitforward/contact.html', 'payitforward-contact', 'payitforward'),
+        dtt(r'^payitforward/gallery/?$', 'payitforward/gallery.html', 'payitforward-gallery', 'payitforward'),
+        dtt(r'^payitforward/involved/?$', 'payitforward/involved.html', 'payitforward-involved', 'payitforward'),
+        dtt(r'^payitforward/point-tracking/?$', 'payitforward/point-tracking.html', 'payitforward-point-tracking', 'payitforward'),
+        dtt(r'^payitforward/awareness/?$', 'payitforward/awareness.html', 'payitforward-awareness', 'payitforward'),
+        dtt(r'^payitforward/point-scale/?$', 'payitforward/point-scale.html', 'payitforward-point-scale', 'payitforward'),
+        dtt(r'^payitforward/revenue/?$', 'payitforward/revenue.html', 'payitforward-revenue', 'payitforward'),
+        dtt(r'^payitforward/video/?$', 'payitforward/video.html', 'payitforward-video', 'payitforward'),
+
 
         # Product > Advantage
 
@@ -553,6 +563,7 @@ urlpatterns += patterns('',
     ('^home-security/business-security-systems$',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
 )
+
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns() 
