@@ -15,7 +15,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
 
-from apps.contact.forms import LeadForm, AffiliateLongForm, PayItForwardForm
+from apps.contact.forms import LeadForm, AffiliateLongForm 
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
