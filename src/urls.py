@@ -173,7 +173,7 @@ else:
     urlpatterns += patterns('',
 
         # Test Pages
-        dtt(r'^test/top-consumer/?$', 'tests/top-consumer-test.html', 'top-consumer-test', 'home'),
+        dtt(r'^test/cell-takeover/?$', 'tests/cell-takeover-test.html', 'cell-takeover-test', 'home'),
 
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),

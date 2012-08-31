@@ -14,64 +14,8 @@
 {% block content %}
 </div>
 
-<div id="top-content">
-    <div class="wrapper">
-        <div id="top-hero-banner-controls">
-            <div id="hero-left-arrow">&nbsp;</div>
-            <div id="pager-container">
-                <ul>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                </ul>
-            </div>
-            <div id="hero-right-arrow">&nbsp;</div>
-            
-            
-        </div>
-        <div id="top-hero-banner">
-            <div id="touchscreen-banner">
-                <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
-                <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
-                
-                <div id="touchscreen-banner-content">
-                    <p>Price Today: <em>$49</em><strong>$115</strong> <span>when you order a gold or platinum package</span></p>
-                    <em>While Supplies Last!</em>
-                    
-                    <div class="button-link">
-                        <a href="http://www.protectamerica.com/products/security-equipment/accessories/touchscreen" title="Add a GE Simon XT Touch Screen to any package today">Learn More ></a>
-                    </div>
-                </div>
-            </div>
-            <div id="interactive-banner">
-                <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
-                <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
-                
-                <div id="interactive-banner-content">
-                    <p>Included <strong>FREE*</strong> <span>with cellular or broadband monitoring.</span></p>
-                    <div class="button-link">
-                        <a href="{% url cellular %}" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
-                    </div>
-                </div>
+{% include "banners/seo-hero-images.html" %}
 
-            </div>
-            <div id="keychain-banner">
-                <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/2-keychains-hero-image.jpg" id="keychain-image" alt="Get 2 Keychain Remotes Free when you order a security system" width="280" height="360" />
-                <div id="keychain-banner-content">
-                    <h2>Security Made Easy. <span>One Button Arming from your Keychain</span></h2>
-                    <p>Two <strong>FREE*</strong> Keychain Remotes <span>when you order any home security system.</span></p>
-                    <div class="button-submit">
-                        <a href="{% url order-package %}" title="Order Now and Get Two Free Keychain Remotes">Order Now ></a>
-                    </div>
-                    <em>*Restrictions apply. Expires August 31, 2012</em>
-                </div>
-            </div>
-
-
-        </div>
-        {% include "order/quote-form.html" with form=forms.basic %}
-    </div>
-</div>
 
 <div class="wrapper">
     {% include "order/call-box.html" %}
