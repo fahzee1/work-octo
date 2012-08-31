@@ -52,3 +52,8 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     os.path.join(TEMPLATE_DIRS[1], 'static'),
 )
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}

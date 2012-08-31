@@ -15,8 +15,10 @@
 {% block content %}
 <div class="wrapper">
     <div class="left-column main-content">
-        <h2>According to A Secure Life,</h2>
-        <h1>"...Protect America is the company to beat."</h1>
+        {% block top-content %}
+            <h2>According to A Secure Life,</h2>
+            <h1>"...Protect America is the company to beat."</h1>
+        {% endblock %}
         <img src="{{ STATIC_URL }}img/affiliates/generic-review-page/woman-with-app.jpg" alt="woman-with-app" width="280" height="424" class="main-woman">
         <span>&nbsp;</span>
         <ul>
@@ -122,11 +124,12 @@
         <h2>Award-Winning Security Monitoring</h2>
         <p>Quality security service at an affordable price draws attention… and awards.</p>
         <p>Protect America has received the coveted 5-star rating from TopConsumerReviews.com for the last 5 years. In addition, our Copper Security Package has been named a Consumer’s Digest Best Buy since 2008. Other companies can’t beat our prices and service. Most won’t even try!</p>
-        <h2>Protect America is "the company to beat!"</h2>
-        <p>A Secure Life has noticed it and you should too! No company can match Protect America’s affordability and quality. That’s why A Secure Life said, "Customers who choose Protect America over comparable systems from many other home security providers save money and receive products that have more options."</p>
+        {% block bottom-content %}
+            <h2>Protect America is "the company to beat!"</h2>
+            <p>A Secure Life has noticed it and you should too! No company can match Protect America’s affordability and quality. That’s why A Secure Life said, "Customers who choose Protect America over comparable systems from many other home security providers save money and receive products that have more options."</p>
+        {% endblock %}
     </div>
     {% addtoblock "js" %}
-        <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
             $('#search-testimonial-box').cycle({
