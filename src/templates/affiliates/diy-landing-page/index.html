@@ -1,0 +1,127 @@
+
+{% extends "affiliates/generic-landing-base/index.html" %}
+{% load sekizai_tags content_tags content_filters %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/diy-landing-page/style.css">
+    <script type="text/javascript" src="//use.typekit.net/vwb5haa.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+
+{% block typekit %}tk-museo-slab{% endblock %}
+
+{% block left-wrapper %}
+    <h1>Simple, Easy <span>Do It Yourself<br/>Home Security</span></h1>
+    <h2>with 24/7 Professional Monitoring</h2>
+{% endblock %}    
+
+{% block assurance-block-one %}
+    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
+    <h3>Customizable Security Packages</h3>
+{% endblock %}
+
+{% block assurance-block-two %}
+    <img src="{{ STATIC_URL }}img/extra/diy-token.png" alt="diy-token" width="111" height="111" />
+    <h3>Easy Wireless Installation</h3>
+{% endblock %}
+
+{% block assurance-block-three %}
+    <img src="{{ STATIC_URL }}img/extra/hammer-token.png" alt="hammer-token" width="111" height="111" />
+    <h3>Lifetime Equipment Warranty</h3>
+{% endblock %}
+
+{% block assurance-block-four %}
+    <img src="{{ STATIC_URL }}img/extra/20-percent-token.png" alt="20-percent-token" width="111" height="111" />
+    <h3>Homeowner's Insurance Discount</h3>
+{% endblock %}
+
+{% block assurance-block-five %}
+    <img src="{{ STATIC_URL }}img/extra/dollar-sign-token.png" alt="dollar-sign-token" width="111" height="111" />
+    <h3>Lowest Price Guaranteed</h3>
+{% endblock %}
+
+{% block assurance-card-one %}
+    <div id="">
+        <h2>Self Installation <span>in Less than an Hour</span></h2>
+        <p></p>
+
+    </div>
+{% endblock %}
+
+{% block assurance-card-two %}
+    <div class="image-area">
+        
+    </div>
+    <div class="copy-point">
+        <h2>Getting a Pizza Delivered <span>Would Take More Time</span></h2>
+        <p>Installing your wireless home security system is convenient and easy. Security systems from Protect America are designed to be installed by customers without help from a professional. No wires or drilling holes in your walls! The installation process can be completed in as little as 30 minutes, even by someone with limited technical knowledge. Go ahead and order that pizza, you'll be done by the time it gets to your newly protected house.  </p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block assurance-card-three %}
+    <div class="image-area">
+        
+    </div>
+    <div class="copy-point">
+        <h2>If It Breaks, We Replace It. <span>The Only Thing Simpler is Self-Installation.</span></h2>
+        <p>Protect America is dedicated to providing your home with comprehensive protection day and night. That’s why we replace any broken part of your security system for free! Sensors not working? We’ll send new ones. Even if your whole system is malfunctioning, we’ll replace it. Protect America is committed to your home security and we’re serious about proving it.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block assurance-card-four %}
+    <div class="image-area">
+        
+    </div>
+    <div class="copy-point">
+        <h2>Give Insurance Companies Less <span>and Your Family More</span></h2>
+        <p>Home security systems work! In fact, your new alarm system is so effective that most insurance providers offer discounts to new security customers. Just install a security system in your home and receive up to a 20 percent discount on your monthly premium The savings really add up and can be worth as much as $500 over the course of your contract.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block assurance-card-five %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/protect-america-lowest-price-guaranteed.jpg" alt="protect-america-lowest-price-guaranteed" id="lowest-price-image" />
+    </div>
+    <div class="copy-point">
+        <h2>The Only Guarantees in Life <span>are Death, Taxes, and Our Low Prices</span></h2>
+        <p>Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America offers the best guaranteed deal in the industry. Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected… for less than your neighbor.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+
+{% endblock %}

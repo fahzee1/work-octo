@@ -1,0 +1,68 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+<div id="top-content">
+    <div class="wrapper">
+        <div id="top-hero-banner-controls">
+            <div id="hero-left-arrow">&nbsp;</div>
+            <div id="pager-container">
+                <ul>
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+                </ul>
+            </div>
+            <div id="hero-right-arrow">&nbsp;</div>
+            
+            
+        </div>
+        <div id="top-hero-banner">
+            <div id="touchscreen-banner" data-url="{% url touchscreen %}">
+                <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
+                <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
+                
+                <div id="touchscreen-banner-content">
+                    <p>Price Today: <strong>Free</strong> <span>when you order:</span></p>
+                    <ul>
+                        <li>
+                            <a href="{% url silver %}" title="Silver Home Security Package">
+                                <img src="{{ STATIC_URL }}img/banners/hero-banners/touchscreen/silver-medal-icon.jpg" alt="silver-medal-icon" width="24" height="24" />Silver Package</li>
+                            </a>
+                        <li>
+                            <a href="{% url gold %}" title="Gold Home Security Package">
+                                <img src="{{ STATIC_URL }}img/banners/hero-banners/touchscreen/gold-medal-icon.jpg" alt="silver-medal-icon" width="24" height="24" />Gold Package
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url platinum %}" title="Platinum Home Security Package">
+                                <img src="{{ STATIC_URL }}img/banners/hero-banners/touchscreen/platinum-medal-icon.jpg" alt="silver-medal-icon" width="24" height="24" />Platinum Package
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="button-link">
+                        <a href="{% url touchscreen %}" title="Add a GE Simon XT Touch Screen to any package today">Learn More ></a>
+                    </div>
+                </div>
+            </div>
+            <div id="interactive-banner" data-url="{% url cellular %}">
+                <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
+                <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
+                
+                <div id="interactive-banner-content">
+                    <p>Included <strong>FREE*</strong> <span>with cellular or broadband monitoring.</span></p>
+                    <div class="button-link">
+                        <a href="{% url cellular %}" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
+                    </div>
+                </div>
+            </div>
+            <div id="top-consumer-banner" data-url="{% url copper %}">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
+                <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
+                <div id="top-consumer-content">
+                    <p>"Protect America provides the <strong>best home security solution</strong> available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are] <strong>top-notch.</strong>"</p>
+                    <em>&ndash; Top Consumer Reviews, 2012</em>
+                </div>
+            </div>
+        </div>
+        {% include "order/quote-form.html" with form=forms.basic %}
+    </div>
+</div>

@@ -257,7 +257,7 @@ class TellAFriend(models.Model):
             t.render(c),
             '"%s" <noreply@protectamerica.com>' % self.name,
             [self.friend_email],
-            ['"Robert Johnson" <robert@protectamerica.com>'],
+            ['"Protect America" <noreply@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
         
@@ -285,3 +285,24 @@ class DoNotCall(models.Model):
 
     def __unicode__(self):
         return '%s : %s' % (self.name, self.phone,)
+
+class PayItForward(models.Model):
+
+    first_name = models.CharField(max_length=64)
+    last_name = models.CharField(max_length=64)
+    email = models.EmailField(max_length=128)
+    comments = models.TextField()
+
+    def email_shawne(self):
+        t = loader.get_template('emails/pay_it_forward.html')
+        c = Context({'sub': self})
+        email = EmailMessage(
+            'New Pay It Forward Submission',
+            t.render(c),
+            '"Protect America" <noreply@protectamerica.com>',
+            ['SHAWNE@protectamerica.com', 'robert@protectamerica.com'],
+            ['"Protect America" <noreply@protectamerica.com>'])
+        email.send()
+
+    def __unicode__(self):
+        return '%s %s - %s' % (self.first_name, self.last_name, self.email)

@@ -10,7 +10,8 @@ from apps.contact.models import (Submission,
                                  MovingKit,
                                  TellAFriend,
                                  DoNotCall,
-                                 Lead)
+                                 Lead,
+                                 PayItForward)
 
 class PAContactForm(ModelForm):
     class Meta:
@@ -116,3 +117,14 @@ class TellAFriendForm(ModelForm):
 class DoNotCallForm(ModelForm):
     class Meta:
         model = DoNotCall
+
+class PayItForwardForm(ModelForm):
+    class Meta:
+        model = PayItForward
+
+    def __init__(self, *args, **kwargs):
+        super(PayItForwardForm, self).__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs['style'] = 'width: 200px; margin-left: 4px;'
+        self.fields['last_name'].widget.attrs['style'] = 'width: 200px; margin-left: 4px;'
+        self.fields['email'].widget.attrs['style'] = 'width: 200px; margin-left: 35px;'
+        self.fields['comments'].widget.attrs['style'] = 'width: 280px; height: 100px;'

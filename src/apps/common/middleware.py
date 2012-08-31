@@ -105,13 +105,26 @@ class CommonMiddlewareWrapper(object):
         Check for denied User-Agents and rewrite the URL based on
         settings.APPEND_SLASH and settings.PREPEND_WWW
         """
-        if settings.SITE_ID != 1 or settings.DEBUG == True:
-            return
+        try:
+            siteid = settings.SITE_ID
+        except:
+            siteid = None
+        
+        # We were seeing some weird issues with google showing the wrong
+        # result in the organic listing. I think it has to do with the google
+        # bots not catching the WSGI setting, so I am going to redirect the user
+        # to www.pa.com if the site id isn't set 
+        if siteid is None:
+            return HttpResponseRedirect('http://www.protectamerica.com/')
+
         # Check for a redirect based on settings.APPEND_SLASH
         # and settings.PREPEND_WWW
         host = request.get_host()
         old_url = [host, request.path]
         new_url = old_url[:]
+
+        if settings.SITE_ID != 1 or settings.DEBUG == True:
+            return
 
         if (old_url[0] and not old_url[0].startswith('www.')):
             new_url[0] = 'www.' + old_url[0]
