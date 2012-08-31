@@ -13,7 +13,7 @@ from django.conf import settings
 
 from apps.contact.models import GoogleExperiment
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
-    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm)
+    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm, PayItForwardForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
@@ -353,3 +353,20 @@ def donotcall(request):
                                'formset': formset,
                                'pages': ['support', 'help'],
                                'page_name': 'tell-a-friend'})
+
+def payitforward(request):
+    if request.method == "POST":
+        form = PayItForwardForm(request.POST)
+        if form.is_valid():
+            formset = form.save(commit=False)
+            formset.save()
+            formset.email_shawne()
+            form.submitted = True
+
+    else:
+        form = PayItForwardForm()
+
+    return simple_dtt(request, 'payitforward/contact.html', {
+                               'form': form,
+                               'pages': ['about'],
+                               'page_name': 'payitforward-contact'})
