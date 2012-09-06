@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.contact.models import Submission, ContactUs, MovingKit, CEOFeedback, TellAFriend, GoogleExperiment, Lead
+from apps.contact.models import Submission, ContactUs, MovingKit, CEOFeedback, TellAFriend, GoogleExperiment, Lead, PayItForward
 
 class SubmissionAdmin(admin.ModelAdmin):
     model = Submission
@@ -31,3 +31,7 @@ class LeadAdmin(admin.ModelAdmin):
     list_filter = ('agent_id',)
     search_fields = ['id', 'agent_id', 'phone', 'email', 'search_keywords']
 admin.site.register(Lead, LeadAdmin)
+
+class PayItForwardAdmin(admin.ModelAdmin):
+    model = PayItForward
+admin.site.register(PayItForward, PayItForwardAdmin)

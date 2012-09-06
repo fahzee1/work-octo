@@ -18,11 +18,25 @@ body {
         background: url('/static/img/affiliates/diy-landing-page/blue-grid.jpg') repeat;
         height: 408px;
         margin: 8px 0 0 8px;
+        #blueprint-ge-logo {
+            padding: 8px;
+        }
+        #touchscreen-offer {
+            position: absolute;
+            left: -96px;
+            top: 96px;
+        }
+        #touchscreen-offer-content {
+            position: absolute;
+            left: 300px;
+            top: 16px;
+        }
         h1 {
             font-size: 24px;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: #555;
+            padding-bottom: 0;
             span {
                 display: block;
                 font-size: 38px;
@@ -30,7 +44,22 @@ body {
             }
         }
         h2 {
-            
+            text-transform: uppercase;
+            font-size: 17px;
+            line-height: 17px;
+            letter-spacing: 0;
+        }
+        ul {
+            padding-top: 24px;
+            li {
+                color: @red;
+                text-transform: uppercase;
+                font-size: 21px;
+                line-height: 24px;
+                padding-left: 64px;
+                padding-bottom: 24px;
+                font-weight: bold;
+            }
         }
     }
     #quote-area {
@@ -60,6 +89,7 @@ body {
     }    
 }
 #five-blocks {
+    position: relative;
     .assurance-block {
         background: transparent;
         text-align: center;
@@ -85,12 +115,83 @@ body {
             border: 1px solid #ddbc8c;
         }
     }
-}
-#five-cards {
-    background: url('/static/img/affiliates/diy-landing-page/paper-bg.jpg') repeat;
-    .drop-shadow(0px, 2px, 3px, @grey);
     #selector-arrow {
         background: url(/static/img/affiliates/diy-landing-page/paper-arrow.png) no-repeat;
+    }
+}
+#five-cards {
+    overflow: hidden;
+    background: url('/static/img/affiliates/diy-landing-page/paper-bg.jpg') repeat;
+    .drop-shadow(0px, 2px, 3px, @grey);
+
+    #bronze-package, #silver-package, #gold-package, #copper-package, #platinum-package, #business-package {
+        width: 304px;
+        height: 328px;
+        background: url('/static/img/affiliates/diy-landing-page/package-bg.jpg') repeat;
+        margin: 8px;
+        float: left;
+        h3 {
+            text-align: center;
+            color: @black;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: bold;
+            span {
+                display: block;
+                font-size: 20px;
+            }
+        }
+        .equipment-price, .monitoring-price {
+            width: 112px;
+            height: 80px;
+            .border-radius(5px,5px,5px,5px);
+            background: @white;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            float: left;
+            margin: 8px;
+            line-height: 16px;
+            font-size: 13px;
+            text-transform: uppercase;
+            strong {
+                display: block;
+                color: @blue;
+                font-size: 30px;
+                font-weight: normal;
+                line-height: 32px;
+                sup {
+                    font-size: 10px;
+                    position: relative;
+                    bottom: 2px;
+                }
+                span {
+                    display: block;
+                    font-size: 10px;
+                    line-height: 14px;
+                }
+            }
+        }
+        .equipment-price {
+            margin-left: 16px;
+        }
+        &:hover {
+            .drop-shadow(0px, 2px, 10px, @light-grey);
+            cursor: pointer;
+            cursor: hand;
+        }
+        &.active {
+            .drop-shadow(0px, 2px, 5px, @grey);
+            cursor: default;
+            .equipment-price, .monitoring-price {
+                background: @v-light-blue;
+
+            }
+        }
+
+    }
+    #package-set-two {
+        display: none;
     }
     .assurance-card {
         background: transparent;
@@ -98,7 +199,7 @@ body {
             width: 275px;
             float: left;
             padding: 16px;
-            height: 363px;
+            height: 331px;
             img#lowest-price-image {
                 padding-top: 45px;
             }
@@ -134,6 +235,27 @@ body {
                     }
                 }
             }
+        }
+    }
+}
+#order-footer #footer-package-section {
+    text-transform: uppercase;
+    background: url('/static/img/affiliates/diy-landing-page/blue-grid.jpg') repeat;
+    margin: 8px;
+    width: 294px;
+    height: 112px;
+    h2 {
+        font-weight: bold;
+        font-size: 22px;
+    }
+    p {
+        text-align: left;
+        font-size: 15px;
+        color: #555;
+        span {
+            font-size: 20px;
+            padding-bottom: 8px;
+            color: @black;
         }
     }
 }

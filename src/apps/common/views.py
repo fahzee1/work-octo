@@ -15,7 +15,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
 
-from apps.contact.forms import LeadForm, AffiliateLongForm
+from apps.contact.forms import LeadForm, AffiliateLongForm 
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
@@ -147,6 +147,16 @@ def payitforward(request):
 
     forms = {}
     forms['basic'] = LeadForm()
+
+    if request.method == "POST":
+        form = PayItForwardForm(request.POST)
+        if form.is_valid():
+            formset = form.save(commit=False)
+            formset.save()
+            formset.email_shawne()
+
+    else:
+        form = PayItForwardForm()
 
     return render_to_response('payitforward.html',
         {
