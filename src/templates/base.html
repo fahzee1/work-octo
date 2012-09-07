@@ -436,7 +436,7 @@
 {% render_block "js" %}
 
 {% block extra_pixels %}
-{{ pixels|safe }}
+{{ pixels|default_if_none:""|safe }}
 {% endblock %}
 
 <!-- Google Code for Home Page Visit Remarketing List -->
