@@ -78,6 +78,7 @@
     {% endcomment %}
 </div>
 <div class="clear"></div>
+{% comment %}
 <div id="crime-statistics">
     <h2>Crime Grade and Statistics Scorecard</h2>
     <div id="crime-grade-scorecard">
@@ -137,6 +138,7 @@
         <div class="clear"></div>
     </div>
 </div>
+{% endcomment %}
     {% if latest_year.stats.burglary_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Burglary Crime Statistics</h2>
@@ -147,7 +149,9 @@
                     <th>&nbsp;</th>
                     <th>Burglaries</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -156,8 +160,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.burglary }}</td>
-                    <td>{{ crimeyear.stats.burglary_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.burglary_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.burglary_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -176,7 +182,9 @@
                     <th>&nbsp;</th>
                     <th>Murders</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -185,8 +193,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.murder_and_nonnegligent_manslaughter }}</td>
-                    <td>{{ crimeyear.stats.murder_and_nonnegligent_manslaughter_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.murder_and_nonnegligent_manslaughter_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.murder_and_nonnegligent_manslaughter_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -205,7 +215,9 @@
                     <th>&nbsp;</th>
                     <th>Forcible Rape</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -214,8 +226,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.forcible_rape }}</td>
-                    <td>{{ crimeyear.stats.forcible_rape_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.forcible_rape_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.forcible_rape_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -235,7 +249,9 @@
                     <th>&nbsp;</th>
                     <th>Robbery Crime</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -244,8 +260,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.robbery }}</td>
-                    <td>{{ crimeyear.stats.robbery_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.robbery_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.robbery_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -264,7 +282,9 @@
                     <th>&nbsp;</th>
                     <th>Aggravated Assault</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -273,8 +293,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.aggravated_assault }}</td>
-                    <td>{{ crimeyear.stats.aggravated_assault_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.aggravated_assault_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.aggravated_assault_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -293,7 +315,9 @@
                     <th>&nbsp;</th>
                     <th>Auto Theft</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -302,8 +326,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.motor_vehicle_theft }}</td>
-                    <td>{{ crimeyear.stats.motor_vehicle_theft_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.motor_vehicle_theft_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.motor_vehicle_theft_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -322,7 +348,9 @@
                     <th>&nbsp;</th>
                     <th>Larceny</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -331,8 +359,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.larceny_theft }}</td>
-                    <td>{{ crimeyear.stats.larceny_theft_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.larceny_theft_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.larceny_theft_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
