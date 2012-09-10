@@ -267,6 +267,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {% if debug %}
         $('#top-hero-banner').cycle('pause');
         {% endif %}
+        {% if 'hic_test' in request.GET %}
+        setCookie('hic_test', 'true');
+        {% endif %}
     });
     </script>
 {% endaddtoblock "js" %}
