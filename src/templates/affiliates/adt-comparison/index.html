@@ -1,0 +1,123 @@
+
+{% extends "affiliates/generic-landing-base/index.html" %}
+{% load sekizai_tags content_tags content_filters %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/adt-comparison/adt-comparison.css">
+    <script type="text/javascript" src="//use.typekit.net/qrm2ztf.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+
+{% block typekit %}tk-museo-slab{% endblock %}
+
+{% block left-wrapper %}
+    <h1 class="tk-freight-sans-pro">How Do You Like Them Apples!</h1>
+    <h2 class="tk-freight-sans-pro">A True Security Comparison.</h2>
+    <img src="{{ STATIC_URL }}/img/affiliates/adt-comparison/apples-top.jpg" alt="apples-top" width="540" height="169" />
+    <h3>What ADT won’t say, speaks volumes:</h3>
+{% endblock %}    
+
+{% block assurance-block-one %}
+    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
+    <h3>Customizable Security Packages</h3>
+{% endblock %}
+
+{% block assurance-block-two %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/mobile-icon.png" alt="mobile-icon" width="120" height="117" />
+    <h3>System control from your smartphone</h3>
+{% endblock %}
+
+{% block assurance-block-three %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/shh-icon.png" alt="shh-icon" width="118" height="115" />
+    <h3>What ADT Won't Say  </h3>
+{% endblock %}
+
+{% block assurance-block-four %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-icon.png" alt="money-icon" width="117" height="115" />
+    <h3>A Cost Comparison</h3>
+{% endblock %}
+
+{% block assurance-block-five %}
+    <img src="{{ STATIC_URL }}img/extra/dollar-sign-token.png" alt="dollar-sign-token" width="111" height="111" />
+    <h3>Lowest Price Guaranteed</h3>
+{% endblock %}
+
+{% block assurance-card-one %}
+    <div id="">
+        <h2>Self Installation <span>in Less than an Hour</span></h2>
+        <p></p>
+
+    </div>
+{% endblock %}
+
+{% block assurance-card-two %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.jpg" alt="interactive" width="652" height="319" />
+    </div>
+    <div class="copy-point">
+        <h2 class="tk-freight-sans-pro">Control Your Security from Anywhere in the World.</h2>
+        <p class="tk-freight-sans-pro">Choose a cellular or broadband monitoring and your account comes with FREE interactive features. Arm your system and program rules to fit your needs anywhere, anytime through your computer or smart phone.<span> With ADT, interactive access could cost you as much as $599!</span> </p>
+    </div>
+    <div id="interactive-call-outs">
+        bvjksd,zvfzbvdfhzb
+        </div>
+{% endblock %}
+
+{% block assurance-card-three %}
+    <div class="image-area">
+        
+    </div>
+    <div class="copy-point">
+        <h2>If It Breaks, We Replace It. <span>The Only Thing Simpler is Self-Installation.</span></h2>
+        <p>Protect America is dedicated to providing your home with comprehensive protection day and night. That’s why we replace any broken part of your security system for free! Sensors not working? We’ll send new ones. Even if your whole system is malfunctioning, we’ll replace it. Protect America is committed to your home security and we’re serious about proving it.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block assurance-card-four %}
+    <div class="image-area">
+        
+    </div>
+    <div class="copy-point">
+        <h2>Give Insurance Companies Less <span>and Your Family More</span></h2>
+        <p>Home security systems work! In fact, your new alarm system is so effective that most insurance providers offer discounts to new security customers. Just install a security system in your home and receive up to a 20 percent discount on your monthly premium The savings really add up and can be worth as much as $500 over the course of your contract.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block assurance-card-five %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/protect-america-lowest-price-guaranteed.jpg" alt="protect-america-lowest-price-guaranteed" id="lowest-price-image" />
+    </div>
+    <div class="copy-point">
+        <h2>The Only Guarantees in Life <span>are Death, Taxes, and Our Low Prices</span></h2>
+        <p>Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America offers the best guaranteed deal in the industry. Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected… for less than your neighbor.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+
+{% endblock %}
