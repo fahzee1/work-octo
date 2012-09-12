@@ -1,38 +1,44 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Bronze Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
+{% block page_title %}Copper Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
+{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
 
 {% block content %}
 <div id="top-content">
-    <div id="bronze-package-offer" itemscope itemtype="http://schema.org/Product">
-        <h1 itemprop="name">Bronze Security Package</h1>
-        <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Bronze Security Package" />
+    <div id="copper-package-offer" itemscope itemtype="http://schema.org/Product">
+        <h1 itemprop="name">Copper Security Package</h1>
+        <img src="/static/img/products/copper-package/copper-package-simon-xt-no-medal.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Copper Security Package" />
         <ul itemprop="description">
             <li>GE Simon XT Control Panel</li>
             <li>3 Security Stickers</li>
-            <li>7 Door / Window Sensors</li>
+            <li>3 Door / Window Sensors</li>
             <li>1 Security Yard Sign </li>
             <li>1 Motion Detector</li>
             <li>Owner's Manual</li>
         </ul>
-        <div id="top-consumer-review-medal">
-            <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
-            <p>Five star rating in 2012 by TopConsumerReviews.com</p>
+        <div id="copper-package-best-buy">
+            <img src="/static/img/external/consumer-digest/consumer-digest-logo-transparent.png"  width="78" height="76" alt="Copper Package named a Consumer Digest Best Buy" />
+            <p>Voted a Consumers Digest<br/>"Best Buy" for 2012</p>
         </div>
-        <span>Equipment Price: <strong itemprop="price">FREE</strong></span>
+        <div id="package-price">
+            <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE</strong></span>
+            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>29.99</strong><em>per month</em></span>
+        </div>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
 <div class="clear"></div>
+{% include "banners/limited-time-offer.html" %}
 
-    {% include "banners/limited-time-offer.html" %}
-
-<div id="the-bronze-package">
-    <img src="/static/img/products/bronze-package/in-the-home.jpg" id="main-package-image" alt="Securing a home with up to seven doors or windows">
-    <div id="bronze-package-content">
-        <h1>In Your Home: Bronze Security</h1>
-        <p>The first of four levels of perimeter protection offered by Protect America, the Bronze Home Security System was designed to provide protection at each point of entry into your home. Ideal for houses under 1200 sq. ft, the Bronze Security Package features enough sensors to cover up to 7 doors and windows. Along with 7 door/window sensors, the Bronze Security Package also protects inside your home with a motion detector for use in heavily used rooms or hallways. Security systems from Protect America are incredibly easy to customize. Just ask one of our salespeople how you can add a garage door sensor or smoke detectors to your Bronze Package!  </p>
-        <div class="button-submit"><a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}</div>
+<div id="the-copper-package">
+    <img src="/static/img/products/copper-package/in-the-home.jpg" id="main-package-image" alt="Securing a home with up to three doors or windows">
+    <div id="copper-package-content">
+        <h1>In Your Home: Copper Security</h1>
+        <p>The average home in the United States has three or less outside doors. Though burglars will enter your home any way they can, most break-ins occur through an outside door. With three door / window sensors, the Copper Security Package has been designed to meet the basic security needs of most America houses. This security system also includes an infrared motion detector to increase your home's interior protection. Simply place the motion detector in a central hallway or the most commonly used living area of your home. Ask one of our home security experts today how to customize your system with additional security accessories, like smoke detectors and interactive cameras.</p>
+        <div class="button-submit"><a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Copper-B']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
@@ -43,7 +49,7 @@
 		</div>
 		<div>
     		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
-    		<strong>Seven (7)</strong> Door / Window Sensors
+    		<strong>Three (3)</strong> Door / Window Sensors
    		</div>
    		<div>
        		<img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
@@ -63,10 +69,10 @@
         </div>
     </div>
 
+
 </div>
 <div class="clear"></div>
     {% include "order/call-box.html" %}
-
 
 <div id="adt-comparison">
 
@@ -82,11 +88,11 @@
                 <tr>
                     <td><strong>Upfront Cost</strong></td>
                     <td class="call-out">FREE*</td>
-                    <td>$699</td>
+                    <td>$379</td>
                 </tr>
                 <tr class="alt">
                     <td><strong>Monthly Cost</strong></td>
-                    <td class="call-out">$35.99</td>
+                    <td class="call-out">$29.99</td>
                     <td>$42.99</td>
                 </tr>
                 <tr>
@@ -97,7 +103,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3"><a href="{% url low-price-guarantee %}" title="Click to learn about our Low Price Guarantee"><img src="{{ STATIC_URL }}/img/external/lowest-price-banner-stacked.png" alt="Protect America Guarantee's the Lowest Price for this Package" /></a></td>
+                    <td colspan="3">&nbsp;</td>
                 </tr>
             </tfoot>
         </table>
@@ -108,11 +114,12 @@
         <ul>
             <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/wireless-sensors.png" width="40" height="40" alt="Wireless Home Security" />Wireless sensors are <strong>easy to install</strong> and don't require drilling.</li>
             <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/save-money.png" width="40" height="40" alt="Save up to 20% on Homeowner's Insurance" />Homes with security systems <strong>save up to 20%</strong> on homeowner's insurance.</li>
+
             <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/free-relocation-kit.png"  width="40" height="40" alt="Free Moving Relocation Kit" />You <strong>own your security system</strong>. Moving to a new home is easy with our <strong>free relocation kit</strong>.</li>
             <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png"  width="40" height="40" alt="Free Replacement Parts Warranty" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
 
         </ul>
-        <div class="button-submit"><a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);" title="Order a Protect America Home Security System">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
+        <div class="button-submit"><a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);" title="Order a Protect America Home Security System">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
 
     </div>
     <div class="clear"></div>
@@ -122,22 +129,22 @@
     <h2>Flexible Monitoring Options:</h2>
     <ul id="monitoring-rates">
         <li>
-            <img src="/static/img/products/monitoring/cellular-icon.png" alt="Cellular Interactive Security Monitoring">
+            <img src="/static/img/products/monitoring/cellular-icon.png" width="128" height="120" alt="Home Security Cellular Connection">
             <h3>Cellular</h3>
-            <p><sup>$</sup>47<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>41<span>99</span><strong>/mo</strong></p>
             <a href="{% url cellular %}" class="button-link" title="Learn About Cellular Monitoring">Learn More ></a>
+        </li>
+        <li>
+            <img src="/static/img/products/monitoring/homepulse-icon.png" width="128" height="120" alt="Home Security Broadband Connection">
+            <h3>Broadband</h3>
+            <p><sup>$</sup>37<span>99</span><strong>/mo</strong></p>
+            <a href="{% url broadband %}" class="button-link" title="Learn About Homepulse Monitoring">Learn More ></a>
         </li>
 
         <li>
-            <img src="/static/img/products/monitoring/homepulse-icon.png" alt="Broadband Interactive Security Monitoring">
-            <h3>Broadband</h3>
-            <p><sup>$</sup>43<span>99</span><strong>/mo</strong></p>
-            <a href="{% url broadband %}" class="button-link" title="Learn About Homepulse Monitoring">Learn More ></a>
-        </li>
-        <li>
-            <img src="/static/img/products/monitoring/landline-icon.png" alt="Landline Security Monitoring">
+            <img src="/static/img/products/monitoring/landline-icon.png" width="128" height="120" alt="Home Security Landline Connection">
             <h3>Landline</h3>
-            <p><sup>$</sup>35<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>29<span>99</span><strong>/mo</strong></p>
             <a href="{% url landline %}" class="button-link" title="Learn About Landline Monitoring">Learn More ></a>
         </li>
         <div class="clear"></div>
@@ -145,9 +152,8 @@
     </ul>
 </div>
 
-<div class="clear"></div>
-{% testimonial_search "bronze" "limit=10&words=75" %}
-</div>
+{% testimonial_search "affordable" "limit=10&words=75" %}
+
 {% addtoblock "js" %}
     <script type="text/javascript">
     $(document).ready(function() {
@@ -158,12 +164,12 @@
     });
     </script>
 {% endaddtoblock "js" %}
-{% endblock %}  
 
+{% endblock %}  
 {% block page-product %}
-    <h2>Bronze Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $35.99/mo</p>
+    <h2>Copper Security Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $29.99/mo</p>
     <div class="button-submit">
-        <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
+        <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
     </div>
 {% endblock %}

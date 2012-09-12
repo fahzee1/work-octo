@@ -1,6 +1,7 @@
 {% extends "products/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Business Security System | Home Security Alarm Systems | Protect America{% endblock %}
+{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
 
 {% block content %}
 <div id="top-content">
@@ -20,8 +21,10 @@
             <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
             <p>Five star rating in 2012 by TopConsumerReviews.com</p>
         </div>
-        <span class="upfront-price">Equipment Price: <strong itemprop="price"><sup>$</sup>99</strong></span>
-        <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>44<sup class="cents">99</sup></strong></span>
+        <div id="package-price">
+            <span class="equipment-price">Equipment Price: <strong itemprop="price"><sup>$</sup>99</strong></span>
+            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>44.99</strong><em>per month</em></span>
+        </div>
 
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
