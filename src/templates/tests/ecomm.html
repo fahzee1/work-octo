@@ -4,6 +4,112 @@
 
 {% block content %}
 {% addtoblock "js" %}
-
+<script type="text/javascript">
+var cart_session = getCookie('paCart');
+if(!cart_session) {
+    reset_cart();
+}else{
+    cart_session = JSON.parse(cart_session); 
+}
+function add_to_cart(category, item, price) {
+    if(category == 'equipment') {
+        if(!cart_session[category][item]) {
+            cart_session[category][item] = {'price': price, 'count': 0};
+        }
+        cart_session[category][item]['count'] = (cart_session[category][item]['count'] + 1)
+    }else{
+        cart_session[category] = {'item': item, 'price': price};
+    }
+    setCookie('paCart', JSON.stringify(cart_session));
+    debug_cart();
+}
+function remove_from_cart(category) {
+    cart_session[category] = {}
+    debug_cart();
+}
+function get_total(category) {
+    var equipment_total = 0;
+    $.each(cart_session['equipment'], function(i, equip) {
+        equip_item_total = equip.count * equip.price;
+        equipment_total = equipment_total + equip_item_total;
+    });
+    return equipment_total;
+}
+function reset_cart() {
+    cart_session = {'monitoring': {}, 'package': {}, 'equipment': {}};
+    setCookie('paCart', JSON.stringify(cart_session));
+}
+function remove_item(category, item) {
+    if(category == 'equipment') {
+        if(!cart_session[category][item]) {
+            return false;
+        }
+        cart_session[category][item]['count'] = (cart_session[category][item]['count'] - 1)
+        if(cart_session[category][item]['count'] == 0) {
+            delete cart_session[category][item];
+        }
+    }else{
+        cart_session[category] = {};
+    }
+    setCookie('paCart', JSON.stringify(cart_session));
+    debug_cart();
+}
+function debug_cart() {
+    $('#debug').html('');
+    var monitoring = $('<ul/>');
+    $('<li/>').html('Item: ' + cart_session['monitoring']['item']).appendTo(monitoring);
+    $('<li/>').html('price: $' + cart_session['monitoring']['price']).appendTo(monitoring);
+    $('#debug').append($('<div/>').html(monitoring));
+    var package = $('<ul/>');
+    $('<li/>').html('Item: ' + cart_session['package']['item']).appendTo(monitoring);
+    $('<li/>').html('price: $' + cart_session['package']['price']).appendTo(monitoring);
+    $('#debug').append($('<div/>').html(monitoring));
+    $('#debug').append($('<div/>').html(package));
+    var equipment = $('<ul/>');
+    $.each(cart_session['equipment'], function(i, equip) {
+        $('<li/>').html(i + ' : ' + equip.count + ' : $' + (equip.count * equip.price) + ' <div class="remove_item" data-category="equipment" data-item="'+i+'">-</div>').appendTo(equipment);
+    });
+    $('#debug').append(equipment);
+    $('#debug').append($('<div/>').html('Total: $' + get_total()));
+}
+debug_cart();
+$('.add-to-cart').click(function(e) {
+    e.preventDefault();
+    var obj = $(this).parent();
+    add_to_cart(obj.attr('data-category'), obj.attr('data-item'), obj.attr('data-price'))
+});
+$('.remove_item').live('click', function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    remove_item(obj.attr('data-category'), obj.attr('data-item'));
+});
+$('.reset').click(function(e) {
+    e.preventDefault();
+    reset_cart();
+    debug_cart();
+});
+</script>
 {% endaddtoblock "js" %}
+<div id="debug"></div>
+<div class="reset">Reset Cart</div>
+<div class="item" data-price="39.99" data-item="cellular" data-category="monitoring">
+    Cellular - <span class='add-to-cart'>+</span>
+</div>
+<div class="item" data-price="49.99" data-item="broadband" data-category="monitoring">
+    Broadband - <span class='add-to-cart'>+</span>
+</div>
+
+<div class="item" data-price="0" data-item="copper" data-category="package">
+    Copper - <span class='add-to-cart'>+</span>
+</div>
+<div class="item" data-price="0" data-item="bronze" data-category="package">
+    Bronze - <span class='add-to-cart'>+</span>
+</div>
+
+<div class="item" data-price="1.99" data-item="sensor" data-category="equipment" data-monthly="1.99">
+    Motion Sensor - <span class='add-to-cart'>+</span>
+</div>
+<div class="item" data-price="5.99" data-item="detector" data-category="equipment" data-monthly="0">
+    Detector - <span class='add-to-cart'>+</span>
+</div>
 {% endblock %}

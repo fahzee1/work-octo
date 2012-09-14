@@ -174,7 +174,7 @@ else:
 
         # Test Pages
         dtt(r'^test/cell-takeover/?$', 'tests/cell-takeover-test.html', 'cell-takeover-test', 'home'),
-
+        dtt(r'^test/ecomm/?$', 'tests/ecomm.html', 'ecomm', 'home'),
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
