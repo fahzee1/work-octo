@@ -86,7 +86,7 @@ def view_testimonials(request):
 
 def testimonial(request, testimonial_id):
     try:
-        testimonial = Textimonial.objects.get(id=testimonial_id)
+        testimonial = Textimonial.objects.get(id=testimonial_id, display=True)
     except Textimonial.DoesNotExist:
         raise Http404
 
