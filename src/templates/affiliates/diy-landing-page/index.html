@@ -1,11 +1,62 @@
-
 {% extends "affiliates/generic-landing-base/index.html" %}
+
 {% load sekizai_tags content_tags content_filters %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/diy-landing-page/style.css">
     <script type="text/javascript" src="//use.typekit.net/vwb5haa.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var current_package = 'bronze';
+    var current_monitoring = 'landline';
+    var price_table = {
+        'bronze': {
+            'landline': {{ pricetable.BRONZE.landline_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.BRONZE.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.BRONZE.cellular_interactive_monitoring|cut:"$" }}
+        },
+        'silver': {
+            'landline': {{ pricetable.SILVER.landline_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.SILVER.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.SILVER.cellular_interactive_monitoring|cut:"$" }}
+        },
+        'gold': {
+            'landline': {{ pricetable.GOLD.landline_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.GOLD.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.GOLD.cellular_interactive_monitoring|cut:"$" }}
+        }
+    }
+    $('#package-set-one > div').click(function() {
+        current_package = $(this).attr('id').split('-package')[0];
+        render_changes();
+        $('#package-set-one > div').removeClass('active');
+        $(this).addClass('active');
+    });
+    $('#monitoring-set-one > div').click(function() {
+        current_monitoring = $(this).attr('id').split('-monitoring')[0];
+        render_changes();
+        $('#monitoring-set-one > div').removeClass('active');
+        $(this).addClass('active');
+    });
+    function render_changes() {
+        $('price').html(price_table[current_package][current_monitoring]);
+        $('#package-set-one > div').each(function(i) {
+            $(this).find('.monitoring-price em').html(
+                price_table[$(this).attr('id').split('-package')[0]][current_monitoring]
+            );
+        });
+        $('#monitoring-set-one > div').each(function(i) {
+            $(this).find('.monitoring-price em').html(
+                price_table[current_package][$(this).attr('id').split('-monitoring')[0]]
+            );
+        });
+    }
+    render_changes();
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
 
 {% block typekit %}tk-museo-slab{% endblock %}
@@ -59,7 +110,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>35.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="silver-package">
@@ -69,7 +120,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>37.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="gold-package">
@@ -79,7 +130,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>39.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
             </p>
         </div>
     </div>
@@ -91,7 +142,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>35.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="platinum-package">
@@ -101,7 +152,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>37.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="business-package">
@@ -111,7 +162,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>39.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
             </p>
         </div>
     </div>
@@ -125,7 +176,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>35.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="broadband-monitoring">
@@ -135,7 +186,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>37.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="cellular-monitoring">
@@ -145,7 +196,7 @@
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup>39.99<span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
             </p>
         </div>
     </div>
@@ -210,5 +261,5 @@
 {% endblock %}
 {% block page-product %}
     <h2>Home Security Package</h2>
-    <p><span>Equipment Price: <strong>$0*</strong></span>monthly monitoring starting at $35.99/mo</p>
+    <p><span>Equipment Price: <strong>$0*</strong></span>monthly monitoring starting at $<price>35.99</price>/mo</p>
 {% endblock %}
