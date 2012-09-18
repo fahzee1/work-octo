@@ -4,9 +4,10 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
+{% if not request.GET.hic_test %}
 <!-- Google Analytics Content Experiment code -->
 <script>function utmx_section(){}function utmx(){}(function(){var
-k='11866140-11',d=document,l=d.location,c=d.cookie;
+k='11866140-12',d=document,l=d.location,c=d.cookie;
 if(l.search.indexOf('utm_expid='+k)>0)return;
 function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
 indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
@@ -18,9 +19,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
 </script><script>utmx('url','A/B');</script>
 <!-- End of Google Analytics Content Experiment code -->
+{% endif %}
 
 {% endblock %}
-{% block page_title %}Free GE Home Security Systems and Home Alarms | Protect America{% endblock %}
+{% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
 {% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
 {% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
 
@@ -38,7 +40,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     <div id="customer-testimonials">
         <div class="ts_testimonial">
             <h1>Our Customers Love Our Home Security Systems</h1>
-            <div class="test_testimonial_box">
+            <div id="main-testimonials">
             {% testimonial_search "" "limit=5&template=old&words=25" %}
             </div>
         </div>
@@ -266,6 +268,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         });
         {% if debug %}
         $('#top-hero-banner').cycle('pause');
+        {% endif %}
+        {% if 'hic_test' in request.GET %}
+        setCookie('hic_test', 'true');
         {% endif %}
     });
     </script>

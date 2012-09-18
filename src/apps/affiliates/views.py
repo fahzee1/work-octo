@@ -244,7 +244,7 @@ def accept_affiliate_update(request, affiliate_id):
         raise Http404
 
     try:
-        affiliate = Affiliate.objects.get(id=affiliate_id)
+        affiliate = Affiliate.objects.get(agent_id=affiliate_id)
     except Affiliate.DoesNotExist:
         raise Http404
 
@@ -276,3 +276,19 @@ def accept_affiliate_update(request, affiliate_id):
 
     affiliate.save()
     return json_response({'success': True})
+
+def get_affiliate_information(request, affiliate_id):
+
+    try:
+        affiliate = Affiliate.objects.get(agent_id=affiliate_id)
+    except Affiliate.DoesNotExist:
+        raise Http404
+
+    info = {
+        'source': affiliate.name,
+        'phone': affiliate.phone,
+        'tracking_pixels': affiliate.pixels,
+        'conversion_pixels': affiliate.conversion_pixels,
+    }
+
+    return json_response({'success': True, 'affiliate': info})
