@@ -40,6 +40,7 @@ $(document).ready(function() {
         $('#monitoring-set-one > div').removeClass('active');
         $(this).addClass('active');
     });
+    {% comment %}
     $('.more-options').toggle(function(){
             $('#package-set-one').hide();
             $('#package-set-two').show();
@@ -47,6 +48,7 @@ $(document).ready(function() {
             $('#package-set-one').show();
             $('#package-set-two').hide();
         });
+    {% endcomment %}
     function render_changes() {
         $('price').html(price_table[current_package][current_monitoring]);
         $('#package-set-one > div').each(function(i) {
@@ -175,7 +177,7 @@ $(document).ready(function() {
         </div>
     </div>
     <p class="terms">3 Year Monitoring Agreement Required</p>
-    <p class="more-options">More Options ></p>
+    {% comment %}<p class="more-options">More Options ></p>{% endcomment %}
 {% endblock %}
 {% block assurance-card-two %}
     <div id="monitoring-set-one">
