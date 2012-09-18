@@ -9,23 +9,23 @@
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {
-    var current_package = 'bronze';
+    var current_package = 'copper';
     var current_monitoring = 'landline';
     var price_table = {
-        'bronze': {
-            'landline': {{ pricetable.BRONZE.landline_monitoring|cut:"$" }},
-            'broadband': {{ pricetable.BRONZE.broadband_monitoring|cut:"$" }},
-            'cellular': {{ pricetable.BRONZE.cellular_interactive_monitoring|cut:"$" }}
+        'copper': {
+            'landline': {{ pricetable.COPPER.landline_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.COPPER.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.COPPER.cellular_monitoring|cut:"$" }}
         },
         'silver': {
             'landline': {{ pricetable.SILVER.landline_monitoring|cut:"$" }},
             'broadband': {{ pricetable.SILVER.broadband_monitoring|cut:"$" }},
-            'cellular': {{ pricetable.SILVER.cellular_interactive_monitoring|cut:"$" }}
+            'cellular': {{ pricetable.SILVER.cellular_monitoring|cut:"$" }}
         },
-        'gold': {
-            'landline': {{ pricetable.GOLD.landline_monitoring|cut:"$" }},
-            'broadband': {{ pricetable.GOLD.broadband_monitoring|cut:"$" }},
-            'cellular': {{ pricetable.GOLD.cellular_interactive_monitoring|cut:"$" }}
+        'platinum': {
+            'landline': {{ pricetable.PLATINUM.landline_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.PLATINUM.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.PLATINUM.cellular_monitoring|cut:"$" }}
         }
     }
     $('#package-set-one > div').click(function() {
@@ -119,7 +119,7 @@ $(document).ready(function() {
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>34.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="silver-package">
@@ -129,7 +129,7 @@ $(document).ready(function() {
                 Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
             </p>
             <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
+                Monitoring Rate: <strong><sup>$</sup><em>42.99</em><span>per month</span></strong>
             </p>
         </div>
         <div id="platinum-package">
