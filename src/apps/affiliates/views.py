@@ -223,62 +223,21 @@ def accept_affiliate(request):
     if not name:
         errors.append('no_source_in_request')
 
-    # check for duplicate agent_id
-    if Affiliate.objects.filter(agent_id=agent_id).count() > 0:
-        errors.append('duplicate_agentid')
-    if Affiliate.objects.filter(name=name).count() > 0:
-        errors.append('duplicate_source')
+    try:
+        affiliate = Affiliate.objects.get(agent_id=agent_id)
+    except Affiliate.DoesNotExist:
+        affiliate = Affiliate()
+        affiliate.agent_id = agent_id
 
     if len(errors):
         return json_response({'success': False, 'errors': errors})
 
-    affiliate = Affiliate()
-    affiliate.agent_id = agent_id
     affiliate.name = name
     affiliate.phone = phone
     affiliate.pixels = pixels
     affiliate.conversion_pixels = conversion_pixels
     affiliate.save()
 
-    return json_response({'success': True})
-
-@csrf_exempt
-def accept_affiliate_update(request, affiliate_id):
-    if request.method != "POST":
-        raise Http404
-
-    try:
-        affiliate = Affiliate.objects.get(agent_id=affiliate_id)
-    except Affiliate.DoesNotExist:
-        raise Http404
-
-    agent_id = request.POST.get('agentid', None).lower()
-    name = request.POST.get('source', None)
-    phone = request.POST.get('phone', '').replace('-', '')
-    pixels = request.POST.get('tracking_pixels', '')
-    conversion_pixels = request.POST.get('conversion_pixels', '')
-
-    if agent_id is not None:
-        if Affiliate.objects.filter(agent_id=agent_id).count() > 0:
-            errors.append('duplicate_agentid')
-        else:
-            affiliate.agent_id = agent_id
-    if name is not None:
-        if Affiliate.objects.filter(name=name).count() > 0:
-            errors.append('duplicate_source')
-        else:
-            affiliate.name = name
-    if phone:
-        affiliate.phone = phone
-    if pixels:
-        affiliate.pixels = pixels
-    if conversion_pixels:
-        affiliate.conversion_pixels = conversion_pixels
-
-    if len(errors):
-        return json_response({'success': False, 'errors': errors})
-
-    affiliate.save()
     return json_response({'success': True})
 
 def get_affiliate_information(request, affiliate_id):
