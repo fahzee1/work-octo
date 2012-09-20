@@ -213,8 +213,7 @@ def accept_affiliate(request):
     # check to make sure all required information is available
     agent_id = request.POST.get('agentid', False).lower()
     name = request.POST.get('source', False)
-    phone = request.POST.get('phone', '')
-    phone = phone.replace('-', '')
+    phone = request.POST.get('phone', '').replace('-', '')
     pixels = request.POST.get('tracking_pixels', '')
     conversion_pixels = request.POST.get('conversion_pixels', '')
 
@@ -225,7 +224,7 @@ def accept_affiliate(request):
 
     try:
         affiliate = Affiliate.objects.get(agent_id=agent_id)
-    except Affiliate.DoesNotExist:
+    except:
         affiliate = Affiliate()
         affiliate.agent_id = agent_id
 
