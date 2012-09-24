@@ -235,6 +235,7 @@ def accept_affiliate(request):
     affiliate.phone = phone
     affiliate.pixels = pixels
     affiliate.conversion_pixels = conversion_pixels
+    affiliate.thank_you = '/affiliate/'
     affiliate.save()
 
     return json_response({'success': True})
