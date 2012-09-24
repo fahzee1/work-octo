@@ -2,6 +2,9 @@
 
 {% load sekizai_tags content_tags content_filters %}
 
+{% block page_title %}DIY Home Security | Do It Yourself Home Security | Home Alarm Monitoring{% endblock %}
+{% block page_description %}Making home security simple, easy and affordable, Protect America's DIY home security systems even includes 24/7 professional home security monitoring. Call to get started today!{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/diy-landing-page/style.css">
     <script type="text/javascript" src="//use.typekit.net/vwb5haa.js"></script>
@@ -28,6 +31,7 @@ $(document).ready(function() {
             'cellular': {{ pricetable.PLATINUM.cellular_monitoring|cut:"$" }}
         }
     }
+    {% comment %}
     $('#package-set-one > div').click(function() {
         current_package = $(this).attr('id').split('-package')[0];
         render_changes();
@@ -40,7 +44,6 @@ $(document).ready(function() {
         $('#monitoring-set-one > div').removeClass('active');
         $(this).addClass('active');
     });
-    {% comment %}
     $('.more-options').toggle(function(){
             $('#package-set-one').hide();
             $('#package-set-two').show();
