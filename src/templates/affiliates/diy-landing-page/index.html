@@ -13,17 +13,17 @@ $(document).ready(function() {
     var current_monitoring = 'landline';
     var price_table = {
         'copper': {
-            'landline': {{ pricetable.COPPER.landline_monitoring|cut:"$" }},
+            'landline': {{ pricetable.COPPER.standard_monitoring|cut:"$" }},
             'broadband': {{ pricetable.COPPER.broadband_monitoring|cut:"$" }},
             'cellular': {{ pricetable.COPPER.cellular_monitoring|cut:"$" }}
         },
         'silver': {
-            'landline': {{ pricetable.SILVER.landline_monitoring|cut:"$" }},
+            'landline': {{ pricetable.SILVER.standard_monitoring|cut:"$" }},
             'broadband': {{ pricetable.SILVER.broadband_monitoring|cut:"$" }},
             'cellular': {{ pricetable.SILVER.cellular_monitoring|cut:"$" }}
         },
         'platinum': {
-            'landline': {{ pricetable.PLATINUM.landline_monitoring|cut:"$" }},
+            'landline': {{ pricetable.PLATINUM.standard_monitoring|cut:"$" }},
             'broadband': {{ pricetable.PLATINUM.broadband_monitoring|cut:"$" }},
             'cellular': {{ pricetable.PLATINUM.cellular_monitoring|cut:"$" }}
         }
@@ -67,7 +67,13 @@ $(document).ready(function() {
 </script>
 {% endaddtoblock "js" %}
 {% endblock %}
-
+{% block extra_javascript %}
+<script>
+$(document).ready(function() {
+    $('#assurance-block-three').trigger('click');
+});
+</script>
+{% endblock %}
 {% block typekit %}tk-museo-slab{% endblock %}
 
 {% block left-wrapper %}
@@ -102,8 +108,6 @@ $(document).ready(function() {
     <img src="{{ STATIC_URL }}img/extra/hammer-token.png" alt="hammer-token" width="111" height="111" />
     <h3>Lifetime Equipment Warranty</h3>
 {% endblock %}
-
-
 
 {% block assurance-block-five %}
     <img src="{{ STATIC_URL }}img/extra/dollar-sign-token.png" alt="dollar-sign-token" width="111" height="111" />
@@ -249,8 +253,8 @@ $(document).ready(function() {
         <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/protect-america-lowest-price-guaranteed.jpg" alt="protect-america-lowest-price-guaranteed" id="lowest-price-image" />
     </div>
     <div class="copy-point">
-        <h2>The Only Guarantees in Life <span>are Death, Taxes, and Our Low Prices</span></h2>
-        <p>Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America offers the best guaranteed deal in the industry. Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected… for less than your neighbor.</p>
+        <h2>Be Secure Against Crime <span>And High Prices</span></h2>
+        <p>Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America’s offer can’t be match! Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected without emptying your wallet.</p>
         {% if phone_number %}
             {% businesstime %}
             <div class="clear"></div>
