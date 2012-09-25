@@ -9,22 +9,8 @@
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/payitforward/payitforward.css">
     <script type="text/javascript" src="//use.typekit.net/hcr8tqq.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#control_arrow').click(function(e) {
-        e.preventDefault();
-        var $next = null;
-        $next = $(this).next();
-        if($next.length === 0) {
-            $next = $(this).siblings().first();
-        }
-        $(this).hide();
-        $next.show();
-    });
-});
-</script>//-->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jqbargraph.min.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
 
 {% block navigation %}
@@ -74,8 +60,12 @@ $(document).ready(function() {
         </ul>
     </div>
     <div id="body-container">
+        {% comment %}
         <img style="padding-left: 70px; margin-top: 55px;" src="{{ STATIC_URL }}img/payitforward/point-scale.png" alt="point-scale" width="662" height="358" />
         <h3 style="width: 200px; color: black; position: absolute; margin-left: 675px; margin-top: -250px;" class="tk-kremlin-pro-web-expanded">Keep track of where each team is with our real time point tracking system.<br /><img style="margin-left: 30px;" src="{{ STATIC_URL }}img/payitforward/arrow-hndwrtg-pointing-left.jpg" alt="arrow-hndwrtg-pointing-left" width="89" height="41" /></h3>
+        {% endcomment %}
+        <div id="barGraph" style="width: 920px; height: 360px; position: relative; text-align: center;"></div>
+        <div class="clear"></div>
     </div>
 </div>
 <div class="clear"></div>
@@ -123,4 +113,10 @@ $(document).ready(function() {
         <img src="{{ STATIC_URL }}img/payitforward/pa-logo-red.png" alt="pa-logo-red" width="220" height="84" />
     </div>
 </div>
+{% addtoblock "js" %}
+<script type="text/javascript">
+arrayOfData = {{ org_data|safe }}
+$('#barGraph').jqBarGraph({ data: arrayOfData, width: 920, height: 430, title: '<strong class="tk-kremlin-pro-web-expanded" style="font-size: 20px;">Point Tracking</strong>'  }); 
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
