@@ -415,6 +415,7 @@
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 {% endblock %}
+{% render_block "js" %}
 {% block extra_javascript %}
 
 {% if 'index' in active_pages %}
@@ -438,7 +439,6 @@
 </script>
 {% endif %}
 {% endblock %}
-{% render_block "js" %}
 
 {% block extra_pixels %}
 {{ pixels|default_if_none:""|safe }}
@@ -474,9 +474,5 @@ var google_conversion_value = 0;
 <!-- End Remarketing Code -->
 
 <!-- BEGIN LivePerson Monitor. --><script language='javascript'> var lpMTagConfig = {'lpServer' : "server.iad.liveperson.net",'lpNumber' : "34774121",'lpProtocol' : "https"}; function lpAddMonitorTag(src){if(typeof(src)=='undefined'||typeof(src)=='object'){src=lpMTagConfig.lpMTagSrc?lpMTagConfig.lpMTagSrc:'/hcp/html/mTag.js';}if(src.indexOf('http')!=0){src=lpMTagConfig.lpProtocol+"://"+lpMTagConfig.lpServer+src+'?site='+lpMTagConfig.lpNumber;}else{if(src.indexOf('site=')<0){if(src.indexOf('?')<0)src=src+'?';else src=src+'&';src=src+'site='+lpMTagConfig.lpNumber;}};var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','iso-8859-1');s.setAttribute('src',src);document.getElementsByTagName('head').item(0).appendChild(s);} if (window.attachEvent) window.attachEvent('onload',lpAddMonitorTag); else window.addEventListener("load",lpAddMonitorTag,false);</script><!-- END LivePerson Monitor. -->
-
-{% if debug %}
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-{% endif %}
 </body>
 </html>
