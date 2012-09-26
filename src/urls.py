@@ -221,8 +221,10 @@ else:
             'payitforward', ctx={'agent_id': 'i03237'}),
         dtt(r'^payitforward/involved/$', 'payitforward/involved.html', 'payitforward-involved',
             'payitforward', ctx={'agent_id': 'i03237'}),
-        dtt(r'^payitforward/point-tracking/$', 'payitforward/point-tracking.html',
-            'payitforward-point-tracking', 'payitforward', ctx={'agent_id': 'i03237'}),
+        #dtt(r'^payitforward/point-tracking/$', 'payitforward/point-tracking.html',
+        #    'payitforward-point-tracking', 'payitforward', ctx={'agent_id': 'i03237'}),
+        url(r'^payitforward/point-tracking/$', 'apps.payitforward.views.point_tracking',
+            name='payitforward-point-tracking'),
         dtt(r'^payitforward/awareness/$', 'payitforward/awareness.html', 'payitforward-awareness',
             'payitforward', ctx={'agent_id': 'i03237'}),
         dtt(r'^payitforward/point-scale/$', 'payitforward/point-scale.html',
@@ -426,8 +428,6 @@ else:
         #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
    
     url(r'^api/affiliate/$', 'apps.affiliates.views.accept_affiliate'),
-    url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/$',
-        'apps.affiliates.views.accept_affiliate_update'),
     url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/$',
         'apps.affiliates.views.get_affiliate_information'),
 
