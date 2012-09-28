@@ -363,10 +363,12 @@ def payitforward(request):
             formset.email_shawne()
             form.submitted = True
 
+            return HttpResponseRedirect(reverse('payitforward-thankyou'))
+
     else:
         form = PayItForwardForm()
 
-    return simple_dtt(request, 'payitforward/contact.html', {
+    return simple_dtt(request, 'payitforward/involved.html', {
                                'form': form,
                                'pages': ['about'],
-                               'page_name': 'payitforward-contact'})
+                               'page_name': 'payitforward-involved'})

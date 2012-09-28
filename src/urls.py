@@ -48,7 +48,8 @@ urlpatterns = patterns('',
             'mimetype': 'application/xml',
         }, name='index'),
     url(r'^sitemap/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
-    
+    url(r'^support/clear-my-cookies/$', 'apps.common.views.clear_my_cookies',
+        name='clear-my-cookies'),
     # affiliate urls
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
@@ -177,9 +178,6 @@ else:
         dtt(r'^test/touchscreen/?$', 'tests/touchscreen-banner-test.html', 'touchscreen-test', 'home'),
         dtt(r'^test/new-lineup/?$', 'tests/new-lineup-test.html', 'new-lineup-test', 'home'),
 
-
-            
-
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
@@ -197,6 +195,11 @@ else:
         dtt(r'^best-home-security-system/$', 'seo-pages/best-home-security-system.html', 'seo-best-home-security-system', 'about-us'),
         dtt(r'^home-security-companies/$', 'seo-pages/home-security-companies.html', 'seo-home-security-companies', 'about-us'),
 
+        # PAID LANDING PAGES
+        dtt(r'^home-security/business-security-systems/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^home-security/free-home-security-system/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
+        dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison/index.html', 'paid-adt-comparison-cat'),
+        dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
 
 
 
@@ -209,26 +212,45 @@ else:
 
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
-        'apps.common.views.thank_you', name='custom_thank_you',),
+            'apps.common.views.thank_you', name='custom_thank_you',),
 
 
 
         # pay it forward page
-        dtt(r'^payitforward/?$', 'payitforward/payitforward.html', 'payitforward'),
-        dtt(r'^payitforward/about/?$', 'payitforward/about.html', 'payitforward-about', 'payitforward'),
-        dtt(r'^payitforward/press/?$', 'payitforward/press.html', 'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
-        dtt(r'^payitforward/extras/?$', 'payitforward/extras.html', 'payitforward-extras', 'payitforward', ctx={'agent_id': 'i03237'}),
-        dtt(r'^payitforward/rules/?$', 'payitforward/rules.html', 'payitforward-rules', 'payitforward'),
-        dtt(r'^payitforward/thankyou/?$', 'payitforward/thankyou.html', 'payitforward-thankyou', 'payitforward', ctx={'agent_id': 'i03237'}),
-        dtt(r'^payitforward/teams/?$', 'payitforward/teams.html', 'payitforward-teams', 'payitforward'),
-        dtt(r'^payitforward/teams/2012/spring/?$', 'payitforward/spring2012.html', 'payitforward-spring2012', 'payitforward', ctx={'agent_id': 'i03237'}),
-        dtt(r'^payitforward/teams/2012/fall/?$', 'payitforward/fall2012.html', 'payitforward-fall2012', 'payitforward', ctx={'agent_id': 'i03237'}),
-        dtt(r'^payitforward/involved/?$', 'payitforward/involved.html', 'payitforward-involved', 'payitforward'),
-        dtt(r'^payitforward/point-tracking/?$', 'payitforward/point-tracking.html', 'payitforward-point-tracking', 'payitforward'),
-        dtt(r'^payitforward/awareness/?$', 'payitforward/awareness.html', 'payitforward-awareness', 'payitforward'),
-        dtt(r'^payitforward/point-scale/?$', 'payitforward/point-scale.html', 'payitforward-point-scale', 'payitforward'),
-        dtt(r'^payitforward/revenue/?$', 'payitforward/revenue.html', 'payitforward-revenue', 'payitforward'),
-        dtt(r'^payitforward/video/?$', 'payitforward/video.html', 'payitforward-video', 'payitforward'),
+        dtt(r'^payitforward/$', 'payitforward/payitforward.html',
+            'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/about/$', 'payitforward/about.html',
+            'payitforward-about', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/press/$', 'payitforward/press.html',
+            'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/extras/$', 'payitforward/extras.html',
+            'payitforward-extras', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/rules/$', 'payitforward/rules.html',
+            'payitforward-rules', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/thankyou/$', 'payitforward/thankyou.html', 
+            'payitforward-thankyou', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/teams/$', 'payitforward/teams.html',
+            'payitforward-teams', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/teams/2012/spring/$', 'payitforward/spring2012.html',
+            'payitforward-spring2012', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/teams/2012/fall/$', 'payitforward/fall2012.html',
+            'payitforward-fall2012', 'payitforward', ctx={'agent_id': 'i03237'}),
+        #dtt(r'^payitforward/involved/?$', 'payitforward/involved.html',
+        #    'payitforward-involved', 'payitforward', ctx={'agent_id': 'i03237'}),
+        url(r'^payitforward/involved/$',
+            'apps.contact.views.payitforward', name='payitforward-involved'),
+        #dtt(r'^payitforward/point-tracking/$', 'payitforward/point-tracking.html',
+        #    'payitforward-point-tracking', 'payitforward', ctx={'agent_id': 'i03237'}),
+        url(r'^payitforward/point-tracking/$', 'apps.payitforward.views.point_tracking',
+            name='payitforward-point-tracking'),
+        dtt(r'^payitforward/awareness/$', 'payitforward/awareness.html',
+            'payitforward-awareness', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/point-scale/$', 'payitforward/point-scale.html',
+            'payitforward-point-scale', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/revenue/$', 'payitforward/revenue.html',
+            'payitforward-revenue', 'payitforward', ctx={'agent_id': 'i03237'}),
+        dtt(r'^payitforward/video/$', 'payitforward/video.html',
+            'payitforward-video', 'payitforward', ctx={'agent_id': 'i03237'}),
 
 
         # Product > Advantage
@@ -276,7 +298,7 @@ else:
                         dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'equipment'),
                             dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
                             dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
-                            dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
+                            #dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
 
 
 
@@ -434,8 +456,12 @@ else:
         
         # Affiliate Resources
         
-        #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
-    
+        dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
+        url(r'^api/affiliate/$', 'apps.affiliates.views.accept_affiliate'),
+
+        url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/$',
+            'apps.affiliates.views.get_affiliate_information'),
+
     url(r'^news/', include('apps.news.urls', namespace='news')),
     url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
@@ -444,6 +470,9 @@ else:
         namespace='testimonials')),
     # CRM urls
     url(r'^crm/', include('apps.crm.urls', namespace='crm')),
+    # EMAIL URLS
+    url(r'^email/', include('apps.emails.urls', namespace='emails')),
+
     # comments urls
     url(r'^comments/posted/$', 'apps.crm.views.comment_posted',
         name='comments-comment-done'),
@@ -577,6 +606,8 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/help/return-policy/', 'permanent': True}),
     ('^pa/request-moving-kit/?$',
         redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
+    ('^home-security/business-security-systems$',
+        redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
 )
 
 if settings.DEBUG:
