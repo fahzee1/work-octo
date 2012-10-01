@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
 from apps.common.views import simple_dtt
@@ -200,3 +201,57 @@ def signup(request):
     ctx['affform'] = form
 
     return simple_dtt(request, 'contact-us/affiliates.html', ctx)
+
+@csrf_exempt
+def accept_affiliate(request):
+    # API listener to accept affiliate submissions
+    if request.method != "POST":
+        raise Http404
+
+    errors = []
+
+    # check to make sure all required information is available
+    agent_id = request.POST.get('agentid', False).lower()
+    name = request.POST.get('source', False)
+    phone = request.POST.get('phone', '').replace('-', '')
+    pixels = request.POST.get('tracking_pixels', '')
+    conversion_pixels = request.POST.get('conversion_pixels', '')
+
+    if not agent_id:
+        errors.append('no_agentid_in_request')
+    if not name:
+        errors.append('no_source_in_request')
+
+    try:
+        affiliate = Affiliate.objects.get(agent_id=agent_id)
+    except:
+        affiliate = Affiliate()
+        affiliate.agent_id = agent_id
+
+    if len(errors):
+        return json_response({'success': False, 'errors': errors})
+
+    affiliate.name = name
+    affiliate.phone = phone
+    affiliate.pixels = pixels
+    affiliate.conversion_pixels = conversion_pixels
+    affiliate.thank_you = '/affiliate/'
+    affiliate.save()
+
+    return json_response({'success': True})
+
+def get_affiliate_information(request, affiliate_id):
+
+    try:
+        affiliate = Affiliate.objects.get(agent_id=affiliate_id)
+    except Affiliate.DoesNotExist:
+        raise Http404
+
+    info = {
+        'source': affiliate.name,
+        'phone': affiliate.phone,
+        'tracking_pixels': affiliate.pixels,
+        'conversion_pixels': affiliate.conversion_pixels,
+    }
+
+    return json_response({'success': True, 'affiliate': info})

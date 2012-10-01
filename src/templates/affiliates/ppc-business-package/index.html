@@ -2,14 +2,10 @@
 
 {% load testimonial_tags sekizai_tags %}
 
-{% block page_title %}Home Security Systems | Protect America{% endblock %}
+{% block page_title %}Business Security Systems | Business Security | Security Solutions{% endblock %}
 {% block page_keywords %}{% endblock %}
-{% block page_description %}Discover how Protect America provides you with peace of mind by helping you feel safer and more secure with one of our inexpensive home security systems.{% endblock %}
+{% block page_description %}Protect America has provided business security systems and business security solutions for businesses across America since 1992. Give us a call to learn more today!{% endblock %}
 {% block order-footer %}
-{% endblock %}
-
-{% block robots_tag %}
-<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
 {% endblock %}
 
 {% block css %}
@@ -286,7 +282,6 @@
         </div>
 
 {% addtoblock "js" %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#search-testimonial-box').cycle({
@@ -334,7 +329,11 @@ $(document).ready(function() {
         $('#included-equipment li').removeClass('active');
         activate_slide($(this).index());
         $(this).addClass('active');
-    });
+    }).hover(function(){
+        $('#included-equipment li').removeClass('active');
+        activate_slide($(this).index());
+        $(this).addClass('active');
+    });;
     $('#right-nav').click(function (){
         var current_slide = $('.product:visible').index();
         if(current_slide == max_slides) {

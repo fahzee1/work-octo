@@ -2,7 +2,11 @@
 <form id="quote-form" method="post" action="">
     {% csrf_token %}
 	<div>
-		<p>Free Security Quote</p>
+        {% if request.GET.hic_test or request.COOKIES.hic_test %}
+		<p>Free Security Analysis</p>
+        {% else %}
+        <p>Free Security Quote</p>
+        {% endif %}
 		<label>Name</label>
         {{ form.name }}
 
@@ -32,7 +36,6 @@
     </div>
 </form>
 {% addtoblock "js" %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#quote-form input').keypress(function(e){

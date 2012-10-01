@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block content %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var Cart = function(cookie_name, equipment_total_class, monthly_total_class, equipment_breakdown_class, current_equ) {
+    this.cookie_name = cookie_name;
+    this.cart = getCookie(this.cookie_name);
+    if(!this.cart) {
+        this.reset();
+    }else{
+        this.cart = JSON.parse(this.cart); 
+    }
+    this.equipment_total_class = equipment_total_class;
+    this.monthly_total_class = monthly_total_class;
+    this.equipment_breakdown_class = equipment_breakdown_class;
+    this.render();
+}
+
+$.extend(Cart.prototype, {
+    debug: function() {
+        console.log(this.cart);
+    },
+    reset: function() {
+        this.cart = {'monitoring': {}, 'package': {}, 'equipment': {}};
+        setCookie('paCart', JSON.stringify(this.cart));
+    },
+    save: function() {
+        setCookie(this.cookie_name, JSON.stringify(this.cart));
+        this.render();
+    },
+    add_monitoring: function(item, price) {
+        this.cart['monitoring'] = {'item': item, 'price': price};
+        this.save();
+    },
+    add_package: function(item, price) {
+        this.cart['package'] = {'item': item, 'price': price};
+        this.save();
+    },
+    add_equipment: function(item, price) {
+        if(!this.cart['equipment'][item]) {
+            this.cart['equipment'][item] = {'price': price, 'count': 0};
+        }
+        this.cart['equipment'][item]['count'] = (this.cart['equipment'][item]['count'] + 1);
+        this.save();
+    },
+    add_to_cart: function(category, item, price) {
+        switch(category) {
+            case 'equipment':
+                this.add_equipment(item, price);
+                break;
+            case 'monitoring':
+                this.add_monitoring(item, price);
+                break;
+            case 'package':
+                this.add_package(item, price);
+                break;
+        }
+    },
+    remove_equipment: function(item) {
+        if(!this.cart['equipment'][item]) {
+            return false;
+        }
+        this.cart['equipment'][item]['count'] = (this.cart['equipment'][item]['count'] - 1);
+        if(this.cart['equipment'][item]['count'] == 0) {
+            delete this.cart['equipment'][item];
+        }
+        this.save();
+    },
+    remove_category: function(category) {
+        this.cart[category] = {};
+        this.save();
+    },
+    remove_from_cart: function(category, item) {
+        console.log(category);
+        console.log(item);
+        switch(category) {
+            case 'equipment':
+                this.remove_equipment(item);
+                break;
+            case 'monitoring':
+                this.remove_category(category);
+                break;
+            case 'package':
+                this.remove_category(category);
+                break;
+        }
+    },
+    get_equipment_total: function() {
+        var equipment_total = Number(0.00);
+        $.each(this.cart['equipment'], function(i, equip) {
+            equip_item_total = equip.count * equip.price;
+            equipment_total = equipment_total + Number(equip_item_total);
+        });
+        return equipment_total;
+    },
+    get_monthly_total: function() {
+        var monthly_total = Number(0.00);
+        if(this.cart['monitoring']) {
+            monthly_total = monthly_total + Number(this.cart['monitoring']['price']);
+        }
+        if(this.cart['package']) {
+            monthly_total = monthly_total + Number(this.cart['package']['price']);
+        }
+        $.each(this.cart['equipment'], function(i, equip) {
+            var equip_item_total = equip.count * equip.monthly;
+            if(equip_item_total){
+                monthly_total = monthly_total + Number(equip_item_total);
+            }
+        });
+        return monthly_total;
+    },
+    render: function() {
+        $('.'+this.equipment_total_class).html(this.get_equipment_total());
+        $('.'+this.monthly_total_class).html(this.get_monthly_total());
+        var breakdown = $('<ul/>');
+        $.each(this.cart['equipment'], function(i, equip) {
+            $('<li/>').html(
+                    i + ' : ' + equip.count + 
+                    ' : $' + Number(equip.count * equip.price) + 
+                    '<div class="remove_from_cart">-</div>').
+                attr('data-category', 'equipment').
+                attr('data-item', i).
+                appendTo(breakdown);
+        });
+        $('.'+this.equipment_breakdown_class).html(breakdown);
+    },
+});
+
+var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
+$('.add-to-cart').click(function(e) {
+    e.preventDefault();
+    var obj = $(this).parent();
+    cart.add_to_cart(obj.attr('data-category'), obj.attr('data-item'), obj.attr('data-price'))
+});
+$('.remove_from_cart').live('click', function(e) {
+    e.preventDefault();
+    var obj = $(this).parent();
+    cart.remove_from_cart(obj.attr('data-category'), obj.attr('data-item'));
+});
+$('.reset').click(function(e) {
+    e.preventDefault();
+    cart.reset();
+});
+</script>
+{% endaddtoblock "js" %}
+<div class="item" data-price="39.99" data-item="cellular" data-category="monitoring">
+    Cellular - <span class='add-to-cart'>+</span>
+</div>
+<div class="item" data-price="49.99" data-item="broadband" data-category="monitoring">
+    Broadband - <span class='add-to-cart'>+</span>
+</div>
+
+<div class="item" data-price="0.00" data-item="copper" data-category="package">
+    Copper - <span class='add-to-cart'>+</span>
+</div>
+<div class="item" data-price="0.00" data-item="bronze" data-category="package">
+    Bronze - <span class='add-to-cart'>+</span>
+</div>
+
+<div class="item" data-price="1.99" data-item="sensor" data-category="equipment" data-monthly="1.99">
+    Motion Sensor - <span class='add-to-cart'>+</span>
+</div>
+<div class="item" data-price="5.99" data-item="detector" data-category="equipment" data-monthly="0.00">
+    Detector - <span class='add-to-cart'>+</span>
+</div>
+<div id="cart">
+    <div> Current Package: <span class="current_package"></span> </div>
+    <div> Current Monitoring: <span class="current_monitoring"></span> </div>
+    <div> Equipment Total: $<span class="equipment_total">0</span> </div>
+    <div> Monthly Total: $<span class="monthly_total">0</span> </div>
+    <div> Equipment Breakdown: <div class="equipment_breakdown"></div> </div>
+</div>
+{% endblock %}

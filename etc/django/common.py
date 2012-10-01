@@ -64,6 +64,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     'django.core.context_processors.static',
     "django.core.context_processors.request",
+    'django.core.context_processors.debug',
     'apps.common.context_processors.business_hours',
     'apps.common.context_processors.phone_number',
     'apps.common.context_processors.mobile_check',
@@ -120,6 +121,7 @@ INSTALLED_APPS = (
 
     'south',
     'sekizai',
+    'colorful',
 
     'apps.common',
     'apps.affiliates',
@@ -132,6 +134,8 @@ INSTALLED_APPS = (
     'apps.crimedatamodels',
     'apps.news',
     'apps.crm',
+    'apps.payitforward',
+    'apps.emails',
 
     # sitemaps by opm
     'apps.pa-sitemaps',
@@ -143,6 +147,8 @@ LOGOUT_URL = '/logout/'
 DEFAULT_PHONE = '8009515190'
 
 GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
+
+INTERNAL_IPS = ('127.0.0.1')
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings

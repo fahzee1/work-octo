@@ -6,16 +6,24 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.http import HttpResponseRedirect, Http404
+from django.template import RequestContext, loader, Context
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.comments.models import Comment
 from django.utils import simplejson
+from django.views.decorators.cache import never_cache
 
 from apps.crm.forms import LoginForm, AffiliateForm, ProfileForm
 from apps.affiliates.models import Affiliate, Profile
+from apps.contact.models import CEOFeedback
+from apps.testimonials.models import Textimonial
+
+@never_cache
+def json_response(x):
+    return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
+                        content_type='application/json; charset=UTF-8')
 
 def crm_login(request):
     if request.method == "POST":
@@ -36,6 +44,7 @@ def crm_login(request):
             'form': form,
         }, context_instance=RequestContext(request))
 
+@never_cache
 def crm_render_wrapper(request, template, context):
     # get Affiliate counts
     counts = {}
@@ -46,6 +55,22 @@ def crm_render_wrapper(request, template, context):
         total_declined = Profile.objects.filter(status='DECLINED').count()
         counts['affiliates'] = (my_aff_count, total_aff_count, total_pending,
             total_declined)
+    if request.user.groups.filter(name='TESTIMONIAL').count() == 1:
+        # TEXTIMONIAL COUNTS
+        textimonial_count = Textimonial.objects.all().count()
+        unread_textimonial_count = Textimonial.objects.filter(date_read=None).count()
+        displayed_textimonial_count = Textimonial.objects.filter(display=True).count()
+        nondisplayed_textimonial_count = Textimonial.objects.filter(display=False).count()
+        # CEO FEEDBACK COUNTS
+        ceo_feedbacks = CEOFeedback.objects.all().count()
+        unread_feedback_count = CEOFeedback.objects.filter(date_read=None).count()
+        counts['textimonials'] = (unread_textimonial_count,
+                                  displayed_textimonial_count,
+                                  nondisplayed_textimonial_count,
+                                  textimonial_count,
+                                  ceo_feedbacks,
+                                  unread_feedback_count)
+
 
     context['counts'] = counts
 
@@ -308,6 +333,194 @@ def affiliates_edit(request, affiliate_id):
             'profileform': profileform,
             'profile': profile,
         })
+
+@login_required(login_url='/crm/login/')
+def textimonials(request):
+    textimonial_list = Textimonial.objects.all().order_by('-date_created')
+    paginator = Paginator(textimonial_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        textimonials = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        textimonials = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        textimonials = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/textimonial_list.html', {
+            'textimonials': textimonials,
+        })
+
+@login_required(login_url='/crm/login/')
+def textimonials_unread(request):
+    textimonial_list = Textimonial.objects.filter(date_read=None).order_by('-date_created')
+    paginator = Paginator(textimonial_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        textimonials = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        textimonials = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        textimonials = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/textimonial_list.html', {
+            'textimonials': textimonials,
+        })
+
+@login_required(login_url='/crm/login/')
+def textimonials_display(request):
+    textimonial_list = Textimonial.objects.filter(display=True).order_by('-date_created')
+    paginator = Paginator(textimonial_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        textimonials = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        textimonials = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        textimonials = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/textimonial_list.html', {
+            'textimonials': textimonials,
+        })
+
+@login_required(login_url='/crm/login/')
+def textimonials_dont_display(request):
+    textimonial_list = Textimonial.objects.filter(display=False).order_by('-date_created')
+    paginator = Paginator(textimonial_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        textimonials = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        textimonials = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        textimonials = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/textimonial_list.html', {
+            'textimonials': textimonials,
+        })
+
+@login_required(login_url='/crm/login/')
+def textimonial_view(request, textimonial_id):
+    try:
+        textimonial = Textimonial.objects.get(id=textimonial_id)
+    except Textimonial.DoesNotExist:
+        return json_response({'success': False, 'errors': ['no_textimonial']})
+
+    textimonial.mark_as_read()
+    textimonial.save()
+
+    c = Context({'textimonial': textimonial})
+    t = loader.get_template('crm/_partials/textimonial_ajax.html')
+    return json_response({'success': True, 'html': t.render(c)})
+
+@login_required(login_url='/crm/login/')
+def textimonial_approve(request, textimonial_id):
+    try:
+        textimonial = Textimonial.objects.get(id=textimonial_id)
+    except Textimonial.DoesNotExist:
+        return json_response({'success': False, 'errors': ['no_textimonial']})
+
+    textimonial.display = True
+    textimonial.mark_as_read()
+    textimonial.save()
+
+    c = Context({'textimonial': textimonial})
+    t = loader.get_template('crm/_partials/textimonial_approved_actions.html')
+    return json_response({'success': True,
+        'id': textimonial.id, 'html': t.render(c)})
+
+@login_required(login_url='/crm/login/')
+def textimonial_dont_display(request, textimonial_id):
+    try:
+        textimonial = Textimonial.objects.get(id=textimonial_id)
+    except Textimonial.DoesNotExist:
+        return json_response({'success': False, 'errors': ['no_textimonial']})
+
+    textimonial.display = False
+    textimonial.mark_as_read()
+    textimonial.save()
+
+    c = Context({'textimonial': textimonial})
+    t = loader.get_template('crm/_partials/textimonial_nonapproved_actions.html')
+    return json_response({'success': True,
+        'id': textimonial.id, 'html': t.render(c)})
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks(request):
+    ceo_feedback_list = CEOFeedback.objects.order_by('-date_created')
+    paginator = Paginator(ceo_feedback_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        ceo_feedbacks = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        ceo_feedbacks = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        ceo_feedbacks = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
+            'ceo_feedbacks': ceo_feedbacks,
+        })
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_unread(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(date_read=None).order_by('-date_created')
+    paginator = Paginator(ceo_feedback_list, 20)
+
+    page = request.GET.get('page', '')
+    try:
+        ceo_feedbacks = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        ceo_feedbacks = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        ceo_feedbacks = paginator.page(paginator.num_pages)
+
+    return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
+            'ceo_feedbacks': ceo_feedbacks,
+        })
+
+@login_required(login_url='/crm/login/')
+def feedback_view(request, feedback_id):
+    try:
+        feedback = CEOFeedback.objects.get(id=feedback_id)
+    except CEOFeedback.DoesNotExist:
+        return json_response({'success': False, 'errors': ['no_feedback']})
+
+    feedback.mark_as_read()
+
+    c = Context({'feedback': feedback})
+    t = loader.get_template('crm/_partials/feedback_ajax.html')
+    return json_response({'success': True, 'html': t.render(c)})
+
+@login_required(login_url='/crm/login/')
+def feedback_convert(request, feedback_id):
+    try:
+        feedback = CEOFeedback.objects.get(id=feedback_id)
+    except CEOFeedback.DoesNotExist:
+        return json_response({'success': False, 'errors': ['no_feedback']})
+
+    feedback.mark_as_read()
+    feedback.convert_to_textimonial()
+
+    c = Context({'feedback': feedback})
+    t = loader.get_template('crm/_partials/feedback_convert_actions.html')
+    return json_response({'success': True,
+        'id': feedback.id, 'html': t.render(c)})
 
 def comment_posted(request):
     comment_id = request.GET.get('c', None)

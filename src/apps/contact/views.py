@@ -13,7 +13,7 @@ from django.conf import settings
 
 from apps.contact.models import GoogleExperiment
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
-    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm)
+    CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm, PayItForwardForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
@@ -72,6 +72,8 @@ def prepare_data_from_request(request):
         affkey = request.session.get('affkey', None)
     if not affkey and 'affkey' in request.POST:
         affkey = request.POST['affkey']
+    if not affkey and 'affkey' in request.GET:
+        affkey = request.GET['affkey']
 
     source = request.COOKIES.get('source', None)
     if source is None:
@@ -120,9 +122,12 @@ def prepare_data_from_request(request):
     # we want to put the google experiment id if there is no affkey
     google_id = request.COOKIES.get('utm_expid', None)
     if affkey is None and google_id is not None:
+        test_b = request.COOKIES.get('has_set_test_b', False)
         try:
             googleexp = GoogleExperiment.objects.get(google_id=google_id)
             affkey = googleexp.name
+            if test_b:
+                affkey = affkey + ' B'
         except:
             pass
 
@@ -348,3 +353,20 @@ def donotcall(request):
                                'formset': formset,
                                'pages': ['support', 'help'],
                                'page_name': 'tell-a-friend'})
+
+def payitforward(request):
+    if request.method == "POST":
+        form = PayItForwardForm(request.POST)
+        if form.is_valid():
+            formset = form.save(commit=False)
+            formset.save()
+            formset.email_shawne()
+            form.submitted = True
+
+    else:
+        form = PayItForwardForm()
+
+    return simple_dtt(request, 'payitforward/contact.html', {
+                               'form': form,
+                               'pages': ['about'],
+                               'page_name': 'payitforward-contact'})

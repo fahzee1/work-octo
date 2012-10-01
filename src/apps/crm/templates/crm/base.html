@@ -32,6 +32,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
     {% endcomment %}
+    {% render_block "css" %}
   </head>
 <body>
     <div class="navbar navbar-fixed-top">
@@ -101,6 +102,40 @@
                     <li{% if c_page == req_aff_page and request.GET.filter == 'declined' %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px; width: 16px; text-align: center;">{{ counts.affiliates.3 }}</span>
                         <a href="{{ req_aff_page }}?filter=declined">Declined Requests</a>
+                    </li>
+                    {% endifusergroup %}
+                    {% ifusergroup TESTIMONIAL %}
+                    {% url crm:textimonials as text_page %}
+                    {% url crm:textimonials_unread as text_unread_page %}
+                    {% url crm:textimonials_display as text_display_page %}
+                    {% url crm:textimonials_dont_display as text_dont_display_page %}
+                    {% url crm:ceo_feedbacks as ceofee_page %}
+                    {% url crm:ceo_feedbacks_unread as ceofee_unread_page %}
+                    <li class="nav-header">Textimonal Pages</li>
+                    <li{% if c_page == text_page %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.3 }}</span>
+                        <a href="{{ text_page }}">All Textimonials</a>
+                    </li>
+                    <li{% if c_page == text_unread_page %} class="active"{% endif %}>
+                        <span class="badge badge-important pull-right" style="margin-top: 3px;">{{ counts.textimonials.0 }}</span>
+                        <a href="{{ text_unread_page }}">Unread Textimonials</a>
+                    </li>
+                    <li{% if c_page == text_display_page %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.1 }}</span>
+                        <a href="{{ text_display_page }}">View Textimonials on Display</a>
+                    </li>
+                    <li{% if c_page == text_dont_display_page %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.2 }}</span>
+                        <a href="{{ text_dont_display_page }}">Textimonials not Displayed</a>
+                    </li>
+                    <li class="nav-header">CEO Feeback Pages</li>
+                    <li{% if c_page == ceofee_page %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.4 }}</span>
+                        <a href="{{ ceofee_page }}">View All Feedbacks</a>
+                    </li>
+                    <li{% if c_page == ceofee_unread_page %} class="active"{% endif %}>
+                        <span class="badge badge-important pull-right" style="margin-top: 3px;">{{ counts.textimonials.5 }}</span>
+                        <a href="{{ ceofee_unread_page }}">View All Unread Feedbacks</a>
                     </li>
                     {% endifusergroup %}
                 </ul>

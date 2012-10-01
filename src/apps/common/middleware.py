@@ -105,13 +105,15 @@ class CommonMiddlewareWrapper(object):
         Check for denied User-Agents and rewrite the URL based on
         settings.APPEND_SLASH and settings.PREPEND_WWW
         """
-        if settings.SITE_ID != 1 or settings.DEBUG == True:
-            return
+
         # Check for a redirect based on settings.APPEND_SLASH
         # and settings.PREPEND_WWW
         host = request.get_host()
         old_url = [host, request.path]
         new_url = old_url[:]
+
+        if settings.SITE_ID != 1 or settings.DEBUG == True:
+            return
 
         if (old_url[0] and not old_url[0].startswith('www.')):
             new_url[0] = 'www.' + old_url[0]
