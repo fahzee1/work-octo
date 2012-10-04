@@ -1,5 +1,6 @@
 import re
 from urlparse import parse_qs
+from datetime import datetime
 
 from django import template
 from sekizai.context import SekizaiContext
@@ -70,12 +71,16 @@ class TestimonialSearchNode(template.Node):
                 testimonial.message = re.sub(pattern,
                     r'<strong>\1</strong>',
                     testimonial.message)
-
+            try:
+                date_created = testimonial.date_created.strftime("%m/%d/%Y")
+            except AttributeError:
+                date_created = datetime.today().strftime("%m/%d/%Y")
+                
             testimonial_array.append({'first_name': testimonial.first_name,
               'last_name': testimonial.last_name,
               'city': testimonial.city,
               'state': testimonial.state,
-              'date_created': testimonial.date_created.strftime("%m/%d/%Y"),
+              'date_created': date_created,
               'testimonial': testimonial.message,
               'get_absolute_url': testimonial.get_absolute_url(),
               'date_created': testimonial.date_created})

@@ -56,6 +56,11 @@ body {
     }    
 }
 #five-blocks {
+    position: relative;
+    height: 187px;
+    #selector-arrow {
+        background: url(/static/img/affiliates/adt-comparison/paper-arrow-blue.png) no-repeat;
+    }
     .assurance-block {
         background: transparent;
         text-align: center;
@@ -87,8 +92,8 @@ body {
     border: #0069aa solid 1px;
     z-index: 999;
     height: auto;
-    #selector-arrow {
-        background: url(/static/img/affiliates/adt-comparison/paper-arrow-blue.png) no-repeat;
+    #assurance-card-five {
+        z-index: 0;
     }
     .image-area {
         width: 275px;
@@ -146,9 +151,11 @@ body {
                 padding-right: 20px;
             }
             ul {
-                width: 400px;
+                width:425px;
+                margin-top: 15px;
                 li {
                     padding-top: 15px;
+                    width:430px;
                     strong {
                         display: block;
                         text-transform: uppercase;
@@ -182,16 +189,14 @@ body {
     .top-left {
         float: left;
         width: 300px;
-        height: 300px;
+        height: 310px;
         border: solid thin #efefef;
         .drop-shadow(-4px, -4px, 3px, #efefef);
         h2 {
             width: 250px;
             margin: auto;
-            padding-top: 15px;
-            font-size: 15px;
-            font-weight: 800;
-            line-height: 5px;
+            padding-top: 5px;
+            font-size: 14px;
         }
         p {
             width: 250px;
@@ -206,14 +211,14 @@ body {
         float: right;
         margin-right: 10px;
         width: 300px;
-        height: 300px;
+        height: 310px;
         border: solid thin #efefef;
         .drop-shadow(-4px, -4px, 3px, #efefef);
         h2 {
             width: 250px;
             margin: auto;
-            padding-top: 15px;
-            line-height: 5px;
+            padding-top: 5px;
+            font-size: 14px;
         }
         p {
             width: 250px;
@@ -228,14 +233,14 @@ body {
         margin-top: 15px;
         float: left;
         width: 300px;
-        height: 300px;
+        height: 310px;
         .drop-shadow(-4px, -4px, 3px, #efefef);
         border: solid thin #efefef;
         h2 {
             width: 250px;
             margin: auto;
-            padding-top: 15px;
-            line-height: 5px;
+            padding-top: 5px;
+            font-size: 14px;
         }
         p {
             width: 250px;
@@ -251,14 +256,14 @@ body {
         margin-right: 10px;
         float: right;
         width: 300px;
-        height: 300px;
+        height: 310px;
         .drop-shadow(-4px, -4px, 3px, #efefef);
         border: solid thin #efefef;
         h2 {
             width: 250px;
             margin: auto;
-            padding-top: 15px;
-            line-height: 4px;
+            padding-top: 5px;
+            font-size: 14px;
         }
         p {
             width: 250px;
@@ -293,7 +298,7 @@ body {
     p {
         text-align: left;
         margin: 15px;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 27px;
         width: 750px;
         span {
@@ -301,7 +306,11 @@ body {
         }
     }
     img {
-        position: relative;
+        position: absolute;
+        right: 100px;
+        z-index: -1;
+        top: 165px;
+        left: 105px;
     }
     #tech-specs {
         position: absolute;
@@ -311,7 +320,7 @@ body {
         font-size: 10px;
         line-height: 12px;
         background: rgba(255,255,255,.5);
-        z-index: 50;
+        z-index: 0;
         tr {
             th {
                 text-align: center;
@@ -336,10 +345,81 @@ body {
         }
     }
 }
+#equipment-features {
+    position: relative;
+    height: 410px;
+    .equipment-feature {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        z-index: 250;
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            background: @blue;
+            .drop-shadow(0px, 2px, 5px, @black);
+            .border-radius(10px, 10px, 10px, 10px);
+            border: 2px solid @light-blue;
+            z-index: 100;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: @white;
+            font-weight: bold;
+            cursor: pointer;
+            cursor: hand;
+            &:hover {
+                .background-gradient(@blue, #00568b);
+                border: 2px solid @light-blue;
+            }
+            &.active {
+                background: @red;
+                border: 2px solid @dark-red;
+                &:hover {
+                    .background-gradient(#e51a19, #ba1615);
+                }
+            }
+        }
+        .feature-content {
+            position: absolute;
+            width: 250px;
+            background: @v-light-grey;
+            .background-gradient(@off-white, @v-light-grey);
+            border: 1px solid @light-grey;
+            top: 50%;
+            .drop-shadow(0px, 2px, 5px, @grey);
+            padding: 8px;
+            .border-radius(5px, 5px, 5px, 5px);
+            z-index: 50;
+            display: none;
+            &.first-open {
+                display: block;
+            }
+            &.right {
+                right: 12px;
+            }
+            &.left {
+                left: 12px;
+            }
+            h3 {
+                font-size: 16px;
+                font-weight: bold;
+            }
+            p {
+                font-size: 13px;
+                line-height: 16px;
+                text-align: justify;
+                color: @black;
+                width: 220px;
+            }
+        }
+    }
+}
+
 #house-features {
     .content-box;
     text-align: center;
-    height: 650px;
+    height: 620px;
     h2 {
         text-align: left;
         margin: 15px;
@@ -360,7 +440,11 @@ body {
         }
     }
     img {
-        position: relative;
+        position: absolute;
+        right: 100px;
+        z-index: -1;
+        top: 130px;
+        left: 0px;
     }
     #tech-specs {
         position: absolute;

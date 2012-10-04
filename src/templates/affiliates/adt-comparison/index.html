@@ -13,6 +13,14 @@
 
 {% block typekit %}tk-museo-slab{% endblock %}
 
+{% block extra_javascript %}
+<script>
+$(document).ready(function() {
+    $('#assurance-block-three').trigger('click');
+});
+</script>
+{% endblock %}
+
 {% block left-wrapper %}
     <h1 class="tk-freight-sans-pro">How Do You Like Them Apples!</h1>
     <h2 class="tk-freight-sans-pro">A True Security Comparison.</h2>
@@ -163,22 +171,22 @@
         <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" alt="interactive" width="642" height="309" />
     </div>
 </div>
-    <div id="interactive-call-out-box">
-        <div class="interactive-call-out">
-            <ul>
-                <li>
-                    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/security-system-control-small-icon-interactive.png" alt="security-system-control-small-icon-interactive" width="74" height="74" />
-                    <p><strong>Security System Control</strong>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
-                    
-                </li>
-                <li>
-                    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/live-video-small-icon-automation.png" alt="live-video-small-icon-automation" width="74" height="74" />
-                    <p><strong>Live Video</strong>Keep an eye on your home from anywhere in the world with live video. (Video Service Required)</p>
-                </li>
-            </ul>
-        </div>
+<div id="interactive-call-out-box">
+    <div class="interactive-call-out">
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/security-system-control-small-icon-interactive.png" alt="security-system-control-small-icon-interactive" width="74" height="74" />
+                <p><strong>Security System Control</strong>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/live-video-small-icon-automation.png" alt="live-video-small-icon-automation" width="74" height="74" />
+                <p><strong>Live Video</strong>Keep an eye on your home from anywhere in the world with live video. (Video Service Required)</p>
+            </li>
+        </ul>
     </div>
-    <div class="clear"></div>
+</div>
+<div class="clear"></div>
 {% endblock %}
 
 
@@ -191,33 +199,33 @@
 </div>
 <div class="four-call-out-boxes">
     <div class="top-left">
-        <h2 style="font-size: 23px; font-weight: 400;" class="tk-freight-sans-pro">ADT Changes Your Monthly Rate (After One Year)</h2><p class="tk-freight-sans-pro">Protect America keeps your monitoring rate the same for the entirety of your contract. With ADT, they can increase your monthly monitoring rate every year after the first year! It's hidden in their ‘Terms and Conditions.’</p>
+        <h2 class="tk-freight-sans-pro">ADT Changes Your Monthly Rate (After One Year)</h2><p class="tk-freight-sans-pro">Protect America keeps your monitoring rate the same for the entirety of your contract. With ADT, they can increase your monthly monitoring rate every year after the first year! It's hidden in their ‘Terms and Conditions.’</p>
         <ul>
-            <li><img style="padding-right: 10px; padding-top: 23px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-small-icons.png" alt="money-small-icons" width="49" height="47" />
+            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-small-icons.png" alt="money-small-icons" width="49" height="47" />
             </li>
         </ul>
     </div>
     <div class="top-right">
-        <h2 style="font-size: 25px;  font-weight: 400;" class="tk-freight-sans-pro">Repairs with ADT will Cost You</h2><p class="tk-freight-sans-pro">If your system malfunctions with ADT, they will charge you for the replacement of parts which can cost hundreds of dollars. With Protect America, if any part of your system breaks, we replace it. With our Lifetime Replacement Parts warranty, you can rest easy knowing your home is safe and sound.</p>
+        <h2 class="tk-freight-sans-pro">Repairs with ADT will Cost You</h2><p class="tk-freight-sans-pro">If your system malfunctions with ADT, they will charge you for the replacement of parts which can cost hundreds of dollars. With Protect America, if any part of your system breaks, we replace it. With our Lifetime Replacement Parts warranty, you can rest easy knowing your home is safe and sound.</p>
         <ul>
             <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/tools-small-icon.png" alt="tools-small-icon" width="49" height="47" />
-                <p style="padding-top: 15px;"><a href="{% url warranty %}" target="_blank">Learn More</a></p>
+                <a href="{% url warranty %}" target="_blank">Learn More</a>
             </li>
         </ul>
     </div>
     <div class="bottom-left">
-       <h2 style="font-size: 25px;  font-weight: 400;" class="tk-freight-sans-pro">ADT Charges for Moving</h2><p class="tk-freight-sans-pro">If you have service with ADT, it could cost you hundreds of dollars when you move. Home security companies that sell wired security systems often require additional fees for relocation. One of the many benefits of a Protect America wireless home security system is that you can transfer your system and your service to your new home for free!</p>
+       <h2 class="tk-freight-sans-pro">ADT Charges for Moving</h2><p class="tk-freight-sans-pro">If you have service with ADT, it could cost you hundreds of dollars when you move. Home security companies that sell wired security systems often require additional fees for relocation. One of the many benefits of a Protect America wireless home security system is that you can transfer your system and your service to your new home for free!</p>
         <ul>
-            <li><img style="padding-right: 10px; padding-top: 5px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/moving-small-icon.png" alt="moving-small-icon" width="48" height="47" />
-                <p style="padding-top: 15px;"><a href="{% url moving-kit %}" target="_blank">Learn More</a></p>
+            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/moving-small-icon.png" alt="moving-small-icon" width="48" height="47" />
+                <a href="{% url moving-kit %}" target="_blank">Learn More</a>
             </li>
         </ul>
     </div>
     <div class="bottom-right">
-         <h2 style="font-size: 25px;  font-weight: 400;" class="tk-freight-sans-pro">ADT Won't Give You a Quote Over the Phone</h2><p class="tk-freight-sans-pro">If you want to know the cost of an ADT system, you’ll have to wait for a technician come to your home. At Protect America, our home security experts are standing by to take your call. Protect America will give you a free home security analysis over the phone in minutes. Call Protect America today!</p>
+         <h2 class="tk-freight-sans-pro">ADT Won't Give You a Quote Over the Phone</h2><p class="tk-freight-sans-pro">If you want to know the cost of an ADT system, you’ll have to wait for a technician come to your home. At Protect America, our home security experts are standing by to take your call. Protect America will give you a free home security analysis over the phone in minutes. Call Protect America today!</p>
         <ul>
             <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/phone-small-icons.png" alt="phone-small-icons" width="48" height="47" />
-                <p style="padding-top: 15px;"><a href="{% url order-package %}" target="_blank">Learn More</a></p>
+                <a href="{% url order-package %}" target="_blank">Learn More</a>
             </li>
         </ul>
     </div>
@@ -266,56 +274,66 @@
 {% endblock %}
 
 {% block assurance-card-five %}
+<div class="clear"></div>
 
 <div id="touchscreen-features">
-    <h2 class="tk-freight-sans-pro">Explore the Simon XT Touch screen Features:</h2>
-    <p class="tk-freight-sans-pro">Featuring an easy-to-install wireless design, the GE Simon XT Touch screen gives users streamlined access to their GE Simon XT home security systems. An ideal solution for more flexible system control, the Simon XT Touch Screen includes one-touch arming and disarming, panic alarm, and a vibrant 3.5 inch LCD screen. <strong>Click the "+" Icons on the Simon XT Touch screen to learn more.</strong></p>
+    <h2 class="tk-freight-sans-pro">Explore the Simon XT Touchscreen Features:</h2>
+    <p class="tk-freight-sans-pro">An ideal solution for more flexible system control, the Simon XT Touch Screen includes one-touch arming and disarming, panic alarm, and a vibrant 3.5 inch LCD screen. The Simon XT Touch Screen from GE will simplify the use of your security system while maintaining the highest standards of protection for your home and family. <strong>Click the "+" Icons on the Simon XT Touchscreen to Learn More</strong></p>
     <div id="equipment-features">
-        <div class="equipment-feature" style="left: 265px; top: 260px;">
+        <div class="equipment-feature" style="left: 165px; top: 260px;">
             <div class="feature-icon">+</div>
             <div class="feature-content left">
                 <h3>Built-In Digital Voice Commands</h3>
-                <p style="width: 235px;">Convenient voice functionality warns users when the system has been activated or deactivated. The reassuring voice features of the Simon XT Touch Screen can also warn homeowners whenever a door or window opens.</p>
+                <p>Convenient voice functionality warns users when the system has been activated or deactivated. The reassuring voice features of the Simon XT Touch Screen can also warn homeowners whenever a door or window opens.</p>
             </div>
         </div>
 
-        <div class="equipment-feature" style="left: 415px; top: 176px;">
-            <div class="feature-icon ">+</div>
+        <div class="equipment-feature" style="left: 323px; top: 176px;">
+            <div class="feature-icon">+</div>
             <div class="feature-content right">
                 <h3>Door & Window Supervision</h3>
-                <p style="width: 235px;">Open doors and windows attract burglars, even when you and your family are home. A green checkmark on the touch screen reassures homeowners that all monitored doors and windows into the home are closed and secured. When users see a red exclamation mark, they know an entry point is unsecure. Nothing could be easier!</p>
+                <p>Open doors and windows attract burglars, even when you and your family are home. A green checkmark on the touch screen reassures homeowners that all monitored doors and windows into the home are closed and secured. When users see a red exclamation mark, they know an entry point is unsecure. Nothing could be easier!</p>
             </div>
         </div>
-        <div class="equipment-feature" style="left: 455px; top: 216px;">
+        <div class="equipment-feature" style="left: 381px; top: 216px;">
             <div class="feature-icon">+</div>
             <div class="feature-content left">
                 <h3>3.5-inch Color LCD Screen</h3>
-                <p style="width: 235px;">The vibrant display of the GE Simon XT Touch Screen makes using your Simon XT home security system easier than ever before. The Simon XT Touch Screen is bright but designed to be energy efficient and plugs into a standard 110 Volt electrical outlets. In case of emergency, the Simon XT Touch Screen can also be use four AAA batteries.</p>
+                <p>The vibrant display of the GE Simon XT Touch Screen makes using your Simon XT home security system easier than ever before. The Simon XT Touch Screen is bright but designed to be energy efficient and plugs into a standard 110 Volt electrical outlets. In case of emergency, the Simon XT Touch Screen can also be use four AAA batteries.</p>
             </div>
         </div>
-        <div class="equipment-feature" style="left: 575px; top: 170px;">
+        <div class="equipment-feature" style="left: 479px; top: 176px;">
             <div class="feature-icon active">x</div>
             <div class="feature-content left first-open">
                 <h3>One-Button Arming/Disarming</h3>
-                <p style="width: 235px;">Using your Simon XT home security system is as easy as pushing a button. This feature activates or deactivates all sensors associated with your alarm system. The easy-to-understand graphical interface clearly displays when the system is armed.</p>
+                <p>Using your Simon XT home security system is as easy as pushing a button. This feature activates or deactivates all sensors associated with your alarm system. The easy-to-understand graphical interface clearly displays when the system is armed.</p>
             </div>
         </div>
-        <div class="equipment-feature" style="left: 595px; top: 123px;">
+        <div class="equipment-feature" style="left: 490px; top: 123px;">
             <div class="feature-icon">+</div>
             <div class="feature-content left">
                 <h3>Simple Status Updates</h3>
-                <p style="width: 235px;">With a quick glance, accurately gauge your home's security status. The easy-to-use graphical interface helps users keep tabs on open entry points and system diagnostics. The Simon XT Touch Screen also tells homeowners whether the system is active or not.</p>
+                <p>With a quick glance, accurately gauge your home's security status. The easy-to-use graphical interface helps users keep tabs on open entry points and system diagnostics. The Simon XT Touch Screen also tells homeowners whether the system is active or not.</p>
             </div>
         </div>
-        <div class="equipment-feature" style="left: 360px; top: 123px;">
+        <div class="equipment-feature" style="left: 140px; top: 123px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>GE Security Equipment</h3>
+                <p>All of our systems feature GE Security Certified products. This means that you get the reliability and flexibility known throughout the security industry for GE alarm systems.  And with the GE Touchscreen, the system comes pre-built to work perfectly and conjunction with your Simon XT Control Panel</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 256px; top: 123px;">
             <div class="feature-icon">+</div>
             <div class="feature-content right">
                 <h3>24-Hour Emergency Panic Button</h3>
-                <p style="width: 235px;">The Simon XT Touch Screen includes a distress signal that can be sent with the single push of button. This feature is intended for use during non-medical emergencies.</p>
+                <p>The Simon XT Touch Screen includes a distress signal that can be sent with the single push of button. This feature is intended for use during non-medical emergencies.</p>
             </div>
         </div>
     </div>
-    <img src="{{ STATIC_URL }}img/products/equipment/touchscreen/touchscreen.jpg" alt="touchscreen" class="equipment-bg" />
+    <img src="http://static.protectamericasecurity.net/img/products/equipment/touchscreen/touchscreen.jpg" alt="touchscreen" class="equipment-bg" />
+</div>
+<div class="clear"></div>
 </div>
 {% endblock %}
 {% block page-product %}
