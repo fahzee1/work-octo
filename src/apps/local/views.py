@@ -5,6 +5,7 @@ from pytz import timezone
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.contrib.localflavor.us.us_states import US_STATES
 
 from apps.contact.forms import PAContactForm
 from apps.crimedatamodels.views import query_by_state_city
@@ -12,7 +13,10 @@ from apps.crimedatamodels.models import (State,
                                          CityLocation,
                                          ZipCode)
 
-
+LOCAL_KEYWORDS = [
+    'home-security-systems',
+    'alarm-systems',
+]
 TIMEZONES = {
     'AL':'America/Chicago',
     'AK':'America/Anchorage',
@@ -66,6 +70,17 @@ TIMEZONES = {
     'WI':'America/Chicago',
     'WY':'America/Denver',
 }
+
+def local_page_wrapper(request, keyword, city, state, zipcode):
+    def get_state_code(statestr):
+        for state in US_STATES:
+            if statestr.lower() == state[1].lower():
+                return state[0]
+        return False
+    statecode = get_state_code(state)
+    if not statecode:
+        raise Http404
+    return local_page(request, statecode, city.capitalize())
 
 def local_page(request, state, city):
     crime_stats_ctx = query_by_state_city(state, city)
@@ -130,3 +145,6 @@ def local_city(request, state):
                                'forms': forms,
                                'state': state.abbreviation,},
                               context_instance=RequestContext(request))
+
+def sitemap(request, keyword):
+    pass
