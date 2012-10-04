@@ -8,6 +8,8 @@ from apps.common.views import simple_dtt
 from django.contrib import admin
 admin.autodiscover()
 
+from apps.local.views import LOCAL_KEYWORDS
+
 # a simple direct_to_template wrapper
 def dtt(pattern, template, name, parent=None, ctx=None):
     ctx = ctx or {}
@@ -90,14 +92,15 @@ elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
         url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/$', 'apps.local.views.local_page',
-        name='local-page'),
+            name='local-page'),
         url(r'^(?P<state>[A-Z]{2})/$', 'apps.local.views.local_city',
-        name='choose-city'), 
+            name='choose-city'), 
+        url(r'^(?P<keyword>%s)/sitemap\.xml', 'apps.local.views.sitemap',
+            name='keyword-sitemap'),
         url(r'^$', 'apps.local.views.local_state', name='local-state'),
 # 301 perm redirect from / to non-/ on article pages
         ('^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)$',
             redirect_to, {'url': '/%(state)s/%(city)s/', 'permanent': True}),
-        
     )
 elif settings.SITE_ID == 5:
     urlpatterns += patterns('',
@@ -183,6 +186,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
             
+        # SEO Local Pages
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
+            'apps.local.views.local_page_wrapper',
+            name='local-page-keyword'),
 
         # SEO Content Pages
         dtt(r'^home-security-systems/$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
