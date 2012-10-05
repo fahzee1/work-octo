@@ -2,6 +2,7 @@
 
 <div id="top-content">
     <div class="wrapper">
+        {% comment %}
         <div id="top-hero-banner-controls">
             <div id="hero-left-arrow">&nbsp;</div>
             <div id="pager-container">
@@ -15,10 +16,14 @@
             
             
         </div>
+        {% endcomment %}
         <div id="top-hero-banner">
+            {% comment %}
             <div id="interactive-banner" data-url="http://www.protectamerica.com/products/order-package">
+            {% endcomment %}
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/flash-promotion.jpg"
                     width="685" height="400" alt="Our best promotion ever! free equipment, 19.99 monthly monitoring" style="position: relative; right: 16px; " />
+            {% comment %}
             </div>
             <div id="touchscreen-banner" data-url="{% url order-package %}?package=silver">
                 <h2>Protecting Homes for 20 Years<span>Celebrate with a GE Simon XT Touch Screen with Every Package</span></h2>
@@ -47,6 +52,7 @@
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
 
             </div>
+            {% endcomment %}
         </div>
         {% include "order/quote-form.html" with form=forms.basic %}
     </div>
