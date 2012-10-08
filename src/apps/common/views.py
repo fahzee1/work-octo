@@ -14,6 +14,7 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanen
 from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
+from django.utils.cache import patch_vary_headers
 
 from apps.contact.forms import LeadForm, AffiliateLongForm 
 from apps.affiliates.models import Affiliate
@@ -113,7 +114,7 @@ def simple_dtt(request, template, extra_context):
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
-
+    patch_vary_headers(response, ('Host',))
     return response
 
 def payitforward(request):

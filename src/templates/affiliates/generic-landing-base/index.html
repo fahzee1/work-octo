@@ -33,7 +33,7 @@
             {% include "order/quote-form.html" with form=forms.basic %}
         </div>
         {% include "order/call-box.html" %}
-
+        <div class="clear"></div>
     </div>
 
     <div id="five-blocks">
@@ -58,10 +58,11 @@
             {% block assurance-block-five %}
             {% endblock %}
         </div>
+        <div id="selector-arrow">&nbsp;</div>
+        <div class="clear"></div>
     </div>
     <div class="clear"></div>
     <div id="five-cards">
-        <div id="selector-arrow">&nbsp;</div>
         <div class="assurance-card" id="assurance-card-one">
             {% block assurance-card-one %}
             {% endblock %}
@@ -82,11 +83,11 @@
             {% block assurance-card-five %}
             {% endblock %}
         </div>
+        <div class="clear"></div>
     </div>
 {% addtoblock "js" %}
 <script type="text/javascript" src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
     var animatedAction = false;
     function switch_card(num) {
         
@@ -100,11 +101,12 @@ $(document).ready(function() {
         // move arrow here
         var left_pos = (196 * num) + 66; 
         $('#selector-arrow').animate({
-            'left': left_pos+'px',
+            'left': left_pos+'px'
         }, 500, 'easeOutBack');
         animatedAction = false;
         return true;
     }
+$(document).ready(function() {
     $('.assurance-block').click(function (e){
         e.preventDefault();
         switch_card($(this).index());
