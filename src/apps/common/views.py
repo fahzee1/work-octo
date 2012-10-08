@@ -3,6 +3,8 @@ import urls
 import urllib2
 from datetime import datetime, timedelta
 from urllib import urlencode
+import twitter
+import operator
 
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
@@ -174,6 +176,10 @@ def index(request):
 
     latest_news = Article.objects.order_by('-date_created')[:3]
     ctx['latest_news'] = latest_news
+
+    t_api = twitter.Api()
+    tweets = t_api.GetUserTimeline('@protectamerica')
+    ctx['tweets'] = tweets[:3]
 
     return simple_dtt(request, 'index.html', ctx)
 

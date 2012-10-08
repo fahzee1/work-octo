@@ -119,6 +119,16 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             <img src="{{ STATIC_URL }}img/extra/michigan-state-pay-it-forward.jpg" alt="Michigan State University and Protect America Pay It Forward" width="232" height="184" id="twitter-ad" />
         </a>
         <ul>
+            {% for tweet in tweets %}
+            <li>
+                <img src="{{ tweet.user.profile_image_url }}" />
+                <strong>{{ tweet.user.name }} <span>@{{ tweet.user.screen_name }}</span></strong>
+                <span class="tweet-date">{{ tweet.GetRelativeCreatedAt }}</span>
+                <p>{{ tweet.text|safe }}</p>
+                <div class="clear"></div>
+            </li>
+            {% endfor %}
+            {% comment %}
             <li><img src="https://si0.twimg.com/profile_images/2179108329/protectamerica_logo_normal.jpg" />
                 <strong>Protect America <span>@protectamerica</span></strong>
                 <span class="tweet-date">5h ago</span>
@@ -139,6 +149,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 <div class="clear"></div>
 
             </li>
+            {% endcomment %}
         </ul>
     </div>
     <div id="customer-testimonials">
