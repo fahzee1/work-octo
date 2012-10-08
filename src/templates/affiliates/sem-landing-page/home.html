@@ -64,6 +64,10 @@
             
         </div>
         <div id="top-hero-banner">
+            <div id="interactive-banner" data-url="http://www.protectamerica.com/products/order-package">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/flash-promotion.jpg"
+                    width="685" height="400" alt="Our best promotion ever! free equipment, 19.99 monthly monitoring" style="position: relative; right: 16px; " />
+            </div>
             <div id="top-consumer-banner" data-url="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
                 <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
@@ -72,23 +76,6 @@
                     <em>&ndash; Top Consumer Reviews, 2012</em>
                 </div>
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
-
-            </div>
-            <div id="touchscreen-banner" data-url="{% url order-package %}?package=silver">
-                <h2>Protecting Homes for 20 Years<span>Celebrate with a GE Simon XT Touch Screen with Every Package</span></h2>
-                
-                <div id="touchscreen-banner-content">
-                    <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/ge-touchscreen.jpg" alt="ge-touchscreen-hero-image" />
-                    <p>when you order Broadband or Cellular Monitoring.</p>
-                    <div class="button-submit">
-                        <a href="{% url order-package %}?package=silver" title="Add a GE Simon XT Touch Screen to any package today">Order Now ></a>
-                    </div>
-                    <span>Expires 09/30/2012</span>
-
-                </div>
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
-
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/streamers.jpg" id="streamers" alt="ge-touchscreen" />
 
             </div>
             <div id="interactive-banner" data-url="http://www.protectamerica.com/products/alarm-monitoring/cellular">
@@ -349,18 +336,14 @@
                 prev: '#hero-left-arrow'
             });
         $('#top-hero-banner > div').click(function(e) {
-            var href = $(this).find('.button-link');
-            if(href.length == 0) {
-                href = $(this).find('.button-submit');
-            }
-            _gaq.push([  
+            if($(this).attr('data-url')) {
+                window.location = $(this).attr('data-url');
+                _gaq.push([  
                     '_trackEvent',
                     'Hero Banner',
-                    'Paid Page Hero Banner Click',
+                    'Front Page Hero Banner Click',
                     $(this).attr('id')
                 ]);
-            if(href.children('a').attr('href')) {
-                window.location = href.children('a').attr('href');
                 return;
             }
         });

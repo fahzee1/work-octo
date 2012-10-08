@@ -2,6 +2,7 @@
 
 <div id="top-content">
     <div class="wrapper">
+        {% comment %}
         <div id="top-hero-banner-controls">
             <div id="hero-left-arrow">&nbsp;</div>
             <div id="pager-container">
@@ -15,7 +16,15 @@
             
             
         </div>
+        {% endcomment %}
         <div id="top-hero-banner">
+            {% comment %}
+            <div id="interactive-banner" data-url="http://www.protectamerica.com/products/order-package">
+            {% endcomment %}
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/flash-promotion.jpg"
+                    width="685" height="400" alt="Our best promotion ever! free equipment, 19.99 monthly monitoring" style="position: relative; right: 16px; " />
+            {% comment %}
+            </div>
             <div id="touchscreen-banner" data-url="{% url order-package %}?package=silver">
                 <h2>Protecting Homes for 20 Years<span>Celebrate with a GE Simon XT Touch Screen with Every Package</span></h2>
                 
@@ -25,25 +34,12 @@
                     <div class="button-submit">
                         <a href="{% url order-package %}?package=silver" title="Add a GE Simon XT Touch Screen to any package today">Order Now ></a>
                     </div>
-                    <span>Expires 09/30/2012</span>
+                    <span>Expires 10/31/2012</span>
 
                 </div>
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
 
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/streamers.jpg" id="streamers" alt="ge-touchscreen" />
-
-            </div>
-            <div id="interactive-banner" data-url="{% url cellular %}">
-                <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
-                <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
-                
-                <div id="interactive-banner-content">
-                    <p>Included <strong>FREE*</strong> <span>with cellular or broadband monitoring.</span></p>
-                    <div class="button-link">
-                        <a href="{% url cellular %}" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
-                    </div>
-                </div>
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
 
             </div>
             <div id="top-consumer-banner" data-url="{% url copper %}">
@@ -56,6 +52,7 @@
                 <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
 
             </div>
+            {% endcomment %}
         </div>
         {% include "order/quote-form.html" with form=forms.basic %}
     </div>
