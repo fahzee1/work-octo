@@ -170,18 +170,31 @@ def payitforward(request):
 
 @cache_page(60 * 60 * 4)
 def index(request): 
-    ctx = {}
-    ctx['page_name'] = 'index'
-    ctx['pages'] = ['index']
+    return index_render(request, 'index.html', {})
+
+def index_test(request, test_name):
+    if test_name == 'tcr-first':
+        template = 'tests/top-consumer-test.html'
+    elif test_name == 'promotion-first':
+        template = 'tests/promotion-tcr-banner-test.html'
+    else:
+        raise Http404
+        
+    return index_render(request, template, {})
+
+def index_render(request, template, context):
+    context['page_name'] = 'index'
+    context['pages'] = ['index']
 
     latest_news = Article.objects.order_by('-date_created')[:3]
-    ctx['latest_news'] = latest_news
+    context['latest_news'] = latest_news
 
     t_api = twitter.Api()
     tweets = t_api.GetUserTimeline('@protectamerica')
-    ctx['tweets'] = tweets[:3]
+    context['tweets'] = tweets[:3]
 
-    return simple_dtt(request, 'index.html', ctx)
+    return simple_dtt(request, template, context)
+
 
 def family_of_companies(request):
     ctx = {}

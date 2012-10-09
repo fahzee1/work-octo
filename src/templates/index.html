@@ -109,12 +109,13 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
 {% block content %}
 </div>
+{% block hero_banner_area %}
     {% if request.GET.agent == 'a01986' or request.COOKIES.refer_id == 'a01986' %}
     {% include "banners/tcr-hero-images.html" %}
     {% else %}
     {% include "banners/seo-hero-images.html" %}
     {% endif %}
-
+{% endblock %}
 <div class="wrapper">
     {% include "order/call-box.html" %}
 <div id="main">

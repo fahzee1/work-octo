@@ -177,9 +177,9 @@ else:
     urlpatterns += patterns('',
 
         # Test Pages
-        dtt(r'^test/tct/?$', 'tests/top-consumer-test.html', 'tct-test', 'home'),
-        dtt(r'^test/touchscreen/?$', 'tests/touchscreen-banner-test.html', 'touchscreen-test', 'home'),
-        dtt(r'^test/new-lineup/?$', 'tests/new-lineup-test.html', 'new-lineup-test', 'home'),
+        dtt(r'^test/tcr-first/$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
+        dtt(r'^test/promotion-first/$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
+        url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/$', 'apps.common.views.index_test', name='index_test'),
 
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
