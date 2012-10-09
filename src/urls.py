@@ -490,9 +490,7 @@ else:
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
     ('^feedback/?$',
         redirect_to, {'url': '/pa/contact', 'permanent': True}),
-    
-    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
-            'apps.common.views.redirect_wrapper'),
+
 )
 # redirect urls
 urlpatterns += patterns('',
@@ -616,6 +614,14 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
     ('^home-security/business-security-systems$',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
+    ('^crimeprevention$',
+        redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
+    ('^crimeprevention/$',
+        redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
+)
+urlpatterns += patterns('',
+    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
+            'apps.common.views.redirect_wrapper'),
 )
 
 if settings.DEBUG:
