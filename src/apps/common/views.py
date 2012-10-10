@@ -179,7 +179,7 @@ def index_test(request, test_name):
         template = 'tests/promotion-tcr-banner-test.html'
     else:
         raise Http404
-        
+
     return index_render(request, template, {})
 
 def index_render(request, template, context):
@@ -188,10 +188,17 @@ def index_render(request, template, context):
 
     latest_news = Article.objects.order_by('-date_created')[:3]
     context['latest_news'] = latest_news
-
-    t_api = twitter.Api()
+    ckey = settings.TWITTER_CKEY
+    csecret = settings.TWITTER_CSECRET
+    atkey = settings.TWITTER_AUTH_KEY
+    atsecret = settings.TWITTER_AUTH_SECRET
+    t_api = twitter.Api(consumer_key=ckey, consumer_secret=csecret,
+        access_token_key=atkey, access_token_secret=atsecret)
+    retweets = t_api.GetUserRetweets()
     tweets = t_api.GetUserTimeline('@protectamerica')
-    context['tweets'] = tweets[:3]
+    new_tweets = retweets + tweets
+    new_tweets = sorted(new_tweets, key=lambda student: student.created_at_in_seconds, reverse=True)
+    context['tweets'] = new_tweets[:3]
 
     return simple_dtt(request, template, context)
 
