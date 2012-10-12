@@ -172,6 +172,7 @@ def payitforward(request):
 def index(request): 
     return index_render(request, 'index.html', {})
 
+@cache_page(60 * 60 * 4)
 def index_test(request, test_name):
     if test_name == 'tcr-first':
         template = 'tests/top-consumer-test.html'
