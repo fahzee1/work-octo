@@ -8,6 +8,7 @@ from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
 
 from apps.contact.forms import PAContactForm
+from apps.local.sitemaps import KeywordSitemap
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
@@ -75,12 +76,17 @@ def local_page_wrapper(request, keyword, city, state, zipcode):
             if statestr.lower() == state[1].lower():
                 return state[0]
         return False
+    print state
     statecode = get_state_code(state)
+    print statecode
     if not statecode:
         raise Http404
-    return local_page(request, statecode, city.capitalize())
+    print statecode
+    return local_page(request, statecode, city.replace('-', ' ').title())
 
 def local_page(request, state, city):
+    print state
+    print city
     crime_stats_ctx = query_by_state_city(state, city)
     forms = {}
     forms['basic'] = PAContactForm()
@@ -145,4 +151,5 @@ def local_city(request, state):
                               context_instance=RequestContext(request))
 
 def sitemap(request, keyword):
-    pass
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap' : KeywordSitemap(keyword)})

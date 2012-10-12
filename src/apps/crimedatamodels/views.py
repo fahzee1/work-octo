@@ -178,11 +178,11 @@ def choose_city(request, state):
 
 def choose_state(request):
     # try to auto find the city/state from IP address
-    geo_ip = GeoIP()
-    city_info = geo_ip.city('12.201.194.50')
-    if city_info is not None and 'city' in city_info and 'region' in city_info and 'dont_auto_crime_stats' not in request.session:
-        request.session['dont_auto_crime_stats'] = True
-        return HttpResponseRedirect(reverse('crime-rate:crime-stats', kwargs={'city': city_info['city'], 'state': city_info['region']}))
+    #geo_ip = GeoIP()
+    #city_info = geo_ip.city('12.201.194.50')
+    #if city_info is not None and 'city' in city_info and 'region' in city_info and 'dont_auto_crime_stats' not in request.session:
+    #    request.session['dont_auto_crime_stats'] = True
+    #    return HttpResponseRedirect(reverse('crime-rate:crime-stats', kwargs={'city': city_info['city'], 'state': city_info['region']}))
     states = State.objects.order_by('name')
 
     forms = {}
