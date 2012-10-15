@@ -4,6 +4,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/products.css">
+{% if not request.COOKIES.packageCookie %}
 <script> 
 _udn = "protectamerica.com";
 </script> 
@@ -21,7 +22,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
 </script><script>utmx('url','A/B');</script>
 <!-- End of Google Analytics Content Experiment code -->
-
+{% endif %}
 {% endblock %}
 
 {% block subnav_child %}
