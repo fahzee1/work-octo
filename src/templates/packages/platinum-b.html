@@ -168,7 +168,22 @@
     });
     </script>
 {% endaddtoblock "js" %}
-
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var testCookie = getCookie('utm_expid');
+    var packageCookie = getCookie('packageCookie');
+    var base_url = '/ge-simon-security-systems/wireless-home-alarm/';
+    if(packageCookie == 'A'){
+        window.location = base_url + 'platinum-package/';
+        return;
+    }
+    if(!testCookie) {
+        setCookie('packageCookie', 'B');
+    }
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}  
 
 {% block page-product %}

@@ -158,7 +158,22 @@
     });
     </script>
 {% endaddtoblock "js" %}
-
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var testCookie = getCookie('utm_expid');
+    var packageCookie = getCookie('packageCookie');
+    var base_url = '/test/wireless-home-alarm/';
+    if(packageCookie == 'B'){
+        window.location = base_url + 'silver-package/';
+        return;
+    }
+    if(!testCookie) {
+        setCookie('packageCookie', 'A');
+    }
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}  
 {% block page-product %}
     <h2>Silver Security Package</h2>
