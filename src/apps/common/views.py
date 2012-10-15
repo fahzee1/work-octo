@@ -3,6 +3,8 @@ import urls
 import urllib2
 from datetime import datetime, timedelta
 from urllib import urlencode
+import twitter
+import operator
 
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
@@ -14,6 +16,7 @@ from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanen
 from django.core.urlresolvers import reverse
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
+from django.utils.cache import patch_vary_headers
 
 from apps.contact.forms import LeadForm, AffiliateLongForm 
 from apps.affiliates.models import Affiliate
@@ -113,7 +116,7 @@ def simple_dtt(request, template, extra_context):
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
-
+    patch_vary_headers(response, ('Host',))
     return response
 
 def payitforward(request):
@@ -167,14 +170,39 @@ def payitforward(request):
 
 @cache_page(60 * 60 * 4)
 def index(request): 
-    ctx = {}
-    ctx['page_name'] = 'index'
-    ctx['pages'] = ['index']
+    return index_render(request, 'index.html', {})
+
+@cache_page(60 * 60 * 4)
+def index_test(request, test_name):
+    if test_name == 'tcr-first':
+        template = 'tests/top-consumer-test.html'
+    elif test_name == 'promotion-first':
+        template = 'tests/promotion-tcr-banner-test.html'
+    else:
+        raise Http404
+
+    return index_render(request, template, {})
+
+def index_render(request, template, context):
+    context['page_name'] = 'index'
+    context['pages'] = ['index']
 
     latest_news = Article.objects.order_by('-date_created')[:3]
-    ctx['latest_news'] = latest_news
+    context['latest_news'] = latest_news
+    ckey = settings.TWITTER_CKEY
+    csecret = settings.TWITTER_CSECRET
+    atkey = settings.TWITTER_AUTH_KEY
+    atsecret = settings.TWITTER_AUTH_SECRET
+    t_api = twitter.Api(consumer_key=ckey, consumer_secret=csecret,
+        access_token_key=atkey, access_token_secret=atsecret)
+    retweets = t_api.GetUserRetweets()
+    tweets = t_api.GetUserTimeline('@protectamerica')
+    new_tweets = retweets + tweets
+    new_tweets = sorted(new_tweets, key=lambda student: student.created_at_in_seconds, reverse=True)
+    context['tweets'] = new_tweets[:3]
 
-    return simple_dtt(request, 'index.html', ctx)
+    return simple_dtt(request, template, context)
+
 
 def family_of_companies(request):
     ctx = {}

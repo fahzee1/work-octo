@@ -57,3 +57,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
+
+GEOIP_LIBRARY_PATH = '/usr/local/lib/libGeoIP.so'

@@ -27,7 +27,7 @@
             </div>
             <div class="clear"></div>
         </li>
-        <li><a href="https://homesecuritysystems.protectamerica.com" title="See Home Security Deals in your Area" id="change-local-city">Change City</a></li>
+        <li><a href="http://homesecuritysystems.protectamerica.com" title="See Home Security Deals in your Area" id="change-local-city">Change City</a></li>
 	</ul>
 	{% endblock %}
 {% block content %}
@@ -40,19 +40,11 @@
     }
 </style>
 {% endaddtoblock "css" %}
-    <div id="left-content">
-        <div id="hero-banner">
-            <a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/silver-package">{% include "banners/669x320/top-consumer-reviews-compact.html" %}</a>
-        </div>
-    </div>
+</div>
+    {% include "banners/seo-hero-images.html" %}
 
-
-
-    {% include "order/quote-form.html" with form=forms.basic %}
-<div class="clear"></div>
-
-{% include "banners/limited-time-offer.html" %}
-<div class="clear"></div>
+<div class="wrapper">
+    {% include "order/call-box.html" %}
 <div id="protect-america-difference">
 	<div>
 		<h2>Protect America Home Security</h2>
@@ -88,52 +80,6 @@
 
 
 </div>
-<div id="crime-statistics">
-    <div id="crime-grade-scorecard">
-        <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.average_grade|lower }}-big.png" id="overall-grade" alt="{{ city }}, {{ state_long }} Overall Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }}, {{ state_long }} Overall Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-        <div id="scorecard-content">
-            <h2>{{ city }}, {{ state }} Crime Scorecard</h2>
-            <p>The security grade for {{ city }}, {{ state_long }} is a {{ latest_year.stats.average_grade }}. This means you are living in a city that has crime rates below the national average. Crime rates vary from one part of a city to another, however. Just like any major city, some areas where you live are simply safer than others. Regardless of the statistics in your city, it is important that you feel safe in your home. To help keep your home and family safe, we highly recommend getting a home security system from Protect America.</p>
-            <div id="crime-grades">
-                <div id="burglary-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.burglary_grade|lower }}-sml.png" alt="{{ city }} Burglary Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }} Burglary Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-                    <p>Burglary</p>
-                </div>
-                <div id="murder-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.murder_and_nonnegligent_manslaughter_grade|lower }}-sml.png" alt="{{ city }} Murder Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }} Murder Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-                    <p>Murder</p>
-                </div>
-                <div id="rape-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.forcible_rape_grade|lower }}-sml.png" alt="{{ city }} Forcible Rape Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }} Forcible Rape Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-                    <p>Forcible Rape</p>
-                </div>
-                <div id="robbery-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.robbery_grade|lower }}-sml.png" alt="{{ city }} Robbery Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }} Robbery Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-                    <p>Robbery</p>
-                </div>
-                <div id="assault-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.aggravated_assault_grade|lower }}-sml.png" alt="{{ city }} Aggravated Assault Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }} Aggravated Assault Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-                    <p>Aggravated Assault</p>
-                </div>
-                <div id="auto-theft-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.motor_vehicle_theft_grade|lower }}-sml.png" alt="{{ city }} Auto Theft Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }} Auto Theft Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-                    <p>Auto Theft</p>
-                </div>
-                <div id="larceny-grade">
-                    <img src="{{ STATIC_URL }}img/crime-stats/crime-grades/grade-{{ latest_year.stats.larceny_theft_grade|lower }}-sml.png" alt="{{ city }} Larceny Crime Grade: {{ latest_year.stats.average_grade|upper }}" title="{{ city }} Larceny Crime Grade: {{ latest_year.stats.average_grade|upper }}" />
-                    <p>Larceny</p>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-
-        </div>
-        
-        <div class="button-link"><a href="http://www.protectamerica.com/crime-rate/{{ state }}/{{ city }}/" title="View Crime Stats in {{ city }}" alt="View Crime Stats in {{ city }}, {{ state }}">View Crime Stats in {{ city }} ></a></div>
-        <div class="clear"></div>
-    </div>
-</div>
-{% include "order/call-box.html" %}
 
 <div id="home-security-advantage">
 	<div id="protect-america-advantage">
@@ -185,6 +131,8 @@
 	</table>
 	<div class="clear"></div>
 </div>
+{% include "order/call-box.html" %}
+
 <div id="customer-testimonials">
     <h2>Real {{ state_long }} Customers Talking about Protect America:</h2>
     <ul id="main-testimonials">

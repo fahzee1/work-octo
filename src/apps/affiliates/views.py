@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
 from apps.common.views import simple_dtt
@@ -201,6 +202,7 @@ def signup(request):
 
     return simple_dtt(request, 'contact-us/affiliates.html', ctx)
 
+@csrf_exempt
 def accept_affiliate(request):
     # API listener to accept affiliate submissions
     if request.method != "POST":
@@ -209,9 +211,9 @@ def accept_affiliate(request):
     errors = []
 
     # check to make sure all required information is available
-    agent_id = request.POST.get('agentid', False)
+    agent_id = request.POST.get('agentid', False).lower()
     name = request.POST.get('source', False)
-    phone = request.POST.get('phone', '')
+    phone = request.POST.get('phone', '').replace('-', '')
     pixels = request.POST.get('tracking_pixels', '')
     conversion_pixels = request.POST.get('conversion_pixels', '')
 
@@ -220,59 +222,36 @@ def accept_affiliate(request):
     if not name:
         errors.append('no_source_in_request')
 
-    # check for duplicate agent_id
-    if Affiliate.objects.filter(agent_id=agent_id).count() > 0:
-        errors.append('duplicate_agentid')
-    if Affiliate.objects.filter(name=name).count() > 0:
-        errors.append('duplicate_source')
+    try:
+        affiliate = Affiliate.objects.get(agent_id=agent_id)
+    except:
+        affiliate = Affiliate()
+        affiliate.agent_id = agent_id
 
     if len(errors):
         return json_response({'success': False, 'errors': errors})
 
-    affiliate = Affiliate()
-    affiliate.agent_id = agent_id
     affiliate.name = name
     affiliate.phone = phone
     affiliate.pixels = pixels
     affiliate.conversion_pixels = conversion_pixels
+    affiliate.thank_you = '/affiliate/'
     affiliate.save()
 
     return json_response({'success': True})
 
-def accept_affiliate_update(request, affiliate_id):
-    if request.method != "POST":
-        raise Http404
+def get_affiliate_information(request, affiliate_id):
 
     try:
-        affiliate = Affiliate.objects.get(id=affiliate_id)
+        affiliate = Affiliate.objects.get(agent_id=affiliate_id)
     except Affiliate.DoesNotExist:
         raise Http404
 
-    agent_id = request.POST.get('agentid', None)
-    name = request.POST.get('source', None)
-    phone = request.POST.get('phone', None)
-    pixels = request.POST.get('tracking_pixels', None)
-    conversion_pixels = request.POST.get('conversion_pixels', None)
+    info = {
+        'source': affiliate.name,
+        'phone': affiliate.phone,
+        'tracking_pixels': affiliate.pixels,
+        'conversion_pixels': affiliate.conversion_pixels,
+    }
 
-    if agent_id is not None:
-        if Affiliate.objects.filter(agent_id=agent_id).count() > 0:
-            errors.append('duplicate_agentid')
-        else:
-            affiliate.agent_id = agent_id
-    if name is not None:
-        if Affiliate.objects.filter(name=name).count() > 0:
-            errors.append('duplicate_source')
-        else:
-            affiliate.name = name
-    if phone is not None:
-        affiliate.phone = phone
-    if pixels is not None:
-        affiliate.pixels = pixels
-    if conversion_pixels is not None:
-        affiliate.conversion_pixels = conversion_pixels
-
-    if len(errors):
-        return json_response({'success': False, 'errors': errors})
-
-    affiliate.save()
-    return json_response({'success': True})
+    return json_response({'success': True, 'affiliate': info})

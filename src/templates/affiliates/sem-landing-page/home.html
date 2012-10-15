@@ -64,34 +64,19 @@
             
         </div>
         <div id="top-hero-banner">
-            <div id="touchscreen-banner" data-url="http://www.protectamerica.com/products/security-equipment/accessories/touchscreen">
-                <img src="{{ STATIC_URL }}img/products/equipment/ge-touchscreen/ge-touchscreen-hero-image.jpg" id="touchscreen-image" alt="ge-touchscreen-hero-image" width="424" height="280" />
-                <h2>GE Simon XT Touch Screen <span>Convenient Control of your Home Security System</span></h2>
-                
-                <div id="touchscreen-banner-content">
-                    <p>Price Today: <strong>Free</strong> <span>when you order:</span></p>
-                    <ul>
-                        <li>
-                            <a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/silver-package" title="Silver Home Security Package">
-                                <img src="{{ STATIC_URL }}img/banners/hero-banners/touchscreen/silver-medal-icon.jpg" alt="silver-medal-icon" width="24" height="24" />Silver Package</li>
-                            </a>
-                        <li>
-                            <a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/gold-package" title="Gold Home Security Package">
-                                <img src="{{ STATIC_URL }}img/banners/hero-banners/touchscreen/gold-medal-icon.jpg" alt="silver-medal-icon" width="24" height="24" />Gold Package
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/platinum-package" title="Platinum Home Security Package">
-                                <img src="{{ STATIC_URL }}img/banners/hero-banners/touchscreen/platinum-medal-icon.jpg" alt="silver-medal-icon" width="24" height="24" />Platinum Package
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="button-link">
-                        <a href="http://www.protectamerica.com/products/security-equipment/accessories/touchscreen" title="Add a GE Simon XT Touch Screen to any package today">Learn More ></a>
-                    </div>
-                    <span>Expires 09/30/2012</span>
-
+            <div id="interactive-banner" data-url="http://www.protectamerica.com/products/order-package">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/best-deal-ever.jpg"
+                    width="685" height="400" alt="Our best promotion ever! free equipment, 19.99 monthly monitoring" style="position: relative; right: 16px; " />
+            </div>
+            <div id="top-consumer-banner" data-url="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
+                <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
+                <div id="top-consumer-content">
+                    <p>"Protect America provides the <strong>best home security solution</strong> available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are] <strong>top-notch.</strong>"</p>
+                    <em>&ndash; Top Consumer Reviews, 2012</em>
                 </div>
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
+
             </div>
             <div id="interactive-banner" data-url="http://www.protectamerica.com/products/alarm-monitoring/cellular">
                 <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
@@ -103,16 +88,10 @@
                         <a href="http://www.protectamerica.com/products/alarm-monitoring/cellular" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
                     </div>
                 </div>
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
 
             </div>
-            <div id="top-consumer-banner" data-url="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
-                <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
-                <div id="top-consumer-content">
-                    <p>"Protect America provides the <strong>best home security solution</strong> available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are] <strong>top-notch.</strong>"</p>
-                    <em>&ndash; Top Consumer Reviews, 2012</em>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -357,18 +336,14 @@
                 prev: '#hero-left-arrow'
             });
         $('#top-hero-banner > div').click(function(e) {
-            var href = $(this).find('.button-link');
-            if(href.length == 0) {
-                href = $(this).find('.button-submit');
-            }
-            _gaq.push([  
+            if($(this).attr('data-url')) {
+                window.location = $(this).attr('data-url');
+                _gaq.push([  
                     '_trackEvent',
                     'Hero Banner',
-                    'Paid Page Hero Banner Click',
+                    'Front Page Hero Banner Click',
                     $(this).attr('id')
                 ]);
-            if(href.children('a').attr('href')) {
-                window.location = href.children('a').attr('href');
                 return;
             }
         });

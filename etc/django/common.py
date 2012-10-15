@@ -121,6 +121,7 @@ INSTALLED_APPS = (
 
     'south',
     'sekizai',
+    'colorful',
 
     'apps.common',
     'apps.affiliates',
@@ -133,6 +134,7 @@ INSTALLED_APPS = (
     'apps.crimedatamodels',
     'apps.news',
     'apps.crm',
+    'apps.payitforward',
     'apps.emails',
 
     # sitemaps by opm

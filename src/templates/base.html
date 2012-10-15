@@ -51,6 +51,11 @@
 
             {% block quick-links %}
             <ul id="quick-link-navigation">
+                <li>
+                    <a href="http://www.yelp.com/biz/protect-america-austin-2" title="Review Us on Yelp!" class="yelp-button">
+                        <img src="{{ STATIC_URL }}img/external/yelp-logo-sml.png" alt="yelp-logo-sml" width="56" height="24">
+                    </a>
+                </li>
                 <li id="quick-social">                
                     <div id="google-button">
                         <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
@@ -61,7 +66,7 @@
                     <div class="clear"></div>
                 </li>
                 
-                <li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat Online with a Security Professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Online Chat</a></li>
+                <li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Online Chat</a></li>
 
                 <li><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
             </ul>
@@ -164,12 +169,12 @@
             </div>
             <div id="footer-call-now">
                 <h3>Give us a call.</h3>
-                <p>Our security professionals are here to answer any questions and help you protect your home and family today.</p>
+                <p>Our security experts are here to answer any questions and help you protect your home and family today.</p>
                 <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
             </div>
             <div id="footer-chat-now">
                 <h3>Chat online.</h3>
-                <p>Have a question about a system? Ready to order? Our security professionals are available to chat online right now.</p>
+                <p>Have a question about a system? Ready to order? Our security experts are available to chat online right now.</p>
                 <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', '{{ page.name }}']);">Online Chat ></a></div>
             </div>
             <div class="clear"></div>
@@ -215,8 +220,8 @@
             <li><a href="http://www.protectamerica.com/help/return-policy/" title="Return Policy">Return Policy</a></li>
             <li><a href="http://www.protectamerica.com/help/do-not-call/" title="Do Not Call List">Do Not Call</a></li>
             <li><a href="http://www.protectamerica.com/sitemap/" title="Sitemap">Sitemap</a></li>
-            <li><strong>Hours of Operation</strong></li>
-            {{ business_hours|safe }}
+            {% comment %}<li><strong>Hours of Operation</strong></li>
+            {{ business_hours|safe }}{% endcomment %}
         </ul>
         <div id="awards">
             
@@ -248,7 +253,7 @@
         <tbody>
             <tr>
                 <td>AL</td>
-                <td>10-027</td>
+                <td>12-027</td>
                 <td>Alabama Electronic Security Board of Licensure, 7956 Vaughn Rd., PMB 392, Montgomery, AL 36116, (334) 264-9388</td>
             </tr>
 
@@ -260,11 +265,11 @@
             <tr>
                 <td>AZ</td>
                 <td>ROC114855 (C-12) and ROC114856 (L-67)</td>
-                <td>Arizona Register of Contractors, 3838 N. Central Ave, Ste 400, Phoenix, AZ 85012-1946, (602) 542-1525</td>
+                <td>Arizona Register of Contractors, 1700 West Washington St, Ste 105, Phoenix, AZ 85007, (602) 542-1525</td>
             </tr>
             <tr>
                 <td>CA</td>
-                <td>CO 4115</td>
+                <td>ACO 4115</td>
                 <td>California Dept. of Consumer Affairs, Bureau of Security & Investigative Services, 401 R Street, Suite 101, Sacramento, CA 95814, (916) 322-4000</td>
             </tr>
             <tr>
@@ -274,7 +279,7 @@
             </tr>
             <tr>
                 <td>FL</td>
-                <td>EG-0000192</td>
+                <td>EG-13000437</td>
                 <td>Florida Department of Business and Professional Regulation, 1940 North Monroe Street, Tallahassee, Florida 32399-1027, (850) 487-1395</td>
             </tr>
             <tr>
@@ -305,8 +310,8 @@
 
             <tr>
                 <td>MD</td>
-                <td>107-670</td>
-                <td>Maryland State Police, Licensing Division, 1111 Reisterstown Rd, Pikesville, MD 21208, (410) 653-4500</td>
+                <td>107-1657</td>
+                <td>Maryland State Police, Licensing Division - SPC/SST, 1111 Reisterstown Rd, Pikesville, MD 21208, (410) 653-4500</td>
             </tr>
 
             <tr>
@@ -333,7 +338,7 @@
             <tr>
                 <td>NC</td>
                 <td>635-CSA</td>
-                <td>NCASLB, 1631 Midtown Place, Suite 104, Raleigh, NC 27609, (919) 875-3611</td>
+                <td>NCASLB, 4901 Glenwood Ave, Suite 200 Raleigh, NC 27612, (919) 788-5320</td>
             </tr>
             <tr class="license-requirement">
                 <td>OK</td>
@@ -362,7 +367,12 @@
             <tr>
                 <td>TX</td>
                 <td>ACR-1204</td>
-                <td>Texas Department of Insurance, State Fire Marshal's Office (112-FM), P.O. Box 149221, Austin, TX 78714-9221 (512) 305-7900</td>
+                <td>Texas Department of Insurance, State Fire Marshal's Office, Mail Code 9999, P.O. Box 149221, Austin, TX 78714-9221 (512) 305-7900</td>
+            </tr>
+            <tr>
+                <td>TX</td>
+                <td>B16272</td>
+                <td>Texas Dept. of Public Safety, Private Security Bureau - MSC 0241, PO Box 4087, Austin, TX 78773-0001, (512) 424-7293</td>
             </tr>
             <tr>
                 <td>UT</td>
@@ -410,6 +420,7 @@
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 {% endblock %}
+{% render_block "js" %}
 {% block extra_javascript %}
 
 {% if 'index' in active_pages %}
@@ -433,7 +444,6 @@
 </script>
 {% endif %}
 {% endblock %}
-{% render_block "js" %}
 
 {% block extra_pixels %}
 {{ pixels|default_if_none:""|safe }}
@@ -469,9 +479,5 @@ var google_conversion_value = 0;
 <!-- End Remarketing Code -->
 
 <!-- BEGIN LivePerson Monitor. --><script language='javascript'> var lpMTagConfig = {'lpServer' : "server.iad.liveperson.net",'lpNumber' : "34774121",'lpProtocol' : "https"}; function lpAddMonitorTag(src){if(typeof(src)=='undefined'||typeof(src)=='object'){src=lpMTagConfig.lpMTagSrc?lpMTagConfig.lpMTagSrc:'/hcp/html/mTag.js';}if(src.indexOf('http')!=0){src=lpMTagConfig.lpProtocol+"://"+lpMTagConfig.lpServer+src+'?site='+lpMTagConfig.lpNumber;}else{if(src.indexOf('site=')<0){if(src.indexOf('?')<0)src=src+'?';else src=src+'&';src=src+'site='+lpMTagConfig.lpNumber;}};var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','iso-8859-1');s.setAttribute('src',src);document.getElementsByTagName('head').item(0).appendChild(s);} if (window.attachEvent) window.attachEvent('onload',lpAddMonitorTag); else window.addEventListener("load",lpAddMonitorTag,false);</script><!-- END LivePerson Monitor. -->
-
-{% if debug %}
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-{% endif %}
 </body>
 </html>
