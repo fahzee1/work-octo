@@ -259,6 +259,8 @@ else:
             'payitforward-revenue', 'payitforward', ctx={'agent_id': 'i03237'}),
         dtt(r'^payitforward/video/$', 'payitforward/video.html',
             'payitforward-video', 'payitforward', ctx={'agent_id': 'i03237'}),
+            dtt(r'^payitforward/press/$', 'payitforward/press.html',
+            'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
 
 
         # Product > Advantage
