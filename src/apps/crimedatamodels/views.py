@@ -5,7 +5,7 @@ from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.contrib.gis.utils import GeoIP
+#from django.contrib.gis.utils import GeoIP
 from django.core.urlresolvers import reverse
 
 from apps.contact.forms import PAContactForm
