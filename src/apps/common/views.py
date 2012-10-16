@@ -178,6 +178,14 @@ def index_test(request, test_name):
         template = 'tests/top-consumer-test.html'
     elif test_name == 'promotion-first':
         template = 'tests/promotion-tcr-banner-test.html'
+    elif test_name == 'nav-shop':
+        template = 'tests/test-nav-shop.html'
+    elif test_name == 'nav-pricing':
+        template = 'tests/test-nav-pricing.html'
+    elif test_name == 'nav-plans':
+        template = 'tests/test-nav-plans.html'
+    elif test_name == 'nav-home-security':
+        template = 'tests/test-nav-home-security.html'
     else:
         raise Http404
 
@@ -189,18 +197,11 @@ def index_render(request, template, context):
 
     latest_news = Article.objects.order_by('-date_created')[:3]
     context['latest_news'] = latest_news
-    ckey = settings.TWITTER_CKEY
-    csecret = settings.TWITTER_CSECRET
-    atkey = settings.TWITTER_AUTH_KEY
-    atsecret = settings.TWITTER_AUTH_SECRET
-    t_api = twitter.Api(consumer_key=ckey, consumer_secret=csecret,
-        access_token_key=atkey, access_token_secret=atsecret)
-    retweets = t_api.GetUserRetweets()
-    tweets = t_api.GetUserTimeline('@protectamerica')
-    new_tweets = retweets + tweets
-    new_tweets = sorted(new_tweets, key=lambda student: student.created_at_in_seconds, reverse=True)
-    context['tweets'] = new_tweets[:3]
 
+    t_api = twitter.Api()
+    tweets = t_api.GetUserTimeline('@protectamerica')
+    context['tweets'] = tweets[:3]
+    
     return simple_dtt(request, template, context)
 
 
