@@ -105,7 +105,7 @@
     <div id="navigation">
         <ul>
             <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="{% url home %}" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
-            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Home Security Systems and Products">Products</a></li>
+            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Home Security Systems and Products">{% if request.COOKIES.navCookieValue %}{% if request.COOKIES.navCookieValue == 'Home%20Security' %}Home Security{% else %}{{ request.COOKIES.navCookieValue }}{% endif %}{% else %}Products{% endif %}</a></li>
             <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
             <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="{% url support %}" title="Need Help with Your Security System? Visit our Support Area">Support</a></li>
             <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>

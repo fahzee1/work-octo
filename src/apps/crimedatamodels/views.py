@@ -92,12 +92,14 @@ def query_by_state_city(state, city):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
+        city_id = None
     except State.DoesNotExist:
         raise Http404
     try:
         city = city.replace('+', ' ')
         city = CityLocation.objects.get(city_name=city,
             state=state.abbreviation)
+        city_id = city.id
     except CityLocation.DoesNotExist:
         raise Http404
 
@@ -144,6 +146,7 @@ def query_by_state_city(state, city):
            'long': city.longitude,
            'weather_info': weather_info,
            'pop_type': pop_type,
+           'city_id': city_id,
            'content': content.render(city)}  
 
 def crime_stats(request, state, city):
