@@ -22,7 +22,7 @@
             <img src="/static/img/external/consumer-digest/consumer-digest-logo-transparent.png"  width="78" height="76" alt="Copper Package named a Consumer Digest Best Buy" />
             <p>Voted a Consumers Digest<br/>"Best Buy" for 2012</p>
         </div>
-        <span>Our Price: <strong itemprop="price">FREE<sup>*</sup></strong></span>
+        <span>Equipment Price: <strong itemprop="price">FREE</strong></span>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -160,7 +160,23 @@
     });
     </script>
 {% endaddtoblock "js" %}
-
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var testCookie = getCookie('utm_expid');
+    var packageCookie = getCookie('packageCookie');
+    var base_url = '/test/wireless-home-alarm/';
+    if(packageCookie == 'B'){
+        window.location = base_url + 'copper-package/';
+        return;
+        console.log('test');
+    }
+    if(!testCookie) {
+        setCookie('packageCookie', 'A');
+    }
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}  
 {% block page-product %}
     <h2>Copper Security Package</h2>

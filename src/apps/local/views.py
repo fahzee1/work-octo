@@ -1,13 +1,18 @@
 import datetime
 import pytz
 from pytz import timezone
+import settings
+import os
 
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
+from django.utils import simplejson
+from django.conf import settings as dsettings
 
 from apps.contact.forms import PAContactForm
+from apps.local.sitemaps import KeywordSitemap
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
@@ -78,10 +83,24 @@ def local_page_wrapper(request, keyword, city, state, zipcode):
     statecode = get_state_code(state)
     if not statecode:
         raise Http404
-    return local_page(request, statecode, city.capitalize())
+    return local_page(request, statecode, city.replace('-', ' ').title())
 
 def local_page(request, state, city):
     crime_stats_ctx = query_by_state_city(state, city)
+    if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
+        json_file = os.path.join(settings.PROJECT_ROOT, 'src',
+            'apps', 'crimedatamodels', 'external', 'city_state_redirect.json')
+        json_data = open(json_file)
+        csr = simplejson.load(json_data)
+        zipcode = ZipCode.objects.filter(city=city, state=state)
+        state_obj = State.objects.get(abbreviation=state)
+        return HttpResponseRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
+            (
+                csr[str(crime_stats_ctx['city_id'])],
+                city.lower().replace(' ', '-'),
+                state_obj.name.lower(),
+                zipcode[0].zip,
+            ))
     forms = {}
     forms['basic'] = PAContactForm()
     crime_stats_ctx['forms'] = forms
@@ -145,4 +164,5 @@ def local_city(request, state):
                               context_instance=RequestContext(request))
 
 def sitemap(request, keyword):
-    pass
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap' : KeywordSitemap(keyword)})
