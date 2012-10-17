@@ -177,9 +177,9 @@ else:
     urlpatterns += patterns('',
 
         # Test Pages
-        dtt(r'^test/tct/?$', 'tests/top-consumer-test.html', 'tct-test', 'home'),
-        dtt(r'^test/touchscreen/?$', 'tests/touchscreen-banner-test.html', 'touchscreen-test', 'home'),
-        dtt(r'^test/new-lineup/?$', 'tests/new-lineup-test.html', 'new-lineup-test', 'home'),
+        dtt(r'^test/tcr-first/$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
+        dtt(r'^test/promotion-first/$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
+        url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/$', 'apps.common.views.index_test', name='index_test'),
 
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
@@ -190,6 +190,9 @@ else:
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
+        url(r'^(?P<keyword>%s)/sitemap/$' % ('|'.join(LOCAL_KEYWORDS)),
+            'apps.local.views.sitemap',
+            name='local-page-sitemap'),
 
         # SEO Content Pages
         dtt(r'^home-security-systems/$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
@@ -208,6 +211,7 @@ else:
         dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison/index.html', 'paid-adt-comparison-cat'),
         dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
+        dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
 
 
 
@@ -268,7 +272,7 @@ else:
         # Home Security Packages
         dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
 
-            # Product > Packages B
+            # Product > Packages
 
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'products'),
@@ -277,7 +281,14 @@ else:
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-business-security/business-package/?$', 'packages/business.html', 'business', 'products'),
 
-            
+            # Product > Packages B
+
+            dtt(r'^test/wireless-home-alarm/copper-package/?$', 'packages/copper-b.html', 'copper-b', 'products'),
+            dtt(r'^test/wireless-home-alarm/bronze-package/?$', 'packages/bronze-b.html', 'bronze-b', 'products'),
+            dtt(r'^test/wireless-home-alarm/silver-package/?$', 'packages/silver-b.html', 'silver-b', 'products'),
+            dtt(r'^test/wireless-home-alarm/gold-package/?$', 'packages/gold-b.html', 'gold', 'products-b'),
+            dtt(r'^test/wireless-home-alarm/platinum-package/?$', 'packages/platinum-b.html', 'platinum-b', 'products'),
+            dtt(r'^test/wireless-business-security/business-package/?$', 'packages/business-b.html', 'business-b', 'products'),
 
             # Product > Monitoring
 
@@ -490,9 +501,7 @@ else:
         redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
     ('^feedback/?$',
         redirect_to, {'url': '/pa/contact', 'permanent': True}),
-    
-    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
-            'apps.common.views.redirect_wrapper'),
+
 )
 # redirect urls
 urlpatterns += patterns('',
@@ -616,6 +625,14 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
     ('^home-security/business-security-systems$',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
+    ('^crimeprevention$',
+        redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
+    ('^crimeprevention/$',
+        redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
+)
+urlpatterns += patterns('',
+    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
+            'apps.common.views.redirect_wrapper'),
 )
 
 if settings.DEBUG:
