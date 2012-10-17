@@ -46,10 +46,7 @@ $(document).ready(function() {
     var submitting = false;
 
     $('#quote-form button').click(function() {
-        if(submitting==true) {
-            return false;
-        }
-        submitting = true;
+        $(this).attr('disabled', true);
         $('#quote-form div').removeClass('.error-state');
         var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
         $.ajax({
@@ -67,6 +64,7 @@ $(document).ready(function() {
                 window.location = "http://www.protectamerica.com" + url;
             }
         if(json.errors) {
+            $('#quote-form button').attr('disabled', false); 
             $("#quote-form-error").show();
             $("#quote-form-error ul").html("");
             var error_string = "";
@@ -97,6 +95,6 @@ $(document).ready(function() {
         }
         return false;
         });
-    }); 
+    });   
 </script>
 {% endaddtoblock "js" %}
