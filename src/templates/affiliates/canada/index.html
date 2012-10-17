@@ -1,0 +1,84 @@
+{% extends "base-r.html" %}
+
+{% load sekizai_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/canada/style.css">
+{% endblock %}
+
+
+{% block content %}
+</div>
+    <div id="top-wrapper">
+        <img src="{{ STATIC_URL }}img/affiliates/canada/canada-home-security-maple-leaf.png" alt="canada-home-security-maple-leaf" width="192" height="200" id="home-security-maple-leaf" />
+
+        <div class="wrapper">
+            <div id="left-wrapper">
+                <h1>The Best Home Security Deal in North America</h1>
+                <img src="{{ STATIC_URL }}img/affiliates/canada/interactive-home-security.jpg" id="security-main-image" alt="interactive-home-security" width="392" height="296" />
+                <div id="soft-offer-box">
+                    <img src="{{ STATIC_URL }}img/affiliates/canada/best-deal-price.png" alt="best-deal-price" width="272" height="128" />
+                    <div class="button-submit">
+                        <a href="{% url order-package %}">
+                            Order Now >
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="quote-area">
+                {% include "affiliates/canada/quote-form.html" with form=forms.basic %}
+                <iframe width="275" height="186" src="http://www.youtube.com/embed/isJJrsr5sXQ?modestbranding=1&rel=0&border=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+<div class="wrapper">
+    <div id="five-blocks">
+        <div class="assurance-block">
+            <p>24 / 7 Security</p>
+        </div>
+        <div class="assurance-block">
+            <p>Monitoring Options</p>
+        </div>
+        <div class="assurance-block">
+            <p>Interactive</p>
+        </div>
+        <div class="assurance-block active">
+            <p>Plans & Pricing</p>
+        </div>
+    </div>
+</div>
+
+{% addtoblock "js" %}
+<script type="text/javascript" src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+<script type="text/javascript">
+    var animatedAction = false;
+    function switch_card(num) {
+        
+        if(animatedAction) {
+            return false;
+        }
+
+        animatedAction = true;
+        $('.assurance-card:visible').fadeOut('fast');
+        $('.assurance-card:eq('+num+')').fadeIn();
+        // move arrow here
+        var left_pos = (196 * num) + 66; 
+        $('#selector-arrow').animate({
+            'left': left_pos+'px'
+        }, 500, 'easeOutBack');
+        animatedAction = false;
+        return true;
+    }
+$(document).ready(function() {
+    $('.assurance-block').click(function (e){
+        e.preventDefault();
+        switch_card($(this).index());
+        $('.assurance-block').removeClass('active');
+        $(this).addClass('active');
+    });
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
