@@ -4,12 +4,13 @@ from pytz import timezone
 import settings
 import os
 
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.utils import simplejson
 from django.conf import settings as dsettings
+from django.views.decorators.cache import cache_page
 
 from apps.contact.forms import PAContactForm
 from apps.local.sitemaps import KeywordSitemap
@@ -74,6 +75,7 @@ TIMEZONES = {
     'WY':'America/Denver',
 }
 
+@cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state, zipcode):
     def get_state_code(statestr):
         for state in US_STATES:
@@ -85,6 +87,7 @@ def local_page_wrapper(request, keyword, city, state, zipcode):
         raise Http404
     return local_page(request, statecode, city.replace('-', ' ').title())
 
+
 def local_page(request, state, city):
     crime_stats_ctx = query_by_state_city(state, city)
     if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
@@ -94,7 +97,7 @@ def local_page(request, state, city):
         csr = simplejson.load(json_data)
         zipcode = ZipCode.objects.filter(city=city, state=state)
         state_obj = State.objects.get(abbreviation=state)
-        return HttpResponseRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
+        return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
             (
                 csr[str(crime_stats_ctx['city_id'])],
                 city.lower().replace(' ', '-'),
