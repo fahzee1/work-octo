@@ -62,6 +62,13 @@ $(document).ready(function() {
             if(json.success) {
                 url = json.thank_you
                 window.location = "http://www.protectamerica.com" + url;
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
             }
         if(json.errors) {
             $('#quote-form button').attr('disabled', false); 
