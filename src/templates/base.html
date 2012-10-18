@@ -91,7 +91,7 @@
 
             {% if phone_number %}
             <div id="phone-number">
-                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
             </div>
             {% endif %}
             <div class="clear"></div>
@@ -170,7 +170,7 @@
             <div id="footer-call-now">
                 <h3>Give us a call.</h3>
                 <p>Our security experts are here to answer any questions and help you protect your home and family today.</p>
-                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span>
             </div>
             <div id="footer-chat-now">
                 <h3>Chat online.</h3>
