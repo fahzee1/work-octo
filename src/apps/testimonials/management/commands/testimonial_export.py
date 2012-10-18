@@ -41,15 +41,15 @@ class Command(BaseCommand):
         ])    
         for feedback in feedbacks:
             writer.writerow([
-                feedback.name,
-                feedback.email,
-                feedback.phone,
+                feedback.name.encode('ascii', 'ignore'),
+                feedback.email.encode('ascii', 'ignore'),
+                feedback.phone.encode('ascii', 'ignore'),
                 feedback.city,
                 feedback.state,
                 feedback.feedback_type,
                 feedback.department,
                 feedback.rep_name,
-                feedback.message,
+                feedback.message.encode('ascii', 'ignore'),
                 feedback.rating,
                 feedback.date_created,
             ])
