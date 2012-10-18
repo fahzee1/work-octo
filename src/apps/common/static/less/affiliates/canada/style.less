@@ -97,6 +97,10 @@ body {
         margin-right: 8px;
         border: 1px solid transparent;
         border-bottom: none;
+        cursor: pointer;
+        cursor: hand;
+        margin-bottom: 0;
+        .fade-slow;
         p {
             color: @white;
             line-height: 48px;
@@ -104,10 +108,15 @@ body {
             text-align: center;
 
         }
+        &:hover {
+            .background-gradient;
+        }
         &.active {
             background: @v-light-grey;
             border: 1px solid @light-grey;
             border-bottom: none;
+            cursor: default;
+            .fade-fast;
             p {
                 color: @grey;
             }
@@ -119,13 +128,112 @@ body {
     position: relative;
     .content-box(960px);
     height: 363px;
-
+    border: 1px solid @light-grey;
+    padding: 8px;
+    .drop-shadow(0, 2px, 5px, #ccc);
+    background: transparent;
     .assurance-card {
 
         background: @white;
         display: none;
         &#assurance-card-one {
             display: block;
+        }
+        &#assurance-card-five {
+            table {
+                width: 90%;
+                margin: 0 auto;
+                thead {
+                    th {
+                        text-align: center;
+                        vertical-align: bottom;
+                        background: @v-light-blue;
+                        border: 1px solid @light-grey;
+                        border-left: none;
+                        padding-bottom: 8px;
+                        &.alpha {
+                            background: transparent;
+                            border-left: none;
+                            border-top: none;
+                        }
+                        h3 {
+                            font-size: 14px;
+                            color: #555;
+                            text-transform: uppercase;
+                            font-weight: bold;
+                        }
+                        p {
+                            color: @red;
+                            text-align: center;
+                            font-weight: 100;
+                            font-size: 40px;
+                            line-height: 40px;
+                            span {
+                                display: block;
+                                font-size: 20px;
+                                line-height: 20px;
+                                
+                            }
+                        }
+                    }
+                }
+                tbody {
+                    tr {
+                    
+                        td {
+                            background: @v-light-grey;
+                            border: 1px solid @light-grey;
+                            border-left: none;
+                            border-top: none; 
+                            vertical-align: middle;
+                            .fade-slow;
+                            h3 {
+                                text-align: right;
+                                color: @grey;
+                                font-weight: 100;
+                                font-size: 28px;
+                                line-height: 32px;
+                                padding-right: 16px;
+                            }
+                            p {
+                                font-size: 24px;
+                                font-weight: bold;
+                                text-align: center;
+                                padding-bottom: 0;
+                                margin-bottom: 0;
+                                line-height: 36px;
+                            }
+                            &.alpha {
+                                border-left: 1px solid @light-grey;
+                                background: @white;
+                                width: 275px;
+                            }
+                            &.alt {
+                                background: @white;
+                            }
+                            &:hover {
+                                background: @v-light-blue;
+                            }
+                            img {
+                                margin: 0 auto;
+                                display: block;
+                            }
+                        }
+                        &:hover {
+                            td {
+                                background: @light-green;
+                                .fade-fast;
+                                &:hover {
+                                    background: rgba(255,255,255,.2);
+                                }
+                                &.alpha:hover {
+                                    background: @light-green;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
