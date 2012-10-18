@@ -51,11 +51,13 @@
 
             {% block quick-links %}
             <ul id="quick-link-navigation">
+                {% comment %}
                 <li>
                     <a href="http://www.yelp.com/biz/protect-america-austin-2" title="Review Us on Yelp!" class="yelp-button">
                         <img src="{{ STATIC_URL }}img/external/yelp-logo-sml.png" alt="yelp-logo-sml" width="56" height="24">
                     </a>
                 </li>
+                {% endcomment %}
                 <li id="quick-social">                
                     <div id="google-button">
                         <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
@@ -91,7 +93,7 @@
 
             {% if phone_number %}
             <div id="phone-number">
-                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
             </div>
             {% endif %}
             <div class="clear"></div>
@@ -104,16 +106,16 @@
     {% block navigation %}
     <div id="navigation">
         <ul>
-            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="{% url home %}" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
-            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Home Security Systems and Products">{% if request.COOKIES.navCookieValue %}{% if request.COOKIES.navCookieValue == 'Home%20Security' %}Home Security{% else %}{{ request.COOKIES.navCookieValue }}{% endif %}{% else %}Products{% endif %}</a></li>
-            <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
-            <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="{% url support %}" title="Need Help with Your Security System? Visit our Support Area">Support</a></li>
-            <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="{% url home %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Home', 'Top Navigation', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
+            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Products', 'Top Navigation', '{{ page_name }}']);">{% if request.COOKIES.navCookieValue %}{% if request.COOKIES.navCookieValue == 'Home%20Security' %}Home Security{% else %}{{ request.COOKIES.navCookieValue }}{% endif %}{% else %}Products{% endif %}</a></li>
+            <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems" onClick="_gaq.push(['_trackEvent', 'About Us', 'Top Navigation', '{{ page_name }}']);">About Us</a></li>
+            <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="{% url support %}" title="Need Help with Your Security System? Visit our Support Area" onClick="_gaq.push(['_trackEvent', 'Support', 'Top Navigation', '{{ page_name }}']);">Support</a></li>
+            <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="{% url contact-us %}" title="Contact Protect America" onClick="_gaq.push(['_trackEvent', 'Contact Us', 'Top Navigation', '{{ page_name }}']);">Contact Us</a></li>
 
         </ul>
         <div id="search-area">
             <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
-                <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
+                <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
             </form>
         </div>
     </div>
@@ -170,7 +172,7 @@
             <div id="footer-call-now">
                 <h3>Give us a call.</h3>
                 <p>Our security experts are here to answer any questions and help you protect your home and family today.</p>
-                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span>
             </div>
             <div id="footer-chat-now">
                 <h3>Chat online.</h3>
