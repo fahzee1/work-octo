@@ -2,275 +2,167 @@
 
 {% load sekizai_tags content_tags content_filters %}
 
-{% block page_title %}DIY Home Security | Do It Yourself Home Security | Home Alarm Monitoring{% endblock %}
-{% block page_description %}Making home security simple, easy and affordable, Protect America's DIY home security systems even includes 24/7 professional home security monitoring. Call to get started today!{% endblock %}
+{% block page_title %}ADT Home Security Comparison | Best Home Security Systems | Protect America Vs. ADT{% endblock %}
+{% block page_description %}Protect America offers the best home security systems at competitive prices. Just compare our security services with that of ADT to see for yourself!{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/diy-landing-page/style.css">
-    <script type="text/javascript" src="//use.typekit.net/vwb5haa.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/comcast-vs-protectamerica/comcast-vs-protectamerica.css">
+    <script type="text/javascript" src="//use.typekit.net/qrm2ztf.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-{% addtoblock "js" %}
-<script type="text/javascript">
-$(document).ready(function() {
-    var current_package = 'copper';
-    var current_monitoring = 'landline';
-    var price_table = {
-        'copper': {
-            'landline': {{ pricetable.COPPER.standard_monitoring|cut:"$" }},
-            'broadband': {{ pricetable.COPPER.broadband_monitoring|cut:"$" }},
-            'cellular': {{ pricetable.COPPER.cellular_monitoring|cut:"$" }}
-        },
-        'silver': {
-            'landline': {{ pricetable.SILVER.standard_monitoring|cut:"$" }},
-            'broadband': {{ pricetable.SILVER.broadband_monitoring|cut:"$" }},
-            'cellular': {{ pricetable.SILVER.cellular_monitoring|cut:"$" }}
-        },
-        'platinum': {
-            'landline': {{ pricetable.PLATINUM.standard_monitoring|cut:"$" }},
-            'broadband': {{ pricetable.PLATINUM.broadband_monitoring|cut:"$" }},
-            'cellular': {{ pricetable.PLATINUM.cellular_monitoring|cut:"$" }}
-        }
-    }
-    {% comment %}
-    $('#package-set-one > div').click(function() {
-        current_package = $(this).attr('id').split('-package')[0];
-        render_changes();
-        $('#package-set-one > div').removeClass('active');
-        $(this).addClass('active');
-    });
-    $('#monitoring-set-one > div').click(function() {
-        current_monitoring = $(this).attr('id').split('-monitoring')[0];
-        render_changes();
-        $('#monitoring-set-one > div').removeClass('active');
-        $(this).addClass('active');
-    });
-    $('.more-options').toggle(function(){
-            $('#package-set-one').hide();
-            $('#package-set-two').show();
-        },function(){
-            $('#package-set-one').show();
-            $('#package-set-two').hide();
-        });
-    {% endcomment %}
-    function render_changes() {
-        $('.total_price').html(price_table[current_package][current_monitoring]);
-        $('#package-set-one > div').each(function(i) {
-            $(this).find('.monitoring-price em').html(
-                price_table[$(this).attr('id').split('-package')[0]][current_monitoring]
-            );
-        });
-        $('#monitoring-set-one > div').each(function(i) {
-            $(this).find('.monitoring-price em').html(
-                price_table[current_package][$(this).attr('id').split('-monitoring')[0]]
-            );
-        });
-    }
-    render_changes();
-});
-</script>
-{% endaddtoblock "js" %}
 {% endblock %}
+
+{% block typekit %}tk-museo-slab{% endblock %}
+
 {% block extra_javascript %}
 <script>
 $(document).ready(function() {
-    $('#assurance-block-three').trigger('click');
+    $('#assurance-block-four').trigger('click');
 });
 </script>
 {% endblock %}
-{% block typekit %}tk-museo-slab{% endblock %}
 
 {% block left-wrapper %}
-    <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/touchscreen-top.jpg" id="touchscreen-offer" alt="Do It Yourself Home Security" width="440" height="312" />
-    <div id="touchscreen-offer-content">
-        <h1>Simple, Easy <span>Do It Yourself<br/>Home Security</span></h1>
-        <h2>with 24/7 Professional Monitoring</h2>
-        <ul>
-            <li>Easy Self Installation</li>
-            <li>No Hidden Fees</li>
-            <li>High Speed, Reliable Monitoring</li>
-        </ul>
-    </div>
+    <img style="padding-top: 15px; padding-left: 10px;" src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/hero.jpg" alt="hero" width="667" height="367" />
+    {% comment %}
+
+    {% endcomment %}
+
 {% endblock %}    
 
 {% block assurance-block-one %}
-    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
-    <h3>Customizable Security Packages</h3>
+    <img src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/save.jpg" alt="save" width="113" height="111" />
+    <h3>Free Home Security System</h3>
 {% endblock %}
 
 {% block assurance-block-two %}
-    <img src="{{ STATIC_URL }}img/extra/monitoring-token.png" alt="20-percent-token" width="111" height="111" />
-    <h3>24/7 Reliable Monitoring</h3>
+    <img src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/247.jpg" alt="247" width="114" height="108" />
+    <h3>24/7 Protection</h3>
 {% endblock %}
 
 {% block assurance-block-three %}
-    <img src="{{ STATIC_URL }}img/extra/diy-token.png" alt="diy-token" width="111" height="111" />
-    <h3>Easy Wireless Installation</h3>
+    <img src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/what-comcast-wont-say.jpg" alt="what-comcast-wont-say" width="115" height="110" />
+    <h3>What Comcast Won't Say</h3>
 {% endblock %}
 
 {% block assurance-block-four %}
-    <img src="{{ STATIC_URL }}img/extra/hammer-token.png" alt="hammer-token" width="111" height="111" />
-    <h3>Lifetime Equipment Warranty</h3>
+    <img src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/PA.jpg" alt="PA" width="113" height="107" />
+    <h3>A Cost Comparison</h3>
 {% endblock %}
 
 {% block assurance-block-five %}
-    <img src="{{ STATIC_URL }}img/extra/dollar-sign-token.png" alt="dollar-sign-token" width="111" height="111" />
-    <h3>Lowest Price Guaranteed</h3>
+    <img src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/smart-phone.jpg" alt="smart-phone" width="117" height="112" />
+    <h3>GE Simon XT Touch Screen</h3>
 {% endblock %}
 
 {% block assurance-card-one %}
-    <div id="package-set-one">
-        <div id="copper-package" class="active">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/copper-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3>Protection for up to <span>3 Doors or Windows</span> plus one motion detector</h3>
-            <p class="equipment-price">
-                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
-            </p>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>34.99</em><span>per month</span></strong>
-            </p>
-        </div>
-        <div id="silver-package">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/silver-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3>Protection for up to <span>10 Doors or Windows</span> plus one motion detector</h3>
-            <p class="equipment-price">
-                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
-            </p>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>42.99</em><span>per month</span></strong>
-            </p>
-        </div>
-        <div id="platinum-package">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/platinum-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3>Protection for up to <span>15 Doors or Windows</span> plus one motion detector</h3>
-            <p class="equipment-price">
-                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
-            </p>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
-            </p>
-        </div>
+<div id="conv-install">
+    <div class="left-conv-install">
+        <img src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/touch-screen.jpg" alt="touch-screen" width="411" height="266" />
     </div>
-    <div id="package-set-two" style="display: none;">
-        <div id="bronze-package" class="active">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/bronze-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3>Protection for up to <span>7 Doors or Windows</span> plus one motion detector</h3>
-            <p class="equipment-price">
-                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
-            </p>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
-            </p>
-        </div>
-        <div id="gold-package">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/gold-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3>Protection for up to <span>12 Doors or Windows</span> plus one motion detector</h3>
-            <p class="equipment-price">
-                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
-            </p>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
-            </p>
-        </div>
+    <div class="right-conv-install">
+        <h2 class="tk-freight-sans-pro">Free Home Security System</h2>
+        <p class="tk-freight-sans-pro">Don’t overpay for your home security! Get a free GE wireless security system when you order one of our monitoring solutions. Cable companies will charge you hundreds of dollars for equipment you should get for free!</p>
+    </div>
+</div>
+{% endblock %}
 
-        <div id="business-package">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/gold-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3>Protection for up to <span>12 Doors or Windows</span> plus one motion detector</h3>
-            <p class="equipment-price">
-                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
-            </p>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
-            </p>
-        </div>
-    </div>
-    <p class="terms">3 Year Monitoring Agreement Required</p>
-    {% comment %}<p class="more-options">More Options ></p>{% endcomment %}
-{% endblock %}
 {% block assurance-card-two %}
-    <div id="monitoring-set-one">
-        <div id="landline-monitoring" class="active">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/landline-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3><span>An affordable solution</span> that works with your existing phone line.</h3>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
-            </p>
-        </div>
-        <div id="broadband-monitoring">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/broadband-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3><span>Blazing fast monitoring</span> that works with your high-speed Internet service.</h3>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
-            </p>
-        </div>
-        <div id="cellular-monitoring">
-            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/cellular-header.jpg" alt="bronze-header" width="304" height="136" />
-            <h3><span>Total Wireless solution</span> that doesn’t require a phone or Internet connection.</h3>
-            <p class="monitoring-price">
-                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
-            </p>
-        </div>
+<div id="conv-install">
+    <div class="left-conv-install">
+        <img style="margin-left: 25px;" src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/open-247.jpg" alt="open-247" width="352" height="283" />
     </div>
-    <p class="terms">3 Year Monitoring Agreement Required</p>
+    <div class="right-conv-install">
+        <h2 class="tk-freight-sans-pro"> 24/7 Protection</h2>
+        <p class="tk-freight-sans-pro"> Our monitoring solutions offer complete, round-the-clock protection based on your needs. We know some people got rid of their landlines while others still don’t have Internet access. Well, don’t worry! Protect America provides landline, broadband, and cellular monitoring that fits the tech needs of any household.</p>
+    </div>
+</div>
+<div class="clear"></div>
 {% endblock %}
+
 {% block assurance-card-three %}
-    <div class="image-area">
-        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/pizza-time.jpg" alt="pizza-time" width="288" height="288" />
+<div id="conv-install">
+    <div class="left-conv-install">
+        <img src="{{ STATIC_URL }}img/affiliates/comcast-vs-protectamerica/chart.jpg" alt="chart" width="378" height="311" />
     </div>
-    <div class="copy-point">
-        <h2>Getting a Pizza Delivered <span>Would Take More Time</span></h2>
-        <p>Installing your wireless home security system is convenient and easy. Security systems from Protect America are designed to be installed by customers without help from a professional. No wires or drilling holes in your walls! The installation process can be completed in as little as 30 minutes, even by someone with limited technical knowledge. Go ahead and order that pizza, you'll be done by the time it gets to your newly protected house.  </p>
-        {% if phone_number %}
-            {% businesstime %}
-            <div class="clear"></div>
-            <div id="call-area">
-                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
-            </div>
-            <div class="clear"></div>
-            {% endbusinesstime %}
-        {% endif %}
+    <div class="right-conv-install">
+        <h2 class="tk-freight-sans-pro">What Comcast Won’t Say</h2>
+        <p class="tk-freight-sans-pro">Trust your home security to a company that’s completely dedication to your home security. With Comcast, the protection of your home is just another feature that comes with your already expensive cable package. Don’t turn your security over to a cable company! Keep your home and family safe with Protect America.</p>
     </div>
+</div>
+<div class="clear"></div>
+
 {% endblock %}
 
 {% block assurance-card-four %}
-    <div class="image-area">
-        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/lifetime-warranty.jpg" alt="lifetime-warranty" width="288" height="331" />
-    </div>
-    <div class="copy-point">
-        <h2>If It Breaks, We Replace It. <span>The Only Thing Simpler is Self-Installation.</span></h2>
-        <p>Protect America is dedicated to providing your home with comprehensive protection day and night. That’s why we replace any broken part of your security system for free! Sensors not working? We’ll send new ones. Even if your whole system is malfunctioning, we’ll replace it. Protect America is committed to your home security and we’re serious about proving it.</p>
-        {% if phone_number %}
-            {% businesstime %}
-            <div class="clear"></div>
-            <div id="call-area">
-                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
-            </div>
-            <div class="clear"></div>
-            {% endbusinesstime %}
-        {% endif %}
-    </div>
+<div id="package-comparison-chart">
+    <h2 class="tk-freight-sans-pro">Price Comparison for our Copper Package vs. Comcast</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="alpha company">&nbsp;</th>
+                <th class="upfront">Equipment Price</th>
+                <th>Landline Monitoring</th>
+                <th>Broadband Monitoring</th>
+                <th>Cellular Monitoring</th>
+                <th>Lifetime Warranty</th>
+                <th>Contract Term</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="company">Protect America</td>
+                <td class="upfront free"><span>FREE</span></td>
+                <td><span> $19.99</span> per month</td>
+                <td><span> $37.99 </span>per month</td>
+                <td><span>$41.99 </span>per month</td>
+                <td><span>FREE</span></td>
+                <td><span>36 </span>Months</td>
+            </tr>
+            <tr class="alt">
+                <td class="company">Comcast</td>
+                <td class="upfront"><span>$349</span>Install</td>
+                <td class="upfront"><span>$42.99</span> per month</td>
+                <td class="na">Not<br/>Offered</td>
+                <td><span>$50.99</span>per month</td>
+                <td class="na"><span>$6.00</span> per month</td>
+                <td><span>36</span> Months</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 style="padding-left: 15px;padding-bottom: 15px; line-height: 12px; font-size: 8pt;">* Information used for home security alarm system comparisons was obtained September 2012 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </h4>
+</div>
 
 {% endblock %}
 
 {% block assurance-card-five %}
+<div class="copy-point">
+    <h2 class="tk-freight-sans-pro">Control Your Security from Anywhere in the World.</h2> 
+    <p class="tk-freight-sans-pro">Choose our cellular or broadband monitoring and your account comes with FREE interactive features. Arm your system and program rules to fit your needs anywhere, anytime through your computer or smart phone.</p>
     <div class="image-area">
-        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/protect-america-lowest-price-guaranteed.jpg" alt="protect-america-lowest-price-guaranteed" id="lowest-price-image" />
+        <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" alt="interactive" width="642" height="309" />
     </div>
-    <div class="copy-point">
-        <h2>Be Secure Against Crime <span>And High Prices</span></h2>
-        <p>Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America’s offer can’t be match! Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected without emptying your wallet.</p>
-        {% if phone_number %}
-            {% businesstime %}
-            <div class="clear"></div>
-            <div id="call-area">
-                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
-            </div>
-            <div class="clear"></div>
-            {% endbusinesstime %}
-        {% endif %}
+</div>
+<div id="interactive-call-out-box">
+    <div class="interactive-call-out">
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/security-system-control-small-icon-interactive.png" alt="security-system-control-small-icon-interactive" width="74" height="74" />
+                <p><strong>Security System Control</strong>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/live-video-small-icon-automation.png" alt="live-video-small-icon-automation" width="74" height="74" />
+                <p><strong>Live Video</strong>Keep an eye on your home from anywhere in the world with live video. (Video Service Required)</p>
+            </li>
+        </ul>
     </div>
-
+</div>
+<div class="clear"></div>
 {% endblock %}
 {% block page-product %}
-    <h2>Home Security Package</h2>
-    <p><span>Equipment Price: <strong>$0*</strong></span>monthly monitoring starting at $<strong class="total_price">35.99</strong>/mo</p>
+    <h2>Copper Security Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $19.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
+    </div>
 {% endblock %}
