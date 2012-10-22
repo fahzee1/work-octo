@@ -92,12 +92,14 @@ def query_by_state_city(state, city):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
+        city_id = None
     except State.DoesNotExist:
         raise Http404
     try:
         city = city.replace('+', ' ')
         city = CityLocation.objects.get(city_name=city,
             state=state.abbreviation)
+        city_id = city.id
     except CityLocation.DoesNotExist:
         raise Http404
 
@@ -144,6 +146,7 @@ def query_by_state_city(state, city):
            'long': city.longitude,
            'weather_info': weather_info,
            'pop_type': pop_type,
+           'city_id': city_id,
            'content': content.render(city)}  
 
 def crime_stats(request, state, city):
@@ -178,11 +181,11 @@ def choose_city(request, state):
 
 def choose_state(request):
     # try to auto find the city/state from IP address
-    geo_ip = GeoIP()
-    city_info = geo_ip.city('12.201.194.50')
-    if city_info is not None and 'city' in city_info and 'region' in city_info and 'dont_auto_crime_stats' not in request.session:
-        request.session['dont_auto_crime_stats'] = True
-        return HttpResponseRedirect(reverse('crime-rate:crime-stats', kwargs={'city': city_info['city'], 'state': city_info['region']}))
+    #geo_ip = GeoIP()
+    #city_info = geo_ip.city('12.201.194.50')
+    #if city_info is not None and 'city' in city_info and 'region' in city_info and 'dont_auto_crime_stats' not in request.session:
+    #    request.session['dont_auto_crime_stats'] = True
+    #    return HttpResponseRedirect(reverse('crime-rate:crime-stats', kwargs={'city': city_info['city'], 'state': city_info['region']}))
     states = State.objects.order_by('name')
 
     forms = {}

@@ -19,7 +19,7 @@
             <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
             <p>Five star rating in 2012 by TopConsumerReviews.com</p>
         </div>
-        <span>Our Price: <strong itemprop="price">FREE<sup>*</sup></strong></span>
+        <span>Equipment Price: <strong itemprop="price">FREE</strong></span>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -161,7 +161,22 @@
     });
     </script>
 {% endaddtoblock "js" %}
-
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var testCookie = getCookie('utm_expid');
+    var packageCookie = getCookie('packageCookie');
+    var base_url = '/test/wireless-home-alarm/';
+    if(packageCookie == 'B'){
+        window.location = base_url + 'gold-package/';
+        return;
+    }
+    if(!testCookie) {
+        setCookie('packageCookie', 'A');
+    }
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}  
 
 {% block page-product %}

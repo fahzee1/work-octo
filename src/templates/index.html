@@ -4,13 +4,14 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
+{% if not debug %}
 {% if request.GET.agent == 'a01986' or request.COOKIES.refer_id == 'a01986' %}
 <script> 
 _udn = "protectamerica.com";
 </script> 
 <!-- Google Analytics Content Experiment code -->
 <script>function utmx_section(){}function utmx(){}(function(){var
-k='61445283-13',d=document,l=d.location,c=d.cookie;
+k='61445283-18',d=document,l=d.location,c=d.cookie;
 if(l.search.indexOf('utm_expid='+k)>0)return;
 function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
 indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
@@ -99,6 +100,26 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 </script><script>utmx('url','A/B');</script>
 <!-- End of Google Analytics Content Experiment code -->
 {% endif %}
+{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.COOKIES.refer_id == 'BINGPPC' or request.COOKIES.refer_id == 'HOMESITE' or not request.COOKIES.refer_id %}
+<script> 
+_udn = "protectamerica.com";
+</script>
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='61445283-20',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
+{% endif %}
+{% endif %}
 {% endblock %}
 {% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
 {% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
@@ -109,12 +130,54 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
 {% block content %}
 </div>
+{% block hero_banner_area %}
+    {% if request.GET.agent == 'a01986' or request.COOKIES.refer_id == 'a01986' %}
+    {% include "banners/tcr-hero-images.html" %}
+    {% else %}
     {% include "banners/seo-hero-images.html" %}
-
+    {% endif %}
+{% endblock %}
 <div class="wrapper">
     {% include "order/call-box.html" %}
 <div id="main">
+    <div id="twitter-feed">
+        <a href="{% url payitforward %}">
+            <img src="{{ STATIC_URL }}img/extra/michigan-state-pay-it-forward.jpg" alt="Michigan State University and Protect America Pay It Forward" width="232" height="184" id="twitter-ad" />
+        </a>
+        <ul>
+            {% for tweet in tweets %}
+            <li>
+                <img src="{{ tweet.user.profile_image_url }}" />
+                <strong>{{ tweet.user.name }} <span>@{{ tweet.user.screen_name }}</span></strong>
+                <span class="tweet-date">{{ tweet.GetRelativeCreatedAt }}</span>
+                <p>{{ tweet.text|safe }}</p>
+                <div class="clear"></div>
+            </li>
+            {% endfor %}
+            {% comment %}
+            <li><img src="https://si0.twimg.com/profile_images/2179108329/protectamerica_logo_normal.jpg" />
+                <strong>Protect America <span>@protectamerica</span></strong>
+                <span class="tweet-date">5h ago</span>
+                <p>@CashSavings Were running an amazing deal. Lowest monthly rate ever at 19.99 per/mo & free equipment! Visit http://protectamerica.com  4 more info</p>
+                <div class="clear"></div>
+            </li>
+            <li><img src="https://si0.twimg.com/profile_images/2179108329/protectamerica_logo_normal.jpg" />
+                <strong>Protect America <span>@protectamerica</span></strong>
+                <span class="tweet-date">5h ago</span>
+                <p>@CashSavings Were running an amazing deal. Lowest monthly rate ever at 19.99 per/mo & free equipment! Visit http://protectamerica.com  4 more info</p>
+                <div class="clear"></div>
 
+            </li>
+            <li><img src="https://si0.twimg.com/profile_images/2179108329/protectamerica_logo_normal.jpg" />
+                <strong>Protect America <span>@protectamerica</span></strong>
+                <span class="tweet-date">5h ago</span>
+                <p>@CashSavings Were running an amazing deal. Lowest monthly rate ever at 19.99 per/mo & free equipment! Visit http://protectamerica.com  4 more info</p>
+                <div class="clear"></div>
+
+            </li>
+            {% endcomment %}
+        </ul>
+    </div>
     <div id="customer-testimonials">
         <div class="ts_testimonial">
             <h1>Our Customers Love Our Home Security Systems</h1>
@@ -149,60 +212,74 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <p>Protection for your home and family is not an easy decision. Our packages combine the best price with the best equipment and service. Compare how our <strong>home security systems</strong> stack up against other leaders in the security industry below to help make the decision easier.</p>
 
         <table summary="Small comparison chart detailing Protect America pricing versus major competitors.">
-        	<thead>
-        		<tr>
-        			<td colspan="3"><strong><a href="{% url advantage %}" title="Home Security Systems Comparison">Home Security Systems Comparison</a></strong></td>
-        		</tr>
-        	</thead>
-        	<tfoot>
-        		<tr>
-        			<td colspan="3">
+            <thead>
+                <tr>
+                    <td colspan="3">
+                        <h3>Equipment Price</h3>
+                        <strong><a href="{% url advantage %}" title="Home Security Systems Comparison">Home Security Systems Comparison</a></strong>
+                    </td>
+                </tr>
+
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
                         Information regarding home security system comparisons obtained via telephone quotations and Internet research 
                         on Sep 01, 2011.
                     </td>
-        		</tr>
-        	</tfoot>
-        	<tbody>
-        		<tr>
-        			<th>Package</th>
-        			<th>Our Price</th>
-        			<th>ADT Price</th>
-        		</tr>
-        		<tr class="odd">
-        			<td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="{% url copper %}">Copper Security</a><br>3 Door / Window Sensors, 1 Motion Detector</td>
+                </tr>
+
+            </tfoot>
+            <tbody>
+                <tr>
+                    <th>Package</th>
+                    <th>Protect America<sup>*</sup></th>
+                    <th>ADT</th>
+                </tr>
+                <tr class="odd">
+                    <td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="{% url copper %}">Copper Security</a><br>3 Door / Window Sensors, 1 Motion Detector</td>
         
-        			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
-        			<td headers="adt"><sup>$</sup>379</td>
-        		</tr>
-        		<tr>
-        			<td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="{% url bronze %}">Bronze Security</a><br>7 Door / Window Sensors, 1 Motion Detector</td>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.COPPER.standard_monitoring }} per month</td>
+                    <td headers="adt"><sup>$</sup>379.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
+                </tr>
+                <tr>
+                    <td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="{% url bronze %}">Bronze Security</a><br>7 Door / Window Sensors, 1 Motion Detector</td>
         
-        			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
-        			<td headers="adt"><sup>$</sup>699</td>
-        		</tr>
-        		<tr class="odd">
-        			<td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="{% url silver %}">Silver Security</a><br>10 Door / Window Sensors, 1 Motion Detector</td>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.BRONZE.standard_monitoring }} per month</td>
+                    <td headers="adt"><sup>$</sup>699.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
+                </tr>
+                <tr class="odd">
+                    <td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="{% url silver %}">Silver Security</a><br>10 Door / Window Sensors, 1 Motion Detector</td>
         
-        			<td class="highlight red" headers="pa">FREE<sup>*</sup></td>
-        			<td headers="adt"><sup>$</sup>939</td>
-        		</tr>
-        		<tr>
-        			<td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="{% url gold %}">Gold Security</a><br>12 Door / Window Sensors, 1 Motion Detector</td>
-        
-        			<td class="highlight" headers="pa">
-                        <span class="red">FREE<sup>*</sup></span>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.SILVER.standard_monitoring }} per month
                     </td>
-        			<td headers="adt"><sup>$</sup>1,099</td>
-        		</tr>
-        		<tr class="odd">
-        			<td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="{% url platinum %}">Platinum Security</a><br>15 Door / Window Sensors, 1 Motion Detector</td>
+                    <td headers="adt"><sup>$</sup>939.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
+                </tr>
+                <tr>
+                    <td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="{% url gold %}">Gold Security</a><br>12 Door / Window Sensors, 1 Motion Detector</td>
         
-        			<td class="highlight" headers="pa">
-                        <span class="red">FREE<sup>*</sup></span>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.GOLD.standard_monitoring }} per month
                     </td>
-        			<td headers="adt"><sup>$</sup>1,339</td>
-        		</tr>
-        	</tbody>
+                    <td headers="adt"><sup>$</sup>1,099.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
+                </tr>
+                <tr class="odd">
+                    <td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="{% url platinum %}">Platinum Security</a><br>15 Door / Window Sensors, 1 Motion Detector</td>
+        
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.PLATINUM.standard_monitoring }} per month
+                    </td>
+                    <td headers="adt"><sup>$</sup>1,339.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
+                </tr>
+            </tbody>
         </table>
         <div class="button-link">
             <a title="View Copper Security Package details and compare to our other home security systems packages." href="{% url advantage %}">Security Advantage ></a>
@@ -265,18 +342,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </div>
 </div>
 <div id="sidebar">
-    <div id="how-safe-is-your-neighborhood">
-        	<h3>How Safe <span>is your Neighborhood?</span></h3>
-        	<p>enter your zip to find sexual predators and crime statistics in your area:</p>
-            <form action="http://www.protectamerica.com/crime-rate/search/" method="GET" name="predator_form" id="predator_form">
-        		<input name="q" />        	
-        		<button type="submit">GO</button>
-        		<input type="hidden" name="widget" value="true">
-        	</form>
-        	<p class="fbi-stats"><a href="http://www.protectamerica.com/crime-rate/">FBI Crime stats</a> provided by <a href="{% url home %}" title="Protect America Home Security">Protect America</a></p>
-
-        
-    </div>
+    <iframe width="275" height="186" src="http://www.youtube.com/embed/isJJrsr5sXQ?modestbranding=1&rel=0&border=1&showinfo=0{% if not debug %}&autoplay=1{% endif %}" frameborder="0" allowfullscreen></iframe>
     <div id="cellupgrade">
         <a title="Click Here If You Already Have a Home Security System" href="{% url cell-takeover %}">
             <img width="251" height="286" alt="Click Here If You Already Have a Home Security System" src="{{ STATIC_URL }}/img/banners/promos/already-have-system-sidebar.jpg">
@@ -313,26 +379,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% addtoblock "js" %}
     <script type="text/javascript">
     $(document).ready(function() {
-        {% comment %}
-        $('#top-hero-banner').before('<div id="pager-container">') 
-            .cycle({ 
-                fx:     'fade',
-                pause: 1, 
-                speed:  'fast', 
-                timeout: 7000, 
-                pager:  '#pager-container ul',
-                pagerAnchorBuilder: function(idx, slide) { 
-                    // return selector string for existing anchor 
-                    return '#pager-container ul li:eq(' + idx + ')'; 
-                },
-                next: '#hero-right-arrow',
-                prev: '#hero-left-arrow'
-            });
-            $('#main-testimonials').cycle({
-            fx: 'fade',
-            timeout: 9000
-        });
-        {% endcomment %}
+        
         $('#top-hero-banner > div').click(function(e) {
             if($(this).attr('data-url')) {
                 window.location = $(this).attr('data-url');

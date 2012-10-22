@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% load sekizai_tags %}
+
+{% block navigation %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var navCookie = getCookie('navCookie');
+var pageTest = 'nav-plans';
+if(navCookie && navCookie != pageTest) {
+    window.location = '/test/index/' + navCookie + '/';
+    return;
+}
+setCookie('navCookie', pageTest);
+setCookie('navCookieValue', 'Plans');
+</script>
+{% endaddtoblock "js" %}
+<div id="navigation">
+    <ul>
+        <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="{% url home %}" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
+        <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Home Security Systems and Products">Plans</a></li>
+        <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
+        <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="{% url support %}" title="Need Help with Your Security System? Visit our Support Area">Support</a></li>
+        <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
+
+    </ul>
+    <div id="search-area">
+        <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
+            <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
+        </form>
+    </div>
+</div>
+{% endblock %}
