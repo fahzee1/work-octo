@@ -85,10 +85,10 @@ def local_page_wrapper(request, keyword, city, state, zipcode):
     statecode = get_state_code(state)
     if not statecode:
         raise Http404
-    return local_page(request, statecode, city.replace('-', ' ').title())
+    return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
 
 
-def local_page(request, state, city):
+def local_page(request, state, city, keyword=None):
     crime_stats_ctx = query_by_state_city(state, city)
     if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
         json_file = os.path.join(settings.PROJECT_ROOT, 'src',
@@ -107,6 +107,8 @@ def local_page(request, state, city):
     forms = {}
     forms['basic'] = PAContactForm()
     crime_stats_ctx['forms'] = forms
+    if keyword is not None:
+        crime_stats_ctx['keyword'] = keyword.replace('-', ' ').title()
     tz = timezone(TIMEZONES[crime_stats_ctx['state']])
     utc_dc = datetime.datetime.now(tz=pytz.utc)
     new_dt = utc_dc.astimezone(tz)
