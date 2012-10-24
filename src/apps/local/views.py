@@ -79,7 +79,7 @@ TIMEZONES = {
 def local_page_wrapper(request, keyword, city, state, zipcode):
     def get_state_code(statestr):
         for state in US_STATES:
-            if statestr.lower() == state[1].lower():
+            if statestr.lower().replace(' ', '-') == state[1].lower():
                 return state[0]
         return False
     statecode = get_state_code(state)
@@ -96,13 +96,16 @@ def local_page(request, state, city, keyword=None):
         json_data = open(json_file)
         csr = simplejson.load(json_data)
         zipcode = ZipCode.objects.filter(city=city, state=state)
+        zipcodestr = '00000'
+        if zipcode:
+            zipcodestr = zipcode[0].zip 
         state_obj = State.objects.get(abbreviation=state)
         return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
             (
                 csr[str(crime_stats_ctx['city_id'])],
                 city.lower().replace(' ', '-'),
-                state_obj.name.lower(),
-                zipcode[0].zip,
+                state_obj.name.lower().replace(' ', '-'),
+                zipcodestr,
             ))
     forms = {}
     forms['basic'] = PAContactForm()
