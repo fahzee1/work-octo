@@ -286,15 +286,6 @@ else:
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-business-security/business-package/?$', 'packages/business.html', 'business', 'products'),
 
-            # Product > Packages B
-
-            dtt(r'^test/wireless-home-alarm/copper-package/?$', 'packages/copper-b.html', 'copper-b', 'products'),
-            dtt(r'^test/wireless-home-alarm/bronze-package/?$', 'packages/bronze-b.html', 'bronze-b', 'products'),
-            dtt(r'^test/wireless-home-alarm/silver-package/?$', 'packages/silver-b.html', 'silver-b', 'products'),
-            dtt(r'^test/wireless-home-alarm/gold-package/?$', 'packages/gold-b.html', 'gold', 'products-b'),
-            dtt(r'^test/wireless-home-alarm/platinum-package/?$', 'packages/platinum-b.html', 'platinum-b', 'products'),
-            dtt(r'^test/wireless-business-security/business-package/?$', 'packages/business-b.html', 'business-b', 'products'),
-
             # Product > Monitoring
 
             dtt(r'^pa/monitoring/security-system/?$', 'products/monitoring/index.html', 'monitoring', 'products'),
