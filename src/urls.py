@@ -214,6 +214,9 @@ else:
         dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
 
 
+        dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
+
+
 
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
@@ -631,6 +634,33 @@ urlpatterns += patterns('',
         redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
+
+    # direct mail
+    ('^AA1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
+    ('^AA2/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10019', 'permanent': True}),
+    ('^AA3/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10021', 'permanent': True}),
+    ('^AA4/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10023', 'permanent': True}),
+    ('^AA5/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
+    ('^AB1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
+
+    ('^aa1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
+    ('^aa2/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10019', 'permanent': True}),
+    ('^aa3/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10021', 'permanent': True}),
+    ('^aa4/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10023', 'permanent': True}),
+    ('^aa5/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
+    ('^ab1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
