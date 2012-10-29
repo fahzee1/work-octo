@@ -13,7 +13,7 @@ from django.conf import settings as dsettings
 from django.views.decorators.cache import cache_page
 
 from apps.contact.forms import PAContactForm
-from apps.local.sitemaps import KeywordSitemap
+from apps.local.sitemaps import KeywordSitemap, KeywordSitemapIndex
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
@@ -174,3 +174,7 @@ def local_city(request, state):
 def sitemap(request, keyword):
     from django.contrib.sitemaps.views import sitemap
     return sitemap(request, {'keyword-sitemap' : KeywordSitemap(keyword)})
+
+def sitemap_index(request):
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap-index' : KeywordSitemapIndex(LOCAL_KEYWORDS)})
