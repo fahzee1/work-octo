@@ -625,6 +625,8 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
     ('^crimeprevention$',
         redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
+    ('^national-crime-prevention$',
+        redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
 
