@@ -1,0 +1,37 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+    <div id="mobile-packages">    
+        <h2>Package Add-Ons:</h2>
+        <ul>
+            <li class="alpha">
+                <img src="{{ STATIC_URL }}img/mobile/extreme-weather-upgrade.png" alt="Extreme Weather Package" width="108" height="80" />
+                <h3>Extreme Weather Package <strong>+$4 <span>per month</span></strong></h3>
+                <ul>
+                    <li>1 Freeze Sensor</li>
+                    <li>1 Flood Sensor</li>
+                </ul>
+                <div class="button-link">
+                    <a href="#">Add to Cart</a>
+                </div>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/mobile/home-away-upgrade.png" alt="Home & Away Package" width="108" height="80" />
+                <h3>Home & Away Package <strong>+$10 <span>per month</span></strong></h3>
+                <ul>
+                    <li>1 GPS Vehicle Tracker</li>
+                </ul>
+                <div class="button-link">
+                    <a href="#">Add to Cart</a>
+                </div>
+            </li>
+        </ul>
+        <div class="button-submit">
+            <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
+        </div>
+    </div>
+{% endblock %}
+
