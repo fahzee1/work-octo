@@ -13,7 +13,7 @@ from django.conf import settings as dsettings
 from django.views.decorators.cache import cache_page
 
 from apps.contact.forms import PAContactForm
-from apps.local.sitemaps import KeywordSitemap
+from apps.local.sitemaps import KeywordSitemap, KeywordSitemapIndex
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
@@ -79,16 +79,16 @@ TIMEZONES = {
 def local_page_wrapper(request, keyword, city, state, zipcode):
     def get_state_code(statestr):
         for state in US_STATES:
-            if statestr.lower() == state[1].lower():
+            if statestr.lower().replace(' ', '-') == state[1].lower():
                 return state[0]
         return False
     statecode = get_state_code(state)
     if not statecode:
         raise Http404
-    return local_page(request, statecode, city.replace('-', ' ').title())
+    return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
 
 
-def local_page(request, state, city):
+def local_page(request, state, city, keyword=None):
     crime_stats_ctx = query_by_state_city(state, city)
     if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
         json_file = os.path.join(settings.PROJECT_ROOT, 'src',
@@ -96,17 +96,22 @@ def local_page(request, state, city):
         json_data = open(json_file)
         csr = simplejson.load(json_data)
         zipcode = ZipCode.objects.filter(city=city, state=state)
+        zipcodestr = '00000'
+        if zipcode:
+            zipcodestr = zipcode[0].zip 
         state_obj = State.objects.get(abbreviation=state)
         return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
             (
                 csr[str(crime_stats_ctx['city_id'])],
                 city.lower().replace(' ', '-'),
-                state_obj.name.lower(),
-                zipcode[0].zip,
+                state_obj.name.lower().replace(' ', '-'),
+                zipcodestr,
             ))
     forms = {}
     forms['basic'] = PAContactForm()
     crime_stats_ctx['forms'] = forms
+    if keyword is not None:
+        crime_stats_ctx['keyword'] = keyword.replace('-', ' ').title()
     tz = timezone(TIMEZONES[crime_stats_ctx['state']])
     utc_dc = datetime.datetime.now(tz=pytz.utc)
     new_dt = utc_dc.astimezone(tz)
@@ -169,3 +174,7 @@ def local_city(request, state):
 def sitemap(request, keyword):
     from django.contrib.sitemaps.views import sitemap
     return sitemap(request, {'keyword-sitemap' : KeywordSitemap(keyword)})
+
+def sitemap_index(request):
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap-index' : KeywordSitemapIndex(LOCAL_KEYWORDS)})

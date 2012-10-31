@@ -187,12 +187,14 @@ else:
             name='thank_you'),
             
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
-        url(r'^(?P<keyword>%s)/sitemap/$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.sitemap',
             name='local-page-sitemap'),
+        url(r'^local-pages-sitemap-index\.xml', 'apps.local.views.sitemap_index',
+            name='keyword-sitemap-index'),
 
         # SEO Content Pages
         dtt(r'^home-security-systems/$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
@@ -212,6 +214,9 @@ else:
         dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
         dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
+        dtt(r'^protect-america-vs-comcast/$', 'affiliates/comcast-vs-protectamerica/index.html', 'comcast-vs-protect-america'),
+
+        dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
 
 
@@ -282,15 +287,6 @@ else:
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-business-security/business-package/?$', 'packages/business.html', 'business', 'products'),
-
-            # Product > Packages B
-
-            dtt(r'^test/wireless-home-alarm/copper-package/?$', 'packages/copper-b.html', 'copper-b', 'products'),
-            dtt(r'^test/wireless-home-alarm/bronze-package/?$', 'packages/bronze-b.html', 'bronze-b', 'products'),
-            dtt(r'^test/wireless-home-alarm/silver-package/?$', 'packages/silver-b.html', 'silver-b', 'products'),
-            dtt(r'^test/wireless-home-alarm/gold-package/?$', 'packages/gold-b.html', 'gold', 'products-b'),
-            dtt(r'^test/wireless-home-alarm/platinum-package/?$', 'packages/platinum-b.html', 'platinum-b', 'products'),
-            dtt(r'^test/wireless-business-security/business-package/?$', 'packages/business-b.html', 'business-b', 'products'),
 
             # Product > Monitoring
 
@@ -629,8 +625,37 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
     ('^crimeprevention$',
         redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
+    ('^national-crime-prevention$',
+        redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
+
+    # direct mail
+    ('^AA1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
+    ('^AA2/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10019', 'permanent': True}),
+    ('^AA3/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10021', 'permanent': True}),
+    ('^AA4/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10023', 'permanent': True}),
+    ('^AA5/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
+    ('^AB1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
+
+    ('^aa1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
+    ('^aa2/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10019', 'permanent': True}),
+    ('^aa3/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10021', 'permanent': True}),
+    ('^aa4/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10023', 'permanent': True}),
+    ('^aa5/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
+    ('^ab1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

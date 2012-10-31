@@ -1,6 +1,7 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Silver Package | Home Security Packages | Protect America Home Security{% endblock %}
+{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
 
 {% block content %}
 <div id="top-content">
@@ -19,7 +20,13 @@
             <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
             <p>Five star rating in 2012 by TopConsumerReviews.com</p>
         </div>
-        <span>Equipment Price: <strong itemprop="price">FREE</strong></span>
+        <div id="package-price">
+            <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE</strong></span>
+            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>37.99</strong><em>per month</em></span>
+        </div>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -158,22 +165,6 @@
     });
     </script>
 {% endaddtoblock "js" %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-$(document).ready(function() {
-    var testCookie = getCookie('utm_expid');
-    var packageCookie = getCookie('packageCookie');
-    var base_url = '/test/wireless-home-alarm/';
-    if(packageCookie == 'B'){
-        window.location = base_url + 'silver-package/';
-        return;
-    }
-    if(!testCookie) {
-        setCookie('packageCookie', 'A');
-    }
-});
-</script>
-{% endaddtoblock "js" %}
 {% endblock %}  
 {% block page-product %}
     <h2>Silver Security Package</h2>
@@ -182,3 +173,4 @@ $(document).ready(function() {
         <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
     </div>
 {% endblock %}
+

@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 class Affiliate(models.Model):
     agent_id = models.CharField(max_length=16, unique=True)
-    name = models.CharField(max_length=64, unique=True)
+    name = models.CharField(max_length=64)
     phone = models.CharField(max_length=10, blank=True, null=True)
     use_call_measurement = models.BooleanField(default=False)
     homesite_override = models.BooleanField(default=False,
