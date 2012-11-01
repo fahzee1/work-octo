@@ -1,0 +1,51 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+    <div id="mobile-monitoring">    
+        <h2>Select Your Monitoring:</h2>
+        <ul>
+            <li class="alpha">
+                <img src="{{ STATIC_URL }}/img/mobile/landline-icon.png" alt="landline-icon" width="112" height="88" />
+                <h3>Landline <strong>$19.99 <span>per month</span></strong></h3>
+                <ul>
+                    <li>Affordable & Reliable</li>
+                    <li>Uses Existing Phone Line</li>
+                </ul>
+                <div class="button-link">
+                    <a href="#">Add to Cart</a>
+                </div>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/mobile/broadband-icon.png" alt="Basic Security Package" width="112" height="88" />
+                <h3>Broadband <strong>$32.99 <span>per month</span></strong></h3>
+                <ul>
+                    <li>4x Faster Than Landline</li>
+                    <li>Uses Existing High Speed Internet</li>
+                    <li>Free Interactive Access</li>
+                </ul>
+                <div class="button-link">
+                    <a href="#">Add to Cart</a>
+                </div>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/mobile/cellular-icon.png" alt="cellular-icon" width="112" height="88" />
+                <h3>Cellular <strong>$37.99 <span>per month</span></strong></h3>
+                <ul>
+                    <li>The New Monitoring Standard</li>
+                    <li>No Extra Utility Bills</li>
+                    <li>Free Interactive Access</li>
+                </ul>
+                <div class="button-link">
+                    <a href="#">Add to Cart</a>
+                </div>
+            </li>
+        </ul>
+        <div class="button-submit">
+            <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
+        </div>
+    </div>
+{% endblock %}
+
