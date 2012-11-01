@@ -181,6 +181,8 @@ elif settings.SITE_ID == 9:
         dtt(r'^security-add-ons/$', 'mobile/adds.html', 'add-ons'),
 
         dtt(r'^home-security-monitoring/$', 'mobile/monitoring.html', 'monitoring'),
+        dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
+
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
 
     )
