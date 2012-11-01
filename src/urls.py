@@ -173,6 +173,19 @@ elif settings.SITE_ID == 8:
 
 
     )
+# Mobile Website
+elif settings.SITE_ID == 9:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'mobile/index.html', 'home'),
+        dtt(r'^home-security-packages/$', 'mobile/packages.html', 'packages'),
+        dtt(r'^security-add-ons/$', 'mobile/adds.html', 'add-ons'),
+
+        dtt(r'^home-security-monitoring/$', 'mobile/monitoring.html', 'monitoring'),
+        dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
+
+        dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
+
+    )
 else:
     urlpatterns += patterns('',
 
