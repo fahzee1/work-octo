@@ -8,40 +8,13 @@
         <h2>Select Your Package:</h2>
         <ul>
             <li class="alpha">
-                <img src="{{ STATIC_URL }}img/mobile/basic-security-package.jpg" alt="Basic Security Package" width="108" height="80" />
-                <h3>Basic <strong>$19.99 <span>per month</span></strong></h3>
-                <ul>
-                    <li>1 Simon XT Control Panel</li>
-                    <li>3 Door / Window Sensors</li>
-                    <li>1 Motion Detector</li>
-                </ul>
-                <div class="button-link">
-                    <a href="#">Add to Cart</a>
-                </div>
+                {% include "mobile/_partial/packages/basic.html" %} 
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/mobile/standard-security-package.jpg" alt="Basic Security Package" width="108" height="80" />
-                <h3>Standard <strong>$32.99 <span>per month</span></strong></h3>
-                <ul>
-                    <li>1 Simon XT Control Panel</li>
-                    <li>10 Door / Window Sensors</li>
-                    <li>1 Motion Detector</li>
-                </ul>
-                <div class="button-link">
-                    <a href="#">Add to Cart</a>
-                </div>
+                {% include "mobile/_partial/packages/standard.html" %}
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/mobile/premier-security-package.jpg" alt="Basic Security Package" width="108" height="80" />
-                <h3>Premier <strong>$32.99 <span>per month</span></strong></h3>
-                <ul>
-                    <li>1 Simon XT Control Panel</li>
-                    <li>15 Door / Window Sensors</li>
-                    <li>1 Motion Detector</li>
-                </ul>
-                <div class="button-link">
-                    <a href="#">Add to Cart</a>
-                </div>
+                {% include "mobile/_partial/packages/premier.html" %}
             </li>
         </ul>
         <div class="equipment-included">
@@ -53,6 +26,25 @@
         <div class="clear"></div>
     </div>
     {% include "mobile/_partial/add-ons.html" %}
-
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
+</script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$('.add-item').click(function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    cart.add_to_cart(obj.attr('data-category'),
+        obj.attr('data-item'), obj.attr('data-price'), obj.attr('data-monthly'));
+    window.location = '/cart/';
+    return false;
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
 

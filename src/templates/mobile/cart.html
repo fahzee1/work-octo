@@ -1,0 +1,94 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+    {% with action='remove' %}
+    <div id="mobile-packages">    
+        <h2>Your Security Package:</h2>
+        <ul>
+            <li class="alpha">
+            {% if cart.package.item == 'basic' %}
+                {% include "mobile/_partial/packages/basic.html" %}
+            {% endif %} 
+            {% if cart.package.item == 'standard' %}
+                {% include "mobile/_partial/packages/standard.html" %}
+            {% endif %} 
+            {% if cart.package.item == 'premier' %}
+                {% include "mobile/_partial/packages/premier.html" %}
+            {% endif %} 
+            {% if not cart.package.item %}
+                {% include "mobile/_partial/packages/select.html" %}
+            {% endif %}
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div id="mobile-monitoring">
+        <ul>
+            <li>
+                {% if cart.monitoring.item == 'landline' %}
+                    {% include "mobile/_partial/monitoring/landline.html" %}
+                {% endif %} 
+                {% if cart.monitoring.item == 'broadband' %}
+                    {% include "mobile/_partial/monitoring/broadband.html" %}
+                {% endif %} 
+                {% if cart.monitoring.item == 'cellular' %}
+                    {% include "mobile/_partial/monitoring/cellular.html" %}
+                {% endif %} 
+                {% if not cart.monitoring.item %}
+                    {% include "mobile/_partial/monitoring/select.html" %}
+            {% endif %}
+            </li>
+        </ul>
+    </div>
+    <div id="mobile-adds">
+        <ul>
+            {% for name, info in cart.equipment.items %}
+            <li>
+                {% if name == 'extreme-weather' %}
+                {% include "mobile/_partial/addons/extreme-weather.html" %}
+                {% endif %}
+                {% if name == 'home-and-away' %}
+                {% include "mobile/_partial/addons/home-and-away.html" %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {{ monthly_price_equipment }}
+    {% endwith %}
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
+</script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$('.remove-item').click(function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    cart.remove_from_cart(obj.attr('data-category'), obj.attr('data-item'));
+    window.location = '/cart/';
+    return false;
+});
+</script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$('.add-item').click(function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    cart.add_to_cart(obj.attr('data-category'),
+        obj.attr('data-item'), obj.attr('data-price'), obj.attr('data-monthly'));
+    window.location = '/cart/';
+    return false;
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
+
