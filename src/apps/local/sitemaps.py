@@ -24,3 +24,18 @@ class KeywordSitemap(Sitemap):
     def __init__(self, keyword, *args, **kwargs):
         self.keyword = keyword
         super(KeywordSitemap, self).__init__(*args, **kwargs)
+    
+
+class KeywordSitemapIndex(Sitemap):
+    def items(self):
+        return self.keywords
+
+    def lastmod(self, obj):
+        return datetime.date(2012, 10, 12)
+
+    def location(self, obj):
+        return '/%s/sitemap.xml' % obj
+
+    def __init__(self, keywords, *args, **kwargs):
+        self.keywords = keywords
+        super(KeywordSitemapIndex, self).__init__(*args, **kwargs)

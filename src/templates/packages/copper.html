@@ -1,12 +1,10 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Copper Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
+{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
 
 {% block content %}
-
-<div id="top-content" style="position: relative;">
-    <img src="{{ STATIC_URL }}img/banners/hero-banners/flash-promotion-white.jpg"
-        width="680" height="400" style="position: absolute; top: 0px; left: -16px; z-index: 100000"/>
+<div id="top-content">
     <div id="copper-package-offer" itemscope itemtype="http://schema.org/Product">
         <h1 itemprop="name">Copper Security Package</h1>
         <img src="/static/img/products/copper-package/copper-package-simon-xt-no-medal.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Copper Security Package" />
@@ -22,7 +20,13 @@
             <img src="/static/img/external/consumer-digest/consumer-digest-logo-transparent.png"  width="78" height="76" alt="Copper Package named a Consumer Digest Best Buy" />
             <p>Voted a Consumers Digest<br/>"Best Buy" for 2012</p>
         </div>
-        <span>Equipment Price: <strong itemprop="price">FREE</strong></span>
+        <div id="package-price">
+            <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE</strong></span>
+            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>19.99</strong><em>per month</em></span>
+        </div>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -88,7 +92,7 @@
                 </tr>
                 <tr class="alt">
                     <td><strong>Monthly Cost</strong></td>
-                    <td class="call-out">$19.99</td>
+                    <td class="call-out">$29.99</td>
                     <td>$42.99</td>
                 </tr>
                 <tr>
@@ -140,7 +144,7 @@
         <li>
             <img src="/static/img/products/monitoring/landline-icon.png" width="128" height="120" alt="Home Security Landline Connection">
             <h3>Landline</h3>
-            <p><sup>$</sup>19<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>29<span>99</span><strong>/mo</strong></p>
             <a href="{% url landline %}" class="button-link" title="Learn About Landline Monitoring">Learn More ></a>
         </li>
         <div class="clear"></div>
@@ -160,27 +164,10 @@
     });
     </script>
 {% endaddtoblock "js" %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-$(document).ready(function() {
-    var testCookie = getCookie('utm_expid');
-    var packageCookie = getCookie('packageCookie');
-    var base_url = '/test/wireless-home-alarm/';
-    if(packageCookie == 'B'){
-        window.location = base_url + 'copper-package/';
-        return;
-        console.log('test');
-    }
-    if(!testCookie) {
-        setCookie('packageCookie', 'A');
-    }
-});
-</script>
-{% endaddtoblock "js" %}
 {% endblock %}  
 {% block page-product %}
     <h2>Copper Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $19.99/mo</p>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $29.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
     </div>

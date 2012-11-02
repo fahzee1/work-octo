@@ -120,7 +120,7 @@ class ContactUs(models.Model):
             'Contact Form Submission',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
-            ['feedback@protectamerica.com'],
+            ['careops@protectamerica.com'],
             ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()

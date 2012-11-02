@@ -8,44 +8,38 @@
         <h2>Select Your Monitoring:</h2>
         <ul>
             <li class="alpha">
-                <img src="{{ STATIC_URL }}/img/mobile/landline-icon.png" alt="landline-icon" width="112" height="88" />
-                <h3>Landline <strong>$19.99 <span>per month</span></strong></h3>
-                <ul>
-                    <li>Affordable & Reliable</li>
-                    <li>Uses Existing Phone Line</li>
-                </ul>
-                <div class="button-link">
-                    <a href="#">Add to Cart</a>
-                </div>
+                {% include "mobile/_partial/monitoring/landline.html" %}
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/mobile/broadband-icon.png" alt="Basic Security Package" width="112" height="88" />
-                <h3>Broadband <strong>$32.99 <span>per month</span></strong></h3>
-                <ul>
-                    <li>4x Faster Than Landline</li>
-                    <li>Uses Existing High Speed Internet</li>
-                    <li>Free Interactive Access</li>
-                </ul>
-                <div class="button-link">
-                    <a href="#">Add to Cart</a>
-                </div>
+                {% include "mobile/_partial/monitoring/broadband.html" %}
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/mobile/cellular-icon.png" alt="cellular-icon" width="112" height="88" />
-                <h3>Cellular <strong>$37.99 <span>per month</span></strong></h3>
-                <ul>
-                    <li>The New Monitoring Standard</li>
-                    <li>No Extra Utility Bills</li>
-                    <li>Free Interactive Access</li>
-                </ul>
-                <div class="button-link">
-                    <a href="#">Add to Cart</a>
-                </div>
+                {% include "mobile/_partial/monitoring/cellular.html" %}
             </li>
         </ul>
         <div class="button-submit">
             <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
         </div>
     </div>
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
+</script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$('.button-link').click(function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    cart.add_to_cart(obj.attr('data-category'),
+        obj.attr('data-item'), obj.attr('data-price'));
+    window.location = '/cart/';
+    return false;
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
 
