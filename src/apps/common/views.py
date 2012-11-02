@@ -24,6 +24,7 @@ from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
+from apps.pricetable.models import Package
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -214,9 +215,31 @@ def mobile_cart(request):
     cart = simplejson.loads(urllib.unquote(request.COOKIES['paCart']))
     context['cart'] = cart
     total_monthly = Decimal('0.00')
-    total_upfront = Decimal('0.00')
+    total_monthly_equipment = Decimal('0.00')
+    if cart['package']['item'] == 'basic':
+        package = Package.objects.get(name='COPPER')
+    elif cart['package']['item'] == 'standard':
+        package = Package.objects.get(name='SILVER')
+    elif cart['package']['item'] == 'premier':
+        package = Package.objects.get(name='PLATINUM')
+    else:
+        package = None
 
-    print cart
+    if package is not None:
+        if cart['monitoring']['item'] == 'landline':
+            total_monthy += Decimal(package.standard_monitoring)
+        elif cart['monitoring']['item'] == 'broadband':
+            total_monthly += Decimal(package.broadband_monitoring)
+        elif cart['monitoring']['item'] == 'cellular':
+            total_monthly += Decimal(package.cellular_monitoring)
+    
+    context['monthly_price'] = total_monthly
+    total_monthly_equipment = total_monthly
+    
+    for name, info in cart['equipment'].iteritems():
+        total_monthly_equipment += Decimal(info['monthly'])
+    context['monthly_price_equipment'] = total_monthly_equipment
+
     return simple_dtt(request, 'mobile/cart.html', context)
 
 def family_of_companies(request):
