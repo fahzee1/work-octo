@@ -24,31 +24,31 @@ $.extend(Cart.prototype, {
         setCookie(this.cookie_name, JSON.stringify(this.cart));
         this.render();
     },
-    add_monitoring: function(item, price) {
-        this.cart['monitoring'] = {'item': item, 'price': price};
+    add_monitoring: function(item, price, moprice) {
+        this.cart['monitoring'] = {'item': item, 'price': price, 'monthly': moprice};
         this.save();
     },
-    add_package: function(item, price) {
-        this.cart['package'] = {'item': item, 'price': price};
+    add_package: function(item, price, moprice) {
+        this.cart['package'] = {'item': item, 'price': price, 'monthly': moprice};
         this.save();
     },
-    add_equipment: function(item, price) {
+    add_equipment: function(item, price, moprice) {
         if(!this.cart['equipment'][item]) {
-            this.cart['equipment'][item] = {'price': price, 'count': 0};
+            this.cart['equipment'][item] = {'price': price, 'count': 0, 'monthly': moprice};
         }
         this.cart['equipment'][item]['count'] = (this.cart['equipment'][item]['count'] + 1);
         this.save();
     },
-    add_to_cart: function(category, item, price) {
+    add_to_cart: function(category, item, price, moprice) {
         switch(category) {
             case 'equipment':
-                this.add_equipment(item, price);
+                this.add_equipment(item, price, moprice);
                 break;
             case 'monitoring':
-                this.add_monitoring(item, price);
+                this.add_monitoring(item, price, moprice);
                 break;
             case 'package':
-                this.add_package(item, price);
+                this.add_package(item, price, moprice);
                 break;
         }
     },
@@ -67,8 +67,6 @@ $.extend(Cart.prototype, {
         this.save();
     },
     remove_from_cart: function(category, item) {
-        console.log(category);
-        console.log(item);
         switch(category) {
             case 'equipment':
                 this.remove_equipment(item);
@@ -89,20 +87,23 @@ $.extend(Cart.prototype, {
         });
         return equipment_total;
     },
+    get_equipment_monthly: function() {
+        var total = Number(0.00);
+        $.each(this.cart['equipment'], function(i, equip) {
+            equip_item_total = equip.count * equip.monthly;
+            total = total + Number(equip_item_total);
+        });
+        return total;
+    },
     get_monthly_total: function() {
         var monthly_total = Number(0.00);
         if(this.cart['monitoring']) {
-            monthly_total = monthly_total + Number(this.cart['monitoring']['price']);
+            monthly_total = monthly_total + Number(this.cart['monitoring']['monthly']);
         }
         if(this.cart['package']) {
-            monthly_total = monthly_total + Number(this.cart['package']['price']);
+            monthly_total = monthly_total + Number(this.cart['package']['monthly']);
         }
-        $.each(this.cart['equipment'], function(i, equip) {
-            var equip_item_total = equip.count * equip.monthly;
-            if(equip_item_total){
-                monthly_total = monthly_total + Number(equip_item_total);
-            }
-        });
+        monthly_total = monthly_total + this.get_equipment_monthly();
         return monthly_total;
     },
     render: function() {
