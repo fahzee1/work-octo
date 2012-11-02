@@ -179,7 +179,7 @@ elif settings.SITE_ID == 9:
         dtt(r'^$', 'mobile/index.html', 'home'),
         dtt(r'^home-security-packages/$', 'mobile/packages.html', 'packages'),
         dtt(r'^security-add-ons/$', 'mobile/adds.html', 'add-ons'),
-
+        dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
         dtt(r'^home-security-monitoring/$', 'mobile/monitoring.html', 'monitoring'),
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
 
