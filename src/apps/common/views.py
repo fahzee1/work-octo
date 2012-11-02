@@ -232,7 +232,7 @@ def mobile_cart(request):
         if package is None:
             package = Package.objects.get(name='COPPER')
         if cart['monitoring']['item'] == 'landline':
-            total_monthy += Decimal(package.standard_monitoring)
+            total_monthly += Decimal(package.standard_monitoring)
         elif cart['monitoring']['item'] == 'broadband':
             total_monthly += Decimal(package.broadband_monitoring)
         elif cart['monitoring']['item'] == 'cellular':
