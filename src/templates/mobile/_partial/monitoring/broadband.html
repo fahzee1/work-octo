@@ -5,6 +5,12 @@
     <li>Uses Existing High Speed Internet</li>
     <li>Free Interactive Access</li>
 </ul>
-<div class="button-link" data-price="{{ monthly_price|default:'32.99' }}" data-item="broadband" data-category="monitoring">
+{% if action == 'remove' %}
+<div class="button-link remove-item" data-monthly="{{ monthly_price|default:'32.99' }}" data-item="broadband" data-category="monitoring" data-price="0.00">
+    <a href="#">Remove</a>
+</div>
+{% else %}
+<div class="button-link add-item" data-monthly="{{ monthly_price|default:'32.99' }}" data-item="broadband" data-category="monitoring" data-price="0.00">
     <a href="#">Add to Cart</a>
 </div>
+{% endif %}
