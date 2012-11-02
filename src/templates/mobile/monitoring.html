@@ -21,5 +21,25 @@
             <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
         </div>
     </div>
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
+</script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$('.button-link').click(function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    cart.add_to_cart(obj.attr('data-category'),
+        obj.attr('data-item'), obj.attr('data-price'));
+    window.location = '/cart/';
+    return false;
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
 

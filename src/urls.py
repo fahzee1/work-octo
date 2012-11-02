@@ -182,9 +182,8 @@ elif settings.SITE_ID == 9:
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
         dtt(r'^home-security-monitoring/$', 'mobile/monitoring.html', 'monitoring'),
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
-
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
-
+        url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
     )
 else:
     urlpatterns += patterns('',

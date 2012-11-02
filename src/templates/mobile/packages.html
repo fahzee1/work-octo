@@ -8,13 +8,13 @@
         <h2>Select Your Package:</h2>
         <ul>
             <li class="alpha">
-                {% include "mobile/_partials/packages/basic.html" %} 
+                {% include "mobile/_partial/packages/basic.html" %} 
             </li>
             <li>
-                {% include "mobile/_partials/packages/standard.html" %}
+                {% include "mobile/_partial/packages/standard.html" %}
             </li>
             <li>
-                {% include "mobile/_partials/packages/standard.html" %}
+                {% include "mobile/_partial/packages/premier.html" %}
             </li>
         </ul>
         <div class="equipment-included">
@@ -26,6 +26,25 @@
         <div class="clear"></div>
     </div>
     {% include "mobile/_partial/add-ons.html" %}
-
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
+</script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$('.button-link').click(function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    cart.add_to_cart(obj.attr('data-category'),
+        obj.attr('data-item'), obj.attr('data-price'));
+    window.location = '/cart/';
+    return false;
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
 

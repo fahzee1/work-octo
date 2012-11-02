@@ -1,5 +1,6 @@
 import re
 import urls
+import urllib
 import urllib2
 from datetime import datetime, timedelta
 from urllib import urlencode
@@ -204,6 +205,14 @@ def index_render(request, template, context):
     
     return simple_dtt(request, template, context)
 
+
+def mobile_cart(request):
+    context = {}
+    context['page_name'] = 'index'
+
+    cart = simplejson.loads(urllib.unquote(request.COOKIES['paCart']))
+    context['cart'] = cart
+    return simple_dtt(request, 'mobile/cart.html', context)
 
 def family_of_companies(request):
     ctx = {}

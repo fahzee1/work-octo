@@ -1,0 +1,46 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+    <div id="mobile-packages">    
+        <h2>Your Security Package:</h2>
+        <ul>
+            <li class="alpha">
+            {% if cart.package.item == 'basic' %}
+                {% include "mobile/_partial/packages/basic.html" %}
+            {% endif %} 
+            {% if cart.package.item == 'standard' %}
+                {% include "mobile/_partial/packages/standard.html" %}
+            {% endif %} 
+            {% if cart.package.item == 'premier' %}
+                {% include "mobile/_partial/packages/premier.html" %}
+            {% endif %} 
+            {% if not cart.package.item %}
+                {% include "mobile/_partial/packages/select.html" %}
+            {% endif %}
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div id="mobile-monitoring">
+        <ul>
+            <li>
+                {% if cart.monitoring.item == 'landline' %}
+                    {% include "mobile/_partial/monitoring/landline.html" %}
+                {% endif %} 
+                {% if cart.monitoring.item == 'broadband' %}
+                    {% include "mobile/_partial/monitoring/broadband.html" %}
+                {% endif %} 
+                {% if cart.monitoring.item == 'cellular' %}
+                    {% include "mobile/_partial/monitoring/cellular.html" %}
+                {% endif %} 
+                {% if not cart.monitoring.item %}
+                    {% include "mobile/_partial/monitoring/select.html" %}
+            {% endif %}
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
