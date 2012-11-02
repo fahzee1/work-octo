@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from urllib import urlencode
 import twitter
 import operator
+from decimal import Decimal
 
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
@@ -212,6 +213,10 @@ def mobile_cart(request):
 
     cart = simplejson.loads(urllib.unquote(request.COOKIES['paCart']))
     context['cart'] = cart
+    total_monthly = Decimal('0.00')
+    total_upfront = Decimal('0.00')
+
+    print cart
     return simple_dtt(request, 'mobile/cart.html', context)
 
 def family_of_companies(request):
