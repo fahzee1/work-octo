@@ -1,3 +1,7 @@
+import urllib
+
+from django.utils import simplejson
+
 from apps.pricetable.models import Package
 
 def price_table(request):
@@ -26,3 +30,11 @@ def price_table(request):
         price_dict[package.name] = info_dict
 
     return {'pricetable': price_dict}
+
+def current_cart(request):
+
+    cart = {'monitoring': {}, 'package': {}, 'equipment': {}}
+    if 'paCart' in request.COOKIES:
+        cart = simplejson.loads(urllib.unquote(request.COOKIES['paCart']))
+
+    return {'current_cart': cart}
