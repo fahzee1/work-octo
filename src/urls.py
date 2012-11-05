@@ -233,7 +233,11 @@ else:
 
         dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
-
+        # CRIME STOPPERS        
+        dtt(r'^CFLA/$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),
+        dtt(r'^CFCHICAGO/$', 'affiliates/crime-stoppers-cf/chicago.html', 'cf-chicago'),
+        dtt(r'^CFCLEVELAND/$', 'affiliates/crime-stoppers-cf/cleveland.html', 'cf-cleveland'),
+        dtt(r'^CFMIAMI/$', 'affiliates/crime-stoppers-cf/miami.html', 'cf-miami'),
 
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
