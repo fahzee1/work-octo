@@ -22,10 +22,10 @@
         </div>
         <div id="package-price">
             {% if request.COOKIES.bbb_test == 'C' %}
-            <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE*</strong></span>
+            <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 12/31/2012</em></span>
             {% endif %}
             {% if request.COOKIES.bbb_test == 'B' %}
-            <span class="equipment-price">Equipment Price: <strong itemprop="price">INCLUDED</strong></span>
+            <span class="equipment-price included">Equipment Price: <strong itemprop="price">INCLUDED</strong></span>
             {% endif %}
             {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
             <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE</strong></span>
@@ -97,7 +97,17 @@
             <tbody>
                 <tr>
                     <td><strong>Upfront Cost</strong></td>
-                    <td class="call-out">FREE*</td>
+                    <td class="call-out">
+                        {% if request.COOKIES.bbb_test == 'C' %}
+                        FREE*<em>expires 12/31/2012</em>
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'B' %}
+                        INCLUDED
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+                        FREE*
+                        {% endif %}
+                    </td>
                     <td>$939</td>
                 </tr>
                 <tr class="alt">
@@ -176,7 +186,17 @@
 {% endblock %}  
 {% block page-product %}
     <h2>Silver Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $37.99/mo</p>
+    <p><span>Equipment Today: <strong>
+                            {% if request.COOKIES.bbb_test == 'C' %}
+                        FREE*<em>expires 12/31/2012</em>
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'B' %}
+                        INCLUDED
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+                        FREE*
+                        {% endif %}
+    </strong></span>monthly monitoring starting at $37.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
     </div>
