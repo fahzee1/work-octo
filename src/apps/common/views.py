@@ -212,22 +212,27 @@ def mobile_cart(request):
     context = {}
     context['page_name'] = 'index'
 
-    cart = simplejson.loads(urllib.unquote(request.COOKIES['paCart']))
+    cart = {'monitoring': {}, 'package': {}, 'equipment': {}}
+    if 'paCart' in request.COOKIES:
+        cart = simplejson.loads(urllib.unquote(request.COOKIES['paCart']))
+
     context['cart'] = cart
     total_monthly = Decimal('0.00')
     total_monthly_equipment = Decimal('0.00')
-    if cart['package']['item'] == 'basic':
-        package = Package.objects.get(name='COPPER')
-    elif cart['package']['item'] == 'standard':
-        package = Package.objects.get(name='SILVER')
-    elif cart['package']['item'] == 'premier':
-        package = Package.objects.get(name='PLATINUM')
-    else:
-        package = None
+    package = None
+    if 'package' in cart and len(cart['package']) > 0:
+        if cart['package']['item'] == 'basic':
+            package = Package.objects.get(name='COPPER')
+        elif cart['package']['item'] == 'standard':
+            package = Package.objects.get(name='SILVER')
+        elif cart['package']['item'] == 'premier':
+            package = Package.objects.get(name='PLATINUM')
 
-    if package is not None:
+    if 'monitoring' in cart and len(cart['monitoring']) > 0:
+        if package is None:
+            package = Package.objects.get(name='COPPER')
         if cart['monitoring']['item'] == 'landline':
-            total_monthy += Decimal(package.standard_monitoring)
+            total_monthly += Decimal(package.standard_monitoring)
         elif cart['monitoring']['item'] == 'broadband':
             total_monthly += Decimal(package.broadband_monitoring)
         elif cart['monitoring']['item'] == 'cellular':
@@ -238,6 +243,7 @@ def mobile_cart(request):
     
     for name, info in cart['equipment'].iteritems():
         total_monthly_equipment += Decimal(info['monthly'])
+
     context['monthly_price_equipment'] = total_monthly_equipment
 
     return simple_dtt(request, 'mobile/cart.html', context)

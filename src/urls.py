@@ -184,6 +184,7 @@ elif settings.SITE_ID == 9:
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
         url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
+        url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
     )
 else:
     urlpatterns += patterns('',
@@ -667,6 +668,10 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
     ('^ab1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
+    ('^feedback/?$',
+        redirect_to, {'url': '/pa/feedback', 'permanent': True}),
+    ('^ceo/?$',
+        redirect_to, {'url': '/pa/feedback', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
