@@ -1,0 +1,16 @@
+{% extends "affiliates/sem-landing-page/home.html" %}
+
+{% load sekizai_tags %}
+
+{% block content %}
+{{ block.super }}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+if(!getCookie('bbb_test')) {
+    setCookie('bbb_test', 'B');
+}
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
