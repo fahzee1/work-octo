@@ -17,9 +17,52 @@
     	</div>
     </div>
 {% endblock %}
-{% block content %}
+{% block content %} 
+    {% addtoblock "js" %}
+    <script language="javascript">
+        
+        var thisImgSrc = "";
+        var theBoxVal = "";
+        function enterAgentID(thisIMG)
+        {
+           thisImgSrc = $(thisIMG).attr('src');
+           var pos = $(thisIMG).offset();
+           var width = $(thisIMG).outerWidth();
+           $('#pop-up-wrapper').fadeIn('fast');
+            updateLinkText();
+            selectLink();
+        }
+        function closePopup()
+        {
+            $('#pop-up-wrapper').fadeOut();
+        }
+        function updateLinkText()
+        {
+            if($('#popupAgentID').val().length > 0)
+            {
+                theBoxVal = '<a href="http://www.protectamerica.com/?agent='  + $('#popupAgentID').val().toLowerCase() + '">\n\t<img src="http://www.protectamerica.com' + thisImgSrc + '" />\n</a>';
+            }
+            else
+            {
+                theBoxVal = '';
+            }
+            
+            
+           $('#popupEntryTextBox').val(theBoxVal);
+        }
+        function selectLink(event)
+        {
+           $('#popupEntryTextBox').select();
+           event.stopPropagation();
+        }
+        function noPropogate(event)
+        {
+            event.stopPropagation();
+        }
+    </script>
+    {% endaddtoblock "js" %}
+
     {% addtoblock "css" %}
-    
         <link rel="stylesheet" href="{{ STATIC_URL }}css/resources.css">
     {% endaddtoblock "css" %}
 
@@ -51,85 +94,103 @@
     <h2>Approved Logos</h2>
     
     <div class="dl-item">
-        <img src="{{ STATIC_URL }}/img/external/pa-logo.png" />
+        <img src="{{ STATIC_URL }}img/external/pa-logo.png" />
         <h4>Protect America Logo</h4>
-        <div class="button-link"><a href="{{ STATIC_URL }}/img/external/pa-logo.eps">.eps format</a></div>
-        <div class="button-link"><a href="{{ STATIC_URL }}/img/external/pa-logo.png">.png format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/pa-logo.eps">.eps format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/pa-logo.png">.png format</a></div>
     </div>
     <div class="dl-item">
-        <img src="{{ STATIC_URL }}/img/external/GE-Security-Authorized-Dealer.png" />
+        <img src="{{ STATIC_URL }}img/external/GE-Security-Authorized-Dealer.png" />
         <h4>GE Security Authorized Dealer</h4>
-        <div class="button-link"><a href="{{ STATIC_URL }}/img/external/GE-Security-Authorized-Dealer.eps">.eps format</a></div>
-        <div class="button-link"><a href="{{ STATIC_URL }}/img/external/GE-Security-Authorized-Dealer.png">.png format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/GE-Security-Authorized-Dealer.eps">.eps format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/GE-Security-Authorized-Dealer.png">.png format</a></div>
     </div>
     <div class="dl-item">
-        <img src="{{ STATIC_URL }}/img/external/consumer_digest3D_ribbon.png" />
+        <img src="{{ STATIC_URL }}img/external/consumer_digest3D_ribbon.png" />
         <h4>Consumer Digest BEST BUY Seal (Copper Package)</h4>
         
-        <div class="button-link"><a href="{{ STATIC_URL }}/img/external/consumer_digest3D_ribbon.png">.png format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/consumer_digest3D_ribbon.png">.png format</a></div>
         <p><strong>Instructions: You must add this copyright information on any web property where the ribbon appears:</strong><br/>
         The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
     </div>
     <div class="dl-item">
-        <img src="{{ STATIC_URL }}/img/external/topConsumerReviews.jpg" />
+        <img src="{{ STATIC_URL }}img/external/topConsumerReviews.jpg" />
         <h4>TopConsumersReviews.com</h4>
         
-        <div class="button-link"><a href="{{ STATIC_URL }}/img/external/topConsumerReviews.jpg">.jpg format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/topConsumerReviews.jpg">.jpg format</a></div>
     </div>
     <div class="clear"></div>
 </div>
+<div id="pop-up-wrapper" onclick="javascript:closePopup()">
+<div id="popupEntry2" style="background-color:#444444;z-index:3000;position:absolute;color:white;padding:20px;">
+    
+    <br />
+     <div id="popupEntryInner" onclick="javascript:noPropogate(event)">
+     Enter Agent ID:
+        <input type="text" id="popupAgentID" size="7" value="axxxxxx" maxlength="7" onkeyup="updateLinkText()" onblur="selectLink();">
+        <br />
+        <br />
+        
+        <textarea  id="popupEntryTextBox" cols=50 rows=5> </textarea>
+        <br />
+        <br />
+        <br />
+        <br />
+        <span class="popUpButton" onclick="javascript:selectLink(event)">select</span>&nbsp;&nbsp;
+        <span class="popUpButton" onclick="javascript:closePopup()">close</span>
+     </div>
+</div>
+</div>
 <div class="content-area" id="aff-banners">
+    
     <h2>Web Banners</h2>
     <p>To Download, right click the image and select "Save Image As..."</p>
 
     <div class="half-box">
     <h3>120x600</h3>
-        <img src="{{ STATIC_URL }}/img/banners/120x600/120x600-brand.jpg" />
-        <img src="{{ STATIC_URL }}/img/banners/120x600/120x600-superhero.jpg" />
-        <img src="{{ STATIC_URL }}/img/banners/120x600/120x600-ncm.jpg" />
+        <img src="{{ STATIC_URL }}img/banners/120x600/120x600-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+        <img src="{{ STATIC_URL }}img/banners/120x600/120x600-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+       
 
         <div class="clear"></div>
     </div>
     <div class="half-box">
         <h3>160x600</h3>
-        <img src="{{ STATIC_URL }}/img/banners/160x600/160x600-brand.jpg" />
-        <img src="{{ STATIC_URL }}/img/banners/160x600/160x600-superhero.gif" />
-        <img src="{{ STATIC_URL }}/img/banners/160x600/160x600-ncm.jpg" />
+        <img src="{{ STATIC_URL }}img/banners/160x600/160x600-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+        <img src="{{ STATIC_URL }}img/banners/160x600/160x600-superhero.gif" onclick="javascript:enterAgentID(this)" class="webBanner" />
 
         <div class="clear"></div>
     </div>
     <div class="clear"></div>
     <h3>200x200</h3>
-    <img src="{{ STATIC_URL }}/img/banners/200x200/200x200-brand.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/200x200/200x200-superhero.jpg" />
+    <img src="{{ STATIC_URL }}img/banners/200x200/200x200-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+    <img src="{{ STATIC_URL }}img/banners/200x200/200x200-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
     <div class="clear"></div>
     <h3>250x250</h3>
-    <img src="{{ STATIC_URL }}/img/banners/250x250/250x250-brand.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/250x250/250x250-superhero.jpg" />
+    <img src="{{ STATIC_URL }}img/banners/250x250/250x250-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+    <img src="{{ STATIC_URL }}img/banners/250x250/250x250-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
 
     <div class="clear"></div>
     <h3>300x50</h3>
-    <img src="{{ STATIC_URL }}/img/banners/300x50/300x50-superhero.jpg" />
+    <img src="{{ STATIC_URL }}img/banners/300x50/300x50-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
     <div class="clear"></div>
     <h3>300x250</h3>
-    <img src="{{ STATIC_URL }}/img/banners/300x250/300x250-brand.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/300x250/300x250-superhero.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/300x250/300x250-ncm.jpg" />
+    <img src="{{ STATIC_URL }}img/banners/300x250/300x250-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+    <img src="{{ STATIC_URL }}img/banners/300x250/300x250-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+
 
     <div class="clear"></div>
     <h3>336x280</h3>
-    <img src="{{ STATIC_URL }}/img/banners/336x280/336x280-brand.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/336x280/336x280-ncm.jpg" />
+    <img src="{{ STATIC_URL }}img/banners/336x280/336x280-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
 
     <div class="clear"></div>
     <h3>468x60</h3>
-    <img src="{{ STATIC_URL }}/img/banners/468x60/468x60-brand.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/468x60/468x60-superhero.jpg" />
+    <img src="{{ STATIC_URL }}img/banners/468x60/468x60-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+    <img src="{{ STATIC_URL }}img/banners/468x60/468x60-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
     <div class="clear"></div>
     <h3>728x90</h3>
-    <img src="{{ STATIC_URL }}/img/banners/728x90/728x90-brand.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/728x90/728x90-superhero.jpg" />
-    <img src="{{ STATIC_URL }}/img/banners/728x90/728x90-ncm.jpg" />
+    <img src="{{ STATIC_URL }}img/banners/728x90/728x90-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+    <img src="{{ STATIC_URL }}img/banners/728x90/728x90-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
 </div>
 {% endblock %}
 {% block footer %}{% endblock %}
