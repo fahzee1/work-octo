@@ -86,6 +86,8 @@ elif settings.SITE_ID == 3:
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^test/touchscreen/$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
         dtt(r'^business/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^test/equip/$', 'affiliates/sem-landing-page/test/equipment-included.html', 'bbb-test-B'),
+        dtt(r'^test/exp/$', 'affiliates/sem-landing-page/test/adds-expiration.html', 'bbb-test-C'),
 
     )
 elif settings.SITE_ID == 4:
@@ -186,6 +188,11 @@ elif settings.SITE_ID == 9:
         url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
         url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
     )
+# Black Friday Site
+elif settings.SITE_ID == 10:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/black-friday/index.html', 'home'),
+    )
 else:
     urlpatterns += patterns('',
 
@@ -231,7 +238,11 @@ else:
 
         dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
-
+        # CRIME STOPPERS        
+        dtt(r'^CFLA/$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),
+        dtt(r'^CFCHICAGO/$', 'affiliates/crime-stoppers-cf/chicago.html', 'cf-chicago'),
+        dtt(r'^CFCLEVELAND/$', 'affiliates/crime-stoppers-cf/cleveland.html', 'cf-cleveland'),
+        dtt(r'^CFMIAMI/$', 'affiliates/crime-stoppers-cf/miami.html', 'cf-miami'),
 
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),

@@ -441,7 +441,7 @@
 
 {% if use_call_measurement %}
 <script type="text/javascript"> 
-    var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use
+    var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use
     var thisref = document.referrer.replace(/&/g, "zzzzz");
     var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
     document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
