@@ -188,6 +188,11 @@ elif settings.SITE_ID == 9:
         url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
         url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
     )
+# Black Friday Site
+elif settings.SITE_ID == 10:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/black-friday/index.html', 'home'),
+    )
 else:
     urlpatterns += patterns('',
 
