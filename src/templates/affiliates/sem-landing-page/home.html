@@ -12,6 +12,10 @@
 <script id='hiconversion_head_script'
              type='text/javascript'>if (typeof hiconversion_head_update == 'function') hiconversion_head_update()</script>
 <!-- End Hiconversion Head Enabling -->
+
+<script> 
+_udn = "protectamerica.com";
+</script> 
 <!-- Google Analytics Content Experiment code -->
 <script>function utmx_section(){}function utmx(){}(function(){var
 k='61445283-22',d=document,l=d.location,c=d.cookie;
@@ -26,6 +30,17 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
 </script><script>utmx('url','A/B');</script>
 <!-- End of Google Analytics Content Experiment code -->
+{% block test_js %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+if(!getCookie('bbb_test')) {
+    setCookie('bbb_test', 'A');
+}
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
 {% endblock %}
 {% block quick-links %}
     <ul id="quick-link-navigation">
@@ -386,13 +401,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         });
     });
     </script>
-<script type="text/javascript">
-$(document).ready(function() {
-if(!getCookie('bbb_test')) {
-    setCookie('bbb_test', 'A');
-}
-});
-</script>
 <!-- Begin Hiconversion Body Enabling. Do NOT move. Must come directly before the closing body tag -->
 <script id='hiconversion_body_script'
              type='text/javascript'>if (typeof hiconversion_body_update == 'function') hiconversion_body_update()</script>
