@@ -79,7 +79,7 @@ TIMEZONES = {
 def local_page_wrapper(request, keyword, city, state, zipcode):
     def get_state_code(statestr):
         for state in US_STATES:
-            if statestr.lower().replace(' ', '-') == state[1].lower():
+            if statestr.lower().replace('-', ' ') == state[1].lower():
                 return state[0]
         return False
     statecode = get_state_code(state)
