@@ -70,6 +70,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.common.context_processors.mobile_check',
     'apps.common.context_processors.tracking_pixels',
     'apps.pricetable.context_processors.price_table',
+    'apps.pricetable.context_processors.current_cart',
     'sekizai.context_processors.sekizai',
 )
 
@@ -83,8 +84,8 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

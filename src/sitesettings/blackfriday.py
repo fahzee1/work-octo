@@ -1,0 +1,6 @@
+SITE_ID = 10
+
+DEFAULT_AGENT = 'HOMESITE'
+DEFAULT_SOURCE = 'PROTECT AMERICA'
+
+from settings import *

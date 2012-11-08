@@ -1,0 +1,33 @@
+{% load sekizai_tags %}
+
+<div id="mobile-adds">    
+    <h2>Package Add-Ons:</h2>
+    <ul>
+        <li class="alpha">
+            {% include "mobile/_partial/addons/extreme-weather.html" %}
+        </li>
+        <li>
+            {% include "mobile/_partial/addons/home-and-away.html" %}
+        </li>
+    </ul>
+</div>
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
+</script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$('.add-item').click(function(e) {
+    e.preventDefault();
+    var obj = $(this);
+    cart.add_to_cart(obj.attr('data-category'),
+        obj.attr('data-item'), obj.attr('data-price'), obj.attr('data-monthly'));
+    window.location = '/cart/';
+    return false;
+});
+</script>
+{% endaddtoblock "js" %}

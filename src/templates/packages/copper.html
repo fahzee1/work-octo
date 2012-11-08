@@ -21,7 +21,15 @@
             <p>Voted a Consumers Digest<br/>"Best Buy" for 2012</p>
         </div>
         <div id="package-price">
+            {% if request.COOKIES.bbb_test == 'C' %}
+            <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 12/31/2012</em></span>
+            {% endif %}
+            {% if request.COOKIES.bbb_test == 'B' %}
+            <span class="equipment-price included">Equipment Price: <strong itemprop="price">INCLUDED</strong></span>
+            {% endif %}
+            {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
             <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE</strong></span>
+            {% endif %}
             <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>19.99</strong><em>per month</em></span>
         </div>
         <div class="button-submit">
@@ -87,7 +95,17 @@
             <tbody>
                 <tr>
                     <td><strong>Upfront Cost</strong></td>
-                    <td class="call-out">FREE*</td>
+                    <td class="call-out">
+                        {% if request.COOKIES.bbb_test == 'C' %}
+                        FREE*<em>expires 12/31/2012</em>
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'B' %}
+                        INCLUDED
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+                        FREE*
+                        {% endif %}
+                    </td>
                     <td>$379</td>
                 </tr>
                 <tr class="alt">
@@ -167,7 +185,17 @@
 {% endblock %}  
 {% block page-product %}
     <h2>Copper Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $29.99/mo</p>
+    <p><span>Equipment Today: <strong>
+        {% if request.COOKIES.bbb_test == 'C' %}
+        FREE*<em>expires 12/31/2012</em>
+        {% endif %}
+        {% if request.COOKIES.bbb_test == 'B' %}
+        INCLUDED
+        {% endif %}
+        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+        FREE*
+        {% endif %}
+    </strong></span>monthly monitoring starting at $29.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
     </div>
