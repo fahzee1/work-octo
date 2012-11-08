@@ -341,9 +341,6 @@ else:
                             dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
                             #dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
 
-
-
-
             # Product > Video
 
             dtt(r'^pa/wireless-security-camera/ip-security-cameras/?$', 'products/video/index.html', 'video', 'products'),
@@ -683,6 +680,8 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/pa/feedback', 'permanent': True}),
     ('^ceo/?$',
         redirect_to, {'url': '/pa/feedback', 'permanent': True}),
+    ('^familyofcompanies/?$',
+        redirect_to, {'url': '/?agent=a02332', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
