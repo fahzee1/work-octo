@@ -60,7 +60,9 @@ $(document).ready(function() {
 {% block order-footer %}
 {% endblock %}
 {% block footer %}
-{% include "mobile/_partial/nav.html" %}
+{% block bottom-nav %}
+    {% include "mobile/_partial/nav.html" %}
+{% endblock %}
 <div id="phone-number">
     <h3>Call Today and Save!</h3>
     <p><a href="tel:{{ phone_number|format_number }}"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
