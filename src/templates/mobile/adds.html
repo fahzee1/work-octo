@@ -5,9 +5,11 @@
 
 {% block content %}
     {% include "mobile/_partial/add-ons.html" %}
-        <div class="button-submit">
-            <a href="{% url cart-checkout %}" class="button-link">Checkout</a>
-        <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
+    {% include "mobile/_partial/subtotal.html" %}
+
+    <div class="button-submit">
+        <a href="{% url customer-info %}">Continue ></a>
+    </div>
 {% addtoblock "js" %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
 {% endaddtoblock "js" %}
