@@ -179,10 +179,10 @@ elif settings.SITE_ID == 8:
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
         dtt(r'^$', 'mobile/index.html', 'home'),
-        dtt(r'^home-security-packages/$', 'mobile/packages.html', 'packages'),
-        dtt(r'^security-add-ons/$', 'mobile/adds.html', 'add-ons'),
+        url(r'^home-security-packages/$', 'apps.pricetable.views.packages', name='packages'),
+        url(r'^security-add-ons/$', 'apps.pricetable.views.adds', name='add-ons'),
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
-        dtt(r'^home-security-monitoring/$', 'mobile/monitoring.html', 'monitoring'),
+        url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
         url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
@@ -294,7 +294,6 @@ else:
             'payitforward-video', 'payitforward', ctx={'agent_id': 'i03237'}),
             dtt(r'^payitforward/press/$', 'payitforward/press.html',
             'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
-
 
         # Product > Advantage
 
