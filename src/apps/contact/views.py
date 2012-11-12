@@ -172,10 +172,14 @@ def basic_post_login(request):
 
         # notes field information
         package = request.POST.get('package', None)
-        notes = ''
+        notes_list = []
         if package:
-            notes = 'Package Requested: %s' % package
-
+            notes_list.append('Package Requested: %s' % package)
+        visited_pages = request.session.get('vpages', None)
+        if visited_pages is not None:
+            notes_list.append('Pages Visited: %s' % visited_pages)
+        notes = '\n'.join(notes_list)
+        
         emaildata = {
             'agent_id': request_data['agentid'],
             'source': request_data['source'],
