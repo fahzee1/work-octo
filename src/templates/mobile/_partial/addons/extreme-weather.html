@@ -4,12 +4,14 @@
     <li>1 Freeze Sensor</li>
     <li>1 Flood Sensor</li>
 </ul>
+{% comment %}
 {% if action == 'remove' or 'extreme-weather' in current_cart.equipment %}
 <div class="button-link remove-item" data-monthly="4.00" data-item="extreme-weather" data-category="equipment" data-price="0.00">
-    <a href="#">Remove</a>
+    <a href="{% url remove_from_cart %}?category=equipment&amp;item=extreme-weather">Remove</a>
 </div>
 {% else %}
 <div class="button-link add-item" data-monthly="4.00" data-item="extreme-weather" data-category="equipment" data-price="0.00">
-    <a href="#">Add to Cart</a>
+    <a href="{% url add_to_cart %}?category=equipment&amp;item=extreme-weather&amp;price=0.00&amp;monthly=4.00">Add to Cart</a>
 </div>
 {% endif %}
+{% endcomment %}

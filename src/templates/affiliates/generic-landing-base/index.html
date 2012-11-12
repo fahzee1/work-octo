@@ -118,5 +118,26 @@ $(document).ready(function() {
     });
 });
 </script>
+{% block active_tab_trigger %}
+{% endblock %}
+<script type="text/javascript">
+$(document).ready(function() {
+    {% if request.GET.tab == '1' %}
+    $('#assurance-block-one').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '2' %}
+    $('#assurance-block-two').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '3' %}
+    $('#assurance-block-three').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '4' %}
+    $('#assurance-block-four').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '5' %}
+    $('#assurance-block-five').trigger('click');
+    {% endif %}
+});
+</script>
 {% endaddtoblock "js" %}
 {% endblock %}

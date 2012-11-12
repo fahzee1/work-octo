@@ -6,13 +6,14 @@
     <li>10 Door / Window Sensors</li>
     <li>1 Motion Detector</li>
 </ul>
-
+{% comment %}
 {% if action == 'remove' or current_cart.package.item == 'standard' %}
-<div class="button-link remove-item" data-price="0.00" data-item="basic" data-category="package" data-monthly="0.00">
-    <a href="#">Remove</a>
+<div class="button-link remove-item" data-price="0.00" data-item="standard" data-category="package" data-monthly="0.00">
+    <a href="{% url remove_from_cart %}?category=package&amp;item=standard">Remove</a>
 </div>
 {% else %}
 <div class="button-link add-item" data-price="0.00" data-item="standard" data-category="package" data-monthly="0.00">
-    <a href="#">Add to Cart</a>
+    <a href="{% url add_to_cart %}?category=package&amp;item=standard&amp;price=0.00&amp;monthly=0.00">Add to Cart</a>
 </div>
 {% endif %}
+{% endcomment %}
