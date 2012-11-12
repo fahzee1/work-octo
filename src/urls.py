@@ -187,7 +187,9 @@ elif settings.SITE_ID == 9:
         dtt(r'^customer-info/$', 'mobile/customer-info.html', 'customer-info'),
 
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
-        url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
+        url(r'^cart/$', 'apps.pricetable.views.mobile_cart', name='cart'),
+        url(r'^add-to-cart/$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
+        url(r'^remove-from-cart/$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
         url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
     )
 # Black Friday Site

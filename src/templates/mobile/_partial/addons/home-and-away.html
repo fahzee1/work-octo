@@ -5,10 +5,10 @@
 </ul>
 {% if action == 'remove' or 'home-and-away' in current_cart.equipment %}
 <div class="button-link remove-item" data-monthly="10.00" data-item="home-and-away" data-category="equipment" data-price="0.00">
-    <a href="#">Remove</a>
+    <a href="{% url remove_from_cart %}?category=equipment&amp;item=home-and-away">Remove</a>
 </div>
 {% else %}
 <div class="button-link add-item" data-monthly="10.00" data-item="home-and-away" data-category="equipment" data-price="0.00">
-    <a href="#">Add to Cart</a>
+    <a href="{% url add_to_cart %}?category=equipment&amp;item=home-and-away&amp;price=0.00&amp;monthly=10.00">Add to Cart</a>
 </div>
 {% endif %}

@@ -216,47 +216,6 @@ def index_render(request, template, context):
     
     return simple_dtt(request, template, context)
 
-
-def mobile_cart(request):
-    context = {}
-    context['page_name'] = 'index'
-
-    cart = {'monitoring': {}, 'package': {}, 'equipment': {}}
-    if 'paCart' in request.COOKIES:
-        cart = simplejson.loads(urllib.unquote(request.COOKIES['paCart']))
-
-    context['cart'] = cart
-    total_monthly = Decimal('0.00')
-    total_monthly_equipment = Decimal('0.00')
-    package = None
-    if 'package' in cart and len(cart['package']) > 0:
-        if cart['package']['item'] == 'basic':
-            package = Package.objects.get(name='COPPER')
-        elif cart['package']['item'] == 'standard':
-            package = Package.objects.get(name='SILVER')
-        elif cart['package']['item'] == 'premier':
-            package = Package.objects.get(name='PLATINUM')
-
-    if 'monitoring' in cart and len(cart['monitoring']) > 0:
-        if package is None:
-            package = Package.objects.get(name='COPPER')
-        if cart['monitoring']['item'] == 'landline':
-            total_monthly += Decimal(package.standard_monitoring)
-        elif cart['monitoring']['item'] == 'broadband':
-            total_monthly += Decimal(package.broadband_monitoring)
-        elif cart['monitoring']['item'] == 'cellular':
-            total_monthly += Decimal(package.cellular_monitoring)
-    
-    context['monthly_price'] = total_monthly
-    total_monthly_equipment = total_monthly
-    
-    for name, info in cart['equipment'].iteritems():
-        total_monthly_equipment += Decimal(info['monthly'])
-
-    context['monthly_price_equipment'] = total_monthly_equipment
-
-    return simple_dtt(request, 'mobile/cart.html', context)
-
 def family_of_companies(request):
     ctx = {}
     ctx['page_name'] = 'family'
