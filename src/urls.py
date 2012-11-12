@@ -179,11 +179,13 @@ elif settings.SITE_ID == 8:
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
         dtt(r'^$', 'mobile/index.html', 'home'),
-        dtt(r'^home-security-packages/$', 'mobile/packages.html', 'packages'),
-        dtt(r'^security-add-ons/$', 'mobile/adds.html', 'add-ons'),
+        url(r'^home-security-packages/$', 'apps.pricetable.views.packages', name='packages'),
+        url(r'^security-add-ons/$', 'apps.pricetable.views.adds', name='add-ons'),
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
-        dtt(r'^home-security-monitoring/$', 'mobile/monitoring.html', 'monitoring'),
+        url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
+        dtt(r'^customer-info/$', 'mobile/customer-info.html', 'customer-info'),
+
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
         url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
         url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
@@ -295,7 +297,6 @@ else:
             dtt(r'^payitforward/press/$', 'payitforward/press.html',
             'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
 
-
         # Product > Advantage
 
         dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
@@ -340,9 +341,6 @@ else:
                             dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
                             dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
                             #dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
-
-
-
 
             # Product > Video
 
@@ -683,6 +681,8 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/pa/feedback', 'permanent': True}),
     ('^ceo/?$',
         redirect_to, {'url': '/pa/feedback', 'permanent': True}),
+    ('^familyofcompanies/?$',
+        redirect_to, {'url': '/?agent=a02332', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

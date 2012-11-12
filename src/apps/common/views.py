@@ -116,6 +116,11 @@ def simple_dtt(request, template, extra_context):
     if newaffiliate:
         request.session['refer_id'] = newaffiliate
 
+    visited_pages = request.session.get('vpages', [])
+    if extra_context['page_name'] not in visited_pages:
+        visited_pages.append(extra_context['page_name'])
+        request.session['vpages'] = visited_pages
+
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
