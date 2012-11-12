@@ -1,10 +1,12 @@
 import re
 import urls
+import urllib
 import urllib2
 from datetime import datetime, timedelta
 from urllib import urlencode
 import twitter
 import operator
+from decimal import Decimal
 
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
@@ -22,6 +24,7 @@ from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
+from apps.pricetable.models import Package
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -113,6 +116,11 @@ def simple_dtt(request, template, extra_context):
     if newaffiliate:
         request.session['refer_id'] = newaffiliate
 
+    visited_pages = request.session.get('vpages', [])
+    if extra_context['page_name'] not in visited_pages:
+        visited_pages.append(extra_context['page_name'])
+        request.session['vpages'] = visited_pages
+
     response = render_to_response(template,
                               extra_context,
                               context_instance=RequestContext(request))
@@ -198,12 +206,15 @@ def index_render(request, template, context):
     latest_news = Article.objects.order_by('-date_created')[:3]
     context['latest_news'] = latest_news
 
-    t_api = twitter.Api()
-    tweets = t_api.GetUserTimeline('@protectamerica')
+    tweets = cache.get('TWEETS')
+    if tweets is None:
+        t_api = twitter.Api()
+        tweets = t_api.GetUserTimeline('@protectamerica')
+        cache.set('TWEETS', tweets, 60*60)
+
     context['tweets'] = tweets[:3]
     
     return simple_dtt(request, template, context)
-
 
 def family_of_companies(request):
     ctx = {}

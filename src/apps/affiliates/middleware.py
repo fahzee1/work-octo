@@ -63,7 +63,7 @@ class AffiliateMiddleware(object):
         affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
         current_source = request.COOKIES.get('source', None)
-        if not current_cookie:
+        if current_cookie is None:
             refer_id = request.session.get('refer_id', None)
             if refer_id is not None:
                 try:

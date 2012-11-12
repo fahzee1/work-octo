@@ -1,0 +1,30 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+    <div id="mobile-packages">    
+        <h2>Security Packages:</h2>
+        <ul>
+            <li class="alpha">
+                {% include "mobile/_partial/packages/basic.html" %} 
+            </li>
+            <li>
+                {% include "mobile/_partial/packages/standard.html" %}
+            </li>
+            <li>
+                {% include "mobile/_partial/packages/premier.html" %}
+            </li>
+        </ul>
+        <div class="equipment-included">
+            <img src="{{ STATIC_URL }}img/mobile/equipment-included.png" alt="equipment-included" width="320" height="56" />
+        </div>
+        <div class="button-submit">
+            <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {% include "mobile/_partial/add-ons.html" %}
+{% endblock %}
+

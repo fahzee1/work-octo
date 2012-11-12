@@ -1,0 +1,25 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+    <div id="mobile-monitoring">    
+        <h2>Monitoring Solutions:</h2>
+        <ul>
+            <li class="alpha">
+                {% include "mobile/_partial/monitoring/landline.html" %}
+            </li>
+            <li>
+                {% include "mobile/_partial/monitoring/broadband.html" %}
+            </li>
+            <li>
+                {% include "mobile/_partial/monitoring/cellular.html" %}
+            </li>
+        </ul>
+        <div class="button-submit">
+            <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
+        </div>
+    </div>
+{% endblock %}
+
