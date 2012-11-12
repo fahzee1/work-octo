@@ -9,16 +9,16 @@
         <h2>Your Security Package:</h2>
         <ul>
             <li class="alpha">
-            {% if cart.package.item == 'basic' %}
+            {% if current_cart.package.item == 'basic' %}
                 {% include "mobile/_partial/packages/basic.html" %}
             {% endif %} 
-            {% if cart.package.item == 'standard' %}
+            {% if current_cart.package.item == 'standard' %}
                 {% include "mobile/_partial/packages/standard.html" %}
             {% endif %} 
-            {% if cart.package.item == 'premier' %}
+            {% if current_cart.package.item == 'premier' %}
                 {% include "mobile/_partial/packages/premier.html" %}
             {% endif %} 
-            {% if not cart.package.item %}
+            {% if not current_cart.package.item %}
                 {% include "mobile/_partial/packages/select.html" %}
             {% endif %}
             </li>
@@ -28,25 +28,26 @@
     <div id="mobile-monitoring">
         <ul>
             <li>
-                {% if cart.monitoring.item == 'landline' %}
+                {% if current_cart.monitoring.item == 'landline' %}
                     {% include "mobile/_partial/monitoring/landline.html" %}
                 {% endif %} 
-                {% if cart.monitoring.item == 'broadband' %}
+                {% if current_cart.monitoring.item == 'broadband' %}
                     {% include "mobile/_partial/monitoring/broadband.html" %}
                 {% endif %} 
-                {% if cart.monitoring.item == 'cellular' %}
+                {% if current_cart.monitoring.item == 'cellular' %}
                     {% include "mobile/_partial/monitoring/cellular.html" %}
                 {% endif %} 
-                {% if not cart.monitoring.item %}
+                {% if not current_cart.monitoring.item %}
                     {% include "mobile/_partial/monitoring/select.html" %}
             {% endif %}
             </li>
         </ul>
     </div>
+    {% if current_cart.equipment.items %}
     <div id="mobile-adds">
         <h2>Selected Add-Ons</h2>
         <ul>
-            {% for name, info in cart.equipment.items %}
+            {% for name, info in current_cart.equipment.items %}
             <li>
                 {% if name == 'extreme-weather' %}
                 {% include "mobile/_partial/addons/extreme-weather.html" %}
@@ -58,39 +59,12 @@
             {% endfor %}
         </ul>
     </div>
-    {{ monthly_price_equipment }}
-    <a href="{% url add-ons %}" class="button-link">Continue</a>
+    {% endif %}
+    {% include "mobile/_partial/subtotal.html" %}
+
+    <div class="button-submit">
+        <a href="{% url add-ons %}">Continue ></a>
+    </div>
     {% endwith %}
-{% addtoblock "js" %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/cart.js"></script>
-{% endaddtoblock "js" %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-var cart = new Cart('paCart', 'equipment_total', 'monthly_total', 'equipment_breakdown', 'current_package', 'current_monitoring');
-</script>
-{% endaddtoblock "js" %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-$('.remove-item').click(function(e) {
-    e.preventDefault();
-    var obj = $(this);
-    cart.remove_from_cart(obj.attr('data-category'), obj.attr('data-item'));
-    window.location = '/cart/';
-    return false;
-});
-</script>
-{% endaddtoblock "js" %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-$('.add-item').click(function(e) {
-    e.preventDefault();
-    var obj = $(this);
-    cart.add_to_cart(obj.attr('data-category'),
-        obj.attr('data-item'), obj.attr('data-price'), obj.attr('data-monthly'));
-    window.location = '/cart/';
-    return false;
-});
-</script>
-{% endaddtoblock "js" %}
 {% endblock %}
 
