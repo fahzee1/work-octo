@@ -11,7 +11,6 @@ def mobile_render(request, template, context):
     if 'current_cart' not in context:
         cart = Cart(request)
         context['current_cart'] = cart
-        print cart.get_json()
     return simple_dtt(request, template, context)
 
 def mobile_cart_checkout(request):
