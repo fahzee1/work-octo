@@ -213,6 +213,9 @@ def index_render(request, template, context):
         cache.set('TWEETS', tweets, 60*60)
 
     context['tweets'] = tweets[:3]
+
+    if 'no_mobile' in request.GET:
+        request.session['no_mobile'] = True
     
     return simple_dtt(request, template, context)
 
