@@ -101,12 +101,14 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <!-- End of Google Analytics Content Experiment code -->
 {% endif %}
 {% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.COOKIES.refer_id == 'BINGPPC' or request.COOKIES.refer_id == 'HOMESITE' or not request.COOKIES.refer_id %}
+{% comment %}Test for Homesite only{% endcomment %}
+{% if is_mobile %}
 <script> 
 _udn = "protectamerica.com";
 </script>
 <!-- Google Analytics Content Experiment code -->
 <script>function utmx_section(){}function utmx(){}(function(){var
-k='61445283-20',d=document,l=d.location,c=d.cookie;
+k='61445283-23',d=document,l=d.location,c=d.cookie;
 if(l.search.indexOf('utm_expid='+k)>0)return;
 function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
 indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
@@ -118,6 +120,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
 </script><script>utmx('url','A/B');</script>
 <!-- End of Google Analytics Content Experiment code -->
+{% endif %}
 {% endif %}
 {% endif %}
 {% endblock %}
@@ -142,7 +145,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div id="main">
     <div id="twitter-feed">
         <a href="{% url payitforward %}">
-            <img src="{{ STATIC_URL }}img/extra/vet-day.jpg" alt="Michigan State University and Protect America Pay It Forward" width="232" height="184" id="twitter-ad" />
+            <img src="{{ STATIC_URL }}img/extra/michigan-state-pay-it-forward.jpg" alt="Michigan State University and Protect America Pay It Forward" width="232" height="184" id="twitter-ad" />
         </a>
         <ul>
             {% for tweet in tweets %}
