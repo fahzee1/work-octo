@@ -197,6 +197,10 @@ elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/black-friday/index.html', 'home'),
     )
+elif settings.SITE_ID == 11:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
+    )
 else:
     urlpatterns += patterns('',
 
