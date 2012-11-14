@@ -184,7 +184,7 @@ elif settings.SITE_ID == 9:
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
         url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
-        dtt(r'^customer-info/$', 'mobile/customer-info.html', 'customer-info'),
+        url(r'^customer-info/$', 'apps.pricetable.views.customer_info', name='customer-info'),
 
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
         url(r'^cart/$', 'apps.pricetable.views.mobile_cart', name='cart'),
