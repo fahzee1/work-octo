@@ -261,13 +261,9 @@ else:
 
         # CJ Page
         dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
-
-
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
-
-
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',
@@ -660,7 +656,8 @@ urlpatterns += patterns('',
    
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
-
+    ('^national-crime-prevention$',
+        redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
