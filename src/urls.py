@@ -259,6 +259,10 @@ else:
         dtt(r'^thank-you/tell-friend/?$', 'thank-you/tell-friend.html', 'contact-tell-friend', 'thank-you'),
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
 
+        # CJ Page
+        dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
+
+
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
