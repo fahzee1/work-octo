@@ -1,3 +1,10 @@
-Rylan, style this shit!
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block content %}
+<p>Protect America is highly committed to the security and safety of our customers at home, as well as online. Due to security reasons, Protect America is required to verify each home security package we sell. Please give us a call at: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> with the package code: {{ packagecode }} to verify and complete your order.
 <br/>
 Packagecode: {{ packagecode }}
+
+    {% include "mobile/_partial/summary.html" %}
+{% endblock %}

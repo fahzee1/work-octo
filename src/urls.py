@@ -184,10 +184,12 @@ elif settings.SITE_ID == 9:
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
         url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
-        dtt(r'^customer-info/$', 'mobile/customer-info.html', 'customer-info'),
+        url(r'^customer-info/$', 'apps.pricetable.views.customer_info', name='customer-info'),
 
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
-        url(r'^cart/$', 'apps.common.views.mobile_cart', name='cart'),
+        url(r'^cart/$', 'apps.pricetable.views.mobile_cart', name='cart'),
+        url(r'^add-to-cart/$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
+        url(r'^remove-from-cart/$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
         url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
     )
 # Black Friday Site
@@ -257,11 +259,11 @@ else:
         dtt(r'^thank-you/tell-friend/?$', 'thank-you/tell-friend.html', 'contact-tell-friend', 'thank-you'),
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
 
+        # CJ Page
+        dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
-
-
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',
@@ -654,7 +656,8 @@ urlpatterns += patterns('',
    
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
-
+    #('^national-crime-prevention$',
+    #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
