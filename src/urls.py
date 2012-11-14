@@ -184,7 +184,7 @@ elif settings.SITE_ID == 9:
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
         url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
         dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
-        dtt(r'^customer-info/$', 'mobile/customer-info.html', 'customer-info'),
+        url(r'^customer-info/$', 'apps.pricetable.views.customer_info', name='customer-info'),
 
         dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
         url(r'^cart/$', 'apps.pricetable.views.mobile_cart', name='cart'),
@@ -196,6 +196,10 @@ elif settings.SITE_ID == 9:
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/black-friday/index.html', 'home'),
+    )
+elif settings.SITE_ID == 11:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
     )
 else:
     urlpatterns += patterns('',
@@ -254,6 +258,10 @@ else:
         dtt(r'^thank-you/moving-kit/?$', 'thank-you/moving-kit.html', 'moving-kit-thank-you', 'thank-you'),
         dtt(r'^thank-you/tell-friend/?$', 'thank-you/tell-friend.html', 'contact-tell-friend', 'thank-you'),
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
+
+        # CJ Page
+        dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
+
 
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
