@@ -253,3 +253,9 @@ def family_of_companies(request):
 
     ctx['industries'] = industry_dict 
     return simple_dtt(request, 'about-us/family-of-companies.html', ctx)
+
+def black_friday(request):
+    ctx = {}
+    ctx['page_name'] = 'index'
+    ctx['black_friday_delta'] = datetime(2012, 11, 23) - datetime(2012, 11, datetime.today().day)
+    return simple_dtt(request, 'external/black-friday/index.html', ctx)

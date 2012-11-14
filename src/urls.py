@@ -195,7 +195,9 @@ elif settings.SITE_ID == 9:
 # Black Friday Site
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/black-friday/index.html', 'home'),
+
+        url(r'^$', 'apps.common.views.black_friday', name='index'),
+
     )
 elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
