@@ -656,8 +656,8 @@ urlpatterns += patterns('',
    
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
-    ('^national-crime-prevention$',
-        redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
+    #('^national-crime-prevention$',
+    #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),

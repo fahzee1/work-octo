@@ -15,7 +15,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
 from django.utils.cache import patch_vary_headers
@@ -30,7 +30,14 @@ def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
     get['agent'] = agent_id
 
-    request.session['refer_id'] = agent_id
+    try:
+        affiliate = Affiliate.objects.get(agent_id=agent_id.lower())
+        request.session['refer_id'] = affiliate.agent_id
+    except Affiliate.DoesNotExist:
+        if request.META['PATH_INFO'][-1] != '/':
+            resolved = resolve(request.META['PATH_INFO'] + '/')
+            if resolved.url_name != 'apps.common.views.redirect_wrapper':
+                return HttpResponseRedirect(reverse(resolved.url_name))
 
     return HttpResponseRedirect('/?%s' % urlencode(get))
 
