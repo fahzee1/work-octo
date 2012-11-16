@@ -28,36 +28,7 @@
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/black-friday.css">
 
-<script>
-    function changeNumber() {
-        var countNumber = $("#CounterNumber").html();
-        
-        var today = new Date();
-        var todayDay = today.getDate();
-        var todayMonth = today.getMonth();
-        var todayYear = today.getYear();
-        
-        var bfd = new Date(2012, 10, 23, 1, 0, 0, 0);
-        var bfdDay = bfd.getDate();
-        var bfdMonth = bfd.getMonth();
-        var bfdYear = bfd.getYear();
-        var countDownFlag = false;
-        var countdownDelta = -1;
-        if(todayMonth == bfdMonth && todayYear == bfdYear)
-        {
-            if(todayDay <= bfdDay)
-            {
-                countDownFlag = true;
-                countdownDelta = bfdDay - todayDay;
-            }
-        }
-        
-        $("#CounterNumber").html(countdownDelta);
-    }
-    $(document).ready(function() {
-        changeNumber();
-    });
-</script>
+
 {% endblock %}
 {% block typekit %}tk-museo-slab{% endblock %}
 {% block header %}
@@ -74,7 +45,7 @@
 {% block content %}
 </div>
 <div id="special-display">
-        <p><strong id="CounterNumber">&nbsp;</strong><span id="days-text">Days</span></p>
+        <p><strong id="CounterNumber">{{ black_friday_delta.days }}</strong><span id="days-text">Days</span></p>
 </div>
 
 <div class="wrapper">

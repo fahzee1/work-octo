@@ -195,7 +195,9 @@ elif settings.SITE_ID == 9:
 # Black Friday Site
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/black-friday/index.html', 'home'),
+
+        url(r'^$', 'apps.common.views.black_friday', name='index'),
+
     )
 elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
@@ -656,8 +658,8 @@ urlpatterns += patterns('',
    
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
-    ('^national-crime-prevention$',
-        redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
+    #('^national-crime-prevention$',
+    #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
