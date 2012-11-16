@@ -2,9 +2,17 @@
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block content %}
-<p>Protect America is highly committed to the security and safety of our customers at home, as well as online. Due to security reasons, Protect America is required to verify each home security package we sell. Please give us a call at: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> with the package code: {{ packagecode }} to verify and complete your order.
-<br/>
-Packagecode: {{ packagecode }}
-
+<div id="package-code">
+    <h1>Notice!</h1>
+    <p>Protect America is dedicated to the security of your home and information. For this reason, we are required to verify each online that is processed through our online ordering system. One of our home security experts is reviewing your order and will be in contact within the next 24 hours. To complete this order sooner, give us a call at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> with your <strong>Package Code: <span>{{ packagecode }}</span></strong>.
+    <div id="contact-us-overview">
+        <h2>Business Hours:</h2>
+        <h3>Mon - Fri: 07:00am - 11:00pm CT</h3>
+        <h3>Sat: 08:00am - 08:00pm CT </h3>
+        <h3>Sun: 11:00am - 09:00pm CT </h3>
+        <p><strong>Note:</strong> All business hours are listed in Central Standard Time. </p>
+    </div>
+</p>
+</div>
     {% include "mobile/_partial/summary.html" %}
 {% endblock %}
