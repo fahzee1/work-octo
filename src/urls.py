@@ -86,6 +86,8 @@ elif settings.SITE_ID == 3:
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^test/touchscreen/$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
         dtt(r'^business/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^test/equip/$', 'affiliates/sem-landing-page/test/equipment-included.html', 'bbb-test-B'),
+        dtt(r'^test/exp/$', 'affiliates/sem-landing-page/test/adds-expiration.html', 'bbb-test-C'),
 
     )
 elif settings.SITE_ID == 4:
@@ -173,6 +175,32 @@ elif settings.SITE_ID == 8:
 
 
     )
+# Mobile Website
+elif settings.SITE_ID == 9:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'mobile/index.html', 'home'),
+        url(r'^home-security-packages/$', 'apps.pricetable.views.packages', name='packages'),
+        url(r'^security-add-ons/$', 'apps.pricetable.views.adds', name='add-ons'),
+        dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
+        url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
+        dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
+        url(r'^customer-info/$', 'apps.pricetable.views.customer_info', name='customer-info'),
+
+        dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
+        url(r'^cart/$', 'apps.pricetable.views.mobile_cart', name='cart'),
+        url(r'^add-to-cart/$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
+        url(r'^remove-from-cart/$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
+        url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
+    )
+# Black Friday Site
+elif settings.SITE_ID == 10:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/black-friday/index.html', 'home'),
+    )
+elif settings.SITE_ID == 11:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
+    )
 else:
     urlpatterns += patterns('',
 
@@ -218,7 +246,11 @@ else:
 
         dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
-
+        # CRIME STOPPERS        
+        dtt(r'^CFLA/$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),
+        dtt(r'^CFCHICAGO/$', 'affiliates/crime-stoppers-cf/chicago.html', 'cf-chicago'),
+        dtt(r'^CFCLEVELAND/$', 'affiliates/crime-stoppers-cf/cleveland.html', 'cf-cleveland'),
+        dtt(r'^CFMIAMI/$', 'affiliates/crime-stoppers-cf/miami.html', 'cf-miami'),
 
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
@@ -227,11 +259,11 @@ else:
         dtt(r'^thank-you/tell-friend/?$', 'thank-you/tell-friend.html', 'contact-tell-friend', 'thank-you'),
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
 
+        # CJ Page
+        dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
-
-
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',
@@ -270,7 +302,6 @@ else:
             'payitforward-video', 'payitforward', ctx={'agent_id': 'i03237'}),
             dtt(r'^payitforward/press/$', 'payitforward/press.html',
             'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
-
 
         # Product > Advantage
 
@@ -316,9 +347,6 @@ else:
                             dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
                             dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
                             #dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
-
-
-
 
             # Product > Video
 
@@ -625,11 +653,11 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
     ('^crimeprevention$',
         redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
-    ('^national-crime-prevention$',
-        redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
+   
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
-
+    #('^national-crime-prevention$',
+    #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
@@ -656,6 +684,12 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
     ('^ab1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
+    ('^feedback/?$',
+        redirect_to, {'url': '/pa/feedback', 'permanent': True}),
+    ('^ceo/?$',
+        redirect_to, {'url': '/pa/feedback', 'permanent': True}),
+    ('^familyofcompanies/?$',
+        redirect_to, {'url': '/?agent=a02332', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

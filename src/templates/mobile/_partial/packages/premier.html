@@ -1,0 +1,19 @@
+<img src="{{ STATIC_URL }}img/mobile/premier-security-package.jpg" alt="Basic Security Package" width="108" height="80" />
+<h3>Premier <strong>{% if action != 'remove' %}{{ pricetable.PLATINUM.standard_monitoring }} <span>per month</span>{% else %}Equipment Included{% endif %}</strong></h3>
+<p>with Landing Monitoring</p>
+<ul>
+    <li>1 Simon XT Control Panel</li>
+    <li>15 Door / Window Sensors</li>
+    <li>1 Motion Detector</li>
+</ul>
+{% comment %}
+{% if action == 'remove' or current_cart.package.item == 'premier' %}
+<div class="button-link remove-item" data-price="0.00" data-item="premier" data-category="package" data-monthly="0.00">
+    <a href="{% url remove_from_cart %}?category=package&amp;item=premier">Remove</a>
+</div>
+{% else %}
+<div class="button-link add-item" data-price="0.00" data-item="premier" data-category="package" data-monthly="0.00">
+    <a href="{% url add_to_cart %}?category=package&amp;item=premier&amp;price=0.00&amp;monthly=0.00">Add to Cart</a>
+</div>
+{% endif %}
+{% endcomment %}

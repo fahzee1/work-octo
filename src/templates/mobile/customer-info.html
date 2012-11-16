@@ -1,0 +1,63 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+<h1>Customer Information</h1>
+<form id="contact-form">
+    <fieldset id="name-information">
+        <div class="form-wrapper">
+            <div class="alpha">
+                <label>First Name</label>
+                <input type="text" />
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input type="text" />
+            </div>
+        </div>
+        <div class="clear"></div>
+    </fieldset>
+    <fieldset id="content-information">
+        <div class="form-wrapper">
+            <h3>Contact Information</h3>
+            <label>Email Address</label>
+            <input type="text" />
+            <label>Phone Number</label>
+            <input type="text" />
+        </div>
+    </fieldset>
+    <fieldset id="address-information">
+        <div class="form-wrapper">
+            <h3>Customer Address</h3>
+
+            <label>Address 1</label>
+            <input type="text" />
+            <label>Address 2</label>
+            <input type="text" />
+            <div class="clear"></div>
+            <div class="city-label">
+                <label>City</label>
+                <input type="text" />
+            </div>
+            <div class="state-label">
+                <label>State</label>
+                <input type="text" />
+            </div>
+            <div class="zip-label">
+                <label>Zipcode</label>
+                <input type="text" />
+            </div>
+        </div>
+        <div class="clear"></div>
+    </fieldset>
+    <div class="button-submit">
+        <a href="{% url cart-checkout %}">Complete Order ></a>
+    </div>
+</form>
+    {% include "mobile/_partial/summary.html" %}
+
+{% endblock %}
+{% block bottom-nav %}
+{% endblock %}
