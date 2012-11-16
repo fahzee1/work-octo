@@ -1,7 +1,8 @@
+{% load cart_tags %}
 <img src="{{ STATIC_URL }}/img/mobile/landline-icon.png" alt="landline-icon" width="112" height="88" />
 
-<h3>Landline
-    <strong>{% if current_cart.package %}${{ current_cart.get_package_monthly }}{% else %}{{ pricetable.COPPER.standard_monitoring }}{% endif %}
+<h3>Landline {{ current_cart.package.item }}
+    <strong>{% monitoring_price current_cart.package.item "landline" %}
         <span>per month</span></strong>
 </h3>
 <p>with the {% if current_cart.package %}{{ current_cart.package.item|capfirst }}{% else %}Basic{% endif %} Package</p>

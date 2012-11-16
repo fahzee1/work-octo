@@ -1,6 +1,15 @@
+{% load cart_tags %}
 <img src="{{ STATIC_URL }}img/mobile/basic-security-package.jpg" alt="Basic Security Package" width="108" height="80" />
-<h3>Basic <strong>{% if page != 'cart' %}{{ pricetable.COPPER.standard_monitoring }} <span>per month</span>{% else %}Equipment Included{% endif %}</strong></h3>
-<p>with Landing Monitoring</p>
+<h3>Basic <strong>
+{% if page == 'cart' and current_cart.monitoring %}
+Equipment Included
+{% else %}
+{% package_price "basic" current_cart.monitoring.item %}<span>per month</span>
+{% endif %}
+</strong></h3>
+{% if page != 'cart' %}
+<p>with {{ current_cart.monitoring.item|capfirst|default:"Landline" }} Monitoring</p>
+{% endif %}
 <ul>
     <li>1 Simon XT Control Panel</li>
     <li>3 Door / Window Sensors</li>

@@ -3,43 +3,90 @@ from datetime import datetime
 from django import template
 from django.conf import settings
 
-from models import Package
+from apps.pricetable.models import Package
 
 register = template.Library()
 
-def content_spinner(parser, token):
+def package_monitoring_price(package, monitoring):
+        if monitoring == 'broadband':
+            price = package.broadband_monitoring
+        elif monitoring == 'cellular':
+            price = package.cellular_monitoring
+        else:
+            price = package.standard_monitoring
+        return '$%s' % price
+
+def package_price(parser, token):
     tag_name = None
     package = None
     monitoring = None
     try:
         tag_name, package, monitoring = token.split_contents()
+
     except ValueError:
         raise template.TemplateSyntaxError(
             '%r tag requires at least 3 arguments' %
             token.contents.split()[0])
 
-    return ContentSpinnerNode(package.replace('"', ''),
-                              monitoring.replace('"', ''))
+    return PackagePriceNode(package.replace('"', ''), monitoring.replace('"', ''))
 
-class ContentSpinnerNode(template.Node):
-    def __init__(self, content_name, content_replacements):
-        self.request = template.Variable('request')
-        self.name = content_name
-        self.replacements = content_replacements.split('|')
+class PackagePriceNode(template.Node):
+    def __init__(self, package, monitoring):
+        self.package = package
+        self.monitoring = template.Variable(monitoring)
 
     def render(self, context):
-        request = self.request.resolve(context)
-        path = request.META['PATH_INFO']
-        # first try to see if the content has already been spun
+        package = self.package
         try:
-            content = SpunContent.objects.get(url=path, name=self.name)
-        except SpunContent.DoesNotExist:
-            # get the random choice
-            from random import choice
-            content = SpunContent()
-            content.url = path
-            content.name = self.name
-            content.content = choice(self.replacements)
-            content.save()
-        return content.content
-register.tag(content_spinner)
+            monitoring = self.monitoring.resolve(context)
+        except template.VariableDoesNotExist:
+            monitoring = 'landline'
+        if package == 'basic':
+            return package_monitoring_price(Package.objects.get(name='COPPER'),
+                                            monitoring)
+        elif package == 'standard':
+            return package_monitoring_price(Package.objects.get(name='SILVER'),
+                                            monitoring)
+        elif package == 'premier':
+            return package_monitoring_price(Package.objects.get(name='PLATINUM'),
+                                            monitoring)
+        return ''
+register.tag(package_price)
+
+
+def monitoring_price(parser, token):
+    tag_name = None
+    package = None
+    monitoring = None
+    try:
+        tag_name, package, monitoring = token.split_contents()
+
+    except ValueError:
+        raise template.TemplateSyntaxError(
+            '%r tag requires at least 3 arguments' %
+            token.contents.split()[0])
+
+    return MonitoringPriceNode(package.replace('"', ''), monitoring.replace('"', ''))
+
+class MonitoringPriceNode(template.Node):
+    def __init__(self, package, monitoring):
+        self.package = template.Variable(package)
+        self.monitoring = monitoring
+
+    def render(self, context):
+        try:
+            package = self.package.resolve(context)
+        except template.VariableDoesNotExist:
+            package = 'basic'
+        monitoring = self.monitoring
+        if package == 'basic':
+            return package_monitoring_price(Package.objects.get(name='COPPER'),
+                                            monitoring)
+        elif package == 'standard':
+            return package_monitoring_price(Package.objects.get(name='SILVER'),
+                                            monitoring)
+        elif package == 'premier':
+            return package_monitoring_price(Package.objects.get(name='PLATINUM'),
+                                            monitoring)
+        return ''
+register.tag(monitoring_price)
