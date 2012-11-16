@@ -212,14 +212,15 @@ def index_render(request, template, context):
 
     latest_news = Article.objects.order_by('-date_created')[:3]
     context['latest_news'] = latest_news
-
-    tweets = cache.get('TWEETS')
-    if tweets is None:
-        t_api = twitter.Api()
-        tweets = t_api.GetUserTimeline('@protectamerica')
-        cache.set('TWEETS', tweets, 60*60)
-
-    context['tweets'] = tweets[:3]
+    try:
+        tweets = cache.get('TWEETS')
+        if tweets is None:
+            t_api = twitter.Api()
+            tweets = t_api.GetUserTimeline('@protectamerica')
+            cache.set('TWEETS', tweets, 60*60)
+        context['tweets'] = tweets[:3]
+    except:
+        context['tweets'] = []
 
     if 'no_mobile' in request.GET:
         request.session['no_mobile'] = True
