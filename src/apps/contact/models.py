@@ -300,7 +300,7 @@ class PayItForward(models.Model):
             'New Pay It Forward Submission',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
-            ['SHAWNE@protectamerica.com', 'robert@protectamerica.com'],
+            ['adrian@protectamerica.com', 'robert@protectamerica.com'],
             ['"Protect America" <noreply@protectamerica.com>'])
         email.send()
 
