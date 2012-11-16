@@ -1,13 +1,16 @@
 <img src="{{ STATIC_URL }}img/mobile/cellular-icon.png" alt="cellular-icon" width="112" height="88" />
-<h3>Cellular <strong>${{ monthly_price|default:'37.99' }} <span>per month</span></strong></h3>
-<p>with the Basic Package</p>
+<h3>Cellular
+    <strong>{% if current_cart.package %}${{ current_cart.get_package_monthly }}{% else %}{{ pricetable.COPPER.cellular_monitoring }}{% endif %}
+        <span>per month</span></strong>
+</h3>
+<p>with the {% if current_cart.package %}{{ current_cart.package.item|capfirst }}{% else %}Basic{% endif %} Package</p>
 <ul>
     <li>The New Monitoring Standard</li>
     <li>No Extra Utility Bills</li>
     <li>Free Interactive Access</li>
 </ul>
 
-{% if action == 'remove' or current_cart.monitoring.item == 'cellular' %}
+{% if page == 'cart' or current_cart.monitoring.item == 'cellular' %}
 <div class="button-link remove-item" data-monthly="0.00" data-item="cellular" data-category="monitoring" data-price="0.00">
     <a href="{% url remove_from_cart %}?category=monitoring&amp;item=cellular">Remove</a>
 </div>

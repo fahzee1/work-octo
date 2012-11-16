@@ -1,5 +1,5 @@
 <img src="{{ STATIC_URL }}img/mobile/standard-security-package.jpg" alt="Basic Security Package" width="108" height="80" />
-<h3>Standard <strong>{% if action != 'remove' %}{{ pricetable.SILVER.standard_monitoring }} <span>per month</span>{% else %}Equipment Included{% endif %}</strong></h3>
+<h3>Standard <strong>{% if page != 'cart' %}{{ pricetable.SILVER.standard_monitoring }} <span>per month</span>{% else %}Equipment Included{% endif %}</strong></h3>
 <p>with Landing Monitoring</p>
 <ul>
     <li>1 Simon XT Control Panel</li>
@@ -7,7 +7,7 @@
     <li>1 Motion Detector</li>
 </ul>
 
-{% if action == 'remove' or current_cart.package.item == 'standard' %}
+{% if page == 'cart' or current_cart.package.item == 'standard' %}
 <div class="button-link remove-item" data-price="0.00" data-item="standard" data-category="package" data-monthly="0.00">
     <a href="{% url remove_from_cart %}?category=package&amp;item=standard">Remove</a>
 </div>
