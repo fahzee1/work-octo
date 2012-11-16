@@ -34,6 +34,13 @@ def packages(request):
     context['page_name'] = 'packages'
     return mobile_render(request, 'mobile/packages.html', context)
 
+
+def customer_info(request):
+    context = {}
+    context['page_name'] = 'customer-info'
+    return mobile_render(request, 'mobile/customer-info.html', context)
+
+
 def monitoring(request):
     context = {}
     context['page_name'] = 'monitoring'
@@ -74,3 +81,4 @@ def mobile_cart(request):
     context['page_name'] = 'index'
 
     return mobile_render(request, 'mobile/cart.html', context)
+
