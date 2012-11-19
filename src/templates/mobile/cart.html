@@ -60,10 +60,11 @@
     </div>
     {% endif %}
     {% include "mobile/_partial/subtotal.html" %}
-
+    {% if current_cart.package and current_cart.monitoring %}
     <div class="button-submit">
         <a href="{% url add-ons %}" title="Continue to Add-Ons">Continue ></a>
     </div>
+    {% endif %}
     {% endwith %}
 {% endblock %}
 

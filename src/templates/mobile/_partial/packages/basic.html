@@ -4,7 +4,7 @@
 {% if page == 'cart' and current_cart.monitoring %}
 Equipment Included
 {% else %}
-{% package_price "basic" current_cart.monitoring.item %}<span>per month</span>
+{% package_price "basic" current_cart.monitoring.item %} <span>per month</span>
 {% endif %}
 </strong></h3>
 {% if page != 'cart' %}
@@ -16,6 +16,7 @@ Equipment Included
     <li>1 Motion Detector</li>
 </ul>
 
+{% if remove_button == False %}
 {% if page == 'cart' or current_cart.package.item == 'basic' %}
 <div class="button-link remove-item" data-price="0.00" data-item="basic" data-category="package" data-monthly="0.00">
     <a href="{% url remove_from_cart %}?category=package&amp;item=basic">Remove</a>
@@ -24,4 +25,5 @@ Equipment Included
 <div class="button-link add-item" data-price="0.00" data-item="basic" data-category="package" data-monthly="0.00">
     <a href="{% url add_to_cart %}?category=package&amp;item=basic&amp;price=0.00&amp;monthly=0.00">Add to Cart</a>
 </div>
+{% endif %}
 {% endif %}
