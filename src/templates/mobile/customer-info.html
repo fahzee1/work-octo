@@ -9,12 +9,10 @@
     <fieldset id="name-information">
         <div class="form-wrapper">
             <div class="alpha">
-                <label>First Name</label>
-                {{ form.first_name }}
+                {% include "mobile/_partial/formfield.html" with field=form.first_name %}
             </div>
             <div>
-                <label>Last Name</label>
-                {{ form.last_name }}
+                {% include "mobile/_partial/formfield.html" with field=form.last_name %}
             </div>
         </div>
         <div class="clear"></div>
@@ -22,39 +20,32 @@
     <fieldset id="content-information">
         <div class="form-wrapper">
             <h3>Contact Information</h3>
-            <label>Email Address</label>
-            {{ form.email }}
-            <label>Phone Number</label>
-            {{ form.phone }}
+            {% include "mobile/_partial/formfield.html" with field=form.email %}
+            {% include "mobile/_partial/formfield.html" with field=form.phone %}
         </div>
     </fieldset>
     <fieldset id="address-information">
         <div class="form-wrapper">
             <h3>Customer Address</h3>
 
-            <label>Address 1</label>
-            {{ form.address }}
-            <label>Address 2</label>
-            {{ form.address_2 }}
+            {% include "mobile/_partial/formfield.html" with field=form.address %}
+            {% include "mobile/_partial/formfield.html" with field=form.address_2 %}
             <div class="clear"></div>
             <div class="city-label">
-                <label>City</label>
-                {{ form.city }}
+                {% include "mobile/_partial/formfield.html" with field=form.city %}
             </div>
             <div class="state-label">
-                <label>State</label>
-                {{ form.state }}
+                {% include "mobile/_partial/formfield.html" with field=form.state %}
             </div>
             <div class="zip-label">
-                <label>Zipcode</label>
-                {{ form.zipcode }}
+                {% include "mobile/_partial/formfield.html" with field=form.zipcode %}
             </div>
         </div>
         <div class="clear"></div>
     </fieldset>
     <fieldset>
         <div class="form-wrapper">
-            {{ form.consent }}
+            {% include "mobile/_partial/formfield.html" with field=form.consent %}
             <label for="tcbox" class="checkbox">By checking this box, you agree to our <a href="http://www.protectamerica.com/help/privacy-policy" title="terms and conditions">terms and conditions</a></label>
             <div class="clear"></div>
         </div>

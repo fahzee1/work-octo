@@ -110,7 +110,7 @@ class EcomLead(Lead):
     address = models.CharField(max_length=128)
     address_2 = models.CharField(max_length=128, blank=True, null=True)
     zipcode = models.CharField(max_length=12)
-    consent = models.BooleanField(default=False, help_text="By checking this box, I expressly give consent to be contacted according to the Terms and Conditions")
+    consent = models.BooleanField(default=False)
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=128)
