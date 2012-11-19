@@ -41,6 +41,7 @@
             border-left: 1px solid #811208;
             cursor: pointer;
             cursor: hand;
+            position: relative;
             img {
                 padding: 4px 10px;
             }
@@ -49,6 +50,11 @@
             }
             &.active {
                 background: @dark-grey;
+            }
+            #cart-notify {
+                position: absolute;
+                right: -12px;
+                top: -4px;
             }
         }
     }
@@ -167,7 +173,7 @@ h1 {
     padding: 16px 0;
     text-align: center;
 }
-#mobile-monitoring, #mobile-packages, #mobile-adds {
+#mobile-monitoring, #mobile-packages, #mobile-adds, #mobile-summary {
     h2 {
         color: #555;
         font-size: 24px;
@@ -263,6 +269,19 @@ h1 {
         text-transform: uppercase;
     }
 }
+#mobile-summary {
+    ul {
+        li {
+            height: 100px;
+            img {
+                padding-top: 0;
+            }
+            ul {
+                display: none;
+            }
+        }
+    }
+}
 .button-submit {
     margin: 16px auto;
     text-align: center;
@@ -271,7 +290,38 @@ h1 {
         padding: 8px 64px;
     }
 }
-
+#package-code {
+    background: @v-light-grey;
+    margin: 8px;
+    .border-radius;
+    h1 {
+        font-size: 60px;
+        line-height: 64px;
+        font-weight: 100;
+        color: @blue;
+    }
+    h2 {
+        color: #555;
+        font-size: 24px;
+        text-transform: uppercase;
+        padding: 16px 0;
+        text-align: center;
+    }
+    h3 {
+        font-size: 16px;
+        line-height: 26px;
+        text-align: center;
+    }
+    p {
+        padding: 0 16px 16px;
+        text-align: justify;
+        strong {
+            span {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
 #mobile-interactive, #mobile-security {
     h2 {
         color: #555;
@@ -405,15 +455,25 @@ h1 {
             display: block;
             font-size: 12px;
             line-height: 16px;
-            width: 320px;
+            width: 300px;
+            &.checkbox {
+                width: 240px;
+                float: left;
+            }
         }
         input {
             height: 20px;
             font-size: 14px;
             line-height: 20px;
-            width: 308px;
+            width: 275px;
             margin-bottom: 8px;
+            &.checkbox {
+                width: 20px;
+                float: left;
+                margin-right: 8px;
+            }
         }
+        
         &#name-information {
             div {
                 float: left;
@@ -421,7 +481,7 @@ h1 {
                     margin-right: 8px;
                 }
                 input, label {
-                    width: 148px;
+                    width: 120px;
                 }
                 &.form-wrapper {
                     float: none;
@@ -429,7 +489,7 @@ h1 {
             }
         }
         .form-wrapper {
-            width: 320px;
+            width: 304px;
             margin: 0 auto;
             float: none;
         }
@@ -438,7 +498,7 @@ h1 {
                 float: left;
                 margin-right: 8px;
                 input, label {
-                    width: 174px;
+                    width: 120px;
                 }
             }
             .state-label {

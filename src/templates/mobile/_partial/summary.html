@@ -1,0 +1,51 @@
+{% load sekizai_tags %}
+{% with action='remove' %}
+
+<div id="mobile-summary">    
+    <h2>Your Cart:</h2>
+    <ul>
+        <li class="alpha">
+            {% if current_cart.package.item == 'basic' %}
+                {% include "mobile/_partial/packages/basic.html" %}
+            {% endif %} 
+            {% if current_cart.package.item == 'standard' %}
+                {% include "mobile/_partial/packages/standard.html" %}
+            {% endif %} 
+            {% if current_cart.package.item == 'premier' %}
+                {% include "mobile/_partial/packages/premier.html" %}
+            {% endif %} 
+            {% if not current_cart.package.item %}
+                {% include "mobile/_partial/packages/select.html" %}
+            {% endif %}
+        </li>
+        <li>
+            {% if current_cart.monitoring.item == 'landline' %}
+                {% include "mobile/_partial/monitoring/landline.html" %}
+            {% endif %} 
+            {% if current_cart.monitoring.item == 'broadband' %}
+                {% include "mobile/_partial/monitoring/broadband.html" %}
+            {% endif %} 
+            {% if current_cart.monitoring.item == 'cellular' %}
+                {% include "mobile/_partial/monitoring/cellular.html" %}
+            {% endif %} 
+            {% if not current_cart.monitoring.item %}
+                {% include "mobile/_partial/monitoring/select.html" %}
+            {% endif %}
+        </li>
+        {% if current_cart.equipment.items %}
+            {% for name, info in current_cart.equipment.items %}
+            <li>
+                {% if name == 'extreme-weather' %}
+                {% include "mobile/_partial/addons/extreme-weather.html" %}
+                {% endif %}
+                {% if name == 'home-and-away' %}
+                {% include "mobile/_partial/addons/home-and-away.html" %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+    {% include "mobile/_partial/subtotal.html" %}
+
+{% endwith %}
