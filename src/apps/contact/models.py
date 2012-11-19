@@ -106,7 +106,7 @@ class Lead(models.Model):
 
 class EcomLead(Lead):
     city = models.CharField(max_length=32)
-    state = USStateField(blank=True, null=True)
+    state = USStateField()
     address = models.CharField(max_length=128)
     address_2 = models.CharField(max_length=128, blank=True, null=True)
     zipcode = models.CharField(max_length=12)

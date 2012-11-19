@@ -16,3 +16,9 @@ class EcomForm(forms.ModelForm):
                   'state',
                   'zipcode',
                   'consent')
+
+    def clean_consent(self):
+        data = self.cleaned_data['consent']
+        if data == False:
+            raise forms.ValidationError("You must agree to our terms and conditions.")
+        return data
