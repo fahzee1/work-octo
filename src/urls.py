@@ -500,6 +500,8 @@ else:
                 #dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
                 url(r'^pa/request-moving-kit/security-moving-kit/?$',
                     'apps.contact.views.moving_kit', name='moving-kit'),
+                url(r'^package-code/$',
+                    'apps.pricetable.views.package_code', name='package-code'),
         
         # Affiliate Resources
         

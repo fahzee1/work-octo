@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="text" name="code" />
+    <button type="submit">Find Package</button>
+</form>
+{% if cart and cart != 'failed' %}
+<ul>
+    <li>Package: {{ cart.package }}</li>
+    <li>Monitoring: {{ cart.monitoring }}</li>
+    <li>Extra Additions: {{ cart.equipment }}</li>
+</ul>
+{% endif %}
+{% if cart == 'failed' %}
+No Code exists with the Package Number you submitted.
+{% endif %}
+{% endblock %}
