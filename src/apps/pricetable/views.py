@@ -30,6 +30,22 @@ def index(request):
     context['page_name'] = 'index'
     return mobile_render(request, 'mobile/index.html', context)
 
+def home_security(request):
+    context = {}
+    context['page_name'] = 'index'
+    return mobile_render(request, 'mobile/home-security.html', context)
+
+def interactive(request):
+    context = {}
+    context['page_name'] = 'interactive'
+    return mobile_render(request, 'mobile/interactive.html', context)
+
+def quote(request):
+    context = {}
+    context['page_name'] = 'quote'
+    return mobile_render(request, 'mobile/index.html', context)
+
+
 def packages(request):
     context = {}
     context['page_name'] = 'packages'
