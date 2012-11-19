@@ -195,7 +195,13 @@ elif settings.SITE_ID == 9:
 # Black Friday Site
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/black-friday/index.html', 'home'),
+
+        url(r'^$', 'apps.common.views.black_friday', name='index'),
+
+    )
+elif settings.SITE_ID == 11:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
     )
 else:
     urlpatterns += patterns('',
@@ -255,11 +261,11 @@ else:
         dtt(r'^thank-you/tell-friend/?$', 'thank-you/tell-friend.html', 'contact-tell-friend', 'thank-you'),
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
 
+        # CJ Page
+        dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
-
-
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',
@@ -652,7 +658,8 @@ urlpatterns += patterns('',
    
     ('^crimeprevention/$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
-
+    #('^national-crime-prevention$',
+    #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
