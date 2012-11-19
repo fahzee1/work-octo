@@ -178,15 +178,15 @@ elif settings.SITE_ID == 8:
 # Mobile Website
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
-        dtt(r'^$', 'mobile/index.html', 'home'),
+        url(r'^$', 'apps.pricetable.views.index', name='home'),
         url(r'^home-security-packages/$', 'apps.pricetable.views.packages', name='packages'),
         url(r'^security-add-ons/$', 'apps.pricetable.views.adds', name='add-ons'),
-        dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
+        url(r'^home-security/$', 'apps.pricetable.views.home_security', name='home-security'),
         url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
-        dtt(r'^interactive-monitoring-features/$', 'mobile/interactive.html', 'interactive'),
+        url(r'^interactive-monitoring-features/$', 'apps.pricetable.views.interactive', name='interactive'),
         url(r'^customer-info/$', 'apps.pricetable.views.customer_info', name='customer-info'),
 
-        dtt(r'^request-quote/$', 'mobile/quote-form.html', 'get-quote'),
+        url(r'^request-quote/$', 'apps.pricetable.views.quote', name='get-quote'),
         url(r'^cart/$', 'apps.pricetable.views.mobile_cart', name='cart'),
         url(r'^add-to-cart/$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
         url(r'^remove-from-cart/$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
