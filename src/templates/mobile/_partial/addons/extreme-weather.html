@@ -5,6 +5,7 @@
     <li>1 Flood Sensor</li>
 </ul>
 
+{% if remove_button == False %}
 {% if page == 'cart' or 'extreme-weather' in current_cart.equipment %}
 <div class="button-link remove-item" data-monthly="4.00" data-item="extreme-weather" data-category="equipment" data-price="0.00">
     <a href="{% url remove_from_cart %}?category=equipment&amp;item=extreme-weather">Remove</a>
@@ -13,4 +14,5 @@
 <div class="button-link add-item" data-monthly="4.00" data-item="extreme-weather" data-category="equipment" data-price="0.00">
     <a href="{% url add_to_cart %}?category=equipment&amp;item=extreme-weather&amp;price=0.00&amp;monthly=4.00">Add to Cart</a>
 </div>
+{% endif %}
 {% endif %}

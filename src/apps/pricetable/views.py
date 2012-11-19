@@ -2,11 +2,12 @@ from decimal import Decimal
 
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.utils import simplejson
 
 from apps.common.views import simple_dtt
 
 from shopping_cart import Cart
-from models import Package
+from models import Package, PackageCode
 from forms import EcomForm
 
 def mobile_render(request, template, context):
@@ -119,3 +120,15 @@ def mobile_cart(request):
 
     return mobile_render(request, 'mobile/cart.html', context)
 
+def package_code(request):
+    context = {}
+    context['page_name'] = 'package_code'
+    code = request.POST.get('code', False)
+    if code:
+        try:
+            packagecode = PackageCode.objects.get(code=code)
+            package = simplejson.loads(packagecode.cart)
+        except PackageCode.DoesNotExist:
+            package = 'failed'
+        context['cart'] = package
+    return simple_dtt(request, 'support/package_code.html', context)
