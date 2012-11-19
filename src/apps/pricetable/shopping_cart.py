@@ -155,3 +155,8 @@ class Cart(object):
         self.request.session['packagecode'] = packagecode.code
         self.request.session['carthash'] = mhash
         return packagecode.code
+
+    def has_items(self):
+        if len(self.equipment) or len(self.package) or len(self.monitoring):
+            return True
+        return False
