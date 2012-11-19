@@ -4,13 +4,16 @@
     <strong>{% monitoring_price current_cart.package.item "cellular" %}
         <span>per month</span></strong>
 </h3>
+{% if function != 'summary' %}
 <p>with the {% if current_cart.package %}{{ current_cart.package.item|capfirst }}{% else %}Basic{% endif %} Package</p>
+{% endif %}
 <ul>
     <li>The New Monitoring Standard</li>
     <li>No Extra Utility Bills</li>
     <li>Free Interactive Access</li>
 </ul>
 
+{% if remove_button == False %}
 {% if page == 'cart' or current_cart.monitoring.item == 'cellular' %}
 <div class="button-link remove-item" data-monthly="0.00" data-item="cellular" data-category="monitoring" data-price="0.00">
     <a href="{% url remove_from_cart %}?category=monitoring&amp;item=cellular">Remove</a>
@@ -19,4 +22,5 @@
 <div class="button-link add-item" data-monthly="0.00" data-item="cellular" data-category="monitoring" data-price="0.00">
     <a href="{% url add_to_cart %}?category=monitoring&amp;item=cellular&amp;price=0.00&amp;monthly=0.00">Add to Cart</a>
 </div>
+{% endif %}
 {% endif %}
