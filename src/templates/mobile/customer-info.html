@@ -65,8 +65,17 @@
     </fieldset>
     <fieldset>
         <div class="form-wrapper">
-            {% include "mobile/_partial/formfield.html" with field=form.consent %}
-            <label for="tcbox" class="checkbox">By checking this box, you agree to our <a href="http://www.protectamerica.com/help/privacy-policy" title="terms and conditions">terms and conditions</a></label>
+            <div class="ctrlHolder {% if form.consent.errors %}error{% endif %}">
+                {{ form.consent }}
+                <label for="tcbox" class="checkbox">By checking this box, you agree to our <a href="http://www.protectamerica.com/help/privacy-policy" title="terms and conditions">terms and conditions</a></label>
+                {% if form.consent.errors %}
+                <ul class="formHint">
+                {% for error in form.consent.errors %}
+                    <li><strong>{{ error }}</strong></li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
             <div class="clear"></div>
         </div>
     </fieldset>
