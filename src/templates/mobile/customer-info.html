@@ -32,14 +32,33 @@
             {% include "mobile/_partial/formfield.html" with field=form.address %}
             {% include "mobile/_partial/formfield.html" with field=form.address_2 %}
             <div class="clear"></div>
-            <div class="city-label">
-                {% include "mobile/_partial/formfield.html" with field=form.city %}
-            </div>
-            <div class="state-label">
-                {% include "mobile/_partial/formfield.html" with field=form.state %}
-            </div>
-            <div class="zip-label">
-                {% include "mobile/_partial/formfield.html" with field=form.zipcode %}
+            <div class="ctrlHolder {% if form.city.errors or form.state.errors or form.zipcode.errors %}error{% endif %}">
+                <div class="city-label">
+                    <label>{{ form.city.label }}:</label>
+                    {{ form.city }}
+                </div>
+                <div class="state-label">
+                    <label>{{ form.state.label }}:</label>
+                    {{ form.state }}                
+                </div>
+                <div class="zip-label">
+                    <label>{{ form.zipcode.label }}:</label>
+                    {{ form.zipcode }}
+                </div>
+                <div class="clear"></div>
+                {% if form.city.errors or form.state.errors or form.zipcode.errors %}
+                    <ul class="formHint">
+                    {% for error in form.city.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    {% for error in form.state.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    {% for error in form.zipcode.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
             </div>
         </div>
         <div class="clear"></div>
