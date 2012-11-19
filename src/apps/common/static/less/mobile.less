@@ -41,6 +41,8 @@
             border-left: 1px solid #811208;
             cursor: pointer;
             cursor: hand;
+            position: relative;
+            overflow: hidden;
             img {
                 padding: 4px 10px;
             }
@@ -49,6 +51,11 @@
             }
             &.active {
                 background: @dark-grey;
+            }
+            #cart-notify {
+                position: absolute;
+                right: -12px;
+                top: -4px;
             }
         }
     }
@@ -266,7 +273,7 @@ h1 {
 #mobile-summary {
     ul {
         li {
-            height: 87px;
+            height: 100px;
             img {
                 padding-top: 0;
             }
@@ -284,7 +291,38 @@ h1 {
         padding: 8px 64px;
     }
 }
-
+#package-code {
+    background: @v-light-grey;
+    margin: 8px;
+    .border-radius;
+    h1 {
+        font-size: 60px;
+        line-height: 64px;
+        font-weight: 100;
+        color: @blue;
+    }
+    h2 {
+        color: #555;
+        font-size: 24px;
+        text-transform: uppercase;
+        padding: 16px 0;
+        text-align: center;
+    }
+    h3 {
+        font-size: 16px;
+        line-height: 26px;
+        text-align: center;
+    }
+    p {
+        padding: 0 16px 16px;
+        text-align: justify;
+        strong {
+            span {
+                text-transform: uppercase;
+            }
+        }
+    }
+}
 #mobile-interactive, #mobile-security {
     h2 {
         color: #555;
@@ -402,6 +440,32 @@ h1 {
 }
 #contact-form {
     margin-top: 8px;
+    button {
+        display: block;
+        background: #90af01;
+        color: @white;
+        text-decoration: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+        cursor: hand;
+        font-size: 16px;
+        padding: 8px 64px;
+        line-height: 14px;
+        margin: 0 auto;
+        background: #90af01;
+        background-image: -moz-linear-gradient(top, #90af01, #829e01);
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#829e01));
+        border: 1px solid transparent;
+        &:hover {
+            background-image: -moz-linear-gradient(center top, #90af01, #687e01);
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#687e01));
+            border: 1px solid #768f03;
+            border-bottom: 1px solid #576902;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+            box-shadow: 0 1px 1px rgba(0,0,0,.3);
+        }
+    }
     fieldset {
         h3 {
             text-align: center;
@@ -419,6 +483,10 @@ h1 {
             font-size: 12px;
             line-height: 16px;
             width: 300px;
+            &.checkbox {
+                width: 240px;
+                float: left;
+            }
         }
         input {
             height: 20px;
@@ -426,7 +494,13 @@ h1 {
             line-height: 20px;
             width: 275px;
             margin-bottom: 8px;
+            &#id_consent {
+                width: 20px;
+                float: left;
+                margin-right: 8px;
+            }
         }
+        
         &#name-information {
             div {
                 float: left;
@@ -445,6 +519,27 @@ h1 {
             width: 304px;
             margin: 0 auto;
             float: none;
+            #ctrl-id_consent {
+                float: left;
+                label {
+                    display: none;
+                }
+            }
+            .ctrlHolder.error {
+                background: @light-grey;
+                .border-radius;
+                margin: 4px 0;
+                padding: 8px 4px;
+                .formHint {
+                    display: block;
+                    li {
+                        text-align: center;
+                        strong {
+                            color: @red;
+                        }
+                    }
+                }
+            }
         }
         &#address-information {
             .city-label {
@@ -457,7 +552,7 @@ h1 {
             .state-label {
                 float: left;
                 margin-right: 8px;
-                input, label {
+                select, label {
                     width: 40px;
                 }
                 
@@ -469,6 +564,7 @@ h1 {
                     width: 64px;
                 }
             }
+
         }
     }
 }

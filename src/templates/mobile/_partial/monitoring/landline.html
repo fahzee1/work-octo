@@ -1,12 +1,17 @@
+{% load cart_tags %}
 <img src="{{ STATIC_URL }}/img/mobile/landline-icon.png" alt="landline-icon" width="112" height="88" />
-<h3>Landline <strong>${{ monthly_price|default:'19.99' }} <span>per month</span></strong></h3>
-<p>with the Basic Package</p>
+
+<h3>Landline
+    <strong>{% monitoring_price current_cart.package.item "landline" %}
+        <span>per month</span></strong>
+</h3>
+<p>with the {% if current_cart.package %}{{ current_cart.package.item|capfirst }}{% else %}Basic{% endif %} Package</p>
 <ul>
-    <li>Affordable & Reliable</li>
+    <li>Affordable &amp; Reliable</li>
     <li>Uses Existing Phone Line</li>
 </ul>
-{% comment %}
-{% if action == 'remove' or current_cart.monitoring.item == 'landline' %}
+
+{% if page == 'cart' or current_cart.monitoring.item == 'landline' %}
 <div class="button-link remove-item" data-monthly="0.00" data-item="landline" data-category="monitoring" data-price="0.00">
     <a href="{% url remove_from_cart %}?category=monitoring&amp;item=landline">Remove</a>
 </div>
@@ -15,4 +20,3 @@
     <a href="{% url add_to_cart %}?category=monitoring&amp;item=landline&amp;price=0.00&amp;monthly=0.00">Add to Cart</a>
 </div>
 {% endif %}
-{% endcomment %}

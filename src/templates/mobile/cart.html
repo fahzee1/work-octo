@@ -2,9 +2,8 @@
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
-
 {% block content %}
-    {% with action='remove' %}
+    {% with page='cart' %}
     <div id="mobile-packages">    
         <h2>Your Security Package:</h2>
         <ul>
@@ -63,7 +62,7 @@
     {% include "mobile/_partial/subtotal.html" %}
 
     <div class="button-submit">
-        <a href="{% url add-ons %}">Continue ></a>
+        <a href="{% url add-ons %}" title="Continue to Add-Ons">Continue ></a>
     </div>
     {% endwith %}
 {% endblock %}

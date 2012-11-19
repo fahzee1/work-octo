@@ -3,8 +3,6 @@
 
 <div id="mobile-summary">    
     <h2>Your Cart:</h2>
-    {{ current_cart.package }}
-    {{ current_cart.monitoring }}
     <ul>
         <li class="alpha">
             {% if current_cart.package.item == 'basic' %}
@@ -48,4 +46,6 @@
         {% endif %}
     </ul>
 </div>
+    {% include "mobile/_partial/subtotal.html" %}
+
 {% endwith %}
