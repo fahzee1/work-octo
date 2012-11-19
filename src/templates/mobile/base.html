@@ -24,7 +24,7 @@
         <ul id="main-navigation">
             <li id="menu_icon"><img src="{{ STATIC_URL }}img/mobile/menu-icon.png" alt="Home Security Menu" width="32" height="40" /></li>
             <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
-            <li><a href="{% url cart %}" title="View Your Home Security Shopping Cart"><img src="{{ STATIC_URL }}img/mobile/cart-notify.png" alt="You have items in your shopping cart" id="cart-notify" width="24" height="24" /><img src="{{ STATIC_URL }}img/mobile/shop-icon.png" alt="Shopping Cart" width="32" height="40" /></a></li>
+            <li><a href="{% url cart %}" title="View Your Home Security Shopping Cart">{% if current_cart.has_items %}<img src="{{ STATIC_URL }}img/mobile/cart-notify.png" alt="You have items in your shopping cart" id="cart-notify" width="24" height="24" />{% endif %}<img src="{{ STATIC_URL }}img/mobile/shop-icon.png" alt="Shopping Cart" width="32" height="40" /></a></li>
         </ul>
     </div>
 {% endblock %}

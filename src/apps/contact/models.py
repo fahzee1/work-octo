@@ -104,6 +104,14 @@ class Lead(models.Model):
         return '%s | %s - %s : %s %s' % (self.id,
             self.agent_id, self.source, self.name, self.phone)
 
+class EcomLead(Lead):
+    city = models.CharField(max_length=32)
+    state = USStateField(blank=True, null=True)
+    address = models.CharField(max_length=128)
+    address_2 = models.CharField(max_length=128, blank=True, null=True)
+    zipcode = models.CharField(max_length=12)
+    consent = models.BooleanField(default=False, help_text="By checking this box, I expressly give consent to be contacted according to the Terms and Conditions")
+
 class ContactUs(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
