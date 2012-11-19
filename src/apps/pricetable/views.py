@@ -42,6 +42,10 @@ def monitoring(request):
 def adds(request):
     context = {}
     context['page_name'] = 'add-ons'
+    cart = Cart(request)
+    if len(cart.equipment) == 2:
+        return HttpResponseRedirect('/cart-checkout/')
+    context['current_cart'] = cart
     return mobile_render(request, 'mobile/adds.html', context)
 
 def add_to_cart(request):
