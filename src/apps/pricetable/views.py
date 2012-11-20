@@ -131,6 +131,6 @@ def package_code(request):
             cart = Cart(request)
             cart.load(package)
         except PackageCode.DoesNotExist:
-            package = 'failed'
+            cart = 'failed'
         context['cart'] = cart
     return simple_dtt(request, 'support/package_code.html', context)
