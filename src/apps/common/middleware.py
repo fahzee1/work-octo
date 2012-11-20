@@ -15,9 +15,12 @@ class DetectMobileBrowser():
         if settings.SITE_ID != 1:
             return None
         request.mobile = False
-        current_cookie = request.COOKIES.get('redirect_mobile', None)
+        current_cookie = request.session.get('redirect_mobile', None)
+        if 'no_mobile' in request.GET:
+            current_cookie = True
+            request.session['redirect_mobile'] = True
 
-        if request.META.has_key('HTTP_USER_AGENT') and not current_cookie:
+        if request.META.has_key('HTTP_USER_AGENT') and current_cookie is None:
             user_agent = request.META['HTTP_USER_AGENT']
             b = reg_b.search(user_agent)
             v = reg_v.search(user_agent[0:4])

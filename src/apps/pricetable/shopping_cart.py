@@ -36,6 +36,11 @@ class Cart(object):
                 'equipment': self.equipment
             })
 
+    def load(self, obj):
+        self.package = obj['package']
+        self.monitoring = obj['monitoring']
+        self.equipment = obj['equipment']
+
     def reset(self):
         self.package = {}
         self.monitoring = {}

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block robots_tag %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>{% endblock %}
+
 {% block content %}
 <form action="" method="POST">
     {% csrf_token %}
@@ -11,6 +13,7 @@
     <li>Package: {{ cart.package }}</li>
     <li>Monitoring: {{ cart.monitoring }}</li>
     <li>Extra Additions: {{ cart.equipment }}</li>
+    {{ cart.get_package_monthly }}
 </ul>
 {% endif %}
 {% if cart == 'failed' %}
