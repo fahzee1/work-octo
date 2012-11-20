@@ -44,7 +44,7 @@ def interactive(request):
 def quote(request):
     context = {}
     context['page_name'] = 'quote'
-    return mobile_render(request, 'mobile/index.html', context)
+    return mobile_render(request, 'mobile/quote-form.html', context)
 
 
 def packages(request):
