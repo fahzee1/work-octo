@@ -128,7 +128,10 @@ def package_code(request):
         try:
             packagecode = PackageCode.objects.get(code=code)
             package = simplejson.loads(packagecode.cart)
+            cart = Cart(request)
+            cart.load(package)
         except PackageCode.DoesNotExist:
-            package = 'failed'
-        context['cart'] = package
+            cart = 'failed'
+        context['cart'] = cart
+        context['code'] = code
     return simple_dtt(request, 'support/package_code.html', context)
