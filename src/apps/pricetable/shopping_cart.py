@@ -36,6 +36,11 @@ class Cart(object):
                 'equipment': self.equipment
             })
 
+    def load(self, obj):
+        self.package = obj['package']
+        self.monitoring = obj['monitoring']
+        self.equipment = obj['equipment']
+
     def reset(self):
         self.package = {}
         self.monitoring = {}
@@ -47,7 +52,6 @@ class Cart(object):
         return True
 
     def add_to_cart(self, category, item, price, monthly):
-        print 'test'
         if category == 'equipment':
             self.add_equipment(item, price, monthly)
         elif category == 'monitoring':
@@ -101,7 +105,6 @@ class Cart(object):
         for name, info in self.equipment.iteritems():
             equipment_monthly = Decimal(info['count'] * info['monthly'])
             total += equipment_monthly
-            print info['monthly']
         return total
 
     def get_cart_price(self):
@@ -157,3 +160,8 @@ class Cart(object):
         self.request.session['packagecode'] = packagecode.code
         self.request.session['carthash'] = mhash
         return packagecode.code
+
+    def has_items(self):
+        if len(self.equipment) or len(self.package) or len(self.monitoring):
+            return True
+        return False
