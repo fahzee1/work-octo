@@ -9,6 +9,20 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cj/style.css">
     <script type="text/javascript" src="//use.typekit.net/vwb5haa.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    {% addtoblock "js" %}
+<!-- Begin RingRevenue Call Tracking Code -->
+<!-- Omit http from path to ensure protocol is same as current request -->
+<script src="//js10.ringrevenue.com/10/integration.js"></script>
+<script type="text/javascript">
+  RingRevenue.advertiser_integration = {
+    id : '20522',
+    numberSelector: '.dynamic-phone-number',
+    numberToReplace: '{{ phone_number|format_number }}'
+  };
+</script>
+<!-- End RingRevenue Call Tracking Code -->
+    {% endaddtoblock "js" %}
 {% endblock %}
 {% block active_tab_trigger %}
 <script>
