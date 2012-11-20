@@ -1,3 +1,4 @@
+import ast
 from decimal import Decimal
 
 from django.http import HttpResponseRedirect
@@ -127,7 +128,7 @@ def package_code(request):
     if code:
         try:
             packagecode = PackageCode.objects.get(code=code)
-            package = simplejson.loads(packagecode.cart)
+            package = ast.literal_eval(packagecode.cart)
             cart = Cart(request)
             cart.load(package)
         except PackageCode.DoesNotExist:
