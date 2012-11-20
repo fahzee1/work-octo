@@ -133,4 +133,5 @@ def package_code(request):
         except PackageCode.DoesNotExist:
             cart = 'failed'
         context['cart'] = cart
+        context['code'] = code
     return simple_dtt(request, 'support/package_code.html', context)
