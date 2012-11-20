@@ -212,14 +212,15 @@ def index_render(request, template, context):
 
     latest_news = Article.objects.order_by('-date_created')[:3]
     context['latest_news'] = latest_news
-
-    tweets = cache.get('TWEETS')
-    if tweets is None:
-        t_api = twitter.Api()
-        tweets = t_api.GetUserTimeline('@protectamerica')
-        cache.set('TWEETS', tweets, 60*60)
-
-    context['tweets'] = tweets[:3]
+    try:
+        tweets = cache.get('TWEETS')
+        if tweets is None:
+            t_api = twitter.Api()
+            tweets = t_api.GetUserTimeline('@protectamerica')
+            cache.set('TWEETS', tweets, 60*60)
+        context['tweets'] = tweets[:3]
+    except:
+        context['tweets'] = []
 
     if 'no_mobile' in request.GET:
         request.session['no_mobile'] = True
@@ -253,3 +254,9 @@ def family_of_companies(request):
 
     ctx['industries'] = industry_dict 
     return simple_dtt(request, 'about-us/family-of-companies.html', ctx)
+
+def black_friday(request):
+    ctx = {}
+    ctx['page_name'] = 'index'
+    ctx['black_friday_delta'] = datetime(2012, 11, 23) - datetime(2012, 11, datetime.today().day)
+    return simple_dtt(request, 'external/black-friday/index.html', ctx)

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security | Alarm Systems | Protect America{% endblock %}
+{% block page_keywords %}Home Security, Alarm Systems, Home Security Systems, GE Simon XT{% endblock %}
+{% block page_description %}Get a home security systems for your home at the lowest cost. Sign up for alarm monitoring and get a GE Simon XT home alarm at no cost.{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/support.css">
+
+{% endblock %}
+
+{% block robots_tag %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>{% endblock %}
+
+{% block content %}
+<div id="package-code">
+    <div id="order-form">
+        <h1>Find a Package Code</h1>
+        <p>Enter a package code to pull up the desired package</p>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="code" {% if code %}value="{{ code }}"{% endif %}/>
+            <button type="submit">Find Package</button>
+        </form> 
+        <div class="clear"></div>
+    </div>
+    <div id="security-cart">
+        {% with remove_button=True %}
+        <li class="alpha">
+            {% if cart.package.item == 'basic' %}
+                {% include "mobile/_partial/packages/basic.html" %}
+            {% endif %} 
+            {% if cart.package.item == 'standard' %}
+                {% include "mobile/_partial/packages/standard.html" %}
+            {% endif %} 
+            {% if cart.package.item == 'premier' %}
+                {% include "mobile/_partial/packages/premier.html" %}
+            {% endif %} 
+            {% if not cart.package.item %}
+                {% include "mobile/_partial/packages/select.html" %}
+            {% endif %}
+        </li>
+        <li>
+            {% if cart == 'landline' %}
+                {% include "mobile/_partial/monitoring/landline.html" %}
+            {% endif %} 
+            {% if cart.monitoring.item == 'broadband' %}
+                {% include "mobile/_partial/monitoring/broadband.html" %}
+            {% endif %} 
+            {% if cart.monitoring.item == 'cellular' %}
+                {% include "mobile/_partial/monitoring/cellular.html" %}
+            {% endif %} 
+            {% if not cart.monitoring.item %}
+                {% include "mobile/_partial/monitoring/select.html" %}
+            {% endif %}
+        </li>
+        {% if cart.equipment.items %}
+            {% for name, info in cart.equipment.items %}
+            <li>
+                {% if name == 'extreme-weather' %}
+                {% include "mobile/_partial/addons/extreme-weather.html" %}
+                {% endif %}
+                {% if name == 'home-and-away' %}
+                {% include "mobile/_partial/addons/home-and-away.html" %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        </ul>
+        {% endif %}
+        {% if cart == 'failed' %}
+        <h2 class="error">No package exists with the Package Code : {{ code }} you submitted.</h2>
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+</div>
+{% block order-footer %}{% endblock %}
+{% endblock %}
