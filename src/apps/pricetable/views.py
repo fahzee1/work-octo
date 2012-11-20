@@ -1,3 +1,4 @@
+import ast
 from decimal import Decimal
 
 from django.http import HttpResponseRedirect
@@ -44,7 +45,7 @@ def interactive(request):
 def quote(request):
     context = {}
     context['page_name'] = 'quote'
-    return mobile_render(request, 'mobile/index.html', context)
+    return mobile_render(request, 'mobile/quote-form.html', context)
 
 
 def packages(request):
@@ -127,7 +128,7 @@ def package_code(request):
     if code:
         try:
             packagecode = PackageCode.objects.get(code=code)
-            package = simplejson.loads(packagecode.cart)
+            package = ast.literal_eval(packagecode.cart)
             cart = Cart(request)
             cart.load(package)
         except PackageCode.DoesNotExist:

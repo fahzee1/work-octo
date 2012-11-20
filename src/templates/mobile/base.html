@@ -54,6 +54,14 @@ $(document).ready(function() {
         $(this).removeClass('active');
         $('#sub-navigate').slideUp('false');
     })
+    $('a[href^="tel"]').click(function() {
+        _gaq.push([  
+            '_trackEvent',
+            'Mobile Phone Click',
+            '{{ page_name }}',
+            $(this).index()
+        ]);
+    });
 });
 </script>
 {% endaddtoblock "js" %}
