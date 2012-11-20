@@ -24,40 +24,37 @@
         <div class="clear"></div>
     </div>
     <div id="security-cart">
-        {% if cart and cart != 'failed' %}
-        <h2>Package Code: {{ code }}</h2>
-        <ul>
         {% with remove_button=True %}
         <li class="alpha">
-            {% if current_cart.package.item == 'basic' %}
+            {% if cart.package.item == 'basic' %}
                 {% include "mobile/_partial/packages/basic.html" %}
             {% endif %} 
-            {% if current_cart.package.item == 'standard' %}
+            {% if cart.package.item == 'standard' %}
                 {% include "mobile/_partial/packages/standard.html" %}
             {% endif %} 
-            {% if current_cart.package.item == 'premier' %}
+            {% if cart.package.item == 'premier' %}
                 {% include "mobile/_partial/packages/premier.html" %}
             {% endif %} 
-            {% if not current_cart.package.item %}
+            {% if not cart.package.item %}
                 {% include "mobile/_partial/packages/select.html" %}
             {% endif %}
         </li>
         <li>
-            {% if current_cart.monitoring.item == 'landline' %}
+            {% if cart == 'landline' %}
                 {% include "mobile/_partial/monitoring/landline.html" %}
             {% endif %} 
-            {% if current_cart.monitoring.item == 'broadband' %}
+            {% if cart.monitoring.item == 'broadband' %}
                 {% include "mobile/_partial/monitoring/broadband.html" %}
             {% endif %} 
-            {% if current_cart.monitoring.item == 'cellular' %}
+            {% if cart.monitoring.item == 'cellular' %}
                 {% include "mobile/_partial/monitoring/cellular.html" %}
             {% endif %} 
-            {% if not current_cart.monitoring.item %}
+            {% if not cart.monitoring.item %}
                 {% include "mobile/_partial/monitoring/select.html" %}
             {% endif %}
         </li>
-        {% if current_cart.equipment.items %}
-            {% for name, info in current_cart.equipment.items %}
+        {% if cart.equipment.items %}
+            {% for name, info in cart.equipment.items %}
             <li>
                 {% if name == 'extreme-weather' %}
                 {% include "mobile/_partial/addons/extreme-weather.html" %}
