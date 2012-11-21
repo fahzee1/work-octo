@@ -1,13 +1,20 @@
+{% load cart_tags %}
 <img src="{{ STATIC_URL }}img/mobile/broadband-icon.png" alt="Basic Security Package" width="112" height="88" />
-<h3>Broadband <strong>${{ current_cart.get_package_monthly|default:'32.99' }} <span>per month</span></strong></h3>
-<p>with the Basic Package</p>
+<h3>Broadband
+    <strong>{% monitoring_price current_cart.package.item "broadband" %}
+        <span>per month</span></strong>
+</h3>
+{% if function != 'summary' %}
+<p>with the {% if current_cart.package %}{{ current_cart.package.item|capfirst }}{% else %}Basic{% endif %} Package</p>
+{% endif %}
 <ul>
     <li>4x Faster Than Landline</li>
     <li>Uses Existing High Speed Internet</li>
     <li>Free Interactive Access</li>
 </ul>
-{% comment %}
-{% if action == 'remove' or current_cart.monitoring.item == 'broadband' %}
+
+{% if remove_button == False %}
+{% if page == 'cart' or current_cart.monitoring.item == 'broadband' %}
 <div class="button-link remove-item" data-monthly="0.00" data-item="broadband" data-category="monitoring" data-price="0.00">
     <a href="{% url remove_from_cart %}?category=monitoring&amp;item=broadband">Remove</a>
 </div>
@@ -16,4 +23,4 @@
     <a href="{% url add_to_cart %}?category=monitoring&amp;item=broadband&amp;price=0.00&amp;monthly=0.00">Add to Cart</a>
 </div>
 {% endif %}
-{% endcomment %}
+{% endif %}
