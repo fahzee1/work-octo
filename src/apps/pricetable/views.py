@@ -114,6 +114,16 @@ def customer_info(request):
                 'notes': notes
             }
             send_leadimport(emaildata)
+            
+            from django.core.mail import send_mail
+            from django.template import loader, Context
+            subject = '%s Lead Submission' % emaildata['agent_id']
+            t = loader.get_template('_partials/lead_submission_email.html')
+            c = Context(emaildata)
+            send_mail(subject, t.render(c),
+                'Protect America <noreply@protectamerica.com>',
+                ['orders@protectamerica.com'], fail_silently=False)
+
             return HttpResponseRedirect(reverse('cart-checkout'))
             
     else:
@@ -132,7 +142,7 @@ def adds(request):
     context['page_name'] = 'add-ons'
     cart = Cart(request)
     if len(cart.equipment) == 2:
-        return HttpResponseRedirect(reverse('cart-checkout'))
+        return HttpResponseRedirect(reverse('customer-info'))
     context['current_cart'] = cart
     return mobile_render(request, 'mobile/adds.html', context)
 
