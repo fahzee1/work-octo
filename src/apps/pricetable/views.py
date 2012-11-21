@@ -25,7 +25,6 @@ def mobile_cart_checkout(request):
     context['current_cart'] = cart
     code = cart.get_package_code()
     context['packagecode'] = code
-    request.session['packagecode'] = code
     return simple_dtt(request, 'mobile/cart-checkout.html',
         context)
 
@@ -49,7 +48,6 @@ def quote(request):
     context['page_name'] = 'quote'
     return mobile_render(request, 'mobile/quote-form.html', context)
 
-
 def packages(request):
     context = {}
     context['page_name'] = 'packages'
@@ -61,6 +59,11 @@ def customer_info(request):
     if request.method == 'POST':
         form = EcomForm(request.POST)
         if form.is_valid():
+            cart = Cart(request)
+            code = cart.get_package_code()
+            context['packagecode'] = code
+            request.session['packagecode'] = code
+
             request_data = prepare_data_from_request(request)
             formset = form.save(commit=False)
             cleaned_data = form.cleaned_data
