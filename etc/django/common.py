@@ -92,6 +92,7 @@ MIDDLEWARE_CLASSES = (
     'apps.affiliates.middleware.AffiliateMiddleware',
     'apps.common.middleware.SearchEngineReferrerMiddleware',
     'apps.common.middleware.CommonMiddlewareWrapper',
+    'apps.common.middleware.DetectMobileBrowser',
     'django.middleware.cache.FetchFromCacheMiddleware',
 )
 

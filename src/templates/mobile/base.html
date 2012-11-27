@@ -6,6 +6,7 @@
 {% block page_description %}Get a home security systems for your home at the lowest cost. Sign up for alarm monitoring and get a GE Simon XT home alarm at no cost.{% endblock %}
 
 {% block css %}
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -54,6 +55,14 @@ $(document).ready(function() {
         $(this).removeClass('active');
         $('#sub-navigate').slideUp('false');
     })
+    $('a[href^="tel"]').vmousedown(function() {
+        _gaq.push([  
+            '_trackEvent',
+            'Mobile Phone Click',
+            '{{ page_name }}',
+            $(this).index()
+        ]);
+    });
 });
 </script>
 {% endaddtoblock "js" %}

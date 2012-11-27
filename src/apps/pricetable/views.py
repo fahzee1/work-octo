@@ -1,3 +1,4 @@
+import ast
 from decimal import Decimal
 
 from django.http import HttpResponseRedirect
@@ -5,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.utils import simplejson
 
 from apps.common.views import simple_dtt
+from apps.contact.views import prepare_data_from_request, send_leadimport
 
 from shopping_cart import Cart
 from models import Package, PackageCode
@@ -44,8 +46,7 @@ def interactive(request):
 def quote(request):
     context = {}
     context['page_name'] = 'quote'
-    return mobile_render(request, 'mobile/index.html', context)
-
+    return mobile_render(request, 'mobile/quote-form.html', context)
 
 def packages(request):
     context = {}
@@ -58,6 +59,12 @@ def customer_info(request):
     if request.method == 'POST':
         form = EcomForm(request.POST)
         if form.is_valid():
+            cart = Cart(request)
+            code = cart.get_package_code()
+            context['packagecode'] = code
+            request.session['packagecode'] = code
+
+            request_data = prepare_data_from_request(request)
             formset = form.save(commit=False)
             cleaned_data = form.cleaned_data
             name = '%s %s' % (cleaned_data['first_name'],
@@ -66,7 +73,57 @@ def customer_info(request):
                                  cleaned_data['address_2'])
             formset.name = name
             formset.address = address
+
+            referer_page = None
+            if 'referer_page' in request.POST:
+                referer_page = request.POST['referer_page']
+            if not referer_page and 'HTTP_REFERER' in request.META:
+                referer_page = request.META['HTTP_REFERER']
+            formset.referer_page = referer_page
+            formset.agent_id = request_data['agentid']
+            formset.source = request_data['source']
+            formset.affkey = request_data['affkey']
+
+            searchkeywords = request.session.get('search_term', None)
+            cikw = request.COOKIES.get('cikw', None)
+            if searchkeywords is None and cikw is not None:
+                searchkeywords = cikw
+            
+            formset.search_engine = request.session['search_engine']
+            formset.search_keywords = searchkeywords
             formset.save()
+
+            if request_data['lead_id'] is None:
+                request_data['lead_id'] = formset.id
+            notes = 'Package Code: %s' % request.session['packagecode']
+            emaildata = {
+                'agent_id': request_data['agentid'],
+                'source': request_data['source'],
+                'customername': name,
+                'phone': cleaned_data['phone'],
+                'email': cleaned_data['email'],
+                'affkey': request_data['affkey'],
+                'address': address,
+                'city': cleaned_data['city'],
+                'state': cleaned_data['state'],
+                'zipcode': cleaned_data['zipcode'],
+                'formlocation': formset.referer_page,
+                'searchengine': request.session['search_engine'],
+                'searchkeywords': searchkeywords,
+                'lead_id': formset.id,
+                'notes': notes
+            }
+            send_leadimport(emaildata)
+            
+            from django.core.mail import send_mail
+            from django.template import loader, Context
+            subject = '%s Lead Submission' % emaildata['agent_id']
+            t = loader.get_template('_partials/lead_submission_email.html')
+            c = Context(emaildata)
+            send_mail(subject, t.render(c),
+                'Protect America <noreply@protectamerica.com>',
+                ['orders@protectamerica.com'], fail_silently=False)
+
             return HttpResponseRedirect(reverse('cart-checkout'))
             
     else:
@@ -85,7 +142,7 @@ def adds(request):
     context['page_name'] = 'add-ons'
     cart = Cart(request)
     if len(cart.equipment) == 2:
-        return HttpResponseRedirect(reverse('cart-checkout'))
+        return HttpResponseRedirect(reverse('customer-info'))
     context['current_cart'] = cart
     return mobile_render(request, 'mobile/adds.html', context)
 
@@ -127,7 +184,7 @@ def package_code(request):
     if code:
         try:
             packagecode = PackageCode.objects.get(code=code)
-            package = simplejson.loads(packagecode.cart)
+            package = ast.literal_eval(packagecode.cart)
             cart = Cart(request)
             cart.load(package)
         except PackageCode.DoesNotExist:

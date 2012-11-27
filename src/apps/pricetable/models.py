@@ -28,10 +28,10 @@ class PackageCode(models.Model):
 
     def generate_code(self):
         random_data = os.urandom(128)
-        tcode = hashlib.md5(random_data).hexdigest()[:5]
+        tcode = hashlib.md5(random_data).hexdigest()[:5].upper()
         if PackageCode.objects.filter(code=tcode):
             self.generate_code()
-        self.code = tcode
+        self.code = tcode.upper()
         return tcode
 
     def __unicode__(self):
