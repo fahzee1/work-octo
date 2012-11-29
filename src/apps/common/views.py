@@ -258,5 +258,6 @@ def family_of_companies(request):
 def black_friday(request):
     ctx = {}
     ctx['page_name'] = 'index'
-    ctx['black_friday_delta'] = datetime(2012, 11, 23) - datetime(2012, 11, datetime.today().day)
+    ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
+        datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
