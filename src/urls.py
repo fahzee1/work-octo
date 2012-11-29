@@ -207,6 +207,7 @@ else:
     urlpatterns += patterns('',
 
         # Test Pages
+        dtt(r'^test/holiday/$', 'tests/holiday-test.html', 'holiday-test', 'home'),
         dtt(r'^test/tcr-first/$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
         dtt(r'^test/promotion-first/$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
         url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/$', 'apps.common.views.index_test', name='index_test'),
