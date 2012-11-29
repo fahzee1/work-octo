@@ -1,37 +1,16 @@
 {% extends "affiliates/radioshack/radioshack.html" %}
 
-{% load content_tags %}
-{% load content_filters %}
 {% load sekizai_tags %}
 
-{% block google_analytics %}
-<script type="text/javascript">
-
- var _gaq = _gaq || [];
- _gaq.push(['_setAccount', 'UA-5441302-2']);
- _gaq.push(['_setDomainName', '.protectamerica.com']);
- _gaq.push(['_trackPageview']);
-
- (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
- })();
-
-</script>
-{% endblock %}
-{% block content %} 
+{% block content %}
 {% addtoblock "css" %}
-	<link rel="icon" href="/favicon.ico" />
-	<link rel="shortcut icon" href="/favicon.ico" />
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/radioshack.css">
     <script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endaddtoblock %}
-{% addtoblock "gwo" %}
-
-{% endaddtoblock "gwo" %}
     <div id="protect-america-content" class="tk-facitweb">
         <div id="main-offer">
             <img src="{{ STATIC_URL }}img/affiliates/radioshack/radioshack-security-package.jpg" title="RadioShack Home Security Package" id="package-image" />
@@ -201,5 +180,21 @@
             <p>&dagger;To qualify for the $250 RadioShack gift card, customer must install and activate Protect America home security system and service within 7 days of receiving their system. Gift card will be sent after 30 days of service; please allow an additional 4-6 weeks for delivery. To be eligible for gift card, must be a new customer and must dial 1-800-951-5167 or submit a lead at http://www.protectamerica.com/radioshack/. Cannot be combined with any other offer. Not available to existing Protect America customers. Security system requires 36 month monitoring service agreement at least 35.95/mo. Void where prohibited. Restrictions apply.</p>
         </div>
     </div>
+{% addtoblock "gwo" %}
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-5441302-2']);
+ _gaq.push(['_setDomainName', '.protectamerica.com']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+{% endaddtoblock %}
 
 {% endblock %}
