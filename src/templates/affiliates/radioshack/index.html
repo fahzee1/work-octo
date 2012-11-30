@@ -1,9 +1,13 @@
 {% extends "affiliates/radioshack/radioshack.html" %}
 
-{% load sekizai_tags %}
-
+{% load sekizai_tags content_tags content_filters %}
 
 {% block left-wrapper %}
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/home-security-price.png" id="five-banner" alt="home-security-price" width="616" height="248" />
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/giftcard-section.png" alt="giftcard-section" width="600" height="80" />
+
+
+
 {% addtoblock "gwo" %}
 <script type="text/javascript">
 
@@ -19,6 +23,8 @@
  })();
 
 </script>
+<script type="text/javascript" src="//use.typekit.net/abv1wld.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endaddtoblock %}
 {% addtoblock "css" %}
     <link rel="icon" href="/favicon.ico" />
@@ -28,4 +34,113 @@
     <script type="text/javascript" src="http://use.typekit.com/exw1shj.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endaddtoblock %}
+{% endblock %}
+{% block assurance-block-one %}
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/pa-bubble.png" alt="pa-bubble" width="111" height="111" />
+    <h3>About Protect America</h3>
+{% endblock %}
+
+{% block assurance-block-two %}
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/security-bubble.png" alt="security-bubble" width="111" height="111" />
+    <h3>Lowest Price Guaranteed</h3>
+{% endblock %}
+
+{% block assurance-block-three %}
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/deal-bubble.png" alt="deal-bubble" width="111" height="111" />
+    <h3>Customizable Security Packages</h3>
+
+{% endblock %}
+
+{% block assurance-block-four %}
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/interactive-bubble.png" alt="interactive-bubble" width="111" height="111" />
+    <h3>Interactive Smartphone Apps</h3>
+
+{% endblock %}
+
+{% block assurance-block-five %}
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/chat-bubble.png" alt="chat-bubble" width="111" height="111" />
+    <h3>Talk to a Security Expert</h3>
+    {% addtoblock "js" %}
+    <script type="text/javascript" src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+    <script type="text/javascript">
+        var animatedAction = false;
+        function switch_card(num) {
+            
+            if(animatedAction) {
+                return false;
+            }
+    
+            animatedAction = true;
+            $('.assurance-card:visible').fadeOut('fast');
+            $('.assurance-card:eq('+num+')').fadeIn();
+            // move arrow here
+            var left_pos = (196 * num) + 66; 
+            $('#selector-arrow').animate({
+                'left': left_pos+'px'
+            }, 500, 'easeOutBack');
+            animatedAction = false;
+            return true;
+        }
+    $(document).ready(function() {
+        $('.assurance-block').click(function (e){
+            e.preventDefault();
+            switch_card($(this).index());
+            $('.assurance-block').removeClass('active');
+            $(this).addClass('active');
+        });
+    });
+    </script>
+    {% block active_tab_trigger %}
+    {% endblock %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        {% if request.GET.tab == '1' %}
+        $('#assurance-block-one').trigger('click');
+        {% endif %}
+        {% if request.GET.tab == '2' %}
+        $('#assurance-block-two').trigger('click');
+        {% endif %}
+        {% if request.GET.tab == '3' %}
+        $('#assurance-block-three').trigger('click');
+        {% endif %}
+        {% if request.GET.tab == '4' %}
+        $('#assurance-block-four').trigger('click');
+        {% endif %}
+        {% if request.GET.tab == '5' %}
+        $('#assurance-block-five').trigger('click');
+        {% endif %}
+    });
+    </script>
+    {% endaddtoblock "js" %}
+
+{% endblock %}
+
+{% block assurance-card-one %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/radioshack/protect-america-logo2.png" alt="250-radioshack-giftcard" style="padding-top: 111px;" />
+    </div>
+    <div class="copy-point">
+                <h2>Protect America Home Security</h2>
+                <p>A pioneer of self-installed home security systems, Protect America has served more than 350,000 people since its founding in 1992. Our dedication to affordable, quality security has helped to make us one of the nation's largest home security companies. People trust Protect America. And with good reason. We're an award-winning company that has also earned a Five-Star Rating from Top Consumer Reviews. Get a GE home security system today and experience a more secure life with Protect America.</p>
+    </div>
+{% endblock %}
+
+{% block assurance-card-two %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/radioshack/250-radioshack-giftcard.png" alt="250-radioshack-giftcard" width="344" height="240" />
+    </div>
+    <div class="copy-point">
+                <h2>Get a $250 RadioShack Gift Card<sup>&dagger;</sup></h2>
+                <p>Do you want a bunch of money to spend on the latest electronics? Whether you're a fan of remote control cars or simply need a new smart phone, Protect America wants give back to our techie customers. Order your Protect America home security system today and receive a $250 gift card to RadioShack. Just remember to set your alarm after filling your house with cool, new toys.</p>
+
+    </div>
+{% endblock %}
+
+{% block assurance-card-three %}
+{% endblock %}
+
+{% block assurance-card-four %}
+{% endblock %}
+
+{% block assurance-card-five %}
 {% endblock %}
