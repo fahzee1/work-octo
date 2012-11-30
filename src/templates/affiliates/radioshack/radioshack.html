@@ -124,6 +124,7 @@ function jump(url)
     <meta property="og:url" content="http://www.radioshack.com" />
     <meta property="og:image" content="http://www.radioshack.com/images/rsk_logo_do_stuff.png" />       
     <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/generic-landing-page/style.css">
     {% render_block "css" %}
 </head>
 <body>
@@ -591,9 +592,68 @@ return self.AJAX;
 
 <a name="mainContent" id="mainContent" tabindex="-1"></a>
 <div id="AffiliateMainContent">
-{% block content %}
+    
+<div id="top-wrapper">
+    <div id="left-wrapper">
+        {% block left-wrapper %}
+        {% endblock %}    
+    </div>
+    <div id="quote-area">
+        {% include "order/quote-form.html" with form=forms.basic %}
+    </div>
+    {% include "order/call-box.html" %}
+    <div class="clear"></div>
+</div>
 
-{% endblock %}
+<div id="five-blocks">
+    <div class="assurance-block active" id="assurance-block-one">
+        {% block assurance-block-one %}
+        {% endblock %}
+    </div>
+    <div class="assurance-block" id="assurance-block-two">
+        {% block assurance-block-two %}
+        {% endblock %}
+    </div>
+    <div class="assurance-block" id="assurance-block-three">
+        {% block assurance-block-three %}
+        {% endblock %}
+    </div>
+    <div class="assurance-block" id="assurance-block-four">
+        {% block assurance-block-four %}
+        {% endblock %}
+    </div>
+
+    <div class="assurance-block" id="assurance-block-five">
+        {% block assurance-block-five %}
+        {% endblock %}
+    </div>
+    <div id="selector-arrow">&nbsp;</div>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div id="five-cards">
+    <div class="assurance-card" id="assurance-card-one">
+        {% block assurance-card-one %}
+        {% endblock %}
+    </div>
+    <div class="assurance-card" id="assurance-card-two">
+        {% block assurance-card-two %}
+        {% endblock %}
+    </div>
+    <div class="assurance-card" id="assurance-card-three">
+        {% block assurance-card-three %}
+        {% endblock %}
+    </div>
+    <div class="assurance-card" id="assurance-card-four">
+        {% block assurance-card-four %}
+        {% endblock %}
+    </div>
+    <div class="assurance-card" id="assurance-card-five">
+        {% block assurance-card-five %}
+        {% endblock %}
+    </div>
+    <div class="clear"></div>
+</div>
 
 </div></div></div></div>
 <div class="footer">
