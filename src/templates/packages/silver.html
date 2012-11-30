@@ -20,15 +20,10 @@
             <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
             <p>Five star rating in 2012 by TopConsumerReviews.com</p>
         </div>
-        <div id="package-price">
-            {% if request.COOKIES.bbb_test == 'C' %}
+        <div id="package-price" {% if request.COOKIES.bbb_test_2 == 'B' %}style="width: auto; margin-right: 80px;"{% endif %}>
+
+            {% if request.COOKIES.bbb_test_2 == 'A' or not request.COOKIES.bbb_test_2 %}
             <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 12/31/2012</em></span>
-            {% endif %}
-            {% if request.COOKIES.bbb_test == 'B' %}
-            <span class="equipment-price included">Equipment Price: <strong itemprop="price">INCLUDED</strong></span>
-            {% endif %}
-            {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-            <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE</strong></span>
             {% endif %}
             <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>37.99</strong><em>per month</em></span>
         </div>
