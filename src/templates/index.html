@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
@@ -125,11 +125,11 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div class="wrapper">
     {% include "order/call-box.html" %}
 <div id="main">
-    
+    {% if pa_ads.promo_banner_full %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_full %}
+    {% else %}
     <div id="twitter-feed">
-        <a href="{% url payitforward %}">
-            <img src="{{ STATIC_URL }}img/banners/224x184/upgrade-to-cell-promo.jpg" alt="upgrade-to-cell-promo" width="224" height="184" id="twitter-ad" style="margin-right: 8px;" />
-        </a>
+        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner %}
         <ul>
             {% for tweet in tweets %}
             <li>
@@ -143,7 +143,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
         </ul>
     </div>
-
+    {% endif %}
     <div id="customer-testimonials">
         <div class="ts_testimonial">
             <h1>Our Customers Love Our Home Security Systems</h1>
@@ -309,11 +309,11 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 </div>
 <div id="sidebar">
     <iframe width="275" height="186" src="http://www.youtube.com/embed/isJJrsr5sXQ?modestbranding=1&rel=0&border=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
+    {% if pa_ads.side_bar %}
     <div id="cellupgrade">
-        <a title="Click Here If You Already Have a Home Security System" href="{% url cell-takeover %}">
-            <img width="251" height="286" alt="Click Here If You Already Have a Home Security System" src="{{ STATIC_URL }}/img/banners/promos/already-have-system-sidebar.jpg">
-        </a>
+        {% include "adspace/adspace_render.html" with ad=pa_ads.side_bar %}
     </div>
+    {% endif %}
 
     <div id="copperbestbuy">
         <h2>Copper Package: Consumers Digest Best Buy</h2>

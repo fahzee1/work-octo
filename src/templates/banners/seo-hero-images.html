@@ -3,14 +3,13 @@
 <div id="top-content-holiday">
 
     <div class="wrapper">
-               <img src="{{ STATIC_URL }}img/banners/hero-banners/holiday-banner/green-bow.jpg" alt="green-bow" id="green-bow" />
-
+        {% if pa_ads.hero_banner_backdrop %}
+            {% include "adspace/adspace_render.html" with ad=pa_ads.hero_banner_backdrop %}
+        {% endif %}
         <div id="top-hero-banner">
 
             <div id="holiday-banner" data-url="{% url order-package %}">
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/holiday-banner/holiday-banner.jpg"
-
-                    alt="Our best promotion ever! free equipment, $5.99 per week for monitoring" id="copper-flash" />
+                {% include "adspace/adspace_render.html" with ad=pa_ads.hero_banner %}
             </div>
         </div>
         {% include "order/quote-form.html" with form=forms.basic %}

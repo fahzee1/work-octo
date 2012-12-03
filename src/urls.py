@@ -201,6 +201,15 @@ elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
     )
+elif settings.SITE_ID == 12:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
+        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
+        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
+        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
+        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
+
+    )
 else:
     urlpatterns += patterns('',
 
@@ -528,7 +537,7 @@ else:
     (r'^comments/', include('django.contrib.comments.urls')),
 
     ('^radioshack/?$',
-        redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
+        redirect_to, {'url': 'http://radioshack.protectamerica.com/', 'permanent': True}),
     ('^feedback/?$',
         redirect_to, {'url': '/pa/contact', 'permanent': True}),
 
