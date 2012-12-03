@@ -528,7 +528,7 @@ else:
     (r'^comments/', include('django.contrib.comments.urls')),
 
     ('^radioshack/?$',
-        redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
+        redirect_to, {'url': 'http://radioshack.protectamerica.com/', 'permanent': True}),
     ('^feedback/?$',
         redirect_to, {'url': '/pa/contact', 'permanent': True}),
 
