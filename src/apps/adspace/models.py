@@ -14,7 +14,14 @@ WEEKDAYS = (
     'saturday',
     'sunday',
 )
-
+TYPE_CHOICES = (
+    ('hero_banner_backdrop','Hero Banner Backdrop'),
+    ('hero_banner','Hero Banner'),
+    ('promo_banner','Promo Banner (224x184)'),
+    ('promo_banner_full', 'Full Promo Banner (671x184)'),
+    ('side_bar','Side Bar Ad (251x286)'),
+    ('product_page','Product Page Ad (934x130)'),
+)
 class Campaign(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64)
@@ -39,14 +46,6 @@ class Campaign(models.Model):
             super(Campaign, self).save(*args, **kwargs)
 
 class Ad(models.Model):
-    TYPE_CHOICES = (
-        ('hero-banner-backdrop','Hero Banner Backdrop'),
-        ('hero-banner','Hero Banner'),
-        ('promo-banner','Promo Banner'),
-        ('promo-banner-full', 'Full Promo Banner'),
-        ('side-bar','Side Bar Ad'),
-        ('product-page','Product Page Ad'),
-    )
 
     def file_path(instance, filename):
         if not instance.campaign:
@@ -62,6 +61,7 @@ class Ad(models.Model):
     alt = models.CharField(max_length=128, blank=True, null=True)
     element_id = models.CharField(max_length=128, blank=True, null=True,
         help_text='The ID of the image element for styling')
+    url = models.CharField(max_length=128, blank=True, null=True)
     width = models.CharField(max_length=4, blank=True, null=True)
     height = models.CharField(max_length=4, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -78,7 +78,9 @@ class Ad(models.Model):
         for campaign in campaigns:
             try:
                 if campaign.__getattribute__(WEEKDAYS[weekday]):
-                    return Ad.objects.get(campaign=campaign, type=self.type)
+                    return Ad.objects.filter(
+                        campaign=campaign, type=self.type).order_by(
+                        'date_created')[0]
             except Ad.DoesNotExist:
                 pass
 
