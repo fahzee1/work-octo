@@ -43,6 +43,7 @@ class Ad(models.Model):
         ('hero-banner-backdrop','Hero Banner Backdrop'),
         ('hero-banner','Hero Banner'),
         ('promo-banner','Promo Banner'),
+        ('promo-banner-full', 'Full Promo Banner'),
         ('side-bar','Side Bar Ad'),
         ('product-page','Product Page Ad'),
     )
@@ -57,6 +58,12 @@ class Ad(models.Model):
     type = models.CharField(max_length=48, choices=TYPE_CHOICES)
     sub_id = models.CharField(max_length=128, blank=True, null=True)
     ad = models.ImageField(upload_to=file_path)
+
+    alt = models.CharField(max_length=128, blank=True, null=True)
+    element_id = models.CharField(max_length=128, blank=True, null=True,
+        help_text='The ID of the image element for styling')
+    width = models.CharField(max_length=4, blank=True, null=True)
+    height = models.CharField(max_length=4, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
