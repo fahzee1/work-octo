@@ -9,25 +9,15 @@
     <div id="main-content-inner">
         <div id="content1">
             <div id="content-inner">
-                <div id="left-column-inner">
-                    {% include "external/alarm-zone/feature-image.html" %}
+                <div id="left-column-inner" class="min-height-top">
+                    {% block left-content %}{{ block.super }}{% endblock %}
                 </div>
                 <div id="right-column-inner">
                     {% include "external/alarm-zone/feature-right.html" %}
                 </div>
             </div>
             
-            <div id="content-inner-lower" class="main-box-height full-width float-left">
-                <div id="left-column">
-                    {% block left-content %}{{ block.super }}{% endblock %}
-                </div>
-                <div id="right-column">
-                    <div id="lower-right">
-                       {% include "external/alarm-zone/right-column.html" with active="contact" %}
-                    </div>
-                </div>
-                
-            </div>
+           
         </div> 
     </div>
 
