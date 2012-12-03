@@ -47,7 +47,7 @@
                     <img src="{{ STATIC_URL }}img/alarm-zone/general_electric_white_40w.png">
                     </span>
                     <div id="call-now" class="rounded-bottom-corners">
-                        <span id="call-now-text">Call Now:</span> 800-951-5132
+                        <span id="call-now-text">Call Now:</span> <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
                     </div>
                 </div>
                 
@@ -104,7 +104,7 @@
                 </div>
     
                 <div id="az-footer-right">
-                    Call us today toll-free at 1-877-810-7950<br />
+                    Call us today toll-free at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span><br />
                     Hours of Operation: M-F: 8am-9pm CT, Sat: 8am-5pm CT<br />
                     GE and GE Security logos are registered trademarks of General Electric.<br />
                     © 2012 Alarm Zone All rights reserved.
