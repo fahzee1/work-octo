@@ -145,52 +145,12 @@
     
     <h2>Web Banners</h2>
     <p>To Download, right click the image and select "Save Image As..."</p>
-
-    <div class="half-box">
-    <h3>120x600</h3>
-        <img src="{{ STATIC_URL }}img/banners/120x600/120x600-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-        <img src="{{ STATIC_URL }}img/banners/120x600/120x600-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-       
-
-        <div class="clear"></div>
-    </div>
-    <div class="half-box">
-        <h3>160x600</h3>
-        <img src="{{ STATIC_URL }}img/banners/160x600/160x600-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-        <img src="{{ STATIC_URL }}img/banners/160x600/160x600-superhero.gif" onclick="javascript:enterAgentID(this)" class="webBanner" />
-
-        <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-    <h3>200x200</h3>
-    <img src="{{ STATIC_URL }}img/banners/200x200/200x200-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <img src="{{ STATIC_URL }}img/banners/200x200/200x200-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <div class="clear"></div>
-    <h3>250x250</h3>
-    <img src="{{ STATIC_URL }}img/banners/250x250/250x250-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <img src="{{ STATIC_URL }}img/banners/250x250/250x250-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-
-    <div class="clear"></div>
-    <h3>300x50</h3>
-    <img src="{{ STATIC_URL }}img/banners/300x50/300x50-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <div class="clear"></div>
-    <h3>300x250</h3>
-    <img src="{{ STATIC_URL }}img/banners/300x250/300x250-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <img src="{{ STATIC_URL }}img/banners/300x250/300x250-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-
-
-    <div class="clear"></div>
-    <h3>336x280</h3>
-    <img src="{{ STATIC_URL }}img/banners/336x280/336x280-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-
-    <div class="clear"></div>
-    <h3>468x60</h3>
-    <img src="{{ STATIC_URL }}img/banners/468x60/468x60-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <img src="{{ STATIC_URL }}img/banners/468x60/468x60-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <div class="clear"></div>
-    <h3>728x90</h3>
-    <img src="{{ STATIC_URL }}img/banners/728x90/728x90-brand.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
-    <img src="{{ STATIC_URL }}img/banners/728x90/728x90-superhero.jpg" onclick="javascript:enterAgentID(this)" class="webBanner" />
+    {% for key,adset in google_ads.items %}
+    <h3>{{ adset.0 }}</h3>
+        {% for ad in adset.1 %}
+        <img src="{{ MEDIA_URL }}{{ ad.ad }}" onclick="javascript:enterAgentID(this)" class="webBanner" />
+        {% endfor %}
+    {% endfor %}
 </div>
 {% endblock %}
 {% block footer %}{% endblock %}
