@@ -15,7 +15,7 @@ WEEKDAYS = (
 )   
 
 def campaign(request):
-    ad_dict = {key: None for (key, value) in TYPE_CHOICES}
+    ad_dict = dict((key, None) for (key, value) in TYPE_CHOICES)
     ctx = {'pa_campaign': [], 'pa_ads': ad_dict}
     today = datetime.date.today()
     weekday = datetime.date.today().weekday()
