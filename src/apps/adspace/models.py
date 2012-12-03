@@ -5,6 +5,16 @@ import datetime
 from django.db.models import Q
 from django.http import HttpResponse
 
+WEEKDAYS = (
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
+)
+
 class Campaign(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64)
@@ -30,36 +40,37 @@ class Campaign(models.Model):
 
 class Ad(models.Model):
     TYPE_CHOICES = (
+        ('hero-banner-backdrop','Hero Banner Backdrop'),
         ('hero-banner','Hero Banner'),
-        ('home-banner','Home Page Banner'),
+        ('promo-banner','Promo Banner'),
         ('side-bar','Side Bar Ad'),
         ('product-page','Product Page Ad'),
     )
-    WEEKDAYS = (
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        'saturday',
-        'sunday',
-    )
+
+    def file_path(instance, filename):
+        if not instance.campaign:
+            return os.path.join('banner_images', 'unfiled', filename)
+        return os.path.join('banner_images',
+            'campaign_%s' % instance.campaign.id, filename)
+
     campaign = models.ForeignKey(Campaign)
     type = models.CharField(max_length=48, choices=TYPE_CHOICES)
     sub_id = models.CharField(max_length=128, blank=True, null=True)
-    ad = models.FilePathField(path='%s/adspace/' % (
-        settings.TEMPLATE_DIRS[0],), recursive=True)
+    ad = models.ImageField(upload_to=file_path)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return '%s - %s' % (self.campaign.name, self.type,)
+        return '%s - %s : %s' % (self.campaign.name, self.type, self.sub_id)
 
     def get_active_campaign(self):
         today = datetime.date.today()
         weekday = datetime.date.today().weekday()
-        campaigns = Campaign.objects.filter(start_date__lte=today).filter(Q(end_date__gte=today) | Q(end_date__isnull=True)).order_by('-pk')
+        campaigns = Campaign.objects.filter(Q(start_date__lte=today) | Q(start_date__isnull=True)).filter(
+            Q(end_date__gte=today) | Q(end_date__isnull=True)).order_by('-pk')
+
         for campaign in campaigns:
             try:
-                if campaign.__getattribute__(self.WEEKDAYS[weekday]):
+                if campaign.__getattribute__(WEEKDAYS[weekday]):
                     return Ad.objects.get(campaign=campaign, type=self.type)
             except Ad.DoesNotExist:
                 pass
