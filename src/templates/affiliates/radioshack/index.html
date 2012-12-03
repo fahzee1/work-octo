@@ -41,13 +41,15 @@
 {% endblock %}
 
 {% block assurance-block-two %}
-    <img src="{{ STATIC_URL }}img/affiliates/radioshack/security-bubble.png" alt="security-bubble" width="111" height="111" />
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/deal-bubble.png" alt="deal-bubble" width="111" height="111" />
     <h3>Lowest Price Guaranteed</h3>
 {% endblock %}
 
 {% block assurance-block-three %}
-    <img src="{{ STATIC_URL }}img/affiliates/radioshack/deal-bubble.png" alt="deal-bubble" width="111" height="111" />
-    <h3>Customizable Security Packages</h3>
+
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/security-bubble.png" alt="security-bubble" width="111" height="111" />
+
+    <h3>Compare & Save</h3>
 
 {% endblock %}
 
@@ -127,20 +129,144 @@
 
 {% block assurance-card-two %}
     <div class="image-area">
-        <img src="{{ STATIC_URL }}img/affiliates/radioshack/250-radioshack-giftcard.png" alt="250-radioshack-giftcard" width="344" height="240" />
+        <img src="{{ STATIC_URL }}img/affiliates/radioshack/lowest-price.png" alt="lowest-price" width="336" height="248" />
     </div>
+    <div class="copy-point">
+        <h2>Be Secure Against Crime <span>And High Prices</span></h2>
+        <p>Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America’s offer can’t be match! Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected without emptying your wallet.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+
     <div class="copy-point">
                 <h2>Get a $250 RadioShack Gift Card<sup>&dagger;</sup></h2>
                 <p>Do you want a bunch of money to spend on the latest electronics? Whether you're a fan of remote control cars or simply need a new smart phone, Protect America wants give back to our techie customers. Order your Protect America home security system today and receive a $250 gift card to RadioShack. Just remember to set your alarm after filling your house with cool, new toys.</p>
 
     </div>
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/radioshack/250-radioshack-giftcard.png" alt="250-radioshack-giftcard" width="344" height="240" />
+    </div>
 {% endblock %}
 
 {% block assurance-card-three %}
+<div id="comparison-chart">
+    <img src="{{ STATIC_URL }}img/affiliates/radioshack/dont-be-fooled.png" title="Don't be fooled by our overpriced competitors" id="dont-be-fooled" />
+    <table>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th class="pa"><span><img src="{{ STATIC_URL }}img/affiliates/radioshack/pa-logo-small.png" title="Protect America" /></span>Radioshack Package</th>
+                <th><span>ADT</span> Basic Package</th>
+                <th><span>ADT</span> Premium Package</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="title">Door / Window Sensors</td>
+                <td class="item-count pa">10</td>
+                <td class="item-count">3</td>
+                <td class="item-count">3</td>
+            </tr>
+            <tr>
+                <td class="title">Motion Detector</td>
+                <td class="item-count pa">1</td>
+                <td class="item-count">1</td>
+                <td class="item-count">1</td>
+            </tr>
+            <tr>
+                <td class="title">Keychain Remote</td>
+                <td class="item-count pa">2</td>
+                <td class="item-count">0</td>
+                <td class="item-count">1</td>
+            </tr>
+            <tr>
+                <td class="title price-divider">Installation Cost</td>
+                <td class="price red price-divider pa">FREE<sup>*</sup></td>
+                <td class="price price-divider">$99</td>
+                <td class="price price-divider">$99</td>
+            </tr>
+            <tr>
+                <td class="title">Monthly Cost</td>
+                <td class="price pa">$35.99</td>
+                <td class="price">$35.99</td>
+                <td class="price">$40.99</td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="clear"></div>
+</div>
 {% endblock %}
 
 {% block assurance-card-four %}
+<div class="copy-point">
+    <h2 class="tk-freight-sans-pro">Control Your Security from Anywhere in the World.</h2> 
+    <p class="tk-freight-sans-pro">Choose our cellular or broadband monitoring and your account comes with FREE interactive features. Arm your system and program rules to fit your needs anywhere, anytime through your computer or smart phone.</p>
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" class="interactive" alt="interactive" width="642" height="309" />
+    </div>
+</div>
+<div id="interactive-call-out-box">
+    <div class="interactive-call-out">
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/security-system-control-small-icon-interactive.png" alt="security-system-control-small-icon-interactive" width="74" height="74" />
+                <p><strong>Security System Control</strong>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/live-video-small-icon-automation.png" alt="live-video-small-icon-automation" width="74" height="74" />
+                <p><strong>Live Video</strong>Keep an eye on your home from anywhere in the world with live video. (Video Service Required)</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>
 {% endblock %}
 
-{% block assurance-card-five %}
+{% block assurance-card-five %} 
+<div id="contact-form">
+            <h2>Security is An Amazing Conversation Piece.</h2>
+            <div id="call-us">
+                <h3>Give us a Call:</h3>
+                <p>Call Protect America today and start a discussion about the security of your home. One of our security experts will go over the details of your home to determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call Protect America now and secure what matters most!</p>
+                <h4><span>Call Today!</span> 1-800-951-5167</h4>
+            </div>
+            <div id="call-you">
+                <h3>We'll Call You:</h3>
+                <p>Fill out this form to learn more about the security of your home from one of our security professionals.</p>
+                {% comment %}
+                <form>
+                    <div id="call-you-inputs">
+                        <label>Your Name</label>
+                        <input></input>
+                        <label>Your Email</label>
+                        <input></input>
+                        <label>Your Phone Number</label>
+                        <input></input>
+                    </div>
+                    <button>Call Me ></button>
+                    <p>We never share your information with anyone.</p>
+                </form>
+                {% endcomment %}
+                {% include "affiliates/radioshack/contact/basic_contact_form.html" with form=forms.basic %}
+            </div>
+            <div class="clear"></div>
+        </div>
+{% endblock %}
+
+{% block extracontent %}
+        <div id="terms-and-conditions">
+            <p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
+            <p>*Offer good through 12/31/12. Must be a homeowner with approved credit. 36 mo. standard monitoring agreement at least $35.95/mo required. $79 restocking fee for early cancellation. Offer subject to change. Void where prohibited. Restrictions apply. Information regarding home security system comparisons obtained via ADT.com on October 15, 2012.</p>
+            <p>&dagger;To qualify for the $250 RadioShack gift card, customer must install and activate Protect America home security system and service within 7 days of receiving their system. Gift card will be sent after 30 days of service; please allow an additional 4-6 weeks for delivery. To be eligible for gift card, must be a new customer and must dial 1-800-951-5167 or submit a lead at http://www.protectamerica.com/radioshack/. Cannot be combined with any other offer. Not available to existing Protect America customers. Security system requires 36 month monitoring service agreement at least 35.95/mo. Void where prohibited. Restrictions apply.</p>
+        </div>
+
 {% endblock %}
