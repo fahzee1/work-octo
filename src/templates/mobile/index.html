@@ -5,9 +5,9 @@
 {% block page_title %}Home Security Systems | Protect America Mobile{% endblock %}
 
 {% block content %}
-    <div class="hero-image">
+    <div class="{{ pa_ads.mobile_hero.sub_id }}">
         <a href="tel:{{ phone_number|format_number }}">
-            <img src="{{ STATIC_URL }}img/mobile/holiday-banner.jpg" alt="Super Holiday Deal - Prices as Low as $5.99 per week for Home Security" width="320" height="232" />
+            {% include "adspace/adspace_render.html" with ad=pa_ads.mobile_hero %}
         </a>
     </div>
 {% endblock %}
