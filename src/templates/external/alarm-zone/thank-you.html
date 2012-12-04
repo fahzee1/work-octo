@@ -1,6 +1,33 @@
 {% extends "external/alarm-zone/base.html" %}
-    {% block az-content %}
-        <div id="thank-you-page">
-        
-        </div>
-    {% endblock %}
+{% load content_filters %} 
+
+{% block content %}
+{% block az_header %}{{ block.super }}{% endblock %}
+<div id="thank-you-page">
+    <div id="left-side">
+        <img src="{{ STATIC_URL }}img/alarm-zone/callcenter-2.jpg" alt="callcenter-2" width="500" height="333" />
+    </div>
+    <div id="right-side">
+        <h1>Thank You for your Interest in Alarm Zone!</h1>
+        <p>Thanks for choosing Alarm Zone for your family's security. We've received your request for a free security quote and one of our security professionals will be contacting you within 24 hours. In the meantime, you can always call us directly at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+    </div>
+    <div class="clear"></div>
+</div>
+    {% block az-footer %}{{ block.super }}{% endblock %}
+
+{% endblock %}
+{% block order-footer %}
+{% endblock %}
+{% block footer %}
+
+
+
+
+
+
+
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block subnav %}
+{% endblock %}
