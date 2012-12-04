@@ -72,9 +72,8 @@ urlpatterns = patterns('',
 # Radioshack URLS
 if settings.SITE_ID == 2:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/radioshack/_base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
+        dtt(r'^$', 'affiliates/radioshack/index.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
         dtt(r'^thank-you/$', 'affiliates/radioshack/thank-you.html', 'thankyou', ctx={'page_name': 'thankyou', 'agent_id': 'a02596'}),
-        dtt(r'^cswitch/$', 'affiliates/radioshack/content_switch.html', 'cswitch', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
 
     )
 # Paid landing site
@@ -202,6 +201,15 @@ elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
     )
+elif settings.SITE_ID == 12:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
+        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
+        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
+        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
+        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
+
+    )
 else:
     urlpatterns += patterns('',
 
@@ -245,6 +253,7 @@ else:
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
         dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
         dtt(r'^protect-america-vs-comcast/$', 'affiliates/comcast-vs-protectamerica/index.html', 'comcast-vs-protect-america'),
+        dtt(r'^protect-america-vs-vivint/$', 'affiliates/vivint-vs-protectamerica/index.html', 'vivint-vs-protect-america'),
 
         dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
@@ -528,7 +537,7 @@ else:
     (r'^comments/', include('django.contrib.comments.urls')),
 
     ('^radioshack/?$',
-        redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
+        redirect_to, {'url': 'http://radioshack.protectamerica.com/', 'permanent': True}),
     ('^feedback/?$',
         redirect_to, {'url': '/pa/contact', 'permanent': True}),
 

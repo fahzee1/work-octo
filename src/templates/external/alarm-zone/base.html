@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Alarm Zone | Home Security for Your Family!{% endblock %}
+{% block page_description %}Alarm Zone provides GE interactive, wireless home alarm & security systems nationwide. Affordable, flexible, 24/7 security monitoring your residence.{% endblock %}
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
+{% block favicon %}
+    <link rel="icon" href="http://{{ request.META.SERVER_NAME }}{% if request.META.SERVER_PORT != 80 %}:{{ request.META.SERVER_PORT }}{% endif %}{{ STATIC_URL }}img/alarm-zone/favicon.ico" />
+    <link rel="shortcut icon" href="http://{{ request.META.SERVER_NAME }}{% if request.META.SERVER_PORT != 80 %}:{{ request.META.SERVER_PORT }}{% endif %}{{ STATIC_URL }}img/alarm-zone/favicon.ico" />
+{% endblock %}
+
+{% block css %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/alarm-zone.css" />
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+
+{% block content %}
+
+{% block az_header %}
+    <div id="full-header">
+        <h1 id="header" class="content-frame large-text textStroke valign-top">
+            <div id="header-left" class="float-left">
+                <span id="header-image-left">
+                    <img src="{{ STATIC_URL }}img/alarm-zone/alarm-zone-logo-3D-80-light.png">           
+                </span>
+                <span id="header-text-left">
+                     Alarm Zone {% block az_header_1 %}{% endblock %}
+                    <span id="subhead">home security experts</span>
+                </span>
+            </div>
+            <div id="header-right" class="float-right light-border">
+                <div id="header-right-top" class="light-border">
+                    <span id="header-image-right">
+                        <img src="{{ STATIC_URL }}img/alarm-zone/phone.png">
+                    </span>
+                    
+                    <span id="GE-security">
+                        GE Security
+                        <span id="subhead">Authorized Dealer</span>
+                    </span>
+                    <span id="GE-logo">
+                    <img src="{{ STATIC_URL }}img/alarm-zone/general_electric_white_40w.png">
+                    </span>
+                    <div id="call-now" class="rounded-bottom-corners">
+                        <span id="call-now-text">Call Now:</span> <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </h1>
+    </div>
+{% endblock %}
+
+<div id="main-content">
+    <div id="navigation-wrapper-2" class="content-frame clear-all">
+        {% include "external/alarm-zone/navigation.html" with active="home" %}
+    </div>
+    {% block az-content %}
+        <div id="main-content-inner">
+            <div id="content1">
+                <div id="content-inner">
+                    {% block az-content-feature %}
+                        <div id="left-column-inner">
+                            {% block az-content-feature-left %}
+                                {% include "external/alarm-zone/feature-image.html" %}
+                            {% endblock %}
+                        </div>
+                        <div id="right-column-inner">
+                            {% block az-content-feature-right %}
+                                {% include "external/alarm-zone/feature-right.html" %}
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+                </div>
+                
+                <div id="content-inner-lower" class="main-box-height full-width float-left">
+                    <div id="left-column">
+                        {% block left-content %}
+                            {% include "external/alarm-zone/content-pages/switchboard.html" %}
+                        {% endblock %}
+                    </div>
+                    <div id="right-column">
+                        <div id="lower-right">
+                           {% include "external/alarm-zone/right-column.html" %}
+                        </div>
+                    </div>
+                    
+                </div>
+            </div> 
+        </div>
+    {% endblock %}
+    {% block az-footer %}
+        <div id="az-footer-width">
+            <div id="az-footer">
+                <div id="az-footer-left">
+                    * Standard monitoring agreement required with approved credit.<br />
+                    Internet Offer, Limited time only. Void where prohibited.
+                </div>
+    
+                <div id="az-footer-right">
+                    Call us today toll-free at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span><br />
+                    Hours of Operation: M-F: 8am-9pm CT, Sat: 8am-5pm CT<br />
+                    GE and GE Security logos are registered trademarks of General Electric.<br />
+                    © 2012 Alarm Zone All rights reserved.
+                </div>
+                <div id="az-footer-full">
+                    *Alarm Zone is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php" target="_blank">Standard home security alarm monitoring agreement</a>. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.
+
+
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</div>
+
+{% endblock %}
+{% block order-footer %}
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block subnav %}
+{% endblock %}

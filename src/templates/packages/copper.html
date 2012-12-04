@@ -25,7 +25,7 @@
             {% if request.COOKIES.bbb_test_2 == 'A' or not request.COOKIES.bbb_test_2 %}
             <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 12/31/2012</em></span>
             {% endif %}
-            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>19.99</strong><em>per month</em></span>
+            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>{{ pricetable.COPPER.standard_monitoring|slice:"1:" }}</strong><em>per month</em></span>
         </div>
         <div class="button-submit">
             <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
@@ -45,30 +45,30 @@
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
-    	<h2>What's Included:</h2>
+        <h2>What's Included:</h2>
         <div>
-    		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Home Security Panel" />
-    		<strong>One (1)</strong> Simon XT Control Panel
-		</div>
-		<div>
-    		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
-    		<strong>Three (3)</strong> Door / Window Sensors
-   		</div>
-   		<div>
-       		<img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
-    		<strong>One (1)</strong> Motion Detector
+            <img src="/static/img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Home Security Panel" />
+            <strong>One (1)</strong> Simon XT Control Panel
+        </div>
+        <div>
+            <img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
+            <strong>Three (3)</strong> Door / Window Sensors
+        </div>
+        <div>
+            <img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
+            <strong>One (1)</strong> Motion Detector
         </div>
         <div>
             <img src="/static/img/products/accessories/installation-manual-icon.jpg" width="160" height="131" alt="Home Security Installation Manual" />
             <strong>One (1)</strong> Owner's / Installation Manual & DVD
         </div>
         <div>
-    		<img src="/static/img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Home Security Window Stickers" />
-    		<strong>Three (3)</strong> Security Window Stickers
+            <img src="/static/img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Home Security Window Stickers" />
+            <strong>Three (3)</strong> Security Window Stickers
         </div>
-    	<div>	
-    		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Protect America Yard Sign" />
-    		<strong>One (1)</strong> Security Yard Sign
+        <div>   
+            <img src="/static/img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Protect America Yard Sign" />
+            <strong>One (1)</strong> Security Yard Sign
         </div>
     </div>
 
@@ -105,7 +105,7 @@
                 </tr>
                 <tr class="alt">
                     <td><strong>Monthly Cost</strong></td>
-                    <td class="call-out">$29.99</td>
+                    <td class="call-out">${{ pricetable.COPPER.standard_monitoring|slice:"1:" }}</td>
                     <td>$42.99</td>
                 </tr>
                 <tr>
@@ -157,7 +157,7 @@
         <li>
             <img src="/static/img/products/monitoring/landline-icon.png" width="128" height="120" alt="Home Security Landline Connection">
             <h3>Landline</h3>
-            <p><sup>$</sup>29<span>99</span><strong>/mo</strong></p>
+            <p><sup>$</sup>23<span>99</span><strong>/mo</strong></p>
             <a href="{% url landline %}" class="button-link" title="Learn About Landline Monitoring">Learn More ></a>
         </li>
         <div class="clear"></div>
@@ -190,7 +190,7 @@
         {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
         FREE*
         {% endif %}
-    </strong></span>monthly monitoring starting at $29.99/mo</p>
+    </strong></span>monthly monitoring starting at $23.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
     </div>
