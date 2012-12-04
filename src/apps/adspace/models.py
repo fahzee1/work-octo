@@ -21,6 +21,7 @@ TYPE_CHOICES = (
     ('promo_banner_full', 'Full Promo Banner (671x184)'),
     ('side_bar','Side Bar Ad (251x286)'),
     ('product_page','Product Page Ad (934x130)'),
+    ('mobile_hero', 'Mobile Hero Banner'),
     ('leaderboard', 'Leaderboard (728x90)'),
     ('banner','Banner (468x60)'),
     ('skyscaper','Skyscraper (120x600)'),
