@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security | Alarm Systems | Protect America{% endblock %}
+{% block page_keywords %}Home Security, Alarm Systems, Home Security Systems, GE Simon XT{% endblock %}
+{% block page_description %}Get a home security systems for your home at the lowest cost. Sign up for alarm monitoring and get a GE Simon XT home alarm at no cost.{% endblock %}
+
+{% block css %}
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+
+{% block header %}
+    <div id="top-phone-number">
+        <p><a href="tel:{{ phone_number|format_number }}">Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+    </div>
+    <div id="header">
+        <div id="company-logo">
+            <a href="/" title="Protect America"><img src="{{ STATIC_URL }}img/mobile/protect-america-logo.png" alt="Protect America Home Security" width="163" height="29" /></a>
+        </div>
+        <ul id="main-navigation">
+            <li id="menu_icon"><img src="{{ STATIC_URL }}img/mobile/menu-icon.png" alt="Home Security Menu" width="32" height="40" /></li>
+            <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
+            <li><a href="{% url cart %}" title="View Your Home Security Shopping Cart">{% if current_cart.has_items %}<img src="{{ STATIC_URL }}img/mobile/cart-notify.png" alt="You have items in your shopping cart" id="cart-notify" width="24" height="24" />{% endif %}<img src="{{ STATIC_URL }}img/mobile/shop-icon.png" alt="Shopping Cart" width="32" height="40" /></a></li>
+        </ul>
+    </div>
+{% endblock %}
+{% block navigation %}
+    <div id="search-area">
+        <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
+            <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
+            <button>Go</button>
+        </form>
+    </div>
+{% endblock %}
+{% block subnav %}
+<div id="sub-navigate">
+    {% include "mobile/_partial/nav.html" %}
+
+</div>
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).bind('pageinit'){
+    $('#menu_icon').toggle(function() {
+        $(this).addClass('active');
+        $('#sub-navigate').slideDown('fast');
+    }, function() {
+        $(this).removeClass('active');
+        $('#sub-navigate').slideUp('false');
+    })
+    $('a[href^="tel"]').vmousedown(function() {
+        _gaq.push([  
+            '_trackEvent',
+            'Mobile Phone Click',
+            '{{ page_name }}',
+            $(this).index()
+        ]);
+    });
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
+{% block content %}
+{% endblock %}
+{% block order-footer %}
+{% endblock %}
+{% block footer %}
+{% block bottom-nav %}
+    {% include "mobile/_partial/nav.html" %}
+{% endblock %}
+<div id="phone-number">
+    <h3>Call Today and Save!</h3>
+    <p><a href="tel:{{ phone_number|format_number }}"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+</div>
+<img src="{{ STATIC_URL }}img/mobile/ge-security.jpeg" class="ge-logo" alt="GE Security Authorized Dealer" width="275" height="101" />
+
+<div id="terms">
+    <p>* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 12/31/2012</p>
+</div>
+<div class="button-link full-site">
+    <a href="http://www.protectamerica.com/?no_mobile" title="Visit the Protect America Full Site">Full Site ></a>
+</div>
+{% endblock %}

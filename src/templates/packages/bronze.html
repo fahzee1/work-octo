@@ -1,12 +1,13 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Bronze Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
+{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
 
 {% block content %}
 <div id="top-content">
     <div id="bronze-package-offer" itemscope itemtype="http://schema.org/Product">
         <h1 itemprop="name">Bronze Security Package</h1>
-        <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Bronze Security Package" />
+        <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" id="offer-main-image" itemprop="image" alt="Bronze Home Security" />
         <ul itemprop="description">
             <li>GE Simon XT Control Panel</li>
             <li>3 Security Stickers</li>
@@ -19,7 +20,16 @@
             <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
             <p>Five star rating in 2012 by TopConsumerReviews.com</p>
         </div>
-        <span>Our Price: <strong itemprop="price">FREE<sup>*</sup></strong></span>
+        <div id="package-price" {% if request.COOKIES.bbb_test_2 == 'B' %}style="width: auto; margin-right: 80px;"{% endif %}>
+
+            {% if request.COOKIES.bbb_test_2 == 'A' or not request.COOKIES.bbb_test_2 %}
+            <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 12/31/2012</em></span>
+            {% endif %}
+            <span class="monthly-price">Monthly Rate: <strong itemprop="price"><sup>$</sup>35.99</strong><em>per month</em></span>
+        </div>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -28,7 +38,7 @@
     {% include "banners/limited-time-offer.html" %}
 
 <div id="the-bronze-package">
-    <img src="/static/img/products/bronze-package/in-the-home.jpg" id="main-package-image" alt="Securing a home with up to seven doors or windows">
+    <img src="/static/img/products/bronze-package/in-the-home.jpg" id="main-package-image" alt="Bronze Home Security Layout">
     <div id="bronze-package-content">
         <h1>In Your Home: Bronze Security</h1>
         <p>The first of four levels of perimeter protection offered by Protect America, the Bronze Home Security System was designed to provide protection at each point of entry into your home. Ideal for houses under 1200 sq. ft, the Bronze Security Package features enough sensors to cover up to 7 doors and windows. Along with 7 door/window sensors, the Bronze Security Package also protects inside your home with a motion detector for use in heavily used rooms or hallways. Security systems from Protect America are incredibly easy to customize. Just ask one of our salespeople how you can add a garage door sensor or smoke detectors to your Bronze Package!  </p>
@@ -81,7 +91,17 @@
             <tbody>
                 <tr>
                     <td><strong>Upfront Cost</strong></td>
-                    <td class="call-out">FREE*</td>
+                    <td class="call-out">
+                        {% if request.COOKIES.bbb_test == 'C' %}
+                        FREE*<em>expires 12/31/2012</em>
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'B' %}
+                        INCLUDED
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+                        FREE*
+                        {% endif %}
+                    </td>
                     <td>$699</td>
                 </tr>
                 <tr class="alt">
@@ -162,7 +182,17 @@
 
 {% block page-product %}
     <h2>Bronze Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $35.99/mo</p>
+    <p><span>Equipment Price: <strong>
+        {% if request.COOKIES.bbb_test == 'C' %}
+        FREE*<em>expires 12/31/2012</em>
+        {% endif %}
+        {% if request.COOKIES.bbb_test == 'B' %}
+        INCLUDED
+        {% endif %}
+        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+        FREE*
+        {% endif %}
+    </strong></span>monthly monitoring starting at $35.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
     </div>

@@ -71,13 +71,12 @@
 </div>
 <div class="sidebar">    
     {% include "order/quote-form.html" with form=forms.basic %}
-    {% comment %}
-    <div class="side-ad">
-        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
-    </div>
-    {% endcomment %}
+    <a href="/" title="Best Deal Ever - Monitoring Starting at $19.99 per month">
+        <img src="{{ STATIC_URL }}img/banners/250x250/250x250-best-deal.png" alt="Best Deal Ever - Monitoring Starting at $19.99 per month" style="padding-left: 25px" />
+    </a>
 </div>
 <div class="clear"></div>
+{% comment %}
 <div id="crime-statistics">
     <h2>Crime Grade and Statistics Scorecard</h2>
     <div id="crime-grade-scorecard">
@@ -137,17 +136,21 @@
         <div class="clear"></div>
     </div>
 </div>
+{% endcomment %}
     {% if latest_year.stats.burglary_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Burglary Crime Statistics</h2>
-        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the gambit of burglary. </p>
+        <p>Burglary is the crime in which someone gains entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the gambit of burglary. <br/> <br/>
+        Source: <a href="http://www.fbi.gov/about-us/cjis/ucr/ucr" rel="nofollow">FBI - Uniform Crime Reports</a></p>
         <table>
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Burglaries</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -156,8 +159,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.burglary }}</td>
-                    <td>{{ crimeyear.stats.burglary_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.burglary_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.burglary_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -169,14 +174,17 @@
     {% if latest_year.stats.murder_and_nonnegligent_manslaughter_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Murder Crime Statistics</h2>
-        <p>Murder and non negligent manslaughter is defined as the willful killing of one human being by another. </p>
+        <p>Murder and non negligent manslaughter is defined as the willful killing of one human being by another. <br/> <br/>
+        Source: <a href="http://www.fbi.gov/about-us/cjis/ucr/ucr" rel="nofollow">FBI - Uniform Crime Reports</a></p>
         <table>
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Murders</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -185,8 +193,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.murder_and_nonnegligent_manslaughter }}</td>
-                    <td>{{ crimeyear.stats.murder_and_nonnegligent_manslaughter_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.murder_and_nonnegligent_manslaughter_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.murder_and_nonnegligent_manslaughter_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -198,14 +208,17 @@
     {% if latest_year.stats.forcible_rape_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Forcible Rape Crime Statistics</h2>
-        <p>Forcible Rape is an assault on another human being involving sexual intercourse without that person's consent. </p>
+        <p>Forcible Rape is an assault on another human being involving sexual intercourse without that person's consent. <br/> <br/>
+        Source: <a href="http://www.fbi.gov/about-us/cjis/ucr/ucr" rel="nofollow">FBI - Uniform Crime Reports</a></p>
         <table>
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Forcible Rape</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -214,8 +227,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.forcible_rape }}</td>
-                    <td>{{ crimeyear.stats.forcible_rape_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.forcible_rape_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.forcible_rape_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -228,14 +243,17 @@
     {% if latest_year.stats.robbery_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Robbery Crime Statistics</h2>
-        <p>Robbery is when someone steals someone else's property through violence or intimidation rather then stealth or fraud.</p>
+        <p>Robbery is when someone steals someone else's property through violence or intimidation rather then stealth or fraud. <br/> <br/>
+        Source: <a href="http://www.fbi.gov/about-us/cjis/ucr/ucr" rel="nofollow">FBI - Uniform Crime Reports</a></p>
         <table>
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Robbery Crime</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -244,8 +262,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.robbery }}</td>
-                    <td>{{ crimeyear.stats.robbery_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.robbery_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.robbery_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -257,14 +277,17 @@
     {% if latest_year.stats.aggravated_assault_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Aggravated Assault Crime Statistics</h2>
-        <p>An assault is considered an aggravated assault when a person attempts to cause serious bodily injury to another person, attempts to have sexual activity with another person under the age of 14, or attempts bodily injury to another person with a deadly weapon. </p>
+        <p>An assault is considered an aggravated assault when a person attempts to cause serious bodily injury to another person, attempts to have sexual activity with another person under the age of 14, or attempts bodily injury to another person with a deadly weapon. <br/> <br/>
+        Source: <a href="http://www.fbi.gov/about-us/cjis/ucr/ucr" rel="nofollow">FBI - Uniform Crime Reports</a></p>
         <table>
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Aggravated Assault</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -273,8 +296,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.aggravated_assault }}</td>
-                    <td>{{ crimeyear.stats.aggravated_assault_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.aggravated_assault_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.aggravated_assault_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -286,14 +311,17 @@
     {% if latest_year.stats.motor_vehicle_theft_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Auto Theft Crime Statistics</h2>
-        <p>Motor vehicle theft or grand theft auto is the criminal act of stealing or attempting to steal a motor vehicle, including an automobile, truck, bus, coach, motorcycle, snowmobile, trailer or any other motorized vehicle.</p>
+        <p>Motor vehicle theft or grand theft auto is the criminal act of stealing or attempting to steal a motor vehicle, including an automobile, truck, bus, coach, motorcycle, snowmobile, trailer or any other motorized vehicle. <br/> <br/>
+        Source: <a href="http://www.fbi.gov/about-us/cjis/ucr/ucr" rel="nofollow">FBI - Uniform Crime Reports</a></p>
         <table>
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Auto Theft</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -302,8 +330,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.motor_vehicle_theft }}</td>
-                    <td>{{ crimeyear.stats.motor_vehicle_theft_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.motor_vehicle_theft_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.motor_vehicle_theft_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}
@@ -315,14 +345,17 @@
     {% if latest_year.stats.larceny_theft_grade %}
     <div id="burglary-crime-statistics">
         <h2>{{ city }}, {{ state }} Larceny Crime Statistics</h2>
-        <p>Larceny is a common law crime involving theft. It is defined as taking and carrying away (stealing) another person's physical property with the intent to deprive him or her of its possession permanently.</p>
+        <p>Larceny is a common law crime involving theft. It is defined as taking and carrying away (stealing) another person's physical property with the intent to deprive him or her of its possession permanently. <br/> <br/>
+        Source: <a href="http://www.fbi.gov/about-us/cjis/ucr/ucr" rel="nofollow">FBI - Uniform Crime Reports</a></p>
         <table>
             <thead>
                 <tr>
                     <th>&nbsp;</th>
                     <th>Larceny</th>
                     <th>Per / 100k</th>
+                    {% comment %}
                     <th>Security Grade</th>
+                    {% endcomment %}
                 </tr>
             </thead>
             <tbody>
@@ -331,8 +364,10 @@
                 <tr class="alt">
                     <td class="year">{{ year }}</td>
                     <td>{{ crimeyear.info.larceny_theft }}</td>
-                    <td>{{ crimeyear.stats.larceny_theft_rank_per100k }}</td>
+                    <td class="omega">{{ crimeyear.stats.larceny_theft_rank_per100k }}</td>
+                    {% comment %}
                     <td class="omega grade">{{ crimeyear.stats.larceny_theft_grade }}</td>
+                    {% endcomment %}
                 </tr>
                 {% endwith %}
                 {% endfor %}

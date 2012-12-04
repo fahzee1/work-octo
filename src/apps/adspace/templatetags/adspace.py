@@ -29,10 +29,8 @@ class AdspaceNode(template.Node):
 
     def render(self, context):  
         t = Ad.objects.filter(type=self.ad_spot.replace('\"',''))[0]
-        try:
-            ad = t.get_active_campaign()
-        except Ad.DoesNotExist:
-            return ''
-        template = loader.get_template(ad.ad)
+        ad = t.get_active_campaign()
+        template = loader.get_template('adspace/adspace_render.html')
         c = Context(context)
+        c['ad'] = ad
         return template.render(c)

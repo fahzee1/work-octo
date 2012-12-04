@@ -1,0 +1,90 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+<h1>Customer Information</h1>
+<form id="contact-form" method="POST" action="">
+    {% csrf_token %}
+    <fieldset id="name-information">
+        <div class="form-wrapper">
+            <div class="alpha">
+                {% include "mobile/_partial/formfield.html" with field=form.first_name %}
+            </div>
+            <div>
+                {% include "mobile/_partial/formfield.html" with field=form.last_name %}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </fieldset>
+    <fieldset id="content-information">
+        <div class="form-wrapper">
+            <h3>Contact Information</h3>
+            {% include "mobile/_partial/formfield.html" with field=form.email %}
+            {% include "mobile/_partial/formfield.html" with field=form.phone %}
+        </div>
+    </fieldset>
+    <fieldset id="address-information">
+        <div class="form-wrapper">
+            <h3>Customer Address</h3>
+
+            {% include "mobile/_partial/formfield.html" with field=form.address %}
+            {% include "mobile/_partial/formfield.html" with field=form.address_2 %}
+            <div class="clear"></div>
+            <div class="ctrlHolder {% if form.city.errors or form.state.errors or form.zipcode.errors %}error{% endif %}">
+                <div class="city-label">
+                    <label>{{ form.city.label }}:</label>
+                    {{ form.city }}
+                </div>
+                <div class="state-label">
+                    <label>{{ form.state.label }}:</label>
+                    {{ form.state }}                
+                </div>
+                <div class="zip-label">
+                    <label>{{ form.zipcode.label }}:</label>
+                    {{ form.zipcode }}
+                </div>
+                <div class="clear"></div>
+                {% if form.city.errors or form.state.errors or form.zipcode.errors %}
+                    <ul class="formHint">
+                    {% for error in form.city.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    {% for error in form.state.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    {% for error in form.zipcode.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </fieldset>
+    <fieldset>
+        <div class="form-wrapper">
+            <div class="ctrlHolder {% if form.consent.errors %}error{% endif %}">
+                {{ form.consent }}
+                <label for="tcbox" class="checkbox">By checking this box, you agree to our <a href="http://www.protectamerica.com/help/privacy-policy" title="terms and conditions">terms and conditions</a></label>
+                {% if form.consent.errors %}
+                <ul class="formHint">
+                {% for error in form.consent.errors %}
+                    <li><strong>{{ error }}</strong></li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="clear"></div>
+        </div>
+    </fieldset>
+    <div class="button-submit">
+        <button type="submit">Complete Order ></button>
+    </div>
+</form>
+    {% include "mobile/_partial/summary.html" %}
+
+{% endblock %}
+{% block bottom-nav %}
+{% endblock %}

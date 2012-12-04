@@ -1,0 +1,70 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block content %}
+    {% with page='cart' %}
+    <div id="mobile-packages">    
+        <h2>Your Security Package:</h2>
+        <ul>
+            <li class="alpha">
+            {% if current_cart.package.item == 'basic' %}
+                {% include "mobile/_partial/packages/basic.html" %}
+            {% endif %} 
+            {% if current_cart.package.item == 'standard' %}
+                {% include "mobile/_partial/packages/standard.html" %}
+            {% endif %} 
+            {% if current_cart.package.item == 'premier' %}
+                {% include "mobile/_partial/packages/premier.html" %}
+            {% endif %} 
+            {% if not current_cart.package.item %}
+                {% include "mobile/_partial/packages/select.html" %}
+            {% endif %}
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div id="mobile-monitoring">
+        <ul>
+            <li>
+                {% if current_cart.monitoring.item == 'landline' %}
+                    {% include "mobile/_partial/monitoring/landline.html" %}
+                {% endif %} 
+                {% if current_cart.monitoring.item == 'broadband' %}
+                    {% include "mobile/_partial/monitoring/broadband.html" %}
+                {% endif %} 
+                {% if current_cart.monitoring.item == 'cellular' %}
+                    {% include "mobile/_partial/monitoring/cellular.html" %}
+                {% endif %} 
+                {% if not current_cart.monitoring.item %}
+                    {% include "mobile/_partial/monitoring/select.html" %}
+            {% endif %}
+            </li>
+        </ul>
+    </div>
+    {% if current_cart.equipment.items %}
+    <div id="mobile-adds">
+        <h2>Selected Add-Ons</h2>
+        <ul>
+            {% for name, info in current_cart.equipment.items %}
+            <li>
+                {% if name == 'extreme-weather' %}
+                {% include "mobile/_partial/addons/extreme-weather.html" %}
+                {% endif %}
+                {% if name == 'home-and-away' %}
+                {% include "mobile/_partial/addons/home-and-away.html" %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% include "mobile/_partial/subtotal.html" %}
+    {% if current_cart.package and current_cart.monitoring %}
+    <div class="button-submit">
+        <a href="{% url add-ons %}" title="Continue to Add-Ons">Continue ></a>
+    </div>
+    {% endif %}
+    {% endwith %}
+{% endblock %}
+

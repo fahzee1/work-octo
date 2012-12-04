@@ -5,7 +5,7 @@
     <title>{% block page_title %}{% endblock %}</title>
     <meta name="description" content="{% block page_description %}{% endblock %}" />
     <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <meta property="fb:admins" content="586942929" />
     {% block robots_tag %}{% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>{% else %}{% if request.is_secure %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>{% else %}<meta name="ROBOTS" content="INDEX, FOLLOW"/>{% endif %}{% endif %}{% endblock %}
     <meta name="rating" content="general" />
@@ -16,8 +16,10 @@
     <meta name="resource-type" content="document" />
     <meta http-equiv="imagetoolbar" content="false" />
     <meta name="MSSmartTagsPreventParsing" content="true" />
+    {% block favicon %}
     <link rel="icon" href="http://www.protectamerica.com/favicon.ico" />
     <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico" />
+    {% endblock %}
     {% block canonical %}{% if request.session.domain == 'protectamerica.com' %}
     <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
     {% endif %}{% endblock %}{% block css %}
@@ -43,14 +45,21 @@
 {% endblock %}
 </head>
 <body class="{{ page_name }} {% block typekit %}tk-facitweb{% endblock %}">
-
 <!-- Page Wrapper -->
+{% block header %}
 <div id="header">
     <div id="header-wrapper">
         <div>
 
             {% block quick-links %}
             <ul id="quick-link-navigation">
+                {% comment %}
+                <li>
+                    <a href="http://www.yelp.com/biz/protect-america-austin-2" title="Review Us on Yelp!" class="yelp-button">
+                        <img src="{{ STATIC_URL }}img/external/yelp-logo-sml.png" alt="yelp-logo-sml" width="56" height="24">
+                    </a>
+                </li>
+                {% endcomment %}
                 <li id="quick-social">                
                     <div id="google-button">
                         <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
@@ -86,7 +95,7 @@
 
             {% if phone_number %}
             <div id="phone-number">
-                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
             </div>
             {% endif %}
             <div class="clear"></div>
@@ -95,20 +104,21 @@
 
     </div>
 </div>
+{% endblock %}
 <div id="navigation-wrapper">
     {% block navigation %}
     <div id="navigation">
         <ul>
-            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="{% url home %}" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
-            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url copper %}" title="Home Security Systems and Products">Products</a></li>
-            <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="{% url about-us %}" title="About Protect America Home Security Systems">About Us</a></li>
-            <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="{% url support %}" title="Need Help with Your Security System? Visit our Support Area">Support</a></li>
-            <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="{% url contact-us %}" title="Contact Protect America">Contact Us</a></li>
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Home', 'Top Navigation', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
+            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
+            <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="/pa/about/home-security-companies" title="About Protect America Home Security Systems" onClick="_gaq.push(['_trackEvent', 'About Us', 'Top Navigation', '{{ page_name }}']);">About Us</a></li>
+            <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="/support" title="Need Help with Your Security System? Visit our Support Area" onClick="_gaq.push(['_trackEvent', 'Support', 'Top Navigation', '{{ page_name }}']);">Support</a></li>
+            <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="/pa/contact" title="Contact Protect America" onClick="_gaq.push(['_trackEvent', 'Contact Us', 'Top Navigation', '{{ page_name }}']);">Contact Us</a></li>
 
         </ul>
         <div id="search-area">
             <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
-                <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
+                <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
             </form>
         </div>
     </div>
@@ -165,7 +175,7 @@
             <div id="footer-call-now">
                 <h3>Give us a call.</h3>
                 <p>Our security experts are here to answer any questions and help you protect your home and family today.</p>
-                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
+                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span>
             </div>
             <div id="footer-chat-now">
                 <h3>Chat online.</h3>
@@ -215,8 +225,8 @@
             <li><a href="http://www.protectamerica.com/help/return-policy/" title="Return Policy">Return Policy</a></li>
             <li><a href="http://www.protectamerica.com/help/do-not-call/" title="Do Not Call List">Do Not Call</a></li>
             <li><a href="http://www.protectamerica.com/sitemap/" title="Sitemap">Sitemap</a></li>
-            <li><strong>Hours of Operation</strong></li>
-            {{ business_hours|safe }}
+            {% comment %}<li><strong>Hours of Operation</strong></li>
+            {{ business_hours|safe }}{% endcomment %}
         </ul>
         <div id="awards">
             
@@ -399,7 +409,7 @@
 </div>
 <div id="legal-bit">
     <div id="terms-conditions">
-        <p>* <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php?homesite=true&TB_iframe=true&width=780&height=550" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited.</p>
+        <p>* <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php?homesite=true&TB_iframe=true&width=780&height=550" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 12/31/2012</p>
         <p>* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
         {% block extra_terms %}
         {% endblock %}
@@ -432,7 +442,7 @@
 
 {% if use_call_measurement %}
 <script type="text/javascript"> 
-    var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use
+    var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'a01415' or request.COOKIES.refer_id == 'a01415' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use
     var thisref = document.referrer.replace(/&/g, "zzzzz");
     var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
     document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
@@ -472,6 +482,10 @@ var google_conversion_value = 0;
 </noscript>
 
 <!-- End Remarketing Code -->
+
+<!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
+<img src="http://ads.bluelithium.com/pixel?id=1732074&t=2" width="1" height="1" />
+<!-- End of segment tag -->
 
 <!-- BEGIN LivePerson Monitor. --><script language='javascript'> var lpMTagConfig = {'lpServer' : "server.iad.liveperson.net",'lpNumber' : "34774121",'lpProtocol' : "https"}; function lpAddMonitorTag(src){if(typeof(src)=='undefined'||typeof(src)=='object'){src=lpMTagConfig.lpMTagSrc?lpMTagConfig.lpMTagSrc:'/hcp/html/mTag.js';}if(src.indexOf('http')!=0){src=lpMTagConfig.lpProtocol+"://"+lpMTagConfig.lpServer+src+'?site='+lpMTagConfig.lpNumber;}else{if(src.indexOf('site=')<0){if(src.indexOf('?')<0)src=src+'?';else src=src+'&';src=src+'site='+lpMTagConfig.lpNumber;}};var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','iso-8859-1');s.setAttribute('src',src);document.getElementsByTagName('head').item(0).appendChild(s);} if (window.attachEvent) window.attachEvent('onload',lpAddMonitorTag); else window.addEventListener("load",lpAddMonitorTag,false);</script><!-- END LivePerson Monitor. -->
 </body>

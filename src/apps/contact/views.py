@@ -31,6 +31,8 @@ def post_to_old_pa(data):
 
 
 def send_leadimport(data):
+    from email import Charset
+    Charset.add_charset('utf-8',Charset.SHORTEST,None,'utf-8')
     subject = '%s Lead Submission' % data['agent_id']
     t = loader.get_template('_partials/lead_submission_email.html')
     c = Context(data)
@@ -172,10 +174,14 @@ def basic_post_login(request):
 
         # notes field information
         package = request.POST.get('package', None)
-        notes = ''
+        notes_list = []
         if package:
-            notes = 'Package Requested: %s' % package
-
+            notes_list.append('Package Requested: %s' % package)
+        visited_pages = request.session.get('vpages', None)
+        if visited_pages is not None:
+            notes_list.append('Pages Visited: %s' % visited_pages)
+        notes = '\n'.join(notes_list)
+        notes = notes.replace('\'', '')
         emaildata = {
             'agent_id': request_data['agentid'],
             'source': request_data['source'],
@@ -363,10 +369,12 @@ def payitforward(request):
             formset.email_shawne()
             form.submitted = True
 
+            return HttpResponseRedirect(reverse('payitforward-thankyou'))
+
     else:
         form = PayItForwardForm()
 
-    return simple_dtt(request, 'payitforward/contact.html', {
+    return simple_dtt(request, 'payitforward/involved.html', {
                                'form': form,
                                'pages': ['about'],
-                               'page_name': 'payitforward-contact'})
+                               'page_name': 'payitforward-involved'})

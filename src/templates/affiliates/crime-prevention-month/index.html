@@ -1,0 +1,277 @@
+{% extends "affiliates/generic-landing-base/index.html" %}
+
+{% load sekizai_tags content_tags content_filters %}
+
+{% block page_title %}National Crime Prevention Month | Protect America{% endblock %}
+{% block page_description %}Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America’s offer can’t be match! Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected without emptying your wallet.{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/national-crime-month/style.css">
+    <script type="text/javascript" src="//use.typekit.net/vwb5haa.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var current_package = 'copper';
+    var current_monitoring = 'landline';
+    var price_table = {
+        'copper': {
+            'landline': {{ pricetable.COPPER.standard_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.COPPER.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.COPPER.cellular_monitoring|cut:"$" }}
+        },
+        'silver': {
+            'landline': {{ pricetable.SILVER.standard_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.SILVER.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.SILVER.cellular_monitoring|cut:"$" }}
+        },
+        'platinum': {
+            'landline': {{ pricetable.PLATINUM.standard_monitoring|cut:"$" }},
+            'broadband': {{ pricetable.PLATINUM.broadband_monitoring|cut:"$" }},
+            'cellular': {{ pricetable.PLATINUM.cellular_monitoring|cut:"$" }}
+        }
+    }
+    {% comment %}
+    $('#package-set-one > div').click(function() {
+        current_package = $(this).attr('id').split('-package')[0];
+        render_changes();
+        $('#package-set-one > div').removeClass('active');
+        $(this).addClass('active');
+    });
+    $('#monitoring-set-one > div').click(function() {
+        current_monitoring = $(this).attr('id').split('-monitoring')[0];
+        render_changes();
+        $('#monitoring-set-one > div').removeClass('active');
+        $(this).addClass('active');
+    });
+    $('.more-options').toggle(function(){
+            $('#package-set-one').hide();
+            $('#package-set-two').show();
+        },function(){
+            $('#package-set-one').show();
+            $('#package-set-two').hide();
+        });
+    {% endcomment %}
+    function render_changes() {
+        $('.total_price').html(price_table[current_package][current_monitoring]);
+        $('#package-set-one > div').each(function(i) {
+            $(this).find('.monitoring-price em').html(
+                price_table[$(this).attr('id').split('-package')[0]][current_monitoring]
+            );
+        });
+        $('#monitoring-set-one > div').each(function(i) {
+            $(this).find('.monitoring-price em').html(
+                price_table[current_package][$(this).attr('id').split('-monitoring')[0]]
+            );
+        });
+    }
+    render_changes();
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
+{% block active_tab_trigger %}
+<script>
+$(document).ready(function() {
+    $('#assurance-block-three').trigger('click');
+});
+</script>
+{% endblock %}
+{% block typekit %}tk-museo-slab{% endblock %}
+
+{% block left-wrapper %}
+    <img src="{{ STATIC_URL }}img/affiliates/national-crime-prevention/touchscreen.jpg" id="touchscreen-offer" alt="National Crime Prevention Month" width="408" height="272" />
+    <div id="touchscreen-offer-content">
+        <img src="{{ STATIC_URL }}img/affiliates/national-crime-prevention/top-banner.png" alt="top-banner" width="656" height="56" />
+        <h1>Free Home Security Equipment</span></h1>
+        <ul>
+            <li>No Hidden Fees</li>
+            <li>High Speed, Reliable Monitoring</li>
+            <li>Lowest Price Guaranteed</li>
+        </ul>
+    </div>
+{% endblock %}    
+
+{% block assurance-block-one %}
+    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
+    <h3>Customizable Security Packages</h3>
+{% endblock %}
+
+{% block assurance-block-two %}
+    <img src="{{ STATIC_URL }}img/extra/monitoring-token.png" alt="20-percent-token" width="111" height="111" />
+    <h3>24/7 Reliable Monitoring</h3>
+{% endblock %}
+
+{% block assurance-block-three %}
+    <img src="{{ STATIC_URL }}img/affiliates/national-crime-prevention/shield.png" alt="Crime Prevention Token" />
+    <h3>Crime Prevention Month</h3>
+{% endblock %}
+
+{% block assurance-block-four %}
+    <img src="{{ STATIC_URL }}img/extra/hammer-token.png" alt="hammer-token" width="111" height="111" />
+    <h3>Easy Wireless Installation</h3>
+{% endblock %}
+
+{% block assurance-block-five %}
+    <img src="{{ STATIC_URL }}img/extra/dollar-sign-token.png" alt="dollar-sign-token" width="111" height="111" />
+    <h3>Lowest Price Guaranteed</h3>
+{% endblock %}
+
+{% block assurance-card-one %}
+    <div id="package-set-one">
+        <div id="copper-package" class="active">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/copper-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3>Protection for up to <span>3 Doors or Windows</span> plus one motion detector</h3>
+            <p class="equipment-price">
+                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
+            </p>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>34.99</em><span>per month</span></strong>
+            </p>
+        </div>
+        <div id="silver-package">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/silver-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3>Protection for up to <span>10 Doors or Windows</span> plus one motion detector</h3>
+            <p class="equipment-price">
+                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
+            </p>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>42.99</em><span>per month</span></strong>
+            </p>
+        </div>
+        <div id="platinum-package">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/platinum-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3>Protection for up to <span>15 Doors or Windows</span> plus one motion detector</h3>
+            <p class="equipment-price">
+                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
+            </p>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
+            </p>
+        </div>
+    </div>
+    <div id="package-set-two" style="display: none;">
+        <div id="bronze-package" class="active">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/bronze-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3>Protection for up to <span>7 Doors or Windows</span> plus one motion detector</h3>
+            <p class="equipment-price">
+                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
+            </p>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
+            </p>
+        </div>
+        <div id="gold-package">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/gold-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3>Protection for up to <span>12 Doors or Windows</span> plus one motion detector</h3>
+            <p class="equipment-price">
+                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
+            </p>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
+            </p>
+        </div>
+
+        <div id="business-package">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/gold-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3>Protection for up to <span>12 Doors or Windows</span> plus one motion detector</h3>
+            <p class="equipment-price">
+                Equipment Price: <strong><sup>$</sup>0<sup>*</sup></strong>
+            </p>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
+            </p>
+        </div>
+    </div>
+    <p class="terms">3 Year Monitoring Agreement Required</p>
+    {% comment %}<p class="more-options">More Options ></p>{% endcomment %}
+{% endblock %}
+{% block assurance-card-two %}
+    <div id="monitoring-set-one">
+        <div id="landline-monitoring" class="active">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/landline-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3><span>An affordable solution</span> that works with your existing phone line.</h3>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>35.99</em><span>per month</span></strong>
+            </p>
+        </div>
+        <div id="broadband-monitoring">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/broadband-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3><span>Blazing fast monitoring</span> that works with your high-speed Internet service.</h3>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>37.99</em><span>per month</span></strong>
+            </p>
+        </div>
+        <div id="cellular-monitoring">
+            <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/cellular-header.jpg" alt="bronze-header" width="304" height="136" />
+            <h3><span>Total Wireless solution</span> that doesn’t require a phone or Internet connection.</h3>
+            <p class="monitoring-price">
+                Monitoring Rate: <strong><sup>$</sup><em>39.99</em><span>per month</span></strong>
+            </p>
+        </div>
+    </div>
+    <p class="terms">3 Year Monitoring Agreement Required</p>
+{% endblock %}
+{% block assurance-card-three %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/national-crime-prevention/crimestoppers.jpg" alt="As Seen on Crime Stoppers TV" width="280" height="328" />
+    </div>
+    <div class="copy-point">
+        <h2>Protect America is Helping <span>Stop Crime in Your Neighborhood</span></h2>
+        <p>Protect America supports "National Crime Prevention Month" in October. All month long, Protect America is offering Free Home Security Equipment and discounted monitoring rates when you sign up for one of our monitoring solutions.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block assurance-card-four %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/pizza-time.jpg" alt="pizza-time" width="288" height="288" />
+    </div>
+    <div class="copy-point">
+        <h2>Getting a Pizza Delivered <span>Would Take More Time</span></h2>
+        <p>Installing your wireless home security system is convenient and easy. Security systems from Protect America are designed to be installed by customers without help from a professional. No wires or drilling holes in your walls! The installation process can be completed in as little as 30 minutes, even by someone with limited technical knowledge. Go ahead and order that pizza, you'll be done by the time it gets to your newly protected house.  </p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block assurance-card-five %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/protect-america-lowest-price-guaranteed.jpg" alt="protect-america-lowest-price-guaranteed" id="lowest-price-image" />
+    </div>
+    <div class="copy-point">
+        <h2>Be Secure Against Crime <span>And High Prices</span></h2>
+        <p>Research is important when choosing a home security company. If you look around, it’s easy to realize that Protect America’s offer can’t be match! Simply order one of our award-winning monitoring solutions and we’ll give you a free home security system. No extra fees or installation costs! Just pay your monthly monitoring fee and get your home protected without emptying your wallet.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+
+{% endblock %}
+{% block page-product %}
+    <h2>Home Security Package</h2>
+    <p><span>Equipment Price: <strong>$0*</strong></span>monthly monitoring starting at $<strong class="total_price">35.99</strong>/mo</p>
+{% endblock %}
