@@ -208,7 +208,12 @@ elif settings.SITE_ID == 12:
         dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
         dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
         dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thank-you.html', 'thank-you'),
 
+    )
+elif settings.SITE_ID == 13:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/ask-security-expert/index.html', 'home'),
     )
 else:
     urlpatterns += patterns('',
