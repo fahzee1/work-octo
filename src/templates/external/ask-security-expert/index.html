@@ -65,30 +65,29 @@
         <div class="clear"></div>
         {% endbusinesstime %}
         <div id="answer-box">
-            <div class="question">
-                <h3 class="tk-corn-dog">Q:</h3>
-                <p>Your Question would go here. Your Question would go here Your Question would go here</p>
-                <div class="clear"></div>
+            <div class="question-panel">
+            {% for question in questions %}
+                <div class="question">
+                    <h3 class="tk-corn-dog">Q:</h3>
+                    <p>{{ question.question|safe }}</p>
+                    <div class="clear"></div>
+                </div>
+                <div class="answer">
+                    <p>{{ question.answer|safe }}</p>
+                    <h3 class="tk-corn-dog"><img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert-head.png" alt="security-expert-head" width="56" height="56" /></h3>
+                    <div class="clear"></div>
+                </div>
+                {% if forloop.counter0|divisibleby:"2" %}
+                <div class="ad">
+                    {% if pa_ads.banner %}
+                {% include "adspace/adspace_render.html" with ad=pa_ads.banner %}
+                    {% endif %}
+                </div> 
+                {% else %}
             </div>
-            <div class="answer">
-                <p>Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here</p>
-                <h3 class="tk-corn-dog"><img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert-head.png" alt="security-expert-head" width="56" height="56" /></h3>
-                <div class="clear"></div>
-            </div>
-            <div class="ad">
-                {% if pa_ads.banner %}
-            {% include "adspace/adspace_render.html" with ad=pa_ads.banner %}
+            <div class="question-panel">
                 {% endif %}
-            </div> 
-            <div class="question">
-                <h3 class="tk-corn-dog">Q:</h3>
-                <p>Your Question would go here. Your Question would go here Your Question would go here</p>
-                <div class="clear"></div>
-            </div>
-            <div class="answer">
-                <p>Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here</p>
-                <h3 class="tk-corn-dog"><img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert-head.png" alt="security-expert-head" width="56" height="56" /></h3>
-                <div class="clear"></div>
+            {% endfor %}
             </div>
         </div>
         <div id="question-box">
