@@ -1,18 +1,11 @@
-{% load content_filters %} 
+{% load content_filters %}
                 <h2>Contact Us</h2> 
                 <p>
-                	<span class="image-right"><img src="{{ STATIC_URL }}img/alarm-zone/callcenter.jpg" class="right-body-image"></span>
+                	<span class="image-right"><img src="{{ STATIC_URL }}img/alarm-zone/callcenter.jpg" class="right-body-image" alt="Call Now For Deals On Home Security Monitoring"></span>
 	                Contact us if you have any questions about home security or simply want more information about why you need an alarm in your home. Our home security experts are standing by to answer any questions you may have. They will provide you with the most up to date information about home alarm systems and how they can benefit you. Start protecting your home today.</p>
-                
-                
-                
-                
-                
-                
-                
-                
+
                 <p class="call-us">Call us today toll-free at 
                 <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
                 <h3>Business Hours</h3>
-                <p>Our business hours are listed in Central Time (CT)<br />
-                {{ business_hours|safe }}</p>
+                <p>Our business hours are listed in Central Time (CT)</p>
+                <ul class="business_hours">{{ business_hours|safe }}</ul>
