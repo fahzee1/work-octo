@@ -75,9 +75,11 @@
                 <h3 class="tk-corn-dog"><img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert-head.png" alt="security-expert-head" width="56" height="56" /></h3>
                 <div class="clear"></div>
             </div>
-            <a href="http://www.protectamerica.com/">
-                <img src="{{ MEDIA_URL }}/banner_images/campaign_4/468x60-brand.jpeg" class="ad" />
-            </a>
+            <div class="ad">
+                {% if pa_ads.banner %}
+            {% include "adspace/adspace_render.html" with ad=pa_ads.banner %}
+                {% endif %}
+            </div> 
             <div class="question">
                 <h3 class="tk-corn-dog">Q:</h3>
                 <p>Your Question would go here. Your Question would go here Your Question would go here</p>
