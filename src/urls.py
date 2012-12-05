@@ -203,17 +203,23 @@ elif settings.SITE_ID == 11:
     )
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
-        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
-        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
-        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
-        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
-        dtt(r'^thank-you/$', 'external/alarm-zone/thank-you.html', 'thank-you'),
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home',
+            ctx={'agent_id': 'a01415'}),
+        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment',
+            ctx={'agent_id': 'a01415'})),
+        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring',
+            ctx={'agent_id': 'a01415'})),
+        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips',
+            ctx={'agent_id': 'a01415'})),
+        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact',
+            ctx={'agent_id': 'a01415'})),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thank-you.html', 'thank-you',
+            ctx={'agent_id': 'a01415'})),
 
     )
 elif settings.SITE_ID == 13:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/ask-security-expert/index.html', 'home'),
+        url(r'^$', 'apps.faqs.views.expert_home', name='home'),
     )
 else:
     urlpatterns += patterns('',
