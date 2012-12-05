@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}{% endblock %}
+{% block page_description %}{% endblock %}
+{% block page_keywords %}{% endblock %}
+
+{% block google_analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5441302-16']);
+  _gaq.push(['_setDomainName', 'blackfridayhomesecurity.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{% endblock %}
+
+{% block css %}
+<script type="text/javascript" src="//use.typekit.net/mmy2edz.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/asksecurityexpert.css">
+
+
+{% endblock %}
+
+{% block header %}
+    <div id="security-expert">
+        <img src="{{ STATIC_URL}}img/external-lp/ask-security-expert/cloud.png" class="cloud-1" alt="cloud" width="200" height="104" />
+        <img src="{{ STATIC_URL}}img/external-lp/ask-security-expert/cloud.png" class="cloud-2" alt="cloud" width="200" height="104" />
+        <img src="{{ STATIC_URL}}img/external-lp/ask-security-expert/cloud.png" class="cloud-3" alt="cloud" width="200" height="104" />
+
+        <div id="security-expert-wrapper">
+            <h1 class="tk-corn-dog">Ask a Security Expert</h1>
+            <div id="security-tip" class="tk-mufferaw">
+                <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/chat-bubble-point.png" class="chat-bubble-point" />
+                <p>Homes without a monitored security alarm system are 3 times more likely to be burglarized or robbed than those with a monitored home security system.</p>
+            </div>
+            <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert.png" alt="security-expert" id="security-expert-person" />
+        </div>
+    </div>
+    <div id="ground">
+        <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/grass.jpg" alt="grass" width="1024" height="128" />
+    </div>
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block order-footer %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block content %}
+        {% businesstime %}
+        <div class="clear"></div>
+        <div id="call-box" class="tk-corn-dog">
+            <p>Get an Alarm System, Call Today! <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+        </div>
+        <div class="clear"></div>
+        {% endbusinesstime %}
+        <div id="answer-box">
+            <div class="question">
+                <h3 class="tk-corn-dog">Q:</h3>
+                <p>Your Question would go here. Your Question would go here Your Question would go here</p>
+                <div class="clear"></div>
+            </div>
+            <div class="answer">
+                <p>Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here</p>
+                <h3 class="tk-corn-dog"><img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert-head.png" alt="security-expert-head" width="56" height="56" /></h3>
+                <div class="clear"></div>
+            </div>
+            <div class="ad">
+                {% if pa_ads.banner %}
+            {% include "adspace/adspace_render.html" with ad=pa_ads.banner %}
+                {% endif %}
+            </div> 
+            <div class="question">
+                <h3 class="tk-corn-dog">Q:</h3>
+                <p>Your Question would go here. Your Question would go here Your Question would go here</p>
+                <div class="clear"></div>
+            </div>
+            <div class="answer">
+                <p>Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here Our answer goes here</p>
+                <h3 class="tk-corn-dog"><img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert-head.png" alt="security-expert-head" width="56" height="56" /></h3>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="question-box">
+            <form class="tk-mufferaw">
+                <h2 class="tk-corn-dog">Ask a Question!</h2>
+                <p>Fill Out the Form Below to ask the security expert a question.</p>
+                <label>Name:</label>
+                <input type="text" />
+                <label>Email:</label>
+                <input type="text" />
+                <label>Your Question:</label>
+                <textarea></textarea>
+                <button>Send Your Question</button>
+            </form>
+        </div>
+{% endblock %}
