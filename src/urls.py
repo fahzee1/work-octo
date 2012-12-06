@@ -213,7 +213,7 @@ elif settings.SITE_ID == 12:
     )
 elif settings.SITE_ID == 13:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/ask-security-expert/index.html', 'home'),
+        url(r'^$', 'apps.faqs.views.expert_home', name='home'),
     )
 else:
     urlpatterns += patterns('',
