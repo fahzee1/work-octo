@@ -14,6 +14,11 @@
     <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/alarm-zone.css" />
+    <style type="text/css">
+    #az-footer-right .business_hours {
+        list-style: none;
+    }
+    </style>
 {% endblock %}
 
 {% block header %}{% endblock %}
@@ -102,7 +107,7 @@
     
                 <div id="az-footer-right">
                     Call us today toll-free at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span><br />
-                    Hours of Operation: M-F: 8am-9pm CT, Sat: 8am-5pm CT<br />
+                    Hours of Operation: <ul class="business_hours">{{ business_hours|safe }}</ul><br />
                     GE and GE Security logos are registered trademarks of General Electric.<br />
                     © 2012 Alarm Zone All rights reserved.
                 </div>
