@@ -55,6 +55,13 @@ class Campaign(models.Model):
                 os.mkdir(filepath)
             super(Campaign, self).save(*args, **kwargs)
 
+class AdSpot(models.Model):
+    name = models.CharField(max_length=64)
+    slug = models.SlugField(max_length=64)
+
+    def __unicode__(self):
+        return '%s' % (self.name,)
+
 class Ad(models.Model):
 
     def file_path(instance, filename):
@@ -64,7 +71,7 @@ class Ad(models.Model):
             'campaign_%s' % instance.campaign.id, filename)
 
     campaign = models.ForeignKey(Campaign)
-    type = models.CharField(max_length=48, choices=TYPE_CHOICES)
+    type = models.ForeignKey(AdSpot)
     sub_id = models.CharField(max_length=128, blank=True, null=True)
     ad = models.ImageField(upload_to=file_path)
 
@@ -78,21 +85,4 @@ class Ad(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return '%s - %s : %s' % (self.campaign.name, self.type, self.sub_id)
-
-    def get_active_campaign(self):
-        today = datetime.date.today()
-        weekday = datetime.date.today().weekday()
-        campaigns = Campaign.objects.filter(Q(start_date__lte=today) | Q(start_date__isnull=True)).filter(
-            Q(end_date__gte=today) | Q(end_date__isnull=True)).order_by('-pk')
-
-        for campaign in campaigns:
-            try:
-                if campaign.__getattribute__(WEEKDAYS[weekday]):
-                    return Ad.objects.filter(
-                        campaign=campaign, type=self.type).order_by(
-                        'date_created')[0]
-            except Ad.DoesNotExist:
-                pass
-
-        raise Ad.DoesNotExist
+        return '%s - %s' % (self.campaign.name, self.type.name)
