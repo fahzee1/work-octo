@@ -73,6 +73,7 @@ class Ad(models.Model):
     url = models.CharField(max_length=128, blank=True, null=True)
     width = models.CharField(max_length=4, blank=True, null=True)
     height = models.CharField(max_length=4, blank=True, null=True)
+    inline_styles = models.TextField(blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
