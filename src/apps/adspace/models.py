@@ -14,24 +14,7 @@ WEEKDAYS = (
     'saturday',
     'sunday',
 )
-TYPE_CHOICES = (
-    ('hero_banner_backdrop','Hero Banner Backdrop'),
-    ('hero_banner','Hero Banner'),
-    ('promo_banner','Promo Banner (224x184)'),
-    ('promo_banner_full', 'Full Promo Banner (671x184)'),
-    ('promo_banner_right', 'Promo Banner Right (251x184)'),
-    ('side_bar','Side Bar Ad (251x286)'),
-    ('product_page','Product Page Ad (934x130)'),
-    ('mobile_hero', 'Mobile Hero Banner'),
-    ('leaderboard', 'Leaderboard (728x90)'),
-    ('banner','Banner (468x60)'),
-    ('skyscaper','Skyscraper (120x600)'),
-    ('wide_skyscraper','Wide Skyscraper (160x600)'),
-    ('small_square','Small Square (200x200)'),
-    ('square','Square (250x250)'),
-    ('medium_rectangle','Medium Rectangle (300x250)'),
-    ('large_rectangle','Large Rectangle (336x280)'),
-)
+
 class Campaign(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64)

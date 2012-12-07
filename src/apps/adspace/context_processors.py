@@ -29,7 +29,6 @@ def campaign(request):
             if campaign.__getattribute__(WEEKDAYS[weekday]):
                 ctx['pa_campaign'].append(campaign)
                 for ad in campaign.ad_set.all():
-                    print ad
                     if ctx['pa_ads'][ad.type.slug] is None:
                         ctx['pa_ads'][ad.type.slug] = ad
         except Ad.DoesNotExist:
