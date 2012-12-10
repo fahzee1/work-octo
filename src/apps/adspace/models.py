@@ -19,6 +19,7 @@ TYPE_CHOICES = (
     ('hero_banner','Hero Banner'),
     ('promo_banner','Promo Banner (224x184)'),
     ('promo_banner_full', 'Full Promo Banner (671x184)'),
+    ('promo_banner_right', 'Promo Banner Right (251x184)'),
     ('side_bar','Side Bar Ad (251x286)'),
     ('product_page','Product Page Ad (934x130)'),
     ('mobile_hero', 'Mobile Hero Banner'),

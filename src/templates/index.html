@@ -304,7 +304,11 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </div>
 </div>
 <div id="sidebar">
+    {% if pa_ads.promo_banner_right %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_right %}
+    {% else %}
     <iframe width="275" height="186" src="http://www.youtube.com/embed/isJJrsr5sXQ?modestbranding=1&rel=0&border=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
     {% if pa_ads.side_bar %}
     <div id="cellupgrade">
         {% include "adspace/adspace_render.html" with ad=pa_ads.side_bar %}
