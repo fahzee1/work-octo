@@ -214,6 +214,7 @@ elif settings.SITE_ID == 12:
 elif settings.SITE_ID == 13:
     urlpatterns += patterns('',
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
+        url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
 else:
     urlpatterns += patterns('',
