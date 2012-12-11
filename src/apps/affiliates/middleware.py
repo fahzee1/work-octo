@@ -89,8 +89,7 @@ class AffiliateMiddleware(object):
                     # that the visitor is organic
                     request.session['refer_id'] = default_agent
                     request.session['source'] = 'PROTECT AMERICA'
-                    
-                    
+
 
         if 'affkey' in request.GET:
             request.session['affkey'] = request.GET['affkey']
