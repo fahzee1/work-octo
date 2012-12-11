@@ -1,155 +1,54 @@
 {% extends "base.html" %}
 
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% load content_filters content_tags sekizai_tags %}
 
-{% block page_title %}Alarm Zone | Home Security for Your Family!{% endblock %}
-{% block page_description %}Alarm Zone provides GE interactive, wireless home alarm & security systems nationwide. Affordable, flexible, 24/7 security monitoring your residence.{% endblock %}
-{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
-{% block favicon %}
-    <link rel="icon" href="{{ STATIC_URL }}img/alarm-zone/favicon.ico" />
-    <link rel="shortcut icon" href="{{ STATIC_URL }}img/alarm-zone/favicon.ico" />
+{% block page_title %}{% endblock %}
+{% block page_description %}{% endblock %}
+{% block page_keywords %}{% endblock %}
+
+{% block google_analytics %}
+
 {% endblock %}
 
 {% block css %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/alarm-zone.css" />
-    <style type="text/css">
-    #az-footer-right .business_hours {
-        list-style: none;
-    }
-    </style>
+<script type="text/javascript" src="//use.typekit.net/noa2fum.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/alarmzone.css">
+
+
 {% endblock %}
 
-{% block header %}{% endblock %}
+{% block header %}
+    <div id="header-wrapper" class="tk-museo-sans">
 
 
-{% block content %}
-
-{% block az_header %}
-    <div id="full-header">
-        <div id="header" class="content-frame large-text textStroke valign-top">
-            <div id="header-left" class="float-left">
-                <span id="header-image-left">
-                    <img src="{{ STATIC_URL }}img/alarm-zone/alarm-zone-logo-3D-80-light.png" alt="Alarm Zone Home Security">           
-                </span>
-                <h1 id="header-text-left">
-                     Alarm Zone
-                    <span id="subhead">home security experts</span>
-                </h1>
-            </div>
-            <div id="header-right" class="float-right light-border">
-                <div id="header-right-top" class="light-border">
-                    <span id="header-image-right">
-                        <img src="{{ STATIC_URL }}img/alarm-zone/phone.png" alt="Alarm Zone Home Security">
-                    </span>
-                    
-                    <span id="GE-security">
-                        GE Security
-                        <span id="subhead">Authorized Dealer</span>
-                    </span>
-                    <span id="GE-logo">
-                    <img src="{{ STATIC_URL }}img/alarm-zone/general_electric_white_40w.png" alt="GE Home Security Authorized Dealer">
-                    </span>
-                    <div id="call-now" class="rounded-bottom-corners">
-                        <span id="call-now-text">Call Now:</span> <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>
-                    </div>
-                </div>
-                
-            </div>
+        <div id="header">
+            <div id="header-left">
+        <div id="header-inner">
+            &nbsp;
         </div>
+                <div id="logo">
+                    <img src="{{ STATIC_URL }}img/external-lp/alarmzone/alarmzone-logo.png" alt="alarmzone-logo" width="71" height="61" />
+                    <h1>AlarmZone <span>Home Security Experts</span></h1>
+                    <div class="clear"></div>
+                </div>
+                <ul id="navigation">
+                    <li><a href="">Shop</a></li>
+                    <li><a href="">Monitoring</a></li>
+                    <li><a href="">Equipment</a></li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div id="phone-number">
+                <p>Security Experts are Standing By <span>1-800-951-5111</span></p>
+            </div>
+
+        </div>
+
     </div>
 {% endblock %}
-
-<div id="main-content">
-    <div id="navigation-wrapper-2" >
-        {% include "external/alarm-zone/navigation.html" with active="home" %}
-    </div>
-    {% block az-content %}
-        <div id="main-content-inner">
-            <div id="content1">
-                <div id="content-inner">
-                    {% block az-content-feature %}
-                            {% block az-content-feature-left %}
-                                {% include "external/alarm-zone/feature-image.html" %}
-                            {% endblock %}
-                        <div id="right-column-inner">
-                            {% block az-content-feature-right %}
-                                {% include "external/alarm-zone/feature-right.html" %}
-                            {% endblock %}
-                        </div>
-                    {% endblock %}
-                </div>
-                
-                <div id="content-inner-lower" class="main-box-height full-width float-left">
-                    <div id="left-column" class="left-lower">
-                        {% block left-content %}
-                            {% include "external/alarm-zone/content-pages/switchboard.html" %}
-                        {% endblock %}
-                    </div>
-                    <div id="right-column">
-                        <div id="lower-right">
-                           {% include "external/alarm-zone/right-column.html" %}
-                        </div>
-                    </div>
-                    
-                </div>
-            </div> 
-        </div>
-    {% endblock %}
-    {% block az-footer %}
-        <div id="az-footer-width">
-            <div id="az-footer">
-                <div id="az-footer-left">
-                    * Standard monitoring agreement required with approved credit.<br />
-                    Internet Offer, Limited time only. Void where prohibited.
-                </div>
-    
-                <div id="az-footer-right">
-                    Call us today toll-free at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span><br />
-                    Hours of Operation: <ul class="business_hours">{{ business_hours|safe }}</ul><br />
-                    GE and GE Security logos are registered trademarks of General Electric.<br />
-                    © 2012 Alarm Zone All rights reserved.
-                </div>
-                <div id="az-footer-full">
-                    *Alarm Zone is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php" target="_blank">Standard home security alarm monitoring agreement</a>. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.
-
-
-                </div>
-            </div>
-        </div>
-
-    {% endblock %}
-
-</div>
-
-
-
-
-{% endblock %}
-
-{% block order-footer %}
-{% endblock %}
+{% block navigation %}{% endblock %}{% block subnav %}{% endblock %}
+{% block order-footer %}{% endblock %}
 {% block footer %}
-
-{% endblock %}
-{% block navigation %}
-{% endblock %}
-{% block subnav %}
-{% endblock %}
-
-
-
-{% block remarketing %}    
-    <span id="test1">
-    <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
-    </script>
-    <noscript>
-    <div style="display:inline;">
-    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
-    </div>
-    </noscript>
-
-    <!-- End Remarketing Code -->
-    </span>
+    <img src="{{ STATIC_URL }}img/external-lp/alarmzone/touchscreen-bg.jpg" id="img-bg" alt="touchscreen-bg"  />
 {% endblock %}
