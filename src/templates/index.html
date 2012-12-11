@@ -126,6 +126,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     {% else %}
     <div id="twitter-feed">
         {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner %}
+        {% if pa_ads.twitter_left and pa_ads.twitter_right %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.twitter_left %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.twitter_right %}
+        {% else %}
         <ul>
             {% for tweet in tweets %}
             <li>
@@ -138,6 +142,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             {% endfor %}
 
         </ul>
+        {% endif %}
     </div>
     {% endif %}
     <div id="customer-testimonials">
