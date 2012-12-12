@@ -50,5 +50,23 @@
 {% block navigation %}{% endblock %}{% block subnav %}{% endblock %}
 {% block order-footer %}{% endblock %}
 {% block footer %}
+    <div class="wrapper">
+        <div id="terms-conditions" class="tk-museo-sans">
+            <div id="conditions-left">
+                <p>* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
+                <p>*Alarm Zone is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php" title="Standard Monitoring Agreement" >Standard home security alarm monitoring agreement</a>. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
+            </div>
+            <div id="hours-right">
+                    <p>Call Us Today Toll-Free at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+                    <p>Hours of Operation:</p>
+                    <ul class="business_hours">
+                        {{ business_hours|safe }}
+                    </ul>
+                    <p>GE and GE Security logos are registered trademarks of General Electric.</p>
+                    <p>&copy; 2012 Alarm Zone All rights reserved.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
     <img src="{{ STATIC_URL }}img/external-lp/alarmzone/touchscreen-bg.jpg" id="img-bg" alt="touchscreen-bg"  />
 {% endblock %}
