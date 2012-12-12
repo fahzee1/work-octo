@@ -53,6 +53,11 @@ def packages(request):
     context['page_name'] = 'packages'
     return mobile_render(request, 'mobile/packages.html', context)
 
+def thank_you(request):
+    context = {}
+    context['page_name'] = 'thank-you'
+    return mobile_render(request, 'mobile/thank-you.html', context)
+
 def customer_info(request):
     context = {}
     context['page_name'] = 'customer-info'
