@@ -24,4 +24,7 @@
 {% block footer %}
 {{ block.super }}
 {% include "_partials/thank_you_scripts.html" %}
+{% if affiliate_obj.conversion_pixels %}
+{{ affiliate_obj.conversion_pixels|safe }}
+{% endif %}
 {% endblock %}

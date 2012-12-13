@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block robots_tag %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+{% addtoblock "js" %}
+<script type="text/javascript">
+    setCookie('bbb-b', 'true');
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
