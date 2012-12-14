@@ -68,8 +68,8 @@ def resources(request):
     }
     for campaign in campaigns:
         for ad in campaign.ad_set.all():
-            if ad.type in ads:
-                ads[ad.type][1].append(ad)
+            if ad.type.slug in ads:
+                ads[ad.type.slug][1].append(ad)
 
     return simple_dtt(request, 'affiliates/resources.html', {
             'page_name': 'affiliate_resources',

@@ -105,11 +105,11 @@ class Lead(models.Model):
             self.agent_id, self.source, self.name, self.phone)
 
 class EcomLead(Lead):
-    city = models.CharField(max_length=32)
-    state = USStateField()
-    address = models.CharField(max_length=128)
+    city = models.CharField(max_length=32, blank=True, null=True)
+    state = USStateField(blank=True, null=True)
+    address = models.CharField(max_length=128, blank=True, null=True)
     address_2 = models.CharField(max_length=128, blank=True, null=True)
-    zipcode = models.CharField(max_length=12)
+    zipcode = models.CharField(max_length=12, blank=True, null=True)
     consent = models.BooleanField(default=False)
 
 class ContactUs(models.Model):

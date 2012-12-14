@@ -39,6 +39,11 @@ class LeadForm(ModelForm):
                 'phone': TextInput(attrs={'placeholder':'Phone'}),
             }
 
+class QuestionForm(ModelForm):
+    class Meta:
+        model = Submission
+        fields = ('name', 'email', 'message')
+
 class AffiliateLongForm(PAContactForm):
     class Meta(PAContactForm.Meta):
         fields = ('name',

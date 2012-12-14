@@ -189,6 +189,7 @@ elif settings.SITE_ID == 9:
         url(r'^add-to-cart/$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
         url(r'^remove-from-cart/$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
         url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
+        url(r'^thank-you/$', 'apps.pricetable.views.thank_you', name='thank_you'),
     )
 # Black Friday Site
 elif settings.SITE_ID == 10:
@@ -197,29 +198,30 @@ elif settings.SITE_ID == 10:
         url(r'^$', 'apps.common.views.black_friday', name='index'),
 
     )
+
+# GetAHomeSecuritySystem.com
 elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
     )
+
+# AlarmZone.com
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/alarm-zone/index.html', 'home',
-            ctx={'agent_id': 'a01415'}),
-        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment',
-            ctx={'agent_id': 'a01415'}),
-        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring',
-            ctx={'agent_id': 'a01415'}),
-        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips',
-            ctx={'agent_id': 'a01415'}),
-        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact',
-            ctx={'agent_id': 'a01415'}),
-        dtt(r'^thank-you/$', 'external/alarm-zone/thank-you.html', 'thank-you',
-            ctx={'agent_id': 'a01415'}),
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
+        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
+        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
+        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
+        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thank-you.html', 'thank-you'),
 
     )
+
+# SecuritySystemExpert.com
 elif settings.SITE_ID == 13:
     urlpatterns += patterns('',
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
+        url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
 else:
     urlpatterns += patterns('',

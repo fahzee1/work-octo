@@ -3,8 +3,8 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block content %}
 <div id="package-code">
-    <h1>You're Almost There!</h1>
-    <p>Protect America is dedicated to the security of your home and information. For this reason, we are required to verify each online order that is processed through our online ordering system. One of our home security experts is reviewing your order and will be in contact within the next 24 hours. {% businesstime %}To complete this order sooner, give us a call at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>.{% endbusinesstime %} When speaking to one of our security experts, please reference your <strong>Package Code: <span>{{ packagecode }}</span></strong>.
+    <h1>Thank You!</h1>
+    <p>We have recieved your contact request. {% businesstime %}To expidite your request give us a call at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>.{% endbusinesstime %} 
     {% businesstime %}
     <div class="button-submit">
         <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Cart Checkout Call', '{{ page_name }}']);">Give Us a Call ></a>
@@ -19,12 +19,12 @@
     </div>
 </p>
 </div>
-    {% with remove_button=True %}
-    {% include "mobile/_partial/summary.html" %}
-    {% endwith %}
 {% endblock %}
 
 {% block footer %}
 {{ block.super }}
 {% include "_partials/thank_you_scripts.html" %}
+{% if affiliate_obj.conversion_pixels %}
+{{ affiliate_obj.conversion_pixels|safe }}
+{% endif %}
 {% endblock %}
