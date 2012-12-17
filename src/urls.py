@@ -206,6 +206,10 @@ elif settings.SITE_ID == 11:
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
+        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
+        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
+        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
+
     )
 # Securtiy System Expert
 elif settings.SITE_ID == 13:

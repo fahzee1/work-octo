@@ -21,33 +21,41 @@
 {% block header %}
     <div id="header-wrapper" class="tk-museo-sans">
 
-
-        <div id="header">
-            <div id="header-left">
         <div id="header-inner">
             &nbsp;
         </div>
+        <div id="header">
+            <div id="header-left">
+
                 <div id="logo">
-                    <img src="{{ STATIC_URL }}img/external-lp/alarmzone/alarmzone-logo.png" alt="alarmzone-logo" width="71" height="61" />
-                    <h1>AlarmZone <span>Home Security Experts</span></h1>
+                    <a href="/">
+                        <img src="{{ STATIC_URL }}img/external-lp/alarmzone/alarmzone-logo.png" alt="alarmzone-logo" width="71" height="61" />
+                        <h1>AlarmZone <span>Home Security Experts</span></h1>
+                    </a>
                     <div class="clear"></div>
                 </div>
                 <ul id="navigation">
-                    <li><a href="">Shop</a></li>
-                    <li><a href="">Monitoring</a></li>
-                    <li><a href="">Equipment</a></li>
+                    <li><a href="{% url shop %}" {% if 'shop' in active_pages %}class="active"{% endif %} title="Shop Home Security">Shop</a></li>
+                    <li><a href="{% url monitoring %}" {% if 'monitoring' in active_pages %}class="active"{% endif %} title="Home Security Monitoring">Monitoring</a></li>
+                    <li><a href="{% url equipment %}" {% if 'equipment' in active_pages %}class="active"{% endif %} title="Home Security Equipment">Equipment</a></li>
+
                     <div class="clear"></div>
                 </ul>
             </div>
             <div id="phone-number">
-                <p>Security Experts are Standing By <span>1-800-951-5111</span></p>
+                <p>Security Experts are Standing By <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span</p>
             </div>
 
         </div>
 
     </div>
 {% endblock %}
-{% block navigation %}{% endblock %}{% block subnav %}{% endblock %}
+{% block navigation %}{% endblock %}
+{% block subnav %}
+<div id="request-quote">
+    <img src="{{ STATIC_URL }}img/external-lp/alarmzone/request-quote.png" id="request-quote-button" alt="request-quote" width="404" height="35" />
+</div>
+{% endblock %}
 {% block order-footer %}{% endblock %}
 {% block footer %}
     <div class="wrapper">
@@ -68,5 +76,39 @@
             <div class="clear"></div>
         </div>
     </div>
+    <div id="quote-form-wrapper" class="tk-museo-sans">
+        <div id="all-quote">
+            {% include "order/quote-form.html" with form=forms.basic %}
+            <div id="quote-phone">
+                <p>or secure your home today, call now: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
+                
+            </div>
+            <a href="#" class="close-button">close [x]</a>
+
+        </div>
+
+    </div>
     <img src="{{ STATIC_URL }}img/external-lp/alarmzone/touchscreen-bg.jpg" id="img-bg" alt="touchscreen-bg"  />
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.close-button').click(function() {
+            $('#quote-form-wrapper').fadeOut('fast');
+            $('#all-quote').css('top', '-50%');
+
+            return false;
+        });
+        $('#request-quote-button').click(function() {
+            $('#quote-form-wrapper').fadeIn('fast', function() {
+                $('#all-quote').show();
+                $('#all-quote').animate({top: '+=75%'}, 500, 'easeOutBounce');
+                return false;
+            });
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}
