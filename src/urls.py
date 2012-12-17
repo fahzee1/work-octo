@@ -209,8 +209,7 @@ elif settings.SITE_ID == 12:
         dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
         dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
         dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
-        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank-you'),
-
+        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you'),
     )
 # Securtiy System Expert
 elif settings.SITE_ID == 13:
