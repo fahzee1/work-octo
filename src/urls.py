@@ -197,20 +197,21 @@ elif settings.SITE_ID == 10:
         url(r'^$', 'apps.common.views.black_friday', name='index'),
 
     )
+# Get a Home Security System
 elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
     )
+# Alarm Zone
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
-        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
-        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
-        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
-        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
-        dtt(r'^thank-you/$', 'external/alarm-zone/thank-you.html', 'thank-you'),
-
+        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
+        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
+        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you'),
     )
+# Securtiy System Expert
 elif settings.SITE_ID == 13:
     urlpatterns += patterns('',
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
