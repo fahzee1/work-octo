@@ -456,6 +456,9 @@ else:
             dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
             
             # Contact Pages > Department Listing
+            dtt(r'^contact/agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
+            
+            # Contact Pages > Department Listing
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
             # Contact Pages > Affiliate Program
