@@ -439,7 +439,6 @@
 
 {% endif %}
 
-
 {% if use_call_measurement %}
 <script type="text/javascript"> 
     var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'a01415' or request.COOKIES.refer_id == 'a01415' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use
@@ -453,7 +452,7 @@
 {% block extra_pixels %}
 {{ pixels|default_if_none:""|safe }}
 {% endblock %}
-
+{% if DEBUG == False %}
 <!-- Google Code for Home Page Visit Remarketing List -->
 <script type="text/javascript">
 <!--
@@ -490,5 +489,6 @@ var google_conversion_value = 0;
 <!-- End of segment tag -->
 
 <!-- BEGIN LivePerson Monitor. --><script language='javascript'> var lpMTagConfig = {'lpServer' : "server.iad.liveperson.net",'lpNumber' : "34774121",'lpProtocol' : "https"}; function lpAddMonitorTag(src){if(typeof(src)=='undefined'||typeof(src)=='object'){src=lpMTagConfig.lpMTagSrc?lpMTagConfig.lpMTagSrc:'/hcp/html/mTag.js';}if(src.indexOf('http')!=0){src=lpMTagConfig.lpProtocol+"://"+lpMTagConfig.lpServer+src+'?site='+lpMTagConfig.lpNumber;}else{if(src.indexOf('site=')<0){if(src.indexOf('?')<0)src=src+'?';else src=src+'&';src=src+'site='+lpMTagConfig.lpNumber;}};var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','iso-8859-1');s.setAttribute('src',src);document.getElementsByTagName('head').item(0).appendChild(s);} if (window.attachEvent) window.attachEvent('onload',lpAddMonitorTag); else window.addEventListener("load",lpAddMonitorTag,false);</script><!-- END LivePerson Monitor. -->
+{% endif %}
 </body>
 </html>
