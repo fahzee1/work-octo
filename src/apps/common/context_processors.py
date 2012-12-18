@@ -47,6 +47,7 @@ def phone_number(request):
             'use_call_measurement': False}
     # we want to set the phone number in the session to keep from hVaving 
     # more than 1 databasecall
+
     session_num = request.session.get('phone_number', None)
     session_call_measurement = request.session.get('call_measurement', None)
     if session_num is not None and session_call_measurement is not None:
@@ -63,11 +64,14 @@ def phone_number(request):
     # the GET var. If neither of those exist, there is no affiliate
     affiliate = get_affiliate_from_request(request)
 
-
     if affiliate:
-        ctx['phone_number'] = affiliate.phone
+        if 'phone' in request.GET:
+            ctx['phone_number'] = request.GET['phone']
+            request.session['phone_number'] = request.GET['phone']
+        else:
+            ctx['phone_number'] = affiliate.phone
+            request.session['phone_number'] = affiliate.phone
         ctx['use_call_measurement'] = affiliate.use_call_measurement
-        request.session['phone_number'] = affiliate.phone
         request.session['call_measurement'] = affiliate.use_call_measurement
 
     return ctx
