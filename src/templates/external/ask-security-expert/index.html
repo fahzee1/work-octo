@@ -2,16 +2,16 @@
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
-{% block page_title %}{% endblock %}
-{% block page_description %}{% endblock %}
-{% block page_keywords %}{% endblock %}
+{% block page_title %}Security System Expert | Ask Our Expert Anything{% endblock %}
+{% block page_description %}Frequently asked questions about home security systems. Our experts are here to answer anything you can think of.{% endblock %}
+{% block page_keywords %}security system expert, home security,expert, home security deals, home security expert, home security system,security,security system,security systems,alarm system{% endblock %}
 
 {% block google_analytics %}
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-5441302-16']);
-  _gaq.push(['_setDomainName', 'blackfridayhomesecurity.com']);
+  _gaq.push(['_setDomainName', 'securitysystemexpert.com']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -41,13 +41,20 @@
             <h1 class="tk-corn-dog">Ask a Security Expert</h1>
             <div id="security-tip" class="tk-mufferaw">
                 <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/chat-bubble-point.png" class="chat-bubble-point" />
-                {% for tip in tips %}
-                <p>{{ tip.tip|safe }}</p>
-                {% endfor %}
+                {% if messages %}
+                    {% for message in messages %}
+                    {{ message|safe }}
+                    {% endfor %}
+                {% else %}
+                    {% for tip in tips %}
+                    <p>{{ tip.tip|safe }}</p>
+                    {% endfor %}
+                {% endif %}
             </div>
             <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert.png" alt="security-expert" id="security-expert-person" />
         </div>
     </div>
+
     <div id="ground">
         <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/grass.jpg" alt="grass" width="1024" height="128" />
     </div>
@@ -59,7 +66,9 @@
 {% block footer %}
 {% endblock %}
 {% block content %}
+{% if not messages %}
 <button class="security_butt tk-corn-dog">Next Tip</button>
+{% endif %}
         {% businesstime %}
         <div class="clear"></div>
         <div id="call-box" class="tk-corn-dog">
@@ -99,16 +108,17 @@
             <button class="question_button tk-corn-dog">More Questions</button>
         </div>
         <div id="question-box">
-            <form class="tk-mufferaw">
+            <form class="tk-mufferaw" action="{% url ask_question %}" method="POST">
+                {% csrf_token %}
                 <h2 class="tk-corn-dog">Ask a Question!</h2>
                 <p>Fill Out the Form Below to ask the security expert a question.</p>
                 <label>Name:</label>
-                <input type="text" />
+                {{ form.name }}
                 <label>Email:</label>
-                <input type="text" />
+                {{ form.email }}
                 <label>Your Question:</label>
-                <textarea></textarea>
-                <button class="tk-corn-dog">Send Your Question</button>
+                {{ form.message }}
+                <button class="tk-corn-dog" type="submit">Send Your Question</button>
             </form>
         </div>
 {% addtoblock "js" %}
@@ -122,8 +132,9 @@ $(document).ready(function() {
         $('.question-panel:eq(0)').show();
         $('#security-tip p').hide();
         $('#security-tip p:eq(0)').show();
-
+        {% if not messages %}
         setInterval(tip_pop, 10000);
+        {% endif %}
     }
     function change_question() {
         var current_panel = $('.question-panel:visible');

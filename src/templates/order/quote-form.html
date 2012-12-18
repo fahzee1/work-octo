@@ -61,8 +61,12 @@ $(document).ready(function() {
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
                 url = json.thank_you
                 window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
                 _gaq.push([  
                     '_trackEvent',
                     'Form Click',

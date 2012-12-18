@@ -6,7 +6,6 @@
 {% block page_description %}Get a home security systems for your home at the lowest cost. Sign up for alarm monitoring and get a GE Simon XT home alarm at no cost.{% endblock %}
 
 {% block css %}
-    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
@@ -16,7 +15,7 @@
 
 {% block header %}
     <div id="top-phone-number">
-        <p><a href="tel:{{ phone_number|format_number }}">Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+        <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Phone', '{{ page_name }}']);">Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
     </div>
     <div id="header">
         <div id="company-logo">
@@ -24,7 +23,7 @@
         </div>
         <ul id="main-navigation">
             <li id="menu_icon"><img src="{{ STATIC_URL }}img/mobile/menu-icon.png" alt="Home Security Menu" width="32" height="40" /></li>
-            <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
+            <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
             <li><a href="{% url cart %}" title="View Your Home Security Shopping Cart">{% if current_cart.has_items %}<img src="{{ STATIC_URL }}img/mobile/cart-notify.png" alt="You have items in your shopping cart" id="cart-notify" width="24" height="24" />{% endif %}<img src="{{ STATIC_URL }}img/mobile/shop-icon.png" alt="Shopping Cart" width="32" height="40" /></a></li>
         </ul>
     </div>
@@ -47,7 +46,7 @@
 {% endaddtoblock "js" %}
 {% addtoblock "js" %}
 <script type="text/javascript">
-$(document).bind('pageinit'){
+$(document).ready(function(){
     $('#menu_icon').toggle(function() {
         $(this).addClass('active');
         $('#sub-navigate').slideDown('fast');
@@ -55,14 +54,6 @@ $(document).bind('pageinit'){
         $(this).removeClass('active');
         $('#sub-navigate').slideUp('false');
     })
-    $('a[href^="tel"]').vmousedown(function() {
-        _gaq.push([  
-            '_trackEvent',
-            'Mobile Phone Click',
-            '{{ page_name }}',
-            $(this).index()
-        ]);
-    });
 });
 </script>
 {% endaddtoblock "js" %}
@@ -77,7 +68,7 @@ $(document).bind('pageinit'){
 {% endblock %}
 <div id="phone-number">
     <h3>Call Today and Save!</h3>
-    <p><a href="tel:{{ phone_number|format_number }}"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+    <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Footer', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
 </div>
 <img src="{{ STATIC_URL }}img/mobile/ge-security.jpeg" class="ge-logo" alt="GE Security Authorized Dealer" width="275" height="101" />
 

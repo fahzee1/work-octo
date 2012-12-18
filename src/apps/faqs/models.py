@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.localflavor.us.models import PhoneNumberField
 
 class Question(models.Model):
     question = models.TextField()
@@ -25,3 +26,11 @@ class Tip(models.Model):
 
     def __unicode__(self):
         return self.tip
+
+class QuestionSubmission(models.Model):
+    name = models.CharField(max_length=128)
+    email = models.EmailField(max_length=128)
+    phone = PhoneNumberField()
+
+    def __unicode__(self):
+        return self.name
