@@ -199,6 +199,7 @@ elif settings.SITE_ID == 10:
 
     )
 
+
 # GetAHomeSecuritySystem.com
 elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
@@ -209,12 +210,10 @@ elif settings.SITE_ID == 11:
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
-        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
-        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
-        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
-        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
-        dtt(r'^thank-you/$', 'external/alarm-zone/thank-you.html', 'thank-you'),
-
+        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
+        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
+        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you'),
     )
 
 # SecuritySystemExpert.com
@@ -461,6 +460,9 @@ else:
         
             # Contact Pages > Find Us
             dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+            
+            # Contact Pages > Department Listing
+            dtt(r'^agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
             
             # Contact Pages > Department Listing
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
