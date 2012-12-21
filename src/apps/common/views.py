@@ -115,6 +115,9 @@ def simple_dtt(request, template, extra_context):
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
 
+    if request.session.get('affkey'):
+        extra_context['affkey'] = request.session.get('affkey')
+
     affiliate = request.COOKIES.get('refer_id', None)
     newaffiliate = None
     if not affiliate and 'agent_id' in extra_context:
