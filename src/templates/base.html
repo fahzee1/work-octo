@@ -92,12 +92,13 @@
                 <p>GE Security Authorized Dealer</p>
             </div>
             {% endblock %}
-
-            {% if phone_number %}
-            <div id="phone-number">
-                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
-            </div>
-            {% endif %}
+            {% block main-phone %}
+                {% if phone_number %}
+                <div id="phone-number">
+                    <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
+                </div>
+                {% endif %}
+            {% endblock %}
             <div class="clear"></div>
         </div>
         
