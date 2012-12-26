@@ -209,7 +209,7 @@ elif settings.SITE_ID == 11:
 # AlarmZone.com
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
         dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
         dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
         dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
@@ -222,6 +222,7 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
+
 else:
     urlpatterns += patterns('',
 
@@ -287,6 +288,10 @@ else:
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
+
+        # Spanish
+        dtt(r'^spanish/$', 'spanish/index.html',
+            'pa-spanish', ctx={'agent_id': 'i10109'}),
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',

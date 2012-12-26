@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/spanish.css">
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+
+{% block typekit %}tk-jaf-facitweb{% endblock %}
+{% block quick-links %}
+<ul id="quick-link-navigation">
+    <li id="quick-social">                
+        <div id="google-button">
+            <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
+        </div>
+        <div id="facebook-button">
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fprotectamerica&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=179318388788943" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Quick Social', 'PAGE_NAME']);"></iframe>
+        </div>
+        <div class="clear"></div>
+    </li>
+    {% comment %}
+    <li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Chat En Directo</a></li>
+    {% endcomment %}
+    <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Contrato</a></li>
+</ul>
+{% endblock %}
+{% block main-phone %}
+    {% if phone_number %}
+    <div id="phone-number">
+        <p>&iexcl;Llame hoy y ahorre ! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block content %}
+</div>
+    {% include "banners/seo-hero-images.html" %}
+<div class="wrapper">
+    {% if phone_number %}
+    {% businesstime %}
+    <div class="clear"></div>
+    <div id="call-box">
+        {% block call-box-text %}<p>Asegure su hogar hoy, <strong>&iexcl;Llame ahora! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+    </div>
+    <div class="clear"></div>
+    {% endbusinesstime %}
+    
+    {% endif %}
+    <div id="security-benefits">
+        <div id="advantage-badges">
+            <img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo.jpg" alt="consumer-digest-logo" width="136" height="120" />
+            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-logo.jpg" alt="top-consumer-logo" width="128" height="120" id="top-consumer-logo" />
+            <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
+        </div>
+        <div id="protect-america-information">
+            <p>Protect America est&aacute; dise&ntilde;ado para proveer los productos y servicios de seguridad para el hogar de la mayor calidad al menor precio posible. Durante los &uacute;ltimos cinco a&ntilde;os (2008-2012) hemos obtenido la calificaci&oacute;n de 5 estrellas en Top Consumer Reviews y nuestro Paquete Cobre incluso recibi&oacute; el reconocimiento 'Mejor Compra' de Consumers Digest. </p>
+            <div class="button-submit"><a href="">Compre Ahora ></a>{% businesstime %}<p class="phone-alt">o &iexcl;Llame Hoy! <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>{% endbusinesstime %}</div>
+        </div>
+        <div id="home-security-video">
+            <iframe width="537" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div id="home-security-testimonials">
+        <h2>Nuestros Clientes Aman Nuestros Sistemas de Seguridad</h2>
+        <div class="testimonial">
+            <p>Noel was excellent: very thorough and patient. As I've mentioned, I installed this alarm many years ago when I worked long hours and traveled ...
+            <img src="{{ STATIC_URL }}img/extra/grey-arrow.png" class="grey-arrow" alt="grey-arrow" width="39" height="18" />
+            </p>
+            <h3>Carlos <span>Somerville, MA on November 15, 2012</span></h3>
+        </div>
+        <div class="testimonial">
+            <p>Great customer service, chatted me through my issue with the low battery Thank You! That's why I choose Protect America,
+            <img src="{{ STATIC_URL }}img/extra/grey-arrow.png" class="grey-arrow" alt="grey-arrow" width="39" height="18" />
+            </p>
+            <h3>Martina <span>Fayetteville, NC on December 04, 2012</span></h3>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="security-categories">
+        <ul>
+            <li id="alarm-category">
+                <img src="{{ STATIC_URL }}img/extra/alarm-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>Wireless Home Security Systems</h2>
+                <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active">Learn More ></a></div>
+            </li>
+            <li id="video-category">
+                <img src="{{ STATIC_URL }}img/extra/video-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>Video <br />Security</h2>
+                <div class="button-link"><a href="#video-security" id="video-button-choice">Learn More ></a></div>
+            </li>
+            <li id="smart-app-category">
+                <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>On The Go <br/>Smart Apps</h2>
+                <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice">Learn More ></a></div>
+            </li>
+            <div class="clear"></div>
+        </ul>
+        <img src="{{ STATIC_URL }}img/spanish/color-band.png" id="color-band" alt="Color Band" width="1030" height="80" />
+        <img src="{{ STATIC_URL }}img/spanish/white-arrow.png" id="white-arrow" alt="Color Band" />
+
+    </div>
+</div>
+<div id="home-security-choice" class="big-info">
+    <div class="big-wrapper">
+
+        <h2>Wireless Home Security Systems</h2>
+    </div>
+</div>
+<div id="video-security-choice" class="big-info">
+    <div class="big-wrapper">
+        <div id="video-security-main-image">
+            <img src="{{ STATIC_URL }}img/spanish/infrared-video-security-camera.jpg" alt="infrared-video-security-camera" width="320" height="480" />
+        </div>
+        <div id="video-security-overview">
+            <h2>Interactive Video Security</h2>
+            <p>Protect America allows you to gain a true picture of what is happening in your home or business with 24/7 on-demand video. Get enhanced security with our night vision video cameras, archived clips, event notifications, and automatic recording when movement is detected. With Protect America's video services, peace of mind is just an instant click away.</p>
+            <h3>Add to any Package for +$10 per month</h3>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div id="video-extra-information">
+            <div id="interactive-security">
+                <h2>Video Home Security: Here, There, Everywhere.</h2>
+                <p>These days, we are always on the go. Whether you are traveling for work or heading to the beach to relax, we find ourselves spending less time at home. Unfortunately, being gone makes it a perfect time for a burglar to strike. So, we made it easy to check in at home anytime, and anywhere with our smart phone app. Just click the icon and you can view your own live feed from your home security cameras. Also, you will stay notified with text notifications that can be read straight from your phone.</p>
+            </div>
+            <div id="video-screenshot">
+            
+            </div>
+        </div>
+    </div>
+</div>
+<div id="smart-app-choice" class="big-info">
+    <div class="big-wrapper">
+        <h2>Smart App</h2>
+    </div>
+</div>
+<div class="wrapper"></div>
+{% addtoblock "js" %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+        animated = false;
+        var flag1 = true;
+        var flag2 = true;
+        var flag3 = true;
+
+            $("#home-security-button-choice").click(function(){
+                if (!animated && flag1) {
+                    console.log('Inside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3;
+                    flag2 = false;
+                    flag3 = false;                    
+                    animated = true;
+                    $('.big-info').slideUp('fast',function() {
+                        $('.button-link > .active').fadeIn('slow');
+                        $('.button-link > .active').removeClass('active');
+                        $('#home-security-button-choice').fadeOut('fast');
+                        $('#white-arrow').animate({left: '-925px'}, 500, function() {
+                            $('#home-security-choice').slideDown('fast', function() {
+                                animated = false;
+
+                                $("#home-security-button-choice").addClass('active');
+                                flag2 = true;
+                                flag3 = true;                                 
+                            });
+                        });
+                    });
+                    
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+            $("#video-button-choice").click(function(){
+
+                console.log('Should be false: '+ animated);
+
+                if (!animated && flag2) {
+                    console.log('Inside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3;
+                    flag1 = false;
+                    flag3 = false;
+                    animated = true;
+                    $('.big-info').slideUp('fast',function() {
+                        $('.button-link > .active').fadeIn('slow');
+                        $('.button-link > .active').removeClass('active');
+                        $('#video-button-choice').fadeOut('fast');
+                        $('#white-arrow').animate({left: '-581px'}, 500, function() {
+                            $('#video-security-choice').slideDown('fast', function() {
+                                animated = false;
+                                $("#video-button-choice").addClass('active');
+                                flag1 = true;
+                                flag3 = true;                                
+                            });
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+
+        });
+    </script>
+{% endaddtoblock "js" %}
+
+{% endblock %}
+
+
