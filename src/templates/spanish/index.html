@@ -102,13 +102,13 @@
 
     </div>
 </div>
-<div id="home-security-choice" class="big-info">
+<div id="home-security-choice" class="big-info" style="display:block">
     <div class="big-wrapper">
 
         <h2>Wireless Home Security Systems</h2>
     </div>
 </div>
-<div id="video-security-choice" class="big-info">
+<div id="video-security-choice" class="big-info" style="display:none">
     <div class="big-wrapper">
         <div id="video-security-main-image">
             <img src="{{ STATIC_URL }}img/spanish/infrared-video-security-camera.jpg" alt="infrared-video-security-camera" width="320" height="480" />
@@ -131,68 +131,149 @@
         </div>
     </div>
 </div>
-<div id="smart-app-choice" class="big-info">
+<div id="smart-app-choice" class="big-info" style="display:none">
     <div class="big-wrapper">
         <h2>Smart App</h2>
     </div>
 </div>
 <div class="wrapper"></div>
 {% addtoblock "js" %}
-    <script type="text/javascript">
+ <script type="text/javascript">
+    
+
+
         $(document).ready(function() {
         animated = false;
-        var flag1 = true;
-        var flag2 = true;
-        var flag3 = true;
+        flag1 = true;
+        flag2 = true;
+        flag3 = true;
 
-            $("#home-security-button-choice").click(function(){
-                if (!animated && flag1) {
-                    console.log('Inside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3;
-                    flag2 = false;
-                    flag3 = false;                    
-                    animated = true;
-                    $('.big-info').slideUp('fast',function() {
-                        $('.button-link > .active').fadeIn('slow');
-                        $('.button-link > .active').removeClass('active');
-                        $('#home-security-button-choice').fadeOut('fast');
-                        $('#white-arrow').animate({left: '-925px'}, 500, function() {
-                            $('#home-security-choice').slideDown('fast', function() {
-                                animated = false;
+        function updateFlag(FlagID, FlagValue)
+        {
+            switch(FlagID)
+            {
+                case 1:
+                {
+                    flag1 = FlagValue;
+                    break;
+                }
+                case 2:
+                {
+                    flag2 = FlagValue;
+                    break;
+                }
+                case 3:
+                {
+                    flag3 = FlagValue;
+                    break;
+                }
+            }
+        }
 
-                                $("#home-security-button-choice").addClass('active');
-                                flag2 = true;
-                                flag3 = true;                                 
+        function getFlag(FlagID)
+        {
+            theBool = false;
+            switch(FlagID)
+            {
+                case 1:
+                {
+                    theBool = flag1;
+                    break;
+                }
+                case 2:
+                {
+                    theBool = flag2;
+                    break;
+                }
+                case 3:
+                {
+                    theBool = flag3;
+                    break;
+                }
+            }
+            return theBool;
+        }
+
+        function showSlide(slideNumber)
+        {
+            switch (slideNumber)
+            {
+                case 1:
+                {
+                    if (!animated && getFlag(1)) {
+                        console.log('Inside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+
+                        updateFlag(2, false);
+                        updateFlag(3, false);                    
+                        animated = true;
+                        console.log('Inside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+
+                        $('.big-info').slideUp('fast',function() {
+                            $('.button-link > .active').fadeIn('slow');
+                            $('.button-link > .active').removeClass('active');
+                            $('#home-security-button-choice').fadeOut('fast');
+                            $('#white-arrow').animate({left: '-925px'}, 500, function() {
+                                $('#home-security-choice').slideDown('fast', function() {
+                                    animated = false;
+
+                                    $("#home-security-button-choice").addClass('active');
+                                    updateFlag(2, true);
+                                    updateFlag(3, true);                                
+                                });
                             });
                         });
-                    });
-                    
-                    return false;
-                } else {
-                    return false;
+                    }
+
+                    break;
                 }
+                case 2:
+                {
+                    if (!animated && getFlag(2)) {
+                        console.log('Inside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+                        updateFlag(1, false);
+                        updateFlag(3, false); 
+                        animated = true;
+                        $('.big-info').slideUp('fast',function() {
+                            $('.button-link > .active').fadeIn('slow');
+                            $('.button-link > .active').removeClass('active');
+                            $('#video-button-choice').fadeOut('fast');
+                            $('#white-arrow').animate({left: '-581px'}, 500, function() {
+                                $('#video-security-choice').slideDown('fast', function() {
+                                    animated = false;
+                                    $("#video-button-choice").addClass('active');
+                                    updateFlag(1, true);
+                                    updateFlag(3, true);                                
+                                });
+                            });
+                        });
+                    }
+
+                    break;
+                }
+                case 3:
+                {
+
+                    break;
+                }
+
+
+            }
+        }
+        
+
+            $("#home-security-button-choice").click(function(){
+
+                console.log('outside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+                showSlide(1);
+                return false;
             });
             $("#video-button-choice").click(function(){
 
                 console.log('Should be false: '+ animated);
+                console.log('outside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3 + '==' + getFlag(2));
+                if (!animated && getFlag(2)) {
+                    showSlide(2);
 
-                if (!animated && flag2) {
-                    console.log('Inside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3;
-                    flag1 = false;
-                    flag3 = false;
-                    animated = true;
-                    $('.big-info').slideUp('fast',function() {
-                        $('.button-link > .active').fadeIn('slow');
-                        $('.button-link > .active').removeClass('active');
-                        $('#video-button-choice').fadeOut('fast');
-                        $('#white-arrow').animate({left: '-581px'}, 500, function() {
-                            $('#video-security-choice').slideDown('fast', function() {
-                                animated = false;
-                                $("#video-button-choice").addClass('active');
-                                flag1 = true;
-                                flag3 = true;                                
-                            });
-                        });
-                    });
                     return false;
                 } else {
                     return false;
