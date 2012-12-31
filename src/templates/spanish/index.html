@@ -36,7 +36,15 @@
 {% endblock %}
 {% block content %}
 </div>
-    {% include "banners/seo-hero-images.html" %}
+<div id="spanish-hero-wrapper">
+    <div id="spanish-topper">
+        <div id="hero-image">
+            <img src="{{ STATIC_URL }}img/spanish/best-security-offer.png" alt="best-security-offer" />
+        </div>
+        {% include "order/quote-form.html" with form=forms.basic %}
+
+    </div>
+</div>
 <div class="wrapper">
     {% if phone_number %}
     {% businesstime %}
@@ -82,7 +90,7 @@
         <ul>
             <li id="alarm-category">
                 <img src="{{ STATIC_URL }}img/extra/alarm-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
-                <h2>Wireless Home Security Systems</h2>
+                <h2>Sistema de Seguridad Inalambricos</h2>
                 <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active">Learn More ></a></div>
             </li>
             <li id="video-category">
@@ -104,9 +112,78 @@
 </div>
 <div id="home-security-choice" class="big-info">
     <div class="big-wrapper">
+        <div id="home-security-packages">
+            <div id="basic-security-package">
+                <h3>Basico</h3>
+                <p><sup>$</sup>19<sup>99</sup><span>mensual</span></p>
+                <div class="package-info">
+                    <ul>
+                        <li><strong>1 &ndash;</strong> Simon XT Panel de Control</li>
+                        <li><strong><span>3</span> &ndash;</strong> Sensor de Puerta/Ventana</li>
+                        <li><strong>1 &ndash;</strong> Sensor de Movimiento</li>
+                    </ul>
+                    <ul class="extra-features">
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Equipo incluido</li>
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Sin Cargos por Activaci&oacute;ns</li>
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Garant&iacute;a de equipo</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="standard-security-package">
+                <h3>Optimo</h3>
+                <p><sup>$</sup>37<sup>99</sup><span>mensual</span></p>
+                <div class="package-info">
+                    <ul>
+                        <li><strong>1 &ndash;</strong> Simon XT Panel de Control</li>
+                        <li><strong><span>10</span> &ndash;</strong> Sensor de Puerta/Ventana</li>
+                        <li><strong>1 &ndash;</strong> Sensor de Movimiento</li>
+                    </ul>
+                    <ul class="extra-features">
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Equipo incluido</li>
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Sin Cargos por Activaci&oacute;ns</li>
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Garant&iacute;a de equipo</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="premier-security-package">
+                <h3>Supremo</h3>
+                <p><sup>$</sup>42<sup>99</sup><span>mensual</span></p>
+                <div class="package-info">
+                    <ul>
+                        <li><strong>1 &ndash;</strong> Simon XT Panel de Control</li>
+                        <li><strong><span>15</span> &ndash;</strong> Sensor de Puerta/Ventana</li>
+                        <li><strong>1 &ndash;</strong> Sensor de Movimiento</li>
+                    </ul>
+                    <ul class="extra-features">
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Equipo incluido</li>
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Sin Cargos por Activaci&oacute;ns</li>
+                        <li><img src="{{ STATIC_URL }}img/spanish/checkmark.png" alt="checkmark" />Garant&iacute;a de equipo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
 
-        <h2>Wireless Home Security Systems</h2>
+        <div id="home-security-info">
+            <div id="home-security-overview">
+                <h2>Proteja a su familia con un sistema de seguridad</h2>
+                <p>Las alarmas para seguridad del hogar son una parte fundamental para aumentar la seguridad de los hogares. Con la amplia variedad de sistemas de seguridad para el hogar que existen en el mercado, puede ser dif&iacute;cil encontrar el mejor sistema para usted. Los sistemas inal&aacute;mbricos de alarmas Protect America tambi&eacute;n se pueden adaptar con accesorios de seguridad para aumentar a&uacute;n m&aacute;s la protecci&oacute;n de su hogar y de su familia.</p>
+                {% if phone_number %}
+                    {% businesstime %}
+                        <h3>Asegure su hogar hoy, <strong>&iexcl;Llame ahora! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                    {% endbusinesstime %}
+                {% endif %}
+                <div class="clear"></div>
+            </div>
+            <div id="home-security-main-image">
+                <img src="{{ STATIC_URL }}img/spanish/lowest-price-guaranteed-icon-spanish.jpg" alt="lowest-price-guaranteed-icon" />
+                <img src="{{ STATIC_URL }}img/spanish/lifetime-equipment-warranty-spanish.jpg" alt="lifetime-equipment-warranty" />
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
     </div>
+
 </div>
 <div id="video-security-choice" class="big-info">
     <div class="big-wrapper">
@@ -123,7 +200,8 @@
         <div id="video-extra-information">
             <div id="interactive-security">
                 <h2>Video Home Security: Here, There, Everywhere.</h2>
-                <p>These days, we are always on the go. Whether you are traveling for work or heading to the beach to relax, we find ourselves spending less time at home. Unfortunately, being gone makes it a perfect time for a burglar to strike. So, we made it easy to check in at home anytime, and anywhere with our smart phone app. Just click the icon and you can view your own live feed from your home security cameras. Also, you will stay notified with text notifications that can be read straight from your phone.</p>
+                <p>These days, people are always on the go and spend less time at home. Unfortunately, an empty house is the perfect time for a burglar to strike. Get interactive video security and check on your phone anywhere at any time. Our home surveillance cameras let you view your own live video feed from any Internet-enabled computer or smartphone. You can also be notified of recorded events with text notifications that can be read straight from your phone.</p>
+                <div class="clear"></div>
             </div>
             <div id="video-screenshot">
             
