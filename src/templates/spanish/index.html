@@ -5,6 +5,285 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/spanish.css">
     <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    <script type="text/javascript">
+        animated = false;
+        active_flag = 1;
+        prev_flag = 1;
+
+        flag1 = true;
+        flag2 = true;
+        flag3 = true;
+        var slides = new Array();
+        slides[0] = "home-security";
+        slides[1] = "video";
+        slides[2] = "smart-app";
+        var slide_choices = new Array();
+        slide_choices[0] = "#home-security-choice";
+        slide_choices[1] = "#video-security-choice";
+        slide_choices[2] = "#smart-app-choice";
+
+
+        function updateFlag(FlagID, FlagValue)
+        {
+            switch(FlagID)
+            {
+                case 1:
+                {
+                    flag1 = FlagValue;
+                    break;
+                }
+                case 2:
+                {
+                    flag2 = FlagValue;
+                    break;
+                }
+                case 3:
+                {
+                    flag3 = FlagValue;
+                    break;
+                }
+            }
+        }
+        function updateOtherFlags(FlagID, FlagValue)
+        {
+            for(var i=1;i<=3;i++)
+            {
+                if(i != FlagID)
+                {
+                    updateFlag(i,FlagValue);
+                }
+            }
+        }
+
+        function getFlag(FlagID)
+        {
+            theBool = false;
+            switch(FlagID)
+            {
+                case 1:
+                {
+                    theBool = flag1;
+                    break;
+                }
+                case 2:
+                {
+                    theBool = flag2;
+                    break;
+                }
+                case 3:
+                {
+                    theBool = flag3;
+                    break;
+                }
+            }
+            return theBool;
+        }
+
+        function storeHistory(FlagID)
+        {
+            prev_flag = active_flag;
+            active_flag = FlagID;
+        }
+
+        function slideAnimation_start(FlagID)
+        {
+
+            updateOtherFlags(FlagID, false);
+            animated = true;
+            slideUp(FlagID);
+        }
+
+        function slideUp(FlagID)
+        {
+            $('.big-info').slideUp(300);
+            //$('.big-info').slideUp('fast', fadeIn(FlagID));
+            
+            fadeIn(FlagID);
+        }
+        function fadeIn(FlagID)
+        {
+            console.log('active id: ' + $('.button-link .active').id);
+            console.log('home security id: ' + $('.button-link #home-security-button-choice').attr('id'));
+            //alert('fade in');
+            $('.button-link > .active').fadeIn('slow');
+            removeActive(FlagID);
+            $('#' + slides[FlagID-1] + "-button-choice").fadeOut('fast', moveArrow(FlagID) );
+            moveArrow(FlagID);
+        }
+
+        function removeActive(FlagID)
+        {
+            $('.button-link > .active').removeClass('active');
+            //
+        }
+
+        function moveArrow(FlagID)
+        {
+            var posFlag = new Array();
+            posFlag[0] = -925;
+            posFlag[1] = -581;
+            posFlag[2] = -240;
+            console.log('move arrow: ' + FlagID);
+
+            $('#white-arrow').animate({left: posFlag[FlagID-1] + 'px'}, 500, slideDown(FlagID) );
+        }
+
+        function slideDown(FlagID)
+        {
+            console.log('slide down: ' + FlagID + '  id:' + $(slide_choices[FlagID-1]).attr('id') );
+            $(slide_choices[FlagID-1]).show();
+            $(slide_choices[FlagID-1]).slideDown('fast', stepNext(FlagID) );
+        }
+
+        function stepNext(FlagID)
+        {
+            console.log('step next: ' + FlagID);
+            $('#' + slides[FlagID-1] + "-button-choice").addClass('active');
+            
+
+            animated = false;
+            updateOtherFlags(FlagID, true);
+            console.log('stepped next: ' + FlagID + '_animated=' + animated);
+        }
+
+        function showSlide(slideNumber)
+        {
+            console.log('flagID:' + slideNumber);
+
+            console.log('slide number: ' + slideNumber);
+            console.log('all button click: animated=' + animated +'|flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+            console.log('start:prev=' + prev_flag);
+            console.log('start:actv=' + active_flag);
+
+            
+            storeHistory(slideNumber)
+
+            switch (slideNumber)
+            {
+                case 1:
+                {
+                    if (!animated && getFlag(1)) {
+                        console.log('Inside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+                        /*
+                        updateOtherFlags(slideNumber, false);                  
+                        animated = true;
+                        console.log('Inside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+
+                        $('.big-info').slideUp('fast',function() {
+                            $('.button-link > .active').fadeIn('slow');
+                            $('.button-link > .active').removeClass('active');
+                            $('#home-security-button-choice').fadeOut('fast');
+                            $('#white-arrow').animate({left: '-925px'}, 500, function() {
+                                $('#home-security-choice').slideDown('fast', function() {
+                                    
+                                    $("#home-security-button-choice").addClass('active');
+                                    animated = false;
+                                    updateOtherFlags(slideNumber, true);
+                                });
+                            });
+                        });
+
+                        */
+                        slideAnimation_start(1);
+                    }
+
+                    break;
+                }
+                case 2:
+                {
+                    if (!animated && getFlag(2)) {
+                        console.log('Inside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+                        
+
+
+
+
+                        /*
+
+
+                        updateOtherFlags(slideNumber, false);
+                        animated = true;
+                        $('.big-info').slideUp('fast',function() {
+                            $('.button-link > .active').fadeIn('slow');
+                            $('.button-link > .active').removeClass('active');
+                            $('#video-button-choice').fadeOut('fast');
+                            $('#white-arrow').animate({left: '-581px'}, 500, function() {
+                                $('#video-security-choice').slideDown('fast', function() {
+                                    
+                                    $("#video-button-choice").addClass('active');
+                                    animated = false;
+                                    updateOtherFlags(slideNumber, true);                               
+                                });
+                            });
+                        });
+
+                        */
+                        
+                        slideAnimation_start(2);
+
+                        
+                    }
+
+                    break;
+                }
+                case 3:
+                {
+
+                     if (!animated && getFlag(3)) 
+                     {
+                        console.log('Inside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+                        slideAnimation_start(3);
+                    }
+
+
+                    break;
+                }
+
+            }
+            console.log( 'style1-hs: ' + $('#home-security-choice').attr('style') );
+            console.log( 'class1-hs: =============' + $('#home-security-button-choice').attr('class') );
+
+            console.log( 'style2-vs: ' + $('#video-security-choice').attr('style') );
+            console.log( 'class2-vs: =============' + $('#video-button-choice').attr('class') );
+
+            console.log( 'style3-sa: ' + $('#smart-app-choice').attr('style') );
+            console.log( 'class3-sa: =============' + $('#smart-app-button-choice').attr('class') );
+            
+
+            console.log('end:prev=' + prev_flag);
+            console.log('end:actv=' + active_flag);
+            console.log('==============================================');
+
+        }
+
+
+        $(document).ready(function() {
+        
+        
+
+           /* $("#home-security-button-choice").click(function(){
+
+                console.log('outside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3);
+                showSlide(1);
+                return false;
+            });
+            $("#video-button-choice").click(function(){
+
+                console.log('Should be false: '+ animated);
+                console.log('outside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3 + '==' + getFlag(2));
+                if (!animated && getFlag(2)) {
+                    showSlide(2);
+
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+*/
+
+        });
+    </script>
 {% endblock %}
 
 {% block typekit %}tk-jaf-facitweb{% endblock %}
@@ -83,17 +362,17 @@
             <li id="alarm-category">
                 <img src="{{ STATIC_URL }}img/extra/alarm-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
                 <h2>Wireless Home Security Systems</h2>
-                <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active">Learn More ></a></div>
+                <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More ></a></div>
             </li>
             <li id="video-category">
                 <img src="{{ STATIC_URL }}img/extra/video-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
                 <h2>Video <br />Security</h2>
-                <div class="button-link"><a href="#video-security" id="video-button-choice">Learn More ></a></div>
+                <div class="button-link"><a href="#video-security" id="video-button-choice"  onclick="showSlide(2);">Learn More ></a></div>
             </li>
             <li id="smart-app-category">
                 <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
                 <h2>On The Go <br/>Smart Apps</h2>
-                <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice">Learn More ></a></div>
+                <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice" onclick="showSlide(3);">Learn More ></a></div>
             </li>
             <div class="clear"></div>
         </ul>
@@ -102,13 +381,13 @@
 
     </div>
 </div>
-<div id="home-security-choice" class="big-info">
+<div id="home-security-choice" class="big-info" style="display:block">
     <div class="big-wrapper">
 
         <h2>Wireless Home Security Systems</h2>
     </div>
 </div>
-<div id="video-security-choice" class="big-info">
+<div id="video-security-choice" class="big-info" style="display:none">
     <div class="big-wrapper">
         <div id="video-security-main-image">
             <img src="{{ STATIC_URL }}img/spanish/infrared-video-security-camera.jpg" alt="infrared-video-security-camera" width="320" height="480" />
@@ -131,76 +410,14 @@
         </div>
     </div>
 </div>
-<div id="smart-app-choice" class="big-info">
+<div id="smart-app-choice" class="big-info" style="display:none">
     <div class="big-wrapper">
         <h2>Smart App</h2>
     </div>
 </div>
 <div class="wrapper"></div>
 {% addtoblock "js" %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-        animated = false;
-        var flag1 = true;
-        var flag2 = true;
-        var flag3 = true;
 
-            $("#home-security-button-choice").click(function(){
-                if (!animated && flag1) {
-                    console.log('Inside button 1 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3;
-                    flag2 = false;
-                    flag3 = false;                    
-                    animated = true;
-                    $('.big-info').slideUp('fast',function() {
-                        $('.button-link > .active').fadeIn('slow');
-                        $('.button-link > .active').removeClass('active');
-                        $('#home-security-button-choice').fadeOut('fast');
-                        $('#white-arrow').animate({left: '-925px'}, 500, function() {
-                            $('#home-security-choice').slideDown('fast', function() {
-                                animated = false;
-
-                                $("#home-security-button-choice").addClass('active');
-                                flag2 = true;
-                                flag3 = true;                                 
-                            });
-                        });
-                    });
-                    
-                    return false;
-                } else {
-                    return false;
-                }
-            });
-            $("#video-button-choice").click(function(){
-
-                console.log('Should be false: '+ animated);
-
-                if (!animated && flag2) {
-                    console.log('Inside button 2 click: flags 1,2,3:'+ flag1 + "," + flag2 + "," + flag3;
-                    flag1 = false;
-                    flag3 = false;
-                    animated = true;
-                    $('.big-info').slideUp('fast',function() {
-                        $('.button-link > .active').fadeIn('slow');
-                        $('.button-link > .active').removeClass('active');
-                        $('#video-button-choice').fadeOut('fast');
-                        $('#white-arrow').animate({left: '-581px'}, 500, function() {
-                            $('#video-security-choice').slideDown('fast', function() {
-                                animated = false;
-                                $("#video-button-choice").addClass('active');
-                                flag1 = true;
-                                flag3 = true;                                
-                            });
-                        });
-                    });
-                    return false;
-                } else {
-                    return false;
-                }
-            });
-
-        });
-    </script>
 {% endaddtoblock "js" %}
 
 {% endblock %}
