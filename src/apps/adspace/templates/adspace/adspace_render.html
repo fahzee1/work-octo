@@ -1,0 +1,11 @@
+{% if ad.url %}
+<a href="{{ ad.url }}">
+{% endif %}
+<img src="{{ MEDIA_URL }}{{ ad.ad }}"
+    {% if ad.alt %}alt="{{ ad.alt }}"{% endif %}
+    {% if ad.width %}width="{{ ad.width }}px"{% endif %}
+    {% if ad.height %}height="{{ ad.height }}px"{% endif %}
+    {% if ad.element_id %}id="{{ ad.element_id }}"{% endif %} />
+{% if ad.url %}
+</a>
+{% endif %}
