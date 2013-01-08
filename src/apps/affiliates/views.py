@@ -13,6 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
+from apps.adspace.models import Ad, Campaign
 from apps.affiliates.forms import AddAffiliateForm, AffiliateSignup
 
 def json_response(x):
@@ -50,7 +51,30 @@ def delta_sky(request):
     return affiliate_view(request, 'a03005')
     
 def resources(request):
-    return simple_dtt(request, 'affiliates/resources.html', {'page_name': 'affiliate_resources'})
+    """
+    Function that gathers all the google ads from all the campaigns and
+    then sends them to the html to be rendered by banner size.
+    """
+    campaigns = Campaign.objects.all()
+    ads = {
+        'leaderboard': ('Leaderboard (728x90)', []),
+        'banner': ('Banner (468x60)', []),
+        'skyscaper': ('Skyscraper (120x600)', []),
+        'wide_skyscraper': ('Wide Skyscraper (160x600)', []),
+        'small_square': ('Small Square (200x200)', []),
+        'square': ('Square (250x250)', []),
+        'medium_rectangle': ('Medium Rectangle (300x250)', []),
+        'large_rectangle': ('Large Rectangle (336x280)', []),
+    }
+    for campaign in campaigns:
+        for ad in campaign.ad_set.all():
+            if ad.type.slug in ads:
+                ads[ad.type.slug][1].append(ad)
+
+    return simple_dtt(request, 'affiliates/resources.html', {
+            'page_name': 'affiliate_resources',
+            'google_ads': ads,
+        })
 
 
 # SEM Landing Page Views

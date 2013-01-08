@@ -71,6 +71,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.common.context_processors.tracking_pixels',
     'apps.pricetable.context_processors.price_table',
     'apps.pricetable.context_processors.current_cart',
+    'apps.adspace.context_processors.campaign',
     'sekizai.context_processors.sekizai',
 )
 
@@ -138,6 +139,7 @@ INSTALLED_APPS = (
     'apps.crm',
     'apps.payitforward',
     'apps.emails',
+    'apps.faqs',
 
     # sitemaps by opm
     'apps.pa-sitemaps',

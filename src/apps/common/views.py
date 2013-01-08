@@ -115,6 +115,9 @@ def simple_dtt(request, template, extra_context):
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
 
+    if request.session.get('affkey'):
+        extra_context['affkey'] = request.session.get('affkey')
+
     affiliate = request.COOKIES.get('refer_id', None)
     newaffiliate = None
     if not affiliate and 'agent_id' in extra_context:
@@ -201,6 +204,8 @@ def index_test(request, test_name):
         template = 'tests/test-nav-plans.html'
     elif test_name == 'nav-home-security':
         template = 'tests/test-nav-home-security.html'
+    elif test_name == 'holiday':
+        template = 'tests/holiday-test.html'
     else:
         raise Http404
 
@@ -258,5 +263,6 @@ def family_of_companies(request):
 def black_friday(request):
     ctx = {}
     ctx['page_name'] = 'index'
-    ctx['black_friday_delta'] = datetime(2012, 11, 23) - datetime(2012, 11, datetime.today().day)
+    ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
+        datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)

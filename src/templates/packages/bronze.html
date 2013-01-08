@@ -7,7 +7,7 @@
 <div id="top-content">
     <div id="bronze-package-offer" itemscope itemtype="http://schema.org/Product">
         <h1 itemprop="name">Bronze Security Package</h1>
-        <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Bronze Security Package" />
+        <img src="/static/img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" id="offer-main-image" itemprop="image" alt="Bronze Home Security" />
         <ul itemprop="description">
             <li>GE Simon XT Control Panel</li>
             <li>3 Security Stickers</li>
@@ -20,15 +20,10 @@
             <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
             <p>Five star rating in 2012 by TopConsumerReviews.com</p>
         </div>
-        <div id="package-price">
-            {% if request.COOKIES.bbb_test == 'C' %}
+        <div id="package-price" {% if request.COOKIES.bbb_test_2 == 'B' %}style="width: auto; margin-right: 80px;"{% endif %}>
+
+            {% if request.COOKIES.bbb_test_2 == 'A' or not request.COOKIES.bbb_test_2 %}
             <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 12/31/2012</em></span>
-            {% endif %}
-            {% if request.COOKIES.bbb_test == 'B' %}
-            <span class="equipment-price included">Equipment Price: <strong itemprop="price">INCLUDED</strong></span>
-            {% endif %}
-            {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-            <span class="equipment-price">Equipment Price: <strong itemprop="price">FREE</strong></span>
             {% endif %}
             <span class="monthly-price">Monthly Rate: <strong itemprop="price"><sup>$</sup>35.99</strong><em>per month</em></span>
         </div>
@@ -43,7 +38,7 @@
     {% include "banners/limited-time-offer.html" %}
 
 <div id="the-bronze-package">
-    <img src="/static/img/products/bronze-package/in-the-home.jpg" id="main-package-image" alt="Securing a home with up to seven doors or windows">
+    <img src="/static/img/products/bronze-package/in-the-home.jpg" id="main-package-image" alt="Bronze Home Security Layout">
     <div id="bronze-package-content">
         <h1>In Your Home: Bronze Security</h1>
         <p>The first of four levels of perimeter protection offered by Protect America, the Bronze Home Security System was designed to provide protection at each point of entry into your home. Ideal for houses under 1200 sq. ft, the Bronze Security Package features enough sensors to cover up to 7 doors and windows. Along with 7 door/window sensors, the Bronze Security Package also protects inside your home with a motion detector for use in heavily used rooms or hallways. Security systems from Protect America are incredibly easy to customize. Just ask one of our salespeople how you can add a garage door sensor or smoke detectors to your Bronze Package!  </p>

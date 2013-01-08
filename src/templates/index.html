@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
@@ -102,25 +102,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% endif %}
 {% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.COOKIES.refer_id == 'BINGPPC' or request.COOKIES.refer_id == 'HOMESITE' or not request.COOKIES.refer_id %}
 {% comment %}Test for Homesite only{% endcomment %}
-{% if is_mobile and not request.session.no_mobile %}
-<script> 
-_udn = "protectamerica.com";
-</script>
-<!-- Google Analytics Content Experiment code -->
-<script>function utmx_section(){}function utmx(){}(function(){var
-k='61445283-23',d=document,l=d.location,c=d.cookie;
-if(l.search.indexOf('utm_expid='+k)>0)return;
-function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
-indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
-length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
-'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
-'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
-'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
-valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
-</script><script>utmx('url','A/B');</script>
-<!-- End of Google Analytics Content Experiment code -->
-{% endif %}
+
 {% endif %}
 {% endif %}
 {% endblock %}
@@ -134,19 +116,20 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block content %}
 </div>
 {% block hero_banner_area %}
-    {% if request.GET.agent == 'a01986' or request.COOKIES.refer_id == 'a01986' %}
-    {% include "banners/tcr-hero-images.html" %}
-    {% else %}
     {% include "banners/seo-hero-images.html" %}
-    {% endif %}
 {% endblock %}
 <div class="wrapper">
     {% include "order/call-box.html" %}
 <div id="main">
+    {% if pa_ads.promo_banner_full %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_full %}
+    {% else %}
     <div id="twitter-feed">
-        <a href="{% url payitforward %}">
-            <img src="{{ STATIC_URL }}img/banners/224x184/upgrade-to-cell-promo.jpg" alt="Michigan State University and Protect America Pay It Forward" width="232" height="184" id="twitter-ad" />
-        </a>
+        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner %}
+        {% if pa_ads.twitter_left and pa_ads.twitter_right %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.twitter_left %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.twitter_right %}
+        {% else %}
         <ul>
             {% for tweet in tweets %}
             <li>
@@ -157,30 +140,11 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 <div class="clear"></div>
             </li>
             {% endfor %}
-            {% comment %}
-            <li><img src="https://si0.twimg.com/profile_images/2179108329/protectamerica_logo_normal.jpg" />
-                <strong>Protect America <span>@protectamerica</span></strong>
-                <span class="tweet-date">5h ago</span>
-                <p>@CashSavings Were running an amazing deal. Lowest monthly rate ever at 19.99 per/mo & free equipment! Visit http://protectamerica.com  4 more info</p>
-                <div class="clear"></div>
-            </li>
-            <li><img src="https://si0.twimg.com/profile_images/2179108329/protectamerica_logo_normal.jpg" />
-                <strong>Protect America <span>@protectamerica</span></strong>
-                <span class="tweet-date">5h ago</span>
-                <p>@CashSavings Were running an amazing deal. Lowest monthly rate ever at 19.99 per/mo & free equipment! Visit http://protectamerica.com  4 more info</p>
-                <div class="clear"></div>
 
-            </li>
-            <li><img src="https://si0.twimg.com/profile_images/2179108329/protectamerica_logo_normal.jpg" />
-                <strong>Protect America <span>@protectamerica</span></strong>
-                <span class="tweet-date">5h ago</span>
-                <p>@CashSavings Were running an amazing deal. Lowest monthly rate ever at 19.99 per/mo & free equipment! Visit http://protectamerica.com  4 more info</p>
-                <div class="clear"></div>
-
-            </li>
-            {% endcomment %}
         </ul>
+        {% endif %}
     </div>
+    {% endif %}
     <div id="customer-testimonials">
         <div class="ts_testimonial">
             <h1>Our Customers Love Our Home Security Systems</h1>
@@ -345,12 +309,16 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </div>
 </div>
 <div id="sidebar">
+    {% if pa_ads.promo_banner_right %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_right %}
+    {% else %}
     <iframe width="275" height="186" src="http://www.youtube.com/embed/isJJrsr5sXQ?modestbranding=1&rel=0&border=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+    {% if pa_ads.side_bar %}
     <div id="cellupgrade">
-        <a title="Click Here If You Already Have a Home Security System" href="{% url cell-takeover %}">
-            <img width="251" height="286" alt="Click Here If You Already Have a Home Security System" src="{{ STATIC_URL }}/img/banners/promos/already-have-system-sidebar.jpg">
-        </a>
+        {% include "adspace/adspace_render.html" with ad=pa_ads.side_bar %}
     </div>
+    {% endif %}
 
     <div id="copperbestbuy">
         <h2>Copper Package: Consumers Digest Best Buy</h2>
