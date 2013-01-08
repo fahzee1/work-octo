@@ -109,33 +109,49 @@ elif settings.SITE_ID == 5:
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
-            'agent_id': 'a01526'}),
+        #dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
+        #    'agent_id': 'a01526'}),
 
-        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
-        dtt(r'^makes-sense$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
-            'agent_id': 'a01526'}),
-        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
-        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
-        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
-        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
+        #dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
+        #    'agent_id': 'a01526'}),
+        #dtt(r'^makes-sense$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
+        #    'agent_id': 'a01526'}),
+        #dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
+        #    'agent_id': 'a01526'}),
+        #dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
+        #    'agent_id': 'a01526'}),
+        #dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
+        #    'agent_id': 'a01526'}),
+        #dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
+        #    'agent_id': 'a01526'}),
 
-        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
-            'agent_id': 'a01526'}),
+        #dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
+        #    'agent_id': 'a01526'}),
 
-        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
-            'agent_id': 'a01526'}),
+        #dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
+        #    'agent_id': 'a01526'}),
         
-        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
-            'agent_id': 'a01526'}),
+        #dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
+        #    'agent_id': 'a01526'}),
             
-        dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
-            'agent_id': 'a01526'}),
+        #dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
+        #    'agent_id': 'a01526'}),
+
+        #url(r'^dynamic/$', 'apps.common.views.black_friday', name='index'),
+
+        url(r'^dynamic2/$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
+
+        url(r'^(?P<directory_flag>[-A-Za-z0-9])/$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
+
+        url(r'^(?P<directory_flag>[-A-Za-z0-9])$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
+
+        # return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
+        # dict(template=template, extra_context=context),
+        # name=name)
+
+        
+
+
 
 
     )
