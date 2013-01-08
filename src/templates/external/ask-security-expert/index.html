@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Security System Expert | Ask Our Expert Anything{% endblock %}
+{% block page_description %}Frequently asked questions about home security systems. Our experts are here to answer anything you can think of.{% endblock %}
+{% block page_keywords %}security system expert, home security,expert, home security deals, home security expert, home security system,security,security system,security systems,alarm system{% endblock %}
+
+{% block google_analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5441302-16']);
+  _gaq.push(['_setDomainName', 'securitysystemexpert.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{% endblock %}
+
+{% block css %}
+<script type="text/javascript" src="//use.typekit.net/mmy2edz.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/asksecurityexpert.css">
+
+
+{% endblock %}
+
+{% block header %}
+    <div id="security-expert">
+        <img src="{{ STATIC_URL}}img/external-lp/ask-security-expert/cloud.png" class="cloud-1" alt="cloud" width="200" height="104" />
+        <img src="{{ STATIC_URL}}img/external-lp/ask-security-expert/cloud.png" class="cloud-2" alt="cloud" width="200" height="104" />
+        <img src="{{ STATIC_URL}}img/external-lp/ask-security-expert/cloud.png" class="cloud-3" alt="cloud" width="200" height="104" />
+
+        <div id="security-expert-wrapper">
+            <h1 class="tk-corn-dog">Ask a Security Expert</h1>
+            <div id="security-tip" class="tk-mufferaw">
+                <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/chat-bubble-point.png" class="chat-bubble-point" />
+                {% if messages %}
+                    {% for message in messages %}
+                    {{ message|safe }}
+                    {% endfor %}
+                {% else %}
+                    {% for tip in tips %}
+                    <p>{{ tip.tip|safe }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert.png" alt="security-expert" id="security-expert-person" />
+        </div>
+    </div>
+
+    <div id="ground">
+        <img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/grass.jpg" alt="grass" width="1024" height="128" />
+    </div>
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block order-footer %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block content %}
+{% if not messages %}
+<button class="security_butt tk-corn-dog">Next Tip</button>
+{% endif %}
+        {% businesstime %}
+        <div class="clear"></div>
+        <div id="call-box" class="tk-corn-dog">
+            <p>Get an Alarm System, Call Today! <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+        </div>
+        <div class="clear"></div>
+        {% endbusinesstime %}
+        <div id="answer-box">
+            <div class="question-panel">
+            {% for question in questions %}
+                <div class="question">
+                    <h3 class="tk-corn-dog">Q:</h3>
+                    <p>{{ question.question|safe }}</p>
+                    <div class="clear"></div>
+                </div>
+                <div class="answer">
+                    <p>{{ question.answer|safe }}</p>
+                    <h3 class="tk-corn-dog"><img src="{{ STATIC_URL }}img/external-lp/ask-security-expert/security-expert-head.png" alt="security-expert-head" width="56" height="56" /></h3>
+                    <div class="clear"></div>
+                </div>
+                {% if forloop.counter0|divisibleby:"2" %}
+                <div class="ad">
+                    {% if pa_ads.banner %}
+                        <a href="http://www.protectamerica.com/?agent=i10054" title="Get a Home Security System Today">
+                        {% include "adspace/adspace_render.html" with ad=pa_ads.banner %}
+                        </a>
+                    {% endif %}
+                </div> 
+                {% else %}
+                {% if not forloop.last %}
+            </div>
+            <div class="question-panel">
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+            </div>
+            <button class="question_button tk-corn-dog">More Questions</button>
+        </div>
+        <div id="question-box">
+            <form class="tk-mufferaw" action="{% url ask_question %}" method="POST">
+                {% csrf_token %}
+                <h2 class="tk-corn-dog">Ask a Question!</h2>
+                <p>Fill Out the Form Below to ask the security expert a question.</p>
+                <label>Name:</label>
+                {{ form.name }}
+                <label>Email:</label>
+                {{ form.email }}
+                <label>Your Question:</label>
+                {{ form.message }}
+                <button class="tk-corn-dog" type="submit">Send Your Question</button>
+            </form>
+        </div>
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
+{% endaddtoblock "js" %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    function init() {
+        $('.question-panel').hide();
+        $('.question-panel:eq(0)').show();
+        $('#security-tip p').hide();
+        $('#security-tip p:eq(0)').show();
+        {% if not messages %}
+        setInterval(tip_pop, 10000);
+        {% endif %}
+    }
+    function change_question() {
+        var current_panel = $('.question-panel:visible');
+        var next_panel = $('.question-panel:eq(' + (current_panel.index() + 1) + ')');
+        if(next_panel.index() == '-1') {
+            next_panel = $('.question-panel:eq(0)');
+        }
+        // current_panel.hide();
+        // next_panel.show();
+        // First we slide the first question and second question out.
+        // The first question slides our to the left and the second question right
+
+        question_one = current_panel.children('.question:eq(0)');
+        answer_one = current_panel.children('.answer:eq(0)');
+
+        question_one.css('position', 'relative').animate({
+            opacity: 0.0,
+            left: '+=400'
+        }, 500, function() {
+        });
+        answer_one.css('position', 'relative').animate({
+            opacity: 0.0,
+            left: '-=400'
+        }, 500, function() {
+        });
+
+        question_two = current_panel.children('.question:eq(1)');
+        answer_two = current_panel.children('.answer:eq(1)');
+
+        question_two.css('position', 'relative').animate({
+            opacity: 0.0,
+            left: '+=400'
+        }, 500, function() {
+        });
+        answer_two.css('position', 'relative').animate({
+            opacity: 0.0,
+            left: '-=400'
+        }, 500, function() {
+            current_panel.hide();
+            question_one.css({opacity:1.0, left: '0'});
+            answer_one.css({opacity:1.0, left: '0'});
+            question_two.css({opacity:1.0, left: '0'});
+            answer_two.css({opacity:1.0, left: '0'});
+            // for shortcut purposes launch the new load after this function
+            next_panel.fadeIn();
+        });
+
+    }
+    function tip_pop() {
+        var current_tip = $('#security-tip p:visible');
+        var next_tip = $('#security-tip p:eq(' + (current_tip.index()) + ')');
+        if(next_tip.index() == '-1') {
+            next_tip = $('#security-tip p:eq(0)');
+        }
+        $('#security-tip img').fadeOut(20)
+        current_tip.slideUp('fast', function() {
+                $('#security-tip img').fadeIn(520);
+                next_tip.slideDown({duration: 'fast', easing: 'easeOutBounce'});
+            });
+        
+    }
+    $('.security_butt').click(function(e) {
+        e.preventDefault();
+        tip_pop();
+    });
+    $('.question_button').click(function(e) {
+        e.preventDefault();
+        change_question();
+    });
+    init();
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}

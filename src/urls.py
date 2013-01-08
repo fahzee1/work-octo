@@ -189,6 +189,7 @@ elif settings.SITE_ID == 9:
         url(r'^add-to-cart/$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
         url(r'^remove-from-cart/$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
         url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
+        url(r'^thank-you/$', 'apps.pricetable.views.thank_you', name='thank_you'),
     )
 # Black Friday Site
 elif settings.SITE_ID == 10:
@@ -197,18 +198,29 @@ elif settings.SITE_ID == 10:
         url(r'^$', 'apps.common.views.black_friday', name='index'),
 
     )
+
+
+# GetAHomeSecuritySystem.com
 elif settings.SITE_ID == 11:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
     )
+
+# AlarmZone.com
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
-        dtt(r'^equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
-        dtt(r'^monitoring/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
-        dtt(r'^security-tips/$', 'external/alarm-zone/security-tips.html', 'security-tips'),
-        dtt(r'^contact/$', 'external/alarm-zone/contact.html', 'contact'),
+        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
+        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
+        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you'),
+    )
 
+# SecuritySystemExpert.com
+elif settings.SITE_ID == 13:
+    urlpatterns += patterns('',
+        url(r'^$', 'apps.faqs.views.expert_home', name='home'),
+        url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
 else:
     urlpatterns += patterns('',
@@ -222,6 +234,8 @@ else:
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
+        # dtt(r'^404/$', '404.html', '404', 'home'),
+
             
         # SEO Local Pages
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
@@ -248,7 +262,7 @@ else:
         dtt(r'^home-security/business-security-systems/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
         dtt(r'^home-security/free-home-security-system/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
         dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison/index.html', 'paid-adt-comparison-cat'),
-        dtt(r'^frontpoint-vs-protect-america-compare-and-save/$', 'affiliates/frontpoint-comparison/index.html', 'paid-adt-comparison-cat'),
+        dtt(r'^frontpoint-vs-protect-america-compare-and-save/$', 'affiliates/frontpoint-vs-protectamerica/index.html', 'frontpoint-vs-pa'),
         dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
         dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
@@ -448,6 +462,9 @@ else:
         
             # Contact Pages > Find Us
             dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+            
+            # Contact Pages > Department Listing
+            dtt(r'^agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
             
             # Contact Pages > Department Listing
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
