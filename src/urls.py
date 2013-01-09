@@ -139,11 +139,68 @@ elif settings.SITE_ID == 6:
 
         #url(r'^dynamic/$', 'apps.common.views.black_friday', name='index'),
 
-        url(r'^dynamic2/$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
 
-        url(r'^(?P<directory_flag>[-A-Za-z0-9])/$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
 
-        url(r'^(?P<directory_flag>[-A-Za-z0-9])$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'home', 
+                'parent': None}, name='home'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'copper', 
+                'parent': 'security-packages'}, name='copper'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'makes-sense', 
+                'parent': 'home'}, name='makes-sense'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'bronze', 
+                'parent': 'security-packages'}, name='bronze'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'silver', 
+                'parent': 'security-packages'}, name='silver'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'gold', 
+                'parent': 'security-packages'}, name='gold'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'platinum', 
+                'parent': 'security-packages'}, name='platinum'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'video', 
+                'parent': None}, name='video'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'gps', 
+                'parent': None}, name='gps'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'order', 
+                'parent': None}, name='order'),
+
+        url(r'^$', 'apps.common.views.five_linx', kwargs={
+                'agent_id': 'a01526', 
+                'page_name': 'thank-you', 
+                'parent': None}, name='thank-you'),
+
+
+
+        #url(r'^(?P<directory_flag>[-A-Za-z0-9])/$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
+
+        #url(r'^(?P<directory_flag>[-A-Za-z0-9])$', 'apps.common.views.five_linx', kwargs={'agent_id': 'a01526'}, name='dynamic2'),
 
         # return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
         # dict(template=template, extra_context=context),
