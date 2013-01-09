@@ -23,7 +23,7 @@
     {% block canonical %}{% if request.session.domain == 'protectamerica.com' %}
     <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
     {% endif %}{% endblock %}{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css?version=2-4-6">
 
 {% endblock %}
 {% render_block "css" %}
@@ -72,7 +72,7 @@
                 
                 <li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Online Chat</a></li>
 
-                <li><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
+                <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
             </ul>
             {% endblock %}
             <!--<div class="clear"></div>-->
@@ -81,7 +81,7 @@
             {% block company-logo %}
             <div id="company-logo">
                 <a href="http://www.protectamerica.com/" title="Protect America Home Security">
-                    <img src="{{ STATIC_URL }}/img/base/protect-america-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
+                    <img src="{{ STATIC_URL }}img/base/protect-america-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
           
                 </a>
             </div>
@@ -409,7 +409,7 @@
 </div>
 <div id="legal-bit">
     <div id="terms-conditions">
-        <p>* <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php?homesite=true&TB_iframe=true&width=780&height=550" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 12/31/2012</p>
+        <p>* <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php?homesite=true&TB_iframe=true&width=780&height=550" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 01/31/2013</p>
         <p>* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
         {% block extra_terms %}
         {% endblock %}
@@ -417,7 +417,7 @@
     <div id="copyrights">
         <p>GE and GE Security logos are registered trademarks of General Electric.</p>
         <p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
-        <p>&copy; 1992 &mdash; 2012 Protect America, Inc. All rights reserved</p>
+        <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
     </div>
     <div class="clear"></div> 
 </div>
@@ -439,7 +439,6 @@
 
 {% endif %}
 
-
 {% if use_call_measurement %}
 <script type="text/javascript"> 
     var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'a01415' or request.COOKIES.refer_id == 'a01415' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}"; //this variable determines the number pool to use
@@ -453,7 +452,7 @@
 {% block extra_pixels %}
 {{ pixels|default_if_none:""|safe }}
 {% endblock %}
-
+{% if DEBUG == False %}
 <!-- Google Code for Home Page Visit Remarketing List -->
 <script type="text/javascript">
 <!--
@@ -473,6 +472,7 @@ var google_conversion_value = 0;
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
 </script>
+{% block remarketing %}
 <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
 </script>
 <noscript>
@@ -482,11 +482,13 @@ var google_conversion_value = 0;
 </noscript>
 
 <!-- End Remarketing Code -->
+{% endblock %}
 
 <!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
 <img src="http://ads.bluelithium.com/pixel?id=1732074&t=2" width="1" height="1" />
 <!-- End of segment tag -->
 
 <!-- BEGIN LivePerson Monitor. --><script language='javascript'> var lpMTagConfig = {'lpServer' : "server.iad.liveperson.net",'lpNumber' : "34774121",'lpProtocol' : "https"}; function lpAddMonitorTag(src){if(typeof(src)=='undefined'||typeof(src)=='object'){src=lpMTagConfig.lpMTagSrc?lpMTagConfig.lpMTagSrc:'/hcp/html/mTag.js';}if(src.indexOf('http')!=0){src=lpMTagConfig.lpProtocol+"://"+lpMTagConfig.lpServer+src+'?site='+lpMTagConfig.lpNumber;}else{if(src.indexOf('site=')<0){if(src.indexOf('?')<0)src=src+'?';else src=src+'&';src=src+'site='+lpMTagConfig.lpNumber;}};var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','iso-8859-1');s.setAttribute('src',src);document.getElementsByTagName('head').item(0).appendChild(s);} if (window.attachEvent) window.attachEvent('onload',lpAddMonitorTag); else window.addEventListener("load",lpAddMonitorTag,false);</script><!-- END LivePerson Monitor. -->
+{% endif %}
 </body>
 </html>

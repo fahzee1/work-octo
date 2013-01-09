@@ -2,7 +2,7 @@ import datetime
 
 from django.db.models import Q
 
-from models import Ad, Campaign, TYPE_CHOICES
+from models import Ad, Campaign, AdSpot
 
 WEEKDAYS = (
     'monday',
@@ -15,7 +15,7 @@ WEEKDAYS = (
 )   
 
 def campaign(request):
-    ad_dict = dict((key, None) for (key, value) in TYPE_CHOICES)
+    ad_dict = dict((str(spot.slug), None) for spot in AdSpot.objects.all())
     ctx = {'pa_campaign': [], 'pa_ads': ad_dict}
     today = datetime.date.today()
     weekday = datetime.date.today().weekday()
@@ -29,8 +29,8 @@ def campaign(request):
             if campaign.__getattribute__(WEEKDAYS[weekday]):
                 ctx['pa_campaign'].append(campaign)
                 for ad in campaign.ad_set.all():
-                    if ctx['pa_ads'][ad.type] is None:
-                        ctx['pa_ads'][ad.type] = ad
+                    if ctx['pa_ads'][ad.type.slug] is None:
+                        ctx['pa_ads'][ad.type.slug] = ad
         except Ad.DoesNotExist:
             pass
     return ctx

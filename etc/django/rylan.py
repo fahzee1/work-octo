@@ -7,7 +7,8 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/rylanfrancis/Documents/protectamerica2/protectamerica.dev/database.db',                      # Or path to database file if using sqlite3
+        #'NAME': '/Users/rylanfrancis/Documents/protectamerica2/protectamerica/database.db',                      # Or path to database file if using sqlite3
+	'NAME': '/vagrant/database.db',
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
@@ -17,31 +18,35 @@ DATABASES = {
 # EMAIL information
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-BUSINESS_HOURS = [{   
+BUSINESS_HOURS = [{
     #monday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #tuesday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #wednesday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #thursday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #friday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #saturday
     'start': '0800',
-    'end': '1700',
-},]
+    'end': '2000',
+},{
+    #sunday
+    'start': '0900',
+    'end': '2100',
+}]
 
 WEBSITE_TEMPLATE = 'patwo'
 TEMPLATE_DIRS = (

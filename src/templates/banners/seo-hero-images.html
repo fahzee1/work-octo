@@ -1,6 +1,6 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
-<div id="top-content-holiday">
+<div id="{{ pa_ads.hero_banner.sub_id }}">
 
     <div class="wrapper">
         {% if pa_ads.hero_banner_backdrop %}
@@ -8,10 +8,10 @@
         {% endif %}
         <div id="top-hero-banner">
 
-            <div id="holiday-banner" data-url="{% url order-package %}">
+            <div id="main-banner" data-url="{% url order-package %}">
                 {% include "adspace/adspace_render.html" with ad=pa_ads.hero_banner %}
             </div>
         </div>
-        {% include "order/quote-form.html" with form=forms.basic %}
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
     </div>
 </div>
