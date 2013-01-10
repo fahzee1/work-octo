@@ -9,7 +9,7 @@ import operator
 from decimal import Decimal
 
 from django.core.cache import cache
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -87,15 +87,23 @@ def fivelinxwinner(request):
     return HttpResponse('%s' % winner[0])
 
 def get_active(urllist, name, pages=None):
+    print('get_active:' + name)
     if pages is None:
         pages = []
     for entry in urllist:
+        print('urlEntry:' + str(entry))
+        #for test in dir(entry):
+        #    print('test==' + test)
+        #print('urlEntry:' + str(entry.name))
+
+        print('===')
         try:
             pname = entry.default_args['extra_context']['page_name']
             if pname == name:
                 pages.append(pname)
                 return get_active(urllist, entry.default_args['extra_context']['parent'], pages)
         except:
+            print('except')
             pass
     return pages
 
@@ -139,10 +147,6 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     #import json
     #json.dumps(extra_context)
 
-    print('======' )
-    dir(extra_context)
-    print('======' )
-
     #for names in dir(extra_context):
         #print('names::' + names)
 
@@ -150,13 +154,14 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     # - ultimately to reolve the affkey issue
     # - in this case, trying to determine the context values 
     # - need to develop a caching solution for client and server
+    # - need to be sure that nav is reflecting the current page selection 
 
-    for thekey in extra_context:
-        print('key:: [' + thekey + ']:: ' + str(len(extra_context[thekey])) )
-        if( len(extra_context[thekey]) > 0):
-            print('subs of :^^^')
-            for theSubKey in extra_context[thekey]:
-                print('            ' + theSubKey + ':' )
+    #for thekey in extra_context:
+    #    print('key:: [' + thekey + ']:: ' + str(len(extra_context[thekey])) )
+    #    if( len(extra_context[thekey]) > 0):
+    #        print('subs of :^^^')
+    #        for theSubKey in extra_context[thekey]:
+    #            print('            ' + theSubKey + ':' )
 
 
     print('[[[affkey]]]: ' + extra_context['affkey'])
@@ -299,6 +304,7 @@ def black_friday(request):
         datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
 
+@never_cache
 def five_linx(request, agent_id, page_name, parent):
     print('page_name: ' + page_name )
 
@@ -346,9 +352,11 @@ def five_linx(request, agent_id, page_name, parent):
 
     ctx = {}
     ctx['page_name'] = page_name
+    ctx['parent'] = parent
+
     #request.get('name')
     #if test_name == 'tcr-first':
     print('tmplt: ' + tmplt[page_name] )
 
-    return simple_dtt(request, tmplt[page_name], ctx)
+    return simple_dtt(request, tmplt[page_name], extra_context=ctx)
 
