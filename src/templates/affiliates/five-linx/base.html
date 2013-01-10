@@ -124,7 +124,7 @@ License: http://creativecommons.org/licenses/MIT
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}</p>
+        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}RIN Number: {{ affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}{% endif %}</p>
     </div>
     {% endblock %}
 </div>

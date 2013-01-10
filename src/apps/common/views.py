@@ -87,23 +87,30 @@ def fivelinxwinner(request):
     return HttpResponse('%s' % winner[0])
 
 def get_active(urllist, name, pages=None):
-    print('get_active:' + name)
+    #print('get_active:' + name)
     if pages is None:
         pages = []
     for entry in urllist:
-        print('urlEntry:' + str(entry))
+        #print('urlEntry:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    | ' + str(entry) + '  name = ' )
+        #try:
+        #    for test1 in entry.default_args:
+        #        print('test1_entry_default_args:' + test1)
+        #        print('test1_entry_default_args_value:' + entry.default_args[test1])
+        #except:
+        #    print('pass')
+        #    pass
         #for test in dir(entry):
         #    print('test==' + test)
         #print('urlEntry:' + str(entry.name))
 
-        print('===')
+        #print('===')
         try:
             pname = entry.default_args['extra_context']['page_name']
             if pname == name:
                 pages.append(pname)
                 return get_active(urllist, entry.default_args['extra_context']['parent'], pages)
         except:
-            print('except')
+            #print('except')
             pass
     return pages
 
@@ -123,13 +130,7 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
 
-    if request.GET.get('affkey', None):
-        request.session['affkey'] = request.GET.get('affkey')
-        request.COOKIES['affkey'] = request.GET.get('affkey')
-
-
-    if request.session.get('affkey'):
-        extra_context['affkey'] = request.session.get('affkey')
+    extra_context['affkey'] = request.session.get('affkey')
 
     affiliate = request.COOKIES.get('refer_id', None)
     newaffiliate = None
