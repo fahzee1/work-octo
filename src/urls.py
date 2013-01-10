@@ -346,7 +346,7 @@ else:
         dtt(r'^home-security/business-security-systems/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
         dtt(r'^home-security/free-home-security-system/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
         dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison/index.html', 'paid-adt-comparison-cat'),
-        dtt(r'^frontpoint-vs-protect-america-compare-and-save/$', 'affiliates/frontpoint-comparison/index.html', 'frontpoint-vs-pa'),
+        dtt(r'^frontpoint-vs-protect-america-compare-and-save/$', 'affiliates/frontpoint-vs-protectamerica/index.html', 'frontpoint-vs-pa'),
         dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
         dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
