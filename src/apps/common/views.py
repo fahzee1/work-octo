@@ -123,6 +123,10 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     else:
         pages = get_active(urls.urlpatterns, extra_context['page_name'])
 
+    #handle special page cases for phone number
+    if extra_context['page_name'] == 'agent-two':
+        extra_context['phone_number'] = '1-888-951-5156'
+
     forms = {}
     forms['basic'] = LeadForm()
     forms['long'] = AffiliateLongForm()
