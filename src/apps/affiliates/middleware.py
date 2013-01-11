@@ -12,7 +12,6 @@ class AffiliateMiddleware(object):
 
     
     def process_view(self, request, view_func, view_args, view_kwargs):
-        print('AffiliateMiddleware')
         if 'agent' not in request.GET:
             if settings.SITE_ID == 3:
                 viewname = view_func.__name__
@@ -90,10 +89,6 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = default_agent
                     request.session['source'] = 'PROTECT AMERICA'
 
-
-        #if 'affkey' in request.GET:
-        #   request.session['affkey'] = request.GET['affkey']
-            
         # Allow overwriting of affkey cookie
         if request.GET.get('affkey', None):
             request.session['affkey'] = request.GET.get('affkey')

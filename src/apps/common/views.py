@@ -87,30 +87,15 @@ def fivelinxwinner(request):
     return HttpResponse('%s' % winner[0])
 
 def get_active(urllist, name, pages=None):
-    #print('get_active:' + name)
     if pages is None:
         pages = []
     for entry in urllist:
-        #print('urlEntry:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    | ' + str(entry) + '  name = ' )
-        #try:
-        #    for test1 in entry.default_args:
-        #        print('test1_entry_default_args:' + test1)
-        #        print('test1_entry_default_args_value:' + entry.default_args[test1])
-        #except:
-        #    print('pass')
-        #    pass
-        #for test in dir(entry):
-        #    print('test==' + test)
-        #print('urlEntry:' + str(entry.name))
-
-        #print('===')
         try:
             pname = entry.default_args['extra_context']['page_name']
             if pname == name:
                 pages.append(pname)
                 return get_active(urllist, entry.default_args['extra_context']['parent'], pages)
         except:
-            #print('except')
             pass
     return pages
 
@@ -148,30 +133,6 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     if extra_context['page_name'] not in visited_pages:
         visited_pages.append(extra_context['page_name'])
         request.session['vpages'] = visited_pages
-
-    #import json
-    #json.dumps(extra_context)
-
-    #for names in dir(extra_context):
-        #print('names::' + names)
-
-    #what is your goal here?
-    # - ultimately to reolve the affkey issue
-    # - in this case, trying to determine the context values 
-    # - need to develop a caching solution for client and server
-    # - need to be sure that nav is reflecting the current page selection 
-
-    #for thekey in extra_context:
-    #    print('key:: [' + thekey + ']:: ' + str(len(extra_context[thekey])) )
-    #    if( len(extra_context[thekey]) > 0):
-    #        print('subs of :^^^')
-    #        for theSubKey in extra_context[thekey]:
-    #            print('            ' + theSubKey + ':' )
-
-
-    print('[[[affkey]]]: ' + extra_context['affkey'])
-    print('[[[active_pages]]]: ' + str(len(extra_context['active_pages'])))
-
 
     response = render_to_response(template,
                               extra_context,
@@ -308,60 +269,4 @@ def black_friday(request):
     ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
         datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
-
-@never_cache
-def five_linx(request, agent_id, page_name, parent):
-    print('page_name: ' + page_name )
-
-    tmplt = {}
-    tmplt['home'] = 'affiliates/five-linx/index.html'
-    tmplt['copper'] = 'affiliates/five-linx/copper.html'
-    tmplt['makes-sense'] = 'affiliates/five-linx/makes-sense.html'
-    tmplt['bronze'] = 'affiliates/five-linx/bronze.html'
-    tmplt['silver'] = 'affiliates/five-linx/silver.html'
-    tmplt['gold'] = 'affiliates/five-linx/gold.html'
-    tmplt['platinum'] = 'affiliates/five-linx/platinum.html'
-    tmplt['video'] = 'affiliates/five-linx/video.html'
-    tmplt['gps'] = 'affiliates/five-linx/gps.html'
-    tmplt['order'] = 'affiliates/five-linx/order.html'
-    tmplt['thank-you'] = 'affiliates/five-linx/thank-you.html'
-
-
-#dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
-        #    'agent_id': 'a01526'}),
-        #dtt(r'^makes-sense$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
-        #    'agent_id': 'a01526'}),
-        #dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
-        #    'agent_id': 'a01526'}),
-        #dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
-        #    'agent_id': 'a01526'}),
-        #dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
-        #    'agent_id': 'a01526'}),
-        #dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
-        #    'agent_id': 'a01526'}),
-
-        #dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
-        #    'agent_id': 'a01526'}),
-
-        #dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
-        #    'agent_id': 'a01526'}),
-        
-        #dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
-        #    'agent_id': 'a01526'}),
-            
-        #dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
-        #    'agent_id': 'a01526'}),
-
-        #url(r'^dynamic/$', 'apps.common.views.black_friday', name='index'),
-
-
-    ctx = {}
-    ctx['page_name'] = page_name
-    ctx['parent'] = parent
-
-    #request.get('name')
-    #if test_name == 'tcr-first':
-    print('tmplt: ' + tmplt[page_name] )
-
-    return simple_dtt(request, tmplt[page_name], extra_context=ctx)
 
