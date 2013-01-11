@@ -41,31 +41,6 @@ def tracking_pixels(request):
         ctx['pixels'] = affiliate.pixels
     return ctx
 
-'''
-
-def iterate_nodes_nodir(iter_item, prefix):
-    for item in iter_item:
-        try:
-            print(prefix+item)
-        except:
-            print('----')
-
-def iterate_nodes(iter_item, prefix):
-    for item in dir(iter_item):
-        try:
-            print(prefix+item)
-            try:
-                iterate_nodes_null(item, prefix+'---')
-            except:
-                print('----')
-        except:
-            
-            try:
-                iterate_nodes_null(item, prefix+'---')
-            except:
-                print('----')
-'''
-
 def phone_number(request):
     from django.conf import settings
     ctx = {'phone_number': settings.DEFAULT_PHONE,
@@ -79,19 +54,6 @@ def phone_number(request):
         ctx['phone_number'] = session_num
         ctx['use_call_measurement'] = session_call_measurement
         return ctx
-
-    #iterate_nodes(request, '|||')
-    '''
-
-    request.session['test_var'] = 1234
-    
-    iterate_nodes_nodir(request.session, '()()')
-
-    iterate_nodes_nodir(request.session.keys, '===')
-
-    '''
-
-    
 
     # the affiliate cookie is not available on the first request
     # because of the nature of http. what this does is first check
