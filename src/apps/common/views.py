@@ -9,7 +9,7 @@ import operator
 from decimal import Decimal
 
 from django.core.cache import cache
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -99,14 +99,18 @@ def get_active(urllist, name, pages=None):
             pass
     return pages
 
-def simple_dtt(request, template, extra_context):
-    expire_time = timedelta(days=90)
+def simple_dtt(request, template, extra_context, expire_days=90):
+    expire_time = timedelta(days=expire_days)
 
     if 'pages' in extra_context:
         pages = extra_context['pages']
         pages.append(extra_context['page_name'])
     else:
         pages = get_active(urls.urlpatterns, extra_context['page_name'])
+
+    #handle special page cases for phone number
+    if extra_context['page_name'] == 'agent-two':
+        extra_context['phone_number'] = '1-888-951-5156'
 
     forms = {}
     forms['basic'] = LeadForm()
@@ -115,8 +119,7 @@ def simple_dtt(request, template, extra_context):
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
 
-    if request.session.get('affkey'):
-        extra_context['affkey'] = request.session.get('affkey')
+    extra_context['affkey'] = request.session.get('affkey')
 
     affiliate = request.COOKIES.get('refer_id', None)
     newaffiliate = None
@@ -266,3 +269,4 @@ def black_friday(request):
     ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
         datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
+
