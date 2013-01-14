@@ -51,7 +51,7 @@
         <ul>
             <li id="alarm-category">
                 <img src="{{ STATIC_URL }}img/extra/alarm-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
-                <h2>Wireless Home Security</h2>
+                <h2>Interactive Wireless Home Security</h2>
                 <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More ></a></div>
             </li>
             <li id="video-category">
@@ -105,6 +105,7 @@
                 </div>
             </div>
             <div class="premium-packages">
+                <img src="{{ STATIC_URL }}img/canada/premium-packages-header.png" class="premium-packages-header" alt="premium-packages-header" />
                 <div id="silver-security-package">
                     <h3>Silver</h3>
                     <p><sup>$</sup>37<sup>99</sup><span>monthly</span></p>
@@ -155,6 +156,7 @@
                         </ul>
                     </div>
                 </div>
+                <img src="{{ STATIC_URL }}img/banners/639x72/fire-smoke-protection.png" class="promo-banner" alt="fire-smoke-protection" width="639" height="72" />
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
@@ -214,21 +216,40 @@
     <div class="big-wrapper">
         <img src="{{ STATIC_URL }}img/canada/home-security-iphone-app.jpg" alt="home-security-iphone-app" width="344" height="704" class="smart-app-image" />
         <div id="smart-app-extra-information">
-            <div id="interactive-security">
-                <h2>There’s a Free App For That.</h2>
-                <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
-                {% if phone_number %}
-                    {% businesstime %}
-                        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
-                    {% endbusinesstime %}
-                {% endif %}
-                <div class="clear"></div>
-            </div>
-            <div id="video-screenshot">
-            
-            </div>
+            <h2>There’s a Free App For That.</h2>
+            <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
+            <ul>
+                <li>
+                    <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                    <div>
+                        <h4>Security System Control</h4>
+                        <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="{{ STATIC_URL }}img/canada/interactive-video-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                    <div>
+                        <h4>Live Video</h4>
+                        <p>Keep an eye on your home from anywhere in the world with live video. (Video Service Required).</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="{{ STATIC_URL }}img/canada/interactive-home-automation-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                    <div>
+                        <h4>Home Automation</h4>
+                        <p>Home automation lets you control lights and appliances from your phone or computer.</p>
+                    </div>
+                </li>
+            </ul>
+            {% if phone_number %}
+                {% businesstime %}
+                    <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                {% endbusinesstime %}
+            {% endif %}
+            <div class="clear"></div>
         </div>
     </div>
+    <div class="clear"></div>
 </div>
 <div class="wrapper"></div>
 {% addtoblock "js" %}
