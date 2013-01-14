@@ -18,31 +18,35 @@ DATABASES = {
 # EMAIL information
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-BUSINESS_HOURS = [{   
+BUSINESS_HOURS = [{
     #monday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #tuesday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #wednesday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #thursday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #friday
-    'start': '0800',
-    'end': '2100',
+    'start': '0700',
+    'end': '2300',
 },{
     #saturday
     'start': '0800',
-    'end': '1700',
-},]
+    'end': '2000',
+},{
+    #sunday
+    'start': '0900',
+    'end': '2100',
+}]
 
 WEBSITE_TEMPLATE = 'radioshack'
 TEMPLATE_DIRS = (
