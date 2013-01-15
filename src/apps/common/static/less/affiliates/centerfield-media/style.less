@@ -2,11 +2,20 @@
 .wrapper {
     padding-bottom: 0;
 }
+#header-wrapper #phone-number {
+    p {
+        span {
+            a {
+                color: @blue;
+            }
+        }
+    }
+}
 #hero-banner-wrapper {
     background: #b3ddf2 url(/static/img/affiliates/centerfield-media/sky-bg.png) center top repeat-x;
     width: 100%;
     overflow: hidden;
-    height: 518px;
+    height: 475px;
     #hero-main {
         width: 960px;
         margin: 0 auto;
@@ -54,7 +63,7 @@
         }
         #hero-right {
             float: left;
-            padding: 24px;
+            padding: 0 24px 24px;
             width: 412px;
             h3 {
                 background: @white;
@@ -78,15 +87,20 @@
                 line-height: 24px;
                 padding-top: 24px;
             }
+            .special-promo {
+                padding-top: 22px;
+            }
         }
     }
 }
+
 #call-box {
     width: 100%;
     background: #76ba00;
     margin: 0 0 16px;
-    border-top: 4px solid #3c7a00;
     padding: 24px 0;
+    border: 1px solid #3c7a00;
+
     p {
         color: @white;
         text-shadow: 1px 2px 0px #3c7a00;
@@ -103,7 +117,11 @@
         border-top: 4px solid #3c7a00;
 
     }
-    
+    &.main {
+        border: none;
+        border-top: 4px solid #3c7a00;
+
+    }
 }
 #quote-form {
     background: @light-grey;
@@ -115,6 +133,7 @@
         p {
             color: @black;
             font-weight: bold;
+            font-size: 24px;
         }
         label {
             color: @dark-grey;
@@ -170,15 +189,98 @@
 #home-security-information {
     .content-box();
     float: left;
-    width: 600px;
-    margin-right: 56px;
+    width: 661px;
+    margin-right: 8px;
     p {
         text-align: justify;
     }
     img {
-        display: block;
+        float: left;
         margin: 0 auto;
     }
+    .customer-testimonial-box {
+        text-align: center;
+        padding: 8px 16px;
+        height: 385px;
+        background: @v-light-grey url(../img/base/testimonial-bg.png) repeat;
+        .drop-shadow(0px, 2px, 5px, #ccc);
+        margin-bottom: 16px;
+        position: relative;
+        border: 1px solid @v-light-grey;
+        width: 292px;
+        margin-right: 8px;
+        float: left;
+    
+        h3 {
+            color: @black+2;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 16px;
+            padding: 10px 10px 0;
+            margin: 10px 0;
+            letter-spacing: 0px;
+            text-align: left;
+            vertical-align: text-bottom;
+            img {
+                vertical-align: text-bottom;
+            }
+            span {
+                color: @black;
+                display: block;
+                font-weight: 300;
+                font-size: 26px;
+                line-height: 28px;
+                padding-bottom: 4px;
+            }
+        }
+        strong {
+            color: @blue;
+            
+        }
+        p {
+            margin: 0 10px 20px;
+            text-align: justify;
+            font-size: 12px;
+            line-height: 22px;
+        }
+        img.testimonial-image {
+            .drop-shadow(0, 2px, 5px, @grey);
+            border: 5px solid @white;
+            margin: 16px 16px 8px 0;
+            text-align: center;
+            width: 120px;
+            float: left;
+        }
+        
+        &.alt {
+            background: @off-white;
+            .drop-shadow(0px ,0px ,0px ,@white);
+            border: 1px solid @light-grey;
+            margin-right: 0;
+        }
+        &:hover {
+            background: @light-green;
+            .drop-shadow;
+        }
+        .star-container {
+            position: absolute;
+            bottom: 16px;
+            padding-bottom: 16px;
+            padding-bottom: 9px;
+            .star {
+                width: 40px;
+                height: 40px;
+                background: url(/static/img/extra/testimonial-stars-light-patched.png) -40px 0 no-repeat;
+                float: left;
+    
+                &.active {
+                    background: url(/static/img/extra/testimonial-stars-light-patched.png) -1px 0 no-repeat;
+    
+                }
+            }
+        }
+    }
+
 }
 
 /***** Left Column ****/
