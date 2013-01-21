@@ -80,3 +80,14 @@
 </div>
 {% endfor %}
 {% endif %}
+{% if template == 'canada-side' %}
+{% for testimonial in testimonials %}
+<div class="testimonial">
+    <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}
+    <img src="/static/img/extra/grey-arrow.png" class="grey-arrow" alt="grey-arrow" width="39" height="18" />
+    </p>
+    <h3>{{ testimonial.first_name }} <span>{{ testimonial.date_created|date:"F d, Y" }}</span></h3>
+</div>
+
+{% endfor %}
+{% endif %}

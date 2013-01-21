@@ -1,5 +1,5 @@
 {% extends "canada/base.html" %}
-{% load sekizai_tags content_tags content_filters %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 
 {% block content %}
 </div>
@@ -24,8 +24,12 @@
             <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
         </div>
         <div id="protect-america-information">
-            <p>At Protect America, we are driven to provide only the highest quality products and dedicated service at an affordable price. Our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for five years in a row (2008—2012), as well as the Consumer Digest Best Buy Award for our Copper Package. </p>
-            <div class="button-submit"><a href="">Learn More ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
+            <p>At Protect America, we are driven to provide only the highest quality products and dedicated service at an affordable price. Serving Alberta, Ontario, and British Columbia, our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for five years in a row (2008—2012), as well as the Consumer Digest Best Buy Award for our Copper Package. </p>
+            {% if phone_number %}
+                {% businesstime %}
+                    <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                {% endbusinesstime %}
+            {% endif %}
         </div>
         <div id="home-security-video">
             <iframe width="537" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -33,18 +37,8 @@
     </div>
     <div id="home-security-testimonials">
         <h2>Customers Love Our Home Security Systems</h2>
-        <div class="testimonial">
-            <p>Noel was excellent: very thorough and patient. As I've mentioned, I installed this alarm many years ago when I worked long hours and traveled ...
-            <img src="{{ STATIC_URL }}img/extra/grey-arrow.png" class="grey-arrow" alt="grey-arrow" width="39" height="18" />
-            </p>
-            <h3>Carlos <span>November 15, 2012</span></h3>
-        </div>
-        <div class="testimonial">
-            <p>Great customer service, chatted me through my issue with the low battery Thank You! That's why I choose Protect America,
-            <img src="{{ STATIC_URL }}img/extra/grey-arrow.png" class="grey-arrow" alt="grey-arrow" width="39" height="18" />
-            </p>
-            <h3>Martina <span>December 04, 2012</span></h3>
-        </div>
+        {% testimonial_search "" "limit=2&template=canada-side&words=25" %}
+
     </div>
     <div class="clear"></div>
     <div id="security-categories">
@@ -156,7 +150,7 @@
                         </ul>
                     </div>
                 </div>
-                <img src="{{ STATIC_URL }}img/banners/639x72/fire-smoke-protection.png" class="promo-banner" alt="fire-smoke-protection" width="639" height="72" />
+                <img src="{{ STATIC_URL }}img/banners/639x72/free-interactive-apps.png" class="promo-banner" alt="Free Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
@@ -186,7 +180,7 @@
 <div id="video-security-choice" class="big-info" style="display:none">
     <div class="big-wrapper">
         <div id="video-security-main-image">
-            <img src="{{ STATIC_URL }}img/spanish/infrared-video-security-camera.jpg" alt="infrared-video-security-camera" width="320" height="480" />
+            <iframe width="450" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
         </div>
         <div id="video-security-overview">
             <h2>Interactive Video Security</h2>
@@ -207,8 +201,9 @@
                 <div class="clear"></div>
             </div>
             <div id="video-screenshot">
-            
+                <img src="{{ STATIC_URL }}img/canada/interactive-video.jpg" alt="interactive-video" width="607" height="579" />
             </div>
+            <div class="clear"></div>
         </div>
     </div>
 </div>
@@ -535,5 +530,8 @@
 {% endaddtoblock "js" %}
 
 {% endblock %}
+{% block order-footer %}{% endblock %}
+{% block main-footer %}{% endblock %}
+
 
 
