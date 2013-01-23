@@ -237,6 +237,10 @@ else:
             name='thank_you'),
         # dtt(r'^404/$', '404.html', '404', 'home'),
 
+
+        # SEM Landing Pages
+        dtt(r'^home-security/for-less/$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
+
             
         # SEO Local Pages
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
