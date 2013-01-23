@@ -1,0 +1,43 @@
+{% extends "landing-pages/index.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+
+
+{% block page_title %}{{ city }}, {{ state }} | {% if keyword %}{{ keyword }} |{% endif %} Protect America{% endblock %}
+
+{% block page_description %}{{ city }} {{ state }} Home Security Systems from Protect America. Voted #1 Home Security Company by Top Consumer Reviews{% endblock %}
+
+{% block page_keywords %}{{ city }} Home Security, Home Security {{ city }}, {{ city }} Alarm Monitoring, Home Security {{ city }} {{ state_long }}, {{ city }} Alarm Systems, {{ city }} Security Alarms, {{ city }} Alarm Security, {{ city }} Alarm Companies, {{ city }} Alarms, Alarms {{ city }} {{ state_long }}, {{ city }} Alarm, {{ city }} Smart Home, {{ city }} Home Automation, Home Security Systems {{ city }}, Security Systems {{ city }}, {{ city }} Alarm Company, Alarm Monitoring {{ city }}{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/local-pages/basic.css">
+<meta name="robots" content="FOLLOW,INDEX"/>
+<meta name="revisit-after" content="2 days"/>
+<meta name="geo.region" content="US-{{ state }}" />
+<meta name="geo.placename" content="{{ city }}" />
+<meta name="geo.position" content="{{ lat }};{{ long }}" />
+<meta name="ICBM" content="{{ lat }}, {{ long }}" />
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
+{% block quick-links %}
+<ul id="quick-link-navigation">
+    <li class="city-info"><span id="city-info">{{ city }}, {{ state }}: <strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" alt="{{ weather_info.desc }}" title="{{ weather_info.desc }}"/> {{ weather_info.temp }}&deg;F</span></li>
+    <li id="quick-social">                
+        <div id="google-button">
+            <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
+        </div>
+        <div id="facebook-button">
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.protectamerica.com&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=133351296712555" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Quick Social', '{{ page_name }}']);"></iframe>
+        </div>
+        <div class="clear"></div>
+    </li>
+    <li><a href="http://homesecuritysystems.protectamerica.com" title="See Home Security Deals in your Area" id="change-local-city">Change City</a></li>
+</ul>
+{% endblock %}
+
+{% block pa-testimonials %}
+<h2>{{ state_long }} Customers Love Our Wireless Home Security Systems</h2>
+{% testimonial_search "wireless" "limit=2&state={{ state }}&template=canada-side&words=25" %}
+{% endblock %}
