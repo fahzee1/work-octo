@@ -38,7 +38,13 @@
     <div class="header-left"></div>
     <div class="header-right">
         <h1>alarmsystemoffers.com!</h1>
-        <div class="phone">1-888-888-8888</div>
+        
+        {% if phone_number %}
+        <div class="phone">
+            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a>
+        </div>
+        {% endif %}
+        
     </div>
 </div>
 <div id="linen">
@@ -96,9 +102,8 @@
     <div class="clear"></div>
 </div>
 <div id="footer">
-    <p>*Alarm Zone is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit Standard home security alarm monitoring agreement. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
-    <p>* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited. 5:31
-GE and GE Security logos are registered trademarks of General Electric.</p>
+    <p>*Alarm System Offers is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit Standard home security alarm monitoring agreement. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
+    <p>* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited. GE and GE Security logos are registered trademarks of General Electric.</p>
 </div>
     
 {% endblock %}
