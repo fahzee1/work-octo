@@ -63,12 +63,12 @@
             </li>
             <li id="video-category" class="security-choice">
                 <img src="{{ STATIC_URL }}img/extra/video-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
-                <h2>Video <br />Security</h2>
+                <h2>{% security-choice-two %}Video <br />Security{% endblock %}</h2>
                 <div class="button-link"><a href="#video-security" id="video-button-choice"  onclick="showSlide(2);">Learn More ></a></div>
             </li>
             <li id="smart-app-category" class="security-choice">
                 <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
-                <h2>On The Go <br/>Smart Apps</h2>
+                <h2>{% security-choice-three %}On The Go <br/>Smart Apps{% endblock %}</h2>
                 <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice" onclick="showSlide(3);">Learn More ></a></div>
             </li>
             <div class="clear"></div>
@@ -172,8 +172,10 @@
     
             <div id="home-security-info">
                 <div id="home-security-overview">
+                    {% block home-security-overview %}
                     <h2>Protect Your Home with a Wireless Security System</h2>
                     <p>Protect America offers the best home security systems and monitoring deals you'll find. We install premium security hardware with GE security products, and have the most flexible range of monitoring services, including cellular monitoring, high speed broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of GE wireless home security components. And, our security packages are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today.</p>
+                    {% endblock %}
                     {% if phone_number %}
                         {% businesstime %}
                             <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
@@ -197,16 +199,20 @@
                 <iframe width="450" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
             </div>
             <div id="video-security-overview">
+                {% block video-security-overview %}
                 <h2>Interactive Video Security</h2>
                 <p>Protect America allows you to gain a true picture of what is happening in your home or business with 24/7 on-demand video. Get enhanced security with our night vision video cameras, archived clips, event notifications, and automatic recording when movement is detected. With Protect America's video services, peace of mind is just an instant click away.</p>
+                {% endblock %}
                 <h3>Add to any Package for +$10 per month</h3>
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
             <div id="video-extra-information">
                 <div id="interactive-security">
+                    {% block video-security-overview-two %}
                     <h2>Video Home Security: Here, There, Everywhere.</h2>
                     <p>These days, people are always on the go and spend less time at home. Unfortunately, an empty house is the perfect time for a burglar to strike. Get interactive video security and check on your phone anywhere at any time. Our home surveillance cameras let you view your own live video feed from any Internet-enabled computer or smartphone. You can also be notified of recorded events with text notifications that can be read straight from your phone.</p>
+                    {% endblock %}
                     {% if phone_number %}
                         {% businesstime %}
                             <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
@@ -225,6 +231,7 @@
         <div class="big-wrapper">
             <img src="{{ STATIC_URL }}img/canada/interactive-app.jpg" class="interactive-app" alt="interactive-app" width="518" height="663" />
             <div id="smart-app-extra-information">
+                {% block smart-app-overview %}
                 <h2>There’s a Free App For That.</h2>
                 <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
                 <ul>
@@ -250,6 +257,7 @@
                         </div>
                     </li>
                 </ul>
+                {% endblock %}
                 {% if phone_number %}
                     {% businesstime %}
                         <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
@@ -262,7 +270,7 @@
         <div class="clear"></div>
     </div>
 </div>
-<div class="wrapper"></div>
+<div class="wrapper">{% block extra-content %}{% endblock %}</div>
 {% addtoblock "js" %}
     <script type="text/javascript">
         $(document).ready(function() {
