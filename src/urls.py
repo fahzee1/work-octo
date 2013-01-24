@@ -222,6 +222,11 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
+# Alarm-System-Offers
+elif settings.SITE_ID == 14:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
+    )
 else:
     urlpatterns += patterns('',
 
