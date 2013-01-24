@@ -296,14 +296,14 @@ else:
             'apps.common.views.thank_you', name='custom_thank_you',),
 
         # Spanish
-        dtt(r'^spanish/$', 'spanish/index.html',
-            'pa-spanish', ctx={'agent_id': 'i10109'}),
+        #dtt(r'^spanish/$', 'spanish/index.html',
+        #    'pa-spanish', ctx={'agent_id': 'i10109'}),
 
         # Canada
-        dtt(r'^canada/$', 'canada/index.html',
-            'pa_canada', ctx={'agent_id': 'i10123'}),
-        dtt(r'^canada/home-security-systems$', 'canada/packages.html',
-            'ca_packages', 'pa_canada', ctx={'agent_id': 'i10123'}),
+        #dtt(r'^canada/$', 'canada/index.html',
+        #    'pa_canada', ctx={'agent_id': 'i10123'}),
+        #dtt(r'^canada/home-security-systems$', 'canada/packages.html',
+        #    'ca_packages', 'pa_canada', ctx={'agent_id': 'i10123'}),
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',
