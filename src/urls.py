@@ -218,7 +218,7 @@ elif settings.SITE_ID == 11:
 # AlarmZone.com
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
         dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
         dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
         dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
@@ -231,6 +231,7 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
+
 else:
     urlpatterns += patterns('',
 
@@ -244,6 +245,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         # dtt(r'^404/$', '404.html', '404', 'home'),
+
+
+        # SEM Landing Pages
+        dtt(r'^home-security/for-less/$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
 
             
         # SEO Local Pages
@@ -298,6 +303,16 @@ else:
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
+
+        # Spanish
+        #dtt(r'^spanish/$', 'spanish/index.html',
+        #    'pa-spanish', ctx={'agent_id': 'i10109'}),
+
+        # Canada
+        #dtt(r'^canada/$', 'canada/index.html',
+        #    'pa_canada', ctx={'agent_id': 'i10123'}),
+        #dtt(r'^canada/home-security-systems$', 'canada/packages.html',
+        #    'ca_packages', 'pa_canada', ctx={'agent_id': 'i10123'}),
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',

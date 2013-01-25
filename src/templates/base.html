@@ -70,9 +70,17 @@
                     <div class="clear"></div>
                 </li>
                 
-                <li><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Online Chat</a></li>
+                <li class="big-green"><a href="#customer-service" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Customer Service', 'Quick Links Customer Service Click', 'Header']);" id="security-agreement">Customer Service</a></li>
 
                 <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
+                <div id="customer-service-box">
+                    <p>Customer CARE Online Chat</p>
+                    <div class="button-link">
+                        <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Online Chat</a>
+                    </div>
+                    <p class="customer-care">Call Customer CARE</p>
+                    <a href="tel:{{ phone_number|format_number }}" class="phone-number">1-800-951-5111 &bull; Option 4</a>
+                </div>
             </ul>
             {% endblock %}
             <!--<div class="clear"></div>-->
@@ -92,12 +100,13 @@
                 <p>GE Security Authorized Dealer</p>
             </div>
             {% endblock %}
-
-            {% if phone_number %}
-            <div id="phone-number">
-                <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
-            </div>
-            {% endif %}
+            {% block main-phone %}
+                {% if phone_number %}
+                <div id="phone-number">
+                    <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
+                </div>
+                {% endif %}
+            {% endblock %}
             <div class="clear"></div>
         </div>
         
@@ -436,6 +445,10 @@
     <script type="text/javascript">
         $("#licenses-button").click(function(){
             $("#licenses-table").toggle("normal");
+            return false;
+        });
+        $(".big-green > a").click(function(){
+            $("#customer-service-box").slideToggle("fast");
             return false;
         });
     </script>
