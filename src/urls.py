@@ -275,13 +275,15 @@ else:
         # PAID LANDING PAGES
         dtt(r'^home-security/business-security-systems/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
         dtt(r'^home-security/free-home-security-system/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
-        dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison/index.html', 'paid-adt-comparison-cat'),
+        dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison-two/index.html', 'paid-adt-comparison-cat'),
         dtt(r'^frontpoint-vs-protect-america-compare-and-save/$', 'affiliates/frontpoint-vs-protectamerica/index.html', 'frontpoint-vs-pa'),
         dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
         dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
         dtt(r'^protect-america-vs-comcast/$', 'affiliates/comcast-vs-protectamerica/index.html', 'comcast-vs-protect-america'),
         dtt(r'^protect-america-vs-vivint/$', 'affiliates/vivint-vs-protectamerica/index.html', 'vivint-vs-protect-america'),
+        dtt(r'^adt-comparison/$', 'affiliates/adt-comparison/index.html', 'adt-two'),
+
 
         dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
