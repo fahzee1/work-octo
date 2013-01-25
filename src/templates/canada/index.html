@@ -1,0 +1,340 @@
+{% extends "canada/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+
+{% block content %}
+</div>
+{% include "banners/seo-hero-images.html" %}
+
+
+<div class="wrapper">
+    {% if phone_number %}
+    {% businesstime %}
+    <div class="clear"></div>
+    <div id="call-box">
+        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+    </div>
+    <div class="clear"></div>
+    {% endbusinesstime %}
+    
+    {% endif %}
+    <div id="security-benefits">
+        <div id="advantage-badges">
+            <img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo.jpg" alt="consumer-digest-logo" width="136" height="120" />
+            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-logo.jpg" alt="top-consumer-logo" width="128" height="120" id="top-consumer-logo" />
+            <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
+        </div>
+        <div id="protect-america-information">
+            <p>At Protect America, we are driven to provide only the highest quality products and dedicated service at an affordable price. Serving Alberta, Ontario, and British Columbia, our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for five years in a row (2008—2012), as well as the Consumer Digest Best Buy Award for our Copper Package. </p>
+            {% if phone_number %}
+                {% businesstime %}
+                    <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                {% endbusinesstime %}
+            {% endif %}
+        </div>
+        <div id="home-security-video">
+            <iframe width="537" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div id="home-security-testimonials">
+        <h2>Customers Love Our Home Security Systems</h2>
+        {% testimonial_search "" "limit=2&template=canada-side&words=25" %}
+
+    </div>
+    <div class="clear"></div>
+    <div id="security-categories">
+        <ul>
+            <li id="alarm-category" class="security-choice active">
+                <img src="{{ STATIC_URL }}img/extra/alarm-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>Interactive Wireless Home Security</h2>
+                <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More ></a></div>
+            </li>
+            <li id="video-category" class="security-choice">
+                <img src="{{ STATIC_URL }}img/extra/video-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>Video <br />Security</h2>
+                <div class="button-link"><a href="#video-security" id="video-button-choice"  onclick="showSlide(2);">Learn More ></a></div>
+            </li>
+            <li id="smart-app-category" class="security-choice">
+                <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>On The Go <br/>Smart Apps</h2>
+                <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice" onclick="showSlide(3);">Learn More ></a></div>
+            </li>
+            <div class="clear"></div>
+        </ul>
+        <img src="{{ STATIC_URL }}img/spanish/color-band.png" id="color-band" alt="Color Band" width="1030" height="80" />
+        <img src="{{ STATIC_URL }}img/spanish/white-arrow.png" id="white-arrow" alt="Color Band" />
+
+    </div>
+</div>
+<div id="big-choices">
+    <div id="home-security-choice" class="big-info" style="display:block">
+        <div class="big-wrapper">
+            <div id="home-security-packages">
+                <div id="copper-security-package">
+                    <h3>Copper</h3>
+                    <p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
+                    <div class="package-info">
+                        <ul>
+                            <li><strong>1</strong> Simon XT Control</li>
+                            <li><strong><span>3</span></strong> Door / Window Sensors</li>
+                            <li><strong>1</strong> Motion Detector</li>
+                        </ul>
+                        <ul class="extra-features">
+                            <li>No Equipment Fees</li>
+                            <li>No Activation Fees</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="bronze-security-package">
+                    <h3>Bronze</h3>
+                    <p><sup>$</sup>35<sup>99</sup><span>monthly</span></p>
+                    <div class="package-info">
+                        <ul>
+                            <li><strong>1</strong> Simon XT Control</li>
+                            <li><strong><span>7</span></strong> Door / Window Sensors</li>
+                            <li><strong>1</strong> Motion Detector</li>
+                        </ul>
+                        <ul class="extra-features">
+                            <li>No Equipment Fees</li>
+                            <li>No Activation Fees</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="premium-packages">
+                    <img src="{{ STATIC_URL }}img/canada/premium-packages-header.png" class="premium-packages-header" alt="premium-packages-header" />
+                    <div id="silver-security-package">
+                        <h3>Silver</h3>
+                        <p><sup>$</sup>37<sup>99</sup><span>monthly</span></p>
+                        <div class="package-info">
+                            <ul>
+                                <li><strong>1</strong> Simon XT Control</li>
+                                <li><strong><span>10</span></strong> Door / Window Sensors</li>
+                                <li><strong>1</strong> Motion Detector</li>
+                                <li><strong>2</strong> Keychain Remotes</li>
+                            </ul>
+                            <ul class="extra-features">
+                                <li>No Equipment Fees</li>
+                                <li>No Activation Fees</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="gold-security-package">
+                        <h3>Gold</h3>
+                        <p><sup>$</sup>39<sup>99</sup><span>monthly</span></p>
+                        <div class="package-info">
+                            <ul>
+                                <li><strong>1</strong> Simon XT Control</li>
+                                <li><strong><span>12</span></strong> Door / Window Sensors</li>
+                                <li><strong>1</strong> Motion Detector</li>
+                                <li><strong>2</strong> Keychain Remotes</li>
+        
+                            </ul>
+                            <ul class="extra-features">
+                                <li>No Equipment Fees</li>
+                                <li>No Activation Fees</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="platinum-security-package">
+                        <h3>Platinum</h3>
+                        <p><sup>$</sup>42<sup>99</sup><span>monthly</span></p>
+                        <div class="package-info">
+                            <ul>
+                                <li><strong>1</strong> Simon XT Control</li>
+                                <li><strong><span>15</span></strong> Door / Window Sensors</li>
+                                <li><strong>1</strong> Motion Detector</li>
+                                <li><strong>2</strong> Keychain Remotes</li>
+        
+                            </ul>
+                            <ul class="extra-features">
+                                <li>No Equipment Fees</li>
+                                <li>No Activation Fees</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <img src="{{ STATIC_URL }}img/banners/639x72/free-interactive-apps.png" class="promo-banner" alt="Free Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+    
+            <div id="home-security-info">
+                <div id="home-security-overview">
+                    <h2>Protect Your Home with a Wireless Security System</h2>
+                    <p>Protect America offers the best home security systems and monitoring deals you'll find. We install premium security hardware with GE security products, and have the most flexible range of monitoring services, including cellular monitoring, high speed broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of GE wireless home security components. And, our security packages are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today.</p>
+                    {% if phone_number %}
+                        {% businesstime %}
+                            <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                        {% endbusinesstime %}
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+                <div id="home-security-main-image">
+                    <img src="{{ STATIC_URL }}img/canada/lowest-price-home-security.jpg" alt="lowest-price-home-security" width="316" height="240" />
+                    <img src="{{ STATIC_URL }}img/canada/lifetime-security-equipment-warranty.jpg" alt="lifetime-security-equipment-warranty" width="220" height="256" />
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    
+    </div>
+    <div id="video-security-choice" class="big-info" style="display:none">
+        <div class="big-wrapper">
+            <div id="video-security-main-image">
+                <iframe width="450" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div id="video-security-overview">
+                <h2>Interactive Video Security</h2>
+                <p>Protect America allows you to gain a true picture of what is happening in your home or business with 24/7 on-demand video. Get enhanced security with our night vision video cameras, archived clips, event notifications, and automatic recording when movement is detected. With Protect America's video services, peace of mind is just an instant click away.</p>
+                <h3>Add to any Package for +$10 per month</h3>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div id="video-extra-information">
+                <div id="interactive-security">
+                    <h2>Video Home Security: Here, There, Everywhere.</h2>
+                    <p>These days, people are always on the go and spend less time at home. Unfortunately, an empty house is the perfect time for a burglar to strike. Get interactive video security and check on your phone anywhere at any time. Our home surveillance cameras let you view your own live video feed from any Internet-enabled computer or smartphone. You can also be notified of recorded events with text notifications that can be read straight from your phone.</p>
+                    {% if phone_number %}
+                        {% businesstime %}
+                            <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                        {% endbusinesstime %}
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+                <div id="video-screenshot">
+                    <img src="{{ STATIC_URL }}img/canada/interactive-video.jpg" alt="interactive-video" width="607" height="579" />
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div id="smart-app-choice" class="big-info" style="display:none">
+        <div class="big-wrapper">
+            <img src="{{ STATIC_URL }}img/canada/interactive-app.jpg" class="interactive-app" alt="interactive-app" width="518" height="663" />
+            <div id="smart-app-extra-information">
+                <h2>There’s a Free App For That.</h2>
+                <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
+                <ul>
+                    <li>
+                        <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <div>
+                            <h4>Security System Control</h4>
+                            <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="{{ STATIC_URL }}img/canada/interactive-video-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <div>
+                            <h4>Live Video</h4>
+                            <p>Keep an eye on your home from anywhere in the world with live video. (Video Service Required).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="{{ STATIC_URL }}img/canada/interactive-home-automation-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <div>
+                            <h4>Home Automation</h4>
+                            <p>Home automation lets you control lights and appliances from your phone or computer.</p>
+                        </div>
+                    </li>
+                </ul>
+                {% if phone_number %}
+                    {% businesstime %}
+                        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                    {% endbusinesstime %}
+                {% endif %}
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="wrapper"></div>
+{% addtoblock "js" %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            animated = 0;
+            $("#alarm-category").click(function(){
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#home-security-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-925px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#home-security-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#home-security-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+    
+            });
+            $("#video-category").click(function(){
+    
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#video-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-582px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#video-security-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#video-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+            $("#smart-app-category").click(function(){
+                
+    
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#smart-app-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-242px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#smart-app-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#smart-app-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+
+        });
+    </script>
+{% endaddtoblock "js" %}
+
+{% endblock %}
+{% block order-footer %}{% endblock %}
+{% block main-footer %}{% endblock %}
+
+
+

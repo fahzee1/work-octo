@@ -659,6 +659,55 @@ table#licenses-table {
     #quick-link-navigation {
         float:right;
         margin: 0px 0 2px 0;
+        position: relative;
+        #customer-service-box {
+            display: none;
+            position: absolute;
+            background: #4bba29 url(/static/img/spanish/smart-app-bg.png) repeat;
+            top: 27px;
+            z-index: 999;
+            padding: 8px;
+            padding-bottom: 16px;
+            .border-radius(5px,5px,5px,5px);
+            .drop-shadow;
+            right: 0px;
+            width: 303px;
+            .button-link {
+                margin-top: 4px;
+                text-align: left;
+                margin-bottom: 20px;
+                text-align: right;
+                a {
+                    padding: 9px 83px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-top: 20px;
+                }
+            }
+            p {
+                text-transform: uppercase;
+                font-size: 13px;
+                font-weight: bold;
+                text-align: right;
+                line-height: 24px;
+                color: @dark-green;
+                padding-bottom: 10px;
+                
+                &.customer-care {
+                    border-top: 1px solid @dark-green;
+                    margin-top: 8px;
+                    padding-top: 8px;
+                    padding-bottom: 0;
+                }
+            }
+            .phone-number {
+                color: @dark-green;
+                text-decoration: none;
+                text-align: right;
+                display: block;
+                font-size: 18px;
+            }
+        }
         li {
             font-size:1em;
             font-weight:normal;
@@ -677,6 +726,12 @@ table#licenses-table {
                     }
                 }
             }
+            &.big-green {
+                a {
+                    background: #4bba29;
+                    color: @white;
+                }
+            }
             .yelp-button {
                 background: transparent;
                 img {
@@ -687,10 +742,12 @@ table#licenses-table {
                 }
                 
             }
+
             &#quick-social {
                 padding-top: 2px;
                 height: 23px;
                 background: @v-light-grey;
+                position: relative;
                 .border-radius(0, 0, 10px, 10px);
                 padding-left: 8px;
                 width: 162px;
