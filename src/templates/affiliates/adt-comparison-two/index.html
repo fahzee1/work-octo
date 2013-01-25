@@ -71,6 +71,11 @@ $(document).ready(function() {
 <div id="house-features">
     <h2 class="tk-freight-sans-pro">Customized to Fit Your Needs</h2>
     <p class="tk-freight-sans-pro">Only Protect America will help you customize your security package to fit your needs.<span> Click on the blue dots to see all that we can protect, it’s your choice!</span></p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
     <div id="equipment-features">
         <div class="equipment-feature" style="left: 360px; top: 115px;">
             <div class="feature-icon">+</div>
@@ -181,6 +186,11 @@ $(document).ready(function() {
 <div class="copy-point">
     <h2 class="tk-freight-sans-pro">Control Your Security from Anywhere in the World.</h2> 
     <p class="tk-freight-sans-pro">Choose our cellular or broadband monitoring and your account comes with FREE interactive features. Arm your system and program rules to fit your needs anywhere, anytime through your computer or smart phone.</p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
     <div class="image-area">
         <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" alt="interactive" width="642" height="309" />
     </div>
@@ -214,34 +224,18 @@ $(document).ready(function() {
 <div class="four-call-out-boxes">
     <div class="top-left">
         <h2 class="tk-freight-sans-pro">ADT Changes Your Monthly Rate (After One Year)</h2><p class="tk-freight-sans-pro">Protect America keeps your monitoring rate the same for the entirety of your contract. With ADT, they can increase your monthly monitoring rate every year after the first year! It's hidden in their ‘Terms and Conditions.’</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-small-icons.png" alt="money-small-icons" width="49" height="47" />
-            </li>
-        </ul>
     </div>
     <div class="top-right">
         <h2 class="tk-freight-sans-pro">Repairs with ADT will Cost You</h2><p class="tk-freight-sans-pro">If your system malfunctions with ADT, they will charge you for the replacement of parts which can cost hundreds of dollars. With Protect America, if any part of your system breaks, we replace it. With our Lifetime Replacement Parts warranty, you can rest easy knowing your home is safe and sound.</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/tools-small-icon.png" alt="tools-small-icon" width="49" height="47" />
-                <a href="{% url warranty %}" target="_blank">Learn More</a>
-            </li>
-        </ul>
+
     </div>
     <div class="bottom-left">
        <h2 class="tk-freight-sans-pro">ADT Charges for Moving</h2><p class="tk-freight-sans-pro">If you have service with ADT, it could cost you hundreds of dollars when you move. Home security companies that sell wired security systems often require additional fees for relocation. A benefit of a Protect America wireless home security system is that you can transfer your system and your service to your new home for free!</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/moving-small-icon.png" alt="moving-small-icon" width="48" height="47" />
-                <a href="{% url moving-kit %}" target="_blank">Learn More</a>
-            </li>
-        </ul>
+
     </div>
     <div class="bottom-right">
          <h2 class="tk-freight-sans-pro">ADT Won't Give You a Quote Over the Phone</h2><p class="tk-freight-sans-pro">If you want to know the cost of an ADT system, you’ll have to wait for a technician come to your home. At Protect America, our home security experts are standing by to take your call. Protect America will give you a free home security analysis over the phone in minutes. Call Protect America today!</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/phone-small-icons.png" alt="phone-small-icons" width="48" height="47" />
-                <a href="{% url order-package %}" target="_blank">Learn More</a>
-            </li>
-        </ul>
+
     </div>
 </div>
 {% endblock %}
@@ -265,7 +259,7 @@ $(document).ready(function() {
             <tr>
                 <td class="company">Protect America</td>
                 <td class="upfront free"><span>FREE</span></td>
-                <td><span> $19.99</span> per month</td>
+                <td class="active"><span> $19.99</span> per month</td>
                 <td><span> $37.99 </span>per month</td>
                 <td><span>$41.99 </span>per month</td>
                 <td><span>FREE</span></td>
@@ -274,7 +268,7 @@ $(document).ready(function() {
             <tr class="alt">
                 <td class="company">ADT</td>
                 <td class="upfront"><span>$349</span>Install</td>
-                <td class="upfront"><span>$42.99</span> per month</td>
+                <td class="upfront active"><span>$42.99</span> per month</td>
                 <td class="na">Not<br/>Offered</td>
                 <td><span>$50.99</span>per month</td>
                 <td class="na"><span>$6.00</span> per month</td>
