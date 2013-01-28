@@ -129,7 +129,7 @@ def local_page(request, state, city, keyword=None):
         background_time = 'night'
 
     crime_stats_ctx['background_time'] = background_time
-    #custom_keyword_list = ['wireless-home-security-systems']
+    custom_keyword_list = ['wireless-home-security-systems']
     if keyword in custom_keyword_list:
         response = render_to_response('local-pages/%s.html' % keyword,
             crime_stats_ctx, context_instance=RequestContext(request))
