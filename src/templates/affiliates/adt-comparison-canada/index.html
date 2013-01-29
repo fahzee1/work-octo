@@ -3,16 +3,12 @@
 
 {% load sekizai_tags content_tags content_filters %}
 
-{% block page_title %}ADT Home Security Comparison of Canada | Best Home Security Systems of Canada | Protect America Canada Vs. ADT{% endblock %}
+{% block page_title %}ADT Home Security Comparison | Best Home Security Systems | Protect America Vs. ADT{% endblock %}
 {% block page_description %}Protect America offers the best home security systems at competitive prices. Just compare our security services with that of ADT to see for yourself!{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/adt-comparison/adt-comparison.css">
-    <script type="text/javascript" src="//use.typekit.net/qrm2ztf.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/adt-comparison-two/adt-comparison-two.css">
 {% endblock %}
-
-{% block typekit %}tk-museo-slab{% endblock %}
 
 {% block active_tab_trigger %}
 <script>
@@ -22,23 +18,43 @@ $(document).ready(function() {
 </script>
 {% endblock %}
 
+{% block hero-block %}
+</div>
+<div id="hero-banner">
+
+    <div class="wrapper">
+        <div id="top-hero-banner">
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison-two/adt-banner.jpg" class="adt-banner" alt="adt-banner" width="1229" height="409" />
+            </div>
+        </div>
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+<div class="wrapper">
+<div class="clear"></div>
+{% endblock %}
+
+
 {% block left-wrapper %}
     <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/hero-exp0113.gif" alt="hero-exp0113" width="660" height="410" />
 {% endblock %}    
 
 {% block assurance-block-one %}
     <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
-    <h3>Customizable Home Security</h3>
+    <h3>Customizable Security Packages</h3>
 {% endblock %}
 
 {% block assurance-block-two %}
     <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/mobile-icon.png" alt="mobile-icon" width="120" height="117" />
-    <h3>Smartphone Control</h3>
+    <h3>Smartphone System Control</h3>
 {% endblock %}
 
 {% block assurance-block-three %}
     <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/shh-icon.png" alt="shh-icon" width="118" height="115" />
-    <h3>What ADT Doesn’t Say</h3>
+    <h3>What ADT Won't Say  </h3>
 {% endblock %}
 
 {% block assurance-block-four %}
@@ -53,8 +69,13 @@ $(document).ready(function() {
 
 {% block assurance-card-one %}
 <div id="house-features">
-    <h2 class="tk-freight-sans-pro">Home Security that Fits Your Life</h2>
-    <p class="tk-freight-sans-pro">Protect America will protect your home no matter where in Canada you are.<span> Click on the blue dots to see how we can protect your home.</span></p>
+    <h2 class="tk-freight-sans-pro">Customized to Fit Your Needs</h2>
+    <p class="tk-freight-sans-pro">Only Protect America will help you customize your security package to fit your needs.<span> Click on the blue dots to see all that we can protect, it’s your choice!</span></p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
     <div id="equipment-features">
         <div class="equipment-feature" style="left: 360px; top: 115px;">
             <div class="feature-icon">+</div>
@@ -163,10 +184,13 @@ $(document).ready(function() {
 
 {% block assurance-card-two %}
 <div class="copy-point">
-    <h2 class="tk-freight-sans-pro">Control Your Home Security System On the Go.</h2> 
-    <p class="tk-freight-sans-pro">Get FREE interactive control when you choose cellular or broadband monitoring. Arm your system from your smartphone or computer and experience the convenience of Protect America Interactive.</p>
-    <p class="tk-freight-sans-pro">Home Security Control – Use your computer or smartphone to arm, disarm, and check the status of your alarm system.</p>
-    <p class="tk-freight-sans-pro">Live-Video Surveillance - Keep an eye on your home and family like never before. Capture live video and protect your home. (Video Service Required)</p>
+    <h2 class="tk-freight-sans-pro">Control Your Security from Anywhere in the World.</h2> 
+    <p class="tk-freight-sans-pro">Choose our cellular or broadband monitoring and your account comes with FREE interactive features. Arm your system and program rules to fit your needs anywhere, anytime through your computer or smart phone.</p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
     <div class="image-area">
         <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" alt="interactive" width="642" height="309" />
     </div>
@@ -192,42 +216,26 @@ $(document).ready(function() {
 
 {% block assurance-card-three %}
 <div class="copy-point2">
-    <h2 style="text-align:right; margin-top: 18px;" class="tk-freight-sans-pro"><span>What ADT Doesn’t Tell You is Alarming!</span></h2> 
+    <h2 style="text-align:right; margin-top: 18px;" class="tk-freight-sans-pro"><span>What ADT Won't Say Speaks Volumes!</span></h2> 
     <div class="image-area2">
         <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/apple-picking.png" alt="apple-picking" width="462" height="550" />
     </div>
 </div>
 <div class="four-call-out-boxes">
     <div class="top-left">
-        <h2 class="tk-freight-sans-pro">ADT Can Change Your Monthly Rate (After One Year)</h2><p class="tk-freight-sans-pro">ADT claims to have a low monthly price, but what happens when they change raise your price? Protect America promises to keep your monitoring rate the same for the length of your contract. Make sure to read your contract before signing!</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-small-icons.png" alt="money-small-icons" width="49" height="47" />
-            </li>
-        </ul>
+        <h2 class="tk-freight-sans-pro">ADT Changes Your Monthly Rate (After One Year)</h2><p class="tk-freight-sans-pro">Protect America keeps your monitoring rate the same for the entirety of your contract. With ADT, they can increase your monthly monitoring rate every year after the first year! It's hidden in their ‘Terms and Conditions.’</p>
     </div>
     <div class="top-right">
-        <h2 class="tk-freight-sans-pro">Repairs Will Cost You with ADT</h2><p class="tk-freight-sans-pro">When your system malfunctions or if you need help, ADT will charge you for a technician to help. Why pay hundreds of dollars to fix your system when you can choose Protect America and get a Lifetime Warranty for free. You can rest easy knowing your home is protected no matter what.</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/tools-small-icon.png" alt="tools-small-icon" width="49" height="47" />
-                <a href="{% url warranty %}" target="_blank">Learn More</a>
-            </li>
-        </ul>
+        <h2 class="tk-freight-sans-pro">Repairs with ADT will Cost You</h2><p class="tk-freight-sans-pro">If your system malfunctions with ADT, they will charge you for the replacement of parts which can cost hundreds of dollars. With Protect America, if any part of your system breaks, we replace it. With our Lifetime Replacement Parts warranty, you can rest easy knowing your home is safe and sound.</p>
+
     </div>
     <div class="bottom-left">
-       <h2 class="tk-freight-sans-pro">ADT Moving Charges</h2><p class="tk-freight-sans-pro">ADT will charge you hundreds if you ever decided to move. Hard-wired home security systems can be difficult to move. Protect America will never charge you a single penny for moving your system. We will even send you a free relocation kit to help when you move!</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/moving-small-icon.png" alt="moving-small-icon" width="48" height="47" />
-                <a href="{% url moving-kit %}" target="_blank">Learn More</a>
-            </li>
-        </ul>
+       <h2 class="tk-freight-sans-pro">ADT Charges for Moving</h2><p class="tk-freight-sans-pro">If you have service with ADT, it could cost you hundreds of dollars when you move. Home security companies that sell wired security systems often require additional fees for relocation. A benefit of a Protect America wireless home security system is that you can transfer your system and your service to your new home for free!</p>
+
     </div>
     <div class="bottom-right">
-         <h2 class="tk-freight-sans-pro">ADT Pushy Sales Tactics</h2><p class="tk-freight-sans-pro">ADT will never give you an exact quote over the phone. If you want to know the price of a home security system, you will have to wait for a technician to come to your home. Protect America is always happy to give you an exact price and quote over the phone. Call Protect America today!</p>
-        <ul>
-            <li><img style="padding-right: 10px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/phone-small-icons.png" alt="phone-small-icons" width="48" height="47" />
-                <a href="{% url order-package %}" target="_blank">Learn More</a>
-            </li>
-        </ul>
+         <h2 class="tk-freight-sans-pro">ADT Won't Give You a Quote Over the Phone</h2><p class="tk-freight-sans-pro">If you want to know the cost of an ADT system, you’ll have to wait for a technician come to your home. At Protect America, our home security experts are standing by to take your call. Protect America will give you a free home security analysis over the phone in minutes. Call Protect America today!</p>
+
     </div>
 </div>
 {% endblock %}
@@ -251,7 +259,7 @@ $(document).ready(function() {
             <tr>
                 <td class="company">Protect America</td>
                 <td class="upfront free"><span>FREE</span></td>
-                <td><span> $19.99</span> per month</td>
+                <td class="active"><span> $19.99</span> per month</td>
                 <td><span> $37.99 </span>per month</td>
                 <td><span>$41.99 </span>per month</td>
                 <td><span>FREE</span></td>
@@ -260,7 +268,7 @@ $(document).ready(function() {
             <tr class="alt">
                 <td class="company">ADT</td>
                 <td class="upfront"><span>$349</span>Install</td>
-                <td class="upfront"><span>$42.99</span> per month</td>
+                <td class="upfront active"><span>$42.99</span> per month</td>
                 <td class="na">Not<br/>Offered</td>
                 <td><span>$50.99</span>per month</td>
                 <td class="na"><span>$6.00</span> per month</td>
@@ -277,8 +285,8 @@ $(document).ready(function() {
 <div class="clear"></div>
 
 <div id="touchscreen-features">
-    <h2 class="tk-freight-sans-pro">Experience the Simon XT Touch Screen:</h2>
-    <p class="tk-freight-sans-pro">As a wireless solution and portable control system, the Simon XT Touch Screen allows you to have full control of you alarm system no matter where you are in your home. The vibrant LCD touchscreen displays icons to allow one-touch arming, disarming, panic alarm signaling, and notifies you when a door or window is open or closed. The Simon XT Touch Screen gives you the perfect control for your alarm system. <strong>Click the “+” Icons on to learn more.</strong></p>
+    <h2 class="tk-freight-sans-pro">Explore the Simon XT Touchscreen Features:</h2>
+    <p class="tk-freight-sans-pro">An ideal solution for more flexible system control, the Simon XT Touch Screen includes one-touch arming and disarming, panic alarm, and a vibrant 3.5 inch LCD screen. The Simon XT Touch Screen from GE will simplify the use of your security system while maintaining the highest standards of protection for your home and family. <strong>Click the "+" Icons on the Simon XT Touchscreen to Learn More</strong></p>
     <div id="equipment-features">
         <div class="equipment-feature" style="left: 165px; top: 260px;">
             <div class="feature-icon">+</div>
