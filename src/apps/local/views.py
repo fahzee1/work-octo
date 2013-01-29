@@ -129,10 +129,13 @@ def local_page(request, state, city, keyword=None):
         background_time = 'night'
 
     crime_stats_ctx['background_time'] = background_time
-    
-    response = render_to_response('local-pages/index.html',
-                              crime_stats_ctx,
-                              context_instance=RequestContext(request))
+    custom_keyword_list = ['wireless-home-security-systems']
+    if keyword in custom_keyword_list:
+        response = render_to_response('local-pages/%s.html' % keyword,
+            crime_stats_ctx, context_instance=RequestContext(request))
+    else:        
+        response = render_to_response('local-pages/index.html',
+            crime_stats_ctx, context_instance=RequestContext(request))
 
     expire_time = datetime.timedelta(days=90)
     response.set_cookie('affkey',

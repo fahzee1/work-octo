@@ -1,0 +1,36 @@
+{% extends "landing-pages/index.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+
+
+{% block page_title %}Wireless Home Security Systems | {{ city }}, {{ state }} | Protect America{% endblock %}
+
+{% block page_description %}{{ city }} {{ state }} Home Security Systems from Protect America. Voted #1 Home Security Company by Top Consumer Reviews{% endblock %}
+
+{% block page_keywords %}{{ city }} Home Security, Home Security {{ city }}, {{ city }} Alarm Monitoring, Home Security {{ city }} {{ state_long }}, {{ city }} Alarm Systems, {{ city }} Security Alarms, {{ city }} Alarm Security, {{ city }} Alarm Companies, {{ city }} Alarms, Alarms {{ city }} {{ state_long }}, {{ city }} Alarm, {{ city }} Smart Home, {{ city }} Home Automation, Home Security Systems {{ city }}, Security Systems {{ city }}, {{ city }} Alarm Company, Alarm Monitoring {{ city }}{% endblock %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
+
+
+{% block navigation %}
+<div id="navigation">
+    <ul>
+        <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+        <li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Home Security Systems and Products">Products</a></li>
+        <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
+    </ul>
+    {% if request.GET.cikw or request.COOKIES.cikw %}
+        <p>You searched for 
+            {% if request.GET.cikw %}
+                <strong>{{ request.GET.cikw|truncatewords:6 }}</strong>
+            {% else %}
+                {% if request.COOKIES.cikw %}
+                    <strong>{{ request.COOKIES.cikw|truncatewords:6 }}</strong>
+                {% endif %}
+            {% endif %}
+        </p>
+    {% endif %}
+</div>
+{% endblock %}
+{% block subnav %}{% endblock %}
+
+{% block pa_information %}At Protect America, we are driven to provide only the highest quality products and dedicated service at an affordable price. Our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008-2013), as well as the Consumer Digest Best Buy Award for our Copper Package.{% endblock %}
