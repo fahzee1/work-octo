@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import redirect_to
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +19,17 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     context.update(ctx)
 
     return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
+        dict(template=template, extra_context=context),
+        name=name)
+
+def dtt_nocache(pattern, template, name, parent=None, ctx=None):
+    ctx = ctx or {}
+
+
+    context = dict(page_name=name, parent=parent)
+    context.update(ctx)
+
+    return url(pattern, never_cache(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
 
@@ -109,35 +120,33 @@ elif settings.SITE_ID == 5:
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
+        dtt_nocache(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
             'agent_id': 'a01526'}),
 
-        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
+        dtt_nocache(r'^copper/?$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^makes-sense$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
+        dtt_nocache(r'^makes-sense/?$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
+        dtt_nocache(r'^bronze/?$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
+        dtt_nocache(r'^silver/?$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
+        dtt_nocache(r'^gold/?$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
-
-        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
+        dtt_nocache(r'^platinum/?$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
             'agent_id': 'a01526'}),
 
-        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
+        dtt_nocache(r'^video/?$', 'affiliates/five-linx/video.html', 'video', ctx={
+            'agent_id': 'a01526'}),
+
+        dtt_nocache(r'^gps/?$', 'affiliates/five-linx/gps.html', 'gps', ctx={
             'agent_id': 'a01526'}),
         
-        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
+        dtt_nocache(r'^order/?$', 'affiliates/five-linx/order.html', 'order', ctx={
             'agent_id': 'a01526'}),
             
-        dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
+        dtt_nocache(r'^thank-you/5linx/?$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
-
-
     )
 elif settings.SITE_ID == 7:
     urlpatterns += patterns('',
@@ -209,7 +218,7 @@ elif settings.SITE_ID == 11:
 # AlarmZone.com
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/alarm-zone/index.html', 'home'),
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
         dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
         dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
         dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
@@ -227,6 +236,7 @@ elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
     )
+
 else:
     urlpatterns += patterns('',
 
@@ -240,6 +250,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         # dtt(r'^404/$', '404.html', '404', 'home'),
+
+
+        # SEM Landing Pages
+        dtt(r'^home-security/for-less/$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
 
             
         # SEO Local Pages
@@ -266,13 +280,15 @@ else:
         # PAID LANDING PAGES
         dtt(r'^home-security/business-security-systems/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
         dtt(r'^home-security/free-home-security-system/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
-        dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison/index.html', 'paid-adt-comparison-cat'),
+        dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison-two/index.html', 'paid-adt-comparison-cat'),
         dtt(r'^frontpoint-vs-protect-america-compare-and-save/$', 'affiliates/frontpoint-vs-protectamerica/index.html', 'frontpoint-vs-pa'),
         dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
         dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
         dtt(r'^protect-america-vs-comcast/$', 'affiliates/comcast-vs-protectamerica/index.html', 'comcast-vs-protect-america'),
         dtt(r'^protect-america-vs-vivint/$', 'affiliates/vivint-vs-protectamerica/index.html', 'vivint-vs-protect-america'),
+        dtt(r'^adt-comparison/$', 'affiliates/adt-comparison/index.html', 'adt-two'),
+
 
         dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
@@ -294,6 +310,16 @@ else:
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
+
+        # Spanish
+        #dtt(r'^spanish/$', 'spanish/index.html',
+        #    'pa-spanish', ctx={'agent_id': 'i10109'}),
+
+        # Canada
+        #dtt(r'^canada/$', 'canada/index.html',
+        #    'pa_canada', ctx={'agent_id': 'i10123'}),
+        #dtt(r'^canada/home-security-systems$', 'canada/packages.html',
+        #    'ca_packages', 'pa_canada', ctx={'agent_id': 'i10123'}),
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',
