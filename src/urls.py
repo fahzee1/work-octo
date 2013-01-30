@@ -219,10 +219,10 @@ elif settings.SITE_ID == 11:
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
-        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
-        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
-        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
-        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you'),
+        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop', ctx={'agent_id': 'a01415'}),
+        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring', ctx={'agent_id': 'a01415'}),
+        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment', ctx={'agent_id': 'a01415'}),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you', ctx={'agent_id': 'a01415'}),
     )
 
 # SecuritySystemExpert.com
