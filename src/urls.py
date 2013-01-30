@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import redirect_to
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +19,17 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     context.update(ctx)
 
     return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
+        dict(template=template, extra_context=context),
+        name=name)
+
+def dtt_nocache(pattern, template, name, parent=None, ctx=None):
+    ctx = ctx or {}
+
+
+    context = dict(page_name=name, parent=parent)
+    context.update(ctx)
+
+    return url(pattern, never_cache(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
 
@@ -109,35 +120,33 @@ elif settings.SITE_ID == 5:
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
+        dtt_nocache(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
             'agent_id': 'a01526'}),
 
-        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
+        dtt_nocache(r'^copper/?$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^makes-sense$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
+        dtt_nocache(r'^makes-sense/?$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
+        dtt_nocache(r'^bronze/?$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
+        dtt_nocache(r'^silver/?$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
+        dtt_nocache(r'^gold/?$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
-
-        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
+        dtt_nocache(r'^platinum/?$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
             'agent_id': 'a01526'}),
 
-        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
+        dtt_nocache(r'^video/?$', 'affiliates/five-linx/video.html', 'video', ctx={
+            'agent_id': 'a01526'}),
+
+        dtt_nocache(r'^gps/?$', 'affiliates/five-linx/gps.html', 'gps', ctx={
             'agent_id': 'a01526'}),
         
-        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
+        dtt_nocache(r'^order/?$', 'affiliates/five-linx/order.html', 'order', ctx={
             'agent_id': 'a01526'}),
             
-        dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
+        dtt_nocache(r'^thank-you/5linx/?$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
-
-
     )
 elif settings.SITE_ID == 7:
     urlpatterns += patterns('',
