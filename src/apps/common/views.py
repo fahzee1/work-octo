@@ -209,6 +209,8 @@ def index_test(request, test_name):
         template = 'tests/test-nav-home-security.html'
     elif test_name == 'holiday':
         template = 'tests/holiday-test.html'
+    elif test_name == 'feb-promo':
+        template = 'tests/feb-test.html'
     else:
         raise Http404
 
