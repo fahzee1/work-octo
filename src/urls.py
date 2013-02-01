@@ -238,6 +238,7 @@ else:
         # Test Pages
         dtt(r'^test/tcr-first/$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
         dtt(r'^test/promotion-first/$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
+        dtt(r'^test/feb-promo/$', 'tests/feb-test.html', 'february-promo-test', 'home'),
         url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/$', 'apps.common.views.index_test', name='index_test'),
 
         # Home Page
