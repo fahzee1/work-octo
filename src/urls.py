@@ -239,6 +239,8 @@ else:
         dtt(r'^test/tcr-first/$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
         dtt(r'^test/promotion-first/$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
         dtt(r'^test/feb-promo/$', 'tests/feb-test.html', 'february-promo-test', 'home'),
+        dtt(r'^test/adt-promo/$', 'affiliates/adt-comparison-two/test-599.html', 'adt-promo-test', 'home'),
+
         url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/$', 'apps.common.views.index_test', name='index_test'),
 
         # Home Page
@@ -756,7 +758,7 @@ urlpatterns += patterns('',
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns() 
-    def template_view(request, path):
+    def adt(request, path):
         from django.views.generic.simple import direct_to_template
         return direct_to_template(request, path)
     urlpatterns += patterns('',
