@@ -765,5 +765,5 @@ if settings.DEBUG:
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
         }),
-        url(r'^templates/(?P<path>.*)$', template_view),
+
    )
