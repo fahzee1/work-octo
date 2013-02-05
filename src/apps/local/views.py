@@ -75,7 +75,7 @@ TIMEZONES = {
     'WY':'America/Denver',
 }
 
-#@cache_page(60 * 60 * 4)
+@cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state, zipcode):
     def get_state_code(statestr):
         for state in US_STATES:
