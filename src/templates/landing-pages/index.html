@@ -15,8 +15,17 @@
 
 {% block content %}
 </div>
-{% include "banners/seo-hero-images.html" %}
+<div id="hero-banner">
 
+    <div class="wrapper">
+        <div id="top-hero-banner">
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/best-deal-banner.jpg" class="adt-banner" alt="The Best Deal in Home Security - starting at $19.99 per month" width="1229" height="409" />
+            </div>
+        </div>
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
+    </div>
+</div>
 
 <div class="wrapper">
     {% if phone_number %}
@@ -82,47 +91,18 @@
     <div id="home-security-choice" class="big-info" style="display:block">
         <div class="big-wrapper">
             <div id="home-security-packages">
-                <div id="copper-security-package">
-                    <h3>Copper</h3>
-                    <p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
-                    <div class="package-info">
-                        <ul>
-                            <li><strong>1</strong> Simon XT Control</li>
-                            <li><strong><span>3</span></strong> Door / Window Sensors</li>
-                            <li><strong>1</strong> Motion Detector</li>
-                        </ul>
-                        <ul class="extra-features">
-                            <li>No Equipment Fees</li>
-                            <li>No Activation Fees</li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="bronze-security-package">
-                    <h3>Bronze</h3>
-                    <p><sup>$</sup>35<sup>99</sup><span>monthly</span></p>
-                    <div class="package-info">
-                        <ul>
-                            <li><strong>1</strong> Simon XT Control</li>
-                            <li><strong><span>7</span></strong> Door / Window Sensors</li>
-                            <li><strong>1</strong> Motion Detector</li>
-                        </ul>
-                        <ul class="extra-features">
-                            <li>No Equipment Fees</li>
-                            <li>No Activation Fees</li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="premium-packages">
                     <img src="{{ STATIC_URL }}img/canada/premium-packages-header.png" class="premium-packages-header" alt="premium-packages-header" />
-                    <div id="silver-security-package">
-                        <h3>Silver</h3>
-                        <p><sup>$</sup>37<sup>99</sup><span>monthly</span></p>
+                    <div id="platinum-security-package">
+                        <h3>Platinum</h3>
+                        <p><sup>$</sup>42<sup>99</sup><span>monthly</span></p>
                         <div class="package-info">
                             <ul>
                                 <li><strong>1</strong> Simon XT Control</li>
-                                <li><strong><span>10</span></strong> Door / Window Sensors</li>
+                                <li><strong><span>15</span></strong> Door / Window Sensors</li>
                                 <li><strong>1</strong> Motion Detector</li>
                                 <li><strong>2</strong> Keychain Remotes</li>
+        
                             </ul>
                             <ul class="extra-features">
                                 <li>No Equipment Fees</li>
@@ -147,16 +127,15 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="platinum-security-package">
-                        <h3>Platinum</h3>
-                        <p><sup>$</sup>42<sup>99</sup><span>monthly</span></p>
+                    <div id="silver-security-package">
+                        <h3>Silver</h3>
+                        <p><sup>$</sup>37<sup>99</sup><span>monthly</span></p>
                         <div class="package-info">
                             <ul>
                                 <li><strong>1</strong> Simon XT Control</li>
-                                <li><strong><span>15</span></strong> Door / Window Sensors</li>
+                                <li><strong><span>10</span></strong> Door / Window Sensors</li>
                                 <li><strong>1</strong> Motion Detector</li>
                                 <li><strong>2</strong> Keychain Remotes</li>
-        
                             </ul>
                             <ul class="extra-features">
                                 <li>No Equipment Fees</li>
@@ -166,6 +145,36 @@
                     </div>
                     <img src="{{ STATIC_URL }}img/banners/639x72/free-interactive-apps.png" class="promo-banner" alt="Free Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
                     <div class="clear"></div>
+                </div>
+                <div id="bronze-security-package">
+                    <h3>Bronze</h3>
+                    <p><sup>$</sup>35<sup>99</sup><span>monthly</span></p>
+                    <div class="package-info">
+                        <ul>
+                            <li><strong>1</strong> Simon XT Control</li>
+                            <li><strong><span>7</span></strong> Door / Window Sensors</li>
+                            <li><strong>1</strong> Motion Detector</li>
+                        </ul>
+                        <ul class="extra-features">
+                            <li>No Equipment Fees</li>
+                            <li>No Activation Fees</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="copper-security-package">
+                    <h3>Copper</h3>
+                    <p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
+                    <div class="package-info">
+                        <ul>
+                            <li><strong>1</strong> Simon XT Control</li>
+                            <li><strong><span>3</span></strong> Door / Window Sensors</li>
+                            <li><strong>1</strong> Motion Detector</li>
+                        </ul>
+                        <ul class="extra-features">
+                            <li>No Equipment Fees</li>
+                            <li>No Activation Fees</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="clear"></div>
             </div>
