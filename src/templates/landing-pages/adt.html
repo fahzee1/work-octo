@@ -1,0 +1,294 @@
+{% extends "affiliates/generic-landing-base/index.html" %}
+
+
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+
+{% block page_title %}ADT Home Security Comparison | Best Home Security Systems | Protect America Vs. ADT{% endblock %}
+{% block page_description %}Protect America offers the best home security systems at competitive prices. Just compare our security services with that of ADT to see for yourself!{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/adt-comparison-two/adt-comparison-two.css">
+{% endblock %}
+
+{% block active_tab_trigger %}
+<script>
+$(document).ready(function() {
+    $('#assurance-block-four').trigger('click');
+});
+</script>
+{% endblock %}
+
+{% block hero-block %}
+</div>
+<div id="hero-banner">
+
+    <div class="wrapper">
+        <div id="top-hero-banner">
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison-two/adt-banner.jpg" class="adt-banner" alt="adt-banner" width="1229" height="409" />
+            </div>
+        </div>
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+<div class="wrapper">
+<div class="clear"></div>
+{% endblock %}
+
+
+{% block left-wrapper %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/hero-exp0113.gif" alt="hero-exp0113" width="660" height="410" />
+{% endblock %}    
+
+{% block assurance-block-one %}
+    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
+    <h3>Customizable Security Packages</h3>
+{% endblock %}
+
+{% block assurance-block-two %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/mobile-icon.png" alt="mobile-icon" width="120" height="117" />
+    <h3>Smartphone System Control</h3>
+{% endblock %}
+
+{% block assurance-block-three %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/shh-icon.png" alt="shh-icon" width="118" height="115" />
+    <h3>What ADT Won't Say  </h3>
+{% endblock %}
+
+{% block assurance-block-four %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-icon.png" alt="money-icon" width="117" height="115" />
+    <h3>A Cost Comparison</h3>
+{% endblock %}
+
+{% block assurance-block-five %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/touch-icon.png" alt="touch-icon" width="120" height="116" />
+    <h3>GE Simon XT Touch Screen</h3>
+{% endblock %}
+
+{% block assurance-card-one %}
+<div id="house-features">
+    <h2 class="tk-freight-sans-pro">Customized to Fit Your Needs</h2>
+    <p class="tk-freight-sans-pro">Only {% content_spinner "custom-sec2" "Protect America|a Protect America wireless home security system|a Protect America wireless home alarm system" %} will help you customize your security package to fit your needs. Click on the blue dots to see why we're better than {% content_spinner "custom-sec9" "ADT Pulse|ADT Pulse Security|ADT Security Pulse|ADT Security Services|ADT home alarms|ADT alarms|the ADT Pulse System" %}</span></p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
+    <div id="equipment-features">
+        <div class="equipment-feature" style="left: 360px; top: 115px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Motion Detectors</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Our motion detectors use both heat and movement to detect intruders when your {% content_spinner "custom-sec7" "alarm system|wireless alarm system|wireless home security system" %} is armed. They are very useful in case someone enters your home and works best in a heavy trafficked area of your home.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 375px; top: 375px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">GE Simon XT Touch Screen</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">A touch screen acts as an optional point of access for your {% content_spinner "custom-sec12" "home security system|wireless home security system|wireless home alarm system" %}. The GE Simon XT Touch Screen features one-touch arming and disarming, soothing voice feedback, and an emergency response signal.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 100px; top: 325px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Glass Break Sensor</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">This sensor is specially designed using pattern recognition technology to detect the sound of breaking glass within a 20-foot radius. Use this sensor around easily accessible windows or glass doors that could be shattered to gain entry into your home.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 195px; top: 150px;">
+            <div class="feature-icon active">+</div>
+            <div class="feature-content first-open">
+                <h3 class="tk-freight-sans-pro">The GE Simon XT</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">The control panel is the 'brains' of your home security system. And with the GE Simon XT, you get a full-featured home security platform that combines the best of home security with ease of use. Arming, emergency response, and status updates are all just one button press away. And with its robust programming system, the Simon XT allows you to upgrade and create an alarm system that fits your needs. Protecting your home and family couldn't be easier than with the GE Simon XT control panel.</p>
+            </div>
+        </div>
+                <div class="equipment-feature" style="left: 25px; top: 100px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Window Sensors</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Window sensors are the most common piece of home security equipment and the front line defense for your home. A surprisingly simple device, door/window sensors create a magnetic field that, when broken, sends a signal to your central GE Simon XT control panel and sounds the alarm. Protect America only uses wireless {% content_spinner "custom-sec5" "sensors|security equipment|security sensors" %} that can be used on either doors or windows, allowing for greater system customization. For most homes, we recommend one {% content_spinner "custom-sec6" "sensor|security sensor|wireless security sensor" %} for every accessible door and window.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 230px; top: 40px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">Smoke Detector</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Protect your home and family from fire by adding {% content_spinner "custom-sec3" "monitored smoke detectors|interactive smoke detectors|self-installed smoke detectors" %}  to your security system. Monitored smoke detectors can identity smoke or rapidly rising temperatures 24 hours a day whether you're home or not. Even if your {% content_spinner "custom-sec4" "security system|alarm system|wireless home security system" %} is disarmed, our monitoring facility notifies your local fire department if there is a fire.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 850px; top: 405px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">Home Security Sign</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Deter burglars from targeting your home with this warning sign that prominently displays that your house is secured with a home alarm system.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 635px; top: 385px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Keychain Remote Control</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">With the keychain remote control, you can enjoy the convenience of turning off your system as you pull into the driveway. You can also send a panic signal from anywhere inside your home allowing you to notify authorities.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 635px; top: 345px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">GPS Vehicle Tracking</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Protect America allows you to instantly locate and follow your car with real-time GPS vehicle tracking. Easily keep a "virtual eye" on your vehicle through an intuitive web interface. Get customizable alerts via email or text if your teenager is speeding or if they are going to places they shouldn't.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 635px; top: 300px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">Garage Door Sensors</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">This {% content_spinner "custom-sec13" "sensor|security sensor|home security accessory" %} protects against entry though the biggest door in your house. By detecting the tilt of an overhead door, this sensor can alert your alarm system if your garage is opened while armed.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 479px; top: 100px;">
+            <div class="feature-icon">x</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Interactive Video Cameras</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">With our your {% content_spinner "custom-sec8" "interactive video home security services|interactive video surveillance|interactive home surveillance services" %} , we bring you easy to use, high-quality security that you can see. Easily check in at home any time of day and from anywhere using your computer or smartphone. Getting a cup of joe? Easy, just log in with your laptop and view your cameras. On vacation? No problem, use your smartphone to make sure everything is okay. With {% content_spinner "custom-sec11" "video home security|interactive home surveillance|interactive video surveillance" %}, checking in at home is just a click away. Protect America {% content_spinner "custom-sec11" "interactive video surveillance|interactive home video|video surveillance services" %}  beats {% content_spinner "custom-sec10" "ADT Pulse cost|ADT Pulse pricing|the ADT Pulse price" %} so you're money stays in your pocket, where it belongs!</p>
+            </div>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/house.gif" alt="house" width="957" height="475" />
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#house-features .feature-icon').click(function(){
+            var icon = $(this).clone();
+            $('#house-features .feature-icon').removeClass('active').html('+');
+            $('#house-features .feature-content').slideUp(250, 'easeOutBounce');
+            if(!$(icon).hasClass('active')) {
+                $(this).addClass('active').html('x').next('#house-features .feature-content').slideDown(250, 'easeOutBounce');
+            }
+        });
+        $('#touchscreen-features .feature-icon').click(function(){
+            var icon = $(this).clone();
+            $('#touchscreen-features .feature-icon').removeClass('active').html('+');
+            $('#touchscreen-features .feature-content').slideUp(250, 'easeOutBounce');
+            if(!$(icon).hasClass('active')) {
+                $(this).addClass('active').html('x').next('#touchscreen-features .feature-content').slideDown(250, 'easeOutBounce');
+            }
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}
+
+{% block assurance-card-two %}
+<div class="copy-point">
+    <h2 class="tk-freight-sans-pro">Control Your {% content_spinner "smart-sys1" "Security|Home Security|Wireless Home Security" %} from Anywhere in the World.</h2> 
+    <p class="tk-freight-sans-pro">Choose our cellular or broadband monitoring and your account comes with FREE {% content_spinner "smart-sys2" "interactive features|interactive access|interactive control" %}. Arm your system and program rules to fit your needs anywhere, anytime through your computer or smart phone.</p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" alt="interactive" width="642" height="309" />
+    </div>
+</div>
+<div id="interactive-call-out-box">
+    <div class="interactive-call-out">
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/security-system-control-small-icon-interactive.png" alt="security-system-control-small-icon-interactive" width="74" height="74" />
+                <p><strong>Security System Control</strong>Use your smartphone to arm, disarm, and view the status of your FREE {% content_spinner "smart-sys3" "alarm system|home security system|wireless alarm system|wirless home alarm system" %} easily in real time.</p>
+                
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/live-video-small-icon-automation.png" alt="live-video-small-icon-automation" width="74" height="74" />
+                <p><strong>Live Video</strong>Keep an eye on your home from anywhere in the world with FREE {% content_spinner "smart-sys4" "live video|interactive video surveillance|interactive home video surveillance|interactive live video" %}. (Video Service Required)</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>
+{% endblock %}
+
+
+{% block assurance-card-three %}
+<div class="copy-point2">
+    <h2 style="text-align:right; margin-top: 18px;" class="tk-freight-sans-pro"><span>What {% content_spinner "adt-say1" "ADT|ADT Pulse|ADT Security Services" %} Won't Say Speaks Volumes</span></h2> 
+    <div class="image-area2">
+        <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/apple-picking.png" alt="apple-picking" width="462" height="550" />
+    </div>
+</div>
+<div class="four-call-out-boxes">
+    <div class="top-left">
+        <h2 class="tk-freight-sans-pro">ADT Changes Your Monthly Rate (After One Year)</h2><p class="tk-freight-sans-pro">Protect America keeps your monitoring rate the same for the entirety of your contract. With {% content_spinner "adt-say2" "ADT|ADT Pulse|ADT Pulse Security|ADT Home Security|ADT Alarm Services" %}, they can increase your monthly monitoring rate every year after the first year! It's hidden in their 'Terms and Conditions.'</p>
+    </div>
+    <div class="top-right">
+        <h2 class="tk-freight-sans-pro">Repairs with ADT will Cost You</h2><p class="tk-freight-sans-pro">If your system malfunctions with {% content_spinner "adt-say3" "ADT|an ADT Pulse system|an ADT alarm system" %}, they will charge you for the replacement of parts which can cost hundreds of dollars. With Protect America, if any part of your system breaks, we replace it. With our Lifetime Replacement Parts warranty, you can rest easy knowing your home is safe and sound.</p>
+    </div>
+    <div class="bottom-left">
+       <h2 class="tk-freight-sans-pro">ADT Charges for Moving</h2><p class="tk-freight-sans-pro">If you have service with with {% content_spinner "adt-say4" "ADT|ADT Pulse|ADT Home Security" %}, it could cost you hundreds of dollars when you move. with {% content_spinner "adt-say5" "Home security companies|Home alarm companies|Home security providers|Home alarm providers" %} that sell wired security systems often require additional fees for relocation. A benefit of a Protect America wireless home alarm system is that you can transfer your system and your service to your new home for free!</p>
+
+    </div>
+    <div class="bottom-right">
+         <h2 class="tk-freight-sans-pro">ADT Won't Give You a Quote Over the Phone</h2><p class="tk-freight-sans-pro">If you want to know the cost of an with {% content_spinner "adt-say5" "ADT system|an ADT Pulse system|an ADT home security system|an ADT Pulse security system" %}, you'll have to wait for a technician come to your home. At Protect America, our home security experts are standing by to take your call. Protect America will give you a free home security analysis over the phone in minutes. Call Protect America today!</p>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block assurance-card-four %}
+<div id="package-comparison-chart">
+    <h2 class="tk-freight-sans-pro">Price Comparison for our Copper Package vs. ADT</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="alpha company">&nbsp;</th>
+                <th class="upfront">Equipment Price</th>
+                <th>Landline Monitoring</th>
+                <th>Broadband Monitoring</th>
+                <th>Cellular Monitoring (ADT Pulse)</th>
+                <th>Lifetime Warranty</th>
+                <th>Contract Term</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="company">Protect America</td>
+                <td class="upfront free"><span>FREE</span></td>
+                <td class="active"><span> $19.99</span> per month</td>
+                <td><span> $37.99 </span>per month</td>
+                <td><span>$41.99 </span>per month</td>
+                <td><span>FREE</span></td>
+                <td><span>36 </span>Months</td>
+            </tr>
+            <tr class="alt">
+                <td class="company">ADT</td>
+                <td class="upfront"><span>$49</span>Install</td>
+                <td class="upfront active"><span>$42.99</span> per month</td>
+                <td class="na">Not<br/>Offered</td>
+                <td><span>$50.99</span>per month</td>
+                <td class="na"><span>$6.00</span> per month</td>
+                <td><span>36</span> Months</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 style="padding-top: 15px; font-size: 8pt;">* Information used for home security alarm system comparisons was obtained September 2012 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </h4>
+</div>
+
+{% endblock %}
+
+{% block assurance-card-five %}
+
+<div class="clear"></div>
+</div>
+{% endblock %}
+{% block page-product %}
+    <h2>Copper Security Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $19.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
+    </div>
+{% endblock %}
