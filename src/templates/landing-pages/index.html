@@ -15,6 +15,7 @@
 
 {% block content %}
 </div>
+{% block heroimage %}
 <div id="hero-banner">
 
     <div class="wrapper">
@@ -26,7 +27,7 @@
         {% include "order/quote-form-noview.html" with form=forms.basic %}
     </div>
 </div>
-
+{% endblock %}
 <div class="wrapper">
     {% if phone_number %}
     {% businesstime %}
@@ -45,7 +46,7 @@
             <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
         </div>
         <div id="protect-america-information">
-            <p>{% block pa_information %}At Protect America, we are driven to provide only the highest quality products and dedicated service at an affordable price. Serving Alberta, Ontario, and British Columbia, our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for five years in a row (2008—2012), as well as the Consumer Digest Best Buy Award for our Copper Package.{% endblock %}</p>
+            <p>{% block pa_information %}From Texas to Toronto, Protect America is driven to provide only the highest quality products and dedicated service at an affordable price. Serving Alberta, Ontario, and British Columbia, our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008—2013), as well as the Consumer Digest Best Buy Award for our Copper Package.{% endblock %}</p>
             {% if phone_number %}
                 {% businesstime %}
                     <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
