@@ -186,6 +186,11 @@ elif settings.SITE_ID == 8:
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
         url(r'^$', 'apps.pricetable.views.index', name='home'),
+        url(r'^promo/click-here/$', 'apps.pricetable.views.test_click', name='home'),
+        url(r'^promo/click-call/$', 'apps.pricetable.views.test_call', name='home'),
+        url(r'^promo/click-order/$', 'apps.pricetable.views.test_order', name='home'),
+
+
         url(r'^home-security-packages/$', 'apps.pricetable.views.packages', name='packages'),
         url(r'^security-add-ons/$', 'apps.pricetable.views.adds', name='add-ons'),
         url(r'^home-security/$', 'apps.pricetable.views.home_security', name='home-security'),
@@ -314,8 +319,8 @@ else:
         #    'pa-spanish', ctx={'agent_id': 'i10109'}),
 
         # Canada
-        dtt(r'^canada/$', 'canada/index.html',
-            'pa_canada', ctx={'agent_id': 'i10123'}),
+        #dtt(r'^canada/$', 'canada/index.html',
+        #    'pa_canada', ctx={'agent_id': 'i10123'}),
         #dtt(r'^canada/home-security-systems$', 'canada/packages.html',
         #    'ca_packages', 'pa_canada', ctx={'agent_id': 'i10123'}),
 
