@@ -4,6 +4,14 @@
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/404.css">
 {% endblock %}
+{% block ga_custom_variables %}
+_gaq.push(['_setCustomVar',
+      1,        
+      'errorType',
+      '404', 
+      3
+   ]);
+{% endblock %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block extra_javascript %}
 <script type="text/javascript" src="/static/js/jquery.cycle.all.min.js"></script>
