@@ -115,7 +115,7 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     forms = {}
     forms['basic'] = LeadForm()
     forms['long'] = AffiliateLongForm()
-    
+
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
 
