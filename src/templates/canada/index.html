@@ -8,6 +8,7 @@
 
 
 {% endblock %}
+{% block navigation %}{% endblock %}
 {% block company-logo %}
 <div id="company-logo">
     <a href="http://www.protectamerica.com/" title="Protect America Home Security">
@@ -21,7 +22,7 @@
     <div class="wrapper">
         <div id="top-hero-banner">
             <div id="main-banner" data-url="{% url order-package %}">
-                <img src="{{ STATIC_URL }}img/canada/hero-image-red.jpg" class="promo-banner" alt="The Best Deal in Home Security - starting at $19.99 per month" width="1229" height="409" />
+                <img src="{{ STATIC_URL }}img/canada/hero-images/red-promo-feb.png" class="promo-banner" alt="The Best Deal in Home Security - starting at $19.99 per month" width="1229" height="409" style="left: -263px;" />
                 <img src="{{ STATIC_URL }}img/canada/the-maple-leaf.png" class="maple-leaf" alt="Maple Leaf - Canada" width="294" height="346" />
             </div>
         </div>
@@ -29,7 +30,11 @@
     </div>
 </div>
 {% endblock %}
-
+{% block big-video %}
+    {% if pa_ads.promo_banner_full %}
+        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_canada %}
+    {% endif %}
+{% endblock %}
 {% block smart-app-overview %}
 <h2>There’s a Free App For That.</h2>
 <p>When connecting your home security system through our broadband monitoring, your account automatically comes with free interactive features. Arm your system, request notifications, manage alarm codes, and home automation all from your computer or smart phone. Forget to set the alarm system? No problem, just arm it while on your timmies-run.</p>
@@ -57,3 +62,7 @@
     </li>
 </ul>
 {% endblock %}
+
+{% block consumer-digest-term %}{% endblock %}
+
+{% block main-footer %}{% endblock %}
