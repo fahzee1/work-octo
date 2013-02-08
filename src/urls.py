@@ -237,6 +237,11 @@ elif settings.SITE_ID == 13:
         url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
 
+# Canada
+elif settings.SITE_ID == 14:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'canada/index.html', 'home'),
+    )
 else:
     urlpatterns += patterns('',
 
@@ -318,11 +323,7 @@ else:
         #dtt(r'^spanish/$', 'spanish/index.html',
         #    'pa-spanish', ctx={'agent_id': 'i10109'}),
 
-        # Canada
-        dtt(r'^canada/$', 'canada/index.html',
-            'pa_canada', ctx={'agent_id': 'i10123'}),
-        #dtt(r'^canada/home-security-systems$', 'canada/packages.html',
-        #    'ca_packages', 'pa_canada', ctx={'agent_id': 'i10123'}),
+
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',

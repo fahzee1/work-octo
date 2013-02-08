@@ -29,45 +29,6 @@
 </div>
 {% endblock %}
 <div class="wrapper">
-    {% if phone_number %}
-    {% businesstime %}
-    <div class="clear"></div>
-    <div id="call-box">
-        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-    </div>
-    <div class="clear"></div>
-    {% endbusinesstime %}
-    
-    {% endif %}
-    <div id="security-benefits">
-        <div id="advantage-badges">
-            {% block advantage-badges %}
-            <img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo.jpg" alt="consumer-digest-logo" width="136" height="120" />
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-logo.jpg" alt="top-consumer-logo" width="128" height="120" id="top-consumer-logo" />
-            <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
-            {% endblock %}
-        </div>
-        <div id="protect-america-information">
-            <p>{% block pa_information %}From Texas to Toronto, Protect America is driven to provide only the highest quality products and dedicated service at an affordable price. Serving Alberta, Ontario, and British Columbia, our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008—2013), as well as the Consumer Digest Best Buy Award for our Copper Package.{% endblock %}</p>
-            {% if phone_number %}
-                {% businesstime %}
-                    <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
-                {% endbusinesstime %}
-            {% endif %}
-        </div>
-        {% block big-video %}
-        <div id="home-security-video">
-            <iframe width="537" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
-        </div>
-        {% endblock %}
-    </div>
-    <div id="home-security-testimonials">
-        {% block pa-testimonials %}
-        <h2>Customers Love Our Home Security Systems</h2>
-        {% testimonial_search "" "limit=2&template=canada-side&words=25" %}
-        {% endblock %}
-    </div>
-    <div class="clear"></div>
     <div id="security-categories">
         <ul>
             <li id="alarm-category" class="security-choice active">
@@ -148,7 +109,7 @@
                             </ul>
                         </div>
                     </div>
-                    <img src="{{ STATIC_URL }}img/banners/639x72/free-interactive-apps.png" class="promo-banner" alt="Free Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
+                    <img src="{{ STATIC_URL }}img/canada/smart-connect-banner.png" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
                     <div class="clear"></div>
                 </div>
                 <div id="bronze-security-package">
@@ -284,6 +245,49 @@
         <div class="clear"></div>
     </div>
 </div>
+<div class="wrapper">
+    {% if phone_number %}
+    {% businesstime %}
+    <div class="clear"></div>
+    <div id="call-box">
+        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+    </div>
+    <div class="clear"></div>
+    {% endbusinesstime %}
+    
+    {% endif %}
+    <div id="security-benefits">
+        <div id="advantage-badges">
+            {% block advantage-badges %}
+            <img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo.jpg" alt="consumer-digest-logo" width="136" height="120" />
+            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-logo.jpg" alt="top-consumer-logo" width="128" height="120" id="top-consumer-logo" />
+            <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
+            {% endblock %}
+        </div>
+        <div id="protect-america-information">
+            <p>{% block pa_information %}From Texas to Toronto, Protect America is driven to provide only the highest quality products and dedicated service at an affordable price. Serving Alberta, Ontario, and British Columbia, our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008—2013).{% endblock %}</p>
+            {% if phone_number %}
+                {% businesstime %}
+                    <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                {% endbusinesstime %}
+            {% endif %}
+        </div>
+        {% block big-video %}
+        <div id="home-security-video">
+            <iframe width="537" height="303" src="http://www.youtube.com/embed/isJJrsr5sXQ?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        {% endblock %}
+    </div>
+    <div id="home-security-testimonials">
+        {% block pa-testimonials %}
+        <h2>Customers Love Our Home Security Systems</h2>
+        {% testimonial_search "" "limit=2&template=canada-side&words=25" %}
+        {% endblock %}
+    </div>
+    <div class="clear"></div>
+
+</div>
+
 <div class="wrapper">{% block extra-content %}{% endblock %}</div>
 {% addtoblock "js" %}
     <script type="text/javascript">
