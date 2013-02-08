@@ -2,5 +2,8 @@ SITE_ID = 14
 
 DEFAULT_AGENT = 'i10123'
 DEFAULT_SOURCE = 'Canada (Organic)'
+DEFAULT_PHONE = '8774597521'
 
 from settings import *
+
+del SESSION_COOKIE_DOMAIN
