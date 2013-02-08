@@ -243,6 +243,12 @@ elif settings.SITE_ID == 15:
         dtt(r'^$', 'external/buy-a-security-system/index.html', 'home'),
     )
 
+# Great-Home-Security-Offer
+elif settings.SITE_ID == 16:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
+    )
+
 else:
     urlpatterns += patterns('',
 
