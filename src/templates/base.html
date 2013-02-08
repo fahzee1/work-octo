@@ -432,7 +432,7 @@
     </div>
     <div id="copyrights">
         <p>GE and GE Security logos are registered trademarks of General Electric.</p>
-        <p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
+        {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
         <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
     </div>
     <div class="clear"></div> 
@@ -444,7 +444,12 @@
 {% endblock %}
 {% render_block "js" %}
 {% block extra_javascript %}
-
+    <script type="text/javascript">
+        $(".big-green > a").click(function(){
+            $("#customer-service-box").slideToggle("fast");
+            return false;
+        });
+    </script>
 {% if 'index' in active_pages %}
 
     <script type="text/javascript">
@@ -452,10 +457,7 @@
             $("#licenses-table").toggle("normal");
             return false;
         });
-        $(".big-green > a").click(function(){
-            $("#customer-service-box").slideToggle("fast");
-            return false;
-        });
+
     </script>
 
 {% endif %}

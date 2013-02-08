@@ -32,6 +32,19 @@ def index(request):
     context = {}
     context['page_name'] = 'index'
     return mobile_render(request, 'mobile/index.html', context)
+    
+def test_click(request):
+    context = {}
+    context['page_name'] = 'index'
+    return mobile_render(request, 'mobile/mobile-tests/feb-click-here.html', context)
+def test_order(request):
+    context = {}
+    context['page_name'] = 'index'
+    return mobile_render(request, 'mobile/mobile-tests/feb-order.html', context)
+def test_call(request):
+    context = {}
+    context['page_name'] = 'index'
+    return mobile_render(request, 'mobile/mobile-tests/feb-click-call.html', context)
 
 def home_security(request):
     context = {}
