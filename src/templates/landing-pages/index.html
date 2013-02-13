@@ -27,7 +27,20 @@
         {% include "order/quote-form-noview.html" with form=forms.basic %}
     </div>
 </div>
+
 {% endblock %}
+<div class="wrapper">
+    {% if phone_number %}
+    {% businesstime %}
+    <div class="clear"></div>
+    <div id="call-box">
+        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+    </div>
+    <div class="clear"></div>
+    {% endbusinesstime %}
+    
+    {% endif %}
+</div>
 <div class="wrapper">
     <div id="security-categories">
         <ul>
@@ -246,16 +259,7 @@
     </div>
 </div>
 <div class="wrapper">
-    {% if phone_number %}
-    {% businesstime %}
-    <div class="clear"></div>
-    <div id="call-box">
-        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-    </div>
-    <div class="clear"></div>
-    {% endbusinesstime %}
-    
-    {% endif %}
+
     <div id="security-benefits">
         <div id="advantage-badges">
             {% block advantage-badges %}

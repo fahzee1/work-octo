@@ -241,6 +241,8 @@ elif settings.SITE_ID == 13:
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
+        dtt(r'^thank-you/$', 'thank-you/canada.html', 'thank_you'),
+
     )
 else:
     urlpatterns += patterns('',
