@@ -2,6 +2,23 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
 {% block navigation %}{% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-5441302-2']);
+ _gaq.push(['_setDomainName', 'protectamericasecurity.ca']);
+ {% block ga_custom_variables %}{% endblock %}
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+{% endblock %}
 {% block company-logo %}
 <div id="company-logo">
     <a href="http://www.protectamericasecurity.ca/" title="Protect America Home Security">
