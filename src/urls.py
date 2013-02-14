@@ -322,8 +322,8 @@ else:
             'apps.common.views.thank_you', name='custom_thank_you',),
 
         # Spanish
-        #dtt(r'^spanish/$', 'spanish/index.html',
-        #    'pa-spanish', ctx={'agent_id': 'i10109'}),
+        dtt(r'^spanish/$', 'spanish/index.html',
+            'pa-spanish', ctx={'agent_id': 'i10109'}),
 
 
 
