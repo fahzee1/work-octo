@@ -236,7 +236,6 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
-
 # Canada
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
@@ -244,6 +243,25 @@ elif settings.SITE_ID == 14:
         dtt(r'^thank-you/$', 'thank-you/canada.html', 'thank_you'),
 
     )
+
+
+# Buy-a-Security-System
+elif settings.SITE_ID == 15:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/buy-a-security-system/index.html', 'home'),
+    )
+
+# Great-Home-Security-Offer
+elif settings.SITE_ID == 16:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
+    )
+# Alarm-System-Offers
+elif settings.SITE_ID == 17:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
+    )
+
 else:
     urlpatterns += patterns('',
 
