@@ -186,6 +186,11 @@ elif settings.SITE_ID == 8:
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
         url(r'^$', 'apps.pricetable.views.index', name='home'),
+        url(r'^promo/click-here/$', 'apps.pricetable.views.test_click', name='home'),
+        url(r'^promo/click-call/$', 'apps.pricetable.views.test_call', name='home'),
+        url(r'^promo/click-order/$', 'apps.pricetable.views.test_order', name='home'),
+
+
         url(r'^home-security-packages/$', 'apps.pricetable.views.packages', name='packages'),
         url(r'^security-add-ons/$', 'apps.pricetable.views.adds', name='add-ons'),
         url(r'^home-security/$', 'apps.pricetable.views.home_security', name='home-security'),
@@ -219,10 +224,10 @@ elif settings.SITE_ID == 11:
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
-        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop'),
-        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring'),
-        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment'),
-        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you'),
+        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop', ctx={'agent_id': 'a01415'}),
+        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring', ctx={'agent_id': 'a01415'}),
+        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment', ctx={'agent_id': 'a01415'}),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you', ctx={'agent_id': 'a01415'}),
     )
 
 # SecuritySystemExpert.com
@@ -231,16 +236,30 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
-# Alarm-System-Offers
+# Canada
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
+        dtt(r'^$', 'canada/index.html', 'home'),
+        dtt(r'^thank-you/$', 'thank-you/canada.html', 'thank_you'),
+
     )
+
 
 # Buy-a-Security-System
 elif settings.SITE_ID == 15:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/buy-a-security-system/index.html', 'home'),
+    )
+
+# Great-Home-Security-Offer
+elif settings.SITE_ID == 16:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
+    )
+# Alarm-System-Offers
+elif settings.SITE_ID == 17:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
     )
 
 else:
@@ -249,6 +268,9 @@ else:
         # Test Pages
         dtt(r'^test/tcr-first/$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
         dtt(r'^test/promotion-first/$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
+        dtt(r'^test/feb-promo/$', 'tests/feb-test.html', 'february-promo-test', 'home'),
+        dtt(r'^test/adt-promo/$', 'affiliates/adt-comparison-two/test-599.html', 'adt-promo-test', 'home'),
+
         url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/$', 'apps.common.views.index_test', name='index_test'),
 
         # Home Page
@@ -321,11 +343,7 @@ else:
         #dtt(r'^spanish/$', 'spanish/index.html',
         #    'pa-spanish', ctx={'agent_id': 'i10109'}),
 
-        # Canada
-        #dtt(r'^canada/$', 'canada/index.html',
-        #    'pa_canada', ctx={'agent_id': 'i10123'}),
-        #dtt(r'^canada/home-security-systems$', 'canada/packages.html',
-        #    'ca_packages', 'pa_canada', ctx={'agent_id': 'i10123'}),
+
 
         # pay it forward page
         dtt(r'^payitforward/$', 'payitforward/payitforward.html',
@@ -725,6 +743,103 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
     #('^national-crime-prevention$',
     #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
+    
+    
+    ('^livechat_iframe.php',
+        redirect_to, {'url': '/support', 'permanent': True}),
+    ('^pa/yard-sign/security-yard-sign',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/x10-appliance-module/home-security-automation',
+        redirect_to, {'url': '/home-security-blog/tag/x10-home-automation', 'permanent': True}),
+    ('^pa/outdoor_lighting/alarms-home',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/x10-powerhorn-siren/security-siren',
+        redirect_to, {'url': '/home-security-blog/alarm-systems/simon-xt-alarm-system-features_2285', 'permanent': True}),
+    ('^pa/operation/monitoring-security',
+        redirect_to, {'url': '/home-security-blog/home-security/how-to-remote-monitor-home-video-security-camera-2_1311', 'permanent': True}),
+    ('^pa/compare/home-security-comparison',
+        redirect_to, {'url': '/home-security-blog/home-security-systems-2/home-security-systems-comparison-3_2604', 'permanent': True}),
+    ('^pa/carbon-monoxide-detector/carbon-monoxide-detector',
+        redirect_to, {'url': '/home-security-blog/home-security/home-security-information/home-security-tips/carbon-monoxide-poisoning_2985', 'permanent': True}),
+    ('^pa/x10-socket-rocket/home-security-automation',
+        redirect_to, {'url': '/home-security-blog/tag/x10-home-automation', 'permanent': True}),
+    ('^pa/landscaping/alarms-home-security',
+        redirect_to, {'url': '/home-security-blog/home-security/home-security-information/best-home-security-diy-projects-and-quick-tips_148', 'permanent': True}),
+    ('^pa/low-temperature-sensor/low-temperature-sensor',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/safer_at_home/security',
+        redirect_to, {'url': '/news/article/keep-homes-safe-with-home-security-systems_1232', 'permanent': True}),
+    ('^pa/glass_around/alarm-home-system',
+        redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
+    ('^pa/license/protect-america-licenses',
+        redirect_to, {'url': '/help/state-licenses/', 'permanent': True}),
+    ('^pa/motion-detector/motion-detector',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/faq/alarm-company-monitoring',
+        redirect_to, {'url': '/support/faq', 'permanent': True}),
+    ('^pa/site_map/protect-america',
+        redirect_to, {'url': '/sitemap/', 'permanent': True}),
+    ('^pa/window-decal/security-window-sticker',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/low-price-guarantee/GE-Security-System',
+        redirect_to, {'url': '/help/low-price-guarantee', 'permanent': True}),
+    ('^pa/map/protect-america',
+        redirect_to, {'url': '/contact/find-us', 'permanent': True}),
+    ('^pa/ge_simon_3/ge-simon-3',
+        redirect_to, {'url': '/products/security-equipment/control-panels/ge-simon-xt', 'permanent': True}),
+    ('^pa/secure_vacation/alarm-house',
+        redirect_to, {'url': '/news/article/consider-home-security-before-going-on-vacation_31', 'permanent': True}),
+    ('^pa/smoke-detector/smoke-detector/',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/products/ge-home-security',
+        redirect_to, {'url': '/pa/equipment/wireless-home-security-system', 'permanent': True}),
+    ('^https:/www.protectamerica.com/pa/security-affiliate-enrollment/security',
+        redirect_to, {'url': '/contact/affiliate-program/', 'permanent': True}),
+    ('^pa/home_automation/home-automation-devices',
+        redirect_to, {'url': '/home-security-blog/tag/home-automation-devices', 'permanent': True}),
+    ('^pa/support/home-security-alarm-system',
+        redirect_to, {'url': '/pa/monitoring/security-system', 'permanent': True}),
+    ('^pa/warranty/monitoring-security-system',
+        redirect_to, {'url': '/help/warranty', 'permanent': True}),
+    ('^pa/talking-wireless-keypad/wireless-keypad',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/solar-yard-sign-light/solar-yard-sign-light',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/careers/home-security-jobs',
+        redirect_to, {'url': '/contact/careers', 'permanent': True}),
+    ('^pa/complete-home-security/',
+        redirect_to, {'url': '/complete-home-security', 'permanent': True}),
+    ('^pa/command-station/security-system',
+        redirect_to, {'url': '/products/security-equipment/control-panels/ge-simon-xt', 'permanent': True}),
+    ('^pa/medical-panic-pendant/medical-panic-pendant',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/neighborhood_watch/burglar-alarm',
+        redirect_to, {'url': '/news/article/serial-burglars-suspected-of-thefts-in-california-neighborhood_453', 'permanent': True}),
+    ('^pa/dept/protect-america',
+        redirect_to, {'url': '/contact/department-listing', 'permanent': True}),
+    ('^pa/glass-break-detector/glass-break-detector',
+        redirect_to, {'url': '/ge-simon-security-systems/wireless-business-security/business-package', 'permanent': True}),
+    ('^pa/door-or-window-sensor/door-sensor',
+        redirect_to, {'url': '/products/security-equipment/sensors/door-window-sensor', 'permanent': True}),
+    ('^pa/keychain-remote-control/security-keychain-remote',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/security-of-information/protect-america',
+        redirect_to, {'url': '/help/security-of-information', 'permanent': True}),
+    ('^pa/order_2/home-security-monitoring-system',
+        redirect_to, {'url': '/products/order-package', 'permanent': True}),
+    ('^pa/home_security_checklist/home-protection',
+        redirect_to, {'url': '/home-security-blog/home-security/vacation-safety-tips_1684', 'permanent': True}),
+    ('^pa/secure_garage/brinks-home-security',
+        redirect_to, {'url': '/news/article/diy-tips-for-garage-security_1306', 'permanent': True}),
+    ('^pa/video-home/',
+        redirect_to, {'url': '/pa/wireless-security-camera/ip-security-cameras', 'permanent': True}),
+    ('^pa/flood-sensor/flood-sensor',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/x10-lamp-module/home-security-automation',
+        redirect_to, {'url': '/home-security-blog/tag/x10-home-automation', 'permanent': True}),
+    ('^pa/video-business/',
+        redirect_to, {'url': '/products/interactive-video/business-video-camera', 'permanent': True}),
+    
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
@@ -766,12 +881,12 @@ urlpatterns += patterns('',
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns() 
-    def template_view(request, path):
+    def adt(request, path):
         from django.views.generic.simple import direct_to_template
         return direct_to_template(request, path)
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
         }),
-        url(r'^templates/(?P<path>.*)$', template_view),
+
    )
