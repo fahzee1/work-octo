@@ -1,13 +1,13 @@
-{% extends "affiliates/generic-landing-base/index.html" %}
+{% extends "affiliates/generic-landing-base/canada.html" %}
 
 
 {% load sekizai_tags content_tags content_filters %}
 
 {% block page_title %}ADT Home Security Comparison | Best Home Security Systems | Protect America Vs. ADT{% endblock %}
-{% block page_description %}Protect America offers the best home security systems at competitive prices. Just compare our security services with that of ADT to see for yourself!{% endblock %}
+{% block page_description %}Protect America offers Canadians the best home security systems at competitive prices. Compare our security services with ADT and see for yourself! Now Serving Alberta, Ontario, and British Columbia{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/adt-comparison-two/adt-comparison-two.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/adt-comparison-canada/adt-comparison.css">
 {% endblock %}
 
 {% block active_tab_trigger %}
@@ -18,6 +18,7 @@ $(document).ready(function() {
 </script>
 {% endblock %}
 
+
 {% block hero-block %}
 </div>
 <div id="hero-banner">
@@ -25,45 +26,43 @@ $(document).ready(function() {
     <div class="wrapper">
         <div id="top-hero-banner">
             <div id="main-banner" data-url="{% url order-package %}">
-                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison-two/adt-banner.jpg" class="adt-banner" alt="adt-banner" width="1229" height="409" />
+                <img src="{{ STATIC_URL }}img/canada/adt-banner.jpg" class="adt-banner" alt="The Best Deal in Home Security - starting at $19.99 per month" width="1229" height="409" />
             </div>
         </div>
         {% include "order/quote-form-noview.html" with form=forms.basic %}
     </div>
 </div>
 {% include "order/call-box.html" %}
-
-<div class="wrapper">
 <div class="clear"></div>
+<div class="wrapper">
 {% endblock %}
-
 
 {% block left-wrapper %}
     <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/hero-exp0113.gif" alt="hero-exp0113" width="660" height="410" />
 {% endblock %}    
 
 {% block assurance-block-one %}
-    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
+    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="Simple, Easy Wireless Home Security" width="111" height="111" />
     <h3>Customizable Home Security</h3>
 {% endblock %}
 
 {% block assurance-block-two %}
-    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/mobile-icon.png" alt="mobile-icon" width="120" height="117" />
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/mobile-icon.png" alt="Interactive Security with our SMART Connect Interactive" width="120" height="117" />
     <h3>Smartphone Control</h3>
 {% endblock %}
 
 {% block assurance-block-three %}
-    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/shh-icon.png" alt="shh-icon" width="118" height="115" />
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/shh-icon.png" alt="Everything ADT won't tell you" width="118" height="115" />
     <h3>What ADT Doesn’t Say</h3>
 {% endblock %}
 
 {% block assurance-block-four %}
-    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-icon.png" alt="money-icon" width="117" height="115" />
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-icon.png" alt="Save Money vs ADT" width="117" height="115" />
     <h3>A Cost Comparison</h3>
 {% endblock %}
 
 {% block assurance-block-five %}
-    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/touch-icon.png" alt="touch-icon" width="120" height="116" />
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/touch-icon.png" alt="GE SImon XT Touchscreen" width="120" height="116" />
     <h3>GE Simon XT Touchscreen</h3>
 {% endblock %}
 
@@ -347,10 +346,4 @@ $(document).ready(function() {
 <div class="clear"></div>
 </div>
 {% endblock %}
-{% block page-product %}
-    <h2>Copper Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $19.99/mo</p>
-    <div class="button-submit">
-        <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
-    </div>
-{% endblock %}
+
