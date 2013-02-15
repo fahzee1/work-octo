@@ -236,14 +236,36 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
-
 # Canada
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
         dtt(r'^thank-you/$', 'thank-you/canada.html', 'thank_you'),
+        # Canada Competitor Landing Pages
+        dtt(r'^security-comparison/adt-vs-protect-america/$', 'affiliates/adt-comparison-canada/index.html', 'home'),
+        dtt(r'^security-comparison/reliance-vs-protect-america/$', 'affiliates/reliance-vs-pa-canada/index.html', 'home'),
+        dtt(r'^security-comparison/vivint-vs-protect-america/$', 'affiliates/vivint-vs-protectamerica-canada/index.html', 'home'),
 
     )
+
+
+# Buy-a-Security-System
+elif settings.SITE_ID == 15:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/buy-a-security-system/index.html', 'home'),
+    )
+
+# Great-Home-Security-Offer
+elif settings.SITE_ID == 16:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
+    )
+# Alarm-System-Offers
+elif settings.SITE_ID == 17:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
+    )
+
 else:
     urlpatterns += patterns('',
 

@@ -1,5 +1,8 @@
 {% extends "landing-pages/index.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+{% block page_title %}Home Security Systems | Home Alarm Systems | Protect America Canada{% endblock %}
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
+{% block page_description %}Get one of our free wireless home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/canada.css">
@@ -8,8 +11,26 @@
 
 
 {% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-5441302-2']);
+ _gaq.push(['_setDomainName', 'protectamericasecurity.ca']);
+ {% block ga_custom_variables %}{% endblock %}
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+{% endblock %}
 {% block navigation %}{% endblock %}
 {% block company-logo %}
+<!-- {{ request.session.refer_id }} & Cookie: request.COOKIES.refer_id  -->
 <div id="company-logo">
     <a href="http://www.protectamericasecurity.ca/" title="Protect America Home Security">
         <img src="{{ STATIC_URL }}img/canada/protect-america-canada-home-security.png" alt="Protect America Home Security" width="288" height="48" />
