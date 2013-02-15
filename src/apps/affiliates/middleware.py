@@ -58,6 +58,11 @@ class AffiliateMiddleware(object):
             default_agent = settings.DEFAULT_AGENT
         except AttributeError:
             default_agent = None
+            
+        try:
+            default_source = settings.DEFAULT_SOURCE
+        except AttributeError:
+            default_source = 'PROTECT AMERICA'
 
         affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
@@ -87,7 +92,7 @@ class AffiliateMiddleware(object):
                     # default agent and that the current_cookie is None
                     # that the visitor is organic
                     request.session['refer_id'] = default_agent
-                    request.session['source'] = 'PROTECT AMERICA'
+                    request.session['source'] = default_source
 
         # Allow overwriting of affkey cookie
         if request.GET.get('affkey', None):

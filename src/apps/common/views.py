@@ -115,7 +115,7 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     forms = {}
     forms['basic'] = LeadForm()
     forms['long'] = AffiliateLongForm()
-    
+
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
 
@@ -209,6 +209,8 @@ def index_test(request, test_name):
         template = 'tests/test-nav-home-security.html'
     elif test_name == 'holiday':
         template = 'tests/holiday-test.html'
+    elif test_name == 'feb-promo':
+        template = 'tests/feb-test.html'
     else:
         raise Http404
 
