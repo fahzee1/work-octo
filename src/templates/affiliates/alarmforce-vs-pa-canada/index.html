@@ -1,0 +1,356 @@
+{% extends "affiliates/generic-landing-base/index.html" %}
+
+
+{% load sekizai_tags content_tags content_filters %}
+
+{% block page_title %}ADT Home Security Comparison | Best Home Security Systems | Protect America Vs. ADT{% endblock %}
+{% block page_description %}Protect America offers the best home security systems at competitive prices. Just compare our security services with that of ADT to see for yourself!{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/alarmforce-vs-pa-canada/alarmforce-vs-pa-canada.css">
+{% endblock %}
+
+{% block active_tab_trigger %}
+<script>
+$(document).ready(function() {
+    $('#assurance-block-four').trigger('click');
+});
+</script>
+{% endblock %}
+
+{% block hero-block %}
+</div>
+<div id="hero-banner">
+
+    <div class="wrapper">
+        <div id="top-hero-banner">
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison-two/adt-banner.jpg" class="adt-banner" alt="adt-banner" width="1229" height="409" />
+            </div>
+        </div>
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+<div class="wrapper">
+<div class="clear"></div>
+{% endblock %}
+
+
+{% block left-wrapper %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/hero-exp0113.gif" alt="hero-exp0113" width="660" height="410" />
+{% endblock %}    
+
+{% block assurance-block-one %}
+    <img src="{{ STATIC_URL }}img/extra/alarm-token.png" alt="alarm-token" width="111" height="111" />
+    <h3>Customizable Home Security</h3>
+{% endblock %}
+
+{% block assurance-block-two %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/mobile-icon.png" alt="mobile-icon" width="120" height="117" />
+    <h3>Smartphone Control</h3>
+{% endblock %}
+
+{% block assurance-block-three %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/shh-icon.png" alt="shh-icon" width="118" height="115" />
+    <h3>What ADT Doesn’t Say</h3>
+{% endblock %}
+
+{% block assurance-block-four %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/money-icon.png" alt="money-icon" width="117" height="115" />
+    <h3>A Cost Comparison</h3>
+{% endblock %}
+
+{% block assurance-block-five %}
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/touch-icon.png" alt="touch-icon" width="120" height="116" />
+    <h3>GE Simon XT Touchscreen</h3>
+{% endblock %}
+
+{% block assurance-card-one %}
+<div id="house-features">
+    <h2 class="tk-freight-sans-pro">Home Security that Fits Your Life</h2>
+    <p class="tk-freight-sans-pro">Protect America will protect your home in British Columbia, Ontario, &amp; Alberta!<span> Click on the blue dots to see how we can protect your home.</span></p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
+    <div id="equipment-features">
+        <div class="equipment-feature" style="left: 360px; top: 115px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Motion Detectors</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Our Motion Detectors use both heat and movement to detect intruders when your alarm system is armed. They are very useful in case someone does enter your home. Therefore, a motion detector is best placed in a heavy traffic area of your home.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 375px; top: 375px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">GE Simon XT Touch Screen</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">A touch screen acts as an optional point of access for your home security system. The GE Simon XT Touch Screen features one-touch arming and disarming, soothing voice feedback, and an emergency response signal.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 100px; top: 325px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Glass Break Sensor</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">This sensor is specially designed using pattern recognition technology to detect the sound of breaking glass within a 20-foot radius. Use this sensor around easily accessible windows or glass doors that could be shattered to gain entry into your home.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 195px; top: 150px;">
+            <div class="feature-icon active">+</div>
+            <div class="feature-content first-open">
+                <h3 class="tk-freight-sans-pro">The GE Simon XT</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">The control panel is the 'brains' of your home security system. And with the GE Simon XT, you get a full-featured home security platform that combines the best of home security with ease of use. Arming, emergency response, and status updates are all just one button press away. And with its robust programming system, the Simon XT allows you to upgrade and create an alarm system that fits your needs. Protecting your home and family couldn't be easier than with the GE Simon XT control panel.</p>
+            </div>
+        </div>
+                <div class="equipment-feature" style="left: 25px; top: 100px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Window Sensors</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Window sensors are the most common piece of home security equipment and the front line defense for your home. A surprisingly simple device, door/window sensors create a magnetic field that, when broken, sends a signal to your central GE Simon XT control panel and sounds the alarm. Protect America only uses wireless sensors that can be used on either doors or windows, allowing for greater system customization. For most homes, we recommend one sensor for every accessible door and window.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 230px; top: 40px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">Smoke Detector</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Protect your home and family from fire by adding monitored smoke detectors to your security system. Monitored smoke detectors can identity smoke or rapidly rising temperatures 24 hours a day whether you're home or not. Even if your security system is disarmed, our monitoring facility notifies your local fire department if there is a fire.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 850px; top: 405px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">Home Security Sign</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Deter burglars from targeting your home with this warning sign that prominently displays that your house is secured with a home alarm system.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 635px; top: 385px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Keychain Remote Control</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">With the keychain remote control, you can enjoy the convenience of turning off your system as you pull into the driveway. You can also send a panic signal from anywhere inside your home allowing you to notify authorities.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 635px; top: 345px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">GPS Vehicle Tracking</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">Protect America allows you to instantly locate and follow your car with real-time GPS vehicle tracking. Easily keep a "virtual eye" on your vehicle through an intuitive web interface. Get customizable alerts via email or text if your teenager is speeding or if they are going to places they shouldn't.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 635px; top: 300px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3 class="tk-freight-sans-pro">Garage Door Sensors</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">This sensor protects against entry though the biggest door in your house. By detecting the tilt of an overhead door, this sensor can alert your alarm system if your garage is opened while armed.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 479px; top: 100px;">
+            <div class="feature-icon">x</div>
+            <div class="feature-content left">
+                <h3 class="tk-freight-sans-pro">Interactive Video Cameras</h3>
+                <p style="width: 220px;" class="tk-freight-sans-pro">With our interactive video home security services, we bring you easy to use, high-quality video security. So you can easily check in at home anytime of day and from anywhere. Getting a cup of joe? Easy, log in with your laptop and view your cameras. On vacation? No problem, just use your smartphone to make sure everything is okay. With video home security, checking in at home is just a click away.</p>
+            </div>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/house.gif" alt="house" width="957" height="475" />
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#house-features .feature-icon').click(function(){
+            var icon = $(this).clone();
+            $('#house-features .feature-icon').removeClass('active').html('+');
+            $('#house-features .feature-content').slideUp(250, 'easeOutBounce');
+            if(!$(icon).hasClass('active')) {
+                $(this).addClass('active').html('x').next('#house-features .feature-content').slideDown(250, 'easeOutBounce');
+            }
+        });
+        $('#touchscreen-features .feature-icon').click(function(){
+            var icon = $(this).clone();
+            $('#touchscreen-features .feature-icon').removeClass('active').html('+');
+            $('#touchscreen-features .feature-content').slideUp(250, 'easeOutBounce');
+            if(!$(icon).hasClass('active')) {
+                $(this).addClass('active').html('x').next('#touchscreen-features .feature-content').slideDown(250, 'easeOutBounce');
+            }
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}
+
+{% block assurance-card-two %}
+<div class="copy-point">
+    <h2 class="tk-freight-sans-pro">Control Your Home Security System On the Go.</h2> 
+    <p class="tk-freight-sans-pro">Control Your Home Security System On the Go.</p>
+    <p class="tk-freight-sans-pro">Get FREE interactive control when you choose cellular or broadband monitoring.</p>
+    <p class="tk-freight-sans-pro">Home Security Control – Use your computer or smartphone to arm, disarm, and check the status of your alarm system.</p>
+    <p class="tk-freight-sans-pro">Live-Video Surveillance - Keep an eye on your home and family like never before. Capture live video and protect your home. (Video Service Required)</p>
+    {% if phone_number %}
+        {% businesstime %}
+            <h3 class="phone">Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+        {% endbusinesstime %}
+    {% endif %}
+    <div class="image-area">
+        <img style="margin-top: 50px;" src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" alt="interactive" width="642" height="309" />
+    </div>
+</div>
+<div id="interactive-call-out-box">
+    <div class="interactive-call-out">
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/security-system-control-small-icon-interactive.png" alt="security-system-control-small-icon-interactive" width="74" height="74" />
+                <p><strong>Security System Control</strong>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/live-video-small-icon-automation.png" alt="live-video-small-icon-automation" width="74" height="74" />
+                <p><strong>Live Video</strong>Keep an eye on your home from anywhere in the world with live video. (Video Service Required)</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>
+{% endblock %}
+
+
+{% block assurance-card-three %}
+<div class="copy-point2">
+    <h2 style="text-align:right; margin-top: 18px;" class="tk-freight-sans-pro"><span>What ADT Doesn’t Tell You is Alarming!</span></h2> 
+    <div class="image-area2">
+        <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/apple-picking.png" alt="apple-picking" width="462" height="550" />
+    </div>
+</div>
+<div class="four-call-out-boxes">
+    <div class="top-left">
+        <h2 class="tk-freight-sans-pro">ADT Can Change Your Monthly Rate (After One Year)</h2><p class="tk-freight-sans-pro">ADT claims to have a low monthly price, but what happens when they change raise your price? Protect America promises to keep your monitoring rate the same for the length of your contract. Make sure to read your contract before signing!</p>
+    </div>
+    <div class="top-right">
+        <h2 class="tk-freight-sans-pro">Repairs Will Cost You with ADT</h2><p class="tk-freight-sans-pro">When your system malfunctions or if you need help, ADT will charge you for a technician to help. Why pay hundreds of dollars to fix your system when you can choose Protect America and get a Lifetime Warranty for free. You can rest easy knowing your home is protected no matter what.</p>
+
+    </div>
+    <div class="bottom-left">
+       <h2 class="tk-freight-sans-pro">ADT Moving Charges</h2><p class="tk-freight-sans-pro">ADT will charge you hundreds if you ever decided to move. Hard-wired home security systems can be difficult to move. Protect America will never charge you a single penny for moving your system. We will even send you a free relocation kit to help when you move!</p>
+
+    </div>
+    <div class="bottom-right">
+         <h2 class="tk-freight-sans-pro">ADT Pushy Sales Tactics</h2><p class="tk-freight-sans-pro">ADT will never give you an exact quote over the phone. If you want to know the price of a home security system, you will have to wait for a technician to come to your home. Protect America is always happy to give you an exact price and quote over the phone. Our home security experts are standing by to take your call and to give you a free security analysis. Call Protect America today!</p>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block assurance-card-four %}
+<div id="package-comparison-chart">
+    <h2 class="tk-freight-sans-pro">Price Comparison for our Copper Package vs. ADT</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="alpha company">&nbsp;</th>
+                <th class="upfront">Equipment Price</th>
+                <th>Landline Monitoring</th>
+                <th>Broadband Monitoring</th>
+                <th>Cellular Monitoring</th>
+                <th>Lifetime Warranty</th>
+                <th>Contract Term</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="company">Protect America</td>
+                <td class="upfront free"><span>FREE</span></td>
+                <td class="active"><span> $19.99</span> per month</td>
+                <td><span> $37.99 </span>per month</td>
+                <td><span>$41.99 </span>per month</td>
+                <td><span>FREE</span></td>
+                <td><span>36 </span>Months</td>
+            </tr>
+            <tr class="alt">
+                <td class="company">ADT</td>
+                <td class="upfront"><span>$349</span>Install</td>
+                <td class="upfront active"><span>$42.99</span> per month</td>
+                <td class="na">Not<br/>Offered</td>
+                <td><span>$50.99</span>per month</td>
+                <td class="na"><span>$6.00</span> per month</td>
+                <td><span>36</span> Months</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4 style="padding-top: 15px; font-size: 8pt;">* Information used for home security alarm system comparisons was obtained September 2012 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </h4>
+</div>
+
+{% endblock %}
+
+{% block assurance-card-five %}
+<div class="clear"></div>
+
+<div id="touchscreen-features">
+    <h2 class="tk-freight-sans-pro">Experience the Simon XT Touch Screen:</h2>
+    <p class="tk-freight-sans-pro">As a wireless solution and portable control system, the Simon XT Touch Screen allows you to have full control of you alarm system no matter where you are in your home. The vibrant LCD touchscreen displays icons to allow one-touch arming, disarming, panic alarm signaling, and notifies you when a door or window is open or closed. The Simon XT Touch Screen gives you the perfect control for your alarm system. <strong>Click the "+" Icons on the Simon XT Touchscreen to Learn More</strong></p>
+    <div id="equipment-features">
+        <div class="equipment-feature" style="left: 165px; top: 260px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>Built-In Digital Voice Commands</h3>
+                <p>Convenient voice functionality warns users when the system has been activated or deactivated. The reassuring voice features of the Simon XT Touch Screen can also warn homeowners whenever a door or window opens.</p>
+            </div>
+        </div>
+
+        <div class="equipment-feature" style="left: 323px; top: 176px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3>Door & Window Supervision</h3>
+                <p>Open doors and windows attract burglars, even when you and your family are home. A green checkmark on the touch screen reassures homeowners that all monitored doors and windows into the home are closed and secured. When users see a red exclamation mark, they know an entry point is unsecure. Nothing could be easier!</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 381px; top: 216px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>3.5-inch Color LCD Screen</h3>
+                <p>The vibrant display of the GE Simon XT Touch Screen makes using your Simon XT home security system easier than ever before. The Simon XT Touch Screen is bright but designed to be energy efficient and plugs into a standard 110 Volt electrical outlets. In case of emergency, the Simon XT Touch Screen can also be use four AAA batteries.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 479px; top: 176px;">
+            <div class="feature-icon active">x</div>
+            <div class="feature-content left first-open">
+                <h3>One-Button Arming/Disarming</h3>
+                <p>Using your Simon XT home security system is as easy as pushing a button. This feature activates or deactivates all sensors associated with your alarm system. The easy-to-understand graphical interface clearly displays when the system is armed.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 490px; top: 123px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>Simple Status Updates</h3>
+                <p>With a quick glance, accurately gauge your home's security status. The easy-to-use graphical interface helps users keep tabs on open entry points and system diagnostics. The Simon XT Touch Screen also tells homeowners whether the system is active or not.</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 140px; top: 123px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content left">
+                <h3>GE Security Equipment</h3>
+                <p>All of our systems feature GE Security Certified products. This means that you get the reliability and flexibility known throughout the security industry for GE alarm systems.  And with the GE Touchscreen, the system comes pre-built to work perfectly and conjunction with your Simon XT Control Panel</p>
+            </div>
+        </div>
+        <div class="equipment-feature" style="left: 256px; top: 123px;">
+            <div class="feature-icon">+</div>
+            <div class="feature-content right">
+                <h3>24-Hour Emergency Panic Button</h3>
+                <p>The Simon XT Touch Screen includes a distress signal that can be sent with the single push of button. This feature is intended for use during non-medical emergencies.</p>
+            </div>
+        </div>
+    </div>
+    <img src="http://static.protectamericasecurity.net/img/products/equipment/touchscreen/touchscreen.jpg" alt="touchscreen" class="equipment-bg" />
+</div>
+<div class="clear"></div>
+</div>
+{% endblock %}
+{% block page-product %}
+    <h2>Copper Security Package</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $19.99/mo</p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
+    </div>
+{% endblock %}
