@@ -245,22 +245,22 @@ elif settings.SITE_ID == 14:
         dtt(r'^security-comparison/adt-vs-protect-america/$', 'affiliates/adt-comparison-canada/index.html', 'home'),
         dtt(r'^security-comparison/reliance-vs-protect-america/$', 'affiliates/reliance-vs-pa-canada/index.html', 'home'),
         dtt(r'^security-comparison/vivint-vs-protect-america/$', 'affiliates/vivint-vs-protectamerica-canada/index.html', 'home'),
-
+        dtt(r'^security-comparison/alarmforce-vs-protect-america/$', 'affiliates/alarmforce-vs-pa-canada/index.html', 'home'),
     )
 
 
-# Buy-a-Security-System
+# BuyaSecuritySystem.com
 elif settings.SITE_ID == 15:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/buy-a-security-system/index.html', 'home'),
     )
 
-# Great-Home-Security-Offer
+# GreatHomeSecurityOffer.com
 elif settings.SITE_ID == 16:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
     )
-# Alarm-System-Offers
+# AlarmSystemOffers.com
 elif settings.SITE_ID == 17:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
@@ -344,8 +344,8 @@ else:
             'apps.common.views.thank_you', name='custom_thank_you',),
 
         # Spanish
-        #dtt(r'^spanish/$', 'spanish/index.html',
-        #    'pa-spanish', ctx={'agent_id': 'i10109'}),
+        dtt(r'^es/$', 'spanish/index.html',
+            'pa-spanish'),
 
 
 

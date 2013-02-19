@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "landing-pages/index.html" %}
 {% load sekizai_tags content_tags content_filters %}
 
 {% block css %}
@@ -8,18 +8,34 @@
 
 
 {% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
 
-{% block typekit %}tk-jaf-facitweb{% endblock %}
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-5441302-2']);
+ _gaq.push(['_setDomainName', 'protectamericasecurity.ca']);
+ {% block ga_custom_variables %}{% endblock %}
+ _gaq.push(['_trackPageview']);
 
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
 
+</script>
+{% endblock %}
 {% block company-logo %}
+<!-- {{ request.session.refer_id }} & Cookie: request.COOKIES.refer_id  -->
 <div id="company-logo">
-    <a href="http://www.protectamerica.com/canada/" title="Protect America - Canada Home Security">
-        <img src="{{ STATIC_URL }}img/canada/protect-america-canada-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
-
+    <a href="http://www.protectamericasecurity.ca/" title="Protect America Home Security">
+        <img src="{{ STATIC_URL }}img/canada/protect-america-canada-home-security.png" alt="Protect America Home Security" width="288" height="48" />
     </a>
 </div>
 {% endblock %}
+
+{% block typekit %}tk-jaf-facitweb{% endblock %}
+
 {% block navigation %}
 {% comment %}
     <div id="navigation">
@@ -35,10 +51,5 @@
     </div>
 {% endcomment %}
 {% endblock %}
-{% block content %}
 
-{% addtoblock "js" %}
-{% endaddtoblock "js" %}
-
-{% endblock %}
 

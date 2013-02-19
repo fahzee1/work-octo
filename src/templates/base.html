@@ -48,6 +48,7 @@
 </script>
 {% endblock %}
 </head>
+{% block bing-conversion-code %}{% endblock %}
 <body class="{{ page_name }} {% block typekit %}tk-facitweb{% endblock %}">
 <!-- Page Wrapper -->
 {% block header %}
@@ -57,13 +58,6 @@
 
             {% block quick-links %}
             <ul id="quick-link-navigation">
-                {% comment %}
-                <li>
-                    <a href="http://www.yelp.com/biz/protect-america-austin-2" title="Review Us on Yelp!" class="yelp-button">
-                        <img src="{{ STATIC_URL }}img/external/yelp-logo-sml.png" alt="yelp-logo-sml" width="56" height="24">
-                    </a>
-                </li>
-                {% endcomment %}
                 <li id="quick-social">                
                     <div id="google-button">
                         <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
@@ -73,10 +67,19 @@
                     </div>
                     <div class="clear"></div>
                 </li>
-                
+                <li class="international">
+                    <img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> EN <img src="{{ STATIC_URL }}img/external/flags/arrow-selector.png" class="arrow-selector" alt="arrow-selector" />
+                </li>                
                 <li class="big-green"><a href="#customer-service" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Customer Service', 'Quick Links Customer Service Click', 'Header']);" id="security-agreement">Customer Service</a></li>
 
                 <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
+                
+                <div id="international-box">
+                    <a href="http://www.protectamerica.com"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> English</a>
+                    <a href="http://www.protectamerica.com/es/"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> Espa&ntilde;ol</a>
+                    <a href="http://www.protectamericasecurity.ca"><img src="{{ STATIC_URL }}img/external/flags/ca.png" alt="us" width="16" height="11" /> Canada</a>
+            
+                </div>
                 <div id="customer-service-box">
                     <p>Customer CARE Online Chat</p>
                     <div class="button-link">
@@ -446,6 +449,10 @@
     <script type="text/javascript">
         $(".big-green > a").click(function(){
             $("#customer-service-box").slideToggle("fast");
+            return false;
+        });
+        $(".international").click(function(){
+            $("#international-box").slideToggle("fast");
             return false;
         });
     </script>
