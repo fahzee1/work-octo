@@ -129,7 +129,7 @@
                         </ul>
                     </div>
                 </div>
-                <img src="{{ STATIC_URL }}img/canada/smart-connect-banner.png" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
+                <img src="{{ STATIC_URL }}img/spanish/smart-connect-banner-spanish.png" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
                 <div class="clear"></div>
             </div>
             <div id="bronze-security-package">
@@ -258,7 +258,17 @@ var google_remarketing_only = true;
 
 
 {% endblock %}
-{% block pa_information %}Protect America esta dedicado en ofrecer la mejor calidad de productos y servicios a un precio económico. Nuestros productos de seguridad ofrecen el equipo necesario para proteger su hogar a una fracción del precio.  Cada sistema esta personalizado para satisfacer sus necesidades no como nuestros  competidores que ofrecen un paquete que nada mas proeje parte de su hogar a un precio muy alto. Por esa razón Protect America ha sido nombrado el mejor sistema de alarma para el hogar por Top Consumer Reviews en 2012. {% endblock %}
+
+
+{% block pa_information %}<p>Protect America esta dedicado en ofrecer la mejor calidad de productos y servicios a un precio económico. Nuestros productos de seguridad ofrecen el equipo necesario para proteger su hogar a una fracción del precio.  Cada sistema esta personalizado para satisfacer sus necesidades no como nuestros  competidores que ofrecen un paquete que nada mas proeje parte de su hogar a un precio muy alto. Por esa razón Protect America ha sido nombrado el mejor sistema de alarma para el hogar por Top Consumer Reviews en 2012.</p>
+{% comment %}
+{% if phone_number %}
+    {% businesstime %}
+        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+    {% endbusinesstime %}
+{% endif %}
+{% endcomment %}
+{% endblock %}
 
 {% block pa-info-phone %}{% endblock %}
 {% block order-footer %}{% endblock %}
