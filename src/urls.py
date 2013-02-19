@@ -245,7 +245,7 @@ elif settings.SITE_ID == 14:
         dtt(r'^security-comparison/adt-vs-protect-america/$', 'affiliates/adt-comparison-canada/index.html', 'home'),
         dtt(r'^security-comparison/reliance-vs-protect-america/$', 'affiliates/reliance-vs-pa-canada/index.html', 'home'),
         dtt(r'^security-comparison/vivint-vs-protect-america/$', 'affiliates/vivint-vs-protectamerica-canada/index.html', 'home'),
-
+        dtt(r'^security-comparison/alarmforce-vs-protect-america/$', 'affiliates/alarmforce-vs-pa-canada/index.html', 'home'),
     )
 
 
