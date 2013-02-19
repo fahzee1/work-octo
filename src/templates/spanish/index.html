@@ -8,12 +8,47 @@
 
 
 {% endblock %}
+{% block quick-links %}
+<ul id="quick-link-navigation">
+    <li id="quick-social">                
+        <div id="google-button">
+            <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
+        </div>
+        <div id="facebook-button">
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fprotectamerica&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=179318388788943" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Quick Social', 'PAGE_NAME']);"></iframe>
+        </div>
+        <div class="clear"></div>
+    </li>
+    <li class="international">
+        <img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> ES <img src="{{ STATIC_URL }}img/external/flags/arrow-selector.png" class="arrow-selector" alt="arrow-selector" />
+    </li>
+    <li class="big-green"><a href="#customer-service" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Customer Service', 'Quick Links Customer Service Click', 'Header']);" id="security-agreement">Servicio al Cliente</a></li>
+
+    <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Acuerdo</a></li>
+    <div id="international-box">
+        <a href="http://www.protectamerica.com"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> English</a>
+        <a href="http://www.protectamerica.com/es/"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> Espa&ntilde;ol</a>
+        <a href="http://www.protectamericasecurity.ca"><img src="{{ STATIC_URL }}img/external/flags/ca.png" alt="us" width="16" height="11" /> Canada</a>
+
+    </div>
+    <div id="customer-service-box">
+        <p>Chat en Línea: Servicio al Cliente</p>
+        <div class="button-link">
+            <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" style="padding: 9px 63px;" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Chat en Línea</a>
+        </div>
+        <p class="customer-care">Llame a Servicio al Cliente</p>
+        <a href="tel:{{ phone_number|format_number }}" class="phone-number">1-800-951-5111 &bull; opción 4</a>
+    </div>
+</ul>
+{% endblock %}
 {% block main-phone %}
+    {% comment %}
     {% if phone_number %}
     <div id="phone-number">
         <p>&iexcl;Llame hoy y ahorre ! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
     </div>
     {% endif %}
+    {% endcomment %}
 {% endblock %}
 {% block navigation %}
 {% endblock %}
@@ -29,7 +64,7 @@
     </div>
 </div>
 {% endblock %}
-{% block call-box-text %}<p>Asegure su hogar hoy, <strong>&iexcl;Llame ahora! {% endblock %}
+{% block call-box %}{% comment %}<p>Asegure su hogar hoy, <strong>&iexcl;Llame ahora! {% endcomment %}{% endblock %}
 
 {% block pa-testimonials %}
     <h2>Nuestros Clientes Aman Nuestros Sistemas de Seguridad</h2>
@@ -37,7 +72,7 @@
 {% endblock %}
 
 {% block security-choice-one %}Sistema de Seguridad Inalambricos{% endblock %}
-{% block security-choice-two %}Seguridad de Video{% endblock %}
+{% block security-choice-two %}Seguridad <br />de Video{% endblock %}
 {% block security-choice-three %}SMART Connect App Interactivo{% endblock %}
 
 
@@ -94,7 +129,7 @@
                         </ul>
                     </div>
                 </div>
-                <img src="{{ STATIC_URL }}img/canada/smart-connect-banner.png" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
+                <img src="{{ STATIC_URL }}img/spanish/smart-connect-banner-spanish.png" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
                 <div class="clear"></div>
             </div>
             <div id="bronze-security-package">
@@ -136,11 +171,13 @@
                 <h2>Proteja a su familia con un sistema de seguridad</h2>
                 <p>Las alarmas para seguridad del hogar son una parte fundamental para aumentar la seguridad de los hogares. Con la amplia variedad de sistemas de seguridad para el hogar que existen en el mercado, puede ser dif&iacute;cil encontrar el mejor sistema para usted. Los sistemas inal&aacute;mbricos de alarmas Protect America tambi&eacute;n se pueden adaptar con accesorios de seguridad para aumentar a&uacute;n m&aacute;s la protecci&oacute;n de su hogar y de su familia.</p>
                 {% endblock %}
+                {% comment %}
                 {% if phone_number %}
                     {% businesstime %}
                         <h3>Asegure su hogar hoy, <strong>&iexcl;Llame ahora! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
                     {% endbusinesstime %}
                 {% endif %}
+                {% endcomment %}
                 <div class="clear"></div>
             </div>
             <div id="home-security-main-image">
@@ -156,28 +193,28 @@
 {% endblock %}
 
 {% block smart-app-overview %}
-<h2>There’s a Free App For That.</h2>
-<p>When connecting your home security system through our broadband monitoring, your account automatically comes with free interactive features. Arm your system, request notifications, manage alarm codes, and home automation all from your computer or smart phone. Forget to set the alarm system? No problem, just arm it while on your timmies-run.</p>
+<h2>App para su Smartphone Gratis!.</h2>
+<p>Cuando conecta su sistema de seguridad con Broadband, su cuenta incluye nuestro servicio interactivo. Arme sus sistema, solicite notificaciones, administre claves, y accede automatización de su hogar desde su computadora or Smartphone.</p>
 <ul>
     <li>
         <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
         <div>
-            <h4>Security System Control</h4>
-            <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+            <h4>Control de Su Alarma</h4>
+            <p>Use su Smartphone para armar, desarmar y vigilar el estado de su alarma en vivo.</p>
         </div>
     </li>
     <li>
         <img src="{{ STATIC_URL }}img/canada/interactive-video-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
         <div>
-            <h4>Live Video</h4>
-            <p>Keep an eye on your home from anywhere in the world with live video. (Video Service Required).</p>
+            <h4>Video en vivo</h4>
+            <p>Vigile su hogar desde cualquier parte del mundo con su servicio de video en vivo. (servicio de video requirido)</p>
         </div>
     </li>
     <li>
         <img src="{{ STATIC_URL }}img/canada/interactive-home-automation-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
         <div>
-            <h4>Home Automation</h4>
-            <p>Home automation lets you control lights and appliances from your phone or computer.</p>
+            <h4>Automatización de su hogar</h4>
+            <p>La automatización de su hogar le permite controlar sus luces y aparatos desde su teléfono o computadora. </p>
         </div>
     </li>
 </ul>
@@ -188,20 +225,26 @@
 {% block big-video %}
 <div class="clear"></div>
 <ul>
-    <li>24/7 Security Monitoring</li>
-    <li>Trusted GE Wireless Home Security System</li>
-    <li>Home Security Customized and Built to your Needs</li>
-    <li>Guaranteed Locked-In Rates</li>
-    <li>Lowest Price in the Industry</li>
+    <li>Monitoreo de Seguridad 24/7</li>
+    <li>Sistema de Seguridad GE Wireless de confianza </li>
+    <li>Sistema de seguridad personalizados para usted</li>
+    <li>Precio de por vida garantizado</li>
+    <li>Mejor precio de la industria</li>
 </ul>
 {% endblock %}
-{% block page-product %}
-    <h2>Home Security</h2>
-    <p><span>Equipment Price: <strong>
-        INCLUDED
-    </strong></span>mensual monitoring starting at $19.99/mo</p>
 
+
+<!-- Video Area -->
+{% block video-security-overview %}
+<h2>Video Interactivo de Seguridad</h2>
+<p>Protect America le deja vigilar su hogar 24 horas al dia 7 dias de la semana con nuestra vigilancia de video on-demand. Nuestras cámaras ofrecen video con visión nocturna, video archivados, notificaciones, y grabación automática activado con movimiento.  El sentido de seguridad y tranquilidad esta a su alcance con nuestro servicio de video.</p>
 {% endblock %}
+{% block video-security-overview-two %}
+<h2>Vigilancia de video desde de seguridad a su alcance</h2>
+<p>Estos días, todo el mundo esta en marcha. Desafortunadamente, el mejor tiempo para que un ladron ataque es cuando un hogar esta desocupado. Con nuestro servicio usted puede vigilar su hogar desde su Smartphone. Nuestras cámaras le da acceso a video en vivo desde cualquier aparato con acceso a el internet. El sistema tan bien notificaciones accesibles desde su teléfono.</p>
+{% endblock %}
+
+
 {% block main-footer %}{% endblock %}
 {% block remarketing-one %}
 <script type="text/javascript">
@@ -215,6 +258,22 @@ var google_remarketing_only = true;
 
 
 {% endblock %}
+
+
+{% block pa_information %}<p>Protect America esta dedicado en ofrecer la mejor calidad de productos y servicios a un precio económico. Nuestros productos de seguridad ofrecen el equipo necesario para proteger su hogar a una fracción del precio.  Cada sistema esta personalizado para satisfacer sus necesidades no como nuestros  competidores que ofrecen un paquete que nada mas proeje parte de su hogar a un precio muy alto. Por esa razón Protect America ha sido nombrado el mejor sistema de alarma para el hogar por Top Consumer Reviews en 2012.</p>
+{% comment %}
+{% if phone_number %}
+    {% businesstime %}
+        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+    {% endbusinesstime %}
+{% endif %}
+{% endcomment %}
+{% endblock %}
+
+{% block pa-info-phone %}{% endblock %}
+{% block order-footer %}{% endblock %}
+
+
 {% block remarketing %}
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 </script>
