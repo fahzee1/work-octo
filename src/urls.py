@@ -249,18 +249,18 @@ elif settings.SITE_ID == 14:
     )
 
 
-# Buy-a-Security-System
+# BuyaSecuritySystem.com
 elif settings.SITE_ID == 15:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/buy-a-security-system/index.html', 'home'),
     )
 
-# Great-Home-Security-Offer
+# GreatHomeSecurityOffer.com
 elif settings.SITE_ID == 16:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
     )
-# Alarm-System-Offers
+# AlarmSystemOffers.com
 elif settings.SITE_ID == 17:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
