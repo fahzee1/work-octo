@@ -268,7 +268,7 @@ elif settings.SITE_ID == 17:
 # homesecuritycompared.com
 elif settings.SITE_ID == 18:
     urlpatterns += patterns('',
-        dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
+        dtt(r'^$', 'external/home-security-compared/index.html', 'home'),
     )
     
 else:
