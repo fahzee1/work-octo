@@ -21,19 +21,16 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% endblock %}
 
 
-{% block page_title %}Wireless Home Security Systems | {{ city }}, {{ state }} | Protect America{% endblock %}
+{% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
 
-{% block page_description %}{{ city }} {{ state }} Home Security Systems from Protect America. Voted #1 Home Security Company by Top Consumer Reviews{% endblock %}
+{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
 
-{% block page_keywords %}{{ city }} Home Security, Home Security {{ city }}, {{ city }} Alarm Monitoring, Home Security {{ city }} {{ state_long }}, {{ city }} Alarm Systems, {{ city }} Security Alarms, {{ city }} Alarm Security, {{ city }} Alarm Companies, {{ city }} Alarms, Alarms {{ city }} {{ state_long }}, {{ city }} Alarm, {{ city }} Smart Home, {{ city }} Home Automation, Home Security Systems {{ city }}, Security Systems {{ city }}, {{ city }} Alarm Company, Alarm Monitoring {{ city }}{% endblock %}
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
 
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
 
 
-{% block heroimage %}
 
-
-{% endblock %}
 {% block subnav %}{% endblock %}
 {% block third-party-nav %}
 
@@ -43,32 +40,52 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <a href="{% url order-package %}" class="button-link header-button">Order Now</a>
 {% endblock %}
 
+{% block navigation %}
+<div id="navigation">
+    <ul>
+        <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Home', 'Top Navigation', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
+        <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url products %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
+        <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="/pa/about/home-security-companies" title="About Protect America Home Security Systems" onClick="_gaq.push(['_trackEvent', 'About Us', 'Top Navigation', '{{ page_name }}']);">About Us</a></li>
+        <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="/support" title="Need Help with Your Security System? Visit our Support Area" onClick="_gaq.push(['_trackEvent', 'Support', 'Top Navigation', '{{ page_name }}']);">Support</a></li>
+        <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="/pa/contact" title="Contact Protect America" onClick="_gaq.push(['_trackEvent', 'Contact Us', 'Top Navigation', '{{ page_name }}']);">Contact Us</a></li>
+
+    </ul>
+    <div id="search-area">
+        <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
+            <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
+        </form>
+    </div>
+</div>
+{% endblock %}
 
 {% block content %}
 </div>
 <div id="big-hero-banner">
-	<div id="hero-wrapper">
-		<h1>Security For Every Home.</h1>
-		<img src="{{ STATIC_URL }}img/protectamerica/iphone-one.png" class="happy-family" alt="family-one" />
-		<div id="hero-features">
-			<img src="{{ STATIC_URL }}img/protectamerica/main-features.png" alt="main-features" class="features" />
-			<img src="{{ STATIC_URL }}img/protectamerica/consumer-digest-best-buy.png" alt="consumer-digest-best-buy" class="consumer-digest" />
-		</div>
-		<img src="{{ STATIC_URL }}img/protectamerica/pricing.png" alt="pricing" class="pricing" />
+    <div id="hero-wrapper">
+        <h1>Security For Every Home.</h1>
+        <img src="{{ STATIC_URL }}img/protectamerica/iphone-one.png" class="happy-family" alt="family-one" />
+        <div id="hero-features">
+            <img src="{{ STATIC_URL }}img/protectamerica/main-features.png" alt="main-features" class="features" />
+            <img src="{{ STATIC_URL }}img/protectamerica/consumer-digest-best-buy.png" alt="consumer-digest-best-buy" class="consumer-digest" />
+        </div>
+        <img src="{{ STATIC_URL }}img/protectamerica/pricing.png" alt="pricing" class="pricing" />
+        <div class="button-submit">
+            <a href="{% url order-package %}">Order Now</a>
+        </div>
         {% include "order/quote-form-new.html" with form=forms.basic %}
 
-	    {% if phone_number %}
-		    {% businesstime %}
-		    <div class="clear"></div>
-		    <div id="call-box">
-		        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-		    </div>
-		    <div class="clear"></div>
-		    {% endbusinesstime %}
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
     
-	    {% endif %}
-	</div>
-	<img src="{{ STATIC_URL }}img/protectamerica/small-town-usa.jpg" alt="Security For Every Home" id="hero-backdrop" />
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/protectamerica/small-town-usa.jpg" alt="Security For Every Home" id="hero-backdrop" />
 </div>
 <div class="wrapper">
 
@@ -342,16 +359,16 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
 <div class="wrapper">{% block extra-content %}{% endblock %}</div>
 {% addtoblock "js" %}
-	<script type="text/javascript" src="{{ STATIC_URL }}/js/waypoints.min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}/js/waypoints-sticky.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/waypoints.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/waypoints-sticky.min.js"></script>
 
 
 
     <script type="text/javascript">
         $(document).ready(function() {
-			$('#header').waypoint('sticky', {
-			  offset: -85 // Apply "stuck" when element 30px from top
-			});
+            $('#header').waypoint('sticky', {
+              offset: -85 // Apply "stuck" when element 30px from top
+            });
             animated = 0;
             $("#alarm-category").click(function(){
                 if(animated == 0 && !$(this).hasClass('active')) {

@@ -2,141 +2,72 @@
 
 
 // Styles for the Ordering Pages
-#order-form {
-    .half-box;
-    .drop-shadow;
-   	background: @blue;
-	padding: 20px;
-	opacity: 0.98;
-	h1 {
-	   color: @v-light-grey;
-	}
-	p {
-	   color: @light-grey;
-       font-size: 12px;
-	}
-	form {
-        padding-bottom: 12px;
-        border-bottom: 1px solid @dark-blue; 
-        a {
-            color: @white;
+.wrapper {
+    margin: 0 auto;
+    padding: 0;
+}
+#sub-navigation {
+    margin-bottom: 0;
+    display: none;
+}
+#header {
+    min-width: 960px;
+    .header-button {
+        display: none;
+    }
+    &.stuck {
+        background: @white;
+        position: fixed;
+        top: 0;
+        .drop-shadow;
+        z-index: 999;
+        width: 100%; 
+        padding-top: 4px;
+        border-bottom: 5px solid @red;
+        #quick-link-navigation {
+            display: none;
+        }
+        #company-logo {
+            bottom: 0;
+        }
+        #ge-logo {
+            display: none;
+        }
+        .header-button {
             display: block;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 10px;
-            text-decoration: none;
+            float: right;
+            margin-top: 4px;
+            padding: 8px 48px;
+            .border-radius(3px, 3px, 3px, 3px);
+            background: #00bbf4;
+            text-shadow: 0px 1px 0px #2a6273;
+            color: @white;
             &:hover {
-                text-decoration: underline;
+                border: 1px solid #2272a2;
             }
         }
-	}
-	.order-form-field {
-	   position: relative;
-	   .form-check {
-	       position: absolute;
-	       right: -20px;
-	       top: 9px;
-	       display: none;
-	       
-	   }
-	   .form-check-select {
-	       position: absolute;
-	       left: 365px;
-	       top: -4px;
-	       display: none;
-	       
-	   }
-	}
-	input {
-        color: @black;
-        font-size: 24px;
-        height: 28px;
-        line-height: 28px;
-        margin: 0 20px 15px;
-        width: 432px;
-        &.yes-check {
-            .fade-slow;
-            background: #fffee7;
-        }
-        &.no-check {
-            .fade-slow;
-            background: #ffd2d2;
-        }
-    }
-    label {
-        display: block;
-        color: @white;
-        font-size: 12px;
-        line-height: 12px;
-        margin-left: 20px;
-    }
-    label.select {
-        display: inline;
-    	color: @white;
-    	font-size: 20px;
-        line-height: 28px;
-        margin-left: 20px;
-    }
-    select {
-    	margin: 0 20px 20px 5px;
-    	font-size: 18px;
-    	color: @black;
-    	width: 250px;
-    }
-    button {
-        display: block;
-        background: #90af01;
-        color: @white;
-        text-decoration: none;
-        height: 36px;
-        line-height: 36px;
-        background-image: -moz-linear-gradient(top, #90af01, #829e01);
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#829e01));
-        border: 1px solid transparent;
-        font-size: 18px;
-        padding: 0 24px;
-        width: 350px;
-        font-weight: bold;
-        cursor: pointer;
-        cursor: hand;
-        margin: 8px auto 0;
-        &:hover {
-            background-image: -moz-linear-gradient(center top, #90af01, #687e01);
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#687e01));
-            border: 1px solid #768f03;
-            border-bottom: 1px solid #576902;
-            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-            box-shadow: 0 1px 1px rgba(0,0,0,.3);
-        }
+        
     }
 }
-#third-party {
-    margin: 16px 16px 0;
-    .border-radius;
-    background: @white;
-    padding: 8px 8px;
-
-    .hackersafe {
-        width: 47%;
-        height: 45px;
-        padding: 0 6px;
-        border-right: 1px solid @v-light-grey;
-        text-align: center;
-        float: left;
-        a {
-            position: relative;
-            top: 5px;
-        }
+#header-wrapper {
+    width: auto;
+    padding: 0 16px;
+    #company-logo {
+        bottom: 11px;
     }
-    .truste {
-        width: 47%;
-        height: 45px;
-        padding: 0 6px;
-        text-align: center;
-        float: left;
-
+}
+#navigation {
+    width: auto;
+    padding: 0 8px;
+    min-width: 960px;
+    #search-area {
+        float: right;
     }
+}
+#top-info {
+    margin: 0 auto;
+    max-width: 1100px;
+    min-width: 960px;
 }
 #top-consumer-review-medal {
     position: absolute;
@@ -158,52 +89,210 @@
     }
 }
 #order-security-package {
-    margin-top: 25px;
-    #security-package-images {
-        .small-box;
-        top: 60px;
-        #copper-package {
-            .image-break;
-            display: none;
-            padding-left: 48px;
-            left: -75px;
+    background: url(/static/img/protectamerica/blue-bg.png) repeat;
+    width: 100%;
+    height: 643px;
+    position: relative;
+    overflow: hidden;
+    min-width: 960px;
+    #awards-box {
+        float: right;
+        width: 339px;
+        background: @white;
+        height: 552px;
+        margin-top: 8px;
+        margin-right: 9%;
+        text-align: center;
+        p {
+            font-size: 10px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid @v-light-grey;
+            width: 85%;
+            margin: 0 auto;
+            line-height: 12px;
+            &.omega {
+                padding-bottom: 0;
+                border: none;
+            }
         }
-        #bronze-package {
-            .image-break;
-            display: none;
-            left: -75px;
-
-        }
-        #silver-package {
-            .image-break;
-            display: none;
-            left: -75px;
-
-        }
-        #gold-package {
-            .image-break;
-            display: none;
-            left: -75px;
-
-        }
-        #platinum-package {
-            .image-break;
-            display: none;
-            left: -75px;
-
-        }
-        #business-package {
-            .image-break;
-            display: none;
-            left: -75px;
-
+        img {
+            display: block;
+            padding-top: 16px;
+            margin: 0 auto;
+            &.alpha {
+                padding-top: 0;
+            }
         }
     }
+    #call-box {
+        background: url(/static/img/protectamerica/black-shade.png) repeat;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 0;
+        p {
+            color: @white;
+            font-weight: 100;
+            strong {
+                color: @white;
+                font-weight: 100;
+            }
+            span {
+                font-weight: 100;
+                color: @white;
+                a {
+                    color: @white;
+                }
+            }
+        }
+    }
+
+    #order-form {
+        width: 48%;
+        padding: 20px;
+        margin-left: 2%;
+        float: left;
+        padding-top: 8px;
+        h1 {
+           color: @white;
+           font-weight: 100;
+           font-size: 38px;
+           line-height: 38px;
+        }
+        p {
+           color: @light-grey;
+           font-size: 12px;
+        }
+        #header-form {
+            background: url(/static/img/protectamerica/black-shade.png) repeat;
+            padding: 16px;
+        }
+        #main-form {
+            background: url(/static/img/protectamerica/black-shade.png) repeat;
+            margin: 8px 0;
+            padding: 16px;
+            a {
+                
+            }
+        }
+        form {
+    		label {
+    			display: block;
+    			color: @white;
+    			line-height: 16px;
+    			font-size: 14px;
+    			padding-bottom: 4px;
+    		}
+    		input {
+    			display: block;
+    			margin-bottom: 8px;
+    			height: 22px;
+    			font-size: 14px;
+    			width: 98%;
+    		}
+    		button {
+    			display: block;
+    			background: #41bb1a;
+    			.border-radius(3px, 3px, 3px, 3px);
+    			height: 42px;
+    			width: 358px;
+    			padding: 0;
+    			margin: 16px auto 8px;
+    			color: @white;
+    			border: 1px solid #0f4707;
+    			font-size: 16px;
+    			cursor: pointer;
+    			cursor: hand;
+    		}
+    		a {
+        		display: block;
+        		color: @white;
+        		text-align: center;
+    		}
+            label.select {
+                display: inline;
+                color: @white;
+                font-size: 16px;
+                line-height: 28px;
+                margin-top: 8px;
+            }
+            select {
+                margin: 8px 20px 8px 5px;
+                font-size: 18px;
+                color: @black;
+                width: 250px;
+            }
+    
+    		.privacy-policy {
+    			font-size: 11px;
+    			color: @white;
+    			display: block;
+    			text-align: center;
+    			text-decoration: none;
+    			line-height: 13px;
+    			&:hover {
+    				text-decoration: underline;
+    			}
+    		}
+        }
+        .order-form-field {
+           position: relative;
+           .form-check {
+               position: absolute;
+               right: -20px;
+               top: 9px;
+               display: none;
+               
+           }
+           .form-check-select {
+               position: absolute;
+               left: 365px;
+               top: -4px;
+               display: none;
+               
+           }
+        }
+    }
+    #third-party {
+        background: @white;
+        padding: 8px 8px;
+    
+        .hackersafe {
+            width: 47%;
+            height: 45px;
+            padding: 0 6px;
+            border-right: 1px solid @v-light-grey;
+            text-align: center;
+            float: left;
+            a {
+                position: relative;
+                top: 5px;
+            }
+        }
+        .truste {
+            width: 47%;
+            height: 45px;
+            padding: 0 6px;
+            text-align: center;
+            float: left;
+    
+        }
+    }
+	#hero-backdrop {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		min-width: 1024px;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	}
 }
 #order-reassurance {
-    margin-top: 10px;
-    border-top: 1px solid @v-light-grey;
-    padding-top: 20px;
+    padding-top: 8px;
+    min-width: 960px;
+    margin: 4px auto 0;
+    max-width: 1400px;
     #lowest-price-guaranteed, #lifetime-warranty, #homeowner-insurance-discount, #relocation-kit, #free-tech-support {
         .fifth-box;
         text-align: center;
