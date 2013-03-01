@@ -392,7 +392,7 @@ else:
         dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
 
         # Home Security Packages
-        dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
+        dtt(r'^shop/home-security-systems/?$', 'packages/index.html', 'products'),
 
             # Product > Packages
 
@@ -685,7 +685,9 @@ urlpatterns += patterns('',
     ('^pa/safer_at_home/?$',
         redirect_to, {'url': '/pa/learn/alarm-companies/', 'permanent': True}),
     ('^pa/products/?$',
-        redirect_to, {'url': '/pa/packages/alarms/', 'permanent': True}),
+        redirect_to, {'url': '/shop/home-security-systems/', 'permanent': True}),
+    ('^pa/packages/alarms/?$',
+        redirect_to, {'url': '/shop/home-security-systems/', 'permanent': True}),
     ('^careers.php$',
         redirect_to, {'url': '/contact/careers/', 'permanent': True}),
     ('^pa/map/?$',
