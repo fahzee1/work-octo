@@ -1,55 +1,436 @@
 {% extends "landing-pages/index.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 {% block google_experiment %}
-<script> 
-_udn = "protectamerica.com";
-</script> 
-<!-- Google Analytics Content Experiment code -->
-<script>function utmx_section(){}function utmx(){}(function(){var
-k='61445283-33',d=document,l=d.location,c=d.cookie;
-if(l.search.indexOf('utm_expid='+k)>0)return;
-function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
-indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
-length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
-'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
-'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
-'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
-valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
-</script><script>utmx('url','A/B');</script>
-<!-- End of Google Analytics Content Experiment code -->
+
 {% endblock %}
 
 
-{% block page_title %}Wireless Home Security Systems | {{ city }}, {{ state }} | Protect America{% endblock %}
+{% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
 
-{% block page_description %}{{ city }} {{ state }} Home Security Systems from Protect America. Voted #1 Home Security Company by Top Consumer Reviews{% endblock %}
+{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
 
-{% block page_keywords %}{{ city }} Home Security, Home Security {{ city }}, {{ city }} Alarm Monitoring, Home Security {{ city }} {{ state_long }}, {{ city }} Alarm Systems, {{ city }} Security Alarms, {{ city }} Alarm Security, {{ city }} Alarm Companies, {{ city }} Alarms, Alarms {{ city }} {{ state_long }}, {{ city }} Alarm, {{ city }} Smart Home, {{ city }} Home Automation, Home Security Systems {{ city }}, Security Systems {{ city }}, {{ city }} Alarm Company, Alarm Monitoring {{ city }}{% endblock %}
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
 
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
 
 
+
+{% block subnav %}{% endblock %}
+{% block third-party-nav %}
+
+<div id="ge-logo" title="GE Logo">
+    <p>GE Security Authorized Dealer</p>
+</div>
+<a href="{% url order-package %}" class="button-link header-button">Order Now</a>
+{% endblock %}
+
 {% block navigation %}
 <div id="navigation">
     <ul>
-        <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
-        <li {% if 'security-packages' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Home Security Systems and Products">Products</a></li>
-        <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/pa/about/home-security-companies" title="About Protect America Home Security Systems">About Us</a></li>
+        <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Home', 'Top Navigation', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
+        <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url products %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
+        <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a href="/pa/about/home-security-companies" title="About Protect America Home Security Systems" onClick="_gaq.push(['_trackEvent', 'About Us', 'Top Navigation', '{{ page_name }}']);">About Us</a></li>
+        <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="/support" title="Need Help with Your Security System? Visit our Support Area" onClick="_gaq.push(['_trackEvent', 'Support', 'Top Navigation', '{{ page_name }}']);">Support</a></li>
+        <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="/pa/contact" title="Contact Protect America" onClick="_gaq.push(['_trackEvent', 'Contact Us', 'Top Navigation', '{{ page_name }}']);">Contact Us</a></li>
+
     </ul>
-    {% if request.GET.cikw or request.COOKIES.cikw %}
-        <p>You searched for 
-            {% if request.GET.cikw %}
-                <strong>{{ request.GET.cikw|truncatewords:6 }}</strong>
-            {% else %}
-                {% if request.COOKIES.cikw %}
-                    <strong>{{ request.COOKIES.cikw|truncatewords:6 }}</strong>
-                {% endif %}
-            {% endif %}
-        </p>
-    {% endif %}
+    <div id="search-area">
+        <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
+            <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
+        </form>
+    </div>
 </div>
 {% endblock %}
-{% block subnav %}{% endblock %}
 
-{% block pa_information %}At Protect America, we are driven to provide only the highest quality products and dedicated service at an affordable price. Our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008-2013), as well as the Consumer Digest Best Buy Award for our Copper Package.{% endblock %}
+{% block content %}
+</div>
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
+        <h1>Security For Every Home.</h1>
+        <img src="{{ STATIC_URL }}img/protectamerica/iphone-two.png" class="happy-family" alt="family-one" />
+        <div id="hero-features">
+            <img src="{{ STATIC_URL }}img/protectamerica/main-features.png" alt="main-features" class="features" />
+            <img src="{{ STATIC_URL }}img/protectamerica/consumer-digest-best-buy.png" alt="consumer-digest-best-buy" class="consumer-digest" />
+        </div>
+        <img src="{{ STATIC_URL }}img/protectamerica/pricing.png" alt="pricing" class="pricing" />
+        <div class="button-submit">
+            <a href="{% url order-package %}">Order Now</a>
+        </div>
+        {% include "order/quote-form-new.html" with form=forms.basic %}
+
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+    
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/protectamerica/small-town-usa.jpg" alt="Security For Every Home" id="hero-backdrop" />
+</div>
+<div class="wrapper">
+
+    <div id="security-benefits">
+        <div id="advantage-badges">
+            {% block advantage-badges %}
+            <img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo.jpg" alt="consumer-digest-logo" width="136" height="120" />
+            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-logo.jpg" alt="top-consumer-logo" width="128" height="120" id="top-consumer-logo" />
+            <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
+            {% endblock %}
+        </div>
+        <div id="protect-america-information">
+            <h2>Wireless Home Security: <br />100% Protection</h2>
+            <p>Whether you want protection for your home or even a small business, the GE Home Security System from Protect America will fulfill your home security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your home security with a GE Home Security System from Protect America:</p>
+        </div>
+
+        <ul>
+            <li><a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Compare Protect America to ADT Security and other home security system companies.">BEST Price in Home Security</a> - Compare &amp; Save!</li>
+
+            <li>BEST Home Security System in the Industry</li>
+            <li><a href="http://www.protectamerica.com/pa/equipment/wireless-home-security-system" title="View available GE wireless home security system equipment and learn how it works.">State-of-the-art UL Listed Security Equipment</a></li>
+            <li>Protect Your Home with 24/7 Security Monitoring</li>
+            <li>Guaranteed Locked in Security Monitoring Rates</li>
+            <li>Super Flexible <a href="http://www.protectamerica.com/pa/packages/alarms" title="View all of our alarms packages and choose the right package and service for your home.">Home Security Packages</a></li>
+            <li>Lifetime <a href="http://www.protectamerica.com/help/warranty/" title="Lifetime monitoring home security system equipment warranty for our valued customers.">Alarm System Replacement Parts Warranty</a></li>
+            <li>Up to 20% Off Homeowners Insurance</li>
+            <li>Peace of Mind When It Comes to Your Family &amp; Home</li>
+        </ul>
+    </div>
+    <div id="home-security-testimonials">
+        {% block pa-testimonials %}
+        <h2>Customers Love Our Home Security Systems</h2>
+        {% testimonial_search "" "limit=2&template=canada-side&words=25" %}
+        {% endblock %}
+    </div>
+    <div class="clear"></div>
+
+</div>
+<div class="wrapper">
+    <div id="security-categories">
+        <ul>
+            <li id="alarm-category" class="security-choice active">
+                <img src="{{ STATIC_URL }}img/extra/alarm-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>{% block security-choice-one %}Home Security Comparison{% endblock %}</h2>
+                <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More ></a></div>
+            </li>
+            <li id="video-category" class="security-choice">
+                <img src="{{ STATIC_URL }}img/protectamerica/protect-america-advantage.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>{% block security-choice-two %}Protect America Advantage{% endblock %}</h2>
+                <div class="button-link"><a href="#video-security" id="video-button-choice"  onclick="showSlide(2);">Learn More ></a></div>
+            </li>
+            <li id="smart-app-category" class="security-choice">
+                <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <h2>{% block security-choice-three %}SMART Connect </br>On The Go App{% endblock %}</h2>
+                <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice" onclick="showSlide(3);">Learn More ></a></div>
+            </li>
+            <div class="clear"></div>
+        </ul>
+        <img src="{{ STATIC_URL }}img/spanish/color-band.png" id="color-band" alt="Color Band" width="1030" height="80" />
+        <img src="{{ STATIC_URL }}img/spanish/white-arrow.png" id="white-arrow" alt="Color Band" />
+
+    </div>
+</div>
+<div id="big-choices">
+    {% block packages-page %}
+    <div id="home-security-choice" class="big-info" style="display:block">
+        <div class="big-wrapper">
+            <table id="comparison-table">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th><img src="{{ STATIC_URL }}img/protectamerica/protect-america-logo.png" alt="protect-america-logo" width="248" height="40" /></th>
+                        <th>ADT</th>
+                        <th>ADT Pulse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="alpha title">Installation</td>
+                        <td class="alpha pa">$0</td>
+                        <td class="alpha">$49</td>
+                        <td class="alpha">$49</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Monthly Rate</td>
+                        <td class="pa">$19.99</td>
+                        <td>$42.99</td>
+                        <td>$50.99</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Homeowner's Discount</td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                    </tr>
+                    <tr>
+                        <td class="title">24/7 Monitoring</td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Interactive Features*</td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td>&nbsp;</td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Free EasyMove<br/> Moving Kit</td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Lowest Price Guaranteed</td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title omega">Locked-in Rate</td>
+                        <td class="pa omega"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="omega">&nbsp;</td>
+                        <td class="omega">&nbsp;</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><a href="{% url order-package %}" class="button-link header-button">Order Now</a></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+            <div id="home-security-info">
+                <div id="home-security-overview">
+                    {% block home-security-overview %}
+                    <h2>Protect Your Home with a Wireless Security System</h2>
+                    <p>Over the past 20 years, Protect America has been committed to excellence and affordability when it comes to securing your home. That's why we're a Consumers Digest Best Buy™ for home security and the best choice for a world-class security. Your family is your top priority. And your home is probably your largest investment. Why not take the extra precaution of providing a wireless home security system and security monitoring for your residence? We make it simple to protect your home, and we are so confident in our security system, we guarantee it.</p>
+                    {% endblock %}
+                    {% if phone_number %}
+                        {% businesstime %}
+                            <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                        {% endbusinesstime %}
+                    {% endif %}
+                    <div class="clear"></div>
+                </div>
+                <div id="home-security-main-image">
+                    <img src="{{ STATIC_URL }}img/canada/lowest-price-home-security.jpg" alt="lowest-price-home-security" width="316" height="240" />
+                    <img src="{{ STATIC_URL }}img/canada/lifetime-security-equipment-warranty.jpg" alt="lifetime-security-equipment-warranty" width="220" height="256" />
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    
+    </div>
+    {% endblock %}
+
+    <div id="video-security-choice" class="big-info" style="display:none">
+        <div class="big-wrapper">
+            <div id="extra-security-information">
+                <div id="security-value">
+                    <h3>Home Security Value</h3>
+                    <p>
+                        The average yearly home insurance premium in the U.S. costs over $800. The good news is that many plans offer discounts up to 20% on home insurance for homes with security systems. You could save $14 or more per month on your insurance with a <a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/gold-package">GE home alarm system</a>. For many, 
+                        the monthly cost of a Protect America GE home security system would be less than $16 per
+                        month once a home insurance discount is applied. For 50 cents a day, you can have the peace
+                        of mind knowing that your family and home will have the extra protection of a residential
+                        security system. Our wireless GE home security system is one investment you can't afford to 
+                        ignore.
+                    </p>
+                </div>
+                <div id="security-choices">
+                    <h3>Home Security Choices</h3>
+                    <p>
+                        Protect America offers the <a href="http://www.protectamerica.com/pa/packages/alarms" title="View all of our alarms packages and choose the right package and service for your home.">best home security system and monitoring</a> deal you'll find. We install
+                        premium security hardware with GE home security products, and have the most flexible range
+                        of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse
+                        broadband monitoring, or standard talking command station monitoring over landline. We
+                        provide an extensive selection of GE <a href="http://www.protectamerica.com/pa/equipment/wireless-home-security-system">wireless home security</a> components. And, our home
+                        security packages are designed to fit most any budget. Let us help you find the right system
+                        for your needs, so you can start protecting your home and family today.
+            
+                    </p>
+                </div>
+                <div class="clear"></div>
+
+                <div id="fbi-stats">
+                    <h3>Home Security Statistics</h3>
+                    <p><strong>Facts about Burglary, Property Crimes, and Home Security Alarms</strong></p>
+                    <p>
+                        There is no better time than today to protect your residence with a monitored home security alarm
+                        system, and there is no more affordable solution than Protect America's wireless GE home security
+                        system. Wherever you live, we have a home security alarm solution for you and with our unique,
+                        low-price guarantee, you can be confident in your choice. Sign up today for a <a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">free home security 
+                        system</a> and get our low-price guarantee, a lifetime alarm equipment warranty, free movers program, 
+                        dedicated support, and award winning home security monitoring from Protect America.
+                    </p>
+                    <ul style="padding-left:25px;list-style-type:square;">
+
+                    </ul>
+                </div>
+                <div id="other-stats">
+                    <p>2007 FBI Crime Statistics:</p>
+                    <ul>
+                        <li class="two"><img src="{{ STATIC_URL }}img/external/timer-icon.png" alt="timer-icon" width="62" height="62" />Each year in the United States, a burglary occurs every 14 seconds.</li>
+                        <li class="two"><img src="{{ STATIC_URL }}img/external/sun-icon.png" alt="sun-icon" width="62" height="62" />Most burglaries occur during the day between 6am and 6pm.</li>
+                        <li class="one"><img src="{{ STATIC_URL }}img/external/money-icon.png" alt="money-icon" width="62" height="62" />The average residential burglary victim lost $1,991.</li>
+                        <li><img src="{{ STATIC_URL }}img/external/door-icon.png" alt="door-icon" width="62" height="62" />In more than a third of all burglaries, the burglar enters the front door (and most of the time does so forcefully).</li>
+                        <li><img src="{{ STATIC_URL }}img/external/3x-icon.png" alt="3x-icon" width="62" height="62" />Homes without a monitored security alarm system are 3 times more likely to be burglarized or robbed than those with a monitored home security system.</li>
+                        <li><img src="{{ STATIC_URL }}img/external/graph-icon.png" alt="graph-icon" width="62" height="62" />There is sufficient evidence to show that in the past, when the economy has suffered, burglary and property crime has increased in parallel.</li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div id="smart-app-choice" class="big-info" style="display:none">
+        <div class="big-wrapper">
+            <img src="{{ STATIC_URL }}img/canada/interactive-app.jpg" class="interactive-app" alt="interactive-app" width="518" height="663" />
+            <div id="smart-app-extra-information">
+                {% block smart-app-overview %}
+                <h2>There’s a Free App For That.</h2>
+                <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
+                <ul>
+                    <li>
+                        <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <div>
+                            <h4>Security System Control</h4>
+                            <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="{{ STATIC_URL }}img/canada/interactive-video-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <div>
+                            <h4>Live Video</h4>
+                            <p>Keep an eye on your home from anywhere in the world with live video. (Video Service Required).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="{{ STATIC_URL }}img/canada/interactive-home-automation-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <div>
+                            <h4>Home Automation</h4>
+                            <p>Home automation lets you control lights and appliances from your phone or computer.</p>
+                        </div>
+                    </li>
+                </ul>
+                {% if phone_number %}
+                    {% businesstime %}
+                        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                    {% endbusinesstime %}
+                {% endif %}
+                {% endblock %}
+
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+
+<div class="wrapper">{% block extra-content %}{% endblock %}</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/waypoints.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/waypoints-sticky.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#header').waypoint('sticky', {
+              offset: -85 // Apply "stuck" when element 30px from top
+            });
+            animated = 0;
+            $("#alarm-category").click(function(){
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#home-security-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-925px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#home-security-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#home-security-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+    
+            });
+            $("#video-category").click(function(){
+    
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#video-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-582px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#video-security-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#video-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+            $("#smart-app-category").click(function(){
+                
+    
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#smart-app-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-242px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#smart-app-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#smart-app-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+
+        });
+    </script>
+{% endaddtoblock "js" %}
+
+{% endblock %}
+
