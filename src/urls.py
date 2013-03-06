@@ -457,7 +457,7 @@ else:
             
             # Product > Interactive Control
 
-            dtt(r'^products/interactive-control/?$', 'products/interactive/index.html', 'interactive-control', 'products'),
+            #dtt(r'^products/interactive-control/?$', 'products/interactive/index.html', 'interactive-control', 'products'),
 
         # About Pages
 
