@@ -1,4 +1,4 @@
-{% extends "landing-pages/index.html" %}
+{% extends "affiliates/sem-landing-page/ppc-landing.html" %}
 {% load sekizai_tags content_tags content_filters %}
 
 {% block css %}
@@ -37,19 +37,19 @@
 {% block typekit %}tk-jaf-facitweb{% endblock %}
 
 {% block navigation %}
-{% comment %}
     <div id="navigation">
         <ul>
             <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Home', 'Top Navigation', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
-            <li {% if 'ca-packages' in active_pages %}class="active"{% endif %}><a href="{% url ca_packages %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
+            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url products %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
         </ul>
-        <div id="search-area">
-            <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
-                <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
-            </form>
-        </div>
+
     </div>
-{% endcomment %}
 {% endblock %}
+{% block page-product %}
+    <h2>Home Security</h2>
+    <p><span>Equipment Price: <strong>
+        INCLUDED
+    </strong></span>monthly monitoring starting at $19.99/mo</p>
 
-
+{% endblock %}
+{% block main-footer %}{% endblock %}

@@ -3,16 +3,79 @@
 {% block page_title %}{% endblock %}
 {% block page_keywords %}{% endblock %}
 {% block page_description %}{% endblock %}
+{% block typekit %}tk-jaf-facitweb{% endblock %}
 
 {% block content %}
-<div id="vehicle-gps">
-
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
+        <h1>Arm Your System From Anywhere.</h1>
+        <h2>with our Exclusive SMART Connect Interactive</h2>
+        <img src="{{ STATIC_URL }}img/interactive/computer-iphone-tablet.png" class="happy-family" alt="family-one" />
+        <div class="overview">
+            <p>Making your home smarter with Protect America’s Exclusive SMART Connect is easy! Arm your system, receive text messages, watch live video, home automation, and more.</p>
+            <p>Forget to arm your system? No problem, just use your SMART Connect app while sipping your morning coffee at work.</p>
+            <div class="button-submit">
+                <a href="{% url order-package %}">Order Now</a>
+            </div>
+        </div>
+        <img src="{{ STATIC_URL }}img/interactive/included-transparent.png" class="included-box" alt="included-transparent" width="360" height="112" />
+        {% include "order/quote-form-new.html" with form=forms.basic %}
+
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+    
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/protectamerica/office-space.jpg" alt="Security For Every Home" id="hero-backdrop" />
+</div>
+<div class="wrapper">
+    <div id="app-for-that">
+        <h2>There’s an App For That!</h2>
+        <p>Control your entire home with the press of a button. Protect America’s amazing, and free, SMART Connect apps for Android devices and the iPhone puts home automation, energy management, and live video in your pocket! Controlling your home just got easier and a lot more fun. </p>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Silver']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
+        <div class="clear"></div>
+        <img src="{{ STATIC_URL }}img/interactive/phones.jpg" class="phones" alt="phones" width="400" height="512" />
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/interactive/alarm-icon.jpg" alt="live-video-icon" width="58" height="58" />
+                <div>
+                    <h3>Security System Control</h3>
+                    <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                </div>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/interactive/home-automation-icon.jpg" alt="live-video-icon" width="58" height="58" />
+                <div>
+                    <h3>Home Automation</h3>
+                    <p>Home automation lets you control lights and appliances from your phone or computer using Z-Wave technology.</p>
+                </div>
+            </li>
+            <li class="omega">
+                <img src="{{ STATIC_URL }}img/interactive/live-video-icon.jpg" alt="live-video-icon" width="58" height="58" />
+                <div>
+                    <h3>Live Video Surveillence</h3>
+                    <p>Keep an eye on your home from anywhere in the world with live video. <span>(Video Service Required)</span></p>
+                </div>
+            </li>
+            <img src="{{ STATIC_URL }}img/interactive/features-arrow.jpg" class="features-arrow" alt="features-arrow" width="40" height="72" />
+            <div class="clear"></div>
+        </ul>
+        <div class="clear"></div>
+    </div>
+{% testimonial_search "interactive" "limit=10&words=75" %}
 
 <div class="clear"></div>
     <div id="check-in-anywhere">
-        <h2><strong>A Secured Home means a Worry Free Vacation</strong> Check in at home from wherever you may be</h2>
+        <h2><strong>A Secured Home Means a Relaxing, Worry-Less Vacation</strong> Check in at home from wherever you may be</h2>
     </div>
 </div>
 <div id="postcards">
@@ -36,6 +99,19 @@
     <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/new-york-postcard.jpg" class="postcard4" />
     <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/hawaii-postcard.jpg" class="postcard5" />
 </div>
+<div class="clear"></div>
+<div class="wrapper">
+    <div id="free-smart-app">
+        <h2>Did We Mention It’s Free?</h2>
+        <p>While many other security companies charge for the extra features of interactive control, we provide our SMART Connect for Free with our Broadband and Cellular security systems. Arm/disarm your system, watch your live video cameras, control your lights and home appliances, receive event notifications, and much more! Home security has never been more convenient, and cool, than Protect America SMART Connect. </p>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Silver']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
+        <img src="{{ STATIC_URL }}img/interactive/included-white.jpg" alt="included-white" width="360" height="112" />
+    </div>
+    <img src="{{ STATIC_URL }}img/interactive/smart-connect-icon-big.png" id="smart-connect-icon" alt="smart-connect-icon-big" width="264" height="264" />
+</div>
+
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}/js/jqueryrotate.js"></script>
     <script type="text/javascript">
@@ -53,8 +129,8 @@
 {% endaddtoblock "js" %}
 {% endblock %}  
 {% block page-product %}
-    <h2>GPS Vehicle Tracking</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $10.00/mo</p>
+    <h2>Wireless Home Security</h2>
+    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $19.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
     </div>
