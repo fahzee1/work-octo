@@ -241,7 +241,7 @@ elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
         dtt(r'^shop/home-security-systems/$', 'canada/packages.html', 'products'),
-        dtt(r'^shop/order/$', 'apps.contact.views.order_form', 'order-package-ca'),
+        url(r'^shop/order/$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
 
 
         dtt(r'^thank-you/$', 'thank-you/canada.html', 'thank_you'),
@@ -462,7 +462,7 @@ else:
             
             # Product > Interactive Control
 
-            #dtt(r'^products/interactive-control/?$', 'products/interactive/index.html', 'interactive-control', 'products'),
+            dtt(r'^products/interactive-control/?$', 'products/interactive/index.html', 'interactive-control', 'products'),
 
         # About Pages
 

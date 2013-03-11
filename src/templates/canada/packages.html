@@ -115,11 +115,11 @@
                 <p>For the past 20 years, Protect America is proud to be the pioneer of wireless home security systems.  We believe in simple, easy to use security that protects your home.</p>
                 <p><strong>An alarm system that is built for you.</strong> You don’t have a phone line? Our broadband monitoring uses high speed internet connection. You have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>
                 <div class="button-submit">
-                    <a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now</a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}
+                    <a href="{% url order-package-ca %}" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now</a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}
                 </div>
             </div>
         </div>
-        {% include "order/quote-form-noview.html" with form=forms.basic %}
+        {% include "canada/quote-form-old.html" with form=forms.basic %}
         <div class="clear"></div>
         <img src="{{ STATIC_URL }}img/products/no-cost-banner.png" id="" alt="no-cost-banner" width="960" height="77" />
     </div>
@@ -237,7 +237,7 @@
                 <tfoot>
                     <tr>
                         <td>&nbsp;</td>
-                        <td><a href="{% url order-package %}" class="button-link header-button">Order Now</a></td>
+                        <td><a href="{% url order-package-ca %}" class="button-link header-button">Order Now</a></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
@@ -255,7 +255,7 @@
                 <img src="{{ STATIC_URL }}img/products/any-way-you-want-home.jpg" alt="any-way-you-want-home" width="368" height="280" />
                 <div id="customize-content">
                     <h2>Home Security<br/> The Way You Want It.</h2>
-                    <p>Our home security packages are built to protect your home. And we know that every home is different.  That is why we make it easy to customize your alarm system to fit your needs. From fire protection to interactive video, our security professionals can build your home security package at an affordable price, and the way you want it.</p>
+                    <p>Our home security packages are specially built to protect Canadian homes. We make it easy to customize your alarm system to fit your needs. From fire protection, freeze sensors, to interactive video, our security professionals can build your home security package at an affordable price, and the way you want it.</p>
                     {% if phone_number %}
                         {% businesstime %}
                             <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>

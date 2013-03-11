@@ -341,6 +341,23 @@ def order_form(request):
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
 
+def order_form_ca(request):
+    if request.method == "POST":
+        formset, success = basic_post_login(request)         
+        if success:
+            return HttpResponseRedirect('http://www.protectamericasecurity.ca%s' % formset.thank_you_url)
+    else:
+        formset = OrderForm()
+
+    if 'package' in request.GET:
+        formset.fields['package'].initial = request.GET['package']
+
+    return simple_dtt(request, 'canada/order-package.html', {
+                               'parent':'products',
+                               'formset': formset,
+                               'pages': ['products'],
+                               'page_name': 'products'})
+
 def donotcall(request):
     if request.method == "POST":
         formset = DoNotCallForm(request.POST)
