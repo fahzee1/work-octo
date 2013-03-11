@@ -1,0 +1,113 @@
+
+{% extends "canada/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Order Your {% if request.GET.package %} {{ request.GET.package|title }}{% endif %} Home Security System | Home Security Packages | Protect America Canada{% endblock %}
+{% block page_description %}Order a wireless home security from Protect America today. Starting at $19.99 per month, Our alarm systems are rated a Consumer Digest Best Buy and #1 from Best Home Security Companys.{% endblock %}
+{% block page_keywords %}Protect America, buy home security system, buy home security, order home security, home security systems review, best buy home security, buy home security alarm, best home security systems, where to buy home security systems{% endblock %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/order.css">
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block subnav %}
+{% endblock %}
+{% block typekit %}tk-jaf-facitweb{% endblock %}
+
+{% block content %}
+</div>
+<div id="order-security-package">
+    <div id="top-info">
+        <div id="order-form">
+            <div id="header-form">
+                <h1>Thank You for Choosing Protect America</h1>
+                <p>One of our home security professionals is ready to guide you through protecting your home.  Please fill out the information below {% businesstime %}or call: <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></strong>{% endbusinesstime %}</p>
+            </div>
+            <div id="main-form">    
+                {% include 'contact-us/forms/order-form.html' %}
+            </div>
+            <div class="clear"></div>
+            <div id="third-party">
+                <div class="hackersafe">
+                    <a target="_blank" href="https://www.mcafeesecure.com/RatingVerify?ref=www.protectamerica.com"><img width="115" height="32" border="0" src="//images.scanalert.com/meter/www.protectamerica.com/12.gif" alt="McAfee SECURE sites help keep you safe from identity theft, credit card fraud, spyware, spam, viruses and online scams" oncontextmenu="alert('Copying Prohibited by Law - McAfee SECURE is a Trademark of McAfee, Inc.'); return false;"></a>
+                </div>
+                <div class="truste">
+                    <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div id="awards-box">
+            <img src="{{ STATIC_URL }}img/external/besthomesecuritycompanys.jpg" alt="Rated #1 by Best Home Security Companys" width="232" height="160" style="padding: 74px 0" />
+            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/awards-top-consumer-reviews.jpg" alt="Rated #1 by Top Consumer Reviews" width="240" height="112" />
+    
+        </div>
+        <div class="clear"></div>
+    </div>
+    {% if phone_number %}
+	    {% businesstime %}
+	    <div class="clear"></div>
+	    <div id="call-box">
+	        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+	    </div>
+	    <div class="clear"></div>
+	    {% endbusinesstime %}
+
+    {% endif %}
+
+    <img src="{{ STATIC_URL }}img/protectamerica/small-town-usa.jpg" alt="Security For Every Home" id="hero-backdrop" />
+    <div class="clear"></div>
+
+</div>
+<div id="order-reassurance">
+    <div id="lowest-price-guaranteed">
+        <img src="/static/img/extra/dollar-sign-token.png" alt="Lowest Price Guaranteed" />
+
+        <h3>Lowest Price Guaranteed</h3>
+        <p>If you find a better offer, let us know.  We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p>
+    </div>
+    <div id="lifetime-warranty">
+        <img src="/static/img/extra/hammer-token.png" alt="Lifetime Equipment Warranty" />
+        <h3>Lifetime Equipment Warranty</h3>
+        <p>As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free.  We want to make sure your home is always secure.</p>
+    </div>
+    <div id="homeowner-insurance-discount">
+        <img src="/static/img/extra/20-percent-token.png" alt="20% Homeowner's Insurance Discount" />
+        <h3>Homeowner's Insurance Discount</h3>
+        <p>Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</p>
+    </div>
+    <div id="relocation-kit">
+        <img src="/static/img/extra/free-relocation-kit.png" alt="Free Relocation Kit" />
+
+        <h3>Relocation Kit</h3>
+        <p>With Protect America, you own your security equipment. If you happen to move, we will send you a relocation kit to easily take your security system with you.</p>
+    </div>
+    <div id="free-tech-support">
+        <img src="/static/img/extra/tech-support-token.png" alt="Free Tech Support" />
+
+        <h3>Free Tech Support</h3>
+        <p>Included with your home security system is our knowledgeable technical support staff.  From simple operation to the advanced settings, they are here to help you.</p>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="wrapper">
+{% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$('#header').waypoint('sticky', {
+			  offset: -85 // Apply "stuck" when element 30px from top
+			});
+        });
+    </script>
+
+{% endaddtoblock %}
+
+{% endblock %}  
+{% block order-footer %}{% endblock %}
+
+
+
+{% block subnav_parent %}{% endblock %}

@@ -232,6 +232,10 @@ def index_render(request, template, context):
     except:
         context['tweets'] = []
 
+    check_agent = request.GET.get('agent', None)
+    if check_agent == 'a01986':
+        return HttpResponseRedirect("/affiliate/a01986/?agent=a01986")
+
     if 'no_mobile' in request.GET:
         request.session['no_mobile'] = True
     

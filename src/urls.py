@@ -240,6 +240,10 @@ elif settings.SITE_ID == 13:
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
+        dtt(r'^shop/home-security-systems/$', 'canada/packages.html', 'products'),
+        url(r'^shop/order/$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
+
+
         dtt(r'^thank-you/$', 'thank-you/canada.html', 'thank_you'),
         # Canada Competitor Landing Pages
         dtt(r'^security-comparison/adt-vs-protect-america/$', 'affiliates/adt-comparison-canada/index.html', 'home'),
@@ -351,7 +355,8 @@ else:
         # Spanish
         dtt(r'^es/$', 'spanish/index.html',
             'pa-spanish'),
-
+        # Get Smart Page
+        dtt(r'^getsmart/?$', 'mobile/get-smart.html', 'getsmart', 'index', ctx={'agent_id': 'i10288'}),
 
 
         # pay it forward page
@@ -883,6 +888,8 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/pa/feedback', 'permanent': True}),
     ('^familyofcompanies/?$',
         redirect_to, {'url': '/?agent=a02332', 'permanent': True}),
+    ('^angies/?$',
+        redirect_to, {'url': '/?agent=a03103', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

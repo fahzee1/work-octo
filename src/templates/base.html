@@ -68,17 +68,19 @@
                     <div class="clear"></div>
                 </li>
                 <li class="international">
-                    <img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> EN <img src="{{ STATIC_URL }}img/external/flags/arrow-selector.png" class="arrow-selector" alt="arrow-selector" />
+                    {% block international-main %}<img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> EN <img src="{{ STATIC_URL }}img/external/flags/arrow-selector.png" class="arrow-selector" alt="arrow-selector" />{% endblock %}
                 </li>                
                 <li class="big-green"><a href="#customer-service" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Customer Service', 'Quick Links Customer Service Click', 'Header']);" id="security-agreement">Customer Service</a></li>
 
                 <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
                 
                 <div id="international-box">
-                    <a href="http://www.protectamerica.com"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> English</a>
-                    <a href="http://www.protectamerica.com/es/"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> Espa&ntilde;ol</a>
-                    <a href="http://www.protectamericasecurity.ca"><img src="{{ STATIC_URL }}img/external/flags/ca.png" alt="us" width="16" height="11" /> Canada</a>
-            
+                    {% block international %}
+                        <a href="http://www.protectamerica.com"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> English</a>
+                        <a href="http://www.protectamerica.com/es/"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> Espa&ntilde;ol</a>
+                        <a href="http://www.protectamericasecurity.ca"><img src="{{ STATIC_URL }}img/external/flags/ca.png" alt="us" width="16" height="11" /> Canada</a>
+                    {% endblock %}
+
                 </div>
                 <div id="customer-service-box">
                     <p>Customer CARE Online Chat</p>

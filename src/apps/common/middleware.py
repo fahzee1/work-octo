@@ -16,6 +16,9 @@ class DetectMobileBrowser():
             return None
         request.mobile = False
         current_cookie = request.session.get('redirect_mobile', None)
+        check_agent = request.path
+        if check_agent == '/getsmart':
+            return None
         if 'no_mobile' in request.GET:
             current_cookie = True
             request.session['redirect_mobile'] = True
