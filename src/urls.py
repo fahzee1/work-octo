@@ -271,6 +271,12 @@ elif settings.SITE_ID == 18:
         dtt(r'^$', 'external/home-security-compared/index.html', 'home'),
     )
     
+# getfreesecurity.com
+elif settings.SITE_ID == 19:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/get-free-security/index.html', 'home'),
+    )
+    
 else:
     urlpatterns += patterns('',
 
