@@ -2,7 +2,7 @@ from itertools import chain
 
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext, loader, Context
-from django.http import Http404, HttpResponse, HttpResponseRedirect
+from django.http import Http404, HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.core.paginator import Paginator
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
@@ -89,7 +89,7 @@ def testimonial(request, testimonial_id):
         testimonial = Textimonial.objects.get(id=testimonial_id, display=True)
     except Textimonial.DoesNotExist:
         try:
-            return redirect("/pa/testimonials/")
+            return HttpResponsePermanentRedirect("/pa/testimonials/")
         except:
             raise Http404
 
