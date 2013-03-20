@@ -1,4 +1,4 @@
-{% extends "contact-us/base.html" %}
+{% extends "contact-us/career-base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags i18n %}
 {% block page_title %}Jobs | Protect America Home Security |  Alarm Systems{% endblock %}
 {% block page_keywords %}home security jobs, security sales, security, home security, home security system, security system{% endblock %}
@@ -14,7 +14,7 @@
         <h1>Want To Work With Us?</h1>
         <h2>We're Growing and Actively Looking for Talented People Like You.</h2>
         <div class="button">
-            <a href="">
+            <a href="{% url jobs %}">
                 Apply Here
             </a>
             <div class="clear"></div>
@@ -31,7 +31,7 @@
 </div>
 <div class="wrapper">
     <div id="company-overview">
-        <h2>Come Grow With This</h2>
+        <h2>Come Grow With Us</h2>
         <p>Voted as one of the 2011 top places to work in Austin, Texas by The Austin American-Statesman, Protect America provides state-of-the-art security systems to  thousands of families nationwide. Due to our competitive prices and excellent customer service techniques Protect America, Inc. is ranked as one of the top home security companies in the nation!</p>
         <h3>Our Mission</h3>
         <p>Protect America is committed to creating an exceptional experience by providing every family and home with an innovative, dependable, and affordable security solution.</p>
@@ -49,24 +49,20 @@
         <img src="{{ STATIC_URL }}img/contact-us/kristen.jpg" alt="kristen" width="592" height="528" class="big-worker" />
     </div>
     <div id="events-and-awards">
+        {% if events %}
         <h2>Upcoming Events:</h2>
-        <div class="event">
-            <p class="date">May <span>20</span></p>
-            <div class="event-info">
-                <h3><a href="">CARE Job Fair</a></h3>
-                <p>Kung Fu Saloon @ 3PM</p>
+        {% for event in events %}
+            <div class="event">
+                <p class="date">{{ event.eventdate|date:"b" }} <span>{{ event.eventdate|date:"j" }}</span></p>
+                <div class="event-info">
+                    <h3>{{ event.title }}</h3>
+                    <p>{{ event.venue.name }}<br />@ {{ event.eventstart }} {% if event.eventfinish %}- {{ event.eventfinish }}{% endif %}</p>
+                </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
-        </div>
-        <div class="event">
-            <p class="date">May <span>21</span></p>
-            <div class="event-info">
-                <h3><a href="http://www.austinyc.org/event/ayc-membership-mixer-kung-fu-saloon/">Sales Recruiting Mixer</a></h3>
-                <p>Kung Fu Saloon @ 5:30-7:30PM</p>
-            </div>
-            <div class="clear"></div>
-        </div>
+        {% endfor %}
         <div class="clear"></div>
+        {% endif %}
         <h2 class="awards">Our Awards:</h2>
         <img src="{{ STATIC_URL }}img/contact-us/topplace.png" class="award" />
         <img src="{{ STATIC_URL }}img/contact-us/sammy.png"class="award" />
@@ -84,14 +80,13 @@
                 <h2>Our Culture</h2>
                 <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
                 <div class="button">
-                    <a href="">
+                    <a href="{% url jobs %}">
                         Apply Here
                     </a>
                     <div class="clear"></div>
                 </div>
             </div>
             <div class="clear"></div>
-        </div>
     </div>
 </div>  
 
