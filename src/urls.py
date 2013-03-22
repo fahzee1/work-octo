@@ -534,6 +534,9 @@ else:
             
             # Contact Pages > Department Listing
             dtt(r'^agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
+            dtt(r'^affiliate/agent-two/?$', 'affiliates/agent-two/index.html', 'agent-two-lp'),
+
+
             
             # Contact Pages > Department Listing
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
@@ -559,9 +562,6 @@ else:
         # Help Pages
 
         dtt(r'^help/?$', 'help/index.html', 'help'),
-
-
-            
                 
             # Help Pages > Low Price Guarantee
                 dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),
