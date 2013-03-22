@@ -540,6 +540,9 @@ else:
             
             # Contact Pages > Department Listing
             dtt(r'^agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
+            dtt(r'^affiliate/agent-two/?$', 'affiliates/agent-two/index.html', 'agent-two-lp'),
+
+
             
             # Contact Pages > Department Listing
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
@@ -550,7 +553,10 @@ else:
                 'apps.affiliates.views.signup', name='affiliate-program'),
             
             # Contact Pages > Careers
-            dtt(r'^contact/careers/?$', 'contact-us/careers.html', 'careers', 'contact-us'),
+            url(r'^contact/careers/?$', 'apps.events.views.careers', name='careers'),
+                
+                dtt(r'^contact/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
+
 
             # Contact Pages > Feedback to CEO
             #dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
@@ -562,9 +568,6 @@ else:
         # Help Pages
 
         dtt(r'^help/?$', 'help/index.html', 'help'),
-
-
-            
                 
             # Help Pages > Low Price Guarantee
                 dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),

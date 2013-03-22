@@ -36,9 +36,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div id="ge-logo" title="GE Logo">
     <p>GE Security Authorized Dealer</p>
 </div>
-{% block header-order-button %}
-<a href="{% url order-package %}" class="button-link header-button">Order Now</a>
-{% endblock %}
+    {% block header-order-button %}
+    <a href="{% url order-package %}" class="button-link header-button">Order Now</a>
+    {% endblock %}
 {% endblock %}
 
 {% block navigation %}
@@ -71,19 +71,20 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             <img src="{{ STATIC_URL }}img/protectamerica/consumer-digest-best-buy.png" alt="consumer-digest-best-buy" class="consumer-digest" />
         </div>
         <img src="{{ STATIC_URL }}img/protectamerica/pricing.png" alt="pricing" class="pricing" />
+        {% block hero-order %}
         <div class="button-submit">
             <a href="{% url order-package %}">Order Now</a>
         </div>
+        {% endblock %}
+        {% block quote-form %}        
         {% include "order/quote-form-new.html" with form=forms.basic %}
-
+        {% endblock %}
         {% if phone_number %}
-            {% businesstime %}
             <div class="clear"></div>
             <div id="call-box">
                 {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
             </div>
             <div class="clear"></div>
-            {% endbusinesstime %}
     
         {% endif %}
     </div>
@@ -223,6 +224,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                         <td class="omega">&nbsp;</td>
                     </tr>
                 </tbody>
+                {% block table-order %}
                 <tfoot>
                     <tr>
                         <td></td>
@@ -231,6 +233,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                         <td></td>
                     </tr>
                 </tfoot>
+                {% endblock %}
             </table>
             <div id="home-security-info">
                 <div id="home-security-overview">
