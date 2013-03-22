@@ -550,7 +550,10 @@ else:
                 'apps.affiliates.views.signup', name='affiliate-program'),
             
             # Contact Pages > Careers
-            dtt(r'^contact/careers/?$', 'contact-us/careers.html', 'careers', 'contact-us'),
+            url(r'^contact/careers/?$', 'apps.events.views.careers', name='careers'),
+                
+                dtt(r'^contact/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
+
 
             # Contact Pages > Feedback to CEO
             #dtt(r'^contact/send-thad-a-message/?$', 'contact-us/feedback-ceo.html', 'feedback-ceo', 'contact-us'),
