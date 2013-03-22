@@ -1,0 +1,17 @@
+{% load sekizai_tags %}
+
+<div id="mobile-adds">    
+    <h2>Package Add-Ons:</h2>
+    <ul>
+        {% if 'extreme-weather' not in current_cart.equipment %}
+        <li>
+            {% include "mobile/_partial/addons/extreme-weather.html" %}
+        </li>
+        {% endif %}
+        {% if 'home-and-away' not in current_cart.equipment %}
+        <li>
+            {% include "mobile/_partial/addons/home-and-away.html" %}
+        </li>
+        {% endif %}
+    </ul>
+</div>

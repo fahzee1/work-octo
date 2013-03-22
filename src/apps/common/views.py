@@ -1,17 +1,21 @@
 import re
 import urls
+import urllib
 import urllib2
 from datetime import datetime, timedelta
 from urllib import urlencode
+import twitter
+import operator
+from decimal import Decimal
 
 from django.core.cache import cache
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 from django.contrib.sites.models import Site
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 from django.views.generic.simple import redirect_to
 from django.utils import simplejson
 from django.utils.cache import patch_vary_headers
@@ -20,12 +24,20 @@ from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
+from apps.pricetable.models import Package
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
     get['agent'] = agent_id
 
-    request.session['refer_id'] = agent_id
+    try:
+        affiliate = Affiliate.objects.get(agent_id=agent_id.lower())
+        request.session['refer_id'] = affiliate.agent_id
+    except Affiliate.DoesNotExist:
+        if request.META['PATH_INFO'][-1] != '/':
+            resolved = resolve(request.META['PATH_INFO'] + '/')
+            if resolved.url_name != 'apps.common.views.redirect_wrapper':
+                return HttpResponseRedirect(reverse(resolved.url_name))
 
     return HttpResponseRedirect('/?%s' % urlencode(get))
 
@@ -87,8 +99,8 @@ def get_active(urllist, name, pages=None):
             pass
     return pages
 
-def simple_dtt(request, template, extra_context):
-    expire_time = timedelta(days=90)
+def simple_dtt(request, template, extra_context, expire_days=90):
+    expire_time = timedelta(days=expire_days)
 
     if 'pages' in extra_context:
         pages = extra_context['pages']
@@ -96,12 +108,18 @@ def simple_dtt(request, template, extra_context):
     else:
         pages = get_active(urls.urlpatterns, extra_context['page_name'])
 
+    #handle special page cases for phone number
+    #if extra_context['page_name'] == 'agent-two':
+        #extra_context['phone_number'] = '1-888-951-5156'
+
     forms = {}
     forms['basic'] = LeadForm()
     forms['long'] = AffiliateLongForm()
-    
+
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
+
+    extra_context['affkey'] = request.session.get('affkey')
 
     affiliate = request.COOKIES.get('refer_id', None)
     newaffiliate = None
@@ -110,6 +128,11 @@ def simple_dtt(request, template, extra_context):
 
     if newaffiliate:
         request.session['refer_id'] = newaffiliate
+
+    visited_pages = request.session.get('vpages', [])
+    if extra_context['page_name'] not in visited_pages:
+        visited_pages.append(extra_context['page_name'])
+        request.session['vpages'] = visited_pages
 
     response = render_to_response(template,
                               extra_context,
@@ -168,14 +191,55 @@ def payitforward(request):
 
 @cache_page(60 * 60 * 4)
 def index(request): 
-    ctx = {}
-    ctx['page_name'] = 'index'
-    ctx['pages'] = ['index']
+    return index_render(request, 'index.html', {})
+
+@cache_page(60 * 60 * 4)
+def index_test(request, test_name):
+    if test_name == 'tcr-first':
+        template = 'tests/top-consumer-test.html'
+    elif test_name == 'promotion-first':
+        template = 'tests/promotion-tcr-banner-test.html'
+    elif test_name == 'nav-shop':
+        template = 'tests/test-nav-shop.html'
+    elif test_name == 'nav-pricing':
+        template = 'tests/test-nav-pricing.html'
+    elif test_name == 'nav-plans':
+        template = 'tests/test-nav-plans.html'
+    elif test_name == 'nav-home-security':
+        template = 'tests/test-nav-home-security.html'
+    elif test_name == 'holiday':
+        template = 'tests/holiday-test.html'
+    elif test_name == 'feb-promo':
+        template = 'tests/feb-test.html'
+    else:
+        raise Http404
+
+    return index_render(request, template, {})
+
+def index_render(request, template, context):
+    context['page_name'] = 'index'
+    context['pages'] = ['index']
 
     latest_news = Article.objects.order_by('-date_created')[:3]
-    ctx['latest_news'] = latest_news
+    context['latest_news'] = latest_news
+    try:
+        tweets = cache.get('TWEETS')
+        if tweets is None:
+            t_api = twitter.Api()
+            tweets = t_api.GetUserTimeline('@protectamerica')
+            cache.set('TWEETS', tweets, 60*60)
+        context['tweets'] = tweets[:3]
+    except:
+        context['tweets'] = []
 
-    return simple_dtt(request, 'index.html', ctx)
+    check_agent = request.GET.get('agent', None)
+    if check_agent == 'a01986':
+        return HttpResponseRedirect("/affiliate/a01986/?agent=a01986")
+
+    if 'no_mobile' in request.GET:
+        request.session['no_mobile'] = True
+    
+    return simple_dtt(request, template, context)
 
 def family_of_companies(request):
     ctx = {}
@@ -204,3 +268,11 @@ def family_of_companies(request):
 
     ctx['industries'] = industry_dict 
     return simple_dtt(request, 'about-us/family-of-companies.html', ctx)
+
+def black_friday(request):
+    ctx = {}
+    ctx['page_name'] = 'index'
+    ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
+        datetime.today().year, datetime.today().month, datetime.today().day)
+    return simple_dtt(request, 'external/black-friday/index.html', ctx)
+

@@ -1,0 +1,197 @@
+{% extends "affiliates/generic-landing-base/index.html" %}
+
+{% load sekizai_tags content_tags content_filters %}
+
+{% block page_title %}Commission Junction | Protect America{% endblock %}
+{% block page_description %}Making home security simple, easy and affordable, Protect America's DIY home security systems even includes 24/7 professional home security monitoring. Call to get started today!{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cj/style.css">
+    <script type="text/javascript" src="//use.typekit.net/vwb5haa.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+    {% addtoblock "js" %}
+<!-- Begin RingRevenue Call Tracking Code -->
+<!-- Omit http from path to ensure protocol is same as current request -->
+<script src="//js10.ringrevenue.com/10/integration.js"></script>
+<script type="text/javascript">
+  RingRevenue.advertiser_integration = {
+    id : '20522',
+    numberSelector: '.dynamic-phone-number',
+    numberToReplace: '{{ phone_number|format_number }}'
+  };
+</script>
+<!-- End RingRevenue Call Tracking Code -->
+    {% endaddtoblock "js" %}
+{% endblock %}
+{% block active_tab_trigger %}
+<script>
+$(document).ready(function() {
+    $('#assurance-block-three').trigger('click');
+});
+</script>
+{% endblock %}
+{% block typekit %}tk-museo-slab{% endblock %}
+
+{% block left-wrapper %}
+    <img src="{{ STATIC_URL }}img/banners/hero-banners/best-deal-ever.jpg" alt="top-banner" width="672" height="392" />
+{% endblock %}    
+
+{% block assurance-block-one %}
+    <img src="{{ STATIC_URL }}img/affiliates/direct-mail/affordable-monitoring.png" alt="affordable-monitoring" width="111" height="111" />
+    <h3>Affordable 24/7 Monitoring</h3>
+{% endblock %}
+
+{% block assurance-block-two %}
+    <img src="{{ STATIC_URL }}img/affiliates/direct-mail/20-off-homeowner-insurance.png" alt="20-off-homeowner-insurance" width="111" height="111" />
+    <h3>Up to 20% Savings on Homeowner's Insurance</h3>
+{% endblock %}
+
+{% block assurance-block-three %}
+    <img src="{{ STATIC_URL }}img/affiliates/direct-mail/wireless-ge-security.png" alt="wireless-ge-security" width="111" height="111" />
+    <h3>Simple-To-Use Wireless GE Security</h3>
+{% endblock %}
+
+{% block assurance-block-four %}
+    <img src="{{ STATIC_URL }}img/affiliates/direct-mail/lifetime-equipment-warranty.png" alt="lifetime-equipment-warranty" width="111" height="111" />
+    <h3>Lifetime Equipment Warranty</h3>
+{% endblock %}
+
+{% block assurance-block-five %}
+    <img src="{{ STATIC_URL }}img/affiliates/direct-mail/free-security-equipment.png" alt="free-security-equipment" width="111" height="111" />
+    <h3>Free Security Equipment</h3>
+{% endblock %}
+
+{% block assurance-card-one %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/protect-america-lowest-price-guaranteed.jpg" alt="protect-america-lowest-price-guaranteed" width="275" height="213" />
+    </div>
+    <div class="copy-point">
+        <h2>24/7 Home Security Protection<span>that fits your home</span></h2>
+        <p> Our monitoring solutions offer complete, round-the-clock protection based on your needs. We know some people got rid of their landlines while others still don’t have Internet access. Well, don’t worry! Protect America provides landline, broadband, and cellular monitoring that fits the tech needs of any household..</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+{% endblock %}
+{% block assurance-card-two %}
+
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/save-money-on-home-owner-insurance.jpg" alt="save-money-on-home-owner-insurance" width="288" height="331" />
+    </div>
+    <div class="copy-point">
+        <h2>Protecting your Home<span>and saving you money</span></h2>
+        <p>Protect America saves you money, but did you know that simply having a home security system will also save you money? Protect America’s products and services are so effective at defending your home from danger that most home insurance providers will take up to 20 percent off your premium just for getting a system. Don’t waste anymore time thinking about home security! Choose Protect America and give your home and family the protection they deserve.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+    
+{% endblock %}
+{% block assurance-card-three %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/direct-mail/lowest-price.jpg" alt="lowest-price" width="312" height="288" />
+    </div>
+    <div class="copy-point">
+        <h2>Easy to install<span>and no holes in your walls</span></h2>
+        <p>Installing your wireless home security system is convenient and easy. Security systems from Protect America are designed to be installed by customers without help from a professional. No wires or drilling holes in your walls! The installation process can be completed in as little as 30 minutes, even by someone with limited technical knowledge.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/affiliates/direct-mail/wireless.jpg" class="free-relocation" alt="wireless" width="904" height="298" />
+{% endblock %}
+
+{% block assurance-card-four %}
+    <div class="image-area">
+        <img src="{{ STATIC_URL }}img/affiliates/diy-landing-page/lifetime-warranty.jpg" alt="lifetime-warranty" width="288" height="331" />
+    </div>
+    <div class="copy-point">
+        <h2>If It Breaks, We Replace It. <span>The Only Thing Simpler is Self-Installation.</span></h2>
+        <p>Protect America is dedicated to providing your home with comprehensive protection day and night. That’s why we replace any broken part of your security system for free! Sensors not working? We’ll send new ones. Even if your whole system is malfunctioning, we’ll replace it. Protect America is committed to your home security and we’re serious about proving it.</p>
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-area">
+                <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/affiliates/direct-mail/free-relocation-kit.png" class="free-relocation" alt="free-relocation-kit" width="928" height="152" />
+
+{% endblock %}
+
+{% block assurance-card-five %}
+    <h2>See How Protect America Shuts Out The Competition:</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th class="pa">Protect America</th>
+                <th class="og">The Other Guys</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="title">Up-front cost</td>
+                <td class="alt">FREE</td>
+                <td>$379</td>
+            </tr>
+            <tr>
+                <td class="title">Monthly cost</td>
+                <td class="alt">$19.99</td>
+                <td>$42.99</td>
+            </tr>
+            <tr>
+                <td class="title">Contract length</td>
+                <td class="alt">36 months</td>
+                <td>36 months</td>
+            </tr>
+            <tr>
+                <td class="title">Rates may rise after 1 year</td>
+                <td class="alt">NO</td>
+                <td>YES</td>
+            </tr>
+            <tr>
+                <td class="title">FREE moving kit</td>
+                <td class="alt">YES</td>
+                <td>NO</td>
+            </tr>
+            <tr>
+                <td class="title">FREE installation</td>
+                <td class="alt">YES</td>
+                <td>NO</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block extracontent %}
+    <div id="extracontent">
+        <img src="{{ STATIC_URL }}img/affiliates/direct-mail/the-no-bar.png" alt="the-no-bar" width="960" height="32" />
+    </div>
+{% endblock %}
+{% block page-product %}
+    <h2>Home Security Package</h2>
+    <p><span>Equipment Price: <strong>$0*</strong></span>monthly monitoring starting at $<strong class="total_price">19.99</strong>/mo</p>
+{% endblock %}

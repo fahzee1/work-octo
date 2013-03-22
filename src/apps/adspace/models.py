@@ -5,6 +5,16 @@ import datetime
 from django.db.models import Q
 from django.http import HttpResponse
 
+WEEKDAYS = (
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
+)
+
 class Campaign(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64)
@@ -28,40 +38,34 @@ class Campaign(models.Model):
                 os.mkdir(filepath)
             super(Campaign, self).save(*args, **kwargs)
 
-class Ad(models.Model):
-    TYPE_CHOICES = (
-        ('hero-banner','Hero Banner'),
-        ('home-banner','Home Page Banner'),
-        ('side-bar','Side Bar Ad'),
-        ('product-page','Product Page Ad'),
-    )
-    WEEKDAYS = (
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        'saturday',
-        'sunday',
-    )
-    campaign = models.ForeignKey(Campaign)
-    type = models.CharField(max_length=48, choices=TYPE_CHOICES)
-    sub_id = models.CharField(max_length=128, blank=True, null=True)
-    ad = models.FilePathField(path='%s/adspace/' % (
-        settings.TEMPLATE_DIRS[0],), recursive=True)
+class AdSpot(models.Model):
+    name = models.CharField(max_length=64)
+    slug = models.SlugField(max_length=64)
 
     def __unicode__(self):
-        return '%s - %s' % (self.campaign.name, self.type,)
+        return '%s' % (self.name,)
 
-    def get_active_campaign(self):
-        today = datetime.date.today()
-        weekday = datetime.date.today().weekday()
-        campaigns = Campaign.objects.filter(start_date__lte=today).filter(Q(end_date__gte=today) | Q(end_date__isnull=True)).order_by('-pk')
-        for campaign in campaigns:
-            try:
-                if campaign.__getattribute__(self.WEEKDAYS[weekday]):
-                    return Ad.objects.get(campaign=campaign, type=self.type)
-            except Ad.DoesNotExist:
-                pass
+class Ad(models.Model):
 
-        raise Ad.DoesNotExist
+    def file_path(instance, filename):
+        if not instance.campaign:
+            return os.path.join('banner_images', 'unfiled', filename)
+        return os.path.join('banner_images',
+            'campaign_%s' % instance.campaign.id, filename)
+
+    campaign = models.ForeignKey(Campaign)
+    type = models.ForeignKey(AdSpot)
+    sub_id = models.CharField(max_length=128, blank=True, null=True)
+    ad = models.ImageField(upload_to=file_path)
+
+    alt = models.CharField(max_length=128, blank=True, null=True)
+    element_id = models.CharField(max_length=128, blank=True, null=True,
+        help_text='The ID of the image element for styling')
+    url = models.CharField(max_length=128, blank=True, null=True)
+    width = models.CharField(max_length=4, blank=True, null=True)
+    height = models.CharField(max_length=4, blank=True, null=True)
+    inline_styles = models.TextField(blank=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return '%s - %s' % (self.campaign.name, self.type.name)

@@ -1,0 +1,17 @@
+<img src="{{ STATIC_URL }}img/mobile/home-away-upgrade.png" alt="Home &amp; Away Package" width="108" height="80" />
+<h3>Home & Away Package <strong>+$10 <span>per month</span></strong></h3>
+<ul>
+    <li>1 GPS Vehicle Tracker</li>
+</ul>
+
+{% if remove_button == False %}
+{% if page == 'cart' or 'home-and-away' in current_cart.equipment %}
+<div class="button-link remove-item" data-monthly="10.00" data-item="home-and-away" data-category="equipment" data-price="0.00">
+    <a href="{% url remove_from_cart %}?category=equipment&amp;item=home-and-away">Remove</a>
+</div>
+{% else %}
+<div class="button-link add-item" data-monthly="10.00" data-item="home-and-away" data-category="equipment" data-price="0.00">
+    <a href="{% url add_to_cart %}?category=equipment&amp;item=home-and-away&amp;price=0.00&amp;monthly=10.00">Add to Cart</a>
+</div>
+{% endif %}
+{% endif %}

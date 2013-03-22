@@ -23,7 +23,6 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = 'BINGPPC'
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
-
         return None
 
     def process_response(self, request, response):
@@ -48,6 +47,7 @@ class AffiliateMiddleware(object):
         cookie_domain = '.%s' % domain
         # set the cookie_domain to the request object
         request.cookie_domain = cookie_domain
+
         request.session['domain'] = domain
 
         expire_time = timedelta(days=90)
@@ -58,11 +58,16 @@ class AffiliateMiddleware(object):
             default_agent = settings.DEFAULT_AGENT
         except AttributeError:
             default_agent = None
+            
+        try:
+            default_source = settings.DEFAULT_SOURCE
+        except AttributeError:
+            default_source = 'PROTECT AMERICA'
 
         affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
         current_source = request.COOKIES.get('source', None)
-        if not current_cookie:
+        if current_cookie is None:
             refer_id = request.session.get('refer_id', None)
             if refer_id is not None:
                 try:
@@ -87,13 +92,12 @@ class AffiliateMiddleware(object):
                     # default agent and that the current_cookie is None
                     # that the visitor is organic
                     request.session['refer_id'] = default_agent
-                    request.session['source'] = 'PROTECT AMERICA'
-                    
-                    
+                    request.session['source'] = default_source
 
-        if 'affkey' in request.GET:
-            request.session['affkey'] = request.GET['affkey']
-            # Allow overwriting of affkey cookie
+        # Allow overwriting of affkey cookie
+        if request.GET.get('affkey', None):
+            request.session['affkey'] = request.GET.get('affkey')
+            request.COOKIES['affkey'] = request.GET.get('affkey')
 
         if 'source' in request.GET and not current_source:
             request.session['source'] = request.GET['source']

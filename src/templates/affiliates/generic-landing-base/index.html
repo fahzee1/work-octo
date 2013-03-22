@@ -24,17 +24,23 @@
     <img src="{{ STATIC_URL }}img/external/ge-logo-transparent.png" alt="ge-logo-transparent" width="160" height="48" style="float: right;" />
 {% endblock %}
 {% block content %}
-    <div id="top-wrapper">
-        <div id="left-wrapper">
-            {% block left-wrapper %}
-            {% endblock %}    
+{% block hero-block %}
+</div>
+<div id="hero-banner">
+
+    <div class="wrapper">
+        <div id="top-hero-banner">
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/best-deal-banner.jpg" class="adt-banner" alt="The Best Deal in Home Security - starting at $19.99 per month" width="1229" height="409" />
+            </div>
         </div>
-        <div id="quote-area">
-            {% include "order/quote-form.html" with form=forms.basic %}
-        </div>
-        {% include "order/call-box.html" %}
-        <div class="clear"></div>
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
     </div>
+</div>
+{% include "order/call-box.html" %}
+<div class="clear"></div>
+<div class="wrapper">
+{% endblock %}
 
     <div id="five-blocks">
         <div class="assurance-block active" id="assurance-block-one">
@@ -85,6 +91,9 @@
         </div>
         <div class="clear"></div>
     </div>
+</div>
+    {% block extracontent %}
+    {% endblock %}
 {% addtoblock "js" %}
 <script type="text/javascript" src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
 <script type="text/javascript">
@@ -113,6 +122,27 @@ $(document).ready(function() {
         $('.assurance-block').removeClass('active');
         $(this).addClass('active');
     });
+});
+</script>
+{% block active_tab_trigger %}
+{% endblock %}
+<script type="text/javascript">
+$(document).ready(function() {
+    {% if request.GET.tab == '1' %}
+    $('#assurance-block-one').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '2' %}
+    $('#assurance-block-two').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '3' %}
+    $('#assurance-block-three').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '4' %}
+    $('#assurance-block-four').trigger('click');
+    {% endif %}
+    {% if request.GET.tab == '5' %}
+    $('#assurance-block-five').trigger('click');
+    {% endif %}
 });
 </script>
 {% endaddtoblock "js" %}

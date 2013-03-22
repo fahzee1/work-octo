@@ -4,18 +4,8 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/products.css">
-
-{% addtoblock "js" %}
-<!-- Start Quantcast Tag -->
-<script type="text/javascript">
-_qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Product Page"};
-</script>
-<script type="text/javascript" src="//secure.quantserve.com/quant.js"></script>
-<noscript>
-<img src="//secure.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Product+Page" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
-</noscript>
-<!-- End Quantcast tag -->
-{% endaddtoblock "js" %}
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
 
 {% block subnav_child %}
@@ -39,6 +29,7 @@ _qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Product Page"};
 	   {% endif %}
     </li>
 	<li class="silver {% if 'silver' in active_pages %}active{% endif %}">
+	   <img src="{{ STATIC_URL }}img/products/featured-package.png" style="position: absolute; left: -1px; top: -2px;" alt="Featured Package" width="65" height="62" />
 	   <a href="{% url silver %}" title="Silver Home Security System">
 	       Silver Security
 	       <span>10 Doors / Windows &bull; Motion Detector</span>
@@ -48,6 +39,8 @@ _qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Product Page"};
 	   {% endif %}
     </li>
 	<li class="gold {% if 'gold' in active_pages %}active{% endif %}">
+	   <img src="{{ STATIC_URL }}img/products/featured-package.png" style="position: absolute; left: -1px; top: -2px;" alt="Featured Package" width="65" height="62" />
+
 	   <a href="{% url gold %}" title="Gold Home Security System">
 	       Gold Security
 	       <span>12 Doors / Windows &bull; Motion Detector</span>
@@ -57,6 +50,8 @@ _qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Product Page"};
 	   {% endif %}
     </li>
 	<li class="platinum omega {% if 'platinum' in active_pages %}active{% endif %}">
+	   <img src="{{ STATIC_URL }}img/products/featured-package.png" style="position: absolute; left: -1px; top: -2px;" alt="Featured Package" width="65" height="62" />
+
 	   <a href="{% url platinum %}" title="Platinum Home Security System">
 	       Platinum Security
 	       <span>15 Doors / Windows &bull; Motion Detector</span>

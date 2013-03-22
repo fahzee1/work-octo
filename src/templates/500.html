@@ -2,7 +2,15 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Error 500: Something Broke{% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/404.css">
+    <link rel="stylesheet" href="/static/css/404.css">
+{% endblock %}
+{% block ga_custom_variables %}
+_gaq.push(['_setCustomVar',
+      1,        
+      'errorType',
+      '505', 
+      3
+   ]);
 {% endblock %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block extra_javascript %}
@@ -15,8 +23,8 @@
      <img src="/static/img/products/platinum-package/platinum-package-oh-no.jpg" alt="Oh No! 500 Error" />
     <div id="box-content">
         <h1><span>500</span>Something Broke</h1>
-        <p>Whoa, something messed up here. No need to call the police, it hasn't been stolen or anything. We have been notified of the issue and working to address the problem. In the mean time, visit our <a href="{% url home %}">homepage</a> to learn how Protect America can secure your home while saving you money.  </p>
-        <div class="button-link"><a href="{% url home %}">Protect America Homepage ></a></div>
+        <p>Whoa, something messed up here. No need to call the police, it hasn't been stolen or anything. We have been notified of the issue and working to address the problem. In the mean time, visit our <a href="http://www.protectamerica.com/">homepage</a> to learn how Protect America can secure your home while saving you money.  </p>
+        <div class="button-link"><a href="http://www.protectamerica.com/">Protect America Homepage ></a></div>
     </div>
     <div class="clear"></div>
 </div>

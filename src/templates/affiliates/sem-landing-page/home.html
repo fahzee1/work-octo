@@ -1,9 +1,28 @@
 {% extends "base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
+    {% block google_experiment %}
+    <script> 
+_udn = "protectamerica.com";
+</script> 
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='61445283-33',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
+    {% endblock %}
 {% block css %}
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/home.css" />
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/home.css?v23" />
 <!-- Begin Hiconversion Head Enabling. Do NOT move. Must come directly before the closing head tag -->
 <script id='hiconversion_head_include'
              type='text/javascript'
@@ -12,6 +31,20 @@
 <script id='hiconversion_head_script'
              type='text/javascript'>if (typeof hiconversion_head_update == 'function') hiconversion_head_update()</script>
 <!-- End Hiconversion Head Enabling -->
+
+
+{% block test_js %}
+{% addtoblock "js" %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+if(!getCookie('bbb_test_2')) {
+    setCookie('bbb_test_2', 'A');
+}
+});
+</script>
+{% endaddtoblock "js" %}
+{% endblock %}
 {% endblock %}
 {% block quick-links %}
     <ul id="quick-link-navigation">
@@ -40,68 +73,31 @@
 {% endblock %}
 {% block subnav %}{% endblock %}
 {% block third-party-nav %}
-<div id="mcafee">
-    <a target="_blank" href="https://www.mcafeesecure.com/RatingVerify?ref=www.protectamerica.com"><img width="115" height="32" border="0" src="//images.scanalert.com/meter/www.protectamerica.com/12.gif" alt="McAfee SECURE sites help keep you safe from identity theft, credit card fraud, spyware, spam, viruses and online scams" oncontextmenu="alert('Copying Prohibited by Law - McAfee SECURE is a Trademark of McAfee, Inc.'); return false;"></a>
-</div>
-{% endblock %}
-{% block content %}
-</div>
-<div id="top-content">
-    <div class="wrapper">
-        {% include "order/quote-form.html" with form=forms.basic %}
-
-        <div id="top-hero-banner-controls">
-            <div id="hero-left-arrow">&nbsp;</div>
-            <div id="pager-container">
-                <ul>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                </ul>
-            </div>
-            <div id="hero-right-arrow">&nbsp;</div>
-            
-            
-        </div>
-        <div id="top-hero-banner">
-            <div id="interactive-banner" data-url="http://www.protectamerica.com/products/order-package">
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/flash-promotion.jpg"
-                    width="685" height="400" alt="Our best promotion ever! free equipment, 19.99 monthly monitoring" style="position: relative; right: 16px; " />
-            </div>
-            <div id="top-consumer-banner" data-url="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
-                <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
-                <div id="top-consumer-content">
-                    <p>"Protect America provides the <strong>best home security solution</strong> available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are] <strong>top-notch.</strong>"</p>
-                    <em>&ndash; Top Consumer Reviews, 2012</em>
-                </div>
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
-
-            </div>
-            <div id="interactive-banner" data-url="http://www.protectamerica.com/products/alarm-monitoring/cellular">
-                <img src="{{ STATIC_URL }}img/interactive/interactive-hero-image.jpg" id="interactive-image" alt="interactive-image" width="528" height="256" />
-                <h2>Interactive Security Monitoring <span>Control your Security System from your Computer or Smartphone</span></h2>
-                
-                <div id="interactive-banner-content">
-                    <p>Included <strong>FREE*</strong> <span>with cellular or broadband monitoring.</span></p>
-                    <div class="button-link">
-                        <a href="http://www.protectamerica.com/products/alarm-monitoring/cellular" title="Interactive Features available free with Cellular or Broadband monitoring">Learn More ></a>
-                    </div>
-                </div>
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
-
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="wrapper">
-    {% include "order/call-box.html" %}
-    <div id="sidebar">
     <div id="ge-logo">
         <img src="{{ STATIC_URL }}/img/external/ge-logo.png" alt="GE Home Security Authorized Dealer" width="160" height="48" />
     </div>
+{% endblock %}
+{% block content %}
+</div>
+<div id="top-content-holiday" class="orange">
+    <div class="wrapper">
+        {% include "order/quote-form.html" with form=forms.basic %}
+
+        <div id="top-hero-banner" class="orange">
+
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/february/orange-banner.jpg"
+
+                    alt="Our best promotion ever! free equipment, $19.99 per month plus two free keychains on any package" style="position: absolute; left: -148px;" />
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="wrapper">
+    {% include "order/call-box.html" %}
+    <div id="sidebar">
+
     <div id="how-safe-is-your-neighborhood">
             <h3>How Safe <span>is your Neighborhood?</span></h3>
             <p>enter your zip to find sexual predators and crime statistics in your area:</p>
@@ -175,11 +171,16 @@
         {% comment %}
         <p>Protection for your home and family is not an easy decision. The home security system packages from Protect America combine the best price with the best equipment and service. Compare how our packages stack up against other leaders in the home security industry below to help make the decision easier.</p>
         {% endcomment %}
+        
         <table summary="Small comparison chart detailing Protect America pricing versus major competitors.">
             <thead>
                 <tr>
-                    <td colspan="3"><strong><a name="home-security-systems-comparison">Home Security Systems Comparison</a></strong></td>
+                    <td colspan="3">
+                        <h3>Equipment Price</h3>
+                        <strong><a href="http://www.protectamerica.com/security-advantage" title="Home Security Systems Comparison">Home Security Systems Comparison</a></strong>
+                    </td>
                 </tr>
+
             </thead>
             <tfoot>
                 <tr>
@@ -188,46 +189,56 @@
                         on Sep 01, 2011.
                     </td>
                 </tr>
+
             </tfoot>
             <tbody>
                 <tr>
                     <th>Package</th>
-                    <th>Our Price</th>
-                    <th>ADT Price</th>
+                    <th>Protect America<sup>*</sup></th>
+                    <th>ADT</th>
                 </tr>
                 <tr class="odd">
-                    <td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">Copper Security Package</a><br>3 Door Sensors, 1 Motion Detector</td>
+                    <td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package">Copper Security</a><br>3 Door / Window Sensors, 1 Motion Detector</td>
         
-                    <td class="highlight red" headers="pa">FREE<sup>*</sup></td>
-                    <td headers="adt"><sup>$</sup>379</td>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.COPPER.standard_monitoring }} per month</td>
+                    <td headers="adt"><sup>$</sup>379.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
                 </tr>
                 <tr>
-                    <td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/bronze-package">Bronze Security Package</a><br>3 Door Sensors, 4 Window Sensors, 1 Motion Detector</td>
+                    <td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/bronze-package">Bronze Security</a><br>7 Door / Window Sensors, 1 Motion Detector</td>
         
-                    <td class="highlight red" headers="pa">FREE<sup>*</sup></td>
-                    <td headers="adt"><sup>$</sup>699</td>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.BRONZE.standard_monitoring }} per month</td>
+                    <td headers="adt"><sup>$</sup>699.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
                 </tr>
                 <tr class="odd">
-                    <td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/silver-package">Silver Security Package</a><br>3 Door Sensors, 7 Window Sensors, 1 Motion Detector</td>
+                    <td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/silver-package">Silver Security</a><br>10 Door / Window Sensors, 1 Motion Detector</td>
         
-                    <td class="highlight red" headers="pa">FREE<sup>*</sup></td>
-                    <td headers="adt"><sup>$</sup>939</td>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.SILVER.standard_monitoring }} per month
+                    </td>
+                    <td headers="adt"><sup>$</sup>939.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
                 </tr>
                 <tr>
-                    <td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/gold-package">Gold Package</a><br>3 Door Sensors, 9 Window Sensors, 1 Motion Detector</td>
+                    <td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/gold-package">Gold Security</a><br>12 Door / Window Sensors, 1 Motion Detector</td>
         
-                    <td class="highlight" headers="pa">
-                        <span class="red">FREE<sup>*</sup></span>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.GOLD.standard_monitoring }} per month
                     </td>
-                    <td headers="adt"><sup>$</sup>1,099</td>
+                    <td headers="adt"><sup>$</sup>1,099.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
                 </tr>
                 <tr class="odd">
-                    <td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/platinum-package">Platinum Package</a><br>3 Door Sensors, 12 Window Sensors, 1 Motion Detector</td>
+                    <td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/platinum-package">Platinum Security</a><br>15 Door / Window Sensors, 1 Motion Detector</td>
         
-                    <td class="highlight" headers="pa">
-                        <span class="red">FREE<sup>*</sup></span>
+                    <td class="highlight red" headers="pa">
+                        {{ pricetable.PLATINUM.standard_monitoring }} per month
                     </td>
-                    <td headers="adt"><sup>$</sup>1,339</td>
+                    <td headers="adt"><sup>$</sup>1,339.00 <br/> + <br/>
+                        <sup>$</sup>42.99 per month</td>
                 </tr>
             </tbody>
         </table>
@@ -236,10 +247,6 @@
         </div>
     </div>
     <div class="clear"></div>
-    <div id="familyofcompanies">
-        <h2>Sister Companies</h2>
-        <img src="{{ STATIC_URL }}img/external/650-sister-companies.jpg" width="650" height="80" alt="Protect America's sister companies: Cleveland Cavaliers, Fathead, Quicken Loans, In House Realty, Quizzle."/> 
-    </div>
     <div id="security">
         <h2>Protect America Home Security</h2>
         <h3>Home Security Commitment</h3>
@@ -315,6 +322,8 @@
         </ul>
         
     </div>
+    <div class="clear"></div>
+
 </div>
 </div>
 

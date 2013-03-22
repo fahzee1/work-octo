@@ -31,6 +31,8 @@ def post_to_old_pa(data):
 
 
 def send_leadimport(data):
+    from email import Charset
+    Charset.add_charset('utf-8',Charset.SHORTEST,None,'utf-8')
     subject = '%s Lead Submission' % data['agent_id']
     t = loader.get_template('_partials/lead_submission_email.html')
     c = Context(data)
@@ -172,10 +174,14 @@ def basic_post_login(request):
 
         # notes field information
         package = request.POST.get('package', None)
-        notes = ''
+        notes_list = []
         if package:
-            notes = 'Package Requested: %s' % package
-
+            notes_list.append('Package Requested: %s' % package)
+        visited_pages = request.session.get('vpages', None)
+        if visited_pages is not None:
+            notes_list.append('Pages Visited: %s' % visited_pages)
+        notes = '\n'.join(notes_list)
+        notes = notes.replace('\'', '')
         emaildata = {
             'agent_id': request_data['agentid'],
             'source': request_data['source'],
@@ -334,6 +340,23 @@ def order_form(request):
                                'formset': formset,
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
+
+def order_form_ca(request):
+    if request.method == "POST":
+        formset, success = basic_post_login(request)         
+        if success:
+            return HttpResponseRedirect('http://www.protectamericasecurity.ca%s' % formset.thank_you_url)
+    else:
+        formset = OrderForm()
+
+    if 'package' in request.GET:
+        formset.fields['package'].initial = request.GET['package']
+
+    return simple_dtt(request, 'canada/order-package.html', {
+                               'parent':'products',
+                               'formset': formset,
+                               'pages': ['products'],
+                               'page_name': 'products'})
 
 def donotcall(request):
     if request.method == "POST":

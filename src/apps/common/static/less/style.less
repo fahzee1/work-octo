@@ -502,6 +502,10 @@ button.button-link {
         padding-left: 8px;
         font-size: 12px !important;
         color: @dark-grey !important;
+        a {
+            color: @red;
+            text-decoration: none;
+        }
         strong {
             color: @red;
         }
@@ -655,6 +659,100 @@ table#licenses-table {
     #quick-link-navigation {
         float:right;
         margin: 0px 0 2px 0;
+        position: relative;
+        .international {
+            padding-top: 2px;
+            height: 23px;
+            background: @v-light-grey;
+            position: relative;
+            .border-radius(0, 0, 10px, 10px);
+            padding-left: 8px;
+            width: 55px;
+            color: @grey;
+            font-size: 13px;
+            line-height: 23px;
+            margin-left: 4px;
+            cursor: pointer;
+            cursor: hand;
+            .arrow-selector {
+                position: relative;
+                bottom: 2px;
+            }
+        }
+        #international-box {
+            position: absolute;
+            top: 27px;
+            display: none;
+            .border-radius(5px,5px,5px,5px);
+            .drop-shadow;
+            right: 171px;
+            width: 100px;
+            background: @v-light-grey;
+            z-index: 999;
+            a {
+                display: block;
+                text-decoration: none;
+                color: @grey;
+                text-align: center;
+                padding: 4px 8px;
+                .fade-slow;
+                img {
+                    padding-right: 4px;
+                }
+                &:hover {
+                    background: @white;
+                    .fade-fast;
+                }
+            }
+        }
+        #customer-service-box {
+            display: none;
+            position: absolute;
+            background: #4bba29 url(/static/img/spanish/smart-app-bg.png) repeat;
+            top: 27px;
+            z-index: 999;
+            padding: 8px;
+            padding-bottom: 16px;
+            .border-radius(5px,5px,5px,5px);
+            .drop-shadow;
+            right: 0px;
+            width: 303px;
+            .button-link {
+                margin-top: 4px;
+                text-align: left;
+                margin-bottom: 20px;
+                text-align: right;
+                a {
+                    padding: 9px 83px;
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-top: 20px;
+                }
+            }
+            p {
+                text-transform: uppercase;
+                font-size: 13px;
+                font-weight: bold;
+                text-align: right;
+                line-height: 24px;
+                color: @dark-green;
+                padding-bottom: 10px;
+                
+                &.customer-care {
+                    border-top: 1px solid @dark-green;
+                    margin-top: 8px;
+                    padding-top: 8px;
+                    padding-bottom: 0;
+                }
+            }
+            .phone-number {
+                color: @dark-green;
+                text-decoration: none;
+                text-align: right;
+                display: block;
+                font-size: 18px;
+            }
+        }
         li {
             font-size:1em;
             font-weight:normal;
@@ -664,46 +762,74 @@ table#licenses-table {
             color:@black+2;
             position: relative;
             bottom: 3px;
-                &#quick-social {
-                    padding-top: 2px;
-                    height: 23px;
-                    background: @v-light-grey;
-                    .border-radius(0, 0, 10px, 10px);
-                    padding-left: 8px;
-                    width: 162px;
-                    #google-button {
-                        position: relative;
-                        top: 3px;
-                        float: right;
-                        cursor: pointer;
-                        cursor: hand;
-                    }
-                    #facebook-button {
-                        float: right;
-                        position: relative;
-                        top: 1px;
-                        cursor: pointer;
-                        cursor: hand;
-                    }
-                }
+            &.big-blue {
                 a {
-                    padding: 3px 10px 7px;
-                    color:@black+2;
-                    line-height: 25px;
-                    text-decoration: none;
-
-                    background: @v-light-grey;
-                    color: @grey;
-                    font-size: 10px;
-                    font-weight: normal;
-                    margin: 0 0 0 5px;
-                    .border-radius(0, 0, 10px, 10px);
-                }
-                a:hover {
+                    background: @blue;
                     color: @white;
-                    background-color: @blue;
-                    text-decoration: underline;
+                    &:hover {
+                        background: @dark-blue;
+                    }
                 }
+            }
+            &.big-green {
+                a {
+                    background: #4bba29;
+                    color: @white;
+                }
+            }
+            .yelp-button {
+                background: transparent;
+                img {
+                    padding-top: 2px;
+                }
+                &:hover {
+                    background: transparent;
+                }
+                
+            }
+
+            &#quick-social {
+                padding-top: 2px;
+                height: 23px;
+                background: @v-light-grey;
+                position: relative;
+                .border-radius(0, 0, 10px, 10px);
+                padding-left: 8px;
+                width: 162px;
+                #google-button {
+                    position: relative;
+                    top: 3px;
+                    float: right;
+                    cursor: pointer;
+                    cursor: hand;
+                }
+                #facebook-button {
+                    float: right;
+                    position: relative;
+                    top: 1px;
+                    cursor: pointer;
+                    cursor: hand;
+                }
+            }
+            a {
+                padding: 3px 10px 7px;
+                color:@black+2;
+                line-height: 25px;
+                text-decoration: none;
+
+                background: @v-light-grey;
+                color: @grey;
+                font-size: 10px;
+                font-weight: normal;
+                margin: 0 0 0 5px;
+                .border-radius(0, 0, 10px, 10px);
+            }
+            a:hover {
+                color: @white;
+                background-color: @blue;
+                text-decoration: underline;
+            }
+
         }
     }
 
@@ -754,6 +880,10 @@ table#licenses-table {
                 color: @red;
                 display: block;
                 line-height: 37px;
+                a {
+                    text-decoration: none;
+                    color: @red;
+                }
             }
         }
         #protection-snippet {
@@ -892,6 +1022,7 @@ table#licenses-table {
         top: 2px;
     }
 }
+
 
 #sub-navigation {
     width: 960px;
@@ -1206,6 +1337,10 @@ ul#child-navigation {
             line-height: 32px;
             padding-top: 9px;
             font-weight: bold;
+            a {
+                text-decoration: none;
+                color: @red;
+            }
         }
 
     }
@@ -1230,6 +1365,10 @@ ul#child-navigation {
         color: @blue;
         strong {
             color: @red;
+            a {
+                text-decoration: none;
+                color: @red;
+            }
         }
         
     }
@@ -1450,7 +1589,7 @@ ul#child-navigation {
 
 #limited-time-offer {
     width: 937px;
-    height: 110px;
+    height: 130px;
     border: 1px dashed @light-grey;
     padding: 8px;
     margin-bottom: 8px;

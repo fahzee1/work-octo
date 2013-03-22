@@ -104,6 +104,14 @@ class Lead(models.Model):
         return '%s | %s - %s : %s %s' % (self.id,
             self.agent_id, self.source, self.name, self.phone)
 
+class EcomLead(Lead):
+    city = models.CharField(max_length=32, blank=True, null=True)
+    state = USStateField(blank=True, null=True)
+    address = models.CharField(max_length=128, blank=True, null=True)
+    address_2 = models.CharField(max_length=128, blank=True, null=True)
+    zipcode = models.CharField(max_length=12, blank=True, null=True)
+    consent = models.BooleanField(default=False)
+
 class ContactUs(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
@@ -120,7 +128,7 @@ class ContactUs(models.Model):
             'Contact Form Submission',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
-            ['feedback@protectamerica.com'],
+            ['careops@protectamerica.com'],
             ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
@@ -300,7 +308,7 @@ class PayItForward(models.Model):
             'New Pay It Forward Submission',
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
-            ['SHAWNE@protectamerica.com', 'robert@protectamerica.com'],
+            ['adrian@protectamerica.com', 'robert@protectamerica.com'],
             ['"Protect America" <noreply@protectamerica.com>'])
         email.send()
 

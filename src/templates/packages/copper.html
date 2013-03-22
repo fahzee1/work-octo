@@ -1,15 +1,13 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Copper Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
+{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
 
 {% block content %}
-
-<div id="top-content" style="position: relative;">
-    <img src="{{ STATIC_URL }}img/banners/hero-banners/flash-promotion-white.jpg"
-        width="680" height="400" style="position: absolute; top: 0px; left: -16px; z-index: 100000"/>
+<div id="top-content">
     <div id="copper-package-offer" itemscope itemtype="http://schema.org/Product">
         <h1 itemprop="name">Copper Security Package</h1>
-        <img src="/static/img/products/copper-package/copper-package-simon-xt-no-medal.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Copper Security Package" />
+        <img src="/static/img/products/copper-package/copper-package-simon-xt-no-medal.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Copper Security Package" alt="Copper Home Security Package" />
         <ul itemprop="description">
             <li>GE Simon XT Control Panel</li>
             <li>3 Security Stickers</li>
@@ -19,10 +17,16 @@
             <li>Owner's Manual</li>
         </ul>
         <div id="copper-package-best-buy">
-            <img src="/static/img/external/consumer-digest/consumer-digest-logo-transparent.png"  width="78" height="76" alt="Copper Package named a Consumer Digest Best Buy" />
+            <img src="/static/img/external/consumer-digest/consumer-digest-logo-transparent.png"  width="78" height="76" alt="Copper Package Consumer Diges Best Buy" />
             <p>Voted a Consumers Digest<br/>"Best Buy" for 2012</p>
         </div>
-        <span>Our Price: <strong itemprop="price">FREE<sup>*</sup></strong></span>
+        <div id="package-price">
+            <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 3/05/2013</em></span>
+            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>{{ pricetable.COPPER.standard_monitoring|slice:"1:" }}</strong><em>per month</em></span>
+        </div>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Copper']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -30,7 +34,7 @@
 {% include "banners/limited-time-offer.html" %}
 
 <div id="the-copper-package">
-    <img src="/static/img/products/copper-package/in-the-home.jpg" id="main-package-image" alt="Securing a home with up to three doors or windows">
+    <img src="/static/img/products/copper-package/in-the-home.jpg" id="main-package-image" alt="Home Security Map">
     <div id="copper-package-content">
         <h1>In Your Home: Copper Security</h1>
         <p>The average home in the United States has three or less outside doors. Though burglars will enter your home any way they can, most break-ins occur through an outside door. With three door / window sensors, the Copper Security Package has been designed to meet the basic security needs of most America houses. This security system also includes an infrared motion detector to increase your home's interior protection. Simply place the motion detector in a central hallway or the most commonly used living area of your home. Ask one of our home security experts today how to customize your system with additional security accessories, like smoke detectors and interactive cameras.</p>
@@ -38,30 +42,30 @@
     </div>
     <div class="clear"></div>
     <div id="included-equipment">
-    	<h2>What's Included:</h2>
+        <h2>What's Included:</h2>
         <div>
-    		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Home Security Panel" />
-    		<strong>One (1)</strong> Simon XT Control Panel
-		</div>
-		<div>
-    		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
-    		<strong>Three (3)</strong> Door / Window Sensors
-   		</div>
-   		<div>
-       		<img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
-    		<strong>One (1)</strong> Motion Detector
+            <img src="/static/img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT" />
+            <strong>One (1)</strong> Simon XT Control Panel
         </div>
         <div>
-            <img src="/static/img/products/accessories/installation-manual-icon.jpg" width="160" height="131" alt="Protect America Home Security Installation Manual" />
-            <strong>One (1)</strong> Owner's / Installation Manual & DVD
+            <img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Home Security Sensor" />
+            <strong>Three (3)</strong> Door / Window Sensors
         </div>
         <div>
-    		<img src="/static/img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Protect America Home Security Window Stickers" />
-    		<strong>Three (3)</strong> Security Window Stickers
+            <img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Motion Detector" />
+            <strong>One (1)</strong> Motion Detector
         </div>
-    	<div>	
-    		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Protect America Home Security Yard Sign" />
-    		<strong>One (1)</strong> Security Yard Sign
+        <div>
+            <img src="/static/img/products/accessories/installation-manual-icon.jpg" width="160" height="131" alt="Home Security Manual" />
+            <strong>One (1)</strong> Owner's / Installation Manual &amp; DVD
+        </div>
+        <div>
+            <img src="/static/img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Home Security Stickers" />
+            <strong>Three (3)</strong> Security Window Stickers
+        </div>
+        <div>   
+            <img src="/static/img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Home Security Yard Sign" />
+            <strong>One (1)</strong> Security Yard Sign
         </div>
     </div>
 
@@ -83,12 +87,22 @@
             <tbody>
                 <tr>
                     <td><strong>Upfront Cost</strong></td>
-                    <td class="call-out">FREE*</td>
+                    <td class="call-out">
+                        {% if request.COOKIES.bbb_test == 'C' %}
+                        FREE*<em>expires 3/05/2012</em>
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'B' %}
+                        INCLUDED
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+                        FREE*
+                        {% endif %}
+                    </td>
                     <td>$379</td>
                 </tr>
                 <tr class="alt">
                     <td><strong>Monthly Cost</strong></td>
-                    <td class="call-out">$19.99</td>
+                    <td class="call-out">${{ pricetable.COPPER.standard_monitoring|slice:"1:" }}</td>
                     <td>$42.99</td>
                 </tr>
                 <tr>
@@ -109,10 +123,10 @@
         <h2>Extra Protect America Benefits:</h2>
         <ul>
             <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/wireless-sensors.png" width="40" height="40" alt="Wireless Home Security" />Wireless sensors are <strong>easy to install</strong> and don't require drilling.</li>
-            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/save-money.png" width="40" height="40" alt="Save up to 20% on Homeowner's Insurance" />Homes with security systems <strong>save up to 20%</strong> on homeowner's insurance.</li>
+            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/save-money.png" width="40" height="40" alt="Home Owners Savings Home Security" />Homes with security systems <strong>save up to 20%</strong> on homeowner's insurance.</li>
 
             <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/free-relocation-kit.png"  width="40" height="40" alt="Free Moving Relocation Kit" />You <strong>own your security system</strong>. Moving to a new home is easy with our <strong>free relocation kit</strong>.</li>
-            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png"  width="40" height="40" alt="Free Replacement Parts Warranty" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
+            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png"  width="40" height="40" alt="Home Security Lifetime Warranty" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
 
         </ul>
         <div class="button-submit"><a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);" title="Order a Protect America Home Security System">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
@@ -125,13 +139,13 @@
     <h2>Flexible Monitoring Options:</h2>
     <ul id="monitoring-rates">
         <li>
-            <img src="/static/img/products/monitoring/cellular-icon.png" width="128" height="120" alt="Home Security Cellular Connection">
+            <img src="/static/img/products/monitoring/cellular-icon.png" width="128" height="120" alt="Cellular Home Security">
             <h3>Cellular</h3>
             <p><sup>$</sup>41<span>99</span><strong>/mo</strong></p>
             <a href="{% url cellular %}" class="button-link" title="Learn About Cellular Monitoring">Learn More ></a>
         </li>
         <li>
-            <img src="/static/img/products/monitoring/homepulse-icon.png" width="128" height="120" alt="Home Security Broadband Connection">
+            <img src="/static/img/products/monitoring/homepulse-icon.png" width="128" height="120" alt="Broadband Home Security">
             <h3>Broadband</h3>
             <p><sup>$</sup>37<span>99</span><strong>/mo</strong></p>
             <a href="{% url broadband %}" class="button-link" title="Learn About Homepulse Monitoring">Learn More ></a>
@@ -160,11 +174,20 @@
     });
     </script>
 {% endaddtoblock "js" %}
-
 {% endblock %}  
 {% block page-product %}
     <h2>Copper Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $19.99/mo</p>
+    <p><span>Equipment Today: <strong>
+        {% if request.COOKIES.bbb_test == 'C' %}
+        FREE*<em>expires 3/05/2012</em>
+        {% endif %}
+        {% if request.COOKIES.bbb_test == 'B' %}
+        INCLUDED
+        {% endif %}
+        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+        FREE*
+        {% endif %}
+    </strong></span>monthly monitoring starting at $19.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Copper-B']);">Order Now ></a>
     </div>

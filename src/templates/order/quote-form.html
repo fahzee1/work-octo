@@ -1,26 +1,28 @@
 {% load sekizai_tags %}
 <form id="quote-form" method="post" action="">
     {% csrf_token %}
+    
 	<div>
         {% if request.GET.hic_test or request.COOKIES.hic_test %}
 		<p>Free Security Analysis</p>
         {% else %}
         <p>Free Security Quote</p>
         {% endif %}
-		<label>Name</label>
-        {{ form.name }}
+        {% block formfields %}
+		  <label>Name</label>
+            {{ form.name }}
 
-		<label>Email</label>
-        {{ form.email }}
+		  <label>Email</label>
+            {{ form.email }}
 		
-        <label>Phone Number</label>
-        {{ form.phone }}
-
-
+            <label>{% block phone-num %}Phone Number{% endblock %}</label>
+            {{ form.phone }}
+        {% endblock %}
 	</div>
-	<button type="button" class="redbutton">Get Quote ></button>
+    
+	<button type="button" class="redbutton">{% block quote-button %}Get Quote >{% endblock %}</button>
 
-    <a href="{% url privacy-policy %}" title="View our Privacy Policy">We never share your information with anyone</a>
+    <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
     <div id="quote-form-error">
         <img src="{{ STATIC_URL }}/img/base/error-arrow.png" id="error-arrow" alt="burglar alarm companies" />
         <strong>Whoops!</strong>
@@ -36,6 +38,7 @@
     </div>
 </form>
 {% addtoblock "js" %}
+{% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
     $('#quote-form input').keypress(function(e){
@@ -46,10 +49,7 @@ $(document).ready(function() {
     var submitting = false;
 
     $('#quote-form button').click(function() {
-        if(submitting==true) {
-            return false;
-        }
-        submitting = true;
+        $(this).attr('disabled', true);
         $('#quote-form div').removeClass('.error-state');
         var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
         $.ajax({
@@ -63,10 +63,22 @@ $(document).ready(function() {
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
                 url = json.thank_you
                 window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
             }
         if(json.errors) {
+            $('#quote-form button').attr('disabled', false); 
             $("#quote-form-error").show();
             $("#quote-form-error ul").html("");
             var error_string = "";
@@ -97,6 +109,7 @@ $(document).ready(function() {
         }
         return false;
         });
-    }); 
+    });   
 </script>
+{% endblock %}
 {% endaddtoblock "js" %}

@@ -36,8 +36,7 @@ License: http://creativecommons.org/licenses/MIT
 <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/five-linx/600.css">
 <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/five-linx/768.css">
 <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/five-linx/960.css">
-<!-- For Retina displays -->
-<link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)" href="{{ STATIC_URL }}css/2x.css">
+
 {% endblock %}
 
 <!--[if (lt IE 9) & (!IEMobile)]>
@@ -94,7 +93,7 @@ License: http://creativecommons.org/licenses/MIT
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}</p>
+        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}RIN Number: {{ affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}{% endif %}</p>
     </div>
     <div id="navigation">
         <ul>
@@ -125,7 +124,7 @@ License: http://creativecommons.org/licenses/MIT
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}</p>
+        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}RIN Number: {{ affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}{% endif %}</p>
     </div>
     {% endblock %}
 </div>

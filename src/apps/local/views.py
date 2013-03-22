@@ -1,19 +1,25 @@
 import datetime
 import pytz
 from pytz import timezone
+import settings
+import os
 
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
+from django.utils import simplejson
+from django.conf import settings as dsettings
+from django.views.decorators.cache import cache_page
 
 from apps.contact.forms import PAContactForm
+from apps.local.sitemaps import KeywordSitemap, KeywordSitemapIndex
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
                                          ZipCode)
 
-LOCAL_KEYWORDS = ['home-security-systems-reviews', 'wireless-home-security-systems', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'wireless-home-security-system', 'honeywell-home-security-systems', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'wireless-home-security-system-reviews', 'home-security-systems-wireless', 'ge-home-security-system', 'diy-home-security-system', 'wireless-home-security-systems-reviews', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-security-systems-reviews', 'wireless-home-security-systems', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'wireless-home-security-system', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'wireless-home-security-system-reviews', 'home-security-systems-wireless', 'ge-home-security-system', 'diy-home-security-system', 'wireless-home-security-systems-reviews', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-surveillance-system', 'wireless-home-surveillance-systems', 'best-home-surveillance-system', 'home-video-surveillance-systems', 'home-surveillance-systems-reviews', 'home-surveillance-system-reviews', 'outdoor-home-surveillance-systems', 'home-video-surveillance-system', 'home-security-surveillance-systems', 'home-surveillance-cameras', 'hidden-home-surveillance-systems', 'surveillance-systems', 'wireless-surveillance-system', 'video-surveillance-systems', 'home-surveillance', 'best-home-surveillance-systems', 'home-video-surveillance', 'home-surveillance-camera', 'video-surveillance-system', 'surveillance-camera-system', 'home-surveillance-systems-wireless', 'surveillance-system', 'surveillance-camera-systems', 'wireless-surveillance-systems', 'security-surveillance-systems', 'home-surveillance-camera-systems', 'home-surveillance-equipment', 'home-surveillance-systems-review', 'camera-surveillance-systems', 'wireless-home-surveillance-system', 'best-home-surveillance-system-reviews', 'home-security-surveillance', 'home-video-surveillance-systems-reviews', 'diy-home-surveillance-systems', 'wireless-home-video-surveillance-systems', 'surveillance-systems-reviews', 'wireless-surveillance-camera-system', 'surveillance-system-reviews', 'dvr-surveillance-system', 'home-surveillance-camera-system', 'home-security-surveillance-system', 'cheap-home-surveillance-systems', 'home-camera-surveillance', 'wireless-video-surveillance-systems', 'surveillance-cameras-systems', 'home-surveillance-systems-iphone', 'camera-surveillance-system', 'outdoor-surveillance-systems']
+LOCAL_KEYWORDS = ['home-security-systems-reviews', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'honeywell-home-security-systems', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'wireless-home-security-system-reviews', 'ge-home-security-system', 'diy-home-security-system', 'wireless-home-security-systems-reviews', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-security-systems-reviews', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'ge-home-security-system', 'diy-home-security-system', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-surveillance-system', 'wireless-home-surveillance-systems', 'best-home-surveillance-system', 'home-video-surveillance-systems', 'home-surveillance-systems-reviews', 'home-surveillance-system-reviews', 'outdoor-home-surveillance-systems', 'home-video-surveillance-system', 'home-security-surveillance-systems', 'home-surveillance-cameras', 'hidden-home-surveillance-systems', 'surveillance-systems', 'wireless-surveillance-system', 'video-surveillance-systems', 'home-surveillance', 'best-home-surveillance-systems', 'home-video-surveillance', 'home-surveillance-camera', 'video-surveillance-system', 'surveillance-camera-system', 'surveillance-system', 'surveillance-camera-systems', 'wireless-surveillance-systems', 'security-surveillance-systems', 'home-surveillance-camera-systems', 'home-surveillance-equipment', 'home-surveillance-systems-review', 'camera-surveillance-systems', 'wireless-home-surveillance-system', 'best-home-surveillance-system-reviews', 'home-security-surveillance', 'home-video-surveillance-systems-reviews', 'diy-home-surveillance-systems', 'wireless-home-video-surveillance-systems', 'surveillance-systems-reviews', 'wireless-surveillance-camera-system', 'surveillance-system-reviews', 'dvr-surveillance-system', 'home-surveillance-camera-system', 'home-security-surveillance-system', 'cheap-home-surveillance-systems', 'home-camera-surveillance', 'wireless-video-surveillance-systems', 'surveillance-cameras-systems', 'home-surveillance-systems-iphone', 'camera-surveillance-system', 'outdoor-surveillance-systems', 'adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services','wireless-home-security-systems', 'wireless-home-security-products', 'wireless-home-security', 'home-surveillance-systems-wireless','wireless-home-security-systems-reviews', 'wireless-home-security-system-reviews', 'home-security-systems-wireless','wireless-home-security-system', 'wireless-home-security-systems', 'home-security-systems-wireless', 'wireless-home-security-system','wireless-home-security-systems','wireless-alarm-systems','wireless-alarms', 'wireless-alarm-system','best-wireless-alarm-system','top-wireless-security-systems','best-wireless-homesecurity-systems','wireless-homesecurity','wireless-ge-security',]
 
 TIMEZONES = {
     'AL':'America/Chicago',
@@ -69,22 +75,43 @@ TIMEZONES = {
     'WY':'America/Denver',
 }
 
+@cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state, zipcode):
     def get_state_code(statestr):
         for state in US_STATES:
-            if statestr.lower() == state[1].lower():
+            if statestr.lower().replace('-', ' ') == state[1].lower():
                 return state[0]
         return False
     statecode = get_state_code(state)
     if not statecode:
         raise Http404
-    return local_page(request, statecode, city.capitalize())
+    return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
 
-def local_page(request, state, city):
+
+def local_page(request, state, city, keyword=None):
     crime_stats_ctx = query_by_state_city(state, city)
+    if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
+        json_file = os.path.join(settings.PROJECT_ROOT, 'src',
+            'apps', 'crimedatamodels', 'external', 'city_state_redirect.json')
+        json_data = open(json_file)
+        csr = simplejson.load(json_data)
+        zipcode = ZipCode.objects.filter(city=city, state=state)
+        zipcodestr = '00000'
+        if zipcode:
+            zipcodestr = zipcode[0].zip 
+        state_obj = State.objects.get(abbreviation=state)
+        return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
+            (
+                csr[str(crime_stats_ctx['city_id'])],
+                city.lower().replace(' ', '-'),
+                state_obj.name.lower().replace(' ', '-'),
+                zipcodestr,
+            ))
     forms = {}
     forms['basic'] = PAContactForm()
     crime_stats_ctx['forms'] = forms
+    if keyword is not None:
+        crime_stats_ctx['keyword'] = keyword.replace('-', ' ').title()
     tz = timezone(TIMEZONES[crime_stats_ctx['state']])
     utc_dc = datetime.datetime.now(tz=pytz.utc)
     new_dt = utc_dc.astimezone(tz)
@@ -102,10 +129,22 @@ def local_page(request, state, city):
         background_time = 'night'
 
     crime_stats_ctx['background_time'] = background_time
-    
-    response = render_to_response('local-pages/index.html',
-                              crime_stats_ctx,
-                              context_instance=RequestContext(request))
+    custom_keyword_list = ['']
+    wireless_keyword_list = ['wireless-home-security-systems', 'wireless-home-security-products', 'wireless-home-security', 'home-surveillance-systems-wireless','wireless-home-security-systems-reviews', 'wireless-home-security-system-reviews', 'home-security-systems-wireless','wireless-home-security-system', 'wireless-home-security-systems', 'home-security-systems-wireless', 'wireless-home-security-system','wireless-home-security-systems','wireless-alarm-systems','wireless-alarms', 'wireless-alarm-system','best-wireless-alarm-system','top-wireless-security-systems','best-wireless-homesecurity-systems','wireless-homesecurity','wireless-ge-security','wireless-ge-security']
+    adt_keyword_list = ['adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services']
+
+    if keyword in custom_keyword_list:
+        response = render_to_response('local-pages/%s.html' % keyword,
+            crime_stats_ctx, context_instance=RequestContext(request))
+    elif keyword in wireless_keyword_list:
+        response = render_to_response('local-pages/wireless-home-security-systems.html',
+            crime_stats_ctx, context_instance=RequestContext(request))
+    elif keyword in adt_keyword_list:
+        response = render_to_response('landing-pages/adt.html',
+            crime_stats_ctx, context_instance=RequestContext(request))
+    else:        
+        response = render_to_response('local-pages/index.html',
+            crime_stats_ctx, context_instance=RequestContext(request))
 
     expire_time = datetime.timedelta(days=90)
     response.set_cookie('affkey',
@@ -145,4 +184,9 @@ def local_city(request, state):
                               context_instance=RequestContext(request))
 
 def sitemap(request, keyword):
-    pass
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap' : KeywordSitemap(keyword)})
+
+def sitemap_index(request):
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap-index' : KeywordSitemapIndex(LOCAL_KEYWORDS)})

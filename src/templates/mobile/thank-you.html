@@ -1,0 +1,30 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block content %}
+<div id="package-code">
+    <h1>Thank You!</h1>
+    <p>We have recieved your contact request. {% businesstime %}To expidite your request give us a call at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span>.{% endbusinesstime %} 
+    {% businesstime %}
+    <div class="button-submit">
+        <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Cart Checkout Call', '{{ page_name }}']);">Give Us a Call ></a>
+    </div>
+    {% endbusinesstime %}
+    <div id="contact-us-overview">
+        <h2>Business Hours:</h2>
+        <h3>Mon - Fri: 07:00am - 11:00pm CT</h3>
+        <h3>Sat: 08:00am - 08:00pm CT </h3>
+        <h3>Sun: 11:00am - 09:00pm CT </h3>
+        <p><strong>Note:</strong> All business hours are listed in Central Time. </p>
+    </div>
+</p>
+</div>
+{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+{% include "_partials/thank_you_scripts.html" %}
+{% if affiliate_obj.conversion_pixels %}
+{{ affiliate_obj.conversion_pixels|safe }}
+{% endif %}
+{% endblock %}

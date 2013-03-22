@@ -1,0 +1,35 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+    <div id="mobile-interactive">    
+        <h2>Interactive Features</h2>
+        <div id="interactive-content">
+            <img src="{{ STATIC_URL }}img/mobile/interactive-features.jpg" alt="interactive-features" width="320" height="152" />
+            <p>Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone.</p>
+            <h3>Interactive Included With:</h3>
+            <div id="interactive-included">
+                <img src="{{ STATIC_URL }}img/mobile/interactive-included.png" alt="Interactive Included With Broadband or Cellular Monitoring" width="320" height="168" />
+            </div>
+        </div>
+        <ul>
+            <li class="alpha">
+                <img src="{{ STATIC_URL }}img/mobile/arm-system-icon.png" alt="arm-system-icon" width="120" height="88" />
+                <h3>Security System Control</h3>
+                <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/mobile/live-video-icon.png" alt="live-video-icon" width="120" height="88" />
+                <h3>Live Video</h3>
+                <p>Keep an eye on your home from anywhere in the world with live video. <strong>(Video Service Required)</strong></p>
+            </li>
+        </ul>
+        <div class="button-submit">
+            <a href="tel:{{ phone_number|format_number }}">Give Us a Call ></a>
+        </div>
+    </div>
+
+{% endblock %}
+

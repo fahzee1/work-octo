@@ -1,3 +1,6 @@
+import os
+import hashlib
+
 from django.db import models
 
 
@@ -17,3 +20,19 @@ class Package(models.Model):
     
     def __unicode__(self):
         return self.name
+
+class PackageCode(models.Model):
+    code = models.CharField(max_length=10)
+    cart = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def generate_code(self):
+        random_data = os.urandom(128)
+        tcode = hashlib.md5(random_data).hexdigest()[:5].upper()
+        if PackageCode.objects.filter(code=tcode):
+            self.generate_code()
+        self.code = tcode.upper()
+        return tcode
+
+    def __unicode__(self):
+        return self.code

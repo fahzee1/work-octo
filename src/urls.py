@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.simple import redirect_to
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
 # Uncomment the next two lines to enable the admin:
@@ -19,6 +19,17 @@ def dtt(pattern, template, name, parent=None, ctx=None):
     context.update(ctx)
 
     return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
+        dict(template=template, extra_context=context),
+        name=name)
+
+def dtt_nocache(pattern, template, name, parent=None, ctx=None):
+    ctx = ctx or {}
+
+
+    context = dict(page_name=name, parent=parent)
+    context.update(ctx)
+
+    return url(pattern, never_cache(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
 
@@ -72,9 +83,8 @@ urlpatterns = patterns('',
 # Radioshack URLS
 if settings.SITE_ID == 2:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/radioshack/_base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
+        dtt(r'^$', 'affiliates/radioshack/index.html', 'home', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
         dtt(r'^thank-you/$', 'affiliates/radioshack/thank-you.html', 'thankyou', ctx={'page_name': 'thankyou', 'agent_id': 'a02596'}),
-        dtt(r'^cswitch/$', 'affiliates/radioshack/content_switch.html', 'cswitch', ctx={'page_name': 'index', 'agent_id': 'a02596'}),
 
     )
 # Paid landing site
@@ -86,6 +96,7 @@ elif settings.SITE_ID == 3:
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^test/touchscreen/$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
         dtt(r'^business/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^test/no-equip-price/$', 'affiliates/sem-landing-page/test/no-equipment-price.html', 'bbb-test-B'),
 
     )
 elif settings.SITE_ID == 4:
@@ -109,35 +120,33 @@ elif settings.SITE_ID == 5:
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
-        dtt(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
+        dtt_nocache(r'^$', 'affiliates/five-linx/index.html', 'home', ctx={
             'agent_id': 'a01526'}),
 
-        dtt(r'^copper$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
+        dtt_nocache(r'^copper/?$', 'affiliates/five-linx/copper.html', 'copper', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^makes-sense$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
+        dtt_nocache(r'^makes-sense/?$', 'affiliates/five-linx/makes-sense.html', 'makes-sense', 'home', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^bronze$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
+        dtt_nocache(r'^bronze/?$', 'affiliates/five-linx/bronze.html', 'bronze', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^silver$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
+        dtt_nocache(r'^silver/?$', 'affiliates/five-linx/silver.html', 'silver', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^gold$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
+        dtt_nocache(r'^gold/?$', 'affiliates/five-linx/gold.html', 'gold', 'security-packages', ctx={
             'agent_id': 'a01526'}),
-        dtt(r'^platinum$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
-            'agent_id': 'a01526'}),
-
-        dtt(r'^video$', 'affiliates/five-linx/video.html', 'video', ctx={
+        dtt_nocache(r'^platinum/?$', 'affiliates/five-linx/platinum.html', 'platinum', 'security-packages', ctx={
             'agent_id': 'a01526'}),
 
-        dtt(r'^gps$', 'affiliates/five-linx/gps.html', 'gps', ctx={
+        dtt_nocache(r'^video/?$', 'affiliates/five-linx/video.html', 'video', ctx={
+            'agent_id': 'a01526'}),
+
+        dtt_nocache(r'^gps/?$', 'affiliates/five-linx/gps.html', 'gps', ctx={
             'agent_id': 'a01526'}),
         
-        dtt(r'^order$', 'affiliates/five-linx/order.html', 'order', ctx={
+        dtt_nocache(r'^order/?$', 'affiliates/five-linx/order.html', 'order', ctx={
             'agent_id': 'a01526'}),
             
-        dtt(r'^thank-you/5linx/$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
+        dtt_nocache(r'^thank-you/5linx/?$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
-
-
     )
 elif settings.SITE_ID == 7:
     urlpatterns += patterns('',
@@ -173,23 +182,130 @@ elif settings.SITE_ID == 8:
 
 
     )
+# Mobile Website
+elif settings.SITE_ID == 9:
+    urlpatterns += patterns('',
+        url(r'^$', 'apps.pricetable.views.index', name='home'),
+        url(r'^promo/click-here/$', 'apps.pricetable.views.test_click', name='home'),
+        url(r'^promo/click-call/$', 'apps.pricetable.views.test_call', name='home'),
+        url(r'^promo/click-order/$', 'apps.pricetable.views.test_order', name='home'),
+
+
+        url(r'^home-security-packages/$', 'apps.pricetable.views.packages', name='packages'),
+        url(r'^security-add-ons/$', 'apps.pricetable.views.adds', name='add-ons'),
+        url(r'^home-security/$', 'apps.pricetable.views.home_security', name='home-security'),
+        url(r'^home-security-monitoring/$', 'apps.pricetable.views.monitoring', name='monitoring'),
+        url(r'^interactive-monitoring-features/$', 'apps.pricetable.views.interactive', name='interactive'),
+        url(r'^customer-info/$', 'apps.pricetable.views.customer_info', name='customer-info'),
+
+        url(r'^request-quote/$', 'apps.pricetable.views.quote', name='get-quote'),
+        url(r'^cart/$', 'apps.pricetable.views.mobile_cart', name='cart'),
+        url(r'^add-to-cart/$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
+        url(r'^remove-from-cart/$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
+        url(r'^cart-checkout/$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
+        url(r'^thank-you/$', 'apps.pricetable.views.thank_you', name='thank_you'),
+    )
+# Black Friday Site
+elif settings.SITE_ID == 10:
+    urlpatterns += patterns('',
+
+        url(r'^$', 'apps.common.views.black_friday', name='index'),
+
+    )
+
+
+# GetAHomeSecuritySystem.com
+elif settings.SITE_ID == 11:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/get-a-home-security-system/index.html', 'home'),
+    )
+
+# AlarmZone.com
+elif settings.SITE_ID == 12:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
+        dtt(r'^shop-home-security/$', 'external/alarm-zone/shop.html', 'shop', ctx={'agent_id': 'a01415'}),
+        dtt(r'^home-alarm-monitoring-services/$', 'external/alarm-zone/monitoring.html', 'monitoring', ctx={'agent_id': 'a01415'}),
+        dtt(r'^ge-security-equipment/$', 'external/alarm-zone/equipment.html', 'equipment', ctx={'agent_id': 'a01415'}),
+        dtt(r'^thank-you/$', 'external/alarm-zone/thanks.html', 'thank_you', ctx={'agent_id': 'a01415'}),
+    )
+
+# SecuritySystemExpert.com
+elif settings.SITE_ID == 13:
+    urlpatterns += patterns('',
+        url(r'^$', 'apps.faqs.views.expert_home', name='home'),
+        url(r'^ask/$', 'apps.faqs.views.ask_question', name='ask_question'),
+    )
+# Canada
+elif settings.SITE_ID == 14:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'canada/index.html', 'home'),
+        dtt(r'^shop/home-security-systems/$', 'canada/packages.html', 'products'),
+        url(r'^shop/order/$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
+
+
+        dtt(r'^thank-you/$', 'thank-you/canada.html', 'thank_you'),
+        # Canada Competitor Landing Pages
+        dtt(r'^security-comparison/adt-vs-protect-america/$', 'affiliates/adt-comparison-canada/index.html', 'home'),
+        dtt(r'^security-comparison/reliance-vs-protect-america/$', 'affiliates/reliance-vs-pa-canada/index.html', 'home'),
+        dtt(r'^security-comparison/vivint-vs-protect-america/$', 'affiliates/vivint-vs-protectamerica-canada/index.html', 'home'),
+        dtt(r'^security-comparison/alarmforce-vs-protect-america/$', 'affiliates/alarmforce-vs-pa-canada/index.html', 'home'),
+    )
+
+
+# BuyaSecuritySystem.com
+elif settings.SITE_ID == 15:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/buy-a-security-system/index.html', 'home'),
+    )
+
+# GreatHomeSecurityOffer.com
+elif settings.SITE_ID == 16:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
+    )
+# AlarmSystemOffers.com
+elif settings.SITE_ID == 17:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
+    )
+# homesecuritycompared.com
+elif settings.SITE_ID == 18:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/home-security-compared/index.html', 'home'),
+    )
+    
 else:
     urlpatterns += patterns('',
 
         # Test Pages
-        dtt(r'^test/tct/?$', 'tests/top-consumer-test.html', 'tct-test', 'home'),
-        dtt(r'^test/touchscreen/?$', 'tests/touchscreen-banner-test.html', 'touchscreen-test', 'home'),
-        dtt(r'^test/new-lineup/?$', 'tests/new-lineup-test.html', 'new-lineup-test', 'home'),
+        dtt(r'^test/tcr-first/$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
+        dtt(r'^test/promotion-first/$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
+        dtt(r'^test/feb-promo/$', 'tests/feb-test.html', 'february-promo-test', 'home'),
+        dtt(r'^test/adt-promo/$', 'affiliates/adt-comparison-two/test-599.html', 'adt-promo-test', 'home'),
+
+        url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/$', 'apps.common.views.index_test', name='index_test'),
 
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
+        # dtt(r'^404/$', '404.html', '404', 'home'),
+
+
+        # SEM Landing Pages
+        dtt(r'^home-security/for-less/$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
+
             
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
+        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
+            'apps.local.views.sitemap',
+            name='local-page-sitemap'),
+        url(r'^local-pages-sitemap-index\.xml', 'apps.local.views.sitemap_index',
+            name='keyword-sitemap-index'),
 
         # SEO Content Pages
         dtt(r'^home-security-systems/$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems', 'about-us'),
@@ -205,11 +321,23 @@ else:
         # PAID LANDING PAGES
         dtt(r'^home-security/business-security-systems/$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
         dtt(r'^home-security/free-home-security-system/$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
-        dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison/index.html', 'paid-adt-comparison-cat'),
+        dtt(r'^adt-vs-protect-america-compare-and-save/$', 'affiliates/adt-comparison-two/index.html', 'paid-adt-comparison-cat'),
+        dtt(r'^frontpoint-vs-protect-america-compare-and-save/$', 'affiliates/frontpoint-vs-protectamerica/index.html', 'frontpoint-vs-pa'),
         dtt(r'^diy/do-it-yourself-home-security-system/$', 'affiliates/diy-landing-page/index.html', 'paid-diy-landing-page'),
         dtt(r'^national-crime-prevention/$', 'affiliates/crime-prevention-month/index.html', 'crime-prevention-month'),
+        dtt(r'^wireless-home-security/$', 'affiliates/wireless/index.html', 'wireless-landing-page'),
+        dtt(r'^protect-america-vs-comcast/$', 'affiliates/comcast-vs-protectamerica/index.html', 'comcast-vs-protect-america'),
+        dtt(r'^protect-america-vs-vivint/$', 'affiliates/vivint-vs-protectamerica/index.html', 'vivint-vs-protect-america'),
+        dtt(r'^adt-comparison/$', 'affiliates/adt-comparison/index.html', 'adt-two'),
 
 
+        dtt(r'^direct-mail/$', 'affiliates/direct-mail/index.html', 'direct-mail'),
+
+        # CRIME STOPPERS        
+        dtt(r'^CFLA/$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),
+        dtt(r'^CFCHICAGO/$', 'affiliates/crime-stoppers-cf/chicago.html', 'cf-chicago'),
+        dtt(r'^CFCLEVELAND/$', 'affiliates/crime-stoppers-cf/cleveland.html', 'cf-cleveland'),
+        dtt(r'^CFMIAMI/$', 'affiliates/crime-stoppers-cf/miami.html', 'cf-miami'),
 
         # Thank You Pages
         dtt(r'^thank-you/contact-us/?$', 'thank-you/contact-us.html', 'contact-thank-you', 'thank-you'),
@@ -218,10 +346,17 @@ else:
         dtt(r'^thank-you/tell-friend/?$', 'thank-you/tell-friend.html', 'contact-tell-friend', 'thank-you'),
         dtt(r'^thank-you/affiliate-enroll/?$', 'thank-you/affiliate-enroll.html', 'affiliate-enroll', 'thank-you'),
 
+        # CJ Page
+        dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
         
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
 
+        # Spanish
+        dtt(r'^es/$', 'spanish/index.html',
+            'pa-spanish'),
+        # Get Smart Page
+        dtt(r'^getsmart/?$', 'mobile/get-smart.html', 'getsmart', 'index', ctx={'agent_id': 'i10288'}),
 
 
         # pay it forward page
@@ -262,15 +397,14 @@ else:
             dtt(r'^payitforward/press/$', 'payitforward/press.html',
             'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
 
-
         # Product > Advantage
 
         dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
 
         # Home Security Packages
-        dtt(r'^pa/packages/alarms/?$', 'packages/index.html', 'products'),
+        dtt(r'^shop/home-security-systems/?$', 'packages/index.html', 'products'),
 
-            # Product > Packages B
+            # Product > Packages
 
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/copper-package/?$', 'packages/copper.html', 'copper', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/bronze-package/?$', 'packages/bronze.html', 'bronze', 'products'),
@@ -278,8 +412,6 @@ else:
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/gold-package/?$', 'packages/gold.html', 'gold', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-home-alarm/platinum-package/?$', 'packages/platinum.html', 'platinum', 'products'),
             dtt(r'^ge-simon-security-systems/wireless-business-security/business-package/?$', 'packages/business.html', 'business', 'products'),
-
-            
 
             # Product > Monitoring
 
@@ -309,9 +441,6 @@ else:
                             dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
                             dtt(r'^products/security-equipment/accessories/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'accessories'),
                             #dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'accessories'),
-
-
-
 
             # Product > Video
 
@@ -404,6 +533,9 @@ else:
             dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
             
             # Contact Pages > Department Listing
+            dtt(r'^agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
+            
+            # Contact Pages > Department Listing
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
             # Contact Pages > Affiliate Program
@@ -463,6 +595,8 @@ else:
                 #dtt(r'^support/moving-kit/?$', 'support/moving-kit.html', 'moving-kit', 'support'),
                 url(r'^pa/request-moving-kit/security-moving-kit/?$',
                     'apps.contact.views.moving_kit', name='moving-kit'),
+                url(r'^package-code/$',
+                    'apps.pricetable.views.package_code', name='package-code'),
         
         # Affiliate Resources
         
@@ -489,12 +623,10 @@ else:
     (r'^comments/', include('django.contrib.comments.urls')),
 
     ('^radioshack/?$',
-        redirect_to, {'url': '/?agent=a02596', 'permanent': True}),
+        redirect_to, {'url': 'http://radioshack.protectamerica.com/', 'permanent': True}),
     ('^feedback/?$',
         redirect_to, {'url': '/pa/contact', 'permanent': True}),
-    
-    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
-            'apps.common.views.redirect_wrapper'),
+
 )
 # redirect urls
 urlpatterns += patterns('',
@@ -563,7 +695,9 @@ urlpatterns += patterns('',
     ('^pa/safer_at_home/?$',
         redirect_to, {'url': '/pa/learn/alarm-companies/', 'permanent': True}),
     ('^pa/products/?$',
-        redirect_to, {'url': '/pa/packages/alarms/', 'permanent': True}),
+        redirect_to, {'url': '/shop/home-security-systems/', 'permanent': True}),
+    ('^pa/packages/alarms/?$',
+        redirect_to, {'url': '/shop/home-security-systems/', 'permanent': True}),
     ('^careers.php$',
         redirect_to, {'url': '/contact/careers/', 'permanent': True}),
     ('^pa/map/?$',
@@ -618,17 +752,159 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/pa/request-moving-kit/security-moving-kit', 'permanent': True}),
     ('^home-security/business-security-systems$',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
+    ('^crimeprevention$',
+        redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
+   
+    ('^crimeprevention/$',
+        redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
+    #('^national-crime-prevention$',
+    #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
+    
+    
+    ('^livechat_iframe.php',
+        redirect_to, {'url': '/support', 'permanent': True}),
+    ('^pa/yard-sign/security-yard-sign',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/x10-appliance-module/home-security-automation',
+        redirect_to, {'url': '/home-security-blog/tag/x10-home-automation', 'permanent': True}),
+    ('^pa/outdoor_lighting/alarms-home',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/x10-powerhorn-siren/security-siren',
+        redirect_to, {'url': '/home-security-blog/alarm-systems/simon-xt-alarm-system-features_2285', 'permanent': True}),
+    ('^pa/operation/monitoring-security',
+        redirect_to, {'url': '/home-security-blog/home-security/how-to-remote-monitor-home-video-security-camera-2_1311', 'permanent': True}),
+    ('^pa/compare/home-security-comparison',
+        redirect_to, {'url': '/home-security-blog/home-security-systems-2/home-security-systems-comparison-3_2604', 'permanent': True}),
+    ('^pa/carbon-monoxide-detector/carbon-monoxide-detector',
+        redirect_to, {'url': '/home-security-blog/home-security/home-security-information/home-security-tips/carbon-monoxide-poisoning_2985', 'permanent': True}),
+    ('^pa/x10-socket-rocket/home-security-automation',
+        redirect_to, {'url': '/home-security-blog/tag/x10-home-automation', 'permanent': True}),
+    ('^pa/landscaping/alarms-home-security',
+        redirect_to, {'url': '/home-security-blog/home-security/home-security-information/best-home-security-diy-projects-and-quick-tips_148', 'permanent': True}),
+    ('^pa/low-temperature-sensor/low-temperature-sensor',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/safer_at_home/security',
+        redirect_to, {'url': '/news/article/keep-homes-safe-with-home-security-systems_1232', 'permanent': True}),
+    ('^pa/glass_around/alarm-home-system',
+        redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
+    ('^pa/license/protect-america-licenses',
+        redirect_to, {'url': '/help/state-licenses/', 'permanent': True}),
+    ('^pa/motion-detector/motion-detector',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/faq/alarm-company-monitoring',
+        redirect_to, {'url': '/support/faq', 'permanent': True}),
+    ('^pa/site_map/protect-america',
+        redirect_to, {'url': '/sitemap/', 'permanent': True}),
+    ('^pa/window-decal/security-window-sticker',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/low-price-guarantee/GE-Security-System',
+        redirect_to, {'url': '/help/low-price-guarantee', 'permanent': True}),
+    ('^pa/map/protect-america',
+        redirect_to, {'url': '/contact/find-us', 'permanent': True}),
+    ('^pa/ge_simon_3/ge-simon-3',
+        redirect_to, {'url': '/products/security-equipment/control-panels/ge-simon-xt', 'permanent': True}),
+    ('^pa/secure_vacation/alarm-house',
+        redirect_to, {'url': '/news/article/consider-home-security-before-going-on-vacation_31', 'permanent': True}),
+    ('^pa/smoke-detector/smoke-detector/',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/products/ge-home-security',
+        redirect_to, {'url': '/pa/equipment/wireless-home-security-system', 'permanent': True}),
+    ('^https:/www.protectamerica.com/pa/security-affiliate-enrollment/security',
+        redirect_to, {'url': '/contact/affiliate-program/', 'permanent': True}),
+    ('^pa/home_automation/home-automation-devices',
+        redirect_to, {'url': '/home-security-blog/tag/home-automation-devices', 'permanent': True}),
+    ('^pa/support/home-security-alarm-system',
+        redirect_to, {'url': '/pa/monitoring/security-system', 'permanent': True}),
+    ('^pa/warranty/monitoring-security-system',
+        redirect_to, {'url': '/help/warranty', 'permanent': True}),
+    ('^pa/talking-wireless-keypad/wireless-keypad',
+        redirect_to, {'url': '/products/security-equipment/accessories', 'permanent': True}),
+    ('^pa/solar-yard-sign-light/solar-yard-sign-light',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/careers/home-security-jobs',
+        redirect_to, {'url': '/contact/careers', 'permanent': True}),
+    ('^pa/complete-home-security/',
+        redirect_to, {'url': '/complete-home-security', 'permanent': True}),
+    ('^pa/command-station/security-system',
+        redirect_to, {'url': '/products/security-equipment/control-panels/ge-simon-xt', 'permanent': True}),
+    ('^pa/medical-panic-pendant/medical-panic-pendant',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/neighborhood_watch/burglar-alarm',
+        redirect_to, {'url': '/news/article/serial-burglars-suspected-of-thefts-in-california-neighborhood_453', 'permanent': True}),
+    ('^pa/dept/protect-america',
+        redirect_to, {'url': '/contact/department-listing', 'permanent': True}),
+    ('^pa/glass-break-detector/glass-break-detector',
+        redirect_to, {'url': '/ge-simon-security-systems/wireless-business-security/business-package', 'permanent': True}),
+    ('^pa/door-or-window-sensor/door-sensor',
+        redirect_to, {'url': '/products/security-equipment/sensors/door-window-sensor', 'permanent': True}),
+    ('^pa/keychain-remote-control/security-keychain-remote',
+        redirect_to, {'url': '/products/security-equipment/accessories/', 'permanent': True}),
+    ('^pa/security-of-information/protect-america',
+        redirect_to, {'url': '/help/security-of-information', 'permanent': True}),
+    ('^pa/order_2/home-security-monitoring-system',
+        redirect_to, {'url': '/products/order-package', 'permanent': True}),
+    ('^pa/home_security_checklist/home-protection',
+        redirect_to, {'url': '/home-security-blog/home-security/vacation-safety-tips_1684', 'permanent': True}),
+    ('^pa/secure_garage/brinks-home-security',
+        redirect_to, {'url': '/news/article/diy-tips-for-garage-security_1306', 'permanent': True}),
+    ('^pa/video-home/',
+        redirect_to, {'url': '/pa/wireless-security-camera/ip-security-cameras', 'permanent': True}),
+    ('^pa/flood-sensor/flood-sensor',
+        redirect_to, {'url': '/products/security-equipment/sensors', 'permanent': True}),
+    ('^pa/x10-lamp-module/home-security-automation',
+        redirect_to, {'url': '/home-security-blog/tag/x10-home-automation', 'permanent': True}),
+    ('^pa/video-business/',
+        redirect_to, {'url': '/products/interactive-video/business-video-camera', 'permanent': True}),
+    
+    # direct mail
+    ('^AA1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
+    ('^AA2/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10019', 'permanent': True}),
+    ('^AA3/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10021', 'permanent': True}),
+    ('^AA4/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10023', 'permanent': True}),
+    ('^AA5/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
+    ('^AB1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
+
+    ('^aa1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
+    ('^aa2/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10019', 'permanent': True}),
+    ('^aa3/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10021', 'permanent': True}),
+    ('^aa4/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10023', 'permanent': True}),
+    ('^aa5/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10025', 'permanent': True}),
+    ('^ab1/?$',
+        redirect_to, {'url': '/direct-mail/?agent=a10027', 'permanent': True}),
+    ('^feedback/?$',
+        redirect_to, {'url': '/pa/feedback', 'permanent': True}),
+    ('^ceo/?$',
+        redirect_to, {'url': '/pa/feedback', 'permanent': True}),
+    ('^familyofcompanies/?$',
+        redirect_to, {'url': '/?agent=a02332', 'permanent': True}),
+    ('^angies/?$',
+        redirect_to, {'url': '/?agent=a03103', 'permanent': True}),
+)
+urlpatterns += patterns('',
+    ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
+            'apps.common.views.redirect_wrapper'),
 )
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns() 
-    def template_view(request, path):
+    def adt(request, path):
         from django.views.generic.simple import direct_to_template
         return direct_to_template(request, path)
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
         }),
-        url(r'^templates/(?P<path>.*)$', template_view),
+
    )

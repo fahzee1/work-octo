@@ -1,59 +1,17 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
-<div id="top-content">
+<div id="main-promotion" class="orange">
+
     <div class="wrapper">
-        {% comment %}
-        <div id="top-hero-banner-controls">
-            <div id="hero-left-arrow">&nbsp;</div>
-            <div id="pager-container">
-                <ul>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                </ul>
+        {% if pa_ads.hero_banner_backdrop %}
+            {% include "adspace/adspace_render.html" with ad=pa_ads.hero_banner_backdrop %}
+        {% endif %}
+        <div id="top-hero-banner" class="orange">
+
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/march/orange-banner.jpg" style="position: absolute; left: -167px;" alt="Our best promotion ever! free equipment, $19.99 per month plus two free keychains on any package" width="1076" height="409" />
             </div>
-            <div id="hero-right-arrow">&nbsp;</div>
-            
-            
         </div>
-        {% endcomment %}
-        <div id="top-hero-banner">
-            {% comment %}
-            <div id="interactive-banner" data-url="http://www.protectamerica.com/products/order-package">
-            {% endcomment %}
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/flash-promotion.jpg"
-                    width="685" height="400" alt="Our best promotion ever! free equipment, 19.99 monthly monitoring" style="position: relative; right: 16px; " />
-            {% comment %}
-            </div>
-            <div id="touchscreen-banner" data-url="{% url order-package %}?package=silver">
-                <h2>Protecting Homes for 20 Years<span>Celebrate with a GE Simon XT Touch Screen with Every Package</span></h2>
-                
-                <div id="touchscreen-banner-content">
-                    <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/ge-touchscreen.jpg" alt="ge-touchscreen-hero-image" />
-                    <p>when you order Broadband or Cellular Monitoring.</p>
-                    <div class="button-submit">
-                        <a href="{% url order-package %}?package=silver" title="Add a GE Simon XT Touch Screen to any package today">Order Now ></a>
-                    </div>
-                    <span>Expires 10/31/2012</span>
-
-                </div>
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
-
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/streamers.jpg" id="streamers" alt="ge-touchscreen" />
-
-            </div>
-            <div id="top-consumer-banner" data-url="{% url copper %}">
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/top-consumer-reviews/top-consumer-ribbons.jpg" id="consumer-image" alt="Rated 5 Stars from Top Consumer Reviews" />
-                <h2>Award Winning Security<span>Rated the Best Home Security System for the Past 5 Years.</span></h2>
-                <div id="top-consumer-content">
-                    <p>"Protect America provides the <strong>best home security solution</strong> available today. Their state-of-the-art equipment and 24 hour nationwide monitoring system [are] <strong>top-notch.</strong>"</p>
-                    <em>&ndash; Top Consumer Reviews, 2012</em>
-                </div>
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/20-anniversary/20-logo.png" id="twenty-logo" alt="Celebrating Protect America's 20th Anniversary" />
-
-            </div>
-            {% endcomment %}
-        </div>
-        {% include "order/quote-form.html" with form=forms.basic %}
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
     </div>
 </div>

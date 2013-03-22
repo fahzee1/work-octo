@@ -1,7 +1,7 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Platinum Home Security System | Home Security Alarm Systems | Protect America{% endblock %}
-
+{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
 {% block content %}
 <div id="top-content">
     <div id="platinum-package-offer" itemscope itemtype="http://schema.org/Product">
@@ -19,7 +19,13 @@
             <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
             <p>Five star rating in 2012 by TopConsumerReviews.com</p>
         </div>
-        <span>Our Price: <strong itemprop="price">FREE<sup>*</sup></strong></span>
+        <div id="package-price">
+            <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 3/05/2013</em></span>
+            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>42.99</strong><em>per month</em></span>
+        </div>
+        <div class="button-submit">
+            <a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Platinum']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
+        </div>
     </div>
     {% include "order/quote-form.html" with form=forms.basic %}
 </div>
@@ -83,7 +89,17 @@
             <tbody>
                 <tr>
                     <td><strong>Upfront Cost</strong></td>
-                    <td class="call-out">FREE*</td>
+                    <td class="call-out">
+                        {% if request.COOKIES.bbb_test == 'C' %}
+                        FREE*<em>expires 3/05/2013</em>
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'B' %}
+                        INCLUDED
+                        {% endif %}
+                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+                        FREE*
+                        {% endif %}
+                    </td>
                     <td>$1339</td>
                 </tr>
                 <tr class="alt">
@@ -162,12 +178,20 @@
     });
     </script>
 {% endaddtoblock "js" %}
-
 {% endblock %}  
 
 {% block page-product %}
     <h2>Platinum Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $42.99/mo</p>
+    <p><span>Equipment Today: <strong>
+    {% if request.COOKIES.bbb_test == 'C' %}
+    FREE*<em>expires 3/05/2013</em>
+    {% endif %}
+    {% if request.COOKIES.bbb_test == 'B' %}
+    INCLUDED
+    {% endif %}
+    {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
+    FREE*
+    {% endif %}</strong></span>monthly monitoring starting at $42.99/mo</p>
     <div class="button-submit">
         <a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
     </div>
