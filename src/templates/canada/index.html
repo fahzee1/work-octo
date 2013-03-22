@@ -1,67 +1,96 @@
-{% extends "landing-pages/index.html" %}
+{% extends "canada/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 {% block page_title %}Home Security Systems | Home Alarm Systems | Protect America Canada{% endblock %}
 {% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
 {% block page_description %}Get one of our free wireless home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
 
-{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/canada.css">
-    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
 
-{% endblock %}
-{% block google_analytics %}
-<script type="text/javascript">
-
- var _gaq = _gaq || [];
- _gaq.push(['_setAccount', 'UA-5441302-2']);
- _gaq.push(['_setDomainName', 'protectamericasecurity.ca']);
- {% block ga_custom_variables %}{% endblock %}
- _gaq.push(['_trackPageview']);
-
- (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
- })();
-
-</script>
-{% endblock %}
-{% block navigation %}{% endblock %}
-{% block company-logo %}
-<!-- {{ request.session.refer_id }} & Cookie: request.COOKIES.refer_id  -->
-<div id="company-logo">
-    <a href="http://www.protectamericasecurity.ca/" title="Protect America Home Security">
-        <img src="{{ STATIC_URL }}img/canada/protect-america-canada-home-security.png" alt="Protect America Home Security" width="288" height="48" />
-    </a>
-</div>
-{% endblock %}
-
-{% block heroimage %}
-<div id="hero-banner">
-
-    <div class="wrapper">
-        <div id="top-hero-banner">
-            <div id="main-banner" data-url="{% url order-package %}">
-                <img src="{{ STATIC_URL }}img/canada/hero-images/red-promo-feb.png" class="promo-banner" alt="The Best Deal in Home Security - starting at $19.99 per month" width="1229" height="409" style="left: -263px;" />
-                <img src="{{ STATIC_URL }}img/canada/the-maple-leaf.png" class="maple-leaf" alt="Maple Leaf - Canada" width="294" height="346" />
-            </div>
+{% block hero-banner %}
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
+        <h1>Security For Every Home.</h1>
+        <img src="{{ STATIC_URL }}img/protectamerica/iphone-two.png" class="happy-family" alt="family-one" />
+        <div id="hero-features">
+            <img src="{{ STATIC_URL }}img/protectamerica/main-features.png" alt="main-features" class="features" />
+            <img src="{{ STATIC_URL }}img/canada/maple-leaf.png" alt="consumer-digest-best-buy" class="consumer-digest" />
+        </div>
+        <img src="{{ STATIC_URL }}img/canada/price-cad.png" alt="pricing" class="pricing" />
+        <div class="button-submit">
+            <a href="{% url order-package-ca %}">Order Now</a>
         </div>
         {% include "canada/quote-form.html" with form=forms.basic %}
+
+        {% if phone_number %}
+            {% businesstime %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+            {% endbusinesstime %}
+    
+        {% endif %}
     </div>
+    <img src="{{ STATIC_URL }}img/canada/canadian-houses.jpg" alt="Security For Every Home" id="hero-backdrop" />
 </div>
 {% endblock %}
-{% block advantage-badges %}
-    <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-logo.jpg" alt="Winner of the Top Consumer Reviews 5 Star Rating" width="128" height="120" />
-    <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-ten-reviews-2013-excellence.png" id="top-consumer-logo" style="padding: 0 48px;" />
+{% block overview-content %}
+<div id="protect-america-information">
+    <h2>Wireless Home Security: <br />100% Protection</h2>
+    <p>From Texas to Toronto, Protect America is driven to provide only the highest quality products and dedicated service at an affordable price. Our alarm systems feature GE Security products that fulfill your home security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your home security with a GE Home Security System from Protect America:</p>
+</div>
+<ul>
+    <li>BEST Price in Home Security</a> - Compare &amp; Save!</li>
+    <li>Protect Your Home with 24/7 Security Monitoring</li>
+    <li>Guaranteed Locked in Security Monitoring Rates</li>
+    <li>Super Flexible Home Security Packages</a></li>
+    <li>Lifetime Alarm System Replacement Parts Warranty</a></li>
+    <li>Up to 20% Off Homeowners Insurance</li>
+    <li>Peace of Mind When It Comes to Your Family &amp; Home</li>
+    <li>Serving Alberta, Ontario, and British Columbia</li>
+</ul>
+{% endblock %}
+            {% block extra-security %}
+                <div id="security-value">
+                    <h3>Home Security Value</h3>
+                    <p>The average yearly home insurance premium in Canada costs $840. The good news is that a GE home alarm system could reduce the premiums on your homeowners insurance by as much as 20 percent. After the home insurance discount is applied, the monthly cost of a Protect America home security system is less than $16 per month. Get the peace of mind that your home and family are safe for only 50 cents a day. Our GE wireless home security system is one investment you can’t afford to ignore.</p>
+                </div>
+                <div id="security-choices">
+                    <h3>Home Security Choices</h3>
+                    <p>Protect America offers the best home security system and monitoring deal you’ll find. We install premium security hardware with GE home security products, and have the most flexible range of monitoring services. Every Protect America security system comes with your pick of HomePulse broadband monitoring or standard landline monitoring. Protect America security packages are designed to fit almost any budget and can also support an extensive selection of wireless security accessories. Let us help you find the right systems for your needs, so you can start protecting your home and family today.</p>
+                </div>
+                <div class="clear"></div>
 
-    <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="Authorized GE Security Dealer" width="240" height="120" />
+                <div id="fbi-stats">
+                    <h3>Home Security Statistics</h3>
+                    <p><strong>Facts about Burglary, Property Crimes, and Home Security Alarms</strong></p>
+                    <p>Don’t wait! There is no better time than today to protect your residence with a monitored home security alarm system. Protect America offers the most affordable home alarm systems in the industry. Wherever you live, we have a home security solution that will fit your needs and budget. And with our lowest price guarantee, you won’t worry about overpaying! Sign up today for a free home security system that includes a lifetime replacement parts warranty, a free movers program, and dedicated customer support.</p>
+                    <ul style="padding-left:25px;list-style-type:square;">
+
+                    </ul>
+                </div>
+                <div id="other-stats">
+                    <p>2011 Canadian Crime Statistics:</p>
+                    <ul>
+                        <li class="two"><img src="{{ STATIC_URL }}img/external/timer-icon.png" alt="timer-icon" width="62" height="62" />A crime is committed every 12 seconds in Canada</li>
+                        <li class="two"><img src="{{ STATIC_URL }}img/external/sun-icon.png" alt="sun-icon" width="62" height="62" />Most burglaries occur during the day between 6am and 6pm.</li>
+                        <li class="one"><img src="{{ STATIC_URL }}img/external/money-icon.png" alt="money-icon" width="62" height="62" />Every year, burglary costs every Canadian an average of $947</li>
+                        <li><img src="{{ STATIC_URL }}img/external/door-icon.png" alt="door-icon" width="62" height="62" />In more than a third of all burglaries, the burglar enters the front door (and most of the time does so forcefully).</li>
+                        <li><img src="{{ STATIC_URL }}img/external/3x-icon.png" alt="3x-icon" width="62" height="62" />Homes without a monitored security alarm system are 3 times more likely to be burglarized or robbed than those with a monitored home security system.</li>
+                        <li><img src="{{ STATIC_URL }}img/external/graph-icon.png" alt="graph-icon" width="62" height="62" />More than 200,000 burglaries occur annually in Canada</li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            {% endblock %}
+{% block home-security-overview %}
+    <h2>Protect Your Home with a Wireless Security System</h2>
+    <p>Over the past 20 years, Protect America has been committed to excellence and affordability when it comes to securing your home. Now serving Ontario, Alberta, British Columbia. Your family is your top priority. And your home is probably your largest investment. Why not take the extra precaution of providing a wireless home security system and security monitoring for your residence? We make it simple to protect your home, and we are so confident in our security system, we guarantee it.</p>
 {% endblock %}
 
 {% block smart-app-overview %}
 <h2>There’s a Free App For That.</h2>
-<p>When connecting your home security system through our broadband monitoring, your account automatically comes with free interactive features. Arm your system, request notifications, manage alarm codes, and home automation all from your computer or smart phone. Forget to set the alarm system? No problem, just arm it while on your timmies-run.</p>
+<p>When connecting your home security system through our broadband monitoring, your account automatically comes with SMART Connect. Arm your system, request notifications, manage alarm codes, and home automation all from your computer or smart phone. Forget to set the alarm system? No problem, just arm it while on your timmies-run.</p>
 <ul>
     <li>
         <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
@@ -85,27 +114,15 @@
         </div>
     </li>
 </ul>
+{% if phone_number %}
+    {% businesstime %}
+        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+    {% endbusinesstime %}
+{% endif %}
 {% endblock %}
 
-{% block consumer-digest-term %}{% endblock %}
 
-{% block big-video %}
-<div class="clear"></div>
-<ul>
-    <li>24/7 Security Monitoring</li>
-    <li>Trusted GE Wireless Home Security System</li>
-    <li>Home Security Customized and Built to your Needs</li>
-    <li>Guaranteed Locked-In Rates</li>
-    <li>Lowest Price in the Industry</li>
-</ul>
-{% endblock %}
-{% block page-product %}
-    <h2>Home Security</h2>
-    <p><span>Equipment Price: <strong>
-        INCLUDED
-    </strong></span>monthly monitoring starting at $19.99/mo</p>
 
-{% endblock %}
 {% block main-footer %}{% endblock %}
 {% block remarketing-one %}
 <script type="text/javascript">

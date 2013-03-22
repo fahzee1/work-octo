@@ -13,6 +13,8 @@
 {% block typekit %}tk-jaf-facitweb{% endblock %}
 
 
+
+
 {% block content %}
 </div>
 {% block heroimage %}
@@ -205,12 +207,13 @@
                     {% block video-security-overview-two %}
                     <h2>Video Home Security: Here, There, Everywhere.</h2>
                     <p>These days, people are always on the go and spend less time at home. Unfortunately, an empty house is the perfect time for a burglar to strike. Get interactive video security and check on your phone anywhere at any time. Our home surveillance cameras let you view your own live video feed from any Internet-enabled computer or smartphone. You can also be notified of recorded events with text notifications that can be read straight from your phone.</p>
-                    {% endblock %}
                     {% if phone_number %}
                         {% businesstime %}
                             <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
                         {% endbusinesstime %}
                     {% endif %}
+                    {% endblock %}
+
                     <div class="clear"></div>
                 </div>
                 <div id="video-screenshot">
@@ -250,12 +253,12 @@
                         </div>
                     </li>
                 </ul>
-                {% endblock %}
                 {% if phone_number %}
                     {% businesstime %}
                         <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
                     {% endbusinesstime %}
                 {% endif %}
+                {% endblock %}
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
@@ -275,11 +278,13 @@
         </div>
         <div id="protect-america-information">
             <p>{% block pa_information %}From Texas to Toronto, Protect America is driven to provide only the highest quality products and dedicated service at an affordable price. Serving Alberta, Ontario, and British Columbia, our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008—2013).{% endblock %}</p>
+            {% block pa-info-phone %}
             {% if phone_number %}
                 {% businesstime %}
                     <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
                 {% endbusinesstime %}
             {% endif %}
+            {% endblock %}
         </div>
         {% block big-video %}
         <div id="home-security-video">
@@ -299,8 +304,16 @@
 
 <div class="wrapper">{% block extra-content %}{% endblock %}</div>
 {% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+
+
+
     <script type="text/javascript">
         $(document).ready(function() {
+			$('#header').waypoint('sticky', {
+			  offset: -85 // Apply "stuck" when element 30px from top
+			});
             animated = 0;
             $("#alarm-category").click(function(){
                 if(animated == 0 && !$(this).hasClass('active')) {
