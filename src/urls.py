@@ -281,7 +281,7 @@ elif settings.SITE_ID == 19:
         dtt(r'^$', 'external/get-free-security/index.html', 'home'),
     )
     
-# simonxtinstall.com.com
+# simonxtinstall.com
 elif settings.SITE_ID == 20:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/simon-xt-install/index.html', 'home'),
