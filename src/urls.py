@@ -285,7 +285,7 @@ elif settings.SITE_ID == 19:
 elif settings.SITE_ID == 20:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/simon-xt-install/index.html', 'home'),
-    )
+        dtt(r'^thank-you/$', 'external/simon-xt-install/thanks.html', 'thank_you', ctx={'agent_id': 'a01415'}),    )
     
 else:
     urlpatterns += patterns('',
