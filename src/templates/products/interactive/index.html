@@ -19,17 +19,15 @@
                 <a href="{% url order-package %}">Order Now</a>
             </div>
         </div>
-        <img src="{{ STATIC_URL }}img/interactive/included-transparent.png" class="included-box" alt="included-transparent" width="360" height="112" />
+        <img src="{{ STATIC_URL }}img/interactive/included-transparent.png" class="included-box" alt="included-transparent" />
         {% include "order/quote-form-new.html" with form=forms.basic %}
 
         {% if phone_number %}
-            {% businesstime %}
             <div class="clear"></div>
             <div id="call-box">
                 {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
             </div>
             <div class="clear"></div>
-            {% endbusinesstime %}
     
         {% endif %}
     </div>
@@ -114,6 +112,7 @@
 
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}/js/jqueryrotate.js"></script>
+
     <script type="text/javascript">
     $(document).ready(function() {
         $('#search-testimonial-box').cycle({
@@ -132,6 +131,7 @@
         $('.postcard3').rotate(-1);
         $('.postcard4').rotate(3);
         $('.postcard5').rotate(-2);
+
     });
     </script>
 {% endaddtoblock "js" %}
