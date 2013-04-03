@@ -7,11 +7,37 @@
 
 
 {% block content %}
-
-    <div id="hero-banner" class="tk-museo-sans">
-       
-        <p>{{ phone_number|format_number }}</p>
+<div id="header-wrapper">
+    <div id="header-yellow">
+        <div class="title-page">SimonXTinstall.com</div>
+        <div class="ge-logo">
+            <img src="{{ STATIC_URL }}img/external-lp/simon-xt-install/ge-logo.png" alt="ge-logo" width="147" height="43" />
+        </div>
     </div>
+    <div id="hero-image">
+        <h1>Installing your alarm system just got a little bit easier.</h1>
+    </div>
+    <div id="light-grey-intro">
+        <div class="yellow-call-out2">
+            <h1>Thank you your information was received! Our security experts will contact you shortly.</h1>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="phone-container">
+    {% if phone_number %}
+        <div id="phone">
+            Call Today <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a>
+        </div>
+    {% endif %}
+    <div class="clear"></div>
+    </div>
+</div>
+<div id="footer">
+    <p style="padding-top: 15px;">*SimonXTinstall.com is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit Standard home security alarm monitoring agreement. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
+    <p style="padding-bottom: 15px;">* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited. GE and GE Security logos are registered trademarks of General Electric.</p>
+</div>
+{% endblock %}
+
 {% addtoblock "js" %}
 <!-- Google Code for Lead Conversion Page -->
 <script type="text/javascript">
@@ -32,4 +58,3 @@ var google_conversion_value = 0;
 </div>
 </noscript>
 {% endaddtoblock "js" %}
-{% endblock %}
