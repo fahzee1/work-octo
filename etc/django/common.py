@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'apps.payitforward',
     'apps.emails',
     'apps.faqs',
+    'apps.events',
 
     # sitemaps by opm
     'apps.pa-sitemaps',
