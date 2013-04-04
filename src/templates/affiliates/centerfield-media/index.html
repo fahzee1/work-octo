@@ -24,9 +24,11 @@
                 <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />24 / 7 Security Monitoring</li>
                 <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Interactive Access and Free Smartphone Apps</li>
             </ul>
-            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/home-security-consumer-digest-best-buy.png" alt="Home Security Consumer Digest Best Buy" width="128" height="116" class="badge" />
-            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-consumer-reviews-5-stars.png" alt="Top Consumer Reviews 5 Stars" width="120" height="120" class="badge" />
-            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-ten-reviews-2013-excellence.png" alt="Top Ten Reviews 2013 Excellence" width="73" height="115" />
+            {% block review-badges %}
+                <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/home-security-consumer-digest-best-buy.png" alt="Home Security Consumer Digest Best Buy" width="128" height="116" class="badge" />
+                <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-consumer-reviews-5-stars.png" alt="Top Consumer Reviews 5 Stars" width="120" height="120" class="badge" />
+                <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-ten-reviews-2013-excellence.png" alt="Top Ten Reviews 2013 Excellence" width="73" height="115" />
+            {% endblock %}
         </div>
         <div id="hero-right">
         {% block hero-content %}
@@ -93,8 +95,9 @@
 
         </div>
         {% include "order/quote-form-callme.html" with form=forms.basic %}
+        {% block review-video %}
         <iframe width="275" height="186" src="http://www.youtube.com/embed/isJJrsr5sXQ?modestbranding=1&rel=0&border=1&showinfo=0" frameborder="0" style="margin-left: 15px;" allowfullscreen></iframe>
-
+        {% endblock %}
         <div class="clear"></div>
     </div>
     {% include "order/call-box.html" %}
