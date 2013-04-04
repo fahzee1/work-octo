@@ -285,7 +285,15 @@ elif settings.SITE_ID == 19:
 elif settings.SITE_ID == 20:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/simon-xt-install/index.html', 'home'),
-        dtt(r'^thank-you/$', 'external/simon-xt-install/thanks.html', 'thank_you', ctx={'agent_id': 'a01415'}),    )
+        dtt(r'^thank-you/$', 'external/simon-xt-install/thanks.html', 'thank_you'),    
+    )
+    
+# nationalhomesecuritycompany.com
+elif settings.SITE_ID == 21:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/national-home-security-company/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/national-home-security-compan/thanks.html', 'thank_you'),    
+    )
     
 else:
     urlpatterns += patterns('',
