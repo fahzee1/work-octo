@@ -1,6 +1,6 @@
 {% extends "news/base.html" %}
 {% load content_filters content_tags sekizai_tags  %}
-{% block page_title %}{{ article.heading }} | Home Security News | Protect America{% endblock %}
+{% block page_title %}{{ article.heading|truncatewords:7 }} | Protect America News{% endblock %}
 {% block page_keywords %}{% for category in article.categories.all %}{{ category.name }}, {% endfor %}{% endblock %}
 {% block page_description %}{{ article.summary }}{% endblock %}
 
