@@ -292,7 +292,7 @@ elif settings.SITE_ID == 20:
 elif settings.SITE_ID == 21:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/national-home-security-company/index.html', 'home'),
-        dtt(r'^thank-you/$', 'external/national-home-security-compan/thanks.html', 'thank_you'),    
+        dtt(r'^thank-you/$', 'external/national-home-security-company/thanks.html', 'thank_you'),   
     )
     
 else:
