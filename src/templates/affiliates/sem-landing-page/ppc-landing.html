@@ -1,5 +1,14 @@
 {% extends "landing-pages/index.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+
+{% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
+
+{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
+
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
+
 {% block google_experiment %}
     <script> 
 _udn = "protectamerica.com";
@@ -19,15 +28,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 </script><script>utmx('url','A/B');</script>
 <!-- End of Google Analytics Content Experiment code -->
     {% endblock %}
-{% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
-
-{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
-
-{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
-
-{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
-
-
 
 {% block subnav %}{% endblock %}
 {% block third-party-nav %}
@@ -70,14 +70,18 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             <img src="{{ STATIC_URL }}img/protectamerica/consumer-digest-best-buy.png" alt="consumer-digest-best-buy" class="consumer-digest" />
         </div>
         <img src="{{ STATIC_URL }}img/protectamerica/pricing.png" alt="pricing" class="pricing" />
-        {% block hero-order %}
-        <div class="button-submit">
-            <a href="{% url order-package %}">Order Now</a>
-        </div>
-        {% endblock %}
+        <img src="{{ STATIC_URL }}img/banners/promos/keychain-promo.png" alt="keychain-promo" class="hero-promo" width="334" height="81" />
+        {% comment %}
+            {% block hero-order %}
+            <div class="button-submit">
+                <a href="{% url order-package %}">Order Now</a>
+            </div>
+            {% endblock %}
+        {% endcomment %}
         {% block quote-form %}        
         {% include "order/quote-form-new.html" with form=forms.basic %}
         {% endblock %}
+
         {% if phone_number %}
             <div class="clear"></div>
             <div id="call-box">
