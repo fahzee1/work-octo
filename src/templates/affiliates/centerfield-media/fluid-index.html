@@ -12,52 +12,50 @@
 {% endblock %}
 {% block content %}
 </div>
-<div id="hero-banner-wrapper" class="tk-jaf-facitweb">
-    <div id="hero-main">
+{% block hero-banner %}
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
         <h1>The Unbeatable Home Security Deal.</h1>
+        <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/iphone.png" class="happy-family" alt="family-one" />
         <div id="hero-left">
             <h2><span>Free</span> Home Security System</h2>
             <ul>
-                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />GE Wireless Security System</li>
-                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />No Equipment Cost or Activation Fees</li>
-                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Entire Home Protection</li>
                 <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />24 / 7 Security Monitoring</li>
-                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Interactive Access and Free Smartphone Apps</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Reliable GE Wireless Security System</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Complete Home Protection</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />No Equipment or Activation Fees</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Up to 20% off Homeowners</li>
             </ul>
-            {% block review-badges %}
-                <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/home-security-consumer-digest-best-buy.png" alt="Home Security Consumer Digest Best Buy" width="128" height="116" class="badge" />
-                <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-consumer-reviews-5-stars.png" alt="Top Consumer Reviews 5 Stars" width="120" height="120" class="badge" />
-                <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-ten-reviews-2013-excellence.png" alt="Top Ten Reviews 2013 Excellence" width="73" height="115" />
-            {% endblock %}
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/keychain-promo.png" class="badge" alt="keychain-promo" width="421" height="104" />
         </div>
         <div id="hero-right">
         {% block hero-content %}
             <h3>The Protect America system is a solid choice! You get latest technology with fastest response time at a price you can afford.<img src="{{ STATIC_URL }}img/affiliates/centerfield-media/quote-arrow.png" class="quote-arrow" alt="quote-arrow" width="32" height="16" /></h3>
             <p>www.homesecuritysystems.net</p>
         {% endblock %}
-        {% block promo-banner %}
-            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/review-site-banner.png"  alt="Home Security Special" />
-        {% endblock %}
+
+
         </div>
-        <div class="clear"></div>
+        <div id="hero-badges">
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/home-security-consumer-digest-best-buy.png" alt="home-security-consumer-digest-best-buy" width="120" height="120" />
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/overall-staff-pick.png" alt="overall-staff-pick" />
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-ten-reviews-2013-excellence.png" alt="top-ten-reviews-2013-excellence" width="73" height="115" />
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-consumer-reviews-5-stars.png" alt="top-consumer-reviews-5-stars" width="120" height="120" />
+        </div>
+        {% if phone_number %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+    
+        {% endif %}
     </div>
+    <img src="{{ STATIC_URL }}img/protectamerica/small-town-usa.jpg" alt="Security For Every Home" id="hero-backdrop" />
 </div>
-<div class="clear"></div>
-<div id="call-box" class="main">
-    <p>Get Started Now, <strong>Call Today! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-</div>
+{% endblock %}
 <div class="clear"></div>
 <div class="wrapper">
-    {% if phone_number %}
-    {% businesstime %}
-    <div class="clear"></div>
-    <div id="call-box">
-        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-    </div>
-    <div class="clear"></div>
-    {% endbusinesstime %}
-    
-    {% endif %}
     <div id="security-information">
         <div id="one-hundred-percent">
             <div id="wireless-security">
@@ -133,7 +131,7 @@
                         <td class="alpha title">Installation</td>
                         <td class="alpha pa">$0</td>
                         <td class="alpha">$49</td>
-                        <td class="alpha">$49</td>
+                        <td class="alpha">$99</td>
                     </tr>
                     <tr>
                         <td class="title">Monthly Rate</td>
@@ -327,7 +325,9 @@
 </div>
 
 </div>
+<div class="wrapper">
     {% include "order/call-box.html" %}
+</div>
 {% addtoblock "js" %}
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>

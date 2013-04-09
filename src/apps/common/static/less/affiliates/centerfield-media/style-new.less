@@ -2,6 +2,51 @@
 .wrapper {
     padding-bottom: 0;
 }
+#header {
+    .header-button {
+        display: none;
+    }
+    &.stuck {
+        background: @white;
+        position: fixed;
+        top: 0;
+        .drop-shadow;
+        z-index: 999;
+        width: 100%; 
+        padding-top: 4px;
+        border-bottom: 5px solid @red;
+        #quick-link-navigation {
+            display: none;
+        }
+        #company-logo {
+            bottom: 0;
+        }
+        #ge-logo {
+            display: none;
+        }
+        .header-button {
+            display: block;
+            float: right;
+            margin-top: 4px;
+            padding: 8px 48px;
+            .border-radius(3px, 3px, 3px, 3px);
+            background: #00bbf4;
+            text-shadow: 0px 1px 0px #2a6273;
+            color: @white;
+            &:hover {
+                border: 1px solid #2272a2;
+            }
+        }
+        
+    }
+}
+#header-wrapper {
+    width: auto;
+    padding: 0 16px;
+    #company-logo {
+        bottom: 11px;
+    }
+}
 #header-wrapper #phone-number {
     p {
         span {
@@ -11,41 +56,53 @@
         }
     }
 }
-#hero-banner-wrapper {
-    background: #b3ddf2 url(/static/img/affiliates/centerfield-media/sky-bg.png) center top repeat-x;
+#big-hero-banner {
+    height: 620px;
+    min-height: 100px;
     width: 100%;
+    position: relative;
     overflow: hidden;
-    height: 475px;
-    #hero-main {
-        width: 960px;
-        margin: 0 auto;
+    margin-bottom: 8px;
+    #hero-wrapper {
+        background: url(/static/img/affiliates/centerfield-media/light-blue-bg.png) repeat;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 500;
+        min-width: 1024px;
         h1 {
             text-align: center;
             color: @black;
-            font-size: 42px;
+            font-size: 48px;
             line-height: 56px;
             font-weight: bold;
             text-shadow: 1px 2px 0px @light-grey;
             letter-spacing: 1px;
-            padding: 16px 0;
+            padding: 16px 0 24px;
             
+        }
+        .happy-family {
+            position: absolute;
+            bottom: 70px;
+            left: auto;
+            right: 80%;
         }
         #hero-left {
             float: left;
-            width: 499px;
-            border-right: 1px solid @white;
+            width: 39%;
+            padding-left: 21%;
             h2 {
                 font-weight: 100;
                 font-size: 32px;
                 line-height: 32px;
                 span {
-                    color: #ffa800;
+                    color: @red;
                     text-transform: uppercase;
                     font-weight: bold;
                 }
             }
             ul {
-                padding: 16px 0;
+                padding: 24px 0;
                 li { 
                     line-height: 24px;
                     font-size: 16px;
@@ -58,17 +115,20 @@
                 }
             }
             .badge {
-                padding-right: 64px;
+                position: absolute;
+                bottom: 83px;
+                left: 18%;
             }
         }
-        #hero-right {
+       #hero-right {
             float: left;
             padding: 0 24px 24px;
-            width: 412px;
+            width: 30%;
+            overflow: hidden;
             h3 {
                 background: @white;
                 .border-radius(3px, 3px, 3px, 3px);
-                font-size: 27px;
+                font-size: 24px;
                 line-height: 35px;
                 font-weight: 100;
                 padding: 16px;
@@ -83,7 +143,7 @@
             p {
                 color: @blue;
                 font-weight: bold;
-                font-size: 21px;
+                font-size: 19px;
                 line-height: 24px;
                 padding-top: 24px;
             }
@@ -91,6 +151,101 @@
                 padding-top: 22px;
             }
         }
+        #hero-badges {
+            width: 37%;
+            position: absolute;
+            right: 3%;
+            top: 424px;
+            img {
+                padding-right: 6%;
+            }
+        }
+        .hero-promo {
+            position: absolute;
+            left: 372px;
+            padding-left: 1%;
+            bottom: 88px;
+        }
+        .pricing {
+            position: absolute;
+            left: 372px;
+            padding-left: 1%;
+            bottom: 175px;
+        }
+        .button-submit {
+            position: absolute;
+            left: 413px;
+            padding-left: 1%;
+            bottom: 105px;
+            text-align: left;
+            a {
+                display: block;
+                margin-top: 4px;
+                padding: 8px 60px;
+                .border-radius(3px,3px,3px,3px);
+                background: #00bbf4;
+                text-shadow: 0px 1px 0px #2a6273;
+                color: #ffffff;
+                width: 100px;
+                text-align: center;
+                margin: 10px auto 0;
+                &:hover {
+                    border: 1px solid @blue;
+                }
+            }
+        }
+        #call-box {
+            width: 100%;
+            background: #76ba00;
+            margin: 0;
+            padding: 24px 0;
+            border: 1px solid #3c7a00;
+        
+            p {
+                color: @white;
+                text-shadow: 1px 2px 0px #3c7a00;
+                font-weight: bold;
+                strong {
+                    color: @white;
+                    a {
+                        color: @white;
+                    }
+                }
+            }
+            &:hover {
+                background: #76ba00;
+                border-top: 4px solid #3c7a00;
+        
+            }
+            &.main {
+                border: none;
+                border-top: 4px solid #3c7a00;
+        
+            }
+        }
+    }
+    #hero-backdrop {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        min-width: 1024px;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+}
+
+#hero-banner-wrapper {
+    background: #b3ddf2 url(/static/img/affiliates/centerfield-media/sky-bg.png) center top repeat-x;
+    width: 100%;
+    overflow: hidden;
+    height: 475px;
+    #hero-main {
+        width: 960px;
+        margin: 0 auto;
+
+
+ 
     }
 }
 #one-hundred-percent {
@@ -114,35 +269,7 @@
     }
 
 }
-#call-box {
-    width: 100%;
-    background: #76ba00;
-    margin: 0 0 16px;
-    padding: 24px 0;
-    border: 1px solid #3c7a00;
 
-    p {
-        color: @white;
-        text-shadow: 1px 2px 0px #3c7a00;
-        font-weight: bold;
-        strong {
-            color: @white;
-            a {
-                color: @white;
-            }
-        }
-    }
-    &:hover {
-        background: #76ba00;
-        border-top: 4px solid #3c7a00;
-
-    }
-    &.main {
-        border: none;
-        border-top: 4px solid #3c7a00;
-
-    }
-}
 
 .top-information {
     border-bottom: 1px solid @v-light-grey;
