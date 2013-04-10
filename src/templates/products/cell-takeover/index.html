@@ -2,16 +2,16 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Cellular Monitoring | Existing Home Security System Activation | Protect America{% endblock %}
 {% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
-{% block page_description %}Protect America offers the best wireless home alarm services on pre-installed alarm systems, which ensures no cut phone lines and no new alarm equipment to buy.{% endblock %}
+{% block page_description %}Already have an existing alarm system? Protect America makes it easy to upgrade to cellular monitoring using existing equipment.{% endblock %}
 
 {% block content %}
 </div>
 <div id="big-hero-banner">
     <div id="hero-wrapper">
         <h1><span>Already Have Security? </span>Switch and Save!</h1>
-        <img src="{{ STATIC_URL }}img/products/cell-takeover/benefit-bullets.png" id="benefit-bullets" alt="benefit-bullets" />
-        <img src="{{ STATIC_URL }}img/products/cell-takeover/existing-price.png" alt="existing-price" width="392" height="152" id="price-area" />
-        <img src="{{ STATIC_URL }}img/products/cell-takeover/alarm-systems.png" id="front-hero-image" alt="alarm-systems" />
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/benefit-bullets.png" id="benefit-bullets" alt="Works with Existing Equipment, Wireless Cellular Technology, No Landline Connection" />
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/existing-price.png" alt="monitoring for existing alarm system starting at $29.99" width="392" height="152" id="price-area" />
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/alarm-systems.png" id="existing alarm system" alt="alarm-systems" />
         <form id="switch-form" method="post" action="">
             <p id="form-headline">How Much Do You Save?</p>
             <div id="save-headline">
@@ -57,15 +57,15 @@
 
         <ul>
             <li>
-                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-one-existing-system.jpg" alt="step-one-existing-system" width="193" height="193" />
-                <h2>{% block security-choice-one %}Use Your Existing Security System{% endblock %}</h2>
+                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-one-existing-system.jpg" alt="Step One: Use your Existing System" width="193" height="193" />
+                <h2>{% block security-choice-one %}Use Your Existing Alarm System{% endblock %}</h2>
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-two-cellular-module.jpg" alt="step-one-existing-system" width="193" height="193" />
+                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-two-cellular-module.jpg" alt="Step Two: Plug in our Cellular Module Upgrade" width="193" height="193" />
                 <h2>{% block security-choice-two %}Plug in Our Cellular Module{% endblock %}</h2>
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-three-secure-home.jpg" alt="step-one-existing-system" width="193" height="193" />
+                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-three-secure-home.jpg" alt="Step Three: Save Money!" width="193" height="193" />
                 <h2>{% block security-choice-three %}Enjoy a Secured Home and Save Money{% endblock %}</h2>
             </li>
             <div class="clear"></div>
@@ -74,7 +74,7 @@
     <div class="clear"></div>
     <div id="cellular-technology">
         <div id="extra-information">
-            <img src="{{ STATIC_URL }}img/products/cell-takeover/black-wire.jpg" id="black-wire" alt="black-wire" width="1200" height="125" />
+            <img src="{{ STATIC_URL }}img/products/cell-takeover/black-wire.jpg" id="black-wire" alt="No Landline Required" width="1200" height="125" />
             <h2>Reliable Cellular Techonlogy</h2>
             <p>When switching to Protect America, your security is upgraded to cellular technology.  When your alarm is triggered, your security system works just like a cell phone, wirelessly contacting police with any sign of trouble.  Our Cellular Module provides the same great protection, without breaking the bank.</p>
             <h2>Save More; <br />Ditch the Landline</h2>
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div id="cut-wire">
-            <img src="{{ STATIC_URL }}img/products/cell-takeover/wire-cutters.jpg" alt="wire-cutters" width="350" height="643" />
+            <img src="{{ STATIC_URL }}img/products/cell-takeover/wire-cutters.jpg" alt="Wire Cutters" width="350" height="643" />
         </div>
     </div>
 </div>
@@ -95,7 +95,7 @@
         <div class="button-submit">
             <a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now</a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home.</p>{% endbusinesstime %}
         </div>
-        <img src="{{ STATIC_URL }}img/products/cell-takeover/new-home.jpg" id="new-home" alt="new-home" width="496" height="440" />
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/new-home.jpg" id="new-home" alt="Add Monitoring For Existing Alarm System" width="496" height="440" />
     </div>
 </div>
 <div id="big-grass">&nbsp;</div>
@@ -110,6 +110,8 @@
             fx: 'fade',
             timeout: 9000
         });
+        $('input').keypress(function(e) { if(e.keyCode == 13){ e.preventDefault();} });
+
         $(document).on('click', '#switch-button', function(e){
             e.preventDefault
             $('#switch-form').fadeOut();

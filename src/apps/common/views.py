@@ -195,22 +195,8 @@ def index(request):
 
 @cache_page(60 * 60 * 4)
 def index_test(request, test_name):
-    if test_name == 'tcr-first':
-        template = 'tests/top-consumer-test.html'
-    elif test_name == 'promotion-first':
-        template = 'tests/promotion-tcr-banner-test.html'
-    elif test_name == 'nav-shop':
-        template = 'tests/test-nav-shop.html'
-    elif test_name == 'nav-pricing':
-        template = 'tests/test-nav-pricing.html'
-    elif test_name == 'nav-plans':
-        template = 'tests/test-nav-plans.html'
-    elif test_name == 'nav-home-security':
-        template = 'tests/test-nav-home-security.html'
-    elif test_name == 'holiday':
-        template = 'tests/holiday-test.html'
-    elif test_name == 'feb-promo':
-        template = 'tests/feb-test.html'
+    if test_name == 'new-page':
+        template = 'tests/new-page.html'
     else:
         raise Http404
 
@@ -235,6 +221,8 @@ def index_render(request, template, context):
     check_agent = request.GET.get('agent', None)
     if check_agent == 'a01986':
         return HttpResponseRedirect("/affiliate/a01986/?agent=a01986")
+    elif check_agent == 'a02675':
+        return HttpResponseRedirect("/affiliate/a02675/?agent=a02675")
 
     if 'no_mobile' in request.GET:
         request.session['no_mobile'] = True

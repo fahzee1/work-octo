@@ -20,6 +20,11 @@ def mobile_check(request):
 
 def get_affiliate_from_request(request):
     affiliate = request.COOKIES.get('refer_id', None)
+    check_affiliate = request.GET.get('agent', None)
+    if check_affiliate in settings.SUPER_AFFILIATES:
+        affiliate = check_affiliate
+        affiliate = Affiliate.objects.get(agent_id=affiliate)
+
     if not affiliate:
         # try pulling the affiliate from the session
         affiliate = request.session.get('refer_id', None)
