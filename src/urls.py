@@ -295,6 +295,13 @@ elif settings.SITE_ID == 21:
         dtt(r'^thank-you/$', 'external/national-home-security-company/thanks.html', 'thank_you'),   
     )
     
+# homesecuritysystemexperts.com
+elif settings.SITE_ID == 22:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/homesecuritysystemexperts/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/homesecuritysystemexperts/thanks.html', 'thank_you'),   
+    )
+    
 else:
     urlpatterns += patterns('',
 
