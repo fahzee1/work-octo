@@ -5,6 +5,9 @@
 
 {% block content %}
 <div id="blue-wrapper">
+    <div class="logo">
+        <img src="{{ STATIC_URL }}img/external-lp/homesecuritysystemexperts/logo.png" alt="logo" width="170" height="93" />
+    </div>
 </div>
 <div id="main-container">
     <div id="main-content-container">
@@ -13,10 +16,18 @@
                 <h1>Your Security Matters to Us.</h1>
                 <p>As home security experts we understand that you want the best home security system! Save money by letting us decide your home security company for you. We compared the top home security companies so you won't have to!  </p>
             </div>
-            <div class="quote-form">
-            <!-- quote form -->
-            {% include "external/homesecuritysystemexperts/quote-form.html" with form=forms.basic %}
+            <div id="top-section">
+                <div class="quote-form">
+                <!-- quote form -->
+                {% include "external/homesecuritysystemexperts/quote-form.html" with form=forms.basic %}
+                </div>
+                <div id="our-choice">
+                    <h1>Our Choice</h1>
+                    <img src="{{ STATIC_URL }}img/external-lp/homesecuritysystemexperts/pa-logo.png" alt="pa-logo" width="116" height="85" />
+                    <p>An all-around top home security company, Protect America is our #1 Choice. Contact us to see why!</p>
+                </div>
             </div>
+            <div class="clear"></div>
             <div id="competitor-chart">
                 <h1>The Results</h1>
                     <table width="100%">
@@ -58,10 +69,18 @@
                         </tr>
                     </table>
             </div>
-            <img style="margin-bottom: 0px; padding-left: 140px" src="{{ STATIC_URL }}img/external-lp/homesecuritysystemexperts/carot.png" alt="carot" width="83" height="17" />
+            <div class="carrot"><img src="{{ STATIC_URL }}img/external-lp/homesecuritysystemexperts/carot.png" alt="carot" width="83" height="10" /></div>
             <div id="should-know">
                 <h1>You Should Know</h1>
                 <p>Upfront equipment price is based on the initial cost to secure your home. The basic monitoring is the amount is charged monthly to protect your home. And warranty is what the company will charge you for adding a warranty to your home security package.</p>
+            </div>
+            <div id="phone-container">
+                <h1>Get Home Security Now</h1>
+                {% if phone_number %}
+                <div id="phone">
+                    Call Today <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
