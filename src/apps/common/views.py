@@ -223,6 +223,8 @@ def index_render(request, template, context):
         return HttpResponseRedirect("/affiliate/a01986/?agent=a01986")
     elif check_agent == 'a02675':
         return HttpResponseRedirect("/affiliate/a02675/?agent=a02675")
+    elif check_agent == 'a03053':
+        return HttpResponseRedirect("/affiliate/a03053/?agent=a03053")
 
     if 'no_mobile' in request.GET:
         request.session['no_mobile'] = True

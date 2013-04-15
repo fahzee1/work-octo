@@ -356,6 +356,9 @@ else:
         # Spanish
         dtt(r'^es/?$', 'spanish/index.html',
             'pa-spanish'),
+        # Hawaii
+        dtt(r'^hialarm/?$', 'affiliates/hialarm/fluid-index.html',
+            'pa-hialarm'),
         # Get Smart Page
         dtt(r'^getsmart/?$', 'mobile/get-smart.html', 'getsmart', 'index', ctx={'agent_id': 'i10288'}),
 
