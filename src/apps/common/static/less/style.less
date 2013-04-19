@@ -327,6 +327,7 @@ a:hover {
     }
 }
 /*** Search Testimonial Results Box ***/
+
 #testimonial-wrapper {
     width: 100%;
     background: url(/static/img/base/testimonial-bg.png) repeat;
@@ -420,8 +421,25 @@ a.button-link {
     }
 
 }
-.phone-alt {
+.button-submit .phone-alt {
     display: inline;
+    a {
+        background: none;
+        color: @red;
+        padding: 0;
+        display: inline;
+        text-shadow: none;
+        float: none;
+        margin-right: 0;
+        font-size: 12px;
+        &:hover {
+            border: none;
+            background: none;
+            background-image: none;
+            .drop-shadow(0,0,0,#000);
+            
+        }
+    }
 }
 button.button-link {
     display: block;
@@ -772,13 +790,24 @@ table#licenses-table {
                 }
             }
             &.big-green {
+                background: #4bba29;
+                margin-left: 4px;
+                .border-radius(0,0,10px,10px);
+                height: 24px;
+                width: 85px;
+                &:hover {
+                    color: @white;
+                    background-color: @blue;
+                }
                 #lpButDivID-1363884338049 {
                     display: block;
-                    width: 78px;
                 }
                 a {
-                    background: #4bba29;
                     color: @white;
+                    background: none;
+                    &:hover {
+                        background: none;
+                    }
                 }
             }
             .yelp-button {
@@ -1148,7 +1177,7 @@ ul#child-navigation {
         padding: 8px;
         p {
             display: block;
-            font-size: 26px;
+            font-size: 22px;
             line-height: 32px;
             font-weight: 400;
             text-align: center;
@@ -1165,7 +1194,7 @@ ul#child-navigation {
             height: 28px;
             line-height: 28px;
             margin: 0 0 8px;
-            width: 251px;
+            width: 98%;
         }
         
     }
@@ -1604,6 +1633,176 @@ ul#child-navigation {
         top: -8px;
     }
 }
+/************* Big Hero Banner Default *****************/
+#big-hero-banner {
+    height: 643px;
+    min-height: 600px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    #hero-wrapper {
+        background: url(/static/img/protectamerica/blue-bg.png) repeat;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 500;
+        min-width: 1024px;
+        h1 {
+            font-weight: 100;
+            color: @white;
+            font-size: 58px;
+            line-height: 58px;
+            padding-top: 30px;
+            padding-left: 7%;
+            text-shadow: 1px 2px 0px #04324c; 
+            
+        }
+        .happy-family {
+            position: absolute;
+            bottom: 70px;
+            left: -1%;
+        }
+        #hero-features {
+            position: absolute;
+            left: 362px;
+            padding-left: 5%;
+            bottom: 354px;
+            width: 42%;
+            height: 140px;
+            overflow: hidden;
+            .consumer-digest {
+                border-left: 1px solid @dark-blue;
+                padding-left: 3%;
+            }
+        }
+        .pricing {
+            position: absolute;
+            left: 372px;
+            padding-left: 5%;
+            bottom: 160px;
+        }
+        .button-submit {
+            position: absolute;
+            left: 413px;
+            padding-left: 5%;
+            bottom: 105px;
+            text-align: left;
+            a {
+                display: block;
+                margin-top: 4px;
+                padding: 8px 60px;
+                .border-radius(3px,3px,3px,3px);
+                background: #00bbf4;
+                text-shadow: 0px 1px 0px #2a6273;
+                color: #ffffff;
+                width: 100px;
+                text-align: center;
+                margin: 10px auto 0;
+                &:hover {
+                    border: 1px solid @blue;
+                }
+            }
+        }
+        #quote-form-new {
+            position: absolute;
+            right: 5%;
+            border: none;
+            background: none;
+            width: 23%;
+            top: 7%;
+            #form-headline {
+                background: url(/static/img/protectamerica/black-shade.png) repeat;
+                color: @white;
+                text-align: center;
+                line-height: 72px;
+                height: 72px;
+                margin-bottom: 8px;
+                font-size: 20px;
+            }
+            #form-area {
+                background: url(/static/img/protectamerica/black-shade.png) repeat;
+                padding: 32px 16px;
+                label {
+                    display: block;
+                    color: @white;
+                    line-height: 16px;
+                    font-size: 14px;
+                    padding-bottom: 4px;
+                }
+                input {
+                    display: block;
+                    margin-bottom: 8px;
+                    height: 22px;
+                    font-size: 14px;
+                    width: 98%;
+                }
+                button {
+                    display: block;
+                    background: #41bb1a;
+                    .border-radius(3px, 3px, 3px, 3px);
+                    height: 42px;
+                    width: 207px;
+                    padding: 0;
+                    margin: 16px auto 8px;
+                    color: @white;
+                    border: 1px solid #0f4707;
+                    font-size: 16px;
+                    cursor: pointer;
+                    cursor: hand;
+                }
+                .privacy-policy {
+                    font-size: 11px;
+                    color: @white;
+                    display: block;
+                    text-align: center;
+                    text-decoration: none;
+                    line-height: 13px;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+            #third-party-container {
+                width: 100%;
+                background: @white;
+                margin-top: 8px;
+                height: 91px;
+            }
+        }
+        #call-box {
+            background: url(/static/img/protectamerica/black-shade.png) repeat;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 0;
+            p {
+                color: @white;
+                font-weight: 100;
+                strong {
+                    color: @white;
+                    font-weight: 100;
+                }
+                span {
+                    font-weight: 100;
+                    color: @white;
+                    a {
+                        color: @white;
+                    }
+                }
+            }
+        }
+    }
+    #hero-backdrop {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        min-width: 1024px;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+}
+
 @import "banners/pop-ups/shipping-popup.less";
 
 

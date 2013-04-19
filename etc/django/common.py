@@ -150,6 +150,8 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 DEFAULT_PHONE = '8009515190'
+SUPER_AFFILIATES = ()
+
 
 GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
 
