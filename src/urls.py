@@ -94,9 +94,7 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
-        dtt(r'^test/touchscreen/?$', 'affiliates/sem-landing-page/test/touchscreen-banner-test.html', 'touchscreen-test'),
         dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
-        dtt(r'^test/no-equip-price/?$', 'affiliates/sem-landing-page/test/no-equipment-price.html', 'bbb-test-B'),
 
     )
 elif settings.SITE_ID == 4:
@@ -306,10 +304,7 @@ else:
     urlpatterns += patterns('',
 
         # Test Pages
-        dtt(r'^test/tcr-first/?$', 'tests/top-consumer-test.html', 'tcr-first-test', 'home'),
-        dtt(r'^test/promotion-first/?$', 'tests/promotion-tcr-banner-test.html', 'promotion-first-test', 'home'),
-        dtt(r'^test/feb-promo/?$', 'tests/feb-test.html', 'february-promo-test', 'home'),
-        dtt(r'^test/adt-promo/?$', 'affiliates/adt-comparison-two/test-599.html', 'adt-promo-test', 'home'),
+        dtt(r'^test/security-packages/?$', 'tests/package-reorder.html', 'package-reorder', 'products'),
 
         url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/?$', 'apps.common.views.index_test', name='index_test'),
 

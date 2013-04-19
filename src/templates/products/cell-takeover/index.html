@@ -2,79 +2,141 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Cellular Monitoring | Existing Home Security System Activation | Protect America{% endblock %}
 {% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
-{% block page_description %}Protect America offers the best wireless home alarm services on pre-installed alarm systems, which ensures no cut phone lines and no new alarm equipment to buy.{% endblock %}
+{% block page_description %}Already have an existing alarm system? Protect America makes it easy to upgrade to cellular monitoring using existing equipment.{% endblock %}
 
 {% block content %}
-<div>
-	<div id="existing-systems">
-    	<div id="old-security-system-image">
-    		<img src="/static/img/products/cell-takeover/old-alarm-panels.jpg" alt="Hard Wire Home Security">
-    	</div>
-    	<div id="existing-system-overview">
-    		<h1>Already have an Existing Security System?</h1>
-    		<p>Protect America provides dedicated home security monitoring for almost any type of pre-installed alarm system. Did you just buy a home with an alarm? Or perhaps you are looking to reactivate your unused home security system? We can help. By using our cellular conversion device, we can take your current home security system and upgrade it with our state-of-the-art cellular monitoring. And there is no need to buy new equipment. With Protect America, you can be assured you get premium home security with a company that is committed to excellence and affordability when it comes to securing your home.</p>
-    		<div class="button-submit">
-    			<a href="{% url order-package %}" title="Click to Upgrade your Existing Alarm System">Get Security for your Existing Alarm System ></a>
-    		</div>
-    	</div>
-	</div>
-    {% include "order/quote-form.html" with form=forms.basic %}
-
-	<div class="clear"></div>
 </div>
-<div>
-	<div id="cellular-connection">
-		<img src="/static/img/products/cell-takeover/black-wire.jpg" class="flood-left" alt="Home Security Wire">
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
+        <h1><span>Already Have Security? </span>Switch and Save!</h1>
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/benefit-bullets.png" id="benefit-bullets" alt="Works with Existing Equipment, Wireless Cellular Technology, No Landline Connection" />
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/existing-price.png" alt="monitoring for existing alarm system starting at $29.99" width="392" height="152" id="price-area" />
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/alarm-systems.png" id="existing alarm system" alt="alarm-systems" />
+        <form id="switch-form" method="post" action="">
+            <p id="form-headline">How Much Do You Save?</p>
+            <div id="save-headline">
+                <p><span>$</span><strong id="save-price">23</strong></p>
+                <h3>per month vs <span id="company-name">ADT</span></h3>
+            </div>
+            <div id="form-area">
+                {% block formfields %}
+                    <label>Current Monthly Bill:</label>
+                    <input value="$42.99" id="monthly-bill" />
+                    <label>Security Provider:</label>
+                    <select id="company-select">
+                        <option>ADT</option>
+                        <option>Brinks</option>
+                        <option>Vivint</option>
+                        <option>Pinnacle</option>
+                        <option>Guardian</option>
+                        <option>Alarm Force</option>
+                        <option>Other</option>
+                    </select>
+                {% endblock %}
+                <button type="button" class="redbutton" id="switch-button">{% block quote-button %}Switch Now{% endblock %}</button>
+                <a href="http://www.protectamerica.com/help/privacy-policy" class="privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+            </div>
+        </form>
+        {% include "order/switch-form.html" with form=forms.basic %}
 
-		<h2>Cellular Connection.<br/>No Cut Phone Line.</h2>
-		<p>When switching to Protect America, your security system is upgraded to connect via a cellular connection. Meaning your home security system works just like a cell phone. If the alarm goes off, authorities are notified without the need of a landline. This eliminates the opportunity for thieves to bypass your protection by simply cutting the wires that lead to your home.</p>
-	</div>
-	<div id="cut-wire-image">
-		<img src="/static/img/products/cell-takeover/wire-cutters.jpg" class="absolute" alt="Wire Cutters">
-
-	</div>
-	<div class="clear"></div>
-</div>
-
-<div>
-	<div id="no-phone-line">
-		<h2>No Phone Line?<br />No Problem.</h2>
-		<p>These days, many people are giving up their home phone in place of a cell phone. But with most alarm systems, giving up your phone means giving up your protection - as they usually require a phone line to dial out to their monitoring station. We say, ditch the phone line and switch to cellular with our cellular conversion device. With this new device, your alarm system will be upgraded to work like a cell phone - wirelessly contacting our monitoring station during any sign of trouble. And best of all, it saves you money. You will no longer need that phone line just for your alarm system, and our monitoring rates are cheaper then those other guys.</p>
-	</div>
-	<div class="clear"></div>
-</div>
-    {% include "order/call-box.html" %}
-{% testimonial_search "art" "limit=10&words=75" %}
-
-<div>
-	<div id="helpful-tech-support">
-		<img src="/static/img/products/cell-takeover/hi-bubble.jpg" alt="Cellular Take Over">
-
-		<h3>Friendly and Helpful Step-By-Step Tech Support</h3>
-		<p>As a Protect America customer, you have access to our technical support professionals to help you with whatever home security questions you may have. We want to make sure you are safe and comfortable in your home.</p>
-	</div>
-	<div id="save-money">
-		<img src="/static/img/products/cell-takeover/piggy-bank.jpg" alt="Home Security Savings">
-
-		<h3>Protecting your Family while Saving Money</h3>
-		<p>Compared to the leading home security companies, we have some of the best monitoring rates around. There is no extra equipment to buy. And with the cellular connection you can ditch that extra phone line.</p>
-	</div>
-	<div id="nationwide-coverage">
-		<img src="/static/img/products/cell-takeover/united-states.jpg" alt="Nation Wide Home Security">
-
-		<h3>Full Nationwide Coverage</h3>
-		<p>Protect America is proud to serve all 50 states with a commitment to excellence and affordability when it comes to securing your home. We are one of the fastest growing home security companies in America with customers coast to coast!.</p>
-	</div>
-
+        {% if phone_number %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+    
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="Security For Every Home" id="hero-backdrop" />
 </div>
 
+<div class="wrapper">
+    <div id="how-it-works">
+        <h2>Upgrading is Easy; How It Works:</h2>
+
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-one-existing-system.jpg" alt="Step One: Use your Existing System" width="193" height="193" />
+                <h2>{% block security-choice-one %}Use Your Existing Alarm System{% endblock %}</h2>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-two-cellular-module.jpg" alt="Step Two: Plug in our Cellular Module Upgrade" width="193" height="193" />
+                <h2>{% block security-choice-two %}Plug in Our Cellular Module{% endblock %}</h2>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/products/cell-takeover/step-three-secure-home.jpg" alt="Step Three: Save Money!" width="193" height="193" />
+                <h2>{% block security-choice-three %}Enjoy a Secured Home and Save Money{% endblock %}</h2>
+            </li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div id="cellular-technology">
+        <div id="extra-information">
+            <img src="{{ STATIC_URL }}img/products/cell-takeover/black-wire.jpg" id="black-wire" alt="No Landline Required" width="1200" height="125" />
+            <h2>Reliable Cellular Techonlogy</h2>
+            <p>When switching to Protect America, your security is upgraded to cellular technology.  When your alarm is triggered, your security system works just like a cell phone, wirelessly contacting police with any sign of trouble.  Our Cellular Module provides the same great protection, without breaking the bank.</p>
+            <h2>Save More; <br />Ditch the Landline</h2>
+            <p>Many homeowners keep a separate landline telephone just for their alarm system.  By switching to Protect America, that extra landline is no longer needed.  We say cut the phone line, and save even more money.</p>
+            <div class="button-submit">
+                <a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now</a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home.</p>{% endbusinesstime %}
+            </div>
+        </div>
+        <div id="cut-wire">
+            <img src="{{ STATIC_URL }}img/products/cell-takeover/wire-cutters.jpg" alt="Wire Cutters" width="350" height="643" />
+        </div>
+    </div>
+</div>
+{% testimonial_search "affordable" "limit=10&words=75" %}
+    <div id="just-moved-in">
+        <h2>Just Moved In?</h2>
+        <p>Many homes come preinstalled with an alarm system. Protect America makes it easy and affordable to protect your new home. Just give us a call and our security experts can help monitor your existing home security system.</p>
+        <div class="button-submit">
+            <a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now</a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home.</p>{% endbusinesstime %}
+        </div>
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/new-home.jpg" id="new-home" alt="Add Monitoring For Existing Alarm System" width="496" height="440" />
+    </div>
+</div>
+<div id="big-grass">&nbsp;</div>
 
 {% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/countTo.js"></script>
+
     <script type="text/javascript">
     $(document).ready(function() {
+        var currentPrice = 19.99;
         $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000
+        });
+        $('input').keypress(function(e) { if(e.keyCode == 13){ e.preventDefault();} });
+
+        $(document).on('click', '#switch-button', function(e){
+            e.preventDefault
+            $('#switch-form').fadeOut();
+            $('#quote-form-new').fadeIn();
+            var newBill = $('#monthly-bill').val();
+            var selectCompany = $('#company-select').val();
+            $('#switch-package-line').val('Currently has '+ selectCompany +' at a rate of '+newBill);
+
+        });
+        $('#monthly-bill').change(function() {
+            var newBill = $('#monthly-bill').val();
+            if (newBill > 999) {
+                alert('Really? You really need to call us because you are paying way too much.');
+            };
+            var newBillSplit = newBill.replace('$', '');
+            var newSavings = newBillSplit - currentPrice;
+            oldSavings = $('#save-price').text();
+            oldSavings = parseInt(oldSavings);
+            newSavings = parseInt(newSavings);
+            $('#save-price').countTo({from: oldSavings, to: newSavings, speed: 500});
+
+        });
+        $('#company-select').change(function() {
+            var selectCompany = $('#company-select').val();
+            $('#company-name').text(selectCompany);
         });
     });
     </script>
