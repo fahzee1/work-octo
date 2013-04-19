@@ -300,6 +300,13 @@ elif settings.SITE_ID == 22:
         dtt(r'^thank-you/$', 'external/homesecuritysystemexperts/thanks.html', 'thank_you'),   
     )
     
+# freecrimestats.com
+elif settings.SITE_ID == 23:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/freecrimestats/thanks.html', 'thank_you'),   
+    )
+    
 else:
     urlpatterns += patterns('',
 
