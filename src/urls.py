@@ -307,6 +307,12 @@ elif settings.SITE_ID == 23:
         dtt(r'^thank-you/$', 'external/freecrimestats/thanks.html', 'thank_you'),   
         dtt(r'^state-page/$', 'external/freecrimestats/state-page.html', 'state-page'),   
         dtt(r'^city-page/$', 'external/freecrimestats/city-page.html', 'city-page'),   
+        dtt(r'^results/$', 'external/freecrimestats/results.html', 'results'),   
+        dtt(r'^burglary/$', 'external/freecrimestats/burglary.html', 'burglary'),   
+        dtt(r'^robbery/$', 'external/freecrimestats/robbery.html', 'robbery'),   
+        dtt(r'^motor-vehicle-theft/$', 'external/freecrimestats/motor-vehicle-theft.html', 'motor-vehicle-theft'),   
+        dtt(r'^violent-crime/$', 'external/freecrimestats/violent-crime.html', 'violent-crime'),   
+        dtt(r'^larceny/$', 'external/freecrimestats/larceny.html', 'larceny'),   
     )
     
 else:
