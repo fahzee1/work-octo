@@ -304,7 +304,7 @@ elif settings.SITE_ID == 22:
 elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
-        dtt(r'^thank-you/$', 'external/freecrimestats/thanks.html', 'thank_you'),   
+        dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),   
         dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),   
         dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),   
         dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),   
