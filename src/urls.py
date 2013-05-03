@@ -279,6 +279,45 @@ elif settings.SITE_ID == 19:
         dtt(r'^$', 'external/get-free-security/index.html', 'home'),
     )
     
+# simonxtinstall.com
+elif settings.SITE_ID == 20:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/simon-xt-install/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/simon-xt-install/thanks.html', 'thank_you'),    
+    )
+    
+# nationalhomesecuritycompany.com
+elif settings.SITE_ID == 21:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/national-home-security-company/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/national-home-security-company/thanks.html', 'thank_you'),   
+    )
+    
+# homesecuritysystemexperts.com
+elif settings.SITE_ID == 22:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/homesecuritysystemexperts/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/homesecuritysystemexperts/thanks.html', 'thank_you'),   
+    )
+    
+# freecrimestats.com
+elif settings.SITE_ID == 23:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
+        dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),   
+        dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),   
+        dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),   
+        dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),   
+        dtt(r'^state-page/$', 'external/freecrimestats/state-page.html', 'state-page'),   
+        dtt(r'^city-page/$', 'external/freecrimestats/city-page.html', 'city-page'),   
+        dtt(r'^results/$', 'external/freecrimestats/results.html', 'results'),   
+        dtt(r'^burglary/$', 'external/freecrimestats/burglary.html', 'burglary'),   
+        dtt(r'^robbery/$', 'external/freecrimestats/robbery.html', 'robbery'),   
+        dtt(r'^motor-vehicle-theft/$', 'external/freecrimestats/motor-vehicle-theft.html', 'motor-vehicle-theft'),   
+        dtt(r'^violent-crime/$', 'external/freecrimestats/violent-crime.html', 'violent-crime'),   
+        dtt(r'^larceny/$', 'external/freecrimestats/larceny.html', 'larceny'),   
+    )
+    
 else:
     urlpatterns += patterns('',
 

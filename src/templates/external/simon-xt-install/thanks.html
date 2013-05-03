@@ -1,0 +1,60 @@
+{% extends "external/simon-xt-install/base.html" %}
+{% load content_filters content_tags sekizai_tags %}
+
+{% block page_title %}Thank You for Requesting a Quote | Alarm Zone{% endblock %}
+{% block page_description %}You are one step closer to securing your home! Thanks for choosing Alamzone for your home security. We've received your request for a free security quote and one of our security professionals will be contacting you within 24 hours.{% endblock %}
+{% block page_keywords %}home security, home alarm quotes, alarm system quotes{% endblock %}
+
+
+{% block content %}
+<div id="header-wrapper">
+    <div id="header-yellow">
+        <div class="title-page">SimonXTinstall.com</div>
+        <div class="ge-logo">
+            <img src="{{ STATIC_URL }}img/external-lp/simon-xt-install/ge-logo.png" alt="ge-logo" width="147" height="43" />
+        </div>
+    </div>
+    <div id="hero-image">
+        <h1>Installing your alarm system just got a little bit easier.</h1>
+    </div>
+    <div id="light-grey-intro">
+        <div class="yellow-call-out2">
+            <h1>Thank you your information was received! Our security experts will contact you shortly.</h1>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="phone-container">
+    {% if phone_number %}
+        <div id="phone">
+            Call Today <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a>
+        </div>
+    {% endif %}
+    <div class="clear"></div>
+    </div>
+</div>
+<div id="footer">
+    <p style="padding-top: 15px;">*SimonXTinstall.com is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit Standard home security alarm monitoring agreement. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
+    <p style="padding-bottom: 15px;">* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited. GE and GE Security logos are registered trademarks of General Electric.</p>
+</div>
+{% endblock %}
+
+{% addtoblock "js" %}
+<!-- Google Code for Lead Conversion Page -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1065718014;
+var google_conversion_language = "en_US";
+var google_conversion_format = "3";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "EkgbCPqZURD-oZb8Aw";
+var google_conversion_value = 0;
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1065718014/?value=0&amp;label=EkgbCPqZURD-oZb8Aw&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+{% endaddtoblock "js" %}
