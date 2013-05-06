@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Home Security System Expert | Home Security Reviews{% endblock %}
+{% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
+{% block google_analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5441302-16']);
+  _gaq.push(['_setDomainName', 'freecrimestats.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{% endblock %}
+
+{% block css %} 
+<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+<script type="text/javascript" src="//use.typekit.net/byd5lqe.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/freecrimestats.css">
+
+{% endblock %}
+
+{% block typekit %}tk-jaf-facitweb{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+{% block content %}
+<div id="blue-wrapper">
+    <div class="logo">
+        <img src="{{ STATIC_URL }}img/external-lp/homesecuritysystemexperts/logo.png" alt="logo" width="160" height="83" />
+    </div>
+</div>
+<div id="main-container">
+    <div id="main-content-container">
+        <div id="transparent-container">
+            <div class="intro-para">
+                <h1>Your Security Matters to Us.</h1>
+                <p>As home security experts we understand that you want the best home security system! Save money by letting us decide your home security company for you. We compared the top home security companies so you won't have to!  </p>
+            </div>
+            <div id="top-section">
+                <div class="quote-form">
+                <!-- quote form -->
+                {% include "external/homesecuritysystemexperts/quote-form.html" with form=forms.basic %}
+                </div>
+                <div id="our-choice">
+                    <h1>Our Choice</h1>
+                    <img src="{{ STATIC_URL }}img/external-lp/homesecuritysystemexperts/pa-logo.png" alt="pa-logo" width="116" height="85" />
+                    <p>An all-around top home security company, Protect America is our #1 Choice. Contact us to see why!</p>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div id="competitor-chart">
+                <h1>The Results</h1>
+                    <table width="100%">
+                        <tr class="dark-grey">
+                            <td>The Company</td>
+                            <td width="100px;">Upfront Equipment Cost</td>
+                            <td>Monthly Cost</td>
+                            <td>Warranty</td>
+                        </tr>
+                        <tr class="light-blue">
+                            <td>Protect America</td>
+                            <td>FREE</td>
+                            <td>$19.99/mo.</td>
+                            <td>FREE</td>
+                        </tr>
+                        <tr class="light-grey">
+                            <td>Comcast</td>
+                            <td>$199.00/mo.</td>
+                            <td>$39.95/mo.</td>
+                            <td>$4.95/mo.</td>
+                        </tr>
+                        <tr class="light-blue2">
+                            <td>ADT</td>
+                            <td>$349.00/mo.</td>
+                            <td>$42.99/mo.</td>
+                            <td>$6/mo.</td>
+                        </tr>
+                        <tr class="light-grey">
+                            <td>Vivint</td>
+                            <td>$99/mo.</td>
+                            <td>$49.99/mo.</td>
+                            <td>Limited</td>
+                        </tr>
+                        <tr class="light-blue2">
+                            <td>FrontPoint</td>
+                            <td>$410.93/mo.</td>
+                            <td>$49.99/mo.</td>
+                            <td>Extremely Limited</td>
+                        </tr>
+                    </table>
+            </div>
+            <div class="carrot"><img src="{{ STATIC_URL }}img/external-lp/homesecuritysystemexperts/carot.png" alt="carot" width="83" height="17" /></div>
+            <div id="should-know">
+                <h1>You Should Know</h1>
+                <p>Upfront equipment price is based on the initial cost to secure your home. The basic monitoring is the amount is charged monthly to protect your home. And warranty is what the company will charge you for adding a warranty to your home security package.</p>
+            </div>
+            <div id="phone-container">
+                <h1>Get Home Security Now</h1>
+                {% if phone_number %}
+                <div id="phone">
+                    Call Today <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <p style="padding-top: 15px;">*homesecuritysystemexperts.com is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit Standard home security alarm monitoring agreement. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
+    <p style="padding-bottom: 15px;">* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited. GE and GE Security logos are registered trademarks of General Electric.</p>
+</div>
+
+{% endblock %}
+{% block order-footer %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block subnav %}
+{% endblock %}
