@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 urlpatterns = patterns('',
-    url(r'^$', 'apps.sitemaps.views.index', name='sitemap'),
+    url(r'^$', 'apps.sitemaps.sitemap_dyn.index', name='sitemap'),
 )
 urlpatterns += patterns('django.views.generic.simple',
     url(r'^index.xml$', 'direct_to_template', {

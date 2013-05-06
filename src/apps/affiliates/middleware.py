@@ -67,7 +67,19 @@ class AffiliateMiddleware(object):
         affiliate = None
         current_cookie = request.COOKIES.get('refer_id', None)
         current_source = request.COOKIES.get('source', None)
-        if current_cookie is None:
+        check_agent_request = request.GET.get('agent', None)
+        print 'testing {0}'.format(check_agent_request)
+        if check_agent_request in settings.SUPER_AFFILIATES:
+            try:
+                affiliate = Affiliate.objects.get(agent_id=check_agent_request)
+                request.session['refer_id'] = affiliate.agent_id
+                request.session['source'] = affiliate.name
+                current_cookie = None
+                current_source = None
+            except Affiliate.DoesNotExist:
+                pass
+
+        elif current_cookie is None:
             refer_id = request.session.get('refer_id', None)
             if refer_id is not None:
                 try:

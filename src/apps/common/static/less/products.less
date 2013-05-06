@@ -23,17 +23,53 @@
 }
 
 /**** The Packages Page ****/
-body.products {
+
+body.products, body.package-reorder {
     .wrapper {
         padding: 0;
     }
     .big-wrapper {
-        width: 1024px;
+        width: 960px;
         margin: 0 auto;
     }
     #security-information {
         width: 960px;
         margin: 0 auto;
+    }
+    .button-submit {
+        padding-top: 0;
+        a {
+            background: #00bbf4;
+            padding: 8px 64px;
+            .border-radius(5px, 5px, 5px, 5px);
+            color: @white;
+            font-size: 16px;
+            text-shadow: 0px 1px 0px #2a6273;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            float: left;
+            margin-right: 8px;
+        }
+        p {
+            padding-top: 8px;
+            display: block;
+            line-height: 52px !important;
+            a {
+                background: none;
+                color: @red;
+                padding: 0;
+                display: inline;
+                text-shadow: none;
+                float: none;
+                margin-right: 0;
+                font-size: 12px;
+                &:hover {
+                    border: none;
+                    .drop-shadow(0,0,0,#000);
+                    
+                }
+            }
+        }
     }
     #one-hundred-percent {
         width: 593px;
@@ -54,26 +90,10 @@ body.products {
         p {
             padding-bottom: 16px;
         }
-        .button-submit {
-            padding-top: 0;
-            a {
-                background: #00bbf4;
-                padding: 8px 64px;
-                .border-radius(5px, 5px, 5px, 5px);
-                color: @white;
-                font-size: 16px;
-                text-shadow: 0px 1px 0px #2a6273;
-                margin-top: 16px;
-                margin-bottom: 8px;
-                float: left;
-                margin-right: 8px;
-            }
-            p {
-                padding-top: 8px;
-                display: block;
-                line-height: 52px;
-            }
-        }
+
+    }
+    #big-choices {
+        width: 100%;
     }
     #home-security-package-choices {
         background: url(/static/img/spanish/home-security-bg.png) repeat;
@@ -121,7 +141,7 @@ body.products {
             }
             #home-security-overview {
                 float: left;
-                width: 568px;
+                width: 504px;
                 padding: 0 16px;
         
             }
@@ -130,7 +150,7 @@ body.products {
 
     #home-security-packages {
         #copper-security-package, #bronze-security-package, #silver-security-package, #gold-security-package, #platinum-security-package {
-            width: 173px;
+            width: 166px;
             float: left;
             .border-radius(5px, 5px, 5px, 5px);
             overflow: hidden;
@@ -180,7 +200,7 @@ body.products {
                 }
             }
             .package-info {
-                background: @white url(/static/img/canada/basic-package-background.jpg) no-repeat;
+                background: @white url(/static/img/canada/basic-package-background.jpg) center top no-repeat;
                 height: 312px;
                 position: relative;
                 ul {
@@ -188,7 +208,7 @@ body.products {
                     line-height: 32px;
                     li {
                         text-align: center;
-                        font-size: 12px;
+                        font-size: 11px;
                         line-height: 20px;
                         padding-bottom: 6px;
                         strong {
@@ -208,7 +228,7 @@ body.products {
                         bottom: 58px;
                         left: 7px;
                         li {
-                            font-size: 12px;
+                            font-size: 11px;
                             color: @grey;
                             text-transform: uppercase;
                             line-height: 16px;
@@ -227,7 +247,7 @@ body.products {
             }
         }
         #copper-security-package, #bronze-security-package {
-            margin-top: 56px;
+            margin-top: 48px;
         }
         #standard-security-package {
             margin: 0 29px;
@@ -259,15 +279,16 @@ body.products {
             margin-right: 8px;
             float: left;
             background: #000;
-            padding: 8px 8px 0 8px;
-            width: 642px;
+            padding: 8px 4px 0 8px;
+            width: 600px;
             .border-radius(3px, 3px, 3px, 3px);
             background: url(/static/img/canada/premium-package-bg.jpg) repeat-x;
             .premium-packages-header {
                 display: block;
+                margin: 0 auto;
             }
             #silver-security-package, #gold-security-package, #platinum-security-package {
-                width: 210px;
+                width: 196px;
                 h3, p {
                     width: 210px;
                 }
@@ -361,7 +382,7 @@ body.products {
     .big-info {
         padding: 16px 0;
         .big-wrapper {
-            width: 1024px;
+            width: 960px;
             margin: 0 auto;
             position: relative;
         }
@@ -407,7 +428,7 @@ body.products {
             #customize-content {
                 margin-top: 16px;
                 float: left;
-                width: 574px;
+                width: 504px;
                 margin-left: 48px;
             }
         }
@@ -423,7 +444,7 @@ body.products {
                     width: 280px;
                     text-align: center;
                     border-right: 1px solid @light-grey;
-                    margin-right: 48px;
+                    margin-right: 24px;
                     h3 {
                         background: none;
                         display: block;
@@ -436,7 +457,7 @@ body.products {
                     }
                 }
                 .add-on {
-                    width: 640px;
+                    width: 618px;
                     background: #555;
                     .border-radius(5px,5px,5px,5px);
                     float: left;
@@ -544,7 +565,6 @@ body.products {
         padding-top: 16px;
         #comparison-table {
             width: 960px;
-            margin: 0 auto;
             th {
                 text-align: center;
                 color: @white;
@@ -660,7 +680,7 @@ body.products {
             }
             #home-security-overview {
                 float: left;
-                width: 568px;
+                width: 504px;
                 padding: 0 16px;
         
             }
@@ -1472,44 +1492,247 @@ body.advantage {
 
 /************** Existing Systems ****************/
 body.cell-takeover {
-    #existing-systems {
-        .content-box(664px);
-    }
-    #existing-system-overview {
-        .content-box(400px);
-        .text-compensate(300px);
-        padding-left: 250px;
-        padding-top: 16px;
-    }
-    #old-security-system-image {
-        .image-break(-300px);
-    }
-    #cellular-connection {
-        .half-box;
-        .text-bump(120px);
-        img {
-            padding-right: 0;
-        }
-    }
-    #cut-wire-image {
-        .half-box;
-    }
-    #no-phone-line {
-        .half-box;
-        .text-compensate(300px);
-    }
-    #nationwide-coverage, #helpful-tech-support, #save-money {
-        .third-box;
-        text-align: center;
-        h3 {
-          margin-bottom: 10px;
-          padding: 0 16px;
+    .button-submit {
+        padding-top: 0;
+        a {
+            background: #00bbf4;
+            padding: 8px 64px;
+            .border-radius(5px, 5px, 5px, 5px);
+            color: @white;
+            font-size: 16px;
+            text-shadow: 0px 1px 0px #2a6273;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            float: left;
+            margin-right: 8px;
         }
         p {
-            padding: 0 16px;
-            font-size: 14px;
-            line-height: 22px;
+            padding-top: 8px;
+            display: block;
+            line-height: 52px !important;
+            a {
+                background: none;
+                color: @red;
+                padding: 0;
+                display: inline;
+                text-shadow: none;
+                float: none;
+                margin-right: 0;
+                font-size: 12px;
+                &:hover {
+                    border: none;
+                    .drop-shadow(0,0,0,#000);
+                    
+                }
+            }
         }
+    }
+    #big-hero-banner {
+        #hero-wrapper {
+            h1 {
+                font-size: 65px;
+                line-height: 76px;
+                span {
+                    display: block;
+                    font-size: 42px;
+                    line-height: 48px;
+                }
+            }
+            #benefit-bullets {
+                position: absolute;
+                left: 30%;
+                top: 30%;
+            }
+            #price-area {
+                position: absolute;
+                left: 30%;
+                top: 59%;
+            }
+            #front-hero-image {
+                position: absolute;
+                right: 71%;
+                bottom: 12%;
+                
+            }
+        }
+        #hero-backdrop {
+            height: auto;
+            bottom: 0;
+            top: auto;
+        }
+        #quote-form-new {
+            display: none;
+        }
+        #switch-form {
+            position: absolute;
+            right: 5%;
+            border: none;
+            background: none;
+            width: 23%;
+            top: 7%;
+            #form-headline {
+                background: url(/static/img/protectamerica/black-shade.png) repeat;
+                color: @white;
+                text-align: center;
+                line-height: 72px;
+                height: 72px;
+                margin-bottom: 8px;
+                font-size: 18px;
+            }
+            #save-headline {
+                background: url(/static/img/protectamerica/black-shade.png) repeat;
+                color: @white;
+                text-align: center;
+                margin-bottom: 8px;
+
+                height: 148px;
+                p {
+                    letter-spacing: 0;
+                    font-size: 92px;
+                    line-height: 96px;
+                    font-weight: bold;
+
+                    span {
+                        font-size: 32px;
+                        vertical-align: text-top;
+                        font-weight: normal;
+                        line-height: 76px;
+                        
+                    }
+                }
+                h3 {
+                    font-size: 12px;
+                    line-height: 14px;
+                }
+
+            }
+            #form-area {
+                background: url(/static/img/protectamerica/black-shade.png) repeat;
+                padding: 32px 16px;
+                label {
+                    display: block;
+                    color: @white;
+                    line-height: 16px;
+                    font-size: 14px;
+                    padding-bottom: 4px;
+                }
+                input {
+                    display: block;
+                    margin-bottom: 8px;
+                    height: 28px;
+                    font-size: 18px;
+                    width: 98%;
+                }
+                select {
+                    display: block;
+                    margin-bottom: 8px;
+                    font-size: 18px;
+                    width: 98%;
+                }
+                button {
+                    display: block;
+                    background: #41bb1a;
+                    .border-radius(3px, 3px, 3px, 3px);
+                    height: 42px;
+                    width: 207px;
+                    padding: 0;
+                    margin: 16px auto 8px;
+                    color: @white;
+                    border: 1px solid #0f4707;
+                    font-size: 16px;
+                    cursor: pointer;
+                    cursor: hand;
+                }
+                .privacy-policy {
+                    font-size: 11px;
+                    color: @white;
+                    display: block;
+                    text-align: center;
+                    text-decoration: none;
+                    line-height: 13px;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    #how-it-works {
+        .content-box;
+        margin-top: 16px;
+        h2 {
+            margin-bottom: 16px;
+            padding-left: 32px;
+        }
+        .left-piece, .right-piece {
+            position: absolute;
+            font-size: 300px;
+            left: -107px;
+            color: @v-light-grey;
+            font-weight: 100;
+            top: 135px;
+            z-index: -1;
+        }
+        .right-piece {
+            left: auto;
+            right: -107px;
+        }
+        ul {
+            li {
+                float: left;
+                width: 320px;
+                text-align: center;
+                h2 {
+                    font-size: 24px;
+                    line-height: 28px;
+                    padding: 16px 32px;
+                    font-weight: 200;
+                }
+            }
+        }
+    }
+    #cellular-technology {
+        #extra-information {
+            float: left;
+            .content-box(610px);
+            position: relative;
+            padding-top: 140px;
+            #black-wire {
+                position: absolute;
+                right: 0;
+                z-index: -1;
+                top: 10px;
+            }
+            h2 {
+                padding-top: 16px;
+            }
+        }
+        #cut-wire {
+            width: 350px;
+            float: right;
+            padding-top: 20px;
+        }
+    }
+    #just-moved-in {
+        .content-box(640px);
+        float: right;
+        height: 475px;
+        padding-top: 64px;
+        #new-home {
+            position: absolute;
+            left: -401px;
+            bottom: 0;
+            z-index: -1;
+        } 
+    }
+    #big-grass {
+        width: 100%;
+        height: 120px;
+        background: url(/static/img/products/cell-takeover/grass.jpg) repeat-x;
+        position: relative;
+        left: 0;
+        z-index: -1;
+        top: 409px;
     }
 }
 /************** GPS Vehicle Tracking ****************/

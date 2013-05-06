@@ -19,6 +19,8 @@
     <meta name="resource-type" content="document" />
     <meta http-equiv="imagetoolbar" content="false" />
     <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
+
     {% block favicon %}
     <link rel="icon" href="http://www.protectamerica.com/favicon.ico" />
     <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico" />
@@ -27,6 +29,8 @@
     <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
     {% endif %}{% endblock %}{% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css?version=2-4-6">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 {% endblock %}
 {% render_block "css" %}
@@ -49,9 +53,15 @@
 <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
-</head>
 {% block bing-conversion-code %}{% endblock %}
-<body class="{{ page_name }} {% block typekit %}tk-facitweb{% endblock %}">
+
+</head>
+<body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
+<!-- BEGIN LivePerson Monitor. -->
+<script type="text/javascript">
+if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',protocol:location.protocol,events:{bind:function(app,ev,fn){lpTag.defer(function(){lpTag.events.bind(app,ev,fn)},0)},trigger:function(app,ev,json){lpTag.defer(function(){lpTag.events.trigger(app,ev,json)},1)}},defer:function(fn,fnType){if(fnType==0){this._defB=this._defB||[];this._defB.push(fn)}else if(fnType==1){this._defT=this._defT||[];this._defT.push(fn)}else{this._defL=this._defL||[];this._defL.push(fn)}},load:function(src,chr,id){var t=this;setTimeout(function(){t._load(src,chr,id)},0)},_load:function(src,chr,id){var url=src;if(!src){url=this.protocol+'//'+((this.ovr&&this.ovr.domain)?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site}var s=document.createElement('script');s.setAttribute('charset',chr?chr:'UTF-8');if(id){s.setAttribute('id',id)}s.setAttribute('src',url);document.getElementsByTagName('head').item(0).appendChild(s)},init:function(){this._timing=this._timing||{};this._timing.start=(new Date()).getTime();var that=this;if(window.attachEvent){window.attachEvent('onload',function(){that._domReady('domReady')})}else{window.addEventListener('DOMContentLoaded',function(){that._domReady('contReady')},false);window.addEventListener('load',function(){that._domReady('domReady')},false)}if(typeof(window._lptStop)=='undefined'){this.load()}},_domReady:function(n){if(!this.isDom){this.isDom=true;this.events.trigger('LPT','DOM_READY',{t:n})}this._timing[n]=(new Date()).getTime()}};lpTag.init()}
+</script>
+<!-- END LivePerson Monitor. -->
 <!-- Page Wrapper -->
 {% block header %}
 <div id="header">
@@ -72,7 +82,11 @@
                 <li class="international">
                     {% block international-main %}<img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> EN <img src="{{ STATIC_URL }}img/external/flags/arrow-selector.png" class="arrow-selector" alt="arrow-selector" />{% endblock %}
                 </li>                
-                <li class="big-green"><a href="#customer-service" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Customer Service', 'Quick Links Customer Service Click', 'Header']);" id="security-agreement">Customer Service</a></li>
+                <li class="big-green">
+                    <!-- BEGIN LivePerson Button Code -->
+                    <span id="lpButDivID-1363884338049"></span>
+                    <!-- END LivePerson Button code -->
+                </li>
 
                 <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
                 
@@ -84,14 +98,7 @@
                     {% endblock %}
 
                 </div>
-                <div id="customer-service-box">
-                    <p>Customer CARE Online Chat</p>
-                    <div class="button-link">
-                        <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat Online with a Security Expert" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Quick Links Chat Online Click', 'Header']);" id="security-agreement">Online Chat</a>
-                    </div>
-                    <p class="customer-care">Call Customer CARE</p>
-                    <a href="tel:{{ phone_number|format_number }}" class="phone-number">1-800-951-5111 &bull; Option 4</a>
-                </div>
+
             </ul>
             {% endblock %}
             <!--<div class="clear"></div>-->
@@ -431,7 +438,7 @@
 {% block terms %}
 <div id="legal-bit">
     <div id="terms-conditions">
-        <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 02/28/2013</p>
+        <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 04/30/2013</p>
         <p>* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
         {% block extra_terms %}
         {% endblock %}
@@ -522,8 +529,8 @@ var google_conversion_value = 0;
 <!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
 <img src="http://ads.bluelithium.com/pixel?id=1732074&t=2" width="1" height="1" />
 <!-- End of segment tag -->
+                    <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
 
-<!-- BEGIN LivePerson Monitor. --><script language='javascript'> var lpMTagConfig = {'lpServer' : "server.iad.liveperson.net",'lpNumber' : "34774121",'lpProtocol' : "https"}; function lpAddMonitorTag(src){if(typeof(src)=='undefined'||typeof(src)=='object'){src=lpMTagConfig.lpMTagSrc?lpMTagConfig.lpMTagSrc:'/hcp/html/mTag.js';}if(src.indexOf('http')!=0){src=lpMTagConfig.lpProtocol+"://"+lpMTagConfig.lpServer+src+'?site='+lpMTagConfig.lpNumber;}else{if(src.indexOf('site=')<0){if(src.indexOf('?')<0)src=src+'?';else src=src+'&';src=src+'site='+lpMTagConfig.lpNumber;}};var s=document.createElement('script');s.setAttribute('type','text/javascript');s.setAttribute('charset','iso-8859-1');s.setAttribute('src',src);document.getElementsByTagName('head').item(0).appendChild(s);} if (window.attachEvent) window.attachEvent('onload',lpAddMonitorTag); else window.addEventListener("load",lpAddMonitorTag,false);</script><!-- END LivePerson Monitor. -->
 {% endif %}
 </body>
 </html>

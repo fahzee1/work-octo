@@ -11,9 +11,10 @@
 <div id="big-choices">
     <div id="home-security-package-choices" style="display:block">
         <div class="big-wrapper">
+        {% block packages %}
             <div id="home-security-packages">
                 <div class="premium-packages">
-                    <img src="{{ STATIC_URL }}img/canada/premium-packages-header.png" class="premium-packages-header" alt="premium-packages-header" />
+                    <img src="{{ STATIC_URL }}img/canada/premium-packages-header.png" class="premium-packages-header" alt="Premium Security Packages" />
                     <div id="platinum-security-package">
                         <h3>Platinum</h3>
                         <p><sup>$</sup>42<sup>99</sup><span>monthly</span></p>
@@ -59,7 +60,9 @@
                             </ul>
                         </div>
                     </div>
-                    <img src="{{ STATIC_URL }}img/canada/smart-connect-banner.png" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" width="639" height="72" />
+                    <a href="{% url interactive-control %}" title="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!">
+                        <img src="{{ STATIC_URL }}img/banners/596x80/arm-disarm-smart-connect.jpg" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" />
+                    </a>
                     <div class="clear"></div>
                 </div>
                 <div id="bronze-security-package">
@@ -94,6 +97,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
+        {% endblock %}
             <div class="clear"></div>
         </div>
     </div>
@@ -122,29 +126,29 @@
         </div>
         {% include "order/quote-form-noview.html" with form=forms.basic %}
         <div class="clear"></div>
-        <img src="{{ STATIC_URL }}img/products/no-cost-banner.png" id="" alt="no-cost-banner" width="960" height="77" />
+        <img src="{{ STATIC_URL }}img/products/no-cost-banner.png" id="" alt="No Activation Fees, No Installation Fees, No Equipment Cost" width="960" height="77" />
     </div>
     <div id="security-categories">
         <ul>
             <li id="alarm-category" class="security-choice active">
-                <img src="{{ STATIC_URL }}img/extra/big-money-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <img src="{{ STATIC_URL }}img/extra/big-money-icon.png" alt="Comparing Protect America and ADT" width="193" height="193" />
                 <h2>{% block security-choice-one %}Security System<br/>Price Comparison{% endblock %}</h2>
                 <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More ></a></div>
             </li>
             <li id="video-category" class="security-choice">
-                <img src="{{ STATIC_URL }}img/extra/big-home-plus-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <img src="{{ STATIC_URL }}img/extra/big-home-plus-icon.png" alt="Home Security For Your Home" width="193" height="193" />
                 <h2>{% block security-choice-two %}Customizable Security Systems{% endblock %}</h2>
                 <div class="button-link"><a href="#video-security" id="video-button-choice"  onclick="showSlide(2);">Learn More ></a></div>
             </li>
             <li id="smart-app-category" class="security-choice">
-                <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
+                <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="Home Security on Your iPhone" width="193" height="193" />
                 <h2>{% block security-choice-three %}SMART Connect </br>On The Go App{% endblock %}</h2>
                 <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice" onclick="showSlide(3);">Learn More ></a></div>
             </li>
             <div class="clear"></div>
         </ul>
         <img src="{{ STATIC_URL }}img/spanish/color-band.png" id="color-band" alt="Color Band" width="1030" height="80" />
-        <img src="{{ STATIC_URL }}img/spanish/white-arrow.png" id="white-arrow" alt="Color Band" />
+        <img src="{{ STATIC_URL }}img/spanish/white-arrow.png" id="white-arrow" alt="White Arrow" />
 
     </div>
 </div>
@@ -155,7 +159,7 @@
     
             <div id="home-security-info">
                 <div id="home-security-main-image">
-                    <img src="{{ STATIC_URL }}img/canada/lowest-price-home-security.jpg" alt="lowest-price-home-security" width="316" height="240" />
+                    <img src="{{ STATIC_URL }}img/canada/lowest-price-home-security.jpg" alt="Lowest Price in Security Guaranteed" width="316" height="240" />
                 </div>
                 <div id="home-security-overview">
                     <h2>Protection for your Home That Just Makes Sense.</h2>
@@ -174,7 +178,7 @@
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
-                        <th><img src="{{ STATIC_URL }}img/protectamerica/protect-america-logo.png" alt="protect-america-logo" width="248" height="40" /></th>
+                        <th><img src="{{ STATIC_URL }}img/protectamerica/protect-america-logo.png" alt="Protect America Logo" width="248" height="40" /></th>
                         <th>ADT</th>
                         <th>ADT Pulse</th>
                     </tr>
@@ -194,43 +198,43 @@
                     </tr>
                     <tr>
                         <td class="title">Homeowner's Discount</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America's Homeowners Discount" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Homeowners Dicount" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse Homeowners Discount" width="40" height="40" /></td>
                     </tr>
                     <tr>
                         <td class="title">24/7 Monitoring</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has 24/7 Monitoring" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT has 24/7 Monitoring" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse has 24/7 Monitoring" width="40" height="40" /></td>
                     </tr>
                     <tr>
                         <td class="title">Interactive Features*</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has Interactive Apps" width="40" height="40" /></td>
                         <td>&nbsp;</td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse has Interactive Apps" width="40" height="40" /></td>
                     </tr>
                     <tr>
                         <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has Lifetime Replacement Parts Warranty" width="40" height="40" /></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td class="title">Free EasyMove<br/> Moving Kit</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has a Free EasyMove Moving Kit" width="40" height="40" /></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td class="title">Lowest Price Guaranteed</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has the Lowest Price Guaranteed" width="40" height="40" /></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td class="title omega">Locked-in Rate</td>
-                        <td class="pa omega"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa omega"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America's Rates are Locked-In" width="40" height="40" /></td>
                         <td class="omega">&nbsp;</td>
                         <td class="omega">&nbsp;</td>
                     </tr>
@@ -253,7 +257,7 @@
     <div id="video-security-choice" class="big-info" style="display:none">
         <div class="big-wrapper">
             <div id="way-you-want-security">
-                <img src="{{ STATIC_URL }}img/products/any-way-you-want-home.jpg" alt="any-way-you-want-home" width="368" height="280" />
+                <img src="{{ STATIC_URL }}img/products/any-way-you-want-home.jpg" alt="Customize your Home Security System the way you want it." width="368" height="280" />
                 <div id="customize-content">
                     <h2>Home Security<br/> The Way You Want It.</h2>
                     <p>Our home security packages are built to protect your home. And we know that every home is different.  That is why we make it easy to customize your alarm system to fit your needs. From fire protection to interactive video, our security professionals can build your home security package at an affordable price, and the way you want it.</p>
@@ -268,27 +272,27 @@
             <div id="add-on-packages">
                 <div id="alarm-add-ons">
                     <div class="big-icon">
-                        <img src="{{ STATIC_URL }}img/extra/big-alarm-icon.png" alt="big-life-safety-icon" width="193" height="193" />
+                        <img src="{{ STATIC_URL }}img/extra/big-alarm-icon.png" alt="Security System Add-ons" width="193" height="193" />
                         <h3>Security Systems Add-Ons</h3>
                         <div class="clear"></div>
 
                     </div>
                     <div class="add-on">
-                        <img src="{{ STATIC_URL }}img/extra/grey-video-icon.png" alt="grey-video-icon" />
+                        <img src="{{ STATIC_URL }}img/extra/grey-video-icon.png" alt="Video Security Icon" />
                         <div class="add-on-info">
                             <h3>Interactive Video Surveillance</h3>
                             <p>Add interactive video cameras to record or view live video that can be viewed from your computer or smart phone.</p>
                         </div>
                     </div>
                     <div class="add-on">
-                        <img src="{{ STATIC_URL }}img/extra/grey-house-icon.png" alt="grey-house-icon" width="80" height="56" />
+                        <img src="{{ STATIC_URL }}img/extra/grey-house-icon.png" alt="Garage Door Protection Icon" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Garage Door Protection</h3>
                             <p>Add protection to a standard garage door using our specially designed tilt based sensor.</p>
                         </div>
                     </div>
                     <div class="add-on">
-                        <img src="{{ STATIC_URL }}img/extra/grey-smash-icon.png" alt="grey-smash-icon" width="80" height="56" />
+                        <img src="{{ STATIC_URL }}img/extra/grey-smash-icon.png" alt="Glass Break Detector Icon" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Smash & Crash Detection</h3>
                             <p>Listening for high frequency sounds, our advanced Glass Break Detector provides an extra layer of protection for your windows.</p>
@@ -299,13 +303,13 @@
                 </div>
                 <div id="life-safety-add-ons">
                     <div class="big-icon">
-                        <img src="{{ STATIC_URL }}img/extra/big-life-safety-icon.png" alt="big-life-safety-icon" width="193" height="193" />
+                        <img src="{{ STATIC_URL }}img/extra/big-life-safety-icon.png" alt="Life Safety Security Icons" width="193" height="193" />
                         <h3>Life Safety Add-Ons</h3>
                         <div class="clear"></div>
 
                     </div>
                     <div class="add-on">
-                        <img src="{{ STATIC_URL }}img/extra/grey-fire-icon.png" alt="grey-fire-icon" width="80" height="56" />
+                        <img src="{{ STATIC_URL }}img/extra/grey-fire-icon.png" alt="Fire & Smoke Protection" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Fire & Smoke Protection</h3>
                             <p>Monitored smoke detectors and an external siren notify authorities when high heat or smoke is detected.</p>
@@ -313,7 +317,7 @@
                         </div>
                     </div>
                     <div class="add-on">
-                        <img src="{{ STATIC_URL }}img/extra/grey-medical-icon.png" alt="grey-medical-icon" width="80" height="56" />
+                        <img src="{{ STATIC_URL }}img/extra/grey-medical-icon.png" alt="Medical Alerty Security" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Medical Alert Security</h3>
                             <p>Perfect for an elderly parent or impaired loved one; with the push of a button, medical response is on the way.</p>
@@ -321,7 +325,7 @@
                         </div>
                     </div>
                     <div class="add-on">
-                        <img src="{{ STATIC_URL }}img/extra/grey-snow-icon.png" alt="grey-snow-icon" width="80" height="56" />
+                        <img src="{{ STATIC_URL }}img/extra/grey-snow-icon.png" alt="Flood and Freeze Detection" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Extreme Weather Protection</h3>
                             <p>Detection of cold weather or flooding helps protect your home and save you from costly repairs.</p>
@@ -335,28 +339,28 @@
     </div>
     <div id="smart-app-choice" class="big-info" style="display:none">
         <div class="big-wrapper">
-            <img src="{{ STATIC_URL }}img/canada/interactive-app.jpg" class="interactive-app" alt="interactive-app" width="518" height="663" />
+            <img src="{{ STATIC_URL }}img/canada/interactive-app.jpg" class="interactive-app" alt="Interactive Security App for your iPhone and Android" width="518" height="663" />
             <div id="smart-app-extra-information">
                 {% block smart-app-overview %}
                 <h2>There’s a Free App For That.</h2>
                 <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
                 <ul>
                     <li>
-                        <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="Interactive App: Security System Control" width="58" height="58" />
                         <div>
                             <h4>Security System Control</h4>
                             <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="{{ STATIC_URL }}img/canada/interactive-video-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <img src="{{ STATIC_URL }}img/canada/interactive-video-icon.jpg" alt="Interactive App: Video Surveillence" width="58" height="58" />
                         <div>
                             <h4>Live Video</h4>
                             <p>Keep an eye on your home from anywhere in the world with live video. (Video Service Required).</p>
                         </div>
                     </li>
                     <li>
-                        <img src="{{ STATIC_URL }}img/canada/interactive-home-automation-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <img src="{{ STATIC_URL }}img/canada/interactive-home-automation-icon.jpg" alt="Interactive App: Home Automation" width="58" height="58" />
                         <div>
                             <h4>Home Automation</h4>
                             <p>Home automation lets you control lights and appliances from your phone or computer.</p>
