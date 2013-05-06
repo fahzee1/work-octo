@@ -52,7 +52,7 @@ def thank_you(request, custom_url=None):
     # until the new lead system is ready go ahead and manually redirect
     # to new landing page here
     if affiliate_obj and affiliate_obj.thank_you and not custom_url:
-        url = '/thank_you%s' % affiliate_obj.thank_you
+        url = '/thank-you%s' % affiliate_obj.thank_you
         if 'leadid' in request.GET:
             url = url + '?leadid=%s' % request.GET['leadid']
         return HttpResponseRedirect(url)

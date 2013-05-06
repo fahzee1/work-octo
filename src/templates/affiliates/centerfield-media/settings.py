@@ -2,8 +2,8 @@
 # 1st value is the url, 2nd value is the template html filename
 # All templates require a index template.
 TEMPLATE_PAGES = (
-    ('fluid', 'index.html'),
-    ('index', 'fluid-index.html'),
+    ('fluid', 'fluid-index.html'),
+    ('index', 'index.html'),
 
 )
 

@@ -897,6 +897,8 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/?agent=a02332', 'permanent': True}),
     ('^angies/?$',
         redirect_to, {'url': '/?agent=a03103', 'permanent': True}),
+    ('^homesecurity/?$',
+        redirect_to, {'url': '/?agent=gr banner', 'permanent': True}),
 )
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

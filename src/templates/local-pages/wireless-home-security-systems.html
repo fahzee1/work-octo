@@ -120,7 +120,7 @@
                 <img src="{{ STATIC_URL }}img/products/any-way-you-want-home.jpg" alt="any-way-you-want-home" width="368" height="280" />
 
                 <h2>Fully Customizable State-of-the-Art Home Security Systems</h2>
-                <p>Unlike most security companies, Protect America recognizes that every home is different. That is why when designing our systems, we made sure to include enough door/window sensors to protect ALL the points of entry into your home. No matter how big or small, Protect America has you covered. We also made it easy to add the features you want like smoke detectors, interactive video cameras, and other home security accessories.</p>
+                <p>Unlike {% content_spinner "vc-1" "most security companies,|other home security companies,|" %}most security companies, Protect America recognizes that every home is different. That is why when designing our systems, we made sure to include enough door/window sensors to protect ALL the points of entry into your home. No matter how big or small, Protect America has you covered. We also made it easy to add the features you want like smoke detectors, interactive video cameras, and other home security accessories.</p>
                 {% if phone_number %}
                     {% businesstime %}
                         <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
@@ -165,19 +165,86 @@
 {% endblock %}
             {% block advantage-badges %}
             {% endblock %}
-{% block home-security-overview %}
+{% block home-security-bottom %}
+            <table id="comparison-table">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th><p class="pa-logo">&nbsp;</p></th>
+                        <th>ADT</th>
+                        <th>ADT Pulse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="alpha title">Installation</td>
+                        <td class="alpha pa">$0</td>
+                        <td class="alpha">$49</td>
+                        <td class="alpha">$49</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Monthly Rate</td>
+                        <td class="pa">$19.99</td>
+                        <td>$42.99</td>
+                        <td>$50.99</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Homeowner's Discount</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td class="title">24/7 Monitoring</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Interactive Features*</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Free EasyMove<br/> Moving Kit</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Lowest Price Guaranteed</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title omega">Locked-in Rate</td>
+                        <td class="pa omega"><span class="green-check">&nbsp;</span></td>
+                        <td class="omega">&nbsp;</td>
+                        <td class="omega">&nbsp;</td>
+                    </tr>
+                </tbody>
+                {% block table-order %}
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><a href="{% url order-package %}" class="button-link header-button">Order Now</a></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                {% endblock %}
+            </table>
 
 {% endblock %}
 
-{% block video-security-overview %}
-    <h2>Interactive Video Security</h2>
-    <p>Protect America allows you to gain a true picture of what is happening in your home or business with 24/7 {% content_spinner "vso1" "on-demand video|interactive video surveillance|interactive security cameras" %}. Get enhanced security with our night vision video cameras, archived clips, event notifications, and automatic recording when movement is detected. With {% content_spinner "vso2" "Protect America's video services|Protect America interactive surveillance cameras|Protect America security cameras" %}, peace of mind is just an instant click away.</p>
-{% endblock %}
-
-{% block video-security-overview-two %}
-    <h2>Video Home Security: Here, There, Everywhere.</h2>
-    <p>These days, people are always on the go and spend less time at home. Unfortunately, an empty house is the perfect time for a burglar to strike. Get {% content_spinner "vsot1" "interactive video security|interactive video surveillance|interactive home surveillance cameras" %} and check on your phone anywhere at any time. Our {% content_spinner "vsot2" "home surveillance cameras|interactive surveillance cameras|home security cameras" %} let you view your own live video feed from any Internet-enabled computer or smartphone. You can also be notified of recorded events with text notifications that can be read straight from your phone.</p> 
-{% endblock %}
 
 {% block smart-app-overview %}
     <h2>There’s a Free App For That.</h2>
