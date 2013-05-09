@@ -29,10 +29,38 @@
 
 {% endblock %}
 
-{% block typekit %}tk-jaf-facitweb{% endblock %}
+{% block typekit %}pragmatica-web{% endblock %}
 
 {% block header %}
+<div id="header">
+    <ul id="tabs">
+        <li class="tab {% if 'home' in active_pages %}active{% endif %}">
+            <a href="{% url home %}">Home</a>
+        </li>
+        <li class="tab alt {% if 'about' in active_pages %}active{% endif %}">
+            <a href="{% url about %}">About</a>
+        </li>
+        <li class="tab {% if 'advice' in active_pages %}active{% endif %}">
+            <a href="{% url advice %}">Advice</a>
+        </li>
+        <li class="tab alt {% if 'contact' in active_pages %}active{% endif %}">
+            <a href="{% url contact %}">Contact</a>
+        </li>
+    </ul>
+    <div id="search-form-mini">
+        <div id="form">
+            <form name="input" action="XXXXXXX" method="get">
+                <div class="search-area">
+                    <input style="border: none; margin-top: 0px;" type="text" spellcheck="true" name="search" placeholder="Enter City, State or Zip Code">
+                </div>
+                <div class="submit">
+                    <input type="image" src="{{ STATIC_URL }}img/external-lp/freecrimestats/submit-button.png" value="">
+                </div>
+            </form>
+        </div>
+    </div>
 
+</div>
 {% endblock %}
 {% block content %}
 <div id="blue-wrapper">
@@ -125,6 +153,34 @@
 {% block order-footer %}
 {% endblock %}
 {% block footer %}
+<div id="footer">
+    <div id="footer-callouts">
+        <div class="footer-links">
+            <ul>
+                <li><a href="{% url index %}">Home</a></li>
+                <li><a href="{% url about %}">About</a></li>
+                <li><a href="{% url advice %}">Advice</a></li>
+                <li><a href="{% url contact %}">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-social">
+            <div class="twitter">
+                <a href="https://twitter.com/freecrimestats" target="_blank" alt="free crime stats twitter page"><img src="{{ STATIC_URL }}img/external-lp/freecrimestats/twitter-icon.png" alt="twitter-icon" width="40" height="39" /></a>
+            </div>
+            <div class="fb">
+                <a href="https://www.facebook.com/pages/Free-Crime-Stats/601567983187955" target="_blank" alt="free crime stats facebook page"><img src="{{ STATIC_URL }}img/external-lp/freecrimestats/facebook-icon.png" alt="facebook-icon" width="39" height="39" /></a>
+            </div>
+            <div class="googleplus">
+                <a href="https://plus.google.com/b/101797190019235418937/pages/getstarted/profile/101797190019235418937" target="_blank" alt="free crime stats google plus page"><img src="{{ STATIC_URL}}img/external-lp/freecrimestats/google-plus.png" alt="google-plus" width="39" height="39" /></a>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div id="footer-text">
+            <p>*freecrimestats.com is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit Standard home security alarm monitoring agreement. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.
+                * Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited. GE and GE Security logos are registered trademarks of General Electric.</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
 {% block navigation %}
 {% endblock %}

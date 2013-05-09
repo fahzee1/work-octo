@@ -4,27 +4,19 @@
 {% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
 
 {% block content %}
-{% include "external/freecrimestats/header.html" %}
 <div id="main-container">
     <div id="hp">
-        <h1>Find Your Neighborhood. <span>Find the Crime.</span></h1>
-        <div id="search-box">
-            {% include "external/freecrimestats/search.html" %}
-        </div>
+
+        {% include "external/freecrimestats/search.html" %}
+
         <div class="clear"></div>
         <div id="secondary">
-            <div id="headline">
-                <div class="right-area">
-                    <h3>We Find <span>the Crime.</span></h3>
-                </div>
-            </div>
             <div class="clear"></div>
             <div id="state">
-                <div class="quote-form">
-                    <h2>Want to make your home safer? Get a free home security quote and advice by filling out the form below.</h2>
-                    {% include "external/freecrimestats/quote-form.html" with form=forms.basic%}
-                </div>
+                {% include "external/freecrimestats/form.html" %}
+
                 <div class="about-text">
+                    <h1>About Free Crime Stats</h1>
                     <p>FreeCrimeStats.com is a free service provided by Protect America Inc. to find local crime statistics about burglary, robbery, motor vehicle theft, violent crime, and larceny. Free Crime Stats is dedicated to informing people of the crime in their area no matter where they live in the United States. Start your search with Free Crime Stats and be aware of the crime in your neighborhood.</p>
                     <p>To get more information on how Protect America Inc. and Free Crime Stats can help make your neighborhood and home a bit safer, contact us at freecrimestats@protectamerica.com .</p>
                     <p>Free Crime Stats provides the information below for free!</p>
@@ -42,5 +34,4 @@
         </div>
     </div>
 </div>
-{% include "external/freecrimestats/footer.html" %}
 {% endblock %}

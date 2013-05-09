@@ -4,26 +4,15 @@
 {% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
 
 {% block content %}
-{% include "external/freecrimestats/header.html" %}
 <div id="main-container">
     <div id="hp">
-        <h1>Find Your Neighborhood. <span>Find the Crime.</span></h1>
-        <div id="search-box">
-            {% include "external/freecrimestats/search.html" %}
-        </div>
+        {% include "external/freecrimestats/search.html" %}
         <div class="clear"></div>
         <div id="secondary">
-            <div id="headline">
-                <div class="right-area">
-                    <h3>We Find <span>the Crime.</span></h3>
-                </div>
-            </div>
             <div class="clear"></div>
             <div id="state">
-                <div class="quote-form">
-                    <h2>Want to make your home safer? Get a free home security quote and advice by filling out the form below.</h2>
-                    {% include "external/freecrimestats/quote-form.html" with form=forms.basic%}
-                </div>
+                {% include "external/freecrimestats/form.html" %}
+
                 <div class="about-text">
                     <h3>If you would like more information about how to make your home more secure contact us at <a href="mailto:community@protectamerica.com">community@protectamerica.com</a></h3>
                 </div>
@@ -32,5 +21,4 @@
         </div>
     </div>
 </div>
-{% include "external/freecrimestats/footer.html" %}
 {% endblock %}

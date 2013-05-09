@@ -12,6 +12,7 @@ from django.utils import simplejson
 from django.conf import settings as dsettings
 from django.views.decorators.cache import cache_page
 
+
 from apps.contact.forms import PAContactForm
 from apps.local.sitemaps import KeywordSitemap, KeywordSitemapIndex
 from apps.crimedatamodels.views import query_by_state_city
@@ -77,6 +78,17 @@ TIMEZONES = {
 
 @cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state, zipcode):
+    def get_state_code(statestr):
+        for state in US_STATES:
+            if statestr.lower().replace('-', ' ') == state[1].lower():
+                return state[0]
+        return False
+    statecode = get_state_code(state)
+    if not statecode:
+        raise Http404
+    return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
+
+def local_page_wrapper(request, keyword, city, state):
     def get_state_code(statestr):
         for state in US_STATES:
             if statestr.lower().replace('-', ' ') == state[1].lower():
@@ -181,6 +193,27 @@ def local_city(request, state):
                               {'cities': city_by_first_letter,
                                'forms': forms,
                                'state': state.abbreviation,},
+                              context_instance=RequestContext(request))
+
+def html_sitemap(request, state, keyword):
+    try:
+        state = State.objects.get(abbreviation=state)
+    except State.DoesNotExist:
+        raise Http404
+    
+    cities = CityLocation.objects.filter(state=state.abbreviation)
+    city_by_first_letter = {}
+    for city in cities:
+        if city.city_name[0] not in city_by_first_letter:
+            city_by_first_letter[city.city_name[0]] = []
+        city_by_first_letter[city.city_name[0]].append(city)
+    forms = {}
+    forms['basic'] = PAContactForm()
+    return render_to_response('local-pages/html-sitemap.html',
+                              {'cities': city_by_first_letter,
+                               'forms': forms,
+                               'state': state.abbreviation,
+                               'keyword': keyword,},
                               context_instance=RequestContext(request))
 
 def sitemap(request, keyword):

@@ -4,32 +4,28 @@
 {% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
 
 {% block content %}
-{% include "external/freecrimestats/header.html" %}
 <div id="main-container">
     <div id="hp">
-        <h1>Find Your Neighborhood. <span>Find the Crime.</span></h1>
-        <div id="search-box">
-            {% include "external/freecrimestats/search.html" %}
-        </div>
+        {% include "external/freecrimestats/search.html" %}
+
         <div class="clear"></div>
         <div id="secondary">
-            <div id="headline">
-                <div class="right-area">
-                    <h3>We Find <span>the Crime.</span></h3>
-                </div>
-            </div>
             <div class="clear"></div>
             <div id="state">
-                <div class="quote-form">
-                    <h2>Want to make your home safer? Get a free home security quote and advice by filling out the form below.</h2>
-                    {% include "external/freecrimestats/quote-form.html" with form=forms.basic%}
-                </div>
-                <div class="results-text">
-                    <h3>Burglary</h3><p>Avoid becoming a victim of burglary by protecting your home before it happens. Set your home up with a home security system to strategically protect your home from intruders. Place sensors on all doors, windows, and any accessible entry points. Speak to your home security provider to find recommendations customized to layout of your home. Place a home security yard sign in your front yard so that it is visible to anyone crossing or watching your home. Homes with security systems are less likely to be broken into.</p>
-                    <h3>Robbery</h3><p>In a robbery, every situation is different. A lot of times your life is threatened or there can be a risk of one being injured. The most important thing is to be calm in whatever the situation may be. If you have the chance, dial or call the proper authorities in the given opportunity depending on your circumstances.</p>
-                    <h3>Motor vehicle theft</h3><p>Always park your vehicle where it can be seen from a window of your home or near a street light. Motor vehicle thefts usually tend to happen in crowded unsupervised parking lots, dark streets or neighborhoods with low person activity. It's important to realize motor vehicle theft can happen at any-time and anywhere. You can also purchase a GPS device to track your vehicle if it's ever stolen.</p>
-                    <h3>Violent Crime</h3><p>Violent crime is to be taken serious and treated with extreme care. Consult with your local police department and authorities if you are ever the victim of a violent crime. It's important to know your rights and to not be afraid to speak up. No one deserves to be treated with violence.</p>
-                    <h3>Larceny</h3><p>If anyone takes property that does not belong to them, or simply belongs to you, this would be considered larceny. It's the wrongful acquisitions of property. Report this to your local authorities and let them handle the situation. Never attempt to take matters into your own hands.</p>
+                {% include "external/freecrimestats/form.html" %}
+
+                <div id="advice-text">
+                	<h1>Crime Prevention Advice</h1>
+                    <h2>Burglary</h2>
+                    <p>Avoid becoming a victim of burglary by protecting your home before it happens. Set your home up with a home security system to strategically protect your home from intruders. Place sensors on all doors, windows, and any accessible entry points. Speak to your home security provider to find recommendations customized to layout of your home. Place a home security yard sign in your front yard so that it is visible to anyone crossing or watching your home. Homes with security systems are less likely to be broken into.</p>
+                    <h2>Robbery</h2>
+                    <p>In a robbery, every situation is different. A lot of times your life is threatened or there can be a risk of one being injured. The most important thing is to be calm in whatever the situation may be. If you have the chance, dial or call the proper authorities in the given opportunity depending on your circumstances.</p>
+                    <h2>Motor vehicle theft</h2>
+                    <p>Always park your vehicle where it can be seen from a window of your home or near a street light. Motor vehicle thefts usually tend to happen in crowded unsupervised parking lots, dark streets or neighborhoods with low person activity. It's important to realize motor vehicle theft can happen at any-time and anywhere. You can also purchase a GPS device to track your vehicle if it's ever stolen.</p>
+                    <h2>Violent Crime</h2>
+                    <p>Violent crime is to be taken serious and treated with extreme care. Consult with your local police department and authorities if you are ever the victim of a violent crime. It's important to know your rights and to not be afraid to speak up. No one deserves to be treated with violence.</p>
+                    <h2>Larceny</h2>
+                    <p>If anyone takes property that does not belong to them, or simply belongs to you, this would be considered larceny. It's the wrongful acquisitions of property. Report this to your local authorities and let them handle the situation. Never attempt to take matters into your own hands.</p>
                     <p>For more information about crimes or to speak to a home security expert, visit www.protectamerica.com</p>
                 </div>
                 <div class="clear"></div>
@@ -37,5 +33,4 @@
         </div>
     </div>
 </div>
-{% include "external/freecrimestats/footer.html" %}
 {% endblock %}
