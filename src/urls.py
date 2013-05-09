@@ -180,8 +180,8 @@ elif settings.SITE_ID == 8:
         dtt(r'^thank-you/tomboy-tools/?$', 'affiliates/tomboy-tools/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a03169'}),
 
-
     )
+
 # Mobile Website
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
@@ -205,14 +205,12 @@ elif settings.SITE_ID == 9:
         url(r'^cart-checkout/?$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
         url(r'^thank-you/?$', 'apps.pricetable.views.thank_you', name='thank_you'),
     )
+
 # Black Friday Site
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
-
         url(r'^$', 'apps.common.views.black_friday', name='index'),
-
     )
-
 
 # GetAHomeSecuritySystem.com
 elif settings.SITE_ID == 11:
@@ -236,22 +234,21 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/?$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
+
 # Canada
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
         dtt(r'^shop/home-security-systems/?$', 'canada/packages.html', 'products'),
         url(r'^shop/order/?$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
-
-
         dtt(r'^thank-you/?$', 'thank-you/canada.html', 'thank_you'),
+
         # Canada Competitor Landing Pages
         dtt(r'^security-comparison/adt-vs-protect-america/?$', 'affiliates/adt-comparison-canada/index.html', 'home'),
         dtt(r'^security-comparison/reliance-vs-protect-america/?$', 'affiliates/reliance-vs-pa-canada/index.html', 'home'),
         dtt(r'^security-comparison/vivint-vs-protect-america/?$', 'affiliates/vivint-vs-protectamerica-canada/index.html', 'home'),
         dtt(r'^security-comparison/alarmforce-vs-protect-america/?$', 'affiliates/alarmforce-vs-pa-canada/index.html', 'home'),
     )
-
 
 # BuyaSecuritySystem.com
 elif settings.SITE_ID == 15:
@@ -443,7 +440,6 @@ else:
             'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
 
         # Product > Advantage
-
         dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
 
         # Home Security Packages
@@ -677,6 +673,7 @@ else:
             redirect_to, {'url': '/pa/contact', 'permanent': True}),
 
 )
+
 # redirect urls
 urlpatterns += patterns('',
     ('^pa/two-way-monitoring/Home-Security-System-Monitoring/?$',
@@ -808,7 +805,6 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
     #('^national-crime-prevention$',
     #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
-    
     
     ('^livechat_iframe.php',
         redirect_to, {'url': '/support', 'permanent': True}),
