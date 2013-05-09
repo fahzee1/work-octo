@@ -9,63 +9,61 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from apps.contact.forms import PAContactForm
-from apps.crimedatamodels.models import (CrimesByCity,
-                                         CityCrimeStats,
-                                         State,
-                                         CityLocation,
-                                         ZipCode,
-                                         CrimeContent)
+from apps.crimedatamodels.models import CrimesByCity, CityCrimeStats, \
+    State, CityLocation, ZipCode, CrimeContent
+
 
 WEATHER_CODE_MAP = {
-    '395':'snow',
-    '392':'snow',
-    '389':'rain',
-    '386':'rain',
-    '377':'snow',
-    '374':'snow',
-    '371':'snow',
-    '368':'rain',
-    '365':'rain',
-    '362':'snow',
-    '359':'rain',
-    '356':'rain',
-    '353':'rain',
-    '350':'snow',
-    '338':'snow',
-    '335':'snow',
-    '332':'snow',
-    '329':'snow',
-    '326':'snow',
-    '323':'snow',
-    '320':'rain',
-    '317':'rain',
-    '314':'rain',
-    '311':'rain',
-    '308':'rain',
-    '305':'rain',
-    '302':'rain',
-    '299':'rain',
-    '296':'rain',
-    '293':'rain',
-    '284':'rain',
-    '281':'rain',
-    '266':'rain',
-    '263':'rain',
-    '260':'smoke',
-    '248':'smoke',
-    '230':'snow',
-    '227':'snow',
-    '200':'lightning',
-    '185':'rain',
-    '182':'rain',
-    '179':'rain',
-    '176':'rain',
-    '143':'smoke',
-    '122':'partly-cloudy',
-    '119':'cloudy',
-    '116':'partly-cloudy',
-    '113':'sunny',
+    '395': 'snow',
+    '392': 'snow',
+    '389': 'rain',
+    '386': 'rain',
+    '377': 'snow',
+    '374': 'snow',
+    '371': 'snow',
+    '368': 'rain',
+    '365': 'rain',
+    '362': 'snow',
+    '359': 'rain',
+    '356': 'rain',
+    '353': 'rain',
+    '350': 'snow',
+    '338': 'snow',
+    '335': 'snow',
+    '332': 'snow',
+    '329': 'snow',
+    '326': 'snow',
+    '323': 'snow',
+    '320': 'rain',
+    '317': 'rain',
+    '314': 'rain',
+    '311': 'rain',
+    '308': 'rain',
+    '305': 'rain',
+    '302': 'rain',
+    '299': 'rain',
+    '296': 'rain',
+    '293': 'rain',
+    '284': 'rain',
+    '281': 'rain',
+    '266': 'rain',
+    '263': 'rain',
+    '260': 'smoke',
+    '248': 'smoke',
+    '230': 'snow',
+    '227': 'snow',
+    '200': 'lightning',
+    '185': 'rain',
+    '182': 'rain',
+    '179': 'rain',
+    '176': 'rain',
+    '143': 'smoke',
+    '122': 'partly-cloudy',
+    '119': 'cloudy',
+    '116': 'partly-cloudy',
+    '113': 'sunny',
 }
+
 
 def query_weather(latitude, longitude, city, state):
     # first try to get cache
@@ -85,8 +83,11 @@ def query_weather(latitude, longitude, city, state):
         weather_info['temp'] = condition['temp_F']
         weather_info['desc'] = condition['weatherDesc'][0]['value']
         weather_info['icon'] = WEATHER_CODE_MAP[condition['weatherCode']]
-        cache.set('WEATHER:%s%s' % (city.lower().replace(' ', ''),state.lower()), weather_info, 60*60)
+
+        cache.set('WEATHER:%s%s' %
+            (city.lower().replace(' ', ''), state.lower()), weather_info, 60*60)
     return weather_info
+
 
 def query_by_state_city(state, city):
     # validate city and state
@@ -130,7 +131,9 @@ def query_by_state_city(state, city):
         pop_type = 'METROPOLIS'
 
     # get content
-    content = CrimeContent.objects.get(grade=crime_stats[years[0]]['stats'].average_grade,population_type=pop_type)
+    content = CrimeContent.objects.get(
+        grade=crime_stats[years[0]]['stats'].average_grade,
+        population_type=pop_type)
 
     # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
@@ -147,7 +150,8 @@ def query_by_state_city(state, city):
            'weather_info': weather_info,
            'pop_type': pop_type,
            'city_id': city_id,
-           'content': content.render(city)}  
+           'content': content.render(city)}
+
 
 def crime_stats(request, state, city):
     crime_stats_ctx = query_by_state_city(state, city)
@@ -158,6 +162,7 @@ def crime_stats(request, state, city):
     return render_to_response('crime-stats/crime-stats.html',
                               crime_stats_ctx,
                               context_instance=RequestContext(request))
+
 
 def choose_city(request, state):
     try:
@@ -173,11 +178,14 @@ def choose_city(request, state):
         city_by_first_letter[city.city_name[0]].append(city)
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('crime-stats/choose-city.html',
-                              {'cities': city_by_first_letter,
-                               'forms': forms,
-                               'state': state.abbreviation,},
-                              context_instance=RequestContext(request))
+
+    return render_to_response(
+        'crime-stats/choose-city.html', {
+            'cities': city_by_first_letter,
+            'forms': forms,
+            'state': state.abbreviation},
+        context_instance=RequestContext(request))
+
 
 def choose_state(request):
     if not settings.DEBUG:
@@ -192,10 +200,12 @@ def choose_state(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('crime-stats/choose-state.html',
-                              {'states': states,
-                               'forms': forms,},
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'crime-stats/choose-state.html', {
+            'states': states,
+            'forms': forms},
+        context_instance=RequestContext(request))
+
 
 def find_city(request):
     ctx = {}
@@ -235,7 +245,7 @@ def find_city(request):
                     ctx['error'] = 'city_not_found'
             elif state is not None:
                 return HttpResponseRedirect(
-                    state.get_absolute_url() + '?q=%s' % request.GET['q']) 
+                    state.get_absolute_url() + '?q=%s' % request.GET['q'])
 
             # check to see if terms[0] is a city
             cities = CityLocation.objects.filter(city_name__iexact=terms[0])
@@ -255,11 +265,87 @@ def find_city(request):
             if len(cities) == 1:
                 return HttpResponseRedirect(cities[0].get_absolute_url())
             ctx['matches'] = cities
+
     forms = {}
     forms['basic'] = PAContactForm()
     ctx['forms'] = forms
     states = State.objects.order_by('name')
     ctx['states'] = states
+
     return render_to_response('crime-stats/choose-state.html',
-                              ctx,
-                              context_instance=RequestContext(request))
+        ctx, context_instance=RequestContext(request))
+
+
+#
+# Tim's FreeCrimeStats Views
+#
+
+
+def _state_city_from_url(argstr):
+    args = argstr.split('/')
+    n = len(args)
+    state = args[0] if (n >= 1) else None
+    city = args[1] if (n >= 2) else None
+    return state, city
+
+
+def index(request, argstr):
+    # Get state and city from URL
+    state, city = _state_city_from_url(argstr)
+
+    # If we have a State or City, break out to those Indexes
+    if city and state:
+        return city_index(request, state, city)
+    elif state:
+        return state_index(request, state)
+    
+    # Otherwise show the main index
+    ctx = {}
+    return render_to_response(
+        'external/freecrimestats/index.html',
+        ctx, context_instance=RequestContext(request))
+
+
+def state_index(request, state):
+    
+    ctx = {}
+    return render_to_response(
+        'external/freecrimestats/state-page.html',
+        ctx, context_instance=RequestContext(request))
+
+
+def city_index(request, state, city):
+    
+
+    ctx = {}
+    return render_to_response(
+        'external/freecrimestats/city-page.html',
+        ctx, context_instance=RequestContext(request))
+
+
+def results(request, argstr):
+    # Get state and city from URL
+    state, city = _state_city_from_url(argstr)
+    
+
+    # Collect filters from GET params
+    filters = {
+        'burglary': True,
+        'robbery': True,
+        'larceny': True,
+        'vehicle': True,
+        'violent': True}
+    for filt in filters.keys():
+        if request.GET.get(filt, None) == 'hide':
+            filters[filt] = False
+
+    # get results!
+
+    # Collect Context and Render Template
+    ctx = {'state': state, 'city': city, 'filters': filters}
+    return render_to_response(
+        'external/freecrimestats/results.html',
+        ctx, context_instance=RequestContext(request))
+
+
+

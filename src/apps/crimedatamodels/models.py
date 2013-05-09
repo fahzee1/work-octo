@@ -171,6 +171,7 @@ class StateCrimeStats(models.Model):
     recompute this table's values.
 
     """
+    
     state = models.ForeignKey(State)
     year = models.IntegerField()
     number_of_cities = models.IntegerField()
@@ -225,8 +226,7 @@ class StateCrimeStats(models.Model):
 
 
 class CrimeContent(models.Model):
-    population_type = models.CharField(max_length=10,
-        choices=POPULATION_TYPES)
+    population_type = models.CharField(max_length=10, choices=POPULATION_TYPES)
     grade = models.CharField(max_length=1, choices=GRADE_CHOICES)
     content = models.TextField()
 

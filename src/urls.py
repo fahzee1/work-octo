@@ -89,6 +89,7 @@ if settings.SITE_ID == 2:
         dtt(r'^thank-you/?$', 'affiliates/radioshack/thank-you.html', 'thankyou', ctx={'page_name': 'thankyou', 'agent_id': 'a02596'}),
 
     )
+
 # Paid landing site
 elif settings.SITE_ID == 3:
     urlpatterns += patterns('',
@@ -99,6 +100,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
 
     )
+
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
@@ -113,10 +115,12 @@ elif settings.SITE_ID == 4:
         ('^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)$',
             redirect_to, {'url': '/%(state)s/%(city)s/', 'permanent': True}),
     )
+
 elif settings.SITE_ID == 5:
     urlpatterns += patterns('',
         dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'AllTheThings'}),
     )
+
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
@@ -148,10 +152,12 @@ elif settings.SITE_ID == 6:
         dtt_nocache(r'^thank-you/5linx/?$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
     )
+
 elif settings.SITE_ID == 7:
     urlpatterns += patterns('',
         url(r'^', include('apps.blogredirects.urls')),
     )
+
 # Tomboy Tools landing site
 elif settings.SITE_ID == 8:
     urlpatterns += patterns('',
@@ -302,6 +308,17 @@ elif settings.SITE_ID == 22:
 # freecrimestats.com
 elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
+
+        # Dynamic Views
+        url(r'^(?P<argstr>.*?)/?$', 'apps.crimedatamodels.views.index', name='home'),
+
+        url(r'^states/?$',
+            'apps.crimedatamodels.views.states', name='states'),
+
+        url(r'^results/(?P<args>.*?)/?$',
+            'apps.crimedatamodels.views.results', name='results'),
+
+        # Direct-to-template pages
         dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
         dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),
         dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
@@ -309,14 +326,15 @@ elif settings.SITE_ID == 23:
         dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
         dtt(r'^state-page/$', 'external/freecrimestats/state-page.html', 'state-page'),
         dtt(r'^city-page/$', 'external/freecrimestats/city-page.html', 'city-page'),
-        dtt(r'^results/$', 'external/freecrimestats/results.html', 'results'),
+        # dtt(r'^results/$', 'external/freecrimestats/results.html', 'results'),
         dtt(r'^burglary/$', 'external/freecrimestats/burglary.html', 'burglary'),
         dtt(r'^robbery/$', 'external/freecrimestats/robbery.html', 'robbery'),
         dtt(r'^motor-vehicle-theft/$', 'external/freecrimestats/motor-vehicle-theft.html', 'motor-vehicle-theft'),
         dtt(r'^violent-crime/$', 'external/freecrimestats/violent-crime.html', 'violent-crime'),
         dtt(r'^larceny/$', 'external/freecrimestats/larceny.html', 'larceny'),
     )
-    
+
+# defaults
 else:
     urlpatterns += patterns('',
 
@@ -938,6 +956,7 @@ urlpatterns += patterns('',
     ('^homesecurity/?$',
         redirect_to, {'url': '/?agent=gr banner', 'permanent': True}),
 )
+
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
         'apps.common.views.redirect_wrapper'),
