@@ -32,7 +32,16 @@
                     </div>
                 </div>
                 <div id="results-text">
-                    <h3>Template test: {{ wut }}</h3>
+
+
+                    <!-- RYLAN: Example of how to get at Crime Data. -->
+                    {% for year, data in crime_stats.iteritems %}
+                        <h3>Year: {{ year }}</h3>
+                        <h3>Aggrivated Assault per 100k: {{ data.stats.aggravated_assault_rank_per100k }}</h3>
+                        <br>
+                    {% endfor %}
+                    <!-- End Example -->
+
 
 					<h1>Truth and Consequences, New Mexico Crime Statistics</h1>
                     <h2>Burglary</h2>

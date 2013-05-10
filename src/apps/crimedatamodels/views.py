@@ -326,14 +326,16 @@ def states(request):
 
 
 def cities(request, state):
+    state_obj = State.objects.get(abbreviation=state.upper())
+
     city_data = CityLocation.objects.all() \
         .filter(state=state.upper()) \
         .order_by('city_name')
 
-
-
     return render_to_response('external/freecrimestats/city-page.html', {
-            'state': state.upper(), 'cities': city_data
+            'state': state_obj.abbreviation,
+            'state_long': state_obj.name,
+            'cities': city_data
         }, context_instance=RequestContext(request))
 
 
@@ -349,10 +351,7 @@ def results(request, state, city):
         if request.GET.get(filt, None) == 'hide':
             filters[filt] = False
 
-    # get results!
-    stats = query_by_state_city(state, city)
-
     # Collect Context and Render Template
-    return render_to_response('external/freecrimestats/results.html', {
-            'state': state, 'city': city, 'filters': filters, 'stats': stats
-        }, context_instance=RequestContext(request))
+    return render_to_response('external/freecrimestats/results.html',
+        query_by_state_city(state, city),
+        context_instance=RequestContext(request))
