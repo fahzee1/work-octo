@@ -22,11 +22,20 @@
 {% endblock %}
 
 {% block css %} 
+<meta name="geo.region" content="US-{{ state }}" />
+<meta name="geo.placename" content="{{ city }}" />
+<meta name="geo.position" content="{{ lat }};{{ long }}" />
+<meta name="ICBM" content="{{ lat }}, {{ long }}" />
+
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 <script type="text/javascript" src="//use.typekit.net/byd5lqe.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/freecrimestats.css">
 
+{% endblock %}
+{% block favicon %}
+<link rel="icon" href="{{ STATIC_URL }}img/external-lp/freecrimestats/fcs.ico" />
+<link rel="shortcut icon" href="{{ STATIC_URL }}img/external-lp/freecrimestats/fcs.ico" />
 {% endblock %}
 
 {% block typekit %}pragmatica-web{% endblock %}

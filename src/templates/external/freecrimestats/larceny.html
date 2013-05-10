@@ -1,41 +1,97 @@
 {% extends "external/freecrimestats/base.html" %}
 {% load content_filters content_tags sekizai_tags %}
-{% block page_title %}Home Security System Expert | Home Security Reviews{% endblock %}
-{% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
+{% block page_title %} {{ city }}, {{ state_long }} Larceny Stats | Local Larceny Stats{% endblock %}
+{% block page_description %}Get free crime stats on larceny related crimes in {{ city }}, {{ state_long }}.{% endblock %}
 
 {% block content %}
-{% include "external/freecrimestats/header.html" %}
+{% block content %}
 <div id="main-container">
     <div id="hp">
-        <h1>Find Your Neighborhood. <span>Find the Crime.</span></h1>
-        <div id="search-box">
-            {% include "external/freecrimestats/search.html" %}
-        </div>
+
         <div class="clear"></div>
         <div id="secondary">
-            <div id="headline">
-                <div class="left-area">
-                    <h2>City, State</h2>
-                </div>
-                <div class="right-area">
-                    <h3>We Found <span>the Crime.</span></h3>
-                </div>
-            </div>
+            <table id="headline">
+                <tbody>
+                    <tr>
+                        <td class="left-area">
+                            Truth and Consequences, New Mexico
+                        </td>
+                        <td class="right-area">
+                            We Found <span>the Crime.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="clear"></div>
             <div id="state">
-                <div class="quote-form">
-                    <h2>Want to make your home safer? Get a free home security quote and advice by filling out the form below.</h2>
-                    {% include "external/freecrimestats/quote-form.html" with form=forms.basic%}
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
                 </div>
-                <div class="about-text">
-                    <h3>Larceny</h3>
-                    <p>Larceny is a crime involving the wrongful acquisition of the personal property of another person.</p>
-                    <p>If anyone takes property that does not belong to them, or simply belongs to you, this would be considered larceny. It's the wrongful acquisitions of property. Report this to your local authorities and let them handle the situation. Never attempt to take matters into your own hands.</p>
+                <div id="results-text">
+                    <h1>Burglary Statistics in Austin, Texas</h1>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Burglaries</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            
+                            <tr class="top">
+                                <td class="year">2009</td>
+                                <td>18164</td>
+                                <td class="omega">1258</td>
+                                
+                            </tr>
+                            
+                            
+                            
+                            <tr class="alt">
+                                <td class="year">2008</td>
+                                <td>18908</td>
+                                <td class="omega">1323</td>
+                                
+                            </tr>
+                            
+                            
+                            
+                            <tr class="bottom">
+                                <td class="year">2007</td>
+                                <td>16750</td>
+                                <td class="omega">1221</td>
+                                
+                            </tr>
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <h2>What is Burglary?</h2>
+                    <p>Burglary (also called breaking and entering or sometimes housebreaking) is a crime, the essence of which is illegal entry into a building for the purposes of committing an offence. Usually that offence will be theft, but most jurisdictions specify others which fall within the ambit of burglary.</p>
+                    <p>Burglary can be one of the most intrusive crimes. Not only does a burglar invade your personal space, but a lot of times they take items that are most important to you or family. Most things can be replaced such as electronics and material items, but a burglary really affects a family when they take items that truly mean something. </p>
+                    <p>Avoid becoming a victim of burglary by protecting your home before it happens. Set your home up with a <a href="http://www.protectamerica.com?agent=i10054" target="_blank">home security system</a> to strategically protect your home from intruders. Place sensors on all doors, windows, and any accessible entry points. Speak to your home security provider to find recommendations customized to layout of your home. Place a home security yard sign in your front yard so that it is visible to anyone crossing or watching your home. Homes with security systems are less likely to be broken into.</p>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
-{% include "external/freecrimestats/footer.html" %}
 {% endblock %}
+
