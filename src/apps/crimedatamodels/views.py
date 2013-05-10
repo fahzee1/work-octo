@@ -297,7 +297,7 @@ def index(request, argstr=''):
 
     if city and state:
         # If City and State, show Results for that City
-        return results(request, argstr)
+        return results(request, state, city)
 
     elif state:
         # If only State value...
@@ -329,7 +329,7 @@ def cities(request, state):
     city_stats = {}
 
     return render_to_response('external/freecrimestats/city-page.html', {
-            'stats': city_stats
+            'city_stats': city_stats
         }, context_instance=RequestContext(request))
 
 
