@@ -8,6 +8,8 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
+from django.contrib.localflavor.us.us_states import US_STATES
+
 from apps.contact.forms import PAContactForm
 from apps.crimedatamodels.models import CrimesByCity, CityCrimeStats, \
     State, CityLocation, ZipCode, CrimeContent
@@ -89,7 +91,7 @@ def query_weather(latitude, longitude, city, state):
     return weather_info
 
 
-def query_by_state_city(state, city):
+def query_by_state_city(state, city, filters=None):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
@@ -289,45 +291,49 @@ def _state_city_from_url(argstr):
     return state, city
 
 
-def index(request, argstr):
+def index(request, argstr=''):
     # Get state and city from URL
     state, city = _state_city_from_url(argstr)
 
-    # If we have a State or City, break out to those Indexes
     if city and state:
-        return city_index(request, state, city)
+        # If City and State, show Results for that City
+        return results(request, argstr)
+
     elif state:
-        return state_index(request, state)
-    
-    # Otherwise show the main index
-    ctx = {}
+        # If only State value...
+        if state.lower() == 'all':
+            # Show the State-Select Page
+            return states(request)
+        else:
+            # Show the City-Select Page for this State
+            return cities(request, state)
+
+    else:
+        # If No State or City, show the homepage
+        return home(request)
+
+
+def home(request):
     return render_to_response(
         'external/freecrimestats/index.html',
-        ctx, context_instance=RequestContext(request))
+        {}, context_instance=RequestContext(request))
 
 
-def state_index(request, state):
-    
-    ctx = {}
+def states(request):
     return render_to_response(
         'external/freecrimestats/state-page.html',
-        ctx, context_instance=RequestContext(request))
+        {'states': US_STATES}, context_instance=RequestContext(request))
 
 
-def city_index(request, state, city):
-    
+def cities(request, state):
+    city_stats = {}
 
-    ctx = {}
-    return render_to_response(
-        'external/freecrimestats/city-page.html',
-        ctx, context_instance=RequestContext(request))
+    return render_to_response('external/freecrimestats/city-page.html', {
+            'stats': city_stats
+        }, context_instance=RequestContext(request))
 
 
-def results(request, argstr):
-    # Get state and city from URL
-    state, city = _state_city_from_url(argstr)
-    
-
+def results(request, state, city):
     # Collect filters from GET params
     filters = {
         'burglary': True,
@@ -340,12 +346,9 @@ def results(request, argstr):
             filters[filt] = False
 
     # get results!
+    stats = query_by_state_city(state, city)
 
     # Collect Context and Render Template
-    ctx = {'state': state, 'city': city, 'filters': filters}
-    return render_to_response(
-        'external/freecrimestats/results.html',
-        ctx, context_instance=RequestContext(request))
-
-
-
+    return render_to_response('external/freecrimestats/results.html', {
+            'state': state, 'city': city, 'filters': filters, 'stats': stats
+        }, context_instance=RequestContext(request))

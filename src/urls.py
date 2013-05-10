@@ -267,23 +267,25 @@ elif settings.SITE_ID == 16:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
     )
+
 # AlarmSystemOffers.com
 elif settings.SITE_ID == 17:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
     )
+
 # homesecuritycompared.com
 elif settings.SITE_ID == 18:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/home-security-compared/index.html', 'home'),
     )
-    
+
 # getfreesecurity.com
 elif settings.SITE_ID == 19:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/get-free-security/index.html', 'home'),
     )
-    
+
 # simonxtinstall.com
 elif settings.SITE_ID == 20:
     urlpatterns += patterns('',
@@ -304,22 +306,23 @@ elif settings.SITE_ID == 22:
         dtt(r'^$', 'external/homesecuritysystemexperts/index.html', 'home'),
         dtt(r'^thank-you/$', 'external/homesecuritysystemexperts/thanks.html', 'thank_you'),
     )
-    
+
 # freecrimestats.com
 elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
 
         # Dynamic Views
-        url(r'^(?P<argstr>.*?)/?$', 'apps.crimedatamodels.views.index', name='home'),
+        url(r'^(?P<argstr>.*?)/?$', 'apps.crimedatamodels.views.index', name='home_params'),
+        url(r'^$', 'apps.crimedatamodels.views.index', name='home'),
 
-        url(r'^states/?$',
+        url(r'^states/$',
             'apps.crimedatamodels.views.states', name='states'),
 
-        url(r'^results/(?P<args>.*?)/?$',
-            'apps.crimedatamodels.views.results', name='results'),
+        # url(r'^results/(?P<argstr>.*?)/?$',
+        #     'apps.crimedatamodels.views.results', name='results'),
 
         # Direct-to-template pages
-        dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
+        # dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
         dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),
         dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
         dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
@@ -349,10 +352,8 @@ else:
             name='thank_you'),
         # dtt(r'^404/?$', '404.html', '404', 'home'),
 
-
         # SEM Landing Pages
         dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
-
             
         # SEO Local Pages
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
