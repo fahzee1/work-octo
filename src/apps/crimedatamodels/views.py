@@ -326,10 +326,14 @@ def states(request):
 
 
 def cities(request, state):
-    city_stats = {}
+    city_data = CityLocation.objects.all() \
+        .filter(state=state.upper()) \
+        .order_by('city_name')
+
+
 
     return render_to_response('external/freecrimestats/city-page.html', {
-            'city_stats': city_stats
+            'state': state.upper(), 'cities': city_data
         }, context_instance=RequestContext(request))
 
 

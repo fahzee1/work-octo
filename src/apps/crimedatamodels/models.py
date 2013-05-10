@@ -4,6 +4,7 @@ from django.db import models
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
 
+
 GRADE_CHOICES = (
     ('A', 'A'),
     ('B', 'B'),
@@ -11,6 +12,7 @@ GRADE_CHOICES = (
     ('D', 'D'),
     ('F', 'F'),
 )
+
 
 POPULATION_TYPES = (
     ('TOWN', 'Town'),
