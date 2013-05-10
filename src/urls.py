@@ -312,7 +312,7 @@ elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
 
         # Dynamic Views
-        url(r'^(?P<argstr>.*?)/?$', 'apps.crimedatamodels.views.index', name='home_params'),
+        #url(r'^(?P<argstr>.*?)/?$', 'apps.crimedatamodels.views.index', name='home_params'),
         url(r'^$', 'apps.crimedatamodels.views.index', name='home'),
 
         url(r'^states/$',
