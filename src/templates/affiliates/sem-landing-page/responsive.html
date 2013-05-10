@@ -1,0 +1,225 @@
+{% load content_tags content_filters sekizai_tags %}
+<!doctype html>
+
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+    {% block google_experiment %}
+    
+    {% endblock %}
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta name="description" content="{% block page_description %}{% endblock %}" />
+    <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta property="fb:admins" content="586942929" />
+    {% block robots_tag %}{% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>{% else %}{% if request.is_secure %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>{% else %}<meta name="ROBOTS" content="INDEX, FOLLOW"/>{% endif %}{% endif %}{% endblock %}
+    <meta name="rating" content="general" />
+    <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
+    <meta name="author" content="Protect America" />
+    <meta name="contact_addr" content="webmaster@protectamerica.com" />
+    <meta name="distribution" content="global" />
+    <meta name="resource-type" content="document" />
+    <meta http-equiv="imagetoolbar" content="false" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
+    <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
+    
+    <!-- For all browsers -->
+    <link rel="stylesheet" media="screen and (max-width: 5990px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/320.css">
+    <!-- For progressively larger displays -->
+    <link rel="stylesheet" media="screen and (min-width: 480px) and (max-width: 599px)" href="/static/css/480.css">
+    <link rel="stylesheet" media="only screen and (min-width: 600px)" href="/static/css/768.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="/static/css/960.css">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="js/selectivizr-min.js"></script>
+    <![endif]-->
+    
+    <!-- JavaScript -->
+    <script src="js/modernizr-2.5.3-min.js"></script>
+    
+    <!-- Icons -->
+    
+    <!-- 16x16 -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- 32x32 -->
+    <link rel="shortcut icon" href="/favicon.png">
+    <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png"> -->
+    <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png"> -->
+    <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png"> -->
+    <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
+    <!-- <meta name="viewport" content="initial-scale=1.0"> (Use if apple-mobile-web-app-capable below is set to yes) -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+    
+    <!-- Startup images -->
+    
+    <!-- iPhone 3GS, pre-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-320x460.png" media="screen and (max-device-width:320px)"> -->
+    <!-- iPhone 4, 4S and 2011 iPod Touch-->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x920.png" media="(max-device-width:480px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPhone 5 and 2012 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x1096.png" media="(max-device-width:548px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPad landscape -->
+    <!-- <link rel="apple-touch-startup-image" sizes="1024x748" href="img/startup/startup-1024x748.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape)"> -->
+    <!-- iPad Portrait -->
+    <!-- <link rel="apple-touch-startup-image" sizes="768x1004" href="img/startup/startup-768x1004.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait)"> -->
+    
+    <!-- Windows 8 / RT -->
+    <meta name="msapplication-TileImage" content="img/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#000">
+    <meta http-equiv="cleartype" content="on">
+    {% block google_analytics %}
+    <script type="text/javascript">
+    
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-5441302-2']);
+     _gaq.push(['_setDomainName', 'protectamerica.com']);
+     {% block ga_custom_variables %}{% endblock %}
+     _gaq.push(['_trackPageview']);
+    
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+    
+    </script>
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    {% endblock %}
+    {% block bing-conversion-code %}{% endblock %}
+</head>
+<body class="clearfix {{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
+{% block content %}
+{% block header %}
+<div id="header">
+    <div id="header-wrapper">   
+        <div>
+            {% block main-phone %}
+                {% if phone_number %}
+                <div id="phone-number">
+                    <p>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
+                </div>
+                {% endif %}
+            {% endblock %}
+            {% block company-logo %}
+            <div id="company-logo">
+                <a href="http://www.protectamerica.com/" title="Protect America Home Security" id="main-logo">
+                    <img src="{{ STATIC_URL }}img/base/protect-america-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
+                </a>
+                <ul id="main-navigation">
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
+                </ul>
+            </div>
+            {% endblock %}
+
+            <div class="clear"></div>
+        </div>
+        
+
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% endblock %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+    <script src="js/plugins.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/helper.js"></script>
+    {% render_block "js" %}
+    {% block extra_javascript %}
+        <script type="text/javascript">
+            $(".big-green > a").click(function(){
+                $("#customer-service-box").slideToggle("fast");
+                return false;
+            });
+            $(".international").click(function(){
+                $("#international-box").slideToggle("fast");
+                return false;
+            });
+        </script>
+    {% if 'index' in active_pages %}
+    
+        <script type="text/javascript">
+            $("#licenses-button").click(function(){
+                $("#licenses-table").toggle("normal");
+                return false;
+            });
+        </script>
+    {% endif %}
+    {% if use_call_measurement %}
+    <script type="text/javascript"> 
+        var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'i10237' or request.COOKIES.refer_id == 'a01415' or request.COOKIES.refer_id == 'i10237' or request.GET.agent == 'i10237' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'i10240' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}";
+        var thisref = document.referrer.replace(/&/g, "zzzzz");
+        var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
+    </script>
+    {% endif %}
+    {% endblock %}
+    {% block extra_pixels %}
+    {{ pixels|default_if_none:""|safe }}
+    {% endblock %}
+    {% if DEBUG == False %}
+    {% block remarketing-one %}
+    <!-- Google Code for Home Page Visit Remarketing List -->
+    <script type="text/javascript">
+    <!--
+    var google_conversion_id = 1072079179;
+    var google_conversion_language = "en";
+    var google_conversion_format = "1";
+    var google_conversion_color = "666666";
+    var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
+    var google_conversion_value = 0;
+    //-->
+    </script>
+    <!-- Google + -->
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+    {% endblock %}
+    {% block remarketing %}
+    <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+    <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+    
+    <!-- End Remarketing Code -->
+    {% endblock %}
+    
+    <!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
+    <img src="http://ads.bluelithium.com/pixel?id=1732074&t=2" width="1" height="1" />
+    <!-- End of segment tag -->
+                        <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
+    
+    {% endif %}
+</body>
+</html>
+

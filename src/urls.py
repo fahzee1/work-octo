@@ -95,6 +95,8 @@ elif settings.SITE_ID == 3:
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^rep/?$', 'affiliates/sem-landing-page/responsive.html', 'squeeze'),
+
 
     )
 elif settings.SITE_ID == 4:
