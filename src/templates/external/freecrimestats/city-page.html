@@ -6,7 +6,6 @@
 {% block content %}
 <div id="main-container">
     <div id="hp">
-
         {% include "external/freecrimestats/search.html" %}
         <div class="clear"></div>
         <div id="secondary">
@@ -26,9 +25,9 @@
                     <div class="city-container">
                         <h2>A</h2>
                         <ul>
-                            <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                            <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-
+                            {% for city in cities %}
+                            <li><a href="/{{ state }}/{{ city.city_name }}">{{ city.city_name }}</a></li>
+                            {% endfor %}
                         </ul>
                         <div class="clear"></div>
                     </div>
