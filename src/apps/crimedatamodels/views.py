@@ -99,9 +99,7 @@ def query_by_state_city(state, city, filters=None):
     except State.DoesNotExist:
         raise Http404
     try:
-        print city
         city = city.replace('+', ' ').replace('-', ' ')
-        print city
         city = CityLocation.objects.get(city_name__iexact=city,
             state=state.abbreviation)
         city_id = city.id
@@ -285,6 +283,17 @@ def find_city(request):
 #
 
 
+# Map of passed 'Crime' strings, to their templates.
+# (Makes it easy to change URLs without changing Template names.)
+CRIME_TEMPLATES = {
+    'burglary': 'external/freecrimestats/burglary.html',
+    'robbery': 'external/freecrimestats/robbery.html',
+    'motor-vehicle-theft': 'external/freecrimestats/motor-vehicle-theft.html',
+    'violent-crime': 'external/freecrimestats/violent-crime.html',
+    'larceny': 'external/freecrimestats/larceny.html'
+}
+
+
 def _state_city_from_url(argstr):
     args = argstr.split('/')
     n = len(args)
@@ -293,26 +302,26 @@ def _state_city_from_url(argstr):
     return state, city
 
 
-def index(request, argstr=''):
-    # Get state and city from URL
-    state, city = _state_city_from_url(argstr)
+# def index(request, argstr=''):
+#     # Get state and city from URL
+#     state, city = _state_city_from_url(argstr)
 
-    if city and state:
-        # If City and State, show Results for that City
-        return results(request, state, city)
+#     if city and state:
+#         # If City and State, show Local Results for that City
+#         return local(request, state, city)
 
-    elif state:
-        # If only State value...
-        if state.lower() == 'all':
-            # Show the State-Select Page
-            return states(request)
-        else:
-            # Show the City-Select Page for this State
-            return cities(request, state)
+#     elif state:
+#         # If only State value...
+#         if state.lower() == 'all':
+#             # Show the State-Select Page
+#             return states(request)
+#         else:
+#             # Show the City-Select Page for this State
+#             return cities(request, state)
 
-    else:
-        # If No State or City, show the homepage
-        return home(request)
+#     else:
+#         # If No State or City, show the homepage
+#         return home(request)
 
 
 def home(request):
@@ -341,7 +350,7 @@ def cities(request, state):
         }, context_instance=RequestContext(request))
 
 
-def results(request, state, city):
+def local(request, state, city):
     # Collect filters from GET params
     filters = {
         'burglary': True,
@@ -355,5 +364,17 @@ def results(request, state, city):
 
     # Collect Context and Render Template
     return render_to_response('external/freecrimestats/results.html',
+        query_by_state_city(state, city),
+        context_instance=RequestContext(request))
+
+
+def crime(request, state, city, crime):
+    # Find correct Template file, 404 if we don't have an entry for it.
+    template = CRIME_TEMPLATES.get(crime, None)
+    if not template:
+        raise Http404
+
+    # Return Template with results of query_by_state_city
+    return render_to_response(template,
         query_by_state_city(state, city),
         context_instance=RequestContext(request))

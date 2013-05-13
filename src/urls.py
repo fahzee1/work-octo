@@ -311,28 +311,34 @@ elif settings.SITE_ID == 22:
 elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
 
-        url(r'^all/$', 'apps.crimedatamodels.views.states',
-            name='states'),
+        # Local Crime Page (.../[State]/[City]/[Crime]/)
+        url(r'^(\w{2})/([\w\-]+)/([\w\-]+)/?$',
+            'apps.crimedatamodels.views.crime', name='crime'),
+        
+        # Local City Page (.../[State]/[City]/)
+        url(r'^(\w{2})/([\w\-]+)/?$',
+            'apps.crimedatamodels.views.local', name='local'),
 
-        url(r'^([\w]+)/([\w\-]+)/?$', 'apps.crimedatamodels.views.results',
-            name='results'),
+        # City Listing (.../[State]/)
+        url(r'^(\w{2})/?$',
+            'apps.crimedatamodels.views.cities', name='cities'),
 
-        url(r'^([\w]+)/?$', 'apps.crimedatamodels.views.cities',
-            name='cities'),
+        # State Listing (.../states/)
+        url(r'^states/?$',
+            'apps.crimedatamodels.views.states', name='states'),
 
-        url(r'^$', 'apps.crimedatamodels.views.index',
-            name='home'),
+        # Main Index
+        url(r'^$',
+            'apps.crimedatamodels.views.home', name='home'),
 
 
         # Direct-to-template pages
-        # dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
         dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),
         dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
         dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
         dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
         dtt(r'^state-page/$', 'external/freecrimestats/state-page.html', 'state-page'),
         dtt(r'^city-page/$', 'external/freecrimestats/city-page.html', 'city-page'),
-        # dtt(r'^results/$', 'external/freecrimestats/results.html', 'results'),
         dtt(r'^burglary/$', 'external/freecrimestats/burglary.html', 'burglary'),
         dtt(r'^robbery/$', 'external/freecrimestats/robbery.html', 'robbery'),
         dtt(r'^motor-vehicle-theft/$', 'external/freecrimestats/motor-vehicle-theft.html', 'motor-vehicle-theft'),
