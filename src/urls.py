@@ -311,6 +311,12 @@ elif settings.SITE_ID == 22:
 elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
 
+        # Direct-To-Template Pages
+        dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),
+        dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
+        dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
+        dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
+
         # Local Crime Page (.../[State]/[City]/[Crime]/)
         url(r'^(\w{2})/([\w\-]+)/([\w\-]+)/?$',
             'apps.crimedatamodels.views.crime', name='crime'),
@@ -331,19 +337,6 @@ elif settings.SITE_ID == 23:
         url(r'^$',
             'apps.crimedatamodels.views.home', name='home'),
 
-
-        # Direct-to-template pages
-        dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),
-        dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
-        dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
-        dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
-        dtt(r'^state-page/$', 'external/freecrimestats/state-page.html', 'state-page'),
-        dtt(r'^city-page/$', 'external/freecrimestats/city-page.html', 'city-page'),
-        dtt(r'^burglary/$', 'external/freecrimestats/burglary.html', 'burglary'),
-        dtt(r'^robbery/$', 'external/freecrimestats/robbery.html', 'robbery'),
-        dtt(r'^motor-vehicle-theft/$', 'external/freecrimestats/motor-vehicle-theft.html', 'motor-vehicle-theft'),
-        dtt(r'^violent-crime/$', 'external/freecrimestats/violent-crime.html', 'violent-crime'),
-        dtt(r'^larceny/$', 'external/freecrimestats/larceny.html', 'larceny'),
     )
 
 # defaults

@@ -294,51 +294,26 @@ CRIME_TEMPLATES = {
 }
 
 
-def _state_city_from_url(argstr):
-    args = argstr.split('/')
-    n = len(args)
-    state = args[0] if (n >= 1) else None
-    city = args[1] if (n >= 2) else None
-    return state, city
-
-
-# def index(request, argstr=''):
-#     # Get state and city from URL
-#     state, city = _state_city_from_url(argstr)
-
-#     if city and state:
-#         # If City and State, show Local Results for that City
-#         return local(request, state, city)
-
-#     elif state:
-#         # If only State value...
-#         if state.lower() == 'all':
-#             # Show the State-Select Page
-#             return states(request)
-#         else:
-#             # Show the City-Select Page for this State
-#             return cities(request, state)
-
-#     else:
-#         # If No State or City, show the homepage
-#         return home(request)
-
-
 def home(request):
+    """Main Index View"""
+
     return render_to_response(
         'external/freecrimestats/index.html',
         {}, context_instance=RequestContext(request))
 
 
 def states(request):
+    """State Listing View"""
+
     return render_to_response(
         'external/freecrimestats/state-page.html',
         {'states': US_STATES}, context_instance=RequestContext(request))
 
 
 def cities(request, state):
-    state_obj = State.objects.get(abbreviation=state.upper())
+    """State-Specific City Listing View"""
 
+    state_obj = State.objects.get(abbreviation=state.upper())
     city_data = CityLocation.objects.all() \
         .filter(state=state.upper()) \
         .order_by('city_name')
@@ -351,6 +326,8 @@ def cities(request, state):
 
 
 def local(request, state, city):
+    """City-Specific Index View"""
+
     # Collect filters from GET params
     filters = {
         'burglary': True,
@@ -369,6 +346,8 @@ def local(request, state, city):
 
 
 def crime(request, state, city, crime):
+    """City-Specific Crime View"""
+
     # Find correct Template file, 404 if we don't have an entry for it.
     template = CRIME_TEMPLATES.get(crime, None)
     if not template:
