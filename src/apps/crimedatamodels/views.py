@@ -1,11 +1,12 @@
 import urllib
 
 from django.core.cache import cache
+from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from django.contrib.localflavor.us.us_states import US_STATES
@@ -356,4 +357,36 @@ def crime(request, state, city, crime):
     # Return Template with results of query_by_state_city
     return render_to_response(template,
         query_by_state_city(state, city),
+        context_instance=RequestContext(request))
+
+
+def search(request):
+    """Render a search results page based on the query string in the GET params"""
+
+    # Extract Query Parameters
+    q_str = request.GET.get('q', '')
+    q_params = q_str.split('+')
+
+    # Get potentially matching zips
+    zqo = Q(zip__in=q_params) | Q(state__in=q_params)
+    for qp in q_params:
+        zqo = zqo | Q(city__contains=qp)
+    zip_qs = ZipCode.objects.filter(zqo)
+    n_zips = zip_qs.count()
+
+    # If we only matched 1 zip result, show that page automatically
+    if n_zips == 1:
+        zipcode = zip_qs[0]
+        city_slug = zipcode.city.lower().replace(' ', '-')
+        return HttpResponseRedirect(
+            reverse('home') + zipcode.state + '/' + city_slug)
+
+    # Otherwise get more creative (WIP)
+    city_objs = []
+    if n_zips == 0:
+        pass
+
+    # Render search-results page
+    return render_to_response('external/freecrimestats/search-results.html',
+        {'num_cities': len(city_objs), 'cities': city_objs, 'search_query': q_str},
         context_instance=RequestContext(request))
