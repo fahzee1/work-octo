@@ -38,38 +38,24 @@
                         <thead>
                             <tr>
                                 <th>&nbsp;</th>
-                                <th class="crime-name">Burglaries</th>
+                                <th class="crime-name">Larceny</th>
                                 <th>Per / 100k</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
                             
-                            
-                            <tr class="top">
-                                <td class="year">2009</td>
-                                <td>18164</td>
-                                <td class="omega">1258</td>
-                                
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.larceny_theft %}{{ data.stats.city.larceny_theft }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.larceny_theft_rank_per100k %}{{ data.stats.larceny_theft_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
                             </tr>
+                            {% endfor %}
                             
-                            
-                            
-                            <tr class="alt">
-                                <td class="year">2008</td>
-                                <td>18908</td>
-                                <td class="omega">1323</td>
-                                
-                            </tr>
-                            
-                            
-                            
-                            <tr class="bottom">
-                                <td class="year">2007</td>
-                                <td>16750</td>
-                                <td class="omega">1221</td>
-                                
-                            </tr>
+                        
                             
                             
                         </tbody>
@@ -82,17 +68,19 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <h2>What is Burglary?</h2>
-                    <p>Burglary (also called breaking and entering or sometimes housebreaking) is a crime, the essence of which is illegal entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary.</p>
-                    <p>Burglary can happen to anyone at any time. Burglary can be one of the most intrusive crimes. Not only does a burglar invade your personal space, but a lot of times they take items that are most important to you or family. Most things can be replaced such as electronics and material items, but a burglary really affects a family when they {% content_spinner "fcs2" "destroy items|steal irreplaceable items|take heirlooms|destroy family heirlooms" %} that truly mean something. It’s important to {% content_spinner "burglary1" "protect|secure|get security for" %} your home and be prepared at all times no matter what the situation is.</p>
-                    <h2>Protection against Burglary in {{ city }}, {{ state_long }}</h2>
-                    <p>Avoid becoming a victim of burglary by protecting your home before it happens. {% content_spinner "burglary2" "One great way|The best way|An easy way" %} to protect against burglaries in {{city}} is to equip your home with an alarm system. <a href="http://www.protectamerica.com/?affkey=fcs" title="Protect America Home Security In {{ city }}, {{ state_long }}">Protect America</a> offers unbeatable deals in the {{ city }} area that are comprehensive solutions for your home security needs.</p>
-                    <p>With a home security system you can monitor all doors and windows of your home. You can even {% content_spinner "fcs3" "protect|secure|arm" %} the inside perimeter of all living areas with a motion detector. Something as simple as a home security yard sign can even deter burglars from approaching your home. Studies have shown that homes protected with a home security system are less likely to be broken into. {% content_spinner "fsc4" "Give Protect America and their security experts a call|Call Protect America|Call a security expert from Protect America|Contact Protect America's security experts" %} at {{ phone_number|format_number }} to find out how they can {% content_spinner "wb3" "secure your home|protect your family|protect your home" %} today.</p>
-                    <h2>Related Burglary Articles</h2>
+
+                    <h2>What is Larceny?</h2>
+                    <p>Larceny is a crime involving the wrongful acquisition of the personal property of another person.</p>
+                    <p>If anyone takes property that does not belong to them, or simply belongs to you, this would be considered larceny. It's the wrongful acquisitions of property. Report this to your local authorities and let them handle the situation. Never attempt to take matters into your own hands.</p>
+                    
+                    <h2>Protection against Larceny in {{ city }}, {{ state_long }}</h2>
+                    <p>Larceny can happen to anyone. Burglars and thieves are everywhere so you want to make sure you are properly protected. You can {% content_spinner "larceny1" "easily|effectively|properly" %}  protect your home and valuables with a home security system and video surveillance.</p>
+                    <p>Not only can a {% content_spinner "larceny2" "home security system|alarm system|home alarm system" %}  deter a thief but it can also alarm the authorities for a prompt response so that they may even be able to catch them in the act. A video surveillance system can help record the larceny in progress and may be beneficial in the return of your property and even the apprehension of the culprit.</p>
+                    <h2>Related Larceny Articles</h2>
                     <ul>
-                        <li><a href="http://www.protectamerica.com/home-security-blog/home-defense-advice/dont-fall-victim-to-the-summer-crime-wave_3528?affkey=fcs" title="Don’t Fall Victim to the Summer Crime Wave">Don’t Fall Victim to the Summer Crime Wave</a></li>
-                        <li><a href="http://www.protectamerica.com/home-security-blog/crime-statistics/4-most-reassuring-crime-statistics_2430?affkey=fcs" title="4 Most Reassuring Crime Statistics">4 Most Reassuring Crime Statistics</a></li>
-                        <li><a href="http://www.protectamerica.com/home-security-blog/home-security/home-security-information/home-security-tips/vacation-home-security-tips_3334?affkey=fcs" title="Vacation Home Security Tips">Vacation Home Security Tips</a></li>
+                        <li><a href="http://www.protectamerica.com/news/article/southern-men-caught-stealing-property-on-camera_1188?affkey=fcs" title="Southern Men Caught Stealing Property on Camera">Southern Men Caught Stealing Property on Camera</a></li>
+                        <li><a href="http://www.protectamerica.com/news/article/police-use-alarm-system-to-catch-burglary-suspects_1488?affkey=fcs" title="Police Use Alarm System to Catch Burglary Suspects"> Police Use Alarm System to Catch Burglary Suspects</a></li>
+                        <li><a href="http://www.protectamerica.com/news/article/surveillance-video-leads-to-capture-of-thief-in-tulsa_1543?affkey=fcs" title="Surveillance Video Leads to Capture of Thief">Surveillance Video Leads to Capture of Thief</a></li>
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -101,4 +89,3 @@
     </div>
 </div>
 {% endblock %}
-

@@ -1,42 +1,90 @@
 {% extends "external/freecrimestats/base.html" %}
-{% load content_filters content_tags sekizai_tags %}
-{% block page_title %}Home Security System Expert | Home Security Reviews{% endblock %}
-{% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+{% block page_title %}{{ city }}, {{ state_long }} Robbery Crime Stats | Robbery Stats | Robbery Statistics{% endblock %}
+{% block page_description %}Get free crime statistics about robbery in {{ city }}, {{ state_long }}. Find out how much robbery there is in your neighborhood and protect yourself before a crime happens.{% endblock %}
 
 {% block content %}
-{% include "external/freecrimestats/header.html" %}
 <div id="main-container">
     <div id="hp">
-        <h1>Find Your Neighborhood. <span>Find the Crime.</span></h1>
-        <div id="search-box">
-            {% include "external/freecrimestats/search.html" %}
-        </div>
+
         <div class="clear"></div>
         <div id="secondary">
-            <div id="headline">
-                <div class="left-area">
-                    <h2>City, State</h2>
-                </div>
-                <div class="right-area">
-                    <h3>We Found <span>the Crime.</span></h3>
-                </div>
-            </div>
+            <table id="headline">
+                <tbody>
+                    <tr>
+                        <td class="left-area">
+                            {{ city }}, {{ state_long }}
+                        </td>
+                        <td class="right-area">
+                            We Found <span>the Crime.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="clear"></div>
             <div id="state">
-                <div class="quote-form">
-                    <h2>Want to make your home safer? Get a free home security quote and advice by filling out the form below.</h2>
-                    {% include "external/freecrimestats/quote-form.html" with form=forms.basic%}
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
                 </div>
-                <div class="results">I dont know how this is going to look its up to Matt.</div>
-                <div class="about-text">
-                    <h3>Robbery</h3>
+                <div id="results-text">
+                    <h1>Robbery Statistics in {{ city }}, {{ state_long }}</h1>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Robberies</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.robbery %}{{ data.stats.city.robbery }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.robbery_rank_per100k %}{{ data.stats.robbery_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <h2>What is Robbery?</h2>
                     <p>Robbery is the crime of taking or attempting to take something of value by force or threat of force or by putting the victim in fear. At common law, robbery is defined as taking the property of another, with the intent to permanently deprive the person of that property, by means of force or fear.</p>
+                    <h2>Safeguarding against a Robbery in {{ city }}, {{ state_long }}</h2>
                     <p>In a robbery, every situation is different. A lot of times your life is threatened or there can be a risk of one being injured. The most important thing is to be calm in whatever the situation may be. If you have the chance, dial or call the proper authorities in the given opportunity depending on your circumstances.</p>
+                    <p>If you’re at home and a burglar is attempting a robbery, you want to make sure you keep them on the outside with your doors locked and secured. {% content_spinner "robbery1" "One great way|The best way|An easy way" %} is to strategically place home security sensors all around your home. A glass break sensor can detect the sound of glass breaking and will immediately sound the alarm if a robber breaks a window to enter your home. Sensors can also protect each door and window to sound the alarm if they are open while your alarm is on. Some home security systems like those provided by Protect America have one button panic alarms that immediately contact the police when needed. A {% content_spinner "robbery2" "home security system|alarm system|home alarm system" %} can also be a simple solution to {% content_spinner "robbery9" "catching the crime in progress|catching the criminal|catching the crime as it happens|recording the crime|recording the criminal|recording the robbery" %} by adding a video surveillance system.</p>
+                    <p>{% content_spinner "robbery7" "When not at home|When out and about|When you are away from your home" %} one easy way to help prevent being robbed is to pay attention to your surroundings. If you notice suspicious activity, don't go near it but leave and report it as soon as {% content_spinner "robbery8" "it is safe to do so.|possible.|you can." %}</p>
+                    <h2>Related Robbery Articles</h2>
+                    <ul>
+                        <li><a href="http://www.protectamerica.com/news/article/home-surveillance-camera-catches-robbery-beating_833?affkey=fcs" title="Home Surveillance Camera Catches Robbery">Home Surveillance Camera Catches Robbery</a></li>
+                        <li><a href="http://www.protectamerica.com/home-security-blog/home-security/home-security-equipment/diy-home-surveillance-equipment_3242?affkey=fcs" title="DIY Home Surveillance Equipment"> DIY Home Surveillance Equipment</a></li>
+                        <li><a href="http://www.protectamerica.com/home-security-blog/protect-america-2/home-surveillance-systems_2944?affkey=fcs" title="Home Surveillance Systems">Vacation Home Surveillance Systems</a></li>
+                    </ul>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
-{% include "external/freecrimestats/footer.html" %}
 {% endblock %}
