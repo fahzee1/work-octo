@@ -1,3 +1,5 @@
+import re
+
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -69,6 +71,10 @@ class CityLocation(models.Model):
 
     def __unicode__(self):
         return '%s, %s' % (self.city_name, self.state)
+
+    @property
+    def slug_name(self):
+        return self.city_name.lower().replace(' ', '-')
 
 
 class CrimesByCity(models.Model):

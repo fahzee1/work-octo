@@ -311,15 +311,18 @@ elif settings.SITE_ID == 22:
 elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
 
-        # Dynamic Views
-        url(r'^(?P<argstr>.*?)/?$', 'apps.crimedatamodels.views.index', name='home_params'),
-        url(r'^$', 'apps.crimedatamodels.views.index', name='home'),
+        url(r'^all/$', 'apps.crimedatamodels.views.states',
+            name='states'),
 
-        url(r'^states/$',
-            'apps.crimedatamodels.views.states', name='states'),
+        url(r'^([\w]+)/([\w\-]+)/?$', 'apps.crimedatamodels.views.results',
+            name='results'),
 
-        # url(r'^results/(?P<argstr>.*?)/?$',
-        #     'apps.crimedatamodels.views.results', name='results'),
+        url(r'^([\w]+)/?$', 'apps.crimedatamodels.views.cities',
+            name='cities'),
+
+        url(r'^$', 'apps.crimedatamodels.views.index',
+            name='home'),
+
 
         # Direct-to-template pages
         # dtt(r'^$', 'external/freecrimestats/index.html', 'home'),
