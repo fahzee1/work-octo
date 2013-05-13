@@ -34,13 +34,7 @@
                 <div id="results-text">
 
 
-                    <!-- RYLAN: Example of how to get at Crime Data. -->
-                    {% for year, data in crime_stats.iteritems %}
-                        <h3>Year: </h3>
-                        <h3>Aggrivated Assault per 100k: {{ data.stats.aggravated_assault_rank_per100k }}</h3>
-                        <br>
-                    {% endfor %}
-                    <!-- End Example -->
+
 
 
                     <h1>{{ city }}, {{ state_long }} Crime Statistics</h1>
@@ -118,10 +112,112 @@
                     </table>
                     <h2>Motor vehicle theft</h2>
                     <p>(sometimes referred to as grand theft auto by the media and police departments in the US) is the criminal act of stealing or attempting to steal a motor vehicle (such as an automobile, truck, bus, coach, motorcycle, or snowmobile, trailer).</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Motor Vehicle Theft</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="top">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.motor_vehicle_theft %}{{ data.stats.city.robbery }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.robbery_rank_per100k %}{{ data.stats.robbery_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
                     <h2>Violent Crime</h2>
                     <p>is a crime in which the offender uses or threatens to use violent force upon the victim. This entails both crimes in which the violent act is the objective, such as murder, as well as crimes in which violence is the means to an end, (including criminal ends) such as robbery. Violent crimes include crimes committed with weapons. With the exception of rape (which accounts for 6% of all reported violent crimes), males are the primary victims of all forms of violent crime.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Violent Crimes</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="top">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.violent_crimes %}{{ data.stats.city.violent_crimes }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.violent_crimes_rank_per100k %}{{ data.stats.violent_crimes_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
                     <h2>Larceny</h2>
                     <p>is a crime involving the wrongful acquisition of the personal property of another person.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Larceny</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="top">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.larceny %}{{ data.stats.city.larceny }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.larceny_rank_per100k %}{{ data.stats.larceny_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
                 <div class="clear"></div>
             </div>
