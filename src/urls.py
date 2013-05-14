@@ -317,6 +317,10 @@ elif settings.SITE_ID == 23:
         dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
         dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
 
+        # Search Results (.../search/)
+        url(r'^search/?$',
+            'apps.crimedatamodels.views.search', name='search'),
+
         # Local Crime Page (.../[State]/[City]/[Crime]/)
         url(r'^(\w{2})/([\w\-]+)/([\w\-]+)/?$',
             'apps.crimedatamodels.views.crime', name='crime'),
@@ -353,10 +357,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         # dtt(r'^404/?$', '404.html', '404', 'home'),
-
+        
         # SEM Landing Pages
         dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
-            
+        
         # SEO Local Pages
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',

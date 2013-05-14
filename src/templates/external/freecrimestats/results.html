@@ -33,10 +33,6 @@
                 </div>
                 <div id="results-text">
 
-
-
-
-
                     <h1>{{ city }}, {{ state_long }} Crime Statistics</h1>
                     <h2>Burglary</h2>
                     <p> (also called breaking and entering or sometimes housebreaking) is a crime, the essence of which is illegal entry into a building for the purposes of committing an offence. Usually that offence will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
@@ -51,19 +47,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            {% for year, data in crime_stats.iteritems %}
-
-                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+                            {% for year, data in cs_years %}
+                            <tr class="top">
 
                                 <td class="year">{{ year }}</td>
                                 <td>{% if data.stats.city.burglary %}{{ data.stats.city.burglary }}{% else %}&nbsp;{% endif %}</td>
                                 <td class="omega">{% if data.stats.burglary_rank_per100k %}{{ data.stats.burglary_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
                             </tr>
                             {% endfor %}
-                            
-                        
-                            
                             
                         </tbody>
                         <tfoot>
@@ -89,7 +80,7 @@
                         </thead>
                         <tbody>
                             
-                            {% for year, data in crime_stats.iteritems %}
+                            {% for year, data in cs_years %}
 
                             <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
 
@@ -98,10 +89,7 @@
                                 <td class="omega">{% if data.stats.robbery_rank_per100k %}{{ data.stats.robbery_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
                             </tr>
                             {% endfor %}
-                            
-                        
-                            
-                            
+                              
                         </tbody>
                         <tfoot>
                             <tr>
@@ -126,7 +114,7 @@
                         </thead>
                         <tbody>
                             
-                            {% for year, data in crime_stats.iteritems %}
+                            {% for year, data in cs_years %}
 
                             <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
 
@@ -163,7 +151,7 @@
                         </thead>
                         <tbody>
                             
-                            {% for year, data in crime_stats.iteritems %}
+                            {% for year, data in cs_years %}
 
                             <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
 
@@ -201,7 +189,7 @@
                         </thead>
                         <tbody>
                             
-                            {% for year, data in crime_stats.iteritems %}
+                            {% for year, data in cs_years %}
 
                             <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
 

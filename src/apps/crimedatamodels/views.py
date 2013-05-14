@@ -1,11 +1,12 @@
 import urllib
 
 from django.core.cache import cache
+from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.core.urlresolvers import reverse
 from django.conf import settings
 
 from django.contrib.localflavor.us.us_states import US_STATES
@@ -91,7 +92,7 @@ def query_weather(latitude, longitude, city, state):
     return weather_info
 
 
-def query_by_state_city(state, city, filters=None):
+def query_by_state_city(state, city, get_content=True):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
@@ -133,26 +134,28 @@ def query_by_state_city(state, city, filters=None):
         pop_type = 'METROPOLIS'
 
     # get content
-    content = CrimeContent.objects.get(
-        grade=crime_stats[years[0]]['stats'].average_grade,
-        population_type=pop_type)
+    if get_content:
+        content = CrimeContent.objects.get(
+            grade=crime_stats[years[0]]['stats'].average_grade,
+            population_type=pop_type)
 
     # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
     
-    return {'crime_stats': crime_stats,
-           'years': years[:3],
-           'latest_year': crime_stats[years[0]],
-           'state': state.abbreviation,
-           'state_long': state.name,
-           'city': city.city_name,
-           'lat': city.latitude,
-           'long': city.longitude,
-           'weather_info': weather_info,
-           'pop_type': pop_type,
-           'city_id': city_id,
-           'content': content.render(city)}
+    return {
+        'crime_stats': crime_stats,
+        'years': years[:3],
+        'latest_year': crime_stats[years[0]],
+        'state': state.abbreviation,
+        'state_long': state.name,
+        'city': city.city_name,
+        'lat': city.latitude,
+        'long': city.longitude,
+        'weather_info': weather_info,
+        'pop_type': pop_type,
+        'city_id': city_id,
+        'content': content.render(city) if get_content else None}
 
 
 def crime_stats(request, state, city):
@@ -318,10 +321,19 @@ def cities(request, state):
         .filter(state=state.upper()) \
         .order_by('city_name')
 
+    # Sort cities into alphabetized buckets
+    cities_alph = {}
+    for cd in city_data:
+        letter = cd.city_name[:1].upper()
+        if not cities_alph.get(letter):
+            cities_alph[letter] = []
+        cities_alph[letter].append(cd)
+
+    buckets = sorted(cities_alph.items(), key=lambda item: item[0])
     return render_to_response('external/freecrimestats/city-page.html', {
             'state': state_obj.abbreviation,
             'state_long': state_obj.name,
-            'cities': city_data
+            'cities_alph': buckets
         }, context_instance=RequestContext(request))
 
 
@@ -339,10 +351,12 @@ def local(request, state, city):
         if request.GET.get(filt, None) == 'hide':
             filters[filt] = False
 
+    data = query_by_state_city(state, city, False)
+    data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
+
     # Collect Context and Render Template
     return render_to_response('external/freecrimestats/results.html',
-        query_by_state_city(state, city),
-        context_instance=RequestContext(request))
+        data, context_instance=RequestContext(request))
 
 
 def crime(request, state, city, crime):
@@ -355,5 +369,58 @@ def crime(request, state, city, crime):
 
     # Return Template with results of query_by_state_city
     return render_to_response(template,
-        query_by_state_city(state, city),
+        query_by_state_city(state, city, False),
+        context_instance=RequestContext(request))
+
+
+def search(request):
+    """Render a search results page based on the query string in the GET params"""
+
+    # Extract Query Parameters
+    q_str = request.GET.get('q', '')
+    q_params = q_str.split(' ')
+
+    # Get any State objects from params, and replace
+    # full state name params with abbreviations
+    states = State.objects.all().filter(
+        Q(abbreviation__in=q_params) | Q(name__in=q_params))
+    for state in states:
+        for i in range(len(q_params)):
+            if state.name.lower() == q_params[i].lower():
+                q_params[i] = state.abbreviation
+
+    # Get potentially matching zips
+    zqo = Q(zip__in=q_params)
+    for qp in q_params:
+        zqo = zqo | Q(city__contains=qp)
+    for state in states:
+        zqo = zqo & Q(state=state.abbreviation)
+    zip_qs = ZipCode.objects.filter(zqo)
+    n_zips = zip_qs.count()
+
+    # If we only matched 1 zip result, show that page automatically
+    if n_zips == 1:
+        zipcode = zip_qs[0]
+        city_slug = zipcode.city.lower().replace(' ', '-')
+        return HttpResponseRedirect(
+            reverse('home') + zipcode.state + '/' + city_slug)
+
+    # Otherwise get more creative (WIP)
+    city_objs, n_cities = [], 0
+    if n_zips > 0:
+        city_names = [zc.city for zc in zip_qs]
+        city_objs = CityLocation.objects.all() \
+            .filter(city_name__in=city_names) \
+            .order_by('city_name')
+        n_cities = city_objs.count()
+
+    # If only 1 city found, redirect to it's results like before
+    if n_cities == 1:
+        city = city_objs[0]
+        return HttpResponseRedirect(
+            reverse('home') + city.state + '/' + city.slug_name)
+
+    # Render search-results page
+    return render_to_response('external/freecrimestats/search-results.html',
+        {'num_cities': n_cities, 'cities': city_objs, 'search_query': q_str},
         context_instance=RequestContext(request))
