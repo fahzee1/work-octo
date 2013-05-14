@@ -92,7 +92,7 @@ def query_weather(latitude, longitude, city, state):
     return weather_info
 
 
-def query_by_state_city(state, city, filters=None):
+def query_by_state_city(state, city, get_content=True):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
@@ -134,9 +134,10 @@ def query_by_state_city(state, city, filters=None):
         pop_type = 'METROPOLIS'
 
     # get content
-    content = CrimeContent.objects.get(
-        grade=crime_stats[years[0]]['stats'].average_grade,
-        population_type=pop_type)
+    if get_content:
+        content = CrimeContent.objects.get(
+            grade=crime_stats[years[0]]['stats'].average_grade,
+            population_type=pop_type)
 
     # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
@@ -154,7 +155,7 @@ def query_by_state_city(state, city, filters=None):
         'weather_info': weather_info,
         'pop_type': pop_type,
         'city_id': city_id,
-        'content': content.render(city)}
+        'content': content.render(city) if get_content else None}
 
 
 def crime_stats(request, state, city):
@@ -350,7 +351,7 @@ def local(request, state, city):
         if request.GET.get(filt, None) == 'hide':
             filters[filt] = False
 
-    data = query_by_state_city(state, city)
+    data = query_by_state_city(state, city, False)
     data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
 
     # Collect Context and Render Template
@@ -368,7 +369,7 @@ def crime(request, state, city, crime):
 
     # Return Template with results of query_by_state_city
     return render_to_response(template,
-        query_by_state_city(state, city),
+        query_by_state_city(state, city, False),
         context_instance=RequestContext(request))
 
 
@@ -377,12 +378,23 @@ def search(request):
 
     # Extract Query Parameters
     q_str = request.GET.get('q', '')
-    q_params = q_str.split('+')
+    q_params = q_str.split(' ')
+
+    # Get any State objects from params, and replace
+    # full state name params with abbreviations
+    states = State.objects.all().filter(
+        Q(abbreviation__in=q_params) | Q(name__in=q_params))
+    for state in states:
+        for i in range(len(q_params)):
+            if state.name.lower() == q_params[i].lower():
+                q_params[i] = state.abbreviation
 
     # Get potentially matching zips
-    zqo = Q(zip__in=q_params) | Q(state__in=q_params)
+    zqo = Q(zip__in=q_params)
     for qp in q_params:
         zqo = zqo | Q(city__contains=qp)
+    for state in states:
+        zqo = zqo & Q(state=state.abbreviation)
     zip_qs = ZipCode.objects.filter(zqo)
     n_zips = zip_qs.count()
 
@@ -394,14 +406,21 @@ def search(request):
             reverse('home') + zipcode.state + '/' + city_slug)
 
     # Otherwise get more creative (WIP)
-    city_objs = []
+    city_objs, n_cities = [], 0
     if n_zips > 0:
         city_names = [zc.city for zc in zip_qs]
         city_objs = CityLocation.objects.all() \
             .filter(city_name__in=city_names) \
             .order_by('city_name')
+        n_cities = city_objs.count()
+
+    # If only 1 city found, redirect to it's results like before
+    if n_cities == 1:
+        city = city_objs[0]
+        return HttpResponseRedirect(
+            reverse('home') + city.state + '/' + city.slug_name)
 
     # Render search-results page
     return render_to_response('external/freecrimestats/search-results.html',
-        {'num_cities': len(city_objs), 'cities': city_objs, 'search_query': q_str},
+        {'num_cities': n_cities, 'cities': city_objs, 'search_query': q_str},
         context_instance=RequestContext(request))
