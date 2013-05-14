@@ -395,10 +395,11 @@ def search(request):
 
     # Otherwise get more creative (WIP)
     city_objs = []
-    if n_zips == 0:
-        pass
-
-
+    if n_zips > 0:
+        city_names = [zc.city for zc in zip_qs]
+        city_objs = CityLocation.objects.all() \
+            .filter(city_name__in=city_names) \
+            .order_by('city_name')
 
     # Render search-results page
     return render_to_response('external/freecrimestats/search-results.html',
