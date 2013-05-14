@@ -1,180 +1,41 @@
 {% extends "external/freecrimestats/base.html" %}
 {% load content_filters content_tags sekizai_tags %}
-{% block page_title %}Home Security System Expert | Home Security Reviews{% endblock %}
-{% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
+{% block page_title %}Crime Statistics by State: {{ state_long }} | {% endblock %}
+{% block page_description %}Crime stats in {{ state_long }}. Get information about crime like burglary, auto-theft, larceny and violent crime.{% endblock %}
 
 {% block content %}
-{% include "external/freecrimestats/header.html" %}
 <div id="main-container">
     <div id="hp">
-        <h1>Find Your Neighborhood. <span>Find the Crime.</span></h1>
-        <div id="search-box">
-            {% include "external/freecrimestats/search.html" %}
-        </div>
+        {% include "external/freecrimestats/search.html" %}
         <div class="clear"></div>
         <div id="secondary">
-            <div id="headline">
-                <div class="left-area">
-                </div>
-                <div class="right-area">
-                    <h3>Select <span>Your City.</span></h3>
-                </div>
-            </div>
             <div class="clear"></div>
             <div id="state">
-                <div class="quote-form">
-                    <h2>Want to make your home safer? Get a free home security quote and advice by filling out the form below.</h2>
-                    {% include "external/freecrimestats/quote-form.html" with form=forms.basic%}
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="city-text">
-                    <h2>A</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>B</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>C</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>A</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>B</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>C</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>A</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>B</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>C</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>A</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>B</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 10px;" class="clear"></div>
-                    <h2>C</h2>
-                    <ul>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                        <li><a href="/crime-rate/AL/Camden">Camden</a></li>
-                        <li><a href="/crime-rate/AL/Centre">Centre</a></li>
-                        <li><a href="/crime-rate/AL/Centreville">Centreville</a></li>
-                        <li><a href="/crime-rate/AL/Chatom">Chatom</a></li>
-                    </ul>
+                <div id="results-text">
+                    <h1>Select a City in {{ state_long }}</h1>
+                    <div class="city-container">
+                        <h2>A</h2>
+                        <ul>
+                            {% for city in cities %}
+                            <li><a href="/{{ state }}/{{ city.slug_name }}">{{ city.city_name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
-{% include "external/freecrimestats/footer.html" %}
 {% endblock %}

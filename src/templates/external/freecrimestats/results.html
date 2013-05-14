@@ -9,18 +9,18 @@
 
         <div class="clear"></div>
         <div id="secondary">
-        	<table id="headline">
-        		<tbody>
-        			<tr>
-        				<td class="left-area">
-		                    Truth and Consequences, New Mexico
-        				</td>
-        				<td class="right-area">
-		                    We Found <span>the Crime.</span>
-        				</td>
-        			</tr>
-        		</tbody>
-        	</table>
+            <table id="headline">
+                <tbody>
+                    <tr>
+                        <td class="left-area">
+                           {{ city }}, {{ state_long }}
+                        </td>
+                        <td class="right-area">
+                            We Found <span>the Crime.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="clear"></div>
             <div id="state">
                 <div id="sidebar">
@@ -32,65 +32,198 @@
                     </div>
                 </div>
                 <div id="results-text">
-					<h1>Truth and Consequences, New Mexico Crime Statistics</h1>
-                    <h2>Burglary</h2>
-                    <p> (also called breaking and entering or sometimes housebreaking) is a crime, the essence of which is illegal entry into a building for the purposes of committing an offence. Usually that offence will be theft, but most jurisdictions specify others which fall within the ambit of burglary.</p>
-                	<table>
-			            <thead>
-			                <tr>
-			                    <th>&nbsp;</th>
-			                    <th class="crime-name">Burglaries</th>
-			                    <th>Per / 100k</th>
-			                    
-			                </tr>
-			            </thead>
-			            <tbody>
-			                
-			                
-			                <tr class="top">
-			                    <td class="year">2009</td>
-			                    <td>18164</td>
-			                    <td class="omega">1258</td>
-			                    
-			                </tr>
-			                
-			                
-			                
-			                <tr class="alt">
-			                    <td class="year">2008</td>
-			                    <td>18908</td>
-			                    <td class="omega">1323</td>
-			                    
-			                </tr>
-			                
-			                
-			                
-			                <tr class="bottom">
-			                    <td class="year">2007</td>
-			                    <td>16750</td>
-			                    <td class="omega">1221</td>
-			                    
-			                </tr>
-			                
-			                
-			            </tbody>
-			            <tfoot>
-							<tr>
-								<td>&nbsp;</td>
-								<td class="crime-footer">&nbsp;</td>
-								<td>&nbsp;</td>
 
-							</tr>
-			            </tfoot>
-			        </table>
+
+
+
+
+                    <h1>{{ city }}, {{ state_long }} Crime Statistics</h1>
+                    <h2>Burglary</h2>
+                    <p> (also called breaking and entering or sometimes housebreaking) is a crime, the essence of which is illegal entry into a building for the purposes of committing an offence. Usually that offence will be theft, but most jurisdictions specify others which fall within the ambit of burglary. </p>
+                    <a href="/{{ state }}/{{ city|slugify }}/burglary" class="button">Read More ></a>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Burglaries</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.burglary %}{{ data.stats.city.burglary }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.burglary_rank_per100k %}{{ data.stats.burglary_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
                     <h2>Robbery</h2>
-                    <p>is the crime of taking or attempting to take something of value by force or threat of force or by putting the victim in fear. At common law, robbery is defined as taking the property of another, with the intent to permanently deprive the person of that property, by means of force or fear.</p>
-                    <h2>Motor vehicle theft</h2>
-                    <p>(sometimes referred to as grand theft auto by the media and police departments in the US) is the criminal act of stealing or attempting to steal a motor vehicle (such as an automobile, truck, bus, coach, motorcycle, or snowmobile, trailer).</p>
+                    <p>is the crime of taking or attempting to take something of value by force or threat of force or by putting the victim in fear. At common law, robbery is defined as taking the property of another, with the intent to permanently deprive the person of that property, by means of force or fear. </p>
+                    <a href="/{{ state }}/{{ city|slugify }}/robbery" class="button">Read More ></a>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Robbery</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.robbery %}{{ data.stats.city.robbery }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.robbery_rank_per100k %}{{ data.stats.robbery_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <h2>Motor Vehicle Theft</h2>
+                    <p>(sometimes referred to as grand theft auto by the media and police departments in the US) is the criminal act of stealing or attempting to steal a motor vehicle (such as an automobile, truck, bus, coach, motorcycle, or snowmobile, trailer). </p>
+                    <a href="/{{ state }}/{{ city|slugify }}/motor-vehicle-theft" class="button">Read More ></a>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Motor Vehicle Theft</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.motor_vehicle_theft %}{{ data.stats.city.motor_vehicle_theft }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.motor_vehicle_theft_rank_per100k %}{{ data.stats.motor_vehicle_theft_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
                     <h2>Violent Crime</h2>
-                    <p>is a crime in which the offender uses or threatens to use violent force upon the victim. This entails both crimes in which the violent act is the objective, such as murder, as well as crimes in which violence is the means to an end, (including criminal ends) such as robbery. Violent crimes include crimes committed with weapons. With the exception of rape (which accounts for 6% of all reported violent crimes), males are the primary victims of all forms of violent crime.</p>
+                    <p>is a crime in which the offender uses or threatens to use violent force upon the victim. This entails both crimes in which the violent act is the objective, such as murder, as well as crimes in which violence is the means to an end, (including criminal ends) such as robbery. Violent crimes include crimes committed with weapons. With the exception of rape (which accounts for 6% of all reported violent crimes), males are the primary victims of all forms of violent crime. </p>
+                    <a href="/{{ state }}/{{ city|slugify }}/violent-crime" class="button">Read More ></a>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Violent Crimes</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.violent_crime %}{{ data.stats.city.violent_crime }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.violent_crime_rank_per100k %}{{ data.stats.violent_crime_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
                     <h2>Larceny</h2>
-                    <p>is a crime involving the wrongful acquisition of the personal property of another person.</p>
+                    
+                    <p>is a crime involving the wrongful acquisition of the personal property of another person. </p>
+                    <a href="/{{ state }}/{{ city|slugify }}/larceny" class="button">Read More ></a>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Larceny</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.larceny_theft %}{{ data.stats.city.larceny_theft }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.larceny_theft_rank_per100k %}{{ data.stats.larceny_theft_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
                 <div class="clear"></div>
             </div>

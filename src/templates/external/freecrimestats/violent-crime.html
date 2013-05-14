@@ -1,42 +1,92 @@
 {% extends "external/freecrimestats/base.html" %}
 {% load content_filters content_tags sekizai_tags %}
-{% block page_title %}Home Security System Expert | Home Security Reviews{% endblock %}
-{% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
+{% block page_title %}{{ city }}, {{ state_long }} Violent Crime Stats | Local Violent Crime Stats{% endblock %}
+{% block page_description %}Local Violent Crime Statistics and crime information about your neighborhood and city. Find local stats about crime in {{ city }}, {{ state_long }}.{% endblock %}
 
 {% block content %}
-{% include "external/freecrimestats/header.html" %}
 <div id="main-container">
     <div id="hp">
-        <h1>Find Your Neighborhood. <span>Find the Crime.</span></h1>
-        <div id="search-box">
-            {% include "external/freecrimestats/search.html" %}
-        </div>
+
         <div class="clear"></div>
         <div id="secondary">
-            <div id="headline">
-                <div class="left-area">
-                    <h2>City, State</h2>
-                </div>
-                <div class="right-area">
-                    <h3>We Found <span>the Crime.</span></h3>
-                </div>
-            </div>
+            <table id="headline">
+                <tbody>
+                    <tr>
+                        <td class="left-area">
+                            {{ city }}, {{ state_long }}
+                        </td>
+                        <td class="right-area">
+                            We Found <span>the Crime.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="clear"></div>
             <div id="state">
-                <div class="quote-form">
-                    <h2>Want to make your home safer? Get a free home security quote and advice by filling out the form below.</h2>
-                    {% include "external/freecrimestats/quote-form.html" with form=forms.basic%}
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
                 </div>
-                <div class="results">I dont know how this is going to look its up to Matt.</div>
-                <div class="about-text">
-                    <h3>Violent Crime</h3>
+                <div id="results-text">
+                    <h1>Violent Crime Statistics in {{ city }}, {{ state_long }}</h1>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Violent Crimes</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.violent_crime %}{{ data.stats.city.violent_crime }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.violent_crime_rank_per100k %}{{ data.stats.violent_crime_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <h2>What is a Violent Crime?</h2>
                     <p>A violent crime or crime of violence is a crime in which the offender uses or threatens to use violent force upon the victim. This entails both crimes in which the violent act is the objective, such as murder, as well as crimes in which violence is the means to an end, (including criminal ends) such as robbery. Violent crimes include crimes committed with weapons. With the exception of rape (which accounts for 6% of all reported violent crimes), males are the primary victims of all forms of violent crime.</p>
                     <p>Violent crime is to be taken serious and treated with extreme care. Consult with your local police department and authorities if you are ever the victim of a violent crime. It's important to know your rights and to not be afraid to speak up. No one deserves to be treated with violence.</p>
+                    <h2>What to do If you are a Victim</h2>
+                    <p>Violent crime {% content_spinner "violent1" "at times can’t|sometimes cannot|in some cases can’t" %} be avoided, but there is never an excuse for it. This type of crime may happen in your home or in public but it’s important to stay calm and think rationally. Consult with your local police department or authorities if you are ever a victim of violent crime. And it is important to remember that if you are the victim of a violent crime, it is never your fault.</p>
+                    <p>{% content_spinner "violent2" "Watch|Keep an eye|Be aware of" %}  out for witnesses but also keep in mind a lot of local businesses have surveillance cameras. You can also arm your home with surveillance video cameras to keep a closer eye on your home, but also yourself and your family.
+
+</p>
+                    <h2>Related Violent Crime Articles</h2>
+                    <ul>
+                        <li><a href="http://www.protectamerica.com/home-security-blog/home-security-systems-2/recent-advances-in-home-security-systems_3347?affkey=fcs" title="Recent Advances in Home Security Systems">Recent Advances in Home Security Systems</a></li>
+                        <li><a href="http://www.protectamerica.com/home-security-blog/home-defense-advice/your-home-security-easy-for-you-hard-for-thieves_2114?affkey=fcs" title="Your Home Security: Easy for you. Hard for Thieves">Your Home Security: Easy for you. Hard for Thieves</a></li>
+                        <li><a href="http://www.wikihow.com/Avoid-Becoming-a-Rape-Victim?affkey=fcs" title="How to Avoid Becoming a Rape Victim">How to Avoid Becoming a Rape Victim</a></li>
+                    </ul>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
 </div>
-{% include "external/freecrimestats/footer.html" %}
 {% endblock %}
