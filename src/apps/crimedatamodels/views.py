@@ -142,18 +142,19 @@ def query_by_state_city(state, city, filters=None):
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
     
-    return {'crime_stats': crime_stats,
-           'years': years[:3],
-           'latest_year': crime_stats[years[0]],
-           'state': state.abbreviation,
-           'state_long': state.name,
-           'city': city.city_name,
-           'lat': city.latitude,
-           'long': city.longitude,
-           'weather_info': weather_info,
-           'pop_type': pop_type,
-           'city_id': city_id,
-           'content': content.render(city)}
+    return {
+        'crime_stats': crime_stats,
+        'years': years[:3],
+        'latest_year': crime_stats[years[0]],
+        'state': state.abbreviation,
+        'state_long': state.name,
+        'city': city.city_name,
+        'lat': city.latitude,
+        'long': city.longitude,
+        'weather_info': weather_info,
+        'pop_type': pop_type,
+        'city_id': city_id,
+        'content': content.render(city)}
 
 
 def crime_stats(request, state, city):
@@ -349,10 +350,12 @@ def local(request, state, city):
         if request.GET.get(filt, None) == 'hide':
             filters[filt] = False
 
+    data = query_by_state_city(state, city)
+    data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
+
     # Collect Context and Render Template
     return render_to_response('external/freecrimestats/results.html',
-        query_by_state_city(state, city),
-        context_instance=RequestContext(request))
+        data, context_instance=RequestContext(request))
 
 
 def crime(request, state, city, crime):
@@ -394,6 +397,8 @@ def search(request):
     city_objs = []
     if n_zips == 0:
         pass
+
+
 
     # Render search-results page
     return render_to_response('external/freecrimestats/search-results.html',
