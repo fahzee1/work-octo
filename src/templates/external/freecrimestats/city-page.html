@@ -23,11 +23,17 @@
                 <div id="results-text">
                     <h1>Select a City in {{ state_long }}</h1>
                     <div class="city-container">
-                        <h2>A</h2>
                         <ul>
-                            {% for city in cities %}
-                            <li><a href="{% url home %}{{ state }}/{{ city.slug_name }}">{{ city.city_name }}</a></li>
-                            {% endfor %}
+                        {% for letter, cities in cities_alph %}
+                            <li>
+                                <h2>{{ letter }}</h2>
+                                <ul>
+                                    {% for city in cities %}
+                                    <li><a href="{% url home %}{{ state }}/{{ city.slug_name }}">{{ city.city_name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
                         </ul>
                         <div class="clear"></div>
                     </div>

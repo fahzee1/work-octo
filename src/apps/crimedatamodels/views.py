@@ -319,10 +319,19 @@ def cities(request, state):
         .filter(state=state.upper()) \
         .order_by('city_name')
 
+    # Sort cities into alphabetized buckets
+    cities_alph = {}
+    for cd in city_data:
+        letter = cd.city_name[:1].upper()
+        if not cities_alph.get(letter):
+            cities_alph[letter] = []
+        cities_alph[letter].append(cd)
+
+    buckets = sorted(cities_alph.items(), key=lambda item: item[0])
     return render_to_response('external/freecrimestats/city-page.html', {
             'state': state_obj.abbreviation,
             'state_long': state_obj.name,
-            'cities': city_data
+            'cities_alph': buckets
         }, context_instance=RequestContext(request))
 
 
