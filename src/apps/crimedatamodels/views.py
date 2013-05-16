@@ -307,10 +307,11 @@ def home(request):
 
 def states(request):
     """State Listing View"""
-
+    forms = {}
+    forms['basic'] = PAContactForm()
     return render_to_response(
         'external/freecrimestats/state-page.html',
-        {'states': US_STATES}, context_instance=RequestContext(request))
+        {'states': US_STATES, 'forms': forms}, context_instance=RequestContext(request))
 
 
 def cities(request, state):
@@ -328,12 +329,14 @@ def cities(request, state):
         if not cities_alph.get(letter):
             cities_alph[letter] = []
         cities_alph[letter].append(cd)
-
+    forms = {}
+    forms['basic'] = PAContactForm()
     buckets = sorted(cities_alph.items(), key=lambda item: item[0])
     return render_to_response('external/freecrimestats/city-page.html', {
             'state': state_obj.abbreviation,
             'state_long': state_obj.name,
-            'cities_alph': buckets
+            'cities_alph': buckets,
+            'forms': forms
         }, context_instance=RequestContext(request))
 
 
@@ -353,6 +356,10 @@ def local(request, state, city):
 
     data = query_by_state_city(state, city, False)
     data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
+
+    forms = {}
+    forms['basic'] = PAContactForm()
+    data['forms'] = forms
 
     # Collect Context and Render Template
     return render_to_response('external/freecrimestats/results.html',
@@ -419,8 +426,11 @@ def search(request):
         city = city_objs[0]
         return HttpResponseRedirect(
             reverse('home') + city.state + '/' + city.slug_name)
+    forms = {}
+    forms['basic'] = PAContactForm()
+    
 
     # Render search-results page
     return render_to_response('external/freecrimestats/search-results.html',
-        {'num_cities': n_cities, 'cities': city_objs, 'search_query': q_str},
+        {'num_cities': n_cities, 'cities': city_objs, 'forms': forms, 'search_query': q_str},
         context_instance=RequestContext(request))
