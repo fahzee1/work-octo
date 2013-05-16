@@ -33,9 +33,9 @@
     <!-- For all browsers -->
     <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/320.css">
     <!-- For progressively larger displays -->
-    <link rel="stylesheet" media="screen and (min-width: 400px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/480.css">
+    <link rel="stylesheet" media="screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/480.css">
     <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
-    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="/static/css/960.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
     <!--[if (lt IE 9) & (!IEMobile)]>
     <script src="js/selectivizr-min.js"></script>
     <![endif]-->
@@ -112,7 +112,7 @@
             {% block main-phone %}
                 {% if phone_number %}
                 <div id="phone-number">
-                    <p>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
+                    <p>Call Now<em> and Save</em>! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
                 </div>
                 {% endif %}
             {% endblock %}
@@ -135,27 +135,33 @@
 </div>
 {% endblock %}
 <div id="hero-wrapper">
-    <h1>Wireless Home Security. <span>100% Protection.</span></h1>
-    <ul>
-        <li>24/7 Nationwide Monitoring</li>
-        <li>Reliable GE Wireless Security System</li>
-        <li>No Equipment or Activation Fees</li>
-        <li>Complete Home Protection</li>
-    </ul>
-    <div class="price-tag">
-		<em>Starting At:</em>
-		<p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
-    </div>
-    <div id="mobile-banner">
-        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/mobile-keychain.png" alt="mobile-keychain" width="480" height="120">
-    </div>
-    <div id="big-quote">
-        <div id="price-tag">
-            <h3>Starting at just</h3>
-            <p><span>$19.99* </span><em>per <span>month</span></em></p>
-            <div class="clear"></div>
+    <div id="hero">
+        <h1>Wireless Home Security. <span>100% Protection.</span></h1>
+        <ul>
+            <li>24/7 Nationwide Monitoring</li>
+            <li>Reliable GE Wireless Security System</li>
+            <li>No Equipment or Activation Fees</li>
+            <li>Complete Home Protection</li>
+            <li class="no-mobile">Up to 20% off Homeowners</li>
+            <li class="no-mobile">Lifetime Replacement Parts<br />Warranty on all Alarm Systems</li>
+        </ul>
+        <div class="price-tag">
+    		<em>Starting At:</em>
+    		<p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
         </div>
-        {% include "order/quote-form-new.html" with form=forms.basic %}
+        <div id="mobile-banner">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/mobile-keychain.png" class="mobile" alt="mobile-keychain">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/mobile-keychain-big.png" class="big" alt="mobile-keychain">
+
+        </div>
+        <div id="big-quote">
+            <div id="price-tag">
+                <h3>Starting at just</h3>
+                <p><span>$19.99* </span><em>per <span>month</span></em></p>
+                <div class="clear"></div>
+            </div>
+            {% include "order/quote-form-new.html" with form=forms.basic %}
+        </div>
     </div>
 </div>
 {% if phone_number %}
@@ -218,6 +224,7 @@
             <div class="clear"></div>
         </div>
     </div>
+    <div class="clear"></div>
     <div id="alarm-monitoring-options">
         <div id="cellular-monitoring-option">
             <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="Cellular Connection" width="199" height="200" />
@@ -311,6 +318,9 @@
                                 <li><strong><span>10</span></strong> Door / Window Sensors</li>
                                 <li><strong>1</strong> Motion Detector</li>
                             </ul>
+                            <div class="smart-connect">
+                                <p>exclusive <span>SMART Connect</span></p>
+                            </div>
                             <ul class="extra-features">
                                 <li>No Equipment Fees</li>
                                 <li>No Activation Fees</li>
@@ -328,6 +338,9 @@
                                 <li><strong><span>12</span></strong> Door / Window Sensors</li>
                                 <li><strong>1</strong> Motion Detector</li>
                             </ul>
+                            <div class="smart-connect">
+                                <p>exclusive <span>SMART Connect</span></p>
+                            </div>
                             <ul class="extra-features">
                                 <li>No Equipment Fees</li>
                                 <li>No Activation Fees</li>
@@ -346,17 +359,17 @@
                                 <li><strong><span>15</span></strong> Door / Window Sensors</li>
                                 <li><strong>1</strong> Motion Detector</li>
                             </ul>
+                            <div class="smart-connect">
+                                <p>exclusive <span>SMART Connect</span></p>
+                            </div>
                             <ul class="extra-features">
                                 <li>No Equipment Fees</li>
                                 <li>No Activation Fees</li>
                             </ul>
                         </div>
                     </div>
-                    {% comment %}
-                    <a href="" title="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!">
-                        <img src="{{ STATIC_URL }}img/banners/596x80/arm-disarm-smart-connect.jpg" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" />
+                    <img src="{{ STATIC_URL }}img/banners/596x80/arm-disarm-smart-connect.jpg" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" />
                     </a>
-                    {% endcomment %}
                     <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
@@ -451,7 +464,7 @@
             <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-right-piece.png" class="right-side" width="16" height="88">
         </h2>
     </div>
-    <div class="testimonial">
+    <div class="testimonial left">
     	<h3>from <span>Escondido, CA</span> <strong>Michael writes:</strong></h3>
     	<p>Noel was excellent: very thorough and patient. As I've mentioned, I installed this alarm many years ago when I worked long hours and traveled for my catering business and was concerned about my Apple computer being stolen. I sold my business, bought a laptop, and stay closer to home, so I don't use the system regularly. I travel 4-5 times/year max, and turn the alarm on then, but pay the monthly fee so I can have peace of mind when I do travel. The new unit looks great, an improvement on the old without being more complicated. I especially appreciate all your help with this replacement. Thanks.</p>
     </div>
@@ -460,17 +473,23 @@
     	<p>Avery was great. I was very nervous about the process of setting up and using the system. Avery was patient and walked me through the process step-by-step. He put me at ease about using the system in general. Avery seemed passionate about the service being provided and that is rare these days.</p>
     </div>
     <div class="testimonial">
-    	<h3>from <span>Enoir, NC</span> <strong>Earl writes:</strong></h3>
-    	<p>L THOMAS WAS VERY MUCH HELPFUL. VERY CARING, VERY FREINDLY. COULD NOT HAVE NO ONE ANY NICER.</p>
-    </div>
-    <div class="testimonial">
     	<h3>from <span>Baltimore, MD</span> <strong>Richard writes:</strong></h3>
     	<p>I got notified today that Bltimore Gas and Electric was turning off power in my neighborhood for about 6 hours on Thursday. Not knowing what that would do the system I called customer service and was fortunate enough to reach Jessica Palma who talked me through all the possible contingencies. Great service Thanks</p>
+    </div>
+    <div class="testimonial left">
+    	<h3>from <span>Enoir, NC</span> <strong>Earl writes:</strong></h3>
+    	<p>L THOMAS WAS VERY MUCH HELPFUL. VERY CARING, VERY FREINDLY. COULD NOT HAVE NO ONE ANY NICER.</p>
     </div>
     <div class="testimonial">
     	<h3>from <span>Alley Village, CA</span> <strong>Ben writes:</strong></h3>
     	<p>Jessika did a great job patiently answering all my questions and addressing my needs. She is excellent.</p>
     </div>
+
+
+    <div class="clear"></div>
+</div>
+<div id="sister-companies">
+    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/companies.jpg" alt="companies" width="948" height="92">
 </div>
 <div id="footer">
     <div id="left-side">

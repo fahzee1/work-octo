@@ -3,24 +3,48 @@
 
 
 body {
+    background: #f0f5f7;
 }
 #header {
+    background: @white;
+    padding: 8px;
+    border-bottom: 5px solid @red;
+
     #header-wrapper {
         #phone-number {
-
-            a {
-
+            width: 40%;
+            float: right;
+            background: @white;
+            p {
+                color: @black;
+                text-align: right;
+                text-transform: none;
+                line-height: 32px;
+                
+                em {
+                    display: inline;
+                }
+            }
+            a,span {
+                color: @red;
+                font-size: 32px;
+                line-height: 36px;
+                display: block;
             }
         }
         #company-logo {
-
+            background: @white;
+            width: 40%;
+            float: left;
+            padding-top: 10px;
             #main-logo {
-
+                background: none;
                 img {
+                    display: block;
                 }
             }
             #main-navigation {
-
+                display: none;
                 li {
 
                     img {
@@ -36,7 +60,7 @@ body {
 }
 #hero-wrapper {
     height: 383px;
-    background: @blue url(/static/img/affiliates/sem-landing-page/rep/mobile-hero-backdrop.jpg) 212px 80px no-repeat;
+    background: @blue url(/static/img/affiliates/sem-landing-page/rep/backdrop-small.jpg) 50% 69px no-repeat;
 
     h1 {
         font-size: 27px;
@@ -52,22 +76,23 @@ body {
     }
     .price-tag {
         display: none;
-    	em {
-    	}
-		p {
+        em {
+        }
+        p {
 
-			sup {
-			}
-			span {
+            sup {
+            }
+            span {
 
-			}
-		}
+            }
+        }
     }
     #big-quote {
         width: 250px;
         position: absolute;
         right: 8px;
         top: 0;
+        display: block;
         #price-tag {
             background: @white;
             .border-radius(0, 0, 10px, 10px);
@@ -199,43 +224,102 @@ body {
         }
     }
     #home-security-package-choices {
-    	#home-security-packages {
-			.premium-packages-header {
-			}
-    		#copper-security-package, #bronze-security-package, #silver-security-package, #gold-security-package, #platinum-security-package {
+        #home-security-packages {
+            background: @blue;
+            margin-top: 0;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            .premium-packages-header {
+            }
+            #copper-security-package, #bronze-security-package, #silver-security-package, #gold-security-package, #platinum-security-package {
+                width:19%;
+                height: auto;
+                float: left;
+                margin-right: 4px;
+                .drop-shadow(0, 1px, 5px, @dark-blue);
+                .border-radius(5px, 5px, 5px, 5px);
+                .package-name {
+                    width: 100%;
+                    float: none;
+                    border: 1px solid @black;
+                    .border-radius(5px, 5px, 0, 0);
+                    h3 {
+                    }
+                    p {
 
-    			.package-name {
+                        sup {
+                        }
+                        span {
 
-    				h3 {
-    				}
-					p {
+                        }
+                    }
+                }
 
-						sup {
-						}
-						span {
+                .package-info {
+                    width: 100%;
+                    ul {
+                        float: none;
+                        width: 100%;
+                        height: auto;
+                        padding: 0;
+                        border: 1px solid @light-grey;
+                        border-bottom: none;
+                        border-top: none;
+                        padding: 16px 0;
+                        li {
+                            strong {
+                                display: block;
+                                font-size: 20px;
+                                line-height: 28px;
+                                
+                            }
+                        
+                        }
 
-						}
-					}
-    			}
+                        &.extra-features {
+                            width: 100%;
+                            border-bottom: 1px solid @light-grey;
+                            .border-radius(0,0,5px,5px);
+                            li {
+                            }
+                        }
+                    }
+                    .smart-connect {
+                        background: #45bc1a;
+                        padding: 16px 0;
+                        border: 1px solid @light-grey;
+                        width: 100%;
+                        display: block;
+                        p {
+                            padding: 0 8px;
+                            color: @white;
+                            font-size: 10px;
+                            font-style: italic;
+                            text-shadow: 0 1px 0 @black;
+                            line-height: 16px;
+                            span {
+                                display: block;
+                                color: #f8d200;
+                                font-size: 20px;
+                                line-height: 20px;
+                                font-style: normal;
+                                font-weight: 100;
+                            }
+                        }
+                    }
+                }
 
-    			.package-info {
-
-    				ul {
-
-    					li {
- 
-    					
-    					}
-    					&.extra-features {
-
-	    					li {
-	    					}
-    					}
-    				}
-    			}
-    			
-    		}
-    	}
+                
+            }
+            .promo-banner {
+                width: 569px;
+                display: block;
+                margin: 0 auto;
+            }
+            #platinum-security-package {
+                margin-right: 0;
+            }
+        }
     }
     #order-reassurance, #alarm-monitoring-options {
         #lowest-price-guaranteed, #lifetime-warranty, #homeowner-insurance-discount, #relocation-kit, #free-tech-support {
@@ -267,11 +351,29 @@ body {
             }
         }
         #cellular-monitoring-option, #broadband-monitoring-option, #landline-monitoring-option {
-            width: 32%;
+            width: 29%;
             float: left;
             img {
-                width: auto;
+                width: 150px;
+                float: none;
+                display: block;
+                margin: 0 auto;
             }
+            .text {
+                width: 100%;
+                h3 {
+                    width: 100%;
+                    text-align: center;
+                    font-size: 17px;
+                    margin-top: 8px;
+                }
+                p {
+                    font-size: 12px;
+                }
+            }
+        }
+        #broadband-monitoring-option {
+            margin: 0 32px;
         }
         #free-tech-support {
 
@@ -284,7 +386,8 @@ body {
         }
         tbody {
             td {
-
+                font-size: 16px;
+                line-height: 24px;
                 &.pa {
 
     
@@ -297,7 +400,9 @@ body {
                     }
                 }
                 &.title {
-
+                    width: 270px;
+                    font-size: 14px;
+                    line-height: 16px;
                 }
                 &.omega {
                 }
@@ -318,16 +423,40 @@ body {
         }
     }
     .testimonial {
+        padding-bottom: 8px;
+        float: left;
         h3 {
-
+            font-size: 12px;
+            font-style: italic;
+            background: url(/static/img/affiliates/sem-landing-page/rep/testimonial-arrow-mobile.png) center bottom no-repeat;
+            padding: 8px 8px 27px;
             span {
+                color: @red;
             }
             strong {
+                display: block;
+                color: @blue;
+                font-size: 20px;
+                font-style: inherit;
             }
         }
         p {
+            width: 250px;
+            padding: 8px 16px;
+            background: #dee8f0;
+            margin: 0 auto;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: justify;
+            .border-radius(0, 0, 16px, 16px);
+        }
+        &.left {
+            margin-right: 4px;
         }
     }
+}
+#sets-apart {
+    margin-top: 0;
 }
 #customer-testimonials {
 
