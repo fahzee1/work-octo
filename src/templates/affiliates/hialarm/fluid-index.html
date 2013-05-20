@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters testimonial_tags %}
+{% block page_title %}Hi Alarm | Hawaii Alarm Help by Protect America | Hawaii Home Security{% endblock %}
+{% block page_description %}Hi Alarm customers now have another option! Protect America can help secure your home at an affordable price. Home Security for Hawaii Alarm customers.{% endblock %}
+{% block navigation %}{% endblock %}
+{% block subnav %}{% endblock %}
+{% block order-footer %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/hialarm/hialarm.css">
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+
+{% block content %}
+</div>
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
+        <h1><span>Aloha HI Alarm Customers, </span>Switch and Save!</h1>
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/benefit-bullets.png" id="benefit-bullets" alt="Works with Existing Equipment, Wireless Cellular Technology, No Landline Connection" />
+        <img src="{{ STATIC_URL }}img/protectamerica/pricing.png" alt="pricing" id="price-area" />
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/2-gig.png" id="front-hero-image" alt="alarm-systems" />
+        <form id="switch-form" method="post" action="">
+            <p id="form-headline">How Much Do You Save?</p>
+            <div id="save-headline">
+                <p><span>$</span><strong id="save-price">23</strong></p>
+                <h3>per month vs <span id="company-name">Hawaii Alarm</span></h3>
+            </div>
+            <div id="form-area">
+                {% block formfields %}
+                    <label>Current Monthly Bill:</label>
+                    <input value="$42.99" id="monthly-bill" />
+                    <label>Security Provider:</label>
+                    <select id="company-select">
+                        <option>Hawaii Alarm</option>
+                        <option>Brinks</option>
+                        <option>Vivint</option>
+                        <option>Pinnacle</option>
+                        <option>Guardian</option>
+                        <option>Alarm Force</option>
+                        <option>Other</option>
+                    </select>
+                {% endblock %}
+                <button type="button" class="redbutton" id="switch-button">{% block quote-button %}Switch Now{% endblock %}</button>
+                <a href="http://www.protectamerica.com/help/privacy-policy" class="privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+            </div>
+        </form>
+        {% include "order/switch-form.html" with form=forms.basic %}
+
+        {% if phone_number %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+    
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="Security For Every Home" id="hero-backdrop" />
+</div>
+<div class="clear"></div>
+<div class="wrapper">
+    <div id="security-information">
+        <div id="one-hundred-percent">
+            <div id="wireless-security">
+                
+                <h1>Dear Hawaii Alarm Customers,</h1>
+                <p>We've heard about HI Alarm closing its doors and leaving you frustrated and your home unsecured.  We are very sorry to hear about that and we want to help. That is why we are offering an unbeatable offer just for HI Alarm customers. Keep your existing system, but protect your home for a lot less.  Special rates start at just $19.99/mo.</p>  
+                <p>Protect America is proud to be a full service home security company that has been in business for over 20 years. Your alarm system comes with triple redundant 24 / 7 security monitoring. You never have to worry about your bill getting higher. You never have to worry about your contract being sold to some outside company within a year or so. We believe in giving our customers a security system they will love while keeping their home secure for life.</p>
+                {% if phone_number %}
+                    {% businesstime %}
+                        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                    {% endbusinesstime %}
+                {% endif %}
+            </div>
+        </div>
+        <div style="padding-top: 32px;">
+            <script type='text/javascript' src='http://KHNL.images.worldnow.com/interface/js/WNVideo.js?rnd=15015;hostDomain=www.hawaiinewsnow.com;playerWidth=275;playerHeight=155;isShowIcon=true;clipId=8759025;flvUri=;partnerclipid=;adTag=News;advertisingZone=;enableAds=true;landingPage=;islandingPageoverride=false;playerType=STANDARD_EMBEDDEDscript;controlsType=overlay'></script>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+</div>
+
+</div>
+<div id="customer-testimonials">
+    <ul id="main-testimonials">
+    {% testimonial_search "" "state=HI&limit=10&words=75" %}
+    </ul>
+</div>
+<div class="wrapper">
+    {% include "order/call-box.html" %}
+</div>
+{% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+   <script type="text/javascript" src="{{ STATIC_URL }}/js/countTo.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var currentPrice = 19.99;
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+        $('input').keypress(function(e) { if(e.keyCode == 13){ e.preventDefault();} });
+
+        $(document).on('click', '#switch-button', function(e){
+            e.preventDefault
+            $('#switch-form').fadeOut();
+            $('#quote-form-new').fadeIn();
+            var newBill = $('#monthly-bill').val();
+            var selectCompany = $('#company-select').val();
+            $('#switch-package-line').val('Currently has '+ selectCompany +' at a rate of '+newBill);
+
+        });
+        $('#monthly-bill').change(function() {
+            var newBill = $('#monthly-bill').val();
+            if (newBill > 999) {
+                alert('Really? You really need to call us because you are paying way too much.');
+            };
+            var newBillSplit = newBill.replace('$', '');
+            var newSavings = newBillSplit - currentPrice;
+            oldSavings = $('#save-price').text();
+            oldSavings = parseInt(oldSavings);
+            newSavings = parseInt(newSavings);
+            $('#save-price').countTo({from: oldSavings, to: newSavings, speed: 500});
+
+        });
+        $('#company-select').change(function() {
+            var selectCompany = $('#company-select').val();
+            $('#company-name').text(selectCompany);
+        });
+    });
+    </script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$('#header').waypoint('sticky', {
+			  offset: -85 // Apply "stuck" when element 30px from top
+			});
+            animated = 0;
+            $("#alarm-category").click(function(){
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#home-security-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-937px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#home-security-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#home-security-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+    
+            });
+            $("#video-category").click(function(){
+    
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#video-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-615px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#video-security-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#video-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+            $("#smart-app-category").click(function(){
+                
+    
+                if(animated == 0 && !$(this).hasClass('active')) {
+                    animated = 1;
+                    $('.security-choice').removeClass('active');
+                    $(this).addClass('active');
+                    $('.big-info').slideUp('fast');
+                    $('.button-link > .active').fadeIn('slow');
+                    $('#smart-app-button-choice').fadeOut('fast');
+                    $('#white-arrow').animate({left: '-291px'}, 500, function() {
+                        $('.button-link > .active').removeClass('active');
+                        $('#smart-app-choice').slideDown('fast', function() {
+                            animated = 0;
+    
+                            $("#smart-app-button-choice").addClass('active');
+    
+    
+                        });
+                    });
+                    return false;
+                } else {
+                    return false;
+                }
+            });
+
+        });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}
+{% block main-footer %}{% endblock %}

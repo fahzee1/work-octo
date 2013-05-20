@@ -1,0 +1,39 @@
+{% extends "external/freecrimestats/base.html" %}
+{% load content_filters content_tags sekizai_tags %}
+{% block page_title %}Home Security System Expert | Home Security Reviews{% endblock %}
+{% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
+
+{% block content %}
+<div id="main-container">
+    <div id="hp">
+
+        {% include "external/freecrimestats/search.html" %}
+        <div class="clear"></div>
+        <div id="secondary">
+            <div class="clear"></div>
+            <div id="state">
+              <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
+                </div>
+                <div id="results-text">
+                    <h1>Select a State to Get Started</h1>
+                    <div class="city-container">
+                        <ul>
+                            {% for state in states %}
+                            <li><a href="{% url home %}{{ state.0 }}">{{ state.1 }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -66,7 +66,11 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <h1>Security For Every Home.</h1>
         <img src="{{ STATIC_URL }}img/protectamerica/iphone-two.png" class="happy-family" alt="family-one" />
         <div id="hero-features">
-            <img src="{{ STATIC_URL }}img/protectamerica/main-features.png" alt="main-features" class="features" />
+            <ul>
+                <li>Reliable Wireless Security</li>
+                <li>Zero Equipment Cost</li>
+                <li>No Installation Fees</li>
+            </ul>
             <img src="{{ STATIC_URL }}img/protectamerica/consumer-digest-best-buy.png" alt="consumer-digest-best-buy" class="consumer-digest" />
         </div>
         <img src="{{ STATIC_URL }}img/protectamerica/pricing.png" alt="pricing" class="pricing" />
@@ -97,13 +101,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div class="wrapper">
 
     <div id="security-benefits">
-        <div id="advantage-badges">
-            {% block advantage-badges %}
-            <img src="{{ STATIC_URL }}img/external/consumer-digest/consumer-digest-logo.jpg" alt="consumer-digest-logo" width="136" height="120" />
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-logo.jpg" alt="top-consumer-logo" width="128" height="120" id="top-consumer-logo" />
-            <img src="{{ STATIC_URL }}img/external/ge-logo-blue.png" alt="ge-logo-blue" width="240" height="120" />
-            {% endblock %}
-        </div>
         {% block overview-content %}
         <div id="protect-america-information">
             <h2>Wireless Home Security: <br />100% Protection</h2>
@@ -122,7 +119,14 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             <li>Up to 20% Off Homeowners Insurance</li>
             <li>Peace of Mind When It Comes to Your Family &amp; Home</li>
         </ul>
+
+        {% if phone_number %}
+            {% businesstime %}
+                <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+            {% endbusinesstime %}
+        {% endif %}
         {% endblock %}
+
     </div>
     <div id="home-security-testimonials">
         {% block pa-testimonials %}
@@ -134,6 +138,8 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
 </div>
 <div class="wrapper">
+    <img src="{{ STATIC_URL }}img/products/no-cost-banner.png" id="" alt="No Activation Fees, No Installation Fees, No Equipment Cost" style="padding-top: 16px;" width="960" height="77" />
+
     <div id="security-categories">
         <ul>
             <li id="alarm-category" class="security-choice active">
@@ -166,7 +172,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 <thead>
                     <tr>
                         <th>&nbsp;</th>
-                        <th><img src="{{ STATIC_URL }}img/protectamerica/protect-america-logo.png" alt="protect-america-logo" width="248" height="40" /></th>
+                        <th><p class="pa-logo">&nbsp;</p></th>
                         <th>ADT</th>
                         <th>ADT Pulse</th>
                     </tr>
@@ -186,43 +192,43 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                     </tr>
                     <tr>
                         <td class="title">Homeowner's Discount</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
                     </tr>
                     <tr>
                         <td class="title">24/7 Monitoring</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
                     </tr>
                     <tr>
                         <td class="title">Interactive Features*</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
                         <td>&nbsp;</td>
-                        <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
                     </tr>
                     <tr>
                         <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td class="title">Free EasyMove<br/> Moving Kit</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td class="title">Lowest Price Guaranteed</td>
-                        <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
                         <td class="title omega">Locked-in Rate</td>
-                        <td class="pa omega"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                        <td class="pa omega"><span class="green-check">&nbsp;</span></td>
                         <td class="omega">&nbsp;</td>
                         <td class="omega">&nbsp;</td>
                     </tr>
@@ -311,12 +317,12 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 <div id="other-stats">
                     <p>2007 FBI Crime Statistics:</p>
                     <ul>
-                        <li class="two"><img src="{{ STATIC_URL }}img/external/timer-icon.png" alt="timer-icon" width="62" height="62" />Each year in the United States, a burglary occurs every 14 seconds.</li>
-                        <li class="two"><img src="{{ STATIC_URL }}img/external/sun-icon.png" alt="sun-icon" width="62" height="62" />Most burglaries occur during the day between 6am and 6pm.</li>
-                        <li class="one"><img src="{{ STATIC_URL }}img/external/money-icon.png" alt="money-icon" width="62" height="62" />The average residential burglary victim lost $1,991.</li>
-                        <li><img src="{{ STATIC_URL }}img/external/door-icon.png" alt="door-icon" width="62" height="62" />In more than a third of all burglaries, the burglar enters the front door (and most of the time does so forcefully).</li>
-                        <li><img src="{{ STATIC_URL }}img/external/3x-icon.png" alt="3x-icon" width="62" height="62" />Homes without a monitored security alarm system are 3 times more likely to be burglarized or robbed than those with a monitored home security system.</li>
-                        <li><img src="{{ STATIC_URL }}img/external/graph-icon.png" alt="graph-icon" width="62" height="62" />There is sufficient evidence to show that in the past, when the economy has suffered, burglary and property crime has increased in parallel.</li>
+                        <li class="two"><span class="alarm-icon">&nbsp;</span>Each year in the United States, a burglary occurs every 14 seconds.</li>
+                        <li class="two"><span class="sun-icon">&nbsp;</span>Most burglaries occur during the day between 6am and 6pm.</li>
+                        <li class="one"><span class="money-icon">&nbsp;</span>The average residential burglary victim lost $1,991.</li>
+                        <li><span class="door-icon">&nbsp;</span>In more than a third of all burglaries, the burglar enters the front door (and most of the time does so forcefully).</li>
+                        <li><span class="three-icon">&nbsp;</span>Homes without a monitored security alarm system are 3 times more likely to be burglarized or robbed than those with a monitored home security system.</li>
+                        <li><span class="graph-icon">&nbsp;</span>There is sufficient evidence to show that in the past, when the economy has suffered, burglary and property crime has increased in parallel.</li>
                     </ul>
                 </div>
                 <div class="clear"></div>
@@ -333,21 +339,21 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 <p>When connecting your home security system through our cellular monitoring or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation,  and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm system? No problem, just arm it while sipping your morning coffee at work.</p>
                 <ul>
                     <li>
-                        <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <span class="alarm-icon">&nbsp;</span>
                         <div>
                             <h4>Security System Control</h4>
                             <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
                         </div>
                     </li>
                     <li>
-                        <img src="{{ STATIC_URL }}img/canada/interactive-video-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <span class="video-icon">&nbsp;</span>
                         <div>
                             <h4>Live Video</h4>
                             <p>Keep an eye on your home from anywhere in the world with live video. (Video Service Required).</p>
                         </div>
                     </li>
                     <li>
-                        <img src="{{ STATIC_URL }}img/canada/interactive-home-automation-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
+                        <span class="automation-icon">&nbsp;</span>
                         <div>
                             <h4>Home Automation</h4>
                             <p>Home automation lets you control lights and appliances from your phone or computer.</p>
@@ -416,7 +422,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                     $('.big-info').slideUp('fast');
                     $('.button-link > .active').fadeIn('slow');
                     $('#video-button-choice').fadeOut('fast');
-                    $('#white-arrow').animate({left: '-582px'}, 500, function() {
+                    $('#white-arrow').animate({left: '-613px'}, 500, function() {
                         $('.button-link > .active').removeClass('active');
                         $('#video-security-choice').slideDown('fast', function() {
                             animated = 0;
@@ -441,7 +447,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                     $('.big-info').slideUp('fast');
                     $('.button-link > .active').fadeIn('slow');
                     $('#smart-app-button-choice').fadeOut('fast');
-                    $('#white-arrow').animate({left: '-242px'}, 500, function() {
+                    $('#white-arrow').animate({left: '-295px'}, 500, function() {
                         $('.button-link > .active').removeClass('active');
                         $('#smart-app-choice').slideDown('fast', function() {
                             animated = 0;

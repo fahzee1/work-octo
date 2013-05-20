@@ -10,10 +10,10 @@ admin.autodiscover()
 
 from apps.local.views import LOCAL_KEYWORDS
 
+
 # a simple direct_to_template wrapper
 def dtt(pattern, template, name, parent=None, ctx=None):
     ctx = ctx or {}
-
 
     context = dict(page_name=name, parent=parent)
     context.update(ctx)
@@ -22,9 +22,9 @@ def dtt(pattern, template, name, parent=None, ctx=None):
         dict(template=template, extra_context=context),
         name=name)
 
+
 def dtt_nocache(pattern, template, name, parent=None, ctx=None):
     ctx = ctx or {}
-
 
     context = dict(page_name=name, parent=parent)
     context.update(ctx)
@@ -32,6 +32,7 @@ def dtt_nocache(pattern, template, name, parent=None, ctx=None):
     return url(pattern, never_cache(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
+
 
 urlpatterns = patterns('',
     # Example:
@@ -63,6 +64,7 @@ urlpatterns = patterns('',
     url(r'^sitemap/?', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     url(r'^support/clear-my-cookies/?$', 'apps.common.views.clear_my_cookies',
         name='clear-my-cookies'),
+
     # affiliate urls
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
@@ -75,8 +77,8 @@ urlpatterns = patterns('',
     dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
     
     url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
-                    'apps.testimonials.views.testimonial', 
-                    name='single-testimonial'),
+        'apps.testimonials.views.testimonial',
+        name='single-testimonial'),
 
 )
 
@@ -87,6 +89,7 @@ if settings.SITE_ID == 2:
         dtt(r'^thank-you/?$', 'affiliates/radioshack/thank-you.html', 'thankyou', ctx={'page_name': 'thankyou', 'agent_id': 'a02596'}),
 
     )
+
 # Paid landing site
 elif settings.SITE_ID == 3:
     urlpatterns += patterns('',
@@ -95,15 +98,18 @@ elif settings.SITE_ID == 3:
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        dtt(r'^rep/?$', 'affiliates/sem-landing-page/responsive.html', 'squeeze'),
+
 
     )
+
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
         url(r'^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/?$', 'apps.local.views.local_page',
             name='local-page'),
         url(r'^(?P<state>[A-Z]{2})/?$', 'apps.local.views.local_city',
-            name='choose-city'), 
+            name='choose-city'),
         url(r'^(?P<keyword>%s)/sitemap\.xml', 'apps.local.views.sitemap',
             name='keyword-sitemap'),
         url(r'^$', 'apps.local.views.local_state', name='local-state'),
@@ -111,10 +117,12 @@ elif settings.SITE_ID == 4:
         ('^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)$',
             redirect_to, {'url': '/%(state)s/%(city)s/', 'permanent': True}),
     )
+
 elif settings.SITE_ID == 5:
     urlpatterns += patterns('',
         dtt(r'^$', 'affiliates/all-the-things/base.html', 'home', ctx={'page_name': 'index', 'agent_id': 'AllTheThings'}),
     )
+
 # 5 Linx landing site
 elif settings.SITE_ID == 6:
     urlpatterns += patterns('',
@@ -146,10 +154,12 @@ elif settings.SITE_ID == 6:
         dtt_nocache(r'^thank-you/5linx/?$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
     )
+
 elif settings.SITE_ID == 7:
     urlpatterns += patterns('',
         url(r'^', include('apps.blogredirects.urls')),
     )
+
 # Tomboy Tools landing site
 elif settings.SITE_ID == 8:
     urlpatterns += patterns('',
@@ -178,8 +188,8 @@ elif settings.SITE_ID == 8:
         dtt(r'^thank-you/tomboy-tools/?$', 'affiliates/tomboy-tools/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a03169'}),
 
-
     )
+
 # Mobile Website
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
@@ -203,14 +213,12 @@ elif settings.SITE_ID == 9:
         url(r'^cart-checkout/?$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
         url(r'^thank-you/?$', 'apps.pricetable.views.thank_you', name='thank_you'),
     )
+
 # Black Friday Site
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
-
         url(r'^$', 'apps.common.views.black_friday', name='index'),
-
     )
-
 
 # GetAHomeSecuritySystem.com
 elif settings.SITE_ID == 11:
@@ -234,22 +242,21 @@ elif settings.SITE_ID == 13:
         url(r'^$', 'apps.faqs.views.expert_home', name='home'),
         url(r'^ask/?$', 'apps.faqs.views.ask_question', name='ask_question'),
     )
+
 # Canada
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
         dtt(r'^shop/home-security-systems/?$', 'canada/packages.html', 'products'),
         url(r'^shop/order/?$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
-
-
         dtt(r'^thank-you/?$', 'thank-you/canada.html', 'thank_you'),
+
         # Canada Competitor Landing Pages
         dtt(r'^security-comparison/adt-vs-protect-america/?$', 'affiliates/adt-comparison-canada/index.html', 'home'),
         dtt(r'^security-comparison/reliance-vs-protect-america/?$', 'affiliates/reliance-vs-pa-canada/index.html', 'home'),
         dtt(r'^security-comparison/vivint-vs-protect-america/?$', 'affiliates/vivint-vs-protectamerica-canada/index.html', 'home'),
         dtt(r'^security-comparison/alarmforce-vs-protect-america/?$', 'affiliates/alarmforce-vs-pa-canada/index.html', 'home'),
     )
-
 
 # BuyaSecuritySystem.com
 elif settings.SITE_ID == 15:
@@ -262,23 +269,83 @@ elif settings.SITE_ID == 16:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/great-home-security-offer/index.html', 'home'),
     )
+
 # AlarmSystemOffers.com
 elif settings.SITE_ID == 17:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-system-offers/index.html', 'home'),
     )
+
 # homesecuritycompared.com
 elif settings.SITE_ID == 18:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/home-security-compared/index.html', 'home'),
     )
-    
+
 # getfreesecurity.com
 elif settings.SITE_ID == 19:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/get-free-security/index.html', 'home'),
     )
+
+# simonxtinstall.com
+elif settings.SITE_ID == 20:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/simon-xt-install/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/simon-xt-install/thanks.html', 'thank_you'),
+    )
     
+# nationalhomesecuritycompany.com
+elif settings.SITE_ID == 21:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/national-home-security-company/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/national-home-security-company/thanks.html', 'thank_you'),
+    )
+    
+# homesecuritysystemexperts.com
+elif settings.SITE_ID == 22:
+    urlpatterns += patterns('',
+        dtt(r'^$', 'external/homesecuritysystemexperts/index.html', 'home'),
+        dtt(r'^thank-you/$', 'external/homesecuritysystemexperts/thanks.html', 'thank_you'),
+    )
+
+# freecrimestats.com
+elif settings.SITE_ID == 23:
+    urlpatterns += patterns('',
+
+        # Direct-To-Template Pages
+        dtt(r'^thanks/$', 'external/freecrimestats/thanks.html', 'thanks'),
+        dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
+        dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
+        dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
+
+        # Search Results (.../search/)
+        url(r'^search/?$',
+            'apps.crimedatamodels.views.search', name='search'),
+
+        # Local Crime Page (.../[State]/[City]/[Crime]/)
+        url(r'^(\w{2})/([\w\-]+)/([\w\-]+)/?$',
+            'apps.crimedatamodels.views.crime', name='crime'),
+        
+        # Local City Page (.../[State]/[City]/)
+        url(r'^(\w{2})/([\w\-]+)/?$',
+            'apps.crimedatamodels.views.local', name='local'),
+
+        # City Listing (.../[State]/)
+        url(r'^(\w{2})/?$',
+            'apps.crimedatamodels.views.cities', name='cities'),
+
+        # State Listing (.../states/)
+        url(r'^states/?$',
+            'apps.crimedatamodels.views.states', name='states'),
+
+        # Main Index
+        url(r'^$',
+            'apps.crimedatamodels.views.home', name='home'),
+
+    )
+
+# defaults
 else:
     urlpatterns += patterns('',
 
@@ -292,12 +359,10 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         # dtt(r'^404/?$', '404.html', '404', 'home'),
-
-
+        
         # SEM Landing Pages
         dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
-
-            
+        
         # SEO Local Pages
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
@@ -334,7 +399,7 @@ else:
 
         dtt(r'^direct-mail/?$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
-        # CRIME STOPPERS        
+        # CRIME STOPPERS
         dtt(r'^CFLA/?$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),
         dtt(r'^CFCHICAGO/?$', 'affiliates/crime-stoppers-cf/chicago.html', 'cf-chicago'),
         dtt(r'^CFCLEVELAND/?$', 'affiliates/crime-stoppers-cf/cleveland.html', 'cf-cleveland'),
@@ -356,6 +421,9 @@ else:
         # Spanish
         dtt(r'^es/?$', 'spanish/index.html',
             'pa-spanish'),
+        # Hawaii
+        dtt(r'^hialarm/?$', 'affiliates/hialarm/fluid-index.html',
+            'pa-hialarm'),
         # Get Smart Page
         dtt(r'^getsmart/?$', 'mobile/get-smart.html', 'getsmart', 'index', ctx={'agent_id': 'i10288'}),
 
@@ -371,7 +439,7 @@ else:
             'payitforward-extras', 'payitforward', ctx={'agent_id': 'i03237'}),
         dtt(r'^payitforward/rules/?$', 'payitforward/rules.html',
             'payitforward-rules', 'payitforward', ctx={'agent_id': 'i03237'}),
-        dtt(r'^payitforward/thankyou/?$', 'payitforward/thankyou.html', 
+        dtt(r'^payitforward/thankyou/?$', 'payitforward/thankyou.html',
             'payitforward-thankyou', 'payitforward', ctx={'agent_id': 'i03237'}),
         dtt(r'^payitforward/teams/?$', 'payitforward/teams.html',
             'payitforward-teams', 'payitforward', ctx={'agent_id': 'i03237'}),
@@ -399,7 +467,6 @@ else:
             'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
 
         # Product > Advantage
-
         dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'products'),
 
         # Home Security Packages
@@ -502,11 +569,11 @@ else:
                 name='video-testimonials'),
                 
                 url(r'^video-testimonials/(?P<testimonial_id>\d+)/?$',
-                    'apps.testimonials.views.vidimonial', 
+                    'apps.testimonials.views.vidimonial',
                     name='single-video-testimonial'),
                 #dtt(r'^pa/share-your-testimonial/?$', 'about-us/send-testimonial.html', 'send-testimonial', 'testimonials'),
                 url(r'^pa/share-your-testimonial/?$',
-                    'apps.testimonials.views.send_testimonial', 
+                    'apps.testimonials.views.send_testimonial',
                     name='send-testimonial'),
 
 
@@ -515,11 +582,11 @@ else:
 
             #dtt(r'^about-us/tell-a-friend/?$', 'about-us/tell-a-friend.html', 'tell-a-friend', 'about-us'),
             url(r'^pa/cust_ref/?$',
-                'apps.contact.views.tell_a_friend', 
+                'apps.contact.views.tell_a_friend',
                 name='tell-a-friend'),
 
         
-        # Complete Home Security 
+        # Complete Home Security
         
         dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
         
@@ -610,28 +677,30 @@ else:
         url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/?$',
             'apps.affiliates.views.get_affiliate_information'),
 
-    url(r'^news/', include('apps.news.urls', namespace='news')),
-    url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
-    url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
-    url(r'^search/?$', 'apps.search.views.search', name='search'),
-    url(r'^testimonials/', include('apps.testimonials.urls',
-        namespace='testimonials')),
-    # CRM urls
-    url(r'^crm/', include('apps.crm.urls', namespace='crm')),
-    # EMAIL URLS
-    url(r'^email/', include('apps.emails.urls', namespace='emails')),
+        url(r'^news/', include('apps.news.urls', namespace='news')),
+        url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
+        url(r'^crime-rate/', include('apps.crimedatamodels.urls', namespace='crime-rate')),
+        url(r'^search/?$', 'apps.search.views.search', name='search'),
+        url(r'^testimonials/', include('apps.testimonials.urls',
+            namespace='testimonials')),
 
-    # comments urls
-    url(r'^comments/posted/?$', 'apps.crm.views.comment_posted',
-        name='comments-comment-done'),
-    (r'^comments/', include('django.contrib.comments.urls')),
+        # CRM urls
+        url(r'^crm/', include('apps.crm.urls', namespace='crm')),
+        # EMAIL URLS
+        url(r'^email/', include('apps.emails.urls', namespace='emails')),
 
-    ('^radioshack/?$',
-        redirect_to, {'url': 'http://radioshack.protectamerica.com/', 'permanent': True}),
-    ('^feedback/?$',
-        redirect_to, {'url': '/pa/contact', 'permanent': True}),
+        # comments urls
+        url(r'^comments/posted/?$', 'apps.crm.views.comment_posted',
+            name='comments-comment-done'),
+        (r'^comments/', include('django.contrib.comments.urls')),
+
+        ('^radioshack/?$',
+            redirect_to, {'url': 'http://radioshack.protectamerica.com/', 'permanent': True}),
+        ('^feedback/?$',
+            redirect_to, {'url': '/pa/contact', 'permanent': True}),
 
 )
+
 # redirect urls
 urlpatterns += patterns('',
     ('^pa/two-way-monitoring/Home-Security-System-Monitoring/?$',
@@ -764,7 +833,6 @@ urlpatterns += patterns('',
     #('^national-crime-prevention$',
     #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
     
-    
     ('^livechat_iframe.php',
         redirect_to, {'url': '/support', 'permanent': True}),
     ('^pa/yard-sign/security-yard-sign',
@@ -894,21 +962,24 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/?agent=a02332', 'permanent': True}),
     ('^angies/?$',
         redirect_to, {'url': '/?agent=a03103', 'permanent': True}),
+    ('^homesecurity/?$',
+        redirect_to, {'url': '/?agent=gr banner', 'permanent': True}),
 )
+
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
-            'apps.common.views.redirect_wrapper'),
+        'apps.common.views.redirect_wrapper'),
 )
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    urlpatterns += staticfiles_urlpatterns() 
+    urlpatterns += staticfiles_urlpatterns()
+
     def adt(request, path):
         from django.views.generic.simple import direct_to_template
         return direct_to_template(request, path)
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
-            'document_root': settings.MEDIA_ROOT,
-        }),
+            'document_root': settings.MEDIA_ROOT}),
 
    )
