@@ -3,19 +3,10 @@
 <div id="search-box">
 	<div id="search-form">
 	    <div id="form">
-	            <p>Refine Your Search</p>
-	        <form name="input" action="XXXXXXX" method="get">
-	            <div class="first">
-	                <input type="checkbox" name="vehicle" value="Bike">Burglary<br />
-	                <input type="checkbox" name="vehicle" value="Car">Robbery<br />
-	                <input type="checkbox" name="vehicle" value="Car">Larceny Theft<br />
-	            </div>
-	            <div class="second">
-	                <input type="checkbox" name="vehicle" value="Bike">Motor Vehicle Theft<br />
-	                <input type="checkbox" name="vehicle" value="Car">Violent Crime Rate<br />
-	            </div>
+	        <form name="input" action="{% url search %}" method="get">
+
 	            <div class="search-area">
-	                <input style="" type="text" spellcheck="true" name="search" placeholder="(Enter City/State or Zip Code)">
+	                <input style="" type="text" spellcheck="true" name="q" placeholder="(Enter City/State or Zip Code)">
 	            </div>
 	            <div class="submit">
 	                <input type="image" src="{{ STATIC_URL }}img/external-lp/freecrimestats/submit-button-large.png" value="">
@@ -23,6 +14,7 @@
 	        </form>
 	    </div>
 	</div>
+	<p id="state-headline"><a href="{% url states %}" title="Search Crime Statistics by State">Or Search By State By Clicking Here</a></p>
 </div>
 <div id="top-ad">
     <a href="http://www.protectamerica.com">

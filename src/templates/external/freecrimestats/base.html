@@ -8,7 +8,7 @@
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-5441302-16']);
+  _gaq.push(['_setAccount', 'UA-5441302-9']);
   _gaq.push(['_setDomainName', 'freecrimestats.com']);
   _gaq.push(['_trackPageview']);
 
@@ -22,11 +22,20 @@
 {% endblock %}
 
 {% block css %} 
+<meta name="geo.region" content="US-{{ state }}" />
+<meta name="geo.placename" content="{{ city }}" />
+<meta name="geo.position" content="{{ lat }};{{ long }}" />
+<meta name="ICBM" content="{{ lat }}, {{ long }}" />
+
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 <script type="text/javascript" src="//use.typekit.net/byd5lqe.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/freecrimestats.css">
 
+{% endblock %}
+{% block favicon %}
+<link rel="icon" href="{{ STATIC_URL }}img/external-lp/freecrimestats/fcs.ico" />
+<link rel="shortcut icon" href="{{ STATIC_URL }}img/external-lp/freecrimestats/fcs.ico" />
 {% endblock %}
 
 {% block typekit %}pragmatica-web{% endblock %}
@@ -49,9 +58,9 @@
     </ul>
     <div id="search-form-mini">
         <div id="form">
-            <form name="input" action="XXXXXXX" method="get">
+            <form name="input" action="{% url search %}" method="get">
                 <div class="search-area">
-                    <input style="border: none; margin-top: 0px;" type="text" spellcheck="true" name="search" placeholder="Enter City, State or Zip Code">
+                    <input style="border: none; margin-top: 0px;" type="text" spellcheck="true" name="q" placeholder="Enter City, State or Zip Code">
                 </div>
                 <div class="submit">
                     <input type="image" src="{{ STATIC_URL }}img/external-lp/freecrimestats/submit-button.png" value="">

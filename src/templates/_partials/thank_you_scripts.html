@@ -50,8 +50,11 @@
     
     <SCRIPT SRC="http://0.r.msn.com/scripts/microsoft_adcenterconversion.js"></SCRIPT>
     <!-- End MSN Code -->
-
-{% if not custom_url %}
+    {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' %}
+        <SCRIPT language="javascript" src="http://www.lmlttrack.com/pixel.track?CID=246268&MerchantReferenceID={{ request.COOKIES.lead_id|default:'NOCOOKIE' }}"></SCRIPT>
+        <NOSCRIPT><IMG src="http://www.lmlttrack.com/pixel.track?CID=246268&p=img&MerchantReferenceID={{ request.COOKIES.lead_id|default:'NOCOOKIE' }}" width="1" height="1" border="0" /></NOSCRIPT>
+    {% endif %}
+    {% if not custom_url %}
     <!-- simpl.fi -->
     <script src="http://i.simpli.fi/dpx.js?cid=70&conversion=10&campaign_id=763"></script>
     <!-- End simpl.fi -->

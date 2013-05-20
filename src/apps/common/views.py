@@ -2,29 +2,34 @@ import re
 import urls
 import urllib
 import urllib2
+import operator
+
+from decimal import Decimal
 from datetime import datetime, timedelta
 from urllib import urlencode
-import twitter
-import operator
-from decimal import Decimal
 
+import twitter
+
+from django.core.urlresolvers import reverse, resolve
 from django.core.cache import cache
+from django.views.generic.simple import redirect_to
 from django.views.decorators.cache import cache_page, never_cache
-from django.contrib.sites.models import Site
+
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
-from django.core.urlresolvers import reverse, resolve
-from django.views.generic.simple import redirect_to
+from django.http import HttpResponseRedirect, HttpResponse, \
+    HttpResponsePermanentRedirect
 from django.utils import simplejson
 from django.utils.cache import patch_vary_headers
+from django.contrib.sites.models import Site
 
-from apps.contact.forms import LeadForm, AffiliateLongForm 
+from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
 from apps.pricetable.models import Package
+
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -40,6 +45,7 @@ def redirect_wrapper(request, agent_id):
                 return HttpResponseRedirect(reverse(resolved.url_name))
 
     return HttpResponseRedirect('/?%s' % urlencode(get))
+
 
 def thank_you(request, custom_url=None):
     agent_id = request.COOKIES.get('refer_id', None)
@@ -62,29 +68,33 @@ def thank_you(request, custom_url=None):
          'affiliate_obj': affiliate_obj}
     return simple_dtt(request, 'thank-you/index.html', c)
 
+
 def clear_my_cookies(request):
     response = render_to_response('support/clear-my-cookies.html',
         {}, context_instance=RequestContext(request))
-    response.delete_cookie('refer_id', domain='.protectamerica.com') 
+    response.delete_cookie('refer_id', domain='.protectamerica.com')
     response.delete_cookie('affkey', domain='.protectamerica.com')
     response.delete_cookie('source', domain='.protectamerica.com')
     return response
+
 
 def fivelinxcontest(request):
     if request.method == 'POST':
         form = LinxContextForm(request.POST)
         if form.is_valid():
-            form.save() 
+            form.save()
             return HttpResponseRedirect('/contest/thanks/')
     else:
         form = LinxContextForm()
-    c = {'form': form,'page_name':'contest'}
+    c = {'form': form, 'page_name': 'contest'}
     return simple_dtt(request, 'affiliates/five-linx/contest.html', c)
+
 
 def fivelinxwinner(request):
     from apps.common.models import LinxContext
     winner = LinxContext.objects.order_by('?')
     return HttpResponse('%s' % winner[0])
+
 
 def get_active(urllist, name, pages=None):
     if pages is None:
@@ -98,6 +108,7 @@ def get_active(urllist, name, pages=None):
         except:
             pass
     return pages
+
 
 def simple_dtt(request, template, extra_context, expire_days=90):
     expire_time = timedelta(days=expire_days)
@@ -139,6 +150,7 @@ def simple_dtt(request, template, extra_context, expire_days=90):
                               context_instance=RequestContext(request))
     patch_vary_headers(response, ('Host',))
     return response
+
 
 def payitforward(request):
 
@@ -189,9 +201,11 @@ def payitforward(request):
             'videos': videos,
         }, context_instance=RequestContext(request))
 
+
 @cache_page(60 * 60 * 4)
 def index(request): 
     return index_render(request, 'index.html', {})
+
 
 @cache_page(60 * 60 * 4)
 def index_test(request, test_name):
@@ -201,6 +215,7 @@ def index_test(request, test_name):
         raise Http404
 
     return index_render(request, template, {})
+
 
 def index_render(request, template, context):
     context['page_name'] = 'index'
@@ -231,6 +246,7 @@ def index_render(request, template, context):
     
     return simple_dtt(request, template, context)
 
+
 def family_of_companies(request):
     ctx = {}
     ctx['page_name'] = 'family'
@@ -256,8 +272,9 @@ def family_of_companies(request):
             industry_dict[family['industry']] = []
         industry_dict[family['industry']].append(family)
 
-    ctx['industries'] = industry_dict 
+    ctx['industries'] = industry_dict
     return simple_dtt(request, 'about-us/family-of-companies.html', ctx)
+
 
 def black_friday(request):
     ctx = {}
@@ -265,4 +282,3 @@ def black_friday(request):
     ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
         datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
-
