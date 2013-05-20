@@ -110,9 +110,9 @@ def local_page(request, state, city, keyword=None):
         zipcode = ZipCode.objects.filter(city=city, state=state)
         zipcodestr = '00000'
         if zipcode:
-            zipcodestr = zipcode[0].zip 
+            zipcodestr = zipcode[0].zip
         state_obj = State.objects.get(abbreviation=state)
-        return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
+        return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' %
             (
                 csr[str(crime_stats_ctx['city_id'])],
                 city.lower().replace(' ', '-'),
