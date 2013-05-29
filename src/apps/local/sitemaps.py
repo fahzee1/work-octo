@@ -4,10 +4,32 @@ from django.contrib.sitemaps import Sitemap
 
 from apps.crimedatamodels.models import ZipCode, State
 
-class KeywordSitemap(Sitemap):
+class KeywordStateSitemap(Sitemap):
 
     def items(self):
-        return ZipCode.objects.all()
+        return State.objects.all()
+
+    def lastmod(self, obj):
+        return datetime.date(2012, 10, 12)
+
+    def location(self, obj):
+        try:
+            return '/%s/%s/' % (
+                self.keyword, self.state.name)
+        except:
+            print obj.state
+
+    def __init__(self, keyword, *args, **kwargs):
+        self.keyword = keyword
+        super(KeywordStateSitemap, self).__init__(*args, **kwargs)
+
+class KeywordCitySitemap(Sitemap):
+
+    def items(self):
+        state = State.objects.filter(name=self.state).values('abbreviation')
+        if len(state):
+            state = state[0]
+        return ZipCode.objects.filter(state=state.abbreviation).values('city')
 
     def lastmod(self, obj):
         return datetime.date(2012, 10, 12)
@@ -21,10 +43,11 @@ class KeywordSitemap(Sitemap):
         except:
             print obj.state
 
-    def __init__(self, keyword, *args, **kwargs):
+    def __init__(self, keyword, state, *args, **kwargs):
         self.keyword = keyword
-        super(KeywordSitemap, self).__init__(*args, **kwargs)
-    
+        self.state = state
+        super(KeywordCitySitemap, self).__init__(*args, **kwargs)
+
 
 class KeywordSitemapIndex(Sitemap):
     def items(self):

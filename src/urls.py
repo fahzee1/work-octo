@@ -53,7 +53,7 @@ urlpatterns = patterns('',
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
-    
+
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
@@ -71,11 +71,11 @@ urlpatterns = patterns('',
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
     url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
-    
+
     # GLOBAL PAGES
     # Help Pages > Privacy Policy
     dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
-    
+
     url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
         'apps.testimonials.views.testimonial',
         name='single-testimonial'),
@@ -147,10 +147,10 @@ elif settings.SITE_ID == 6:
 
         dtt_nocache(r'^gps/?$', 'affiliates/five-linx/gps.html', 'gps', ctx={
             'agent_id': 'a01526'}),
-        
+
         dtt_nocache(r'^order/?$', 'affiliates/five-linx/order.html', 'order', ctx={
             'agent_id': 'a01526'}),
-            
+
         dtt_nocache(r'^thank-you/5linx/?$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
     )
@@ -181,10 +181,10 @@ elif settings.SITE_ID == 8:
 
         dtt(r'^gps$', 'affiliates/tomboy-tools/gps.html', 'gps', ctx={
             'agent_id': 'a03169'}),
-        
+
         dtt(r'^order$', 'affiliates/tomboy-tools/order.html', 'order', ctx={
             'agent_id': 'a03169'}),
-            
+
         dtt(r'^thank-you/tomboy-tools/?$', 'affiliates/tomboy-tools/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a03169'}),
 
@@ -294,14 +294,14 @@ elif settings.SITE_ID == 20:
         dtt(r'^$', 'external/simon-xt-install/index.html', 'home'),
         dtt(r'^thank-you/$', 'external/simon-xt-install/thanks.html', 'thank_you'),
     )
-    
+
 # nationalhomesecuritycompany.com
 elif settings.SITE_ID == 21:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/national-home-security-company/index.html', 'home'),
         dtt(r'^thank-you/$', 'external/national-home-security-company/thanks.html', 'thank_you'),
     )
-    
+
 # homesecuritysystemexperts.com
 elif settings.SITE_ID == 22:
     urlpatterns += patterns('',
@@ -326,7 +326,7 @@ elif settings.SITE_ID == 23:
         # Local Crime Page (.../[State]/[City]/[Crime]/)
         url(r'^(\w{2})/([\w\-]+)/([\w\-]+)/?$',
             'apps.crimedatamodels.views.crime', name='crime'),
-        
+
         # Local City Page (.../[State]/[City]/)
         url(r'^(\w{2})/([\w\-]+)/?$',
             'apps.crimedatamodels.views.local', name='local'),
@@ -359,14 +359,17 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         # dtt(r'^404/?$', '404.html', '404', 'home'),
-        
+
         # SEM Landing Pages
         dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
-        
+
         # SEO Local Pages
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
+        url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
+            'apps.local.views.sitemap_state',
+            name='local-page-sitemap-state'),
         url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.sitemap',
             name='local-page-sitemap'),
@@ -414,7 +417,7 @@ else:
 
         # CJ Page
         dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
-        
+
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
 
@@ -503,7 +506,7 @@ else:
                         dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
                             dtt(r'^products/security-equipment/sensors/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'sensors'),
                             dtt(r'^products/security-equipment/sensors/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'sensors'),
-                        
+
                         # Product > Equipment > Accessories
                         dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'equipment'),
                             dtt(r'^products/security-equipment/accessories/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'accessories'),
@@ -527,7 +530,7 @@ else:
             # Product > Cell Takeover
 
             dtt(r'^products/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'products'),
-            
+
             # Product > Interactive Control
 
             dtt(r'^products/interactive-control/?$', 'products/interactive/index.html', 'interactive-control', 'products'),
@@ -550,7 +553,7 @@ else:
             # About > Charities
 
             dtt(r'^pa/charities/america-protect/?$', 'about-us/charities.html', 'charities', 'about-us'),
-            
+
             # About > How it Works
 
             dtt(r'^pa/how_it_works/ge-security-systems/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
@@ -567,7 +570,7 @@ else:
             url(r'^video-testimonials/?$',
                 'apps.testimonials.views.view_vidimonials',
                 name='video-testimonials'),
-                
+
                 url(r'^video-testimonials/(?P<testimonial_id>\d+)/?$',
                     'apps.testimonials.views.vidimonial',
                     name='single-video-testimonial'),
@@ -585,27 +588,27 @@ else:
                 'apps.contact.views.tell_a_friend',
                 name='tell-a-friend'),
 
-        
+
         # Complete Home Security
-        
+
         dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
-        
+
         # Contact Pages
 
         #dtt(r'^contact-us/?$', 'contact-us/index.html', 'contact-us'),
         url(r'^pa/contact/?$', 'apps.contact.views.main',
             name='contact-us'),
 
-        
+
             # Contact Pages > Find Us
             dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
-            
+
             # Contact Pages > Department Listing
             dtt(r'^agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
             dtt(r'^affiliate/agent-two/?$', 'affiliates/agent-two/index.html', 'agent-two-lp'),
 
 
-            
+
             # Contact Pages > Department Listing
             dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
 
@@ -613,10 +616,10 @@ else:
             #dtt(r'^contact/affiliate-program/?$', 'contact-us/affiliates.html', 'affiliate-program', 'contact-us'),
             url(r'^contact/affiliate-program/?$',
                 'apps.affiliates.views.signup', name='affiliate-program'),
-            
+
             # Contact Pages > Careers
             url(r'^contact/careers/?$', 'apps.events.views.careers', name='careers'),
-                
+
                 dtt(r'^contact/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
 
 
@@ -630,7 +633,7 @@ else:
         # Help Pages
 
         dtt(r'^help/?$', 'help/index.html', 'help'),
-                
+
             # Help Pages > Low Price Guarantee
                 dtt(r'^help/low-price-guarantee/?$', 'help/low-price-guarantee.html', 'low-price-guarantee', 'help'),
 
@@ -651,7 +654,7 @@ else:
                 dtt(r'^help/warranty/?$', 'help/warranty.html', 'warranty', 'help'),
 
         # Support Pages
-        
+
         dtt(r'^support/?$', 'support/index.html', 'support'),
 
             # Support Pages > Installation
@@ -668,9 +671,9 @@ else:
                     'apps.contact.views.moving_kit', name='moving-kit'),
                 url(r'^package-code/?$',
                     'apps.pricetable.views.package_code', name='package-code'),
-        
+
         # Affiliate Resources
-        
+
         dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
         url(r'^api/affiliate/?$', 'apps.affiliates.views.accept_affiliate'),
 
@@ -827,12 +830,12 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/home-security/business-security-systems/', 'permanent': True}),
     ('^crimeprevention$',
         redirect_to, {'url': 'crimeprevention/', 'permanent': True}),
-   
+
     ('^crimeprevention/?$',
         redirect_to, {'url': '/national-crime-prevention/?agent=i03248', 'permanent': True}),
     #('^national-crime-prevention$',
     #    redirect_to, {'url': '/national-crime-prevention/', 'permanent': True}),
-    
+
     ('^livechat_iframe.php',
         redirect_to, {'url': '/support', 'permanent': True}),
     ('^pa/yard-sign/security-yard-sign',
@@ -927,7 +930,7 @@ urlpatterns += patterns('',
         redirect_to, {'url': '/home-security-blog/tag/x10-home-automation', 'permanent': True}),
     ('^pa/video-business/',
         redirect_to, {'url': '/products/interactive-video/business-video-camera', 'permanent': True}),
-    
+
     # direct mail
     ('^AA1/?$',
         redirect_to, {'url': '/direct-mail/?agent=a10017', 'permanent': True}),
