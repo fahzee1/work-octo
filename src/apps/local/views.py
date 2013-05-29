@@ -3,6 +3,7 @@ import pytz
 from pytz import timezone
 import settings
 import os
+import logging
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
