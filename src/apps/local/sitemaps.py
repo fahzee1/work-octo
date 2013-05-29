@@ -14,10 +14,10 @@ class KeywordStateSitemap(Sitemap):
 
     def location(self, obj):
         try:
-            return '/%s/%s/' % (
-                self.keyword, self.state.name)
+            return '/%s/%s/sitemap.xml' % (
+                self.keyword, obj.name)
         except:
-            print obj.state
+            print obj.name
 
     def __init__(self, keyword, *args, **kwargs):
         self.keyword = keyword
@@ -29,7 +29,7 @@ class KeywordCitySitemap(Sitemap):
         state = State.objects.filter(name=self.state).values('abbreviation')
         if len(state):
             state = state[0]
-        return ZipCode.objects.filter(state=state.abbreviation).values('city')
+        return ZipCode.objects.filter(state=state['abbreviation'])
 
     def lastmod(self, obj):
         return datetime.date(2012, 10, 12)

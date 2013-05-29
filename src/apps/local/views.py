@@ -90,18 +90,6 @@ def local_page_wrapper(request, keyword, city, state, zipcode):
     return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
 
 
-def local_page_wrapper(request, keyword, city, state):
-    def get_state_code(statestr):
-        for state in US_STATES:
-            if statestr.lower().replace('-', ' ') == state[1].lower():
-                return state[0]
-        return False
-    statecode = get_state_code(state)
-    if not statecode:
-        raise Http404
-    return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
-
-
 def local_page(request, state, city, keyword=None):
     crime_stats_ctx = query_by_state_city(state, city)
     if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
