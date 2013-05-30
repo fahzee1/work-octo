@@ -15,9 +15,9 @@ class KeywordStateSitemap(Sitemap):
     def location(self, obj):
         try:
             return '/%s/%s/sitemap.xml' % (
-                self.keyword, obj.name)
+                self.keyword, obj.slug)
         except:
-            print obj.name
+            print obj.slug
 
     def __init__(self, keyword, *args, **kwargs):
         self.keyword = keyword
@@ -26,7 +26,7 @@ class KeywordStateSitemap(Sitemap):
 class KeywordCitySitemap(Sitemap):
 
     def items(self):
-        state = State.objects.filter(name=self.state).values('abbreviation')
+        state = State.objects.filter(slug=self.state).values('abbreviation')
         if len(state):
             state = state[0]
         return CityLocation.objects.filter(state=state['abbreviation'])
@@ -38,11 +38,11 @@ class KeywordCitySitemap(Sitemap):
         try:
             if obj.state and obj.city_name:
                 state = State.objects.get(abbreviation=obj.state)
-                return '/%s/%s/%s/%s/' % (
-                    self.keyword, obj.city_name.lower().replace(' ', '-'), state.name.lower(), '00000')
+                return '/%s/%s/%s/' % (
+                    self.keyword, obj.city_name_slug, state.slug)
         except:
             print obj.state
-    
+
     def __init__(self, keyword, state, *args, **kwargs):
         self.keyword = keyword
         self.state = state

@@ -41,6 +41,7 @@ class ZipCode(models.Model):
 
 class State(models.Model):
     name = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=64, unique=True)
     abbreviation = models.CharField(max_length=2, unique=True)
 
     def __unicode__(self):
@@ -55,7 +56,9 @@ class State(models.Model):
 
 class CityLocation(models.Model):
     city_name = models.CharField(max_length=64)
+    city_name_slug = models.SlugField(max_length=64)
     state = models.CharField(max_length=2)
+
     latitude = models.DecimalField(max_digits=10, decimal_places=6,
         db_index=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6,
@@ -179,7 +182,7 @@ class StateCrimeStats(models.Model):
     recompute this table's values.
 
     """
-    
+
     state = models.ForeignKey(State)
     year = models.IntegerField()
     number_of_cities = models.IntegerField()
