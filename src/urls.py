@@ -311,7 +311,7 @@ elif settings.SITE_ID == 22:
     )
 
 # freecrimestats.com
-elif settings.SITE_ID == 23:
+elif settings.SITE_ID == 1:
     urlpatterns += patterns('',
 
         # Direct-To-Template Pages
@@ -319,6 +319,13 @@ elif settings.SITE_ID == 23:
         dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
         dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
         dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
+
+        url(r'^free-crime-stats/sitemap.xml$',
+            'apps.crimedatamodels.views.state_sitemap',
+            name='state_sitemap'),
+        url(r'^free-crime-stats/(?P<state>\w+)/sitemap.xml$',
+            'apps.crimedatamodels.views.city_sitemap',
+            name='city_sitemap'),
 
         # Search Results (.../search/)
         url(r'^search/?$',
@@ -365,7 +372,7 @@ else:
         dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
         url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
