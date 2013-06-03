@@ -310,7 +310,7 @@ elif settings.SITE_ID == 22:
     )
 
 # freecrimestats.com
-elif settings.SITE_ID == 23:
+elif settings.SITE_ID == 1:
     urlpatterns += patterns('',
 
         # Direct-To-Template Pages
@@ -318,6 +318,13 @@ elif settings.SITE_ID == 23:
         dtt(r'^about/$', 'external/freecrimestats/about.html', 'about'),
         dtt(r'^advice/$', 'external/freecrimestats/advice.html', 'advice'),
         dtt(r'^contact/$', 'external/freecrimestats/contact.html', 'contact'),
+
+        url(r'^free-crime-stats/sitemap.xml$',
+            'apps.crimedatamodels.views.state_sitemap',
+            name='state_sitemap'),
+        url(r'^free-crime-stats/(?P<state>\w+)/sitemap.xml$',
+            'apps.crimedatamodels.views.city_sitemap',
+            name='city_sitemap'),
 
         # Search Results (.../search/)
         url(r'^search/?$',
