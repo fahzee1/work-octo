@@ -2,6 +2,7 @@ import re
 
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
@@ -247,3 +248,41 @@ class CrimeContent(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.population_type, self.grade)
+
+
+class LocalAddress(models.Model):
+    """
+    Local address of all Protect America Locations.
+    """
+    street_name=models.CharField(max_length=255,blank=True,null=True)
+    city=models.CharField(max_length=255,blank=True,null=True)
+    state=models.CharField(max_length=255,blank=True,null=True)
+    zip_code=models.IntegerField(max_length=5,blank=True,null=True)
+
+    def __unicode__(self):
+        return '%s, %s, %s, %s' % (self.street_name,self.city,self.state,self.zip_code)
+
+
+class MatchAddressLocation(models.Model):
+    """
+    Match the local page of each city/state with an
+    address of a local Protect America location
+    """
+    address=models.ForeignKey(LocalAddress)
+    location=models.ForeignKey(CityLocation)
+
+    def __unicode__(self):
+        return '%s (%s)' % (self.address, self.location)
+
+    def save(self, *args, **kwargs):
+        addr_state=self.address.state
+        match_state=self.location.state
+        if addr_state != match_state:
+            raise ValidationError('The states of the location and the address must match!')
+        else:
+            super(MatchAddressLocation,self).save(*args, **kwargs) 
+
+    
+
+
+    

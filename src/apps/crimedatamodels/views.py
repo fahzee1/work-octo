@@ -5,16 +5,21 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.conf import settings
 
 from django.contrib.localflavor.us.us_states import US_STATES
 
 from apps.contact.forms import PAContactForm
-from apps.crimedatamodels.models import CrimesByCity, CityCrimeStats, \
-    State, CityLocation, ZipCode, CrimeContent
 
+from apps.crimedatamodels.models import (CrimesByCity,
+                                         CityCrimeStats,
+                                         State,
+                                         CityLocation,
+                                         ZipCode,
+                                         CrimeContent,
+                                         MatchAddressLocation)
 
 WEATHER_CODE_MAP = {
     '395': 'snow',
@@ -148,20 +153,31 @@ def query_by_state_city(state, city, get_content=True):
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
 
-    return {
-        'crime_stats': crime_stats,
-        'years': years[:3],
-        'latest_year': crime_stats[years[0]],
-        'state': state.abbreviation,
-        'state_long': state.name,
-        'city': city.city_name,
-        'lat': city.latitude,
-        'long': city.longitude,
-        'weather_info': weather_info,
-        'pop_type': pop_type,
-        'city_id': city_id,
-        'content': content.render(city) if get_content else None}
+    context={'crime_stats': crime_stats,
+           'years': years[:3],
+           'latest_year': crime_stats[years[0]],
+           'state': state.abbreviation,
+           'state_long': state.name,
+           'city': city.city_name,
+           'lat': city.latitude,
+           'long': city.longitude,
+           'weather_info': weather_info,
+           'pop_type': pop_type,
+           'city_id': city_id,
+           'content': content.render(city)}
 
+    try:
+        #try to see if the local page has an address associated with it
+        location_match=MatchAddressLocation.objects.select_related().get(location=city)
+        context.update(local_street=location_match.address.street_name,
+                       local_city=location_match.address.city,
+                       local_state=location_match.address.state,
+                       local_zipcode=location_match.address.zip_code)
+    except MatchAddressLocation.DoesNotExist:
+        pass
+
+    print context
+    return context
 
 def crime_stats(request, state, city):
     crime_stats_ctx = query_by_state_city(state, city)
@@ -283,7 +299,8 @@ def find_city(request):
     ctx['states'] = states
 
     return render_to_response('crime-stats/choose-state.html',
-        ctx, context_instance=RequestContext(request))
+                              ctx,
+                              context_instance=RequestContext(request))
 
 
 #
