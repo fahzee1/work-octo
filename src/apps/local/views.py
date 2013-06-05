@@ -5,7 +5,7 @@ import settings
 import os
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render 
 from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.utils import simplejson
@@ -134,17 +134,16 @@ def local_page(request, state, city, keyword=None):
     adt_keyword_list = ['adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services']
 
     if keyword in custom_keyword_list:
-        response = render_to_response('local-pages/%s.html' % keyword,
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/%s.html', crime_stats_ctx) % keyword
     elif keyword in wireless_keyword_list:
-        response = render_to_response('local-pages/wireless-home-security-systems.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/wireless-home-security-systems.html',
+            crime_stats_ctx)
     elif keyword in adt_keyword_list:
-        response = render_to_response('landing-pages/adt.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'landing-pages/adt.html',
+            crime_stats_ctx)
     else:        
-        response = render_to_response('local-pages/index.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/index.html',
+            crime_stats_ctx)
 
     expire_time = datetime.timedelta(days=90)
     response.set_cookie('affkey',

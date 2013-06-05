@@ -169,9 +169,8 @@ def crime_stats(request, state, city):
     forms = {}
     forms['basic'] = PAContactForm()
     crime_stats_ctx['forms'] = forms
-    return render_to_response('crime-stats/crime-stats.html',
-                              crime_stats_ctx,
-                              context_instance=RequestContext(request))
+
+    return render(request,'crime-stats/crime-stats.html',crime_stats_ctx)
 
 def choose_city(request, state):
     try:
@@ -187,11 +186,10 @@ def choose_city(request, state):
         city_by_first_letter[city.city_name[0]].append(city)
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('crime-stats/choose-city.html',
+    return render(request,'crime-stats/choose-city.html',
                               {'cities': city_by_first_letter,
                                'forms': forms,
-                               'state': state.abbreviation,},
-                              context_instance=RequestContext(request))
+                               'state': state.abbreviation,})
 
 def choose_state(request):
     if not settings.DEBUG:
@@ -206,10 +204,9 @@ def choose_state(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('crime-stats/choose-state.html',
+    return render(request,'crime-stats/choose-state.html',
                               {'states': states,
-                               'forms': forms,},
-                              context_instance=RequestContext(request))
+                               'forms': forms,})
 
 def find_city(request):
     ctx = {}
@@ -274,9 +271,7 @@ def find_city(request):
     ctx['forms'] = forms
     states = State.objects.order_by('name')
     ctx['states'] = states
-    return render_to_response('crime-stats/choose-state.html',
-                              ctx,
-                              context_instance=RequestContext(request))
+    return render(request,'crime-stats/choose-state.html',ctx)
 
 
 
