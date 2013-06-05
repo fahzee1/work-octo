@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+{% block page_title %}Protect America Affiliate Resources{% endblock %}
+{% block page_description %}Protect America resources and logos for use by affiliates and authorized dealers.{% endblock %}
+
+{% block navigation %}
+<div id="navigation">
+    	<ul>
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+    		<li><a href="#affiliate-reports">Get Started</a></li>
+    		<li><a href="#aff-logos">Logos</a></li>
+    		<li><a href="#aff-banners">Web Banners</a></li>
+    		<li><a href="#aff-banners">Products</a></li>
+    		<li><a href="#aff-banners">Collateral</a></li>
+
+
+
+    	</ul>
+    	<div id="search-area">
+    		<form name="search2" method="GET" action="/search/">
+    			<input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
+    		</form>
+    	</div>
+    </div>
+{% endblock %}
+{% block content %} 
+    {% addtoblock "js" %}

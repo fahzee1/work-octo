@@ -160,6 +160,6 @@ INTERNAL_IPS = ('127.0.0.1')
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
 try:
-    from etc.django.local import *
+    from etc.django.caroline import *
 except ImportError:
     pass
