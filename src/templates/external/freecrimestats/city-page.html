@@ -1,0 +1,47 @@
+{% extends "external/freecrimestats/base.html" %}
+{% load content_filters content_tags sekizai_tags %}
+{% block page_title %}Crime Statistics by State: {{ state_long }} | Free Crime Stats{% endblock %}
+{% block page_description %}Crime stats in {{ state_long }}. Get information about crime like burglary, auto-theft, larceny and violent crime.{% endblock %}
+
+{% block content %}
+<div id="main-container">
+    <div id="hp">
+        {% include "external/freecrimestats/search.html" %}
+        <div class="clear"></div>
+        <div id="secondary">
+            <div class="clear"></div>
+            <div id="state">
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="results-text">
+                    <h1>Select a City in {{ state_long }}</h1>
+                    <div class="city-container">
+                        <ul>
+                        {% for letter, cities in cities_alph %}
+                            <li>
+                                <h2>{{ letter }}</h2>
+                                <ul>
+                                    {% for city in cities %}
+                                    <li><a href="{% url home %}{{ state }}/{{ city.slug_name }}">{{ city.city_name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

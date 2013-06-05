@@ -1,14 +1,18 @@
 import urllib
 
 from django.core.cache import cache
+from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
-from django.core.urlresolvers import reverse
 from django.conf import settings
 
+from django.contrib.localflavor.us.us_states import US_STATES
+
 from apps.contact.forms import PAContactForm
+
 from apps.crimedatamodels.models import (CrimesByCity,
                                          CityCrimeStats,
                                          State,
@@ -18,55 +22,56 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          MatchAddressLocation)
 
 WEATHER_CODE_MAP = {
-    '395':'snow',
-    '392':'snow',
-    '389':'rain',
-    '386':'rain',
-    '377':'snow',
-    '374':'snow',
-    '371':'snow',
-    '368':'rain',
-    '365':'rain',
-    '362':'snow',
-    '359':'rain',
-    '356':'rain',
-    '353':'rain',
-    '350':'snow',
-    '338':'snow',
-    '335':'snow',
-    '332':'snow',
-    '329':'snow',
-    '326':'snow',
-    '323':'snow',
-    '320':'rain',
-    '317':'rain',
-    '314':'rain',
-    '311':'rain',
-    '308':'rain',
-    '305':'rain',
-    '302':'rain',
-    '299':'rain',
-    '296':'rain',
-    '293':'rain',
-    '284':'rain',
-    '281':'rain',
-    '266':'rain',
-    '263':'rain',
-    '260':'smoke',
-    '248':'smoke',
-    '230':'snow',
-    '227':'snow',
-    '200':'lightning',
-    '185':'rain',
-    '182':'rain',
-    '179':'rain',
-    '176':'rain',
-    '143':'smoke',
-    '122':'partly-cloudy',
-    '119':'cloudy',
-    '116':'partly-cloudy',
-    '113':'sunny',
+    '395': 'snow',
+    '392': 'snow',
+    '389': 'rain',
+    '386': 'rain',
+    '377': 'snow',
+    '374': 'snow',
+    '371': 'snow',
+    '368': 'rain',
+    '365': 'rain',
+    '362': 'snow',
+    '359': 'rain',
+    '356': 'rain',
+    '353': 'rain',
+    '350': 'snow',
+    '338': 'snow',
+    '335': 'snow',
+    '332': 'snow',
+    '329': 'snow',
+    '326': 'snow',
+    '323': 'snow',
+    '320': 'rain',
+    '317': 'rain',
+    '314': 'rain',
+    '311': 'rain',
+    '308': 'rain',
+    '305': 'rain',
+    '302': 'rain',
+    '299': 'rain',
+    '296': 'rain',
+    '293': 'rain',
+    '284': 'rain',
+    '281': 'rain',
+    '266': 'rain',
+    '263': 'rain',
+    '260': 'smoke',
+    '248': 'smoke',
+    '230': 'snow',
+    '227': 'snow',
+    '200': 'lightning',
+    '185': 'rain',
+    '182': 'rain',
+    '179': 'rain',
+    '176': 'rain',
+    '143': 'smoke',
+    '122': 'partly-cloudy',
+    '119': 'cloudy',
+    '116': 'partly-cloudy',
+    '113': 'sunny',
 }
+
 
 def query_weather(latitude, longitude, city, state):
     # first try to get cache
@@ -79,29 +84,37 @@ def query_weather(latitude, longitude, city, state):
             return None
         if 'Error' in result:
             return None
-        
+
         weather_info = {}
         condition = result['data']['current_condition'][0]
 
         weather_info['temp'] = condition['temp_F']
         weather_info['desc'] = condition['weatherDesc'][0]['value']
         weather_info['icon'] = WEATHER_CODE_MAP[condition['weatherCode']]
-        cache.set('WEATHER:%s%s' % (city.lower().replace(' ', ''),state.lower()), weather_info, 60*60)
+
+        cache.set('WEATHER:%s%s' %
+            (city.lower().replace(' ', ''), state.lower()), weather_info, 60*60)
     return weather_info
 
-def query_by_state_city(state, city):
+
+def query_by_state_city(state, city, get_content=True):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
+        print state
     except State.DoesNotExist:
         raise Http404
     try:
-        city = city.replace('+', ' ')
-        city = CityLocation.objects.get(city_name=city,
+        city = city.replace('+', ' ').replace('-', ' ')
+        print city
+
+        city = CityLocation.objects.get(city_name__iexact=city,
             state=state.abbreviation)
+        print city
         city_id = city.id
     except CityLocation.DoesNotExist:
+        print 'none'
         raise Http404
 
     city_crime_objs = CrimesByCity.objects.filter(
@@ -131,7 +144,10 @@ def query_by_state_city(state, city):
         pop_type = 'METROPOLIS'
 
     # get content
-    content = CrimeContent.objects.get(grade=crime_stats[years[0]]['stats'].average_grade,population_type=pop_type)
+    if get_content:
+        content = CrimeContent.objects.get(
+            grade=crime_stats[years[0]]['stats'].average_grade,
+            population_type=pop_type)
 
     # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
@@ -173,12 +189,13 @@ def crime_stats(request, state, city):
                               crime_stats_ctx,
                               context_instance=RequestContext(request))
 
+
 def choose_city(request, state):
     try:
         state = State.objects.get(abbreviation=state)
     except State.DoesNotExist:
         raise Http404
-    
+
     cities = CityLocation.objects.filter(state=state.abbreviation)
     city_by_first_letter = {}
     for city in cities:
@@ -187,11 +204,14 @@ def choose_city(request, state):
         city_by_first_letter[city.city_name[0]].append(city)
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('crime-stats/choose-city.html',
-                              {'cities': city_by_first_letter,
-                               'forms': forms,
-                               'state': state.abbreviation,},
-                              context_instance=RequestContext(request))
+
+    return render_to_response(
+        'crime-stats/choose-city.html', {
+            'cities': city_by_first_letter,
+            'forms': forms,
+            'state': state.abbreviation},
+        context_instance=RequestContext(request))
+
 
 def choose_state(request):
     if not settings.DEBUG:
@@ -206,10 +226,12 @@ def choose_state(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('crime-stats/choose-state.html',
-                              {'states': states,
-                               'forms': forms,},
-                              context_instance=RequestContext(request))
+    return render_to_response(
+        'crime-stats/choose-state.html', {
+            'states': states,
+            'forms': forms},
+        context_instance=RequestContext(request))
+
 
 def find_city(request):
     ctx = {}
@@ -237,7 +259,7 @@ def find_city(request):
                     state = State.objects.get(abbreviation__iexact=terms[0])
                 except State.DoesNotExist:
                     state = None
-            
+
             # if state is not "None" and terms is more than 1 try to
             # find a city otherwise redirect to the state page
             if state is not None and len(terms) > 1:
@@ -249,7 +271,7 @@ def find_city(request):
                     ctx['error'] = 'city_not_found'
             elif state is not None:
                 return HttpResponseRedirect(
-                    state.get_absolute_url() + '?q=%s' % request.GET['q']) 
+                    state.get_absolute_url() + '?q=%s' % request.GET['q'])
 
             # check to see if terms[0] is a city
             cities = CityLocation.objects.filter(city_name__iexact=terms[0])
@@ -264,20 +286,189 @@ def find_city(request):
                 if state is not None:
                     cities = cities.get(state=state.abbreviation)
                     return HttpResponseRedirect(cities.get_absolute_url())
-            
+
             # if cities == 1 then redirect
             if len(cities) == 1:
                 return HttpResponseRedirect(cities[0].get_absolute_url())
             ctx['matches'] = cities
+
     forms = {}
     forms['basic'] = PAContactForm()
     ctx['forms'] = forms
     states = State.objects.order_by('name')
     ctx['states'] = states
+
     return render_to_response('crime-stats/choose-state.html',
                               ctx,
                               context_instance=RequestContext(request))
 
 
+#
+# Tim's FreeCrimeStats Views
+#
 
 
+# Map of passed 'Crime' strings, to their templates.
+# (Makes it easy to change URLs without changing Template names.)
+CRIME_TEMPLATES = {
+    'burglary': 'external/freecrimestats/burglary.html',
+    'robbery': 'external/freecrimestats/robbery.html',
+    'motor-vehicle-theft': 'external/freecrimestats/motor-vehicle-theft.html',
+    'violent-crime': 'external/freecrimestats/violent-crime.html',
+    'larceny': 'external/freecrimestats/larceny.html'
+}
+
+
+def home(request):
+    """Main Index View"""
+
+    return render_to_response(
+        'external/freecrimestats/index.html',
+        {}, context_instance=RequestContext(request))
+
+
+def states(request):
+    """State Listing View"""
+    forms = {}
+    forms['basic'] = PAContactForm()
+    return render_to_response(
+        'external/freecrimestats/state-page.html',
+        {'states': US_STATES, 'forms': forms}, context_instance=RequestContext(request))
+
+
+def cities(request, state):
+    """State-Specific City Listing View"""
+
+    state_obj = State.objects.get(abbreviation=state.upper())
+    city_data = CityLocation.objects.all() \
+        .filter(state=state.upper()) \
+        .order_by('city_name')
+
+    # Sort cities into alphabetized buckets
+    cities_alph = {}
+    for cd in city_data:
+        letter = cd.city_name[:1].upper()
+        if not cities_alph.get(letter):
+            cities_alph[letter] = []
+        cities_alph[letter].append(cd)
+    forms = {}
+    forms['basic'] = PAContactForm()
+    buckets = sorted(cities_alph.items(), key=lambda item: item[0])
+    return render_to_response('external/freecrimestats/city-page.html', {
+            'state': state_obj.abbreviation,
+            'state_long': state_obj.name,
+            'cities_alph': buckets,
+            'forms': forms
+        }, context_instance=RequestContext(request))
+
+
+def local(request, state, city):
+    """City-Specific Index View"""
+
+    # Collect filters from GET params
+    filters = {
+        'burglary': True,
+        'robbery': True,
+        'larceny': True,
+        'vehicle': True,
+        'violent': True}
+    for filt in filters.keys():
+        if request.GET.get(filt, None) == 'hide':
+            filters[filt] = False
+
+    data = query_by_state_city(state, city, False)
+    data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
+
+    forms = {}
+    forms['basic'] = PAContactForm()
+    data['forms'] = forms
+
+    # Collect Context and Render Template
+    return render_to_response('external/freecrimestats/results.html',
+        data, context_instance=RequestContext(request))
+
+
+def crime(request, state, city, crime):
+    """City-Specific Crime View"""
+
+    # Find correct Template file, 404 if we don't have an entry for it.
+    template = CRIME_TEMPLATES.get(crime, None)
+    if not template:
+        raise Http404
+
+    # Return Template with results of query_by_state_city
+    return render_to_response(template,
+        query_by_state_city(state, city, False),
+        context_instance=RequestContext(request))
+
+
+def search(request):
+    """Render a search results page based on the query string in the GET params"""
+
+    # Extract Query Parameters
+    q_str = request.GET.get('q', '')
+    q_params = q_str.split(' ')
+
+    # Get any State objects from params, and replace
+    # full state name params with abbreviations
+    states = State.objects.all().filter(
+        Q(abbreviation__in=q_params) | Q(name__in=q_params))
+    for state in states:
+        for i in range(len(q_params)):
+            if state.name.lower() == q_params[i].lower():
+                q_params[i] = state.abbreviation
+
+    # Get potentially matching zips
+    zqo = Q(zip__in=q_params)
+    for qp in q_params:
+        zqo = zqo | Q(city__contains=qp)
+    for state in states:
+        zqo = zqo & Q(state=state.abbreviation)
+    zip_qs = ZipCode.objects.filter(zqo)
+    n_zips = zip_qs.count()
+
+    # If we only matched 1 zip result, show that page automatically
+    if n_zips == 1:
+        zipcode = zip_qs[0]
+        city_slug = zipcode.city.lower().replace(' ', '-')
+        return HttpResponseRedirect(
+            reverse('home') + zipcode.state + '/' + city_slug)
+
+    # Otherwise get more creative (WIP)
+    city_objs, n_cities = [], 0
+    if n_zips > 0:
+        city_names = [zc.city for zc in zip_qs]
+        city_objs = CityLocation.objects.all() \
+            .filter(city_name__in=city_names) \
+            .order_by('city_name')
+        n_cities = city_objs.count()
+
+    # If only 1 city found, redirect to it's results like before
+    if n_cities == 1:
+        city = city_objs[0]
+        return HttpResponseRedirect(
+            reverse('home') + city.state + '/' + city.slug_name)
+    forms = {}
+    forms['basic'] = PAContactForm()
+
+
+    # Render search-results page
+    return render_to_response('external/freecrimestats/search-results.html',
+        {'num_cities': n_cities, 'cities': city_objs, 'forms': forms, 'search_query': q_str},
+        context_instance=RequestContext(request))
+
+
+def state_sitemap(request):
+    from django.contrib.sitemaps.views import sitemap
+    from apps.crimedatamodels.sitemaps import FreeCrimeStatsStateSitemap
+    return sitemap(request, {'keyword-sitemap-index' : FreeCrimeStatsStateSitemap()})
+
+def city_sitemap(request, state):
+    from django.contrib.sitemaps.views import sitemap
+    from apps.crimedatamodels.sitemaps import FreeCrimeStatsCitySitemap
+    return sitemap(request, {'keyword-sitemap-cities' : FreeCrimeStatsCitySitemap(state)})
+
+def crime_sitemap(request, state, city):
+    from django.contrib.sitemaps.views import sitemap
+    from apps.crimedatamodels.sitemaps import FreeCrimeStatsCrimeSitemap
+    return sitemap(request, {'keyword-sitemap-index' : FreeCrimeStatsCrimeSitemap(state, city)})
