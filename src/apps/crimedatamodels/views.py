@@ -457,6 +457,7 @@ def search(request):
         {'num_cities': n_cities, 'cities': city_objs, 'forms': forms, 'search_query': q_str},
         context_instance=RequestContext(request))
 
+
 def state_sitemap(request):
     from django.contrib.sitemaps.views import sitemap
     from apps.crimedatamodels.sitemaps import FreeCrimeStatsStateSitemap
@@ -467,3 +468,7 @@ def city_sitemap(request, state):
     from apps.crimedatamodels.sitemaps import FreeCrimeStatsCitySitemap
     return sitemap(request, {'keyword-sitemap-cities' : FreeCrimeStatsCitySitemap(state)})
 
+def crime_sitemap(request, state, city):
+    from django.contrib.sitemaps.views import sitemap
+    from apps.crimedatamodels.sitemaps import FreeCrimeStatsCrimeSitemap
+    return sitemap(request, {'keyword-sitemap-index' : FreeCrimeStatsCrimeSitemap(state, city)})

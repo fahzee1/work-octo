@@ -326,6 +326,9 @@ elif settings.SITE_ID == 23:
         url(r'^free-crime-stats/(?P<state>\w+)/sitemap.xml$',
             'apps.crimedatamodels.views.city_sitemap',
             name='city_sitemap'),
+        url(r'^free-crime-stats/(?P<state>\w+)/(?P<city>[\w\-]+)/sitemap.xml$',
+            'apps.crimedatamodels.views.crime_sitemap',
+            name='crime_sitemap'),
 
         # Search Results (.../search/)
         url(r'^search/?$',
