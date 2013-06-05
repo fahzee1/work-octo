@@ -311,7 +311,7 @@ elif settings.SITE_ID == 22:
     )
 
 # freecrimestats.com
-elif settings.SITE_ID == 1:
+elif settings.SITE_ID == 23:
     urlpatterns += patterns('',
 
         # Direct-To-Template Pages
