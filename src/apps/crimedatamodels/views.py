@@ -3,7 +3,7 @@ import urllib
 from django.core.cache import cache
 from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.conf import settings
@@ -14,7 +14,8 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          State,
                                          CityLocation,
                                          ZipCode,
-                                         CrimeContent)
+                                         CrimeContent,
+                                         MatchAddressLocation)
 
 WEATHER_CODE_MAP = {
     '395':'snow',
@@ -135,8 +136,8 @@ def query_by_state_city(state, city):
     # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
-    
-    return {'crime_stats': crime_stats,
+
+    context={'crime_stats': crime_stats,
            'years': years[:3],
            'latest_year': crime_stats[years[0]],
            'state': state.abbreviation,
@@ -147,7 +148,20 @@ def query_by_state_city(state, city):
            'weather_info': weather_info,
            'pop_type': pop_type,
            'city_id': city_id,
-           'content': content.render(city)}  
+           'content': content.render(city)}
+
+    try:
+        #try to see if the local page has an address associated with it
+        location_match=MatchAddressLocation.objects.select_related().get(location=city)
+        context.update(local_street=location_match.address.street_name,
+                       local_city=location_match.address.city,
+                       local_state=location_match.address.state,
+                       local_zipcode=location_match.address.zip_code)
+    except MatchAddressLocation.DoesNotExist:
+        pass
+
+    print context
+    return context
 
 def crime_stats(request, state, city):
     crime_stats_ctx = query_by_state_city(state, city)
@@ -263,3 +277,7 @@ def find_city(request):
     return render_to_response('crime-stats/choose-state.html',
                               ctx,
                               context_instance=RequestContext(request))
+
+
+
+
