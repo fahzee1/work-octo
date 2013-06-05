@@ -3,6 +3,7 @@ import pytz
 from pytz import timezone
 import settings
 import os
+import logging
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response
@@ -14,7 +15,7 @@ from django.views.decorators.cache import cache_page
 
 
 from apps.contact.forms import PAContactForm
-from apps.local.sitemaps import KeywordSitemap, KeywordSitemapIndex
+from apps.local.sitemaps import KeywordCitySitemap, KeywordStateSitemap, KeywordSitemapIndex
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
@@ -78,18 +79,6 @@ TIMEZONES = {
 
 
 @cache_page(60 * 60 * 4)
-def local_page_wrapper(request, keyword, city, state, zipcode):
-    def get_state_code(statestr):
-        for state in US_STATES:
-            if statestr.lower().replace('-', ' ') == state[1].lower():
-                return state[0]
-        return False
-    statecode = get_state_code(state)
-    if not statecode:
-        raise Http404
-    return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
-
-
 def local_page_wrapper(request, keyword, city, state):
     def get_state_code(statestr):
         for state in US_STATES:
@@ -183,7 +172,7 @@ def local_city(request, state):
         state = State.objects.get(abbreviation=state)
     except State.DoesNotExist:
         raise Http404
-    
+
     cities = CityLocation.objects.filter(state=state.abbreviation)
     city_by_first_letter = {}
     for city in cities:
@@ -204,7 +193,7 @@ def html_sitemap(request, state, keyword):
         state = State.objects.get(abbreviation=state)
     except State.DoesNotExist:
         raise Http404
-    
+
     cities = CityLocation.objects.filter(state=state.abbreviation)
     city_by_first_letter = {}
     for city in cities:
@@ -221,10 +210,13 @@ def html_sitemap(request, state, keyword):
         }, context_instance=RequestContext(request))
 
 
-def sitemap(request, keyword):
+def sitemap(request, keyword, state):
     from django.contrib.sitemaps.views import sitemap
-    return sitemap(request, {'keyword-sitemap' : KeywordSitemap(keyword)})
+    return sitemap(request, {'keyword-sitemap' : KeywordCitySitemap(keyword, state)})
 
+def sitemap_state(request, keyword):
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap' : KeywordStateSitemap(keyword)})
 
 def sitemap_index(request):
     from django.contrib.sitemaps.views import sitemap

@@ -2,6 +2,7 @@ import re
 
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
@@ -41,6 +42,7 @@ class ZipCode(models.Model):
 
 class State(models.Model):
     name = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=64, unique=True)
     abbreviation = models.CharField(max_length=2, unique=True)
 
     def __unicode__(self):
@@ -55,7 +57,9 @@ class State(models.Model):
 
 class CityLocation(models.Model):
     city_name = models.CharField(max_length=64)
+    city_name_slug = models.SlugField(max_length=64)
     state = models.CharField(max_length=2)
+
     latitude = models.DecimalField(max_digits=10, decimal_places=6,
         db_index=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6,
@@ -179,7 +183,7 @@ class StateCrimeStats(models.Model):
     recompute this table's values.
 
     """
-    
+
     state = models.ForeignKey(State)
     year = models.IntegerField()
     number_of_cities = models.IntegerField()
@@ -244,3 +248,41 @@ class CrimeContent(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.population_type, self.grade)
+
+
+class LocalAddress(models.Model):
+    """
+    Local address of all Protect America Locations.
+    """
+    street_name=models.CharField(max_length=255,blank=True,null=True)
+    city=models.CharField(max_length=255,blank=True,null=True)
+    state=models.CharField(max_length=255,blank=True,null=True)
+    zip_code=models.IntegerField(max_length=5,blank=True,null=True)
+
+    def __unicode__(self):
+        return '%s, %s, %s, %s' % (self.street_name,self.city,self.state,self.zip_code)
+
+
+class MatchAddressLocation(models.Model):
+    """
+    Match the local page of each city/state with an
+    address of a local Protect America location
+    """
+    address=models.ForeignKey(LocalAddress)
+    location=models.ForeignKey(CityLocation)
+
+    def __unicode__(self):
+        return '%s (%s)' % (self.address, self.location)
+
+    def save(self, *args, **kwargs):
+        addr_state=self.address.state
+        match_state=self.location.state
+        if addr_state != match_state:
+            raise ValidationError('The states of the location and the address must match!')
+        else:
+            super(MatchAddressLocation,self).save(*args, **kwargs) 
+
+    
+
+
+    

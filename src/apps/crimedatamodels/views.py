@@ -5,16 +5,21 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.conf import settings
 
 from django.contrib.localflavor.us.us_states import US_STATES
 
 from apps.contact.forms import PAContactForm
-from apps.crimedatamodels.models import CrimesByCity, CityCrimeStats, \
-    State, CityLocation, ZipCode, CrimeContent
 
+from apps.crimedatamodels.models import (CrimesByCity,
+                                         CityCrimeStats,
+                                         State,
+                                         CityLocation,
+                                         ZipCode,
+                                         CrimeContent,
+                                         MatchAddressLocation)
 
 WEATHER_CODE_MAP = {
     '395': 'snow',
@@ -79,7 +84,7 @@ def query_weather(latitude, longitude, city, state):
             return None
         if 'Error' in result:
             return None
-        
+
         weather_info = {}
         condition = result['data']['current_condition'][0]
 
@@ -97,14 +102,19 @@ def query_by_state_city(state, city, get_content=True):
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
+        print state
     except State.DoesNotExist:
         raise Http404
     try:
         city = city.replace('+', ' ').replace('-', ' ')
+        print city
+
         city = CityLocation.objects.get(city_name__iexact=city,
             state=state.abbreviation)
+        print city
         city_id = city.id
     except CityLocation.DoesNotExist:
+        print 'none'
         raise Http404
 
     city_crime_objs = CrimesByCity.objects.filter(
@@ -142,21 +152,32 @@ def query_by_state_city(state, city, get_content=True):
     # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
-    
-    return {
-        'crime_stats': crime_stats,
-        'years': years[:3],
-        'latest_year': crime_stats[years[0]],
-        'state': state.abbreviation,
-        'state_long': state.name,
-        'city': city.city_name,
-        'lat': city.latitude,
-        'long': city.longitude,
-        'weather_info': weather_info,
-        'pop_type': pop_type,
-        'city_id': city_id,
-        'content': content.render(city) if get_content else None}
 
+    context={'crime_stats': crime_stats,
+           'years': years[:3],
+           'latest_year': crime_stats[years[0]],
+           'state': state.abbreviation,
+           'state_long': state.name,
+           'city': city.city_name,
+           'lat': city.latitude,
+           'long': city.longitude,
+           'weather_info': weather_info,
+           'pop_type': pop_type,
+           'city_id': city_id,
+           'content': content.render(city)}
+
+    try:
+        #try to see if the local page has an address associated with it
+        location_match=MatchAddressLocation.objects.select_related().get(location=city)
+        context.update(local_street=location_match.address.street_name,
+                       local_city=location_match.address.city,
+                       local_state=location_match.address.state,
+                       local_zipcode=location_match.address.zip_code)
+    except MatchAddressLocation.DoesNotExist:
+        pass
+
+    print context
+    return context
 
 def crime_stats(request, state, city):
     crime_stats_ctx = query_by_state_city(state, city)
@@ -174,7 +195,7 @@ def choose_city(request, state):
         state = State.objects.get(abbreviation=state)
     except State.DoesNotExist:
         raise Http404
-    
+
     cities = CityLocation.objects.filter(state=state.abbreviation)
     city_by_first_letter = {}
     for city in cities:
@@ -238,7 +259,7 @@ def find_city(request):
                     state = State.objects.get(abbreviation__iexact=terms[0])
                 except State.DoesNotExist:
                     state = None
-            
+
             # if state is not "None" and terms is more than 1 try to
             # find a city otherwise redirect to the state page
             if state is not None and len(terms) > 1:
@@ -265,7 +286,7 @@ def find_city(request):
                 if state is not None:
                     cities = cities.get(state=state.abbreviation)
                     return HttpResponseRedirect(cities.get_absolute_url())
-            
+
             # if cities == 1 then redirect
             if len(cities) == 1:
                 return HttpResponseRedirect(cities[0].get_absolute_url())
@@ -278,7 +299,8 @@ def find_city(request):
     ctx['states'] = states
 
     return render_to_response('crime-stats/choose-state.html',
-        ctx, context_instance=RequestContext(request))
+                              ctx,
+                              context_instance=RequestContext(request))
 
 
 #
@@ -428,9 +450,25 @@ def search(request):
             reverse('home') + city.state + '/' + city.slug_name)
     forms = {}
     forms['basic'] = PAContactForm()
-    
+
 
     # Render search-results page
     return render_to_response('external/freecrimestats/search-results.html',
         {'num_cities': n_cities, 'cities': city_objs, 'forms': forms, 'search_query': q_str},
         context_instance=RequestContext(request))
+
+
+def state_sitemap(request):
+    from django.contrib.sitemaps.views import sitemap
+    from apps.crimedatamodels.sitemaps import FreeCrimeStatsStateSitemap
+    return sitemap(request, {'keyword-sitemap-index' : FreeCrimeStatsStateSitemap()})
+
+def city_sitemap(request, state):
+    from django.contrib.sitemaps.views import sitemap
+    from apps.crimedatamodels.sitemaps import FreeCrimeStatsCitySitemap
+    return sitemap(request, {'keyword-sitemap-cities' : FreeCrimeStatsCitySitemap(state)})
+
+def crime_sitemap(request, state, city):
+    from django.contrib.sitemaps.views import sitemap
+    from apps.crimedatamodels.sitemaps import FreeCrimeStatsCrimeSitemap
+    return sitemap(request, {'keyword-sitemap-index' : FreeCrimeStatsCrimeSitemap(state, city)})
