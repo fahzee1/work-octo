@@ -12,6 +12,17 @@ class AffiliateMiddleware(object):
 
     
     def process_view(self, request, view_func, view_args, view_kwargs):
+        check_agent_request = request.GET.get('agent', None)
+        if check_agent_request in settings.SUPER_AFFILIATES:
+            try:
+                affiliate = Affiliate.objects.get(agent_id=check_agent_request)
+                request.session['refer_id'] = affiliate.agent_id
+                request.session['source'] = affiliate.name
+                request.session['phone_number'] = affiliate.phone
+                request.session['call_measurement'] = False
+
+            except Affiliate.DoesNotExist:
+                pass
         if 'agent' not in request.GET:
             if settings.SITE_ID == 3:
                 viewname = view_func.__name__
@@ -23,6 +34,7 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = 'BINGPPC'
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
+
         return None
 
     def process_response(self, request, response):
@@ -68,17 +80,18 @@ class AffiliateMiddleware(object):
         current_cookie = request.COOKIES.get('refer_id', None)
         current_source = request.COOKIES.get('source', None)
         check_agent_request = request.GET.get('agent', None)
-        print 'testing {0}'.format(check_agent_request)
         if check_agent_request in settings.SUPER_AFFILIATES:
             try:
                 affiliate = Affiliate.objects.get(agent_id=check_agent_request)
                 request.session['refer_id'] = affiliate.agent_id
                 request.session['source'] = affiliate.name
+                request.session['phone_number'] = affiliate.phone
+                request.session['call_measurement'] = False
                 current_cookie = None
                 current_source = None
             except Affiliate.DoesNotExist:
                 pass
-
+            
         elif current_cookie is None:
             refer_id = request.session.get('refer_id', None)
             if refer_id is not None:

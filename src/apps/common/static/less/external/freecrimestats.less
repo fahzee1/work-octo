@@ -1,0 +1,836 @@
+@charset "utf-8";
+    /* CSS Document */
+/************************************
+*   Reset                           *
+************************************/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;}:focus{outline:0;}body{line-height:1;color:#000;background:@white;}ol,ul{list-style:none;}table{border-collapse:separate;border-spacing:0;}caption,th,td{text-align:left;font-weight:normal;}blockquote:before,blockquote:after,q:before,q:after{content:"";}blockquote,q{quotes:"" "";}.container_full{overflow:hidden;width:100%;}.padding_10{padding:10px;}.center{text-align:center;}.absolute{position:absolute!important;}.relative{position:relative!important;}.text-center{text-align:center;}.float_left{float:left;}
+
+/********** Color Selection ***********/
+
+// Shades of Grey
+@white: #fff;
+@off-white: #fcfcfc;
+@v-light-grey: #eee;
+@light-grey: #ccc;
+@grey: #888;
+@dark-grey: #4A505A;
+@black: #333; /* In place of black, PA uses a very dark grey. */
+
+// Shades of Blue
+@v-light-blue: #f2fdff;
+@light-blue: #d9f2ff;
+@blue: #0069aa;
+@dark-blue: #023269;
+@link-blue: #0066B3;
+@navy-blue: #2f394a;
+
+// Shades of Blood
+@light-red: #ffdfdf;
+@red: #e51b24;
+@dark-red: #8b0404;
+
+// Shades of Green
+@light-green: #DDF7B7;
+@green: #367403;
+@dark-green: #005500;
+
+
+/********** Mix-ins ***********/
+
+.border-radius (@top-left-radius: 10px, @top-right-radius: 10px, @bottom-right-radius: 10px, @bottom-left-radius: 10px) {
+    border-radius: @top-left-radius @top-right-radius @bottom-right-radius @bottom-left-radius;
+    -moz-border-radius: @top-left-radius @top-right-radius @bottom-right-radius @bottom-left-radius;
+    -webkit-border-top-left-radius: @top-left-radius;
+    -webkit-border-top-right-radius: @top-right-radius;
+    -webkit-border-bottom-left-radius: @bottom-left-radius;
+    -webkit-border-bottom-right-radius: @bottom-right-radius;
+}
+.drop-shadow (@shadow-x: 0px, @shadow-y: 2px, @shadow-blur: 5px, @shadow-color: @dark-grey) {
+    -moz-box-shadow: @shadow-x @shadow-y @shadow-blur @shadow-color;
+    -webkit-box-shadow: @shadow-x @shadow-y @shadow-blur @shadow-color;
+    box-shadow: @shadow-x @shadow-y @shadow-blur @shadow-color;
+}
+.inset-shadow (@shadow-x: 0px, @shadow-y: 0px, @shadow-blur: 5px, @shadow-color: @light-blue) {
+    -moz-box-shadow: inset @shadow-x @shadow-y @shadow-blur @shadow-color;
+    -webkit-box-shadow: inset @shadow-x @shadow-y @shadow-blur @shadow-color;
+    box-shadow: inset @shadow-x @shadow-y @shadow-blur @shadow-color;
+}
+.rotate (@rotation) {
+    -webkit-transform: rotate(@rotation);
+    -moz-transform: rotate(@rotation);
+    transform: rotate(@rotation);
+
+}
+.text-bump (@bumpness) {
+    padding-top: @bumpness;
+}
+.text-compensate (@compensation) {
+    height: @compensation;
+}
+.fade-slow {
+    -webkit-transition: background-color .7s ease-out;
+    -moz-transition: background-color .7s ease-out;
+    transition: background-color .7s ease-out;
+
+
+}
+.fade-fast {
+    -webkit-transition: background-color .3s ease-out;
+    -moz-transition: background-color .3s ease-out;
+    transition: background-color .3s ease-out;
+
+}
+.background-gradient(@top-color: @blue, @bottom-color: #005f9a) {
+    background: @top-color;
+    background-image: -moz-linear-gradient(top,@top-color,@bottom-color);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(@top-color),to(@bottom-color));
+}
+img.image-break {
+    left: -150px;
+    position: absolute;
+    z-index: -50;
+}
+.image-break (@bumpness: -150px) {
+    left: @bumpness;
+    position: absolute;
+    z-index: -50;
+}
+.image-break-right (@bumpness: 50px) {
+    right: @bumpness;
+    position: absolute;
+    z-index: -50;
+}
+.image-break-ribbon {
+    position: absolute;
+    right: -145px;
+    top: 0px;
+    z-index: -50;
+
+}
+.absolute {
+    position: absolute;
+    z-index: -50;
+
+}
+.flood-left {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -50;
+
+}
+.flood-right {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -50;
+
+}
+
+strong {
+    font-weight: bold;
+}
+
+body {
+    background: #8a95a8;
+    margin: auto;
+}
+#header {
+    overflow: hidden;
+    background-color: #8a95a8;
+    width: 960px;
+    margin: 0 auto;
+    height: 100px;
+    #tabs {
+        background: url('/static/img/external-lp/freecrimestats/header-search.png') top left no-repeat; 
+        width: 586px;
+        height: 70px;
+        margin: 0 auto;
+        margin-top: 31px;
+        position: relative;
+        float: left;
+        padding-top: 5px;
+        .tab {
+            background-color: #82c0e5;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            float: left;
+            height: 40px;
+            width: 145px;
+            margin-top: 13px;
+            font-family: "pragmatica-web";
+            font-weight: 300;
+            font-size: 14pt;
+            text-align: center;
+            color: white;
+            margin:0px;
+            padding-top: 8px;
+            .fade-slow;
+            a { 
+                text-decoration:none;
+                color: white; 
+                display: block;
+                height: 40px;
+                line-height: 40px;
+            }
+
+            &.alt {
+                background-color: #69707e;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                float: left;
+                height: 40px;
+                width: 145px;
+            }
+            &:hover {
+                background: @white;
+                color: #69707e;
+                .fade-fast;
+                a {
+                    color: #69707e;
+                }
+            }
+            &.active {
+                background: #eae6d8;
+                a {
+                    color: #69707e;
+                }
+            }
+        }
+    }
+    #search-form-mini {
+        background: url('/static/img/external-lp/freecrimestats/header-search.png') top right no-repeat; 
+        height: 70px;
+        width: 374px;
+        float: left;
+        margin-top: 31px;
+        #form {
+            position: relative;
+            font-family: "pragmatica-web";
+            font-weight: 300;
+            font-size: 10pt;
+            .search-area {
+                float: left;
+                border: none;
+                width: 175px;
+                margin:15px 0 0 100px;
+                background-color:white;
+                input {
+                    width: 185px;
+                    background: none;
+                    height: 24px;
+                    line-height: 24px;
+                }
+            }
+            .submit {
+                float: left;
+                margin: 15px 0 0 15px;
+                background: url('/static/img/external-lp/freecrimestats/submit-button.png') no-repeat;
+                cursor:pointer;
+                height: 28px;
+                border: none;
+            }
+        }
+    }
+
+}
+#main-container {
+    background: #fff url('/static/img/external-lp/freecrimestats/background-piece-rep.png') -158px bottom repeat-x; 
+    margin: 0 auto;
+    min-height: 678px;
+    #top-ad {
+        width: 728px;
+        display: block;
+        margin: 8px auto 0;
+    }
+    #side-ad {
+        float: left;
+        width: 235px;
+        text-align: center;
+        margin-top: 16px;
+    }
+    #sidebar {
+        width: 235px;
+        float: left;
+    }
+    #hp {
+        background: #ebe7db url('/static/img/external-lp/freecrimestats/homes-bg.png') center bottom repeat-x; 
+        width: 960px;
+        margin: 0 auto;
+        padding-top: 15px;
+        min-height: 678px;
+        h4 {
+            font-family: "pragmatica-web";
+            font-weight: 200;
+            font-size: 20pt;
+            margin: 0 auto;
+            width: 960;
+            text-align: center;
+            padding-top: 25px;
+            span {
+                font-family: "pragmatica-web";
+                font-weight: 700;
+                font-size: 23pt;
+            }
+        }
+        #search-box {
+            background-color: #77c4f1;
+            border-radius: 50px;
+            z-index: 100;
+            width: 808px;
+            height: 93px;
+            margin: 0 auto;
+            margin-top: 0px;
+            #state-headline {
+                text-align: center;
+                a {
+                    font-family: "pragmatica-web";
+                    color: @black;
+                    font-size: 10px;
+                    text-align: center;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+            }
+            #search-form {
+                width: 800px;
+                position: relative;
+                margin-top: 0px;
+                padding-top: 15px;
+                #form {
+                    position: relative;
+                    font-family: "pragmatica-web";
+                    font-weight: 300;
+                    font-size: 10pt;
+                    height: 60px;
+                    margin: 0 0 0 20px;
+                    background: @v-light-grey;
+                    margin-right: 11px;
+                    .border-radius(40px,40px,40px,40px); 
+                    .first {
+                        height: 60px;
+                        width: 150px;
+                        float: left;
+                        margin-left: 25px;
+                        padding-top: 3px;
+                    }
+                    .second {
+                        height: 60px;
+                        width: 150px;
+                        float: left;
+                        padding-top: 10px;
+                    }
+                    .search-area {
+                        float: left;
+                        border: none;
+                        width: 687px;
+                        background-color:white;
+                        border-radius: 50px;
+                        margin-top: 8px;
+                        margin-left: 16px;
+                        input {
+                            height: 40px;
+                            line-height: 40px;
+                            width: 200px;
+                            border: none;
+                            margin-left: 35px;
+                            margin-top: 0px;
+                        }
+                    }
+                    .submit {
+                        float: left;
+                        padding:10px 0 0 10px;
+                        
+                    }
+                    p {
+                        font-size: 9pt;
+                        font-family: "pragmatica-web";
+                        font-weight:700;
+                        float: left;
+                        width: 50px;
+                        padding: 10px 0 0 15px;
+                        text-align: right;
+                    }
+                }
+            }
+        }
+    }
+    #secondary {
+        width: 960px;
+        padding-bottom: 8px;
+        #headline {
+            background: url('/static/img/external-lp/freecrimestats/search-result-background.png') top center no-repeat; 
+            border-radius: 5px;
+            width: 740px;
+            height: 75px;
+            margin: 8px auto 0;
+            .left-area {
+                width: 150px;
+                vertical-align: middle;
+	            font-size: 10pt;
+	            font-family: "pragmatica-web";
+	            font-weight:800;
+	            text-align: right;
+	            line-height: 15px;
+	            padding-right: 92px;
+            }
+            .right-area {
+                width: 400px;
+                margin: 0 60px 0 0px;
+                height: 75px;
+                vertical-align: middle;
+                font-size: 18pt;
+                font-family: "pragmatica-web";
+                font-weight:300;
+                span {
+                    font-weight: 800;
+                }
+            }
+        }
+        #state {
+            background-color: white;
+            width: 740px;
+            margin: 8px auto;
+            .border-radius(5px, 5px, 5px, 5px);
+            .drop-shadow(0,2px,3px, #ccc);
+            .quote-form {
+                float: left;
+                background-color: #78c4f1;
+                width: 235px;
+                padding-bottom: 22px;
+                .border-radius(5px,5px,5px,5px);
+                p {
+                    font-size: 16pt;
+                    font-family: "pragmatica-web";
+                    font-weight: 800;
+                    color: white;
+                    padding: 0 10px 16px 10px;
+                    margin-botom: 0px;
+                }
+               	h3 {
+                    background: url(/static/img/protectamerica/black-shade.png) repeat;
+                    font-size: 18pt;
+                    font-family: "pragmatica-web";
+                    font-weight:800;
+                    color: white;
+                    padding: 10px;
+                    text-align: center;
+                    line-height: 24px;
+                    margin-bottom: 8px;
+                    .border-radius(5px,5px,0,0);
+                    span {
+                        display: block;
+                        font-size: 12px;
+                        line-height: 14px;
+                        padding-top: 4px;
+                        font-weight: normal;
+                    }
+                    
+                }
+                label {
+                    font-family: "pragmatica-web";
+                    font-size: 12px;
+                    color: white;
+                    font-weight: bold;
+                    display: block;
+                    padding-left: 15px;
+                }
+                button {
+                    
+                }
+                a {
+                    display: none;
+                }
+
+                #quote-form-error {
+                    display: none;
+                }
+                label {
+                    line-height: 16px;
+                }
+                button {
+                    color: @white;
+                    padding: 8px 48px;
+                    font-size: 16px;
+                    .border-radius;
+                    background: #90af01;
+                    background-image: -moz-linear-gradient(top, #90af01, #829e01);
+                    background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#829e01));
+                    border: 1px solid transparent;
+                    width: 202px;
+                    display: block;
+                    margin: 16px auto;
+                    &:hover {
+                        background-image: -moz-linear-gradient(center top, #90af01, #687e01);
+                        background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#687e01));
+                        border: 1px solid #768f03;
+                        border-bottom: 1px solid #576902;
+                        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                        box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                    }
+                }
+                input {
+                    margin-left: 15px;
+                    border: 1px solid #4691d5;
+                    .border-radius;
+                    height: 24px;
+                    line-height: 24px;
+                    margin-bottom: 8px;
+                    padding-left: 8px;
+                    width: 194px;
+                }
+            }
+            .state-text {
+                float: left;
+                width: 500px;
+                background-color: white;
+                h1 {
+                    font-family: "pragmatica-web";
+                    font-weight: 200;
+                    font-size: 20pt;
+                }
+                ul {
+                    li {
+                        font-family: "pragmatica-web";
+                        font-weight:400;
+                        font-size: 12pt;
+                        float: left;
+                        padding-right: 10px;
+                        list-style-type: none;
+                        line-height: 34px;
+                    }
+                }
+            }
+            .city-text {
+                width: 505px;
+                float: right;
+                font-family: "pragmatica-web";
+                font-weight: 200;
+                font-size: 10pt;
+                h2 {
+                    margin: 0;
+                    font-size: 12pt;
+                    padding: 8px 0 0 25px;
+                }
+                ul {
+                    margin: 0;
+                    li {
+                        font-family: "pragmatica-web";
+                        font-weight:400;
+                        font-size: 12pt;
+                        float: left;
+                        padding-right: 10px;
+                        list-style-type: none;
+                        line-height: 34px;
+                    }
+                }
+            }
+            .results {
+                width: 500px;
+                float: right;
+            }
+
+            .thanks-text {
+                width:720px;
+                float: right;
+                padding: 10px;
+                background-color: white;
+                h3 {
+                    font-family: "pragmatica-web";
+                    font-weight: 800;
+                    font-size: 10pt;
+                    margin-bottom: 0px;
+                }
+                p {
+                    font-family: "pragmatica-web";
+                    font-weight: 400;
+                    font-size: 10pt;
+                    margin-top: 0px;
+                    padding: 50px;
+                }
+                span {
+                    font-weight: 800;
+                }
+            }
+
+        }
+        .about-text, #advice-text, #results-text {
+            width: 470px;
+            float: right;
+            padding: 10px;
+            font-family: "pragmatica-web";
+
+            h1 {
+                font-family: "pragmatica-web";
+                font-weight: 200;
+                font-size: 20pt;
+                margin: 0 auto;
+                width: 960;
+                padding-top: 25px;
+                padding-bottom: 16px;
+            }
+            h2 {
+                font-family: "pragmatica-web";
+                font-weight: 200;
+                font-size: 16pt;
+                margin: 0 auto;
+                padding-top: 25px;
+                padding-bottom: 16px;
+            }
+            h3 {
+                font-family: "pragmatica-web";
+                font-weight: 800;
+                font-size: 10pt;
+                margin-bottom: 0px;
+            }
+            p {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                margin-top: 0px;
+                width: 460px;
+                text-align: justify;
+                padding-bottom: 8px;
+                a {
+                    color: @link-blue;
+                }
+
+            }
+            .button {
+                display: block;
+                text-transform: uppercase;
+                .border-radius;
+                background: #82c0e5;
+                width: 67px;
+                padding: 8px 16px;
+                color: @white;
+                text-decoration: none;
+                font-size: 10px;
+            }
+            .city-container {
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 8px;
+                ul {
+                    margin-left: 0;
+                    padding-left: 0;
+                    li {
+                        font-family: "pragmatica-web";
+                        font-weight: 200;
+                        font-size: 12pt;
+                        float: left;
+                        list-style-type: none;
+                        margin-right: 0px;
+                        display: block;
+                        float: left;
+                        a {
+                            text-decoration:underline;
+                            color: @link-blue;
+                            text-shadow: 0px 1px 0px #eee;
+                            display: block;
+                            padding: 4px 8px;
+                            .fade-slow;
+                            .border-radius;
+    
+                            &:hover {
+                                background: #82c0e5;
+                                color: #fff;
+                                text-decoration: none;
+                                .fade-fast;
+                                text-shadow: none;
+                            }
+                        }
+                    }
+
+                }
+            }
+            ul {
+                margin-left: 8px;
+                list-style-type: disc;
+                padding-left: 8px;
+                color: @link-blue;
+
+                li {
+                    list-style-type: disc;
+                    padding-left: 8px;
+                    a {
+                        color: @link-blue;
+                        font-size: 16px;
+                        line-height: 28px;
+                        font-weight: 200;
+                    }
+                }
+            }
+            table {
+            	width: 460px;
+            	tbody, thead {
+            	
+	            	tr {
+	            		th {
+	            			text-align: center;
+	            			font-size: 10px;
+	            			text-transform: uppercase;
+	            			line-height: 24px;
+	            			font-weight: bold;
+	            			&.crime-name {
+	            				background: #eee;
+	            				border: 1px solid #ccc;
+	            				.border-radius(5px, 5px, 0, 0);
+	            			}
+	            		}
+	            		td {
+	            			background: #eee;
+	            			height: 32px;
+	            			line-height: 32px;
+	            			text-align: center;
+	            			font-size: 24px;
+	            			font-weight: 200;
+	            			border-bottom: 1px solid #ccc;
+	            			border-right: 1px solid #ccc;
+	
+	            			&.year {
+	            				background: #78c4f1;
+	            				border-bottom: 1px solid #39738b;
+	            				border-right: 1px solid #39738b;
+	            			}
+	            			&.omega {
+	            				background: #ddd;
+	            			}
+	            		}
+	            		&.bottom {
+	            			td {
+	            				&.year {
+	            					border-bottom: none;
+	            					.border-radius(0, 0, 0, 5px);
+
+	            				}
+	            				&.omega {
+	            					.border-radius(0, 0, 5px, 0);
+	            				}
+	            			}
+	            		}
+	            		&.top {
+	            			td {
+	            				&.year {
+	            					.border-radius(5px, 0, 0, 0);
+
+	            				}
+	            				&.omega {
+	            					.border-radius(0, 5px, 0, 0);
+	            				}
+	            			}
+	            		}
+	            	}
+	            }
+            	tfoot {
+            		tr {
+            			td {
+            				height: 24px;
+            				&.crime-footer {
+	            				background: #eee;
+	            				border: 1px solid #ccc;
+	            				.border-radius(0, 0, 5px, 5px);
+	            				border-top: none;
+            				}
+            			}
+            		}
+            	}
+            }
+            ul {
+                font-family: "pragmatica-web";
+                font-weight: 400;
+                font-size: 10pt;
+                margin-bottom: 0px;
+
+            }
+        }
+    }
+}
+#footer {
+    overflow: hidden;
+    background-color: #8a95a8;
+    width: 100%;
+    height:150px;
+    #footer-callouts {
+        width: 960px;
+        background-color: white;
+        position: relative;
+        margin: 0 auto;
+        height: 140px;
+        margin-bottom: 0px;
+        .footer-links {
+            width: 600px;
+            float: left;
+            padding-left: 32px;
+            padding-top: 16px;
+            ul {
+                float: left;
+                li {
+                    font-family: "pragmatica-web";
+                    font-weight: 200;
+                    font-size: 12pt;
+                    float: left;
+                    list-style-type: none;
+                    margin-right: 20px;
+                    display: block;
+                    float: left;
+                    a {
+                        text-decoration:underline;
+                        color: #82c0e5;
+                        text-shadow: 0px 1px 0px #eee;
+                        display: block;
+                        padding: 4px 8px;
+                        .fade-slow;
+                        .border-radius;
+
+                        &:hover {
+                            background: #82c0e5;
+                            color: #fff;
+                            text-decoration: none;
+                            .fade-fast;
+                            text-shadow: none;
+                        }
+                    }
+                }
+            }
+        }
+        .footer-social {
+            width: 245px;
+            float: right;
+            padding-top: 5px;
+            .twitter {
+                float: left;
+                width: 40px;
+                height: 39px;
+                padding-left: 25px;
+            }
+            .fb {
+                float: left;
+                width: 40px;
+                height: 39px;
+                padding-left: 25px;
+            }
+            .googleplus {
+                float: left;
+                width: 40px;
+                height: 39px;
+                padding-left: 25px;
+            }
+        }
+        #footer-text {
+        width: 900px;
+        margin: 0 auto;
+        display: block;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: #e4e4e4 1px solid;
+            p {
+                font-size: 9pt;
+                font-family: "pragmatica-web";
+                font-weight: 200;
+            }
+        }
+    }
+}
+.clear { clear: both; }

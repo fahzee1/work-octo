@@ -2,7 +2,7 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 
 
-{% block page_title %}Wireless Home Security Systems | {{ city }}, {{ state }} | Protect America{% endblock %}
+{% block page_title %}{{ keyword }} | {{ city }}, {{ state }} | Protect America{% endblock %}
 
 {% block page_description %}{% content_spinner "pa-info1" "At Protect America, we|Here at Protect America, we" %} offer % content_spinner "pa-info2" "highest quality|best|top" %} {% content_spinner "pa-info3" "wireless home security products|wireless home security systems|wireless home security|wireless home security alarms|home wireless security systems" %} at the best price guaranteed. That's why Protect America was rated the best {% content_spinner "pa-info4" "wireless home security|wireless home security systems|wireless home security alarms|home wireless security systems" %} with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008—2013), as well as the Consumer Digest Best Buy Award for our Copper Package.{% endblock %}
 
@@ -23,7 +23,7 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
 {% block quick-links %}
 <ul id="quick-link-navigation">
-    <li class="city-info"><span id="city-info">{{ city }}, {{ state }}: <strong>Population: {{ latest_year.info.population|intcomma }}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" alt="{{ weather_info.desc }}" title="{{ weather_info.desc }}"/> {{ weather_info.temp }}&deg;F</span></li>
+    <li class="city-info"><span id="city-info">{{ city }}, {{ state }}: <strong>Population: {{ latest_year.info.population|intcomma }}</strong></span></li>
     <li id="quick-social">                
         <div id="google-button">
             <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
@@ -36,35 +36,219 @@
     <li><a href="http://homesecuritysystems.protectamerica.com" title="See Home Security Deals in your Area" id="change-local-city">Change City</a></li>
 </ul>
 {% endblock %}
+{% block heroimage %}
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
+        <h1>The Unbeatable Home Security Deal.</h1>
+        <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/iphone.png" class="happy-family" alt="family-one" />
+        <div id="hero-left">
+            <h2><span>Free</span> Home Security System</h2>
+            <ul>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />24 / 7 Nationwide Monitoring</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Reliable GE Wireless Security System</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Licensed {{ state_long }} Security Professionals</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />No Equipment or Activation Fees</li>
+                <li><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/checkmark.png" alt="checkmark" width="24" height="24" />Up to 20% off Homeowners</li>
 
+            </ul>
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/keychain-promo.png" class="badge" alt="keychain-promo" width="421" height="104" />
+        </div>
+        <div id="hero-right">
+        {% block hero-content %}
+            <h3>The Protect America system is a solid choice! You get latest technology with fastest response time at a price you can afford.<img src="{{ STATIC_URL }}img/affiliates/centerfield-media/quote-arrow.png" class="quote-arrow" alt="quote-arrow" width="32" height="16" /></h3>
+            <p>www.homesecuritysystems.net</p>
+        {% endblock %}
+
+
+        </div>
+        <div id="hero-badges">
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/home-security-consumer-digest-best-buy.png" alt="home-security-consumer-digest-best-buy" />
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/overall-staff-pick.png" alt="overall-staff-pick" />
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-ten-reviews-2013-excellence.png" alt="top-ten-reviews-2013-excellence" width="73" height="115" />
+            <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-consumer-reviews-5-stars.png" alt="top-consumer-reviews-5-stars" width="120" height="120" />
+        </div>
+        {% if phone_number %}
+            <div class="clear"></div>
+            <div id="call-box">
+                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+            </div>
+            <div class="clear"></div>
+    
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/protectamerica/small-town-usa.jpg" alt="Security For Every Home" id="hero-backdrop" />
+</div>
+<div class="wrapper">
+    <div id="security-information">
+        <div id="one-hundred-percent">
+            <div id="wireless-security">
+                <h1>Wireless Home Security <br/>100% Protection.</h1>
+                <p>Over the past 20 years, Protect America has revolutionized the security business. We are a nationwide company with a localized focus. This simply means you receive an easy to use security system that protects your {{ state_long }} home.</p>
+                <p><strong>An alarm system that is built specifically for {{ city }} residents.</strong> You don’t have a phone line? Our cellular monitoring is 100% wireless. You have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>
+                {% if phone_number %}
+                    {% businesstime %}
+                        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                    {% endbusinesstime %}
+                {% endif %}
+            </div>
+        </div>
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
+        <div class="clear"></div>
+        <img src="{{ STATIC_URL }}img/products/no-cost-banner.png" id="" alt="no-cost-banner" width="960" height="77" />
+    </div>
+</div>
+{% endblock %}
+{% block call-box %}
+
+{% endblock %}
 {% block pa-testimonials %}
 <h2>{{ state_long }} Customers Love Our Wireless Home Security Systems</h2>
 {% testimonial_search "" "limit=2&state={{ state }}&template=state-side&words=25" %}
 {% endblock %}
 
-{% block pa_information %}{% content_spinner "pa-info1" "At Protect America, we are|Here at Protect America, we are|Protect America is|We are" %} driven to provide only the {% content_spinner "pa-info2" "highest quality|best|top" %} {% content_spinner "pa-info3" "wireless home security products|wireless home security systems|wireless home security|wireless home security alarms|home wireless security systems" %} and dedicated service at an affordable price. We are {% content_spinner "pa-info7" "proud|excited" %} to offer {{ city }} residents our {% content_spinner "pa-info5" "wireless home security|wireless home security system|wireless home security alarm|home wireless security system" %} packages that provide the equipment necessary to protect your entire home for {% content_spinner "pa-info6" "a whole lot less|cheaper|less|a fraction of the cost" %}. Each system is customized to fit your needs, while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best {% content_spinner "pa-info4" "wireless home security|wireless home security systems|wireless home security alarms|home wireless security systems" %} with a 5-Star Rating from Top Consumer Reviews for six years in a row (2008—2013), as well as the Consumer Digest Best Buy Award for our Copper Package.{% endblock %}
-
-{% block security-choice-one %}{% content_spinner "sc-1" "Wireless Home Security Systems|Home Wireless Security Systems|Wireless Home Security|Wireless Home Alarms" %}{% endblock %}
-{% block security-choice-two %}Wireless Video Surveillance{% endblock %}
-
-{% block home-security-overview %}
+{% block pa_information %}
     <h2>Protect Your Home with a Wireless Security System</h2>
     <p>Protect America offers the {%content_spinner "hso1" "best|most affordable|greatest" %} {%content_spinner "hso2" "home security systems|home alarm systems|wireless home security system|wireless home alarm system" %} and monitoring deals you'll find in {{ city }}, {{ state_long }}. We install {%content_spinner "hso3" "premium|the highest quality|warranty-backed" %} security hardware with GE security products, and have the most flexible range of monitoring services, including cellular monitoring, high speed broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of {%content_spinner "hso4" "GE wireless home security components|wireless home alarm equipment|home security equipment|wireless security equipment" %}. And, our {%content_spinner "hso5" "security packages|security systems|home security systems|wireless security systems|wireless alarm systems" %} are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today.</p>
 {% endblock %}
 
-{% block video-security-overview %}
-    <h2>Interactive Video Security</h2>
-    <p>Protect America allows you to gain a true picture of what is happening in your home or business with 24/7 {% content_spinner "vso1" "on-demand video|interactive video surveillance|interactive security cameras" %}. Get enhanced security with our night vision video cameras, archived clips, event notifications, and automatic recording when movement is detected. With {% content_spinner "vso2" "Protect America's video services|Protect America interactive surveillance cameras|Protect America security cameras" %}, peace of mind is just an instant click away.</p>
+{% block security-choice-one %}{% content_spinner "sc-1" "Wireless Home Security Systems|Home Wireless Security Systems|Wireless Home Security|Wireless Home Alarms" %}{% endblock %}
+{% block security-choice-two %}Wireless Video Surveillance{% endblock %}
+{% block video-choice %}
+    <div id="video-security-choice" class="big-info" style="display:none">
+        <div class="big-wrapper">
+            <div id="way-you-want-security">
+                <img src="{{ STATIC_URL }}img/products/any-way-you-want-home.jpg" alt="any-way-you-want-home" width="368" height="280" />
+
+                <h2>Fully Customizable State-of-the-Art Home Security Systems</h2>
+                <p>Unlike {% content_spinner "vc-1" "most security companies,|other home security companies,|" %}most security companies, Protect America recognizes that every home is different. That is why when designing our systems, we made sure to include enough door/window sensors to protect ALL the points of entry into your home. No matter how big or small, Protect America has you covered. We also made it easy to add the features you want like smoke detectors, interactive video cameras, and other home security accessories.</p>
+                {% if phone_number %}
+                    {% businesstime %}
+                        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
+                    {% endbusinesstime %}
+                {% endif %}
+            </div>
+            <div class="clear"></div>
+            <div id="self-install">
+                <iframe width="309" height="174" src="http://www.youtube.com/embed/2nQjZ1Siwuo?rel=0" frameborder="0" allowfullscreen></iframe>
+                <h2>Home Security Shipped Straight to Your Door</h3>
+                <p>When Protect America started 20 years, we changed the home security industry.  We ditched the annoying installation technician and created a simple easy-to-use self installed system. There’s no need to have a complete stranger enter your home. We pre-program the system to you and ship it straight to your door. The best part? No installation fee saves you hundreds or even thousands of dollars!</p>
+            </div>
+            <div id="locked-in">
+                <iframe width="309" height="174" src="http://www.youtube.com/embed/TJZcgvhfOV0?rel=0" frameborder="0" allowfullscreen></iframe>
+                <h2>An Alarm Company with You in Mind.</h2>
+                <p>We pride ourselves in being a full service home security company. Your alarm system comes with triple redundant 24 / 7 security monitoring. You never have to worry about your bill getting higher. You never have to worry about your contract being sold to some outside company within a year or so. We believe in giving our customers a security system they will love while keeping their home secure for life.</p>
+            </div>
+
+            <div class="customer-testimonial-box">
+                
+                    <h3><span>Jamese writes:</span> from <strong>Lynnwood, IL</strong></h3>
+                    <p>My husband and I recently got married and bought a house. We were uncertain about which security system to go with but were convinced by your reviews, contract agreement, and pricing that Protect America was a good fit for us. From the day we received our security system in the mail Protect America remained in constant contact with us to ensure that the system was installed and working as soon as possible. Thank you for your great customer service, I now feel safer in my new home. </p>
+                    
+                    <div class="star-container">
+                        <div class="star active">&nbsp;</div>
+                        <div class="star active">&nbsp;</div>
+                        <div class="star active">&nbsp;</div>
+                        <div class="star active">&nbsp;</div>
+                        <div class="star active">&nbsp;</div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+            {% block advantage-badges %}
+            {% endblock %}
+{% block home-security-bottom %}
+            <table id="comparison-table">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th><p class="pa-logo">&nbsp;</p></th>
+                        <th>ADT</th>
+                        <th>ADT Pulse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="alpha title">Installation</td>
+                        <td class="alpha pa">$0</td>
+                        <td class="alpha">$49</td>
+                        <td class="alpha">$49</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Monthly Rate</td>
+                        <td class="pa">$19.99</td>
+                        <td>$42.99</td>
+                        <td>$50.99</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Homeowner's Discount</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td class="title">24/7 Monitoring</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Interactive Features*</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td><span class="blue-check">&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Free EasyMove<br/> Moving Kit</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title">Lowest Price Guaranteed</td>
+                        <td class="pa"><span class="green-check">&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="title omega">Locked-in Rate</td>
+                        <td class="pa omega"><span class="green-check">&nbsp;</span></td>
+                        <td class="omega">&nbsp;</td>
+                        <td class="omega">&nbsp;</td>
+                    </tr>
+                </tbody>
+                {% block table-order %}
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td><a href="{% url order-package %}" class="button-link header-button">Order Now</a></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                {% endblock %}
+            </table>
+
 {% endblock %}
 
-{% block video-security-overview-two %}
-    <h2>Video Home Security: Here, There, Everywhere.</h2>
-    <p>These days, people are always on the go and spend less time at home. Unfortunately, an empty house is the perfect time for a burglar to strike. Get {% content_spinner "vsot1" "interactive video security|interactive video surveillance|interactive home surveillance cameras" %} and check on your phone anywhere at any time. Our {% content_spinner "vsot2" "home surveillance cameras|interactive surveillance cameras|home security cameras" %} let you view your own live video feed from any Internet-enabled computer or smartphone. You can also be notified of recorded events with text notifications that can be read straight from your phone.</p> 
-{% endblock %}
 
 {% block smart-app-overview %}
     <h2>There’s a Free App For That.</h2>
-    <p>When connecting your {% content_spinner "sao1" "home security system|wireless home security system|home alarm system|wireless home alarm system" %} with cellular broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation, and program rules to fit your needs anywhere, at any time through your computer or smartphone. Forget to set your {% content_spinner "sao2" "alarm system|home security system|wireless alarm system|wireless home security system" %}? No problem, just arm it while sipping your morning coffee at work.</p>
+    <p>When connecting your {% content_spinner "sao1" "home security system|wireless home security system|home alarm system|wireless home alarm system" %} with cellular or broadband monitoring, your account automatically comes with interactive features. Arm your system, request notifications, manage contacts, control lights, energy, home automation, and program rules to fit your needs anywhere, at any time through your computer or smartphone. Forget to set your {% content_spinner "sao2" "alarm system|home security system|wireless alarm system|wireless home security system" %}? No problem, just arm it while sipping your morning coffee at work.</p>
     <ul>
         <li>
             <img src="{{ STATIC_URL }}img/canada/interactive-alarm-icon.jpg" alt="interactive-alarm-icon" width="58" height="58" />
@@ -89,5 +273,3 @@
         </li>
     </ul>
 {% endblock %}
-{% block order-footer %}{% endblock %}
-{% block main-footer %}{% endblock %}

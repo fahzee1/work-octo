@@ -1,10 +1,10 @@
 # Common Django settings for web project.
 import sys
 import os
-
 import settings
 
-DEBUG = True 
+
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -79,7 +79,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.load_template_source',
     'django.template.loaders.app_directories.load_template_source',
-# 'django.template.loaders.eggs.load_template_source',
+    # 'django.template.loaders.eggs.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -150,7 +150,7 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 DEFAULT_PHONE = '8009515190'
-SUPER_AFFILIATES = ()
+SUPER_AFFILIATES = ("a10058",)
 
 
 GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
@@ -160,6 +160,6 @@ INTERNAL_IPS = ('127.0.0.1')
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
 try:
-    from etc.django.cj import *
+    from etc.django.local import *
 except ImportError:
     pass
