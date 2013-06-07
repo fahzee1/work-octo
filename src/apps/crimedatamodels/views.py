@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.utils import simplejson
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
 from django.conf import settings
 
@@ -102,16 +102,16 @@ def query_by_state_city(state, city, get_content=True):
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
-        print state
+        print "this is state %s" % state
     except State.DoesNotExist:
         raise Http404
     try:
         city = city.replace('+', ' ').replace('-', ' ')
-        print city
+        print "this is city %s" % city
 
         city = CityLocation.objects.get(city_name__iexact=city,
             state=state.abbreviation)
-        print city
+        print "this is edited city %s" % city
         city_id = city.id
     except CityLocation.DoesNotExist:
         print 'none'
@@ -143,13 +143,7 @@ def query_by_state_city(state, city, get_content=True):
     else:
         pop_type = 'METROPOLIS'
 
-    # get content
-    if get_content:
-        content = CrimeContent.objects.get(
-            grade=crime_stats[years[0]]['stats'].average_grade,
-            population_type=pop_type)
-
-    # Google Weather API
+     # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
 
@@ -163,11 +157,18 @@ def query_by_state_city(state, city, get_content=True):
            'long': city.longitude,
            'weather_info': weather_info,
            'pop_type': pop_type,
-           'city_id': city_id,
-           'content': content.render(city)}
+           'city_id': city_id}
+
+    # get content
+    if get_content:
+        content = CrimeContent.objects.get(
+            grade=crime_stats[years[0]]['stats'].average_grade,
+            population_type=pop_type)
+        context.update(content=content.render(city))
+
 
     try:
-        #try to see if the local page has an address associated with it
+        #try to see if the local page has an address associated with it 
         location_match=MatchAddressLocation.objects.select_related().get(location=city)
         context.update(local_street=location_match.address.street_name,
                        local_city=location_match.address.city,
@@ -370,7 +371,7 @@ def local(request, state, city):
         if request.GET.get(filt, None) == 'hide':
             filters[filt] = False
 
-    data = query_by_state_city(state, city, False)
+    data = query_by_state_city(state, city, get_content=False)
     data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
 
     forms = {}
@@ -378,8 +379,7 @@ def local(request, state, city):
     data['forms'] = forms
 
     # Collect Context and Render Template
-    return render_to_response('external/freecrimestats/results.html',
-        data, context_instance=RequestContext(request))
+    return render(request,'external/freecrimestats/results.html',data)
 
 
 def crime(request, state, city, crime):
@@ -403,10 +403,58 @@ def search(request):
     q_str = request.GET.get('q', '')
     q_params = q_str.split(' ')
 
+    #if comma or slash in query,remove comma or slash
+    #use state to query DB.
+    comma_or_slash=False
+    city_and_state=False
+    _city=False
+    _state=_city
+    if ',' or '/' in q_str:
+        comma_or_slash=True
+        if ',' in q_str:
+            _city,_state=q_str.replace(',',' ').split()
+            _state=_state.upper()
+            city_and_state=True
+        elif '/' in q_str:
+            _city,_state=q_str.replace('/',' ').split()
+            _state=_state.upper()
+            city_and_state=True
+        else:
+            _city=q_str
+            _state=_city
+            city_and_state=False
+        print _state 
+       
     # Get any State objects from params, and replace
     # full state name params with abbreviations
-    states = State.objects.all().filter(
-        Q(abbreviation__in=q_params) | Q(name__in=q_params))
+
+    try:
+        if comma_or_slash:
+            query_abbr=_state
+            query_name=_state
+        else:
+            query_abbr=q_str.upper()
+            query_name.q_str.capitalize()
+
+        print query_abbr
+        print query_name
+        states = State.objects.all().filter(
+        Q(abbreviation__iexact=query_abbr)| Q(name__icontains=query_name))
+        
+        print 'states are %s' % (states)
+    except State.DoesNotExist:
+        states=False
+
+
+    list_all_cities=False
+    if states:
+        if not city_and_state:
+            ss=states[0].abbreviation.upper()
+            all_cities=CityLocation.objects.filter(state=ss)
+            list_all_cities=True
+            print 'all cities are %s' % all_cities
+
+
     for state in states:
         for i in range(len(q_params)):
             if state.name.lower() == q_params[i].lower():
@@ -420,6 +468,8 @@ def search(request):
         zqo = zqo & Q(state=state.abbreviation)
     zip_qs = ZipCode.objects.filter(zqo)
     n_zips = zip_qs.count()
+
+    print 'zip codes are %s' % (zip_qs)
 
     # If we only matched 1 zip result, show that page automatically
     if n_zips == 1:
@@ -437,19 +487,33 @@ def search(request):
             .order_by('city_name')
         n_cities = city_objs.count()
 
+
+    print 'cities are %s' % (city_objs)
+
     # If only 1 city found, redirect to it's results like before
     if n_cities == 1:
         city = city_objs[0]
         return HttpResponseRedirect(
             reverse('home') + city.state + '/' + city.slug_name)
+
+
+    if city_and_state:
+        city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
+        return redirect('local',city.state,city.slug_name)
+
     forms = {}
     forms['basic'] = PAContactForm()
 
+    ctx={'num_cities': n_cities, 
+         'cities': city_objs, 
+         'forms': forms, 
+         'search_query': q_str}
+
+    if list_all_cities:
+        ctx.update(all_cities=all_cities)
 
     # Render search-results page
-    return render_to_response('external/freecrimestats/search-results.html',
-        {'num_cities': n_cities, 'cities': city_objs, 'forms': forms, 'search_query': q_str},
-        context_instance=RequestContext(request))
+    return render(request,'external/freecrimestats/search-results.html',ctx)
 
 
 def state_sitemap(request):

@@ -122,9 +122,9 @@ class Test_Crime_Data_Models(TestCase):
 		self.assertTrue(matched_ctx)
 
 	def test_local_state_and_city(self):
-		local_state=self.client.get(reverse("local-state"))
-		local_city=self.client.get(reverse("choose-city",kwargs={"state":"TX"}))
-		local_page=self.client.get(reverse("local-page",kwargs={"state":"TX", "city":"Austin"}))
+		local_state=self.client.get(reverse("local_state"))
+		local_city=self.client.get(reverse("local_city",kwargs={"state":"TX"}))
+		local_page=self.client.get(reverse("local_page",kwargs={"state":"TX", "city":"Austin"}))
 		print 'local state is %s' % local_state
 
 		try:

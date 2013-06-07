@@ -1,5 +1,5 @@
 {% extends "external/freecrimestats/base.html" %}
-{% load content_filters content_tags sekizai_tags %}
+{% load content_filters content_tags sekizai_tags %}{% load url from future %}
 {% block page_title %}Crime Statistics by State: {{ state_long }} | {% endblock %}
 {% block page_description %}Crime stats in {{ state_long }}. Get information about crime like burglary, auto-theft, larceny and violent crime.{% endblock %}
 
@@ -22,24 +22,47 @@
                 </div>
                 <div id="results-text">
 
-                {% if num_cities %}
+                {% if cities %}
 
                     <h1>Found {{ num_cities }} results for "{{ search_query }}"</h1>
                     <div class="city-container">
                         <ul>
                             {% for city in cities %}
-                            <li><a href="/{{ state }}/{{ city.slug_name }}">{{ city }}</a></li>
+                            <li><a href="{% url 'local' city.state city.slug_name %}">{{ city }}</a></li>
                             {% endfor %}
                         </ul>
                         <div class="clear"></div>
                     </div>
                     <div class="clear"></div>
+                    {% comment %}
+                         dont use named urls below, theres a
+                         problem with the query for the city 
+                         O'Donnell, TX
+                    {% endcomment %}
 
-                {% else %}
+                    {% else %}
+            
+                         {% if all_cities %}
 
-                    <h1>No results found for "{{ search_query }}"</h1>
+                          <h1>Found {{ all_cities.count }} results for "{{ search_query }}"</h1>
+                            <div class="city-container">
+                             <ul>
+                                {% for city in all_cities %}
+                                 <li><a href="/{{ city.state }}/{{ city.slug_name }}">{{ city }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="clear"></div>
+                            </div>
+                        <div class="clear"></div>
 
-                {% endif %}
+
+
+                             {% else %}
+
+                                <h1>No results found for "{{ search_query }}"</h1>
+
+                        {% endif %}
+                    {% endif %}
 
                 </div>
                 <div class="clear"></div>
