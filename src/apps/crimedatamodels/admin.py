@@ -23,4 +23,10 @@ class LocalAddressAdmin(admin.ModelAdmin):
 	model=LocalAddress
 admin.site.register(LocalAddress,LocalAddressAdmin)
 
+class CityLocationAdmin(admin.ModelAdmin):
+	model=CityLocation
+admin.site.register(CityLocation,CityLocationAdmin)
+
+
+
 
