@@ -30,6 +30,11 @@ from apps.common.forms import LinxContextForm
 from apps.news.models import Article
 from apps.pricetable.models import Package
 
+consumer_key=settings.TWITTER_CONSUMER_KEY
+consumer_secret=settings.TWITTER_CONSUMER_SECRET
+access_token=settings.TWITTER_ACCESS_TOKEN
+access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
+
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -226,8 +231,11 @@ def index_render(request, template, context):
     try:
         tweets = cache.get('TWEETS')
         if tweets is None:
-            t_api = twitter.Api()
-            tweets = t_api.GetUserTimeline('@protectamerica')
+            t_api = twitter.Api(consumer_key=consumer_key,
+                                consumer_secret=consumer_secret,
+                                access_token_key=access_token,
+                                access_token_secret=access_secret)
+            tweets = t_api.GetUserTimeline('protectamerica')
             cache.set('TWEETS', tweets, 60*60)
         context['tweets'] = tweets[:3]
     except:

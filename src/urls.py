@@ -339,7 +339,7 @@ elif settings.SITE_ID == 23:
             'apps.crimedatamodels.views.crime', name='crime'),
 
         # Local City Page (.../[State]/[City]/)
-        url(r'^(\w{2})/([\w\-]+)/?$',
+        url(r'^(?P<state>\w{2})/(?P<city>[\w\-]+)/?$',
             'apps.crimedatamodels.views.local', name='local'),
 
         # City Listing (.../[State]/)

@@ -6,7 +6,7 @@ import os
 import logging
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render 
 from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.utils import simplejson
@@ -84,7 +84,8 @@ def local_page_wrapper(request, keyword, city, state):
         for state in US_STATES:
             if statestr.lower().replace('-', ' ') == state[1].lower():
                 return state[0]
-        return False
+            else:
+                return False
     statecode = get_state_code(state)
     if not statecode:
         raise Http404
@@ -92,6 +93,7 @@ def local_page_wrapper(request, keyword, city, state):
 
 
 def local_page(request, state, city, keyword=None):
+
     crime_stats_ctx = query_by_state_city(state, city)
     if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
         json_file = os.path.join(settings.PROJECT_ROOT, 'src',
@@ -137,17 +139,17 @@ def local_page(request, state, city, keyword=None):
     adt_keyword_list = ['adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services']
 
     if keyword in custom_keyword_list:
-        response = render_to_response('local-pages/%s.html' % keyword,
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/%s.html', crime_stats_ctx) % keyword
     elif keyword in wireless_keyword_list:
-        response = render_to_response('local-pages/wireless-home-security-systems.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/wireless-home-security-systems.html',
+            crime_stats_ctx)
     elif keyword in adt_keyword_list:
-        response = render_to_response('landing-pages/adt.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
-    else:
-        response = render_to_response('local-pages/index.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+
+        response = render(request,'landing-pages/adt.html',
+            crime_stats_ctx)
+    else:        
+        response = render(request,'local-pages/index.html',
+            crime_stats_ctx)
 
     expire_time = datetime.timedelta(days=90)
     response.set_cookie('affkey',
