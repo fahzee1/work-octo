@@ -84,7 +84,8 @@ def local_page_wrapper(request, keyword, city, state):
         for state in US_STATES:
             if statestr.lower().replace('-', ' ') == state[1].lower():
                 return state[0]
-        return False
+            else:
+                return False
     statecode = get_state_code(state)
     if not statecode:
         raise Http404
@@ -92,7 +93,7 @@ def local_page_wrapper(request, keyword, city, state):
 
 
 def local_page(request, state, city, keyword=None):
-    print state +'.....'+ city
+
     crime_stats_ctx = query_by_state_city(state, city)
     if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
         json_file = os.path.join(settings.PROJECT_ROOT, 'src',
