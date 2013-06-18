@@ -236,6 +236,7 @@ def index_render(request, template, context):
                                 access_token_key=access_token,
                                 access_token_secret=access_secret)
             tweets = t_api.GetUserTimeline('protectamerica')
+            print tweets
             cache.set('TWEETS', tweets, 60*60)
         context['tweets'] = tweets[:3]
     except:
