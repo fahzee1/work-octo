@@ -685,11 +685,15 @@ else:
 
         # Affiliate Resources
 
-        dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
+        #dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
         url(r'^api/affiliate/?$', 'apps.affiliates.views.accept_affiliate'),
 
         url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/?$',
             'apps.affiliates.views.get_affiliate_information'),
+
+
+
+
 
         url(r'^news/', include('apps.news.urls', namespace='news')),
         url(r'^sitemaps/', include('apps.pa-sitemaps.urls', namespace='sitemaps')),

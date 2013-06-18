@@ -1,7 +1,7 @@
 import re
 from datetime import datetime, timedelta
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render,redirect
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -10,11 +10,20 @@ from django.utils import simplejson
 from django.core.urlresolvers import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
+from apps.affiliates.models import Affiliate, LandingPage, AffTemplate,Profile
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
 from apps.adspace.models import Ad, Campaign
-from apps.affiliates.forms import AddAffiliateForm, AffiliateSignup
+from apps.affiliates.forms import AddAffiliateForm, AffiliateSignup, AffiliateLoginForm
+from django.contrib import messages
+
+
+def check_if_affiliate(email,agent_id):
+    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
+    for aff in affiliates:
+        if aff.email == email and aff.affiliate.agent_id == agent_id:
+            return True
+        return False
 
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
@@ -55,6 +64,12 @@ def resources(request):
     Function that gathers all the google ads from all the campaigns and
     then sends them to the html to be rendered by banner size.
     """
+    aff_check=request.session.get('aff-logged-in',False)
+    if not aff_check:
+        print 'redirect'
+        return redirect('affiliates:aff-login')
+
+
     campaigns = Campaign.objects.all()
     ads = {
         'leaderboard': ('Leaderboard (728x90)', []),
@@ -279,3 +294,24 @@ def get_affiliate_information(request, affiliate_id):
     }
 
     return json_response({'success': True, 'affiliate': info})
+
+
+def affiliate_login(request):
+    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
+    form=AffiliateLoginForm()
+    if request.method == 'POST':
+        form=AffiliateLoginForm(request.POST)
+        if form.is_valid():
+            check_email=form.cleaned_data['email']
+            check_agentid=form.cleaned_data['agent_id']
+            is_aff=check_if_affiliate(check_email,check_agentid)
+            if is_aff:
+                request.session['aff-logged-in']=True
+                return redirect('affiliates:affiliate_resources')
+            else:
+                messages.info(request,'Please Enter The Correct Login.')
+                return redirect('affiliates:aff-login')       
+    else:
+       form=AffiliateLoginForm()
+    return render(request,'affiliates/login.html',{'form':form})
+

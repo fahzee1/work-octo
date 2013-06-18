@@ -72,6 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.pricetable.context_processors.price_table',
     'apps.pricetable.context_processors.current_cart',
     'apps.adspace.context_processors.campaign',
+    'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
 )
 
