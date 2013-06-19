@@ -1,11 +1,15 @@
 {% load content_tags content_filters sekizai_tags %}
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 
-    {% block google_experiment %}
-    
-    {% endblock %}
+{% block google_experiment %}
+
+{% endblock %}
     <!-- Begin Inspectlet Embed Code -->
     <script type="text/javascript" id="inspectletjs">
     	window.__insp = window.__insp || [];
@@ -20,12 +24,20 @@
     	})();
     </script>
     <!-- End Inspectlet Embed Code -->
+    
     <title>{% block page_title %}{% endblock %}</title>
     <meta name="description" content="{% block page_description %}{% endblock %}" />
     <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <meta property="fb:admins" content="586942929" />
-    {% block robots_tag %}{% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>{% else %}{% if request.is_secure %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>{% else %}<meta name="ROBOTS" content="INDEX, FOLLOW"/>{% endif %}{% endif %}{% endblock %}
+{% block robots_tag %}
+    {% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>
+    {% else %}
+        {% if request.is_secure %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+        {% else %}<meta name="ROBOTS" content="INDEX, FOLLOW"/>
+        {% endif %}
+    {% endif %}
+{% endblock %}
     <meta name="rating" content="general" />
     <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
     <meta name="author" content="Protect America" />
@@ -36,39 +48,82 @@
     <meta name="MSSmartTagsPreventParsing" content="true" />
     <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
     <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
-    {% block favicon %}
-    <link rel="icon" href="http://www.protectamerica.com/favicon.ico" />
-    <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico" />
-    {% endblock %}
-    {% block canonical %}{% if request.session.domain == 'protectamerica.com' %}
-    <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
-    {% endif %}{% endblock %}{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css?version=2-4-6">
+{% block favicon %}
+    <!-- Icons -->
+    <!-- 16x16 -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- 32x32 -->
+    <link rel="shortcut icon" href="/favicon.png">
+    <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png"> -->
+    <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png"> -->
+    <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png"> -->
+    <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
+    <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
+    <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
+    <!-- <meta name="viewport" content="initial-scale=1.0"> (Use if apple-mobile-web-app-capable below is set to yes) -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+    <!-- Startup images -->
+    <!-- iPhone 3GS, pre-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-320x460.png" media="screen and (max-device-width:320px)"> -->
+    <!-- iPhone 4, 4S and 2011 iPod Touch-->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x920.png" media="(max-device-width:480px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPhone 5 and 2012 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x1096.png" media="(max-device-width:548px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPad landscape -->
+    <!-- <link rel="apple-touch-startup-image" sizes="1024x748" href="img/startup/startup-1024x748.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape)"> -->
+    <!-- iPad Portrait -->
+    <!-- <link rel="apple-touch-startup-image" sizes="768x1004" href="img/startup/startup-768x1004.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait)"> -->
+    
+    <!-- Windows 8 / RT -->
+    <meta name="msapplication-TileImage" content="img/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#000">
 {% endblock %}
-{% render_block "css" %}
+    <meta http-equiv="cleartype" content="on">
+{% block css %}
+    <!-- For all browsers -->
+    <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/320.css">
+    <!-- For progressively larger displays -->
+    <link rel="stylesheet" media="screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/480.css">
+    <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="js/selectivizr-min.js"></script>
+    <![endif]-->
+{% endblock %}    
+<!-- JavaScript -->
+<script src="{{ STATIC_URL }}js/modernizr-2.5.3-min.js"></script>
+
+{% block canonical %}
+    {% if request.session.domain == 'protectamerica.com' %}
+        <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
+    {% endif %}
+{% endblock %}
+    
 {% block google_analytics %}
-<script type="text/javascript">
-
- var _gaq = _gaq || [];
- _gaq.push(['_setAccount', 'UA-5441302-2']);
- _gaq.push(['_setDomainName', 'protectamerica.com']);
- {% block ga_custom_variables %}{% endblock %}
- _gaq.push(['_trackPageview']);
-
- (function() {
-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-   ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
- })();
-
-</script>
-<script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script type="text/javascript">
+    
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-5441302-2']);
+     _gaq.push(['_setDomainName', 'protectamerica.com']);
+     {% block ga_custom_variables %}{% endblock %}
+     _gaq.push(['_trackPageview']);
+    
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+    
+    </script>
 {% endblock %}
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% block bing-conversion-code %}{% endblock %}
 
 </head>
@@ -80,93 +135,61 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 <!-- END LivePerson Monitor. -->
 <!-- Page Wrapper -->
 {% block header %}
-<div id="header">
-    <div id="header-wrapper">
-        <div>
-
-            {% block quick-links %}
-            <ul id="quick-link-navigation">
-                <li id="quick-social">                
-                    <div id="google-button">
-                        <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
-                    </div>
-                    <div id="facebook-button">
-                        <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fprotectamerica&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=179318388788943" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Quick Social', 'PAGE_NAME']);"></iframe>
-                    </div>
-                    <div class="clear"></div>
-                </li>
-                <li class="international">
-                    {% block international-main %}<img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> EN <img src="{{ STATIC_URL }}img/external/flags/arrow-selector.png" class="arrow-selector" alt="arrow-selector" />{% endblock %}
-                </li>                
-                <li class="big-green">
-                    <!-- BEGIN LivePerson Button Code -->
-                    <span id="lpButDivID-1363884338049"></span>
-                    <!-- END LivePerson Button code -->
-                </li>
-
-                <li class="big-blue"><a href="https://secure.protectamerica.com" title="Enter the Online Agreement" id="security-agreement" onClick="_gaq.push(['_trackEvent', 'Links', 'Click', 'Agreement Process']);">Agreement</a></li>
-                
-                <div id="international-box">
-                    {% block international %}
-                        <a href="http://www.protectamerica.com"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> English</a>
-                        <a href="http://www.protectamerica.com/es/"><img src="{{ STATIC_URL }}img/external/flags/us.png" alt="us" width="16" height="11" /> Espa&ntilde;ol</a>
-                        <a href="http://www.protectamericasecurity.ca"><img src="{{ STATIC_URL }}img/external/flags/ca.png" alt="us" width="16" height="11" /> Canada</a>
-                    {% endblock %}
-
-                </div>
+    <div id="top-section-wrapper">
+        <div id="top-section">
+            <ul id="newsfeed">
+                <li><i class="icon-twitter"></i> @owowdesigns thanks for the follow! <span>&ndash; About an Hour Ago</span></li>
+                <li><i class="icon-thumbs-up"></i> Like us on Facebook Today! <span>&ndash; About an Hour Ago</span></li>
+                <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
 
             </ul>
-            {% endblock %}
-            <!--<div class="clear"></div>-->
-        </div>    
-        <div>
-            {% block company-logo %}
-            <div id="company-logo">
-                <a href="http://www.protectamerica.com/" title="Protect America Home Security">
-                    <img src="{{ STATIC_URL }}img/base/protect-america-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
-          
-                </a>
-            </div>
-            {% endblock %}
-            {% block third-party-nav %}
+            <div id="company-links">
+                <ul id="international-selection">
+                    <li class="us">EN</li>
+                    <li class="es">ES</li>
+                    <li class="ca">EN</li>
+                </ul>
 
-            <div id="ge-logo" title="GE Logo">
-                <p>GE Security Authorized Dealer</p>
-            </div>
-            {% endblock %}
-            {% block main-phone %}
-                {% if phone_number %}
-                <div id="phone-number">
-                    <p>Call Today and Save! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
+                <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
+                        {% endif %}
+                    {% endblock %}
                 </div>
-                {% endif %}
-            {% endblock %}
+            </div>
             <div class="clear"></div>
         </div>
-        
-
     </div>
-</div>
-{% endblock %}
-<div id="navigation-wrapper">
-    {% block navigation %}
-    <div id="navigation">
-        <ul>
-            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Home', 'Top Navigation', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
-            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
-            <li {% if 'about-us' in active_pages %}class="active"{% endif %}><a rel="author" href="/pa/about/home-security-companies" title="About Protect America Home Security Systems" onClick="_gaq.push(['_trackEvent', 'About Us', 'Top Navigation', '{{ page_name }}']);">About Us</a></li>
-            <li {% if 'support' in active_pages %}class="active"{% endif %}><a href="/support" title="Need Help with Your Security System? Visit our Support Area" onClick="_gaq.push(['_trackEvent', 'Support', 'Top Navigation', '{{ page_name }}']);">Support</a></li>
-            <li {% if 'contact-us' in active_pages %}class="active"{% endif %}><a href="/pa/contact" title="Contact Protect America" onClick="_gaq.push(['_trackEvent', 'Contact Us', 'Top Navigation', '{{ page_name }}']);">Contact Us</a></li>
-
-        </ul>
-        <div id="search-area">
-            <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
-                <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
-            </form>
+    <div id="header-wrapper">
+        <div id="header">
+            <img src="{{ STATIC_URL }}img/base/protect-america-grey.png" alt="Protect America Home Security" id="company-logo">
+            <a href="{% url order-package %}" class="request-quote-button">Request Quote</a>
+            <ul id="main-navigation">
+                <li {% if 'products' in active_pages %}class="active"{% endif %}>
+                    <a href="">Shop</a>
+                    {% if 'products' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'products' in active_pages %}class="active"{% endif %}>
+                    <a href="">Equipment</a>
+                    {% if 'products' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'products' in active_pages %}class="active"{% endif %}>
+                    <a href="">Learn</a>
+                    {% if 'products' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'products' in active_pages %}class="active"{% endif %}>
+                    <a href="">Support</a>
+                    {% if 'products' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+            <div class="clear"></div>
         </div>
     </div>
-    {% endblock %}
-</div>
+        
+{% endblock %}
 {% block subnav %}
 <div id="sub-navigation">
     {% block subnav_parent %}{% endblock %}
@@ -483,7 +506,16 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             $("#international-box").slideToggle("fast");
             return false;
         });
+        $('#newsfeed').cycle({
+           fx:     'blindY',
+           speed:   500,
+           timeout: 6000,
+           delay:  -3000
+        });
+
+
     </script>
+    
 {% if 'index' in active_pages %}
 
     <script type="text/javascript">
