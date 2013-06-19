@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+{% block page_title %}Protect America Affiliate Resources{% endblock %}
+{% block page_description %}Protect America resources and logos for use by affiliates and authorized dealers.{% endblock %}
+
+{% block navigation %}
+    <div id="navigation">
+    	<ul>
+            <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png"/></a></li>
+    		<li><a href="#affiliate-reports">Reports</a></li>
+    		<li><a href="#aff-logos">Logos</a></li>
+    		<li><a href="#aff-banners">Web Banners</a></li>
+
+    	</ul>
+    	<div id="search-area">
+    		<form name="search2" method="GET" action="/search/">
+    			<input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"/>
+    		</form>
+    	</div>
+    </div>
+{% endblock %}
+{% block content %} 
+    {% addtoblock "js" %}
+    <script language="javascript">
+        
+        var thisImgSrc = "";
+        var theBoxVal = "";
+        function enterAgentID(thisIMG)
+        {
+           thisImgSrc = $(thisIMG).attr('src');
+           var pos = $(thisIMG).offset();
+           var width = $(thisIMG).outerWidth();
+           $('#pop-up-wrapper').fadeIn('fast');
+            updateLinkText();
+            selectLink();
+        }
+        function closePopup()
+        {
+            $('#pop-up-wrapper').fadeOut();
+        }
+        function updateLinkText()
+        {
+            if($('#popupAgentID').val().length > 0)
+            {
+                theBoxVal = '<a href="http://www.protectamerica.com/?agent='  + $('#popupAgentID').val().toLowerCase() + '">\n\t<img src="' + thisImgSrc + '" />\n</a>';
+            }
+            else
+            {
+                theBoxVal = '';
+            }
+            
+            
+           $('#popupEntryTextBox').val(theBoxVal);
+        }
+        function selectLink(event)
+        {
+           $('#popupEntryTextBox').select();
+           event.stopPropagation();
+        }
+        function noPropogate(event)
+        {
+            event.stopPropagation();
+        }
+    </script>
+    {% endaddtoblock "js" %}
+
+    {% addtoblock "css" %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/resources.css">
+    {% endaddtoblock "css" %}
+
+<div id="affiliate-reports">
+    <h2>Affiliate Reports</h2>
+    <p>To access your affiliate reports, please visit <a href="http://www.protectamerica.com/reports/" target="_top">http://www.protectamerica.com/reports</a> and enter your user name and password.<br/><strong>Please Note: User name and password are case sensitive.</strong></p>
+    <table class="data">
+        <thead>
+            <tr>
+                <th class="alpha">&nbsp;</th>
+                <th>User Name</th>
+                <th class="omega">Password</th>
+            </tr>
+        </thead>
+        <tr>
+            <td><strong>Sample Report</strong></td>
+            <td>A99999</td>
+            <td>guest</td>
+        </tr>
+        <tfoot>
+            <tr>
+                <td colspan="3">&nbsp;</th>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="button-link"><a href="http://www.protectamerica.com/reports/" target="_top">Click Here to Access Affiliate Reports</a></div>
+</div>
+<div class="content-area" id="aff-logos">
+    <h2>Approved Logos</h2>
+    
+    <div class="dl-item">
+        <img src="{{ STATIC_URL }}img/external/pa-logo.png" />
+        <h4>Protect America Logo</h4>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/pa-logo.eps">.eps format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/pa-logo.png">.png format</a></div>
+    </div>
+    <div class="dl-item">
+        <img src="{{ STATIC_URL }}img/external/GE-Security-Authorized-Dealer.png" />
+        <h4>GE Security Authorized Dealer</h4>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/GE-Security-Authorized-Dealer.eps">.eps format</a></div>
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/GE-Security-Authorized-Dealer.png">.png format</a></div>
+    </div>
+    <div class="dl-item">
+        <img src="{{ STATIC_URL }}img/external/consumer_digest3D_ribbon.png" />
+        <h4>Consumer Digest BEST BUY Seal (Copper Package)</h4>
+        
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/consumer_digest3D_ribbon.png">.png format</a></div>
+        <p><strong>Instructions: You must add this copyright information on any web property where the ribbon appears:</strong><br/>
+        The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
+    </div>
+    <div class="dl-item">
+        <img src="{{ STATIC_URL }}img/external/topConsumerReviews.jpg" />
+        <h4>TopConsumersReviews.com</h4>
+        
+        <div class="button-link"><a href="{{ STATIC_URL }}img/external/topConsumerReviews.jpg">.jpg format</a></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="pop-up-wrapper" onclick="javascript:closePopup()">
+<div id="popupEntry2" style="background-color:#444444;z-index:3000;position:absolute;color:white;padding:20px;">
+    
+    <br />
+     <div id="popupEntryInner" onclick="javascript:noPropogate(event)">
+     Enter Agent ID:
+        <input type="text" id="popupAgentID" size="7" value="axxxxxx" maxlength="7" onkeyup="updateLinkText()" onblur="selectLink();">
+        <br />
+        <br />
+        
+        <textarea  id="popupEntryTextBox" cols=50 rows=5> </textarea>
+        <br />
+        <br />
+        <br />
+        <br />
+        <span class="popUpButton" onclick="javascript:selectLink(event)">select</span>&nbsp;&nbsp;
+        <span class="popUpButton" onclick="javascript:closePopup()">close</span>
+     </div>
+</div>
+</div>
+<div class="content-area" id="aff-banners">
+
+    <h2>Web Banners</h2>
+    <p>To Download, right click the image and select "Save Image As..."</p>
+    {% for key,adset in google_ads.items %}
+    <h3>{{ adset.0 }}</h3>
+        {% for ad in adset.1 %}
+        <img src="{{ MEDIA_URL }}{{ ad.ad }}" onclick="javascript:enterAgentID(this)" class="webBanner" />
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

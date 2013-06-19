@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+{% block page_title %}Protect America Interactive Home Security | As Seen in Delta Sky Magazine{% endblock %}
+{% block subnav %}{% endblock %}
+{% block content %}
+    {% addtoblock "css" %}
+    
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/delta-sky.css">
+        {% if is_mobile %}
+        <meta name="viewport" content="width=960, initial-scale=1">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/delta-sky-mobile.css">
+        {% endif %}
+    {% endaddtoblock "css" %}
+    {% if not is_mobile %}
+    <div id="top-content">
+        <div id="worry-free-vacation">
+            <h1><strong>a secured home</strong> means a worry free vacation.</h1>
+        </div>
+        {% include "order/quote-form.html" with form=forms.basic %}
+    </div>
+    
+    <div class="clear"></div>
+    {% endif %}
+    <div id="check-in-anywhere">
+        <h2><strong>Check in at home from wherever you may be</strong> with Protect America Interactive Security</h2>
+
+
+
+    </div>
+</div>
+    <div id="postcards">
+        <div id="interactive-demo">
+            <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/iphone-hand.png" id="iphone" />
+            <div id="app-screens">
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-armed.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-main-menu.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-disarmed.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-cameras.png" />
+                <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/app-alarm-history.png" />
+
+
+
+            </div>
+
+        </div>
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/hawaii-postcard.jpg" class="postcard1" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/savannah-ga-postcard.jpg" class="postcard2" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/austin-tx-postcard.jpg" class="postcard3" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/new-york-postcard.jpg" class="postcard4" />
+        <img src="{{ STATIC_URL }}/img/products/monitoring/interactive/hawaii-postcard.jpg" class="postcard5" />
+    </div>
+<div class="wrapper">
+    <div class="clear"></div>
+        {% if is_mobile %}
+
+        <div id="call-box">
+            <p>{% businesstime %}
+                <strong>Call Us! {{ phone_number|format_number }}</strong>
+            {% endbusinesstime %}
+        </div>
+        {% else %}
+        <div id="call-box">
+            <p>{% businesstime %}
+                <strong>Call Today! {{ phone_number|format_number }}</strong>
+            {% endbusinesstime %}
+            <img src="{{ STATIC_URL }}img/affiliates/sky/sky-giftcard.png" /></p>
+        </div>
+        {% endif %}
+    <div class="clear"></div>
+    <div id="package-content">
+        <img src="{{ STATIC_URL }}/img/products/platinum-package/platinum-package-lowest-price.jpg" id="platinum-package" />
+        
+        <h2>GE Wireless <span>Home Security System</span></h2>
+        <ul>​
+            <li>Simon XT Control Panel</li>
+            <li>Internal Siren &amp; Door Chime</li>
+            <li>1 Yard Sign</li>
+            <li>15 Door / Window Sensors</li>
+            <li>Battery Backup</li>
+            <li>3 Window Decals</li>
+            <li>1 Motion Detector</li>
+        </ul>
+        <p id="price-tag">Price Today:<strong>Free</strong><span>with 3-year monitoring agreement*</span></p>
+    </div>
+
+    <div id="confidence-builders">
+        <div id="all-day-monitoring">
+            <img src="{{ STATIC_URL }}img/extra/always-on-monitoring.png" title="24/7 Monitored Home Security" />
+            <h3>Affordable 24/7 Home Security Monitoring</h3>
+            <p>Keep your loved ones secure day and night</p>
+        </div>
+        <div id="wireless-home-security">
+            <img src="{{ STATIC_URL }}img/extra/wireless-home-security.png" title="GE Wireless Home Security Systems" />
+            <h3>Simple to Use Wireless GE Security</h3>
+            <p>Trusted top of the line security equipment</p>
+        </div>
+        <div id="twenty-off-home-insurance">
+            <img src="{{ STATIC_URL }}img/extra/20-off-homeowners-insurance.png" title="20% off your Homeowner Insurance" />
+            <h3>Save up to 20% on Homeowner's Insurance</h3>
+            <p>Protecting your home while saving you money</p>
+        </div>
+        <div id="lifetime-warranty">
+            <img src="{{ STATIC_URL }}img/extra/lifetime-warranty.png" title="Lifetime Warranty with your Security System" />
+            <h3>Lifetime Replacement Parts Warranty</h3>
+            <p>Making sure you are always safe and secure</p>
+        </div>
+        <div id="lowest-price-guaranteed">
+            <img src="{{ STATIC_URL }}img/extra/lowest-price-home-security.png" title="Lowest Priced Home Security System" />
+            <h3>The Best Priced Home Security System</h3>
+            <p>Compare & save, get the best priced guaranteed</p>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    <div id="giftcard-promotion">
+        <img src="{{ STATIC_URL }}img/affiliates/sky/100-amex-giftcard.png" title="$100 AMEX Giftcard" />
+
+        <div id="promotion-content">
+            <h2>Get a $100 AMEX Gift Card<sup>&dagger;</sup></h2>
+            <p>Do you want a bunch of money? Whether you’re a fan of shopping or need some extra cash for your vacation, Protect America wants to give back to our customers. Order your home security system today and receive a $100 AMEX gift card. Just remember to set your alarm after leaving the house for your night out!</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div id="contact-form">
+        <h2>Security is An Amazing Conversation Piece.</h2>
+        <div id="call-us">
+            <h3>Give us a Call:</h3>
+            <p>Call Protect America today and start a discussion about the security of your home. One of our security experts will go over the details of your home to determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call Protect America now and secure what matters most!</p>
+            {% businesstime %}
+                <h4><span>Call Today!</span> {{ phone_number|format_number }}</h4>
+            {% endbusinesstime %}
+        </div>
+        <div id="call-you">
+            <h3>We'll Call You:</h3>
+            <p>Fill out this form to learn more about the security of your home from one of our security professionals.</p>
+            {% comment %}
+            <form>
+                <div id="call-you-inputs">
+                    <label>Your Name</label>
+                    <input></input>
+                    <label>Your Email</label>
+                    <input></input>
+                    <label>Your Phone Number</label>
+                    <input></input>
+                </div>
+                <button>Call Me ></button>
+                <p>We never share your information with anyone.</p>
+            </form>
+            {% endcomment %}
+        {% include "order/quote-form.html" with form=forms.basic %}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>
+    {% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}/js/jqueryrotate.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#app-screens').cycle({
+		fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+	}).rotate(7.75);
+    $('.postcard1').rotate(-3);
+    $('.postcard2').rotate(2);
+    $('.postcard3').rotate(-1);
+    $('.postcard4').rotate(3);
+    $('.postcard5').rotate(-2);
+});
+</script>
+    {% endaddtoblock "js" %}
+{% endblock %}
+{% block extra_terms %}
+    <p>&dagger;Standard thirty-six month monitoring agreement required with approved credit. Applicable taxes and fees not included. Cannot be combined with any other offer. Offer subject to change. Not available to existing Protect America customers. Other restrictions apply. Void where prohibited. Protect America, Inc., 3800 Quick Hill Road, Building 1-100, Austin, TX 78728. </p>
+{% endblock %}

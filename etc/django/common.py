@@ -73,7 +73,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.pricetable.context_processors.current_cart',
     'apps.adspace.context_processors.campaign',
     'sekizai.context_processors.sekizai',
-)
+    'django.contrib.messages.context_processors.messages',
+    )
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

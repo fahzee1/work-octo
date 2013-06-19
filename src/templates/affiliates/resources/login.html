@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}{% load url from future %}
+{% block page_title %}Affiliate Resources Login{% endblock %}
+{% block page_description %}Protect America resources and logos for use by affiliates and authorized dealers.{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/resources/resources.css">
+{% endblock %}
+
+
+{% block content %}
+<div id="big-hero-banner">
+    <div id="hero-wrapper">
+         
+         <img src="{{ STATIC_URL }}img/affiliates/resources/icons.png"  id="header-icons" />
+         
+         <div id="aff-login">
+    
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+                 
+            <div id="form-area">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <fieldset>
+                        <p><legend>Affiliate Login</legend></p>
+                        {% for f in form %}
+                            <span>{{ f.errors }}</span>
+                            <h2>{{ f.label }}</br></h2>
+                            <div id="white-box">{{ f }}</br></div>
+                            
+                        {% endfor %}
+                    </fieldset></br>
+                    <div class="button-link">
+                        <button type="submit" value="Login" id="form" maxlength="128">Login</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+ 
+            
+        </div>
+    
+</div>
+
+{% endblock %}
+{% block order-footer %}
+{% endblock %}

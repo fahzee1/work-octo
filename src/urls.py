@@ -32,6 +32,8 @@ def dtt_nocache(pattern, template, name, parent=None, ctx=None):
     return url(pattern, never_cache(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
+        
+ctx={'horizontal':'horizontal-web-download.png'}    
 
 
 urlpatterns = patterns('',
@@ -55,6 +57,8 @@ urlpatterns = patterns('',
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
 
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
+    
+    
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
     url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template', {
@@ -71,7 +75,8 @@ urlpatterns = patterns('',
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
     url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
-
+    
+    
     # GLOBAL PAGES
     # Help Pages > Privacy Policy
     dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
@@ -684,8 +689,14 @@ else:
                     'apps.pricetable.views.package_code', name='package-code'),
 
         # Affiliate Resources
-
-        dtt(r'^affiliate/resources/?$', 'affiliates/resources.html', 'aff'),
+        
+        dtt(r'^affiliates/resources/?$', 'affiliates/resources.html', 'aff'),
+        url(r'^affiliates/resources/get-started/?$', 'apps.affiliates.views.get_started_page', name='aff-get-started'),
+        url(r'^affiliates/resources/logos/?$','apps.affiliates.views.logos_page' ,name='aff-logos'),
+        url(r'^affiliates/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='aff-web-banners'),
+        url(r'^affiliates/resources/collateral/?$', 'apps.affiliates.views.collateral_page', name='aff-collateral'),
+        url(r'^affiliates/resources/products/?$', 'apps.affiliates.views.products_page', name='aff-products'),
+        url(r'^affiliates/login/?$', 'apps.affiliates.views.aff_login', name='aff-login'),                
         url(r'^api/affiliate/?$', 'apps.affiliates.views.accept_affiliate'),
 
         url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/?$',
