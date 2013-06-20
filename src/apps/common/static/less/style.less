@@ -204,6 +204,8 @@ table#licenses-table {
 /************** Header ****************/
 #top-section-wrapper {
     background: @grey;
+    position: relative;
+    z-index: 999;
     #top-section {
         .wrapper;
         #newsfeed {
@@ -211,7 +213,7 @@ table#licenses-table {
             float: left;
             li {
                 display: block;
-                width: 592px;
+                width: 580px;
                 color: @light-grey;
                 font-size: 10px;
                 line-height: 32px;
@@ -229,9 +231,79 @@ table#licenses-table {
         }
         #company-links {
             float: right;
-            width: 368px;
+            width: 376px;
+            position: relative;
             #international-selection {
-                display: none;
+                margin-top: 6px;
+                float: left;
+                width: 64px;
+                position: relative;
+                li {
+                    display: none;
+                    color: @light-grey;
+                    font-size: 10px;
+                    width: 56px;
+                    padding: 4px 4px;
+                    .fade-slow;
+                    .border-radius(5px,5px,5px,5px);
+
+                    a {
+                        background: url(/static/img/base/base-sprite-new.png) 0px -14px no-repeat;
+                        color: @white;
+                        padding: 0 16px 0 21px;
+                        text-decoration: none;
+                        line-height: 12px;
+                        height: 12px;
+                        display: block;
+                        width: 20px;
+                    }
+                    
+                    &:hover {
+                        background: @black;
+                        .fade-fast;
+                    }
+                    &.active {
+                        display: block;
+                    }
+                    &.ca {
+                        a {
+                            background: url(/static/img/base/base-sprite-new.png) 0px -26px no-repeat;
+                        }
+                    }
+                }
+                .icon-caret-down {
+                    position: absolute;
+                    right: 11px;
+                    top: -1px;
+                    color: @light-grey;
+                }
+                &.active {
+                    position: absolute;
+                    background: @light-grey;
+                    z-index: 999;
+                    .border-radius(5px,5px,5px,5px);
+                    li {
+                        display: block;
+                        a {
+                            color: @grey;
+                            &:hover {
+                                color: @white;
+                            }
+                        }
+                        &.active {
+                            .border-radius(0,0,0,0);
+                            border-bottom: 1px solid @black;
+                            &:hover {
+                                background: transparent;
+                                
+                            }
+                            
+                        }
+                    }
+                    .icon-caret-down {
+                        color: @grey;
+                    }
+                }
             }
             #main-phone {
                 float: right;
@@ -258,13 +330,14 @@ table#licenses-table {
                 margin: 6px 0 5px 8px;
                 color: @white;
                 font-size: 9px;
-                background: url(/static/img/base/base-sprite-new.png) -16px 3px no-repeat;
+                background: url(/static/img/base/base-sprite-new.png) 0px 3px no-repeat;
             }
         }
     }
 }
 #header-wrapper {
     background: @black;
+    position: relative;
     #header {
         .wrapper;
         #company-logo {
@@ -696,237 +769,142 @@ ul#child-navigation {
 }
 /************** Call Box ****************/
 #call-box {
-    .content-box(926px);
-    background: @off-white;
-    border: 1px solid @light-grey;
-    padding: 24px 16px;
-    margin: 32px 0;
-    .fade-fast;
+    background: @grey;
     p {
-        font-size: 40px;
-        font-weight: 300;
-        margin-bottom: 0;
+        width: 960px;
+        margin: 0 auto;
+        color: @white;
+        font-weight: 100;
+        font-size: 42px;
+        line-height: 42px;
         text-align: center;
-        color: @blue;
+        padding: 12px 0px;
+        text-shadow: 1px 2px 0px @black;
         strong {
-            color: @red;
-            a {
-                text-decoration: none;
-                color: @red;
-            }
+            font-weight: 100;
         }
-        
-    }
-    &:hover {
-        background: @v-light-grey;
-        border: 1px solid @light-grey;
-        .fade-slow;
+        a {
+            color: @white;
+            text-decoration: none;
+            cursor: default;
+        }
     }
 }
+
 /************** Footer ****************/
-#footer {
-    background: @off-white;
-    border: 1px solid @light-grey;
-    width: 960px;
-    margin: 0 auto 8px;
-    text-align: center;
-    p {
-        text-align: left;
-        display: block;
-        font-size: 14px;
-        font-weight: bold;
-        margin-left: 20px;
-    }
-    div.bottom-rule {
-        margin-bottom: 5px;
-    }
-
-    #popular-topics, #about-us, #help {
-        float: left;
-        margin: 0 20px 25px;
-        width: 175px;
-        text-align: left;
-        li {
-            &.social {
-                padding-top: 22px;
-                height: 60px;
-                span {
-                    display: block;
-                    font-weight: bold;
-                    font-size: 11px;
-                    line-height: 11px;
-                    padding-bottom: 4px;
-                }
-            }
-            a {
-                color: @link-blue;
-                text-decoration: none;
-                padding: 5px 10px;
-                .border-radius;
-                position: relative;
-                right: 10px;
-            }
-            a:hover {
-                text-decoration: underline;
-            }
-            font-size: 10px;
-            font-weight: normal;
-            line-height: 25px;
-            strong {
-                display: block;
-                font-size: 14px;
-                font-weight: bold;
-                margin-top: 15px;
-            }
-            &.active a {
-                background: @link-blue;
+#footer-wrapper {
+    background: @black;
+    #footer {
+        background: url(/static/img/base/protect-america-grey.png) 0px 25px no-repeat;
+        margin: 0 auto;
+        width: 730px;
+        padding: 32px 0 32px 230px;
+        #footer-main-navigation, #footer-care-nav, #footer-contact-info {
+            display: block;
+            float: left;
+            padding-left: 16px;
+            li {
                 color: @white;
+                font-weight: 100;
+                font-size: 12px;
+                line-height: 20px;
+                margin-bottom: 8px;
+                display: block;
+                width: 108px;
+                padding: 2px 8px;
+                .border-radius(5px,5px,5px,5px);
+                .fade-slow;
+                &:hover {
+                    background: @grey;
+                    .fade-fast;
+                }
             }
-            &#organizations-line {
-                padding-top: 8px;
-            }
-            &#social-media {
-                padding: 8px 0 0 8px;
+        }
+        #footer-contact-info {
+            li {
+                width: 132px;
+                margin-bottom: 0;
+
+                strong {
+                    text-transform: uppercase;
+                }
+                span {
+                    font-weight: normal;
+                }
                 a {
-                    padding: 0 4px 0 0;
-                    .border-radius(6px,6px,6px,6px);
-                    width: 28px;
-                    height: 32px;
-                    display: block;
-                    float: left;
-                    margin-right: 4px;
-                    p {
-                        display: none;
+                    color: @white;
+                    text-decoration: none;
+                }
+                &:hover {
+                    background: transparent;
+                }
+                &#footer-social-icons {
+                    margin-top: 32px;
+                    .icon-twitter, .icon-facebook, .icon-youtube {
+                        background: #76c1c5;
+                        padding: 4px 6px;
+                        color: @black;
+                        font-size: 28px;
+                        .border-radius(20px, 20px, 20px, 20px);
+                        .fade-slow;
+                        margin-right: 1px;
+                        &:hover {
+                            background: @light-grey;
+                            .fade-fast;
+                        }
                     }
-                    &:hover {
-                        .drop-shadow(0px, 2px, 3px, @grey);
-                        background-color: @dark-grey;
+                    .icon-facebook {
+                        background: #698bd3;
+                        padding: 4px 13px;
                     }
-                    &#google-plus-button {
-                        width: 28px;
-                        height: 32px;
-                        .base-sprite (-192px, -64px);
-                    }
-                    &#facebook-button {
-                        width: 28px;
-                        height: 32px;
-                        .base-sprite (-160px, -32px);
-                    }
-                    &#twitter-button {
-                        width: 28px;
-                        height: 32px;
-                        .base-sprite (-160px, 0px);
-                    }
-                    &#youtube-button {
-                        width: 28px;
-                        height: 32px;
-                        .base-sprite (-192px, -96px);
+                    .icon-youtube {
+                        background: #ff5a5a;
                     }
                 }
-
             }
         }
+        #footer-awards {
+            border-left: 1px solid @grey;
+            height: 192px;
+            float: left;
+        }
     }
-    #awards {
-        border-left: 1px solid @v-light-grey;
-        float: left;
-        margin: 20px 0;
-        padding: 10px;
-        text-align: left;
-        width: 290px;
-        
-        div {
-            width: 275px;
-            padding: 5px 0 0 20px;
-            img {
-                float: left;
-                margin-right: 20px;
-            }
+}
+#terms-wrapper {
+    background: @grey;
+    #terms {
+        width: 960px;
+        margin: 0 auto;
+        padding-top: 8px;
+        #terms-conditions {
+            float: left;
+            width: 50%;
             p {
-                float: left;
                 font-size: 10px;
-                font-weight: bold;
-                line-height: 15px;
-                margin: 19px 0;
-                width: 140px;
-            }
-            &#top-consumer-award {
-                h4 {
-                    .base-sprite(0px, -65px);
-                    width: 94px;
-                    height: 89px;
-                    float: left;
-                    margin-right: 16px;
-                    span {
-                        display: none;
-                    }
-                }
-            }
-            &#best-buy-award {
-                h4 {
-                    .base-sprite(-95px, -65px);
-                    width: 94px;
-                    height: 89px;
-                    float: left;
-                    margin-right: 16px;
-                    span {
-                        display: none;
-                    }
+                line-height: 14px;
+                padding-bottom: 8px;
+                color: @light-grey;
+                text-align: justify;
+                a {
+                    color: @light-grey;
                 }
             }
         }
-    }
-
-}
-
-#extra-information {
-    width: 960px;
-    margin: 10px auto 135px;
-    img {
-        padding-top: 10px;
-    }
-    #legal-text {
-        float: right;
-        width: 750px;
-        text-align: right;
-        font-size: 11px;
-        line-height: 16px;
-    }
-    #disclaimer {
-        color: #999;
-        font-size: 10px;
-        line-height: 1.2em;
-        padding-top: 5px;
-        text-align: justify;
-    }
-
-}
-#legal-bit {
-    .content-box;
-    float: none;
-    margin: 0 auto 32px;
-    #terms-conditions {
-        float: left;
-        width: 632px;
-        padding-right: 16px;
-        border-right: 1px solid @light-grey;
-        p {
-            font-size: 9px;
-            line-height: 14px;
-            
-        }
-    }
-    #copyrights {
-        float: right;
-        width: 302px;
-        padding-left: 8px;
-        p {
-            text-align: right;
-            font-size: 8px;
-            line-height: 12px;
+        #copyrights {
+            width: 45%;
+            float: right;
+            p {
+                text-align: right;
+                font-size: 10px;
+                line-height: 14px;
+                padding-bottom: 8px;
+                color: @light-grey;
+            }
         }
     }
 }
+
+
 
 
 
@@ -946,181 +924,20 @@ ul#child-navigation {
     }
 }
 /************* Big Hero Banner Default *****************/
-#big-hero-banner {
-    height: 643px;
-    min-height: 600px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    #hero-wrapper {
-        background: url(/static/img/protectamerica/blue-bg.png) repeat;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        z-index: 500;
-        min-width: 1024px;
-        h1 {
-            font-weight: 100;
-            color: @white;
-            font-size: 58px;
-            line-height: 58px;
-            padding-top: 30px;
-            padding-left: 7%;
-            text-shadow: 1px 2px 0px #04324c; 
-            
-        }
-        .happy-family {
-            position: absolute;
-            bottom: 70px;
-            left: -1%;
-        }
-        #hero-features {
-            position: absolute;
-            left: 362px;
-            padding-left: 5%;
-            bottom: 354px;
-            width: 42%;
-            height: 140px;
-            overflow: hidden;
-            .consumer-digest {
-                border-left: 1px solid @dark-blue;
-                padding-left: 3%;
-            }
-        }
-        .pricing {
-            position: absolute;
-            left: 372px;
-            padding-left: 5%;
-            bottom: 160px;
-        }
-        .button-submit {
-            position: absolute;
-            left: 413px;
-            padding-left: 5%;
-            bottom: 105px;
-            text-align: left;
-            a {
-                display: block;
-                margin-top: 4px;
-                padding: 8px 60px;
-                .border-radius(3px,3px,3px,3px);
-                background: #00bbf4;
-                text-shadow: 0px 1px 0px #2a6273;
-                color: #ffffff;
-                width: 100px;
-                text-align: center;
-                margin: 10px auto 0;
-                &:hover {
-                    border: 1px solid @blue;
-                }
-            }
-        }
-        #quote-form-new {
-            position: absolute;
-            right: 5%;
-            border: none;
-            background: none;
-            width: 23%;
-            top: 2%;
-            #form-headline {
-                background: url(/static/img/protectamerica/black-shade.png) repeat;
-                color: @white;
-                text-align: center;
-                line-height: 56px;
-                height: 56px;
-                margin-bottom: 8px;
-                font-size: 20px;
-            }
-            #form-area {
-                background: url(/static/img/protectamerica/black-shade.png) repeat;
-                padding: 16px 16px;
-                label {
-                    display: block;
-                    color: @white;
-                    line-height: 16px;
-                    font-size: 14px;
-                    padding-bottom: 4px;
-                }
-                input {
-                    display: block;
-                    margin-bottom: 8px;
-                    height: 22px;
-                    font-size: 14px;
-                    width: 98%;
-                }
-                button {
-                    display: block;
-                    background: #41bb1a;
-                    .border-radius(3px, 3px, 3px, 3px);
-                    height: 42px;
-                    width: 207px;
-                    padding: 0;
-                    margin: 16px auto 8px;
-                    color: @white;
-                    border: 1px solid #0f4707;
-                    font-size: 16px;
-                    cursor: pointer;
-                    cursor: hand;
-                }
-                .privacy-policy {
-                    font-size: 11px;
-                    color: @white;
-                    display: block;
-                    text-align: center;
-                    text-decoration: none;
-                    line-height: 13px;
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-            }
-            #third-party-container {
-                width: 100%;
-                background: @white;
-                margin-top: 8px;
-                height: 64px;
-            }
-        }
-        #call-box {
-            background: url(/static/img/protectamerica/black-shade.png) repeat;
-            width: 100%;
-            position: absolute;
-            bottom: 0;
-            margin-bottom: 0;
-            p {
-                color: @white;
-                font-weight: 100;
-                strong {
-                    color: @white;
-                    font-weight: 100;
-                }
-                span {
-                    font-weight: 100;
-                    color: @white;
-                    a {
-                        color: @white;
-                    }
-                }
-            }
-        }
+
+#hero-wrapper {
+    height: 496px;
+    background: #2b80b8 url(/static/img/base/bg-blue.png) repeat;
+    &.red {
+        background: #eb292b url(/static/img/base/bg-red.png) repeat;
     }
-    #hero-backdrop {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        min-width: 1024px;
-        top: 0;
-        left: 0;
-        z-index: -1;
+    &.yellow {
+        background: #ffc000 url(/static/img/base/bg-yellow.png) repeat;
+    }
+    &.grey {
+        background: @grey url(/static/img/base/bg-grey.png) repeat;
+    }
+    &.green {
+        background: #2b80b8 url(/static/img/base/bg-green.png) repeat;
     }
 }
-
-@import "banners/pop-ups/shipping-popup.less";
-
-
-
-
-
-
-
-

@@ -117,12 +117,12 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />{% endblock %}
 
 {% block content %}
-</div>
 {% block hero_banner_area %}
     {% include "banners/seo-hero-images.html" %}
 {% endblock %}
+{% include "order/call-box.html" %}
 <div class="wrapper">
-    {% include "order/call-box.html" %}
+
 <div id="main">
     {% if pa_ads.promo_banner_full %}
         {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_full %}
@@ -345,6 +345,8 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {% endfor %}
         </ul>
     </div>
+</div>
+<div class="clear"></div>
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript">
