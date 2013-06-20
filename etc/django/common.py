@@ -74,6 +74,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'apps.adspace.context_processors.campaign',
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
+    'apps.common.context_processors.last_day_of_month',
 )
 
 # List of callables that know how to import templates from various sources.

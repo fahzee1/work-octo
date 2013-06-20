@@ -4,8 +4,10 @@ import urllib
 import urllib2
 import operator
 
+
 from decimal import Decimal
 from datetime import datetime, timedelta
+
 from urllib import urlencode
 
 import twitter
