@@ -216,8 +216,8 @@ def index(request):
 
 @cache_page(60 * 60 * 4)
 def index_test(request, test_name):
-    if test_name == 'new-page':
-        template = 'tests/new-page.html'
+    if test_name == 'notweet':
+        template = 'tests/index-notwit.html'
     else:
         raise Http404
 
@@ -238,6 +238,7 @@ def index_render(request, template, context):
                                 access_token_key=access_token,
                                 access_token_secret=access_secret)
             tweets = t_api.GetUserTimeline('protectamerica')
+            print tweets
             cache.set('TWEETS', tweets, 60*60)
         context['tweets'] = tweets[:3]
     except:

@@ -112,7 +112,7 @@
             {% block main-phone %}
                 {% if phone_number %}
                 <div id="phone-number">
-                    <p>Call Now<em> and Save</em>! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></p>
+                    <p>Call Now<em> and Save</em>! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a></span></p>
                 </div>
                 {% endif %}
             {% endblock %}
@@ -161,6 +161,7 @@
             <div id="price-tag">
                 <h3>Starting at just</h3>
                 <p><span>$19.99* </span><em>per <span>month</span></em></p>
+                <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/arrow.png" class="arrow" alt="arrow">
                 <div class="clear"></div>
             </div>
             {% include "order/quote-form-new.html" with form=forms.basic %}
@@ -170,7 +171,7 @@
 {% if phone_number %}
     <div class="clear"></div>
     <div id="call-box">
-        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Main Call Box', '{{ page_name }}']);">{{ phone_number|format_number }}</a></span></strong></p>
     </div>
     <div class="clear"></div>
 
@@ -260,6 +261,7 @@
         <div class="clear"></div>
     </div>
 </div>
+
 <div id="security-packages">
     <div class="header">
         <h2>

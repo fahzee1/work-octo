@@ -57,10 +57,10 @@ urlpatterns = patterns('',
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
-    url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template', {
-            'template': 'sitemaps/index.xml',
-            'mimetype': 'application/xml',
-        }, name='index'),
+#    url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template', {
+#            'template': 'sitemaps/index.xml',
+#            'mimetype': 'application/xml',
+#        }, name='index'),
     url(r'^sitemap/?', include('apps.pa-sitemaps.urls', namespace='sitemaps')),
     url(r'^support/clear-my-cookies/?$', 'apps.common.views.clear_my_cookies',
         name='clear-my-cookies'),
@@ -505,7 +505,7 @@ else:
 
             # Product > Equipment
 
-            dtt(r'^pa/equipment/wireless-home-security-system/?$', 'products/equipment/index.html', 'equipment', 'products'),
+            dtt(r'^pa/equipment/wireless-home-security-system/?$', 'products/equipment/index.html', 'equipment'),
 
                         #dtt(r'^products/security-equipment/control-panels/?$', 'products/equipment/control-panels.html', 'control-panel', 'equipment'),
                             dtt(r'^products/security-equipment/control-panels/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'control-panel'),
