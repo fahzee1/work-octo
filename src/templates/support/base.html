@@ -1,22 +1,8 @@
 {% extends "base.html" %}
+
+{% load sekizai_tags %}
+
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/support.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/support2.css">
 {% endblock %}
-{% block subnav_child %}
 
-{% endblock %}
-{% block subnav_parent %}
-<ul id="sub-nav-parent">
-    <li {% if 'news' in active_pages %}class="active"{% endif %}><a href="{% url news:news-home %}" title="Read exciting home security news from around the country.">News</a></li>
-    <li {% if 'blog' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/home-security-blog/" title="Read the Protect America Blog: The Home Security Blanket">Home Security Blog</a></li>
-    <li {% if 'crime-rate' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/crime-rate/" title="How Safe is your Neighborhood? Learn More With our Crime Stats">Local Crime Stats</a></li>
-    <li {% if 'installation' in active_pages %}class="active"{% endif %}><a href="{% url installation %}" title="Step by step installation instructions and video for your wireless home security system.">Installation</a></li>
-    <li {% if 'operation' in active_pages %}class="active"{% endif %}><a href="{% url operation %}" title="Learn how to use your Protect America system.">Operation</a></li>
-    <li {% if 'troubleshooting' in active_pages %}class="active"{% endif %}><a href="{% url troubleshooting %}" title="Have a Problem with your System? Try to fix it yourself with easy troubleshooting.">Troubleshooting</a></li>
-    <li {% if 'moving-kit' in active_pages %}class="active"{% endif %}><a href="{% url moving-kit %}" title="Click here request a Moving Kit for your Security System">Moving Kit</a></li>
-    <li {% if 'faq' in active_pages %}class="active"{% endif %}><a href="{% url faq %}" title="Click here to review our Frequently Asked Questions">FAQs</a></li>
-
-
-
-</ul>
-{% endblock %}

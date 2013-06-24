@@ -6,8 +6,7 @@
 {% block typekit %}tk-jaf-facitweb{% endblock %}
 
 {% block content %}
-{% block subnav_child %}{% endblock %}
-</div>
+
 <div id="big-choices">
     <div id="home-security-package-choices" style="display:block">
         <div class="big-wrapper">
@@ -106,25 +105,18 @@
         </div>
     </div>
 </div>  
+{% include "order/call-box.html" %}
+
 <div class="wrapper">
-    {% if phone_number %}
-    {% businesstime %}
-    <div class="clear"></div>
-    <div id="call-box">
-        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-    </div>
-    <div class="clear"></div>
-    {% endbusinesstime %}
-    
-    {% endif %}
     <div id="security-information">
         <div id="one-hundred-percent">
             <div id="wireless-security">
                 <h1>Wireless Home Security.<br/>100% Protection.</h1>
                 <p>For the past 20 years, Protect America is proud to be the pioneer of wireless home security systems.  We believe in simple, easy to use security that protects your home.</p>
                 <p><strong>An alarm system that is built for you.</strong> You don’t have a phone line? Our cellular monitoring is 100% wireless. You have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>
-                <div class="button-submit">
-                    <a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Bronze-B']);">Order Now</a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=silver" class="button-link" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', '{{ page_name }}']);">Order Now <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
                 </div>
             </div>
         </div>
@@ -137,17 +129,18 @@
             <li id="alarm-category" class="security-choice active">
                 <img src="{{ STATIC_URL }}img/extra/big-money-icon.png" alt="Comparing Protect America and ADT" width="193" height="193" />
                 <h2>{% block security-choice-one %}Security System<br/>Price Comparison{% endblock %}</h2>
-                <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More ></a></div>
+                <a href="#wireless-home-security" id="home-security-button-choice" class="button-link active" style="display:none" onClick="_gaq.push(['_trackEvent', 'Category Click', 'Learn More Click', 'Home Security']);">Learn More <i class="icon-chevron-down"></i></a>
+
             </li>
             <li id="video-category" class="security-choice">
                 <img src="{{ STATIC_URL }}img/extra/big-home-plus-icon.png" alt="Home Security For Your Home" width="193" height="193" />
                 <h2>{% block security-choice-two %}Customizable Security Systems{% endblock %}</h2>
-                <div class="button-link"><a href="#video-security" id="video-button-choice"  onclick="showSlide(2);">Learn More ></a></div>
+                <a href="#video-security" id="video-button-choice" class="button-link active" onClick="_gaq.push(['_trackEvent', 'Category Click', 'Learn More Click', 'Custom Systems']);">Learn More <i class="icon-chevron-down"></i></a>
             </li>
             <li id="smart-app-category" class="security-choice">
                 <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="Home Security on Your iPhone" width="193" height="193" />
                 <h2>{% block security-choice-three %}SMART Connect </br>On The Go App{% endblock %}</h2>
-                <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice" onclick="showSlide(3);">Learn More ></a></div>
+                <a href="#smart-apps" id="smart-app-button-choice" class="button-link active" onClick="_gaq.push(['_trackEvent', 'Category Click', 'Learn More Click', 'Smart App']);">Learn More <i class="icon-chevron-down"></i></a>
             </li>
             <div class="clear"></div>
         </ul>
@@ -169,9 +162,7 @@
                     <h2>Protection for your Home That Just Makes Sense.</h2>
                     <p>Why pay too much for home security? With Protect America we give you more for less. There is no cutting corners. More doors and windows protected, more interactive features, and just more for your money. We are so confident in our security system, we guarantee it.</p>
                     {% if phone_number %}
-                        {% businesstime %}
                             <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
-                        {% endbusinesstime %}
                     {% endif %}
                     <div class="clear"></div>
                 </div>
@@ -266,9 +257,7 @@
                     <h2>Home Security<br/> The Way You Want It.</h2>
                     <p>Our home security packages are built to protect your home. And we know that every home is different.  That is why we make it easy to customize your alarm system to fit your needs. From fire protection to interactive video, our security professionals can build your home security package at an affordable price, and the way you want it.</p>
                     {% if phone_number %}
-                        {% businesstime %}
                             <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
-                        {% endbusinesstime %}
                     {% endif %}
                 </div>
                 <div class="clear"></div>
@@ -417,10 +406,10 @@
                     $('.security-choice').removeClass('active');
                     $(this).addClass('active');
                     $('.big-info').slideUp('fast');
-                    $('.button-link > .active').fadeIn('slow');
+                    $('.button-link.active').fadeIn('slow');
                     $('#home-security-button-choice').fadeOut('fast');
                     $('#white-arrow').animate({left: '-935px'}, 500, function() {
-                        $('.button-link > .active').removeClass('active');
+                        $('.button-link.active').removeClass('active');
                         $('#home-security-choice').slideDown('fast', function() {
                             animated = 0;
     
@@ -442,10 +431,10 @@
                     $('.security-choice').removeClass('active');
                     $(this).addClass('active');
                     $('.big-info').slideUp('fast');
-                    $('.button-link > .active').fadeIn('slow');
+                    $('.button-link.active').fadeIn('slow');
                     $('#video-button-choice').fadeOut('fast');
                     $('#white-arrow').animate({left: '-614px'}, 500, function() {
-                        $('.button-link > .active').removeClass('active');
+                        $('.button-link.active').removeClass('active');
                         $('#video-security-choice').slideDown('fast', function() {
                             animated = 0;
     
@@ -467,16 +456,13 @@
                     $('.security-choice').removeClass('active');
                     $(this).addClass('active');
                     $('.big-info').slideUp('fast');
-                    $('.button-link > .active').fadeIn('slow');
+                    $('.button-link.active').fadeIn('slow');
                     $('#smart-app-button-choice').fadeOut('fast');
                     $('#white-arrow').animate({left: '-295px'}, 500, function() {
-                        $('.button-link > .active').removeClass('active');
+                        $('.button-link.active').removeClass('active');
                         $('#smart-app-choice').slideDown('fast', function() {
                             animated = 0;
-    
                             $("#smart-app-button-choice").addClass('active');
-    
-    
                         });
                     });
                     return false;

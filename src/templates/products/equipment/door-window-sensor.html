@@ -6,119 +6,71 @@
 
 
 {% block content %}
-<div id="door-window-sensor-main">
-    <div id="main-image">
-        <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/door-window-sensor.jpg" alt="door-window-sensor" width="325" height="270" />
+<div id="hero-wrapper" class="blue">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h2>Home Security</h2>
+            <h1>Door or Window Sensor</h1>
+            <p>A mighty small package providing the front line defense for your home.</p>
+            <h3>Included in any package. Extra Sensors: $39.95 each</h3>
+            <a href="{% url shop %}" class="button-link">Add to Cart <i class="icon-chevron-right"></i></a>
+
+        </div>
+        <img src="{{ STATIC_URL }}img/products/smart-connect/smart-connect-interactive-app.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
 
     </div>
-    <div id="main-content">
-        <h1>Home Security Equipment: Door/Window Sensors</h1>
-        <p>Door/window sensors are the most common piece of home security equipment and the front line defense for your home. A surprisingly simple device, door/window sensors create a magnetic field that, when broken, sends a signal to your central GE Simon XT control panel and sounds the alarm. Protect America only uses wireless sensors that can be used on either doors or windows, allowing for greater system customization. For most homes, we recommend one sensor for every accessible door and window.</p>
-        <div class="button-submit"><a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Copper-B']);">Order Home Security System ></a></div>
-    </div>
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
-<div class="clear"></div>
-<div id="door-window-video">
-    <h2>Door / Window Security Sensor Videos:</h2>
-    <div id="main-video">
-        <iframe width="520" height="300" src="http://www.youtube.com/embed/7i0luaNTZHo" frameborder="0" allowfullscreen></iframe>
-    </div>
-    <div id="other-videos">
-        <h3>Other Videos:</h3>
-        <ul>
-            <li class="active">
-                
-                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/how-the-door-window-sensor-works.jpg" alt="Video: How the GE Wireless Door and Window Sensors Work" width="120" height="90" />
-                <p>How the GE Wireless Door and Window Sensors Work</p>
-                <div class="button-link video-link"><a href="http://www.youtube.com/embed/7i0luaNTZHo">Now Playing</a></div>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/how-to-install-door-window-sensor-video.jpg" alt="Video: How to Install a Door / Window Security Sensor" width="120" height="90" />
-                <p>Installation of the GE Wireless Door and Window Sensors</p>
-                <div class="button-link video-link"><a href="http://www.youtube.com/embed/OK_JY_Hm2YA">Watch Video ></a></div>
-                <div class="clear"></div>
-            </li>
-            <li>
-                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/maintenance-door-window-sensor-video.jpg" alt="Maintence on your Door / Window Sensors" width="120" height="90" />
-                <p>Maintenance of the GE Wireless Door and Window Sensors</p>
-                <div class="button-link video-link"><a href="http://www.youtube.com/embed/sIiPPE7H9j8">Watch Video ></a></div>
-                <div class="clear"></div>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="clear"></div>
 {% include "order/call-box.html" %}
-<div id="about-door-sensor">
-    <div id="front-door-content">
-        <h2>The Front Door: A Burglar's Main Target</h2>
-        <p>Your home starts at the front door. So should your home security.</p>
-        <p>In nearly 24 percent of burglaries, forcible entry was used on the front door to gain access to the home. In total, more than a third of all burglaries involve the front door.  
-It's clearly important to secure your front door with quality locks and a home security system. Houses with alarm systems are 3 times less likely to fall victim to burglary. It's just common sense protection. Obviously, criminals avoid the unwanted attention of loud alarms!</p>
-        <p>Defend your home, and front door, with a wireless GE Simon XT alarm system from Protect America. You and your family deserve to be safe.</p>
-        <div class="button-submit"><a href="{% url order-package %}?package=copper" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Copper-B']);">Order Home Security ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
-    </div>
-    <div id="big-front-door">
-        <img src="{{ STATIC_URL }}/img/products/equipment/door-window-sensor/front-door.jpg" alt="front-door" width="264" height="592" />
-    </div>
 
-</div>
-<div id="in-your-home">
-    <h2>How Many Door / Window Sensors for Your Home?</h2>
-    <p>Our home security packages are designed to provide complete protection for almost any sized home. As a general rule, there should be one sensor per accessible door and window. Check out the chart below to figure out which home security package works best for your home:</p>
-    <table>
-        <thead>
-            <tr>
-                <th class="alpha">&nbsp;</th>
-                <th>Door / Window Sensors</th>
-                <th>Motion Detector</th>
-                <th>Home Size</th>
-                <th class="omega">&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><span>Copper Package</span>Starting at: {{ pricetable.COPPER.standard_monitoring }}/monthly</td>
-                <td class="call-out">3</td>
-                <td>1</td>
-                <td>~900 sq. ft.</td>
-                <td class="button"><a href="{% url copper %}" title="Learn More about the Copper Package" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Bronze Package</span>Starting at: {{ pricetable.BRONZE.standard_monitoring }}/monthly</td>
-                <td class="call-out">7</td>
-                <td>1</td>
-                <td>~1200 sq. ft.</td>
-                <td class="button"><a href="{% url bronze %}" title="Learn More about the Bronze Package" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Silver Package</span>Starting at: {{ pricetable.SILVER.standard_monitoring }}/monthly</td>
-                <td class="call-out">10</td>
-                <td>1</td>
-                <td>~2300 sq. ft.</td>
-                <td class="button"><a href="{% url silver %}" title="Learn More about the Silver Package" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Gold Package</span>Starting at: {{ pricetable.GOLD.standard_monitoring }}/monthly</td>
-                <td class="call-out">12</td>
-                <td>1</td>
-                <td>~3500 sq. ft.</td>
-                <td class="button"><a href="{% url gold %}" title="Learn More about the Gold Package" class="button-link">Learn More ></a></td>
-            </tr>
-            <tr>
-                <td><span>Platinum Package</span>Starting at: {{ pricetable.PLATINUM.standard_monitoring }}/monthly</td>
-                <td class="call-out">15</td>
-                <td>1</td>
-                <td>~4500 sq. ft.</td>
-                <td class="button omega"><a href="{% url platinum %}" title="Learn More about the Platinum Package" class="button-link">Learn More ></a></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-{% testimonial_search "sensor" "limit=10&words=75" %}
 
+<div class="wrapper">
+    <div class="video-features">
+        <div class="video-content">
+            <h2>Simple to Use. <span>Reliable Security.</span></h2>
+            <p>A surprisingly simple device, door/window sensors create a magnetic field that, when broken, sends a signal to your central GE Simon XT control panel and sounds the alarm.</p>
+            <p>Protect America only uses wireless sensors that can be used on either doors or windows, allowing for greater system customization. For most homes, we recommend one sensor for every accessible door and window.</p>
+        </div>
+        <div class="video-frame">
+            <iframe width="400" height="225" src="http://www.youtube.com/embed/8zENnoNoQgQ?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/door-window-sensor/in-the-home-door-window-sensor.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Door or Window Sensors</h2>
+            <p>The most common piece of security equipment when it comes to securing your home, door or window sensors are used to detect when any door or window is opened.  Protect America uses wireless micro sensors to help keep them inconspicuous and out of the way. And we recommend a door / window sensor should be placed on any easily accessible door or window to attain a secure home perimeter.  </p>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+<div class="wrapper">
+    <div id="about-door-sensor">
+        <div id="front-door-content">
+            <h2>The Front Door: A Burglar's Main Target</h2>
+            <p>Your home starts at the front door. So should your home security.</p>
+            <p>In nearly 24 percent of burglaries, forcible entry was used on the front door to gain access to the home. In total, more than a third of all burglaries involve the front door. It's clearly important to secure your front door with quality locks and a home security system. Houses with alarm systems are 3 times less likely to fall victim to burglary. It's just common sense protection. Obviously, criminals avoid the unwanted attention of loud alarms!</p>
+            <p>Defend your home, and front door, with a affordable wireless alarm system from Protect America. You and your family deserve to be safe and packages start at $19.99 per month.</p>
+            <div class="order-link">
+                <a href="{% url order-package %}?package=copper" class="button-link" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Door / Window Sensor']);">Order Now <i class="icon-chevron-right"></i></a>
+                <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+            </div>
+        </div>
+        <div id="big-front-door">
+            <img src="{{ STATIC_URL }}/img/products/equipment/door-window-sensor/front-door.jpg" alt="front-door" width="264" height="592" />
+        </div>
+    
+    </div>
+    <div class="clear"></div>
+</div>
 {% addtoblock "js" %}
     <script type="text/javascript">
     $(document).ready(function() {

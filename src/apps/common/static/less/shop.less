@@ -24,7 +24,7 @@
 
 /**** The Packages Page ****/
 
-body.products, body.package-reorder {
+body.shop, body.package-reorder {
     .wrapper {
         padding: 0;
     }
@@ -34,43 +34,9 @@ body.products, body.package-reorder {
     }
     #security-information {
         width: 960px;
-        margin: 0 auto;
+        margin: 8px auto;
     }
-    .button-submit {
-        padding-top: 0;
-        a {
-            background: #00bbf4;
-            padding: 8px 64px;
-            .border-radius(5px, 5px, 5px, 5px);
-            color: @white;
-            font-size: 16px;
-            text-shadow: 0px 1px 0px #2a6273;
-            margin-top: 16px;
-            margin-bottom: 8px;
-            float: left;
-            margin-right: 8px;
-        }
-        p {
-            padding-top: 8px;
-            display: block;
-            line-height: 52px !important;
-            a {
-                background: none;
-                color: @red;
-                padding: 0;
-                display: inline;
-                text-shadow: none;
-                float: none;
-                margin-right: 0;
-                font-size: 12px;
-                &:hover {
-                    border: none;
-                    .drop-shadow(0,0,0,#000);
-                    
-                }
-            }
-        }
-    }
+
     #one-hundred-percent {
         width: 593px;
         float: left;
@@ -96,11 +62,10 @@ body.products, body.package-reorder {
         width: 100%;
     }
     #home-security-package-choices {
-        background: url(/static/img/spanish/home-security-bg.png) repeat;
+        background: #2b80b8;
         display: block;
         padding-top: 16px;
         padding-bottom: 8px;
-        margin-bottom: 8px;
         #home-security-info {
             margin-top: 32px;
             border-top: 1px solid #1e679a;
@@ -115,18 +80,7 @@ body.products, body.package-reorder {
                 
             }
             h3 {
-                background: #00bbf4;
-                padding: 8px 16px;
-                .border-radius;
-                float: left;
-                color: @white;
-                font-size: 16px;
-                text-shadow: 0px 1px 0px #2a6273;
-                margin-top: 16px;
-                a {
-                    color: @white;
-                    text-decoration: none;
-                }
+
             }
             p {
                 text-align: justify;
@@ -356,6 +310,10 @@ body.products, body.package-reorder {
                 text-align: center;
                 cursor: pointer;
                 cursor: hand;
+                .button-link {
+                    float: none;
+                    display: inline;
+                }
                 &.active {
                     cursor: default;
                 }
@@ -365,6 +323,7 @@ body.products, body.package-reorder {
                     padding: 16px 32px;
                     font-weight: 200;
                 }
+
             }
         }
         #color-band {
@@ -402,16 +361,12 @@ body.products, body.package-reorder {
             
         }
         h3 {
-            background: #00bbf4;
-            padding: 8px 16px;
-            .border-radius;
-            float: left;
-            color: @white;
-            font-size: 16px;
-            text-shadow: 0px 1px 0px #2a6273;
+            color: @light-yellow;
             margin-top: 16px;
+            font-size: 16px;
+            text-shadow: 0 2px 1px @black;
             a {
-                color: @white;
+                color: @light-yellow;
                 text-decoration: none;
             }
         }
@@ -522,17 +477,12 @@ body.products, body.package-reorder {
                 padding-bottom: 16px;
             }
             h3 {
-                background: #00bbf4;
-                padding: 8px 16px;
-                .drop-shadow(0px, 1px, 3px, #22650d);
-                .border-radius;
-                float: left;
-                color: @white;
-                font-size: 16px;
-                text-shadow: 0px 1px 0px #2a6273;
+                color: @light-yellow;
                 margin-top: 16px;
+                font-size: 16px;
+                text-shadow: 0 2px 1px @black;
                 a {
-                    color: @white;
+                    color: @light-yellow;
                     text-decoration: none;
                 }
             }
@@ -654,16 +604,12 @@ body.products, body.package-reorder {
                 
             }
             h3 {
-                background: #00bbf4;
-                padding: 8px 16px;
-                .border-radius;
-                float: left;
-                color: @white;
-                font-size: 16px;
-                text-shadow: 0px 1px 0px #2a6273;
+                color: @light-yellow;
                 margin-top: 16px;
+                font-size: 16px;
+                text-shadow: 0 2px 1px @black;
                 a {
-                    color: @white;
+                    color: @light-yellow;
                     text-decoration: none;
                 }
             }
@@ -1288,42 +1234,291 @@ body.advantage {
     }
 }
 /**** The Copper Package ***/
-#affordable-home-security, #starter-home-security, #average-american-home-security, #complete-perimeter-home-security, #most-comprehensive-security {
-    background: @white url(/static/img/products/copper-package/little-girl-sleeping.jpg) no-repeat;
-    width: 664px;
-    height: 320px;
-    position: relative;
-    float:left;
-    h1 {
-        background: @red;
-        height: 56px;
-        width: 400px;
-        color: @white;
-        line-height: 56px;
-        padding: 0 16px;
-        text-align: right;
-        position: absolute;
-        bottom: 32px;
-        font-size: 14px;
-        strong {
-            font-weight: bold;
+body.copper, body.bronze, body.silver, body.gold, body.platinum {
+    #hero-wrapper {
+        position: relative;
+        z-index: 0;
+        #hero-image {
+            .hero-image-backdrop {
+                position: absolute;
+                z-index: -1;
+                top: 0;
+                left: -25%;
+            }
+            #package-information {
+                position: relative;
+                z-index: 5;
+                float: right;
+                width: 400px;
+                height: 496px;
+                h1 {
+                    text-align: center;
+                    color: @black;
+                    margin: 72px 0 0px;
+                }
+                p.info {
+                    color: @grey;
+                    text-align: center;
+                    padding-top: 0;
+                    margin-bottom: 32px;
+                    margin-top: 8px;
+                }
+                .home-security, .life-safety, .smart-connect {
+                    background: @blue;
+                    padding: 8px;
+                    height: 84px;
+                    margin-bottom: 8px;
+                    .icon-home-security, .icon-life-safety, .icon-smart-connect {
+                        float: left;
+                        margin: 17px 24px 8px 16px;
+                    }
+                    ul {
+                        li {
+                            color: @white;
+                            display: block;
+                        }
+                    }
+                }
+                .life-safety {
+                    background: @red;
+                    ul {
+                        margin-top: 21px;
+                    }
+                }
+                .smart-connect {
+                    background: @green;
+                    ul {
+                        margin-top: 10px;
+                    }
+                }
+            }
+            .button-link {
+                background: @blue;
+                color: @white;
+                margin-right: 0;
+                &:hover {
+                    color: @white;
+                    background: #00aee4;
+
+                }
+            }
+            .order-area {
+                position: absolute;
+                bottom: 70px;
+                left: 0;
+                p { 
+                    width: 210px;
+                    float: left;
+                    color: @grey;
+                    font-size: 42px;
+                    font-weight: 100;
+                    line-height: 48px;
+                    border-right: 1px solid @light-grey;
+                    margin-right: 26px;
+                    strong {
+                        float: left;
+                        font-weight: 100;
+                        padding-right: 4px;
+                    }
+                    b {
+                        display: block;
+                        font-size: 20px;
+                        line-height: 20px;
+                    }
+                    span {
+                        font-size: 16px;
+                        line-height: 16px;
+                        float: left;
+                        width: 20px;
+                        padding-top: 4px;
+                    }
+                }
+            }
+        }
+    }
+
+    #award-winning {
+        margin: 16px 0;
+        img {
+            float: left;
+            padding-left: 32px;
+            display: block;
+        }
+        #award-winning-content {
+            .content-box(500px);
+            margin-left: 64px;
+            margin-top: 64px;
+            h2 {
+                font-size: 28px;
+                line-height: 36px;
+                padding-bottom: 16px;
+            }
+            p {
+                line-height: 32px;
+                font-size: 16px;
+            }
+        }
+    }
+    #advantage-table-wrapper {
+        background: @v-light-grey;
+        #advantage-table {
+            width: 960px;
+            margin: 0 auto;
+            padding: 16px 0;
+            h2 {
+                text-align: center;
+                color: @grey;
+                font-size: 42px;
+                line-height: 52px;
+                font-weight: bold;
+                padding: 16px 0;
+                span {
+                    display: block;
+                    font-size: 28px;
+                    line-height: 36px;
+                }
+            }
+            table {
+                width: 100%;
+                vertical-align: middle;
+                thead {
+                    tr {
+                        th {
+                            color: @grey;
+                            text-align: center;
+                            font-size: 16px;
+                            padding: 8px 0;
+                            font-weight: bold;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+                tbody {
+                    tr {
+                        td {
+                            text-align: center;
+                            color: @blue;
+                            line-height: 32px;
+                            border-bottom: 1px solid @light-grey;
+                            width: 200px;
+                            font-size: 32px;
+                            font-weight: 100;
+                            vertical-align: middle;
+                            padding: 8px 0;
+                            i {
+                                color: @light-grey;
+                                font-size: 32px;
+                            }
+                            &.y-axis {
+                                text-align: right;
+                                color: @grey;
+                                width: 298px;
+                                padding-right: 16px;
+                                font-size: 18px;
+                                line-height: 24px;
+                            }
+                            
+                            &.pa {
+                                width: 246px;
+                                background: @light-blue;
+                                i {
+                                    color: @green;
+                                }
+                                border: 1px solid @light-grey;
+                                border-top: none;
+                            }
+                            &.last {
+                                border-left: 1px solid @light-grey;
+                            }
+                        }
+                        &.alpha {
+                            td {
+                                border-top: none;
+                                &.pa {
+                                    border-top: 1px solid @light-grey;
+                                    .border-radius(5px,5px,0,0);
+                                }
+                            }
+                        }
+                        &.omega {
+                            td {
+                                border-bottom: none;
+                                &.pa {
+                                    border-bottom: 1px solid @light-grey;
+                                    .border-radius(0,0,5px,5px);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #monitoring-options {
+                .content-box;
+                padding-top: 32px;
+                h2 {
+                    text-align: left;
+                }
+                #monitoring-rates {
+                    margin: 16px 0 32px 0;
+                    li {
+                        float: left;
+                        width: 320px;
+                        img {
+                            float: left;
+                            padding-right: 8px;
+                        }
+                        h3 {
+                            color: @blue;
+                            font-size: 26px;
+                            font-weight: normal;
+                            line-height: 26px;
+                            margin-bottom: 0px;
+                            letter-spacing: -1px;
+                            
+                        }
+                        p {
+                            position: relative;
+                            font-size: 72px;
+                            font-weight: 300;
+                            letter-spacing: -4px;
+                            line-height: 72px;
+                            color: @dark-grey;
+                            padding-bottom: 4px;
+                            sup {
+                                font-size: .25em;
+                                line-height: .25em;
+                                position: relative;
+                                bottom: 15px;
+                            }
+                            span {
+                                font-size: .5em;
+                                line-height: .5em;
+                                position: relative;
+                                bottom: 26px;
+                                left: 4px;
+                                letter-spacing: 0px;
+                            }
+                            strong {
+                                font-size: .25em;
+                                line-height: .25em;
+                                font-weight: normal;
+                                letter-spacing: 0;
+                                position: relative;
+                                right: 32px;
+                            }
+                        }
+                        .button-link {
+                            margin-left: 133px;
+                        }
+                        
+                    }
+                }
+            
+            }
 
         }
     }
 }
-#starter-home-security {
-    background: @white url(/static/img/products/bronze-package/starter-home-security.jpg) no-repeat;
-}
-#average-american-home-security {
-    background: @white url(/static/img/products/bronze-package/new-home-security.jpg) no-repeat;
-}
-#most-comprehensive-security {
-    background: @white url(/static/img/products/platinum-package/full-family-photo.jpg) no-repeat;
-}
-#complete-perimeter-home-security {
-    background: @white url(/static/img/products/silver-package/average-american-family.jpg) no-repeat;
-}
-
 #monitoring-options {
     .content-box;
     #monitoring-rates {
@@ -1709,14 +1904,17 @@ body.cell-takeover {
         #cut-wire {
             width: 350px;
             float: right;
-            padding-top: 20px;
+            padding-top: 10px;
         }
     }
     #just-moved-in {
         .content-box(640px);
         float: right;
-        height: 475px;
-        padding-top: 64px;
+        height: 465px;
+        margin-bottom: 0;
+        h2 {
+            padding-top: 48px;
+        }
         #new-home {
             position: absolute;
             left: -401px;
@@ -1731,7 +1929,7 @@ body.cell-takeover {
         position: relative;
         left: 0;
         z-index: -1;
-        top: 409px;
+        top: 345px;
     }
 }
 /************** GPS Vehicle Tracking ****************/
