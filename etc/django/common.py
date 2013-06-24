@@ -75,6 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
     'apps.common.context_processors.last_day_of_month',
+    #'apps.newsfeed.context_processors.show_feed',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -97,6 +98,7 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.CommonMiddlewareWrapper',
     'apps.common.middleware.DetectMobileBrowser',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'apps.newsfeed.middleware.RenderNewsFeed',
 )
 
 ROOT_URLCONF = 'urls'
@@ -143,6 +145,7 @@ INSTALLED_APPS = (
     'apps.emails',
     'apps.faqs',
     'apps.events',
+    'apps.newsfeed',
 
     # sitemaps by opm
     'apps.pa-sitemaps',

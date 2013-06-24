@@ -1,20 +1,20 @@
 from django.contrib import admin
-from models import DateFeed,NewsFeed,FeedType
+from models import TheFeed,AddType,FallBacks
 
 class NewsFeedAdmin(admin.ModelAdmin):
-	list_display=('name','location','type','created','expires','active',)
-
-
-class DateFeedAdmin(admin.ModelAdmin):
-	list_display=('date',)
+	list_display=('name','location','type','created','expires','active','feed_expired',)
+	list_filter=('type','active','state',)
+	search_fields=('name','created',)
 
 
 class FeedTypeAdmin(admin.ModelAdmin):
 	list_display=('name',)	
 
+class FallBackAdmin(admin.ModelAdmin):
+	list_display=('feed_name',)	
 
 
 
-admin.site.register(NewsFeed,NewsFeedAdmin)
-admin.site.register(DateFeed,DateFeedAdmin)
-admin.site.register(FeedType,FeedTypeAdmin)
+admin.site.register(TheFeed,NewsFeedAdmin)
+admin.site.register(AddType,FeedTypeAdmin)
+admin.site.register(FallBacks,FallBackAdmin)

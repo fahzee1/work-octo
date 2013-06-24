@@ -50,6 +50,9 @@ urlpatterns = patterns('',
         'apps.affiliates.views.edit_affiliate'),
     (r'^django-admin/', include(admin.site.urls)),
 
+    #newsfeed 
+    url(r'^newsfeed/?$', 'apps.common.views.render_feed',name='render-feed'),
+
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
@@ -359,6 +362,7 @@ elif settings.SITE_ID == 23:
 # defaults
 else:
     urlpatterns += patterns('',
+
 
         # Test Pages
         dtt(r'^test/security-packages/?$', 'tests/package-reorder.html', 'package-reorder', 'products'),
@@ -690,9 +694,6 @@ else:
 
         url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/?$',
             'apps.affiliates.views.get_affiliate_information'),
-
-
-
 
 
         url(r'^news/', include('apps.news.urls', namespace='news')),

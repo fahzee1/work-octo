@@ -1,4 +1,5 @@
 {% load content_tags content_filters sekizai_tags %}
+{% load url from future %}
 <!DOCTYPE html>
 <!-- HTML5 Boilerplate -->
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -140,11 +141,14 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     <div id="top-section-wrapper">
         <div id="top-section">
             <ul id="newsfeed">
-                <li><i class="icon-twitter"></i> @owowdesigns thanks for the follow! <span>&ndash; About an Hour Ago</span></li>
+            </ul>
+
+
+{% comment %}
+   <li><i class="icon-twitter"></i> @owowdesigns thanks for the follow! <span>&ndash; About an Hour Ago</span></li>
                 <li><i class="icon-thumbs-up"></i> Like us on Facebook Today! <span>&ndash; About an Hour Ago</span></li>
                 <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
-
-            </ul>
+{% endcomment %}  
             <div id="company-links">
                 <ul id="international-selection">
                     <li class="us active"><a href="">EN</a></li>
@@ -152,8 +156,10 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     <li class="ca"><a href="">EN</a></li>
                     <i class="icon-caret-down"></i>
                 </ul>
-
-                <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                <form action="{% url 'search' %}" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
                 <div id="main-phone">
                     <i class="icon-phone-sign"></i>
                     {% block main-phone %}
@@ -169,14 +175,14 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     <div id="header-wrapper">
         <div id="header">
             <img src="{{ STATIC_URL }}img/base/protect-america-grey.png" alt="Protect America Home Security" id="company-logo">
-            <a href="{% url order-package %}" class="request-quote-button">Request Quote</a>
+            <a href="{% url 'order-package' %}" class="request-quote-button">Request Quote</a>
             <ul id="main-navigation">
                 <li {% if 'products' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url products %}">Shop</a>
+                    <a href="{% url 'products' %}">Shop</a>
                     {% if 'products' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url equipment %}">Equipment</a>
+                    <a href="{% url 'equipment' %}">Equipment</a>
                     {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'products' in active_pages %}class="active"{% endif %}>
@@ -184,7 +190,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     {% if 'products' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'support' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url support %}">Support</a>
+                    <a href="{% url 'support' %}">Support</a>
                     {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
             </ul>
@@ -198,7 +204,8 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 {% block subnav %}{% endblock %}
 
 <!-- Main Content -->
-{% block content %}{% endblock %}
+{% block content %}
+{% endblock %}
 
 
 <!-- Order Footer -->
@@ -294,7 +301,133 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 {% endblock %}
 
 <!-- Javascript -->
+
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    {% if not request.session.GeoFeedData %}
+    if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(getLocation,alertError,options_position);
+    }
+    else{
+        alert('Geolocation is not supported on your browser. Please upgrade.')
+
+    }
+    {% else %}
+        $.ajax({
+            url:"/newsfeed",
+            success:function(data){
+                $("#newsfeed").html(data);
+                $('#newsfeed').cycle({
+                            fx:'blindY',
+                            speed:500,
+                            timeout:6000,
+                            delay:-3000
+                });
+            }
+
+        });
+
+
+    {% endif %}
+
+
+    function alertError(error){
+        switch(error.code){
+            case error.PERMISSION_DENIED:
+                alert('User denied request')
+            break;
+            case error.POSITION_UNAVAILABLE:
+                alert('Location information is unavailable')
+            break;
+            case error.TIMEOUT:
+                alert('Request timed out')
+            break;
+            case error.UKNOWN_ERROR:
+                alert('Uknown error occured')
+            break;
+        }
+    }
+
+    var options_position={
+    enableHighAccuracy:true,
+    maximumAge: 60000, 
+    timeout: 50000 
+    }
+
+    function getLocation(position){
+        var combine = position.coords.latitude+","+position.coords.longitude;
+        var coords=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+        var longlat= {'longlat':combine};
+        var geo=new google.maps.Geocoder();
+        geo.geocode({
+        'location':coords},
+        function(results,status){
+            switch(status){
+                case google.maps.GeocoderStatus.OK:
+                    var city=results[0].address_components[3].long_name;
+                    var state=results[0].address_components[5].long_name;
+                    if (city != '' && state != ''){
+                        var geoData={
+                            'city':city,
+                            'state':state 
+                        }
+
+                        getFeed(geoData);
+                    }
+                break;
+                case google.maps.GeocoderStatus.ERROR:
+                    alert('error with google');
+                break;
+                case google.map.GeocoderStatus.INVALID_REQUEST:
+                    alert('invalid request');
+                break;
+                case google.map.GeocoderStatus.OVER_QUERY_LIMIT:
+                    alert('over query limit');
+                break;
+                case google.map.GeocoderStatus.REQUEST_DENIED:
+                    alert('request denied');
+                break;
+                case google.map.GeocoderStatus.UNKOWN_ERROR:
+                    alert('there was a unknown error');
+                break;
+                case google.map.GeocoderStatus.ZERO_RESULTS:
+                    alert('there was no results');
+                break;
+            }
+        });
+
+    }
+
+
+    function getFeed(citystate){
+        $.ajax({
+            url:"/newsfeed",
+            type:"GET",
+            data:citystate,
+            success:function(data){
+                $("#newsfeed").html(data);
+                $('#newsfeed').cycle({
+                            fx:'blindY',
+                            speed:500,
+                            timeout:6000,
+                            delay:-3000
+                });
+            }
+
+        });
+    }
+
+  
+
+
+});
+
+</script>
+
 
 {% render_block "js" %}
 {% block extra_javascript %}
@@ -312,12 +445,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             }
             return false;
         });
-        $('#newsfeed').cycle({
-           fx:     'blindY',
-           speed:   500,
-           timeout: 6000,
-           delay:  -3000
-        });
+        
 
 
     </script>

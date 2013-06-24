@@ -1,0 +1,15 @@
+	{% if not request.session.backup %}					
+         {% for feed in GeoFeed %}
+             <li><i class={% if feed.icon %}{{ feed.icon }}{% else %}"icon-long-arrow-right"{% endif %}></i>{{ feed.message }}
+                {% if feed.link %}<a href="{{ feed.link }}">{{ feed.link_name }}</a>{% endif %}
+             </liz>
+          {% endfor %}
+
+    {% else %}
+    	{% for feed in GeoFeed %}
+             <li><i class={% if feed.feed_name.icon %}{{ feed.feed_name.icon }}{% else %}"icon-long-arrow-right"{% endif %}></i>{{ feed.feed_name.message }}
+                {% if feed.feed_name.link %}<a href="{{ feed.feed_name.link }}">{{ feed.feed_name.link_name }}</a>{% endif %}
+             </liz>
+          {% endfor %}
+
+     {% endif %}
