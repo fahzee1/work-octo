@@ -3,6 +3,61 @@
 {% load sekizai_tags %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/support2.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/support-2.css">
 {% endblock %}
 
+{% block subnav %}
+<div id="subnav-wrapper">
+    <ul id="subnav">
+        <li class="{% if 'home-security-equipment' in active_pages %}active{% endif %} menu-item" data-menu="customer-service">
+            <a href="{% url home-security-equipment %}">Customer Service</a>
+            <div class="child-nav">
+                <ul class="customer-service">
+                    <li>Installation</li>
+                    <li>Operation</li>
+                    <li>Troubleshooting</li>
+                    <li>FAQs</li>
+                    <li>Cancel Service</li>
+                    <li>EasyMove Kit</li>
+
+                </ul>
+                <div class="clear"></div>
+
+            </div>
+        </li>
+        <li class="{% if 'find-us' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url find-us %}">Find Us</a>
+        </li>
+        <li class="{% if 'careers' in active_pages %}active{% endif %} menu-item"  data-menu="careers">
+            <a href="{% url careers %}">Careers</a>
+            <div class="child-nav">
+                <ul class="careers" >
+                    <li class="{% if 'jobs' in active_pages %}active{% endif %}"><a href="{% url jobs %}" title="View Current Job Openings">Job Openings</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="{% if 'agent-two' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url agent-two %}">Dealer Program</a>
+        </li>
+        <li class="{% if 'affilaite-program' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url affiliate-program %}">Affiliates</a>
+        </li>
+        <li class="{% if 'contact-us' in active_pages %}active{% endif %} menu-item" data-menu="contant-areas">
+            <a href="{% url contact-us %}">Contact Us</a>
+            <div class="child-nav">
+                <ul class="contact-areas">
+                    <li>Department Listing</li>
+                    <li>Customer Care Online Chat</li>
+                    <li>Send Feedback to Our CEO</li>
+
+
+                </ul>
+                <div class="clear"></div>
+
+            </div>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+{% endblock %}

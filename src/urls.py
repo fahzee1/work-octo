@@ -386,14 +386,20 @@ else:
             dtt(r'^equipment/?$', 'products/equipment/index.html', 'equipment'),
             
             # Equipment > Home Security
-                dtt(r'^equipment/home-security/?$', 'products/equipment/simon-xt.html', 'home-security-equipment', 'equipment'),
+                dtt(r'^equipment/home-security/?$', 'products/equipment/home-security.html', 'home-security-equipment', 'equipment'),
                 
                     dtt(r'^equipment/home-security/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/motion-detector/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
-
                     dtt(r'^equipment/home-security/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'home-security-equipment'),
-                    dtt(r'^pa/wireless-security-camera/ip-security-cameras/?$', 'products/video/index.html', 'video', 'home-security-equipment'),
+                    dtt(r'^pa/wireless-security-camera/ip-security-cameras/?$', 'products/equipment/video.html', 'video', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/talking-wireless-keypad/?$', 'products/equipment/talking-wireless-keypad.html', 'talking-wireless-keypad', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/garage-door-sensor/?$', 'products/equipment/garage-door-sensor.html', 'garage-door-sensor', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/glassbreak-sensor/?$', 'products/equipment/glassbreak-sensor.html', 'glassbreak-sensor', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/mini-pinpad/?$', 'products/equipment/mini-pinpad.html', 'mini-pinpad', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/two-button-panic/?$', 'products/equipment/two-button-panic.html', 'two-button-panic', 'home-security-equipment'),
+                    dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
+
 
                     
                     # Moratorium 
@@ -401,11 +407,18 @@ else:
                         dtt(r'^equipment/home-security/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'home-security-equipment'),
    
             # Life Safety
-                    
+                dtt(r'^equipment/life-safety/?$', 'products/equipment/life-safety.html', 'life-safety-equipment', 'equipment'),
+
+                    dtt(r'^equipment/life-safety/smoke-detector/?$', 'products/equipment/smoke-detector.html', 'smoke-detector', 'life-safety-equipment'),
+                    dtt(r'^equipment/life-safety/carbon-monoxide-detector/?$', 'products/equipment/carbon-monoxide-detector.html', 'carbon-monoxide-detector', 'life-safety-equipment'),
+                    dtt(r'^equipment/life-safety/medical-pendant/?$', 'products/equipment/medical-pendant.html', 'medical-pendant', 'life-safety-equipment'),
+
+                    dtt(r'^equipment/life-safety/freeze-sensor/?$', 'products/equipment/freeze-sensor.html', 'freeze-sensor', 'life-safety-equipment'),
                     dtt(r'^equipment/life-safety/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'life-safety-equipment'),
             
             # Equipment > Home Automation
-                    #dtt(r'^products/security-equipment/accessories/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation', 'equipment'),
+                dtt(r'^equipment/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation-equipment', 'equipment'),
+                        dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
 
             
             # SMART Connect
@@ -466,7 +479,6 @@ else:
                 url(r'^pa/cust_ref/?$','apps.contact.views.tell_a_friend',name='tell-a-friend'),
                                
                 # Remove dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
-                # remove dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'equipment'),
                 # remove dtt(r'^products/interactive-video/home-video-cameras?$', 'products/video/video-home.html', 'video-home', 'video'),
                 # remove dtt(r'^products/interactive-video/business-video-cameras?$', 'products/video/video-business.html', 'video-business', 'video'),
                 # remove dtt(r'^pa/profile/home-alarm-systems/?$', 'about-us/profile.html', 'profile', 'about-us'),
@@ -480,12 +492,10 @@ else:
                     dtt(r'^support/operation/?$', 'support/operation.html', 'operation', 'support'),
                     dtt(r'^support/troubleshooting/?$', 'support/troubleshooting.html', 'troubleshooting', 'support'),
                     dtt(r'^support/faq/?$', 'support/faq.html', 'faq', 'support'),                
+                    url(r'^pa/request-moving-kit/security-moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
                     
-                # Support > Moving Kit
-                url(r'^pa/request-moving-kit/security-moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
-                
                 # Support > Find Us
-                dtt(r'^contact/find-us/?$', 'contact-us/find-us.html', 'find-us', 'contact-us'),
+                dtt(r'^support/find-us/?$', 'contact-us/find-us.html', 'find-us', 'support'),
 
                 # Support > Contact Us
                 url(r'^pa/contact/?$', 'apps.contact.views.main', name='contact-us'),

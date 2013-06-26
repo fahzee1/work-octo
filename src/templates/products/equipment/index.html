@@ -11,7 +11,7 @@
             <i class="home-security-icon"></i>
             <h2>Home Security</h2>
             <p>Peace of mind for your family.</p> 
-            <a href="" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+            <a href="{% url home-security-equipment %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
         </div>
 
         <div id="life-safety-category" class="equipment-category">
@@ -32,14 +32,14 @@
             <i class="home-security-icon"></i>
             <h2>SMART Connect</h2>
             <p>Check in from anywhere.</p>
-            <a href="" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+            <a href="{% url interactive-control %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
         </div>
 
         <div id="automotive-category" class="equipment-category">
             <i class="home-security-icon"></i>
             <h2>Automotive</h2>
             <p>Extend security beyond the home.</p>
-            <a href="" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+            <a href="{% url gps %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
         </div>
     </div>
 </div>
@@ -135,5 +135,30 @@
 </div>
 <div class="clear"></div>
 </div>
+{% addtoblock "js" %}
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#home-security-category").click(function() {
+                window.location.href = "{% url home-security-equipment %}";
+            });
+            $("#life-safety-category").click(function() {
+                window.location.href = "{% url life-safety-equipment %}";
+            });
+            $("#home-automation-category").click(function() {
+                window.location.href = "{% url home-automation-equipment %}";
+            });
+            $("#smart-connect-category").click(function() {
+                window.location.href = "{% url interactive-control %}";
+            });
+            $("#automotive-category").click(function() {
+                window.location.href = "{% url gps %}";
+            });
+
+        });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}  
 

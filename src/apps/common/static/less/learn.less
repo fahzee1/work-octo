@@ -1,5 +1,75 @@
 @import "style";
-
+#hero-image {
+    .main-hero-image {
+        position: absolute;
+        bottom: 0;
+        left: -5%;
+        z-index: 0;
+    }
+    #hero-content {
+        float: right;
+        width: 480px;
+        margin-top: 48px;
+        color: @grey;
+        h2 {
+            color: @blue;
+        }
+        p {
+            color: @grey;
+            text-align: justify;
+        }
+        h1 {
+            color: @blue;
+        }
+    }
+} 
+.crime-hero {
+    form {
+        input {
+            height: 32px;
+            line-height: 32px;
+            font-size: 16px;
+            color: @black;
+            display: block;
+            float: none;
+            margin-top: 32px;
+            width: 300px;
+        }
+        button {
+            display: block;
+            float: left;
+            .border-radius(5px,5px,5px,5px);
+            color: @white;
+            background: @blue;
+            text-decoration: none;
+            margin-right: 16px;
+            .fade-slow;            
+            font-size: 16px;
+            padding: 12px 24px;
+            margin-top: 32px;
+            border: none;
+            cursor: pointer;
+            cursor: hand;
+            &:hover {
+                .fade-fast;
+                background: #00aee4;
+                text-decoration: none;
+            }
+            i {
+                border-left: 1px solid #6598b9;
+                padding: 4px 0 4px 8px;
+                margin-left: 4px;
+            }
+            &.alt {
+                background: @blue;
+                color: @white;
+                &:hover {
+                    background: #00aee4;
+                }
+            }
+        }
+    }
+}
 body.monitoring {
     #hero-image {
         #cellular-monitoring-option, #broadband-monitoring-option, #landline-monitoring-option {
@@ -65,6 +135,51 @@ body.monitoring {
             position: absolute;
             right: -6px;
             z-index: -1;
+        }
+    }
+    #alarm-monitoring-confidence {
+        #trusted-home-monitoring, #redundent-security-backup, #on-the-level-pricing {
+            .content-box(33%);
+            text-align: center;
+            p {
+                padding: 0 16px;
+            }
+            
+        }
+        #redundent-security-backup {
+            p {
+            }
+        }
+    }
+}
+body.family {
+    #family-of-companies-container {
+        .content-box;
+        h2 {
+            padding: 16px 0;
+            margin: 16px 0;
+            border-top: 1px solid @v-light-grey; 
+            border-bottom: 1px solid @v-light-grey; 
+
+        }
+        .family-company {
+            .content-box(456px);
+            margin: 0 24px 16px 0;
+            img {
+                float: left;
+                width: 143px;
+            }
+            .company-about {
+                width: 257px;
+                float: left;
+                padding-left: 7px;
+                margin-left: 8px;
+                border-left: 1px solid @v-light-grey;
+            }
+            
+        }
+        #education-training, #business-services, #investment-companies, #sports-entertainment, #financial-services, #biotechnology, #consumer-services {
+            clear: both;
         }
     }
 }

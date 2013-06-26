@@ -206,11 +206,11 @@ table#licenses-table {
     #top-section {
         .wrapper;
         #newsfeed {
-            width: 592px;
+            width: 572px;
             float: left;
             li {
                 display: block;
-                width: 580px;
+                width: 560px;
                 color: @light-grey;
                 font-size: 10px;
                 line-height: 32px;
@@ -229,7 +229,7 @@ table#licenses-table {
         }
         #company-links {
             float: right;
-            width: 376px;
+            width: 396px;
             position: relative;
             #international-selection {
                 margin-top: 6px;
@@ -306,7 +306,7 @@ table#licenses-table {
             #main-phone {
                 float: right;
                 color: @white;
-                font-size: 20px;
+                font-size: 19px;
                 line-height: 32px;
                 i {
                     padding-right: 4px;
@@ -342,6 +342,9 @@ table#licenses-table {
             margin-top: 10px;
             width: 192px;
             float: left;
+        }
+        .stuck-phone {
+            display: none;
         }
         #main-navigation {
             float: right;
@@ -409,6 +412,35 @@ table#licenses-table {
             margin-top: 8px;
             &:hover {
                 background: #12a859
+            }
+        }
+
+    }
+    &.stuck {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        width: 100%;
+        .drop-shadow;
+        #header {
+            height: 54px;
+            #main-navigation {
+                display: none;
+            }
+            .stuck-phone {
+                display: block;
+                color: #ffffff;
+                margin-top: 16px;
+                font-size: 22px;
+                font-weight: normal;
+                float: right;
+                color: @white;
+                margin-right: 16px;
+                a {
+                    color: @white;
+                    text-decoration: none;
+                }
             }
         }
     }
@@ -743,6 +775,17 @@ table#licenses-table {
                     background: @grey;
                     .fade-fast;
                 }
+                a {
+                    color: @white;
+                    text-decoration: none;
+                }
+                &.active {
+                    background: @white;
+                    color: @blue;
+                    a {
+                        color: @blue;
+                    }
+                }
             }
         }
         #footer-contact-info {
@@ -853,11 +896,26 @@ table#licenses-table {
 #hero-wrapper {
     height: 496px;
     background: #2b80b8 url(/static/img/base/bg-blue.png) repeat;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
     &.red {
         background: @red url(/static/img/base/bg-red.png) repeat;
     }
     &.yellow {
         background: @yellow url(/static/img/base/bg-yellow.png) repeat;
+        #hero-image {
+            #hero-content {
+                h1, p, h2 {
+                    color: @grey;
+                    text-shadow: 1px 2px 1px rgba(0,0,1,.2);
+
+                }
+                p {
+                    text-shadow: none;
+                }
+            }
+        }
     }
     &.grey {
         background: @grey url(/static/img/base/bg-grey.png) repeat;
@@ -873,7 +931,8 @@ table#licenses-table {
         margin: 0 auto;
         position: relative;
         height: 496px;
-        .icon-smart-connect, .icon-automotive, .icon-home-security, .icon-life-safety {
+        z-index: 0;
+        .icon-smart-connect, .icon-automotive, .icon-home-automation, .icon-home-security, .icon-life-safety, .icon-customer-care {
             width: 48px;
             height: 48px;
             display: block;
@@ -888,7 +947,13 @@ table#licenses-table {
         }  
         .icon-home-security {
             background: url(/static/img/base/base-sprite-new.png) 0px -48px no-repeat;
-        }        
+        }
+        .icon-customer-care {
+            background: url(/static/img/base/base-sprite-new.png) 0px -144px no-repeat;
+        }  
+        .icon-home-automation {
+            background: url(/static/img/base/base-sprite-new.png) 0px -96px no-repeat;
+        }  
         h2 {
             font-weight: 300;
             color: @white;
@@ -914,6 +979,7 @@ table#licenses-table {
             color: @white;
             width: 400px;
             margin-top: 16px;
+            text-align: justify;
         }
         .button-link {
             font-size: 16px;
@@ -924,6 +990,19 @@ table#licenses-table {
             &:hover {
                 background: @white;
             }
+            &.alt {
+                background: @blue;
+                color: @white;
+                &:hover {
+                    background: #00aee4;
+                }
+            }
+        }
+        .main-hero-image {
+            position: absolute;
+            bottom: 0;
+            z-index: -1;
+            
         }
     }
 }
@@ -967,6 +1046,23 @@ table#licenses-table {
                 .border-radius(20px,20px,20px,20px);
                 cursor: pointer;
                 cursor: hand;
+            }
+            .learn-more {
+                position: absolute;
+                left: 120px;
+                z-index: 999;
+                top: 24px;
+                text-transform: uppercase;
+                color: @blue;
+            }
+            .back {
+                position: absolute;
+                left: 16px;
+                z-index: 999;
+                top: 16px;
+                text-transform: uppercase;
+                color: @grey;
+                display: none;
             }
         }
         .home-content {
@@ -1052,19 +1148,20 @@ table#licenses-table {
             color: @grey;
             font-weight: bold;
             line-height: 26px;
+            height: 66px;
             span {
                 display: block;
                 font-weight: normal;
                 font-style: italic;
                 font-size: 16px;
-                padding-bottom: 20px;
                 line-height: 20px;
             }
         }
         i.icon-caret-up {
             position: absolute;
             left: 24px;
-            top: 36px;
+            top: 32px;
+            line-height: 56px;
             font-size: 56px;
             color: @light-blue;
         }

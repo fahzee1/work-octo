@@ -9,31 +9,29 @@
 <div id="hero-wrapper" class="v-light-grey">
     <div id="hero-image">
         <div id="hero-content">
-            <i class="icon-smart-connect"></i>
-            <h2>Protect America Customer Support</h2>
+            <i class="icon-customer-care"></i>
+            <h2>Protect America Customer CARE</h2>
             <h1>We're Here to Help.</h1>
-            <p>If you are having any problems whatsoever with your home security system, we're here to help.  Our customer support staff is specially trained to help you with any issue concerning your home security alarm system.</p>
+            <p>If you are having any concerns with your home security system, we can solve it. Our customer support staff is specially trained to help you with any issue concerning your home security alarm system.</p>
+            <div id="customer-support-hours">
+                <h2>Customer Support Hours:</h2>
+                <h3>Mon - Fri: 8:00am - 9:00pm CT</h3>
+                <h3>Sat: 9:00am - 7:00pm CT </h3>
+                <h3>Sun: 9:00am - 5:00pm CT </h3>
+            </div>
         </div>
+        <img src="{{ STATIC_URL }}img/employee-photos/adrian.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
 
     </div>
 </div>
-<div id="support-content">
-    <h1>Protect America Customer Support</h1>
-    <p>If you are having problems with your <a href="{% url troubleshooting %}" title="Troubleshooting Home Security Alarm System">home security alarm system</a>, or if you simply have questions regarding your home security alarm system, please contact us. Our customer support staff is here to help you with any issue concerning your home security alarm system.  In addition, answers to frequently asked questions can be found on our <a href="{% url faq %}" title="Frequently Asked Home Security Alarm System Questions">FAQs sheet</a>.</p>
-    <h2>Contact our Customer Support Staff</h2>
-    <div id="customer-support-hours">
-        <h3>Mon - Fri: 8:00am - 9:00pm CT</h3>
-        <h3>Sat: 9:00am - 7:00pm CT </h3>
-        <h3>Sun: 9:00am - 5:00pm CT </h3>
-    </div>
-    <div id="customer-support-contact">
-        <p><strong>1-800-951-5111, Option 4</strong></p>
-        <p><a href="mailto:support@protectamerica.com">support@protectamerica.com</a></p>
-    </div>
-
+{% if phone_number %}
+<div class="clear"></div>
+<div id="call-box">
+    <p><a href="tel:{{ phone_number|format_number }}">Customer CARE: <strong>1-800-951-5111, Option 4</strong></a></p>
 </div>
 <div class="clear"></div>
-{% testimonial_search "support" "limit=10&words=75" %}
+{% endif %}
+
 
 
 {% addtoblock "js" %}
