@@ -1,15 +1,50 @@
 	{% if not request.session.backup %}					
          {% for feed in GeoFeed %}
-             <li><i class={% if feed.icon %}{{ feed.icon }}{% else %}"icon-long-arrow-right"{% endif %}></i>{{ feed.message }}
-                {% if feed.link %}<a href="{{ feed.link }}">{{ feed.link_name }}</a>{% endif %}
-             </liz>
+             <li>
+             	{% if feed.feed_name.icon %}
+             	<i class="{{ feed.feed_name.icon }}"></i>
+             	{% endif %}
+             	{% if feed.text %}
+             	<i class="icon-twitter"></i>
+             	{% endif %}
+             	{% if feed.feed_name.message %}
+             		{{ feed.feed_name.message }} 
+             	{% endif %}
+             	{% if feed.text %}
+             		{{ feed.text|slice:":70" }}... 
+             	{% endif %}
+                {% if feed.feed_name.link %}
+                <a href="{{ feed.feed_name.link }}">{{ feed.feed_name.link_name }}</a>
+                {% endif %}
+                {% if feed.GetRelativeCreatedAt %}
+                <span class="tweet-date">{{ feed.GetRelativeCreatedAt }}</span>
+                {% endif %}
+             </li>
           {% endfor %}
 
     {% else %}
     	{% for feed in GeoFeed %}
-             <li><i class={% if feed.feed_name.icon %}{{ feed.feed_name.icon }}{% else %}"icon-long-arrow-right"{% endif %}></i>{{ feed.feed_name.message }}
-                {% if feed.feed_name.link %}<a href="{{ feed.feed_name.link }}">{{ feed.feed_name.link_name }}</a>{% endif %}
-             </liz>
-          {% endfor %}
+             <li>
+             	{% if feed.feed_name.icon %}
+             	<i class="{{ feed.feed_name.icon }}"></i>
+             	{% endif %}
+             	{% if feed.text %}
+             	<i class="icon-twitter"></i>
+             	{% endif %}
+             	{% if feed.feed_name.message %}
+             		{{ feed.feed_name.message }} 
+             	{% endif %}
+             	{% if feed.text %}
+             		{{ feed.text|slice:":70" }}... 
+             	{% endif %}
+                {% if feed.feed_name.link %}
+                <a href="{{ feed.feed_name.link }}">{{ feed.feed_name.link_name }}</a>
+                {% endif %}
+                {% if feed.GetRelativeCreatedAt %}
+                <span class="tweet-date">{{ feed.GetRelativeCreatedAt }}</span>
+                {% endif %}
+             </li>
+          	{% endfor %}
 
      {% endif %}
+  

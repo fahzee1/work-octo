@@ -3,7 +3,7 @@ import urls
 import urllib
 import urllib2
 import operator
-
+import random
 
 from decimal import Decimal
 from datetime import datetime, timedelta
@@ -32,6 +32,7 @@ from apps.common.forms import LinxContextForm
 from apps.news.models import Article
 from apps.pricetable.models import Package
 from apps.newsfeed.models import TheFeed,FallBacks
+from itertools import chain
 
 consumer_key=settings.TWITTER_CONSUMER_KEY
 consumer_secret=settings.TWITTER_CONSUMER_SECRET
@@ -259,11 +260,25 @@ def index_render(request, template, context):
 
 
 def render_feed(request):
-    if request.is_ajax:
+    if request.is_ajax():
+        ctx={}
+        tweets = cache.get('TWEETS')
+        if not tweets:
+            t_api = twitter.Api(consumer_key=consumer_key,
+                                consumer_secret=consumer_secret,
+                                access_token_key=access_token,
+                                access_token_secret=access_secret)
+            tweets = t_api.GetUserTimeline('protectamerica')
+            cache.set('TWEETS', tweets, 60*60)
+        ctx['tweets'] = tweets[:3]
+
         data=request.session.get('GeoFeedData',False)
         fback=request.session.get('FallBacks',False)
         if data or fback:
-            ctx={'GeoFeed':data,'FallBacks':fback}
+            results=list(chain(data,tweets[:5]))
+            random.shuffle(results)
+            ctx['GeoFeed']=results
+            ctx['FallBacks']=fback
             return render(request,'newsfeed/feed.html',ctx)
 
 
