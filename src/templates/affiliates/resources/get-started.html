@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+{% load url from future %}
+{% block page_title %}Protect America Affiliate Resources{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/resources/resources.css">
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block content %}
+
+<h1>Welcome {{ aff_name|capfirst }} </h1>
+
+</div>
+{% include "affiliates/resources/_partials/resources-nav.html" %}
+
+<div class="wrapper">
+    <div id="affiliate-reports">
+    <h2>Affiliate Reports</h2>
+    <p>To access your affiliate reports, please visit <a href="http://www.protectamerica.com/reports/" target="_top">http://www.protectamerica.com/reports</a> and enter your user name and password.<br/><strong>Please Note: User name and password are case sensitive.</strong></p>
+    <h3>Example:</h3>
+    <img src="{{ STATIC_URL  }}img/affiliates/resources/affiliate-reports.png" alt="reports"/>
+    </div>
+</div>
+<div id="powerpoint">
+    <div class="wrapper">       
+        <img src="{{ STATIC_URL }}img/affiliates/resources/powerpoint.png" alt="powerpoint" id="opportunity" width="505" height="379" />
+        <div id="text-area">
+            <h2>Welcome</h2>
+            <p>Before you delve into this great business opportunity, we recommend taking a look at this presentation to get you started with Protect America.<p>
+             <div class="button-link">
+                <a href="{{ STATIC_URL  }}pdf/powerpoint.pdf" alt="Get%20Started" width="720" height="540">Click Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block order-footer %}
+{% endblock %}
