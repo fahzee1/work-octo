@@ -1,4 +1,4 @@
-{% extends "contact-us/base.html" %}
+{% extends "support/base.html" %}
 
 {% load sekizai_tags %}
 
@@ -8,64 +8,74 @@
 
 
 {% block content %}
-<div id="ceo-feedback-form">
-    <form method="POST">
-    {% csrf_token %}
-    <div id="ceo-message">
-        <h2>A Message from our CEO</h2>
-        <p>"As the Founder and CEO of Protect America, I want to make sure that we are doing everything possible to provide each and every customer with the very best customer service. If there is ever a situation in which a customer is not 100% satisfied, I want to know about it. I also want to know when a member of my staff provides you with exceptional service as well. Please use this page to submit your feedback directly to me. If you have an unresolved issue, I will have a member of my staff contact you to resolve your problem within 48 hours. Thank you for taking the time to provide me with your valuable feedback!"</p>
-        <img src="/static/img/external/tp-signature.png" alt="Thad Paschall, Protect America CEO & Founder" />
-        <p><strong>Thad Paschall</strong><br/>CEO & Founder</p>
-    </div>
-    <div id="ceo-form">
-        <h1>Send Thad a Message</h1>
-        <div id="customer-information"
-            <p>Please fill out the form below to provide feedback to our CEO. Be sure to choose the type of feedback, the department for which you are providing feedback, and if you know the name of the representative(s) that helped you, please enter that information as well.</p>
-            {% include "_partials/formfield.html" with field=formset.name %}
-            {% include "_partials/formfield.html" with field=formset.email %}
-            {% include "_partials/formfield.html" with field=formset.phone %}
-            <label>City & State</label>
-            {% include "_partials/formfield_nolabel.html" with field=formset.city %}
-            {% include "_partials/formfield_nolabel.html" with field=formset.state %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>Contact Us</h2>
+            <h1>Send Feedback to our CEO</h1>
+            <p>"As the Founder and CEO of Protect America, I want to make sure that we are doing everything possible to provide each and every customer with the very best customer service. If there is ever a situation in which a customer is not 100% satisfied, I want to know about it. I also want to know when a member of my staff provides you with exceptional service as well. Please use this page to submit your feedback directly to me. If you have an unresolved issue, I will have a member of my staff contact you to resolve your problem within 48 hours. Thank you for taking the time to provide me with your valuable feedback!"</p>
+            <img src="/static/img/external/tp-signature.png" alt="Thad Paschall, Protect America CEO & Founder" />
+            <p><strong>Thad Paschall</strong><br/>CEO & Founder</p>
         </div>
-        <div id="feedback-information">
-            <p>Please provide as much detailed information as possible regarding the nature of your feedback, especially if you still have an outstanding issue or complaint that you need resolved.</p>
-            {% include "_partials/formfield.html" with field=formset.feedback_type %}
-            {% include "_partials/formfield.html" with field=formset.department %}
-            {% include "_partials/formfield.html" with field=formset.rep_name %}
-            <label class="required">Rate your Experience:</label>
+    </div>
+</div>
+<div class="wrapper">
+    <div id="ceo-feedback-form">
+        <form method="POST">
+        {% csrf_token %}
 
-            <fieldset id="star-rating">
-                {{ formset.rating.as_hidden }}
-                <div class="star-container">
-                    <div class="star-button" id="1-star">&nbsp;</div>
-                    <div class="star-button" id="2-star">&nbsp;</div>
-                    <div class="star-button" id="3-star">&nbsp;</div>
-                    <div class="star-button" id="4-star">&nbsp;</div>
-                    <div class="star-button" id="5-star">&nbsp;</div>
-                </div>
-                {% if formset.rating.errors %}
-                <ul class="formHint">
-                    {% for error in formset.rating.errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-                <div class="clear"></div>
-            </fieldset>
+        <div id="ceo-form">
+            <h1>Send Thad a Message</h1>
+            <div id="customer-information"
+                <p>Please fill out the form below to provide feedback to our CEO. Be sure to choose the type of feedback, the department for which you are providing feedback, and if you know the name of the representative(s) that helped you, please enter that information as well.</p>
+                {% include "_partials/formfield.html" with field=formset.name %}
+                {% include "_partials/formfield.html" with field=formset.email %}
+                {% include "_partials/formfield.html" with field=formset.phone %}
+                <label>City & State</label>
+                {% include "_partials/formfield_nolabel.html" with field=formset.city %}
+                {% include "_partials/formfield_nolabel.html" with field=formset.state %}
+            </div>
+            <div id="feedback-information">
+                <p>Please provide as much detailed information as possible regarding the nature of your feedback, especially if you still have an outstanding issue or complaint that you need resolved.</p>
+                {% include "_partials/formfield.html" with field=formset.feedback_type %}
+                {% include "_partials/formfield.html" with field=formset.department %}
+                {% include "_partials/formfield.html" with field=formset.rep_name %}
+                <label class="required">Rate your Experience:</label>
+    
+                <fieldset id="star-rating">
+                    {{ formset.rating.as_hidden }}
+                    <div class="star-container">
+                        <div class="star-button" id="1-star">&nbsp;</div>
+                        <div class="star-button" id="2-star">&nbsp;</div>
+                        <div class="star-button" id="3-star">&nbsp;</div>
+                        <div class="star-button" id="4-star">&nbsp;</div>
+                        <div class="star-button" id="5-star">&nbsp;</div>
+                    </div>
+                    {% if formset.rating.errors %}
+                    <ul class="formHint">
+                        {% for error in formset.rating.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="clear"></div>
+                </fieldset>
+            </div>
+            <div class="clear"></div>
+            {% include "_partials/formfield.html" with field=formset.message %}
+    
+            <button class="buyit" type="submit">Send Your Message to Thad ></button>
+    
+            <div class="clear"></div>
         </div>
-        <div class="clear"></div>
-        {% include "_partials/formfield.html" with field=formset.message %}
-
-        <button class="buyit" type="submit">Send Your Message to Thad ></button>
-
+    
+        </form>
         <div class="clear"></div>
     </div>
-
-    </form>
+    <div class="clear"></div>
 
 </div>
-
 {% addtoblock "js" %}
 <script type="text/javascript">
     $(document).ready(function() {
