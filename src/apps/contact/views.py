@@ -375,7 +375,7 @@ def donotcall(request):
                                'parent':'help',
                                'formset': formset,
                                'pages': ['support', 'help'],
-                               'page_name': 'tell-a-friend'})
+                               'page_name': 'do-not-call'})
 
 def payitforward(request):
     if request.method == "POST":

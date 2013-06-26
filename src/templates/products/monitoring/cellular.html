@@ -1,4 +1,4 @@
-{% extends "products/monitoring/base.html" %}
+{% extends "learn/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
 {% block page_title %}Wireless Home Security | Home Security Cellular Monitoring | Protect America{% endblock %}
@@ -6,7 +6,7 @@
 {% block page_description %}Experience an extra level of protection with Cellular Monitoring built right into a home security system. The alarm contacts the monitoring facility through a GSM cellular device.{% endblock %}
 
 {% block content %}
-
+<div class="wrapper">
 <div id="cellular-overview">
     <div id="cellular-image">
         <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="broadband-icon-big" width="199" height="200" />
@@ -18,7 +18,6 @@
     <div class="clear"></div>
     <img src="{{ STATIC_URL }}img/products/monitoring/cellular-step-by-step.jpg" alt="landline-monitoring-step-by-step" width="640" height="145" />
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
 <div class="clear"></div>
 
     {% include "banners/limited-time-offer.html" %}
@@ -82,17 +81,9 @@
         </a>
     </div>
 </div>
-
+</div>
 
 {% addtoblock "js" %}
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#search-testimonial-box').cycle({
-            fx: 'fade',
-            timeout: 9000
-        });
-    });
-    </script>
 {% endaddtoblock "js" %}
 
 {% endblock %}  

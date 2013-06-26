@@ -11,6 +11,6 @@ def careers(request):
 
     return simple_dtt(request, 'contact-us/careers.html', {
                                'events': events,
-                               'parent':'contact-us',
-                               'pages': ['careers'],
+                               'parent':'support',
+                               'pages': ['support'],
                                'page_name': 'careers'})

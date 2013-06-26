@@ -1,0 +1,104 @@
+{% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Door / Window Sensors | Home Security Equipment | Protect America{% endblock %}
+{% block page_keywords %}door sensor, security sensor, window sensor, door security, window security, entry point, front door protection{% endblock %}
+{% block page_description %}Protect your homes' windows and doors from intruders with door & window sensors. Protect America offers quality wireless home security equipment at low-prices.{% endblock %}
+
+
+{% block content %}
+<div id="hero-wrapper" class="blue">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h2>Home Security</h2>
+            <h1>Mini Pinpad</h1>
+            <p>A mighty small package providing the front line defense for your home.</p>
+            <h3>Included in any package. Extra Sensors: $39.95 each</h3>
+            <a href="{% url shop %}" class="button-link">Add to Cart <i class="icon-chevron-right"></i></a>
+
+        </div>
+        <img src="{{ STATIC_URL }}img/products/door-window-sensor/door-window-sensor-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
+
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+
+<div class="wrapper">
+    <div class="video-features">
+        <div class="video-content">
+            <h2>Simple to Use. <span>Reliable Security.</span></h2>
+            <p>A surprisingly simple device, door/window sensors create a magnetic field that, when broken, sends a signal to your central GE Simon XT control panel and sounds the alarm.</p>
+            <p>Protect America only uses wireless sensors that can be used on either doors or windows, allowing for greater system customization. For most homes, we recommend one sensor for every accessible door and window.</p>
+        </div>
+        <div class="video-frame">
+            <iframe width="400" height="225" src="http://www.youtube.com/embed/lyRK4d88i80?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/door-window-sensor/in-the-home-door-window-sensor.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Door or Window Sensors</h2>
+            <p>The most common piece of security equipment when it comes to securing your home, door or window sensors are used to detect when any door or window is opened.  Protect America uses wireless micro sensors to help keep them inconspicuous and out of the way. And we recommend a door / window sensor should be placed on any easily accessible door or window to attain a secure home perimeter.  </p>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+<div class="wrapper">
+    <div id="about-door-sensor">
+        <div id="front-door-content">
+            <h2>The Front Door: A Burglar's Main Target</h2>
+            <p>Your home starts at the front door. So should your home security.</p>
+            <p>In nearly 24 percent of burglaries, forcible entry was used on the front door to gain access to the home. In total, more than a third of all burglaries involve the front door. It's clearly important to secure your front door with quality locks and a home security system. Houses with alarm systems are 3 times less likely to fall victim to burglary. It's just common sense protection. Obviously, criminals avoid the unwanted attention of loud alarms!</p>
+            <p>Defend your home, and front door, with a affordable wireless alarm system from Protect America. You and your family deserve to be safe and packages start at $19.99 per month.</p>
+            <div class="order-link">
+                <a href="{% url order-package %}?package=copper" class="button-link" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Door / Window Sensor']);">Order Now <i class="icon-chevron-right"></i></a>
+                <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+            </div>
+        </div>
+        <div id="big-front-door">
+            <img src="{{ STATIC_URL }}/img/products/equipment/door-window-sensor/front-door.jpg" alt="front-door" width="264" height="592" />
+        </div>
+    
+    </div>
+    <div class="clear"></div>
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+        $('.video-link').click(function(e) {
+            e.preventDefault();
+            $('.video-link').parent().removeClass('active');
+            $('.video-link a').html('Watch Now >');
+            
+            var video_url = $(this).children('a').attr('href');
+            $('#main-video iframe').attr('src', video_url);
+
+            $(this).parent().addClass('active');
+            $(this).children('a').html('Now Playing');
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
+
+{% block page-product %}
+    <h2>Door / Window Security Sensors</h2>
+    <p><span>Add to your Package: <strong>$39.50 each</strong></span></p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Door / Window Sensor']);">Order Now ></a>
+    </div>
+{% endblock %}
+

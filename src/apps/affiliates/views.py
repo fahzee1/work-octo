@@ -1,7 +1,8 @@
 import re
+import os
 from datetime import datetime, timedelta
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render,redirect
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -10,12 +11,23 @@ from django.utils import simplejson
 from django.core.urlresolvers import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from apps.affiliates.models import Affiliate, LandingPage, AffTemplate
+from apps.affiliates.models import Affiliate, LandingPage, AffTemplate,Profile
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
 from apps.adspace.models import Ad, Campaign
-from apps.affiliates.forms import AddAffiliateForm, AffiliateSignup
+from apps.affiliates.forms import AddAffiliateForm, AffiliateSignup, AffiliateLoginForm
+import mimetypes
+from django.contrib import messages
 
+def check_if_affiliate(email,agent_id):
+    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
+    for aff in affiliates:
+        if aff.email == email and aff.affiliate.agent_id == agent_id:
+            ctx={'name':aff.affiliate.name,
+                 'agent_id':aff.affiliate.agent_id}
+            return ctx
+        return False
+        
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
                         content_type='application/json; charset=UTF-8')
@@ -75,6 +87,75 @@ def resources(request):
             'page_name': 'affiliate_resources',
             'google_ads': ads,
         })
+        
+def web_banners_page(request):
+    """
+    Function that gathers all the google ads from all the campaigns and
+    then sends them to the html to be rendered by banner size.
+    """
+    campaigns = Campaign.objects.all()
+    ads = {
+        'leaderboard': ('Leaderboard (728x90)', []),
+        'banner': ('Banner (468x60)', []),
+        'skyscaper': ('Skyscraper (120x600)', []),
+        'wide_skyscraper': ('Wide Skyscraper (160x600)', []),
+        'small_square': ('Small Square (200x200)', []),
+        'square': ('Square (250x250)', []),
+        'medium_rectangle': ('Medium Rectangle (300x250)', []),
+        'large_rectangle': ('Large Rectangle (336x280)', []),
+    }
+    for campaign in campaigns:
+        for ad in campaign.ad_set.all():
+            if ad.type.slug in ads:
+                ads[ad.type.slug][1].append(ad)
+         
+                         
+    ctx={'page_name': 'aff-web-banners',
+            'google_ads':ads}
+    return simple_dtt(request, 'affiliates/resources/web-banners.html',ctx)
+        
+def get_started_page(request):
+    aff_check=request.session.get('aff-logged-in',False)
+    if not aff_check:
+        return redirect('aff-login')
+    name_here=False
+    if request.session.get('aff_name',False):
+        name_here=True
+        aff_name=request.session['aff_name']
+    id_here=False
+    if request.session.get('aff_id',False):
+        id_here=True
+        aff_id=request.session['aff_id']
+        
+    ctx={'page_name':'aff-get-started',
+        'aff_name':(aff_name if name_here else None),
+        'aff_id':(aff_id if id_here else None)}
+    return simple_dtt(request,'affiliates/resources/get-started.html',ctx)   
+    
+
+
+def logos_page(request):
+    aff_check=request.session.get('aff-logged-in',False)
+    if not aff_check:
+        return redirect('aff-login')
+    ctx={'page_name':'aff-logos'}
+    return simple_dtt(request,'affiliates/resources/logos.html',ctx)
+    
+def collateral_page(request):
+    aff_check=request.session.get('aff-logged-in',False)
+    if not aff_check:
+        return redirect('aff-login')
+    ctx={'page_name':'aff-collateral'}
+    return simple_dtt(request,'affiliates/resources/collateral.html',ctx)
+    
+    'affiliates/resources/products.html'
+    
+def products_page(request):
+    aff_check=request.session.get('aff-logged-in',False)
+    if not aff_check:
+        return redirect('aff-login')
+    ctx={'page_name':'aff-products'}
+    return simple_dtt(request,'affiliates/resources/products.html',ctx)
 
 
 # SEM Landing Page Views
@@ -279,3 +360,33 @@ def get_affiliate_information(request, affiliate_id):
     }
 
     return json_response({'success': True, 'affiliate': info})
+    
+    
+def aff_login(request):
+    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
+    form=AffiliateLoginForm()
+    if request.method == 'POST':
+        form=AffiliateLoginForm(request.POST)
+        if form.is_valid():
+            check_email=form.cleaned_data['email']
+            check_agentid=form.cleaned_data['agent_id']
+            is_aff=check_if_affiliate(check_email,check_agentid)
+            if is_aff:
+                request.session['aff-logged-in']=True
+                request.session['aff_name']=is_aff['name']
+                request.session['aff_id']=is_aff['agent_id']
+                return redirect('aff-get-started')
+                
+            else:
+                messages.info(request,'Please Enter The Correct Login.')
+                return redirect('aff-login')       
+    else:
+       form=AffiliateLoginForm()
+    ctx={'form':form,'page_name':'aff-login'}
+    return render(request,'affiliates/resources/login.html',ctx) 
+    
+    
+           
+   
+   
+

@@ -1,6 +1,8 @@
 {% extends "local-pages/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
 
+{% load url from future %}
+
 {% block page_title %}{{ state }} Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
 
 {% block content %}
@@ -44,9 +46,12 @@
         <h2>{{ key }}</h2>
         <ul>
         {% for city in value %}
-            <li><a href="/{{ state }}/{{ city.city_name }}/">{{ city.city_name }}</a></li>
+            <li><a href="{% url 'local-page' state city.city_name %}">{{ city.city_name }}</a></li>
         {% endfor %}
         </ul>
+        {% comment %}
+        "/{{ state }}/{{ city.city_name }}/"
+        {% endcomment %}
     </div>
     <div class="clear"></div>
     {% endfor %}
