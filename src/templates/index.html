@@ -117,237 +117,50 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />{% endblock %}
 
 {% block content %}
+</div>
 {% block hero_banner_area %}
     {% include "banners/seo-hero-images.html" %}
 {% endblock %}
 {% include "order/call-box.html" %}
+
 <div class="wrapper">
-
-<div id="main">
-    {% if pa_ads.promo_banner_full %}
-        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_full %}
-    {% else %}
-    <div id="twitter-feed">
-        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner %}
-        {% if pa_ads.twitter_left and pa_ads.twitter_right %}
-        {% include "adspace/adspace_render.html" with ad=pa_ads.twitter_left %}
-        {% include "adspace/adspace_render.html" with ad=pa_ads.twitter_right %}
-        {% else %}
-        <ul>
-            {% for tweet in tweets %}
-            <li>
-                <img src="{{ tweet.user.profile_image_url }}" />
-                <strong>{{ tweet.user.name }} <span>@{{ tweet.user.screen_name }}</span></strong>
-                <span class="tweet-date">{{ tweet.GetRelativeCreatedAt }}</span>
-                <p>{{ tweet.text|safe }}</p>
-                <div class="clear"></div>
-            </li>
-            {% endfor %}
-
-        </ul>
-        {% endif %}
-    </div>
-    {% endif %}
-    <div id="customer-testimonials">
-        <div class="ts_testimonial">
-            <h1>Our Customers Love Our Home Security Systems</h1>
-            <div id="main-testimonials">
-            {% testimonial_search "" "limit=5&template=old&words=25" %}
+    <div id="categories">
+        <div class="category">
+            <img src="{{ STATIC_URL }}img/base/icon-home-security.png" class="category-img" alt="icon-home-security" width="131" height="131" />
+            <div class="category-info">
+                <h2>Home Security Designed <span>Just for You.</span></h2>
+                <p>Control your home while you’re away with our free SMART Connect app. Arm your system, conserve energy, and control lights at anytime through your computer or smart phone. </p>
+                <a href="" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
             </div>
         </div>
-    </div>
-
-    <div id="protection">
-        <h2>100% Protection</h2>
-        <p>Whether you want protection for your home or even a small business, the <a href="{% url seo-ge-home-security-systems %}" title="GE Home Security">GE Home Security</a> System from Protect America will fulfill your security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your security with Protect America:</p>
-        <ul>
-            <li>BEST Prices on Home Security Systems - Compare &amp; Save!</li>
-
-            <li>BEST Security Systems in the Industry</li>
-            <li>State-of-the-Art UL Listed Security Equipment</li>
-            <li>Protect Your Home with 24/7 Security Monitoring</li>
-            <li>Guaranteed Locked in Security Monitoring Rates</li>
-            <li>Super Flexible Packages for any <a href="{% url seo-alarm-systems %}" title="Alarm System">Alarm System</a></li>
-            <li>Lifetime Replacement Parts Warranty on all <a href="{% url seo-alarm-systems %}" title="Alarm Systems">Alarm Systems</a></li>
-            <li>Up to 20% Off Homeowners Insurance</li>
-            <li>Peace of Mind When It Comes to Your Family &amp; Home</li>
-        </ul>
-        <div class="button-link">
-            <a title="View Copper Security Package details and compare to our other home security systems packages." href="{% url products %}">Home Security Packages ></a>
+        <div class="category">
+            <img src="{{ STATIC_URL }}img/base/icon-home-security.png" class="category-img" alt="icon-home-security" width="131" height="131" />
+            <div class="category-info">
+                <h2>Protecting Against More than Home Break-ins.</h2>
+                <p>Control your home while you’re away with our free SMART Connect app. Arm your system, conserve energy, and control lights at anytime through your computer or smart phone. </p>
+                <a href="" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            </div>
         </div>
-        
-    </div>
-    <div id="advantage">
-        <h2>The Protect America Security Advantage</h2>
-        <p>Protection for your home and family is not an easy decision. Our packages combine the best price with the best equipment and service. Compare how our <strong>home security systems</strong> stack up against other leaders in the security industry below to help make the decision easier.</p>
-
-        <table summary="Small comparison chart detailing Protect America pricing versus major competitors.">
-            <thead>
-                <tr>
-                    <td colspan="3">
-                        <h3>Equipment Price</h3>
-                        <strong><a href="{% url advantage %}" title="Home Security Systems Comparison">Home Security Systems Comparison</a></strong>
-                    </td>
-                </tr>
-
-            </thead>
-            <tfoot>
-                <tr>
-                    <td colspan="3">
-                        Information regarding home security system comparisons obtained via telephone quotations and Internet research 
-                        on Sep 01, 2011.
-                    </td>
-                </tr>
-
-            </tfoot>
-            <tbody>
-                <tr>
-                    <th>Package</th>
-                    <th>Protect America<sup>*</sup></th>
-                    <th>ADT</th>
-                </tr>
-                <tr class="odd">
-                    <td headers="package"><a title="View Copper Package details and compare to our other home security system packages." href="{% url copper %}">Copper Security</a><br>3 Door / Window Sensors, 1 Motion Detector</td>
-        
-                    <td class="highlight red" headers="pa">
-                        {{ pricetable.COPPER.standard_monitoring }} per month</td>
-                    <td headers="adt"><sup>$</sup>379.00 <br/> + <br/>
-                        <sup>$</sup>42.99 per month</td>
-                </tr>
-                <tr>
-                    <td headers="package"><a title="View Bronze Package details and compare to our other home security system packages." href="{% url bronze %}">Bronze Security</a><br>7 Door / Window Sensors, 1 Motion Detector</td>
-        
-                    <td class="highlight red" headers="pa">
-                        {{ pricetable.BRONZE.standard_monitoring }} per month</td>
-                    <td headers="adt"><sup>$</sup>699.00 <br/> + <br/>
-                        <sup>$</sup>42.99 per month</td>
-                </tr>
-                <tr class="odd">
-                    <td headers="package"><a title="View Silver Package details and compare to our other home security system packages." href="{% url silver %}">Silver Security</a><br>10 Door / Window Sensors, 1 Motion Detector</td>
-        
-                    <td class="highlight red" headers="pa">
-                        {{ pricetable.SILVER.standard_monitoring }} per month
-                    </td>
-                    <td headers="adt"><sup>$</sup>939.00 <br/> + <br/>
-                        <sup>$</sup>42.99 per month</td>
-                </tr>
-                <tr>
-                    <td headers="package"><a title="View Gold Package details and compare to our other home security system packages." href="{% url gold %}">Gold Security</a><br>12 Door / Window Sensors, 1 Motion Detector</td>
-        
-                    <td class="highlight red" headers="pa">
-                        {{ pricetable.GOLD.standard_monitoring }} per month
-                    </td>
-                    <td headers="adt"><sup>$</sup>1,099.00 <br/> + <br/>
-                        <sup>$</sup>42.99 per month</td>
-                </tr>
-                <tr class="odd">
-                    <td headers="package"><a title="View Platinum Package details and compare to our other home security system packages." href="{% url platinum %}">Platinum Security</a><br>15 Door / Window Sensors, 1 Motion Detector</td>
-        
-                    <td class="highlight red" headers="pa">
-                        {{ pricetable.PLATINUM.standard_monitoring }} per month
-                    </td>
-                    <td headers="adt"><sup>$</sup>1,339.00 <br/> + <br/>
-                        <sup>$</sup>42.99 per month</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="button-link">
-            <a title="View Copper Security Package details and compare to our other home security systems packages." href="{% url advantage %}">Security Advantage ></a>
+        <div class="category">
+            <img src="{{ STATIC_URL }}img/base/icon-home-security.png" class="category-img" alt="icon-home-security" width="131" height="131" />
+            <div class="category-info">
+                <h2>Home Security Designed <span>Just for You.</span></h2>
+                <p>Control your home while you’re away with our free SMART Connect app. Arm your system, conserve energy, and control lights at anytime through your computer or smart phone. </p>
+                <a href="" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            </div>
         </div>
-    </div>
-    <div class="clear"></div>
-    <div id="security">
-        <h2>Protect America Home Security</h2>
-        <h3>Home Security Commitment</h3>
-        <p>
-            Protect America is committed to excellence and affordability when it comes to securing your home. That's why we're a <a href="{% url seo-home-security-system %}" title="home security system">Consumers Digest Best Buy&trade;</a> for home security systems and the best choice for a world-class security system backed by a company that is dedicated to serving your security needs. Your family is your top priority. Your home is probably your largest investment. Why not take the extra precaution of providing a security system and monitoring for your residence? <a href="{% url seo-home-security-system %}" title="Protect America">Protect America</a> is committed to helping you meet your home security needs and providing you with quality home security systems and service you can depend on.
-        </p>
-
-        <h3>Home Security Value</h3>
-        <p>
-            The average yearly home insurance premium in the U.S. costs over $800. The good news is that many plans offer discounts up to 20% on home insurance for homes with home security systems installed. You could save $14 or more per month on your insurance with any of our <a href="{% url seo-home-alarm-systems %}" title="GE home alarm systems">GE home alarm systems</a>. For many, the monthly cost of a Protect America security system would be less than $16 per month once a home insurance discount is applied. For 50 cents a day, you can have the peace of mind knowing that your family and home will have the extra protection you want. 
-        </p>
-
-        <h3>Home Security Choices</h3>
-        <p>
-            Protect America offers the best home security systems and monitoring deals you'll find. We install premium security hardware with <a href="{% url seo-ge-home-security %}" title="GE Security Products">GE security products</a>, and have the most flexible range of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of GE wireless home security components. And, our security packages are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today.
-        </p>
-
-        <h3>Home Security Statistics</h3>
-        <p>
-            <strong>Facts about Burglary, Property Crimes, and Home Security Alarms </strong>
-            <br/><br/>
-            
-            2007 FBI Crime Statistics:
-        </p>
-        <ul style='padding-left:25px;list-style-type:square;'>
-            <li>Each year in the United States, a burglary occurs every 14 seconds.</li>
-
-            <li>Most burglaries occur during the day between 6am and 6pm.</li>
-            <li>The average residential burglary victim lost $1,991.</li>
-        </ul>
-        <p>
-            There is no better time than today to protect your residence with one of our monitored home security systems, and there is no more affordable solution than Protect America's wireless security system. Wherever you live, we have a package that will meet your needs and with our unique, low-price guarantee, you can be confident in your choice. Sign up today for a free security system and get our low-price guarantee, a lifetime alarm equipment warranty, free movers program, dedicated support, and award winning <a href="{% url seo-best-home-security-system %}" title="home security">home security</a> monitoring from <a href="{% url seo-home-security-companies %}" title="Protect America" >Protect America</a>.
-        </p>
-        <ul style='padding-left:25px;list-style-type:square;'>
-            <li>
-
-                In more than a third of all burglaries, the burglar enters the front door (and most of the time 
-                does so forcefully).
-            </li>
-            <li>
-                Homes without a monitored security alarm system are 3 times more likely to be burglarized or 
-                robbed than those with a monitored home security system.
-            </li>
-            <li>
-                There is sufficient evidence to show that in the past, when the economy has suffered, burglary 
-                and property crime has increased in parallel.
-            </li>
-        </ul>
-        
-    </div>
-</div>
-<div id="sidebar">
-    {% if pa_ads.promo_banner_right %}
-        {% include "adspace/adspace_render.html" with ad=pa_ads.promo_banner_right %}
-    {% else %}
-    <iframe width="275" height="186" src="http://www.youtube.com/embed/isJJrsr5sXQ?modestbranding=1&rel=0&border=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
-    {% endif %}
-    {% if pa_ads.side_bar %}
-    <div id="cellupgrade">
-        {% include "adspace/adspace_render.html" with ad=pa_ads.side_bar %}
-    </div>
-    {% endif %}
-
-    <div id="copperbestbuy">
-        <h2>Copper Package: Consumers Digest Best Buy</h2>
-        <img class="centered" width="108" height="200" alt="home security systems" src="{{ STATIC_URL }}img/external/consumer-digest/copper-package-consumer-digest-ribbon.png">
-        <div class="button-link">
-            <a title="View Copper Package details. Compare to our other home security systems packages." href="{% url copper %}">Copper Package ></a>
+        <div class="category">
+            <img src="{{ STATIC_URL }}img/base/icon-home-security.png" class="category-img" alt="icon-home-security" width="131" height="131" />
+            <div class="category-info">
+                <h2>Check in from Anywhere. <span>with SMART Connect.</span></h2>
+                <p>Control your home while you’re away with our free SMART Connect app. Arm your system, conserve energy, and control lights at anytime through your computer or smart phone. </p>
+                <a href="" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            </div>
         </div>
-    </div>
-    <div class="clear"></div>
-
-    <div id="sidebar-testimonials">
-        <h2>Testimonials</h2>
-        <ul>
-            {% testimonial_search "affordable" "limit=3&template=sidebar-old&words=30" %}
-        </ul>    
-    </div>
-    <div id="sidebar-news">
-        <h2>Latest News</h2>
-        <ul>
-        {% for article in latest_news %}
-            <li>
-                <h3><a href="{{ article.get_absolute_url }}" title="{{ article.heading }}">{{ article.heading }}</a></h3>
-                <p><span>{{ article.date_created|date:"M d Y" }}</span> -- {{ article.summary }}</p>
-            </li>
-        {% endfor %}
-        </ul>
+        <div class="clear"></div>
     </div>
 </div>
 <div class="clear"></div>
-</div>
 {% addtoblock "js" %}
     <script type="text/javascript">
     $(document).ready(function() {

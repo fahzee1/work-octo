@@ -3,19 +3,34 @@
 {% load sekizai_tags %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/products.css">
-    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/shop.css">
 {% endblock %}
 
 {% block subnav %}
 <div id="subnav-wrapper">
-    <ul>
-        <li>Basic</li>
-        <li>Complete Home</li>
-        <li>Complete Home Plus</li>
-        <li>Business</li>
-        <li>Existing System</li>
+    <ul id="subnav">
+        <li {% if 'copper' in active_pages %}class="active"{% endif %}>
+            <a href="{% url copper %}">Copper</a>
+        </li>
+        <li {% if 'bronze' in active_pages %}class="active"{% endif %}>
+            <a href="{% url bronze %}">Bronze</a>
+        </li>
+        <li {% if 'silver' in active_pages %}class="active"{% endif %}>
+            <a href="{% url silver %}">Silver</a>
+        </li>
+        <li {% if 'gold' in active_pages %}class="active"{% endif %}>
+            <a href="{% url gold %}">Gold</a>
+        </li>
+        <li {% if 'platinum' in active_pages %}class="active"{% endif %}>
+            <a href="{% url platinum %}">Platinum</a>
+        </li>
+        <li {% if 'business' in active_pages %}class="active"{% endif %}>
+            <a href="{% url business %}">Business</a>
+        </li>
+        <li {% if 'cell-takeover' in active_pages %}class="active"{% endif %}>
+            <a href="{% url cell-takeover %}">Existing Systems</a>
+        </li>
     </ul>
+    <div class="clear"></div>
 </div>
 {% endblock %}

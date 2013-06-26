@@ -1,0 +1,78 @@
+{% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}{% endblock %}
+{% block page_keywords %}{% endblock %}
+{% block page_description %}{% endblock %}
+
+{% block content %}
+<div id="hero-wrapper" class="blue">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h2>Home Security</h2>
+            <h1>Motion Detector</h1>
+            <p>Secure the inside of your home against anything that moves.</p>
+            <h3>Included in any package. Extra Sensors: $39.95 each</h3>
+            <a href="{% url shop %}" class="button-link">Add to Cart <i class="icon-chevron-right"></i></a>
+
+        </div>
+        <img src="{{ STATIC_URL }}img/products/motion-detector/motion-detector-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
+
+    </div>
+</div>
+{% include "order/call-box.html" %}
+<div class="wrapper">
+    <div class="video-features">
+        <div class="video-content">
+            <h2>Simple to Use. <span>Reliable Security.</span></h2>
+            <p>The Simon XT is the operations center for your entire alarm system. It checks in with each wireless sensor and other devices to make sure everything is doing alright.</p>
+            <p>Unlike other wireless security systems, the Simon XT provides a full-featured home security platform that combines the best of home security with ease of use. Its one button arming makes it easy to secure your home and loved ones.</p>
+        </div>
+        <div class="video-frame">
+            <iframe width="400" height="225" src="http://www.youtube.com/embed/803KpFF2LmU?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Motion Detector</h2>
+            <p>Placed in a central location, the Simon XT can be used to arm your system with its one-button arming, call emergency response, or disarm your system with its keypad. The security panel connects with up to 40 home security, life safety, or home automation sensors to secure your entire home. Though we think its most important feature is the dependable protection it provides for your family.</p>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        $('.feature-icon').click(function(){
+            var icon = $(this).clone();
+            $('.feature-icon').removeClass('active').html('+');
+            $('.feature-content').slideUp(250, 'easeOutBounce');
+            if(!$(icon).hasClass('active')) {
+                $(this).addClass('active').html('x').next('.feature-content').slideDown(250, 'easeOutBounce');
+            }
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
+
+{% block page-product %}
+    <h2>The GE Simon XT</h2>
+    <p><span>Included in any Package.</span></p>
+
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Simon XT Touchscreen']);">Order Now ></a>
+    </div>
+{% endblock %}
+

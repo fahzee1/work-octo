@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load sekizai_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/learn.css">
+
+{% endblock %}
+
+{% block subnav %}
+<div id="subnav-wrapper">
+    <ul id="subnav">
+        <li class="{% if 'about-us' in active_pages %}active{% endif %} menu-item" data-menu="about-us">
+            <a href="{% url about-us %}">About Us</a>
+           <div class="child-nav">
+                <ul class="about-us">
+                    <li class="{% if 'family' in active_pages %}active{% endif %}" ><a href="{% url family %}">Our Family of Companies</a></li>
+                    <li class="{% if 'charities' in active_pages %}active{% endif %}" ><a href="{% url charities %}">Charity Work</a></li>
+                    <li class="{% if 'payitforward' in active_pages %}active{% endif %}" ><a href="{% url payitforward %}">Pay It Forward</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="{% if 'advantage' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url advantage %}">Our Advantage</a>
+        </li>
+
+        <li class="{% if 'monitoring' in active_pages %}active{% endif %} menu-item" data-menu="security-monitoring">
+            <a href="{% url monitoring %}">Security Monitoring</a>
+           <div class="child-nav">
+                <ul class="security-monitoring">
+                    <li class="{% if 'landline' in active_pages %}active{% endif %}" ><a href="{% url landline %}">Standard Landline</a></li>
+                    <li class="{% if 'broadband' in active_pages %}active{% endif %}" ><a href="{% url broadband %}">High-Speed Broadband</a></li>
+                    <li class="{% if 'cellular' in active_pages %}active{% endif %}" ><a href="{% url cellular %}">Cellular</a></li>
+
+                </ul>
+            </div>
+        </li>
+        <li class="{% if 'security-intro' in active_pages %}active{% endif %} menu-item" data-menu="security-intro">
+            <a href="">Security 101</a>
+           <div class="child-nav">
+                <ul class="security-intro">
+                    <li class="{% if 'how-it-works' in active_pages %}active{% endif %}" ><a href="{% url how-it-works %}">How It Works</a></li>
+                    <li class="{% if 'complete-home-security' in active_pages %}active{% endif %}" ><a href="{% url complete-home-security %}">Complete Home Security</a></li>
+                    <li class="{% if 'crime-rate' in active_pages %}active{% endif %}" ><a href="/crime-rate/">Local Crime Stats</a></li>
+
+
+                </ul>
+            </div>
+        </li>
+        <li>
+            <a href="http://www.protectamerica.com/home-security-blog/">Blog</a>
+        </li>
+        <li class="{% if 'testimonials' in active_pages %}active{% endif %} menu-item" data-menu="testimonials">
+            <a href="{% url testimonials %}">Protect America Reviews</a>
+        </li>
+        
+    </ul>
+    <div class="clear"></div>
+</div>
+
+{% endblock %}

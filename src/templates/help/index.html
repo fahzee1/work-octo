@@ -1,13 +1,36 @@
-{% extends "about-us/base.html" %}
+{% extends "help/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
 {% block page_title %}Need Help? | Home Security Customer Service | Protect America{% endblock %}
 {% block content %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>Protect America Customer CARE</h2>
+            <h1>We're Here to Help.</h1>
+            <p>If you are having any concerns with your home security system, we can solve it. Our customer support staff is specially trained to help you with any issue concerning your home security alarm system.</p>
+            <div id="customer-support-hours">
+                <h2>Customer Support Hours:</h2>
+                <h3>Mon - Fri: 8:00am - 9:00pm CT</h3>
+                <h3>Sat: 9:00am - 7:00pm CT </h3>
+                <h3>Sun: 9:00am - 5:00pm CT </h3>
+            </div>
+        </div>
+        <img src="{{ STATIC_URL }}img/employee-photos/adrian.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
 
+    </div>
+</div>
+{% if phone_number %}
+<div class="clear"></div>
+<div id="call-box">
+    <p><a href="tel:{{ phone_number|format_number }}">Customer CARE: <strong>1-800-951-5111, Option 4</strong></a></p>
+</div>
+<div class="clear"></div>
+{% endif %}
 
 {% endblock %}  
-{% block sidebar %}
-{{ block.super }}
 
 
-{% endblock %}
 
-{% block subnav_parent %}{% endblock %}
+

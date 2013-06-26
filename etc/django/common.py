@@ -75,8 +75,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
     'apps.common.context_processors.last_day_of_month',
-    #'apps.newsfeed.context_processors.show_feed',
-)
+    'django.contrib.messages.context_processors.messages',
+    )
+
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
