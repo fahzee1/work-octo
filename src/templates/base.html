@@ -176,11 +176,11 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     <div id="header-wrapper">
         <div id="header">
 
-            <a href="{% url home %}">
+            <a href="{% url 'home' %}">
                 <img src="{{ STATIC_URL }}img/base/protect-america-grey.png" alt="Protect America Home Security" id="company-logo">
             </a>
 
-            <a href="{% url order-package %}" class="request-quote-button">Request Quote</a>
+            <a href="{% url 'order-package' %}" class="request-quote-button">Request Quote</a>
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
@@ -189,7 +189,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             {% endif %}
             <ul id="main-navigation">
                 <li {% if 'shop' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url shop %}">Shop</a>
+                    <a href="{% url 'shop' %}">Shop</a>
                     {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
@@ -197,7 +197,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'learn' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url learn %}">Learn</a>
+                    <a href="{% url 'learn' %}">Learn</a>
                     {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'support' in active_pages %}class="active"{% endif %}>
@@ -264,9 +264,9 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             </ul>
             <ul id="footer-care-nav">
                 <li>Customer Service</li>
-                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="{% url privacy-policy %}" title="View our Privacy Policy">Privacy Policy</a></li>
-                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="{% url state-licenses %}" title="View our Licenses for Each State">State Licenses</a></li>
-                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="{% url do-not-call %}" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
+                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="{% url 'privacy-policy' %}" title="View our Privacy Policy">Privacy Policy</a></li>
+                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="{% url 'state-licenses' %}" title="View our Licenses for Each State">State Licenses</a></li>
+                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="{% url 'do-not-call' %}" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
                 <li>Careers</li>
                 <li>Affiliates</li>
             </ul> 
@@ -316,10 +316,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 <!-- Javascript -->
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
-<<<<<<< HEAD
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-
 <script type="text/javascript">
 $(document).ready(function(){
     {% if not request.session.GeoFeedData %}
@@ -442,10 +439,9 @@ $(document).ready(function(){
 
 </script>
 
-=======
-	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
->>>>>>> 623d33c992a8b955839785ca575d8ee814fb0000
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+
 
 {% render_block "js" %}
 {% block extra_javascript %}
@@ -481,20 +477,10 @@ $(document).ready(function(){
             }
             return false;
         });
-<<<<<<< HEAD
-        
 
-=======
-        $('#newsfeed').cycle({
-           fx:     'blindY',
-           speed:   500,
-           timeout: 6000,
-           delay:  -3000
-        });
         $('#header-wrapper').waypoint('sticky', {
 		  offset: -85 // Apply "stuck" when element 30px from top
 		});
->>>>>>> 623d33c992a8b955839785ca575d8ee814fb0000
 
     </script>
 
