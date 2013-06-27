@@ -14,7 +14,6 @@ import twitter
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.core.urlresolvers import reverse, resolve
 from django.core.cache import cache
-from django.views.generic.simple import redirect_to
 from django.views.decorators.cache import cache_page, never_cache
 
 from django.shortcuts import render_to_response,render

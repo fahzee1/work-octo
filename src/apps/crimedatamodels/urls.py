@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from django.views.generic.simple import redirect_to
+from django.views.generic.base import RedirectView
 
 from apps.crimedatamodels.sitemaps import CrimeStatsSitemap
 
@@ -16,7 +16,7 @@ urlpatterns = patterns('apps.crimedatamodels.views',
 
     
     ('^(?P<state>[A-Z]{2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/$',
-            redirect_to, {'url': 'http://www.protectamerica.com/crime-rate/%(state)s/%(city)s', 'permanent': True}),
+            RedirectView.as_view(url='http://www.protectamerica.com/crime-rate/%(state)s/%(city)s',permanent=True)), 
     
 )
 
