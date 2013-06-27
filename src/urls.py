@@ -3,7 +3,7 @@ from django.conf import settings
 from django.views.generic.base import RedirectView
 from apps.sitemaps.sitemap import StaticSitemap
 from apps.news.sitemaps import ArticleSitemap
-from apps.local.sitemaps import KeywordStateSitemap
+from apps.local.sitemaps import KeywordStateSitemap,KeywordSitemapIndex
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
@@ -12,6 +12,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from apps.local.views import LOCAL_KEYWORDS
+
 
 
 # a simple direct_to_template wrapper
@@ -86,6 +87,7 @@ urlpatterns = patterns('',
 
     #newsfeed 
     url(r'^newsfeed/?$', 'apps.common.views.render_feed',name='render-feed'),
+    url(r'^hourlycheck/?$', 'apps.newsfeed.views.hourly_check',name='hourly_check'),
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),

@@ -274,8 +274,7 @@ def render_feed(request):
         data=request.session.get('GeoFeedData',False)
         fback=request.session.get('FallBacks',False)
         if data or fback:
-            results=list(chain(data,tweets[:5]))
-            random.shuffle(results)
+            results=list(chain.from_iterable(zip(data,tweets[:5])))
             ctx['GeoFeed']=results
             ctx['FallBacks']=fback
             return render(request,'newsfeed/feed.html',ctx)
