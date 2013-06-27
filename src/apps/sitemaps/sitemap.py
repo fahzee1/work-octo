@@ -18,7 +18,7 @@ class StaticSitemap(Sitemap):
 		return datetime.datetime.now()	
 
 	def changefreq(self,obj):
-		return 'weekly'
+		return 'monthly'
 
 	def location(self,obj):
 		return reverse(obj)
