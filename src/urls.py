@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.base import RedirectView
+
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
@@ -661,7 +662,6 @@ else:
         dtt(r'^CFMIAMI/?$', 'affiliates/crime-stoppers-cf/miami.html', 'cf-miami'),
 
 
-
 )
 
 # redirect urls
@@ -792,7 +792,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='crimeprevention/',permanent=True)), 
 
     ('^crimeprevention/?$',
-        RedirectView.as_view(url='/national-crime-prevention/?agent=i03248',permanent=True)), 
+        RedirectView.as_view(url='/national-crime-prevention/?agent=i03248',permanent=True)),  
     #('^national-crime-prevention$',
     #    RedirectView.as_view(), {'url': '/national-crime-prevention/', 'permanent': True}),
 
@@ -963,9 +963,6 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/learn-about-security/monitoring/security-system/',permanent=True)),
     ('pa/about/home-security-companies/?$',
         RedirectView.as_view(url='learn-about-security/protect-america/',permanent=True)),
-
-
-
 
 )
 
