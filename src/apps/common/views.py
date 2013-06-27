@@ -3,19 +3,21 @@ import urls
 import urllib
 import urllib2
 import operator
+import random
 
 from decimal import Decimal
 from datetime import datetime, timedelta
+
 from urllib import urlencode
-
+from django.db.models import Q
 import twitter
-
+from django.contrib.localflavor.us.us_states import US_STATES
 from django.core.urlresolvers import reverse, resolve
 from django.core.cache import cache
 from django.views.generic.simple import redirect_to
 from django.views.decorators.cache import cache_page, never_cache
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render
 from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse, \
@@ -29,6 +31,8 @@ from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
 from apps.pricetable.models import Package
+from apps.newsfeed.models import TheFeed,FallBacks
+from itertools import chain
 
 consumer_key=settings.TWITTER_CONSUMER_KEY
 consumer_secret=settings.TWITTER_CONSUMER_SECRET
@@ -208,7 +212,7 @@ def payitforward(request):
 
 
 @cache_page(60 * 60 * 4)
-def index(request): 
+def index(request):
     return index_render(request, 'index.html', {})
 
 
@@ -236,7 +240,6 @@ def index_render(request, template, context):
                                 access_token_key=access_token,
                                 access_token_secret=access_secret)
             tweets = t_api.GetUserTimeline('protectamerica')
-            print tweets
             cache.set('TWEETS', tweets, 60*60)
         context['tweets'] = tweets[:3]
     except:
@@ -254,6 +257,30 @@ def index_render(request, template, context):
         request.session['no_mobile'] = True
     
     return simple_dtt(request, template, context)
+
+
+def render_feed(request):
+    if request.is_ajax():
+        ctx={}
+        tweets = cache.get('TWEETS')
+        if not tweets:
+            t_api = twitter.Api(consumer_key=consumer_key,
+                                consumer_secret=consumer_secret,
+                                access_token_key=access_token,
+                                access_token_secret=access_secret)
+            tweets = t_api.GetUserTimeline('protectamerica')
+            cache.set('TWEETS', tweets, 60*60)
+        ctx['tweets'] = tweets[:3]
+
+        data=request.session.get('GeoFeedData',False)
+        fback=request.session.get('FallBacks',False)
+        if data or fback:
+            results=list(chain(data,tweets[:5]))
+            random.shuffle(results)
+            ctx['GeoFeed']=results
+            ctx['FallBacks']=fback
+            return render(request,'newsfeed/feed.html',ctx)
+
 
 
 def family_of_companies(request):

@@ -104,6 +104,7 @@ def query_by_state_city(state, city, get_content=True):
         city_id = None
         print "this is state %s" % state
     except State.DoesNotExist:
+        print 'none'
         raise Http404
     try:
         city = city.replace('+', ' ').replace('-', ' ')

@@ -1,5 +1,4 @@
 from django import forms
-
 from apps.affiliates.models import Affiliate, LandingPage,Profile
 from django.core.validators import validate_email
 
@@ -69,4 +68,3 @@ class AffiliateLoginForm(forms.Form):
   email=forms.EmailField(required=True,label='Enter Email',validators=[validate_email])
   agent_id=forms.CharField(required=True,max_length=16,label='Enter Agent ID')
 
-        

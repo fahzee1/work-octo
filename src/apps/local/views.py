@@ -93,7 +93,6 @@ def local_page_wrapper(request, keyword, city, state):
 
 
 def local_page(request, state, city, keyword=None):
-
     crime_stats_ctx = query_by_state_city(state, city)
     if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
         json_file = os.path.join(settings.PROJECT_ROOT, 'src',
@@ -112,6 +111,7 @@ def local_page(request, state, city, keyword=None):
                 state_obj.name.lower().replace(' ', '-'),
                 zipcodestr,
             ))
+
     forms = {}
     forms['basic'] = PAContactForm()
     crime_stats_ctx['forms'] = forms
@@ -223,3 +223,5 @@ def sitemap_state(request, keyword):
 def sitemap_index(request):
     from django.contrib.sitemaps.views import sitemap
     return sitemap(request, {'keyword-sitemap-index' : KeywordSitemapIndex(LOCAL_KEYWORDS)})
+
+

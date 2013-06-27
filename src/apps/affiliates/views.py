@@ -19,6 +19,7 @@ from apps.affiliates.forms import AddAffiliateForm, AffiliateSignup, AffiliateLo
 import mimetypes
 from django.contrib import messages
 
+
 def check_if_affiliate(email,agent_id):
     affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
     for aff in affiliates:
@@ -27,7 +28,7 @@ def check_if_affiliate(email,agent_id):
                  'agent_id':aff.affiliate.agent_id}
             return ctx
         return False
-        
+         
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
                         content_type='application/json; charset=UTF-8')
@@ -67,6 +68,12 @@ def resources(request):
     Function that gathers all the google ads from all the campaigns and
     then sends them to the html to be rendered by banner size.
     """
+    aff_check=request.session.get('aff-logged-in',False)
+    if not aff_check:
+        print 'redirect'
+        return redirect('affiliates:aff-login')
+
+
     campaigns = Campaign.objects.all()
     ads = {
         'leaderboard': ('Leaderboard (728x90)', []),
@@ -360,6 +367,7 @@ def get_affiliate_information(request, affiliate_id):
     }
 
     return json_response({'success': True, 'affiliate': info})
+
     
     
 def aff_login(request):
@@ -387,6 +395,4 @@ def aff_login(request):
     
     
            
-   
-   
 

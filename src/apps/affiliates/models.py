@@ -24,6 +24,9 @@ class Affiliate(models.Model):
     manager = models.ForeignKey(User, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def __unicode__(self):
+        return '%s (%s)' % (self.name, self.agent_id)
+
     def has_landing_page(self):
         try:
             lp = LandingPage.objects.get(affiliate=self)
@@ -51,8 +54,6 @@ class Affiliate(models.Model):
             pass
         return False
 
-    def __unicode__(self):
-        return '%s (%s)' % (self.name, self.agent_id)
 
 
 class AffTemplate(models.Model):
@@ -135,6 +136,9 @@ class Profile(models.Model):
         verbose_name = 'Affiliate Request'
         verbose_name_plural = 'Affiliate Requests'
 
+    def __unicode__(self):
+        return '%s' % self.name    
+
     def accept_affiliate(self, agent_id, name, phone=None):
         # send email to affiliate
         aff = Affiliate()
@@ -216,5 +220,16 @@ class Profile(models.Model):
         send_mail(subject, t.render(c), '"Protect America" <noreply@protectamerica.com>',
             [self.email], fail_silently=True)
 
-    def __unicode__(self):
-        return '%s' % self.name
+
+   
+
+
+
+
+
+
+
+
+
+
+

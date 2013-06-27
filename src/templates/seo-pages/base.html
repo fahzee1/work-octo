@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% load url from future %}
 
 {% block page_title %}Alarm Systems by Protect America{% endblock %}
 {% block page_keywords %}alarm home security systems, best home security system, free home security, free home security system, ge home security systems, home security alarms, home security systems{% endblock %}
@@ -65,7 +66,7 @@
     <h2>Silver Security Package</h2>
     <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $37.99/mo</p>
     <div class="button-submit">
-        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
+        <a href="{% url 'order-package' %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
     </div>
 {% endblock %}
 
