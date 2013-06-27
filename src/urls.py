@@ -1,7 +1,9 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.base import RedirectView
-
+from apps.sitemaps.sitemap import StaticSitemap
+from apps.news.sitemaps import ArticleSitemap
+from apps.local.sitemaps import KeywordStateSitemap
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
@@ -34,6 +36,36 @@ def dtt_nocache(pattern, template, name, parent=None, ctx=None):
         dict(template=template, extra_context=context),
         name=name)
         
+
+sitemaps={
+    'home':StaticSitemap(['home','thank_you','sem-landing'],0.5),
+    'contact':StaticSitemap(['contact-us','find-us','order-package','privacy-policy'],0.5),
+    'shop':StaticSitemap(['shop','copper','bronze','silver','gold','platinum','business','cell-takeover'],0.5),
+    'equipment':StaticSitemap(['equipment','home-security-equipment','simon-xt','door-window-sensor','motion-detector',
+                                'touchscreen','video','talking-wireless-keypad','garage-door-sensor','glassbreak-sensor',
+                                'mini-pinpad','two-button-panic','accessories','simon-3','life-safety-equipment','smoke-detector',
+                                'carbon-monoxide-detector','medical-pendant','freeze-sensor','flood-sensor','home-automation-equipment',
+                                'door-lock','interactive-control','gps'],0.5),
+    'learn':StaticSitemap(['learn','advantage','monitoring','landline','broadband','cellular','about-us','family','charities','payitforward',
+                            'payitforward-about','payitforward-press','payitforward-extras','payitforward-rules','payitforward-thankyou','payitforward-teams',
+                             'payitforward-spring2012','payitforward-fall2012','payitforward-involved','payitforward-awareness','payitforward-point-scale',
+                             'payitforward-revenue','payitforward-video','payitforward-press','learn-about-security','how-it-works','complete-home-security',
+                             'testimonials','video-testimonials','send-testimonial','tell-a-friend'],0.5),
+    'support':StaticSitemap(['support','installation','operation','troubleshooting','faq','moving-kit','find-us','contact-us','department-listing','feedback-ceo',
+                             'careers','jobs','agent-two','affiliate-program','aff'],0.5),
+    'help':StaticSitemap(['help','low-price-guarantee','return-policy','state-licenses','do-not-call','security-of-information','warranty'],0.5),
+    'thankyou':StaticSitemap(['contact-thank-you','ceo-thank-you','moving-kit-thank-you','contact-tell-friend','affiliate-enroll'],0.5),
+    'affiliates':StaticSitemap(['agent-two-lp','package-code','pa-spanish','pa-hialarm','cj','aff','aff-get-started','aff-logos','aff-web-banners','aff-collateral',
+                                'aff-products','aff-login'],0.5),
+    'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems','seo-ge-home-security','seo-ge-home-security-systems','seo-ge-home-security-systems','seo-home-alarm-systems',
+                         'seo-security-systems','seo-home-security-systems','seo-best-home-security-system','seo-home-security-companies'],0.5),
+    'paidlanding':StaticSitemap(['paid-business-landing-page','paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
+                                 'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
+    'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
+    'article':ArticleSitemap,
+
+
+}        
 
 
 urlpatterns = patterns('',
@@ -969,6 +1001,10 @@ urlpatterns += patterns('',
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
         'apps.common.views.redirect_wrapper'),
+)
+
+urlpatterns += patterns('',
+    (r'^sitemap\.xml', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
 
 if settings.DEBUG:
