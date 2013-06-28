@@ -349,16 +349,20 @@ $(document).ready(function(){
     function alertError(error){
         switch(error.code){
             case error.PERMISSION_DENIED:
-                alert('You denied our request')
+               // alert('You denied our request');
+                getFallback();
             break;
             case error.POSITION_UNAVAILABLE:
-                alert('Location information is unavailable')
+               // alert('Location information is unavailable');
+                getFallback();
             break;
             case error.TIMEOUT:
-                alert('Request timed out')
+               // alert('Request timed out');
+                getFallback();
             break;
             case error.UKNOWN_ERROR:
-                alert('Uknown error occured')
+               // alert('Uknown error occured');
+                getFallback();
             break;
         }
     }
@@ -391,22 +395,28 @@ $(document).ready(function(){
                     }
                 break;
                 case google.maps.GeocoderStatus.ERROR:
-                    alert('error with google');
+                   // alert('error with google');
+                    getFallback();
                 break;
                 case google.map.GeocoderStatus.INVALID_REQUEST:
-                    alert('invalid request');
+                   // alert('invalid request');
+                    getFallback();
                 break;
                 case google.map.GeocoderStatus.OVER_QUERY_LIMIT:
-                    alert('over query limit');
+                   // alert('over query limit');
+                    getFallback();
                 break;
                 case google.map.GeocoderStatus.REQUEST_DENIED:
-                    alert('request denied');
+                  // alert('request denied');
+                    getFallback();
                 break;
                 case google.map.GeocoderStatus.UNKOWN_ERROR:
-                    alert('there was a unknown error');
+                   // alert('there was a unknown error');
+                    getFallback();
                 break;
                 case google.map.GeocoderStatus.ZERO_RESULTS:
-                    alert('there was no results');
+                    // alert('there were zero results');
+                    getFallback();
                 break;
             }
         });
@@ -414,9 +424,26 @@ $(document).ready(function(){
     }
 
 
+    function getFallback(){
+        $.ajax({
+            url:"{% url 'get-fallback' %}",
+            success:function(data){
+                $("#newsfeed").html(data);
+                $('#newsfeed').cycle({
+                            fx:'blindY',
+                            speed:500,
+                            timeout:6000,
+                            delay:-3000
+                });
+            }
+        });
+    }
+
+
+
     function getFeed(citystate){
         $.ajax({
-            url:"/newsfeed",
+            url:"{% url 'render-feed' %}",
             type:"GET",
             data:citystate,
             success:function(data){

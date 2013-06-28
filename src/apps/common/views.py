@@ -267,9 +267,8 @@ def render_feed(request):
                                 consumer_secret=consumer_secret,
                                 access_token_key=access_token,
                                 access_token_secret=access_secret)
-            tweets = t_api.GetUserTimeline('protectamerica')
+            tweets = t_api.GetUserTimeline('protectamerica',count=5)
             cache.set('TWEETS', tweets, 60*60)
-        ctx['tweets'] = tweets[:3]
 
         data=request.session.get('GeoFeedData',False)
         fback=request.session.get('FallBacks',False)
@@ -281,7 +280,7 @@ def render_feed(request):
                         results.append(y)
                     if x not in results:
                         results.append(x)
-                        
+
             ctx['GeoFeed']=results
             ctx['FallBacks']=fback
             return render(request,'newsfeed/feed.html',ctx)

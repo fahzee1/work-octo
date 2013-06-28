@@ -88,6 +88,7 @@ urlpatterns = patterns('',
     #newsfeed 
     url(r'^newsfeed/?$', 'apps.common.views.render_feed',name='render-feed'),
     url(r'^hourlycheck/?$', 'apps.newsfeed.views.hourly_check',name='hourly_check'),
+    url(r'^getfallback/?$', 'apps.newsfeed.views.get_fallback',name='get-fallback'),
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
