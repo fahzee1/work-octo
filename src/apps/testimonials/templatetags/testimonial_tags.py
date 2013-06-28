@@ -84,7 +84,7 @@ class TestimonialSearchNode(template.Node):
               'testimonial': testimonial.message,
               'get_absolute_url': testimonial.get_absolute_url(),
               'date_created': testimonial.date_created})
-        t = template.loader.get_template('testimonials/testimonial_search_tag.html')
+        t = template.loader.get_template('testimonials/testimonial_3.html')
         c = SekizaiContext({
             'testimonials': testimonial_array,
             'template': self.template,

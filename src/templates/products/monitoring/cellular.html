@@ -6,81 +6,112 @@
 {% block page_description %}Experience an extra level of protection with Cellular Monitoring built right into a home security system. The alarm contacts the monitoring facility through a GSM cellular device.{% endblock %}
 
 {% block content %}
-<div class="wrapper">
-<div id="cellular-overview">
-    <div id="cellular-image">
-        <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="broadband-icon-big" width="199" height="200" />
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <h2>Monitored Home Security</h2>
+            <h1>Cellular Monitoring</h1>
+            <p>The completely wireless security solution</p>
+            <a href="{% url shop %}" class="button-link alt">Shop Packages <i class="icon-chevron-right"></i></a>
+
+        </div>
+
     </div>
-    <div id="cellular-content">
-        <h1>No Phone, No Problem with Cellular Monitoring.</h1>
-        <p>With our Cellular Monitoring Solution, you receive true flexibility for your home security monitoring service. There is no need for any type of landline home phone or internet connection. And since it is a cellular connection, the alarm system doesn't require any extra wires to work. Simply plug the command station into a power outlet and everything else is completely wireless. This service is not available in all areas and requires adequate cellular phone coverage in your area.</p>
+</div>
+{% include "order/call-box.html" %}
+<div class="wrapper">
+    <div id="cellular-connection">
+        <img src="{{ STATIC_URL }}img/products/monitoring/cell-phone.png" alt="broadband-globe" />
+    
+        <div id="cellular-benefits">
+            <h2>The Interactive Cellular Advantage</h2>
+            <ul>
+    			<li>No landline phone or internet required.</li>
+    			<li>All communication is via cellular towers, which means no extra wires to the alarm system. </li>
+    			<li>Access to <strong>ProtectAmericaInteractive.com</strong>—anytime, anywhere alarm management. Call today for details!</li>
+    	   </ul>
+        </div>
+    </div>
+    <div id="app-for-that">
+        <h2>There’s an App For That!</h2>
+        <p>Unlike other security companies, Protect America's interactive features are included with no charge when you select Broadband or Cellular monitoring. Our SMART Connect apps for Android devices and the iPhone puts home automation, energy management, and live video in your pocket!</p>
+        <div class="clear"></div>
+        <img src="{{ STATIC_URL }}img/interactive/phones.jpg" class="phones" alt="SMART Connect available on iPhone and Android phones" width="400" height="512" />
+        <ul>
+            <li>
+                <img src="{{ STATIC_URL }}img/interactive/alarm-icon.jpg" alt="Control your Securtiy System from your Phone" width="58" height="58" />
+                <div>
+                    <h3>Security System Control</h3>
+                    <p>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
+                </div>
+            </li>
+            <li>
+                <img src="{{ STATIC_URL }}img/interactive/home-automation-icon.jpg" alt="Home Automation from your Phone" width="58" height="58" />
+                <div>
+                    <h3>Home Automation</h3>
+                    <p>Home automation lets you control lights and appliances from your phone or computer using Z-Wave technology.</p>
+                </div>
+            </li>
+            <li class="omega">
+                <img src="{{ STATIC_URL }}img/interactive/live-video-icon.jpg" alt="Live Video on your Phone" width="58" height="58" />
+                <div>
+                    <h3>Live Video Surveillance</h3>
+                    <p>Keep an eye on your home from anywhere in the world with live video. <span>(Video Service Required)</span></p>
+                </div>
+            </li>
+            <img src="{{ STATIC_URL }}img/interactive/features-arrow.jpg" class="features-arrow" alt="features-arrow" width="40" height="72" />
+            <div class="clear"></div>
+        </ul>
+        <div class="clear"></div>
+        <div class="order-link">
+            <a href="{% url interactive-control %}" class="button-link" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Interactive']);">Learn More <i class="icon-chevron-right"></i></a>
+            <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Cellular Monitoring</h2>
+            <p>With our Cellular Monitoring Solution, you receive true flexibility for your home security monitoring service. There is no need for any type of landline home phone or internet connection. And since it is a cellular connection, the alarm system doesn't require any extra wires to work. Simply plug the command station into a power outlet and everything else is completely wireless. This service is not available in all areas and requires adequate cellular phone coverage in your area.</p>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+<div class="wrapper">
+
+    <div>
+    	<div id="cellular-connected">
+    		<img src="/static/img/products/cell-takeover/black-wire.jpg" class="flood-left">
+    
+    		<h2>Cellular Connection.<br/>No Cut Phone Line.</h2>
+    		<p>With Interactive Cellular Monitoring, your home security system works just like a cell phone. If the alarm goes off, authorities are notified without the need of a landline. This eliminates the opportunity for thieves to bypass your protection by simply cutting the wires that lead to your home.</p>
+    	</div>
+    	<div id="cut-wire-image">
+    		<img src="/static/img/products/cell-takeover/wire-cutters.jpg" class="absolute">
+    
+    	</div>
+    	<div class="clear"></div>
+    </div>
+    
+    <div>
+    	<div id="no-phone-line">
+    		<h2>No Phone Line?<br />No Problem.</h2>
+    		<p>These days, many people are giving up their home phone in place of a cell phone. But with most alarm systems, giving up your phone means giving up your protection - as they usually require a phone line to dial out to their monitoring station. We say, ditch the phone line and switch to cellular. Cellular monitoring means your alarm system will work just like a cell phone - wirelessly contacting our monitoring station during any sign of trouble.</p>
+    	</div>
+    	<div class="clear"></div>
     </div>
     <div class="clear"></div>
-    <img src="{{ STATIC_URL }}img/products/monitoring/cellular-step-by-step.jpg" alt="landline-monitoring-step-by-step" width="640" height="145" />
-</div>
-<div class="clear"></div>
 
-    {% include "banners/limited-time-offer.html" %}
-<div id="cellular-connection">
-    <img src="{{ STATIC_URL }}img/products/monitoring/cell-phone.png" alt="broadband-globe" />
-
-    <div id="cellular-benefits">
-        <h2>The Interactive Cellular Advantage</h2>
-        <ul>
-			<li>No landline phone or internet required.</li>
-			<li>All communication is via cellular towers, which means no extra wires to the alarm system. </li>
-			<li>Access to <strong>ProtectAmericaInteractive.com</strong>—anytime, anywhere alarm management. Call today for details!</li>
-	   </ul>
-    </div>
-</div>
-<div class="clear"></div>
-<div>
-	<div id="cellular-connected">
-		<img src="/static/img/products/cell-takeover/black-wire.jpg" class="flood-left">
-
-		<h2>Cellular Connection.<br/>No Cut Phone Line.</h2>
-		<p>With Interactive Cellular Monitoring, your home security system works just like a cell phone. If the alarm goes off, authorities are notified without the need of a landline. This eliminates the opportunity for thieves to bypass your protection by simply cutting the wires that lead to your home.</p>
-	</div>
-	<div id="cut-wire-image">
-		<img src="/static/img/products/cell-takeover/wire-cutters.jpg" class="absolute">
-
-	</div>
-	<div class="clear"></div>
-</div>
-
-<div>
-	<div id="no-phone-line">
-		<h2>No Phone Line?<br />No Problem.</h2>
-		<p>These days, many people are giving up their home phone in place of a cell phone. But with most alarm systems, giving up your phone means giving up your protection - as they usually require a phone line to dial out to their monitoring station. We say, ditch the phone line and switch to cellular. Cellular monitoring means your alarm system will work just like a cell phone - wirelessly contacting our monitoring station during any sign of trouble.</p>
-	</div>
-	<div class="clear"></div>
-</div>
-<div class="clear"></div>
-    {% include "order/call-box.html" %}
-{% testimonial_search "cellular" "limit=10&words=75" %}
-
-<div class="clear"></div>
-<div id="interactive-laptop">
-    <div id="online-control">
-        <h2>Alarm Control At Home and Online.</h2>
-        <p>When connecting your home security system through our cellular monitoring, you have the option to upgrade your service to include ProtectAmericaInteractive.com. Arm your system, request notifications, manage contacts, and program rules to fit your needs anywhere and at anytime through your computer or smart phone. Forget to set the alarm? No problem, just arm it while sipping your morning coffee at work.</p>
-    </div>
-    <img src="{{ STATIC_URL }}img/products/monitoring/myprotectam-laptop.png" />
-</div>
-<div id="interactive-call-out">
-    <img src="{{ STATIC_URL }}img/products/monitoring/app-for-that.jpg" alt="app-for-that" width="220" height="322" />
-    <div id="app-for-that">
-        <h2>There's A <strong>Free</strong> App For That.</h2>
-        <p>With Protect America's broadband and cellular monitoring you have free direct access to your security system anytime through our interactive monitoring. This includes our mobile app, where you can arm or disarm your system, see which windows or doors are currently open, and access a complete history of your systems events.</p>
-        <p>This feature also offers real-time notifications to your mobile phone. This means your system will notify you when your children have come home from school, the housekeeper arrives (and what time the housekeeper left!), and if your medicine cabinet, liquor cabinet, or garage door has been opened (for this monitors will need to be placed on the cabinet and garage door).</p>
-        <a href="http://itunes.apple.com/app/pamobile/id438114009?mt=8" title="Click to Download the App in the App Store">
-            <img src="{{ STATIC_URL }}img/external/app-store-button.png" class="app-button" alt="app-store-button" width="97" height="31" />
-        </a>
-        <a href="https://market.android.com/details?id=com.securenetmonitoring.protectamerica&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5zZWN1cmVuZXRtb25pdG9yaW5nLnByb3RlY3RhbWVyaWNhIl0." title="Click to download the Android App in the Android Marketplace">
-            <img src="{{ STATIC_URL }}img/external/android-market-button.png" alt="android-market-button" width="93" height="31" class="app-button" />
-        </a>
-    </div>
-</div>
 </div>
 
 {% addtoblock "js" %}
