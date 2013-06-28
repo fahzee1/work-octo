@@ -1,20 +1,26 @@
-{% extends "about-us/base.html" %}
+{% extends "learn/base.html" %}
 
 {% block page_title %}Charities | Protect America | Home Security Systems | Alarm System{% endblock %}
 {% block page_keywords %}public service, charity work, protect america, community{% endblock %}
 {% block page_description %}Protect America provides protection and peace of mind through home security systems. PA supports many charities including: Ronald McDonald House, Austin Pets Alive, Support Our Troops, Cystic Fibrosis Foundation, Feed the Children and more.{% endblock %}
 
 {% block content %}
-<div id="protect-america-cares">
-    <img width="325" height="270" src="{{ STATIC_URL }}img/external/protect-america-cares.png" id="protect-america-cares-logo" alt="Protect America Cares Logo">
-    <div id="protect-america-cares-content">
-        <h1>Supported Charities with Protect America Cares</h1>
-        <p>As a company, we strive to be more than just a home security company. And we've made it our goal to help people. We are proud to care about those around us and to give back to our community when we can. Below are just some of the people we have helped over the years. For more information about our charity efforts and upcoming events, please visit us today at: <a target="_blank" href="http://www.protectamericacares.org">http://www.protectamericacares.org</a></p>
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        {% comment %}
+        <div id="charity-video">
+            <iframe width="400" height="225" src="http://www.youtube.com/embed/2nQjZ1Siwuo?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+        {% endcomment %}
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>About Protect America</h2>
+            <h1>Our Charity Work</h1>
+            <p>As a company, we've made it our goal to help people. Everyday we protect homes and make people feel a little safer where they live. But we strive to be more then a home security company. We are proud to care about those around us and to give back to our community when we can. Below are just some of the people we have helped over the years.</p>
+        </div>
     </div>
-    <div class="clear"></div>
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
-<div class="clear"></div>
+<div class="wrapper">
 <div id="pay-it-forward">
     <div id="pay-it-forward-ad">
         <a href="{% url payitforward %}" title="Click Here to Learn about the Pay It Forward Project">
@@ -24,9 +30,7 @@
     <div id="pay-it-forward-content">
         <h2>Pay It Forward</h2>
         <p>Protect America Cares (the charitable organization of home security company, Protect America, Inc.) recently teamed up with students at Michigan State University to raise money and awareness for charities in the Lansing area. Guided by advertising professor David Regan, the students were divided into 7 groups and given $500 seed money from Protect America to create marketing campaigns that help local charities improve fundraising.</p>
-        <div class="button-link">
-            <a href="{% url payitforward %}" title="Click Here to Learn about the Pay It Forward Project">Pay It Forward ></a>
-        </div>
+            <a href="{% url payitforward %}" class="button-link" title="Click Here to Learn about the Pay It Forward Project">Pay It Forward <i class="icon-chevron-right"></i></a>
     </div>
     <div class="clear"></div>
 </div>
@@ -149,7 +153,8 @@
     </div>
     <div class="clear"></div>
 </div>
-
+<div class="clear"></div>
+</div>
 {% endblock %}  
 {% block sidebar %}
 {{ block.super }}
