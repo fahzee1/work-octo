@@ -1,5 +1,44 @@
 @import "style.less";
-
+#hero-wrapper {
+    background: #000;
+    #hero-image {
+        #dependable-security {
+            padding: 0 54px;
+            h1 {
+                font-size: 40px;
+                padding-top: 42px;
+                line-height: 42px;
+            }
+            p {
+                width: 100%;
+                font-size: 16px;
+                line-height: 24px;
+                span {
+                    display: block;
+                }
+            }
+            .main-hero-image {
+                position: absolute;
+                z-index: -1;
+                left: -205px;
+            }
+            .button-link {
+                float: none;
+                display: block;
+                margin: 0 auto;
+                width: 160px;
+                margin-top: 80px;
+                .drop-shadow(0,2px,5px,#000);
+                background: #00aee4;
+                color: @white;
+                &:hover {
+                    background: @white;
+                    color: @blue;
+                }
+            }
+        }
+    }
+}
 #categories {
     .category {
         float: left;
@@ -8,7 +47,20 @@
         .category-img {
             float: left;
             padding-right: 16px;
-            width: 132px;
+            width: 128px;
+            height: 128px;
+            display: block;
+            margin: 42px auto 16px;
+            background: url(/static/img/base/main-icons-sprite.png) 0 0 no-repeat;  
+            &.life-safety {
+                background: url(/static/img/base/main-icons-sprite.png) 0 -128px no-repeat;
+            }        
+            &.home-automation {
+                background: url(/static/img/base/main-icons-sprite.png) 0 -256px no-repeat;
+            }          
+            &.smart-connect {
+                background: url(/static/img/base/main-icons-sprite.png) 0 -385px no-repeat;
+            }
         }
         .category-info {
             float: left;

@@ -13,12 +13,14 @@
             <a href="{% url home-security-equipment %}">Customer Service</a>
             <div class="child-nav">
                 <ul class="customer-service">
-                    <li>Installation</li>
-                    <li>Operation</li>
-                    <li>Troubleshooting</li>
-                    <li>FAQs</li>
-                    <li>Cancel Service</li>
-                    <li>EasyMove Kit</li>
+                    <li class="{% if 'installation' in active_pages %}active{% endif %}"><a href="{% url installation %}">Installation</a></li>
+                    <li class="{% if 'operation' in active_pages %}active{% endif %}"><a href="{% url operation %}">Operation</a></li>
+
+                    <li class="{% if 'troubleshooting' in active_pages %}active{% endif %}"><a href="{% url troubleshooting %}">Troubleshooting</a></li>
+
+                    <li class="{% if 'faq' in active_pages %}active{% endif %}"><a href="{% url faq %}">FAQs</a></li>
+
+                    <li class="{% if 'moving-kit' in active_pages %}active{% endif %}"><a href="{% url moving-kit %}">EasyMove Kit</a></li>
 
                 </ul>
                 <div class="clear"></div>
@@ -42,15 +44,13 @@
         <li class="{% if 'affilaite-program' in active_pages %}active{% endif %} menu-item">
             <a href="{% url affiliate-program %}">Affiliates</a>
         </li>
-        <li class="{% if 'contact-us' in active_pages %}active{% endif %} menu-item" data-menu="contant-areas">
+        <li class="{% if 'contact-us' in active_pages %}active{% endif %} menu-item" data-menu="contact-areas">
             <a href="{% url contact-us %}">Contact Us</a>
             <div class="child-nav">
                 <ul class="contact-areas">
-                    <li>Department Listing</li>
-                    <li>Customer Care Online Chat</li>
-                    <li>Send Feedback to Our CEO</li>
-
-
+                    <li class="{% if 'department-listing' in active_pages %}active{% endif %}"><a href="{% url department-listing %}">Department Listing</a></li>
+                    <li class="{% if 'feedback-ceo' in active_pages %}active{% endif %}"><a href="{% url feedback-ceo %}">Send Feedback to Our CEO</a></li>
+                    <li class="{% if 'send-testimonial' in active_pages %}active{% endif %}"><a href="{% url send-testimonial %}">Write a Review</a></li>
                 </ul>
                 <div class="clear"></div>
 

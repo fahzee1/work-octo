@@ -166,7 +166,6 @@ a {
 
 /*** Search Testimonial Results Box ***/
 
-/************** Buttons ****************/
 table#licenses-table {
     font-size: 10px;
     padding: 0 0 8px;
@@ -336,6 +335,7 @@ table#licenses-table {
 #header-wrapper {
     background: @black;
     position: relative;
+    z-index: 900;
     #header {
         .wrapper;
         #company-logo {
@@ -413,6 +413,10 @@ table#licenses-table {
             &:hover {
                 background: #12a859
             }
+            &.active {
+                .border-radius(5px,5px, 0, 0);
+                padding: 8px 16px 15px;
+            }
         }
 
     }
@@ -475,7 +479,7 @@ table#licenses-table {
                 left: 50%;
                 margin-left: -480px;
                 .border-radius(0,0,5px,5px);
-                z-index: 999;
+                z-index: 100;
                 .drop-shadow;
                 ul {
                     display: none;
@@ -540,22 +544,96 @@ table#licenses-table {
 
 /************** Quote Form ****************/
 #quote-form {
-    .content-box(275px);
-    background: #0069aa;
+    .content-box(376px);
+    background: #555;
     float: left;
     margin-left: 16px;
     position: relative;
     padding-bottom: 4px;
-    
+    position: absolute;
+    z-index: 999;
+    top: 52px;
+    display: none;
+    right: -1px;
+    border: 1px solid @black;
+    border-top: none;
+    .border-radius(0,0,5px,5px);
+    padding: 0;
+    .drop-shadow(0px,2px,5px,#000);
+
+    p.form-title {
+       background: #1fb867;
+       line-height: 64px; 
+    }
+    .form-fields {
+        padding: 8px 32px 16px;
+        p {
+            font-size: 11px;
+            line-height: 13px;
+            text-align: justify;
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+        }
+        .consent-box {
+            border-top: 1px solid @black;
+            border-bottom: 1px solid @black;
+            padding: 4px 0;
+            margin-top: 8px;
+            cursor: pointer;
+            cursor: hand;
+            #id_consent {
+                float: left;
+                margin: 8px 8px;
+                width: 32px;
+            }
+            label.consent-label {
+                font-size: 11px;
+                line-height: 15px;
+                text-align: justify;
+                float: left;
+                width: 260px;
+            }
+        }
+    }
+    button {
+        display: block;
+        padding: 14px 16px;
+        .border-radius(5px,5px,5px,5px);
+        color: @white;
+        background: @red;
+        text-decoration: none;
+        border: none;
+        font-size: 24px;
+        margin: 0 auto;
+        width: 265px;
+        .fade-slow;
+        cursor: pointer;
+        cursor: hand;
+        &:hover {
+            color: @white;
+            .fade-fast;
+            background: @dark-red;
+            text-decoration: none;
+            i {
+                border-left: 1px solid @red;
+
+            }
+        }
+        i {
+            border-left: 1px solid @dark-red;
+            padding: 4px 0 4px 24px;
+            margin-left: 12px;
+        }
+    }
     #third-party-container {
         background: @white;
-        width: 96%;
-        margin: 0 auto 8px;
         text-align: center;
         padding: 0;
-        .border-radius;
         overflow: hidden;
-        height: 72px;
+        height: 76px;
         .third-party-badge {
             margin: 0 auto; 
             width: 135px; 
@@ -584,7 +662,6 @@ table#licenses-table {
         }
     }
     div {
-        padding: 8px;
         p {
             display: block;
             font-size: 22px;
@@ -600,57 +677,18 @@ table#licenses-table {
         }
         input {
             color: @black;
-            font-size: 18px;
-            height: 28px;
-            line-height: 28px;
+            font-size: 14px;
+            height: 32px;
+            line-height: 32px;
             margin: 0 0 8px;
-            width: 98%;
+            width: 300px;
+            padding-left: 8px;
+            .border-radius (5px,5px, 5px, 5px);
+            border: 1px solid @black;
         }
         
     }
 
-    button {
-        display: block;
-        background: #90af01;
-        color: @white;
-        text-decoration: none;
-        height: 36px;
-        line-height: 36px;
-        background-image: -moz-linear-gradient(top, #90af01, #829e01);
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#829e01));
-        border: 1px solid transparent;
-        font-size: 18px;
-        padding: 0 24px;
-        width: 257px;
-        font-weight: bold;
-        cursor: pointer;
-        cursor: hand;
-        margin-left: 8px;
-        &:hover {
-            background-image: -moz-linear-gradient(center top, #90af01, #687e01);
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#90af01), to(#687e01));
-            border: 1px solid #768f03;
-            border-bottom: 1px solid #576902;
-            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3);
-            box-shadow: 0 1px 1px rgba(0,0,0,.3);
-        }
-        &.redbutton {
-            background: #E51A19;
-            color: white;
-            background-image: -moz-linear-gradient(top, #e51a19, #ba1615);
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#e51a19), to(#ba1615));
-            &:hover {
-                background-image: -moz-linear-gradient(center top, #e51a19, #920403);
-                background-image: -webkit-gradient(linear, left top, left bottom, from(#e51a19), to(#920403));
-                border: 1px solid #8d0400;
-                border-bottom: 1px solid #6e0401;
-                -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-                -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-            }
-        }
-    }
     a {
         display: block;
         text-align: center;
@@ -998,6 +1036,30 @@ table#licenses-table {
                 }
             }
         }
+        button {
+            display: block;
+            float: left;
+            padding: 8px 16px;
+            .border-radius(5px,5px,5px,5px);
+            color: @white;
+            background: @blue;
+            text-decoration: none;
+            margin-right: 16px;
+            border: none;
+            font-size: 16px;
+            .fade-slow;
+            &:hover {
+                color: @white;
+                .fade-fast;
+                background: #00aee4;
+                text-decoration: none;
+            }
+            i {
+                border-left: 1px solid #6598b9;
+                padding: 4px 0 4px 8px;
+                margin-left: 4px;
+            }
+        }
         .main-hero-image {
             position: absolute;
             bottom: 0;
@@ -1114,12 +1176,17 @@ table#licenses-table {
     text-decoration: none;
     margin-right: 16px;
     .fade-slow;
+    &.alt {
+        background: @white;
+        color: @blue;
+    }
     &:hover {
         color: @white;
         .fade-fast;
         background: #00aee4;
         text-decoration: none;
     }
+    
     i {
         border-left: 1px solid #6598b9;
         padding: 4px 0 4px 8px;
@@ -1155,6 +1222,12 @@ table#licenses-table {
                 font-style: italic;
                 font-size: 16px;
                 line-height: 20px;
+            }
+            .rating {
+                position: absolute;
+                right: 0;
+                top: 26px;
+                color: @yellow;
             }
         }
         i.icon-caret-up {

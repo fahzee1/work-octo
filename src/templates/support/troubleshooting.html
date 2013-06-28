@@ -3,150 +3,134 @@
 {% block page_title %}Troubleshoot | Security System | Wireless Security System{% endblock %}
 {% block page_keywords %}troubleshooting,support,troubleshoot,problems,issues,fix,security system,equipment,installation{% endblock %}
 {% block page_description %}Protect America helps you troubleshoot any problems you may have with your GE home security system with answers to common issues and an available support line.{% endblock %}
-{% block subnav_child %}
-<ul>
-    <li><a href="#ac-power" title="Click here to learn how to fix an ac power failure">AC Power Failure</a></li>
-    <li><a href="#low-battery" title="Click here to learn how to fix a low battery">Low Battery</a></li>
-    <li><a href="#system-time" title="Click here to learn how to fix a Time Not Set problem">Time Not Set</a></li>
-    <li><a href="#sensor-open" title="Click here to learn how to fix an open sensor">Sensor Open</a></li>
-    <li><a href="#communication-failure" title="Click here to learn how to fix a communication failure">Communication Failure</a></li>
-    <li><a href="#sensor-fail" title="Click here to learn how to fix a failing sensor">Sensor Failure</a></li>
-    <li><a href="#trouble-beeps" title="Click here to learn how to Silence Trouble Beeps">Trouble Beeps</a></li>
 
-</ul>
-{% endblock %}
 
 {% block content %}
-<div id="troubleshooting-overview">
-    <img src="{{ STATIC_URL }}img/products/security-panels/simon-xt-medium.jpg" alt="simon-xt-medium" width="350" height="297" />
-
-    <div id="troubleshooting-content">
-        <h1>Troubleshooting</h1>
-        <p>Troubleshooting and repairs to your home security system can be easy to perform on your own. Minor issues, like sensor failure or low batteries, can be addressed with minimal support from Protect America technicians. In the event of equipment failure, customers can always call Protect America for immediate assistance.  </p>
-        <p>Protect America provides the following guide to help troubleshoot any issues you might have with your alarm system. If you still need help after troubleshooting, please call one of our Protect America Technical Support Representatives at 1 (800) 951-5111, option 4.</p>
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>Customer Service</h2>
+            <h1>Troubleshooting</h1>
+            <p>Troubleshooting and repairs to your home security system can be easy to perform on your own. Minor issues, like sensor failure or low batteries, can be addressed with minimal support from Protect America technicians. In the event of equipment failure, customers can always call Protect America for immediate assistance.  </p>
+            <p>Protect America provides the following guide to help troubleshoot any issues you might have with your alarm system. If you still need help after troubleshooting, please call one of our Protect America Technical Support Representatives at 1 (800) 951-5111, option 4.</p>
+        </div>
+        <img src="{{ STATIC_URL }}img/products/simon-xt/simon-xt-hero-grey.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
     </div>
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
-<div class="clear"></div>
-<div id="support-department">
-    <h3>Customer Service</h3>
-    <p class="phone-number"><strong>1-800-951-5111, Option 4</strong></p>
-    <p class="email-address"><a href="mailto:support@protectamerica.com">support@protectamerica.com</a></p>
+<div id="call-box">
+    <p><a href="tel:{{ phone_number|format_number }}">Customer CARE: <strong>1-800-951-5111, Option 4</strong></a></p>
 </div>
-<div class="clear"></div>
-{% testimonial_search "trouble" "limit=10&words=75" %}
-
-<div id="ac-power">
-    <h3>AC Power Failure</h3>
-    <ul>
-        <li>This condition occurs when the panel is no longer receiving power from the transformer.</li>
-        <li>Check for a possible AC power outage.</li>
-        <li>Check breakers.</li>
-        <li>Check the transformer, see if it may have been accidentally unplugged or look for any loose wires, make sure your AC wires are connected.</li>
-        <li>If the failure was not caused by the above conditions, please contact Protect America Technical Support at (800)951-5111 option 4.</li>
-        <li>When an AC power failure occurs, the backup battery will take over (if fully charged, it will last for 18-24 hours with no AC power.) If AC power is not restored within 15 seconds, the Control Panel will alert you with trouble beeps. Pressing SYSTEM STATUS twice will confirm the AC power failure.</li>
-    </ul>
-</div>
-<div id="low-battery">
-    <h3>System Low Battery</h3>
-    <ul>
-        <li>This condition occurs if the emergency backup battery has been drained. Trouble beeps will start and the SYSTEM STATUS button will light.</li>
-		<li>The battery is usually drained if panel is not receiving electricity. After AC power is restored the battery will recharge. The panel will report low battery during the recharging process. If the System Low Battery report does not clear after 24 hours have passed with AC power restored, contact Protect America Technical Support at (800)951-5111 option 4.</li>
-    </ul>
-</div>
-<div id="system-time">
-    <h3>System Time is not set</h3>
-	<p>System time has been lost. Setting your clock:</p>
-	<ol>
-		<li>Open your Control Panel cover.</li>
-		<li>Enter your 4 digit MASTER CODE using the red numbered keys.</li>
-		<li>Press the CLOCK SET button.</li>
-		<li>Press the HOURS and MINUTES buttons until the system states the correct time.</li>
-		<li>Press the DONE button.</li>
-		<li>Close the Control Panel cover.</li>
-	</ol>
-</div>
-<div id="alarm-memory">
-    <h3>Alarm In Memory</h3>
-	<p>If an alarm has occurred it will remain in memory until cleared. Trouble beeps will start and the system status light will illuminate. Press the SYSTEM STATUS button twice to hear the status report. If an alarm is in memory the panel will respond with the Sensor # Name Alarm. (Example: "Sensor 1 Front Door Alarm").</p>
-	<p>To clear alarms in memory:</p>
-	<ol>
-		<li>Press the SYSTEM STATUS button. Listen to the status report.</li>
-		<li>Press the DISARM button immediately.</li>
-	</ol>
-</div>
-<div id="sensor-open">
-    <h3>Sensor Open</h3>
-	<ul>
-		<li>This condition occurs if a door or window is open, or a system sensor has been disturbed or tampered with and not reset properly. For example, a <a href="{% url sensors %}#motion-detector" title="Click to learn more about our Motion Detectors">Motion Sensor</a> may be off the wall or a protected door or window may have been left open. Your system will indicate this condition to you by causing the SYSTEM STATUS button to light. When you press this button twice, the system responds with "Sensor # Name open" (Example: "Sensor 1 Front Door Open" this indicates that the sensor on the front door is open).</li>
-		<li>Make sure doors/windows are securely closed
-Try opening and shutting the door or window.
-Check to see if the <a href="{% url door-window-sensor %}" title="Click Here to Learn about our Door / Window Sensors">Door/Window magnet</a> may have been removed from the sensor. Make sure both magnet and contact are still mounted
-If you have done the following and open zone still exists please contact Protect America Technical Support at (800) 951-5111 option 4.</li>
-	</ul>
-</div>
-<div id="sensor-low-battery">
-    <h3>Sensor Low Battery</h3>
-	<p>This condition occurs if a system sensor has a low battery. The sensor may still be communicating with the Control Panel. Trouble beeps will start and the SYSTEM STATUS button will light. Press the SYSTEM STATUS button twice to hear which sensor(s) have trouble. Sensor batteries can be replaced by the homeowner.</p>
-	<ol>
-		<li>Locate the sensor.</li>
-		<li>Open the sensor.</li>
-		<li>Replace the battery.</li>
-	</ol>
-	<p><strong>Which Battery do I need?</strong></p>
-	<ul>
-		<li>Micro sensors take <a href="https://www.amazon.com/dp/B0002DSVS8/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B0002DSVS8&adid=0ZD3S800ACJE265JSB51&" title="one 3V lithium coin-cell battery (CR2032)">one 3V lithium coin-cell battery (CR2032)</a></li>
-		<li>Saw sensors take <a href="https://www.amazon.com/dp/B00422KWU0/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00422KWU0&adid=05V86GCCEGTD38RMNGPC&" title="two AAA alkaline batteries">two AAA alkaline batteries</a></li>
-		<li>Crystal sensors take <a href="https://www.amazon.com/dp/B000UEFLD2/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B000UEFLD2&adid=0RX7KFD857S6AB6YAV73&" title="one 3.6V lithium battery">one 3.6V lithium battery</a></li>
-		<li>Motion sensors take <a href="https://www.amazon.com/dp/B00422KWTQ/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00422KWTQ&adid=0ZB8M3MX4SXK3SZ0P9ZF&" title="two AA alkaline batterie">two AA alkaline batteries</a></li>
-		<li>Smoke detectors take <a href="https://www.amazon.com/dp/B002IGW15G/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B002IGW15G&adid=1NVHMF8VGHDBQPPK2KN5&" title="two 3V lithium batteries (CR123A)">two 3V lithium batteries (CR123A)</a></li>
-		<li>2-Way Talking Touch Pads take <a href="https://www.amazon.com/dp/B00422KWU0/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00422KWU0&adid=05V86GCCEGTD38RMNGPC&" title="2 AAA alkaline batteries">2 AAA alkaline batteries</a></li>
-		<li>Key Fobs take one <a href="https://www.amazon.com/dp/B00004YK10/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00004YK10&adid=05QQJ4MRNY4GRZ1MB954&" title="A23 alkaline battery">A23 alkaline battery</a></li>
-	</ul>
-	<p>If you need help or have any questions, please contact Protect America Technical Support at (800) 951-5111 option 4. Often times, a sensor battery is covered by Protect America's lifetime parts warranty.</p>
-</div>
-<div id="communication-failure">
-    <h3>Failure-To-Communicate</h3>
-	<ul>
-		<li>This condition only occurs if your home security system tries to send a signal and cannot communicate with the central monitoring station. Your system will try to communicate with the central monitoring station 8 times before it tells you there is a Fail To Communicate problem. Trouble beeps will start and the SYSTEM STATUS button will light.</li>
-		<li>Check to see if your phone lines are down.
-If you have a dial tone then go to the main panel and verify that your phone lines are connected.  There should be a phone cord going out of your panel to the phone jack. 
-If the connections look like they are connected properly or if you need assistance, contact Protect America Technical Support at (800)951-5111 option 2.</li>
-	</ul>
-</div>
-<div id="sensor-fail">
-    <h3>Sensor Failure</h3>
-	<p>This condition occurs if a sensor is not communicating with the Control Panel. Trouble beeps will start and the SYSTEM STATUS button will light. Press the SYSTEM STATUS button twice to hear which sensor(s) have trouble.  Perform sensor tests.</p>
-	<ol>
-		<li>Open your panel cover.</li>
-		<li>Enter your 4 digit master code.</li>
-		<li>Press the TEST button once. The panel will announce SENSOR TEST. The panel will voice prompt you with a list of your programmed sensors. The panel will start with sensor # 1 and announce TEST SENSOR, SENSOR NAME. When the panel announces the sensor that you need to test, trip the sensor. (Use the instructions below on how to trip the devices.)</li>
-		<li>Press the DONE button and close the cover. If trouble still exists please contact Protect America Technical Support at (800) 951-5111, option 4.</li>
-	</ol>
-	<p><strong>How to Trip your Security Devices:</strong></p>
-	<ul>
-		<li>Door/Window Sensor: Open the secured door or window.</li>
-		<li>Glass Guard Sensor: Tap the glass 3 or 4 inches from the sensor.</li>
-		<li>Motion Sensor: Avoid the motion's view for 5 minutes, then enter its view.</li>
-	</ul>
+<div class="wrapper">
+    <div id="support-department">
+        <h3>Customer Service</h3>
+        <p class="phone-number"><strong>1-800-951-5111, Option 4</strong></p>
+        <p class="email-address"><a href="mailto:support@protectamerica.com">support@protectamerica.com</a></p>
+    </div>
+    <div class="clear"></div>
     
+    <div id="ac-power">
+        <h3>AC Power Failure</h3>
+        <ul>
+            <li>This condition occurs when the panel is no longer receiving power from the transformer.</li>
+            <li>Check for a possible AC power outage.</li>
+            <li>Check breakers.</li>
+            <li>Check the transformer, see if it may have been accidentally unplugged or look for any loose wires, make sure your AC wires are connected.</li>
+            <li>If the failure was not caused by the above conditions, please contact Protect America Technical Support at (800)951-5111 option 4.</li>
+            <li>When an AC power failure occurs, the backup battery will take over (if fully charged, it will last for 18-24 hours with no AC power.) If AC power is not restored within 15 seconds, the Control Panel will alert you with trouble beeps. Pressing SYSTEM STATUS twice will confirm the AC power failure.</li>
+        </ul>
+    </div>
+    <div id="low-battery">
+        <h3>System Low Battery</h3>
+        <ul>
+            <li>This condition occurs if the emergency backup battery has been drained. Trouble beeps will start and the SYSTEM STATUS button will light.</li>
+    		<li>The battery is usually drained if panel is not receiving electricity. After AC power is restored the battery will recharge. The panel will report low battery during the recharging process. If the System Low Battery report does not clear after 24 hours have passed with AC power restored, contact Protect America Technical Support at (800)951-5111 option 4.</li>
+        </ul>
+    </div>
+    <div id="system-time">
+        <h3>System Time is not set</h3>
+    	<p>System time has been lost. Setting your clock:</p>
+    	<ol>
+    		<li>Open your Control Panel cover.</li>
+    		<li>Enter your 4 digit MASTER CODE using the red numbered keys.</li>
+    		<li>Press the CLOCK SET button.</li>
+    		<li>Press the HOURS and MINUTES buttons until the system states the correct time.</li>
+    		<li>Press the DONE button.</li>
+    		<li>Close the Control Panel cover.</li>
+    	</ol>
+    </div>
+    <div id="alarm-memory">
+        <h3>Alarm In Memory</h3>
+    	<p>If an alarm has occurred it will remain in memory until cleared. Trouble beeps will start and the system status light will illuminate. Press the SYSTEM STATUS button twice to hear the status report. If an alarm is in memory the panel will respond with the Sensor # Name Alarm. (Example: "Sensor 1 Front Door Alarm").</p>
+    	<p>To clear alarms in memory:</p>
+    	<ol>
+    		<li>Press the SYSTEM STATUS button. Listen to the status report.</li>
+    		<li>Press the DISARM button immediately.</li>
+    	</ol>
+    </div>
+    <div id="sensor-open">
+        <h3>Sensor Open</h3>
+    	<ul>
+    		<li>This condition occurs if a door or window is open, or a system sensor has been disturbed or tampered with and not reset properly. For example, a <a href="{% url motion-detector %}" title="Click to learn more about our Motion Detectors">Motion Sensor</a> may be off the wall or a protected door or window may have been left open. Your system will indicate this condition to you by causing the SYSTEM STATUS button to light. When you press this button twice, the system responds with "Sensor # Name open" (Example: "Sensor 1 Front Door Open" this indicates that the sensor on the front door is open).</li>
+    		<li>Make sure doors/windows are securely closed
+    Try opening and shutting the door or window.
+    Check to see if the <a href="{% url door-window-sensor %}" title="Click Here to Learn about our Door / Window Sensors">Door/Window magnet</a> may have been removed from the sensor. Make sure both magnet and contact are still mounted
+    If you have done the following and open zone still exists please contact Protect America Technical Support at (800) 951-5111 option 4.</li>
+    	</ul>
+    </div>
+    <div id="sensor-low-battery">
+        <h3>Sensor Low Battery</h3>
+    	<p>This condition occurs if a system sensor has a low battery. The sensor may still be communicating with the Control Panel. Trouble beeps will start and the SYSTEM STATUS button will light. Press the SYSTEM STATUS button twice to hear which sensor(s) have trouble. Sensor batteries can be replaced by the homeowner.</p>
+    	<ol>
+    		<li>Locate the sensor.</li>
+    		<li>Open the sensor.</li>
+    		<li>Replace the battery.</li>
+    	</ol>
+    	<p><strong>Which Battery do I need?</strong></p>
+    	<ul>
+    		<li>Micro sensors take <a href="https://www.amazon.com/dp/B0002DSVS8/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B0002DSVS8&adid=0ZD3S800ACJE265JSB51&" title="one 3V lithium coin-cell battery (CR2032)">one 3V lithium coin-cell battery (CR2032)</a></li>
+    		<li>Saw sensors take <a href="https://www.amazon.com/dp/B00422KWU0/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00422KWU0&adid=05V86GCCEGTD38RMNGPC&" title="two AAA alkaline batteries">two AAA alkaline batteries</a></li>
+    		<li>Crystal sensors take <a href="https://www.amazon.com/dp/B000UEFLD2/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B000UEFLD2&adid=0RX7KFD857S6AB6YAV73&" title="one 3.6V lithium battery">one 3.6V lithium battery</a></li>
+    		<li>Motion sensors take <a href="https://www.amazon.com/dp/B00422KWTQ/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00422KWTQ&adid=0ZB8M3MX4SXK3SZ0P9ZF&" title="two AA alkaline batterie">two AA alkaline batteries</a></li>
+    		<li>Smoke detectors take <a href="https://www.amazon.com/dp/B002IGW15G/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B002IGW15G&adid=1NVHMF8VGHDBQPPK2KN5&" title="two 3V lithium batteries (CR123A)">two 3V lithium batteries (CR123A)</a></li>
+    		<li>2-Way Talking Touch Pads take <a href="https://www.amazon.com/dp/B00422KWU0/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00422KWU0&adid=05V86GCCEGTD38RMNGPC&" title="2 AAA alkaline batteries">2 AAA alkaline batteries</a></li>
+    		<li>Key Fobs take one <a href="https://www.amazon.com/dp/B00004YK10/ref=as_li_ss_til?tag=movtee-20&camp=0&creative=0&linkCode=as4&creativeASIN=B00004YK10&adid=05QQJ4MRNY4GRZ1MB954&" title="A23 alkaline battery">A23 alkaline battery</a></li>
+    	</ul>
+    	<p>If you need help or have any questions, please contact Protect America Technical Support at (800) 951-5111 option 4. Often times, a sensor battery is covered by Protect America's lifetime parts warranty.</p>
+    </div>
+    <div id="communication-failure">
+        <h3>Failure-To-Communicate</h3>
+    	<ul>
+    		<li>This condition only occurs if your home security system tries to send a signal and cannot communicate with the central monitoring station. Your system will try to communicate with the central monitoring station 8 times before it tells you there is a Fail To Communicate problem. Trouble beeps will start and the SYSTEM STATUS button will light.</li>
+    		<li>Check to see if your phone lines are down.
+    If you have a dial tone then go to the main panel and verify that your phone lines are connected.  There should be a phone cord going out of your panel to the phone jack. 
+    If the connections look like they are connected properly or if you need assistance, contact Protect America Technical Support at (800)951-5111 option 2.</li>
+    	</ul>
+    </div>
+    <div id="sensor-fail">
+        <h3>Sensor Failure</h3>
+    	<p>This condition occurs if a sensor is not communicating with the Control Panel. Trouble beeps will start and the SYSTEM STATUS button will light. Press the SYSTEM STATUS button twice to hear which sensor(s) have trouble.  Perform sensor tests.</p>
+    	<ol>
+    		<li>Open your panel cover.</li>
+    		<li>Enter your 4 digit master code.</li>
+    		<li>Press the TEST button once. The panel will announce SENSOR TEST. The panel will voice prompt you with a list of your programmed sensors. The panel will start with sensor # 1 and announce TEST SENSOR, SENSOR NAME. When the panel announces the sensor that you need to test, trip the sensor. (Use the instructions below on how to trip the devices.)</li>
+    		<li>Press the DONE button and close the cover. If trouble still exists please contact Protect America Technical Support at (800) 951-5111, option 4.</li>
+    	</ol>
+    	<p><strong>How to Trip your Security Devices:</strong></p>
+    	<ul>
+    		<li>Door/Window Sensor: Open the secured door or window.</li>
+    		<li>Glass Guard Sensor: Tap the glass 3 or 4 inches from the sensor.</li>
+    		<li>Motion Sensor: Avoid the motion's view for 5 minutes, then enter its view.</li>
+    	</ul>
+        
+    </div>
+    <div id="trouble-beeps">
+        <h3>Silencing Trouble Beeps</h3>
+    	<ul>
+    		<li>Press the SYSTEM STATUS button twice or ARM and DISARM the system.</li>
+    		<li>Doing this will silence the trouble beeps temporarily. Trouble beeps begin again 4 hours later unless the trouble condition is corrected. If you have disabled Panel Beeps, system trouble will only be indicated by the system status light.</li>
+    	</ul>
+    </div>
+    <div class="clear"></div>
 </div>
-<div id="trouble-beeps">
-    <h3>Silencing Trouble Beeps</h3>
-	<ul>
-		<li>Press the SYSTEM STATUS button twice or ARM and DISARM the system.</li>
-		<li>Doing this will silence the trouble beeps temporarily. Trouble beeps begin again 4 hours later unless the trouble condition is corrected. If you have disabled Panel Beeps, system trouble will only be indicated by the system status light.</li>
-	</ul>
-</div>
-<div class="clear"></div>
-{% addtoblock "js" %}
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#search-testimonial-box').cycle({
-            fx: 'fade',
-            timeout: 9000
-        });
-    });
-    </script>
-{% endaddtoblock "js" %}
 {% endblock %}  

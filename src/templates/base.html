@@ -153,8 +153,8 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             <div id="company-links">
                 <ul id="international-selection">
                     <li class="us active"><a href="">EN</a></li>
-                    <li class="es"><a href="">ES</a></li>
-                    <li class="ca"><a href="">EN</a></li>
+                    <li class="es"><a href="http://www.protectamerica.com/es/">ES</a></li>
+                    <li class="ca"><a href="http://www.protectamericasecurity.ca">EN</a></li>
                     <i class="icon-caret-down"></i>
                 </ul>
                 <form action="{% url 'search' %}" method='get'>
@@ -205,6 +205,8 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
             </ul>
+            {% include "order/quote-form-refresh.html" with form=forms.basic %}
+
             <div class="clear"></div>
         </div>
     </div>
@@ -509,6 +511,22 @@ $(document).ready(function(){
 
             }
             return false;
+        });
+        $(".request-quote-button").click(function(){
+            if ($(this).hasClass('active')) {
+                $('#quote-form').hide();
+                $(this).removeClass('active');
+            } else {
+                $('#quote-form').show();
+                $(this).addClass('active');
+            };
+            return false;
+        });
+        $('#newsfeed').cycle({
+           fx:     'blindY',
+           speed:   500,
+           timeout: 6000,
+           delay:  -3000
         });
 
         $('#header-wrapper').waypoint('sticky', {
