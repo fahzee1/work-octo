@@ -351,7 +351,7 @@ $(document).ready(function(){
     function alertError(error){
         switch(error.code){
             case error.PERMISSION_DENIED:
-                alert('User denied request')
+                alert('You denied our request')
             break;
             case error.POSITION_UNAVAILABLE:
                 alert('Location information is unavailable')
@@ -434,6 +434,12 @@ $(document).ready(function(){
         });
     }
 
+    function checkExpired(){
+        $.ajax({
+            url:"{% url 'hourly_check' %}",
+        });
+    }
+    setInterval(checkExpired,3600000)
   
 
 

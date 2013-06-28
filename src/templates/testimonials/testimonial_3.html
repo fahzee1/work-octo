@@ -1,8 +1,12 @@
+{% load sekizai_tags %}
 
-<div class="testimonial {% cycle 'alt' '' %}">
-    {% if test.type == 'Textimonial' %}
+
+<div class="testimonials">
+    {% for testimonial in testimonials %}
+
+    <div class="testimonial {% cycle '' 'mid' %}">
         <h3>{{ testimonial.first_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}
-       {% if testimonial.rating > '0' %}
+        {% if testimonial.rating > '0' %}
             <div class="rating">
                 {% if testimonial.rating >= '1' %}<i class="icon-star"></i>{% endif %}
                 {% if testimonial.rating >= '2' %}<i class="icon-star"></i>{% endif %}
@@ -16,9 +20,8 @@
         <p>{{ testimonial.message|safe }}</p>
  
         <div class="clear"></div>
-    {% else %}
-        {% if test.type == 'Vidimonial' %}
-            <iframe width="100%" height="340px" src="http://www.youtube.com/embed/{{ testimonial.video_url }}" frameborder="0" allowfullscreen></iframe>
-        {% endif %}
-    {% endif %}
+    </div>
+    {% endfor %}
+    <div class="clear"></div>
 </div>
+
