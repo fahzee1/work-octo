@@ -31,7 +31,7 @@ from apps.common.forms import LinxContextForm
 from apps.news.models import Article
 from apps.pricetable.models import Package
 from apps.newsfeed.models import TheFeed,FallBacks
-from itertools import chain
+from itertools import chain, izip
 
 consumer_key=settings.TWITTER_CONSUMER_KEY
 consumer_secret=settings.TWITTER_CONSUMER_SECRET
@@ -274,7 +274,14 @@ def render_feed(request):
         data=request.session.get('GeoFeedData',False)
         fback=request.session.get('FallBacks',False)
         if data or fback:
-            results=list(chain.from_iterable(zip(data,tweets[:5])))
+            results=list(chain.from_iterable(izip(data,tweets[:5])))
+            for x in data:
+                for y in tweets:
+                    if y not in results:
+                        results.append(y)
+                    if x not in results:
+                        results.append(x)
+                        
             ctx['GeoFeed']=results
             ctx['FallBacks']=fback
             return render(request,'newsfeed/feed.html',ctx)
