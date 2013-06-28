@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from django.views.generic.simple import redirect_to
+from django.views.generic.base import RedirectView
 
 from apps.news.sitemaps import ArticleSitemap
 from apps.news.feeds import RssNewsFeed
@@ -25,7 +25,7 @@ urlpatterns = patterns('apps.news.views',
         'load_more_articles', name="load-more-articles"),
     # 301 perm redirect from / to non-/ on article pages
     ('^article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)/$',
-        redirect_to, {'url': '/news/article/%(article_title)s_%(article_id)s', 'permanent': True}),
+        RedirectView.as_view(url='/news/article/%(article_title)s_%(article_id)s',permanent=True)), 
     
     url(r'^article/(?P<article_title>[a-zA-Z\-\_0-9\s+]+)_(?P<article_id>[0-9]+)$', 'article', name="news-article"),
 
@@ -34,7 +34,7 @@ urlpatterns = patterns('apps.news.views',
     url(r'^category/(?P<category_id>\d+)-(.*)/?$', 'redirect_old_category', name='news-category-redirect'),
     
     # redirect /news/article/ to /news/archive/
-    url('^article/$', redirect_to, {'url': '/news/archive/', 'permanent': True}),
+    url('^article/$', RedirectView.as_view(url='/news/archive/',permanent=True)), 
     
 
 )
