@@ -48,7 +48,7 @@ def send_testimonial(request):
 def view_testimonials(request):
     testimonials = Textimonial.objects.filter(display=True).order_by('-date_created')
     vidimonials = Vidimonial.objects.order_by('-date_created')
-
+    test_count = testimonials.count() + vidimonials.count()
     result_list = sorted(
         chain(testimonials, vidimonials),
         key=lambda instance: instance.date_created, reverse=True)
@@ -77,6 +77,7 @@ def view_testimonials(request):
     
     return simple_dtt(request, 'about-us/testimonials.html', {
                                'parent':'about-us',
+                               'test_count':test_count,
                                'left_ts': left,
                                'middle_ts': middle,
                                'right_ts': right,

@@ -14,6 +14,9 @@
             <a href="{% url about-us %}">About Us</a>
            <div class="child-nav">
                 <ul class="about-us">
+                    <li class="{% if 'testimonials' in active_pages %}active{% endif %} menu-item" data-menu="testimonials">
+                        <a href="{% url testimonials %}">Protect America Reviews</a>
+                    </li>
                     <li class="{% if 'family' in active_pages %}active{% endif %}" ><a href="{% url family %}">Our Family of Companies</a></li>
                     <li class="{% if 'charities' in active_pages %}active{% endif %}" ><a href="{% url charities %}">Charity Work</a></li>
                     <li class="{% if 'payitforward' in active_pages %}active{% endif %}" ><a href="{% url payitforward %}">Pay It Forward</a></li>
@@ -50,9 +53,11 @@
         <li>
             <a href="http://www.protectamerica.com/home-security-blog/">Blog</a>
         </li>
-        <li class="{% if 'testimonials' in active_pages %}active{% endif %} menu-item" data-menu="testimonials">
-            <a href="{% url testimonials %}">Protect America Reviews</a>
+        <li class="{% if 'news' in active_pages %}active{% endif %} menu-item">
+            <a href="news/">Security News</a>
         </li>
+
+
         
     </ul>
     <div class="clear"></div>
