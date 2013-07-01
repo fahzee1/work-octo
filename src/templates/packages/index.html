@@ -270,21 +270,21 @@
                         <div class="clear"></div>
 
                     </div>
-                    <div class="add-on">
+                    <div class="add-on video-add">
                         <img src="{{ STATIC_URL }}img/extra/grey-video-icon.png" alt="Video Security Icon" />
                         <div class="add-on-info">
                             <h3>Interactive Video Surveillance</h3>
                             <p>Add interactive video cameras to record or view live video that can be viewed from your computer or smart phone.</p>
                         </div>
                     </div>
-                    <div class="add-on">
+                    <div class="add-on garage-add">
                         <img src="{{ STATIC_URL }}img/extra/grey-house-icon.png" alt="Garage Door Protection Icon" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Garage Door Protection</h3>
                             <p>Add protection to a standard garage door using our specially designed tilt based sensor.</p>
                         </div>
                     </div>
-                    <div class="add-on">
+                    <div class="add-on glass-add">
                         <img src="{{ STATIC_URL }}img/extra/grey-smash-icon.png" alt="Glass Break Detector Icon" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Smash & Crash Detection</h3>
@@ -301,7 +301,7 @@
                         <div class="clear"></div>
 
                     </div>
-                    <div class="add-on">
+                    <div class="add-on fire-add">
                         <img src="{{ STATIC_URL }}img/extra/grey-fire-icon.png" alt="Fire & Smoke Protection" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Fire & Smoke Protection</h3>
@@ -309,7 +309,7 @@
                             <div class="clear"></div>
                         </div>
                     </div>
-                    <div class="add-on">
+                    <div class="add-on medical-add">
                         <img src="{{ STATIC_URL }}img/extra/grey-medical-icon.png" alt="Medical Alerty Security" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Medical Alert Security</h3>
@@ -317,7 +317,7 @@
                             <div class="clear"></div>
                         </div>
                     </div>
-                    <div class="add-on">
+                    <div class="add-on weather-add">
                         <img src="{{ STATIC_URL }}img/extra/grey-snow-icon.png" alt="Flood and Freeze Detection" width="80" height="56" />
                         <div class="add-on-info">
                             <h3>Extreme Weather Protection</h3>
@@ -361,11 +361,10 @@
                     </li>
                 </ul>
                 {% endblock %}
-                {% if phone_number %}
-                    {% businesstime %}
-                        <h3>Get Started Today, <strong>Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></h3>
-                    {% endbusinesstime %}
-                {% endif %}
+                <div class="order-link">
+                    <a href="{% url interactive-control %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt" style="color: #fff">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+                </div>
                 <div class="clear"></div>
             </div>
             <div class="clear"></div>
@@ -395,6 +394,24 @@
             });
             $("#platinum-security-package").click(function() {
                 window.location.href = "{% url platinum %}";
+            });
+            $(".video-add").click(function() {
+                window.location.href = "{% url video %}";
+            });
+            $(".garage-add").click(function() {
+                window.location.href = "{% url garage-door-sensor %}";
+            });
+            $(".glass-add").click(function() {
+                window.location.href = "{% url glassbreak-sensor %}";
+            });
+            $(".weather-add").click(function() {
+                window.location.href = "{% url freeze-sensor %}";
+            });
+            $(".medical-add").click(function() {
+                window.location.href = "{% url medical-pendant %}";
+            });
+            $(".fire-add").click(function() {
+                window.location.href = "{% url smoke-detector %}";
             });
 			$('#header').waypoint('sticky', {
 			  offset: -85 // Apply "stuck" when element 30px from top

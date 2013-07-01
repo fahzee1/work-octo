@@ -13,7 +13,13 @@
             <h2>Home Security</h2>
             <h1>Door or Window Sensor</h1>
             <p>A mighty small package providing the front line defense for your home.</p>
-            <a href="{% url shop %}" class="button-link">Add to Cart <i class="icon-chevron-right"></i></a>
+            {% if phone_number %}
+
+                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
+
+
+            {% endif %}
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
 
         </div>
         <img src="{{ STATIC_URL }}img/products/door-window-sensor/door-window-sensor-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />

@@ -9,7 +9,7 @@
     <div id="hero-image">
         <div id="package-information">
             <h1>The Platinum Package</h1>
-            <p class="info">Reliable security, customized to your home at a very affordable price.</p>
+            <p class="info">Complete home security protection.</p>
             <div class="home-security">
                 <i class="icon-home-security"></i>
                 <ul>
@@ -19,11 +19,18 @@
                     <li>1 Yard Sign / 3 Window Decals</li>
                 </ul>
             </div>
-
+            <div class="promo">
+                <i class="icon-gift"></i>
+                <ul>
+                    <li>Limited Time Offer: <span>2 Free Keychain Remotes</span></li>
+                </ul>
+            </div>
             <div class="order-area">
                 <p><b>starting at: </b><strong>$42.99</strong> <span>per month</span></p>
                 <a href="{% url order-package %}?package=copper" class="button-link">Order Now <i class="icon-chevron-right"></i></a>           
             </div>
+            <p class="equipment-cost">No Equipment Fees &bull; No Installation Fees</p>
+
         </div>
         <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-simon-xt.jpg" alt="copper-package-simon-xt" class="hero-image-backdrop" />
     </div>
@@ -48,8 +55,8 @@
         <div class="home-content">
             <div class="main">
                 <strong>In The Home:</strong>
-                <h2>The Bronze Package</h2>
-                <p>Ideal for houses under 1200 sq. ft, the Bronze Security Package features enough sensors to cover up to 7 doors or windows. Our packages can be customized to fit any home by adding, removing, or swapping equipment for other accessories.</p>
+                <h2>The Platinum Package</h2>
+                <p>The Platinum Security Package from Protect America is the most comprehensive perimeter protection offered in the home security industry. Each alarm system features 15 door/window sensors for coverage at every point of entry into your home. The Platinum Security also protects inside your home with a motion detector for your use in heavily used rooms or hallways. The Platinum Package also makes customization a breeze.  Extra sensors can be swapped out for other pieces of equipment to suit your home.</p>
                 <a href="{% url shop %}" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
             </div>
             <div class="alt-content simon-xt">
@@ -188,24 +195,7 @@
 </div>
 <div class="clear"></div>
 <div class="wrapper">
-    <div class="testimonials">
-        <div class="testimonial">
-            <h3>Martina <span>of Tucson, AZ</span></h3>
-            <i class="icon-caret-up"></i>
-            <p>This has been a positive experience from step one. The cost to protect my home is now affordable, the technicians like Shawn make the over the phone installation/testing process as easy as 1-2-3. I would highly recommend the Protect America wireless system to anyone looking for peace of mind with home security. Truly! Hans</p>
-        </div>
-        <div class="testimonial mid">
-            <h3>Martina <span>of Tucson, AZ</span></h3>
-            <i class="icon-caret-up"></i>
-            <p>This has been a positive experience from step one. The cost to protect my home is now affordable, the technicians like Shawn make the over the phone installation/testing process as easy as 1-2-3. I would highly recommend the Protect America wireless system to anyone looking for peace of mind with home security. Truly! Hans</p>
-        </div>
-        <div class="testimonial">
-            <h3>George <span>of Tucson, AZ</span></h3>
-            <i class="icon-caret-up"></i>
-            <p>This has been a positive experience from step one. The cost to protect my home is now affordable, the technicians like Shawn make the over the phone installation/testing process as easy as 1-2-3. I would highly recommend the Protect America wireless system to anyone looking for peace of mind with home security. Truly! Hans</p>
-        </div>
-        <div class="clear"></div>
-    </div>
+    {% testimonial_search "platinum" "limit=3" %}
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript">

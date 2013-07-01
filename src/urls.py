@@ -410,7 +410,7 @@ else:
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
-        # dtt(r'^404/?$', '404.html', '404', 'home'),
+        dtt(r'^404/?$', '404.html', '404', 'home'),
 
         # Shop
         dtt(r'^shop/?$', 'packages/index.html', 'shop'),
@@ -532,10 +532,11 @@ else:
             dtt(r'^support/?$', 'support/index.html', 'support'),
                 
                 # Support > Customer Service
-                    dtt(r'^support/installation/?$', 'support/installation.html', 'installation', 'support'),
-                    dtt(r'^support/operation/?$', 'support/operation.html', 'operation', 'support'),
-                    dtt(r'^support/troubleshooting/?$', 'support/troubleshooting.html', 'troubleshooting', 'support'),
-                    dtt(r'^support/faq/?$', 'support/faq.html', 'faq', 'support'),                
+                    dtt(r'^support/customer-service/?$', 'support/customer-service.html', 'customer-service', 'support'),
+                    dtt(r'^support/customer-service/installation/?$', 'support/installation.html', 'installation', 'customer-service'),
+                    dtt(r'^support/customer-service/operation/?$', 'support/operation.html', 'operation', 'customer-service'),
+                    dtt(r'^support/customer-service/troubleshooting/?$', 'support/troubleshooting.html', 'troubleshooting', 'customer-service'),
+                    dtt(r'^support/customer-service/faq/?$', 'support/faq.html', 'faq', 'customer-service'),                
                     url(r'^pa/request-moving-kit/security-moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
                     
                 # Support > Find Us

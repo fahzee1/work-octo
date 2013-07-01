@@ -257,20 +257,20 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     <div id="footer-wrapper">
         <div id="footer">
             <ul id="footer-main-navigation">
-                <li>Shop</li>
-                <li>Equipment</li>
-                <li>Learn</li>
-                <li>Support</li>
-                <li>Order</li>
-                <li>Sitemap</li>
+                <li class="{% if 'shop' in active_pages %}active{% endif %}"><a href="{% url 'shop' %}" title="Shop Home Security Packages">Shop</a></li>
+                <li class="{% if 'equipment' in active_pages %}active{% endif %}"><a href="{% url 'equipment' %}" title="View Equipment and Products">Equipment</a></li>
+                <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="{% url 'learn' %}" title="Learn about Home Security">Learn</a></li>
+                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="{% url 'support' %}" title="Get Help for your Home Security System">Support</a></li>
+                <li class="{% if 'order-package' in active_pages %}active{% endif %}"><a href="{% url 'order-package' %}" title="Order Home Security Today">Order</a></li>
+                <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="" title="View our Sitemap">Sitemap</a></li>
             </ul>
             <ul id="footer-care-nav">
                 <li>Customer Service</li>
                 <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="{% url 'privacy-policy' %}" title="View our Privacy Policy">Privacy Policy</a></li>
                 <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="{% url 'state-licenses' %}" title="View our Licenses for Each State">State Licenses</a></li>
                 <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="{% url 'do-not-call' %}" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
-                <li>Careers</li>
-                <li>Affiliates</li>
+                <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="{% url 'careers' %}" title="Start your Career at Protect America">Careers</a></li>
+                <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="{% url 'affiliate-program' %}" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
             </ul> 
             <ul id="footer-contact-info">
                 <li><strong>Telephone</strong></li>
@@ -463,7 +463,7 @@ $(document).ready(function(){
 
     function checkExpired(){
         $.ajax({
-            url:"{% url 'hourly_check' %}",
+            url:"/hourlycheck",
         });
     }
     setInterval(checkExpired,3600000);

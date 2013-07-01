@@ -13,7 +13,12 @@
             <h2>Home Security</h2>
             <h1>Two Button Panic</h1>
             <p>Small and discrete, but packs a heavy punch.</p>
-            
+            {% if phone_number %}
+
+                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
+
+
+            {% endif %}  
             <a href="{% url shop %}" class="button-link">Shop Packages<i class="icon-chevron-right"></i></a>
 
         </div>
@@ -46,7 +51,7 @@
         <div class="home-content">
             <strong>In The Home:</strong>
             <h2>Two Button Panic</h2>
-            <p>The two button panic is recommended to be placed in a hidden location such as a drawer or underneath a cabinet. A favorable spot for the button is by your night stand. The two button panic has a 24 hour panic that will summon the police if needed, anytime. Simply press the lock and unlock feature to enact the panic mode. </p>
+            <p>The two button panic is recommended to be placed in a hidden location such as a drawer or underneath a cabinet. A favorable spot for the button is by your night stand for easy arming right before bed. The two button panic has a 24 hour panic that will summon the police if needed, anytime. Simply press the lock and unlock feature to enact the panic mode.</p>
             <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
         </div>
     </div>

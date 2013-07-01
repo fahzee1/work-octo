@@ -6,15 +6,65 @@
 {% block page_description %}Protect America is a growing premier alarm monitoring service that ensures the best home security system to protect your family and home from criminal activity.{% endblock %}
 
 {% block content %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>About Protect America</h2>
+            <h1>We Value Our Customers and Community</h1>
+        </div>
+        <img src="{{ STATIC_URL }}img/base/protect-america-hero.jpg" class="main-hero-image" alt="Protect America Logo" />
+
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
 <div class="wrapper">
-    <div id="about-us-content">
-        <img src="{{ STATIC_URL }}img/extra/protect-america-office.jpg" alt="Protect America Headquarters - Austin, TX" width="664" height="232" />
-        <h1>Protect America Values Customers and Community</h1>
-        <p><a rel="me" href=https://plus.google.com/113573642727337197280 title="Protect America">Protect America</a>, Inc has protected nearly half a million families nationwide with the state-of-the-art <a href="{% url equipment %}" title="GE Wireless Home Security Companies Systems">GE Wireless Home Security System</a>. We are one of the fastest growing home security companies in America with customers coast to coast!</p>
-        
-        <p>Among other home security companies, Protect America, Inc. has ranked in the Top 10 in volume of residential security system installations for the last three years according to SDM Magazine. As one of the fastest growing home security companies nationwide, we use cutting-edge computer technology to provide instantaneous product support and <strong>24-hour protection</strong> of your home and family.</p>
-        
-        <p>Make sure you are prepared in the event of an emergency anytime day or night. Defend your home and family against the threat of invasion, burglary and forced entry with a <a href="{% url equipment %}" title="GE Wireless Home Security Companies Systems">GE Wireless Home Security System</a> from one of the best home security companies around!</p>
+    <div id="profile">
+        <div id="about-us-content">
+            <p>Protect America Inc., one of the nation’s top home security companies. We have protected almost half a million homes since 1992 and have continued to grow. Currently an average of 15% of the population in the U.S. has a working alarm system. Our goal is to provide home security for the whole nation and educate consumers on the importance of home security.</p>
+            <p>Furthermore, Protect America provides more than just home security products. We also offer offer convenience and safety through our <a href="{% url home-automation-equipment %}" title="Find information on our home automation products">home automation</a>, <a href="{% url gps %}" title="Find information on our GPS vehicle tracking product">GPS</a>, and <a href="{% url video %}" title="Find information on our video security cameras">surveillance products</a>. Our wireless home security systems and products allow consumers to protect their home and loved ones at an affordable price.</p>
+                <div class="order-link">
+                    <a href="{% url equipment %}" class="button-link">View Equipment <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+                </div>
+        </div>
+        <div id="about-badges">
+            <img src="{{ STATIC_URL }}img/about-us/consumer-digest-logo.png" alt="consumer-digest-logo" />
+            <img src="{{ STATIC_URL }}img/about-us/20-years-logo.png" alt="20-years-logo" />
+    
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-content">
+            <h3>"Protect America is committed to creating an exceptional experience by providing every family and home with an innovative, dependable, and affordable security solution."</h3>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+<div class="wrapper">
+    <div id="twenty-years">
+        <h2>In The Business For Over 20 Years</h2>
+        <p>In 1992 Thad Paschall founded Round Rock, TX, based Protect America, Inc. Since 1992, Protect America has been providing state-of-the-art home alarm systems to American families.</p>
+        <p>Protect America started as a small home security provider and has become one of the fastest growing security companies in America with customers coast to coast! Already, Protect America, Inc. has protected nearly half a million families nationwide and is ranked in the top 10 of residential home alarm systems installations!</p>
+    </div>
+    <div id="awards">
+        <div id="awards-content">
+            <h2>We're Ranked #1</h2>
+            <p>Among other home security companies, Protect America, Inc. has ranked in the Top 10 in volume of residential security system installations for the last three years according to SDM Magazine. As one of the fastest growing home security companies nationwide, we use cutting-edge computer technology to provide instantaneous product support and 24-hour protection of your home and family.</p>
+            <p>We work hard to earn and keep your business every day, and people are taking notice. We very proud to be ranked #1 from many home security review sites including: <a href="http://besthomesecuritycompanys.com/company/protect-america" title="Read Protect America's Review on BestHomeSecurityCompanys.com">Best Home Security Companys</a>, <a href="http://www.homesecuritysystems.net/protect-america-review/" title="Read Protect America's Review on HomeSecuritySystems.net">HomeSecuritySystems.net</a>, and <a href="http://www.topconsumerreviews.com/home-security/detailed-reviews.php#protect_america" title="Read Protect America's Review on Top Consumer Reviews" >Top Consumer Reviews.</a></p>
+
+        </div>
+        <div id="award-badges">
+            <img src="{{ STATIC_URL }}img/about-us/best-home-security-companys.jpg" alt="best-home-security-companys" />
+            <img src="{{ STATIC_URL }}img/about-us/top-consumer-reviews.jpg" alt="top-consumer-reviews" />
+            <img src="{{ STATIC_URL }}img/about-us/home-security-systems-net.jpg" alt="home-security-systems-net" />
+        </div>
+        <div class="clear"></div>
     </div>
     <div class="clear"></div>
 </div>

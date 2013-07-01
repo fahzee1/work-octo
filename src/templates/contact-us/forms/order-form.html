@@ -5,34 +5,20 @@
         {{ field }}
     {% endfor %}
     {% for field in formset.visible_fields %}
-        <div class="order-form-field">
             {{ field.errors }}
             
-            {% if field.field.widget|klass == 'Select' %}
-            <label class="select">{{ field.name|capfirst }}:</label>
-            <img src="{{ STATIC_URL }}img/extra/form-check.png" alt="Nice Job, This Looks Good!" width="40" height="40" class="form-check-select yes" />
-            <img src="{{ STATIC_URL }}img/extra/form-check-error.png" alt="Whoa, Something Doesn't Look Right Here" width="40" height="40" class="form-check-select no" />
 
-
-            {% else %}
-            <label>{{ field.name|capfirst }}:</label>
-            <img src="{{ STATIC_URL }}img/extra/form-check.png" alt="Nice Job, This Looks Good!" width="40" height="40" class="form-check yes" />
-            <img src="{{ STATIC_URL }}img/extra/form-check-error.png" alt="Whoa, Something Doesn't Look Right Here" width="40" height="40" class="form-check no" />
-
-
-            {% endif %}
             {{ field }}
-        </div>
 
 
     {% endfor %}
-    <button class="buyit">Continue ></button>
-    <a href="{% url privacy-policy %}" title="View our Privacy Policy">We never share your information with anyone</a>
-    <div id="quote-form-error">
-        <img src="{{ STATIC_URL }}/img/base/error-arrow.png" id="error-arrow" />
-        <strong>Whoops!</strong>
-        <ul></ul>
+    <div class="consent-box">
+        <input id="id_consent" type="checkbox" maxlength="20" name="consent">
+        <label class="consent-label" for="id_consent">I agree that Protect America and their representatives may contact me at the email address and phone number stated above.</label>
+        <div class="clear"></div>
     </div>
+    <button>Continue <i class="icon-chevron-right"></i></button>
+    <a href="{% url privacy-policy %}" id="privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
 </form>
 {% addtoblock "js" %}
 {% comment %}
