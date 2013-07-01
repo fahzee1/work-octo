@@ -1,4 +1,6 @@
 {% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
 {% block page_title %}Flood Detector Sensor | Wireless Alarm Equipment | Protect America{% endblock %}
 {% block content %}
 <div id="hero-wrapper" class="red">
@@ -8,6 +10,12 @@
             <h2>Life Safety</h2>
             <h1>Flood Sensor</h1>
             <p>Saving your home from costly water damage problems.</p>
+            {% if phone_number %}
+
+                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
+
+
+            {% endif %}
             <a href="{% url shop %}" class="button-link">Shop Packages<i class="icon-chevron-right"></i></a>
 
         </div>

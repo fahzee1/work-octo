@@ -7,7 +7,7 @@
 <div id="hero-wrapper" class="v-light-grey">
     <div id="hero-image" class="crime-hero">
         <div id="hero-content">
-            <i class="icon-life-safety"></i>
+            <i class="icon-home-security"></i>
             <h2>Local Crime Stats</h2>
             <h1>Find Your City</h1>
             <form action="/crime-rate/search/" method="GET">
@@ -20,25 +20,28 @@
     </div>
 </div>
 {% include "order/call-box.html" %}
-<div id="state-list">
-    {% if matches %}
-    <div id="search-results">
-        <h2>Did you mean?</h2>
+
+<div class="wrapper" id="state-chooser">
+    <div id="state-list">
+        {% if matches %}
+        <div id="search-results">
+            <h2>Did you mean?</h2>
+            <ul>
+            {% for city in matches %}
+                <li><a href="{{ city.get_absolute_url }}">{{ city }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}    
+        
+        <h2>Select Your State:</h2>
         <ul>
-        {% for city in matches %}
-            <li><a href="{{ city.get_absolute_url }}">{{ city }}</a></li>
+        {% for state in states %}
+            <li><a href="{{ state.get_absolute_url }}">{{ state.name }}</a></li>
         {% endfor %}
         </ul>
     </div>
-    {% endif %}    
-    
-    <h2>Select Your State:</h2>
-    <ul>
-    {% for state in states %}
-        <li><a href="{{ state.get_absolute_url }}">{{ state.name }}</a></li>
-    {% endfor %}
-    </ul>
+    <div class="clear"></div>
 </div>
-<div class="clear"></div>
 {% endblock %}
 

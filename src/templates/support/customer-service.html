@@ -1,0 +1,46 @@
+{% extends "support/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Support |  Home Security Systems | Home Alarm | GE Security{% endblock %}
+{% block page_keywords %}Protect America offers you support on all home security systems and home alarm services and can easily be reached by either phone or email.{% endblock %}
+{% block page_description %}Protect America support, help, support, home security alarm system{% endblock %}
+
+
+{% block content %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>Protect America Customer Service</h2>
+            <h1>Having Security Issues? We Can Help.</h1>
+            <p>Your satisfaction and security is important to us.  From adding equipment to changing a battery, our Customer CARE team is ready to assist you.</p>
+            <div id="customer-support-hours">
+                <h2>Customer Support Hours:</h2>
+                <h3>Mon - Fri: 8:00am - 9:00pm CT</h3>
+                <h3>Sat: 9:00am - 7:00pm CT </h3>
+                <h3>Sun: 9:00am - 5:00pm CT </h3>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% if phone_number %}
+<div class="clear"></div>
+<div id="call-box">
+    <p><a href="tel:{{ phone_number|format_number }}">Customer CARE: <strong>1-800-951-5111, Option 4</strong></a></p>
+</div>
+<div class="clear"></div>
+{% endif %}
+
+
+
+{% addtoblock "js" %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
