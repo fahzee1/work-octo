@@ -19,6 +19,14 @@
                     <li>1 Yard Sign / 3 Window Decals</li>
                 </ul>
             </div>
+            <div class="promo">
+                <i class="icon-gift"></i>
+                <ul>
+                    <li>Limited Time Offer: <span>2 Free Keychain Remotes</span></li>
+                </ul>
+            </div>
+            <p class="equipment-cost">No Equipment Fees &bull; No Installation Fees</p>
+
             {% comment %}
             <div class="life-safety">
                 <i class="icon-life-safety"></i>
@@ -75,7 +83,10 @@
                 <strong>In The Home:</strong>
                 <h2>The Copper Package</h2>
                 <p>Protect America understands the importance of protecting your home and family. That is why we created our copper package - easy, affordable, and customizable security for every home. Specially designed; this package provides basic protection for small homes, condos, and renters for one of the best prices in the industry.</p>
-                <a href="{% url shop %}" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=Copper" class="button-link" onClick="_gaq.push(['_trackEvent', 'Add to Package', 'Add to Package Button', 'GPS']);">Order Now <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+                </div>
             </div>
             <div class="alt-content simon-xt">
                 <strong>Home Security:</strong>

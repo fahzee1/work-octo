@@ -12,7 +12,12 @@
             <h2>Home Automation</h2>
             <h1>Z-Wave Door Lock</h1>
             <p>Lock your door from anywhere with your smart phone.</p>
-            
+            {% if phone_number %}
+
+                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
+
+
+            {% endif %}
             <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
 
         </div>

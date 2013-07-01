@@ -2,15 +2,20 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
 {% block content %}
-    <div id="main-content">
-        <div id="get-excited-image"><img src="{{ STATIC_URL }}img/thank-you-pages/excited-nerd.jpg" alt="One Step Closer to Getting Home Security" /></div>
-        <div id="get-excited">
-            <h1>Thanks!</h1>
-            <h2>We have received your message.</h2>
+<div id="hero-wrapper" class="blue">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h2>Thanks!</h2>
+            <h1>We have received your message.</h1>
             <p>At Protect America, we get excited hearing from our customers and future customers. We have received your message and you should get a response <strong>within 24 - 48 hours</strong>. If you have a question about Protect America products or services, we welcome your call at 1-800-951-5111. Thanks again for your interest in Protect America!</p>
-
         </div>
+        <img src="{{ STATIC_URL }}img/base/thank-you-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
+
     </div>
+</div>
+{% include "order/call-box.html" %}
+<div class="wrapper">
     <div id="recommend-us">
         <h2>Recommend Us</h2>
         <div id="facebook">
@@ -33,6 +38,8 @@
         </div>
         <div class="clear"></div>
     </div>
+    <div class="clear"></div>
+</div>
 {% addtoblock "css" %}
 {% endaddtoblock "css" %}
 {% if request.META.REMOTE_ADDR != '12.201.194.50' and request.META.REMOTE_ADDR != '207.200.35.18' and request.META.REMOTE_ADDR != '127.0.0.1' %}
