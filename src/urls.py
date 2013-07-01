@@ -998,6 +998,10 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/learn-about-security/monitoring/security-system/',permanent=True)),
     ('pa/about/home-security-companies/?$',
         RedirectView.as_view(url='learn-about-security/protect-america/',permanent=True)),
+    ('contact/find-us/?$',
+        RedirectView.as_view(url='/support/find-us/',permanent=True)),
+    ('contact-us/?$',
+        RedirectView.as_view(url='/pa/contact/',permanent=True)),
 
 )
 
