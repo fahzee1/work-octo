@@ -20,13 +20,12 @@ class RenderNewsFeed():
 			 	state=request.GET['state']
 			 	data={
 			 	'city':city,
-			 	'state':state
-	            }
+			 	'state':state}
 
-	     
-	     			for x in US_STATES:
-	            			if x[1]==state:
-	            				state=x[0]
+			 	for x in US_STATES:
+			 		if x[1]==state:
+			 			state=x[0]
+
 	           
 				try:
 					query1=Q(active=True,city__icontains=city,state__exact=state)

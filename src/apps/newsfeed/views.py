@@ -1,6 +1,6 @@
 import twitter
 from models import TheFeed,FallBacks
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render 
 from itertools import chain, izip
 from django.core.cache import cache
@@ -19,6 +19,7 @@ def hourly_check(request):
 		for x in feeds:
 			x.feed_expired()
 		return HttpResponse()
+	return HttpResponseBadRequest()
 
 
 def get_fallback(request):
