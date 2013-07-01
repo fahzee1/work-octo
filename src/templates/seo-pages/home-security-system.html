@@ -5,7 +5,11 @@
 {% block page_description %}Protect America provides the best home security system available. With inexpensive monitoring and more features for less, they're an obvious choice.{% endblock %}
 
 {% block content %}
-    {{ block.super }}
+{% block hero_banner_area %}
+    {% include "banners/seo-hero-images.html" %}
+{% endblock %}
+{% include "order/call-box.html" %}
+<div class="wrapper">
     <div class="home-security-content">
         <img src="{{ STATIC_URL }}img/products/equipment/sensors-layout.jpg" alt="Home Security Sensors" class="center" width="665" height="250" />
         <h1>Home Security System by Protect America</h1>
@@ -38,4 +42,6 @@
     <div class="button-submit">
         <a href="{% url 'order-package' %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
     </div>
+    <div class="clear"></div>
+</div>
 {% endblock %}

@@ -649,7 +649,8 @@ else:
             
 
         # SEM Landing Pages
-        dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
+        #dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
+        #forward to homepage
 
         # SEO Local Pages
         url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
@@ -676,7 +677,8 @@ else:
         dtt(r'^home-security-companies/?$', 'seo-pages/home-security-companies.html', 'seo-home-security-companies', 'about-us'),
 
         # PAID LANDING PAGES
-        dtt(r'^home-security/business-security-systems/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        #dtt(r'^home-security/business-security-systems/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
+        #Redirect to Business Page
         dtt(r'^home-security/free-home-security-system/?$', 'affiliates/ppc-adt-clone/index.html', 'paid-adt-copy-cat'),
         dtt(r'^adt-vs-protect-america-compare-and-save/?$', 'affiliates/adt-comparison-two/index.html', 'paid-adt-comparison-cat'),
         dtt(r'^frontpoint-vs-protect-america-compare-and-save/?$', 'affiliates/frontpoint-vs-protectamerica/index.html', 'frontpoint-vs-pa'),

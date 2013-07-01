@@ -5,7 +5,11 @@
 {% block page_description %}Learn how Protect America helps you and your family feel safer and more secure then all of the home security companies in America.{% endblock %}
 
 {% block content %}
-    {{ block.super }}
+{% block hero_banner_area %}
+    {% include "banners/seo-hero-images.html" %}
+{% endblock %}
+{% include "order/call-box.html" %}
+<div class="wrapper">
     <div class="home-security-content">
         <h1>How Does Protect America Stand up Against the Competition?</h1>
         
@@ -48,4 +52,6 @@
     <div class="button-submit">
         <a href="{% url 'order-package' %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
     </div>
+    <div class="clear"></div>
+</div>
 {% endblock %}
