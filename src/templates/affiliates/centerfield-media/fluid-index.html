@@ -46,18 +46,19 @@
             <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-ten-reviews-2013-excellence.png" alt="top-ten-reviews-2013-excellence" width="73" height="115" />
             <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/top-consumer-reviews-5-stars.png" alt="top-consumer-reviews-5-stars" width="120" height="120" />
         </div>
-        {% if phone_number %}
-            <div class="clear"></div>
-            <div id="call-box">
-                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-            </div>
-            <div class="clear"></div>
-    
-        {% endif %}
+
     </div>
     <img src="{{ STATIC_URL }}img/protectamerica/small-town-usa.jpg" alt="Security For Every Home" id="hero-backdrop" />
 </div>
 {% endblock %}
+{% if phone_number %}
+    <div class="clear"></div>
+    <div id="call-box">
+        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
+    </div>
+    <div class="clear"></div>
+
+{% endif %}
 <div class="clear"></div>
 <div class="wrapper">
     <div id="security-information">
@@ -82,17 +83,17 @@
             <li id="alarm-category" class="security-choice active">
                 <img src="{{ STATIC_URL }}img/extra/big-money-icon.png" alt="alarm-big-icon" width="193" height="193" />
                 <h2>{% block security-choice-one %}Security System<br/>Price Comparison{% endblock %}</h2>
-                <div class="button-link" ><a href="#wireless-home-security" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More ></a></div>
+                <a href="#wireless-home-security" class="button-link" id="home-security-button-choice" class="active"  onclick="showSlide(1);">Learn More <i class="icon-chevron-right"></i></a>
             </li>
             <li id="video-category" class="security-choice">
                 <img src="{{ STATIC_URL }}img/protectamerica/protect-america-advantage.png" alt="alarm-big-icon" width="193" height="193" />
                 <h2>{% block security-choice-two %}Protect America Advantage{% endblock %}</h2>
-                <div class="button-link"><a href="#video-security" id="video-button-choice"  onclick="showSlide(2);">Learn More ></a></div>
+                <a href="#video-security" class="button-link" id="video-button-choice"  onclick="showSlide(2);">Learn More <i class="icon-chevron-right"></i></a>
             </li>
             <li id="smart-app-category" class="security-choice">
                 <img src="{{ STATIC_URL }}img/extra/smart-app-big-icon.png" alt="alarm-big-icon" width="193" height="193" />
                 <h2>{% block security-choice-three %}SMART Connect </br>On The Go App{% endblock %}</h2>
-                <div class="button-link"><a href="#smart-apps" id="smart-app-button-choice" onclick="showSlide(3);">Learn More ></a></div>
+                <a href="#smart-apps" class="button-link" id="smart-app-button-choice" onclick="showSlide(3);">Learn More <i class="icon-chevron-right"></i></a>
             </li>
             <div class="clear"></div>
         </ul>
@@ -291,9 +292,7 @@
 </div>
 
 </div>
-<div class="wrapper">
     {% include "order/call-box.html" %}
-</div>
 {% addtoblock "js" %}
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
@@ -302,9 +301,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-			$('#header').waypoint('sticky', {
-			  offset: -85 // Apply "stuck" when element 30px from top
-			});
+
             animated = 0;
             $("#alarm-category").click(function(){
                 if(animated == 0 && !$(this).hasClass('active')) {
