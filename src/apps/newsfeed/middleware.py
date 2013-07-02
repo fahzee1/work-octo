@@ -6,10 +6,6 @@ from django.contrib.localflavor.us.us_states import US_STATES
 from models import TheFeed,FallBacks
 from django.db.models import Q
 from django.conf import settings
-consumer_key=settings.TWITTER_CONSUMER_KEY
-consumer_secret=settings.TWITTER_CONSUMER_SECRET
-access_token=settings.TWITTER_ACCESS_TOKEN
-access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 
 class RenderNewsFeed():
 
