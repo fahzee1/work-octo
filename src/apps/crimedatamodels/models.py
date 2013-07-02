@@ -1,7 +1,13 @@
+import re
+
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.core.exceptions import ValidationError
+
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
+
+
 GRADE_CHOICES = (
     ('A', 'A'),
     ('B', 'B'),
@@ -9,11 +15,14 @@ GRADE_CHOICES = (
     ('D', 'D'),
     ('F', 'F'),
 )
+
+
 POPULATION_TYPES = (
     ('TOWN', 'Town'),
     ('CITY', 'City'),
     ('METROPOLIS', 'Metropolis'),
 )
+
 
 class ZipCode(models.Model):
     zip = models.CharField(primary_key=True, max_length=5, unique=True)
@@ -23,29 +32,39 @@ class ZipCode(models.Model):
         db_index=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6,
         db_index=True)
+
     def __unicode__(self):
         return self.zip
+
     class Meta:
         db_table = 'zip_codes'
 
+
 class State(models.Model):
     name = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=64, unique=True)
     abbreviation = models.CharField(max_length=2, unique=True)
+
     def __unicode__(self):
         return '%s %s' % (self.abbreviation, self.name)
+
     class Meta:
         db_table = 'states'
 
     def get_absolute_url(self):
         return reverse('crime-rate:choose-city', args=[self.abbreviation])
 
+
 class CityLocation(models.Model):
     city_name = models.CharField(max_length=64)
+    city_name_slug = models.SlugField(max_length=64)
     state = models.CharField(max_length=2)
+
     latitude = models.DecimalField(max_digits=10, decimal_places=6,
-        db_index = True)
+        db_index=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=6,
-        db_index = True)
+        db_index=True)
+
     class Meta:
         db_table = 'citylocations'
         unique_together = (('city_name', 'state'),)
@@ -56,6 +75,10 @@ class CityLocation(models.Model):
 
     def __unicode__(self):
         return '%s, %s' % (self.city_name, self.state)
+
+    @property
+    def slug_name(self):
+        return self.city_name.lower().replace(' ', '-')
 
 
 class CrimesByCity(models.Model):
@@ -73,17 +96,21 @@ class CrimesByCity(models.Model):
     property_crime = models.IntegerField(null=True)
     robbery = models.IntegerField(null=True)
     violent_crime = models.IntegerField(null=True)
+
     class Meta:
         db_table = 'crimes_by_city'
         unique_together = (('fbi_city_name', 'fbi_state', 'year'),)
+
     def __unicode__(self):
         return '%s %s, %s' % (self.year, self.fbi_city_name, self.fbi_state)
+
     def by_100k(self, field_name):
         """Get the requested field, but measured in per-100,000-population."""
         val = getattr(self, field_name)
         if val is None:
             return val
         return 1e5*val/max(1.0, self.population)
+
 
 class CityCrimeStats(models.Model):
     """Volatile city crime stats computed from the CrimesByCity table.
@@ -147,6 +174,7 @@ class CityCrimeStats(models.Model):
         db_table = 'city_crime_stats'
         unique_together = (('city', 'year'),)
 
+
 class StateCrimeStats(models.Model):
     """Volatile state crime stats computed from the CrimesByCity table.
 
@@ -155,6 +183,7 @@ class StateCrimeStats(models.Model):
     recompute this table's values.
 
     """
+
     state = models.ForeignKey(State)
     year = models.IntegerField()
     number_of_cities = models.IntegerField()
@@ -192,11 +221,14 @@ class StateCrimeStats(models.Model):
     property_crime_grade = models.CharField(null=True, max_length=1)
     robbery_grade = models.CharField(null=True, max_length=1)
     violent_crime_grade = models.CharField(null=True, max_length=1)
+
     class Meta:
         db_table = 'state_crime_stats'
         unique_together = (('state', 'year'),)
+
     def __unicode__(self):
         return '%s %s' % (self.year, self.state.name)
+
     def by_100k(self, field_name):
         """Get the requested field, but measured in per-100,000-population."""
         val = getattr(self, field_name)
@@ -204,9 +236,9 @@ class StateCrimeStats(models.Model):
             return val
         return 1e5*val/max(1.0, self.population)
 
+
 class CrimeContent(models.Model):
-    population_type = models.CharField(max_length=10,
-        choices=POPULATION_TYPES)
+    population_type = models.CharField(max_length=10, choices=POPULATION_TYPES)
     grade = models.CharField(max_length=1, choices=GRADE_CHOICES)
     content = models.TextField()
 
@@ -216,3 +248,41 @@ class CrimeContent(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.population_type, self.grade)
+
+
+class LocalAddress(models.Model):
+    """
+    Local address of all Protect America Locations.
+    """
+    street_name=models.CharField(max_length=255,blank=True,null=True)
+    city=models.CharField(max_length=255,blank=True,null=True)
+    state=models.CharField(max_length=255,blank=True,null=True)
+    zip_code=models.IntegerField(max_length=5,blank=True,null=True)
+
+    def __unicode__(self):
+        return '%s, %s, %s, %s' % (self.street_name,self.city,self.state,self.zip_code)
+
+
+class MatchAddressLocation(models.Model):
+    """
+    Match the local page of each city/state with an
+    address of a local Protect America location
+    """
+    address=models.ForeignKey(LocalAddress)
+    location=models.ForeignKey(CityLocation)
+
+    def __unicode__(self):
+        return '%s (%s)' % (self.address, self.location)
+
+    def save(self, *args, **kwargs):
+        addr_state=self.address.state
+        match_state=self.location.state
+        if addr_state != match_state:
+            raise ValidationError('The states of the location and the address must match!')
+        else:
+            super(MatchAddressLocation,self).save(*args, **kwargs) 
+
+    
+
+
+    

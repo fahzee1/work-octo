@@ -1,200 +1,276 @@
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Home Security Alarm Systems | Gold Home Security System | Protect America{% endblock %}
-{% block css %}<link rel="stylesheet" href="{{ STATIC_URL }}css/products-b.css">{% endblock %}
+{% block page_title %}Home Security Alarm Systems | Copper Home Security System | Protect America{% endblock %}
+{% block page_description %}Our most affordable security package that provides security for up to three doors or windows.{% endblock %}
+
 
 {% block content %}
-<div id="top-content">
-    <div id="gold-package-offer" itemscope itemtype="http://schema.org/Product">
-        <h1 itemprop="name">Gold Security Package</h1>
-        <img src="/static/img/products/gold-package/gold-package-simon-xt-lowest-price.jpg" id="offer-main-image" itemprop="image" alt="GE Wireless Home Security System - Gold Package" />
-        <ul itemprop="description">
-            <li>GE Simon XT Control Panel</li>
-            <li>3 Security Stickers</li>
-            <li>12 Door / Window Sensors</li>
-            <li>1 Security Yard Sign </li>
-            <li>1 Motion Detector</li>
-            <li>Owner's Manual</li>
-        </ul>
-        <div id="top-consumer-review-medal">
-            <img src="/static/img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
-            <p>Five star rating in 2012 by TopConsumerReviews.com</p>
-        </div>
-        <div id="package-price">
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="package-information">
+            <h1>The Gold Package</h1>
+            <p class="info">The perfect solution for larger sized homes.</p>
+            <div class="home-security">
+                <i class="icon-home-security"></i>
+                <ul>
+                    <li>1 Simon XT Control Panel</li>
+                    <li>12 Door or Window Sensors</li>
+                    <li>1 Motion Detector</li>
+                    <li>1 Yard Sign / 3 Window Decals</li>
+                </ul>
+            </div>
+            <div class="promo">
+                <i class="icon-gift"></i>
+                <ul>
+                    <li>Limited Time Offer: <span>2 Free Keychain Remotes</span></li>
+                </ul>
+            </div>
+            <p class="equipment-cost">No Equipment Fees &bull; No Installation Fees</p>
 
-            <span class="equipment-price expire">Equipment Price: <strong itemprop="price">FREE*</strong><em>expires 4/30/2013</em></span>
-            <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>39.99</strong><em>per month</em></span>
+            <div class="order-area">
+                <p><b>starting at: </b><strong>$39.99</strong> <span>per month</span></p>
+                <a href="{% url order-package %}?package=gold" class="button-link">Order Now <i class="icon-chevron-right"></i></a>           
+            </div>
         </div>
-        <div class="button-submit">
-            <a href="{% url order-package %}?package=gold" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Gold']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</p>{% endbusinesstime %}
-        </div>
+        <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-hero.jpg" alt="copper-package-simon-xt" class="hero-image-backdrop" />
     </div>
-    {% include "order/quote-form.html" with form=forms.basic %}
 </div>
-<div class="clear"></div>
+{% include "order/call-box.html" %}
 
-    {% include "banners/limited-time-offer.html" %}
-
-<div id="the-gold-package">
-    <img src="/static/img/products/gold-package/in-the-home.jpg" id="main-package-image" alt="Securing a home with up to twelve doors or windows">
-    <div id="gold-package-content">
-        <h1>In Your Home: Gold Security</h1>
-        <p>The second-highest level of perimeter protection offered by Protect America, the Gold Security Package includes enough door/window sensors to defend homes smaller than 3500 sq ft. Each Gold Home Security System comes with 12 door/window sensors that can be placed on every vulnerable door and window. For added security inside of your home, a motion detector is also provided for installation in a primary hallways or commonly used living rooms. Your Home Security can be customized to your exact specifications, just ask one of our home security experts how!</p>
-        <div class="button-submit"><a href="{% url order-package %}?package=gold" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Gold-B']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to receive a free security analysis</p>{% endbusinesstime %}</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/gold-package/gold-map.png" class="main" alt="in-the-home-simon-xt" />
+            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" class="alt-img simon-xt" alt="Simon XT Control Panel" width="439" height="453" />
+            <img src="{{ STATIC_URL }}img/products/door-window-sensor/in-the-home-door-window-sensor.jpg" class="alt-img door-window-sensor" alt="Door / Window Sensor" width="439" height="453" />
+            <img src="{{ STATIC_URL }}img/products/motion-detector/in-the-home-motion-detector.jpg" class="alt-img motion-detector" alt="Motion Detector" width="439" height="453" />
+            <i class="home-icon-base" style="top: 180px; left: 150px;" data-info="motion-detector">M</i>
+            <i class="home-icon-base" style="top: 265px; left:84px;" data-info="door-window-sensor">1</i>
+            <i class="home-icon-base" style="top: 250px; left: 166px;" data-info="door-window-sensor">2</i>
+            <i class="home-icon-base" style="top: 348px; left: 322px;" data-info="door-window-sensor">3</i>
+            <i class="home-icon-base" style="top: 197px; left: 322px;" data-info="door-window-sensor">4</i>
+            <i class="home-icon-base" style="top: 158px; left: 341px;" data-info="door-window-sensor">5</i>
+            <i class="home-icon-base" style="top: 131px; left: 301px;" data-info="door-window-sensor">6</i>
+            <i class="home-icon-base" style="top: 131px; left: 260px;" data-info="door-window-sensor">7</i>
+             <i class="home-icon-base" style="top: 141px; left: 218px;" data-info="door-window-sensor">8</i>
+            <i class="home-icon-base" style="top: 94px; left: 203px;" data-info="door-window-sensor">9</i>
+            <i class="home-icon-base" style="top: 128px; left: 128px;" data-info="door-window-sensor">10</i>
+              <i class="home-icon-base" style="top: 163px; left: 83px;" data-info="door-window-sensor">11</i>
+             <i class="home-icon-base" style="top: 230px; left: 5px;" data-info="door-window-sensor">12</i>
+            <i class="home-icon" style="top: 200px; left: 60px;" data-info="simon-xt"><img src="{{ STATIC_URL }}img/base/home-security-icon-mini.png"  alt="home-security-icon-mini" width="43" height="43" /></i>
+            <p class="learn-more">Click an Icon to Learn More</p>
+            <p class="back">Back</p>
+        </div>
+        <div class="home-content">
+            <div class="main">
+                <strong>In The Home:</strong>
+                <h2>The Gold Package</h2>
+                <p>The Gold Security Package includes enough door/window sensors to defend homes smaller than 3500 sq ft. Each Gold Home Security System comes with 12 door/window sensors that can be placed on every vulnerable door and window. For added security inside of your home, a motion detector is also provided for installation in a primary hallways or commonly used living rooms. Your Home Security can be customized to your exact specifications, just ask one of our home security experts how!</p>
+                <a href="{% url shop %}" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="alt-content simon-xt">
+                <strong>Home Security:</strong>
+                <h2>The Simon XT</h2>
+                <p>The Simon XT is the hub of your entire security system. it is the place you will be entering commands to arm or disarm the system and we recommend the Simon XT be placed in an easy to access location. From there you can arm your system, call emergency response, see important status messages, or disarm your system with its keypad.</p>
+                <p class="emp">All of our packages include 1 Simon XT Control Panel.</p>
+            </div>
+            <div class="alt-content door-window-sensor">
+                <strong>Home Security:</strong>
+                <h2>Door / Window Sensor</h2>
+                <p>The most common piece of security equipment when it comes to securing your home, door or window sensors are used to detect when any door or window is opened. The Copper Package is designed to provide basic security; protecting your front door and 2 other doors or windows.</p>
+                <p class="emp">The Copper Package Includes 3 Door / Window Sensors</p>
+            </div>
+            <div class="alt-content motion-detector">
+                <strong>Home Security:</strong>
+                <h2>Motion Detector</h2>
+                <p>A motion detector is designed to protect the inside of your home.  If a burglar somehow bypasses the perimeter sensors, the motion detector will sound the alarm if any movement is detected. We recommend that each motion detector be placed in a heavy traffic area.</p>
+                <p class="emp">The Copper Package Includes 1 Motion Detector</p>
+            </div>
+        </div>
     </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
     <div class="clear"></div>
-    <div id="included-equipment">
-    	<h2>What's Included:</h2>
-        <div>
-    		<img src="/static/img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Home Security Panel" />
-    		<strong>One (1)</strong> Simon XT Control Panel
-		</div>
-		<div>
-    		<img src="/static/img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Home Security Sensor" />
-    		<strong>Twelve (12)</strong> Door / Window Sensors
-   		</div>
-   		<div>
-       		<img src="/static/img/products/equipment/motion-detector-icon.jpg" width="160" height="131" alt="Home Security Motion Detector" />
-    		<strong>One (1)</strong> Motion Detector
-        </div>
-        <div>
-            <img src="/static/img/products/accessories/installation-manual-icon.jpg" width="160" height="131" alt="Protect America Home Security Installation Manual" />
-            <strong>One (1)</strong> Owner's / Installation Manual & DVD
-        </div>
-        <div>
-    		<img src="/static/img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Protect America Home Security Window Stickers" />
-    		<strong>Three (3)</strong> Security Window Stickers
-        </div>
-    	<div>	
-    		<img src="/static/img/products/accessories/security-yard-sign-icon.jpg" width="160" height="131" alt="Protect America Home Security Yard Sign" />
-    		<strong>One (1)</strong> Security Yard Sign
-        </div>
-    </div>
-
-
-
 </div>
-<div class="clear"></div>
-    {% include "order/call-box.html" %}
-
-
-<div id="adt-comparison">
-
-    <div id="adt-price-chart">
-        <h2>Comparison Chart:</h2>
-        <table class="data">
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        <h2>Simply The Best in Home Security <span>(with the features and service to prove it)</span></h2>
+        <table>
             <thead>
-                <th class="alpha">&nbsp;</th>
-                <th>Protect America</th>
-                <th class="omega">ADT</th>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th><img src="{{ STATIC_URL }}img/base/protect-america-logo-transparent.png" alt="protect-america-logo-transparent" width="207" height="35" /></th>
+                    <th>ADT</th>
+                    <th>Frontpoint</th>
+                </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><strong>Upfront Cost</strong></td>
-                    <td class="call-out">
-                        {% if request.COOKIES.bbb_test == 'C' %}
-                        FREE*<em>expires 4/30/2012</em>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'B' %}
-                        INCLUDED
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-                        FREE*
-                        {% endif %}
-                    </td>
-                    <td>$1099</td>
+                <tr class="alpha">
+                    <td class="y-axis">Installation</td>
+                    <td class="pa">$0</td>
+                    <td>$99</td>
+                    <td class="last">$99</td>
                 </tr>
-                <tr class="alt">
-                    <td><strong>Monthly Cost</strong></td>
-                    <td class="call-out">$39.99</td>
+                <tr>
+                    <td class="y-axis">Monthly Rate</td>
+                    <td class="pa">$39.99</td>
                     <td>$42.99</td>
+                    <td class="last">$34.99</td>
                 </tr>
                 <tr>
-                    <td><strong>Contract Length</strong></td>
-                    <td class="call-out">36 Months</td>
-                    <td>36 Months</td>
+                    <td class="y-axis">Master Control Panel</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td><i class="icon-ok-sign"></i></td>
+                    <td class="last"><i class="icon-ok-sign"></i></td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Door / Window Sensors</td>
+                    <td class="pa">7</td>
+                    <td>2</td>
+                    <td class="last">2</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Pet Friendly Motion Detector</td>
+                    <td class="pa">1</td>
+                    <td>1</td>
+                    <td class="last">1</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Homeowner's Discount</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td><i class="icon-ok-sign"></i></td>
+                    <td class="last"><i class="icon-ok-sign"></i></td>
+                </tr>
+                <tr>
+                    <td class="y-axis">24/7 Monitoring</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td><i class="icon-ok-sign"></i></td>
+                    <td class="last"><i class="icon-ok-sign"></i></td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Lifetime Replacement Parts Warranty</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Free EasyMove Moving Kit</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Lowest Price Guaranteed</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
+                </tr>
+                <tr class="omega">
+                    <td class="y-axis">Locked-In Rate</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
                 </tr>
             </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="3"><a href="{% url low-price-guarantee %}" title="Click to learn about our Low Price Guarantee"><img src="{{ STATIC_URL }}/img/external/lowest-price-banner-stacked.png" alt="Protect America Guarantee's the Lowest Price for this Package" /></a></td>
-                </tr>
-            </tfoot>
         </table>
-    </div>
-    
-    <div id="extra-benefits">
-        <h2>Extra Protect America Benefits:</h2>
-        <ul>
-            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/wireless-sensors.png" width="40" height="40" alt="Wireless Home Security" />Wireless sensors are <strong>easy to install</strong> and don't require drilling.</li>
-            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/save-money.png" width="40" height="40" alt="Save up to 20% on Homeowner's Insurance" />Homes with security systems <strong>save up to 20%</strong> on homeowner's insurance.</li>
-
-            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/free-relocation-kit.png"  width="40" height="40" alt="Free Moving Relocation Kit" />You <strong>own your security system</strong>. Moving to a new home is easy with our <strong>free relocation kit</strong>.</li>
-            <li><img src="{{ STATIC_URL }}img/extra/extra-benefit-icons/lifetime-replacement-parts-warranty.png"  width="40" height="40" alt="Free Replacement Parts Warranty" />We stand behind our product with a <strong>free lifetime replacement parts warranty</strong></li>
-
-        </ul>
-        <div class="button-submit"><a href="{% url order-package %}?package=gold" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Extra Benefits Click', 'Copper-B']);" title="Order a Protect America Home Security System">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}</div>
-
-    </div>
-    <div class="clear"></div>
-
-</div>
-<div id="monitoring-options">
-    <h2>Flexible Monitoring Options:</h2>
-    <ul id="monitoring-rates">
-        <li>
-            <img src="/static/img/products/monitoring/cellular-icon.png" alt="Cellular Interactive Security Monitoring">
-            <h3>Cellular</h3>
-            <p><sup>$</sup>51<span>99</span><strong>/mo</strong></p>
-            <a href="{% url cellular %}" class="button-link" title="Learn About Cellular Monitoring">Learn More ></a>
-        </li>
-        <li>
-            <img src="/static/img/products/monitoring/homepulse-icon.png" alt="Broadband Interactive Security Monitoring">
-            <h3>Broadband</h3>
-            <p><sup>$</sup>47<span>99</span><strong>/mo</strong></p>
-            <a href="{% url broadband %}" class="button-link" title="Learn About Homepulse Monitoring">Learn More ></a>
-        </li>
-
-        <li>
-            <img src="/static/img/products/monitoring/landline-icon.png" alt="Landline Interactive Security Monitoring">
-            <h3>Landline</h3>
-            <p><sup>$</sup>39<span>99</span><strong>/mo</strong></p>
-            <a href="{% url landline %}" class="button-link" title="Learn About Landline Monitoring">Learn More ></a>
-        </li>
         <div class="clear"></div>
-    
-    </ul>
+        <div id="monitoring-options">
+            <h2>Flexible Monitoring Options:</h2>
+            <ul id="monitoring-rates">
+                <li>
+                    <img src="{{ STATIC_URL }}img/products/monitoring/landline-icon-big.png" alt="Standard Landline Connection" width="128" height="128" />
+                    <h3>Landline</h3>
+                    <p><sup>$</sup>19<span>99</span><strong>/mo</strong></p>
+                    <a href="{% url landline %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+                </li>
+
+                <li>
+                    <img src="{{ STATIC_URL }}img/products/monitoring/homepulse-icon-big.png" alt="Standard Landline Connection" width="128" height="128" />
+                    <h3>Broadband</h3>
+                    <p><sup>$</sup>37<span>99</span><strong>/mo</strong></p>
+                    <a href="{% url broadband %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+                </li>
+                <li>
+                    <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="Standard Landline Connection" width="128" height="128" />
+                    <h3>Cellular</h3>
+                    <p><sup>$</sup>41<span>99</span><strong>/mo</strong></p>
+                    <a href="{% url cellular %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+                </li>        
+
+                <div class="clear"></div>
+            
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
 </div>
-
-{% testimonial_search "gold" "limit=10&words=75" %}
-
-
+<div class="clear"></div>
+<div class="wrapper">
+    {% testimonial_search "gold" "limit=3" %}
+</div>
 {% addtoblock "js" %}
     <script type="text/javascript">
-    $(document).ready(function() {
-        $('#search-testimonial-box').cycle({
-            fx: 'fade',
-            timeout: 9000
+        $(document).ready(function() {
+            $(".home-icon").click(function() {
+                if ($(this).data("info")) {
+                    var info = $(this).data("info");
+                    $('.home-img > .home-icon-base').fadeOut();
+                    $('.home-img > .home-icon').fadeOut();
+                    $('.home-img > .learn-more').fadeOut();
+                    $('.home-img > .main').fadeOut(300, function () {
+                        $('.home-img > .alt-img.' + info).fadeIn();
+                        $('.home-img > .back').fadeIn();
+
+                    });
+                    $('.home-content > .main').fadeOut(300, function () {
+                        $('.home-content > .alt-content.' + info).fadeIn();
+                    });                    
+                }
+            });
+            $(".home-icon-base").click(function() {
+                if ($(this).data("info")) {
+                    var info = $(this).data("info");
+                    $('.home-img > .home-icon-base').fadeOut();
+                    $('.home-img > .home-icon').fadeOut();
+                    $('.home-img > .learn-more').fadeOut();
+                    $('.home-img > .main').fadeOut(300, function () {
+                        $('.home-img > .alt-img.' + info).fadeIn();
+                        $('.home-img > .back').fadeIn();
+
+                    });
+                    $('.home-content > .main').fadeOut(300, function () {
+                        $('.home-content > .alt-content.' + info).fadeIn();
+
+                    });                    
+                }
+            });
+            $(".home-img > .alt-img").click(function() {
+                $('.home-img > .back').fadeOut();
+                $('.home-img > .alt-img').fadeOut(300, function () {
+                    $('.home-img > .main').fadeIn();
+                    $('.home-img > .home-icon-base').fadeIn();
+                    $('.home-img > .home-icon').fadeIn();
+                    $('.home-img > .learn-more').fadeIn();
+
+                });
+                $('.home-content > .alt-content').fadeOut(300, function () {
+                    $('.home-content > .main').fadeIn();
+                });  
+            });
+            $(".home-img > .back").click(function() {
+                $('.home-img > .back').fadeOut();
+                $('.home-img > .alt-img').fadeOut(300, function () {
+                    $('.home-img > .main').fadeIn();
+                    $('.home-img > .home-icon-base').fadeIn();
+                    $('.home-img > .home-icon').fadeIn();
+                    $('.home-img > .learn-more').fadeIn();
+
+                });
+                $('.home-content > .alt-content').fadeOut(300, function () {
+                    $('.home-content > .main').fadeIn();
+                });  
+            });
+
         });
-    });
     </script>
 {% endaddtoblock "js" %}
-{% endblock %}  
-
-{% block page-product %}
-    <h2>Gold Security Package</h2>
-    <p><span>Equipment Today: <strong>
-        {% if request.COOKIES.bbb_test == 'C' %}
-        FREE*<em>expires 4/30/2012</em>
-        {% endif %}
-        {% if request.COOKIES.bbb_test == 'B' %}
-        INCLUDED
-        {% endif %}
-        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-        FREE*
-        {% endif %}
-    </strong></span>monthly monitoring starting at $39.99/mo</p>
-    <div class="button-submit">
-        <a href="{% url order-package %}?package=gold" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Gold-B']);">Order Now ></a>
-    </div>
 {% endblock %}

@@ -1,55 +1,36 @@
-{% extends "products/cell-takeover/base.html" %}
+{% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Cellular Monitoring | Existing Home Security System Activation | Protect America{% endblock %}
 {% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
 {% block page_description %}Already have an existing alarm system? Protect America makes it easy to upgrade to cellular monitoring using existing equipment.{% endblock %}
 
 {% block content %}
-</div>
-<div id="big-hero-banner">
-    <div id="hero-wrapper">
-        <h1><span>Already Have Security? </span>Switch and Save!</h1>
-        <img src="{{ STATIC_URL }}img/products/cell-takeover/benefit-bullets.png" id="benefit-bullets" alt="Works with Existing Equipment, Wireless Cellular Technology, No Landline Connection" />
-        <img src="{{ STATIC_URL }}img/products/cell-takeover/existing-price.png" alt="monitoring for existing alarm system starting at $29.99" width="392" height="152" id="price-area" />
-        <img src="{{ STATIC_URL }}img/products/cell-takeover/alarm-systems.png" id="existing alarm system" alt="alarm-systems" />
-        <form id="switch-form" method="post" action="">
-            <p id="form-headline">How Much Do You Save?</p>
-            <div id="save-headline">
-                <p><span>$</span><strong id="save-price">23</strong></p>
-                <h3>per month vs <span id="company-name">ADT</span></h3>
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="package-information">
+            <h1>Existing Security Systems</h1>
+            <p class="info">Switch you home security company and save money.</p>
+            <div class="home-security">
+                <i class="icon-home-security"></i>
+                <ul>
+                    <li>1 Cellular Upgrade Module</li>
+                    <li>1 Yard Sign / 3 Window Decals</li>
+                </ul>
+        
             </div>
-            <div id="form-area">
-                {% block formfields %}
-                    <label>Current Monthly Bill:</label>
-                    <input value="$42.99" id="monthly-bill" />
-                    <label>Security Provider:</label>
-                    <select id="company-select">
-                        <option>ADT</option>
-                        <option>Brinks</option>
-                        <option>Vivint</option>
-                        <option>Pinnacle</option>
-                        <option>Guardian</option>
-                        <option>Alarm Force</option>
-                        <option>Other</option>
-                    </select>
-                {% endblock %}
-                <button type="button" class="redbutton" id="switch-button">{% block quote-button %}Switch Now{% endblock %}</button>
-                <a href="http://www.protectamerica.com/help/privacy-policy" class="privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+            
+            <div class="order-area">
+                <p><b>starting at: </b><strong>$29.99</strong> <span>per month</span></p>
+                <a href="{% url order-package %}?package=existing" class="button-link">Order Now <i class="icon-chevron-right"></i></a>           
             </div>
-        </form>
-        {% include "order/switch-form.html" with form=forms.basic %}
+            <p class="equipment-cost">No Equipment Fees &bull; No Installation Fees</p>
 
-        {% if phone_number %}
-            <div class="clear"></div>
-            <div id="call-box">
-                {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></strong></p>
-            </div>
-            <div class="clear"></div>
-    
-        {% endif %}
+        </div>
+        <img src="{{ STATIC_URL }}img/products/cell-takeover/cell-takeover-hero.jpg"  class="main-hero-image"/>
+      
     </div>
-    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="Security For Every Home" id="hero-backdrop" />
 </div>
+{% include "order/call-box.html" %}
 
 <div class="wrapper">
     <div id="how-it-works">
@@ -87,8 +68,9 @@
             <img src="{{ STATIC_URL }}img/products/cell-takeover/wire-cutters.jpg" alt="Wire Cutters" width="350" height="643" />
         </div>
     </div>
+    <div class="clear"></div>
 </div>
-{% testimonial_search "affordable" "limit=10&words=75" %}
+<div class="wrapper">
     <div id="just-moved-in">
         <h2>Just Moved In?</h2>
         <p>Many homes come preinstalled with an alarm system. Protect America makes it easy and affordable to protect your new home. Just give us a call and our security experts can help monitor your existing home security system.</p>
@@ -99,13 +81,13 @@
     </div>
 </div>
 <div id="big-grass">&nbsp;</div>
-
+<div class="clear"></div>
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}/js/countTo.js"></script>
 
     <script type="text/javascript">
     $(document).ready(function() {
-        var currentPrice = 19.99;
+        var currentPrice = 29.99;
         $('#search-testimonial-box').cycle({
             fx: 'fade',
             timeout: 9000

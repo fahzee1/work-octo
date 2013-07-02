@@ -2,29 +2,42 @@ import re
 import urls
 import urllib
 import urllib2
-from datetime import datetime, timedelta
-from urllib import urlencode
-import twitter
 import operator
-from decimal import Decimal
+import random
 
+from decimal import Decimal
+from datetime import datetime, timedelta
+
+from urllib import urlencode
+from django.db.models import Q
+import twitter
+from django.contrib.localflavor.us.us_states import US_STATES
+from django.core.urlresolvers import reverse, resolve
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page, never_cache
-from django.contrib.sites.models import Site
-from django.shortcuts import render_to_response
+
+from django.shortcuts import render_to_response,render
 from django.template import RequestContext
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
-from django.core.urlresolvers import reverse, resolve
-from django.views.generic.simple import redirect_to
+from django.http import HttpResponseRedirect, HttpResponse, \
+    HttpResponsePermanentRedirect
 from django.utils import simplejson
 from django.utils.cache import patch_vary_headers
+from django.contrib.sites.models import Site
 
-from apps.contact.forms import LeadForm, AffiliateLongForm 
+from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
 from apps.pricetable.models import Package
+from apps.newsfeed.models import TheFeed,FallBacks
+from itertools import chain, izip
+
+consumer_key=settings.TWITTER_CONSUMER_KEY
+consumer_secret=settings.TWITTER_CONSUMER_SECRET
+access_token=settings.TWITTER_ACCESS_TOKEN
+access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
+
 
 def redirect_wrapper(request, agent_id):
     get = request.GET.copy()
@@ -41,6 +54,7 @@ def redirect_wrapper(request, agent_id):
 
     return HttpResponseRedirect('/?%s' % urlencode(get))
 
+
 def thank_you(request, custom_url=None):
     agent_id = request.COOKIES.get('refer_id', None)
     affiliate_obj = None
@@ -52,7 +66,7 @@ def thank_you(request, custom_url=None):
     # until the new lead system is ready go ahead and manually redirect
     # to new landing page here
     if affiliate_obj and affiliate_obj.thank_you and not custom_url:
-        url = '/thank_you%s' % affiliate_obj.thank_you
+        url = '/thank-you%s' % affiliate_obj.thank_you
         if 'leadid' in request.GET:
             url = url + '?leadid=%s' % request.GET['leadid']
         return HttpResponseRedirect(url)
@@ -62,29 +76,33 @@ def thank_you(request, custom_url=None):
          'affiliate_obj': affiliate_obj}
     return simple_dtt(request, 'thank-you/index.html', c)
 
+
 def clear_my_cookies(request):
     response = render_to_response('support/clear-my-cookies.html',
         {}, context_instance=RequestContext(request))
-    response.delete_cookie('refer_id', domain='.protectamerica.com') 
+    response.delete_cookie('refer_id', domain='.protectamerica.com')
     response.delete_cookie('affkey', domain='.protectamerica.com')
     response.delete_cookie('source', domain='.protectamerica.com')
     return response
+
 
 def fivelinxcontest(request):
     if request.method == 'POST':
         form = LinxContextForm(request.POST)
         if form.is_valid():
-            form.save() 
+            form.save()
             return HttpResponseRedirect('/contest/thanks/')
     else:
         form = LinxContextForm()
-    c = {'form': form,'page_name':'contest'}
+    c = {'form': form, 'page_name': 'contest'}
     return simple_dtt(request, 'affiliates/five-linx/contest.html', c)
+
 
 def fivelinxwinner(request):
     from apps.common.models import LinxContext
     winner = LinxContext.objects.order_by('?')
     return HttpResponse('%s' % winner[0])
+
 
 def get_active(urllist, name, pages=None):
     if pages is None:
@@ -98,6 +116,7 @@ def get_active(urllist, name, pages=None):
         except:
             pass
     return pages
+
 
 def simple_dtt(request, template, extra_context, expire_days=90):
     expire_time = timedelta(days=expire_days)
@@ -139,6 +158,7 @@ def simple_dtt(request, template, extra_context, expire_days=90):
                               context_instance=RequestContext(request))
     patch_vary_headers(response, ('Host',))
     return response
+
 
 def payitforward(request):
 
@@ -189,18 +209,21 @@ def payitforward(request):
             'videos': videos,
         }, context_instance=RequestContext(request))
 
+
 @cache_page(60 * 60 * 4)
-def index(request): 
+def index(request):
     return index_render(request, 'index.html', {})
+
 
 @cache_page(60 * 60 * 4)
 def index_test(request, test_name):
-    if test_name == 'new-page':
-        template = 'tests/new-page.html'
+    if test_name == 'notweet':
+        template = 'tests/index-notwit.html'
     else:
         raise Http404
 
     return index_render(request, template, {})
+
 
 def index_render(request, template, context):
     context['page_name'] = 'index'
@@ -211,8 +234,11 @@ def index_render(request, template, context):
     try:
         tweets = cache.get('TWEETS')
         if tweets is None:
-            t_api = twitter.Api()
-            tweets = t_api.GetUserTimeline('@protectamerica')
+            t_api = twitter.Api(consumer_key=consumer_key,
+                                consumer_secret=consumer_secret,
+                                access_token_key=access_token,
+                                access_token_secret=access_secret)
+            tweets = t_api.GetUserTimeline('protectamerica',count=3)
             cache.set('TWEETS', tweets, 60*60)
         context['tweets'] = tweets[:3]
     except:
@@ -223,11 +249,43 @@ def index_render(request, template, context):
         return HttpResponseRedirect("/affiliate/a01986/?agent=a01986")
     elif check_agent == 'a02675':
         return HttpResponseRedirect("/affiliate/a02675/?agent=a02675")
+    elif check_agent == 'a03053':
+        return HttpResponseRedirect("/affiliate/a03053/?agent=a03053")
 
     if 'no_mobile' in request.GET:
         request.session['no_mobile'] = True
     
     return simple_dtt(request, template, context)
+
+
+def render_feed(request):
+    if request.is_ajax():
+        ctx={}
+        tweets = cache.get('TWEETS')
+        if not tweets:
+            t_api = twitter.Api(consumer_key=consumer_key,
+                                consumer_secret=consumer_secret,
+                                access_token_key=access_token,
+                                access_token_secret=access_secret)
+            tweets = t_api.GetUserTimeline('protectamerica',count=5)
+            cache.set('TWEETS', tweets, 60*60)
+
+        data=request.session.get('GeoFeedData',False)
+        fback=request.session.get('FallBacks',False)
+        if data or fback:
+            results=list(chain.from_iterable(izip(data,tweets[:5])))
+            for x in data:
+                for y in tweets:
+                    if y not in results:
+                        results.append(y)
+                    if x not in results:
+                        results.append(x)
+
+            ctx['GeoFeed']=results
+            ctx['FallBacks']=fback
+            return render(request,'newsfeed/feed.html',ctx)
+
+
 
 def family_of_companies(request):
     ctx = {}
@@ -254,8 +312,9 @@ def family_of_companies(request):
             industry_dict[family['industry']] = []
         industry_dict[family['industry']].append(family)
 
-    ctx['industries'] = industry_dict 
+    ctx['industries'] = industry_dict
     return simple_dtt(request, 'about-us/family-of-companies.html', ctx)
+
 
 def black_friday(request):
     ctx = {}
@@ -263,4 +322,3 @@ def black_friday(request):
     ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
         datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
-

@@ -1,6 +1,6 @@
 from django import forms
-
-from apps.affiliates.models import Affiliate, LandingPage, Profile
+from apps.affiliates.models import Affiliate, LandingPage,Profile
+from django.core.validators import validate_email
 
 class AddAffiliateForm(forms.ModelForm):
     landing_page = forms.BooleanField(initial=False, required=False,
@@ -61,3 +61,10 @@ class AffiliateSignup(forms.ModelForm):
         super(AffiliateSignup, self).__init__(*args, **kwargs)
 
         self.fields['agreed_to_terms'].widget.attrs['class'] = 'checkbox'
+        
+        
+        
+class AffiliateLoginForm(forms.Form):
+  email=forms.EmailField(required=True,label='Enter Email',validators=[validate_email])
+  agent_id=forms.CharField(required=True,max_length=16,label='Enter Agent ID')
+

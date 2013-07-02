@@ -1,379 +1,432 @@
-{% extends "products/base.html" %}
+{% extends "learn/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}ADT Security | Protect America Advantage over Competitors{% endblock %}
 {% block page_keywords %}adt,adt security,security,home security,home security system,security system{% endblock %}
 {% block page_description %}Protect America works harder to beat out larger competitors offering alarm systems and home security monitoring for much cheaper with no loss in protection.{% endblock %}
 
 {% block content %}
-<div id="advantage-overview">
-    <div id="advantage-content">
-        <h1>Our Advantage</h1>
-        <p>At Protect America, we are driven to provide only the highest quality products and dedicated service at an affordable price. Our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost while our competitors offer a "starter" package that only protects part of the house at a much higher cost. That's why Protect America was rated the best home security system with a 5-Star Rating from Top Consumer Reviews for five years in a row (2008&mdash;2012), as well as the Consumer Digest Best Buy Award for our Copper Package. See the chart below to compare our prices to the competition, such as ADT Home Security, to discover the Protect America Advantage.</p>
-    </div>
-    <img src="{{ STATIC_URL }}img/external/consumer-digest-top-consumer-review.png" alt="awards-advantage" width="310" />
-</div>
-{% include "order/quote-form.html" with form=forms.basic %}
-<div class="clear"></div>
-<div class="home-security-comparisons">
-    <h2>Home Security Systems Comparison</h2>
-    <div id="copper-package-comparison">
-        <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-simon-xt.jpg" alt="Copper Package - GE Simon XT with 3 Door / Window Sensors and 1 Motion Detector"  id="copper-package-image" />
-        <div id="copper-package-information">
-            <h3>The Copper Package</h3>
-            <ul>
-                <li><strong>1 GE Wireless Control Panel</strong></li>
-                <li><strong>3 Door / Window Sensors</strong></li>
-                <li><strong>1 Motion Detector</strong></li>
-                <li>Internal Siren and Door Chime</li>
-                <li>Battery Backup</li>
-                <li>One-Button Arming</li>
-                <li>3 Window Decals</li>
-                <li>1 Yard Sign</li>
-                <div class="clear"></div>
-            </ul>
-            <table class="product_table">
-                <thead>
-                    <tr>
-                        <th class="alpha">&nbsp;</th>
-                        <th>OUR PRICE wireless*</th>
-                        <th>ADT Home wireless*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span>Equipment Price:</span></td>
-                        {% if request.COOKIES.bbb_test == 'C' %}
-                        <td class="call-out">
-                            <span class="free">FREE*</span>
-                            <span style="font-size: 10px; padding-top: 0px; margin-top: 0px;">Expires 12/31/2012</a>
-                        </td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'B' %}
-                        <td class="call-out"><span class="free">INCLUDED</span></td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-                        <td class="call-out"><span class="free">FREE</span></td>
-                        {% endif %}
-                        <td>$349</td>
-                    </tr>
-                    <tr>
-                        <td><span>Monthly Cost:</td>
-                        <td class="call-out">$19.99</td>
-                        <td>$42.99</td>
-                    </tr>
-                    <tr>
-                        <td><span>Contract Length:</td>
-                        <td class="call-out">36 Months</td>
-                        <td>36 Months</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="clear"></div>
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h2>Learn About Home Security</h2>
+            <h1>The Protect America Advantage</h1>
+            <p>We are driven to provide only the highest quality products and dedicated service at an affordable price. Our home security packages provide the equipment necessary to protect your entire home for a fraction of the cost of our competitors. Other companies usually offer a "starter" package which usually provide little or no security.  See the charts below to compare our prices to the competition, such as ADT Home Security, to discover the Protect America Advantage.</p>
         </div>
-        <div class="clear"></div>
-        <div id="copper-package-bar">
-            <div class="button-submit">
-                <a href="{% url order-package %}?package=copper">Order the Copper Package ></a>
-                {% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}
-            </div>
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
+        <img src="{{ STATIC_URL }}img/base/protect-america-hero.jpg" class="main-hero-image" alt="Protect America Logo" />
 
-            <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-            <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-protect-america-vs-adt.png" alt="Save $379 compared to ADT" class="adt-badge" />
-
-        </div>
-        <div class="clear"></div>
-    </div>
-    <!-- Bronze Package -->
-    <div id="bronze-package-comparison">
-        <img src="{{ STATIC_URL }}img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" alt="Bronze Package - GE Simon XT with 7 Door / Window Sensors and 1 Motion Detector" id="bronze-package-image" />
-        <div id="bronze-package-information">
-            <h3>The Bronze Package</h3>
-            <ul>
-                <li><strong>1 GE Wireless Control Panel</strong></li>
-                <li><strong>7 Door / Window Sensors</strong></li>
-                <li><strong>1 Motion Detector</strong></li>
-                <li>Internal Siren and Door Chime</li>
-                <li>Battery Backup</li>
-                <li>One-Button Arming</li>
-                <li>3 Window Decals</li>
-                <li>1 Yard Sign</li>
-                <div class="clear"></div>
-            </ul>
-            <table class="product_table">
-                <thead>
-                    <tr>
-                        <th class="alpha">&nbsp;</th>
-                        <th>OUR PRICE wireless*</th>
-                        <th>ADT Home wireless*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span>Equipment Price:</span></td>
-                        {% if request.COOKIES.bbb_test == 'C' %}
-                        <td class="call-out">
-                            <span class="free">FREE*</span>
-                            <span style="font-size: 10px; padding-top: 0px; margin-top: 0px;">Expires 12/31/2012</a>
-                        </td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'B' %}
-                        <td class="call-out"><span class="free">INCLUDED</span></td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-                        <td class="call-out"><span class="free">FREE</span></td>
-                        {% endif %}
-                        <td>$699</td>
-                    </tr>
-                    <tr>
-                        <td><span>Monthly Cost:</td>
-                        <td class="call-out">$35.99</td>
-                        <td>$42.99</td>
-                    </tr>
-                    <tr>
-                        <td><span>Contract Length:</td>
-                        <td class="call-out">36 Months</td>
-                        <td>36 Months</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-        <div id="bronze-package-bar">
-            <div class="button-submit">
-                <a href="{% url order-package %}?package=bronze">Order the Bronze Package ></a>
-                {% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}
-            </div>
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-
-            <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-            <img src="{{ STATIC_URL }}img/products/bronze-package/bronze-package-protect-america-vs-adt.png" alt="Save $699 compared to ADT" class="adt-badge" />
-
-        </div>
     </div>
 </div>
-<div class="clear"></div>
 {% include "order/call-box.html" %}
-<div class="home-security-comparisons">
-    <!-- Silver Package -->
-    <div id="silver-package-comparison">
-        <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-simon-xt-lowest-price.jpg" alt="Silver Package - GE Simon XT with 10 Door / Window Sensors and 1 Motion Detector" id="silver-package-image" />
-        <div id="silver-package-information">
-            <h3>The Silver Package</h3>
-            <ul>
-                <li><strong>1 GE Wireless Control Panel</strong></li>
-                <li><strong>10 Door / Window Sensors</strong></li>
-                <li><strong>1 Motion Detector</strong></li>
-                <li>Internal Siren and Door Chime</li>
-                <li>Battery Backup</li>
-                <li>One-Button Arming</li>
-                <li>3 Window Decals</li>
-                <li>1 Yard Sign</li>
+<div class="wrapper">
+    <div class="home-security-comparisons">
+        <h2>Home Security Systems Comparison</h2>
+        <div id="copper-package-comparison">
+            <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-simon-xt-2.jpg" alt="Copper Package - GE Simon XT with 3 Door / Window Sensors and 1 Motion Detector"  id="copper-package-image" />
+            <div id="copper-package-information">
+                <h3>The Copper Package</h3>
+                <ul>
+                    <li><strong>1 Simon XT Control Panel</strong></li>
+                    <li><strong>3 Door / Window Sensors</strong></li>
+                    <li><strong>1 Motion Detector</strong></li>
+                    <li>Internal Siren and Door Chime</li>
+                    <li>Battery Backup</li>
+                    <li>One-Button Arming</li>
+                    <li>3 Window Decals</li>
+                    <li>1 Yard Sign</li>
+                    <div class="clear"></div>
+                </ul>
+                <table class="product_table">
+                    <thead>
+                        <tr>
+                            <th class="alpha">&nbsp;</th>
+                            <th>OUR PRICE wireless*</th>
+                            <th>ADT Home wireless*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>Equipment Price:</span></td>
+                            <td class="call-out">
+                                <span class="free">Included</span>
+                            </td>
+ 
+                            <td>$349</td>
+                        </tr>
+                        <tr>
+                            <td><span>Monthly Cost:</td>
+                            <td class="call-out">$19.99</td>
+                            <td>$42.99</td>
+                        </tr>
+                        <tr>
+                            <td><span>Contract Length:</td>
+                            <td class="call-out">36 Months</td>
+                            <td>36 Months</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="clear"></div>
-            </ul>
-            <table class="product_table">
-                <thead>
-                    <tr>
-                        <th class="alpha">&nbsp;</th>
-                        <th>OUR PRICE wireless*</th>
-                        <th>ADT Home wireless*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span>Equipment Price:</span></td>
-                        {% if request.COOKIES.bbb_test == 'C' %}
-                        <td class="call-out">
-                            <span class="free">FREE*</span>
-                            <span style="font-size: 10px; padding-top: 0px; margin-top: 0px;">Expires 12/31/2012</a>
-                        </td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'B' %}
-                        <td class="call-out"><span class="free">INCLUDED</span></td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-                        <td class="call-out"><span class="free">FREE</span></td>
-                        {% endif %}
-                        <td>$939</td>
-                    </tr>
-                    <tr>
-                        <td><span>Monthly Cost:</td>
-                        <td class="call-out">$37.99</td>
-                        <td>$42.99</td>
-                    </tr>
-                    <tr>
-                        <td><span>Contract Length:</td>
-                        <td class="call-out">36 Months</td>
-                        <td>36 Months</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-        <div id="silver-package-bar">
-            <div class="button-submit">
-                <a href="{% url order-package %}?package=silver">Order the Silver Package ></a>
-                {% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}
             </div>
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-
-            <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-            <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-protect-america-vs-adt.png" alt="Save $939 compared to ADT" class="adt-badge" />
-
-        </div>
-    </div>
-    <!-- Gold Package -->
-    <div id="gold-package-comparison">
-        <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-simon-xt-lowest-price.jpg" alt="Gold Package - GE Simon XT with 12 Door / Window Sensors and 1 Motion Detector" id="gold-package-image" />
-        <div id="gold-package-information">
-            <h3>The Gold Package</h3>
-            <ul>
-                <li><strong>1 GE Wireless Control Panel</strong></li>
-                <li><strong>12 Door / Window Sensors</strong></li>
-                <li><strong>1 Motion Detector</strong></li>
-                <li>Internal Siren and Door Chime</li>
-                <li>Battery Backup</li>
-                <li>One-Button Arming</li>
-                <li>3 Window Decals</li>
-                <li>1 Yard Sign</li>
-                <div class="clear"></div>
-            </ul>
-            <table class="product_table">
-                <thead>
-                    <tr>
-                        <th class="alpha">&nbsp;</th>
-                        <th>OUR PRICE wireless*</th>
-                        <th>ADT Home wireless*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span>Equipment Price:</span></td>
-                        {% if request.COOKIES.bbb_test == 'C' %}
-                        <td class="call-out">
-                            <span class="free">FREE*</span>
-                            <span style="font-size: 10px; padding-top: 0px; margin-top: 0px;">Expires 12/31/2012</a>
-                        </td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'B' %}
-                        <td class="call-out"><span class="free">INCLUDED</span></td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-                        <td class="call-out"><span class="free">FREE</span></td>
-                        {% endif %}
-                        <td>$1099</td>
-                    </tr>
-                    <tr>
-                        <td><span>Monthly Cost:</td>
-                        <td class="call-out">$39.99</td>
-                        <td>$42.99</td>
-                    </tr>
-                    <tr>
-                        <td><span>Contract Length:</td>
-                        <td class="call-out">36 Months</td>
-                        <td>36 Months</td>
-                    </tr>
-                </tbody>
-            </table>
             <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-        <div id="gold-package-bar">
-            <div class="button-submit">
-                <a href="{% url order-package %}?package=gold">Order the Gold Package ></a>
-                {% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}
-            </div>
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-
-            <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-            <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-protect-america-vs-adt.png" alt="Save $1099 compared to ADT" class="adt-badge" />
-
-        </div>
-    </div>
-</div>
-<div class="clear"></div>
-{% include "order/call-box.html" %}
-<div class="home-security-comparisons">
-    <!-- Platinum Package -->
-    <div id="platinum-package-comparison">
-        <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-simon-xt-lowest-price.jpg" alt="Platinum Package - GE Simon XT with 15 Door / Window Sensors and 1 Motion Detector" id="platinum-package-image" />
-        <div id="platinum-package-information">
-            <h3>The Platinum Package</h3>
-            <ul>
-                <li><strong>1 GE Wireless Control Panel</strong></li>
-                <li><strong>15 Door / Window Sensors</strong></li>
-                <li><strong>1 Motion Detector</strong></li>
-                <li>Internal Siren and Door Chime</li>
-                <li>Battery Backup</li>
-                <li>One-Button Arming</li>
-                <li>3 Window Decals</li>
-                <li>1 Yard Sign</li>
-                <div class="clear"></div>
-            </ul>
-            <table class="product_table">
-                <thead>
-                    <tr>
-                        <th class="alpha">&nbsp;</th>
-                        <th>OUR PRICE wireless*</th>
-                        <th>ADT Home wireless*</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span>Equipment Price:</span></td>
-                        {% if request.COOKIES.bbb_test == 'C' %}
-                        <td class="call-out">
-                            <span class="free">FREE*</span>
-                            <span style="font-size: 10px; padding-top: 0px; margin-top: 0px;">Expires 12/31/2012</a>
-                        </td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'B' %}
-                        <td class="call-out"><span class="free">INCLUDED</span></td>
-                        {% endif %}
-                        {% if request.COOKIES.bbb_test == 'A' or not request.COOKIES.bbb_test %}
-                        <td class="call-out"><span class="free">FREE</span></td>
-                        {% endif %}
-                        <td>$1339</td>
-                    </tr>
-                    <tr>
-                        <td><span>Monthly Cost:</td>
-                        <td class="call-out">$42.99</td>
-                        <td>$42.99</td>
-                    </tr>
-                    <tr>
-                        <td><span>Contract Length:</td>
-                        <td class="call-out">36 Months</td>
-                        <td>36 Months</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="clear"></div>
-        </div>
-        <div class="clear"></div>
-        <div id="platinum-package-bar">
-            <div class="button-submit">
-                <a href="{% url order-package %}?package=platinum">Order the Platinum Package ></a>
-                {% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started</p>{% endbusinesstime %}
-            </div>
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-
-            <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-            <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-protect-america-vs-adt.png" alt="Save $1339 compared to ADT" class="adt-badge" />
-
-        </div>
-    </div>    
+            <div id="copper-package-bar">
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=copper" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
+                </div>
+                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
     
+                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
+                <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-protect-america-vs-adt.png" alt="Save $379 compared to ADT" class="adt-badge" />
+    
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!-- Bronze Package -->
+        <div id="bronze-package-comparison">
+            <img src="{{ STATIC_URL }}img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" alt="Bronze Package - GE Simon XT with 7 Door / Window Sensors and 1 Motion Detector" id="bronze-package-image" />
+            <div id="bronze-package-information">
+                <h3>The Bronze Package</h3>
+                <ul>
+                    <li><strong>1 Simon XT Control Panel</strong></li>
+                    <li><strong>7 Door / Window Sensors</strong></li>
+                    <li><strong>1 Motion Detector</strong></li>
+                    <li>Internal Siren and Door Chime</li>
+                    <li>Battery Backup</li>
+                    <li>One-Button Arming</li>
+                    <li>3 Window Decals</li>
+                    <li>1 Yard Sign</li>
+                    <div class="clear"></div>
+                </ul>
+                <table class="product_table">
+                    <thead>
+                        <tr>
+                            <th class="alpha">&nbsp;</th>
+                            <th>OUR PRICE wireless*</th>
+                            <th>ADT Home wireless*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>Equipment Price:</span></td>
+                            <td class="call-out">
+                                <span class="free">Included</span>
+                            </td>
+
+                            <td>$699</td>
+                        </tr>
+                        <tr>
+                            <td><span>Monthly Cost:</td>
+                            <td class="call-out">$35.99</td>
+                            <td>$42.99</td>
+                        </tr>
+                        <tr>
+                            <td><span>Contract Length:</td>
+                            <td class="call-out">36 Months</td>
+                            <td>36 Months</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div id="bronze-package-bar">
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=bronze" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
+                </div>
+                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
+    
+                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
+                <img src="{{ STATIC_URL }}img/products/bronze-package/bronze-package-protect-america-vs-adt.png" alt="Save $699 compared to ADT" class="adt-badge" />
+    
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="home-security-comparisons">
+        <!-- Silver Package -->
+        <div id="silver-package-comparison">
+            <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-simon-xt-lowest-price.jpg" alt="Silver Package - GE Simon XT with 10 Door / Window Sensors and 1 Motion Detector" id="silver-package-image" />
+            <div id="silver-package-information">
+                <h3>The Silver Package</h3>
+                <ul>
+                    <li><strong>1 Simon XT Control Panel</strong></li>
+                    <li><strong>10 Door / Window Sensors</strong></li>
+                    <li><strong>1 Motion Detector</strong></li>
+                    <li>Internal Siren and Door Chime</li>
+                    <li>Battery Backup</li>
+                    <li>One-Button Arming</li>
+                    <li>3 Window Decals</li>
+                    <li>1 Yard Sign</li>
+                    <div class="clear"></div>
+                </ul>
+                <table class="product_table">
+                    <thead>
+                        <tr>
+                            <th class="alpha">&nbsp;</th>
+                            <th>OUR PRICE wireless*</th>
+                            <th>ADT Home wireless*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>Equipment Price:</span></td>
+                            <td class="call-out">
+                                <span class="free">Included</span>
+                            </td>
+
+                            <td>$939</td>
+                        </tr>
+                        <tr>
+                            <td><span>Monthly Cost:</td>
+                            <td class="call-out">$37.99</td>
+                            <td>$42.99</td>
+                        </tr>
+                        <tr>
+                            <td><span>Contract Length:</td>
+                            <td class="call-out">36 Months</td>
+                            <td>36 Months</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div id="silver-package-bar">
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=silver" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
+                </div>
+                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
+    
+                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
+                <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-protect-america-vs-adt.png" alt="Save $939 compared to ADT" class="adt-badge" />
+    
+            </div>
+        </div>
+        <!-- Gold Package -->
+        <div id="gold-package-comparison">
+            <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-simon-xt-lowest-price.jpg" alt="Gold Package - GE Simon XT with 12 Door / Window Sensors and 1 Motion Detector" id="gold-package-image" />
+            <div id="gold-package-information">
+                <h3>The Gold Package</h3>
+                <ul>
+                    <li><strong>1 Simon XT Control Panel</strong></li>
+                    <li><strong>12 Door / Window Sensors</strong></li>
+                    <li><strong>1 Motion Detector</strong></li>
+                    <li>Internal Siren and Door Chime</li>
+                    <li>Battery Backup</li>
+                    <li>One-Button Arming</li>
+                    <li>3 Window Decals</li>
+                    <li>1 Yard Sign</li>
+                    <div class="clear"></div>
+                </ul>
+                <table class="product_table">
+                    <thead>
+                        <tr>
+                            <th class="alpha">&nbsp;</th>
+                            <th>OUR PRICE wireless*</th>
+                            <th>ADT Home wireless*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>Equipment Price:</span></td>
+                            <td class="call-out">
+                                <span class="free">Included</span>
+                            </td>
+
+                            <td>$1099</td>
+                        </tr>
+                        <tr>
+                            <td><span>Monthly Cost:</td>
+                            <td class="call-out">$39.99</td>
+                            <td>$42.99</td>
+                        </tr>
+                        <tr>
+                            <td><span>Contract Length:</td>
+                            <td class="call-out">36 Months</td>
+                            <td>36 Months</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div id="gold-package-bar">
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=gold" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
+                </div>
+                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
+    
+                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
+                <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-protect-america-vs-adt.png" alt="Save $1099 compared to ADT" class="adt-badge" />
+    
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="home-security-comparisons">
+        <!-- Platinum Package -->
+        <div id="platinum-package-comparison">
+            <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-simon-xt-lowest-price.jpg" alt="Platinum Package - GE Simon XT with 15 Door / Window Sensors and 1 Motion Detector" id="platinum-package-image" />
+            <div id="platinum-package-information">
+                <h3>The Platinum Package</h3>
+                <ul>
+                    <li><strong>1 Simon XT Control Panel</strong></li>
+                    <li><strong>15 Door / Window Sensors</strong></li>
+                    <li><strong>1 Motion Detector</strong></li>
+                    <li>Internal Siren and Door Chime</li>
+                    <li>Battery Backup</li>
+                    <li>One-Button Arming</li>
+                    <li>3 Window Decals</li>
+                    <li>1 Yard Sign</li>
+                    <div class="clear"></div>
+                </ul>
+                <table class="product_table">
+                    <thead>
+                        <tr>
+                            <th class="alpha">&nbsp;</th>
+                            <th>OUR PRICE wireless*</th>
+                            <th>ADT Home wireless*</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>Equipment Price:</span></td>
+                            <td class="call-out">
+                                <span class="free">Included</span>
+                            </td>
+                            <td>$1339</td>
+                        </tr>
+                        <tr>
+                            <td><span>Monthly Cost:</td>
+                            <td class="call-out">$42.99</td>
+                            <td>$42.99</td>
+                        </tr>
+                        <tr>
+                            <td><span>Contract Length:</td>
+                            <td class="call-out">36 Months</td>
+                            <td>36 Months</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div id="platinum-package-bar">
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=platinum" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
+                </div>
+                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
+    
+                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
+                <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-protect-america-vs-adt.png" alt="Save $1339 compared to ADT" class="adt-badge" />
+    
+            </div>
+        </div>    
+        
+    </div>
+    <div id="protect-america-security">
+        <h2>Home Security Commitment</h2>
+        <p>
+            Protect America is committed to excellence and affordability when it comes to securing your home. That's why we're a <a href="/home-security-system" title="home security system">Consumers Digest Best Buy™</a> for home security systems and the best choice for a world-class security system backed by a company that is dedicated to serving your security needs. Your family is your top priority. Your home is probably your largest investment. Why not take the extra precaution of providing a security system and monitoring for your residence? <a href="/home-security-system" title="Protect America">Protect America</a> is committed to helping you meet your home security needs and providing you with quality home security systems and service you can depend on.
+        </p>
+        <h2>Home Security Value</h2>
+        <p>
+            The average yearly home insurance premium in the U.S. costs over $800. The good news is that many plans offer discounts up to 20% on home insurance for homes with home security systems installed. You could save $14 or more per month on your insurance with any of our <a href="/home-alarm-systems" title="GE home alarm systems">GE home alarm systems</a>. For many, the monthly cost of a Protect America security system would be less than $16 per month once a home insurance discount is applied. For 50 cents a day, you can have the peace of mind knowing that your family and home will have the extra protection you want. 
+        </p>
+
+        <h2>Home Security Choices</h2>
+        <p>
+            Protect America offers the best home security systems and monitoring deals you'll find. We install premium security hardware with <a href="/ge-home-security" title="GE Security Products">GE security products</a>, and have the most flexible range of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of GE wireless home security components. And, our security packages are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today.
+        </p>
+    </div>
+    <div class="clear"></div>
 </div>
-<div id="why-choose-protect-america">
-    <h2>Why choose Protect America over ADT Home Security?</h2>
-    <p>If you are in the market for a security system odds are you've been shopping around and comparing different companies in the alarm system business, such as ADT Home Security and Protect America. Choosing a home security company is an important decision but one that doesn't have to be hard. Before you buy, here are a few reasons you should choose Protect America for your security needs.</p>
-    <ul>
-    	<li>Look at ADT Security prices &mdash; you will pay hundreds of dollars for a security system, whereas with Protect America, you get a GE Wireless Home Security System that has more options than ADT Home Security, for free.</li>
-    	<li>Protect America was rated the best home security system by receiving a 5-Star Rating from Top Consumer Reviews for five years in a row (2008&mdash;2012), as well as the Consumer Digest Best Buy Award for our Copper Package</li>
-    	<li>Additional equipment for your security system is sold by Protect America at a fraction of the cost of what ADT Security charges.</li>
-    	<li>ADT Home Security offers landline and cellular home security monitoring service while  Protect America uses the best technology to bring you several types of  alarm monitoring service such as Cellular Interactive, Broadband Interactive, Two-Way Voice, and Standard Landline monitoring.</li>
-    </ul>
-</div>
+    <div id="big-choices">
+        <div id="home-security-choice" class="big-info" style="display:block">
+            <div class="big-wrapper">
+                <div class="clear"></div>
+                <table id="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th><img src="{{ STATIC_URL }}img/protectamerica/protect-america-logo.png" alt="Protect America Logo" width="248" height="40" /></th>
+                            <th>ADT</th>
+                            <th>ADT Pulse</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="alpha title">Installation</td>
+                            <td class="alpha pa">$0</td>
+                            <td class="alpha">$49</td>
+                            <td class="alpha">$49</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Monthly Rate</td>
+                            <td class="pa">$19.99</td>
+                            <td>$42.99</td>
+                            <td>$50.99</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Homeowner's Discount</td>
+                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America's Homeowners Discount" width="40" height="40" /></td>
+                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Homeowners Dicount" width="40" height="40" /></td>
+                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse Homeowners Discount" width="40" height="40" /></td>
+                        </tr>
+                        <tr>
+                            <td class="title">24/7 Monitoring</td>
+                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has 24/7 Monitoring" width="40" height="40" /></td>
+                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT has 24/7 Monitoring" width="40" height="40" /></td>
+                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse has 24/7 Monitoring" width="40" height="40" /></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Interactive Features*</td>
+                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has Interactive Apps" width="40" height="40" /></td>
+                            <td>&nbsp;</td>
+                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse has Interactive Apps" width="40" height="40" /></td>
+                        </tr>
+                        <tr>
+                            <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
+                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has Lifetime Replacement Parts Warranty" width="40" height="40" /></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Free EasyMove<br/> Moving Kit</td>
+                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has a Free EasyMove Moving Kit" width="40" height="40" /></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="title">Lowest Price Guaranteed</td>
+                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has the Lowest Price Guaranteed" width="40" height="40" /></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="title omega">Locked-in Rate</td>
+                            <td class="pa omega"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America's Rates are Locked-In" width="40" height="40" /></td>
+                            <td class="omega">&nbsp;</td>
+                            <td class="omega">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><a href="{% url order-package %}" class="button-link header-button">Order Now</a></td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+    
+            </div>
+        
+        </div>
+    </div>
+
 {% endblock %}  

@@ -3,17 +3,19 @@ import pytz
 from pytz import timezone
 import settings
 import os
+import logging
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render 
 from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.utils import simplejson
 from django.conf import settings as dsettings
 from django.views.decorators.cache import cache_page
 
+
 from apps.contact.forms import PAContactForm
-from apps.local.sitemaps import KeywordSitemap, KeywordSitemapIndex
+from apps.local.sitemaps import KeywordCitySitemap, KeywordStateSitemap, KeywordSitemapIndex
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
@@ -22,66 +24,68 @@ from apps.crimedatamodels.models import (State,
 LOCAL_KEYWORDS = ['home-security-systems-reviews', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'honeywell-home-security-systems', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'wireless-home-security-system-reviews', 'ge-home-security-system', 'diy-home-security-system', 'wireless-home-security-systems-reviews', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-security-systems-reviews', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'ge-home-security-system', 'diy-home-security-system', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-surveillance-system', 'wireless-home-surveillance-systems', 'best-home-surveillance-system', 'home-video-surveillance-systems', 'home-surveillance-systems-reviews', 'home-surveillance-system-reviews', 'outdoor-home-surveillance-systems', 'home-video-surveillance-system', 'home-security-surveillance-systems', 'home-surveillance-cameras', 'hidden-home-surveillance-systems', 'surveillance-systems', 'wireless-surveillance-system', 'video-surveillance-systems', 'home-surveillance', 'best-home-surveillance-systems', 'home-video-surveillance', 'home-surveillance-camera', 'video-surveillance-system', 'surveillance-camera-system', 'surveillance-system', 'surveillance-camera-systems', 'wireless-surveillance-systems', 'security-surveillance-systems', 'home-surveillance-camera-systems', 'home-surveillance-equipment', 'home-surveillance-systems-review', 'camera-surveillance-systems', 'wireless-home-surveillance-system', 'best-home-surveillance-system-reviews', 'home-security-surveillance', 'home-video-surveillance-systems-reviews', 'diy-home-surveillance-systems', 'wireless-home-video-surveillance-systems', 'surveillance-systems-reviews', 'wireless-surveillance-camera-system', 'surveillance-system-reviews', 'dvr-surveillance-system', 'home-surveillance-camera-system', 'home-security-surveillance-system', 'cheap-home-surveillance-systems', 'home-camera-surveillance', 'wireless-video-surveillance-systems', 'surveillance-cameras-systems', 'home-surveillance-systems-iphone', 'camera-surveillance-system', 'outdoor-surveillance-systems', 'adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services','wireless-home-security-systems', 'wireless-home-security-products', 'wireless-home-security', 'home-surveillance-systems-wireless','wireless-home-security-systems-reviews', 'wireless-home-security-system-reviews', 'home-security-systems-wireless','wireless-home-security-system', 'wireless-home-security-systems', 'home-security-systems-wireless', 'wireless-home-security-system','wireless-home-security-systems','wireless-alarm-systems','wireless-alarms', 'wireless-alarm-system','best-wireless-alarm-system','top-wireless-security-systems','best-wireless-homesecurity-systems','wireless-homesecurity','wireless-ge-security',]
 
 TIMEZONES = {
-    'AL':'America/Chicago',
-    'AK':'America/Anchorage',
-    'AZ':'America/Phoenix',
-    'AR':'America/Chicago',
-    'CA':'America/Los_Angeles',
-    'CO':'America/Denver',
-    'CT':'America/New_York',
-    'DE':'America/New_York',
-    'DC':'America/New_York',
-    'FL':'America/New_York',
-    'GA':'America/New_York',
-    'HI':'Pacific/Honolulu',
-    'ID':'America/Denver',
-    'IL':'America/Chicago',
-    'IN':'America/Indianapolis',
-    'IA':'America/Chicago',
-    'KS':'America/Chicago',
-    'KY':'America/New_York',
-    'LA':'America/Chicago',
-    'ME':'America/New_York',
-    'MD':'America/New_York',
-    'MA':'America/New_York',
-    'MI':'America/New_York',
-    'MN':'America/Chicago',
-    'MS':'America/Chicago',
-    'MO':'America/Chicago',
-    'MT':'America/Denver',
-    'NE':'America/Chicago',
-    'NV':'America/Los_Angeles',
-    'NH':'America/New_York',
-    'NJ':'America/New_York',
-    'NM':'America/Denver',
-    'NY':'America/New_York',
-    'NC':'America/New_York',
-    'ND':'America/Chicago',
-    'OH':'America/New_York',
-    'OK':'America/Chicago',
-    'OR':'America/Los_Angeles',
-    'PA':'America/New_York',
-    'RI':'America/New_York',
-    'SC':'America/New_York',
-    'SD':'America/Chicago',
-    'TN':'America/Chicago',
-    'TX':'America/Chicago',
-    'UT':'America/Denver',
-    'VT':'America/New_York',
-    'VA':'America/New_York',
-    'WA':'America/Los_Angeles',
-    'WV':'America/New_York',
-    'WI':'America/Chicago',
-    'WY':'America/Denver',
+    'AL': 'America/Chicago',
+    'AK': 'America/Anchorage',
+    'AZ': 'America/Phoenix',
+    'AR': 'America/Chicago',
+    'CA': 'America/Los_Angeles',
+    'CO': 'America/Denver',
+    'CT': 'America/New_York',
+    'DE': 'America/New_York',
+    'DC': 'America/New_York',
+    'FL': 'America/New_York',
+    'GA': 'America/New_York',
+    'HI': 'Pacific/Honolulu',
+    'ID': 'America/Denver',
+    'IL': 'America/Chicago',
+    'IN': 'America/Indianapolis',
+    'IA': 'America/Chicago',
+    'KS': 'America/Chicago',
+    'KY': 'America/New_York',
+    'LA': 'America/Chicago',
+    'ME': 'America/New_York',
+    'MD': 'America/New_York',
+    'MA': 'America/New_York',
+    'MI': 'America/New_York',
+    'MN': 'America/Chicago',
+    'MS': 'America/Chicago',
+    'MO': 'America/Chicago',
+    'MT': 'America/Denver',
+    'NE': 'America/Chicago',
+    'NV': 'America/Los_Angeles',
+    'NH': 'America/New_York',
+    'NJ': 'America/New_York',
+    'NM': 'America/Denver',
+    'NY': 'America/New_York',
+    'NC': 'America/New_York',
+    'ND': 'America/Chicago',
+    'OH': 'America/New_York',
+    'OK': 'America/Chicago',
+    'OR': 'America/Los_Angeles',
+    'PA': 'America/New_York',
+    'RI': 'America/New_York',
+    'SC': 'America/New_York',
+    'SD': 'America/Chicago',
+    'TN': 'America/Chicago',
+    'TX': 'America/Chicago',
+    'UT': 'America/Denver',
+    'VT': 'America/New_York',
+    'VA': 'America/New_York',
+    'WA': 'America/Los_Angeles',
+    'WV': 'America/New_York',
+    'WI': 'America/Chicago',
+    'WY': 'America/Denver'
 }
 
+
 @cache_page(60 * 60 * 4)
-def local_page_wrapper(request, keyword, city, state, zipcode):
+def local_page_wrapper(request, keyword, city, state):
     def get_state_code(statestr):
         for state in US_STATES:
             if statestr.lower().replace('-', ' ') == state[1].lower():
                 return state[0]
-        return False
+            else:
+                return False
     statecode = get_state_code(state)
     if not statecode:
         raise Http404
@@ -98,15 +102,16 @@ def local_page(request, state, city, keyword=None):
         zipcode = ZipCode.objects.filter(city=city, state=state)
         zipcodestr = '00000'
         if zipcode:
-            zipcodestr = zipcode[0].zip 
+            zipcodestr = zipcode[0].zip
         state_obj = State.objects.get(abbreviation=state)
-        return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' % 
+        return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' %
             (
                 csr[str(crime_stats_ctx['city_id'])],
                 city.lower().replace(' ', '-'),
                 state_obj.name.lower().replace(' ', '-'),
                 zipcodestr,
             ))
+
     forms = {}
     forms['basic'] = PAContactForm()
     crime_stats_ctx['forms'] = forms
@@ -134,17 +139,17 @@ def local_page(request, state, city, keyword=None):
     adt_keyword_list = ['adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services']
 
     if keyword in custom_keyword_list:
-        response = render_to_response('local-pages/%s.html' % keyword,
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/%s.html', crime_stats_ctx) % keyword
     elif keyword in wireless_keyword_list:
-        response = render_to_response('local-pages/wireless-home-security-systems.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/wireless-home-security-systems.html',
+            crime_stats_ctx)
     elif keyword in adt_keyword_list:
-        response = render_to_response('landing-pages/adt.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+
+        response = render(request,'landing-pages/adt.html',
+            crime_stats_ctx)
     else:        
-        response = render_to_response('local-pages/index.html',
-            crime_stats_ctx, context_instance=RequestContext(request))
+        response = render(request,'local-pages/index.html',
+            crime_stats_ctx)
 
     expire_time = datetime.timedelta(days=90)
     response.set_cookie('affkey',
@@ -153,22 +158,23 @@ def local_page(request, state, city, keyword=None):
                     expires=datetime.datetime.now() + expire_time)
     return response
 
+
 def local_state(request):
     states = State.objects.order_by('name')
 
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('local-pages/choose-state.html',
-                              {'states': states,
-                               'forms': forms,},
-                              context_instance=RequestContext(request))
+    return render_to_response('local-pages/choose-state.html', {
+            'states': states, 'forms': forms
+        }, context_instance=RequestContext(request))
+
 
 def local_city(request, state):
     try:
         state = State.objects.get(abbreviation=state)
     except State.DoesNotExist:
         raise Http404
-    
+
     cities = CityLocation.objects.filter(state=state.abbreviation)
     city_by_first_letter = {}
     for city in cities:
@@ -177,16 +183,45 @@ def local_city(request, state):
         city_by_first_letter[city.city_name[0]].append(city)
     forms = {}
     forms['basic'] = PAContactForm()
-    return render_to_response('local-pages/choose-city.html',
-                              {'cities': city_by_first_letter,
-                               'forms': forms,
-                               'state': state.abbreviation,},
-                              context_instance=RequestContext(request))
+    return render_to_response('local-pages/choose-city.html', {
+                'cities': city_by_first_letter,
+                'forms': forms,
+                'state': state.abbreviation,
+            }, context_instance=RequestContext(request))
 
-def sitemap(request, keyword):
+
+def html_sitemap(request, state, keyword):
+    try:
+        state = State.objects.get(abbreviation=state)
+    except State.DoesNotExist:
+        raise Http404
+
+    cities = CityLocation.objects.filter(state=state.abbreviation)
+    city_by_first_letter = {}
+    for city in cities:
+        if city.city_name[0] not in city_by_first_letter:
+            city_by_first_letter[city.city_name[0]] = []
+        city_by_first_letter[city.city_name[0]].append(city)
+    forms = {}
+    forms['basic'] = PAContactForm()
+    return render_to_response('local-pages/html-sitemap.html', {
+            'cities': city_by_first_letter,
+            'forms': forms,
+            'state': state.abbreviation,
+            'keyword': keyword,
+        }, context_instance=RequestContext(request))
+
+
+def sitemap(request, keyword, state):
     from django.contrib.sitemaps.views import sitemap
-    return sitemap(request, {'keyword-sitemap' : KeywordSitemap(keyword)})
+    return sitemap(request, {'keyword-sitemap' : KeywordCitySitemap(keyword, state)})
+
+def sitemap_state(request, keyword):
+    from django.contrib.sitemaps.views import sitemap
+    return sitemap(request, {'keyword-sitemap' : KeywordStateSitemap(keyword)})
 
 def sitemap_index(request):
     from django.contrib.sitemaps.views import sitemap
     return sitemap(request, {'keyword-sitemap-index' : KeywordSitemapIndex(LOCAL_KEYWORDS)})
+
+

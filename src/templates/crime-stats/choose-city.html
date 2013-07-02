@@ -1,87 +1,80 @@
-{% extends "crime-stats/base.html" %}
+{% extends "learn/base.html" %}
 {% load content_filters content_tags sekizai_tags crime_stats_filters testimonial_tags humanize %}
 
 {% block page_title %}{{ state }} Crime Statistics | Crime Rate and Sex Offenders List | Protect America Home Security{% endblock %}
 
 {% block content %}
-<div id="city-bar" class="select">
-    <h1>Find your City:</h1>
-    <form action="/crime-rate/search/" method="GET">
-        <input value="{{ request.GET.q }}" name="q" placeholder="(Enter City/State or Zip Code)" />
-        <button class="button-link">Find City ></button>
-        <div class="clear"></div>
-
-    </form>
-    <ul id="letters">
-        <li {% if cities.A %}class="has-cities"{% endif %}><a href="#A_cities">A</a></li>
-        <li {% if cities.B %}class="has-cities"{% endif %}><a href="#B_cities">B</a></li>
-        <li {% if cities.C %}class="has-cities"{% endif %}><a href="#C_cities">C</a></li>
-        <li {% if cities.D %}class="has-cities"{% endif %}><a href="#D_cities">D</a></li>
-        <li {% if cities.E %}class="has-cities"{% endif %}><a href="#E_cities">E</a></li>
-        <li {% if cities.F %}class="has-cities"{% endif %}><a href="#F_cities">F</a></li>
-        <li {% if cities.G %}class="has-cities"{% endif %}><a href="#G_cities">G</a></li>
-        <li {% if cities.H %}class="has-cities"{% endif %}><a href="#H_cities">H</a></li>
-        <li {% if cities.I %}class="has-cities"{% endif %}><a href="#I_cities">I</a></li>
-        <li {% if cities.J %}class="has-cities"{% endif %}><a href="#J_cities">J</a></li>
-        <li {% if cities.K %}class="has-cities"{% endif %}><a href="#K_cities">K</a></li>
-        <li {% if cities.L %}class="has-cities"{% endif %}><a href="#L_cities">L</a></li>
-        <li {% if cities.M %}class="has-cities"{% endif %}><a href="#M_cities">M</a></li>
-        <li {% if cities.N %}class="has-cities"{% endif %}><a href="#N_cities">N</a></li>
-        <li {% if cities.O %}class="has-cities"{% endif %}><a href="#O_cities">O</a></li>
-        <li {% if cities.P %}class="has-cities"{% endif %}><a href="#P_cities">P</a></li>
-        <li {% if cities.Q %}class="has-cities"{% endif %}><a href="#Q_cities">Q</a></li>
-        <li {% if cities.R %}class="has-cities"{% endif %}><a href="#R_cities">R</a></li>
-        <li {% if cities.S %}class="has-cities"{% endif %}><a href="#S_cities">S</a></li>
-        <li {% if cities.T %}class="has-cities"{% endif %}><a href="#T_cities">T</a></li>
-        <li {% if cities.U %}class="has-cities"{% endif %}><a href="#U_cities">U</a></li>
-        <li {% if cities.V %}class="has-cities"{% endif %}><a href="#V_cities">V</a></li>
-        <li {% if cities.W %}class="has-cities"{% endif %}><a href="#W_cities">W</a></li>
-        <li {% if cities.X %}class="has-cities"{% endif %}><a href="#X_cities">X</a></li>
-        <li {% if cities.Y %}class="has-cities"{% endif %}><a href="#Y_cities">Y</a></li>
-        <li {% if cities.Z %}class="has-cities"{% endif %}><a href="#Z_cities">Z</a></li>
-        <div class="clear"></div>
-    </ul>
-
-</div>
-<div class="clear"></div>
-
-<div id="city-content">
-    <a href="/" title="Best Deal Ever - Monitoring Starting at $19.99 per month">
-        <img src="{{ STATIC_URL }}img/banners/664x144/664x144-best-deal-ever.png" alt="Best Deal Ever - Monitoring Starting at $19.99 per month" width="664" height="144" />
-    </a>
-    <div class="clear"></div>
-    {% for key, value in cities.iteritems %}
-    <div id="{{ key }}_cities" class="alphabet-content">
-        <h2>{{ key }}</h2>
-        <ul>
-        {% for city in value %}
-            <li><a href="{{ city.get_absolute_url }}">{{ city.city_name }}</a></li>
-        {% endfor %}
+<div id="city-bar-wrapper">
+    <div id="city-bar" class="select">
+        <h1>Find your City:</h1>
+        <form action="/crime-rate/search/" method="GET">
+            <input value="{{ request.GET.q }}" name="q" placeholder="(Enter City/State or Zip Code)" />
+            <button class="button-link">Find City <i class="icon-chevron-right"></i></button>
+            <div class="clear"></div>
+    
+        </form>
+        <ul id="letters">
+            <li {% if cities.A %}class="has-cities"{% endif %}><a href="#A_cities">A</a></li>
+            <li {% if cities.B %}class="has-cities"{% endif %}><a href="#B_cities">B</a></li>
+            <li {% if cities.C %}class="has-cities"{% endif %}><a href="#C_cities">C</a></li>
+            <li {% if cities.D %}class="has-cities"{% endif %}><a href="#D_cities">D</a></li>
+            <li {% if cities.E %}class="has-cities"{% endif %}><a href="#E_cities">E</a></li>
+            <li {% if cities.F %}class="has-cities"{% endif %}><a href="#F_cities">F</a></li>
+            <li {% if cities.G %}class="has-cities"{% endif %}><a href="#G_cities">G</a></li>
+            <li {% if cities.H %}class="has-cities"{% endif %}><a href="#H_cities">H</a></li>
+            <li {% if cities.I %}class="has-cities"{% endif %}><a href="#I_cities">I</a></li>
+            <li {% if cities.J %}class="has-cities"{% endif %}><a href="#J_cities">J</a></li>
+            <li {% if cities.K %}class="has-cities"{% endif %}><a href="#K_cities">K</a></li>
+            <li {% if cities.L %}class="has-cities"{% endif %}><a href="#L_cities">L</a></li>
+            <li {% if cities.M %}class="has-cities"{% endif %}><a href="#M_cities">M</a></li>
+            <li {% if cities.N %}class="has-cities"{% endif %}><a href="#N_cities">N</a></li>
+            <li {% if cities.O %}class="has-cities"{% endif %}><a href="#O_cities">O</a></li>
+            <li {% if cities.P %}class="has-cities"{% endif %}><a href="#P_cities">P</a></li>
+            <li {% if cities.Q %}class="has-cities"{% endif %}><a href="#Q_cities">Q</a></li>
+            <li {% if cities.R %}class="has-cities"{% endif %}><a href="#R_cities">R</a></li>
+            <li {% if cities.S %}class="has-cities"{% endif %}><a href="#S_cities">S</a></li>
+            <li {% if cities.T %}class="has-cities"{% endif %}><a href="#T_cities">T</a></li>
+            <li {% if cities.U %}class="has-cities"{% endif %}><a href="#U_cities">U</a></li>
+            <li {% if cities.V %}class="has-cities"{% endif %}><a href="#V_cities">V</a></li>
+            <li {% if cities.W %}class="has-cities"{% endif %}><a href="#W_cities">W</a></li>
+            <li {% if cities.X %}class="has-cities"{% endif %}><a href="#X_cities">X</a></li>
+            <li {% if cities.Y %}class="has-cities"{% endif %}><a href="#Y_cities">Y</a></li>
+            <li {% if cities.Z %}class="has-cities"{% endif %}><a href="#Z_cities">Z</a></li>
+            <div class="clear"></div>
         </ul>
+    
     </div>
     <div class="clear"></div>
-    {% endfor %}
 </div>
+<div class="wrapper">
 
-<div class="sidebar">    
-    {% include "order/quote-form.html" with form=forms.basic %}
-    {% comment %}
-    <div class="side-ad">
-        <a href="http://www.socialfirefly.com" title="Watch your kid's online with Social Firefly" target="_blank"><img src="{{ STATIC_URL }}/img/banners/274x216/social-firefly.png" alt="Watch your kid's online with Social Firefly" /></a>
+    <div id="city-content">
+
+        <div class="clear"></div>
+        {% for key, value in cities.iteritems %}
+        <div id="{{ key }}_cities" class="alphabet-content">
+            <h2>{{ key }}</h2>
+            <ul>
+            {% for city in value %}
+                <li><a href="{{ city.get_absolute_url }}">{{ city.city_name }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="clear"></div>
+        {% endfor %}
     </div>
-    {% endcomment %}
+    <div class="clear"></div>
 </div>
-<div class="clear"></div>
 {% addtoblock "js" %}
     <script type="text/javascript"> 
     $(document).ready(function() {
             $(window).scroll(function() {
                 if($(document).scrollTop() >= 208) {
-                    $('#city-bar').css({'position':'fixed',
-                                        'top': '0px',
+                    $('#city-bar-wrapper').css({'position':'fixed',
+                                        'top': '48px',
                                         'z-index': '1000'});
                 } else {
-                    $('#city-bar').css({'position':'relative'});
+                    $('#city-bar-wrapper').css({'position':'inherit'});
                 }
             });
     });

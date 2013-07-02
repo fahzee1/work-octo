@@ -1,0 +1,89 @@
+{% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Door / Window Sensors | Home Security Equipment | Protect America{% endblock %}
+{% block page_keywords %}door sensor, security sensor, window sensor, door security, window security, entry point, front door protection{% endblock %}
+{% block page_description %}Protect your homes' windows and doors from intruders with door & window sensors. Protect America offers quality wireless home security equipment at low-prices.{% endblock %}
+
+
+{% block content %}
+<div id="hero-wrapper" class="blue">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h2>Home Security</h2>
+            <h1>Mini Pin Pad</h1>
+            <p>Home security control in an extra small size.</p>
+            {% if phone_number %}
+
+                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
+
+
+            {% endif %}            
+            <a href="{% url shop %}" class="button-link">Shop Packages<i class="icon-chevron-right"></i></a>
+
+        </div>
+        <img src="{{ STATIC_URL }}img/products/equipment/mini-pinpad/mini-pinpad-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
+
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+
+<div class="wrapper">
+    <div class="video-features">
+        <div class="video-content">
+            <h2>Pocket Sized<span>Home Security.</span></h2>
+            <p>Small yet effective and convenient, the Mini Pin Pad gives you pocket-sized home security protection. The pin pad allows you to arm, disarm, and even send emergency signals no matter where you are in your home. </p>
+        </div>
+        <div class="video-frame">
+            <iframe width="400" height="225" src="http://www.youtube.com/embed/lyRK4d88i80?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/equipment/mini-pinpad/mini-pinpad-white.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Mini Pin Pad</h2>
+            <p>Placing these strategically throughout your home can come in handy when you least expect it. These pin pads have the capability to sends distress signals to alert the authorities. You also have the power to arm and disarm the system. The pin pad is the perfect mix of security and convenience mixed in one.</p>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+        $('.video-link').click(function(e) {
+            e.preventDefault();
+            $('.video-link').parent().removeClass('active');
+            $('.video-link a').html('Watch Now >');
+            
+            var video_url = $(this).children('a').attr('href');
+            $('#main-video iframe').attr('src', video_url);
+
+            $(this).parent().addClass('active');
+            $(this).children('a').html('Now Playing');
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
+
+{% block page-product %}
+    <h2>Door / Window Security Sensors</h2>
+    <p><span>Add to your Package: <strong>$39.50 each</strong></span></p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Door / Window Sensor']);">Order Now ></a>
+    </div>
+{% endblock %}
+

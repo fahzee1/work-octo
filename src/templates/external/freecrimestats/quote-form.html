@@ -1,0 +1,72 @@
+{% extends "order/quote-form.html" %}
+
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#quote-form input').keypress(function(e){
+        if(e.which == 13){
+            $('#quote-form button').click();
+        }
+    });
+    var submitting = false;
+
+    $('#quote-form button').click(function() {
+        $(this).attr('disabled', true);
+        $('#quote-form div').removeClass('.error-state');
+		
+        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
+        $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess
+        });
+
+        function newFormSuccess(json) {
+            submitting = false;
+            if(json.success) {
+                window.location = "/thank-you/";
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        if(json.errors) {
+            $('#quote-form button').attr('disabled', false); 
+            $("#quote-form-error").show();
+            $("#quote-form-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quote-form-error ul").html(error_string);
+            } else $("#quote-form-error").hide();
+
+        }
+        return false;
+        });
+    });   
+</script>
+{% endblock %}

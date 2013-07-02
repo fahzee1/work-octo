@@ -1,69 +1,50 @@
-{% extends "products/base.html" %}
+{% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Business Security System | Home Security Alarm Systems | Protect America{% endblock %}
-{% block page_description %}Protect America makes it easy to secure your small office or business with our Business Security Package.{% endblock %}
+{% block page_title %}Home Security Alarm Systems | Copper Home Security System | Protect America{% endblock %}
+{% block page_description %}Our most affordable security package that provides security for up to three doors or windows.{% endblock %}
+
 
 {% block content %}
-<div id="top-content">
-    <div id="business-package-offer" itemscope itemtype="http://schema.org/Product">
-        <h1 itemprop="name">Business Security Package</h1>
-        <img src="{{ STATIC_URL }}img/products/business-package/business-package.jpg" id="offer-main-image" alt="Business Alarm Security" />
-        <ul itemprop="description">
-            <li>GE Simon XT Control Panel</li>
-            <li>1 Interactive Video Camera</li>
-            <li>2 Door / Window Sensors</li>
-            <li>1 Glass Break Sensor</li>
-            <li>1 Secret Keypad</li>
-            <li>3 Security Stickers</li>
-            <li>Owner's Manual</li>
-        </ul>
-        <div id="top-consumer-review-medal">
-            <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-five-star-transparent.png" width="78" height="76" alt="Rated 5-Stars by Top Consumer Reviews" />
-            <p>Five star rating in 2012 by TopConsumerReviews.com</p>
-        </div>
-        <span class="upfront-price">Equipment Price: <strong itemprop="price"><sup>$</sup>99</strong></span>
-        <span class="monthly-price">Monthly Price: <strong itemprop="price"><sup>$</sup>44<sup class="cents">99</sup></strong></span>
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="package-information">
+            <h1>The Business Package</h1>
+            <p class="info">Security for the small business or restaurant.</p>
+            <div class="home-security">
+                <i class="icon-home-security"></i>
+                <ul>
+                    <li>1 Simon XT Control Panel</li>
+                    <li>2 Door or Window Sensors</li>
+                    <li>1 Glass Break Detector</li>
+                    <li>1 Video Surveillance Camera</li>
+                    <li>3 Window Decals</li>
+                </ul>
+            </div>
+            <div class="smart-connect">
+                <i class="icon-smart-connect"></i>
 
-    </div>
-    {% include "order/quote-form.html" with form=forms.basic %}
-</div>
-<div class="clear"></div>
-<div id="included-equipment">
-    <h2>What's Included:</h2>
-    <div>
-        <img src="{{ STATIC_URL }}img/products/security-panels/simon-xt-icon.jpg" width="160" height="131" alt="GE Simon XT Security Control Panel" />
-        <strong>One (1)</strong> Simon XT Control Panel
-    </div>
-    <div>
-        <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor-icon.jpg" width="160" height="131" alt="Door / Window Business Security Sensor" />
-        <strong>Two (2)</strong> Door Sensors
-        </div>
-    <div>
-        <img src="{{ STATIC_URL }}img/products/equipment/interactive-video-camera-icon.jpg" width="160" height="131" alt="Protect America Home Security Installation Manual" />
-        <strong>One (1)</strong> Interactive Video Camera
-    </div>
-    <div>   
-        <img src="{{ STATIC_URL }}img/products/equipment/glass-break-detector/glass-break-sensor-icon.jpg" width="160" height="131" alt="Glass Break Sensor" />
-        <strong>One (1)</strong> Glass Break Sensor
-    </div>
-    <div>
-        <img src="{{ STATIC_URL }}img/products/equipment/secret-keypad/secret-keypad-icon.jpg" width="160" height="131" alt="Business Security Motion Detector" />
-        <strong>One (1)</strong> Secret Keypad
-    </div>
-    <div>
-        <img src="{{ STATIC_URL }}img/products/accessories/security-window-stickers-icon.jpg" width="160" height="131" alt="Protect America Home Security Window Stickers" />
-        <strong>Three (3)</strong> Security Window Stickers
-    </div>
+                <ul>
+                    <li>Arm / Disarm from your Smart Phone</li>
+                    <li>View Live Video from Anywhere</li>
+                </ul>
+            </div>
 
-</div>
-<div id="the-business-package">
-    <img src="{{ STATIC_URL }}img/products/business-package/small-business-graphic.jpg" alt="Business Security Alarm" id="main-package-image" />
-    <div id="business-package-content">
-        <h1>In Your Business</h1>
-        <p>An affordable and comprehensive business security solution, the Business Package from Protect America can secure anything from restaurants to medium-sized retail stores. Protect America has specifically designed the Business Package to meet the needs of business owners. Connecting through our Interactive Broadband Monitoring, the system plugs right into your current high speed internet connection.  This means you have lightning quick alarms signals. Also with the Interactive Broadband, you have free access to our interactive services meaning you can watch your business from anywhere with your smartphone or personal computer. Each Business Package includes 2 door/window sensors, a glass break detector, and an interactive video security camera.</p>
-        <div class="button-submit"><a href="{% url order-package %}?package=business" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Business']);">Order Now ></a>{% businesstime %}<p class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to start securing your home and family</p>{% endbusinesstime %}</div>
+            <div class="order-area">
+                <p><b>starting at: </b><strong>$44.99</strong> <span>per month</span></p>
+                
+                <a href="{% url order-package %}?package=copper" class="button-link">Order Now <i class="icon-chevron-right"></i></a>           
+            </div>
+            <p class="equipment-cost">$99 Equipment Cost &bull; No Installation Fees</p>
+
+        </div>
+        
+        <img src="{{ STATIC_URL }}img/products/business-package/yard-sign.jpg" alt="copper-package-simon-xt" class="main-hero-image" />
     </div>
+</div>
+{% include "order/call-box.html" %}
+<div class="wrapper">
     <div id="three-protections">
+        <h2>Triple Threat Security Protection <span>Three Ways to Help Protect Your Business</span></h2>
         <div id="door-protection">
             <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/door-window-sensor-240x240.jpg" alt="Door / Window Sensor" width="240" height="240" />
             <h3>Break-In Security Protection</h3>
@@ -80,80 +61,121 @@
             <p>The business package from Protect America also includes a state-of-the-art interactive home video camera. Accessible from almost any computer or smartphone with Internet access, our interactive video security cameras help prevent against employee theft and vandalism. With video security, watching your business is just a click away.</p>
         </div>
     </div>
-    <div class="clear"></div>
-
-
 </div>
-<div class="clear"></div>
-{% include "order/call-box.html" %}
-<div id="employee-watch">
-    <img src="{{ STATIC_URL }}img/products/video/big-camera.jpg" alt="Interactive Video Business Security" width="356" height="327" />
 
-    <div id="employee-content">
-        <h2>What Exactly Are Your Employees Doing?</h2>
-        <p>Well now, you'll know. Because with our interactive video security, you get an extra set of "eyes" to be able to watch your business. So you can easily make sure your employees stay on task and are working rather than goofing off. And checking in on your phone is just a click away with our easy to use smart phone apps.</p>
-        <div class="button-link">
-            <a href="{% url video-business %}" title="Learn About Business Video Security">Business Video Security ></a>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/copper-package/in-the-home.png" class="main" alt="in-the-home-simon-xt" />
+            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" class="alt-img simon-xt" alt="Simon XT Control Panel" width="439" height="453" />
+            <img src="{{ STATIC_URL }}img/products/door-window-sensor/in-the-home-door-window-sensor.jpg" class="alt-img door-window-sensor" alt="Door / Window Sensor" width="439" height="453" />
+            <img src="{{ STATIC_URL }}img/products/motion-detector/in-the-home-motion-detector.jpg" class="alt-img motion-detector" alt="Motion Detector" width="439" height="453" />
+            <i class="home-icon-base" style="top: 120px; left: 277px;" data-info="motion-detector">M</i>
+            <i class="home-icon-base" style="top: 303px; left: 241px;" data-info="door-window-sensor">1</i>
+            <i class="home-icon-base" style="top: 254px; left: 333px;" data-info="door-window-sensor">2</i>
+            <i class="home-icon-base" style="top: 104px; left: 95px;" data-info="door-window-sensor">3</i>
+            <i class="home-icon" style="top: 175px; left: 162px;" data-info="simon-xt"><img src="{{ STATIC_URL }}img/base/home-security-icon-mini.png"  alt="home-security-icon-mini" width="43" height="43" /></i>
+            <p class="learn-more">Click an Icon to Learn More</p>
+            <p class="back">Back</p>
+        </div>
+        <div class="home-content">
+            <div class="main">
+                <h2>The Business Package</h2>
+                <p>Protect America has specifically designed the Business Package to meet the needs of business owners from restaurants to medium-sized retail stores. Connecting through our Interactive Broadband Monitoring, the system plugs right into your current high speed internet connection. This means you have lightning quick alarms signals. Also with the Interactive Broadband, you have free access to our interactive services meaning you can watch your business from anywhere with your smartphone or personal computer.</p>
+                <a href="{% url shop %}" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="alt-content simon-xt">
+                <strong>Home Security:</strong>
+                <h2>The Simon XT</h2>
+                <p>The Simon XT is the hub of your entire security system. it is the place you will be entering commands to arm or disarm the system and we recommend the Simon XT be placed in an easy to access location. From there you can arm your system, call emergency response, see important status messages, or disarm your system with its keypad.</p>
+                <p class="emp">All of our packages include 1 Simon XT Control Panel.</p>
+            </div>
+            <div class="alt-content door-window-sensor">
+                <strong>Home Security:</strong>
+                <h2>Door / Window Sensor</h2>
+                <p>The most common piece of security equipment when it comes to securing your home, door or window sensors are used to detect when any door or window is opened. The Copper Package is designed to provide basic security; protecting your front door and 2 other doors or windows.</p>
+                <p class="emp">The Copper Package Includes 3 Door / Window Sensors</p>
+            </div>
+            <div class="alt-content motion-detector">
+                <strong>Home Security:</strong>
+                <h2>Motion Detector</h2>
+                <p>A motion detector is designed to protect the inside of your home.  If a burglar somehow bypasses the perimeter sensors, the motion detector will sound the alarm if any movement is detected. We recommend that each motion detector be placed in a heavy traffic area.</p>
+                <p class="emp">The Copper Package Includes 1 Motion Detector</p>
+            </div>
         </div>
     </div>
-
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
     <div class="clear"></div>
 </div>
-<div id="three-camera-benefits">
-    <div id="after-hours">
-        <img src="{{ STATIC_URL }}img/products/video/closed-sign.jpg" alt="Closed Sign" width="180" height="160" />
-        <h3>After Hours Video Surveillance</h3>
-        <p>Waking up in a cold sweat at night because you're worried about your business? Check in at anytime to make sure everything is alright.</p>
-    </div>
-    <div id="deter-shoplifters">
-        <img src="{{ STATIC_URL }}img/products/video/money-bags.jpg" alt="Inventory Safe" width="180" height="160" />
-        <h3>Keep your Inventory Safe. Deter Shoplifters.</h3>
-        <p>A visible camera on your products helps you keep shoplifters at bay.</p>
-    </div>
-    <div id="employee-theft">
-        <img src="{{ STATIC_URL }}img/products/video/safe-box.jpg" alt="Safe Security" width="180" height="160" />
-        <h3>Reduce Employee Theft with an Extra Level of Security</h3>
-        <p>Always have an "eye in the sky" to watch sensitive areas such as your store's safe to stop employee theft.</p>
-    </div>
-</div>
-<div class="clear"></div>
-{% include "order/call-box.html" %}
-<div id="interactive-call-out">
-    <img src="{{ STATIC_URL }}img/products/monitoring/app-for-that.jpg" alt="Home Security App" width="220" height="322" />
-    <div id="app-for-that">
-        <h2>There's A <strong>Free</strong> App For That.</h2>
-        <p>With Protect America's Business Package you have free direct access to your security system anytime through our interactive monitoring. This includes our mobile app, where you can arm or disarm your system, see which doors are currently open, view your business video cameras and access a complete history of your systems events.</p>
-        <p>This feature also offers real-time notifications to your mobile phone. This means your system will notify you when your system is disarmed or armed.</p>
-        <a href="http://itunes.apple.com/app/pamobile/id438114009?mt=8" title="Click to Download the App in the App Store">
-            <img src="{{ STATIC_URL }}img/external/app-store-button.png" class="app-button" alt="App Store" width="97" height="31" />
-        </a>
-        <a href="https://market.android.com/details?id=com.securenetmonitoring.protectamerica&feature=search_result#?t=W251bGwsMSwxLDEsImNvbS5zZWN1cmVuZXRtb25pdG9yaW5nLnByb3RlY3RhbWVyaWNhIl0." title="Click to download the Android App in the Android Marketplace">
-            <img src="{{ STATIC_URL }}img/external/android-market-button.png" alt="Android Market" width="93" height="31" class="app-button" />
-        </a>
-    </div>
-</div>
-
 
 <div class="clear"></div>
-{% testimonial_search "business" "limit=10&words=75" %}
+<div class="wrapper">
+    {% testimonial_search "business" "limit=3" %}
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript">
-    $(document).ready(function() {
-        $('#search-testimonial-box').cycle({
-            fx: 'fade',
-            timeout: 9000
+        $(document).ready(function() {
+            $(".home-icon").click(function() {
+                if ($(this).data("info")) {
+                    var info = $(this).data("info");
+                    $('.home-img > .home-icon-base').fadeOut();
+                    $('.home-img > .home-icon').fadeOut();
+                    $('.home-img > .learn-more').fadeOut();
+                    $('.home-img > .main').fadeOut(300, function () {
+                        $('.home-img > .alt-img.' + info).fadeIn();
+                        $('.home-img > .back').fadeIn();
+
+                    });
+                    $('.home-content > .main').fadeOut(300, function () {
+                        $('.home-content > .alt-content.' + info).fadeIn();
+                    });                    
+                }
+            });
+            $(".home-icon-base").click(function() {
+                if ($(this).data("info")) {
+                    var info = $(this).data("info");
+                    $('.home-img > .home-icon-base').fadeOut();
+                    $('.home-img > .home-icon').fadeOut();
+                    $('.home-img > .learn-more').fadeOut();
+                    $('.home-img > .main').fadeOut(300, function () {
+                        $('.home-img > .alt-img.' + info).fadeIn();
+                        $('.home-img > .back').fadeIn();
+
+                    });
+                    $('.home-content > .main').fadeOut(300, function () {
+                        $('.home-content > .alt-content.' + info).fadeIn();
+
+                    });                    
+                }
+            });
+            $(".home-img > .alt-img").click(function() {
+                $('.home-img > .back').fadeOut();
+                $('.home-img > .alt-img').fadeOut(300, function () {
+                    $('.home-img > .main').fadeIn();
+                    $('.home-img > .home-icon-base').fadeIn();
+                    $('.home-img > .home-icon').fadeIn();
+                    $('.home-img > .learn-more').fadeIn();
+
+                });
+                $('.home-content > .alt-content').fadeOut(300, function () {
+                    $('.home-content > .main').fadeIn();
+                });  
+            });
+            $(".home-img > .back").click(function() {
+                $('.home-img > .back').fadeOut();
+                $('.home-img > .alt-img').fadeOut(300, function () {
+                    $('.home-img > .main').fadeIn();
+                    $('.home-img > .home-icon-base').fadeIn();
+                    $('.home-img > .home-icon').fadeIn();
+                    $('.home-img > .learn-more').fadeIn();
+
+                });
+                $('.home-content > .alt-content').fadeOut(300, function () {
+                    $('.home-content > .main').fadeIn();
+                });  
+            });
+
         });
-    });
     </script>
 {% endaddtoblock "js" %}
-
-{% endblock %}  
-
-{% block page-product %}
-    <h2>Business Security Package</h2>
-    <p><span>Price Today: <strong>$99</strong></span>monthly monitoring: $44.99/mo</p>
-    <div class="button-submit">
-        <a href="{% url order-package %}?package=bronze" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Bronze-B']);">Order Now ></a>
-    </div>
 {% endblock %}

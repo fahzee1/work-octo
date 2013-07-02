@@ -1,4 +1,4 @@
-{% extends "complete-home-security/base.html" %}
+{% extends "learn/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
 {% block page_keywords %}affordable home security, security systems for home, home security systems comparison, art security prices, whole home security, garage security{% endblock %}
@@ -6,157 +6,87 @@
 
 
 {% block content %}
-{% addtoblock "css" %}
-<!-- Google Website Optimizer Tracking Script -->
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['homesecurity._setAccount', 'UA-5441302-7']);
-  _gaq.push(['homesecurity._trackPageview', '/1270118885/test']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-<!-- End of Google Website Optimizer Tracking Script -->
-{% endaddtoblock "css" %}
-<div id="package-fan">
-    <h1><strong>Which House is Yours?</strong> Protection for all doors and windows at an affordable price.</h1>
-    <div id="copper-card" class="card">
-        <img src="{{ STATIC_URL }}img/extra/copper-home-icon.png" alt="Copper Package House (3 Doors / Windows)" width="176" height="160" />
-        <h3>3 Doors <br/> or Windows</h3>
-        <p>The <strong>most affordable</strong> way to secure peace of mind.</p>
-
-        <h4>Upfront Price: <strong class="free-tag">Free</strong>
-            <br/>
-            Monthly Price: <strong>{{ pricetable.COPPER.standard_monitoring }}</strong>
-        </h4>
-        <div class="button-submit"><a href="{% url order-package %}?package=copper">Order Now ></a></div>
-    </div>
-
-    <div id="bronze-card" class="card">
-        <img src="{{ STATIC_URL }}img/extra/bronze-home-icon.png" alt="Bronze Package House (7 Doors / Windows)" width="176" height="160" />
-        <h3>7 Doors <br/> or Windows</h3>
-        <p>The <strong>perfect solution</strong> to secure your starter home.</p>
-
-
-        <h4>Upfront Price: <strong class="free-tag">Free</strong>
-            <br/>
-            Monthly Price: <strong>{{ pricetable.BRONZE.standard_monitoring }}</strong>
-        </h4>
-        <div class="button-submit"><a href="{% url order-package %}?package=bronze">Order Now ></a></div>
-    </div>
-
-    <div id="silver-card" class="card">
-        <img src="{{ STATIC_URL }}img/extra/silver-home-icon.png" alt="Silver Package House (10 Doors / Windows)" width="176" height="160" />
-        <h3>10 Doors <br/> or Windows</h3>
-        <p><strong>Perimeter protection</strong> for the average American home</p>
-
-        <h4>Upfront Price: <strong class="free-tag">Free</strong>
-            <br/>
-            Monthly Price: <strong>{{ pricetable.SILVER.standard_monitoring }}</strong>
-        </h4>
-
-        <div class="button-submit"><a href="{% url order-package %}?package=silver">Order Now ></a></div>
-    </div>
+<div id="package-fan-wrapper">
+    <div id="package-fan">
+        <h1><strong>Which House is Yours?</strong> Protection for all doors and windows at an affordable price.</h1>
+        <div id="copper-card" class="card">
+            <img src="{{ STATIC_URL }}img/extra/copper-home-icon.png" alt="Copper Package House (3 Doors / Windows)" width="176" height="160" />
+            <h3>3 Doors <br/> or Windows</h3>
+            <p>The <strong>most affordable</strong> way to secure peace of mind.</p>
     
-    <div id="gold-card" class="card">
-        <img src="{{ STATIC_URL }}img/extra/gold-home-icon.png" alt="Gold Package House (12 Doors / Windows)" width="176" height="160" />
-        <h3>12 Doors <br/> or Windows</h3>
-        <p><strong>Unmatched security</strong> for larger sized homes</p>
-
-        <h4>Upfront Price: <strong class="free-tag">Free</strong>
-            <br/>
-            Monthly Price: <strong>{{ pricetable.GOLD.standard_monitoring }}</strong>
-        </h4>
-        <div class="button-submit"><a href="{% url order-package %}?package=gold">Order Now ></a></div>
-    </div>
+            <h4>Monthly Price: <strong>{{ pricetable.COPPER.standard_monitoring }}</strong></h4>
+            <a href="{% url order-package %}?package=platinum" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+        </div>
     
-    <div id="platinum-card" class="card">
-        <img src="{{ STATIC_URL }}img/extra/platinum-home-icon.png" alt="Platinum Package House (15 Doors / Windows)" width="176" height="160" />
-        <h3>15 Doors <br/> or Windows</h3>
+        <div id="bronze-card" class="card">
+            <img src="{{ STATIC_URL }}img/extra/bronze-home-icon.png" alt="Bronze Package House (7 Doors / Windows)" width="176" height="160" />
+            <h3>7 Doors <br/> or Windows</h3>
+            <p>The <strong>perfect solution</strong> to secure your starter home.</p>
+    
+    
+            <h4>Monthly Price: <strong>{{ pricetable.BRONZE.standard_monitoring }}</strong></h4>
 
-        <p>Our <strong>most comprehensive</strong> security system package</strong></p>
+            </h4>
+            <a href="{% url order-package %}?package=bronze" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+        </div>
+    
+        <div id="silver-card" class="card">
+            <img src="{{ STATIC_URL }}img/extra/silver-home-icon.png" alt="Silver Package House (10 Doors / Windows)" width="176" height="160" />
+            <h3>10 Doors <br/> or Windows</h3>
+            <p><strong>Perimeter protection</strong> for the average American home</p>
+            <h4>Monthly Price: <strong>{{ pricetable.SILVER.standard_monitoring }}</strong></h4>
 
-        <h4>Upfront Price: <strong class="free-tag">Free</strong>
-            <br/>
-            Monthly Price: <strong>{{ pricetable.PLATINUM.standard_monitoring }}</strong>
-        </h4>
-        <div class="button-submit"><a href="{% url order-package %}?package=platinum">Order Now ></a></div>
+    
+            <a href="{% url order-package %}?package=silver" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+        </div>
+        
+        <div id="gold-card" class="card">
+            <img src="{{ STATIC_URL }}img/extra/gold-home-icon.png" alt="Gold Package House (12 Doors / Windows)" width="176" height="160" />
+            <h3>12 Doors <br/> or Windows</h3>
+            <p><strong>Unmatched security</strong> for larger sized homes</p>
+    
+            <h4>Monthly Price: <strong>{{ pricetable.GOLD.standard_monitoring }}</strong></h4>
+
+            <a href="{% url order-package %}?package=gold" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+        </div>
+        
+        <div id="platinum-card" class="card">
+            <img src="{{ STATIC_URL }}img/extra/platinum-home-icon.png" alt="Platinum Package House (15 Doors / Windows)" width="176" height="160" />
+            <h3>15 Doors <br/> or Windows</h3>
+    
+            <p>Our <strong>most comprehensive</strong> security system package</strong></p>
+    
+            <h4>Monthly Price: <strong>{{ pricetable.PLATINUM.standard_monitoring }}</strong></h4>
+
+            <a href="{% url order-package %}?package=platinum" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+<div class="wrapper">
+
+    {% testimonial_search "trust" "limit=3" %}
+    
+    <div id="trusted-name">
+        <div id="trusted-name-content">
+            <h2>The Name You Can Trust</h2>
+            <p>Protect America is proud to use certified GE wireless home security for our alarm system panels — meaning we use the same trusted and recognized security systems as other leading security companies such as ADT, but sell them for a great deal less. We are confident that you can't find a better home security system anywhere else. And our prices are the best in the industry — we guarantee it!</p>
+        </div>
+        <div id="trusted-awards"><img src="{{ STATIC_URL }}img/external/consumer-digest-top-consumer-review.png" alt="consumer-digest-top-consumer-review" width="352" height="176" /></div>
+    <div class="clear"></div>
+    
+    </div>
+    <div id="house-diagram">
+        <img src="{{ STATIC_URL }}img/extra/equipment-house-diagram.jpg" class="house-img" alt="equipment-house-diagram" />
+        <div id="diagram-content">
+            <h2>A Security System that Does More, and Protects More. Yep, Even the Garage.</h2>
+            <p>With the GE Simon XT Control Panel, you can have up to forty detection points. So, Protect America offers a variety of special sensors to protect your home. This includes: Garage Door Sensors, Flood Sensors, Wireless Cameras, Fire and Smoke Detectors, and Motion Sensors. Unlike out dated, wired systems, our sensors require no mess, wires or modifications. And of course, being Protect America, we offer them at an unbeatable price.</p>
+        </div>
     </div>
     <div class="clear"></div>
 </div>
-<div class="clear"></div>
-    {% include "order/call-box.html" %}
-
-<div id="home-security-advantage">
-	<div id="protect-america-advantage">
-		<div id="advantage-background">
-
-		</div>
-		<div id="protect-america-advantage-content">
-			<h2>Protect America's Home Security Advantage</h2>
-			<p>Homes need security. And not just a couple doors and a window.  Your home needs every entry covered. When deciding the best security solution for your home, choose a company that combines comprehensive protection with unbeatable value. Protect America will provide you with enough sensors to monitor <strong>every door and window on your home</strong>. With Protect America, you get complete home security without leaving any opening vulnerable. The best part? We’ll even provide the equipment for free! There’s nothing easier and nothing more secure! When choosing home security, the choice is easy, Protect America.</p>
-			<div class="clear"></div>
-		</div>
-	</div>
-	<table id="protect-america-vs-adt">
-		<thead>
-			<tr>
-				<th id="blank-box"></th>
-				<th id="protect-america-table-title">Protect America</th>
-				<th id="adt-table-title">ADT*</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td id="copper-package"><span>Copper Package</span>3 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="copper-package-protect-america-price"><span>{{ pricetable.COPPER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.COPPER.standard_monitoring }}/monthly)</td>
-				<td id="copper-package-adt-price"><span>{{ pricetable.COPPER.adt_upfront }}</span>({{ pricetable.COPPER.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="bronze-package"><span>Bronze Package</span>7 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="bronze-package-protect-america-price"><span>{{ pricetable.BRONZE.upfront|default_if_none:"FREE" }}</span>({{ pricetable.BRONZE.standard_monitoring }}/monthly)</td>
-				<td id="bronze-package-adt-price"><span>{{ pricetable.BRONZE.adt_upfront }}</span>({{ pricetable.BRONZE.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="silver-package"><span>Silver Package</span>10 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="silver-package-protect-america-price"><span>{{ pricetable.SILVER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.SILVER.standard_monitoring }}/monthly)</td>
-				<td id="silver-package-adt-price"><span>{{ pricetable.SILVER.adt_upfront }}</span>({{ pricetable.SILVER.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="gold-package"><span>Gold Package</span>12 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="gold-package-protect-america-price"><span>{{ pricetable.GOLD.upfront|default_if_none:"FREE" }}</span>({{ pricetable.GOLD.standard_monitoring }}/monthly)</td>
-				<td id="gold-package-adt-price"><span>{{ pricetable.GOLD.adt_upfront }}</span>({{ pricetable.GOLD.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="platinum-package"><span>Platinum Package</span>15 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="platinum-package-protect-america-price"><span>{{ pricetable.PLATINUM.upfront|default_if_none:"FREE" }}</span>({{ pricetable.PLATINUM.standard_monitoring }}/monthly)</td>
-				<td id="platinum-package-adt-price"><span>{{ pricetable.PLATINUM.adt_upfront }}</span>({{ pricetable.PLATINUM.adt_monitoring }}/monthly)</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="clear"></div>
-</div>
-{% testimonial_search "trust" "limit=10&words=75" %}
-
-<div id="trusted-name">
-    <div id="trusted-name-content">
-        <h2>The Name You Can Trust</h2>
-        <p>Protect America is proud to use certified GE wireless home security for our alarm system panels — meaning we use the same trusted and recognized security systems as other leading security companies such as ADT, but sell them for a great deal less. We are confident that you can't find a better home security system anywhere else. And our prices are the best in the industry — we guarantee it!</p>
-    </div>
-    <div id="trusted-awards"><img src="{{ STATIC_URL }}img/external/consumer-digest-top-consumer-review.png" alt="consumer-digest-top-consumer-review" width="352" height="176" /></div>
-<div class="clear"></div>
-
-</div>
-<div id="house-diagram">
-    <img src="{{ STATIC_URL }}img/extra/equipment-house-diagram.jpg" alt="equipment-house-diagram" />
-    <div id="diagram-content">
-        <h2>A Security System that Does More, and Protects More. Yep, Even the Garage.</h2>
-        <p>With the GE Simon XT Control Panel, you can have up to forty detection points. So, Protect America offers a variety of special sensors to protect your home. This includes: Garage Door Sensors, Flood Sensors, Wireless Cameras, Fire and Smoke Detectors, and Motion Sensors. Unlike out dated, wired systems, our sensors require no mess, wires or modifications. And of course, being Protect America, we offer them at an unbeatable price.</p>
-    </div>
-</div>
-<div class="clear"></div>
 {% addtoblock "js" %}
     <script type="text/javascript">
     $(document).ready(function() {

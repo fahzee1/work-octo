@@ -1,19 +1,66 @@
 {% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
 {% block page_title %}Flood Detector Sensor | Wireless Alarm Equipment | Protect America{% endblock %}
 {% block content %}
+<div id="hero-wrapper" class="red">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-life-safety"></i>
+            <h2>Life Safety</h2>
+            <h1>Flood Sensor</h1>
+            <p>Saving your home from costly water damage problems.</p>
+            {% if phone_number %}
+
+                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
+
+
+            {% endif %}
+            <a href="{% url shop %}" class="button-link">Shop Packages<i class="icon-chevron-right"></i></a>
+
+        </div>
+        <img src="{{ STATIC_URL }}img/products/equipment/flood-sensor/flood-sensor-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
+
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+
+<div class="wrapper">
+    <div class="video-features">
+        <div class="video-content">
+            <h2>Water Damage Can Be Costly.<span>Be Preventative And Get Flood Sensors</span> </h2>
+            <p>It can happen to anyone, a pipe breaks and you find yourself with a costly repair bill. The Flood Sensor is designed to discover any leakage in  your home or business.  With prompt notice it gives you the time you need to salvage your valuables and shut off the water.</p>
+        </div>
+            </div>
+    <div class="clear"></div>
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/equipment/flood-sensor/flood-sensor-white.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Flood Sensor</h2>
+            <p>The basement or first level of your business or residence (i.e. in the kitchen if you don’t have a basement) is the best place for a Flood Sensor. Mount the detector on the lowermost area of your wall or even right on the floor in order to detect water. A home security system with a flood sensor can also be a great way to help make sure a vacation or vacant home is safe and secure while you're not there.</p>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
 </div>
 <div style="background: #ecfbfe url(/static/img/water.jpg) repeat-x;">
 	<div class="wrapper">
-		<img src="/static/img/products/flood-sensor/rubber-ducky.jpg">
+	    
+		<div id="rubber-duck"><img src="/static/img/products/flood-sensor/rubber-ducky.jpg"></div>
 		<div>
 			<div class="content-box half">
 			</div>
 			<div id="know-the-problem">
-				<h2>Know about a Problem, Before it Becomes a Catastrophe.</h2>
+				<h2>Know About A Problem,<span> Before It Becomes A Catastrophe.</span></h2>
 				<p>When a leak occurs, your flood sensor will warn you as soon as it senses the water.  Meaning you don't have to arrive home to find yourself knee-deep in water. And you can fix the problem quickly without costly repairs. So instead of having an aquarium, you can have a nice, dry basement. Add a flood sensor to any of our home security packages today.</p>
-				<div class="button-link">
-					<a href="{% url order-package %}">Order Now ></a>
-				</div>
+				
 			</div>
 		</div>
 		<div class="clear"></div>

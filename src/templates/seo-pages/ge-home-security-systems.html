@@ -1,16 +1,19 @@
 {% extends "seo-pages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
-{% block page_title %}GE Home Security Systems | Buy GE Home Security Systems | Protect America{% endblock %}
+{% block page_title %}Buy GE Home Security Systems | Protect America{% endblock %}
 {% block page_description %}Protect America provides GE home security systems that provide a high level of security and safety at your home.{% endblock %}
 {% block page_keywords %}ge home alarm system, ge alarm system, best ge alarm systems, ge home alarm systems{% endblock %}
 
 
 {% block content %}
-    {{ block.super }}
-
+{% block hero_banner_area %}
+    {% include "banners/seo-hero-images.html" %}
+{% endblock %}
+{% include "order/call-box.html" %}
+<div class="wrapper">
     <div class="home-security-content">
-    <h1>Home Alarm System by Protect America</h1>
+    <h1>GE Home Security Systems by Protect America</h1>
      
     <img src="{{ STATIC_URL }}/img/products/equipment/motion-detector/motion-detector-med.jpg" alt="Motion Detector" width="325" height="270" />
     <p>Protect America provides a home alarm system that can include additional life saving features, such as a garage door sensor, smoke detectors, glass break sensors, low temperature sensors, flood sensors, keychain remote controls and medical panic pendants. All of these features are described below and will enhance your home alarm system.</p> 
@@ -32,5 +35,7 @@
      
     <p>All of these are features that will enhance your home alarm system. Even though they may have additional charges, you never know which one could be the life-changing feature for your home alarm system.</p>
     </div>
+    <div class="clear"></div>
+</div>
 
 {% endblock %}

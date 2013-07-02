@@ -1,78 +1,90 @@
-{% extends "products/gps/base.html" %}
+{% extends "products/equipment/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}GPS Vehicle Tracking | GPS Tracking | Protect America{% endblock %}
 {% block page_keywords %}security system,alarm,security,home security,security system,alarm system{% endblock %}
 {% block page_description %}Keep a virtual eye on your vehicle using the intuitive web interface offered by Protect America's GPS vehicle tracking. Know your vehicle's location and speed.{% endblock %}
 
 {% block content %}
-<div id="vehicle-gps">
-	<div id="gps-tracking-car">
-		<img src="/static/img/products/gps/big-red-car.jpg" alt="GPS Tracking">
-	</div>
-	<div id="gps-tracking-overview">
-		<h1>GPS Vehicle Tracking</h1>
-		<p>Protect America allows you to instantly locate and follow your car with real-time GPS vehicle tracking. With this free equipment it is easy to keep a "virtual eye" on your vehicle through its intuitive web interface. Protect America also provides you with the safety and security of knowing where your teenager is while driving. Get customizable alerts via email or text if your teenager is speeding or if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college. Protect America's vehicle tracking brings an added level of security and control to your vehicle.</p>
-		<div class="button-submit">
-			<a href="{% url order-package %}" title="Click to Order GPS Tracking for your Car">Get GPS Vehicle Tracking ></a>
-		</div>
-	</div>
-	<div class="clear"></div>
+<div id="hero-wrapper" class="grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-automotive"></i>
+            <h2>Automotive Security</h2>
+            <h1>Track your Car anywhere with GPS Vehicle Tracking</h1>
+            <h3>Add to any security package for $9.99 per month.</h3>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+
+        </div>
+        <img src="{{ STATIC_URL }}img/products/gps/gps-tracker-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
+
+    </div>
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
+{% include "order/call-box.html" %}
+<div class="wrapper">
+    <div id="vehicle-gps">
+        <div id="gps-tracking-car">
+            <img src="/static/img/products/gps/big-red-car.jpg" alt="GPS Tracking">
+        </div>
+        <div id="gps-tracking-overview">
+            <h2>GPS Vehicle Tracking</h2>
+            <p>Our simple-to-use GPS tracking device plugs into your car's existing ODB port and allows you to keep a "virtual eye" on your vehicle.</p>
+            <p>Get customizable alerts via email or text if your teenager or loved one is speeding or even if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college. If your car is stolen, track its location. Our GPS vehicle tracking brings an added level of security and control to any vehicle.</p>
+            <div class="order-link">
+                <a href="{% url order-package %}?package=silver" class="button-link" onClick="_gaq.push(['_trackEvent', 'Add to Package', 'Add to Package Button', 'GPS']);">Add Car Tracking <i class="icon-chevron-right"></i></a>
+                <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    
+    <div class="clear"></div>
+    <img src="/static/img/products/gps/location-found.jpg" alt="GPS Tracking Image">
+    <div id="lost-your-car">
+    
+        <h2>Lost Your Car?</h2>
+        <p>With the click of a button, your car is instantly located through GPS vehicle tracking. Use it as an aide in case it's ever stolen or if you forgot where you're parked.</p>
+    <div class="clear"></div>
 
-<div class="clear"></div>
-<div id="location-found-image">
-	<img src="/static/img/products/gps/location-found.jpg" class="absolute" alt="GPS Tracking Image">
+    </div>
 
-	<div id="lost-your-car">
+    <div id="custom-notifications">
+        <img src="/static/img/products/gps/speed-limit.jpg" alt="GPS Tracking Speed">
+        <div id="notifications-content">
+            <h2>Customizable Notifications</h2>
+            <p>Our vehicle GPS tracking device can easily create notifications that allow you to keep an eye on what your teenager or loved one is doing. Get notified by email or text when their car enters an "off limits" zone or receive an alert if they decide to speed while on a little joy ride.</p>
+                <div class="order-link">
+                    <a href="{% url order-package %}?package=silver" class="button-link" onClick="_gaq.push(['_trackEvent', 'Add to Package', 'Add to Package Button', 'GPS']);">Add Car Tracking <i class="icon-chevron-right"></i></a>
+                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+                </div>
+        </div>
+    <div class="clear"></div>
 
-		<h2>Lost Your Car?</h2>
-		<p>With the click of a button, your car is instantly located through GPS vehicle tracking. Use it as an aide in case it's ever stolen or if you forgot where you're parked. It works as an extra level of security - you always know the location of your car.</p>
-	</div>
-
+    </div>
+    
+    <div>
+        <div id="access-from-computer">
+            <img src="/static/img/products/gps/gps-laptop.jpg" alt="Track GPS on Computer" />
+            <h3>Check on your Vehicles from any Computer</h3>
+            <p>Sign in at home, at work, or even the library to check on your car.</p>
+        </div>
+        <div id="plug-n-play">
+            <img src="/static/img/products/gps/gps-tracker-sml.jpg" alt="GPS Technology" />
+            <h3>Plug and Play Technology</h3>
+            <p>Installation is as easy as plugging the device into your OBD port.</p>
+        </div>
+        <div id="monitor-elderly-drivers">
+            <img src="/static/img/products/gps/elderly-tracker.jpg" alt="GPS Tracking for Elderly" />
+            <h3>Easily Monitor Elderly Drivers</h3>
+            <p>Worried about your elderly parents, make sure they are okay on the road.</p>
+        </div>
+        <div id="company-vehicle-tracker">
+            <img src="/static/img/products/gps/company-truck.jpg" alt="GPS Tracking Business Vehicle" />
+            <h3>Keep Track of Company Vehicles</h3>
+            <p>Know where your employees are going and see if they're on schedule.</p>
+        </div>
+    </div>
+    <div class="clear"></div>
 </div>
-<div>
-	<div id="speed-limit-sign">
-		<img src="/static/img/products/gps/speed-limit.jpg" alt="GPS Tracking Speed">
-	</div>
-	<div id="customizable-notifications">
-		<h2>Customizable Notifications</h2>
-		<p>Protect America's Home Security Systems can easily create notifications that allow you to keep an eye on what your teenager is doing. Get notified by email or text when their car enters an "off limits" zone or receive an alert if they decide to speed while on a little joy ride.</p>
-	</div>
-	<div class="clear"></div>
-
-</div>
-    {% include "order/call-box.html" %}
-{% testimonial_search "care" "limit=10&words=75" %}
-
-<div>
-	<div id="access-from-computer">
-		<img src="/static/img/products/gps/gps-laptop.jpg" alt="Track GPS on Computer" />
-
-		<h3>Check on your Vehicles from any Computer</h3>
-		<p>Sign in at home, at work, or even the library to check on your car.</p>
-	</div>
-	<div id="plug-n-play">
-		<img src="/static/img/products/gps/gps-tracker-sml.jpg" alt="GPS Technology" />
-
-		<h3>Plug and Play Technology</h3>
-		<p>Installation is as easy as plugging the device into your OBD port.</p>
-	</div>
-	<div id="monitor-elderly-drivers">
-		<img src="/static/img/products/gps/elderly-tracker.jpg" alt="GPS Tracking for Elderly" />
-
-		<h3>Easily Monitor Elderly Drivers</h3>
-		<p>Worried about your elderly parents, make sure they are okay on the road.</p>
-	</div>
-	<div id="company-vehicle-tracker">
-		<img src="/static/img/products/gps/company-truck.jpg" alt="GPS Tracking Business Vehicle" />
-
-		<h3>Keep Track of Company Vehicles</h3>
-		<p>Know where your employees are going and see if they're on schedule.</p>
-	</div>
-
-</div>
-
 {% addtoblock "js" %}
     <script type="text/javascript">
     $(document).ready(function() {

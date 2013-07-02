@@ -1,0 +1,609 @@
+{% load content_tags content_filters sekizai_tags %}
+<!doctype html>
+
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+    {% block google_experiment %}
+    
+    {% endblock %}
+    <title>{% block page_title %}Home Security Systems - Home Alarm Systems - GE Security Systems{% endblock %}</title>
+    <meta name="description" content="{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}" />
+    <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta property="fb:admins" content="586942929" />
+    {% block robots_tag %}{% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>{% else %}{% if request.is_secure %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>{% else %}<meta name="ROBOTS" content="INDEX, FOLLOW"/>{% endif %}{% endif %}{% endblock %}
+    <meta name="rating" content="general" />
+    <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
+    <meta name="author" content="Protect America" />
+    <link rel="canonical" href="http://www.protectamerica.com/"/>
+    <meta name="contact_addr" content="webmaster@protectamerica.com" />
+    <meta name="distribution" content="global" />
+    <meta name="resource-type" content="document" />
+    <meta http-equiv="imagetoolbar" content="false" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
+    <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
+    
+    <!-- For all browsers -->
+    <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/320.css">
+    <!-- For progressively larger displays -->
+    <link rel="stylesheet" media="screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/480.css">
+    <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="js/selectivizr-min.js"></script>
+    <![endif]-->
+    
+    <!-- JavaScript -->
+    <script src="js/modernizr-2.5.3-min.js"></script>
+    
+    <!-- Icons -->
+    
+    <!-- 16x16 -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- 32x32 -->
+    <link rel="shortcut icon" href="/favicon.png">
+    <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png"> -->
+    <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png"> -->
+    <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png"> -->
+    <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
+    
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
+    <!-- <meta name="viewport" content="initial-scale=1.0"> (Use if apple-mobile-web-app-capable below is set to yes) -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+    
+    <!-- Startup images -->
+    
+    <!-- iPhone 3GS, pre-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-320x460.png" media="screen and (max-device-width:320px)"> -->
+    <!-- iPhone 4, 4S and 2011 iPod Touch-->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x920.png" media="(max-device-width:480px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPhone 5 and 2012 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x1096.png" media="(max-device-width:548px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPad landscape -->
+    <!-- <link rel="apple-touch-startup-image" sizes="1024x748" href="img/startup/startup-1024x748.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape)"> -->
+    <!-- iPad Portrait -->
+    <!-- <link rel="apple-touch-startup-image" sizes="768x1004" href="img/startup/startup-768x1004.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait)"> -->
+    
+    <!-- Windows 8 / RT -->
+    <meta name="msapplication-TileImage" content="img/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#000">
+    <meta http-equiv="cleartype" content="on">
+    {% block google_analytics %}
+    <script type="text/javascript">
+    
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-5441302-2']);
+     _gaq.push(['_setDomainName', 'protectamerica.com']);
+     {% block ga_custom_variables %}{% endblock %}
+     _gaq.push(['_trackPageview']);
+    
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+    
+    </script>
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    {% endblock %}
+    {% block bing-conversion-code %}{% endblock %}
+</head>
+<body class="clearfix {{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
+{% block header %}
+<div id="header">
+    <div id="header-wrapper">   
+        <div>
+            {% block main-phone %}
+                {% if phone_number %}
+                <div id="phone-number">
+                    <p>Call Now<em> and Save</em>! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a></span></p>
+                </div>
+                {% endif %}
+            {% endblock %}
+            {% block company-logo %}
+            <div id="company-logo">
+                <a href="{% url squeeze %}" title="Protect America Home Security" id="main-logo">
+                    <img src="{{ STATIC_URL }}img/base/protect-america-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
+                </a>
+                <ul id="main-navigation">
+                    <li class="get-quote {% if 'squeeze-form' in active_pages %}active{% endif %}"><a href="{% url squeeze-form %}" title="Get Quote" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/mobile/get-quote-icon.png" alt="Call Protect America" /></a></li>
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
+                </ul>
+            </div>
+            {% endblock %}
+
+            <div class="clear"></div>
+        </div>
+        
+
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+
+<div id="hero-wrapper">
+    <div id="hero">
+        <h1>Wireless Home Security. <span>100% Protection.</span></h1>
+        <ul>
+            <li>24/7 Nationwide Monitoring</li>
+            <li>Reliable GE Wireless Security System</li>
+            <li>No Equipment or Activation Fees</li>
+            <li>Complete Home Protection</li>
+            <li class="no-mobile">Up to 20% off Homeowners</li>
+            <li class="no-mobile">Lifetime Replacement Parts<br />Warranty on all Alarm Systems</li>
+        </ul>
+        <div class="price-tag">
+    		<em>Starting At:</em>
+    		<p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
+        </div>
+        <div id="mobile-banner">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/mobile-keychain.png" class="mobile" alt="mobile-keychain">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/mobile-keychain-big.png" class="big" alt="mobile-keychain">
+
+        </div>
+        <div id="big-quote">
+            <div id="price-tag">
+                <h3>Starting at just</h3>
+                <p><span>$19.99* </span><em>per <span>month</span></em></p>
+                <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/arrow.png" class="arrow" alt="arrow">
+                <div class="clear"></div>
+            </div>
+            {% include "order/quote-form-new.html" with form=forms.basic %}
+        </div>
+    </div>
+</div>
+{% if phone_number %}
+    <div class="clear"></div>
+    <div id="call-box">
+        {% block call-box-text %}<p>Get Started Today, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Main Call Box', '{{ page_name }}']);">{{ phone_number|format_number }}</a></span></strong></p>
+    </div>
+    <div class="clear"></div>
+
+{% endif %}
+<div id="advantages">
+    <div class="header">
+        <h2>
+            <span>Advantages Over Our Competitors</span>
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-left-piece.png" class="left-side" width="16" height="88">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-right-piece.png" class="right-side" width="16" height="88">
+        </h2>
+    </div>
+    <div id="order-reassurance">
+        <div id="lowest-price-guaranteed" class="left-side">
+            <img src="/static/img/extra/dollar-sign-token.png" alt="Lowest Price Guaranteed" />
+            <div class="text">
+                <h3>Lowest Price Guaranteed</h3>
+                <p>If you find a better offer, let us know.  We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="lifetime-warranty">
+            <img src="/static/img/extra/hammer-token.png" alt="Lifetime Equipment Warranty" />
+            <div class="text">
+    
+                <h3>Lifetime Equipment Warranty</h3>
+                <p>As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free.  We want to make sure your home is always secure.</p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <div id="homeowner-insurance-discount" class="left-side">
+            <img src="/static/img/extra/20-percent-token.png" alt="20% Homeowner's Insurance Discount" />
+            <div class="text">
+                <h3>Homeowner's Insurance Discount</h3>
+                <p>Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="relocation-kit">
+            <img src="/static/img/extra/free-relocation-kit.png" alt="Free Relocation Kit" />
+            <div class="text">
+                <h3>Relocation Kit</h3>
+                <p>With Protect America, you own your security equipment. If you happen to move, we will send you a relocation kit to easily take your security system with you.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="free-tech-support" class="no-six">
+            <img src="/static/img/extra/tech-support-token.png" alt="Free Tech Support" />
+            <div class="text">
+                <h3>Free Tech Support</h3>
+                <p>Included with your home security system is our knowledgeable technical support staff.  From simple operation to the advanced settings, they are here to help you.</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="alarm-monitoring-options">
+        <div id="cellular-monitoring-option">
+            <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="Cellular Connection" width="199" height="200" />
+            <div class="text">
+                <h3>Wireless Interactive <br/>Cellular Connection</h3>
+                <p>The alarm panel is built with a GSM cellular device that directly contacts our monitoring station in case of trouble or alarm.</p>
+            </div>
+            <div class="clear"></div>
+    
+        </div>
+    
+        <div id="broadband-monitoring-option">
+            <img src="{{ STATIC_URL }}img/products/monitoring/homepulse-icon-big.png" alt="High Speed Broadband Connection" width="199" height="200" />
+            <div class="text">
+                <h3>High-Speed Interactive<br/>Broadband Connection</h3>
+                <p>No phone, no problem! Using your broadband modem or router, your alarm panel contacts our monitoring station and dispatches emergency in case of trouble or alarm.</p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <div id="landline-monitoring-option">
+            <img src="{{ STATIC_URL }}img/products/monitoring/landline-icon-big.png" alt="Standard Landline Connection" width="199" height="200" />
+            <div class="text">
+                <h3>Standard Landline<br/>Connection</h3>
+                <p>Using a standard telephone line, your panel directly contacts our monitoring station in time of trouble or alarm and dispatches emergency.</p>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div id="security-packages">
+    <div class="header">
+        <h2>
+            <span>Security Packages We Offer</span>
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-left-piece.png" class="left-side" width="16" height="88">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-right-piece.png" class="right-side" width="16" height="88">
+        </h2>
+    </div>
+    <div id="home-security-package-choices" style="display:block">
+        <div class="big-wrapper">
+        {% block packages %}
+            <div id="home-security-packages">
+                <div id="copper-security-package">
+                    <div class="package-name">
+	                    <h3>Copper</h3>
+	                    <p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
+					</div>
+                    <div class="package-info">
+                        <ul>
+                            <li><strong>1</strong> Simon XT Control</li>
+                            <li><strong><span>3</span></strong> Door / Window Sensors</li>
+                            <li><strong>1</strong> Motion Detector</li>
+                        </ul>
+                        <ul class="extra-features">
+                            <li>No Equipment Fees</li>
+                            <li>No Activation Fees</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="bronze-security-package">
+                    <div class="package-name">
+	                    <h3>Bronze</h3>
+	                    <p><sup>$</sup>35<sup>99</sup><span>monthly</span></p>
+                    </div>
+                    <div class="package-info">
+                        <ul>
+                            <li><strong>1</strong> Simon XT Control</li>
+                            <li><strong><span>7</span></strong> Door / Window Sensors</li>
+                            <li><strong>1</strong> Motion Detector</li>
+                        </ul>
+                        <ul class="extra-features">
+                            <li>No Equipment Fees</li>
+                            <li>No Activation Fees</li>
+                        </ul>
+                    </div>
+                </div>
+        
+                <div class="premium-packages">
+                    <img src="{{ STATIC_URL }}img/canada/premium-packages-header.png" class="premium-packages-header" alt="premium-packages-header" />
+        
+                    <div id="silver-security-package">
+	                    <div class="package-name">	
+	                        <h3>Silver</h3>
+	                        <p><sup>$</sup>37<sup>99</sup><span>monthly</span></p>
+                        </div>
+                        <div class="package-info">
+                            <ul>
+                                <li><strong>1</strong> Simon XT Control</li>
+                                <li><strong><span>10</span></strong> Door / Window Sensors</li>
+                                <li><strong>1</strong> Motion Detector</li>
+                            </ul>
+                            <div class="smart-connect">
+                                <p>exclusive <span>SMART Connect</span></p>
+                            </div>
+                            <ul class="extra-features">
+                                <li>No Equipment Fees</li>
+                                <li>No Activation Fees</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="gold-security-package">
+	                    <div class="package-name">	
+	                        <h3>Gold</h3>
+	                        <p><sup>$</sup>39<sup>99</sup><span>monthly</span></p>
+                        </div>
+                        <div class="package-info">
+                            <ul>
+                                <li><strong>1</strong> Simon XT Control</li>
+                                <li><strong><span>12</span></strong> Door / Window Sensors</li>
+                                <li><strong>1</strong> Motion Detector</li>
+                            </ul>
+                            <div class="smart-connect">
+                                <p>exclusive <span>SMART Connect</span></p>
+                            </div>
+                            <ul class="extra-features">
+                                <li>No Equipment Fees</li>
+                                <li>No Activation Fees</li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div id="platinum-security-package">
+	                    <div class="package-name">	
+	                        <h3>Platinum</h3>
+	                        <p><sup>$</sup>42<sup>99</sup><span>monthly</span></p>
+	                    </div>
+                        <div class="package-info">
+                            <ul>
+                                <li><strong>1</strong> Simon XT Control</li>
+                                <li><strong><span>15</span></strong> Door / Window Sensors</li>
+                                <li><strong>1</strong> Motion Detector</li>
+                            </ul>
+                            <div class="smart-connect">
+                                <p>exclusive <span>SMART Connect</span></p>
+                            </div>
+                            <ul class="extra-features">
+                                <li>No Equipment Fees</li>
+                                <li>No Activation Fees</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <img src="{{ STATIC_URL }}img/banners/596x80/arm-disarm-smart-connect.jpg" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" />
+                    </a>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        {% endblock %}
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div id="sets-apart">
+    <div class="header">
+        <h2>
+            <span>What Sets Protect America Apart</span>
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-left-piece.png" class="left-side" width="16" height="88">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-right-piece.png" class="right-side" width="16" height="88">
+        </h2>
+    </div>
+    <table id="comparison-table">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Protect America</th>
+                <th>ADT</th>
+                <th>Frontpoint</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="alpha title">Installation</td>
+                <td class="alpha pa">$0</td>
+                <td class="alpha">$49</td>
+                <td class="alpha">$99</td>
+            </tr>
+            <tr>
+                <td class="title">Monthly Rate</td>
+                <td class="pa">$19.99</td>
+                <td>$42.99</td>
+                <td>$34.99</td>
+            </tr>
+            <tr>
+                <td class="title">Homeowner's Discount</td>
+                <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+            </tr>
+            <tr>
+                <td class="title">24/7 Monitoring</td>
+                <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+                <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="blue-check" width="40" height="40" /></td>
+            </tr>
+            <tr>
+                <td class="title">Interactive Features*</td>
+                <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
+                <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="title">Free EasyMove<br/> Moving Kit</td>
+                <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="title">Lowest Price Guaranteed</td>
+                <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="title omega">Locked-in Rate</td>
+                <td class="pa omega"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="green-check" width="40" height="40" /></td>
+                <td class="omega">&nbsp;</td>
+                <td class="omega">&nbsp;</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+<div id="customer-testimonials">
+    <div class="header">
+        <h2>
+            <span>What Our Customers Say About Us?</span>
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-left-piece.png" class="left-side" width="16" height="88">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/banner-right-piece.png" class="right-side" width="16" height="88">
+        </h2>
+    </div>
+    <div class="testimonial left">
+    	<h3>from <span>Escondido, CA</span> <strong>Michael writes:</strong></h3>
+    	<p>Noel was excellent: very thorough and patient. As I've mentioned, I installed this alarm many years ago when I worked long hours and traveled for my catering business and was concerned about my Apple computer being stolen. I sold my business, bought a laptop, and stay closer to home, so I don't use the system regularly. I travel 4-5 times/year max, and turn the alarm on then, but pay the monthly fee so I can have peace of mind when I do travel. The new unit looks great, an improvement on the old without being more complicated. I especially appreciate all your help with this replacement. Thanks.</p>
+    </div>
+    <div class="testimonial">
+    	<h3>from <span>Thomasville, NC</span> <strong>Jodi writes:</strong></h3>
+    	<p>Avery was great. I was very nervous about the process of setting up and using the system. Avery was patient and walked me through the process step-by-step. He put me at ease about using the system in general. Avery seemed passionate about the service being provided and that is rare these days.</p>
+    </div>
+    <div class="testimonial">
+    	<h3>from <span>Baltimore, MD</span> <strong>Richard writes:</strong></h3>
+    	<p>I got notified today that Bltimore Gas and Electric was turning off power in my neighborhood for about 6 hours on Thursday. Not knowing what that would do the system I called customer service and was fortunate enough to reach Jessica Palma who talked me through all the possible contingencies. Great service Thanks</p>
+    </div>
+    <div class="testimonial left">
+    	<h3>from <span>Enoir, NC</span> <strong>Earl writes:</strong></h3>
+    	<p>L THOMAS WAS VERY MUCH HELPFUL. VERY CARING, VERY FREINDLY. COULD NOT HAVE NO ONE ANY NICER.</p>
+    </div>
+    <div class="testimonial">
+    	<h3>from <span>Alley Village, CA</span> <strong>Ben writes:</strong></h3>
+    	<p>Jessika did a great job patiently answering all my questions and addressing my needs. She is excellent.</p>
+    </div>
+
+
+    <div class="clear"></div>
+</div>
+<div id="sister-companies">
+    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/companies.jpg" alt="companies" width="948" height="92">
+</div>
+<div id="footer">
+    <div id="left-side">
+        <p>* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 05/31/2013</p>
+        <p>* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan".</p>
+    </div>
+    <div id="right-side">
+        <p>GE and GE Security logos are registered trademarks of General Electric.</p>
+        <p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p> 
+        <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+    <script src="js/plugins.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/helper.js"></script>
+    {% render_block "js" %}
+    {% block extra_javascript %}
+    	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+    	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+    
+    
+    
+        <script type="text/javascript">
+            $(document).ready(function() {
+    			$('#call-box').waypoint('sticky', {
+    			  offset: -200 // Apply "stuck" when element 30px from top
+    			});
+                animated = 0;
+    		});
+    	</script>
+        <script type="text/javascript">
+            $(".big-green > a").click(function(){
+                $("#customer-service-box").slideToggle("fast");
+                return false;
+            });
+            $(".international").click(function(){
+                $("#international-box").slideToggle("fast");
+                return false;
+            });
+        </script>
+    {% if 'index' in active_pages %}
+    
+        <script type="text/javascript">
+            $("#licenses-button").click(function(){
+                $("#licenses-table").toggle("normal");
+                return false;
+            });
+        </script>
+    {% endif %}
+    {% if use_call_measurement %}
+    <script type="text/javascript"> 
+        var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'i10237' or request.COOKIES.refer_id == 'a01415' or request.COOKIES.refer_id == 'i10237' or request.GET.agent == 'i10237' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'i10240' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}";
+        var thisref = document.referrer.replace(/&/g, "zzzzz");
+        var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+        document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
+    </script>
+    {% endif %}
+    {% endblock %}
+    {% block extra_pixels %}
+    {{ pixels|default_if_none:""|safe }}
+    {% endblock %}
+    {% if DEBUG == False %}
+    {% block remarketing-one %}
+    <!-- Google Code for Home Page Visit Remarketing List -->
+    <script type="text/javascript">
+    <!--
+    var google_conversion_id = 1072079179;
+    var google_conversion_language = "en";
+    var google_conversion_format = "1";
+    var google_conversion_color = "666666";
+    var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
+    var google_conversion_value = 0;
+    //-->
+    </script>
+    <!-- Google + -->
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+    {% endblock %}
+    {% block remarketing %}
+    <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+    <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+    
+    <!-- End Remarketing Code -->
+    {% endblock %}
+    
+    <!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
+    <img src="http://ads.bluelithium.com/pixel?id=1732074&t=2" width="1" height="1" />
+    <!-- End of segment tag -->
+                        <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
+    
+    {% endif %}
+</body>
+</html>
+

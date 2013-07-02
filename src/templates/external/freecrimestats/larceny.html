@@ -1,0 +1,91 @@
+{% extends "external/freecrimestats/base.html" %}
+{% load content_filters content_tags sekizai_tags %}
+{% block page_title %} {{ city }}, {{ state_long }} Larceny Stats | Local Larceny Stats{% endblock %}
+{% block page_description %}Get free crime stats on larceny related crimes in {{ city }}, {{ state_long }}.{% endblock %}
+
+{% block content %}
+<div id="main-container">
+    <div id="hp">
+
+        <div class="clear"></div>
+        <div id="secondary">
+            <table id="headline">
+                <tbody>
+                    <tr>
+                        <td class="left-area">
+                            {{ city }}, {{ state_long }}
+                        </td>
+                        <td class="right-area">
+                            We Found <span>the Crime.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+            <div id="state">
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
+                </div>
+                <div id="results-text">
+                    <h1>Larceny Statistics in {{ city }}, {{ state_long }}</h1>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Larceny</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.larceny_theft %}{{ data.stats.city.larceny_theft }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.larceny_theft_rank_per100k %}{{ data.stats.larceny_theft_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <h2>What is Larceny?</h2>
+                    <p>Larceny is a crime involving the wrongful acquisition of the personal property of another person.</p>
+                    <p>If anyone takes property that does not belong to them, or simply belongs to you, this would be considered larceny. It's the wrongful acquisitions of property. Report this to your local authorities and let them handle the situation. Never attempt to take matters into your own hands.</p>
+                    
+                    <h2>Protection against Larceny in {{ city }}, {{ state_long }}</h2>
+                    <p>Larceny can happen to anyone. Burglars and thieves are everywhere so you want to make sure you are properly protected. You can {% content_spinner "larceny1" "easily|effectively|properly" %}  protect your home and valuables with a home security system and video surveillance.</p>
+                    <p>Not only can a {% content_spinner "larceny2" "home security system|alarm system|home alarm system" %}  deter a thief but it can also alarm the authorities for a prompt response so that they may even be able to catch them in the act. A video surveillance system can help record the larceny in progress and may be beneficial in the return of your property and even the apprehension of the culprit.</p>
+                    <h2>Related Larceny Articles</h2>
+                    <ul>
+                        <li><a href="http://www.protectamerica.com/news/article/southern-men-caught-stealing-property-on-camera_1188?affkey=fcs" title="Southern Men Caught Stealing Property on Camera">Southern Men Caught Stealing Property on Camera</a></li>
+                        <li><a href="http://www.protectamerica.com/news/article/police-use-alarm-system-to-catch-burglary-suspects_1488?affkey=fcs" title="Police Use Alarm System to Catch Burglary Suspects"> Police Use Alarm System to Catch Burglary Suspects</a></li>
+                        <li><a href="http://www.protectamerica.com/news/article/surveillance-video-leads-to-capture-of-thief-in-tulsa_1543?affkey=fcs" title="Surveillance Video Leads to Capture of Thief">Surveillance Video Leads to Capture of Thief</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

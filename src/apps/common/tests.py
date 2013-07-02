@@ -5,7 +5,9 @@ unittest). These will both pass when you run "manage.py test".
 Replace these with more appropriate tests for your application.
 """
 
-from django.test import TestCase
+from django.test import TestCase, TransactionTestCase
+from django.core.urlresolvers import reverse
+#from django.test.utils import override_settings
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):
@@ -20,4 +22,15 @@ Another way to test that 1 + 1 is equal to 2.
 >>> 1 + 1 == 2
 True
 """}
+
+class TestHome(TransactionTestCase):
+
+	def setUp(self):
+		from django.conf import settings
+		settings.SITE_ID=1
+	
+
+	def test_fetch_home_page(self):
+		pass
+		
 

@@ -1,11 +1,22 @@
 from datetime import datetime
 
 from django.conf import settings
-
+import calendar
 from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 from apps.affiliates.models import Affiliate
 
+
+def last_day_of_month(request):
+    #get final date of each month
+    _now=str(datetime.now())
+    now=_now.replace('-',' ')
+    year=int(now[:4])
+    month=int(now[4:7])
+    last_day=calendar.monthrange(year,month)[1]
+    last_date=str(month)+'/'+str(last_day)+'/'+str(year)
+    _date=datetime.strptime(last_date,'%m/%d/%Y')
+    return {'final_date':_date}
 
 def mobile_check(request):
     ua = get_user_agent(request)
@@ -55,7 +66,10 @@ def phone_number(request):
 
     session_num = request.session.get('phone_number', None)
     session_call_measurement = request.session.get('call_measurement', None)
+    check_affiliate = request.GET.get('agent', None)
+
     if session_num is not None and session_call_measurement is not None:
+
         ctx['phone_number'] = session_num
         ctx['use_call_measurement'] = session_call_measurement
         return ctx

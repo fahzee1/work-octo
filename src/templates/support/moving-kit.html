@@ -5,52 +5,62 @@
 {% block page_description %}Protect America allows for easily moving GE wireless security systems from house to house. Fill out a brief form and PA will send you a Moving Kit.{% endblock %}
 
 {% block content %}
-<div id="moving-kit-overview">
-    <h1>Moving Kit</h1>
-    <p>Are you moving? <a href="{% url home %}" title="Update Protect America Home Security">Protect America</a> customers who use our GE wireless security system are able to transfer their system and service very easily.  Simply fill out this form and we will send you a relocation kit for free so you will be able to take your security system with you to your new home.  You will be able to use the relocation kit to install your system in your new home and then you will need to make sure to contact customer service to update all of your account information and re-activate the system at your new location.  If you have questions about moving, please <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" target="_blank">click here</a> or contact one of our security representatives at 1-800-951-5111, Option 4.</p>
-</div>
-<div class="clear"></div>
-<form id="moving-kit-form" method="POST">
-    {% csrf_token %}
-    <div id="account-info">
-        <h2>Current Account Information:</h2>
-        {% include "_partials/formfield.html" with field=formset.name %}
-        {% include "_partials/formfield.html" with field=formset.email %}
-        {% include "_partials/formfield.html" with field=formset.current_phone %}
-        {% include "_partials/formfield.html" with field=formset.current_address %}
-        <label class="required">City / State / Zip</label>
-        {% include "_partials/formfield_nolabel.html" with field=formset.current_city %}
-        {% include "_partials/formfield_nolabel.html" with field=formset.current_state %}
-        {% include "_partials/formfield_nolabel.html" with field=formset.current_zipcode %}
-    </div>
-    <div id="new-home-info">
-        <h2>New Home Information (Optional):</h2>
-        {% include "_partials/formfield.html" with field=formset.new_phone %}
-        {% include "_partials/formfield.html" with field=formset.new_address %}
-        <label>City / State / Zip</label>
-        {% include "_partials/formfield_nolabel.html" with field=formset.new_city %}
-        {% include "_partials/formfield_nolabel.html" with field=formset.new_state %}
-        {% include "_partials/formfield_nolabel.html" with field=formset.new_zipcode %}
-    </div>
-    <div id="same-as-account">
-        {{ formset.send_to_current_address }}
-        <label>Send Moving Kit to Current Account Address</label>
-    </div>
-    <div class="clear"></div>
-    <div id="shipping-address">
-        <h2>Shipping Address</h2>
-        {% include "_partials/formfield.html" with field=formset.shipping_address %}
-        <div id="shipping-city">
-            <label>City / State / Zip</label>
-            {% include "_partials/formfield_nolabel.html" with field=formset.shipping_city %}
-            {% include "_partials/formfield_nolabel.html" with field=formset.shipping_state %}
-            {% include "_partials/formfield_nolabel.html" with field=formset.shipping_zipcode %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>Customer Service</h2>
+            <h1>EasyMove Moving Kit</h1>
+            <p>Are you moving? <a href="{% url home %}" title="Update Protect America Home Security">Protect America</a> customers who use our GE wireless security system are able to transfer their system and service very easily.  Simply fill out this form and we will send you a EasyMove kit for free so you will be able to take your security system with you to your new home.  You will be able to use the EasyMove relocation kit to install your system in your new home and then you will need to make sure to contact customer service to update all of your account information and re-activate the system at your new location.  If you have questions about moving, please <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" target="_blank">click here</a> or contact one of our security representatives at 1-800-951-5111, Option 4.</p>
         </div>
-    </div>
-    <div class="clear"></div>
-    <button class="buyit">Submit your Information ></button>
+        <img src="{{ STATIC_URL }}img/support/moving-kit-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
 
-</form>
+    </div>
+</div>
+
+<div class="wrapper">
+    <form id="moving-kit-form" method="POST">
+        {% csrf_token %}
+        <div id="account-info">
+            <h2>Current Account Information:</h2>
+            {% include "_partials/formfield.html" with field=formset.name %}
+            {% include "_partials/formfield.html" with field=formset.email %}
+            {% include "_partials/formfield.html" with field=formset.current_phone %}
+            {% include "_partials/formfield.html" with field=formset.current_address %}
+            <label class="required">City / State / Zip</label>
+            {% include "_partials/formfield_nolabel.html" with field=formset.current_city %}
+            {% include "_partials/formfield_nolabel.html" with field=formset.current_state %}
+            {% include "_partials/formfield_nolabel.html" with field=formset.current_zipcode %}
+        </div>
+        <div id="new-home-info">
+            <h2>New Home Information (Optional):</h2>
+            {% include "_partials/formfield.html" with field=formset.new_phone %}
+            {% include "_partials/formfield.html" with field=formset.new_address %}
+            <label>City / State / Zip</label>
+            {% include "_partials/formfield_nolabel.html" with field=formset.new_city %}
+            {% include "_partials/formfield_nolabel.html" with field=formset.new_state %}
+            {% include "_partials/formfield_nolabel.html" with field=formset.new_zipcode %}
+        </div>
+        <div id="same-as-account">
+            {{ formset.send_to_current_address }}
+            <label>Send Moving Kit to Current Account Address</label>
+        </div>
+        <div class="clear"></div>
+        <div id="shipping-address">
+            <h2>Shipping Address</h2>
+            {% include "_partials/formfield.html" with field=formset.shipping_address %}
+            <div id="shipping-city">
+                <label>City / State / Zip</label>
+                {% include "_partials/formfield_nolabel.html" with field=formset.shipping_city %}
+                {% include "_partials/formfield_nolabel.html" with field=formset.shipping_state %}
+                {% include "_partials/formfield_nolabel.html" with field=formset.shipping_zipcode %}
+            </div>
+        </div>
+        <div class="clear"></div>
+        <button class="buyit">Submit your Information ></button>
+    
+    </form>
+</div>
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {

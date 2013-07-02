@@ -1,10 +1,15 @@
 {% extends "seo-pages/base.html" %}
-{% block page_title %}Best Home Security System | Buy the Best Home Security System | Protect America{% endblock %}
+{% load url from future %}
+{% block page_title %}Buy the Best Home Security System | Protect America{% endblock %}
 {% block page_keywords %}best home security system, home security system, home security system, security system{% endblock %}
 {% block page_description %}Discover the many ways Protect America can make you and your family feel more secure and safer by providing the best home security system available.{% endblock %}
 
 {% block content %}
-    {{ block.super }}
+{% block hero_banner_area %}
+    {% include "banners/seo-hero-images.html" %}
+{% endblock %}
+{% include "order/call-box.html" %}
+<div class="wrapper">
     <div class="home-security-content">
 
         <h1>Best Home Security System by Protect America</h1>
@@ -22,11 +27,13 @@
           
         <p>Protect America understands that the cost of owning a home can be high, that's why we offer the best home security system in the industry for free when you sign up for our monitoring service. Depending on the size of your home, we offer five different packages that include an alarm system, a control panel, a motion detector, three security stickers, a security yard sign and anywhere from 3 to 15 door/window sensors. When you combine all these great features with our great prices, it's no wonder our customers believe we have the best home security system in the nation!</p>
     </div>
+    <div class="clear"></div>
+</div>
 {% endblock %}
 {% block page-product %}
     <h2>Silver Security Package</h2>
     <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $37.99/mo</p>
     <div class="button-submit">
-        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
+        <a href="{% url 'order-package' %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
     </div>
 {% endblock %}

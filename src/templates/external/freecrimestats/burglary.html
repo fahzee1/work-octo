@@ -1,0 +1,90 @@
+{% extends "external/freecrimestats/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+{% block page_title %}{{ city }}, {{ state_long }} Burglary Crime Stats | Burglary Stats | Burglary Statistics{% endblock %}
+{% block page_description %}Get free crime statistics about burglary in {{ city }}, {{ state_long }}. Find out how much burglary there is in your neighborhood and protect yourself before a crime happens.{% endblock %}
+
+{% block content %}
+<div id="main-container">
+    <div id="hp">
+
+        <div class="clear"></div>
+        <div id="secondary">
+            <table id="headline">
+                <tbody>
+                    <tr>
+                        <td class="left-area">
+                            {{ city }}, {{ state_long }}
+                        </td>
+                        <td class="right-area">
+                            We Found <span>the Crime.</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+            <div id="state">
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
+                </div>
+                <div id="results-text">
+                    <h1>Burglary Statistics in {{ city }}, {{ state_long }}</h1>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="crime-name">Burglaries</th>
+                                <th>Per / 100k</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {% for year, data in crime_stats.iteritems %}
+
+                            <tr class="{% if forloop.first %}top{% endif %}{% if forloop.last %}bottom{% endif %}">
+
+                                <td class="year">{{ year }}</td>
+                                <td>{% if data.stats.city.burglary %}{{ data.stats.city.burglary }}{% else %}&nbsp;{% endif %}</td>
+                                <td class="omega">{% if data.stats.burglary_rank_per100k %}{{ data.stats.burglary_rank_per100k }}{% else %}&nbsp;{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                            
+                        
+                            
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td class="crime-footer">&nbsp;</td>
+                                <td>&nbsp;</td>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <h2>What is Burglary?</h2>
+                    <p>Burglary (also called breaking and entering or sometimes housebreaking) is a crime, the essence of which is illegal entry into a building for the purposes of committing an offense. Usually that offense will be theft, but most jurisdictions specify others which fall within the ambit of burglary.</p>
+                    <p>Burglary can happen to anyone at any time. Burglary can be one of the most intrusive crimes. Not only does a burglar invade your personal space, but a lot of times they take items that are most important to you or family. Most things can be replaced such as electronics and material items, but a burglary really affects a family when they {% content_spinner "fcs2" "destroy items|steal irreplaceable items|take heirlooms|destroy family heirlooms" %} that truly mean something. It’s important to {% content_spinner "burglary1" "protect|secure|get security for" %} your home and be prepared at all times no matter what the situation is.</p>
+                    <h2>Protection against Burglary in {{ city }}, {{ state_long }}</h2>
+                    <p>Avoid becoming a victim of burglary by protecting your home before it happens. {% content_spinner "burglary2" "One great way|The best way|An easy way" %} to protect against burglaries in {{city}} is to equip your home with an alarm system. <a href="http://www.protectamerica.com/?affkey=fcs" title="Protect America Home Security In {{ city }}, {{ state_long }}">Protect America</a> offers unbeatable deals in the {{ city }} area that are comprehensive solutions for your home security needs.</p>
+                    <p>With a home security system you can monitor all doors and windows of your home. You can even {% content_spinner "fcs3" "protect|secure|arm" %} the inside perimeter of all living areas with a motion detector. Something as simple as a home security yard sign can even deter burglars from approaching your home. Studies have shown that homes protected with a home security system are less likely to be broken into. {% content_spinner "fsc4" "Give Protect America and their security experts a call|Call Protect America|Call a security expert from Protect America|Contact Protect America's security experts" %} at {{ phone_number|format_number }} to find out how they can {% content_spinner "wb3" "secure your home|protect your family|protect your home" %} today.</p>
+                    <h2>Related Burglary Articles</h2>
+                    <ul>
+                        <li><a href="http://www.protectamerica.com/home-security-blog/home-defense-advice/dont-fall-victim-to-the-summer-crime-wave_3528?affkey=fcs" title="Don’t Fall Victim to the Summer Crime Wave">Don’t Fall Victim to the Summer Crime Wave</a></li>
+                        <li><a href="http://www.protectamerica.com/home-security-blog/crime-statistics/4-most-reassuring-crime-statistics_2430?affkey=fcs" title="4 Most Reassuring Crime Statistics">4 Most Reassuring Crime Statistics</a></li>
+                        <li><a href="http://www.protectamerica.com/home-security-blog/home-security/home-security-information/home-security-tips/vacation-home-security-tips_3334?affkey=fcs" title="Vacation Home Security Tips">Vacation Home Security Tips</a></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

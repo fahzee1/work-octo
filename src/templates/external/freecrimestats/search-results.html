@@ -1,0 +1,73 @@
+{% extends "external/freecrimestats/base.html" %}
+{% load content_filters content_tags sekizai_tags %}{% load url from future %}
+{% block page_title %}Crime Statistics by State: {{ state_long }} | {% endblock %}
+{% block page_description %}Crime stats in {{ state_long }}. Get information about crime like burglary, auto-theft, larceny and violent crime.{% endblock %}
+
+{% block content %}
+<div id="main-container">
+    <div id="hp">
+        {% include "external/freecrimestats/search.html" %}
+        <div class="clear"></div>
+        <div id="secondary">
+            <div class="clear"></div>
+            <div id="state">
+                <div id="sidebar">
+                    {% include "external/freecrimestats/form.html" %}
+                    <div id="side-ad">
+                        <a href="http://www.protectamerica.com">
+                            <img src="{{ STATIC_URL }}img/banners/200x200/200x200-simple-wireless.png" alt="728x90-security-for-every-home" />
+                        </a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="results-text">
+
+                {% if cities %}
+
+                    <h1>Found {{ num_cities }} results for "{{ search_query }}"</h1>
+                    <div class="city-container">
+                        <ul>
+                            {% for city in cities %}
+                            <li><a href="{% url 'local' city.state city.slug_name %}">{{ city }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
+                    {% comment %}
+                         dont use named urls below, theres a
+                         problem with the query for the city 
+                         O'Donnell, TX
+                    {% endcomment %}
+
+                    {% else %}
+            
+                         {% if all_cities %}
+
+                          <h1>Found {{ all_cities.count }} results for "{{ search_query }}"</h1>
+                            <div class="city-container">
+                             <ul>
+                                {% for city in all_cities %}
+                                 <li><a href="/{{ city.state }}/{{ city.slug_name }}">{{ city }}</a></li>
+                                {% endfor %}
+                            </ul>
+                            <div class="clear"></div>
+                            </div>
+                        <div class="clear"></div>
+
+
+
+                             {% else %}
+
+                                <h1>No results found for "{{ search_query }}"</h1>
+
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

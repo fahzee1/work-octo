@@ -1,0 +1,89 @@
+{% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Carbon Monoxide Detector | Life Safety Equipment | Protect America{% endblock %}
+{% block page_keywords %}door sensor, security sensor, window sensor, door security, window security, entry point, front door protection{% endblock %}
+{% block page_description %}Protect your homes' windows and doors from intruders with door & window sensors. Protect America offers quality wireless home security equipment at low-prices.{% endblock %}
+
+
+{% block content %}
+<div id="hero-wrapper" class="red">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h2>Life Safety</h2>
+            <h1>Carbon Monoxide</h1>
+            <p>Detecting carbon monoxide to help save your life.</p>
+            {% if phone_number %}
+
+                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
+
+
+            {% endif %}
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+
+        </div>
+        <img src="{{ STATIC_URL }}img/products/equipment/carbon-monoxide-detector/carbon-monoxide-detector-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
+
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+
+<div class="wrapper">
+    <div class="video-features">
+        <div class="video-content">
+            <h2>Stopping the Silent Killer</h2>
+            <p>The wireless carbon monoxide detector is an important safety tool that alerts you of dangerous levels of carbon monoxide (CO) in your home. Carbon Monoxide is a colorless, odorless, and tasteless gas that is harmful to you and your pets. When potentially dangerous levels of CO are present, it provides a warning signal to alert you and Protect America for help. The alarm will only reset once dangerous carbon monoxide levels are no longer being detected.</p>
+        </div>
+        <div class="video-frame">
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/equipment/carbon-monoxide-detector/carbon-monoxide-detector-small.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Carbon Monoxide</h2>
+            <p>Carbon Monoxide Alarms should be mounted on all levels of your home, and are best situated in bedrooms and living rooms.  In other words, you should be able to hear the alarm from wherever you and your family typically sleep, NOT near a fireplace, furnace or in the basement (unless of course someone sleeps in the basement).  </p>
+            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+
+{% addtoblock "js" %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#search-testimonial-box').cycle({
+            fx: 'fade',
+            timeout: 9000
+        });
+        $('.video-link').click(function(e) {
+            e.preventDefault();
+            $('.video-link').parent().removeClass('active');
+            $('.video-link a').html('Watch Now >');
+            
+            var video_url = $(this).children('a').attr('href');
+            $('#main-video iframe').attr('src', video_url);
+
+            $(this).parent().addClass('active');
+            $(this).children('a').html('Now Playing');
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
+
+{% block page-product %}
+    <h2>Door / Window Security Sensors</h2>
+    <p><span>Add to your Package: <strong>$39.50 each</strong></span></p>
+    <div class="button-submit">
+        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Door / Window Sensor']);">Order Now ></a>
+    </div>
+{% endblock %}
+
