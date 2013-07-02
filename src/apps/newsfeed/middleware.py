@@ -6,10 +6,6 @@ from django.contrib.localflavor.us.us_states import US_STATES
 from models import TheFeed,FallBacks
 from django.db.models import Q
 from django.conf import settings
-consumer_key=settings.TWITTER_CONSUMER_KEY
-consumer_secret=settings.TWITTER_CONSUMER_SECRET
-access_token=settings.TWITTER_ACCESS_TOKEN
-access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 
 class RenderNewsFeed():
 
@@ -20,13 +16,12 @@ class RenderNewsFeed():
 			 	state=request.GET['state']
 			 	data={
 			 	'city':city,
-			 	'state':state
-	            }
+			 	'state':state}
 
-	     
-	     			for x in US_STATES:
-	            			if x[1]==state:
-	            				state=x[0]
+			 	for x in US_STATES:
+			 		if x[1]==state:
+			 			state=x[0]
+
 	           
 				try:
 					query1=Q(active=True,city__icontains=city,state__exact=state)
