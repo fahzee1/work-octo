@@ -10,7 +10,8 @@ from models import TheFeed,AddType,FallBacks
 from middleware import RenderNewsFeed
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
-from mock import Mock
+from mock import Mock 
+import requests
 
 
 
@@ -72,13 +73,12 @@ class TheFeedTest(TestCase):
 		self.assertEqual(locale,'Austin,TX')
 		self.assertFalse(not_expired)
 		self.assertTrue(is_expired)
-	'''
+	
 	def test_render_feed(self):
-		feed=self.client.get(reverse('render-feed'),HTTP_X_REQUESTED_WITH='XMLHttpRequest',SERVER_NAME='http://127.0.0.1:8000')
-		print feed
+		feed=requests.get(reverse('render-feed'),HTTP_X_REQUESTED_WITH='XMLHttpRequest',SERVER_NAME='http://127.0.0.1:8000')
 		self.assertTrue(feed)
 		self.assertEqual(feed.status_code,200)
-	'''
+
 
 
 class TheFeedMiddlewareTest(TestCase):
