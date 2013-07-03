@@ -40,7 +40,7 @@ class AddType(models.Model):
 class TheFeed(models.Model):
 	name=models.CharField(max_length=200,blank=True,null=True,help_text='Name of this feed message')
 	city=models.CharField(max_length=255,blank=True,null=True,default='')
-	state=models.CharField(max_length=2,blank=True,null=True,choices=US_STATES,default='')
+	state=models.CharField(max_length=2,blank=True,null=True,choices=US_STATES)
 	message=models.TextField(blank=False,null=False,help_text='Message to show on feed')
 	link_name=models.CharField(max_length=255,blank=True,null=True,default='Click Here')
 	link=models.URLField(max_length=200,blank=True,null=True,help_text='Link to relevant page')
