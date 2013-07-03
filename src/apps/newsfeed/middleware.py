@@ -56,7 +56,7 @@ class GetGeoIp():
 		if request.session.get('GeoFeedObjects',False):
 			return None
 		ip=request.META['REMOTE_ADDR']
-		r=requests.get('http://freegeoip.net/json/')
+		r=requests.get('http://freegeoip.net/json/'+ip)
 		resp=r.json()
 		city=resp['city']
 		state_abbr=resp['region_code']
