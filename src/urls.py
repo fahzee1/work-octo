@@ -405,6 +405,17 @@ elif settings.SITE_ID == 23:
 
     )
 
+# myprotectamerica.com
+elif settings.SITE_ID == 24:
+    urlpatterns += patterns('',
+
+        # My Protect America Homepage
+        dtt(r'^$', 'my-protect-america/index.html', 'myprotectamerica'),
+
+
+    )
+
+
 # defaults
 else:
     urlpatterns += patterns('',
@@ -466,13 +477,9 @@ else:
             
             # Equipment > Home Automation
                 dtt(r'^equipment/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation-equipment', 'equipment'),
-<<<<<<< HEAD
-                        dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
-                        dtt(r'^equipment/home-automation/z-wave-appliance-module/?$', 'products/equipment/appliance-module.html', 'appliance-module', 'home-automation-equipment'),
-                        dtt(r'^equipment/home-automation/z-wave-indoor-siren/?$', 'products/equipment/indoor-siren.html', 'indoor-siren', 'home-automation-equipment'),
-=======
-                        dtt(r'^equipment/home-automation/z-wave-door/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
->>>>>>> URL changes
+                    #dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
+                    dtt(r'^equipment/home-automation/z-wave-appliance-module/?$', 'products/equipment/appliance-module.html', 'appliance-module', 'home-automation-equipment'),
+                    dtt(r'^equipment/home-automation/z-wave-indoor-siren/?$', 'products/equipment/indoor-siren.html', 'indoor-siren', 'home-automation-equipment'),
 
             
             # SMART Connect
