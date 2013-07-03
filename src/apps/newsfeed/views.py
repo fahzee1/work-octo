@@ -20,11 +20,10 @@ def give_me_tweets():
 				              access_token_key=access_token,
 				              access_token_secret=access_secret)
 			tweets=t_api.GetUserTimeline('protectamerica')
-			cache.set('TWEETS',tweets,60*60)
+			cache.set('TWEETS',tweets,60*60)	
+			return tweets[:5]
 		except:
 			pass
-
-	return tweets
 
 def hourly_check(request):
 	if request.is_ajax():
@@ -35,45 +34,24 @@ def hourly_check(request):
 	return HttpResponseBadRequest()
 
 
-def get_fallback(request):
-	try:
-		fbacks=request.session['FallBacks']
-	except KeyError:
-		fbacks=FallBacks.objects.select_related().all()
-
-	tweets=give_me_tweets()
-
-	results=list(chain.from_iterable(izip(fbacks,tweets[:5])))
-	for x in fbacks:
-		for y in tweets:
-			if y not in results:
-				results.append(y)
-			if x not in results:
-				results.append(x)
-	ctx={'FallBacks':results}                  
-	return render(request,'newsfeed/fallback.html',ctx)
-
-
 
 def render_feed(request):
     #ajax request
     ctx={}
     tweets=give_me_tweets()
-    data=request.session.get('GeoFeedData',False)
-    fback=request.session.get('FallBacks',False)
-    if data or fback:
-        if tweets:
-            results=list(chain.from_iterable(izip(data,tweets[:5])))
-            for x in data:
-                for y in tweets:
-                    if y not in results:
-                        results.append(y)
-                    if x not in results:
-                        results.append(x)
-        else:
-            results=data
+    data=request.session.get('GeoFeedObjects',False)
+    if data and tweets:
+        results=list(chain.from_iterable(izip(data,tweets)))
+        for x in data:
+            for y in tweets:
+                if y not in results:
+                    results.append(y)
+                if x not in results:
+                    results.append(x)
         ctx['GeoFeed']=results
-        ctx['FallBacks']=fback
+    else:
+        results=data
+        ctx['GeoFeed']=results
     return render(request,'newsfeed/feed.html',ctx)
 
 

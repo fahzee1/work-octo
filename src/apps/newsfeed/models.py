@@ -87,11 +87,18 @@ class TheFeed(models.Model):
 			return False
 
 
+
 class FallBacks(models.Model):
 	feed_name=models.ForeignKey(TheFeed)
 
 	def __unicode__(self):
 		return '%s' % self.feed_name
+
+
+
+
+
+
 
 
 	

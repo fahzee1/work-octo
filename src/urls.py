@@ -94,7 +94,6 @@ urlpatterns = patterns('',
     #newsfeed 
     url(r'^newsfeed/?$', 'apps.newsfeed.views.render_feed',name='render-feed'),
     url(r'^hourlycheck/?$', 'apps.newsfeed.views.hourly_check',name='hourly_check'),
-    url(r'^getfallback/?$', 'apps.newsfeed.views.get_fallback',name='get-fallback'),
     url(r'^nongeofeed/?$', 'apps.newsfeed.views.nongeo_feed',name='nongeo-feed'),
 
     #contact us

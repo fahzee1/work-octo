@@ -317,7 +317,6 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     {% endblock %}
 
 {% endblock %}
-
 <!-- Javascript -->
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
@@ -326,7 +325,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 $(document).ready(function(){
     
         $.ajax({
-            url:"{% url 'nongeo-feed' %}",
+            url:"{% url 'render-feed' %}",
             success:function(data){
                 $("#newsfeed").html(data);
                 $('#newsfeed').cycle({
@@ -342,24 +341,7 @@ $(document).ready(function(){
 
 {% comment %}
 /*
-    function getFallback(){
-        $.ajax({
-            url:"{% url 'get-fallback' %}",
-            success:function(data){
-                $("#newsfeed").html(data);
-                $('#newsfeed').cycle({
-                            fx:'blindY',
-                            speed:500,
-                            timeout:6000,
-                            delay:-3000
-                });
-            }
-        });
-    }
-
-
-
-
+   
     function getFeed(citystate){
         $.ajax({
             url:"{% url 'render-feed' %}",
