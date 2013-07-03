@@ -41,6 +41,7 @@ class TheFeed(models.Model):
 	name=models.CharField(max_length=200,blank=True,null=True,help_text='Name of this feed message')
 	city=models.CharField(max_length=255,blank=True,null=True,default='')
 	state=models.CharField(max_length=2,blank=True,null=True,choices=US_STATES,default='')
+	visible_to_all=models.BooleanField(default=False,help_text='This feed message will be seen by everyone not just a specific location. No need to enter city/state.')
 	message=models.TextField(blank=False,null=False,help_text='Message to show on feed')
 	link_name=models.CharField(max_length=255,blank=True,null=True,default='Click Here')
 	link=models.URLField(max_length=200,blank=True,null=True,help_text='Link to relevant page')
@@ -56,8 +57,9 @@ class TheFeed(models.Model):
 
 	def save(self,*args,**kwargs):
 		if not self.city or not self.state:
-			raise ValidationError('city and state needed')
-			
+			if not self.visible_to_all:
+				raise ValidationError('city and state or visible to all required')
+
 		try:
 			f,l=self.city.split()
 			a=f.capitalize()
