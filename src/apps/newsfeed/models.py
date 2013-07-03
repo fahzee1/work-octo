@@ -26,7 +26,12 @@ class AddType(models.Model):
 			name=_f+' '+_l
 			self.name=name
 		except ValueError:
-			raise ValidationError('Name should be two words only')
+			_name=self.name.split()
+			if len(_name) ==1:
+				_name=self.name.capitalize()
+				self.name=_name
+			else:
+				raise ValidationError('Name should be two words only')
 
 		super(AddType,self).save(*args,**kwargs)
 

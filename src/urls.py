@@ -3,7 +3,8 @@ from django.conf import settings
 from django.views.generic.base import RedirectView
 from apps.sitemaps.sitemap import StaticSitemap
 from apps.news.sitemaps import ArticleSitemap
-from apps.local.sitemaps import KeywordStateSitemap,KeywordSitemapIndex
+from apps.local.sitemaps import *
+from apps.crimedatamodels.sitemaps import *
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
@@ -64,6 +65,11 @@ sitemaps={
                                  'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
     'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
     'article':ArticleSitemap,
+    'crimestats':CrimeStatsSitemap,
+    'crimestats-state':FreeCrimeStatsStateSitemap,
+    #'crimestats-city':FreeCrimeStatsCitySitemap,
+   # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
+    'keyword':KeywordSitemapIndex(LOCAL_KEYWORDS)
 
 
 }        
@@ -88,6 +94,7 @@ urlpatterns = patterns('',
     #newsfeed 
     url(r'^newsfeed/?$', 'apps.common.views.render_feed',name='render-feed'),
     url(r'^hourlycheck/?$', 'apps.newsfeed.views.hourly_check',name='hourly_check'),
+    url(r'^getfallback/?$', 'apps.newsfeed.views.get_fallback',name='get-fallback'),
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
@@ -1037,6 +1044,10 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/learn-about-security/monitoring/security-system/',permanent=True)),
     ('pa/about/home-security-companies/?$',
         RedirectView.as_view(url='learn-about-security/protect-america/',permanent=True)),
+    ('contact/find-us/?$',
+        RedirectView.as_view(url='/support/find-us/',permanent=True)),
+    ('contact-us/?$',
+        RedirectView.as_view(url='/pa/contact/',permanent=True)),
 
 )
 
