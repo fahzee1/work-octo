@@ -32,8 +32,8 @@ class Event(models.Model):
     description = models.TextField(blank=True)
     event_url = models.CharField(max_length=500, blank=True, default=u"")
     eventdate = models.DateField(blank=True)
-    eventstart = models.TimeField(blank=True, default=u"")
-    eventfinish = models.TimeField(blank=True, default=u"")
+    eventstart = models.TimeField(blank=True, null=True)
+    eventfinish = models.TimeField(blank=True, null=True)
     image = models.ImageField(upload_to="event", blank=True)
 
     def __unicode__(self):

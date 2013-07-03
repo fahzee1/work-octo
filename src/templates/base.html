@@ -93,10 +93,12 @@
     <link rel="stylesheet" media="screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/480.css">
     <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
     <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
-    <!--[if (lt IE 9) & (!IEMobile)]>
-    <script src="js/selectivizr-min.js"></script>
-    <![endif]-->
+
 {% endblock %}    
+
+<!--[if IE 7]>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome/font-awesome-ie7.min.css">
+<![endif]-->
 
 <!-- JavaScript -->
 <script src="{{ STATIC_URL }}js/modernizr-2.5.3-min.js"></script>
@@ -323,7 +325,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    
+
         $.ajax({
             url:"{% url 'render-feed' %}",
             success:function(data){
@@ -374,6 +376,7 @@ $(document).ready(function(){
 });
 
 </script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/placeholder.js"></script>
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
@@ -381,6 +384,12 @@ $(document).ready(function(){
 
 {% render_block "js" %}
 {% block extra_javascript %}
+<script>Modernizr.load({
+            test: Modernizr.input.placeholder,
+            nope: ['Placeholder.js'],
+            complete: function(){Placeholders.init();}
+        });
+</script>
     <script type="text/javascript">
         $("#subnav > li.menu-item").mouseover(function(){
             if ($(this).hasClass('open') || $(this).hasClass('hover')) {
@@ -389,7 +398,7 @@ $(document).ready(function(){
                 if ($(this).data("menu")) {
                     var menu = $(this).data("menu");
                     $(this).addClass('hover');
-                    $('.child-nav > .' + menu).show();
+                    $(this).children('.child-nav').show();
                 }
             }
 
@@ -400,7 +409,8 @@ $(document).ready(function(){
                 if ($(this).data("menu")) {
                     var menu = $(this).data("menu");
                     $(this).removeClass('hover');
-                    $('.child-nav > .' + menu).hide();
+                    $(this).children('.child-nav').hide();
+
                 }
             }
         });        

@@ -39,8 +39,8 @@ class AddType(models.Model):
 
 class TheFeed(models.Model):
 	name=models.CharField(max_length=200,blank=True,null=True,help_text='Name of this feed message')
-	city=models.CharField(max_length=255,blank=True,null=True,default='')
-	state=models.CharField(max_length=2,blank=True,null=True,choices=US_STATES,default='')
+	city=models.CharField(max_length=255,blank=True,null=True)
+	state=models.CharField(max_length=2,blank=True,null=True,choices=US_STATES)
 	visible_to_all=models.BooleanField(default=False,help_text='This feed message will be seen by everyone not just a specific location. No need to enter city/state.')
 	message=models.TextField(blank=False,null=False,help_text='Message to show on feed')
 	link_name=models.CharField(max_length=255,blank=True,null=True,default='Click Here')
