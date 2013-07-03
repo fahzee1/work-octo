@@ -19,15 +19,16 @@ class Migration(SchemaMigration):
         db.create_table('newsfeed_thefeed', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(default='', max_length=255, null=True, blank=True)),
+            ('city', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('state', self.gf('django.db.models.fields.CharField')(max_length=2, null=True, blank=True)),
+            ('visible_to_all', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('message', self.gf('django.db.models.fields.TextField')()),
             ('link_name', self.gf('django.db.models.fields.CharField')(default='Click Here', max_length=255, null=True, blank=True)),
             ('link', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
             ('icon', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('expires', self.gf('django.db.models.fields.DateField')()),
             ('type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['newsfeed.AddType'])),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2013, 7, 2, 15, 35, 56, 329967), auto_now_add=True, blank=True)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2013, 7, 3, 18, 54, 4, 726259), auto_now_add=True, blank=True)),
             ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
         ))
         db.send_create_signal('newsfeed', ['TheFeed'])
@@ -66,8 +67,8 @@ class Migration(SchemaMigration):
         'newsfeed.thefeed': {
             'Meta': {'object_name': 'TheFeed'},
             'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'city': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 7, 2, 15, 35, 56, 329967)', 'auto_now_add': 'True', 'blank': 'True'}),
+            'city': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2013, 7, 3, 18, 54, 4, 726259)', 'auto_now_add': 'True', 'blank': 'True'}),
             'expires': ('django.db.models.fields.DateField', [], {}),
             'icon': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -76,7 +77,8 @@ class Migration(SchemaMigration):
             'message': ('django.db.models.fields.TextField', [], {}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'state': ('django.db.models.fields.CharField', [], {'max_length': '2', 'null': 'True', 'blank': 'True'}),
-            'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['newsfeed.AddType']"})
+            'type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['newsfeed.AddType']"}),
+            'visible_to_all': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
         }
     }
 
