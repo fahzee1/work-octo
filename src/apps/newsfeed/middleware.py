@@ -6,7 +6,7 @@ from django.contrib.localflavor.us.us_states import US_STATES
 from models import TheFeed,FallBacks
 from django.db.models import Q
 from django.conf import settings
-
+'''
 class RenderNewsFeed():
 
 	def process_request(self,request):
@@ -45,3 +45,5 @@ class RenderNewsFeed():
 	  			pass 
 
 	  	return None       
+
+'''

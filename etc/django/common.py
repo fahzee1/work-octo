@@ -99,7 +99,7 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.CommonMiddlewareWrapper',
     'apps.common.middleware.DetectMobileBrowser',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    'apps.newsfeed.middleware.RenderNewsFeed',
+    #'apps.newsfeed.middleware.RenderNewsFeed',
 )
 
 ROOT_URLCONF = 'urls'

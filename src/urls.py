@@ -92,9 +92,10 @@ urlpatterns = patterns('',
     (r'^django-admin/', include(admin.site.urls)),
 
     #newsfeed 
-    url(r'^newsfeed/?$', 'apps.common.views.render_feed',name='render-feed'),
+    url(r'^newsfeed/?$', 'apps.newsfeed.views.render_feed',name='render-feed'),
     url(r'^hourlycheck/?$', 'apps.newsfeed.views.hourly_check',name='hourly_check'),
     url(r'^getfallback/?$', 'apps.newsfeed.views.get_fallback',name='get-fallback'),
+    url(r'^nongeofeed/?$', 'apps.newsfeed.views.nongeo_feed',name='nongeo-feed'),
 
     #contact us
     url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
