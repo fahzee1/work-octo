@@ -11,7 +11,19 @@ access_token=settings.TWITTER_ACCESS_TOKEN
 access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 
 
-
+def give_me_tweets():
+	tweets=cache.get('TWEETS')
+	if not tweets:
+		try:
+			t_api=twitter.Api(consumer_key=consumer_key,
+				              consumer_secret=consumer_secret,
+				              access_token_key=access_token,
+				              access_token_secret=access_secret)
+			tweets=t_api.GetUserTimeline('protectamerica')
+			cache.set('TWEETS',tweets,60*60)	
+			return tweets[:5]
+		except:
+			pass
 
 def hourly_check(request):
 	if request.is_ajax():
@@ -22,27 +34,48 @@ def hourly_check(request):
 	return HttpResponseBadRequest()
 
 
-def get_fallback(request):
-	try:
-		fbacks=request.session['FallBacks']
-	except KeyError:
-		fbacks=FallBacks.objects.select_related().all()
 
-	tweets = cache.get('TWEETS')
-    	if not tweets:
-            t_api = twitter.Api(consumer_key=consumer_key,
-                                consumer_secret=consumer_secret,
-                                access_token_key=access_token,
-                                access_token_secret=access_secret)
-            tweets = t_api.GetUserTimeline('protectamerica',count=5)
-            cache.set('TWEETS', tweets, 60*60)
+def render_feed(request):
+    #ajax request
+    ctx={}
+    tweets=give_me_tweets()
+    data=request.session.get('GeoFeedObjects',False)
+    if data and tweets:
+        results=list(chain.from_iterable(izip(data,tweets)))
+        for x in data:
+            for y in tweets:
+                if y not in results:
+                    results.append(y)
+                if x not in results:
+                    results.append(x)
+        ctx['GeoFeed']=results
+    else:
+        results=data
+        ctx['GeoFeed']=results
+    return render(request,'newsfeed/feed.html',ctx)
 
-	results=list(chain.from_iterable(izip(fbacks,tweets[:5])))
-	for x in fbacks:
+
+def nongeo_feed(request):
+	ctx={}
+	tweets=give_me_tweets()[:5]
+	data=cache.get('NonGeoFeedData')
+	if not data:
+		data=TheFeed.objects.filter(active=True).order_by('created').reverse()[:5]
+		if data.count() == 0:
+			request.session['backup']=True
+			data=FallBacks.objects.all()
+		cache.set('NonGeoFeedData',data)
+
+	results=list(chain.from_iterable(izip(data,tweets)))
+	for x in data:
 		for y in tweets:
 			if y not in results:
 				results.append(y)
 			if x not in results:
 				results.append(x)
-	ctx={'FallBacks':results}                  
-	return render(request,'newsfeed/fallback.html',ctx)
+
+	ctx['GeoFeed']=results
+	return render(request,'newsfeed/feed.html',ctx)
+
+
+
