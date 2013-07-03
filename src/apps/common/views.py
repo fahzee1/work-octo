@@ -258,39 +258,6 @@ def index_render(request, template, context):
     return simple_dtt(request, template, context)
 
 
-def render_feed(request):
-    #ajax request
-    ctx={}
-    tweets = cache.get('TWEETS')
-    if not tweets:
-        t_api = twitter.Api(consumer_key=consumer_key,
-                            consumer_secret=consumer_secret,
-                            access_token_key=access_token,
-                             access_token_secret=access_secret)
-        try:
-            #twitter sometimes gives errors so catch it 
-            tweets = t_api.GetUserTimeline('protectamerica')
-            cache.set('TWEETS', tweets, 60*60)
-        except:
-            pass
-
-    data=request.session.get('GeoFeedData',False)
-    fback=request.session.get('FallBacks',False)
-    if data or fback:
-        if tweets:
-            results=list(chain.from_iterable(izip(data,tweets[:5])))
-            for x in data:
-                for y in tweets:
-                    if y not in results:
-                        results.append(y)
-                    if x not in results:
-                        results.append(x)
-        else:
-            results=data
-        ctx['GeoFeed']=results
-        ctx['FallBacks']=fback
-    return render(request,'newsfeed/feed.html',ctx)
-
 
 
 def family_of_companies(request):

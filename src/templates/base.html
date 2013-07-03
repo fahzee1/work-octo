@@ -319,24 +319,15 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     {% endblock %}
 
 {% endblock %}
-
 <!-- Javascript -->
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    {% if not request.session.GeoFeedData %}
-    if (navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(getLocation,alertError,options_position);
-    }
-    else{
-        // alert('Geolocation is not supported on your browser. Please upgrade.')
 
-    }
-    {% else %}
         $.ajax({
-            url:"/newsfeed",
+            url:"{% url 'render-feed' %}",
             success:function(data){
                 $("#newsfeed").html(data);
                 $('#newsfeed').cycle({
@@ -350,104 +341,9 @@ $(document).ready(function(){
         });
 
 
-    {% endif %}
-
-
-    function alertError(error){
-        switch(error.code){
-            case error.PERMISSION_DENIED:
-               // alert('You denied our request');
-                getFallback();
-            break;
-            case error.POSITION_UNAVAILABLE:
-               // alert('Location information is unavailable');
-                getFallback();
-            break;
-            case error.TIMEOUT:
-               // alert('Request timed out');
-                getFallback();
-            break;
-            case error.UKNOWN_ERROR:
-               // alert('Uknown error occured');
-                getFallback();
-            break;
-        }
-    }
-
-    var options_position={
-    enableHighAccuracy:true,
-    maximumAge: 60000, 
-    timeout: 50000 
-    }
-
-    function getLocation(position){
-        var combine = position.coords.latitude+","+position.coords.longitude;
-        var coords=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        var longlat= {'longlat':combine};
-        var geo=new google.maps.Geocoder();
-        geo.geocode({
-        'location':coords},
-        function(results,status){
-            switch(status){
-                case google.maps.GeocoderStatus.OK:
-                    var city=results[0].address_components[3].long_name;
-                    var state=results[0].address_components[5].long_name;
-                    if (city != '' && state != ''){
-                        var geoData={
-                            'city':city,
-                            'state':state 
-                        }
-
-                        getFeed(geoData);
-                    }
-                break;
-                case google.maps.GeocoderStatus.ERROR:
-                   // alert('error with google');
-                    getFallback();
-                break;
-                case google.map.GeocoderStatus.INVALID_REQUEST:
-                   // alert('invalid request');
-                    getFallback();
-                break;
-                case google.map.GeocoderStatus.OVER_QUERY_LIMIT:
-                   // alert('over query limit');
-                    getFallback();
-                break;
-                case google.map.GeocoderStatus.REQUEST_DENIED:
-                  // alert('request denied');
-                    getFallback();
-                break;
-                case google.map.GeocoderStatus.UNKOWN_ERROR:
-                   // alert('there was a unknown error');
-                    getFallback();
-                break;
-                case google.map.GeocoderStatus.ZERO_RESULTS:
-                    // alert('there were zero results');
-                    getFallback();
-                break;
-            }
-        });
-
-    }
-
-
-    function getFallback(){
-        $.ajax({
-            url:"{% url 'get-fallback' %}",
-            success:function(data){
-                $("#newsfeed").html(data);
-                $('#newsfeed').cycle({
-                            fx:'blindY',
-                            speed:500,
-                            timeout:6000,
-                            delay:-3000
-                });
-            }
-        });
-    }
-
-
-
+{% comment %}
+/*
+   
     function getFeed(citystate){
         $.ajax({
             url:"{% url 'render-feed' %}",
@@ -465,6 +361,8 @@ $(document).ready(function(){
 
         });
     }
+    */
+    {% endcomment %}
 
     function checkExpired(){
         $.ajax({
