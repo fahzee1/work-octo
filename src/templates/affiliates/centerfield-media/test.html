@@ -10,10 +10,13 @@
 {% block header %}{% endblock %}
 {% block order-footer %}{% endblock %}
 {% block css %}
-        <link href='http://fonts.googleapis.com/css?family=Sanchez:400italic,400|Open+Sans:400italic,400,700,600,600italic' rel='stylesheet' type='text/css'/>
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/centerfield-media/cf-style-test.css" type="text/css" media="screen" charset="utf-8" /> 
-        <!--[if gt IE 5.5]>
-        <link rel="stylesheet" type="text/css" href="./css/ie.css" />
+        <link href='http://fonts.googleapis.com/css?family=Sanchez:400italic,400|Open+Sans:400italic,400,700,600,600italic|Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'/>
+        
+        <script src="//cdn.optimizely.com/js/228089307.js"></script>
+        
+        <!--[if lte IE 7]>
+        	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/affiliates/centerfield-media/ie.css" />
         <![endif]-->
         <!--[if lte IE 8]>
         	<style type="text/css">
@@ -27,7 +30,6 @@
         		}
         	</style>
         <![endif]-->
-
 {% endblock %}
 {% block typekit %}{% endblock %}
 {% block content %}
@@ -115,6 +117,7 @@
                                     </div>
                                     
                                     {% include "order/quote-form-cf.html" with form=forms.basic %}
+
 
 
                                     <div class="bottom"></div>
@@ -521,6 +524,7 @@
 {% addtoblock "js" %}
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+<script src="//cdn.optimizely.com/js/228089307.js"></script>
 
 
 
