@@ -2,7 +2,7 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Equipment | Freeze Sensor | Protect America{% endblock %}
 {% block page_keywords %}wireless home security system, home security, home security monitoring, x10 home automation, homepulse, latchkey feature, pan{% endblock %}
-{% block page_description %}Protect America's freeze sensor protects your home and family by alerting of cold temperatures where possible pipes might shatter.% endblock %}
+{% block page_description %}Protect America's freeze sensor protects your home and family by alerting of cold temperatures where possible pipes might shatter.{% endblock %}
 
 {% block content %}
 <div id="hero-wrapper" class="red">
@@ -52,30 +52,5 @@
     <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="In The Home;Background" class="in-home-bg" />
     <div class="clear"></div>
 </div>
-{% addtoblock "js" %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-
-        $('.feature-icon').click(function(){
-            var icon = $(this).clone();
-            $('.feature-icon').removeClass('active').html('+');
-            $('.feature-content').slideUp(250, 'easeOutBounce');
-            if(!$(icon).hasClass('active')) {
-                $(this).addClass('active').html('x').next('.feature-content').slideDown(250, 'easeOutBounce');
-            }
-        });
-    });
-    </script>
-{% endaddtoblock "js" %}
 {% endblock %}  
-
-{% block page-product %}
-    <h2>The GE Simon XT</h2>
-    <p><span>Included in any Package.</span></p>
-
-    <div class="button-submit">
-        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Simon XT Touchscreen']);">Order Now ></a>
-    </div>
-{% endblock %}
 

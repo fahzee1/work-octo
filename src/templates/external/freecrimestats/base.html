@@ -1,6 +1,7 @@
-{% extends "base.html" %}
+{% extends "base-old.html" %}
 
-{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% load content_tags content_filters sekizai_tags %}
+{% load url from future %}
 
 {% block page_title %}Home Security System Expert | Home Security Reviews{% endblock %}
 {% block page_description %}Home security system experts share home security reviews and insight about the best home security systems today. Get useful information about getting a home security system from our experts.{% endblock %}
@@ -44,21 +45,21 @@
 <div id="header">
     <ul id="tabs">
         <li class="tab {% if 'home' in active_pages %}active{% endif %}">
-            <a href="{% url home %}">Home</a>
+            <a href="{% url 'home' %}">Home</a>
         </li>
         <li class="tab alt {% if 'about' in active_pages %}active{% endif %}">
-            <a href="{% url about %}">About</a>
+            <a href="{% url 'about' %}">About</a>
         </li>
         <li class="tab {% if 'advice' in active_pages %}active{% endif %}">
-            <a href="{% url advice %}">Advice</a>
+            <a href="{% url 'advice' %}">Advice</a>
         </li>
         <li class="tab alt {% if 'contact' in active_pages %}active{% endif %}">
-            <a href="{% url contact %}">Contact</a>
+            <a href="{% url 'contact' %}">Contact</a>
         </li>
     </ul>
     <div id="search-form-mini">
         <div id="form">
-            <form name="input" action="{% url search %}" method="get">
+            <form name="input" action="{% url 'search' %}" method="get">
                 <div class="search-area">
                     <input style="border: none; margin-top: 0px;" type="text" spellcheck="true" name="q" placeholder="Enter City, State or Zip Code">
                 </div>
@@ -166,10 +167,10 @@
     <div id="footer-callouts">
         <div class="footer-links">
             <ul>
-                <li><a href="{% url index %}">Home</a></li>
-                <li><a href="{% url about %}">About</a></li>
-                <li><a href="{% url advice %}">Advice</a></li>
-                <li><a href="{% url contact %}">Contact</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'advice' %}">Advice</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
             </ul>
         </div>
         <div class="footer-social">
