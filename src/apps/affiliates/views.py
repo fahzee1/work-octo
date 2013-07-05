@@ -90,7 +90,7 @@ def resources(request):
             if ad.type.slug in ads:
                 ads[ad.type.slug][1].append(ad)
 
-    return simple_dtt(request, 'affiliates/resources.html', {
+    return simple_dtt(request, 'affiliates/resources/get-started.html', {
             'page_name': 'affiliate_resources',
             'google_ads': ads,
         })

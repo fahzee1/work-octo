@@ -452,6 +452,7 @@ else:
                     dtt(r'^equipment/home-security/panic-button/?$', 'products/equipment/two-button-panic.html', 'two-button-panic', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/extra-security/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
                     # > dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
+                    
                     # Moratorium 
                         dtt(r'^equipment/home-security/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'home-security-equipment'),
                         dtt(r'^equipment/home-security/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'home-security-equipment'),
@@ -658,7 +659,6 @@ else:
 
 
         # Affiliate Resources 
-        dtt(r'^affiliates/resources/?$', 'affiliates/resources.html', 'aff'),
         url(r'^affiliates/resources/get-started/?$', 'apps.affiliates.views.get_started_page', name='aff-get-started'),
         url(r'^affiliates/resources/logos/?$','apps.affiliates.views.logos_page' ,name='aff-logos'),
         url(r'^affiliates/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='aff-web-banners'),
@@ -1101,8 +1101,6 @@ urlpatterns += patterns('',
             RedirectView.as_view(url='/support/contact-us/write-a-review/',permanent=True)),
     ('products/interactive-video/business-video-camera/?$',
             RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
-    ('affiliate/resources/?$',
-            RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
     ('contact/careers/job-opening/?$',
         RedirectView.as_view(url='/support/careers/jobs/',permanent=True))
 
