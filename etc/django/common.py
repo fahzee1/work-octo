@@ -169,6 +169,8 @@ TWITTER_CONSUMER_KEY='neNxtJ7k9R0UKTfwx12OnA'
 TWITTER_CONSUMER_SECRET='gAN1yKQXv6Z8JXKoJngKKd382nxzw2VrTdgHu0LBjU'
 TWITTER_ACCESS_TOKEN='199333362-iUqm5j0TqbufpKcQRlPyuOqiwMArfLzwl0nmY3CJ'
 TWITTER_ACCESS_TOKEN_SECRET='jWBAmeUpFTZbpfyX7kXKhSJVWqow3uhtV8fRfI39URA'
+SESSION_COOKIE_AGE=86400
+SESSION_SAVE_EVERY_REQUEST=True
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
