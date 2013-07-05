@@ -1,0 +1,106 @@
+{% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security Equipment | Protect America{% endblock %}
+{% block page_keywords %}wireless home security system, GE security, wireless GE security equipment,security, home security, security system, home sec{% endblock %}
+{% block page_description %}Protect America's GE wireless home security systems are easy to install and very reliable. These are some of the most advanced available and offer great protection.{% endblock %}
+
+{% block content %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="home-security-category" class="equipment-category">
+            <i class="home-security-icon"></i>
+            <h2>Home Security</h2>
+            <p>Peace of mind for your family.</p> 
+            <a href="{% url home-security-equipment %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+        </div>
+
+        <div id="life-safety-category" class="equipment-category">
+            <i class="home-security-icon"></i>
+            <h2>Life Safety</h2>
+            <p>Protecting more than the home.</p>
+            <a href="{% url life-safety-equipment %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+        </div>
+
+        <div id="home-automation-category" class="equipment-category">
+            <i class="home-security-icon"></i>
+            <h2>Home Automation</h2>
+            <p>Making your security smarter.</p>
+            <a href="{% url home-automation-equipment %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+        </div>
+
+        <div id="smart-connect-category" class="equipment-category">
+            <i class="home-security-icon"></i>
+            <h2>SMART Connect</h2>
+            <p>Check in from anywhere.</p>
+            <a href="{% url interactive-control %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+        </div>
+
+        <div id="automotive-category" class="equipment-category">
+            <i class="home-security-icon"></i>
+            <h2>Automotive</h2>
+            <p>Extend security beyond the home.</p>
+            <a href="{% url gps %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
+        </div>
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+<div class="wrapper">
+
+<div id="three-main-products">
+    <h2>Popular Security Equipment</h2>
+    <div id="ge-simon-xt-touchscreen">
+        <a href="{% url touchscreen %}" title="Learn About the GE Simon XT Touch Screen">
+            <img src="{{ STATIC_URL }}img/products/equipment/touchscreen/touchscreen-map.jpg" alt="GE Simon XT Touch Screen" width="312" height="304" />
+        </a>
+        <h3>GE Simon XT Touch Screen</h3>
+        <p>A touch screen acts as an optional point of access for your home security system. The GE Simon XT Touch Screen adds an unprecedented level of ease and control to the GE Simon XT home security platform. Created to quickly and easily update update homeowners of their security status. </p>
+        <a href="{% url touchscreen %}" class="button-link" title="Learn About the GE Simon XT Touch Screen">GE Simon XT Touch Screen <i class="icon-chevron-right"></i></a>
+    </div>
+    <div id="door-window-sensors">
+        <a href="{% url door-window-sensor %}" title="Learn About our Door / Window Security Sensors">
+            <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/door-window-sensor-small.jpg" alt="Door and Window Sensors" width="312" height="304" />
+        </a>
+        <h3>Door / Window Sensors</h3>
+        <p>Wireless door and window sensors are the most common piece of home security equipment. They are interchangeable and can be used as a door sensor or as window alarm sensors. If an intruder opens any door or window, the sensor detects the change and triggers the alarm.</p>
+            <a href="{% url door-window-sensor %}" class="button-link" title="Learn About our Door / Window Security Sensors">Door / Window Sensors <i class="icon-chevron-right"></i></a>
+    </div>
+    <div id="smoke-detectors">
+        <a href="" title="Learn About our Smoke Detectors">
+            <img src="{{ STATIC_URL }}img/products/equipment/smoke-detector/smoke-detector-small.jpg" alt="smoke-detector-med" width="312" height="304" />
+        </a>
+        <h3>Smoke Detectors</h3>
+        <p>Monitored smoke detectors can identify smoke or rapidly rising temperatures 24 hours a day whether you're home or not. Even if your security system is disarmed, our monitoring facility notifies your local fire department if there is a fire. Stay protected from fire disasters.</p>
+            <a href="{% url smoke-detector %}" class="button-link" title="Learn About our Smoke Detectors">Smoke Detectors <i class="icon-chevron-right"></i></a>
+    </div>
+</div>
+
+<div class="clear"></div>
+</div>
+{% addtoblock "js" %}
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#home-security-category").click(function() {
+                window.location.href = "{% url home-security-equipment %}";
+            });
+            $("#life-safety-category").click(function() {
+                window.location.href = "{% url life-safety-equipment %}";
+            });
+            $("#home-automation-category").click(function() {
+                window.location.href = "{% url home-automation-equipment %}";
+            });
+            $("#smart-connect-category").click(function() {
+                window.location.href = "{% url interactive-control %}";
+            });
+            $("#automotive-category").click(function() {
+                window.location.href = "{% url gps %}";
+            });
+
+        });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
+
