@@ -47,12 +47,11 @@
 {% endblock %}
 
 {% block typekit %}tk-jaf-facitweb{% endblock %}
-
 {% block navigation %}
     <div id="navigation">
         <ul>
             <li class="home-button {% if 'index' in active_pages %}active{% endif %}"><a href="/" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Home', 'Top Navigation', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/base/home-icon{% if 'index' in active_pages %}-white{% endif %}.png" alt="home alarm companies" /></a></li>
-            <li {% if 'products' in active_pages %}class="active"{% endif %}><a href="{% url products %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
+            <li {% if 'shop' in active_pages %}class="active"{% endif %}><a href="{% url shop %}" title="Home Security Systems and Products" onClick="_gaq.push(['_trackEvent', 'Shop', 'Top Navigation', '{{ page_name }}']);">Shop</a></li>
         </ul>
 
     </div>
@@ -64,4 +63,5 @@
     </strong></span>monthly monitoring starting at $19.99/mo</p>
 
 {% endblock %}
+{% block footer %}{% endblock %}
 {% block main-footer %}{% endblock %}

@@ -64,7 +64,7 @@
     <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
     <!--iOS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1024">
     <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
     <!-- <meta name="viewport" content="initial-scale=1.0"> (Use if apple-mobile-web-app-capable below is set to yes) -->
     <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
@@ -132,16 +132,15 @@
 
 </head>
 <body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
-{% comment %}
 
 <!-- BEGIN LivePerson Monitor. -->
 <script type="text/javascript">
 if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',protocol:location.protocol,events:{bind:function(app,ev,fn){lpTag.defer(function(){lpTag.events.bind(app,ev,fn)},0)},trigger:function(app,ev,json){lpTag.defer(function(){lpTag.events.trigger(app,ev,json)},1)}},defer:function(fn,fnType){if(fnType==0){this._defB=this._defB||[];this._defB.push(fn)}else if(fnType==1){this._defT=this._defT||[];this._defT.push(fn)}else{this._defL=this._defL||[];this._defL.push(fn)}},load:function(src,chr,id){var t=this;setTimeout(function(){t._load(src,chr,id)},0)},_load:function(src,chr,id){var url=src;if(!src){url=this.protocol+'//'+((this.ovr&&this.ovr.domain)?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site}var s=document.createElement('script');s.setAttribute('charset',chr?chr:'UTF-8');if(id){s.setAttribute('id',id)}s.setAttribute('src',url);document.getElementsByTagName('head').item(0).appendChild(s)},init:function(){this._timing=this._timing||{};this._timing.start=(new Date()).getTime();var that=this;if(window.attachEvent){window.attachEvent('onload',function(){that._domReady('domReady')})}else{window.addEventListener('DOMContentLoaded',function(){that._domReady('contReady')},false);window.addEventListener('load',function(){that._domReady('domReady')},false)}if(typeof(window._lptStop)=='undefined'){this.load()}},_domReady:function(n){if(!this.isDom){this.isDom=true;this.events.trigger('LPT','DOM_READY',{t:n})}this._timing[n]=(new Date()).getTime()}};lpTag.init()}
 </script>
 <!-- END LivePerson Monitor. -->
-{% endcomment %}
 <!-- Page Header -->
 {% block header %}
+
     <div id="top-section-wrapper">
         <div id="top-section">
             <ul id="newsfeed">
@@ -152,7 +151,6 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li><i class="icon-thumbs-up"></i> Like us on Facebook Today! <span>&ndash; About an Hour Ago</span></li>
                 <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
 {% endcomment %}
-  
             <div id="company-links">
                 <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
 
@@ -162,7 +160,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     <li class="ca"><a href="http://www.protectamericasecurity.ca">EN</a></li>
                     <i class="icon-caret-down"></i>
                 </ul>
-                <form action="{% url 'search' %}" method='get'>
+                <form action="http://www.protectamerica.com/search/" method='get'>
                     {% csrf_token %}
                      <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
                 </form>
@@ -182,31 +180,32 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
         <div id="header">
 
             <a href="{% url 'home' %}">
-                <img src="{{ STATIC_URL }}img/base/protect-america-grey.png" alt="Protect America Home Security" id="company-logo">
+                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
             </a>
 
-            <a href="{% url 'order-package' %}" class="request-quote-button">Request Quote</a>
+            <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
                     <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
                 </div>
             {% endif %}
+
             <ul id="main-navigation">
                 <li {% if 'shop' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url 'shop' %}">Shop</a>
+                    <a href="http://www.protectamerica.com/shop-home-security-packages/">Shop</a>
                     {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url 'equipment' %}">Equipment</a>
+                    <a href="http://www.protectamerica.com/security-equipment/">Equipment</a>
                     {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'learn' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url 'learn' %}">Learn</a>
+                    <a href="http://www.protectamerica.com/learn/">Learn</a>
                     {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'support' in active_pages %}class="active"{% endif %}>
-                    <a href="{% url 'support' %}">Support</a>
+                    <a href="http://www.protectamerica.com/support">Support</a>
                     {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
             </ul>
@@ -262,20 +261,20 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     <div id="footer-wrapper">
         <div id="footer">
             <ul id="footer-main-navigation">
-                <li class="{% if 'shop' in active_pages %}active{% endif %}"><a href="{% url 'shop' %}" title="Shop Home Security Packages">Shop</a></li>
-                <li class="{% if 'equipment' in active_pages %}active{% endif %}"><a href="{% url 'equipment' %}" title="View Equipment and Products">Equipment</a></li>
-                <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="{% url 'learn' %}" title="Learn about Home Security">Learn</a></li>
-                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="{% url 'support' %}" title="Get Help for your Home Security System">Support</a></li>
-                <li class="{% if 'order-package' in active_pages %}active{% endif %}"><a href="{% url 'order-package' %}" title="Order Home Security Today">Order</a></li>
-                <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="" title="View our Sitemap">Sitemap</a></li>
+                <li class="{% if 'shop' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/shop-home-security-packges/" title="Shop Home Security Packages">Shop</a></li>
+                <li class="{% if 'equipment' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/security-equipment/" title="View Equipment and Products">Equipment</a></li>
+                <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/learn/" title="Learn about Home Security">Learn</a></li>
+                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/" title="Get Help for your Home Security System">Support</a></li>
+                <li class="{% if 'order-package' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/products/order-package/" title="Order Home Security Today">Order</a></li>
+                <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/sitemap/" title="View our Sitemap">Sitemap</a></li>
             </ul>
             <ul id="footer-care-nav">
-                <li>Customer Service</li>
-                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="{% url 'privacy-policy' %}" title="View our Privacy Policy">Privacy Policy</a></li>
-                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="{% url 'state-licenses' %}" title="View our Licenses for Each State">State Licenses</a></li>
-                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="{% url 'do-not-call' %}" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
-                <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="{% url 'careers' %}" title="Start your Career at Protect America">Careers</a></li>
-                <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="{% url 'affiliate-program' %}" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
+                <li class="{% if 'customer-service' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/customer-service/" title="Customer Service">Customer Service</a></li>
+                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/privacy-policy/" title="View our Privacy Policy">Privacy Policy</a></li>
+                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/state-licenses/" title="View our Licenses for Each State">State Licenses</a></li>
+                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
+                <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
+                <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
             </ul> 
             <ul id="footer-contact-info">
                 <li><strong>Telephone</strong></li>
@@ -290,8 +289,10 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 
                 </li>
             </ul>
-            <div id="footer-awards">
-                &nbsp;
+            <div id="footer-awards" style="padding-left: 24px;">
+                <a href="http://besthomesecuritycompanys.com/company/protect-america" title="Best Home Security Companys' Protect America Review">
+                    <img src="{{ STATIC_URL }}img/base/besty-award.png" alt="Best Home Security Comapnys #1 Choice Overall" />
+                </a>
             </div>
             <div class="clear"></div>
         </div>
@@ -377,19 +378,19 @@ $(document).ready(function(){
 
 </script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/placeholder.js"></script>
-
-<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
-
-
-{% render_block "js" %}
-{% block extra_javascript %}
 <script>Modernizr.load({
             test: Modernizr.input.placeholder,
             nope: ['Placeholder.js'],
             complete: function(){Placeholders.init();}
         });
 </script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+
+
+{% render_block "js" %}
+{% block main_js %}
+
     <script type="text/javascript">
         $("#subnav > li.menu-item").mouseover(function(){
             if ($(this).hasClass('open') || $(this).hasClass('hover')) {
@@ -445,6 +446,9 @@ $(document).ready(function(){
 		});
 
     </script>
+
+{% endblock %}
+{% block extra_javascript %}
 
 {% if use_call_measurement %}
 <script type="text/javascript"> 

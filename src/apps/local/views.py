@@ -84,8 +84,6 @@ def local_page_wrapper(request, keyword, city, state):
     for x in US_STATES:
         if x[1]==state.title():
             statecode=x[0]           
-
-    print 'statecode is %s' % statecode
     if not statecode:
         raise Http404
     return local_page(request, statecode, city.replace('-', ' ').title(), keyword)

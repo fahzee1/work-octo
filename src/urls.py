@@ -405,13 +405,16 @@ elif settings.SITE_ID == 23:
 
     )
 
+
+
 # defaults
 else:
     urlpatterns += patterns('',
 
 
         # Test Pages
-
+        url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/?$', 'apps.common.views.index_test', name='index_test'),
+        
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
@@ -419,36 +422,36 @@ else:
         dtt(r'^404/?$', '404.html', '404', 'home'),
 
         # Shop
-        dtt(r'^shop/?$', 'packages/index.html', 'shop'),
+        dtt(r'^shop-home-security-packages/?$', 'packages/index.html', 'shop'),
 
             # Product > Packages
 
-            dtt(r'^shop/copper-package/?$', 'packages/copper.html', 'copper', 'shop'),
-            dtt(r'^shop/bronze-package/?$', 'packages/bronze.html', 'bronze', 'shop'),
-            dtt(r'^shop/silver-package/?$', 'packages/silver.html', 'silver', 'shop'),
-            dtt(r'^shop/gold-package/?$', 'packages/gold.html', 'gold', 'shop'),
-            dtt(r'^shop/platinum-package/?$', 'packages/platinum.html', 'platinum', 'shop'),
-            dtt(r'^shop/business-package/?$', 'packages/business.html', 'business', 'shop'),
-            dtt(r'^shop/existing-security-system/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'shop'),
+            dtt(r'^shop-home-security-packages/copper/?$', 'packages/copper.html', 'copper', 'shop'),
+            dtt(r'^shop-home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'shop'),
+            dtt(r'^shop-home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'shop'),
+            dtt(r'^shop-home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'shop'),
+            dtt(r'^shop-home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'shop'),
+            dtt(r'^shop-home-security-packages/business/?$', 'packages/business.html', 'business', 'shop'),
+            dtt(r'^shop-home-security-packages/existing/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'shop'),
 
 
         # Equipment
-            dtt(r'^equipment/?$', 'products/equipment/index.html', 'equipment'),
+            dtt(r'^security-equipment/?$', 'products/equipment/index.html', 'equipment'),
             
             # Equipment > Home Security
                 dtt(r'^equipment/home-security/?$', 'products/equipment/home-security.html', 'home-security-equipment', 'equipment'),
                 
                     dtt(r'^equipment/home-security/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/door-window-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/motion-detector/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/touchscreen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'home-security-equipment'),
-                    dtt(r'^pa/wireless-security-camera/ip-security-cameras/?$', 'products/equipment/video.html', 'video', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/talking-wireless-keypad/?$', 'products/equipment/talking-wireless-keypad.html', 'talking-wireless-keypad', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/garage-door-sensor/?$', 'products/equipment/garage-door-sensor.html', 'garage-door-sensor', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/glassbreak-sensor/?$', 'products/equipment/glassbreak-sensor.html', 'glassbreak-sensor', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/mini-pinpad/?$', 'products/equipment/mini-pinpad.html', 'mini-pinpad', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/two-button-panic/?$', 'products/equipment/two-button-panic.html', 'two-button-panic', 'home-security-equipment'),
-                    dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/wireless-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/motion-sensors/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/touch-screen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/security-camera/?$', 'products/equipment/video.html', 'video', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/wireless-keypad/?$', 'products/equipment/talking-wireless-keypad.html', 'talking-wireless-keypad', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/garage-security/?$', 'products/equipment/garage-door-sensor.html', 'garage-door-sensor', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/glass-breaking/?$', 'products/equipment/glassbreak-sensor.html', 'glassbreak-sensor', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/mini-pin-pad/?$', 'products/equipment/mini-pinpad.html', 'mini-pinpad', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/panic-button/?$', 'products/equipment/two-button-panic.html', 'two-button-panic', 'home-security-equipment'),
+                    dtt(r'^equipment/home-security/extra-security/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
                     # > dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
                     # Moratorium 
                         dtt(r'^equipment/home-security/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'home-security-equipment'),
@@ -458,26 +461,26 @@ else:
                 dtt(r'^equipment/life-safety/?$', 'products/equipment/life-safety.html', 'life-safety-equipment', 'equipment'),
 
                     dtt(r'^equipment/life-safety/smoke-detector/?$', 'products/equipment/smoke-detector.html', 'smoke-detector', 'life-safety-equipment'),
-                    dtt(r'^equipment/life-safety/carbon-monoxide-detector/?$', 'products/equipment/carbon-monoxide-detector.html', 'carbon-monoxide-detector', 'life-safety-equipment'),
-                    dtt(r'^equipment/life-safety/medical-pendant/?$', 'products/equipment/medical-pendant.html', 'medical-pendant', 'life-safety-equipment'),
+                    dtt(r'^equipment/life-safety/co-detector/?$', 'products/equipment/carbon-monoxide-detector.html', 'carbon-monoxide-detector', 'life-safety-equipment'),
+                    dtt(r'^equipment/life-safety/medical-alert/?$', 'products/equipment/medical-pendant.html', 'medical-pendant', 'life-safety-equipment'),
 
                     dtt(r'^equipment/life-safety/freeze-sensor/?$', 'products/equipment/freeze-sensor.html', 'freeze-sensor', 'life-safety-equipment'),
                     dtt(r'^equipment/life-safety/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'life-safety-equipment'),
             
             # Equipment > Home Automation
                 dtt(r'^equipment/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation-equipment', 'equipment'),
-                        dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
-                        dtt(r'^equipment/home-automation/z-wave-appliance-module/?$', 'products/equipment/appliance-module.html', 'appliance-module', 'home-automation-equipment'),
-                        dtt(r'^equipment/home-automation/z-wave-indoor-siren/?$', 'products/equipment/indoor-siren.html', 'indoor-siren', 'home-automation-equipment'),
+                    #dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
+                    dtt(r'^equipment/home-automation/z-wave-appliance-module/?$', 'products/equipment/appliance-module.html', 'appliance-module', 'home-automation-equipment'),
+                    dtt(r'^equipment/home-automation/z-wave-indoor-siren/?$', 'products/equipment/indoor-siren.html', 'indoor-siren', 'home-automation-equipment'),
 
             
             # SMART Connect
 
-                    dtt(r'^equipment/smart-connect-app/?$', 'products/interactive/index.html', 'interactive-control', 'equipment'),
+                    dtt(r'^equipment/smart-connect/?$', 'products/interactive/index.html', 'interactive-control', 'equipment'),
             
             # Equipment > Automotive
         
-                    dtt(r'^equipment/automotive/gps-tracking-services/?$', 'products/gps/index.html', 'gps', 'equipment'),
+                    dtt(r'^equipment/automotive/gps-car-tracker/?$', 'products/gps/index.html', 'gps', 'equipment'),
                     # > dtt(r'^pa/vehicle-gps-tracking/gps-services/?$', 'products/gps/index.html', 'gps', 'equipment'),
 
 
@@ -505,7 +508,7 @@ else:
                 dtt(r'^learn/protect-america/?$', 'about-us/index.html', 'about-us', 'learn'),
                 # > dtt(r'^learn-about-security/protect-america/?$', 'about-us/index.html', 'about-us', 'learn'),
 
-                    url(r'^learn/protect-america/family-of-companies/?$', 'apps.common.views.family_of_companies', name='family'),
+                    url(r'^learn/protect-america/company-family/?$', 'apps.common.views.family_of_companies', name='family'),
                     # > url(r'^pa/family-of-companies/america-protect/?$', 'apps.common.views.family_of_companies', name='family'),
                     dtt(r'^learn/protect-america/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
                     # > dtt(r'^pa/charities/america-protect/?$', 'about-us/charities.html', 'charities', 'about-us'),
@@ -531,10 +534,10 @@ else:
                 dtt(r'^learn/security-101/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'learn'),
                 # > dtt(r'^pa/learn/alarm-companies/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'about-us'),
 
-                    dtt(r'^learn/security-101/how-security-systems-works/?$', 'about-us/how-it-works.html', 'how-it-works', 'learn-about-security'),
+                    dtt(r'^learn/security-101/how-it-works/?$', 'about-us/how-it-works.html', 'how-it-works', 'learn-about-security'),
                     # > dtt(r'^pa/how_it_works/ge-security-systems/?$', 'about-us/how-it-works.html', 'how-it-works', 'about-us'),
 
-                    dtt(r'^learn/security-101/complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security', 'learn-about-security'),
+                    dtt(r'^learn/security-101/complete-security/?$', 'complete-home-security/index.html', 'complete-home-security', 'learn-about-security'),
                     # > dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
 
             # Learn > Reviews
@@ -564,9 +567,9 @@ else:
                     dtt(r'^support/customer-service/?$', 'support/customer-service.html', 'customer-service', 'support'),
                     dtt(r'^support/customer-service/installation/?$', 'support/installation.html', 'installation', 'customer-service'),
                     dtt(r'^support/customer-service/operation/?$', 'support/operation.html', 'operation', 'customer-service'),
-                    dtt(r'^support/customer-service/troubleshooting/?$', 'support/troubleshooting.html', 'troubleshooting', 'customer-service'),
+                    dtt(r'^support/customer-service/troubleshoot/?$', 'support/troubleshooting.html', 'troubleshooting', 'customer-service'),
                     dtt(r'^support/customer-service/faq/?$', 'support/faq.html', 'faq', 'customer-service'),                
-                    url(r'^support/customer-service/request-security-moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
+                    url(r'^support/customer-service/moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
                     # > url(r'^pa/request-moving-kit/security-moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
 
                     
@@ -577,10 +580,10 @@ else:
                 url(r'^support/contact-us/?$', 'apps.contact.views.main', name='contact-us'),
                 # > url(r'^pa/contact/?$', 'apps.contact.views.main', name='contact-us'),
                 
-                    dtt(r'^contact-us/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
+                    dtt(r'^support/contact-us/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
                     # > dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
                     
-                    url(r'^contact-us/feedback-to-the-ceo/?$', 'apps.contact.views.ceo', name='feedback-ceo'),
+                    url(r'^support/contact-us/feedback/?$', 'apps.contact.views.ceo', name='feedback-ceo'),
                     # > url(r'^pa/feedback/?$', 'apps.contact.views.ceo', name='feedback-ceo'),
                     
                     
@@ -592,16 +595,16 @@ else:
                 url(r'^support/careers/?$', 'apps.events.views.careers', name='careers'),
                 # > url(r'^contact/careers/?$', 'apps.events.views.careers', name='careers'),
 
-                    dtt(r'^support/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
+                    dtt(r'^support/careers/jobs/?$', 'contact-us/jobs.html', 'jobs', 'careers'),
                     # > dtt(r'^contact/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
 
 
                 
                 # Support > Dealer Program
-                dtt(r'^agent-2/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
+                dtt(r'^support/dealers/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
                 
                 # Support > Affiliate Program
-                url(r'^support/affiliate-program/?$', 'apps.affiliates.views.signup', name='affiliate-program'),
+                url(r'^support/affiliates/?$', 'apps.affiliates.views.signup', name='affiliate-program'),
                 # > url(r'^contact/affiliate-program/?$', 'apps.affiliates.views.signup', name='affiliate-program'),
 
  
@@ -697,7 +700,7 @@ else:
         # > forward to homepage
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
         url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
@@ -830,19 +833,19 @@ urlpatterns += patterns('',
     ('^pa/home_automation/?$',
         RedirectView.as_view(url='/products/security-equipment/accessories/home-automation/',permanent=True)),
     ('^pa/copper/home-security-systems/?$',
-        RedirectView.as_view(url='/shop/copper-package',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/copper',permanent=True)),
     ('^pa/home_automation/home-automation-devices/?$',
         RedirectView.as_view(url='/products/security-equipment/accessories/home-automation',permanent=True)), 
     ('^pa/advantage/adt-security/?$',
         RedirectView.as_view(url='/security-advantage',permanent=True)), 
     ('^pa/platinum/alarm-system/?$',
-        RedirectView.as_view(url='/shop/platinum-package',permanent=True)), 
+        RedirectView.as_view(url='/shop-home-security-packages/platinum',permanent=True)), 
     ('^pa/gold/alarm-systems/?$',
-        RedirectView.as_view(url='/shop/gold-package',permanent=True)), 
+        RedirectView.as_view(url='/shop-home-security-packages/gold',permanent=True)), 
     ('^pa/silver/alarm/?$',
-        RedirectView.as_view(url='/shop/silver-package',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/silver',permanent=True)),
     ('^pa/bronze/security-systems/?$',
-        RedirectView.as_view(url='/shop/bronze-package',permanent=True)), 
+        RedirectView.as_view(url='/shop-home-security-packages/bronze',permanent=True)), 
     ('^pa/existing-home-security-system/cellular-monitoring/?$',
         RedirectView.as_view(url='/products/existing-security-system',permanent=True)), 
     ('^pa/install/home-security-wireless/?$',
@@ -1009,19 +1012,19 @@ urlpatterns += patterns('',
     ('^homesecurity/?$',
         RedirectView.as_view(url='/?agent=gr banner',permanent=True)), 
     ('shop/home-security-systems/?$',
-        RedirectView.as_view(url='/shop/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/',permanent=True)),
     ('ge-simon-security-systems/wireless-home-alarm/copper-package/?$',
-        RedirectView.as_view(url='/shop/copper-package/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
     ('ge-simon-security-systems/wireless-home-alarm/bronze-package/?$',
-        RedirectView.as_view(url='/shop/bronze-package/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/bronze/',permanent=True)),
     ('ge-simon-security-systems/wireless-home-alarm/gold-package/?$',
-        RedirectView.as_view(url='/shop/gold-package/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/gold/',permanent=True)),
     ('ge-simon-security-systems/wireless-home-alarm/platinum-package/?$',
-        RedirectView.as_view(url='/shop/platinum-package/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/platinum/',permanent=True)),
     ('ge-simon-security-systems/wireless-home-alarm/business-package/?$',
-        RedirectView.as_view(url='/shop/business-package/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/business/',permanent=True)),
     ('products/existing-security-system/?$',
-        RedirectView.as_view(url='/shop/existing-security-system/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/existing/',permanent=True)),
     ('products/security-equipment/control-panels/ge-simon-xt/?$',
         RedirectView.as_view(url='/equipment/home-security/ge-simon-xt/',permanent=True)),
     ('products/security-equipment/control-panels/ge-simon-3/?$',
@@ -1031,7 +1034,7 @@ urlpatterns += patterns('',
     ('products/security-equipment/sensors/door-window-sensor/?$',
         RedirectView.as_view(url='/equipment/home-security/door-window-sensor/',permanent=True)),
     ('products/security-equipment/accessories/?$',
-        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)),
+        RedirectView.as_view(url='/equipment/home-security/extra-security/',permanent=True)),
     ('products/security-equipment/accessories/touchscreen/?$',
         RedirectView.as_view(url='equipment/home-security/touchscreen/',permanent=True)),
     ('products/security-equipment/accessories/secret-keypad/?$',
@@ -1039,17 +1042,61 @@ urlpatterns += patterns('',
     ('products/security-equipment/accessories/home-automation/?$',
         RedirectView.as_view(url='/equipment/home-automation/',permanent=True)),
     ('products/interactive-control/?$',
-        RedirectView.as_view(url='/equipment/smart-connect-app/',permanent=True)),
+        RedirectView.as_view(url='/equipment/smart-connect',permanent=True)),
     ('pa/monitoring/security-system/?$',
-        RedirectView.as_view(url='/learn-about-security/monitoring/security-system/',permanent=True)),
+        RedirectView.as_view(url='/learn/alarm-monitoring',permanent=True)),
     ('pa/about/home-security-companies/?$',
-        RedirectView.as_view(url='learn-about-security/protect-america/',permanent=True)),
+        RedirectView.as_view(url='/learn/protect-america/',permanent=True)),
     ('contact/find-us/?$',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
     ('(?P<keyword>%s)/(?P<city>[a-zA-Z_]\w*)/(?P<state>[a-zA-Z_]\w*)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
         RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)), 
+    ('pa/testimonials/?$',
+        RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),
+    ('contact/careers/?$',
+        RedirectView.as_view(url='/support/careers/',permanent=True)),
+    ('pa/equipment/wireless-home-security-system/?$',
+        RedirectView.as_view(url='/security-equipment/',permanent=True)),
+    ('pa/charities/america-protect/?$',
+        RedirectView.as_view(url='/learn/protect-america/charities/',permanent=True)),
+    ('pa/contact/?$',
+        RedirectView.as_view(url='/support/contact-us/',permanent=True)),
+    ('agent-2/?$',
+        RedirectView.as_view(url='/support/dealers/',permanent=True)),
+    ('pa/feedback/?$',
+        RedirectView.as_view(url='/support/contact-us/feedback/',permanent=True)),
+    ('pa/how_it_works/ge-security-systems/?$',
+        RedirectView.as_view(url='/learn/security-101/how-it-works/',permanent=True)),
+    ('affiliate/resources/?$',
+        RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
+    ('video-testimonials/?$',
+        RedirectView.as_view(url='/learn/protect-america/video-testimonials/',permanent=True)),
+    ('contact/affiliate-program/?$',
+        RedirectView.as_view(url='/support/affiliates/',permanent=True)),
+    ('contact/department-listing/?$',
+        RedirectView.as_view(url='/support/contact-us/department-listing/',permanent=True)),
+    ('security-advantage/?$',
+        RedirectView.as_view(url='/learn/security-advantage/',permanent=True)),
+    ('pa/request-moving-kit/security-moving-kit/?$',
+        RedirectView.as_view(url='/support/customer-service/moving-kit/',permanent=True)),
+    ('pa/learn/alarm-companies/?$',
+        RedirectView.as_view(url='/learn/security-101/',permanent=True)),
+    ('support/installation/?$',
+            RedirectView.as_view(url='/support/customer-service/installation/',permanent=True)),
+    ('products/alarm-monitoring/cellular/?$',
+            RedirectView.as_view(url='/learn/alarm-monitoring/cellular/',permanent=True)),
+    ('ge-simon-security-systems/wireless-home-alarm/silver-package/?$',
+            RedirectView.as_view(url='/shop-home-security-packages/silver/',permanent=True)),
+    ('products/alarm-monitoring/broadband/?$',
+            RedirectView.as_view(url='/learn/alarm-monitoring/broadband/',permanent=True)),
+    ('products/interactive-video/home-video-camera/?$',
+            RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
+    ('pa/wireless-security-camera/ip-security-cameras/?$',
+            RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
+    ('contact/careers/job-opening/?$',
+        RedirectView.as_view(url='/support/careers/jobs/',permanent=True))
 
 )
 
