@@ -406,7 +406,6 @@ elif settings.SITE_ID == 23:
     )
 
 
-
 # defaults
 else:
     urlpatterns += patterns('',
@@ -1069,8 +1068,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/contact-us/feedback/',permanent=True)),
     ('pa/how_it_works/ge-security-systems/?$',
         RedirectView.as_view(url='/learn/security-101/how-it-works/',permanent=True)),
-    ('affiliate/resources/?$',
-        RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
+
     ('video-testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/video-testimonials/',permanent=True)),
     ('contact/affiliate-program/?$',
@@ -1095,6 +1093,8 @@ urlpatterns += patterns('',
             RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
     ('pa/wireless-security-camera/ip-security-cameras/?$',
             RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
+    ('affiliate/resources/?$',
+            RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
     ('contact/careers/job-opening/?$',
         RedirectView.as_view(url='/support/careers/jobs/',permanent=True))
 
