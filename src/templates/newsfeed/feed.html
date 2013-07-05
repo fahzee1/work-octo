@@ -1,17 +1,30 @@
-	{% if not request.session.backup %}	
-    				
-         {% for feed in GeoFeed %}
+
+    	{% for feed in GeoFeed %}
              <li>
-             	{% if feed.icon %}
-             	<i class="{{ feed.icon }}"></i>
+                {% if feed.icon %}
+                <i class="{{ feed.icon }}"></i>
+                {% endif %}
+             	{% if feed.feed_name.icon %}
+             	<i class="{{ feed.feed_name.icon }}"></i>
              	{% endif %}
-             	{% if not feed.icon and not feed.text %}
+                {% if not feed.feed_name.icon %}
+                {% if not feed.icon and not feed.text %}
+                <i class="icon-arrow-right"></i>
+                {% endif %}
+                {% endif %}
+                {% if not feed.icon %}
+             	{% if not feed.feed_name.icon and not feed.text %}
+                <i class="icon-arrow-right"></i>
              	{% endif %}
+                {% endif %}
              	{% if feed.text %}
              	<i class="icon-twitter"></i>
              	{% endif %}
-             	{% if feed.message %}
-             	  {{ feed.message }} 
+                {% if feed.message %}
+                    {{ feed.message }}
+                {% endif %}
+             	{% if feed.feed_name.message %}
+             		{{ feed.feed_name.message }} 
              	{% endif %}
              	{% if feed.text %}
              		{{ feed.text|slice:":50" }}... 
@@ -19,29 +32,6 @@
                 {% if feed.link %}
                 <a href="{{ feed.link }}">{{ feed.link_name }}</a>
                 {% endif %}
-                {% if feed.GetRelativeCreatedAt %}
-                <span class="tweet-date">{{ feed.GetRelativeCreatedAt }}</span>
-                {% endif %}
-             </li>
-          {% endfor %}
-
-    {% else %}
-    	{% for feed in GeoFeed %}
-             <li>
-             	{% if feed.feed_name.icon %}
-             	<i class="{{ feed.feed_name.icon }}"></i>
-             	{% endif %}
-             	{% if not feed.feed_name.icon and not feed.text %}
-             	{% endif %}
-             	{% if feed.text %}
-             	<i class="icon-twitter"></i>
-             	{% endif %}
-             	{% if feed.feed_name.message %}
-             		{{ feed.feed_name.message }} 
-             	{% endif %}
-             	{% if feed.text %}
-             		{{ feed.text|slice:":50" }}... 
-             	{% endif %}
                 {% if feed.feed_name.link %}
                 <a href="{{ feed.feed_name.link }}">{{ feed.feed_name.link_name }}</a>
                 {% endif %}
@@ -51,5 +41,3 @@
              </li>
           	{% endfor %}
 
-     {% endif %}
-  
