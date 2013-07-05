@@ -105,7 +105,7 @@ def query_by_state_city(state, city, get_content=True):
         print "this is state %s" % state
     except State.DoesNotExist:
         print 'none'
-        raise Http404
+        pass
     try:
         city = city.replace('+', ' ').replace('-', ' ')
         print "this is city %s" % city
@@ -116,7 +116,7 @@ def query_by_state_city(state, city, get_content=True):
         city_id = city.id
     except CityLocation.DoesNotExist:
         print 'none'
-        raise Http404
+        pass
 
     city_crime_objs = CrimesByCity.objects.filter(
         fbi_city_name=city.city_name, fbi_state=state.abbreviation)

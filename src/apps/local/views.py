@@ -4,6 +4,7 @@ from pytz import timezone
 import settings
 import os
 import logging
+import pdb
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response, render 
@@ -80,13 +81,11 @@ TIMEZONES = {
 
 @cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state):
-    def get_state_code(statestr):
-        for state in US_STATES:
-            if statestr.lower().replace('-', ' ') == state[1].lower():
-                return state[0]
-            else:
-                return False
-    statecode = get_state_code(state)
+    for x in US_STATES:
+        if x[1]==state.capitalize():
+            statecode=x[0]           
+
+    print 'statecode is %s' % statecode
     if not statecode:
         raise Http404
     return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
