@@ -40,7 +40,7 @@ def dtt_nocache(pattern, template, name, parent=None, ctx=None):
         
 
 sitemaps={
-    'home':StaticSitemap(['home','thank_you','sem-landing'],0.5),
+    'home':StaticSitemap(['home','thank_you'],0.5),
     'contact':StaticSitemap(['contact-us','find-us','order-package','privacy-policy'],0.5),
     'shop':StaticSitemap(['shop','copper','bronze','silver','gold','platinum','business','cell-takeover'],0.5),
     'equipment':StaticSitemap(['equipment','home-security-equipment','simon-xt','door-window-sensor','motion-detector',
@@ -61,7 +61,7 @@ sitemaps={
                                 'aff-products','aff-login'],0.5),
     'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems','seo-ge-home-security','seo-ge-home-security-systems','seo-ge-home-security-systems','seo-home-alarm-systems',
                          'seo-security-systems','seo-home-security-systems','seo-best-home-security-system','seo-home-security-companies'],0.5),
-    'paidlanding':StaticSitemap(['paid-business-landing-page','paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
+    'paidlanding':StaticSitemap(['paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
                                  'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
     'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
     'article':ArticleSitemap,
@@ -406,7 +406,6 @@ elif settings.SITE_ID == 23:
     )
 
 
-
 # defaults
 else:
     urlpatterns += patterns('',
@@ -453,6 +452,7 @@ else:
                     dtt(r'^equipment/home-security/panic-button/?$', 'products/equipment/two-button-panic.html', 'two-button-panic', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/extra-security/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
                     # > dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
+                    
                     # Moratorium 
                         dtt(r'^equipment/home-security/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'home-security-equipment'),
                         dtt(r'^equipment/home-security/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'home-security-equipment'),
@@ -659,7 +659,6 @@ else:
 
 
         # Affiliate Resources 
-        dtt(r'^affiliates/resources/?$', 'affiliates/resources.html', 'aff'),
         url(r'^affiliates/resources/get-started/?$', 'apps.affiliates.views.get_started_page', name='aff-get-started'),
         url(r'^affiliates/resources/logos/?$','apps.affiliates.views.logos_page' ,name='aff-logos'),
         url(r'^affiliates/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='aff-web-banners'),
@@ -700,7 +699,7 @@ else:
         # > forward to homepage
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
         url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
@@ -1032,7 +1031,7 @@ urlpatterns += patterns('',
     ('products/security-equipment/sensors/flood-sensor/?$',
         RedirectView.as_view(url='/equipment/life-safety/flood-sensor/',permanent=True)),
     ('products/security-equipment/sensors/door-window-sensor/?$',
-        RedirectView.as_view(url='/equipment/home-security/door-window-sensor/',permanent=True)),
+        RedirectView.as_view(url='/equipment/home-security/wireless-sensor/',permanent=True)),
     ('products/security-equipment/accessories/?$',
         RedirectView.as_view(url='/equipment/home-security/extra-security/',permanent=True)),
     ('products/security-equipment/accessories/touchscreen/?$',
@@ -1051,6 +1050,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
+    ('(?P<keyword>%s)/(?P<city>[a-zA-Z_]\w*)/(?P<state>[a-zA-Z_]\w*)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)), 
     ('pa/testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),
     ('contact/careers/?$',
@@ -1067,8 +1068,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/contact-us/feedback/',permanent=True)),
     ('pa/how_it_works/ge-security-systems/?$',
         RedirectView.as_view(url='/learn/security-101/how-it-works/',permanent=True)),
-    ('affiliate/resources/?$',
-        RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
+
     ('video-testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/video-testimonials/',permanent=True)),
     ('contact/affiliate-program/?$',
@@ -1093,8 +1093,17 @@ urlpatterns += patterns('',
             RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
     ('pa/wireless-security-camera/ip-security-cameras/?$',
             RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
+    ('pa/vehicle-gps-tracking/gps-services/?$',
+            RedirectView.as_view(url='/equipment/automotive/gps-car-tracker/',permanent=True)),
+    ('ge-simon-security-systems/wireless-business-security/business-package/?$',
+            RedirectView.as_view(url='/shop-home-security-packages/business/',permanent=True)),
+    ('pa/share-your-testimonial/?$',
+            RedirectView.as_view(url='/support/contact-us/write-a-review/',permanent=True)),
+    ('products/interactive-video/business-video-camera/?$',
+            RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
     ('contact/careers/job-opening/?$',
         RedirectView.as_view(url='/support/careers/jobs/',permanent=True))
+
 )
 
 urlpatterns += patterns('',

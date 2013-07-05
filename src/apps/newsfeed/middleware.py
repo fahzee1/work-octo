@@ -64,10 +64,8 @@ class GetGeoIp():
 		try:
 			f=TheFeed.objects.filter(active=True,city=city,state=state_abbr).order_by('created').reverse()
 			if f.count() == 0:
-				request.session['backup']=True
 				f=FallBacks.objects.select_related().all()
 		except TheFeed.DoesNotExist:
-			request.session['backup']=True
 			f=FallBacks.objects.select_related().filter()
 
 		try:
@@ -78,10 +76,12 @@ class GetGeoIp():
 		except TheFeed.DoesNotExist:
 			pass
 
+
 		if no_visible:
 			feed=list(chain(f,a))
 		else:
-			feed=f         
+			feed=f 
+
 		request.session['GeoFeedObjects']=feed	
 		
 
