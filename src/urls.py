@@ -1048,8 +1048,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
-    ('(?P<keyword>%s)/(?P<city>[a-zA-Z\\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\]+)/(?P<zipcode>\d+)/?$',
-        RedirectView.as_view(url='/(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/',permanent=True)),
+    ('(?P<keyword>%s)/(?P<city>[a-zA-Z_]\w*)/(?P<state>[a-zA-Z_]\w*)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)), 
 
 )
 
