@@ -128,7 +128,6 @@ urlpatterns = patterns('',
     url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
         'apps.testimonials.views.testimonial',
         name='single-testimonial'),
-
 )
 
 # Radioshack URLS
@@ -659,7 +658,6 @@ else:
 
 
         # Affiliate Resources 
-        dtt(r'^affiliates/resources/?$', 'affiliates/resources.html', 'aff'),
         url(r'^affiliates/resources/get-started/?$', 'apps.affiliates.views.get_started_page', name='aff-get-started'),
         url(r'^affiliates/resources/logos/?$','apps.affiliates.views.logos_page' ,name='aff-logos'),
         url(r'^affiliates/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='aff-web-banners'),
@@ -1069,7 +1067,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/contact-us/feedback/',permanent=True)),
     ('pa/how_it_works/ge-security-systems/?$',
         RedirectView.as_view(url='/learn/security-101/how-it-works/',permanent=True)),
-    ('affiliate/resources/?$',
+    ('pa/contact/$',
         RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
     ('video-testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/video-testimonials/',permanent=True)),
@@ -1096,8 +1094,9 @@ urlpatterns += patterns('',
     ('pa/wireless-security-camera/ip-security-cameras/?$',
             RedirectView.as_view(url='/equipment/home-security/security-camera/',permanent=True)),
     ('contact/careers/job-opening/?$',
-        RedirectView.as_view(url='/support/careers/jobs/',permanent=True))
-
+        RedirectView.as_view(url='/support/careers/jobs/',permanent=True)),
+    ('affiliate//?$',
+        RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
 )
 
 urlpatterns += patterns('',
