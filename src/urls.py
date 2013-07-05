@@ -40,7 +40,7 @@ def dtt_nocache(pattern, template, name, parent=None, ctx=None):
         
 
 sitemaps={
-    'home':StaticSitemap(['home','thank_you','sem-landing'],0.5),
+    'home':StaticSitemap(['home','thank_you'],0.5),
     'contact':StaticSitemap(['contact-us','find-us','order-package','privacy-policy'],0.5),
     'shop':StaticSitemap(['shop','copper','bronze','silver','gold','platinum','business','cell-takeover'],0.5),
     'equipment':StaticSitemap(['equipment','home-security-equipment','simon-xt','door-window-sensor','motion-detector',
@@ -61,7 +61,7 @@ sitemaps={
                                 'aff-products','aff-login'],0.5),
     'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems','seo-ge-home-security','seo-ge-home-security-systems','seo-ge-home-security-systems','seo-home-alarm-systems',
                          'seo-security-systems','seo-home-security-systems','seo-best-home-security-system','seo-home-security-companies'],0.5),
-    'paidlanding':StaticSitemap(['paid-business-landing-page','paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
+    'paidlanding':StaticSitemap(['paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
                                  'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
     'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
     'article':ArticleSitemap,
@@ -699,7 +699,7 @@ else:
         # > forward to homepage
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
         url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
@@ -1050,6 +1050,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
+    ('(?P<keyword>%s)/(?P<city>[a-zA-Z_]\w*)/(?P<state>[a-zA-Z_]\w*)/(?P<zipcode>\d+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)), 
     ('pa/testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),
     ('contact/careers/?$',
@@ -1095,6 +1097,7 @@ urlpatterns += patterns('',
             RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
     ('contact/careers/job-opening/?$',
         RedirectView.as_view(url='/support/careers/jobs/',permanent=True))
+
 )
 
 urlpatterns += patterns('',
