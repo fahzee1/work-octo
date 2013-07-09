@@ -65,6 +65,5 @@ class AffiliateSignup(forms.ModelForm):
         
         
 class AffiliateLoginForm(forms.Form):
-  email=forms.EmailField(required=True,label='Enter Email',validators=[validate_email])
   agent_id=forms.CharField(required=True,max_length=16,label='Enter Agent ID')
 
