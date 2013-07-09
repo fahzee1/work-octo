@@ -1,5 +1,5 @@
 import urllib
-
+from django.contrib import messages
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -148,6 +148,7 @@ def query_by_state_city(state, city, get_content=True):
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
 
+    print crime_stats
     context={'crime_stats': crime_stats,
            'years': years[:3],
            'latest_year': crime_stats[years[0]],
@@ -499,8 +500,12 @@ def search(request):
 
 
     if city_and_state:
-        city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
-        return redirect('local',city.state,city.slug_name)
+        try:
+            city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
+        except CityLocation.DoesNotExist:
+            messages.info(request,'Sorry no city/state/zipcode matching your query')
+            return redirect('crime-rate:choose-state')
+        return redirect('crime-rate:crime-stats',city.state,city.slug_name)
 
     forms = {}
     forms['basic'] = PAContactForm()

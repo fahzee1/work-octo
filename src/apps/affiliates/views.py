@@ -20,10 +20,10 @@ import mimetypes
 from django.contrib import messages
 
 
-def check_if_affiliate(email,agent_id):
+def check_if_affiliate(agent_id):
     affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
     for aff in affiliates:
-        if aff.email == email and aff.affiliate.agent_id == agent_id:
+        if aff.affiliate.agent_id == agent_id:
             ctx={'name':aff.affiliate.name,
                  'agent_id':aff.affiliate.agent_id}
             return ctx
@@ -376,9 +376,8 @@ def aff_login(request):
     if request.method == 'POST':
         form=AffiliateLoginForm(request.POST)
         if form.is_valid():
-            check_email=form.cleaned_data['email']
             check_agentid=form.cleaned_data['agent_id']
-            is_aff=check_if_affiliate(check_email,check_agentid)
+            is_aff=check_if_affiliate(check_agentid)
             if is_aff:
                 request.session['aff-logged-in']=True
                 request.session['aff_name']=is_aff['name']

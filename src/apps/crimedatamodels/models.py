@@ -148,6 +148,10 @@ class CityCrimeStats(models.Model):
     violent_crime_grade = models.CharField(null=True,
         max_length=1)
 
+
+    def __unicode__(self):
+        return "%s" % self.city
+        
     @property
     def average_grade(self):
 
