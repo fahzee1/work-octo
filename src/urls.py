@@ -1114,6 +1114,10 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/learn/',permanent=True)),
     ('products/security-equipment/accessories/?$',
         RedirectView.as_view(url='/equipment/home-security/extra-security/',permanent=True)),
+    ('pa/profile/home-alarm-systems?$',
+        RedirectView.as_view(url='/',permanent=True)),
+    ('support/faq/?$',
+        RedirectView.as_view(url='/support/customer-service/faq/',permanent=True))
 
 )
 
