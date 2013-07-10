@@ -110,7 +110,7 @@ def query_by_state_city(state, city, get_content=True):
         city = city.replace('+', ' ').replace('-', ' ')
         print "this is city %s" % city
 
-        city = CityLocation.objects.get(city_name__iexact=city,
+        city = CityLocation.objects.get(city_name__icontains=city,
             state=state.abbreviation)
         print "this is edited city %s" % city
         city_id = city.id
@@ -503,7 +503,7 @@ def search(request):
         try:
             city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
         except CityLocation.DoesNotExist:
-            messages.info(request,'Sorry no city/state/zipcode matching your query')
+            messages.info(request,'Sorry no city/state/zipcode matching your querys')
             return redirect('crime-rate:choose-state')
         return redirect('crime-rate:crime-stats',city.state,city.slug_name)
 

@@ -21,11 +21,11 @@ from django.contrib import messages
 
 
 def check_if_affiliate(agent_id):
-    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
+    affiliates=Affiliate.objects.all()
     for aff in affiliates:
-        if aff.affiliate.agent_id == agent_id:
-            ctx={'name':aff.affiliate.name,
-                 'agent_id':aff.affiliate.agent_id}
+        if aff.agent_id == agent_id:
+            ctx={'name':aff.name,
+                 'agent_id':aff.agent_id}
             return ctx
         return False
          
@@ -371,7 +371,6 @@ def get_affiliate_information(request, affiliate_id):
     
     
 def aff_login(request):
-    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
     form=AffiliateLoginForm()
     if request.method == 'POST':
         form=AffiliateLoginForm(request.POST)

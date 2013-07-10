@@ -81,9 +81,11 @@ TIMEZONES = {
 
 @cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state):
-    state=state.replace('-',' ').title()
+    if '-' in state:
+        state=state.replace('-',' ').title()
+
     for x in US_STATES:
-        if x[1]==state:
+        if x[1]==state.title():
             statecode=x[0]           
     if not statecode:
         raise Http404
