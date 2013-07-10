@@ -83,11 +83,7 @@ def articles(request, **kwargs):
         'year', order="DESC")
 
     articles = Article.objects.order_by('-date_created')
-    
-    if 'year' in kwargs:
-        year = kwargs['year']
-    else:
-        year = '2012'
+    year = kwargs['year']
     articles = articles.filter(date_created__year=year)
 
     article_months = articles.dates('date_created',
