@@ -5,7 +5,7 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 from datetime import date, timedelta
-from django.test import TestCase,TransactionTestCase#LiveServerTestCase
+from django.test import TestCase,TransactionTestCase
 from models import TheFeed,AddType,FallBacks
 from middleware import GetGeoIp
 from django.core.exceptions import ValidationError
