@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.views.generic.base import RedirectView
-
+from datetime import datetime
 from apps.news.sitemaps import ArticleSitemap
 from apps.news.feeds import RssNewsFeed
 
@@ -11,7 +11,7 @@ urlpatterns = patterns('apps.news.views',
 
     url(r'^$', 'news_home', name='news-home'),
 
-    url(r'^archive/$', 'articles', name='news-articles'),
+    url(r'^archive/$', 'articles',{'year':datetime.now().year},name='news-articles'),
     url(r'^archive/(?P<year>[0-9]{4})/$',
         'articles_by_year', name='news-articles-by-year'),
 
