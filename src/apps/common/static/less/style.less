@@ -224,6 +224,13 @@ table#licenses-table {
                     color: @white;
                     text-transform: uppercase;
                 }
+                a {
+                    color: @white;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
             }
         }
         #company-links {
@@ -722,6 +729,31 @@ table#licenses-table {
     }
 
 }
+body.alternate {
+    .request-quote-button {
+        display: none;
+    }
+    #hero-banner.alt-form {
+        #quote-form {
+            display: block;
+            width: 275px;
+            top: 0;
+            .drop-shadow(0,0,0,0);
+            border: 1px solid @black;
+            label {
+                display: none;
+            }
+            input {
+                margin: 16px auto;
+                width: 240px;
+                display: block;
+            }
+            button {
+                width: 250px;
+            }
+        }
+    }
+}
 #quote-form-error {
     display: none;
     position: absolute;
@@ -794,14 +826,14 @@ table#licenses-table {
         width: 960px;
         margin: 0 auto;
         color: @white;
-        font-weight: 100;
-        font-size: 40px;
+        font-weight: bold;
+        font-size: 38px;
         line-height: 42px;
         text-align: center;
         padding: 12px 0px;
         text-shadow: 1px 2px 0px @black;
         strong {
-            font-weight: 100;
+            font-weight: bold;
         }
         a {
             color: @white;
