@@ -68,6 +68,7 @@ class CityLocation(models.Model):
     class Meta:
         db_table = 'citylocations'
         unique_together = (('city_name', 'state'),)
+        ordering=['state']
 
     def get_absolute_url(self):
         return reverse('crime-rate:crime-stats', args=[self.state,

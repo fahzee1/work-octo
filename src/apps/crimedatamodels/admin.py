@@ -25,6 +25,8 @@ admin.site.register(LocalAddress,LocalAddressAdmin)
 
 class CityLocationAdmin(admin.ModelAdmin):
 	model=CityLocation
+	list_filter=('state',)
+
 admin.site.register(CityLocation,CityLocationAdmin)
 
 
