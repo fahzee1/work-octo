@@ -131,7 +131,7 @@
 {% block bing-conversion-code %}{% endblock %}
 
 </head>
-<body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
+<body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %} {% block extra_class %}{% endblock %} ">
 
 <!-- BEGIN LivePerson Monitor. -->
 <script type="text/javascript">
@@ -152,7 +152,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
 {% endcomment %}
             <div id="company-links">
-                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" class="easy-chat-click" id="online-chat-button" target="blank">Online Chat</a>
 
                 <ul id="international-selection">
                     <li class="us active"><a href="">EN</a></li>
@@ -442,7 +442,10 @@ $(document).ready(function(){
            timeout: 6000,
            delay:  -3000
         });
-
+        $('.easy-chat-click').click(function() {
+            window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1', 'chatter', "height=465,width=400");
+            return false;
+        });
         $('#header-wrapper').waypoint('sticky', {
 		  offset: -85 // Apply "stuck" when element 30px from top
 		});
@@ -497,6 +500,8 @@ var google_conversion_value = 0;
 </noscript>
 
 <!-- End Remarketing Code -->
+<IMG SRC="http://mpp.specificclick.net/?nwk=4&y=2&t=i&tp=1&clid=4056&pixid=99072978" width=1 height=1 border=0>
+
 {% endblock %}
 
 <!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
