@@ -110,7 +110,7 @@ def query_by_state_city(state, city, get_content=True):
         city = city.replace('+', ' ').replace('-', ' ')
         print "this is city %s" % city
 
-        city = CityLocation.objects.get(city_name__icontains=city,
+        city = CityLocation.objects.get(city_name__iexact=city,
             state=state.abbreviation)
         print "this is edited city %s" % city
         city_id = city.id
