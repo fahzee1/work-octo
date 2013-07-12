@@ -369,7 +369,7 @@ def aff_login(request):
                 if aff:
                     request.session['aff-logged-in']=True
                     request.session['aff_name']=aff.name
-                    request.session['aff_id']=aff.id
+                    request.session['aff_id']=aff.agent_id
                     return redirect('aff-get-started')
                 
             except Affiliate.DoesNotExist:
