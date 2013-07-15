@@ -1,5 +1,5 @@
 {% load sekizai_tags %}
-<form id="quote-form" class="{% if not business_time %}sleepy{% endif %}" method="post" action="">
+<form id="quote-form" method="post" action="">
     {% csrf_token %}
     
 	<div>
@@ -46,7 +46,7 @@ $(document).ready(function() {
     $('#quote-form button').click(function() {
         $(this).attr('disabled', true);
         $('#quote-form div').removeClass('.error-state');
-        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
+        var data = {'name': $('#id_name_two').val(), 'email': $('#id_email_two').val(), 'phone': $('#id_phone_two').val(), 'form': 'basic'}
         $.ajax({
             type: "POST",
             url: "/contact/ajaxpost/",

@@ -120,7 +120,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block hero_banner_area %}
     {% include "banners/seo-hero-images.html" %}
 {% endblock %}
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 
 <div class="wrapper">
     {% comment %}
@@ -230,6 +230,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {% endif %}
         {% if 'hic_test' in request.GET %}
         setCookie('hic_test', 'true');
+        {% endif %}
+        {% if not business_time %}
+            $("#quote-form.sleepy").slideDown();
+            $(".request-quote-button").addClass('active');
         {% endif %}
     });
     </script>
