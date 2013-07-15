@@ -1,4 +1,6 @@
 import urllib
+import pdb
+import requests
 from django.contrib import messages
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
@@ -212,22 +214,25 @@ def choose_city(request, state):
 
 
 def choose_state(request):
-    if not settings.DEBUG:
-        from django.contrib.gis.utils import GeoIP
-        # try to auto find the city/state from IP address
-        geo_ip = GeoIP()
-        city_info = geo_ip.city(request.META['REMOTE_ADDR'])
-        if city_info is not None and 'city' in city_info and 'region' in city_info and 'dont_auto_crime_stats' not in request.session:
-            request.session['dont_auto_crime_stats'] = True
-            return HttpResponseRedirect(reverse('crime-rate:crime-stats', kwargs={'city': city_info['city'], 'state': city_info['region']}))
     states = State.objects.order_by('name')
-
     forms = {}
     forms['basic'] = PAContactForm()
-
+    if not settings.DEBUG:
+        ip=request.META['REMOTE_ADDR']
+        r=requests.get('http://freegeoip.net/json/'+ip)
+        resp=r.json()
+        city=resp['city']
+        state_abbr=resp['region_code']
+        state_long=resp['region_name']
+        if city and state_abbr and 'dont_auto_crime_stats' not in request.session:
+            request.session['dont_auto_crime_stats']=True
+            try:
+                return HttpResponseRedirect(reverse('crime-rate:crime-stats',kwargs={'city':city,'state':state_abbr}))
+            except:
+                return render(request,'crime-stats/choose-state.html',{'states':states,'forms':forms})
     return render(request,'crime-stats/choose-state.html',
                               {'states': states,
-                               'forms': forms,})
+                               'forms': forms})
 
 def find_city(request):
     ctx = {}
@@ -398,7 +403,7 @@ def crime(request, state, city, crime):
 
 def search(request):
     """Render a search results page based on the query string in the GET params"""
-
+    pdb.set_trace()
     # Extract Query Parameters
     q_str = request.GET.get('q', '')
     q_params = q_str.split(' ')
@@ -502,8 +507,8 @@ def search(request):
             city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
         except CityLocation.DoesNotExist:
             messages.info(request,'Sorry no city/state/zipcode matching your querys')
-            return redirect('crime-rate:choose-state')
-        return redirect('crime-rate:crime-stats',city.state,city.slug_name)
+            return redirect('home')
+        return redirect('local',city.state,city.slug_name)
 
     forms = {}
     forms['basic'] = PAContactForm()
