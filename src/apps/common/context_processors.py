@@ -7,6 +7,31 @@ from mobile.sniffer.utilities import get_user_agent
 from apps.affiliates.models import Affiliate
 
 
+def business_time(request):
+    ctx={'business_time':None}
+    if not hasattr(settings,'BUSINESS_HOURS'):
+        return ctx
+    today=datetime.today()
+    try:
+        start=datetime.strptime('%s-%s-%s %s' % (
+            today.day,
+            today.month,
+            today.year,
+            settings.BUSINESS_HOURS[today.weekday()]['start'],
+            ), '%d-%m-%Y %H%M')
+        end=datetime.strptime('%s-%s-%s %s' % (
+            today.day,
+            today.month,
+            today.year,
+            settings.BUSINESS_HOURS[today.weekday()]['end'],
+            ), '%d-%m-%Y %H%M')
+        now=datetime.now()
+        if start <= now <= end:
+            ctx['business_time']=True
+            return ctx
+    except:
+        return ctx
+
 def last_day_of_month(request):
     #get final date of each month
     _now=str(datetime.now())
