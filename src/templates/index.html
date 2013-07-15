@@ -231,6 +231,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {% if 'hic_test' in request.GET %}
         setCookie('hic_test', 'true');
         {% endif %}
+        {% if not business_time %}
+            $("#quote-form.sleepy").slideDown();
+            $(".request-quote-button").addClass('active');
+        {% endif %}
     });
     </script>
 {% endaddtoblock "js" %}
