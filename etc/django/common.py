@@ -75,6 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
     'apps.common.context_processors.last_day_of_month',
+    'apps.common.context_processors.business_time',
     'django.contrib.messages.context_processors.messages',
     )
 
