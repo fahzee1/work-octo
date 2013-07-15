@@ -110,7 +110,7 @@ def query_by_state_city(state, city, get_content=True):
         city = city.replace('+', ' ').replace('-', ' ')
         print "this is city %s" % city
 
-        city = CityLocation.objects.get(city_name__icontains=city,
+        city = CityLocation.objects.get(city_name__iexact=city,
             state=state.abbreviation)
         print "this is edited city %s" % city
         city_id = city.id
@@ -148,7 +148,6 @@ def query_by_state_city(state, city, get_content=True):
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
 
-    print crime_stats
     context={'crime_stats': crime_stats,
            'years': years[:3],
            'latest_year': crime_stats[years[0]],
@@ -179,7 +178,6 @@ def query_by_state_city(state, city, get_content=True):
     except MatchAddressLocation.DoesNotExist:
         pass
 
-    print context
     return context
 
 def crime_stats(request, state, city):
