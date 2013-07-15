@@ -29,6 +29,15 @@ class CityLocationAdmin(admin.ModelAdmin):
 
 admin.site.register(CityLocation,CityLocationAdmin)
 
+class StateAdmin(admin.ModelAdmin):
+	model=State
+	list_filter=('name',)
+
+admin.site.register(State,StateAdmin)
+
+
+
+
 
 
 

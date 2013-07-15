@@ -1175,6 +1175,12 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/news/',permanent=True)),
     ('products/security-equipment/accessories/equipment/home-security/touchscreen/?$',
         RedirectView.as_view(url='/equipment/home-security/touch-screen/',permanent=True)),
+    ('products/security-equipment/sensors/?$',
+        RedirectView.as_view(url='/equipment/home-security/',permanent=True)),
+    ('affiliates/get-started/?$',
+        RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
+    ('pa/door-or-window-sensor/?$',
+        RedirectView.as_view(url='/products/security-equipment/sensors/door-window-sensor/',permanent=True)),
 
 
 )
