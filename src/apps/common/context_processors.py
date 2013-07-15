@@ -49,13 +49,6 @@ def get_affiliate_from_request(request):
         pass
     return None
 
-def tracking_pixels(request):
-    affiliate = get_affiliate_from_request(request)
-    
-    ctx = {'pixels': None}
-    if affiliate:
-        ctx['pixels'] = affiliate.pixels
-    return ctx
 
 def phone_number(request):
     from django.conf import settings
@@ -84,6 +77,7 @@ def phone_number(request):
     affiliate = get_affiliate_from_request(request)
 
     if affiliate:
+        request.session['affiliate']=affiliate
         if 'phone' in request.GET:
             ctx['phone_number'] = request.GET['phone']
             request.session['phone_number'] = request.GET['phone']
@@ -95,6 +89,15 @@ def phone_number(request):
 
     return ctx
 
+
+def tracking_pixels(request):
+    ctx={}
+    try:
+        affiliate=request.session['affiliate']
+        ctx['pixels']=affiliate.pixels
+    except KeyError:
+        ctx['pixels']=None
+    return ctx
 
 def business_hours(request):
     ctx = {'business_hours': ''}

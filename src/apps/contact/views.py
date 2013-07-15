@@ -1,10 +1,10 @@
 import urls
+import pdb
 from datetime import datetime, timedelta
 from string import Template
-
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
@@ -203,6 +203,7 @@ def basic_post_login(request):
     return (form, False)
 
 def ajax_post(request):
+    pdb.set_trace()
     if request.method != "POST":
         return HttpResponseRedirect('/')
 
@@ -226,7 +227,6 @@ def ajax_post(request):
         response.set_cookie('lead_id', value=form.id,
             domain='.protectamerica.com',
             expires=datetime.now() + expire_time)
-    
     return response
 
 
@@ -332,14 +332,63 @@ def order_form(request):
     else:
         formset = OrderForm()
 
-    if 'package' in request.GET:
-        formset.fields['package'].initial = request.GET['package']
+        if 'package' in request.GET:
+            formset.fields['package'].initial = request.GET['package']
 
     return simple_dtt(request, 'order/order-package.html', {
                                'parent':'packages',
                                'formset': formset,
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
+
+'''
+def new_order_form(request):
+    if not request.method == 'POST':
+        return redirect('/')
+    form_type=request.POST['form']
+    if form_type =='basic':
+        form,success=basic_post_login(request)
+        if success:
+            thanks_url=form.thank_you_url
+            lead_id=form.id
+            response=HttpResponseRedirect('http://www.protectamerica.com%s' % thanks_url)
+            response.set_cookie('lead_id',value=lead_id,
+                    domain='.protectamerica.com',
+                    expires=datetime.now()+expire_time)
+            return response
+'''
+
+def ajax_post(request):
+    pdb.set_trace()
+    if request.method != "POST":
+        return HttpResponseRedirect('/')
+
+    response_dict = {}
+    form_type = request.POST['form']
+
+    if form_type == 'basic':
+        form, success = basic_post_login(request)
+        if success:
+            response_dict.update({'success': True,
+                'thank_you': form.thank_you_url,
+                'lead_id': form.id})
+        else:
+            response_dict.update({'errors': form.errors})
+
+    response = HttpResponse(simplejson.dumps(response_dict),
+        mimetype='application/javascript')
+
+    if 'success' in response_dict and response_dict['success']:
+        expire_time = timedelta(days=90)
+        response.set_cookie('lead_id', value=form.id,
+            domain='.protectamerica.com',
+            expires=datetime.now() + expire_time)
+    
+    return response
+
+  
+
+
 
 def order_form_ca(request):
     if request.method == "POST":
@@ -349,8 +398,8 @@ def order_form_ca(request):
     else:
         formset = OrderForm()
 
-    if 'package' in request.GET:
-        formset.fields['package'].initial = request.GET['package']
+        if 'package' in request.GET:
+            formset.fields['package'].initial = request.GET['package']
 
     return simple_dtt(request, 'canada/order-package.html', {
                                'parent':'products',
