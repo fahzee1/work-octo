@@ -104,16 +104,26 @@ def query_by_state_city(state, city, get_content=True):
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
-        print "this is state %s" % state
+        print "this is state %s" % state.abbreviation
     except State.DoesNotExist:
         print 'none'
         raise Http404
     try:
-        city = city.replace('+', ' ').replace('-', ' ')
-        print "this is city %s" % city
+        if ' ' not in city:
+            cities = CityLocation.objects.filter(state=state.abbreviation)
+            city_here=False
+            for x in cities:
+                if x.join_name() == city:
+                    city_here=True
+                    city=x
+                    print "this is city and length was 1 %s" % city
+            if not city_here:
+                raise Http404
+        else:
+            city = city.replace('+', ' ').replace('-', ' ')
+            print "this is city blah blah %s" % city
+            city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
 
-        city = CityLocation.objects.get(city_name__iexact=city,
-            state=state.abbreviation)
         print "this is edited city %s" % city
         city_id = city.id
     except CityLocation.DoesNotExist:
