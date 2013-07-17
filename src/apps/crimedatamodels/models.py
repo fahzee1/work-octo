@@ -76,7 +76,7 @@ class CityLocation(models.Model):
         return reverse('crime-rate:crime-stats', args=[self.state,
             self.city_name])
 
-    def join_name(self,slug=True):
+    def join_name(self):
         names=self.city_name.split(' ')
         if len(names)>1:
             first,second=names[0],names[1].lower()
