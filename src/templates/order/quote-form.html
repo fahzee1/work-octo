@@ -1,5 +1,5 @@
 {% load sekizai_tags %}
-<form id="quote-form" method="post" action="">
+<form id="quote-form" class="{% if not business_time %}sleepy{% endif %}" method="post" action="">
     {% csrf_token %}
     
 	<div>
@@ -16,14 +16,9 @@
         {% endblock %}
 	</div>
     
-	<button type="button" class="redbutton">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
+	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
 
     <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
-    <div id="quote-form-error">
-        <img src="{{ STATIC_URL }}/img/base/error-arrow.png" id="error-arrow" alt="burglar alarm companies" />
-        <strong>Whoops!</strong>
-        <ul></ul>
-    </div>
     <div id="third-party-container" class="v">
         <div class="third-party-badge vsign">
             <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>

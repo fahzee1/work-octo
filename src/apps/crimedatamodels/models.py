@@ -1,5 +1,4 @@
 import re
-
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -68,13 +67,23 @@ class CityLocation(models.Model):
     class Meta:
         db_table = 'citylocations'
         unique_together = (('city_name', 'state'),)
+        ordering=['state']
+
+    def __unicode__(self):
+        return '%s, %s' % (self.city_name, self.state)
 
     def get_absolute_url(self):
         return reverse('crime-rate:crime-stats', args=[self.state,
             self.city_name])
 
-    def __unicode__(self):
-        return '%s, %s' % (self.city_name, self.state)
+    def join_name(self):
+        names=self.city_name.split(' ')
+        if len(names)>1:
+            first,second=names[0],names[1].lower()
+            return first+second
+        else:
+            return self.city_name_slug.replace('-',' ')
+
 
     @property
     def slug_name(self):
@@ -148,6 +157,10 @@ class CityCrimeStats(models.Model):
     violent_crime_grade = models.CharField(null=True,
         max_length=1)
 
+
+    def __unicode__(self):
+        return "%s" % self.city
+        
     @property
     def average_grade(self):
 

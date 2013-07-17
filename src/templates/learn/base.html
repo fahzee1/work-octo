@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
 {% load sekizai_tags %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/learn.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/learn.css?v3.0.0">
 
 {% endblock %}
 
@@ -54,7 +53,7 @@
             <a href="http://www.protectamerica.com/home-security-blog/">Blog</a>
         </li>
         <li class="{% if 'news' in active_pages %}active{% endif %} menu-item">
-            <a href="news/">Security News</a>
+            <a href="{% url news:news-home %}">Security News</a>
         </li>
 
 

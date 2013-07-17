@@ -2,7 +2,7 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Automation | X-10 Home Automation | Protect America{% endblock %}
 {% block page_keywords %}home automation devices, home security, x10 lamp module, x10 appliance module, x10 power horn module,{% endblock %}
-{% block page_description %}Wireless home security system equipment by GE uses state-of-the-art wireless home security system technology to provide the reliability our customers know they can trust. Get a GE wireless home security system from Protect America today.{% endblock %}
+{% block page_description %}Protect your home and family with Protect America's home security equipment and products today.{% endblock %}
 
 {% block content %}
 <div id="hero-wrapper" class="blue">
@@ -12,16 +12,18 @@
             <h2>Protect America Equipment</h2>
             <h1>Home Security</h1>
             <p>When looking to find peace of mind when it comes to your family, an alarm system can help make the difference to make your home feel secure. And we realize that importance of feeling safe. With over 20 years in the security industry, Protect America offers various security equipment pieces to customize your security system to your home and budget.</p>
-            <img src="{{ STATIC_URL }}img/products/home-security/blue-icon.png"class="main-hero-image" />
+            <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add secure your home now.</h3>
+
+            <img src="{{ STATIC_URL }}img/products/home-security/blue-icon.png" alt="Home Security Icon" class="main-hero-image" />
         </div>
 
     </div>
 </div>
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 <div id="in-home-wrapper">
     <div id="in-your-home">
         <div class="home-img">
-            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="in-the-home-simon-xt" />
+            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="In The Home;Home Security" />
         </div>
         <div class="home-content">
             <strong>In The Home:</strong>
@@ -30,7 +32,7 @@
             <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
         </div>
     </div>
-    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="Inside Home Background" class="in-home-bg" />
     <div class="clear"></div>
 </div>
 <div class="clear"></div>
@@ -38,92 +40,92 @@
     <div id="featured-equipment">
         <h2>Featured Equipment</h2>
         <div class="equipment-piece">
-            <a href="{% url simon-xt %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url simon-xt %}" title="Simon XT" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="Simon XT" width="192" height="192" />
                 <h3>Simon XT</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url simon-xt %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url simon-xt %}" title="Simon XT" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url video %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/video/video-camera-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url video %}" title="Video Survelliance Camera" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/video/video-camera-small.jpg" alt="Video Survelliance Camera" width="192" height="192" />
                 <h3>Video Camera</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url video %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url video %}" title="Video Survelliance Camera" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url mini-pinpad %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/mini-pinpad/mini-pinpad-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url mini-pinpad %}" title="Mini Pinpad" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/mini-pinpad/mini-pinpad-small.jpg" alt="Mini Pinpad" width="192" height="192" />
                 <h3>Mini Pin Pad</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url mini-pinpad %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url mini-pinpad %}" title="Mini Pinpad" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url door-window-sensor %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/door-window-sensor-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url door-window-sensor %}" title="Door and Window Sensor" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/door-window-sensor/door-window-sensor-small.jpg" alt="Door and Window Sensor" width="192" height="192" />
                 <h3>Door/Window Sensor</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url door-window-sensor %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url door-window-sensor %}" title="Door and Window Sensor" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url talking-wireless-keypad %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/talking-wireless-keypad/talking-wireless-keypad-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url talking-wireless-keypad %}" title="Talking Wireless Keypad" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/talking-wireless-keypad/talking-wireless-keypad-small.jpg" alt="Talking Wireless Keypad" width="192" height="192" />
                 <h3>Wireless Keypad</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url talking-wireless-keypad %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url talking-wireless-keypad %}" title="Talking Wireless Keypad" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url two-button-panic %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/two-button-panic/two-button-panic-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url two-button-panic %}" title="Two Button Panic" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/two-button-panic/two-button-panic-small.jpg" alt="Two Button Panic" width="192" height="192" />
                 <h3>Panic Button</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url two-button-panic %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url two-button-panic %}" title="Two Button Panic" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url motion-detector %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/motion-detector/motion-detector-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url motion-detector %}" title="Motion Detector" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/motion-detector/motion-detector-small.jpg" alt="Motion Detector" width="192" height="192" />
                 <h3>Motion Detector</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url motion-detector %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url motion-detector %}" title="Motion Detector" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url garage-door-sensor %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/garage-door-sensor/garage-door-sensor-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url garage-door-sensor %}" title="Garage Door Sensor" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/garage-door-sensor/garage-door-sensor-small.jpg" alt="Garage Door Sensor" width="192" height="192" />
                 <h3>Garage Door Sensor</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url garage-door-sensor %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url garage-door-sensor %}" title="Garage Door Sensor" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url accessories %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/solar-light/solar-yard-light-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url accessories %}" title="Security Accessories" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/solar-light/solar-yard-light-small.jpg" alt="Security Accessories" width="192" height="192" />
                 <h3>Other Accessories</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url accessories %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url accessories %}" title="Security Accessories" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url touchscreen %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/touchscreen/touchscreen-map.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url touchscreen %}" title="Touchscreen" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/touchscreen/touchscreen-map.jpg" alt="Touchscreen" width="192" height="192" />
                 <h3>Touchscreen</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url touchscreen %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url touchscreen %}" title="Touchscreen" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url glassbreak-sensor %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/glass-break-detector/glass-break-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url glassbreak-sensor %}" title="Glass Break Sensor" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/glass-break-detector/glass-break-small.jpg" alt="Glass Break Sensor" width="192" height="192" />
                 <h3>Glass Break Sensor</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url glassbreak-sensor %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url glassbreak-sensor %}" title="Glass Break Sensor" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
     </div>
     <div class="clear"></div>

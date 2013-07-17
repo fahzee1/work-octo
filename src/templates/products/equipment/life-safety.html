@@ -2,7 +2,7 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Equipment | Life Safety | Protect America{% endblock %}
 {% block page_keywords %}home automation devices, home security, x10 lamp module, x10 appliance module, x10 power horn module,{% endblock %}
-{% block page_description %}Wireless home security system equipment by GE uses state-of-the-art wireless home security system technology to provide the reliability our customers know they can trust. Get a GE wireless home security system from Protect America today.{% endblock %}
+{% block page_description %}Protect more then your home with Protect America's life safety equipment and products.{% endblock %}
 
 {% block content %}
 <div id="hero-wrapper" class="red">
@@ -11,27 +11,29 @@
             <i class="icon-life-safety"></i>
             <h2>Protect America Equipment</h2>
             <h1>Life Safety</h1>
-            <p>Important pieces of equipment, we offer life safety sensors and accessories that can extend your home security system to protect more than your home. From medical panic pendents to monitored smoke detectors, we realize that sometimes the difference between life and death is the press of a button, or the sound of an alarm.</p>
-            <img src="{{ STATIC_URL }}img/products/life-safety/life-safety-icon.png" class="main-hero-image" alt="smart-connect-interactive-app" />
+            <p>Important pieces of equipment, we offer life safety sensors and accessories that can extend your home security system to protect more than your home. From medical panic pendants to monitored smoke detectors, we realize that sometimes the difference between life and death is the press of a button, or the sound of an alarm.</p>
+            <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add secure your home now.</h3>
+
+            <img src="{{ STATIC_URL }}img/products/life-safety/life-safety-icon.png" class="main-hero-image" alt="Life Safety Icon" />
 
         </div>
 
     </div>
 </div>
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 <div id="in-home-wrapper">
     <div id="in-your-home">
         <div class="home-img">
-            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="in-the-home-simon-xt" />
+            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="In The Home;Life Safety" />
         </div>
         <div class="home-content">
             <strong>In The Home:</strong>
             <h2>Life Safety</h2>
             <p>Adding life safety equipment can be an easy way to help protect family from unforeseen disasters.  Monitored smoke detectors are a common piece of equipment that calls out the fire department in the event of a fire.  Medical panic pendents are great for elderly parents who might get hurt and are unable to reach a phone for help.</p>
-            <a href="{% url shop %}" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+            <a href="{% url shop %}" title="Shop Packages" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
         </div>
     </div>
-    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="In The Home;Background" class="in-home-bg" />
     <div class="clear"></div>
 </div>
 <div class="clear"></div>
@@ -39,45 +41,31 @@
     <div id="featured-equipment">
         <h2>Featured Equipment</h2>
         <div class="equipment-piece">
-            <a href="{% url smoke-detector %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/smoke-detector/smoke-detector-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url smoke-detector %}" title="Monitored Smoke Detector" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/smoke-detector/smoke-detector-small.jpg" alt="Monitored Smoke Detector" width="192" height="192" />
                 <h3>Smoke Detector</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url smoke-detector %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url smoke-detector %}" title="Monitored Smoke Detector" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
+
         <div class="equipment-piece">
-            <a href="{% url flood-sensor %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/flood-sensor/flood-sensor-white-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
-                <h3>Flood Sensor</h3>
-            </a>
-            <div class="clear"></div>
-            <a href="{% url flood-sensor %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
-        </div>
-        <div class="equipment-piece">
-            <a href="{% url medical-pendant %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/medical-panic-pendent/medical-pendant-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url medical-pendant %}" title="Medical Pendant" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/medical-panic-pendent/medical-pendant-small.jpg" alt="Medical Pendant" width="192" height="192" />
                 <h3>Medical Pendant</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url medical-pendant %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url medical-pendant %}" title="Medical Pendant" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="equipment-piece">
-            <a href="{% url carbon-monoxide-detector %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/carbon-monoxide-detector/carbon-monoxide-detector-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+            <a href="{% url carbon-monoxide-detector %}" title="Carbon Monoxide Detector" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/carbon-monoxide-detector/carbon-monoxide-detector-small.jpg" alt="Carbon Monoxide Detector" width="192" height="192" />
                 <h3>Carbon Monoxide</h3>
             </a>
             <div class="clear"></div>
-            <a href="{% url carbon-monoxide-detector %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+            <a href="{% url carbon-monoxide-detector %}" title="Carbon Monoxide Detector" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
-        <div class="equipment-piece">
-            <a href="{% url freeze-sensor %}" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/freeze-sensor/freeze-sensor-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
-                <h3>Freeze Sensor</h3>
-            </a>
-            <div class="clear"></div>
-            <a href="{% url freeze-sensor %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
-        </div>
+
     </div>
     <div class="clear"></div>
 </div>

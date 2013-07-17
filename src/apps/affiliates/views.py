@@ -20,14 +20,6 @@ import mimetypes
 from django.contrib import messages
 
 
-def check_if_affiliate(email,agent_id):
-    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
-    for aff in affiliates:
-        if aff.email == email and aff.affiliate.agent_id == agent_id:
-            ctx={'name':aff.affiliate.name,
-                 'agent_id':aff.affiliate.agent_id}
-            return ctx
-        return False
          
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
@@ -90,7 +82,7 @@ def resources(request):
             if ad.type.slug in ads:
                 ads[ad.type.slug][1].append(ad)
 
-    return simple_dtt(request, 'affiliates/resources.html', {
+    return simple_dtt(request, 'affiliates/resources/get-started.html', {
             'page_name': 'affiliate_resources',
             'google_ads': ads,
         })
@@ -122,8 +114,7 @@ def web_banners_page(request):
     return simple_dtt(request, 'affiliates/resources/web-banners.html',ctx)
         
 def get_started_page(request):
-    aff_check=request.session.get('aff-logged-in',False)
-    if not aff_check:
+    if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
     name_here=False
     if request.session.get('aff_name',False):
@@ -142,15 +133,13 @@ def get_started_page(request):
 
 
 def logos_page(request):
-    aff_check=request.session.get('aff-logged-in',False)
-    if not aff_check:
+    if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
     ctx={'page_name':'aff-logos'}
     return simple_dtt(request,'affiliates/resources/logos.html',ctx)
     
 def collateral_page(request):
-    aff_check=request.session.get('aff-logged-in',False)
-    if not aff_check:
+    if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
     ctx={'page_name':'aff-collateral'}
     return simple_dtt(request,'affiliates/resources/collateral.html',ctx)
@@ -158,8 +147,7 @@ def collateral_page(request):
     'affiliates/resources/products.html'
     
 def products_page(request):
-    aff_check=request.session.get('aff-logged-in',False)
-    if not aff_check:
+    if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
     ctx={'page_name':'aff-products'}
     return simple_dtt(request,'affiliates/resources/products.html',ctx)
@@ -171,7 +159,7 @@ def semlanding_response(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    response = render_to_response('affiliates/sem-landing-page/home.html',
+    response = render_to_response('affiliates/sem-landing-page/responsive.html',
                                   {'forms': forms},
                                   context_instance=RequestContext(request))
     
@@ -371,21 +359,20 @@ def get_affiliate_information(request, affiliate_id):
     
     
 def aff_login(request):
-    affiliates=Profile.objects.filter(status='APPROVED').select_related().all()
     form=AffiliateLoginForm()
     if request.method == 'POST':
         form=AffiliateLoginForm(request.POST)
         if form.is_valid():
-            check_email=form.cleaned_data['email']
             check_agentid=form.cleaned_data['agent_id']
-            is_aff=check_if_affiliate(check_email,check_agentid)
-            if is_aff:
-                request.session['aff-logged-in']=True
-                request.session['aff_name']=is_aff['name']
-                request.session['aff_id']=is_aff['agent_id']
-                return redirect('aff-get-started')
+            try:
+                aff=Affiliate.objects.get(agent_id=check_agentid)
+                if aff:
+                    request.session['aff-logged-in']=True
+                    request.session['aff_name']=aff.name
+                    request.session['aff_id']=aff.agent_id
+                    return redirect('aff-get-started')
                 
-            else:
+            except Affiliate.DoesNotExist:
                 messages.info(request,'Please Enter The Correct Login.')
                 return redirect('aff-login')       
     else:

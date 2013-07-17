@@ -2,7 +2,19 @@
 {% if phone_number %}
 <div class="clear"></div>
 <div id="call-box">
-    {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Get Started Now, <strong>Call Today! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></a></p>
+
+    {% if no_promo = True %}
+
+    {% else %}
+    <div id="main-promo">
+        <a href="{% url order-package %}?promo=true" id="main-promo-content">
+            <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/keychain-promo.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
+            <p><span>Limited Time Offer</span> 2 Keychain Remotes Included with Any Package</p>
+            <div class="clear"></div>
+        </a>
+    </div>
+    {% endif %}
+    {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Secure Your Home, <strong>Call Now! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></a></p>
 </div>
 <div class="clear"></div>
 

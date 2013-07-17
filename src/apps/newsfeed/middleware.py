@@ -6,7 +6,10 @@ from django.contrib.localflavor.us.us_states import US_STATES
 from models import TheFeed,FallBacks
 from django.db.models import Q
 from django.conf import settings
-
+import requests
+import json
+from itertools import chain, izip
+'''
 class RenderNewsFeed():
 
 	def process_request(self,request):
@@ -45,3 +48,45 @@ class RenderNewsFeed():
 	  			pass 
 
 	  	return None       
+
+'''
+
+class GetGeoIp():
+	def process_request(self,request):
+		if request.session.get('GeoFeedObjects',False):
+			return None
+		ip=request.META['REMOTE_ADDR']
+		r=requests.get('http://freegeoip.net/json/'+ip)
+		resp=r.json()
+		city=resp['city']
+		state_abbr=resp['region_code']
+		state_long=resp['region_name']
+		try:
+			f=TheFeed.objects.filter(active=True,city=city,state=state_abbr).order_by('created').reverse()
+			if f.count() == 0:
+				f=FallBacks.objects.select_related().all()
+		except TheFeed.DoesNotExist:
+			f=FallBacks.objects.select_related().filter()
+
+		try:
+			no_visible=True
+			a=TheFeed.objects.filter(visible_to_all=True).order_by('created').reverse()
+			if a.count() == 0:
+				no_visible=False
+		except TheFeed.DoesNotExist:
+			pass
+
+
+		if no_visible:
+			feed=list(chain(f,a))
+		else:
+			feed=f 
+
+		request.session['GeoFeedObjects']=feed	
+		
+
+
+		return None
+
+
+
