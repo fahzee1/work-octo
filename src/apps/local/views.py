@@ -83,6 +83,9 @@ TIMEZONES = {
 def local_page_wrapper(request, keyword, city, state):
     if '-' in state:
         state=state.replace('-',' ').title()
+    else:
+        state=state.title()
+
 
     three=len(state.split(' '))
     if three==3:
@@ -94,10 +97,24 @@ def local_page_wrapper(request, keyword, city, state):
 
 
     for x in US_STATES:
-        if x[1]==(new_state if three==3 else state.title()):
-            statecode=x[0]           
-    if not statecode:
-        raise Http404
+        if x[1]==(new_state if three==3 else state):
+            statecode=x[0]   
+        else:        
+            for x in US_STATES:
+                mult=x[1].split(' ')
+                if len(mult) == 2:
+                    first=mult[0].title()
+                    second=mult[1].lower()
+                    _state=first+second
+                elif len(mult) == 3:
+                    first=mult[0].title()
+                    second=mult[1].lower()
+                    third=mult[2].lower()
+                    _state=first+second+third
+                else:
+                    _state=None
+                if _state == state:
+                    statecode=x[0]
     return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
 
 
