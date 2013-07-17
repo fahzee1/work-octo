@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.conf import settings
 import calendar
 from mobile.sniffer.detect import detect_mobile_browser
@@ -8,7 +7,7 @@ from apps.affiliates.models import Affiliate
 
 
 def business_time(request):
-    ctx={'business_time':None}
+    ctx={'business_time':False}
     if not hasattr(settings,'BUSINESS_HOURS'):
         return ctx
     today=datetime.today()
@@ -28,7 +27,9 @@ def business_time(request):
         now=datetime.now()
         if start <= now <= end:
             ctx['business_time']=True
-            return ctx
+        else:
+            ctx['business_time']=False
+        return ctx
     except:
         return ctx
 
