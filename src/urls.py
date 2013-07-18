@@ -539,6 +539,10 @@ else:
                     dtt(r'^learn/security-101/complete-security/?$', 'complete-home-security/index.html', 'complete-home-security', 'learn-about-security'),
                     # > dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
 
+                    dtt(r'^learn/security-101/glossary/?$', 'about-us/glossary.html', 'glossary', 'learn-about-security'),
+
+                    dtt(r'^learn/security-101/resources/?$', 'about-us/resources.html', 'resources-101', 'learn-about-security'),
+
             # Learn > Reviews
             url(r'^learn/protect-america/reviews/?$', 'apps.testimonials.views.view_testimonials', name='testimonials'),
             # > url(r'^pa/testimonials/?$', 'apps.testimonials.views.view_testimonials', name='testimonials'),
