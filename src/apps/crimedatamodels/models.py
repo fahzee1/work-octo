@@ -1,4 +1,5 @@
 import re
+import pdb
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -78,13 +79,21 @@ class CityLocation(models.Model):
 
     def join_name(self):
         names=self.city_name.split(' ')
-        if len(names)>1:
+        if len(names) == 1:
+            name=self.city_name
+            return name
+        elif len(names)==2:
             first,second=names[0],names[1].lower()
-            return first+second
-        elif len(names) == 1:
-            return self.city_name
+            name=first+second
+            return name
+        elif len(names) == 3:
+            first,second,third=names[0],names[1].lower(),names[2].lower()
+            name=first+second+third
+            return name
         else:
-            return self.city_name_slug.replace('-',' ')
+            name=self.city_name_slug.replace('-',' ')
+            return name
+        print 'name is %s' %name
 
 
     @property
