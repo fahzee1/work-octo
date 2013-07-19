@@ -108,8 +108,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% endif %}
 {% endblock %}
 {% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
-{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
-{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
+{% block page_keywords %}home alarm system, home alarm systems, security, security system, security systems, home security, home security system, home security systems, home security monitoring{% endblock %}
+{% block page_description %}Get a free home security system for your home. Sign up for home security monitoring and get a GE Simon security system at no cost. Protect your home today!
+{% endblock %}
 
 {% block subnav %}
 {% endblock %}
@@ -120,7 +121,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block hero_banner_area %}
     {% include "banners/seo-hero-images.html" %}
 {% endblock %}
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 
 <div class="wrapper">
     {% comment %}
@@ -230,6 +231,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {% endif %}
         {% if 'hic_test' in request.GET %}
         setCookie('hic_test', 'true');
+        {% endif %}
+        {% if not business_time %}
+            $("#quote-form.sleepy").slideDown();
+            $(".request-quote-button").addClass('active');
         {% endif %}
     });
     </script>
