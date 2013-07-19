@@ -80,7 +80,6 @@ class CityLocation(models.Model):
     def join_name(self):
         names=self.city_name.split(' ')
         if len(names) == 1:
-            print 'its one'
             name=self.city_name
             return name
         elif len(names)==2:
@@ -92,12 +91,10 @@ class CityLocation(models.Model):
                 if len(names)==3:
                     first,second,third=names[0],names[1].lower(),names[2].lower()
                     return first+second+third
-            print 'its two'
             first,second=names[0],names[1].lower()
             name=first+second
             return name
         elif len(names) == 3:
-            print 'its three'
             first,second,third=names[0],names[1].lower(),names[2].lower()
             name=first+second+third
             return name
