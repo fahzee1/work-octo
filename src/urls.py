@@ -1187,6 +1187,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/products/security-equipment/sensors/door-window-sensor/',permanent=True)),
     ('shop-home-security-packages/copper-package/?$',
         RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
+    ('crime/rate/?$',
+        RedirectView.as_view(url='/crime-rate/',permanent=True)),
 
 
 )

@@ -84,6 +84,14 @@ class CityLocation(models.Model):
             name=self.city_name
             return name
         elif len(names)==2:
+            if '.' in self.city_name:
+                names=self.city_name.replace('.','').split(' ')
+                if len(names)==2:
+                    first,second=names[0],names[1].lower()
+                    return first+second
+                if len(names)==3:
+                    first,second,third=names[0],names[1].lower(),names[2].lower()
+                    return first+second+third
             print 'its two'
             first,second=names[0],names[1].lower()
             name=first+second
@@ -94,10 +102,7 @@ class CityLocation(models.Model):
             name=first+second+third
             return name
         else:
-            print 'its none'
-            name=self.city_name_slug.replace('-',' ')
-            return name
-        print 'name is %s' %name
+            pass
 
 
     @property
