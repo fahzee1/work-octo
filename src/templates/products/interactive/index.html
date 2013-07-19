@@ -21,11 +21,11 @@
 
     </div>
 </div>
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 <div class="wrapper">
     <div id="app-for-that">
         <h2>There’s an App For That!</h2>
-        <p>Control your entire home with the press of a button. Protect America’s amazing, and free, SMART Connect apps for Android devices and the iPhone puts home automation, energy management, and live video in your pocket! Controlling your home just got easier and a lot more fun. </p>
+        <p>Control your entire home with the press of a button. Protect America’s amazing SMART Connect apps for Android devices and the iPhone puts home automation, energy management, and live video in your pocket! Controlling your home just got easier and a lot more fun. </p>
         <div class="clear"></div>
         <img src="{{ STATIC_URL }}img/interactive/phones.jpg" class="phones" alt="SMART Connect available on iPhone and Android phones" width="400" height="512" />
         <ul>
@@ -84,8 +84,8 @@
 <div class="clear"></div>
 <div class="wrapper">
     <div id="free-smart-app">
-        <h2>Did We Mention It’s Free?</h2>
-        <p>While many other security companies charge for the extra features of interactive control, we provide our SMART Connect for Free with our Broadband and Cellular security systems. Arm/disarm your system, watch your live video cameras, control your lights and home appliances, receive event notifications, and much more! Home security has never been more convenient, and cool, than Protect America SMART Connect. </p>
+        <h2>Included with your System</h2>
+        <p>While many other security companies charge for the extra features of interactive control, we provide our SMART Connect with our Broadband and Cellular security systems. Arm/disarm your system, watch your live video cameras, control your lights and home appliances, receive event notifications, and much more! Home security has never been more convenient, and cool, than Protect America SMART Connect. </p>
         <div class="order-link">
             <a href="{% url order-package %}?package=silver" class="button-link" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Button Click', 'Interactive']);">Order Now <i class="icon-chevron-right"></i></a>
             <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
