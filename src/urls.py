@@ -541,6 +541,10 @@ else:
                     dtt(r'^learn/security-101/complete-security/?$', 'complete-home-security/index.html', 'complete-home-security', 'learn-about-security'),
                     # > dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
 
+                    dtt(r'^learn/security-101/glossary/?$', 'about-us/glossary.html', 'glossary', 'learn-about-security'),
+
+                    dtt(r'^learn/security-101/resources/?$', 'about-us/resources.html', 'resources-101', 'learn-about-security'),
+
             # Learn > Reviews
             url(r'^learn/protect-america/reviews/?$', 'apps.testimonials.views.view_testimonials', name='testimonials'),
             # > url(r'^pa/testimonials/?$', 'apps.testimonials.views.view_testimonials', name='testimonials'),
@@ -1185,6 +1189,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/products/security-equipment/sensors/door-window-sensor/',permanent=True)),
     ('shop-home-security-packages/copper-package/?$',
         RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
+    ('crime/rate/?$',
+        RedirectView.as_view(url='/crime-rate/',permanent=True)),
 
 
 )
