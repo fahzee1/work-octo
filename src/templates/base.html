@@ -134,6 +134,16 @@
 
 </head>
 <body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %} {% block extra_class %}{% endblock %} ">
+<script type='text/javascript'>
+var ebRand = Math.random()+'';
+ebRand = ebRand * 1000000;
+//<![CDATA[ 
+document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=342256&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
+//]]>
+</script>
+<noscript>
+<img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=342256&amp;ns=1"/>
+</noscript>
 
 <!-- BEGIN LivePerson Monitor. -->
 <script type="text/javascript">
@@ -226,6 +236,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 <!-- Main Content -->
 {% block content %}
 {% endblock %}
+
 
 
 <!-- Order Footer -->
@@ -323,6 +334,23 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     {% endblock %}
 
 {% endblock %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.next-row-button').click(function() {
+        var current_row = $(this).parent().children('.slide-row:visible');
+        var row_count = $(this).parent().children('.slide-row').length;
+        if(current_row.index() == (row_count - 1) ) {
+            var next_slide = $(this).parent().children('.slide-row:eq(0)');
+        } else {
+            var next_slide = $(this).parent().children('.slide-row:eq('+(current_row.index() + 1)+')');
+        }
+        $(this).parent().children('.slide-row:visible').removeClass('active')
+        next_slide.addClass('active');
+    });
+});
+</script>
+{% endaddtoblock "js" %}
 <!-- Javascript -->
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>

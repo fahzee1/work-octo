@@ -4,7 +4,7 @@ import urllib
 import urllib2
 import operator
 import random
-
+from django.http import Http404
 from decimal import Decimal
 from datetime import datetime, timedelta
 
