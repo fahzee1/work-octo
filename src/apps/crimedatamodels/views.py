@@ -109,6 +109,7 @@ def query_by_state_city(state, city, get_content=True):
         print 'none'
         raise Http404
     try:
+        print city
         if ' ' not in city:
             cities = CityLocation.objects.filter(state=state.abbreviation)
             city_here=False
