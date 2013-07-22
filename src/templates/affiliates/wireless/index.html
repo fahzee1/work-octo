@@ -10,7 +10,25 @@
 {% endblock %}
 
 {% block typekit %}tk-museo-slab{% endblock %}
+{% block extra_class %}alternate{% endblock %}
+{% block hero-block %}
+</div>
+<div id="hero-banner" class="alt-form">
 
+    <div class="wrapper">
+        <div id="top-hero-banner">
+            <div id="main-banner" data-url="{% url order-package %}">
+                <img src="{{ STATIC_URL }}img/banners/hero-banners/best-deal-banner.jpg" class="adt-banner" alt="adt-banner" width="1229" height="409" />
+            </div>
+        </div>
+        {% include "order/quote-form-noview.html" with form=forms.basic %}
+    </div>
+</div>
+{% include "order/call-box.html" %}
+
+<div class="wrapper">
+<div class="clear"></div>
+{% endblock %}
 {% block left-wrapper %}
     <h1>Simple, Easy Wireless Home Security</h1>
     <div class="icon">
