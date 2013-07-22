@@ -64,7 +64,9 @@
     <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
     <!--iOS -->
+    {% block viewport %}
     <meta name="viewport" content="width=1024">
+    {% endblock %}
     <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
     <!-- <meta name="viewport" content="initial-scale=1.0"> (Use if apple-mobile-web-app-capable below is set to yes) -->
     <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
@@ -190,7 +192,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
                 </div>
             {% endif %}
-
+            {% block navigation %}
             <ul id="main-navigation">
                 <li {% if 'shop' in active_pages %}class="active"{% endif %}>
                     <a href="{% url 'shop' %}">Shop</a>
@@ -209,6 +211,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
                 </li>
             </ul>
+            {% endblock %}
             {% include "order/quote-form-refresh.html" with form=forms.basic %}
 
             <div class="clear"></div>
