@@ -81,6 +81,8 @@ class CityLocation(models.Model):
         if len(names)>1:
             first,second=names[0],names[1].lower()
             return first+second
+        elif len(names) == 1:
+            return self.city_name
         else:
             return self.city_name_slug.replace('-',' ')
 

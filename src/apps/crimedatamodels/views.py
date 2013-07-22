@@ -120,7 +120,13 @@ def query_by_state_city(state, city, get_content=True):
             if not city_here:
                 raise Http404
         else:
-            city = city.replace('+', ' ').replace('-', ' ')
+            city = city.replace('+', ' ').replace('-', ' ').split(' ')
+            if len(city)==2:
+                f,l=city[0],city[1]
+                if len(str(f))==2:
+                    city=f+'.'+' '+l
+                else:
+                    city=f+' '+l
             print "this is city blah blah %s" % city
             city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
 
