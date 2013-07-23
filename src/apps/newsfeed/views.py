@@ -1,3 +1,4 @@
+import pdb
 import twitter
 from models import TheFeed,FallBacks
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -41,8 +42,8 @@ def render_feed(request):
     tweets=give_me_tweets()
     data=request.session.get('GeoFeedObjects',False)
     if data and tweets:
-        results=list(chain.from_iterable(izip(data,tweets)))
-        for x in data:
+        results=list(chain.from_iterable(izip(data['Feed'],tweets)))
+        for x in data['Feed']:
             for y in tweets:
                 if y not in results:
                     results.append(y)

@@ -55,17 +55,24 @@ class GetGeoIp():
 	def process_request(self,request):
 		if request.session.get('GeoFeedObjects',False):
 			return None
+
+		ip=False
+		city=state_abbr=state_long=ip
 		ip=request.META['REMOTE_ADDR']
 		r=requests.get('http://freegeoip.net/json/'+ip)
 		try:
+			#if they return 403 response will get JSONDecode error here
 			resp=r.json()
 			city=resp['city']
 			state_abbr=resp['region_code']
 			state_long=resp['region_name']
-
-			f=TheFeed.objects.filter(active=True,city=city,state=state_abbr).order_by('created').reverse()
-			if f.count() == 0:
+			try:
+				f=TheFeed.objects.filter(active=True,city=city,state=state_abbr).order_by('created').reverse()
+				if f.count() == 0:
+					f=FallBacks.objects.select_related().all()
+			except TheFeed.DoesNotExist:
 				f=FallBacks.objects.select_related().all()
+
 		except:
 			f=FallBacks.objects.select_related().all()
 
@@ -77,13 +84,21 @@ class GetGeoIp():
 		except TheFeed.DoesNotExist:
 			pass
 
-
 		if no_visible:
 			feed=list(chain(f,a))
 		else:
 			feed=f 
+		FeedObjects={}
+		FeedObjects['Feed']=feed
+		if ip:
+			FeedObjects['geo-ip']=ip
+		if city:
+			FeedObjects['geo-city']=city
+		if state_abbr and state_long:
+			FeedObjects['geo-state-abbr']=state_abbr
+			FeedObjects['geo-state-long']=state_long
 
-		request.session['GeoFeedObjects']=feed	
+		request.session['GeoFeedObjects']=FeedObjects	
 		
 
 
