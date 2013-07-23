@@ -1,3 +1,4 @@
+import pdb
 from datetime import datetime
 from django.conf import settings
 import calendar
@@ -42,7 +43,15 @@ def last_day_of_month(request):
     last_day=calendar.monthrange(year,month)[1]
     last_date=str(month)+'/'+str(last_day)+'/'+str(year)
     _date=datetime.strptime(last_date,'%m/%d/%Y')
-    return {'final_date':_date}
+
+    #get weekend
+    wknd=datetime.now().isoweekday()
+    is_weekend=True
+    if wknd != 6 or 7:
+        is_weekend=False
+    ctx={'final_date':_date,
+         'is_weekend':is_weekend}
+    return ctx
 
 def mobile_check(request):
     ua = get_user_agent(request)
