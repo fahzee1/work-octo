@@ -57,16 +57,17 @@ class GetGeoIp():
 			return None
 		ip=request.META['REMOTE_ADDR']
 		r=requests.get('http://freegeoip.net/json/'+ip)
-		resp=r.json()
-		city=resp['city']
-		state_abbr=resp['region_code']
-		state_long=resp['region_name']
 		try:
+			resp=r.json()
+			city=resp['city']
+			state_abbr=resp['region_code']
+			state_long=resp['region_name']
+
 			f=TheFeed.objects.filter(active=True,city=city,state=state_abbr).order_by('created').reverse()
 			if f.count() == 0:
 				f=FallBacks.objects.select_related().all()
-		except TheFeed.DoesNotExist:
-			f=FallBacks.objects.select_related().filter()
+		except:
+			f=FallBacks.objects.select_related().all()
 
 		try:
 			no_visible=True
