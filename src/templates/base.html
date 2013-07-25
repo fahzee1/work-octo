@@ -132,7 +132,8 @@
 
 </head>
 <body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %} {% block extra_class %}{% endblock %} ">
-    
+
+<div style="position:absolute;">    
 <!-- Start Quantcast Tag -->
 <script type="text/javascript"> 
 var _qevents = _qevents || [];
@@ -157,6 +158,7 @@ _qevents.push(
 
 <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=342256&amp;ns=1"/>
 </noscript>
+</div>
 
 <!-- BEGIN LivePerson Monitor. -->
 <script type="text/javascript">
@@ -384,32 +386,9 @@ $(document).ready(function(){
 
         });
 
-
-{% comment %}
-/*
-   
-    function getFeed(citystate){
-        $.ajax({
-            url:"{% url 'render-feed' %}",
-            type:"GET",
-            data:citystate,
-            success:function(data){
-                $("#newsfeed").html(data);
-                $('#newsfeed').cycle({
-                            fx:'blindY',
-                            speed:500,
-                            timeout:6000,
-                            delay:-3000
-                });
-            }
-
-        });
-    }
-    */
-    {% endcomment %}
-     setInterval(checkExpired,3600000);
 });
 
+    setInterval(checkExpired,3600000);
     function checkExpired(){
         $.ajax({
             url:"/hourlycheck",

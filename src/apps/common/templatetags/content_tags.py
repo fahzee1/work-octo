@@ -71,10 +71,15 @@ class ContentSpinnerNode(template.Node):
     def render(self, context):
         request = self.request.resolve(context)
         path = request.META['PATH_INFO']
+        spun_items = getattr(request, 'spun_items', None)
+        if spun_items is None:
+            items = list(SpunContent.objects.filter(url=path))
+            request.spun_items = spun_items = {}
+            for sc in items:
+                spun_items[sc.name] = sc
         # first try to see if the content has already been spun
-        try:
-            content = SpunContent.objects.get(url=path, name=self.name)
-        except SpunContent.DoesNotExist:
+        content = spun_items.get(self.name)
+        if not content:
             # get the random choice
             from random import choice
             content = SpunContent()
