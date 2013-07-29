@@ -1,8 +1,11 @@
+import os
+import pdb
+import json
+from django.conf import settings
+from random import choice
 from datetime import datetime
-
 from django import template
 from django.conf import settings
-
 from apps.common.models import SpunContent
 
 register = template.Library()
@@ -67,7 +70,7 @@ class ContentSpinnerNode(template.Node):
         self.request = template.Variable('request')
         self.name = content_name
         self.replacements = content_replacements.split('|')
-
+    '''
     def render(self, context):
         request = self.request.resolve(context)
         path = request.META['PATH_INFO']
@@ -89,3 +92,44 @@ class ContentSpinnerNode(template.Node):
             content.save()
         return content.content
 register.tag(content_spinner)
+    '''
+
+    def render(self, context):
+        request = self.request.resolve(context)
+        path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
+        json_file = path+'.json'
+        os.chdir(settings.LOCAL_PAGE_PATH)
+        if os.path.exists(json_file):  
+            try:
+                the_file = open(json_file,'r+')
+                new_file = json.load(the_file)
+                try:
+                    content = new_file[self.name]
+                except KeyError:
+                    if self.name not in new_file.keys():
+                        obj={self.name:choice(self.replacements)}
+                        _obj= json.loads(str(obj))
+                        new_file.update(_obj)
+                        with open(json_file, 'w+') as f:
+                            f.write(str(new_file))
+                        content = new_file[self.name]
+
+            except IOError:
+                pass
+        else:
+            if not os.path.exists(path):
+                url=path.split('/')
+                first,second,third=url[0],url[1],url[2]
+                full_url=first+'/'+second
+                os.mkdir(full_url)
+                os.chdir(full_url)
+                content=choice(self.replacements)
+                obj={self.name:content}
+                js=json.dumps(obj)
+                with open(third+'.json',"w+") as f:
+                    f.write(js)
+
+        return content
+
+register.tag(content_spinner)
+
