@@ -223,6 +223,8 @@ def index_test(request, test_name):
         template = 'tests/index-with-price.html'
     elif test_name == 'packages-price':
         template = 'tests/index-with-price-and-packages.html'
+    elif test_name == 'best-deal':
+        template = 'tests/index-with-best-deal.html'
     else:
         return redirect('home')
 
