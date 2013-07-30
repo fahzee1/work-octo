@@ -132,16 +132,33 @@
 
 </head>
 <body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %} {% block extra_class %}{% endblock %} ">
-<script type='text/javascript'>
-var ebRand = Math.random()+'';
-ebRand = ebRand * 1000000;
-//<![CDATA[ 
-document.write('<scr'+'ipt src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=342256&amp;rnd=' + ebRand + '"></scr' + 'ipt>');
-//]]>
+
+<div style="position:absolute;">    
+<!-- Start Quantcast Tag -->
+<script type="text/javascript"> 
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push(
+{qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Homepage"}
+);
 </script>
 <noscript>
+<img src="//pixel.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Homepage" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+
 <img width="1" height="1" style="border:0" src="HTTP://bs.serving-sys.com/BurstingPipe/ActivityServer.bs?cn=as&amp;ActivityID=342256&amp;ns=1"/>
 </noscript>
+</div>
 
 <!-- BEGIN LivePerson Monitor. -->
 <script type="text/javascript">
@@ -369,32 +386,9 @@ $(document).ready(function(){
 
         });
 
-
-{% comment %}
-/*
-   
-    function getFeed(citystate){
-        $.ajax({
-            url:"{% url 'render-feed' %}",
-            type:"GET",
-            data:citystate,
-            success:function(data){
-                $("#newsfeed").html(data);
-                $('#newsfeed').cycle({
-                            fx:'blindY',
-                            speed:500,
-                            timeout:6000,
-                            delay:-3000
-                });
-            }
-
-        });
-    }
-    */
-    {% endcomment %}
-     setInterval(checkExpired,3600000);
 });
 
+    setInterval(checkExpired,3600000);
     function checkExpired(){
         $.ajax({
             url:"/hourlycheck",
@@ -538,5 +532,23 @@ var google_conversion_value = 0;
                     <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
 
 {% endif %}
+{% block geo-pixel %}
+<!-- Google Code for Remarketing Tag -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 979438097;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/979438097/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+{% endblock %}
 </body>
 </html>
