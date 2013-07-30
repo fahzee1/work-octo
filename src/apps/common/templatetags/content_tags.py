@@ -7,6 +7,7 @@ from datetime import datetime
 from django import template
 from django.conf import settings
 from apps.common.models import SpunContent
+from django.http import Http404
 
 register = template.Library()
 
@@ -70,30 +71,7 @@ class ContentSpinnerNode(template.Node):
         self.request = template.Variable('request')
         self.name = content_name
         self.replacements = content_replacements.split('|')
-    '''
-    def render(self, context):
-        request = self.request.resolve(context)
-        path = request.META['PATH_INFO']
-        spun_items = getattr(request, 'spun_items', None)
-        if spun_items is None:
-            items = list(SpunContent.objects.filter(url=path))
-            request.spun_items = spun_items = {}
-            for sc in items:
-                spun_items[sc.name] = sc
-        # first try to see if the content has already been spun
-        content = spun_items.get(self.name)
-        if not content:
-            # get the random choice
-            from random import choice
-            content = SpunContent()
-            content.url = path
-            content.name = self.name
-            content.content = choice(self.replacements)
-            content.save()
-        return content.content
-register.tag(content_spinner)
-    '''
-
+   
     def render(self, context):
         request = self.request.resolve(context)
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
@@ -107,27 +85,27 @@ register.tag(content_spinner)
                     content = new_file[self.name]
                 except KeyError:
                     if self.name not in new_file.keys():
-                        obj={self.name:choice(self.replacements)}
-                        _obj= json.loads(str(obj))
-                        new_file.update(_obj)
+                        obj = {self.name:choice(self.replacements)}
+                        new_file.update(obj)
                         with open(json_file, 'w+') as f:
-                            f.write(str(new_file))
+                            f.write(json.dumps(new_file))
                         content = new_file[self.name]
 
             except IOError:
-                pass
+                raise Http404
         else:
             if not os.path.exists(path):
-                url=path.split('/')
+                url = path.split('/')
                 first,second,third=url[0],url[1],url[2]
-                full_url=first+'/'+second
+                full_url = first+'/'+second
                 os.mkdir(full_url)
                 os.chdir(full_url)
-                content=choice(self.replacements)
-                obj={self.name:content}
-                js=json.dumps(obj)
+                obj = {self.name:choice(self.replacements)}
                 with open(third+'.json',"w+") as f:
-                    f.write(js)
+                    f.write(json.dumps(obj))
+                content = obj[self.name]
+            else:
+                raise Http404
 
         return content
 
