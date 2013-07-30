@@ -1,6 +1,7 @@
 import os
 import pdb
 import json
+from glob import glob
 from django.conf import settings
 from random import choice
 from datetime import datetime
@@ -96,10 +97,10 @@ class ContentSpinnerNode(template.Node):
             except IOError:
                 raise Http404
         else:
+            url = path.split('/')
+            first,second,third=url[0],url[1],url[2]
+            full_url = first+'/'+second
             if not os.path.exists(path):
-                url = path.split('/')
-                first,second,third=url[0],url[1],url[2]
-                full_url = first+'/'+second
                 os.mkdir(full_url)
                 os.chdir(full_url)
                 obj = {self.name:choice(self.replacements)}
@@ -107,7 +108,22 @@ class ContentSpinnerNode(template.Node):
                     f.write(json.dumps(obj))
                 content = obj[self.name]
             else:
-                raise Http404
+                os.chdir(full_url+'/'+third)
+                try:
+                    _file = glob('*.json')[0]
+                except:
+                    raise Http404
+                try:    
+                    the_file = open(_file,'r+')
+                    new_file = json.load(the_file)
+                    try:
+                        content = new_file[self.name]
+                    except KeyError:
+                        raise Http404
+
+                except IOError:
+                    raise Http404
+
 
         return content
 
