@@ -341,25 +341,8 @@ def order_form(request):
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
 
-'''
-def new_order_form(request):
-    if not request.method == 'POST':
-        return redirect('/')
-    form_type=request.POST['form']
-    if form_type =='basic':
-        form,success=basic_post_login(request)
-        if success:
-            thanks_url=form.thank_you_url
-            lead_id=form.id
-            response=HttpResponseRedirect('http://www.protectamerica.com%s' % thanks_url)
-            response.set_cookie('lead_id',value=lead_id,
-                    domain='.protectamerica.com',
-                    expires=datetime.now()+expire_time)
-            return response
-'''
 
 def ajax_post(request):
-    pdb.set_trace()
     if request.method != "POST":
         return HttpResponseRedirect('/')
 

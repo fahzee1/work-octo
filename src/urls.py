@@ -146,7 +146,10 @@ elif settings.SITE_ID == 3:
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
-        dtt(r'^rep/?$', 'affiliates/sem-landing-page/responsive.html', 'squeeze'),
+        dtt(r'^rep/?$', 'affiliates/sem-landing-page/refresh-responsive.html', 'squeeze'),
+        dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test.html', 'squeeze'),
+
+
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
 
 
@@ -468,7 +471,7 @@ else:
             
             # Equipment > Home Automation
                 dtt(r'^equipment/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation-equipment', 'equipment'),
-                    #dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
+                    dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
                     dtt(r'^equipment/home-automation/z-wave-appliance-module/?$', 'products/equipment/appliance-module.html', 'appliance-module', 'home-automation-equipment'),
                     dtt(r'^equipment/home-automation/z-wave-indoor-siren/?$', 'products/equipment/indoor-siren.html', 'indoor-siren', 'home-automation-equipment'),
 
@@ -538,6 +541,10 @@ else:
 
                     dtt(r'^learn/security-101/complete-security/?$', 'complete-home-security/index.html', 'complete-home-security', 'learn-about-security'),
                     # > dtt(r'^complete-home-security/?$', 'complete-home-security/index.html', 'complete-home-security'),
+
+                    dtt(r'^learn/security-101/glossary/?$', 'about-us/glossary.html', 'glossary', 'learn-about-security'),
+
+                    dtt(r'^learn/security-101/resources/?$', 'about-us/resources.html', 'resources-101', 'learn-about-security'),
 
             # Learn > Reviews
             url(r'^learn/protect-america/reviews/?$', 'apps.testimonials.views.view_testimonials', name='testimonials'),
@@ -1183,6 +1190,10 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/products/security-equipment/sensors/door-window-sensor/',permanent=True)),
     ('shop-home-security-packages/copper-package/?$',
         RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
+    ('crime/rate/?$',
+        RedirectView.as_view(url='/crime-rate/',permanent=True)),
+    ('affiliates/resources/?$',
+        RedirectView.as_view(url='/affiliates/resources/get-started/',permanent=True)),
 
 
 )

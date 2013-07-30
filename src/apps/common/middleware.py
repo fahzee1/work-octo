@@ -28,7 +28,7 @@ class DetectMobileBrowser():
             b = reg_b.search(user_agent)
             v = reg_v.search(user_agent[0:4])
             if b or v:
-                return HttpResponseRedirect("http://m.protectamerica.com/")
+                return HttpResponseRedirect("http://homesecurity.protectamerica.com/")
 
 class SearchEngineReferrerMiddleware(object):
     """

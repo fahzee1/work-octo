@@ -38,16 +38,17 @@
     <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
     <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
     <!--[if (lt IE 9) & (!IEMobile)]>
-    <script src="js/selectivizr-min.js"></script>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
     <![endif]-->
     
     <!-- JavaScript -->
-    <script src="js/modernizr-2.5.3-min.js"></script>
+    <script src="{{ STATIC_URL }}js/modernizr-2.5.3-min.js"></script>
     
     <!-- Icons -->
     
     <!-- 16x16 -->
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico">
+    {% comment %}
     <!-- 32x32 -->
     <link rel="shortcut icon" href="/favicon.png">
     <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
@@ -58,7 +59,7 @@
     <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png"> -->
     <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
-    
+    {% endcomment %}
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
@@ -105,6 +106,30 @@
     {% block bing-conversion-code %}{% endblock %}
 </head>
 <body class="clearfix {{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
+<div style="position:absolute;left:9999px;">    
+<!-- Start Quantcast Tag -->
+<script type="text/javascript"> 
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push(
+{qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Search Landing Page"}
+);
+</script>
+<noscript>
+<img src="//pixel.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Search+Landing+Page" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+</div>
+
 {% block header %}
 <div id="header">
     <div id="header-wrapper">   
@@ -514,10 +539,10 @@
 
 {% endblock %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
-    <script src="js/plugins.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/helper.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"><\/script>')</script>
+    <script src="{{ STATIC_URL }}js/plugins.js"></script>
+    <script src="{{ STATIC_URL }}js/script.js"></script>
+    <script src="{{ STATIC_URL }}js/helper.js"></script>
     {% render_block "js" %}
     {% block extra_javascript %}
     	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
