@@ -165,7 +165,7 @@ GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels
 
 INTERNAL_IPS = ('127.0.0.1')
 
-
+LOCAL_PAGE_PATH = '/virtual/customer/www2.protectamerica.com/localpages/'
 TWITTER_CONSUMER_KEY='neNxtJ7k9R0UKTfwx12OnA'
 TWITTER_CONSUMER_SECRET='gAN1yKQXv6Z8JXKoJngKKd382nxzw2VrTdgHu0LBjU'
 TWITTER_ACCESS_TOKEN='199333362-iUqm5j0TqbufpKcQRlPyuOqiwMArfLzwl0nmY3CJ'

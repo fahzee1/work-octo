@@ -16,7 +16,7 @@ from django.core.urlresolvers import reverse, resolve
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page, never_cache
 
-from django.shortcuts import render_to_response,render
+from django.shortcuts import render_to_response,render,redirect
 from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse, \
@@ -226,7 +226,7 @@ def index_test(request, test_name):
     elif test_name == 'best-deal':
         template = 'tests/index-with-best-deal.html'
     else:
-        raise Http404
+        return redirect('home')
 
     return index_render(request, template, {})
 
