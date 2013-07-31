@@ -1,7 +1,7 @@
 import pdb
 import twitter
 from models import TheFeed,FallBacks
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseBadRequest,Http404
 from django.shortcuts import render 
 from itertools import chain, izip
 from django.core.cache import cache
@@ -49,10 +49,13 @@ def render_feed(request):
                     results.append(y)
                 if x not in results:
                     results.append(x)
-        ctx['GeoFeed']=results
     else:
-        results=data
-        ctx['GeoFeed']=results
+    	try:
+        	results=data['Feed']
+        except KeyError:
+        	raise Http404
+    if results:    	
+    	ctx['GeoFeed']=results
     return render(request,'newsfeed/feed.html',ctx)
 
 

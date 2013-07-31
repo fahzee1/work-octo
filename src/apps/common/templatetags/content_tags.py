@@ -101,7 +101,7 @@ class ContentSpinnerNode(template.Node):
             first,second,third=url[0],url[1],url[2]
             full_url = first+'/'+second
             if not os.path.exists(path):
-                os.mkdir(full_url)
+                os.makedirs(full_url)
                 os.chdir(full_url)
                 obj = {self.name:choice(self.replacements)}
                 with open(third+'.json',"w+") as f:
@@ -110,6 +110,7 @@ class ContentSpinnerNode(template.Node):
             else:
                 os.chdir(full_url+'/'+third)
                 try:
+                    #get first file that ends in json
                     _file = glob('*.json')[0]
                 except:
                     raise Http404
