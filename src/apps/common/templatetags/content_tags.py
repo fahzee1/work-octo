@@ -74,7 +74,6 @@ class ContentSpinnerNode(template.Node):
         self.replacements = content_replacements.split('|')
    
     def render(self, context):
-        pdb.set_trace()
         request = self.request.resolve(context)
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
         json_file = path+'.json'
