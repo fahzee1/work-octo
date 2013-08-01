@@ -100,16 +100,45 @@ class ContentSpinnerNode(template.Node):
             url = path.split('/')
             first,second,third=url[0],url[1],url[2]
             full_url = first+'/'+second
-            if not os.path.exists(path):
-                os.mkdir(full_url)
+            if not os.path.exists(full_url):
+                os.makedirs(full_url)
                 os.chdir(full_url)
                 obj = {self.name:choice(self.replacements)}
                 with open(third+'.json',"w+") as f:
                     f.write(json.dumps(obj))
                 content = obj[self.name]
+            
+            elif os.path.exists(full_url):
+                os.chdir(full_url)
+                j_file=third+'.json'
+                try:
+                    _files = glob('*json')
+                    _list=[]
+                    for f in _files:
+                        _list.append(f)
+                    if j_file not in _list:
+                        obj = {self.name:choice(self.replacements)}
+                        with open(j_file,"w+") as f:
+                            f.write(json.dumps(obj))
+                        content = obj[self.name]
+                    else:
+                        _file = _files[0]
+                        try:
+                            the_file = open(_file,'r+')
+                            new_file = json.load(the_file)
+                            try:
+                                content = new_file[self.name]
+                            except KeyError:
+                                raise Http404
+                        except IOError:
+                            raise Http404
+
+                except:
+                    raise Http404
             else:
                 os.chdir(full_url+'/'+third)
                 try:
+                    #get first file that ends in json
                     _file = glob('*.json')[0]
                 except:
                     raise Http404
