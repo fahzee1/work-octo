@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import TheFeed,AddType,FallBacks
+from models import TheFeed,AddType,FallBacks,TweetBackup
 
 class NewsFeedAdmin(admin.ModelAdmin):
 	list_display=('name','location','type','created','expires','active','feed_expired',)
@@ -13,8 +13,10 @@ class FeedTypeAdmin(admin.ModelAdmin):
 class FallBackAdmin(admin.ModelAdmin):
 	list_display=('feed_name',)	
 
+class TweetsAdmin(admin.ModelAdmin):
+	list_display=('text','GetRelativeCreatedAt','created',)
 
-
+admin.site.register(TweetBackup,TweetsAdmin)
 admin.site.register(TheFeed,NewsFeedAdmin)
 admin.site.register(AddType,FeedTypeAdmin)
 admin.site.register(FallBacks,FallBackAdmin)
