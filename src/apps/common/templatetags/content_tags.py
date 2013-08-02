@@ -76,7 +76,9 @@ class ContentSpinnerNode(template.Node):
         request = self.request.resolve(context)
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
         json_file = path+'.json'
-        os.chdir(settings.LOCAL_PAGE_PATH)
+        default = '/virtual/customer/www2.protectamerica.com/localpages/'
+        LOCAL_PAGE_PATH = getattr(settings,'LOCAL_PAGE_PATH',default)
+        os.chdir(LOCAL_PAGE_PATH)
         if os.path.exists(json_file):  
             try:
                 the_file = open(json_file,'r+')
