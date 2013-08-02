@@ -121,19 +121,36 @@ def query_by_state_city(state, city, get_content=True):
             if not city_here:
                 raise Http404
         else:
-           
             city = city.replace('+', ' ').replace('-', ' ').split(' ')
+            _city=None
+            city_slug=None
             if len(city)==2:
                 f,l=city[0],city[1]
                 if len(str(f))==2:
                     city=f+'.'+' '+l
+                    _city=f+' '+l
                 else:
                     city=f+' '+l
             if len(city)==3:
-                f,s,t=city[0],city[1],city[2]
+                f,s,t=city[0].lower(),city[1].lower(),city[2].lower()
+                a,b,c=city[0],city[1],city[2]
+                city_slug=f+'-'+s+'-'+t
                 city=f+' '+s+' '+t
+            if len(city)==4:
+                f,s,t,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower()
+                city_slug=f+'-'+s+'-'+t+'-'+l
+            if len(city)==5:
+                f,s,t,a,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower(),city[4].lower()
+                city_slug=f+'-'+s+'-'+t+'-'+a+'-'+l
             print "this is city blah blah %s" % city
-            city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
+            if city_slug:
+                city=CityLocation.objects.get(city_name_slug=city_slug,state=state.abbreviation)
+            elif _city:
+                aa=Q(city_name__iexact=city)
+                bb=Q(city_name__iexact=_city)
+                city=CityLocation.objects.get(aa|bb,state=state.abbreviation)
+            else:
+                city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
 
         print "this is edited city %s" % city
         city_id = city.id
@@ -159,13 +176,17 @@ def query_by_state_city(state, city, get_content=True):
 
     years.sort(reverse=True)
 
-    # get population type
-    if crimesbycity.population <= 40000:
-        pop_type = 'TOWN'
-    elif crimesbycity.population > 40000 and crimesbycity.population <= 750000:
-        pop_type = 'CITY'
+    if city_crime_objs:
+        # get population type
+        if crimesbycity.population <= 40000:
+            pop_type = 'TOWN'
+        elif crimesbycity.population > 40000 and crimesbycity.population <= 750000:
+            pop_type = 'CITY'
+        else:
+            pop_type = 'METROPOLIS'
     else:
         pop_type = 'METROPOLIS'
+
 
      # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
@@ -173,7 +194,7 @@ def query_by_state_city(state, city, get_content=True):
 
     context={'crime_stats': crime_stats,
            'years': years[:3],
-           'latest_year': crime_stats[years[0]],
+           'latest_year': (crime_stats[years[0]] if city_crime_objs else None),
            'state': state.abbreviation,
            'state_long': state.name,
            'city': city.city_name,
@@ -184,7 +205,7 @@ def query_by_state_city(state, city, get_content=True):
            'city_id': city_id}
 
     # get content
-    if get_content:
+    if get_content and city_crime_objs:
         content = CrimeContent.objects.get(
             grade=crime_stats[years[0]]['stats'].average_grade,
             population_type=pop_type)
