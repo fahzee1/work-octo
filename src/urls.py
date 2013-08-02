@@ -149,7 +149,6 @@ elif settings.SITE_ID == 3:
         dtt(r'^rep/?$', 'affiliates/sem-landing-page/refresh-responsive.html', 'squeeze'),
         dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test.html', 'squeeze'),
 
-
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
 
 
