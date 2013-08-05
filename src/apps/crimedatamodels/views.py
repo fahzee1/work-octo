@@ -130,7 +130,7 @@ def query_by_state_city(state, city, get_content=True):
                     city=f+'.'+' '+l
                     _city=f+' '+l
                 else:
-                    city=f+' '+l
+                    city_slug=f.lower()+'-'+l.lower()
             if len(city)==3:
                 f,s,t=city[0].lower(),city[1].lower(),city[2].lower()
                 a,b,c=city[0],city[1],city[2]

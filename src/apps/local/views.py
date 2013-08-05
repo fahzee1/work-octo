@@ -111,7 +111,7 @@ def local_page_wrapper(request, keyword, city, state):
                 if _state == state:
                     statecode=x[0]
     if '-' and '.' in city:
-        city=city.replace('-','').replace('.',' ')
+        city=city.replace('-',' ').replace('.','')
     if '-' in city:
         city=city.replace('-',' ')
     if '.' in city:
