@@ -118,6 +118,8 @@ def local_page_wrapper(request, keyword, city, state):
         city=city.replace('.',' ')
     if '(' or ')' in city:
         city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
     return local_page(request, statecode, city.title(), keyword)
 
 

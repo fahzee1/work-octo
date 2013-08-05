@@ -1237,9 +1237,19 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/',permanent=True)),
     ('pa/glass_around/?$',
         RedirectView.as_view(url='/',permanent=True)), 
-
-
-
+    ('pa/search/?$',
+        RedirectView.as_view(url='/search/',permanent=True)),
+    ('pa/thank_you/?$',
+        RedirectView.as_view(url='/thank_you/',permanent=True)),      
+    ('pa/outdoor_lighting/?$',
+        RedirectView.as_view(url='/security-equipment',permanent=True)),      
+    ('pa/cellular-monitoring/?$',
+        RedirectView.as_view(url='/learn/alarm-monitoring/cellular/',permanent=True)),  
+    ('pa/order/?$',
+        RedirectView.as_view(url='/products/order-package/',permanent=True)), 
+    ('crime-rate?$',
+        RedirectView.as_view(url='/crime-rate/',permanent=True)),  
+ 
 
 
 )
