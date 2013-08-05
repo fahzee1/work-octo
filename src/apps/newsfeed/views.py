@@ -1,3 +1,4 @@
+import pdb
 import twitter
 from models import TheFeed,FallBacks,TweetBackup
 from django.http import HttpResponse, HttpResponseBadRequest,Http404
@@ -14,36 +15,36 @@ access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 def give_me_tweets():
 	tweets=cache.get('TWEETS')
 	if not tweets:
-		try:
-			t_api=twitter.Api(consumer_key=consumer_key,
+	    try:
+		    t_api=twitter.Api(consumer_key=consumer_key,
 				              consumer_secret=consumer_secret,
 				              access_token_key=access_token,
 				              access_token_secret=access_secret)
-			tweets=t_api.GetUserTimeline('protectamerica')
-			cache.set('TWEETS',tweets,60*60)
-			backups=TweetBackup.objects.all()
-			b_count=backups.count()
-			if b_count != 0:
-				_list=[]
-				for b in backups.values('text'):
-					_list.append(b['text'])
-				for t in tweets:
-					if t.text not in _list:
-						TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())
-				for ba in backups:
-					ba.remove_old()	
+		    tweets=t_api.GetUserTimeline('protectamerica')
+		    cache.set('TWEETS',tweets,60*60)
+		    backups=TweetBackup.objects.all()
+		    b_count=backups.count()
+		    if b_count != 0:
+			    _list=[]
+			    for b in backups.values('text'):
+				    _list.append(b['text'])
+			    for t in tweets:
+				    if t.text not in _list:
+					    TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())
+			    for ba in backups:
+				    ba.remove_old()	
 
-			else:
-				for t in tweets:
-					TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())	
+		    else:
+			    for t in tweets:
+				    TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())	
 
-		except:
-			tweets=TweetBackup.objects.all()
+	    except:
+		    tweets=TweetBackup.objects.all()
 			
 	if tweets:
-		return tweets[:5]
+	    return tweets[:5]
 	else:
-		return None
+	    return None
 
 def hourly_check(request):
 	if request.is_ajax():
@@ -61,17 +62,20 @@ def render_feed(request):
     tweets=give_me_tweets()
     data=request.session.get('GeoFeedObjects',False)
     if data and tweets:
-        results=list(chain.from_iterable(izip(data,tweets)))
-        for x in data:
+        results=list(chain.from_iterable(izip(data['Feed'],tweets)))
+        for x in data['Feed']:
             for y in tweets:
                 if y not in results:
                     results.append(y)
                 if x not in results:
                     results.append(x)
-        ctx['GeoFeed']=results
     else:
-        results=data
-        ctx['GeoFeed']=results
+    	try:
+        	results=data['Feed']
+        except KeyError:
+        	raise Http404
+    if results:    	
+    	ctx['GeoFeed']=results
     return render(request,'newsfeed/feed.html',ctx)
 
 
