@@ -1,6 +1,6 @@
 import twitter
-from models import TheFeed,FallBacks
-from django.http import HttpResponse, HttpResponseBadRequest
+from models import TheFeed,FallBacks,TweetBackup
+from django.http import HttpResponse, HttpResponseBadRequest,Http404
 from django.shortcuts import render 
 from itertools import chain, izip
 from django.core.cache import cache
@@ -20,10 +20,30 @@ def give_me_tweets():
 				              access_token_key=access_token,
 				              access_token_secret=access_secret)
 			tweets=t_api.GetUserTimeline('protectamerica')
-			cache.set('TWEETS',tweets,60*60)	
-			return tweets[:5]
+			cache.set('TWEETS',tweets,60*60)
+			backups=TweetBackup.objects.all()
+			b_count=backups.count()
+			if b_count != 0:
+				_list=[]
+				for b in backups.values('text'):
+					_list.append(b['text'])
+				for t in tweets:
+					if t.text not in _list:
+						TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())
+				for ba in backups:
+					ba.remove_old()	
+
+			else:
+				for t in tweets:
+					TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())	
+
 		except:
-			pass
+			tweets=TweetBackup.objects.all()
+			
+	if tweets:
+		return tweets[:5]
+	else:
+		return None
 
 def hourly_check(request):
 	if request.is_ajax():

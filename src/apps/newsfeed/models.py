@@ -2,7 +2,7 @@ try:
 	from django.utils import timezone
 	timezone=timezone
 except ImportError:
-	from datetime import datetime
+	from datetime import datetime,timedelta
 	timezone=datetime
 from django.db import models
 from django.contrib.localflavor.us.us_states import US_STATES
@@ -93,6 +93,20 @@ class FallBacks(models.Model):
 	def __unicode__(self):
 		return '%s' % self.feed_name
 
+
+
+class TweetBackup(models.Model):
+	text=models.CharField(max_length=255)
+	GetRelativeCreatedAt=models.CharField(max_length=255)
+	created=models.DateTimeField(auto_now_add=True,default=timezone.now())
+
+	def __unicode__(self):
+		return '%s' % self.text
+
+	def remove_old(self):
+		too_old=self.created + timedelta(days=1)
+		if timezone.now() >= too_old and TweetBackup.objects.all().count() > 5:
+			self.delete()
 
 
 

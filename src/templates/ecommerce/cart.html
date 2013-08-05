@@ -1,0 +1,42 @@
+{% extends 'packages/base.html' %}
+
+{% block content %}
+
+<div id='first-block' style='margin:5px 5px 5px 5px'>
+ <h2>Your Security Package:</h2>
+ {% if current_cart.package.item == 'basic' %}
+   <h3 style='background-color:yellow;width:200px;'>Basic Package</h3>
+ {% endif %} 
+ {% if current_cart.package.item == 'standard' %}
+    <h3 style='background-color:yellow;width:200px;'>Standard Package</h3>
+ {% endif %} 
+ {% if current_cart.package.item == 'premier' %}
+ 	<h3 style='background-color:yellow;width:200px;'>Premier Package</h3>
+ {% endif %} 
+ {% if not current_cart.package.item %}
+	<h3 style='background-color:yellow;width:200px;'>No package selected</h3>
+ {% endif %}
+</div>
+<div id='second-block' style='margin:5px 5px 5px 5px'>
+{% if current_cart.monitoring.item == 'landline' %}
+   <h3 style='background-color:pink;width:200px;'>Landline</h3>
+{% endif %} 
+{% if current_cart.monitoring.item == 'broadband' %}
+   <h3 style='background-color:pink;width:200px;'>Broadband</h3>
+{% endif %} 
+{% if current_cart.monitoring.item == 'cellular' %}
+    <h3 style='background-color:pink;width:200px;'>Cellular</h3>
+{% endif %} 
+{% if not current_cart.monitoring.item %}
+    <h3 style='background-color:pink;width:200px;'>No monitoring selected</h3>
+{% endif %}
+</div>
+
+
+{% if current_cart.package and current_cart.monitoring %}
+    <div class="button-submit">
+        <a href="#" title="Continue to Add-Ons">Continue ></a>
+    </div>
+{% endif %}
+
+{% endblock %}
