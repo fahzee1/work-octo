@@ -341,7 +341,8 @@ def order_form(request):
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
 
-
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def ajax_post(request):
     if request.method != "POST":
         return HttpResponseRedirect('/')

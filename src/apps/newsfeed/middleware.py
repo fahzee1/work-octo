@@ -78,7 +78,7 @@ class GetGeoIp():
 
 		try:
 			no_visible=True
-			a=TheFeed.objects.filter(visible_to_all=True).order_by('created').reverse()
+			a=TheFeed.objects.filter(active=True,visible_to_all=True).order_by('created').reverse()
 			if a.count() == 0:
 				no_visible=False
 		except TheFeed.DoesNotExist:
