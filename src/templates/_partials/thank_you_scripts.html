@@ -83,16 +83,29 @@
     <!-- simpl.fi -->
     <script src="http://i.simpli.fi/dpx.js?cid=70&conversion=10&campaign_id=763"></script>
     <!-- End simpl.fi -->
-
+    
     <!-- Start Quantcast Tag -->
-    <script type="text/javascript">
-    _qoptions={qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Quote Confirmation",meta:"orderID={{ request.COOKIES.lead_id|default:'NOCOOKIE' }}"};
+    <script type="text/javascript"> 
+    var _qevents = _qevents || [];
+
+    (function() {
+    var elem = document.createElement('script');
+    elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+    elem.async = true;
+    elem.type = "text/javascript";
+    var scpt = document.getElementsByTagName('script')[0];
+    scpt.parentNode.insertBefore(elem, scpt);
+    })();
+
+    _qevents.push(
+    {qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Quote Confirmation",orderid:"{{ request.COOKIES.lead_id|default:'NOCOOKIE' }}"}
+    );
     </script>
-    <script type="text/javascript" src="//secure.quantserve.com/quant.js"></script>
     <noscript>
-    <img src="//secure.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Quote+Confirmation&meta=orderID={{ request.COOKIES.lead_id|default:'NOCOOKIE' }}" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+    <img src="//pixel.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Quote+Confirmation&orderid={{ request.COOKIES.lead_id|default:'NOCOOKIE' }}" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
     </noscript>
     <!-- End Quantcast tag -->
+
     <!-- Advertiser 'Protect America',  Conversion tracking 'Protect America Conversion Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
     <img src="http://ads.bluelithium.com/pixel?id=1732080&t=2" width="1" height="1" />
     <!-- End of conversion tag -->
