@@ -66,26 +66,27 @@ function blackin() {
             <div class="right-banner sprite"></div>
         </div>
         <!-- CHANGING ID IN FORM CHANGES MODERNIZR SCRIPT -->
-        <form id="quoteForm">
+        <form id="quoteForm">{% csrf_token %}
         <div class="form blue-gradient">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td><div class="form-header">GET A FREE QUOTE</div><div class="form-subheader">Fill in your contact information and one of our advisors will contact you directly</div></td>
               </tr>
               <tr>
-                <td><div class="form-field sprite"><input name="name" class="fields" id="name" type="text" value="" placeholder="*Full Name" onclick="blackout();" /></div></td>
+                <td><div class="form-field sprite"><input name="name" class="fields" id="_name" type="text" value="" placeholder="*Full Name" onclick="blackout();" /></div></td>
               </tr>
               <tr>
-                <td><div class="form-field sprite"><input name="email" class="fields" id="email" type="text" value="" placeholder="*Email Address" onclick="blackout();" /></div></td>
+                <td><div class="form-field sprite"><input name="email" class="fields" id="_email" type="text" value="" placeholder="*Email Address" onclick="blackout();" /></div></td>
               </tr>
               <tr>
-                <td><div class="form-field sprite"><input name="phone" class="fields" id="phone" type="text" value="" placeholder="*Phone Number" onclick="blackout();" /></div></td>
+                <td><div class="form-field sprite"><input name="phone" class="fields" id="_phone" type="text" value="" placeholder="*Phone Number" onclick="blackout();" /></div></td>
               </tr>
               <tr>
                 <td><div class="form-divider sprite"></div></td>
               </tr>
               <tr>
-                <td><a href="#"><div class="cta sprite"></div></a></td>
+
+                <td><div id='lp2-button' class="cta sprite"></div></td>
               </tr>
               <tr>
                 <td>
@@ -321,12 +322,86 @@ function blackin() {
   </div>
 </div>
 {% addtoblock "js" %}
-<script type="text/javascript" src="script/jquery-1.8.3.min.js"></script>
+{% block javascript %}
 
-<script type="text/javascript" src="script/functions.js"></script>
-<script type="text/javascript" src="script/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="script/centerfield_script.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/affiliates/centerfield-media/functions.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/affiliates/centerfield-media/centerfield_script.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    console.log("{% csrf_token %}");
+    $('#quoteForm input').keypress(function(e){
+        if(e.which == 13){
+            console.log('enter pressed');
+            $('#quoteForm button').click();
+        }
+    });
+    var submitting = false;
 
+    $('#quoteForm #lp2-button').click(function() {
+        $(this).attr('disabled', true);
+        $('#quoteForm div').removeClass('.error-state');
+        var data = {'name': $('#_name').val(), 'email': $('#_email').val(), 'phone': $('#_phone').val(), 'form': 'basic'}
+        $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess
+        });
+
+        function newFormSuccess(json) {
+            submitting = false;
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                url = json.thank_you
+                console.log(url);
+                window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        if(json.errors) {
+            $('#quoteForm button').attr('disabled', false); 
+            $("#quoteForm-error").show();
+            $("#quoteForm-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quoteForm-error ul").html(error_string);
+            } else $("#quoteForm-error").hide();
+        }
+        return false;
+        });
+    });   
+</script>
+{% endblock %}
 {% endaddtoblock "js" %}
             
 
