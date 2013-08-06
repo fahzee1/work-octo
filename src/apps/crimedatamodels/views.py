@@ -271,15 +271,16 @@ def choose_state(request):
     forms = {}
     forms['basic'] = PAContactForm()
     if not settings.DEBUG:
-        ip=request.META['REMOTE_ADDR']
-        r=requests.get('http://freegeoip.net/json/'+ip)
         try:
+            ip=request.META['REMOTE_ADDR']
+            r=requests.get('http://freegeoip.net/json/'+ip)
             resp=r.json()
             city=resp['city']
             state_abbr=resp['region_code']
             state_long=resp['region_name']
         except:
-            pass
+            city=None
+            state_abbr=None
         if city and state_abbr and 'dont_auto_crime_stats' not in request.session:
             request.session['dont_auto_crime_stats']=True
             try:
