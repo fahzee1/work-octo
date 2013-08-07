@@ -5,7 +5,7 @@ from string import Template
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseBadRequest
 from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
@@ -202,8 +202,8 @@ def basic_post_login(request):
         return (formset, True)
     return (form, False)
 
+
 def ajax_post(request):
-    pdb.set_trace()
     if request.method != "POST":
         return HttpResponseRedirect('/')
 
@@ -227,8 +227,11 @@ def ajax_post(request):
         response.set_cookie('lead_id', value=form.id,
             domain='.protectamerica.com',
             expires=datetime.now() + expire_time)
-    return response
+        return response
+    return HttpResponseBadRequest()
+    
 
+  
 
 def post(request):
     
@@ -340,37 +343,6 @@ def order_form(request):
                                'formset': formset,
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
-
-from django.views.decorators.csrf import csrf_exempt
-@csrf_exempt
-def ajax_post(request):
-    if request.method != "POST":
-        return HttpResponseRedirect('/')
-
-    response_dict = {}
-    form_type = request.POST['form']
-
-    if form_type == 'basic':
-        form, success = basic_post_login(request)
-        if success:
-            response_dict.update({'success': True,
-                'thank_you': form.thank_you_url,
-                'lead_id': form.id})
-        else:
-            response_dict.update({'errors': form.errors})
-
-    response = HttpResponse(simplejson.dumps(response_dict),
-        mimetype='application/javascript')
-
-    if 'success' in response_dict and response_dict['success']:
-        expire_time = timedelta(days=90)
-        response.set_cookie('lead_id', value=form.id,
-            domain='.protectamerica.com',
-            expires=datetime.now() + expire_time)
-    
-    return response
-
-  
 
 
 

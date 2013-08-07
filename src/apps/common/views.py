@@ -153,9 +153,7 @@ def simple_dtt(request, template, extra_context, expire_days=90):
         visited_pages.append(extra_context['page_name'])
         request.session['vpages'] = visited_pages
 
-    response = render_to_response(template,
-                              extra_context,
-                              context_instance=RequestContext(request))
+    response = render(request,template,extra_context)
     patch_vary_headers(response, ('Host',))
     return response
 
