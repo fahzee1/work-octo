@@ -97,7 +97,7 @@ urlpatterns = patterns('',
     url(r'^nongeofeed/?$', 'apps.newsfeed.views.nongeo_feed',name='nongeo-feed'),
 
     #contact us
-    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
+    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post',name='contact-ajax'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
 
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
