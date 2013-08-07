@@ -67,8 +67,9 @@ function blackin() {
             <div class="right-banner sprite"></div>
         </div>
         <!-- CHANGING ID IN FORM CHANGES MODERNIZR SCRIPT -->
-        <form id="quoteForm" TYPE="POST">
-        {% csrf_token %}
+
+       <form id="quoteForm" method="post" action=''>
+         {% csrf_token %}
         <div class="form blue-gradient">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
@@ -343,10 +344,10 @@ $(document).ready(function() {
     $('#quoteForm #lp2-button').click(function() {
         $(this).attr('disabled', true);
         $('#quoteForm div').removeClass('.error-state');
-        var data = {'name': $('#_name').val(), 'email': $('#_email').val(), 'phone': $('#_phone').val(), 'form': 'basic'}
+        var data = {'name': $('#_name').val(), 'email': $('#_email').val(), 'phone': $('#_phone').val(), 'form': 'basic','csrfmiddlewaretoken':'{{csrf_token}}'}
         $.ajax({
             type: "POST",
-            url: "/contact/ajaxpost/",
+            url: "{% url contact-ajax %}",
             data: data,
             dataType: "json",
             success: newFormSuccess
