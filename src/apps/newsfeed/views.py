@@ -1,5 +1,6 @@
 import pdb
 import twitter
+from random import shuffle
 from models import TheFeed,FallBacks,TweetBackup
 from django.http import HttpResponse, HttpResponseBadRequest,Http404
 from django.shortcuts import render 
@@ -39,7 +40,8 @@ def give_me_tweets():
 				    TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())	
 
 	    except:
-		    tweets=TweetBackup.objects.all()
+		    tweets=list(TweetBackup.objects.all())
+		    shuffle(tweets)
 			
 	if tweets:
 	    return tweets[:5]
