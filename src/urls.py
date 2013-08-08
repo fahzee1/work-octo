@@ -1249,7 +1249,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/products/order-package/',permanent=True)), 
     ('crime-rate?$',
         RedirectView.as_view(url='/crime-rate/',permanent=True)),  
- 
+    ('pa/home/?$',
+        RedirectView.as_view(url='/',permanent=True)),  
 
 
 )
