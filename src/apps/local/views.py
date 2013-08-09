@@ -78,6 +78,42 @@ TIMEZONES = {
     'WY': 'America/Denver'
 }
 
+EXCLUDE_CITIES={
+'New York':'NY',
+'Los Angeles':'CA',
+'Chicago':'IL',
+'Washington':'DC',
+'Boston':'MA',
+'San Jose':'CA',
+'Philadelphia':'PA',
+'Dallas':'TX',
+'Houston':'TX',
+'Atlanta':'GA',
+'Miami':'FL',
+'Detroit':'MI',
+'Phoenix':'AZ',
+'Seattle':'WA',
+'Minneapolis':'MN'
+}
+
+def get_timezone(state):
+    tz = timezone(TIMEZONES[state])
+    utc_dc = datetime.datetime.now(tz=pytz.utc)
+    new_dt = utc_dc.astimezone(tz)
+
+    hour = int(new_dt.strftime("%H"))
+    if hour >= 0 and hour < 6:
+        background_time = 'night'
+    elif hour >= 6 and hour < 8:
+        background_time = 'dusk'
+    elif hour >= 8 and hour < 18:
+        background_time = 'day'
+    elif hour >= 18 and hour < 20:
+        background_time = 'dusk'
+    elif hour >= 20 and hour < 24:
+        background_time = 'night'
+    return background_time
+
 
 @cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state):
@@ -120,7 +156,25 @@ def local_page_wrapper(request, keyword, city, state):
         city=city.replace('(','').replace(')','')
     if ',' in city:
         city=city.replace(',','')
-    return local_page(request, statecode, city.title(), keyword)
+
+    if (city.upper(),statecode) in ((k.upper(),v) for k,v in EXCLUDE_CITIES.iteritems()):
+        background_time=get_timezone(statecode)
+        ctx={'background_time':background_time}
+        try:
+            response = render(request,'local-pages/static-pages/%s.html'% city.replace(' ','-').lower(),ctx)
+        except:
+            response = render(request,'local-pages/static-pages/default.html',ctx)
+
+        expire_time = datetime.timedelta(days=90)
+        response.set_cookie('affkey',
+                    value='%s:%s' % (city.replace(' ', ''), state),
+                    domain='.protectamerica.com',
+                    expires=datetime.datetime.now() + expire_time)
+        return response
+
+    else:
+        return local_page(request, statecode, city.title(), keyword)
+
 
 
 def local_page(request, state, city, keyword=None):
@@ -148,21 +202,8 @@ def local_page(request, state, city, keyword=None):
     crime_stats_ctx['forms'] = forms
     if keyword is not None:
         crime_stats_ctx['keyword'] = keyword.replace('-', ' ').title()
-    tz = timezone(TIMEZONES[crime_stats_ctx['state']])
-    utc_dc = datetime.datetime.now(tz=pytz.utc)
-    new_dt = utc_dc.astimezone(tz)
 
-    hour = int(new_dt.strftime("%H"))
-    if hour >= 0 and hour < 6:
-        background_time = 'night'
-    elif hour >= 6 and hour < 8:
-        background_time = 'dusk'
-    elif hour >= 8 and hour < 18:
-        background_time = 'day'
-    elif hour >= 18 and hour < 20:
-        background_time = 'dusk'
-    elif hour >= 20 and hour < 24:
-        background_time = 'night'
+    background_time=get_timezone(crime_stats_ctx['state'])
 
     crime_stats_ctx['background_time'] = background_time
     custom_keyword_list = ['']
@@ -219,6 +260,7 @@ def local_city(request, state):
                 'forms': forms,
                 'state': state.abbreviation,
             }, context_instance=RequestContext(request))
+
 
 
 def html_sitemap(request, state, keyword):
