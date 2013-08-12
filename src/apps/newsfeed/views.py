@@ -15,7 +15,6 @@ access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 
 def give_me_tweets():
 	tweets=cache.get('TWEETS')
-	pdb.set_trace()
 	if not tweets:
 	    try:
 		    t_api=twitter.Api(consumer_key=consumer_key,
