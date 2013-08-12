@@ -15,6 +15,7 @@ access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 
 def give_me_tweets():
 	tweets=cache.get('TWEETS')
+	pdb.set_trace()
 	if not tweets:
 	    try:
 		    t_api=twitter.Api(consumer_key=consumer_key,
@@ -40,8 +41,10 @@ def give_me_tweets():
 				    TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())	
 
 	    except:
-		    tweets=list(TweetBackup.objects.all())
-		    shuffle(tweets)
+		    tweets=TweetBackup.objects.all()
+		    for t in tweets:
+		    	t.remove_old()
+		    shuffle(list(tweets))
 			
 	if tweets:
 	    return tweets[:5]
