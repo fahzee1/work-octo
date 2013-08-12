@@ -99,7 +99,7 @@ def query_weather(latitude, longitude, city, state):
     return weather_info
 
 
-def query_by_state_city(state, city, get_content=True):
+def query_by_state_city(state, city, get_content=True,local=False):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
@@ -113,8 +113,9 @@ def query_by_state_city(state, city, get_content=True):
         if ' ' not in city:
             cities = CityLocation.objects.filter(state=state.abbreviation)
             city_here=False
+            local=(True if local else False)
             for x in cities:
-                if x.join_name() == city:
+                if x.join_name(local) == city:
                     city_here=True
                     city=x
                     print "this is city and length was 1 %s" % city
@@ -130,7 +131,7 @@ def query_by_state_city(state, city, get_content=True):
                     city=f+'.'+' '+l
                     _city=f+' '+l
                 else:
-                    city=f+' '+l
+                    city_slug=f.lower()+'-'+l.lower()
             if len(city)==3:
                 f,s,t=city[0].lower(),city[1].lower(),city[2].lower()
                 a,b,c=city[0],city[1],city[2]
@@ -225,6 +226,16 @@ def query_by_state_city(state, city, get_content=True):
     return context
 
 def crime_stats(request, state, city):
+    if '-' and '.' in city:
+        city=city.replace('-',' ').replace('.','')
+    if '-' in city:
+        city=city.replace('-',' ')
+    if '.' in city:
+        city=city.replace('.',' ')
+    if '(' or ')' in city:
+        city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
     crime_stats_ctx = query_by_state_city(state, city)
 
     forms = {}
@@ -260,12 +271,16 @@ def choose_state(request):
     forms = {}
     forms['basic'] = PAContactForm()
     if not settings.DEBUG:
-        ip=request.META['REMOTE_ADDR']
-        r=requests.get('http://freegeoip.net/json/'+ip)
-        resp=r.json()
-        city=resp['city']
-        state_abbr=resp['region_code']
-        state_long=resp['region_name']
+        try:
+            ip=request.META['REMOTE_ADDR']
+            r=requests.get('http://freegeoip.net/json/'+ip)
+            resp=r.json()
+            city=resp['city']
+            state_abbr=resp['region_code']
+            state_long=resp['region_name']
+        except:
+            city=None
+            state_abbr=None
         if city and state_abbr and 'dont_auto_crime_stats' not in request.session:
             request.session['dont_auto_crime_stats']=True
             try:
@@ -418,7 +433,17 @@ def local(request, state, city):
         if request.GET.get(filt, None) == 'hide':
             filters[filt] = False
 
-    data = query_by_state_city(state, city, get_content=False)
+    if '-' and '.' in city:
+        city=city.replace('-',' ').replace('.','')
+    if '-' in city:
+        city=city.replace('-',' ')
+    if '.' in city:
+        city=city.replace('.',' ')
+    if '(' or ')' in city:
+        city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
+    data = query_by_state_city(state, city, get_content=False,local=True)
     data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
 
     forms = {}
@@ -436,7 +461,16 @@ def crime(request, state, city, crime):
     template = CRIME_TEMPLATES.get(crime, None)
     if not template:
         raise Http404
-
+    if '-' and '.' in city:
+        city=city.replace('-',' ').replace('.','')
+    if '-' in city:
+        city=city.replace('-',' ')
+    if '.' in city:
+        city=city.replace('.',' ')
+    if '(' or ')' in city:
+        city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
     # Return Template with results of query_by_state_city
     return render_to_response(template,
         query_by_state_city(state, city, False),

@@ -1,0 +1,413 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+{% block page_title %}Best Home Security | Protect America Home Security{% endblock %}
+{% block page_description %}Get a home security system at an affordable price. Protect America home security and alarm systems will protect your home. Get a free GE home security system today!{% endblock %}
+{% block google_experiment %}
+
+{% endblock %}   
+{% block navigation %}{% endblock %}
+{% block subnav %}{% endblock %}
+{% block header %}{% endblock %}
+{% block order-footer %}{% endblock %}
+{% block css %}
+<link href="{{ STATIC_URL }}css/affiliates/centerfield-media/lp2/stylesheet.css" rel="stylesheet" type="text/css">
+<link href="{{ STATIC_URL }}css/affiliates/centerfield-media/lp2/normalize.css" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Dancing+Script:700|Open+Sans+Condensed:700|Open+Sans:600italic,700italic,800italic,400,600,700,800|Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript">
+function blackout() {
+	if (document.getElementById('pageoverlay').style.display == 'none') {document.getElementById('pageoverlay').style.display = 'block'; }	
+}
+function blackin() {
+	if (document.getElementById('pageoverlay').style.display == 'block') {document.getElementById('pageoverlay').style.display = 'none'; }	
+}
+</script>
+
+{% endblock %}
+{% block typekit %}{% endblock %}
+{% block content %}
+<div class="container">
+	<div id="pageoverlay" style="display:none;" onclick="blackin();"></div>
+	<div class="bar blue-gradient" id="top-bar">
+      	<div class="header-txt">Call Now for a FREE Quote <font style="color:#ffd200;"><label class="rc_phone">
+        {% if request.GET.phone %}
+            {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+            {% else %}
+                <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+            {% endif %}
+        {% else %}
+            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+        {% endif %}
+            </a>
+        </label></font></div>
+      </div>
+      
+    <div class="main-content">
+        <div class="logo-shell cf">
+        	<div class="logo"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/wht-logo.gif" width="290" height="50" alt="Protect America Logo " /></div>
+            <div class="top-number">
+            	<div class="t1">CALL NOW FOR A FREE QUOTE!</div>
+                <div class="t2"><label class="rc_phone">        {% if request.GET.phone %}
+            {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+            {% else %}
+                <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+            {% endif %}
+        {% else %}
+            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+        {% endif %}</a></label></div>
+            </div>
+        </div>
+        <div class="top-banner cf">
+        	<div class="left-banner sprite"></div>
+            <div class="mid-banner">
+            	<div class="header-txt">Wireless Home Security.  100% Protection.</div>
+            </div>
+            <div class="right-banner sprite"></div>
+        </div>
+        <!-- CHANGING ID IN FORM CHANGES MODERNIZR SCRIPT -->
+
+       <form id="quoteForm" method="post" action=''>
+         {% csrf_token %}
+        <div class="form blue-gradient">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><div class="form-header">GET A FREE QUOTE</div><div class="form-subheader">Fill in your contact information and one of our advisors will contact you directly</div></td>
+              </tr>
+              <tr>
+                <td><div class="form-field sprite"><input name="name" class="fields" id="_name" type="text" value="" placeholder="*Full Name" onclick="blackout();" /></div></td>
+              </tr>
+              <tr>
+                <td><div class="form-field sprite"><input name="email" class="fields" id="_email" type="text" value="" placeholder="*Email Address" onclick="blackout();" /></div></td>
+              </tr>
+              <tr>
+                <td><div class="form-field sprite"><input name="phone" class="fields" id="_phone" type="text" value="" placeholder="*Phone Number" onclick="blackout();" /></div></td>
+              </tr>
+              <tr>
+                <td><div class="form-divider sprite"></div></td>
+              </tr>
+              <tr>
+
+                <td><div id='lp2-button' class="cta sprite"></div></td>
+              </tr>
+              <tr>
+                <td>
+                <div class="privacy">
+                	<div class="t5">or call <label class="rc_phone">
+                	        {% if request.GET.phone %}
+            {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+            {% else %}
+                <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+            {% endif %}
+        {% else %}
+            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+        {% endif %}
+            </a>
+                	</label></div>
+                    <div class="t6"><a href="#">We never share your information with anyone</a></div>
+                </div>
+                </td>
+              </tr>
+            </table>
+        </div>
+        </form>
+        <div class="special-offer">
+        	<div class="offer-img sprite"></div>
+            <div class="limited-offer lo-pos1 sprite"></div>
+            <div class="offer-txt ot-pos1 text-shadow">Call in Now for <font style="color:#ffd800;">2 FREE Keychain Remotes </font>with your Home Security System.</div>
+        </div>
+        <div class="header-img">
+        	<div class="bullets">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td valign="top"><div class="check sprite"></div></td>
+                    <td align="left" valign="top"><div class="bullet-txt"><font style="color:#C00;">24/7</font> Nationwide Monitoring</div></td>
+                  </tr>
+                  <tr>
+                    <td valign="top"><div class="check sprite"></div></td>
+                    <td align="left" valign="top"><div class="bullet-txt">Reliable GE Wireless Security System</div></td>
+                  </tr>
+                  <tr>
+                    <td valign="top"><div class="check sprite"></div></td>
+                    <td align="left" valign="top"><div class="bullet-txt"><font style="color:#C00;">Free Equipment</font> &amp; <font style="color:#C00;">NO Activation Fees</font></div></td>
+                  </tr>
+                  <tr>
+                    <td valign="top"><div class="check sprite"></div></td>
+                    <td align="left" valign="top"><div class="bullet-txt">Up to <font style="color:#C00;">20% off</font> Homeowners</div></td>
+                  </tr>
+                  <tr>
+                    <td valign="top"><div class="check sprite"></div></td>
+                    <td align="left" valign="top"><div class="bullet-txt"><font style="color:#C00;">Lifetime Replacement Parts</font> Warranty on all Alarm Systems</div></td>
+                  </tr>
+                  <tr>
+                    <td valign="top"><div class="check sprite"></div></td>
+                    <td align="left" valign="top"><div class="bullet-txt">Complete Home Protection</div></td>
+                  </tr>
+                </table>
+            </div>
+        </div>
+      <div class="price-container cf">
+        	<div class="price-bg sprite">
+            	<div class="t3 text-shadow">Starting at just</div>
+                <div class="t4 text-shadow"><span class="s1">$</span>19<span class="s2">.99/mo*</span></div>
+            </div>
+            <div class="verify"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/verify.gif" width="260" height="67" alt="verify logos" /></div>
+      </div>
+      <div class="cf"></div>
+      
+      <div class="blue-gradient" id="bar">
+      	<div class="header-txt">Call Now for a FREE Quote <font style="color:#ffd200;"><label class="rc_phone">        {% if request.GET.phone %}
+            {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+            {% else %}
+                <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+            {% endif %}
+        {% else %}
+            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+        {% endif %}</a></label></font></div>
+      </div>
+      
+      <div class="content-below">
+      	<div class="items-container cf">
+       	  <div class="item">
+            <div class="item-headline">Lowest Price Guaranteed</div>
+            <div class="item-img"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/lowprice.jpg" width="181" height="79" alt="lowest price" /></div>
+            <div class="item-txt">If you find a better offer, let us know. We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</div>
+          </div>
+          <div class="item">
+            <div class="item-headline">Lifetime Equipment Warranty</div>
+            <div class="item-img"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/equipment.jpg" width="181" height="79" alt="equipment" /></div>
+            <div class="item-txt">As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free. We want to make sure your home is always secure.</div>
+          </div>
+          <div class="item">
+            <div class="item-headline">Homeowner’s Insurance Discount</div>
+            <div class="item-img"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/security.jpg" width="181" height="79" alt="homeowner insurance" /></div>
+            <div class="item-txt">Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</div>
+          </div>
+          <div class="item">
+            <div class="item-headline2">Relocation Kit</div>
+            <div class="item-img"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/relocation.jpg" width="181" height="79" alt="relocation" /></div>
+            <div class="item-txt">With Protect America, you own your security equipment. If you happen to move, we will send you a relocation kit to easily take your security system with you.</div>
+          </div>
+          <div class="item">
+            <div class="item-headline2">Free Tech Support</div>
+            <div class="item-img"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/support.jpg" width="181" height="79" alt="support" /></div>
+            <div class="item-txt">Included with your home security system is our knowledgeable technical support staff. From simple operation to the advanced settings, they are here to help you.</div>
+          </div>
+        </div>
+        <div><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/pa-divider.gif" width="1003" height="72" />
+        </div>
+        <div class="section-header">What Sets Protect America Apart?</div>  
+        <div class="chart-wrapper">
+        	<table id="chart" width="900" border="1" bordercolor="#CCCCCC" cellspacing="0" cellpadding="0">
+              <tr>
+                <td>&nbsp;</td>
+                <td class="chart-pa" align="center" valign="middle"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp-two/blue-logo.gif" width="253" height="45" /></td>
+                <td width="150" height="75" bgcolor="#C7C7C7" valign="middle">ADT</td>
+                <td width="150" height="75" bgcolor="#C7C7C7" valign="middle">FrontPoint</td>
+              </tr>
+              <tr>
+                <td>Installation</td>
+                <td class="chart-pa" valign="middle">$0</td>
+                <td>$49</td>
+                <td>$99</td>
+              </tr>
+              <tr>
+                <td>Monthly Rate</td>
+                <td class="chart-pa" valign="middle">$19.99</td>
+                <td valign="middle">$42.99</td>
+                <td valign="middle">$34.99</td>
+              </tr>
+              <tr>
+                <td>Homeowner's Discount</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td align="center" valign="middle"><div class="blue-check sprite"></div></td>
+                <td align="center" valign="middle"><div class="blue-check sprite"></div></td>
+              </tr>
+              <tr>
+                <td>24/7 Monitoring</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td align="center" valign="middle"><div class="blue-check sprite"></div></td>
+                <td align="center" valign="middle"><div class="blue-check sprite"></div></td>
+              </tr>
+              <tr>
+                <td>Interactive Features*</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Lifetime Replacement</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Parts Warranty</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Free EasyMove</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Moving Kit</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Lowest Price Guaranteed</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>Locked-in Rate</td>
+                <td class="chart-pa" align="center" valign="middle"><div class="green-check sprite"></div></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="chart-pa" align="center" valign="middle"><a href="#" onclick="blackout();"><div class="cta sprite"></div></a></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+        </div>    
+        <div class="offer-bar cf">
+        	<div class="offer-left">Call Now for a FREE Quote<br /> <font style="color:#ffd200; font-size:44px;"><label class="rc_phone">        {% if request.GET.phone %}
+            {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+            {% else %}
+                <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+            {% endif %}
+        {% else %}
+            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+        {% endif %}</a></label></font></div>
+            <div class="offer-img2 sprite"></div>
+            <div class="limited-offer lo-pos2 sprite"></div>
+            <div class="offer-txt ot-pos2 text-shadow">Call in Now for <font style="color:#ffd800;">2 FREE Keychain Remotes </font>with your Home Security System.</div>
+        </div>
+        <div class="section-header">What Our Customers Have to Say!</div>
+        <div class="testi-wrapper cf">
+        	<div class="testimonial testi-width1">
+            	<div class="testi-name">Michael</div>
+                <div class="testi-location">from <font style="color:#C00;">Escondido, CA</font></div>
+                <div class="item-txt">Noel was excellent: very thorough and patient. As I've mentioned, I installed this alarm many years ago when I worked long hours and traveled for my catering business and was concerned about my Apple computer being stolen. I sold my business, bought a laptop, and stay closer to home, so I don't use the system regularly. I travel 4-5 times/year max, and turn the alarm on then, but pay the monthly fee so I can have peace of mind when I do travel. The new unit looks great, an improvement on the old without being more complicated. I especially appreciate all your help with this replacement. Thanks. </div>
+            </div>
+            <div class="testimonial testi-width2">
+            	<div class="testi-name">Richard</div>
+                <div class="testi-location">from <font style="color:#C00;">Baltimore, MD</font></div>
+                <div class="item-txt">I got notified today that Bltimore Gas and Electric was turning off power in my neighborhood for about 6 hours on Thursday. Not knowing what that would do the system I called customer service and was fortunate enough to reach Jessica Palma who talked me through all the possible contingencies. Great service Thanks.</div>
+            </div>
+            <div class="testimonial testi-width2">
+            	<div class="testi-name">Jodi</div>
+                <div class="testi-location">from <font style="color:#C00;">Thomasville, NC</font></div>
+                <div class="item-txt">Avery was great. I was very nervous about the process of setting up and using the system. Avery was patient and walked me through the process step-by-step. He put me at ease about using the system in general. Avery seemed passionate about the service being provided and that is rare these days.</div>
+            </div>
+        </div>
+        <div class="footer blue-gradient-rev">
+        	<div class="footer-txt"><p>* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date }}</p>
+<p>* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan".</p>
+<p>GE and GE Security logos are registered trademarks of General Electric.</p>
+<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
+<p>© 1992 — 2013 Protect America, Inc. All rights reserved</p></div>
+		</div>
+      </div>
+  </div>
+</div>
+{% addtoblock "js" %}
+{% block javascript %}
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/affiliates/centerfield-media/functions.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/affiliates/centerfield-media/centerfield_script.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    console.log("{% csrf_token %}");
+    $('#quoteForm input').keypress(function(e){
+        if(e.which == 13){
+            console.log('enter pressed');
+            $('#quoteForm button').click();
+        }
+    });
+    var submitting = false;
+
+    $('#quoteForm #lp2-button').click(function() {
+        $(this).attr('disabled', true);
+        $('#quoteForm div').removeClass('.error-state');
+        var data = {'name': $('#_name').val(), 'email': $('#_email').val(), 'phone': $('#_phone').val(), 'form': 'basic','csrfmiddlewaretoken':'{{csrf_token}}'}
+        $.ajax({
+            type: "POST",
+            url: "{% url contact-ajax %}",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess
+        });
+
+        function newFormSuccess(json) {
+            submitting = false;
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                url = json.thank_you
+                console.log(url);
+                window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        if(json.errors) {
+            $('#quoteForm button').attr('disabled', false); 
+            $("#quoteForm-error").show();
+            $("#quoteForm-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quoteForm-error ul").html(error_string);
+            } else $("#quoteForm-error").hide();
+        }
+        return false;
+        });
+    });   
+</script>
+{% endblock %}
+{% endaddtoblock "js" %}
+            
+
+{% endblock %}
+{% block main-footer %}{% endblock %}
+{% block terms %}{% endblock %}

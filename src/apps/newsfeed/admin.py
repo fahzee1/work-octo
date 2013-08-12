@@ -16,6 +16,7 @@ class FallBackAdmin(admin.ModelAdmin):
 class TweetsAdmin(admin.ModelAdmin):
 	list_display=('text','GetRelativeCreatedAt','created',)
 
+
 admin.site.register(TweetBackup,TweetsAdmin)
 admin.site.register(TheFeed,NewsFeedAdmin)
 admin.site.register(AddType,FeedTypeAdmin)

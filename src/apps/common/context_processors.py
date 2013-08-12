@@ -1,5 +1,5 @@
 import pdb
-from datetime import datetime
+from datetime import datetime,date
 from django.conf import settings
 import calendar
 from mobile.sniffer.detect import detect_mobile_browser
@@ -49,6 +49,7 @@ def last_day_of_month(request):
     is_weekend=True
     if wknd != 6 or 7:
         is_weekend=False
+
     ctx={'final_date':_date,
          'is_weekend':is_weekend}
     return ctx

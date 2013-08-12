@@ -8,10 +8,9 @@ from apps.crimedatamodels.sitemaps import *
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
-# Uncomment the next two lines to enable the admin:
+#Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-
 from apps.local.views import LOCAL_KEYWORDS
 
 
@@ -97,7 +96,7 @@ urlpatterns = patterns('',
     url(r'^nongeofeed/?$', 'apps.newsfeed.views.nongeo_feed',name='nongeo-feed'),
 
     #contact us
-    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post'),
+    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post',name='contact-ajax'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
 
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
@@ -1237,9 +1236,22 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/',permanent=True)),
     ('pa/glass_around/?$',
         RedirectView.as_view(url='/',permanent=True)), 
-
-
-
+    ('pa/search/?$',
+        RedirectView.as_view(url='/search/',permanent=True)),
+    ('pa/thank_you/?$',
+        RedirectView.as_view(url='/thank_you/',permanent=True)),      
+    ('pa/outdoor_lighting/?$',
+        RedirectView.as_view(url='/security-equipment',permanent=True)),      
+    ('pa/cellular-monitoring/?$',
+        RedirectView.as_view(url='/learn/alarm-monitoring/cellular/',permanent=True)),  
+    ('pa/order/?$',
+        RedirectView.as_view(url='/products/order-package/',permanent=True)), 
+    ('crime-rate?$',
+        RedirectView.as_view(url='/crime-rate/',permanent=True)),  
+    ('pa/home/?$',
+        RedirectView.as_view(url='/',permanent=True)),
+    ('alarm/?$',
+        RedirectView.as_view(url='/equipment/home-automation/z-wave-indoor-siren/',permanent=True)),        
 
 
 )
