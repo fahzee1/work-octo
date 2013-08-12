@@ -58,18 +58,18 @@ class TheFeed(models.Model):
 
 	def feed_expired(self):
 		if timezone.today().date() >= self.expires:
-			self.active=False
+			self.active = False
 			self.save()
 			return True
 		else:
-			self.active=True
+			self.active = True
 			self.save()
 			return False
 
 
 
 class FallBacks(models.Model):
-	feed_name=models.ForeignKey(TheFeed)
+	feed_name = models.ForeignKey(TheFeed)
 
 	def __unicode__(self):
 		return '%s' % self.feed_name
@@ -77,9 +77,9 @@ class FallBacks(models.Model):
 
 
 class TweetBackup(models.Model):
-	text=models.CharField(max_length=255)
-	GetRelativeCreatedAt=models.CharField(max_length=255)
-	created=models.DateTimeField(auto_now_add=True,default=timezone.now())
+	text = models.CharField(max_length=255)
+	GetRelativeCreatedAt = models.CharField(max_length=255)
+	created = models.DateTimeField(auto_now_add=True,default=timezone.now())
 
 	def __unicode__(self):
 		return '%s' % self.text
