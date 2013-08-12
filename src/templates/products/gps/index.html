@@ -19,7 +19,7 @@
 
     </div>
 </div>
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 <div class="wrapper">
     <div id="vehicle-gps">
         <div id="gps-tracking-car">
@@ -28,7 +28,7 @@
         <div id="gps-tracking-overview">
             <h2>GPS Vehicle Tracking</h2>
             <p>Our simple-to-use GPS tracking device plugs into your car's existing ODB port and allows you to keep a "virtual eye" on your vehicle.</p>
-            <p>Get customizable alerts via email or text if your teenager or loved one is speeding or even if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college. If your car is stolen, track its location. Our GPS vehicle tracking brings an added level of security and control to any vehicle.</p>
+            <p>Get customizable alerts via email or text if your teenager or loved one is speeding or even if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college. If your car is stolen, track its location. Our GPS vehicle tracking brings an added level of <a href="{% url simon-xt %}">security and control</a> to any vehicle.</p>
             <div class="order-link">
                 <a href="{% url order-package %}?package=silver" class="button-link" onClick="_gaq.push(['_trackEvent', 'Add to Package', 'Add to Package Button', 'GPS']);">Add Car Tracking <i class="icon-chevron-right"></i></a>
                 <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
@@ -51,7 +51,7 @@
         <img src="/static/img/products/gps/speed-limit.jpg" alt="GPS Tracking Speed">
         <div id="notifications-content">
             <h2>Customizable Notifications</h2>
-            <p>Our vehicle GPS tracking device can easily create notifications that allow you to keep an eye on what your teenager or loved one is doing. Get notified by email or text when their car enters an "off limits" zone or receive an alert if they decide to speed while on a little joy ride.</p>
+            <p>Our vehicle GPS tracking device can easily create notifications that allow you to keep an eye on what your teenager or loved one is doing. Get notified by email or text when their car enters an "off limits" zone or receive an <a href="{% url medical-pendant %}">alert</a> if they decide to speed while on a little joy ride.</p>
                 <div class="order-link">
                     <a href="{% url order-package %}?package=silver" class="button-link" onClick="_gaq.push(['_trackEvent', 'Add to Package', 'Add to Package Button', 'GPS']);">Add Car Tracking <i class="icon-chevron-right"></i></a>
                     <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
@@ -75,7 +75,7 @@
         <div id="monitor-elderly-drivers">
             <img src="/static/img/products/gps/elderly-tracker.jpg" alt="GPS Tracking for Elderly" />
             <h3>Easily Monitor Elderly Drivers</h3>
-            <p>Worried about your elderly parents? ake sure they are okay on the road.</p>
+            <p>Worried about your elderly parents? <ake sure they are okay on the road.</p>
         </div>
         <div id="company-vehicle-tracker">
             <img src="/static/img/products/gps/company-truck.jpg" alt="GPS Tracking Business Vehicle" />

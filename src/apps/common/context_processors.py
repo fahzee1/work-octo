@@ -1,11 +1,38 @@
-from datetime import datetime
-
+import pdb
+from datetime import datetime,date
 from django.conf import settings
 import calendar
 from mobile.sniffer.detect import detect_mobile_browser
 from mobile.sniffer.utilities import get_user_agent
 from apps.affiliates.models import Affiliate
 
+
+def business_time(request):
+    ctx={'business_time':False}
+    if not hasattr(settings,'BUSINESS_HOURS'):
+        return ctx
+    today=datetime.today()
+    try:
+        start=datetime.strptime('%s-%s-%s %s' % (
+            today.day,
+            today.month,
+            today.year,
+            settings.BUSINESS_HOURS[today.weekday()]['start'],
+            ), '%d-%m-%Y %H%M')
+        end=datetime.strptime('%s-%s-%s %s' % (
+            today.day,
+            today.month,
+            today.year,
+            settings.BUSINESS_HOURS[today.weekday()]['end'],
+            ), '%d-%m-%Y %H%M')
+        now=datetime.now()
+        if start <= now <= end:
+            ctx['business_time']=True
+        else:
+            ctx['business_time']=False
+        return ctx
+    except:
+        return ctx
 
 def last_day_of_month(request):
     #get final date of each month
@@ -16,7 +43,16 @@ def last_day_of_month(request):
     last_day=calendar.monthrange(year,month)[1]
     last_date=str(month)+'/'+str(last_day)+'/'+str(year)
     _date=datetime.strptime(last_date,'%m/%d/%Y')
-    return {'final_date':_date}
+
+    #get weekend
+    wknd=datetime.now().isoweekday()
+    is_weekend=True
+    if wknd != 6 or 7:
+        is_weekend=False
+
+    ctx={'final_date':_date,
+         'is_weekend':is_weekend}
+    return ctx
 
 def mobile_check(request):
     ua = get_user_agent(request)
@@ -49,13 +85,6 @@ def get_affiliate_from_request(request):
         pass
     return None
 
-def tracking_pixels(request):
-    affiliate = get_affiliate_from_request(request)
-    
-    ctx = {'pixels': None}
-    if affiliate:
-        ctx['pixels'] = affiliate.pixels
-    return ctx
 
 def phone_number(request):
     from django.conf import settings
@@ -84,6 +113,7 @@ def phone_number(request):
     affiliate = get_affiliate_from_request(request)
 
     if affiliate:
+        request.session['affiliate']=affiliate
         if 'phone' in request.GET:
             ctx['phone_number'] = request.GET['phone']
             request.session['phone_number'] = request.GET['phone']
@@ -95,6 +125,15 @@ def phone_number(request):
 
     return ctx
 
+
+def tracking_pixels(request):
+    ctx={}
+    try:
+        affiliate=request.session['affiliate']
+        ctx['pixels']=affiliate.pixels
+    except KeyError:
+        ctx['pixels']=None
+    return ctx
 
 def business_hours(request):
     ctx = {'business_hours': ''}

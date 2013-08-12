@@ -3,7 +3,7 @@
 {% load sekizai_tags %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/support-2.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/support-2.css?v3.0.0">
 {% endblock %}
 
 {% block subnav %}
@@ -26,6 +26,9 @@
                 <div class="clear"></div>
 
             </div>
+        </li>
+        <li class="{% if 'installation' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url installation %}">Installation Videos</a>
         </li>
         <li class="{% if 'find-us' in active_pages %}active{% endif %} menu-item">
             <a href="{% url find-us %}">Find Us</a>

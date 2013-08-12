@@ -75,6 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'sekizai.context_processors.sekizai',
     'apps.common.context_processors.last_day_of_month',
+    'apps.common.context_processors.business_time',
     'django.contrib.messages.context_processors.messages',
     )
 
@@ -99,7 +100,8 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.CommonMiddlewareWrapper',
     'apps.common.middleware.DetectMobileBrowser',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    'apps.newsfeed.middleware.RenderNewsFeed',
+    #'apps.newsfeed.middleware.RenderNewsFeed',
+    'apps.newsfeed.middleware.GetGeoIp',
 )
 
 ROOT_URLCONF = 'urls'
@@ -156,18 +158,20 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 DEFAULT_PHONE = '8009515190'
-SUPER_AFFILIATES = ("a10058",)
+SUPER_AFFILIATES = ("a10058","a10447","a10449")
 
 
 GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
 
 INTERNAL_IPS = ('127.0.0.1')
 
-
+LOCAL_PAGE_PATH = '/virtual/customer/www2.protectamerica.com/localpages/'
 TWITTER_CONSUMER_KEY='neNxtJ7k9R0UKTfwx12OnA'
 TWITTER_CONSUMER_SECRET='gAN1yKQXv6Z8JXKoJngKKd382nxzw2VrTdgHu0LBjU'
 TWITTER_ACCESS_TOKEN='199333362-iUqm5j0TqbufpKcQRlPyuOqiwMArfLzwl0nmY3CJ'
 TWITTER_ACCESS_TOKEN_SECRET='jWBAmeUpFTZbpfyX7kXKhSJVWqow3uhtV8fRfI39URA'
+SESSION_COOKIE_AGE=86400
+SESSION_SAVE_EVERY_REQUEST=True
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings

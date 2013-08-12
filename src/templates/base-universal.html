@@ -1,0 +1,507 @@
+{% load content_tags content_filters sekizai_tags %}
+{% load url from future %}
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+{% block google_experiment %}
+
+{% endblock %}
+    <!-- Begin Inspectlet Embed Code -->
+    <script type="text/javascript" id="inspectletjs">
+    	window.__insp = window.__insp || [];
+    	__insp.push(['wid', 1417973242]);
+    	(function() {
+    		function __ldinsp(){var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://www.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); }
+    		if (window.attachEvent){
+    			window.attachEvent('onload', __ldinsp);
+    		}else{
+    			window.addEventListener('load', __ldinsp, false);
+    		}
+    	})();
+    </script>
+    <!-- End Inspectlet Embed Code -->
+    
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta name="description" content="{% block page_description %}{% endblock %}" />
+    <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <meta property="fb:admins" content="586942929" />
+{% block robots_tag %}
+    {% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>
+    {% else %}
+        {% if request.is_secure %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+        {% else %}<meta name="ROBOTS" content="INDEX, FOLLOW"/>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+    <meta name="rating" content="general" />
+    <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
+    <meta name="author" content="Protect America" />
+    <meta name="contact_addr" content="webmaster@protectamerica.com" />
+    <meta name="distribution" content="global" />
+    <meta name="resource-type" content="document" />
+    <meta http-equiv="imagetoolbar" content="false" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
+    <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
+{% block favicon %}
+    <!-- Icons -->
+    <!-- 16x16 -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- 32x32 -->
+    <link rel="shortcut icon" href="/favicon.png">
+    <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png"> -->
+    <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png"> -->
+    <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png"> -->
+    <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
+    <!--iOS -->
+    <meta name="viewport" content="width=1024">
+    <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
+    <!-- <meta name="viewport" content="initial-scale=1.0"> (Use if apple-mobile-web-app-capable below is set to yes) -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
+    <!-- Startup images -->
+    <!-- iPhone 3GS, pre-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-320x460.png" media="screen and (max-device-width:320px)"> -->
+    <!-- iPhone 4, 4S and 2011 iPod Touch-->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x920.png" media="(max-device-width:480px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPhone 5 and 2012 iPod Touch -->
+    <!-- <link rel="apple-touch-startup-image" href="img/startup/startup-640x1096.png" media="(max-device-width:548px) and (-webkit-min-device-pixel-ratio:2)"> -->
+    <!-- iPad landscape -->
+    <!-- <link rel="apple-touch-startup-image" sizes="1024x748" href="img/startup/startup-1024x748.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape)"> -->
+    <!-- iPad Portrait -->
+    <!-- <link rel="apple-touch-startup-image" sizes="768x1004" href="img/startup/startup-768x1004.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait)"> -->
+    
+    <!-- Windows 8 / RT -->
+    <meta name="msapplication-TileImage" content="img/apple-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#000">
+{% endblock %}
+    <meta http-equiv="cleartype" content="on">
+{% block css %}
+    <!-- For all browsers -->
+    <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/320.css">
+    <!-- For progressively larger displays -->
+    <link rel="stylesheet" media="screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/480.css">
+    <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+
+{% endblock %}    
+
+<!--[if IE 7]>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome/font-awesome-ie7.min.css">
+<![endif]-->
+
+<!-- JavaScript -->
+<script src="{{ STATIC_URL }}js/modernizr-2.5.3-min.js"></script>
+
+{% block canonical %}
+    {% if request.session.domain == 'protectamerica.com' %}
+        <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
+    {% endif %}
+{% endblock %}
+    
+{% block google_analytics %}
+    <script type="text/javascript">
+    
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-5441302-2']);
+     _gaq.push(['_setDomainName', 'protectamerica.com']);
+     {% block ga_custom_variables %}{% endblock %}
+     _gaq.push(['_trackPageview']);
+    
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+    
+    </script>
+{% endblock %}
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% block bing-conversion-code %}{% endblock %}
+
+</head>
+<body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
+
+<!-- BEGIN LivePerson Monitor. -->
+<script type="text/javascript">
+if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',protocol:location.protocol,events:{bind:function(app,ev,fn){lpTag.defer(function(){lpTag.events.bind(app,ev,fn)},0)},trigger:function(app,ev,json){lpTag.defer(function(){lpTag.events.trigger(app,ev,json)},1)}},defer:function(fn,fnType){if(fnType==0){this._defB=this._defB||[];this._defB.push(fn)}else if(fnType==1){this._defT=this._defT||[];this._defT.push(fn)}else{this._defL=this._defL||[];this._defL.push(fn)}},load:function(src,chr,id){var t=this;setTimeout(function(){t._load(src,chr,id)},0)},_load:function(src,chr,id){var url=src;if(!src){url=this.protocol+'//'+((this.ovr&&this.ovr.domain)?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site}var s=document.createElement('script');s.setAttribute('charset',chr?chr:'UTF-8');if(id){s.setAttribute('id',id)}s.setAttribute('src',url);document.getElementsByTagName('head').item(0).appendChild(s)},init:function(){this._timing=this._timing||{};this._timing.start=(new Date()).getTime();var that=this;if(window.attachEvent){window.attachEvent('onload',function(){that._domReady('domReady')})}else{window.addEventListener('DOMContentLoaded',function(){that._domReady('contReady')},false);window.addEventListener('load',function(){that._domReady('domReady')},false)}if(typeof(window._lptStop)=='undefined'){this.load()}},_domReady:function(n){if(!this.isDom){this.isDom=true;this.events.trigger('LPT','DOM_READY',{t:n})}this._timing[n]=(new Date()).getTime()}};lpTag.init()}
+</script>
+<!-- END LivePerson Monitor. -->
+<!-- Page Header -->
+{% block header %}
+
+    <div id="top-section-wrapper">
+        <div id="top-section">
+            <ul id="newsfeed">
+            </ul>
+             
+{% comment %}
+   <li><i class="icon-twitter"></i> @owowdesigns thanks for the follow! <span>&ndash; About an Hour Ago</span></li>
+                <li><i class="icon-thumbs-up"></i> Like us on Facebook Today! <span>&ndash; About an Hour Ago</span></li>
+                <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
+{% endcomment %}
+            <div id="company-links">
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+
+                <ul id="international-selection">
+                    <li class="us active"><a href="">EN</a></li>
+                    <li class="es"><a href="http://www.protectamerica.com/es/">ES</a></li>
+                    <li class="ca"><a href="http://www.protectamericasecurity.ca">EN</a></li>
+                    <i class="icon-caret-down"></i>
+                </ul>
+                <form action="http://www.protectamerica.com/search/" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div id="header-wrapper">
+        <div id="header">
+
+            <a href="{% url 'home' %}">
+                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+            </a>
+
+            <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
+                </div>
+            {% endif %}
+
+            <ul id="main-navigation">
+                <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/shop-home-security-packages/">Shop</a>
+                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/security-equipment/">Equipment</a>
+                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/learn/">Learn</a>
+                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'support' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/support">Support</a>
+                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+            {% include "order/quote-form-refresh.html" with form=forms.basic %}
+
+            <div class="clear"></div>
+        </div>
+    </div>
+        
+{% endblock %}
+
+<!-- Sub Navigation -->
+{% block subnav %}{% endblock %}
+
+<!-- Main Content -->
+{% block content %}
+{% endblock %}
+
+
+<!-- Order Footer -->
+{% block order-footer %}
+{% comment %}
+        <div id="order-footer">
+            <div id="footer-package-section">
+                {% block page-product %}
+                <h3>Search Our Site.</h3>
+                <p>Try searching our site to find what you are looking for.</p>
+                <form id="search-form" method="GET" action="http://www.protectamerica.com/search/">
+                    <input type="text" id="q" name="q" placeholder="Enter Keywords"></input>
+                    <button class="button-link" onClick="_gaq.push(['_trackEvent', 'Search', 'Footer Search Button', '{{ page.name }}']);">Search Now ></button>
+                </form>
+                {% endblock %}
+            </div>
+            <div id="footer-call-now">
+                <h3>Give us a call.</h3>
+                <p>Our security experts are here to answer any questions and help you protect your home and family today.</p>
+                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span>
+            </div>
+            <div id="footer-chat-now">
+                <h3>Chat online.</h3>
+                <p>Have a question about a system? Ready to order? Our security experts are available to chat online right now.</p>
+                <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', '{{ page.name }}']);">Online Chat ></a></div>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+{% endcomment %}
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% block main-footer %}
+    <div id="footer-wrapper">
+        <div id="footer">
+            <ul id="footer-main-navigation">
+                <li class="{% if 'shop' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/shop-home-security-packges/" title="Shop Home Security Packages">Shop</a></li>
+                <li class="{% if 'equipment' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/security-equipment/" title="View Equipment and Products">Equipment</a></li>
+                <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/learn/" title="Learn about Home Security">Learn</a></li>
+                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/" title="Get Help for your Home Security System">Support</a></li>
+                <li class="{% if 'order-package' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/products/order-package/" title="Order Home Security Today">Order</a></li>
+                <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/sitemap/" title="View our Sitemap">Sitemap</a></li>
+            </ul>
+            <ul id="footer-care-nav">
+                <li class="{% if 'customer-service' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/customer-service/" title="Customer Service">Customer Service</a></li>
+                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/privacy-policy/" title="View our Privacy Policy">Privacy Policy</a></li>
+                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/state-licenses/" title="View our Licenses for Each State">State Licenses</a></li>
+                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
+                <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
+                <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
+            </ul> 
+            <ul id="footer-contact-info">
+                <li><strong>Telephone</strong></li>
+                <li><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></li>
+                <li><span>M-F</span> 7AM - 11PM CT</li>
+                <li><span>SAT</span> 8AM - 8PM CT</li>
+                <li><span>SUN</span> 9AM - 9PM CT</li>
+                <li id="footer-social-icons">
+                    <a href="http://www.twitter.com/ProtectAmerica" title="Visit our Twitter Page"><i class="icon-twitter"></i></a>
+                    <a href="http://www.facebook.com/ProtectAmerica" title="Visit our Facebook Page"><i class="icon-facebook"></i>
+                    <a href="http://www.youtube.com/user/ProtectAmerica" title="Watch our Tutorials and Videos on our YouTube Page"><i class="icon-youtube"></i></a>
+
+                </li>
+            </ul>
+            <div id="footer-awards">
+                &nbsp;
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    {% endblock %}
+    {% block terms %}
+    <div id="terms-wrapper">
+        <div id="terms">
+            <div id="terms-conditions">
+                <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 06/30/2013</p>
+                <p>* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
+                {% block extra_terms %}
+                {% endblock %}
+            </div>
+            <div id="copyrights">
+                <p>GE and GE Security logos are registered trademarks of General Electric.</p>
+                {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
+                <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
+            </div>
+        </div>
+        <div class="clear"></div> 
+
+    </div>
+    {% endblock %}
+
+{% endblock %}
+<!-- Javascript -->
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+        $.ajax({
+            url:"{% url 'render-feed' %}",
+            success:function(data){
+                $("#newsfeed").html(data);
+                $('#newsfeed').cycle({
+                            fx:'blindY',
+                            speed:500,
+                            timeout:6000,
+                            delay:-3000
+                });
+            }
+
+        });
+
+
+{% comment %}
+/*
+   
+    function getFeed(citystate){
+        $.ajax({
+            url:"{% url 'render-feed' %}",
+            type:"GET",
+            data:citystate,
+            success:function(data){
+                $("#newsfeed").html(data);
+                $('#newsfeed').cycle({
+                            fx:'blindY',
+                            speed:500,
+                            timeout:6000,
+                            delay:-3000
+                });
+            }
+
+        });
+    }
+    */
+    {% endcomment %}
+     setInterval(checkExpired,3600000);
+});
+    function checkExpired(){
+        $.ajax({
+            url:"/hourlycheck",
+        });
+    }
+  
+
+
+
+
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/placeholder.js"></script>
+<script>Modernizr.load({
+            test: Modernizr.input.placeholder,
+            nope: ['Placeholder.js'],
+            complete: function(){Placeholders.init();}
+        });
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+
+
+{% render_block "js" %}
+{% block main_js %}
+
+    <script type="text/javascript">
+        $("#subnav > li.menu-item").mouseover(function(){
+            if ($(this).hasClass('open') || $(this).hasClass('hover')) {
+                
+            } else {
+                if ($(this).data("menu")) {
+                    var menu = $(this).data("menu");
+                    $(this).addClass('hover');
+                    $(this).children('.child-nav').show();
+                }
+            }
+
+        }).mouseout(function(){
+            if ($(this).hasClass('open')) {
+                
+            } else {
+                if ($(this).data("menu")) {
+                    var menu = $(this).data("menu");
+                    $(this).removeClass('hover');
+                    $(this).children('.child-nav').hide();
+
+                }
+            }
+        });        
+        $("#international-selection > li.active").click(function(){
+            if ($("#international-selection").hasClass("active")) {
+                $("#international-selection").removeClass('active');
+            } else {
+                $("#international-selection").addClass('active');
+
+            }
+            return false;
+        });
+        $(".request-quote-button").click(function(){
+            if ($(this).hasClass('active')) {
+                $('#quote-form').hide();
+                $(this).removeClass('active');
+            } else {
+                $('#quote-form').show();
+                $(this).addClass('active');
+            };
+            return false;
+        });
+        $('#newsfeed').cycle({
+           fx:     'blindY',
+           speed:   500,
+           timeout: 6000,
+           delay:  -3000
+        });
+
+        $('#header-wrapper').waypoint('sticky', {
+		  offset: -85 // Apply "stuck" when element 30px from top
+		});
+
+    </script>
+
+{% endblock %}
+{% block extra_javascript %}
+
+{% if use_call_measurement %}
+<script type="text/javascript"> 
+    var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'i10237' or request.COOKIES.refer_id == 'a01415' or request.COOKIES.refer_id == 'i10237' or request.GET.agent == 'i10237' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'i10240' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}";
+    var thisref = document.referrer.replace(/&/g, "zzzzz");
+    var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+    document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
+</script>
+{% endif %}
+{% endblock %}
+
+{% block extra_pixels %}
+{{ pixels|default_if_none:""|safe }}
+{% endblock %}
+{% if DEBUG == False %}
+{% block remarketing-one %}
+<!-- Google Code for Home Page Visit Remarketing List -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1072079179;
+var google_conversion_language = "en";
+var google_conversion_format = "1";
+var google_conversion_color = "666666";
+var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
+var google_conversion_value = 0;
+//-->
+</script>
+<!-- Google + -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{% endblock %}
+{% block remarketing %}
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- End Remarketing Code -->
+<IMG SRC="http://mpp.specificclick.net/?nwk=4&y=2&t=i&tp=1&clid=4056&pixid=99072978" width=1 height=1 border=0>
+
+{% endblock %}
+
+<!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
+<img src="http://ads.bluelithium.com/pixel?id=1732074&t=2" width="1" height="1" style="position: absolute;" />
+<!-- End of segment tag -->
+                    <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
+
+{% endif %}
+</body>
+</html>

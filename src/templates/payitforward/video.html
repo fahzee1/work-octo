@@ -1,6 +1,4 @@
-   {% extends "base.html" %}
-
-
+{% extends "base.html" %}
 {% load testimonial_tags sekizai_tags %
 
 
@@ -48,23 +46,6 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-$(document).ready(function() {
-    $('.next-row-button').click(function() {
-        var current_row = $(this).parent().children('.slide-row:visible');
-        var row_count = $(this).parent().children('.slide-row').length;
-        if(current_row.index() == (row_count - 1) ) {
-            var next_slide = $(this).parent().children('.slide-row:eq(0)');
-        } else {
-            var next_slide = $(this).parent().children('.slide-row:eq('+(current_row.index() + 1)+')');
-        }
-        $(this).parent().children('.slide-row:visible').removeClass('active')
-        next_slide.addClass('active');
-    });
-});
-</script>
-{% endaddtoblock "js" %}
 <div id="body">
     <div id="grunge">
         <div id="top-container">
