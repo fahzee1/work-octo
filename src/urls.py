@@ -11,7 +11,7 @@ from apps.common.views import simple_dtt
 #Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-
+from apps.local.views import LOCAL_KEYWORDS
 
 
 
