@@ -1,7 +1,6 @@
 import re
 import os
 from datetime import datetime, timedelta
-
 from django.shortcuts import render_to_response,render,redirect
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -9,8 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
-from django.views.decorators.csrf import csrf_exempt
-
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate,Profile
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
@@ -306,7 +303,7 @@ def signup(request):
 
     return simple_dtt(request, 'contact-us/affiliates.html', ctx)
 
-@csrf_exempt
+
 def accept_affiliate(request):
     # API listener to accept affiliate submissions
     if request.method != "POST":

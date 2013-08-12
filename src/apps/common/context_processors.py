@@ -50,17 +50,8 @@ def last_day_of_month(request):
     if wknd != 6 or 7:
         is_weekend=False
 
-    #change sunday hours on 8/11
-    today=datetime.today().date()
-    change_date=date(2013,8,11)
-    if today >= change_date:
-        today=True
-    else:
-        today=False
-
     ctx={'final_date':_date,
-         'is_weekend':is_weekend,
-         'change_today':today}
+         'is_weekend':is_weekend}
     return ctx
 
 def mobile_check(request):

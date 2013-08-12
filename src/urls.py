@@ -8,7 +8,7 @@ from apps.crimedatamodels.sitemaps import *
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
 
-# Uncomment the next two lines to enable the admin:
+#Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
@@ -1249,7 +1249,9 @@ urlpatterns += patterns('',
     ('crime-rate?$',
         RedirectView.as_view(url='/crime-rate/',permanent=True)),  
     ('pa/home/?$',
-        RedirectView.as_view(url='/',permanent=True)),  
+        RedirectView.as_view(url='/',permanent=True)),
+    ('alarm/?$',
+        RedirectView.as_view(url='/equipment/home-automation/z-wave-indoor-siren/',permanent=True)),        
 
 
 )
