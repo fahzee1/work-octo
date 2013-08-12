@@ -1,5 +1,7 @@
 import urllib
-
+import pdb
+import requests
+from django.contrib import messages
 from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.db.models import Q
@@ -97,21 +99,60 @@ def query_weather(latitude, longitude, city, state):
     return weather_info
 
 
-def query_by_state_city(state, city, get_content=True):
+def query_by_state_city(state, city, get_content=True,local=False):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
-        print "this is state %s" % state
+        print "this is state %s" % state.abbreviation
     except State.DoesNotExist:
         print 'none'
         raise Http404
     try:
-        city = city.replace('+', ' ').replace('-', ' ')
-        print "this is city %s" % city
+        print city
+        if ' ' not in city:
+            cities = CityLocation.objects.filter(state=state.abbreviation)
+            city_here=False
+            local=(True if local else False)
+            for x in cities:
+                if x.join_name(local) == city:
+                    city_here=True
+                    city=x
+                    print "this is city and length was 1 %s" % city
+            if not city_here:
+                raise Http404
+        else:
+            city = city.replace('+', ' ').replace('-', ' ').split(' ')
+            _city=None
+            city_slug=None
+            if len(city)==2:
+                f,l=city[0],city[1]
+                if len(str(f))==2:
+                    city=f+'.'+' '+l
+                    _city=f+' '+l
+                else:
+                    city_slug=f.lower()+'-'+l.lower()
+            if len(city)==3:
+                f,s,t=city[0].lower(),city[1].lower(),city[2].lower()
+                a,b,c=city[0],city[1],city[2]
+                city_slug=f+'-'+s+'-'+t
+                city=f+' '+s+' '+t
+            if len(city)==4:
+                f,s,t,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower()
+                city_slug=f+'-'+s+'-'+t+'-'+l
+            if len(city)==5:
+                f,s,t,a,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower(),city[4].lower()
+                city_slug=f+'-'+s+'-'+t+'-'+a+'-'+l
+            print "this is city blah blah %s" % city
+            if city_slug:
+                city=CityLocation.objects.get(city_name_slug=city_slug,state=state.abbreviation)
+            elif _city:
+                aa=Q(city_name__iexact=city)
+                bb=Q(city_name__iexact=_city)
+                city=CityLocation.objects.get(aa|bb,state=state.abbreviation)
+            else:
+                city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
 
-        city = CityLocation.objects.get(city_name__iexact=city,
-            state=state.abbreviation)
         print "this is edited city %s" % city
         city_id = city.id
     except CityLocation.DoesNotExist:
@@ -136,13 +177,17 @@ def query_by_state_city(state, city, get_content=True):
 
     years.sort(reverse=True)
 
-    # get population type
-    if crimesbycity.population <= 40000:
-        pop_type = 'TOWN'
-    elif crimesbycity.population > 40000 and crimesbycity.population <= 750000:
-        pop_type = 'CITY'
+    if city_crime_objs:
+        # get population type
+        if crimesbycity.population <= 40000:
+            pop_type = 'TOWN'
+        elif crimesbycity.population > 40000 and crimesbycity.population <= 750000:
+            pop_type = 'CITY'
+        else:
+            pop_type = 'METROPOLIS'
     else:
         pop_type = 'METROPOLIS'
+
 
      # Google Weather API
     weather_info = query_weather(city.latitude, city.longitude,
@@ -150,7 +195,7 @@ def query_by_state_city(state, city, get_content=True):
 
     context={'crime_stats': crime_stats,
            'years': years[:3],
-           'latest_year': crime_stats[years[0]],
+           'latest_year': (crime_stats[years[0]] if city_crime_objs else None),
            'state': state.abbreviation,
            'state_long': state.name,
            'city': city.city_name,
@@ -161,7 +206,7 @@ def query_by_state_city(state, city, get_content=True):
            'city_id': city_id}
 
     # get content
-    if get_content:
+    if get_content and city_crime_objs:
         content = CrimeContent.objects.get(
             grade=crime_stats[years[0]]['stats'].average_grade,
             population_type=pop_type)
@@ -178,10 +223,19 @@ def query_by_state_city(state, city, get_content=True):
     except MatchAddressLocation.DoesNotExist:
         pass
 
-    print context
     return context
 
 def crime_stats(request, state, city):
+    if '-' and '.' in city:
+        city=city.replace('-',' ').replace('.','')
+    if '-' in city:
+        city=city.replace('-',' ')
+    if '.' in city:
+        city=city.replace('.',' ')
+    if '(' or ')' in city:
+        city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
     crime_stats_ctx = query_by_state_city(state, city)
 
     forms = {}
@@ -213,22 +267,29 @@ def choose_city(request, state):
 
 
 def choose_state(request):
-    if not settings.DEBUG:
-        from django.contrib.gis.utils import GeoIP
-        # try to auto find the city/state from IP address
-        geo_ip = GeoIP()
-        city_info = geo_ip.city(request.META['REMOTE_ADDR'])
-        if city_info is not None and 'city' in city_info and 'region' in city_info and 'dont_auto_crime_stats' not in request.session:
-            request.session['dont_auto_crime_stats'] = True
-            return HttpResponseRedirect(reverse('crime-rate:crime-stats', kwargs={'city': city_info['city'], 'state': city_info['region']}))
     states = State.objects.order_by('name')
-
     forms = {}
     forms['basic'] = PAContactForm()
-
+    if not settings.DEBUG:
+        try:
+            ip=request.META['REMOTE_ADDR']
+            r=requests.get('http://freegeoip.net/json/'+ip)
+            resp=r.json()
+            city=resp['city']
+            state_abbr=resp['region_code']
+            state_long=resp['region_name']
+        except:
+            city=None
+            state_abbr=None
+        if city and state_abbr and 'dont_auto_crime_stats' not in request.session:
+            request.session['dont_auto_crime_stats']=True
+            try:
+                return HttpResponseRedirect(reverse('crime-rate:crime-stats',kwargs={'city':city,'state':state_abbr}))
+            except:
+                return render(request,'crime-stats/choose-state.html',{'states':states,'forms':forms})
     return render(request,'crime-stats/choose-state.html',
                               {'states': states,
-                               'forms': forms,})
+                               'forms': forms})
 
 def find_city(request):
     ctx = {}
@@ -372,7 +433,17 @@ def local(request, state, city):
         if request.GET.get(filt, None) == 'hide':
             filters[filt] = False
 
-    data = query_by_state_city(state, city, get_content=False)
+    if '-' and '.' in city:
+        city=city.replace('-',' ').replace('.','')
+    if '-' in city:
+        city=city.replace('-',' ')
+    if '.' in city:
+        city=city.replace('.',' ')
+    if '(' or ')' in city:
+        city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
+    data = query_by_state_city(state, city, get_content=False,local=True)
     data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
 
     forms = {}
@@ -390,7 +461,16 @@ def crime(request, state, city, crime):
     template = CRIME_TEMPLATES.get(crime, None)
     if not template:
         raise Http404
-
+    if '-' and '.' in city:
+        city=city.replace('-',' ').replace('.','')
+    if '-' in city:
+        city=city.replace('-',' ')
+    if '.' in city:
+        city=city.replace('.',' ')
+    if '(' or ')' in city:
+        city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
     # Return Template with results of query_by_state_city
     return render_to_response(template,
         query_by_state_city(state, city, False),
@@ -399,7 +479,6 @@ def crime(request, state, city, crime):
 
 def search(request):
     """Render a search results page based on the query string in the GET params"""
-
     # Extract Query Parameters
     q_str = request.GET.get('q', '')
     q_params = q_str.split(' ')
@@ -499,7 +578,11 @@ def search(request):
 
 
     if city_and_state:
-        city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
+        try:
+            city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
+        except CityLocation.DoesNotExist:
+            messages.info(request,'Sorry no city/state/zipcode matching your querys')
+            return redirect('home')
         return redirect('local',city.state,city.slug_name)
 
     forms = {}

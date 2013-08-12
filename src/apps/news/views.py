@@ -6,7 +6,7 @@ from xml.dom.minidom import parseString
 
 from django.shortcuts import render_to_response
 from django.template import RequestContext, Context, loader
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponsePermanentRedirect,Http404
 from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.utils import simplejson
@@ -83,11 +83,7 @@ def articles(request, **kwargs):
         'year', order="DESC")
 
     articles = Article.objects.order_by('-date_created')
-    
-    if 'year' in kwargs:
-        year = kwargs['year']
-    else:
-        year = '2012'
+    year = kwargs['year']
     articles = articles.filter(date_created__year=year)
 
     article_months = articles.dates('date_created',

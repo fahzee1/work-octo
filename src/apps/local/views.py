@@ -4,6 +4,7 @@ from pytz import timezone
 import settings
 import os
 import logging
+import pdb
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.shortcuts import render_to_response, render 
@@ -80,16 +81,46 @@ TIMEZONES = {
 
 @cache_page(60 * 60 * 4)
 def local_page_wrapper(request, keyword, city, state):
-    def get_state_code(statestr):
-        for state in US_STATES:
-            if statestr.lower().replace('-', ' ') == state[1].lower():
-                return state[0]
-            else:
-                return False
-    statecode = get_state_code(state)
-    if not statecode:
-        raise Http404
-    return local_page(request, statecode, city.replace('-', ' ').title(), keyword)
+    if '-' in state:
+        state=state.replace('-',' ').title()
+    else:
+        state=state.title()
+
+
+    three=len(state.split(' '))
+    if three==3:
+        words=state.split(' ')
+        first,second,third=words[0].capitalize(),words[1].lower(),words[2].capitalize()
+        new_state=first+' '+second+' '+third
+
+
+    for x in US_STATES:
+        if x[1]==(new_state if three==3 else state):
+            statecode=x[0]   
+        else:        
+            for x in US_STATES:
+                mult=x[1].split(' ')
+                if len(mult) == 2:
+                    first,second=mult[0].title(),mult[1].lower()
+                    _state=first+second
+                elif len(mult) == 3:
+                    first,second,third=mult[0].title(),mult[1].lower(),mult[2].lower()
+                    _state=first+second+third
+                else:
+                    _state=None
+                if _state == state:
+                    statecode=x[0]
+    if '-' and '.' in city:
+        city=city.replace('-',' ').replace('.','')
+    if '-' in city:
+        city=city.replace('-',' ')
+    if '.' in city:
+        city=city.replace('.',' ')
+    if '(' or ')' in city:
+        city=city.replace('(','').replace(')','')
+    if ',' in city:
+        city=city.replace(',','')
+    return local_page(request, statecode, city.title(), keyword)
 
 
 def local_page(request, state, city, keyword=None):

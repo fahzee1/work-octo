@@ -1,5 +1,5 @@
 import re
-
+import pdb
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -68,13 +68,42 @@ class CityLocation(models.Model):
     class Meta:
         db_table = 'citylocations'
         unique_together = (('city_name', 'state'),)
+        ordering=['state']
+
+    def __unicode__(self):
+        return '%s, %s' % (self.city_name, self.state)
 
     def get_absolute_url(self):
         return reverse('crime-rate:crime-stats', args=[self.state,
             self.city_name])
 
-    def __unicode__(self):
-        return '%s, %s' % (self.city_name, self.state)
+    def join_name(self,local=False):
+        names=self.city_name.split(' ')
+        if len(names) == 1:
+            name=self.city_name
+            if local:
+                return name.lower()
+            else:
+                return name
+        elif len(names)==2:
+            if '.' in self.city_name:
+                names=self.city_name.replace('.','').split(' ')
+                if len(names)==2:
+                    first,second=names[0],names[1].lower()
+                    return first+second
+                if len(names)==3:
+                    first,second,third=names[0],names[1].lower(),names[2].lower()
+                    return first+second+third
+            first,second=names[0],names[1].lower()
+            name=first+second
+            return name
+        elif len(names) == 3:
+            first,second,third=names[0],names[1].lower(),names[2].lower()
+            name=first+second+third
+            return name
+        else:
+            pass
+
 
     @property
     def slug_name(self):
@@ -148,6 +177,10 @@ class CityCrimeStats(models.Model):
     violent_crime_grade = models.CharField(null=True,
         max_length=1)
 
+
+    def __unicode__(self):
+        return "%s" % self.city
+        
     @property
     def average_grade(self):
 

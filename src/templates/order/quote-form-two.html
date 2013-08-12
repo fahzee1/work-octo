@@ -1,0 +1,110 @@
+{% load sekizai_tags %}
+<form id="quote-form" method="post" action="">
+    {% csrf_token %}
+    
+	<div>
+        <p class="form-title">Free Security Quote</p>
+        {% block formfields %}
+		  <label>Name</label>
+            {{ form.name }}
+
+		  <label>Email</label>
+            {{ form.email }}
+		
+            <label>{% block phone-num %}Phone Number{% endblock %}</label>
+            {{ form.phone }}
+        {% endblock %}
+	</div>
+    
+	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
+
+    <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+    <div id="third-party-container" class="v">
+        <div class="third-party-badge vsign">
+            <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
+        </div>
+        {% comment %}
+        <div class="third-party-badge truste">
+            <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
+        </div>
+        {% endcomment %}
+    </div>
+</form>
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    console.log("{% csrf_token %}");
+    $('#quote-form input').keypress(function(e){
+        if(e.which == 13){
+            console.log('enter pressed');
+            $('#quote-form button').click();
+        }
+    });
+    var submitting = false;
+
+    $('#quote-form button').click(function() {
+        $(this).attr('disabled', true);
+        $('#quote-form div').removeClass('.error-state');
+        var data = {'name': $('#id_name_two').val(), 'email': $('#id_email_two').val(), 'phone': $('#id_phone_two').val(), 'form': 'basic'}
+        $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess
+        });
+
+        function newFormSuccess(json) {
+            submitting = false;
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                url = json.thank_you
+                console.log(url);
+                window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        if(json.errors) {
+            $('#quote-form button').attr('disabled', false); 
+            $("#quote-form-error").show();
+            $("#quote-form-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quote-form-error ul").html(error_string);
+            } else $("#quote-form-error").hide();
+        }
+        return false;
+        });
+    });   
+</script>
+{% endblock %}
+{% endaddtoblock "js" %}

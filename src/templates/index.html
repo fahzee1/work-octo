@@ -3,7 +3,7 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css?v3.0.4">
 {% if not debug %}
 {% if request.GET.agent == 'a01986' or request.COOKIES.refer_id == 'a01986' %}
 <script> 
@@ -108,8 +108,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% endif %}
 {% endblock %}
 {% block page_title %}Home Security Systems | Home Alarm Systems | GE Security | Protect America{% endblock %}
-{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
-{% block page_description %}Get one of our free home security systems for your home. Sign up for alarm monitoring and get a GE Simon home alarm at no cost. Protect your home today!{% endblock %}
+{% block page_keywords %}home alarm system, home alarm systems, security, security system, security systems, home security, home security system, home security systems, home security monitoring{% endblock %}
+{% block page_description %}Get a free home security system for your home. Sign up for home security monitoring and get a GE Simon security system at no cost. Protect your home today!
+{% endblock %}
 
 {% block subnav %}
 {% endblock %}
@@ -120,13 +121,14 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block hero_banner_area %}
     {% include "banners/seo-hero-images.html" %}
 {% endblock %}
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 
 <div class="wrapper">
+    {% comment %}
     <div id="packages">
         <div class="package copper">
             <h2>Copper Package</h2>
-            <p><b>$19.99 /</b> <span>per month</span><div class="clear"></div></p>
+            <p><b>$19.99 /</b> <span>per month</span></p>
             <a href="{% url copper %}" title="Learn More about the Copper Package" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
         <div class="package bronze">
@@ -152,12 +154,16 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <div class="clear"></div>      
     </div>
     <div class="clear"></div>
+    {% endcomment %}
     <div id="categories">
         <div class="category">
             <i class="category-img"></i>
             <div class="category-info">
                 <h2>Home Security Designed <span>Just for You.</span></h2>
-                <p>It is important to feel safe in your home. And we know that protection for your home and family is not an easy decision. Our security systems are custom built to combine the best price with the best equipment and service.</p>
+                <p>It’s important to feel safe in your home. We know protection for your home and family is not an easy decision. Our security systems are custom built to combine the best price with the best equipment and service.</p>
+                <p class="extra-content"  style="display:none;">Our home security systems are customized to fit your home and family’s needs.  Securing your home has never been easier! Protect America provides all the help, equipment and resources you need to protect your home.</p>
+
+
                 <a href="{% url home-security-equipment %}" title="Home Security Equipment" class="button-link">Home Security <i class="icon-chevron-right"></i></a>
             </div>
         </div>
@@ -166,16 +172,22 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
             <div class="category-info">
                 <h2>Protecting Against More than Home Break-ins.</h2>
-                <p>Protect America security systems have evolved beyond the ability to just stop burglary. Each one of our systems has the ability to add important sensors including life saving devices like: Smoke Detectors, Medical Panic Alert, and more.</p>
+                <p>Protect America security systems have evolved beyond the ability to just prevent burglary. Each one of our systems has the ability to add important sensors including life saving devices like: Smoke Detectors, Medical Panic Alert, and more.</p>
+                <p class="extra-content"  style="display:none;">Our home alarm systems can be programmed to have various life-saving sensors. Home security is not just being able to protect your home; it’s about being able to protect your life. Our life safety sensors provide security against smoke and fires, help for medical situations, as well as detection of carbon monoxide leaks.</p>
                 <a href="{% url life-safety-equipment %}" title="Life Safety Equipment" class="button-link">Life Safety <i class="icon-chevron-right"></i></a>
             </div>
         </div>
+        <div class="clear"></div>
         <div class="category">
             <i class="category-img home-automation"></i>
 
             <div class="category-info">
                 <h2>Simple and Easy; <span>Complete Home Control.</span></h2>
                 <p>Compatible with advanced Z-Wave technology, we create a complete home security and management system that puts you in control of your home from home, work, or anywhere you happen to be.</p>
+                <p class="extra-content"  style="display:none;">Controlling your home alarm system has never been easier. Our home automation products offer solutions to make your home security complete. The convenience of controlling other electronic devices and adding security features such as our wireless Indoor Siren will provide with you additional peace of mind.</p>
+
+
+
                 <a href="{% url home-automation-equipment %}" title="Home Automation Equipment" class="button-link">Home Automation <i class="icon-chevron-right"></i></a>
             </div>
         </div>
@@ -184,7 +196,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
             <div class="category-info">
                 <h2>Check in from Anywhere <span>with SMART Connect.</span></h2>
-                <p>Control your home while you’re away with our free SMART Connect app. Arm your system, conserve energy, and control lights at anytime through your computer or smart phone. </p>
+                <p>Control your home while you’re away with our free SMART Connect app. Arm your system, conserve energy, and control lights at any time through your computer or smartphone.</p>
+                <p class="extra-content" style="display:none;">SMART Connect is compatible with our broadband and cellular home security monitoring solutions. Control your home security system on the go with convenience and ease. Check your alarm system while you’re at work or on vacation and enjoy the comfort SMART Connect provides.</p>
+
                 <a href="{% url interactive-control %}" title="SMART Connect Interactive App" class="button-link">Interactive App <i class="icon-chevron-right"></i></a>
             </div>
         </div>
@@ -194,6 +208,14 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div class="clear"></div>
 {% addtoblock "js" %}
     <script type="text/javascript">
+    $('#quote-form').show();
+    $('.request-quote-button').addClass('active');
+    $(".extra-content").siblings('p').append(' <a href="" class="read-more">Read More</a>')
+    $(".read-more").click(function() {
+        $(this).hide()
+        $(this).parent().parent().children('.extra-content').slideDown('fast');
+        return false;
+    });
     $(document).ready(function() {
             $(".copper").click(function() {
                 window.location.href = "{% url copper %}";
@@ -210,7 +232,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             $(".platinum").click(function() {
                 window.location.href = "{% url platinum %}";
             });
-    
+
             $('#top-hero-banner > div').click(function(e) {
             if($(this).attr('data-url')) {
                 window.location = $(this).attr('data-url');
@@ -222,6 +244,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 ]);
                 return;
             }
+
         });
         {% if debug %}
         $('#top-hero-banner').cycle('pause');
@@ -229,6 +252,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         {% if 'hic_test' in request.GET %}
         setCookie('hic_test', 'true');
         {% endif %}
+
     });
     </script>
 {% endaddtoblock "js" %}

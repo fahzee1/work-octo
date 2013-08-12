@@ -1,11 +1,11 @@
 import urls
+import pdb
 from datetime import datetime, timedelta
 from string import Template
-
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.shortcuts import render_to_response,redirect
+from django.http import HttpResponse,HttpResponseBadRequest
 from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
@@ -202,6 +202,7 @@ def basic_post_login(request):
         return (formset, True)
     return (form, False)
 
+
 def ajax_post(request):
     if request.method != "POST":
         return HttpResponseRedirect('/')
@@ -226,9 +227,11 @@ def ajax_post(request):
         response.set_cookie('lead_id', value=form.id,
             domain='.protectamerica.com',
             expires=datetime.now() + expire_time)
+        return response
+    return HttpResponseBadRequest()
     
-    return response
 
+  
 
 def post(request):
     
@@ -332,14 +335,16 @@ def order_form(request):
     else:
         formset = OrderForm()
 
-    if 'package' in request.GET:
-        formset.fields['package'].initial = request.GET['package']
+        if 'package' in request.GET:
+            formset.fields['package'].initial = request.GET['package']
 
     return simple_dtt(request, 'order/order-package.html', {
                                'parent':'packages',
                                'formset': formset,
                                'pages': ['contact-us'],
                                'page_name': 'moving-kit'})
+
+
 
 def order_form_ca(request):
     if request.method == "POST":
@@ -349,8 +354,8 @@ def order_form_ca(request):
     else:
         formset = OrderForm()
 
-    if 'package' in request.GET:
-        formset.fields['package'].initial = request.GET['package']
+        if 'package' in request.GET:
+            formset.fields['package'].initial = request.GET['package']
 
     return simple_dtt(request, 'canada/order-package.html', {
                                'parent':'products',

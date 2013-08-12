@@ -224,6 +224,13 @@ table#licenses-table {
                     color: @white;
                     text-transform: uppercase;
                 }
+                a {
+                    color: @white;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
             }
         }
         #company-links {
@@ -346,6 +353,7 @@ table#licenses-table {
                 color: @white;
                 font-size: 9px;
                 background: url(/static/img/base/base-sprite-new.png) -78px 0px no-repeat;
+                width: 86px;
             }
         }
     }
@@ -473,6 +481,7 @@ table#licenses-table {
     border-bottom: 1px solid @dark-blue;
     .drop-shadow(0px, 3px, 2px, rgba(0,0,0,.15));
     position: relative;
+    z-index: 500;
     #subnav {
         margin: 0 auto;
         width: 960px;
@@ -498,9 +507,9 @@ table#licenses-table {
                 margin-left: -480px;
                 .border-radius(0,0,5px,5px);
                 z-index: 100;
+                display: none;
                 .drop-shadow;
                 ul {
-                    display: none;
                     padding: 8px;
                     li {
                         color: @white;
@@ -605,7 +614,7 @@ table#licenses-table {
             #id_consent {
                 float: left;
                 margin: 8px 8px;
-                width: 32px;
+                width: 16px;
             }
             label.consent-label {
                 font-size: 11px;
@@ -718,7 +727,54 @@ table#licenses-table {
             text-decoration: underline;
         }
     }
+    &.sleepy {
+        width: 275px;
+        .form-fields {
+            padding: 8px 16px 16px;
+            p {
+                font-size: 11px;
+                line-height: 13px;
+                text-align: justify;
+                margin-bottom: 16px;
+            }
+            label {
+                display: block;
+                font-size: 13px;
+            }
+            input {
+                width: 234px;
+            }
+            button {
+                width: 244px;
+            }
+        }
+    }
 
+}
+body.alternate {
+    .request-quote-button {
+        display: none;
+    }
+    #hero-banner.alt-form {
+        #quote-form {
+            display: block;
+            width: 275px;
+            top: 0;
+            .drop-shadow(0,0,0,0);
+            border: 1px solid @black;
+            label {
+                display: none;
+            }
+            input {
+                margin: 16px auto;
+                width: 240px;
+                display: block;
+            }
+            button {
+                width: 250px;
+            }
+        }
+    }
 }
 #quote-form-error {
     display: none;
@@ -785,6 +841,45 @@ table#licenses-table {
     border-top: 1px solid @black;
     width: 100%;
     border-bottom: 1px solid @black;
+    position: relative;
+    #main-promo {
+        background: url(/static/img/base/promo-bg.png) repeat;
+        width: 100%;
+        height: 56px;
+        position: absolute;
+        top: -56px;
+        left: 0;
+        #main-promo-content {
+            width: 960px;
+            margin: 0 auto;
+            text-decoration: none;
+            position: relative;
+            height: 56px;
+            display: block;
+            .main-promo-image {
+                position: absolute;
+                left: 0;
+                bottom: 0px;
+            }
+            p {
+                font-size: 18px;
+                text-align: left;
+                line-height: 20px;
+                padding: 6px 0;
+                text-shadow: none;
+                padding-left: 127px;
+                span {
+                    display: block;
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    font-weight: normal;
+                }
+            }
+        }
+        &:hover {
+            background: #12a859
+        }
+    }
     &.alt {
         background: #1fb867;
     }
@@ -792,14 +887,14 @@ table#licenses-table {
         width: 960px;
         margin: 0 auto;
         color: @white;
-        font-weight: 100;
-        font-size: 42px;
+        font-weight: bold;
+        font-size: 38px;
         line-height: 42px;
         text-align: center;
         padding: 12px 0px;
         text-shadow: 1px 2px 0px @black;
         strong {
-            font-weight: 100;
+            font-weight: bold;
         }
         a {
             color: @white;
@@ -959,6 +1054,7 @@ table#licenses-table {
     background: #2b80b8 url(/static/img/base/bg-blue.png) repeat;
     position: relative;
     z-index: 0;
+    width: 100%;
     overflow: hidden;
     &.red {
         background: @red url(/static/img/base/bg-red.png) repeat;
@@ -975,17 +1071,20 @@ table#licenses-table {
                 p {
                     text-shadow: none;
                 }
+                h3 {
+                    color: @grey;
+                }
             }
         }
     }
     &.grey {
-        background: @grey url(/static/img/base/bg-grey.png) repeat;
+        background: @grey url(/static/img/base/bg-grey.jpg) repeat;
     }
     &.green {
         background: @green url(/static/img/base/bg-green.png) repeat;
     }
     &.v-light-grey {
-        background: @v-light-grey url(/static/img/base/bg-v-light-grey.png) repeat;
+        background: @v-light-grey url(/static/img/base/bg-v-light-grey.jpg) repeat;
         #hero-image {
             #hero-content {
                 h1, p, h2 {
@@ -1163,6 +1262,7 @@ table#licenses-table {
         }
         .home-content {
             width: 436px;
+            background: @white;
             background: rgba(255,255,255,.85);
             float: left;
             height: 357px;

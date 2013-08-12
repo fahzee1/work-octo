@@ -1,8 +1,16 @@
-{% extends "base.html" %}
+{% extends "base-universal.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Error 404: Page Not Found{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/404.css">
+    <style>
+        #hero-wrapper {
+            background: #000;
+        }
+        .main-hero-image {
+            left: -32%;
+        }
+    </style>
 {% endblock %}
 {% block ga_custom_variables %}
 _gaq.push(['_setCustomVar',
@@ -20,13 +28,13 @@ _gaq.push(['_setCustomVar',
 {% endblock %}
 {% block content %}
 </div>
-<div class="box-404-wrapper">
+<div class="box-404-wrapper" style="background: #000;">
     <div id="box-404">
         <img src="/static/img/products/platinum-package/platinum-package-oh-no.jpg" alt="Oh No! 404 Page" />
         <div id="box-content">
             <h1><span>404</span>Page Not Found</h1>
             <p>The page you requested can't be found. No need to call the police, it hasn't been stolen. We have been notified of the issue and working to address the problem. In the mean time, visit our <a href="http://www.protectamerica.com/">homepage</a> to learn how Protect America can secure your home while saving you money.  </p>
-            <div class="button-link"><a href="http://www.protectamerica.com/">Protect America Homepage ></a></div>
+            <a href="http://www.protectamerica.com/" class="button-link">Protect America Homepage <i class="icon-chevron-right"></i></a>
         </div>
         <div class="clear"></div>
     </div>

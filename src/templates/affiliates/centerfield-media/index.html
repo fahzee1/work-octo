@@ -37,7 +37,16 @@
             {% block main-phone %}
                 {% if phone_number %}
                 <div id="phone-number" class="tk-jaf-facitweb">
-                    <p>Call Today and Save! <span>{% if request.GET.phone %}<a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}{% else %}<a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}{% endif %}</a></span></p>
+                    <p>Call Today and Save! <span>
+                    {% if request.GET.phone %}
+{% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                        {% else %}
+                            <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+                        {% endif %}
+                    {% else %}
+                        <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                    {% endif %}</a></span></p>
                 </div>
                 {% endif %}
             {% endblock %}
@@ -79,7 +88,17 @@
                             <div id="getstarted">
                                 <div id="phone-her" class="contentHolder">
                                     <div id="call-box" class="tk-jaf-facitweb">
-                                        {% block call-box-text %}<p>Get Started Now, <strong>Call Today! {% endblock %}<span>{% if request.GET.phone %}<a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}{% else %}<a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}{% endif %}</a></span></strong></p>
+                                        {% block call-box-text %}<p>Get Started Now, <strong>Call Today! {% endblock %}<span>
+                                        {% if request.GET.phone %}
+{% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                                                <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                                            {% else %}
+                                                <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                                        {% endif %}
+                                        </a></span></strong></p>
                                     </div>                                    
                                     
                                     

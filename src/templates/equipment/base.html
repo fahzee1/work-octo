@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load sekizai_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/equipment.css?v3.0.4">
+
+{% endblock %}
+
+{% block subnav %}
+<div id="subnav-wrapper">
+    <ul id="subnav">
+        <li class="{% if 'home-security-equipment' in active_pages %}active{% endif %} menu-item" data-menu="home-security">
+            <a href="{% url home-security-equipment %}">Home Security</a>
+            <div class="child-nav">
+                <ul class="home-security">
+                    <li class="{% if 'simon-xt' in active_pages %}active{% endif %}" ><a href="{% url simon-xt %}">Simon XT Control Panel</a></li>
+                    <li class="{% if 'door-window-sensor' in active_pages %}active{% endif %}"><a href="{% url door-window-sensor %}">Door / Window Sensor</a></li>
+                    <li class="{% if 'motion-detector' in active_pages %}active{% endif %}"><a href="{% url motion-detector %}">Motion Detector</a></li>
+                    <li class="{% if 'touchscreen' in active_pages %}active{% endif %}"><a href="{% url touchscreen %}">GE Simon XT Touchscreen</a></li>
+                    <li class="{% if 'video' in active_pages %}active{% endif %}"><a href="{% url video %}">Video Security Cameras</a></li>
+                    <li class="{% if 'talking-wireless-keypad' in active_pages %}active{% endif %}"><a href="{% url talking-wireless-keypad %}">Talking Wireless Keypad</a></li>
+                    <li class="{% if 'garage-door-sensor' in active_pages %}active{% endif %}"><a href="{% url garage-door-sensor %}">Garage Door Sensor</a></li>
+                    <li class="{% if 'glassbreak-sensor' in active_pages %}active{% endif %}"><a href="{% url glassbreak-sensor %}">Glass Break Sensor</a></li>
+                    <li class="{% if 'mini-pinpad' in active_pages %}active{% endif %}"><a href="{% url mini-pinpad %}">Mini Pinpad</a></li>
+                    <li class="{% if 'two-button-panic' in active_pages %}active{% endif %}"><a href="{% url two-button-panic %}">Two Button Panic</a></li>
+                    <li class="{% if 'securtiy-accessories' in active_pages %}active{% endif %}"><a href="{% url accessories %}">Other Accessories</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="{% if 'life-safety-equipment' in active_pages %}active{% endif %} menu-item" data-menu="life-safety">
+            <a href="{% url life-safety-equipment %}">Life Safety</a>
+            <div class="child-nav">
+                <ul class="life-safety">
+                    <li class="{% if 'smoke-detector' in active_pages %}active{% endif %}" ><a href="{% url smoke-detector %}">Monitored Smoke Detector</a></li>
+                    <li class="{% if 'medical-panic-pendant' in active_pages %}active{% endif %}" ><a href="{% url medical-pendant %}">Medical Panic Pendant</a></li>
+                    <li class="{% if 'carbon-monoxide-detector' in active_pages %}active{% endif %}" ><a href="{% url carbon-monoxide-detector %}">Carbon Monoxide Detector</a></li>
+                    <li class="{% if 'freeze-sensor' in active_pages %}active{% endif %}" ><a href="{% url freeze-sensor %}">Freeze Sensor</a></li>
+                    <li class="{% if 'flood-sensor' in active_pages %}active{% endif %}" ><a href="{% url flood-sensor %}">Flood Sensor</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="{% if 'home-automation-equipment' in active_pages %}active{% endif %} menu-item" data-menu="home-automation">
+            <a href="{% url home-automation-equipment %}">Home Automation</a>
+            <div class="child-nav">
+                <ul class="home-automation">
+                    {% comment %}
+                    <li class="{% if 'door-lock' in active_pages %}active{% endif %}" ><a href="{% url door-lock %}">Z-Wave Door Lock</a></li>
+                    {% endcomment %}
+                    <li class="{% if 'appliance-module' in active_pages %}active{% endif %}" ><a href="{% url appliance-module %}">Z-Wave Appliance Module</a></li>
+                    <li class="{% if 'indoor-siren' in active_pages %}active{% endif %}" ><a href="{% url indoor-siren %}">Z-Wave Indoor Siren</a></li>
+
+
+                </ul>
+            </div>
+        </li>
+        <li class="{% if 'interactive-control' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url interactive-control %}">SMART Connect</a>
+        </li>
+        <li class="{% if 'gps' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url gps %}">Automotive</a>
+        </li>
+
+    </ul>
+    <div class="clear"></div>
+</div>
+
+{% endblock %}

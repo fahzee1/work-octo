@@ -1,9 +1,8 @@
 {% extends "base.html" %}
-
 {% load sekizai_tags %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/learn.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/learn.css?v3.0.0">
 
 {% endblock %}
 
@@ -45,6 +44,8 @@
                     <li class="{% if 'how-it-works' in active_pages %}active{% endif %}" ><a href="{% url how-it-works %}">How It Works</a></li>
                     <li class="{% if 'complete-home-security' in active_pages %}active{% endif %}" ><a href="{% url complete-home-security %}">Complete Home Security</a></li>
                     <li class="{% if 'crime-rate' in active_pages %}active{% endif %}" ><a href="/crime-rate/">Local Crime Stats</a></li>
+                    <li class="{% if 'glossary' in active_pages %}active{% endif %}" ><a href="{% url glossary %}">Glossary</a></li>
+                    <li class="{% if 'resources-101' in active_pages %}active{% endif %}" ><a href="{% url resources-101 %}">Resources</a></li>
 
 
                 </ul>
@@ -54,7 +55,7 @@
             <a href="http://www.protectamerica.com/home-security-blog/">Blog</a>
         </li>
         <li class="{% if 'news' in active_pages %}active{% endif %} menu-item">
-            <a href="news/">Security News</a>
+            <a href="{% url news:news-home %}">Security News</a>
         </li>
 
 

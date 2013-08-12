@@ -1,8 +1,8 @@
 {% extends "products/equipment/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Home Automation | X-10 Home Automation | Protect America{% endblock %}
+{% block page_title %}Home Security Equipment | Life Safety | Protect America{% endblock %}
 {% block page_keywords %}home automation devices, home security, x10 lamp module, x10 appliance module, x10 power horn module,{% endblock %}
-{% block page_description %}Wireless home security system equipment by GE uses state-of-the-art wireless home security system technology to provide the reliability our customers know they can trust. Get a GE wireless home security system from Protect America today.{% endblock %}
+{% block page_description %}Protect more then your home with Protect America's life safety equipment and products.{% endblock %}
 
 {% block content %}
 <div id="hero-wrapper" class="red">
@@ -11,14 +11,16 @@
             <i class="icon-life-safety"></i>
             <h2>Protect America Equipment</h2>
             <h1>Life Safety</h1>
-            <p>Important pieces of equipment, we offer life safety sensors and accessories that can extend your home security system to protect more than your home. From medical panic pendents to monitored smoke detectors, we realize that sometimes the difference between life and death is the press of a button, or the sound of an alarm.</p>
+            <p>Important pieces of equipment, we offer life safety sensors and accessories that can extend your home security system to protect more than your home. From medical panic pendants to monitored smoke detectors, we realize that sometimes the difference between life and death is the press of a button, or the sound of an alarm.</p>
+            <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add secure your home now.</h3>
+
             <img src="{{ STATIC_URL }}img/products/life-safety/life-safety-icon.png" class="main-hero-image" alt="Life Safety Icon" />
 
         </div>
 
     </div>
 </div>
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 <div id="in-home-wrapper">
     <div id="in-your-home">
         <div class="home-img">
@@ -46,14 +48,7 @@
             <div class="clear"></div>
             <a href="{% url smoke-detector %}" title="Monitored Smoke Detector" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
-        <div class="equipment-piece">
-            <a href="{% url flood-sensor %}" title="Flood Sensor" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/equipment/flood-sensor/flood-sensor-white-small.jpg" alt="Flood Sensor" width="192" height="192" />
-                <h3>Flood Sensor</h3>
-            </a>
-            <div class="clear"></div>
-            <a href="{% url flood-sensor %}" title="Flood Sensor" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
-        </div>
+
         <div class="equipment-piece">
             <a href="{% url medical-pendant %}" title="Medical Pendant" class="equipment-piece">
                 <img src="{{ STATIC_URL }}img/products/equipment/medical-panic-pendent/medical-pendant-small.jpg" alt="Medical Pendant" width="192" height="192" />
@@ -70,14 +65,7 @@
             <div class="clear"></div>
             <a href="{% url carbon-monoxide-detector %}" title="Carbon Monoxide Detector" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
         </div>
-        <div class="equipment-piece">
-            <a href="{% url freeze-sensor %}" title="Freeze Sensor" class="equipment-piece">
-                <img src="{{ STATIC_URL }}img/products/freeze-sensor/freeze-sensor-small.jpg" alt="Freeze Sesnor" width="192" height="192" />
-                <h3>Freeze Sensor</h3>
-            </a>
-            <div class="clear"></div>
-            <a href="{% url freeze-sensor %}" title="Freeze Sensor" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
-        </div>
+
     </div>
     <div class="clear"></div>
 </div>

@@ -17,13 +17,13 @@
 
     </div>
 </div>
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 
 <div class="wrapper">
     <div id="profile">
         <div id="about-us-content">
-            <p>Protect America Inc., one of the nation’s top home security companies. We have protected almost half a million homes since 1992 and have continued to grow. Currently an average of 15% of the population in the U.S. has a working alarm system. Our goal is to provide home security for the whole nation and educate consumers on the importance of home security.</p>
-            <p>Furthermore, Protect America provides more than just home security products. We also offer offer convenience and safety through our <a href="{% url home-automation-equipment %}" title="Find information on our home automation products">home automation</a>, <a href="{% url gps %}" title="Find information on our GPS vehicle tracking product">GPS</a>, and <a href="{% url video %}" title="Find information on our video security cameras">surveillance products</a>. Our wireless home security systems and products allow consumers to protect their home and loved ones at an affordable price.</p>
+            <p>Protect America Inc., one of the nation’s top <a href="http://www.protectamerica.com/home-security-companies" title="home security companies">home security companies</a>. We have protected almost half a million homes since 1992 and have continued to grow. Currently an average of 15% of the population in the U.S. has a working <a href="http://www.protectamerica.com/home-alarm-systems/" title="alarm system">alarm system</a>. Our goal is to provide home security for the whole nation and educate consumers on the importance of home security.</p>
+            <p>Furthermore, Protect America provides more than just home security products. We also offer convenience and safety through our <a href="{% url home-automation-equipment %}" title="Find information on our home automation products">home automation</a>, <a href="{% url gps %}" title="Find information on our GPS vehicle tracking product">GPS</a>, and <a href="{% url video %}" title="Find information on our video security cameras">surveillance products</a>. Our wireless home security systems and products allow consumers to protect their home and loved ones at an affordable price.</p>
                 <div class="order-link">
                     <a href="{% url equipment %}" title="View Equipment" class="button-link">View Equipment <i class="icon-chevron-right"></i></a>
                     <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
