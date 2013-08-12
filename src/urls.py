@@ -1250,7 +1250,9 @@ urlpatterns += patterns('',
     ('crime-rate?$',
         RedirectView.as_view(url='/crime-rate/',permanent=True)),  
     ('pa/home/?$',
-        RedirectView.as_view(url='/',permanent=True)),  
+        RedirectView.as_view(url='/',permanent=True)),
+    ('alarm/?$',
+        RedirectView.as_view(url='/equipment/home-automation/z-wave-indoor-siren/',permanent=True)),        
 
 
 )
