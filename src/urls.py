@@ -12,7 +12,6 @@ from apps.common.views import simple_dtt
 from django.contrib import admin
 admin.autodiscover()
 
-from apps.local.views import LOCAL_KEYWORDS
 
 
 
@@ -69,7 +68,7 @@ sitemaps={
     'crimestats-state':FreeCrimeStatsStateSitemap,
     #'crimestats-city':FreeCrimeStatsCitySitemap,
    # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
-    'keyword':KeywordSitemapIndex(LOCAL_KEYWORDS)
+    'keyword':KeywordSitemapIndex(settings.LOCAL_KEYWORDS)
 
 
 }        
@@ -704,13 +703,13 @@ else:
         # > forward to homepage
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(settings.LOCAL_KEYWORDS)),
             'apps.local.views.local_page_wrapper',
             name='local-page-keyword'),
-        url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(settings.LOCAL_KEYWORDS)),
             'apps.local.views.sitemap',
             name='local-page-sitemap-state'),
-        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(settings.LOCAL_KEYWORDS)),
             'apps.local.views.sitemap_state',
             name='local-page-sitemap'),
         url(r'^local-pages-sitemap-index\.xml', 'apps.local.views.sitemap_index',
@@ -1055,7 +1054,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
-    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
+    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$' % ('|'.join(settings.LOCAL_KEYWORDS)),
         RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)),
     ('(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$',
         RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),     
