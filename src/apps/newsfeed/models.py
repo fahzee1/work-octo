@@ -7,6 +7,8 @@ except ImportError:
 from django.db import models
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.core.exceptions import ValidationError
+import pdb
+
 # Create your models here.
 
 
@@ -88,6 +90,10 @@ class TweetBackup(models.Model):
 		too_old=self.created + timedelta(days=1)
 		if timezone.now() >= too_old and TweetBackup.objects.all().count() > 5:
 			self.delete()
+		all_matches = TweetBackup.objects.filter(text=self.text)
+		for a in all_matches:
+			if self.text == a.text and len(all_matches) > 1:
+				self.delete()
 
 
 

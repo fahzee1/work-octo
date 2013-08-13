@@ -193,9 +193,10 @@ def query_by_state_city(state, city, get_content=True,local=False):
     weather_info = query_weather(city.latitude, city.longitude,
         city.city_name, state.abbreviation)
 
-    context={'crime_stats': crime_stats,
+    context={'crime_stats': (crime_stats if crime_stats else None),
            'years': years[:3],
-           'latest_year': (crime_stats[years[0]] if city_crime_objs else None),
+           'latest_year': (crime_stats[years[0]] if crime_stats else None),
+           'latest_year_':(city_crime_objs[0] if city_crime_objs else None),
            'state': state.abbreviation,
            'state_long': state.name,
            'city': city.city_name,
@@ -206,7 +207,7 @@ def query_by_state_city(state, city, get_content=True,local=False):
            'city_id': city_id}
 
     # get content
-    if get_content and city_crime_objs:
+    if get_content and city_crime_objs and crime_stats:
         content = CrimeContent.objects.get(
             grade=crime_stats[years[0]]['stats'].average_grade,
             population_type=pop_type)
