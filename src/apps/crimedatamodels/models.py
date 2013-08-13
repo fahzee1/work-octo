@@ -78,6 +78,9 @@ class CityLocation(models.Model):
             self.city_name])
 
     def join_name(self,local=False):
+        if "'" in self.city_name:
+            return self.city_name_slug.title()
+
         names=self.city_name.split(' ')
         if len(names) == 1:
             name=self.city_name

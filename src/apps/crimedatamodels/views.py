@@ -125,11 +125,13 @@ def query_by_state_city(state, city, get_content=True,local=False):
             city = city.replace('+', ' ').replace('-', ' ').split(' ')
             _city=None
             city_slug=None
+
             if len(city)==2:
                 f,l=city[0],city[1]
                 if len(str(f))==2:
                     city=f+'.'+' '+l
                     _city=f+' '+l
+                    _city_=f+'-'+l
                 else:
                     city_slug=f.lower()+'-'+l.lower()
             if len(city)==3:
@@ -149,7 +151,8 @@ def query_by_state_city(state, city, get_content=True,local=False):
             elif _city:
                 aa=Q(city_name__iexact=city)
                 bb=Q(city_name__iexact=_city)
-                city=CityLocation.objects.get(aa|bb,state=state.abbreviation)
+                cc=Q(city_name__iexact=_city_)
+                city=CityLocation.objects.get(aa|bb|cc,state=state.abbreviation)
             else:
                 city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
 

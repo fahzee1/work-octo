@@ -1210,6 +1210,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/shop-home-security-packages/silver/',permanent=True)),
     ('pa/platinum/?$',
         RedirectView.as_view(url='/shop-home-security-packages/platinum/',permanent=True)),
+    ('pa/copper/?$',
+        RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
     ('pa/motion-detector/?$',
         RedirectView.as_view(url='/equipment/home-security/motion-sensors/',permanent=True)),
     ('pa/existing-home-security-system/?$',
@@ -1251,8 +1253,9 @@ urlpatterns += patterns('',
     ('pa/home/?$',
         RedirectView.as_view(url='/',permanent=True)),
     ('alarm/?$',
-        RedirectView.as_view(url='/equipment/home-automation/z-wave-indoor-siren/',permanent=True)),        
-
+        RedirectView.as_view(url='/equipment/home-automation/z-wave-indoor-siren/',permanent=True)),
+    ('support/operation/?$',
+        RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),         
 
 )
 
