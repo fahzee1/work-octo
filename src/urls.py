@@ -147,7 +147,8 @@ elif settings.SITE_ID == 3:
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
         dtt(r'^rep/?$', 'affiliates/sem-landing-page/refresh-responsive.html', 'squeeze'),
-        dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test.html', 'squeeze'),
+        dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test.html', 'orange-test'),
+        dtt(r'^blue/?$', 'affiliates/sem-landing-page/blue-test.html', 'blue-test'),
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
 
