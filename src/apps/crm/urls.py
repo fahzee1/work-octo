@@ -4,6 +4,7 @@ urlpatterns = patterns('apps.crm.views',
 
     # account auth urls
     url(r'^login/$', 'crm_login', name="login"),
+    url(r'^logout/$', 'crm_logout', name="logout"),
 
     # affiliates
     url(r'affiliates/$', 'affiliates', name='affiliates'),

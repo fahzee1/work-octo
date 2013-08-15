@@ -5,7 +5,7 @@ from datetime import datetime
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
 from django.template import RequestContext, loader, Context
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
@@ -43,6 +43,11 @@ def crm_login(request):
     return render_to_response('crm/login.html', {
             'form': form,
         }, context_instance=RequestContext(request))
+
+def crm_logout(request):
+    logout(request)
+    return redirect('crm:login')
+
 
 @never_cache
 def crm_render_wrapper(request, template, context):
