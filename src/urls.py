@@ -1255,7 +1255,9 @@ urlpatterns += patterns('',
     ('alarm/?$',
         RedirectView.as_view(url='/equipment/home-automation/z-wave-indoor-siren/',permanent=True)),
     ('support/operation/?$',
-        RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),         
+        RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),
+    ('news?$',
+        RedirectView.as_view(url='/news/',permanent=True)),              
 
 )
 
