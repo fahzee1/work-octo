@@ -477,7 +477,7 @@ def crime(request, state, city, crime):
         city=city.replace(',','')
     # Return Template with results of query_by_state_city
     return render_to_response(template,
-        query_by_state_city(state, city, False),
+        query_by_state_city(state, city, False,True),
         context_instance=RequestContext(request))
 
 

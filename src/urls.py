@@ -1057,7 +1057,7 @@ urlpatterns += patterns('',
     ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
         RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)),
     ('(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$',
-        RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),     
+        RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),
     ('pa/testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),
     ('contact/careers/?$',
@@ -1257,9 +1257,11 @@ urlpatterns += patterns('',
     ('support/operation/?$',
         RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),
     ('news?$',
-        RedirectView.as_view(url='/news/',permanent=True)),              
+        RedirectView.as_view(url='/news/',permanent=True)),
 
 )
+
+
 
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
