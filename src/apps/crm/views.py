@@ -1,11 +1,12 @@
 import urllib2
 import feedparser
+import pdb
 from datetime import datetime
 
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
-from django.shortcuts import render_to_response,redirect
+from django.shortcuts import render_to_response,redirect,render
 from django.template import RequestContext, loader, Context
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
@@ -19,6 +20,7 @@ from apps.crm.forms import LoginForm, AffiliateForm, ProfileForm
 from apps.affiliates.models import Affiliate, Profile
 from apps.contact.models import CEOFeedback
 from apps.testimonials.models import Textimonial
+from django.db.models import Q
 
 @never_cache
 def json_response(x):
@@ -69,12 +71,21 @@ def crm_render_wrapper(request, template, context):
         # CEO FEEDBACK COUNTS
         ceo_feedbacks = CEOFeedback.objects.all().count()
         unread_feedback_count = CEOFeedback.objects.filter(date_read=None).count()
+        general_feeback_count = CEOFeedback.objects.filter(feedback_type='general').count()
+        positive_feedback_count = CEOFeedback.objects.filter(feedback_type='positive').count()
+        negative_feedback_count = CEOFeedback.objects.filter(feedback_type='negative').count()
+        other_count = CEOFeedback.objects.filter(feedback_type='other').count()
+
         counts['textimonials'] = (unread_textimonial_count,
                                   displayed_textimonial_count,
                                   nondisplayed_textimonial_count,
                                   textimonial_count,
                                   ceo_feedbacks,
-                                  unread_feedback_count)
+                                  unread_feedback_count,
+                                  general_feeback_count,
+                                  positive_feedback_count,
+                                  negative_feedback_count,
+                                  other_count)
 
 
     context['counts'] = counts
@@ -84,12 +95,10 @@ def crm_render_wrapper(request, template, context):
 
 @login_required(login_url='/crm/login/')
 def index(request):
-
     # Display Latest Changes to the Website
     # rss -> https://github.com/batcave/protectamerica/commits/master.atom
-
     changes = feedparser.parse(
-        'https://github.com/robrocker7/protectamerica/commits/master.atom?login=robrocker7&token=60952c2cdb279c500b7c8f14545e0531')
+        'https://github.com/fahzee1.private.atom?token=7f6e88eb75db13005ffd5c911cc6d834')
     change_list = []
     for entry in changes.entries[:10]:
         if 'Merge' in entry.title:
@@ -536,3 +545,20 @@ def comment_posted(request):
         'You have successfully submitted your comment.')
     return HttpResponseRedirect(reverse('crm:affiliates_edit',
         kwargs={'affiliate_id': comment.object_pk}))
+
+def search(request):
+    #pdb.set_trace()
+    ctx = {}
+    query = request.GET.get('q', None)
+    if not query:
+        return redirect('crm:index')
+    q1 = Q(first_name__iexact=query)
+    q2 = Q(last_name__iexact=query)
+    q3 = Q(message__contains=query)
+    textimonials=Textimonial.objects.filter(q1|q2|q3).order_by('-date_created')
+
+    ctx['textimonials'] = textimonials
+    ctx['query'] = query
+    return crm_render_wrapper(request,'crm/search-results.html',ctx)
+
+

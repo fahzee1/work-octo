@@ -42,6 +42,9 @@ urlpatterns = patterns('apps.crm.views',
         name='affiliate_requests_edit'),
     url(r'requests/(?P<profile_id>\d+)/decline/$', 'affiliate_requests_decline',
         name='affiliate_requests_decline'), 
+
+    # search
+    url(r'^search$', 'search', name='search'),
     
     # pages
     url(r'^$', 'index', name='index'),
