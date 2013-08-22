@@ -3,7 +3,7 @@ import pdb
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.db.models import Sum
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
 
@@ -142,6 +142,9 @@ class CrimesByCity(models.Model):
         if val is None:
             return val
         return 1e5*val/max(1.0, self.population)
+
+
+
 
 
 class CityCrimeStats(models.Model):
@@ -319,6 +322,8 @@ class MatchAddressLocation(models.Model):
             super(MatchAddressLocation,self).save(*args, **kwargs) 
 
     
-
+def return_sums(state,field_name):
+    return CrimesByCity.objects.filter(fbi_state=state.upper()).aggregate(Sum(field_name.lower()))
+    
 
     
