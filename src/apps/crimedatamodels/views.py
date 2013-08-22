@@ -484,6 +484,7 @@ def crime(request, state, city, crime):
 def search(request):
     """Render a search results page based on the query string in the GET params"""
     # Extract Query Parameters
+    
     q_str = request.GET.get('q', '')
     q_params = q_str.split(' ')
 
