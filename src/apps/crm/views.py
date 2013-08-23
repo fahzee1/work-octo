@@ -27,6 +27,19 @@ def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
                         content_type='application/json; charset=UTF-8')
 
+
+
+def paginate_this(request,_list,num=20):
+    paginator = Paginator(_list,num)
+    page = request.GET.get('page','')
+    try:
+        new_list = paginator.page(page)
+    except PageNotAnInteger:
+        new_list = paginator.page(1)
+    except EmptyPage:
+        new_list = paginator.page(paginator.num_pages)
+    return new_list
+
 def crm_login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -473,17 +486,7 @@ def textimonial_dont_display(request, textimonial_id):
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks(request):
     ceo_feedback_list = CEOFeedback.objects.order_by('-date_created')
-    paginator = Paginator(ceo_feedback_list, 20)
-
-    page = request.GET.get('page', '')
-    try:
-        ceo_feedbacks = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        ceo_feedbacks = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        ceo_feedbacks = paginator.page(paginator.num_pages)
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
 
     return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
             'ceo_feedbacks': ceo_feedbacks,
@@ -492,21 +495,42 @@ def ceo_feedbacks(request):
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_unread(request):
     ceo_feedback_list = CEOFeedback.objects.filter(date_read=None).order_by('-date_created')
-    paginator = Paginator(ceo_feedback_list, 20)
-
-    page = request.GET.get('page', '')
-    try:
-        ceo_feedbacks = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        ceo_feedbacks = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        ceo_feedbacks = paginator.page(paginator.num_pages)
-
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
             'ceo_feedbacks': ceo_feedbacks,
         })
+
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_general(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='general').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_positive(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='positive').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_negative(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='negative').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_other(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='other').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+
+
 
 @login_required(login_url='/crm/login/')
 def feedback_view(request, feedback_id):
