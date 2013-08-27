@@ -574,8 +574,11 @@ def search(request):
     #pdb.set_trace()
     ctx = {}
     query = request.GET.get('q', None)
+    came_from = request.META.get('HTTP_REFERER',None)
+    if not came_from:
+        came_from = 'crm:index'
     if not query:
-        return redirect('crm:index')
+        return redirect(came_from)
     q1 = Q(first_name__iexact=query)
     q2 = Q(last_name__iexact=query)
     q3 = Q(message__contains=query)
