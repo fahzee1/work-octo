@@ -485,7 +485,6 @@ def search(request):
     """Render a search results page based on the query string in the GET params"""
     # Extract Query Parameters
     
-    pdb.set_trace()
     q_str = request.GET.get('q', '')
     q_params = q_str.split(' ')
 
