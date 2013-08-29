@@ -1,5 +1,4 @@
 {% extends "crm/base.html" %}
-
 {% load sekizai_tags %}
 
 {% block content %}
@@ -11,31 +10,30 @@
 .star-button.hover{background:url({{ STATIC_URL }}img/extra/testimonial-stars-light-grey.png) -80px 0 no-repeat;}
 </style>
 {% endaddtoblock "css" %}
-<div class="row">
-    <div class="span8">
-        <h1>CEO Feedbacks</h1>
-    </div>
-</div>
-<div class="row">
+	<div class="row">
+   		 <div class="span8">
+        	<h1>Search Results For... <i>{{ query }}</i></h1>
+    	</div>
+	</div>
+	{% if textimonials.count != 0 %}
+	<div class="row">
     <div class="span8">
 <table class="table table-striped table-bordered table-condensed">
     <tr>
         <th width="112px">Name</th>
         <th width="96px">Location</th>
-        <th>Type</th>
         <th>Message</th>
         <th>Rating</th>
         <th width="112px"></th>
     </tr>
-    {% for feedback in ceo_feedbacks.object_list %}
-    <tr class="feedback_{{ feedback.id }}">
-        <td>{{ feedback.name }}</td>
-        <td>{{ feedback.city }}, {{ feedback.state }}</td>
-        <td>{{ feedback.feedback_type }}</td>
-        <td>{{ feedback.message|truncatewords:20 }}</td>
+    {% for textimonial in textimonials %}
+    <tr class="textimonial_{{ textimonial.id }}">
+        <td>{{ textimonial.first_name }} {{ textimonial.last_name }}</td>
+        <td>{{ textimonial.city }}, {{ textimonial.state }}</td>
+        <td>{{ textimonial.message|truncatewords:20 }}</td>
         <td>
             <div class="star-container">
-                {% with rating=feedback.rating %}
+                {% with rating=textimonial.rating %}
                 <div class="star-button{% if rating >= '1' %} active{% endif %}" id="1-star">&nbsp;</div>
                 <div class="star-button{% if rating >= '2' %} active{% endif %}" id="2-star">&nbsp;</div>
                 <div class="star-button{% if rating >= '3' %} active{% endif %}" id="3-star">&nbsp;</div>
@@ -46,59 +44,57 @@
         </td>
         <td style="text-align: center; vertical-align: middle;">
             <div class="btn-group">
-            {% if feedback.converted %}
-                {% include "crm/_partials/feedback_convert_actions.html" with feedback=feedback %} 
+            {% if textimonial.display %}
+                {% include "crm/_partials/textimonial_approved_actions.html" with textimonial=textimonial %}
             {% else %}
-                <a href="{% url crm:feedback_view feedback.id %}" class="btn feedback_view">
-                    <i class="icon-eye-open"></i>
-                </a>
-                <a href="{% url crm:feedback_convert feedback.id %}" class="btn btn-success feedback_convert">
-                    <i class="icon-share-alt icon-white"></i>
-                </a>
+                {% include "crm/_partials/textimonial_nonapproved_actions.html" with textimonial=textimonial %}
             {% endif %}
             </div>
         </td>
     </tr>
     {% endfor %}
 </table>
-<ul class="pager">
-    {% if ceo_feedbacks.has_previous %}
-    <li class="previous">
-        <a href="?page={{ ceo_feedbacks.previous_page_number }}">&larr; Newer</a>
-    </li>
-    {% endif %}
-    {% if ceo_feedbacks.has_next %}
-    <li class="next">
-        <a href="?page={{ ceo_feedbacks.next_page_number }}">Older &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
+	
+	{% else %}
+	<div class="row">
+		<div class="span8">
+			<h3>No results for your search query.</h3>
+		</div>
+	</div>
+	{% endif %}
 
-    </div>
-</div>
-<div class="modal fade hide" id="feedback_view_modal"></div>
+<div class="modal fade hide" id="textimonial_view_modal"></div>
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {
-    $('.feedback_view').live('click', function(e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
+    $('.textimonial_view').live('click', function() {
+        var url = $(this).attr('data-url');
         $.get(url, function(json_response){
             if(json_response.success) {
-                $("#feedback_view_modal").html(json_response.html).modal('show');
+                $("#textimonial_view_modal").html(json_response.html).modal('show');
             }
         });
     });
-    $('.feedback_convert').live('click', function(e) {
+    $('.textimonial_approve').live('click', function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $.get(url, function(json_response){
             if(json_response.success) {
-                $('.feedback_' + json_response.id).find('.btn-group').html(json_response.html);
+                $('.textimonial_' + json_response.id).find('.btn-group').html(json_response.html);
+            }
+        });
+    });
+    $('.textimonial_dont_display').live('click', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.get(url, function(json_response){
+            if(json_response.success) {
+                $('.textimonial_' + json_response.id).find('.btn-group').html(json_response.html);
             }
         });
     });
 });
 </script>
 {% endaddtoblock "js" %}
+
 {% endblock %}

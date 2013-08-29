@@ -4,6 +4,7 @@ urlpatterns = patterns('apps.crm.views',
 
     # account auth urls
     url(r'^login/$', 'crm_login', name="login"),
+    url(r'^logout/$', 'crm_logout', name="logout"),
 
     # affiliates
     url(r'affiliates/$', 'affiliates', name='affiliates'),
@@ -28,6 +29,7 @@ urlpatterns = patterns('apps.crm.views',
     url(r'textimonial/(?P<textimonial_id>\d+)/dont-display/$', 'textimonial_dont_display',
         name='textimonial_dont_display'),
 
+    # ceo feedbacks
     url(r'ceo-feedbacks/$', 'ceo_feedbacks', name='ceo_feedbacks'),
     url(r'ceo-feedbacks/unread/$', 'ceo_feedbacks_unread', name='ceo_feedbacks_unread'),
     url(r'ceo-feedback/(?P<feedback_id>\d+)/view/$', 'feedback_view',
@@ -35,12 +37,20 @@ urlpatterns = patterns('apps.crm.views',
     url(r'ceo-feedback/(?P<feedback_id>\d+)/convert/$', 'feedback_convert',
         name='feedback_convert'),
 
+    url(r'ceo-feedbacks/general/$', 'ceo_feedbacks_general', name='ceo_feedbacks_general'),
+    url(r'ceo-feedbacks/positive/$', 'ceo_feedbacks_positive', name='ceo_feedbacks_positive'), 
+    url(r'ceo-feedbacks/negative/$', 'ceo_feedbacks_negative', name='ceo_feedbacks_negative'), 
+    url(r'ceo-feedbacks/other/$', 'ceo_feedbacks_other', name='ceo_feedbacks_other'),
+
     # profiles
     url(r'requests/$', 'affiliate_requests', name='requests'),
     url(r'requests/(?P<profile_id>\d+)/$', 'affiliate_requests_edit',
         name='affiliate_requests_edit'),
     url(r'requests/(?P<profile_id>\d+)/decline/$', 'affiliate_requests_decline',
         name='affiliate_requests_decline'), 
+
+    # search
+    url(r'^search$', 'search', name='search'),
     
     # pages
     url(r'^$', 'index', name='index'),

@@ -4,10 +4,12 @@ from apps.crimedatamodels.models import (CrimesByCity, CityCrimeStats, CrimeCont
 
 class CrimesByCityAdmin(admin.ModelAdmin):
     model = CrimesByCity
+    list_filter = ('year','fbi_state',)
 admin.site.register(CrimesByCity, CrimesByCityAdmin)
 
 class CityCrimeStatsAdmin(admin.ModelAdmin):
-    model = CrimesByCity
+    model = CityCrimeStats
+    list_filter = ('year','city__fbi_state',)
 admin.site.register(CityCrimeStats, CityCrimeStatsAdmin)
 
 class CrimeContentAdmin(admin.ModelAdmin):
@@ -15,23 +17,23 @@ class CrimeContentAdmin(admin.ModelAdmin):
 admin.site.register(CrimeContent, CrimeContentAdmin)
 	
 class MatchAdressLocationAdmin(admin.ModelAdmin):
-	model=MatchAddressLocation
-	list_display=('address','location',)
+	model = MatchAddressLocation
+	list_display = ('address','location',)
 admin.site.register(MatchAddressLocation,MatchAdressLocationAdmin)
 
 class LocalAddressAdmin(admin.ModelAdmin):
-	model=LocalAddress
+	model = LocalAddress
 admin.site.register(LocalAddress,LocalAddressAdmin)
 
 class CityLocationAdmin(admin.ModelAdmin):
-	model=CityLocation
-	list_filter=('state',)
+	model = CityLocation
+	list_filter = ('state',)
 
 admin.site.register(CityLocation,CityLocationAdmin)
 
 class StateAdmin(admin.ModelAdmin):
-	model=State
-	list_filter=('name',)
+	model = State
+	list_filter = ('name',)
 
 admin.site.register(State,StateAdmin)
 

@@ -17,6 +17,11 @@
       .sidebar-nav {
         padding: 9px 0;
       }
+      .form-search{
+        position:absolute;
+        top: 415px;
+        left: 180px; 
+      }
     </style>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -58,7 +63,7 @@
                 <li><a href="#">Profile</a></li>
                 <li class="divider"></li>
                 {% if request.user.is_authenticated %}
-                <li><a href="#">Sign Out</a></li>
+                <li><a href="{% url crm:logout %}">Sign Out</a></li>
                 {% else %}
                 <li><a href="{% url crm:login %}">Login</a>
                 {% endif %}
@@ -111,6 +116,11 @@
                     {% url crm:textimonials_dont_display as text_dont_display_page %}
                     {% url crm:ceo_feedbacks as ceofee_page %}
                     {% url crm:ceo_feedbacks_unread as ceofee_unread_page %}
+                    {% url crm:ceo_feedbacks_general as ceofee_general %}
+                    {% url crm:ceo_feedbacks_positive as ceofee_positive %}
+                    {% url crm:ceo_feedbacks_negative as ceofee_negative %}
+                    {% url crm:ceo_feedbacks_other as ceofee_other %}
+
                     <li class="nav-header">Textimonal Pages</li>
                     <li{% if c_page == text_page %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.3 }}</span>
@@ -134,15 +144,35 @@
                         <a href="{{ ceofee_page }}">View All Feedbacks</a>
                     </li>
                     <li{% if c_page == ceofee_unread_page %} class="active"{% endif %}>
-                        <span class="badge badge-important pull-right" style="margin-top: 3px;">{{ counts.textimonials.5 }}</span>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.5 }}</span>
                         <a href="{{ ceofee_unread_page }}">View All Unread Feedbacks</a>
                     </li>
+                     <li{% if c_page == ceofee_general %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.6 }}</span>
+                        <a href="{{ ceofee_general }}">View All General Types</a>
+                    </li>
+                     <li{% if c_page == ceofee_positive %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.7 }}</span>
+                        <a href="{{ ceofee_positive }}">View All Positive Types </a>
+                    </li>
+                    <li{% if c_page == ceofee_negative %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.8 }}</span>
+                        <a href="{{ ceofee_negative }}">View All Negative Types</a>
+                    </li>
+                     <li{% if c_page == ceofee_other %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.9 }}</span>
+                        <a href="{{ ceofee_other }}">View All Other Types</a>
+                    </li>
+
                     {% endifusergroup %}
                 </ul>
                 </div>
                 {% block extra_sidebar %}{% endblock %}
             </div>
         {% endwith %}
+        {% block search-form %}
+           {% include "crm/_partials/search_form.html" %}
+        {% endblock %}
         {% endblock %}
             <div class="span8 offset1">
                 {% include "crm/_partials/message_box.html" %}
