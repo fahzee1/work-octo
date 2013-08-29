@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib.localflavor.us.us_states import US_STATES
 
 from apps.contact.forms import PAContactForm
-
+from django.template.defaultfilters import slugify
 from apps.crimedatamodels.models import (CrimesByCity,
                                          CityCrimeStats,
                                          State,
@@ -485,106 +485,90 @@ def search(request):
     """Render a search results page based on the query string in the GET params"""
     # Extract Query Parameters
     
-    q_str = request.GET.get('q', '')
-    q_params = q_str.split(' ')
+    q_str = request.GET.get('q', None)
+    city_and_state = False
+    city_or_state = False
+    is_zipcode = False
+    n_cities = None
+    city_objs = None
+    if ',' in q_str:
+        q_params = q_str.split(',')
+        _city,_state = q_params[0],q_params[1]
+        _state = _state.upper()
+        city_and_state = True
+    elif '/' in q_str:
+        q_params = q_str.split('/')
+        _city,_state = q_params[0],q_params[1]
+        _state = _state.upper()
+        city_and_state = True
+    elif q_str.isdigit():
+        is_zipcode = True
+        q_params = q_str
+    else:
+        q_params =  q_str.capitalize()
+        _city,_state = None,None
+        city_or_state = True
 
-    #if comma or slash in query,remove comma or slash
-    #use state to query DB.
-    comma_or_slash=False
-    city_and_state=False
-    _city=False
-    _state=_city
-    if ',' or '/' in q_str:
-        comma_or_slash=True
-        if ',' in q_str:
-            _city,_state=q_str.replace(',',' ').split()
-            _state=_state.upper()
-            city_and_state=True
-        elif '/' in q_str:
-            _city,_state=q_str.replace('/',' ').split()
-            _state=_state.upper()
-            city_and_state=True
-        else:
-            _city=q_str
-            _state=_city
-            city_and_state=False
-        print _state 
        
     # Get any State objects from params, and replace
     # full state name params with abbreviations
+    if not is_zipcode:
+        try:
+            query_abbr = (_state if city_and_state else q_params.upper())
+            query_name = (_state if city_and_state else q_params.capitalize())
+            q_abbr,q_name = query_abbr.replace(' ',''), query_name.replace(' ','')
+            q1,q2 =  Q(abbreviation__iexact=q_abbr), Q(name__iexact=q_abbr)
+            q3,q4 =  Q(abbreviation__iexact=q_name), Q(name__iexact=q_name)
+            state = State.objects.get(q1|q2|q3|q4)
+            print 'states are %s' % state.name
+        except State.DoesNotExist:
+            state = False
 
-    try:
-        if comma_or_slash:
-            query_abbr=_state
-            query_name=_state
+
+        if state:
+            ss = state.abbreviation.upper()
+            all_cities = CityLocation.objects.filter(state=ss)
         else:
-            query_abbr=q_str.upper()
-            query_name.q_str.capitalize()
-
-        print query_abbr
-        print query_name
-        states = State.objects.all().filter(
-        Q(abbreviation__iexact=query_abbr)| Q(name__icontains=query_name))
-        
-        print 'states are %s' % (states)
-    except State.DoesNotExist:
-        states=False
-
-
-    list_all_cities=False
-    if states:
-        if not city_and_state:
-            ss=states[0].abbreviation.upper()
-            all_cities=CityLocation.objects.filter(state=ss)
+            ss,dd = Q(city_name_slug=slugify(q_params)) ,Q(state__iexact=q_params)
+            all_cities = CityLocation.objects.filter(ss|dd)
+        if all_cities:
             list_all_cities=True
             print 'all cities are %s' % all_cities
 
 
-    for state in states:
-        for i in range(len(q_params)):
-            if state.name.lower() == q_params[i].lower():
-                q_params[i] = state.abbreviation
+    if is_zipcode:
+        zip_qs = ZipCode.objects.filter(zip=q_params)
+        n_zips = zip_qs.count()
 
-    # Get potentially matching zips
-    zqo = Q(zip__in=q_params)
-    for qp in q_params:
-        zqo = zqo | Q(city__contains=qp)
-    for state in states:
-        zqo = zqo & Q(state=state.abbreviation)
-    zip_qs = ZipCode.objects.filter(zqo)
-    n_zips = zip_qs.count()
-
-    print 'zip codes are %s' % (zip_qs)
+        print 'zip codes are %s' % (zip_qs)
 
     # If we only matched 1 zip result, show that page automatically
-    if n_zips == 1:
-        zipcode = zip_qs[0]
-        city_slug = zipcode.city.lower().replace(' ', '-')
-        return HttpResponseRedirect(
-            reverse('home') + zipcode.state + '/' + city_slug)
+        if n_zips == 1:
+            zipcode = zip_qs[0]
+            city_slug = zipcode.city.lower().replace(' ', '-')
+            return HttpResponseRedirect(
+                reverse('home') + zipcode.state + '/' + city_slug)
 
     # Otherwise get more creative (WIP)
-    city_objs, n_cities = [], 0
-    if n_zips > 0:
-        city_names = [zc.city for zc in zip_qs]
-        city_objs = CityLocation.objects.all() \
-            .filter(city_name__in=city_names) \
-            .order_by('city_name')
-        n_cities = city_objs.count()
+        city_objs, n_cities = [], 0
+        if n_zips > 0:
+            city_names = [zc.city for zc in zip_qs]
+            city_objs = CityLocation.objects.filter(city_name__in=city_names).order_by('city_name')
+            n_cities = city_objs.count()
 
 
-    print 'cities are %s' % (city_objs)
+        print 'cities are %s' % (city_objs)
 
     # If only 1 city found, redirect to it's results like before
-    if n_cities == 1:
-        city = city_objs[0]
-        return HttpResponseRedirect(
-            reverse('home') + city.state + '/' + city.slug_name)
+        if n_cities == 1:
+            city = city_objs[0]
+            return HttpResponseRedirect(
+                reverse('home') + city.state + '/' + city.slug_name)
 
 
     if city_and_state:
         try:
-            city=CityLocation.objects.get(city_name=_city.capitalize(),state=states[0].abbreviation)
+            city = all_cities.get(city_name_slug=slugify((_city if city_and_state else q_params)))
         except CityLocation.DoesNotExist:
             messages.info(request,'Sorry no city/state/zipcode matching your querys')
             return redirect('home')
@@ -593,8 +577,8 @@ def search(request):
     forms = {}
     forms['basic'] = PAContactForm()
 
-    ctx={'num_cities': n_cities, 
-         'cities': city_objs, 
+    ctx={'num_cities': (n_cities if n_cities else None), 
+         'cities': (city_objs if city_objs else None), 
          'forms': forms, 
          'search_query': q_str}
 
