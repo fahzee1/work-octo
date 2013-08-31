@@ -1,11 +1,12 @@
 import urllib2
 import feedparser
+import pdb
 from datetime import datetime
 
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect,render
 from django.template import RequestContext, loader, Context
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
@@ -19,11 +20,25 @@ from apps.crm.forms import LoginForm, AffiliateForm, ProfileForm
 from apps.affiliates.models import Affiliate, Profile
 from apps.contact.models import CEOFeedback
 from apps.testimonials.models import Textimonial
+from django.db.models import Q
 
 @never_cache
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
                         content_type='application/json; charset=UTF-8')
+
+
+
+def paginate_this(request,_list,num=20):
+    paginator = Paginator(_list,num)
+    page = request.GET.get('page','')
+    try:
+        new_list = paginator.page(page)
+    except PageNotAnInteger:
+        new_list = paginator.page(1)
+    except EmptyPage:
+        new_list = paginator.page(paginator.num_pages)
+    return new_list
 
 def crm_login(request):
     if request.method == "POST":
@@ -43,6 +58,11 @@ def crm_login(request):
     return render_to_response('crm/login.html', {
             'form': form,
         }, context_instance=RequestContext(request))
+
+def crm_logout(request):
+    logout(request)
+    return redirect('crm:login')
+
 
 @never_cache
 def crm_render_wrapper(request, template, context):
@@ -64,12 +84,21 @@ def crm_render_wrapper(request, template, context):
         # CEO FEEDBACK COUNTS
         ceo_feedbacks = CEOFeedback.objects.all().count()
         unread_feedback_count = CEOFeedback.objects.filter(date_read=None).count()
+        general_feeback_count = CEOFeedback.objects.filter(feedback_type='general').count()
+        positive_feedback_count = CEOFeedback.objects.filter(feedback_type='positive').count()
+        negative_feedback_count = CEOFeedback.objects.filter(feedback_type='negative').count()
+        other_count = CEOFeedback.objects.filter(feedback_type='other').count()
+
         counts['textimonials'] = (unread_textimonial_count,
                                   displayed_textimonial_count,
                                   nondisplayed_textimonial_count,
                                   textimonial_count,
                                   ceo_feedbacks,
-                                  unread_feedback_count)
+                                  unread_feedback_count,
+                                  general_feeback_count,
+                                  positive_feedback_count,
+                                  negative_feedback_count,
+                                  other_count)
 
 
     context['counts'] = counts
@@ -79,12 +108,10 @@ def crm_render_wrapper(request, template, context):
 
 @login_required(login_url='/crm/login/')
 def index(request):
-
     # Display Latest Changes to the Website
     # rss -> https://github.com/batcave/protectamerica/commits/master.atom
-
     changes = feedparser.parse(
-        'https://github.com/robrocker7/protectamerica/commits/master.atom?login=robrocker7&token=60952c2cdb279c500b7c8f14545e0531')
+        'https://github.com/fahzee1.private.atom?token=7f6e88eb75db13005ffd5c911cc6d834')
     change_list = []
     for entry in changes.entries[:10]:
         if 'Merge' in entry.title:
@@ -459,17 +486,7 @@ def textimonial_dont_display(request, textimonial_id):
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks(request):
     ceo_feedback_list = CEOFeedback.objects.order_by('-date_created')
-    paginator = Paginator(ceo_feedback_list, 20)
-
-    page = request.GET.get('page', '')
-    try:
-        ceo_feedbacks = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        ceo_feedbacks = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        ceo_feedbacks = paginator.page(paginator.num_pages)
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
 
     return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
             'ceo_feedbacks': ceo_feedbacks,
@@ -478,21 +495,42 @@ def ceo_feedbacks(request):
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_unread(request):
     ceo_feedback_list = CEOFeedback.objects.filter(date_read=None).order_by('-date_created')
-    paginator = Paginator(ceo_feedback_list, 20)
-
-    page = request.GET.get('page', '')
-    try:
-        ceo_feedbacks = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        ceo_feedbacks = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        ceo_feedbacks = paginator.page(paginator.num_pages)
-
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
             'ceo_feedbacks': ceo_feedbacks,
         })
+
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_general(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='general').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_positive(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='positive').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_negative(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='negative').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_other(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='other').order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+
+
 
 @login_required(login_url='/crm/login/')
 def feedback_view(request, feedback_id):
@@ -531,3 +569,23 @@ def comment_posted(request):
         'You have successfully submitted your comment.')
     return HttpResponseRedirect(reverse('crm:affiliates_edit',
         kwargs={'affiliate_id': comment.object_pk}))
+
+def search(request):
+    #pdb.set_trace()
+    ctx = {}
+    query = request.GET.get('q', None)
+    came_from = request.META.get('HTTP_REFERER',None)
+    if not came_from:
+        came_from = 'crm:index'
+    if not query:
+        return redirect(came_from)
+    q1 = Q(first_name__iexact=query)
+    q2 = Q(last_name__iexact=query)
+    q3 = Q(message__contains=query)
+    textimonials=Textimonial.objects.filter(q1|q2|q3).order_by('-date_created')
+
+    ctx['textimonials'] = textimonials
+    ctx['query'] = query
+    return crm_render_wrapper(request,'crm/search-results.html',ctx)
+
+

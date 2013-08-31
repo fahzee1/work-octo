@@ -3,7 +3,9 @@ import pdb
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.db.models import Sum,Q
+from django.template.defaultfilters import slugify
+from geopy import geocoders
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
 
@@ -78,6 +80,9 @@ class CityLocation(models.Model):
             self.city_name])
 
     def join_name(self,local=False):
+        if "'" in self.city_name:
+            return self.city_name_slug.title()
+
         names=self.city_name.split(' ')
         if len(names) == 1:
             name=self.city_name
@@ -141,6 +146,50 @@ class CrimesByCity(models.Model):
         return 1e5*val/max(1.0, self.population)
 
 
+    def check_create_if_none(self):
+        # run this multiple times cause most likely will run out of trys then throw an error
+        # note had to run 5 times first time using script
+        try:
+            #try and get city location in DB
+            city = CityLocation.objects.get(city_name_slug=slugify(self.fbi_city_name),state=self.fbi_state)
+            return ' skipping city %s,%s is there' % (self.fbi_city_name,self.fbi_state)
+        except CityLocation.DoesNotExist:
+            #if not there create one (also using geocode to get latitude longitude)
+            city_n = self.fbi_city_name
+            state = self.fbi_state
+            try:
+                g = geocoders.GoogleV3()
+                results = g.geocode(city_n+','+state,exactly_one=False)
+                addr ,(lat,lng) = results[0]
+            except:
+                try:
+                    g = geocoders.GeocoderDotUS()
+                    results = g.geocode(city_n+','+state,exactly_one=False)
+                    addr ,(lat,lng) = results[0]
+                except:
+                    try:
+                        g = geocoders.GeoNames()
+                        results = g.geocode(city_n+','+state,exactly_one=False)
+                        addr ,(lat,lng) = results[0]
+                    except:
+                        try:
+                            g = geocoders.MediaWiki("http://wiki.case.edu/%s")
+                            results = g.geocode(city_n+','+state,exactly_one=False)
+                            addr ,(lat,lng) = results[0]
+                        except:
+                            pass
+
+            city = CityLocation.objects.create(city_name=city_n,city_name_slug=slugify(city_n),state=state,latitude=lat,longitude=lng)
+            return 'created city %s, %s' % (city_n,state)
+    
+
+
+
+
+
+
+
+
 class CityCrimeStats(models.Model):
     """Volatile city crime stats computed from the CrimesByCity table.
 
@@ -177,6 +226,9 @@ class CityCrimeStats(models.Model):
     violent_crime_grade = models.CharField(null=True,
         max_length=1)
 
+    class Meta:
+        db_table = 'city_crime_stats'
+        unique_together = (('city', 'year'),)
 
     def __unicode__(self):
         return "%s" % self.city
@@ -203,9 +255,7 @@ class CityCrimeStats(models.Model):
         ag = int(round(float(sum(used_fields_for_avg)) / float(len(used_fields_for_avg))))
         return [k for k, v in GRADE_MAP.iteritems() if v == ag][0]
 
-    class Meta:
-        db_table = 'city_crime_stats'
-        unique_together = (('city', 'year'),)
+
 
 
 class StateCrimeStats(models.Model):
@@ -316,6 +366,19 @@ class MatchAddressLocation(models.Model):
             super(MatchAddressLocation,self).save(*args, **kwargs) 
 
     
-
+def return_sums(crime,state,city=None,year=2011,per100=False):
+    if per100:
+        if city:
+            locations = CrimesByCity.objects.filter(year=year,fbi_city_name=city.title(),fbi_state=state.upper())
+        else:
+            locations = CrimesByCity.objects.filter(year=year,fbi_state=state.upper())
+        end_string = '_rank_per100k'
+        return CityCrimeStats.objects.filter(city=locations).aggregate(Sum(crime.lower()+end_string))
+            
+    else:
+        if city:
+            return CrimesByCity.objects.filter(year=year,fbi_city_name=city.title(),fbi_state=state.upper()).aggregate(Sum(crime.lower()))
+        return CrimesByCity.objects.filter(year=year,fbi_state=state.upper()).aggregate(Sum(crime.lower()))
+    
 
     
