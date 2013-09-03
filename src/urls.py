@@ -419,6 +419,7 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         dtt(r'^404/?$', '404.html', '404', 'home'),
+        dtt(r'^blog404/?$', 'blog404.html', 'blog404', 'home'),
 
         # Shop
         dtt(r'^shop-home-security-packages/?$', 'packages/index.html', 'shop'),
@@ -1258,6 +1259,15 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),
     ('news?$',
         RedirectView.as_view(url='/news/',permanent=True)),
+    ('home-security-blog/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/[-\w]+/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+
 
 )
 
