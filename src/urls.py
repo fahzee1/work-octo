@@ -1055,9 +1055,9 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
-    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
+    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{1,5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
         RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)),
-    ('(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$',
+    ('(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{1,5})/?$',
         RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),
     ('pa/testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),
@@ -1259,6 +1259,10 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),
     ('news?$',
         RedirectView.as_view(url='/news/',permanent=True)),
+)
+
+# new redirects need to go in here cause urlpatterns has 255 limit
+urlpatterns += patterns('',
     ('home-security-blog/?$',
         RedirectView.as_view(url='/blog404/',permanent=True)),
     ('home-security-blog/[-\w]+/[-\w]+/?$',
@@ -1267,10 +1271,12 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/blog404/',permanent=True)),
     ('home-security-blog/[-\w]+/[-\w]+/[-\w]+/?$',
         RedirectView.as_view(url='/blog404/',permanent=True)),
-
+    ('home-security-blog/[-\w]+/[-\w]+/[-\w]+/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/[-\w]+/[-\w]+/[-\w]+/[-/w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
 
 )
-
 
 
 urlpatterns += patterns('',

@@ -101,6 +101,7 @@ def query_weather(latitude, longitude, city, state):
 
 def query_by_state_city(state, city, get_content=True,local=False):
     # validate city and state
+
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
@@ -115,7 +116,8 @@ def query_by_state_city(state, city, get_content=True,local=False):
             city_here=False
             local=(True if local else False)
             for x in cities:
-                if x.join_name(local) == city:
+                data = x.join_name(local)
+                if city == data['name'] or slugify(city) == data['slug']:
                     city_here=True
                     city=x
                     print "this is city and length was 1 %s" % city
@@ -193,8 +195,9 @@ def query_by_state_city(state, city, get_content=True,local=False):
 
 
      # Google Weather API
-    weather_info = query_weather(city.latitude, city.longitude,
-        city.city_name, state.abbreviation)
+    #weather_info = query_weather(city.latitude, city.longitude,
+     #   city.city_name, state.abbreviation)
+    weather_info = None
 
     context={'crime_stats': (crime_stats if crime_stats else None),
            'years': years[:3],

@@ -15,11 +15,14 @@
 <meta name="geo.position" content="{{ lat }};{{ long }}" />
 <meta name="ICBM" content="{{ lat }}, {{ long }}" />
 {% endblock %}
+{% block comment %}
+Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" alt="{{ weather_info.desc }}" title="{{ weather_info.desc }}"/> {{ weather_info.temp }}&deg;F
+{% endblock %}
 
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
     {% block quick-links %}
 	<ul id="quick-link-navigation">
-        <li class="city-info"><span id="city-info">{{ city }}, {{ state }}: <strong>Population:{% if latest_year.info %} {{ latest_year.info.population|intcomma }} {% else %} {{ latest_year_.population|intcomma }} {% endif %}</strong>Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" alt="{{ weather_info.desc }}" title="{{ weather_info.desc }}"/> {{ weather_info.temp }}&deg;F</span></li>
+        <li class="city-info"><span id="city-info">{{ city }}, {{ state }}: <strong>Population:{% if latest_year.info %} {{ latest_year.info.population|intcomma }} {% else %} {{ latest_year_.population|intcomma }} {% endif %}</strong></span></li>
         <li id="quick-social">                
             <div id="google-button">
                 <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>

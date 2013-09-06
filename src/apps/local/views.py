@@ -95,7 +95,7 @@ def local_page_wrapper(request, keyword, city, state):
 
 
     for x in US_STATES:
-        if x[1]==(new_state if three==3 else state):
+        if x[1] == (new_state if three == 3 else state) or x[0] == state.upper():
             statecode=x[0]   
         else:        
             for x in US_STATES:
