@@ -19,7 +19,7 @@
       }
       .form-search{
         position:absolute;
-        top: 415px;
+        top: 460px;
         left: 180px; 
       }
     </style>
@@ -116,16 +116,18 @@
                     {% url crm:textimonials_dont_display as text_dont_display_page %}
                     {% url crm:ceo_feedbacks as ceofee_page %}
                     {% url crm:ceo_feedbacks_unread as ceofee_unread_page %}
+                    {% url crm:ceo_feedbacks_read as ceofee_read_page %}
                     {% url crm:ceo_feedbacks_general as ceofee_general %}
                     {% url crm:ceo_feedbacks_positive as ceofee_positive %}
                     {% url crm:ceo_feedbacks_negative as ceofee_negative %}
                     {% url crm:ceo_feedbacks_other as ceofee_other %}
-
+                    {% url crm:ceo_feedbacks_postedsite as ceofee_postedsite %}
                     <li class="nav-header">Textimonal Pages</li>
                     <li{% if c_page == text_page %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.3 }}</span>
                         <a href="{{ text_page }}">All Textimonials</a>
                     </li>
+
                     <li{% if c_page == text_unread_page %} class="active"{% endif %}>
                         <span class="badge badge-important pull-right" style="margin-top: 3px;">{{ counts.textimonials.0 }}</span>
                         <a href="{{ text_unread_page }}">Unread Textimonials</a>
@@ -142,6 +144,10 @@
                     <li{% if c_page == ceofee_page %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.4 }}</span>
                         <a href="{{ ceofee_page }}">View All Feedbacks</a>
+                    </li>
+                     <li{% if c_page == text_read_page %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.11 }}</span>
+                        <a href="{{ ceofee_read_page }}">View All Read Feedbacks</a>
                     </li>
                     <li{% if c_page == ceofee_unread_page %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.5 }}</span>
@@ -162,6 +168,10 @@
                      <li{% if c_page == ceofee_other %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.9 }}</span>
                         <a href="{{ ceofee_other }}">View All Other Types</a>
+                    </li>
+                    <li{% if c_page == ceofee_postedsite %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.10 }}</span>
+                        <a href="{{ ceofee_postedsite }}">View All Posted To Site</a>
                     </li>
 
                     {% endifusergroup %}

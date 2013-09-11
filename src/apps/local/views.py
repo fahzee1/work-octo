@@ -93,7 +93,7 @@ def local_page_wrapper(request, keyword, city, state):
         first,second,third=words[0].capitalize(),words[1].lower(),words[2].capitalize()
         new_state=first+' '+second+' '+third
 
-
+    statecode = None
     for x in US_STATES:
         if x[1] == (new_state if three == 3 else state) or x[0] == state.upper():
             statecode=x[0]   
@@ -110,6 +110,9 @@ def local_page_wrapper(request, keyword, city, state):
                     _state=None
                 if _state == state:
                     statecode=x[0]
+    if not statecode:
+        raise Http404
+
     if '-' and '.' in city:
         city=city.replace('-',' ').replace('.','')
     if '-' in city:

@@ -64,8 +64,8 @@ sitemaps={
                                  'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
     'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
     'article':ArticleSitemap,
-    'crimestats':CrimeStatsSitemap,
-    'crimestats-state':FreeCrimeStatsStateSitemap,
+   # 'crimestats':CrimeStatsSitemap,
+   'crimestats-state':FreeCrimeStatsStateSitemap,
     #'crimestats-city':FreeCrimeStatsCitySitemap,
    # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
     'keyword':KeywordSitemapIndex(LOCAL_KEYWORDS)
@@ -1262,6 +1262,7 @@ urlpatterns += patterns('',
 )
 
 # new redirects need to go in here cause urlpatterns has 255 limit
+'''
 urlpatterns += patterns('',
     ('home-security-blog/?$',
         RedirectView.as_view(url='/blog404/',permanent=True)),
@@ -1277,7 +1278,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/blog404/',permanent=True)),
 
 )
-
+'''
 
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',

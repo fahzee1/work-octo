@@ -84,10 +84,12 @@ def crm_render_wrapper(request, template, context):
         # CEO FEEDBACK COUNTS
         ceo_feedbacks = CEOFeedback.objects.all().count()
         unread_feedback_count = CEOFeedback.objects.filter(date_read=None).count()
-        general_feeback_count = CEOFeedback.objects.filter(feedback_type='general').count()
-        positive_feedback_count = CEOFeedback.objects.filter(feedback_type='positive').count()
-        negative_feedback_count = CEOFeedback.objects.filter(feedback_type='negative').count()
-        other_count = CEOFeedback.objects.filter(feedback_type='other').count()
+        read_feedback_count = CEOFeedback.objects.filter(read=True).count()
+        general_feeback_count = CEOFeedback.objects.filter(feedback_type='general',read=False,converted=False).count()
+        positive_feedback_count = CEOFeedback.objects.filter(feedback_type='positive',read=False,converted=False).count()
+        negative_feedback_count = CEOFeedback.objects.filter(feedback_type='negative',read=False,converted=False).count()
+        other_count = CEOFeedback.objects.filter(feedback_type='other',read=False,converted=False).count()
+        converted_count = CEOFeedback.objects.filter(converted=True).count()
 
         counts['textimonials'] = (unread_textimonial_count,
                                   displayed_textimonial_count,
@@ -98,7 +100,9 @@ def crm_render_wrapper(request, template, context):
                                   general_feeback_count,
                                   positive_feedback_count,
                                   negative_feedback_count,
-                                  other_count)
+                                  other_count,
+                                  converted_count,
+                                  read_feedback_count)
 
 
     context['counts'] = counts
@@ -500,35 +504,48 @@ def ceo_feedbacks_unread(request):
             'ceo_feedbacks': ceo_feedbacks,
         })
 
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_read(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(read=True).order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
+            'ceo_feedbacks': ceo_feedbacks,
+        })
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_general(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='general').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='general',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_positive(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='positive').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='positive',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_negative(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='negative').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='negative',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_other(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='other').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='other',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_posted(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(converted=True).order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 
 
@@ -587,5 +604,9 @@ def search(request):
     ctx['textimonials'] = textimonials
     ctx['query'] = query
     return crm_render_wrapper(request,'crm/search-results.html',ctx)
+
+
+
+
 
 

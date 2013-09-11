@@ -33,7 +33,7 @@ def post_to_old_pa(data):
     data = response.read()
     conn.close()
 
-def affiliate_view(request, affiliate, page_name=None):
+def affiliate_view(request, affiliate, page_name=None,index=0):
     if page_name is None:
         page_name = 'index'
     try:
@@ -43,14 +43,14 @@ def affiliate_view(request, affiliate, page_name=None):
     except Affiliate.DoesNotExist:
         raise Http404
 
-    landingpage = LandingPage.objects.get(affiliate=affiliate)
-    htmlfilename = 'affiliates/%s/%s' % (landingpage.template.folder, landingpage.get_filename(page_name))
+    landingpage = LandingPage.objects.filter(affiliate=affiliate)
+    htmlfilename = 'affiliates/%s/%s' % (landingpage[index].template.folder, landingpage[index].get_filename(page_name))
 
     return simple_dtt(request, htmlfilename, {'page_name': page_name,
         'agent_id': affiliate.agent_id})
 
 def delta_sky(request):
-    return affiliate_view(request, 'a03005')
+    return affiliate_view(request, 'a03005',index=0)
     
 def resources(request):
     """

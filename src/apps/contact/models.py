@@ -189,6 +189,7 @@ class CEOFeedback(models.Model):
 
     rating = models.CharField(max_length=4, default='0')
     converted = models.BooleanField(default=False)
+    read = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
@@ -239,6 +240,7 @@ class CEOFeedback(models.Model):
             return
     
         self.date_read = datetime.now()
+        self.read = True
         self.save()
         return True
 

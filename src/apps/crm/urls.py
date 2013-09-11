@@ -32,6 +32,7 @@ urlpatterns = patterns('apps.crm.views',
     # ceo feedbacks
     url(r'ceo-feedbacks/$', 'ceo_feedbacks', name='ceo_feedbacks'),
     url(r'ceo-feedbacks/unread/$', 'ceo_feedbacks_unread', name='ceo_feedbacks_unread'),
+    url(r'ceo-feedbacks/read/$', 'ceo_feedbacks_read', name='ceo_feedbacks_read'),
     url(r'ceo-feedback/(?P<feedback_id>\d+)/view/$', 'feedback_view',
         name='feedback_view'),
     url(r'ceo-feedback/(?P<feedback_id>\d+)/convert/$', 'feedback_convert',
@@ -41,6 +42,7 @@ urlpatterns = patterns('apps.crm.views',
     url(r'ceo-feedbacks/positive/$', 'ceo_feedbacks_positive', name='ceo_feedbacks_positive'), 
     url(r'ceo-feedbacks/negative/$', 'ceo_feedbacks_negative', name='ceo_feedbacks_negative'), 
     url(r'ceo-feedbacks/other/$', 'ceo_feedbacks_other', name='ceo_feedbacks_other'),
+    url(r'ceo-feedbacks/converted/$', 'ceo_feedbacks_posted', name='ceo_feedbacks_postedsite'),
 
     # profiles
     url(r'requests/$', 'affiliate_requests', name='requests'),
