@@ -97,8 +97,7 @@ def phone_number(request):
     session_call_measurement = request.session.get('call_measurement', None)
     check_affiliate = request.GET.get('agent', None)
 
-    if session_num is not None and session_call_measurement is not None:
-
+    if session_num is not None and session_call_measurement is not None and session_num != '':
         ctx['phone_number'] = session_num
         ctx['use_call_measurement'] = session_call_measurement
         return ctx

@@ -33,7 +33,7 @@ def post_to_old_pa(data):
     data = response.read()
     conn.close()
 
-def affiliate_view(request, affiliate, page_name=None,index=0):
+def affiliate_view(request, affiliate, page_name=None):
     if page_name is None:
         page_name = 'index'
     try:
@@ -42,15 +42,30 @@ def affiliate_view(request, affiliate, page_name=None,index=0):
         request.session['source'] = affiliate.name
     except Affiliate.DoesNotExist:
         raise Http404
+    landingpage = LandingPage.objects.get(affiliate=affiliate)
+    htmlfilename = 'affiliates/%s/%s' % (landingpage.template.folder, landingpage.get_filename(page_name))
 
-    landingpage = LandingPage.objects.filter(affiliate=affiliate)
-    htmlfilename = 'affiliates/%s/%s' % (landingpage[index].template.folder, landingpage[index].get_filename(page_name))
+    return simple_dtt(request, htmlfilename, {'page_name': page_name,
+        'agent_id': affiliate.agent_id})
+
+def delta_view(request, affiliate, page_name=None):
+    if page_name is None:
+        page_name = 'index'
+    try:
+        affiliate = Affiliate.objects.get(agent_id=affiliate)
+        request.session['refer'] = affiliate.name
+        request.session['source'] = affiliate.name
+    except Affiliate.DoesNotExist:
+        raise Http404
+    template = AffTemplate.objects.get(name=affiliate.name)
+    landingpage = LandingPage.objects.get(affiliate=affiliate,template=template)
+    htmlfilename = 'affiliates/%s/%s' % (landingpage.template.folder, landingpage.get_filename(page_name))
 
     return simple_dtt(request, htmlfilename, {'page_name': page_name,
         'agent_id': affiliate.agent_id})
 
 def delta_sky(request):
-    return affiliate_view(request, 'a03005',index=0)
+    return delta_view(request, 'a03005')
     
 def resources(request):
     """

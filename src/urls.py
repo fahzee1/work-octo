@@ -71,7 +71,8 @@ sitemaps={
     'keyword':KeywordSitemapIndex(LOCAL_KEYWORDS)
 
 
-}        
+}
+
 
 
 urlpatterns = patterns('',
@@ -297,7 +298,7 @@ elif settings.SITE_ID == 13:
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
-        dtt(r'^shop/home-security-systems/?$', 'canada/packages.html', 'shop'),
+        dtt(r'^b?$', 'canada/packages.html', 'shop'),
         url(r'^shop/order/?$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
         dtt(r'^thank-you/?$', 'thank-you/canada.html', 'thank_you'),
 
@@ -1262,6 +1263,17 @@ urlpatterns += patterns('',
 )
 
 # new redirects need to go in here cause urlpatterns has 255 limit
+urlpatterns += patterns('',
+    ('support/feedback/?$',
+        RedirectView.as_view(url='/support/contact-us/feedback/',permanent=True)),
+    ('pa/equipment/wireless/?$',
+        RedirectView.as_view(url='/equipment/home-security/',permanent=True)),
+    ('products/security-equipment/accessories/?$',
+        RedirectView.as_view(url='/equipment/home-security/extra-security/',permanent=True)),
+    ('pa/neighborhood_watch/?$',
+        RedirectView.as_view(url='/news/',permanent=True)),
+)
+
 '''
 urlpatterns += patterns('',
     ('home-security-blog/?$',

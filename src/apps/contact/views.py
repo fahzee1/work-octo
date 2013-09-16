@@ -10,13 +10,13 @@ from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
 from django.conf import settings
-
 from apps.contact.models import GoogleExperiment
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
     CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm, PayItForwardForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
+render_to_string = loader.render_to_string
 
 def post_to_old_pa(data):
     import httplib, urllib
@@ -52,6 +52,24 @@ def send_thankyou(data):
     msg.send()
 
     return True
+
+def send_caroline_thankyou(request,data,agent):
+    phone =settings.DEFAULT_PHONE 
+    if 'phone' in request.GET:
+        data['pa_phone'] = request.GET['phone']
+    elif agent is not None and agent.phone:
+        data['pa_phone'] = agent.phone
+    else:
+        data['pa_phone'] = phone
+
+    subject = 'Hello, Thank you for your interest!'
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = data['email']
+    html_content = render_to_string('emails/lead-email.html',data)
+    msg = EmailMultiAlternatives(subject,html_content,from_email,[to_email])
+    msg.attach_alternative(html_content,'text/html')
+    msg.send()
+
 
 def send_error(data):
     subject = 'Affiliate Not In Database'
@@ -134,6 +152,7 @@ def prepare_data_from_request(request):
             pass
 
     return {
+            'agent':agent,
             'agentid': agentid,
             'affkey': affkey,
             'source': source,
@@ -196,11 +215,13 @@ def basic_post_login(request):
             'notes': notes
         }
         send_leadimport(emaildata)
-        send_thankyou(emaildata)
+        #send_thankyou(emaildata)
+        send_caroline_thankyou(request,emaildata,request_data['agent'])
         
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
+
 
 
 def ajax_post(request):
