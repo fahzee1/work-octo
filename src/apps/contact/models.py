@@ -244,6 +244,23 @@ class CEOFeedback(models.Model):
         self.save()
         return True
 
+    def remove_duplicate_state(self):
+        if self.city and 'Washington, DC' not in self.city:
+            name = self.city.split(',')
+            self.city = name[0]
+            self.save()
+            print self.city
+        elif self.city and 'Washington, DC' in self.city:
+            name = self.city.split(',')
+            self.city = name[0]
+            self.state = 'DC'
+            self.save()
+            print self.city,self.state
+        else:
+            print self.city
+            print 'no city or its Washington'
+
+
 
     def __unicode__(self):
         return '%s : %s - %s' % (self.name, self.phone, self.feedback_type)

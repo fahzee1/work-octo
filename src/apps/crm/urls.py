@@ -44,6 +44,23 @@ urlpatterns = patterns('apps.crm.views',
     url(r'ceo-feedbacks/other/$', 'ceo_feedbacks_other', name='ceo_feedbacks_other'),
     url(r'ceo-feedbacks/converted/$', 'ceo_feedbacks_posted', name='ceo_feedbacks_postedsite'),
 
+    #temporary cities
+    url(r'ceo-feedbacks/newyork/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_newyork'),
+    url(r'ceo-feedbacks/boston/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_boston'),
+    url(r'ceo-feedbacks/losanageles/$','ceo_feedbacks_cities', name='ceo_feedbacks_losangeles'),
+    url(r'ceo-feedbacks/atlanta/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_atlanta'),
+    url(r'ceo-feedbacks/chicago/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_chicago'),
+    url(r'ceo-feedbacks/dallas/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_dallas'),
+    url(r'ceo-feedbacks/detroit/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_detroit'),
+    url(r'ceo-feedbacks/houston/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_houston'),
+    url(r'ceo-feedbacks/miami/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_miami'),
+    url(r'ceo-feedbacks/minneapolis/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_minneapolis'),
+    url(r'ceo-feedbacks/philadelphia/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_philadelphia'),
+    url(r'ceo-feedbacks/phoenix/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_phoenix'),
+    url(r'ceo-feedbacks/sanjose/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_sanjose'),
+    url(r'ceo-feedbacks/seattle/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_seattle'),
+    url(r'ceo-feedbacks/washington/$', 'ceo_feedbacks_cities', name='ceo_feedbacks_washington'),
+
     # profiles
     url(r'requests/$', 'affiliate_requests', name='requests'),
     url(r'requests/(?P<profile_id>\d+)/$', 'affiliate_requests_edit',

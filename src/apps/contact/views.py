@@ -18,6 +18,7 @@ from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
 render_to_string = loader.render_to_string
 
+
 def post_to_old_pa(data):
     import httplib, urllib
     params = urllib.urlencode(data)
@@ -214,7 +215,7 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        send_leadimport(emaildata)
+        #send_leadimport(emaildata)
         #send_thankyou(emaildata)
         send_caroline_thankyou(request,emaildata,request_data['agent'])
         

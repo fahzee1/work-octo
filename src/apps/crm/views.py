@@ -29,6 +29,19 @@ def json_response(x):
 
 
 
+
+def count_gmail_cities(city,state):
+    q1 = Q(city=city)| Q(city=city.lower())
+    ceo_list = CEOFeedback.objects.filter(q1,state=state,feedback_type='positive')
+    the_list = []
+    for x in ceo_list:
+        if '@gmail' or '@GMAIL' in x.email:
+            the_list.append(x)
+    return len(the_list)
+
+
+
+
 def paginate_this(request,_list,num=20):
     paginator = Paginator(_list,num)
     page = request.GET.get('page','')
@@ -103,6 +116,38 @@ def crm_render_wrapper(request, template, context):
                                   other_count,
                                   converted_count,
                                   read_feedback_count)
+
+        newyork_count = count_gmail_cities('New York','NY')
+        boston_count = count_gmail_cities('Boston','MA')
+        la_count = count_gmail_cities('Los Angeles','CA')
+        atl_count = count_gmail_cities('Atlanta','GA')
+        chicago_count = count_gmail_cities('Chicago','IL')
+        dallas_count = count_gmail_cities('Dallas','TX')
+        detroit_count = count_gmail_cities('Detroit','MI')
+        houston_count = count_gmail_cities('Houston','TX')
+        miami_count = count_gmail_cities('Miami','FL')
+        mn_count = count_gmail_cities('Minneapolis','MN')
+        philly_count = count_gmail_cities('Philadelphia','PA')
+        phoenix_count = count_gmail_cities('Phoenix','AZ')
+        sj_count = count_gmail_cities('San Jose','CA')
+        seattle_count = count_gmail_cities('Seattle','WA')
+        washington_count = count_gmail_cities('Washington','DC')
+
+        counts['cities'] = (newyork_count,
+                            boston_count,
+                            la_count,
+                            atl_count,
+                            chicago_count,
+                            dallas_count,
+                            detroit_count,
+                            houston_count,
+                            miami_count,
+                            mn_count,
+                            philly_count,
+                            phoenix_count,
+                            sj_count,
+                            seattle_count,
+                            washington_count)
 
 
     context['counts'] = counts
@@ -604,6 +649,22 @@ def search(request):
     ctx['textimonials'] = textimonials
     ctx['query'] = query
     return crm_render_wrapper(request,'crm/search-results.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_cities(request):
+    city,state = request.GET['city'],request.GET['state']
+    q1 = Q(city=city)| Q(city=city.lower())
+    ceo_list = CEOFeedback.objects.filter(q1,state=state,feedback_type='positive')
+    the_list = []
+    for x in ceo_list:
+        if '@gmail' or '@GMAIL' in x.email:
+            the_list.append(x)
+
+    ceo_feedbacks = paginate_this(request,the_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+
+
 
 
 

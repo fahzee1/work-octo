@@ -19,8 +19,8 @@
       }
       .form-search{
         position:absolute;
-        top: 460px;
-        left: 180px; 
+        top: 900px;
+        left: 110px; 
       }
     </style>
 
@@ -172,6 +172,85 @@
                     <li{% if c_page == ceofee_postedsite %} class="active"{% endif %}>
                         <span class="badge pull-right" style="margin-top: 3px;">{{ counts.textimonials.10 }}</span>
                         <a href="{{ ceofee_postedsite }}">View All Posted To Site</a>
+                    </li>
+
+                    {% url crm:ceo_feedbacks_newyork as ceofee_newyork %}
+                    {% url crm:ceo_feedbacks_boston as ceofee_boston %}
+                    {% url crm:ceo_feedbacks_losangeles as ceofee_losangeles %}
+                    {% url crm:ceo_feedbacks_atlanta as ceofee_atlanta %}
+                    {% url crm:ceo_feedbacks_chicago as ceofee_chicago %}
+                    {% url crm:ceo_feedbacks_dallas as ceofee_dallas %}
+                    {% url crm:ceo_feedbacks_detroit as ceofee_detroit %}
+                    {% url crm:ceo_feedbacks_houston as ceofee_houston %}
+                    {% url crm:ceo_feedbacks_miami as ceofee_miami %}
+                    {% url crm:ceo_feedbacks_minneapolis as ceofee_minneapolis %}
+                    {% url crm:ceo_feedbacks_philadelphia as ceofee_philadelphia %}
+                    {% url crm:ceo_feedbacks_phoenix as ceofee_phoenix %}
+                    {% url crm:ceo_feedbacks_sanjose as ceofee_sanjose %}
+                    {% url crm:ceo_feedbacks_seattle as ceofee_seattle %}
+                    {% url crm:ceo_feedbacks_washington as ceofee_washington %}
+
+                    <!-- Temporary for octavia  -->
+                    <li class="nav-header">Temporary Filters</li>
+                      <li{% if c_page == ceofee_newyork %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.0 }}</span>
+                        <a href="{{ ceofee_newyork }}?city=New York&state=NY">New York</a>
+                    </li>
+                      <li{% if c_page == ceofee_boston %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.1 }}</span>
+                        <a href="{{ ceofee_boston }}?city=Boston&state=MA">Boston</a>
+                    </li>
+                    <li{% if c_page == ceofee_losangeles %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.2 }}</span>
+                        <a href="{{ ceofee_losangeles }}?city=Los Angeles&state=CA">Los Angeles</a>
+                    </li>
+                    <li{% if c_page == ceofee_atlanta %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.3 }}</span>
+                        <a href="{{ ceofee_atlanta }}?city=Atlanta&state=GA">Atlanta</a>
+                    </li> 
+                    <li{% if c_page == ceofee_chicago %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.4 }}</span>
+                        <a href="{{ ceofee_chicago }}?city=Chicago&state=IL">Chicago</a>
+                    </li>
+                    <li{% if c_page == ceofee_dallas %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.5 }}</span>
+                        <a href="{{ ceofee_dallas }}?city=Dallas&state=TX">Dallas</a>
+                    </li>
+                     <li{% if c_page == ceofee_detroit %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.6 }}</span>
+                        <a href="{{ ceofee_detroit }}?city=Detroit&state=MI">Detroit</a>
+                    </li>
+                     <li{% if c_page == ceofee_houston %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.7 }}</span>
+                        <a href="{{ ceofee_houston }}?city=Houston&state=TX">Houston</a>
+                    </li>
+                     <li{% if c_page == ceofee_miami %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.8 }}</span>
+                        <a href="{{ ceofee_miami }}?city=Miami&state=FL">Miami</a>
+                    </li>
+                     <li{% if c_page == ceofee_minneapolis %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.9 }}</span>
+                        <a href="{{ ceofee_minneapolis }}?city=Minneapolis&state=MN">Minneapolis</a>
+                    </li>
+                     <li{% if c_page == ceofee_philadelphia %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.10 }}</span>
+                        <a href="{{ ceofee_philadelphia }}?city=Philadelphia&state=PA">Philly</a>
+                    </li>
+                    <li{% if c_page == ceofee_phoenix %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.11 }}</span>
+                        <a href="{{ ceofee_phoenix }}?city=Phoenix&state=AZ">Phoenix</a>
+                    </li>
+                    <li{% if c_page == ceofee_sanjose %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.12 }}</span>
+                        <a href="{{ ceofee_sanjose }}?city=San Jose&state=CA">San Jose</a>
+                    </li>
+                    <li{% if c_page == ceofee_seattle %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.13 }}</span>
+                        <a href="{{ ceofee_seattle }}?city=Seattle&state=WA">Seattle</a>
+                    </li>
+                    <li{% if c_page == ceofee_washinton %} class="active"{% endif %}>
+                        <span class="badge pull-right" style="margin-top: 3px;">{{ counts.cities.14 }}</span>
+                        <a href="{{ ceofee_washington }}?city=Washington&state=DC">Washington DC</a>
                     </li>
 
                     {% endifusergroup %}

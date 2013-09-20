@@ -154,6 +154,7 @@ elif settings.SITE_ID == 3:
 
     )
 
+# Homesecuritysystems.protectamerica.com
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
@@ -1272,6 +1273,21 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/equipment/home-security/extra-security/',permanent=True)),
     ('pa/neighborhood_watch/?$',
         RedirectView.as_view(url='/news/',permanent=True)),
+    ('shop/home-security-system/?$',
+        RedirectView.as_view(url='/shop-home-security-packages/',permanent=True)),
+    ('shop/home/?$',
+        RedirectView.as_view(url='/shop-home-security-packages/',permanent=True)),
+    ('equipment/smart/?$',
+        RedirectView.as_view(url='/equipment/smart-connect/',permanent=True)),
+    ('pa/secure_vacation/?$',
+        RedirectView.as_view(url='/news/',permanent=True)),
+    ('payitforward/gallery/?$',
+        RedirectView.as_view(url='/payitforward/',permanent=True)),
+    ('pa/landscaping/?$',
+        RedirectView.as_view(url='/home-security-blog/',permanent=True)),
+    ('support/careers/job/?$',
+        RedirectView.as_view(url='support/careers/jobs/',permanent=True)),
+
 )
 
 '''
