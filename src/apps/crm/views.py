@@ -2,7 +2,7 @@ import urllib2
 import feedparser
 import pdb
 from datetime import datetime
-
+from itertools import chain
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
@@ -35,7 +35,7 @@ def count_gmail_cities(city,state):
     ceo_list = CEOFeedback.objects.filter(q1,state=state,feedback_type='positive')
     the_list = []
     for x in ceo_list:
-        if '@gmail' or '@GMAIL' in x.email:
+        if '@gmail' in x.email or '@GMAIL' in x.email:
             the_list.append(x)
     return len(the_list)
 
@@ -644,9 +644,10 @@ def search(request):
     q1 = Q(first_name__iexact=query)
     q2 = Q(last_name__iexact=query)
     q3 = Q(message__contains=query)
-    textimonials=Textimonial.objects.filter(q1|q2|q3).order_by('-date_created')
-
-    ctx['textimonials'] = textimonials
+    z1 = Q(name__iexact=query)
+    textimonials = Textimonial.objects.filter(q1|q2|q3).order_by('-date_created')
+    feeds = CEOFeedback.objects.filter(q3|z1).order_by('-date_created')
+    ctx['textimonials'] = chain(textimonials,feeds)
     ctx['query'] = query
     return crm_render_wrapper(request,'crm/search-results.html',ctx)
 
@@ -657,12 +658,12 @@ def ceo_feedbacks_cities(request):
     ceo_list = CEOFeedback.objects.filter(q1,state=state,feedback_type='positive')
     the_list = []
     for x in ceo_list:
-        if '@gmail' or '@GMAIL' in x.email:
+        if '@gmail' in x.email or '@GMAIL' in x.email:
             the_list.append(x)
 
     ceo_feedbacks = paginate_this(request,the_list)
-    ctx={'ceo_feedbacks':ceo_feedbacks}
-    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
+    ctx={'ceo_feedbacks':the_list}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list_temp.html',ctx)
 
 
 
