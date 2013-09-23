@@ -11,7 +11,7 @@ from apps.common.views import simple_dtt
 #Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-from apps.local.views import LOCAL_KEYWORDS
+LOCAL_KEYWORDS = settings.LOCAL_KEYWORDS
 
 
 
@@ -706,9 +706,11 @@ else:
         # > forward to homepage
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
-            'apps.local.views.local_page_wrapper',
-            name='local-page-keyword'),
+        #url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+            #'apps.local.views.local_page_wrapper',
+            #name='local-page-keyword'),
+        url(r'^(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-keyword2'),
+
         url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.sitemap',
             name='local-page-sitemap-state'),
@@ -1058,9 +1060,9 @@ urlpatterns += patterns('',
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
     ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{1,5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
-        RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)),
+        RedirectView.as_view(url='/%(city)s/%(state)s/',permanent=True)),
     ('(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{1,5})/?$',
-        RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),
+        RedirectView.as_view(url='/%(city)s/%(state)s/',permanent=True)),
     ('pa/testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),
     ('contact/careers/?$',
@@ -1286,9 +1288,11 @@ urlpatterns += patterns('',
     ('pa/landscaping/?$',
         RedirectView.as_view(url='/home-security-blog/',permanent=True)),
     ('support/careers/job/?$',
-        RedirectView.as_view(url='support/careers/jobs/',permanent=True)),
+        RedirectView.as_view(url='/support/careers/jobs/',permanent=True)),
     ('home-security-systems/bronze/?$',
-        RedirectView.as_view(url='shop-home-security-packages/bronze/',permanent=True)),
+        RedirectView.as_view(url='/shop-home-security-packages/bronze/',permanent=True)),
+    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        RedirectView.as_view(url='/%(city)s/%(state)s/',permanent=True)),
 
 )
 
