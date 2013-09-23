@@ -124,6 +124,19 @@ def local_page(request, state, city, keyword=None):
 
     background_time = get_timezone(crime_stats_ctx['state'])
     crime_stats_ctx['background_time'] = background_time
+    if dsettings.READY_FOR_STATIC: 
+        if (city.upper(),crime_stats_ctx['state']) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
+            background_time=get_timezone(crime_stats_ctx['state'])
+            try:
+                response = render(request,'local-pages/static-pages/%s.html'% city.replace(' ','-').lower(),crime_stats_ctx)
+            except:
+                response = render(request,'local-pages/index.html',crime_stats_ctx)
+            expire_time = datetime.timedelta(days=90)
+            response.set_cookie('affkey',
+                        value='%s:%s' % (city.replace(' ', ''), state),
+                        domain='.protectamerica.com',
+                        expires=datetime.datetime.now() + expire_time)
+            return response
 
     if keyword in dsettings.CUSTOM_KEYWORD_LIST:
         response = render(request,'local-pages/%s.html', crime_stats_ctx) % keyword
@@ -189,23 +202,7 @@ def local_page_wrapper2(request,city,state):
         city=city.replace('(','').replace(')','')
     if ',' in city:
         city=city.replace(',','')
-    if dsettings.READY_FOR_STATIC:
-        if (city.upper(),statecode) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
-            background_time=get_timezone(statecode)
-            ctx={'background_time':background_time}
-            try:
-                response = render(request,'local-pages/static-pages/%s.html'% city.replace(' ','-').lower(),ctx)
-            except:
-                response = render(request,'local-pages/static-pages/default.html',ctx)
 
-            expire_time = datetime.timedelta(days=90)
-            response.set_cookie('affkey',
-                        value='%s:%s' % (city.replace(' ', ''), state),
-                        domain='.protectamerica.com',
-                        expires=datetime.datetime.now() + expire_time)
-            return response
-        else:
-            return local_page(request, statecode, city.title())
     return local_page(request,statecode,city.title())
 
 
