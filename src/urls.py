@@ -1287,6 +1287,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/home-security-blog/',permanent=True)),
     ('support/careers/job/?$',
         RedirectView.as_view(url='support/careers/jobs/',permanent=True)),
+    ('home-security-systems/bronze/?$',
+        RedirectView.as_view(url='shop-home-security-packages/bronze/',permanent=True)),
 
 )
 
