@@ -546,7 +546,6 @@ var google_remarketing_only = true;
 {% endblock %}
 {% block offline-tracking %}
 <script type="text/javascript"> 
-   <script type="text/javascript"> 
   function setCookie(a,d,b){var c=new 
   Date;c.setTime(c.getTime()+864E5*b);b="; 
   expires="+c.toUTCString();document.cookie=a+"="+d+b}function 
@@ -555,8 +554,25 @@ var google_remarketing_only = true;
   "))}var gclid=getParam("gclid");if(gclid){var 
   gclsrc=getParam("gclsrc");(!gclsrc||-1!==gclsrc.indexOf("aw"))
   &&setCookie("gclid",gclid,90)}; 
-  </script> 
 </script> 
+ <script> 
+  function readCookie(name) { 
+  var n = name + "="; 
+  var cookie = document.cookie.split(';'); 
+  for(var i=0;i < cookie.length;i++) {      
+      var c = cookie[i];      
+      while (c.charAt(0)==' '){c = c.substring(1,c.length);}      
+      if (c.indexOf(n) == 0){return 
+  c.substring(n.length,c.length);} 
+  } 
+  return null; 
+  } 
+
+  window.onload = function() {      
+      document.getElementById('gclid').value = 
+  readCookie('gclid'); 
+  } 
+  </script>
 
 {% endblock %}
 </body>
