@@ -90,13 +90,14 @@ def write_csv_data(app,the_file,data,time_zone):
 	writer.writerow([first_line])
 	writer.writerow(second_line)
 	for line in data:
+		#if line['gclid'] is None:
+			#bcontinue
 		row_values = ('add',line['gclid'],'Lead Sold',line['conversion_value'],line['date'])
 		writer.writerow(row_values) 
 	csv_file.close()
 	if app.options['verbose']:
 		print 'CSV ready my boy....!'
 
-	print 'Make sure you converted the date to the acceptable form CJ!!'
 
 
 
