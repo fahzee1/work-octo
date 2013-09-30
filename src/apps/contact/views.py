@@ -134,12 +134,12 @@ def prepare_data_from_request(request):
 
     if agent is None:
         if agentid != 'HOMESITE' and source != 'PROTECT AMERICA':
-            send_error({
+            '''send_error({
                     'agent': agentid,
                     'source': source,
                     'affkey': affkey, 
                 })
-
+            '''
     # we want to put the google experiment id if there is no affkey
     google_id = request.COOKIES.get('utm_expid', None)
     if affkey is None and google_id is not None:
@@ -187,8 +187,14 @@ def basic_post_login(request):
         
         formset.search_engine = request.session['search_engine']
         formset.search_keywords = searchkeywords
-        if fdata['gclid']:
+        try:
+            fdata['gclid']
             formset.gclid = fdata['gclid']
+        except KeyError:
+            fdata['gclid'] = request.COOKIES.get('gclid',None)
+            if fdata['gclid']:
+                formset.gclid = fdata['gclid']
+
         formset.save()
         
         if request_data['lead_id'] is None:
