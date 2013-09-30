@@ -187,7 +187,8 @@ def basic_post_login(request):
         
         formset.search_engine = request.session['search_engine']
         formset.search_keywords = searchkeywords
-        formset.gclid = fdata['gclid']
+        if fdata['gclid']:
+            formset.gclid = fdata['gclid']
         formset.save()
         
         if request_data['lead_id'] is None:
