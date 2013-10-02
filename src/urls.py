@@ -7,7 +7,10 @@ from apps.local.sitemaps import *
 from apps.crimedatamodels.sitemaps import *
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
+from django.contrib.localflavor.us.us_states import US_STATES
+from apps.crimedatamodels.views import r_states
 
+states = r_states()
 #Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -1056,9 +1059,9 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
-    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{1,5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
+    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-.,()\w]+)/(?P<zipcode>\d{1,5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
         RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)),
-    ('(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{1,5})/?$',
+    ('(?P<city>[-.,()\w]+)/(?P<state>%s)/(?P<zipcode>\d{1,5})/?$' % ('|'.join(states)),
         RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),
     ('pa/testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),

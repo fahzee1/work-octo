@@ -199,18 +199,20 @@ def query_by_state_city(state, city, get_content=True,local=False):
      #   city.city_name, state.abbreviation)
     weather_info = None
 
-    context={'crime_stats': (crime_stats if crime_stats else None),
-           'years': years[:3],
-           'latest_year': (crime_stats[years[0]] if crime_stats else None),
-           'latest_year_':(city_crime_objs[0] if city_crime_objs else None),
-           'state': state.abbreviation,
-           'state_long': state.name,
-           'city': city.city_name,
-           'lat': city.latitude,
-           'long': city.longitude,
-           'weather_info': weather_info,
-           'pop_type': pop_type,
-           'city_id': city_id}
+    context = {
+               'crime_stats': (crime_stats if crime_stats else None),
+               'years': years[:3],
+               'latest_year': (crime_stats[years[0]] if crime_stats else None),
+               'latest_year_':(city_crime_objs[0] if city_crime_objs else None),
+               'state': state.abbreviation,
+               'state_long': state.name,
+               'city': city.city_name,
+               'lat': city.latitude,
+               'long': city.longitude,
+               'weather_info': weather_info,
+               'pop_type': pop_type,
+               'city_id': city_id
+            }
 
     # get content
     if get_content and city_crime_objs and crime_stats:
@@ -606,3 +608,15 @@ def crime_sitemap(request, state, city):
     from django.contrib.sitemaps.views import sitemap
     from apps.crimedatamodels.sitemaps import FreeCrimeStatsCrimeSitemap
     return sitemap(request, {'keyword-sitemap-index' : FreeCrimeStatsCrimeSitemap(state, city)})
+
+def r_states():
+    st = [(x[1].lower(),x[1].title()) for x in US_STATES]
+    states = []
+    for x in st:
+        states.append(x[0])
+        states.append(x[1])
+    for x in states:
+        if ' ' in x:
+            x = x.replace(' ','-')
+            states.append(x)
+    return states
