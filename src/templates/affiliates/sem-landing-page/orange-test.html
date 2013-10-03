@@ -10,6 +10,10 @@
 
 {% endblock %}    
 
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+
 {% block header %}
     <div id="header-wrapper">
         {% block main-phone %}
@@ -26,7 +30,7 @@
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
-                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                 </div>
             {% endif %}
             <ul id="main-navigation">
@@ -59,6 +63,8 @@
 
 
     </div>
+    {% comment %}
+
     <div id="mobile-main-promo">
         <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
             <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/keychain-promo.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
@@ -66,6 +72,51 @@
             <div class="clear"></div>
         </a>
     </div>
+    {% endcomment %}
+    
+    {% comment %}
+    <div id="mobile-main-promo">
+        <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
+            <img src="{{ STATIC_URL }}img/banners/call-banner/motion-detector-icon.png" class="main-promo-image" alt="keychain-promo" style="height: 76px;" />
+            <p><span>Call In Now for a Motion Detector</span> Included with Your Home Security System</p>
+            <div class="clear"></div>
+        </a>
+    </div>
+    {% endcomment %}
+    <div id="mobile-main-promo">
+        <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
+            <img src="{{ STATIC_URL }}img/banners/call-banner/ipod-icon.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
+            <p><span>SALE TODAY! Free iPod Shuffle</span> When you Order Any Package</p>
+            <div class="clear"></div>
+        </a>
+    </div>
+    {% comment %}
+    
+    <div id="main-promo">
+        <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
+            <img src="{{ STATIC_URL }}img/banners/call-banner/free-shipping-icon.png" class="main-promo-image" style="width: 121px;" alt="keychain-promo" />
+            <p style="margin-left: 16px;"><strong style="display: block; float: left; font-size: 31px; padding-top: 12px;">TODAY ONLY!</strong><span style="float: left; display: block; margin-left: 16px;">Free Shipping <br/> When you Order Any Package</span></p>
+            <div class="clear"></div>
+        </a>
+    </div>
+    {% endcomment %}
+    
+    <div id="main-promo" style="background: #55835b; border-bottom: 5px solid #ccc; border-top: 1px solid #ccc;">
+        <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
+            <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/keychain-promo.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
+            <p style="padding-top: 3px;"><img src="{{ STATIC_URL }}img/banners/call-banner/back-to-school-keychains-2.png" alt="back-to-school-keychains" width="792" height="51" /></p>
+            <div class="clear"></div>
+        </a>
+    </div>
+    {% comment %}
+    <div id="mobile-main-promo">
+        <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
+            <img src="{{ STATIC_URL }}img/banners/call-banner/free-shipping-icon.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
+            <p><span>Today Only! Free Shipping</span> When you Order Any Package</p>
+            <div class="clear"></div>
+        </a>
+    </div>
+    {% endcomment %}
 </div>
 
 {% include "order/call-box.html" with no_promo=False %}
