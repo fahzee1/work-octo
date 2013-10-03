@@ -16,6 +16,8 @@ admin.site.register(MovingKit, MovingKitAdmin)
 
 class CEOFeedbackAdmin(admin.ModelAdmin):
     model = CEOFeedback
+    search_fields = ['name']
+    list_filter = ('feedback_type',)
 admin.site.register(CEOFeedback, CEOFeedbackAdmin)
 
 class TellAFriendAdmin(admin.ModelAdmin):

@@ -1,5 +1,5 @@
 import pdb
-from datetime import datetime
+from datetime import datetime,date
 from django.conf import settings
 import calendar
 from mobile.sniffer.detect import detect_mobile_browser
@@ -49,6 +49,7 @@ def last_day_of_month(request):
     is_weekend=True
     if wknd != 6 or 7:
         is_weekend=False
+
     ctx={'final_date':_date,
          'is_weekend':is_weekend}
     return ctx
@@ -96,8 +97,7 @@ def phone_number(request):
     session_call_measurement = request.session.get('call_measurement', None)
     check_affiliate = request.GET.get('agent', None)
 
-    if session_num is not None and session_call_measurement is not None:
-
+    if session_num is not None and session_call_measurement is not None and session_num != '':
         ctx['phone_number'] = session_num
         ctx['use_call_measurement'] = session_call_measurement
         return ctx

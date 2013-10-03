@@ -7,13 +7,14 @@ from apps.local.sitemaps import *
 from apps.crimedatamodels.sitemaps import *
 from django.views.decorators.cache import cache_page, never_cache
 from apps.common.views import simple_dtt
+from django.contrib.localflavor.us.us_states import US_STATES
+from apps.crimedatamodels.views import r_states
 
-# Uncomment the next two lines to enable the admin:
+states = r_states()
+#Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-
-from apps.local.views import LOCAL_KEYWORDS
-
+LOCAL_KEYWORDS = settings.LOCAL_KEYWORDS
 
 
 # a simple direct_to_template wrapper
@@ -65,14 +66,15 @@ sitemaps={
                                  'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
     'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
     'article':ArticleSitemap,
-    'crimestats':CrimeStatsSitemap,
-    'crimestats-state':FreeCrimeStatsStateSitemap,
+   # 'crimestats':CrimeStatsSitemap,
+   'crimestats-state':FreeCrimeStatsStateSitemap,
     #'crimestats-city':FreeCrimeStatsCitySitemap,
    # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
     'keyword':KeywordSitemapIndex(LOCAL_KEYWORDS)
 
 
-}        
+}
+
 
 
 urlpatterns = patterns('',
@@ -154,6 +156,7 @@ elif settings.SITE_ID == 3:
 
     )
 
+# Homesecuritysystems.protectamerica.com
 elif settings.SITE_ID == 4:
     urlpatterns += patterns('',
         # local pages
@@ -298,7 +301,7 @@ elif settings.SITE_ID == 13:
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
         dtt(r'^$', 'canada/index.html', 'home'),
-        dtt(r'^shop/home-security-systems/?$', 'canada/packages.html', 'shop'),
+        dtt(r'^b?$', 'canada/packages.html', 'shop'),
         url(r'^shop/order/?$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
         dtt(r'^thank-you/?$', 'thank-you/canada.html', 'thank_you'),
 
@@ -420,6 +423,7 @@ else:
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
             name='thank_you'),
         dtt(r'^404/?$', '404.html', '404', 'home'),
+        dtt(r'^blog404/?$', 'blog404.html', 'blog404', 'home'),
 
         # Shop
         dtt(r'^shop-home-security-packages/?$', 'packages/index.html', 'shop'),
@@ -1055,10 +1059,10 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/support/find-us/',permanent=True)),
     ('contact-us/?$',
         RedirectView.as_view(url='/pa/contact/',permanent=True)),
-    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
+    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-.,()\w]+)/(?P<zipcode>\d{1,5})/?$' % ('|'.join(LOCAL_KEYWORDS)),
         RedirectView.as_view(url='/%(keyword)s/%(city)s/%(state)s/',permanent=True)),
-    ('(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/(?P<zipcode>\d{5})/?$',
-        RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),     
+    ('(?P<city>[-.,()\w]+)/(?P<state>%s)/(?P<zipcode>\d{1,5})/?$' % ('|'.join(states)),
+        RedirectView.as_view(url='/top-home-security-systems/%(city)s/%(state)s/',permanent=True)),
     ('pa/testimonials/?$',
         RedirectView.as_view(url='/learn/protect-america/reviews/',permanent=True)),
     ('contact/careers/?$',
@@ -1211,6 +1215,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/shop-home-security-packages/silver/',permanent=True)),
     ('pa/platinum/?$',
         RedirectView.as_view(url='/shop-home-security-packages/platinum/',permanent=True)),
+    ('pa/copper/?$',
+        RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
     ('pa/motion-detector/?$',
         RedirectView.as_view(url='/equipment/home-security/motion-sensors/',permanent=True)),
     ('pa/existing-home-security-system/?$',
@@ -1249,10 +1255,65 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/products/order-package/',permanent=True)), 
     ('crime-rate?$',
         RedirectView.as_view(url='/crime-rate/',permanent=True)),  
- 
+    ('pa/home/?$',
+        RedirectView.as_view(url='/',permanent=True)),
+    ('alarm/?$',
+        RedirectView.as_view(url='/equipment/home-automation/z-wave-indoor-siren/',permanent=True)),
+    ('support/operation/?$',
+        RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),
+    ('news?$',
+        RedirectView.as_view(url='/news/',permanent=True)),
+)
 
+# new redirects need to go in here cause urlpatterns has 255 limit
+urlpatterns += patterns('',
+    ('support/feedback/?$',
+        RedirectView.as_view(url='/support/contact-us/feedback/',permanent=True)),
+    ('pa/equipment/wireless/?$',
+        RedirectView.as_view(url='/equipment/home-security/',permanent=True)),
+    ('products/security-equipment/accessories/?$',
+        RedirectView.as_view(url='/equipment/home-security/extra-security/',permanent=True)),
+    ('pa/neighborhood_watch/?$',
+        RedirectView.as_view(url='/news/',permanent=True)),
+    ('shop/home-security-system/?$',
+        RedirectView.as_view(url='/shop-home-security-packages/',permanent=True)),
+    ('shop/home/?$',
+        RedirectView.as_view(url='/shop-home-security-packages/',permanent=True)),
+    ('equipment/smart/?$',
+        RedirectView.as_view(url='/equipment/smart-connect/',permanent=True)),
+    ('pa/secure_vacation/?$',
+        RedirectView.as_view(url='/news/',permanent=True)),
+    ('payitforward/gallery/?$',
+        RedirectView.as_view(url='/payitforward/',permanent=True)),
+    ('pa/landscaping/?$',
+        RedirectView.as_view(url='/home-security-blog/',permanent=True)),
+    ('support/careers/job/?$',
+        RedirectView.as_view(url='/support/careers/jobs/',permanent=True)),
+    ('home-security-systems/bronze/?$',
+        RedirectView.as_view(url='/shop-home-security-packages/bronze/',permanent=True)),
+    ('pa/low-price-guarantee/?$',
+        RedirectView.as_view(url='/help/low-price-guarantee/',permanent=True)),
+   
 
 )
+
+'''
+urlpatterns += patterns('',
+    ('home-security-blog/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/[-\w]+/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/[-\w]+/[-\w]+/[-\w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+    ('home-security-blog/[-\w]+/[-\w]+/[-\w]+/[-\w]+/[-/w]+/?$',
+        RedirectView.as_view(url='/blog404/',permanent=True)),
+
+)
+'''
 
 urlpatterns += patterns('',
     ('^(?P<agent_id>[A-Za-z0-9\_-]+)/?$',
