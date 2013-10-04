@@ -121,9 +121,9 @@ def local_page(request, state, city, keyword=None):
 
     if keyword in dsettings.CUSTOM_KEYWORD_LIST:
         response = render(request,'local-pages/%s.html', crime_stats_ctx) % keyword
-    elif keyword in desttings.WIRELESS_KEYWORD_LIST:
+    elif keyword in dsettings.WIRELESS_KEYWORD_LIST:
         response = render(request,'local-pages/wireless-home-security-systems.html',crime_stats_ctx)
-    elif keyword in desettings.ADT_KEYWORD_LIST:
+    elif keyword in dsettings.ADT_KEYWORD_LIST:
         response = render(request,'landing-pages/adt.html',crime_stats_ctx)
     else:        
         response = render(request,'local-pages/index.html',crime_stats_ctx)

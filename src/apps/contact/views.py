@@ -223,9 +223,9 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        send_leadimport(emaildata)
+        #send_leadimport(emaildata)
         #send_thankyou(emaildata)
-        send_caroline_thankyou(request,emaildata,request_data['agent'])
+        #send_caroline_thankyou(request,emaildata,request_data['agent'])
         
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)

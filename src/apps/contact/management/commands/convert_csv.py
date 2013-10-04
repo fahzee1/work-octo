@@ -83,7 +83,7 @@ def write_csv_data(app,the_file,data,time_zone):
 	if app.options['verbose']:
 		print 'writing data to csv with GCLID..'
 	first_line = 'Parameters:EntityType=OFFLINECONVERSION;TimeZone=%s;' % time_zone
-	second_line = ('Action','Google Click','Conversion Name','Conversion Value','Conversion Time')
+	second_line = ('Action','Google Click Id','Conversion Name','Conversion Value','Conversion Time')
 
 	csv_file = open('/Users/cjogbuehi/Documents/'+the_file,'wb')
 	writer = csv.writer(csv_file)
