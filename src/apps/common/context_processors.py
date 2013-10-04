@@ -197,3 +197,13 @@ def business_hours(request):
         html = html + element
     ctx['business_hours'] = html
     return ctx
+
+def detect_agent_id(request):
+    data = {}
+    agent_id = request.session.get('refer_id',None)
+    if not agent_id:
+        agent_id = request.COOKIES.get('refer_id',None)
+    if agent_id and agent_id[0] == 'b':
+        data['b_agent'] = True
+    
+    return data 

@@ -9,4 +9,5 @@ class VidimonialAdmin(admin.ModelAdmin):
 admin.site.register(Vidimonial, VidimonialAdmin)
 class TextimonialAdmin(admin.ModelAdmin):
     model = Textimonial
+    search_fields = ['message']
 admin.site.register(Textimonial, TextimonialAdmin)
