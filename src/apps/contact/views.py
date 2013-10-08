@@ -1,5 +1,6 @@
 import urls
 import pdb
+import requests
 from datetime import datetime, timedelta
 from string import Template
 from django.http import HttpResponseRedirect
@@ -16,7 +17,79 @@ from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm,
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
+from xml.etree import ElementTree as ET
 render_to_string = loader.render_to_string
+
+
+def send_conduit_error(data):
+    message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    send_mail('LeadConduit Error',message,from_email,['cjogbuehi@protectamerica.com'])
+
+def post_to_leadconduit(data,test=False):
+    #pdb.set_trace()
+    params = {'xxAccountId':'settings.LEAD_ACCOUNT_ID',
+              'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
+              'LEAD_ID':data['lead_id'],
+              'TCPA_Cert_URL':data['trusted_url'],
+              'Name':data['name'],
+              'Phone1':data['phone'],
+              'email':data['email'],
+              'Referer_Page':data['referer_page'],
+              'Agent_ID':data['agentid'],
+              'Source':data['source'],
+              'Affkey':data['affkey'],
+              'Search_Keywords':data['searchkeywords'],
+              'Search_Engine':data['searchengine'],
+              'ip_address':data['ip'],
+                }
+    if test:
+        params.update({'xxTest':'true'})
+    try:
+        xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params)
+        if xml_request.status_code == 200: 
+            root = ET.fromstring(xml_request.content)
+            response = root.find('result').text
+            try:
+                url = root.find('url').text
+            except:
+                url = None
+            try:
+                lead_id = root.find('leadId').text
+            except:
+                lead_id = None
+            #TODO may need to create extra field on lead or create new table with key to lead to store the leadconduit url and status
+            if response == 'success':
+                # get/store lead id and do whatever else needs to be done
+                pass
+            if response == 'queued':
+                pass
+            if response == 'failure':
+                for x in root.findall('reason'):
+                    #store reason, url, and lead id
+                    print 'failure reason was %s' % x.text
+            if response == 'error':
+                reasons = []
+                for x in root.findall('reason'):
+                    reasons.append(x.text)
+                data = {'reasons':reasons,
+                        'lead_id':lead_id,
+                        'url':url,
+                        'params':params.items()}
+                send_conduit_error(data)
+
+                    
+        elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
+            #retry request
+            pass
+        else:
+            # report to support@activeprospect.com
+            pass
+
+    except:
+        # TODO handle what to do if requests screws me maybe use urllib or try again
+        pass
+
 
 
 def post_to_old_pa(data):
@@ -166,12 +239,19 @@ def prepare_data_from_request(request):
         }
 
 def basic_post_login(request):
+    try:
+        # url for Trusted Form 
+        trusted_url = request.POST['trusted_form']
+    except:
+        trusted_url = None
+
+    lead_data = {'trusted_url': trusted_url}
+
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
 
         request_data = prepare_data_from_request(request)
-
         formset = form.save(commit=False)
         referer_page = None
         if 'referer_page' in request.POST:
@@ -194,6 +274,16 @@ def basic_post_login(request):
         
         if request_data['lead_id'] is None:
             request_data['lead_id'] = formset.id
+
+        lead_data.update(request_data)
+        lead_data.update({'searchkeywords':searchkeywords,
+                     'searchengine':request.session.get('search_engine',None),
+                     'referer_page':formset.referer_page,
+                     'ip':request.META.get('REMOTE_ADDR',None),
+                     'name':fdata['name'],
+                     'phone':fdata['phone'],
+                     'email':fdata['email']
+                     })
 
         # notes field information
         package = request.POST.get('package', None)
@@ -218,9 +308,10 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        send_leadimport(emaildata)
+        post_to_leadconduit(lead_data,test=True)
+        #send_leadimport(emaildata)
         #send_thankyou(emaildata)
-        send_caroline_thankyou(request,emaildata,request_data['agent'])
+        #send_caroline_thankyou(request,emaildata,request_data['agent'])
         
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)

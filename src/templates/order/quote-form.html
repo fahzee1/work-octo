@@ -46,7 +46,7 @@ $(document).ready(function() {
     $('#quote-form button').click(function() {
         $(this).attr('disabled', true);
         $('#quote-form div').removeClass('.error-state');
-        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
+        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
         $.ajax({
             type: "POST",
             url: "/contact/ajaxpost/",

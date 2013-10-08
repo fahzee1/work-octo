@@ -254,6 +254,10 @@ TIMEZONES = {
     'WY': 'America/Denver'
 }
 
+#LeadConduit data
+LEAD_ACCOUNT_ID = '1626fa3'
+LEAD_CAMPAIGN_ID = '054irukv1'
+
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
 try:
