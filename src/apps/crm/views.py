@@ -633,7 +633,6 @@ def comment_posted(request):
         kwargs={'affiliate_id': comment.object_pk}))
 
 def search(request):
-    #pdb.set_trace()
     ctx = {}
     query = request.GET.get('q', None)
     came_from = request.META.get('HTTP_REFERER',None)
