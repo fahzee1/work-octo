@@ -51,6 +51,7 @@
     <meta name="MSSmartTagsPreventParsing" content="true" />
     <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
     <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
+
 {% block favicon %}
     <!-- Icons -->
     <!-- 16x16 -->
@@ -137,6 +138,7 @@
 </head>
 <body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %} {% block extra_class %}{% endblock %} ">
 
+{% block quantcast-pixel %}
 <div style="position:absolute;">    
 <!-- Start Quantcast Tag -->
 <script type="text/javascript"> 
@@ -160,6 +162,7 @@ _qevents.push(
 </noscript>
 <!-- End Quantcast tag -->
 </div>
+{% endblock %}
 
 <!-- BEGIN LivePerson Monitor. -->
 <script type="text/javascript">
@@ -371,6 +374,7 @@ $(document).ready(function() {
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+    /*
 
         $.ajax({
             url:"{% url 'render-feed' %}",
@@ -385,18 +389,9 @@ $(document).ready(function(){
             }
 
         });
+    */
 
 });
-
-    setInterval(checkExpired,3600000);
-    function checkExpired(){
-        $.ajax({
-            url:"/hourlycheck",
-        });
-    }
- 
-  
-
 
 
 

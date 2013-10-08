@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.db import models
 from django.contrib.localflavor.us.models import (PhoneNumberField, 
     USStateField)
@@ -190,6 +189,7 @@ class CEOFeedback(models.Model):
 
     rating = models.CharField(max_length=4, default='0')
     converted = models.BooleanField(default=False)
+    read = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
@@ -240,8 +240,26 @@ class CEOFeedback(models.Model):
             return
     
         self.date_read = datetime.now()
+        self.read = True
         self.save()
         return True
+
+    def remove_duplicate_state(self):
+        if self.city and 'Washington, DC' not in self.city:
+            name = self.city.split(',')
+            self.city = name[0]
+            self.save()
+            print self.city
+        elif self.city and 'Washington, DC' in self.city:
+            name = self.city.split(',')
+            self.city = name[0]
+            self.state = 'DC'
+            self.save()
+            print self.city,self.state
+        else:
+            print self.city
+            print 'no city or its Washington'
+
 
 
     def __unicode__(self):

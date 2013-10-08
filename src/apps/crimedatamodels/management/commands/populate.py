@@ -1,3 +1,4 @@
+import pdb
 import csv
 import glob
 from optparse import make_option
@@ -42,7 +43,7 @@ def parse_crime_data_csv(app, crime_data_file):
     """Read CSV file into unsaved CrimesByCity model instances"""
     if app.options['verbose']:
         print "Parsing CSV %s" % (crime_data_file['path'])
-    with open(crime_data_file['path']) as file:
+    with open(crime_data_file['path'],"rU") as file:
         reader = csv.DictReader(file)
         for entry in reader:
             entry['year'] = crime_data_file['year']
@@ -102,7 +103,9 @@ class FBIData(object):
         return new_entry
     def verify_fields(self, entry):
         """Raise an exception if a field in `entry` is invalid"""
-        if not entry['fbi_city_name']:
+        try: 
+            entry['fbi_city_name']
+        except KeyError:
             raise FBIDataError("Record without fbi_city_name: %r" % entry)
     def save_crimesbycity(self):
         """Save the FBI data to a CrimesByCity record"""

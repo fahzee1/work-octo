@@ -38,10 +38,8 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-    console.log("{% csrf_token %}");
     $('#quote-form input').keypress(function(e){
         if(e.which == 13){
-            console.log('enter pressed');
             $('#quote-form button').click();
         }
     });
@@ -66,7 +64,6 @@ $(document).ready(function() {
                 window.location = '{{ thank_you }}';
                 {% else %}
                 url = json.thank_you
-                console.log(url);
                 window.location = "http://www.protectamerica.com" + url;
                 {% endif %}
                 _gaq.push([  
