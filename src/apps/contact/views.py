@@ -11,7 +11,7 @@ from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
 from django.conf import settings
-from apps.contact.models import GoogleExperiment
+from apps.contact.models import GoogleExperiment, Lead, Reasons
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
     CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm, PayItForwardForm)
 from apps.affiliates.models import Affiliate
@@ -28,6 +28,11 @@ def send_conduit_error(data):
 
 def post_to_leadconduit(data,test=False):
     #pdb.set_trace()
+    try:
+        lead = Lead.objects.get(id=data['lead_id'])
+    except:
+        lead = None
+
     params = {'xxAccountId':'settings.LEAD_ACCOUNT_ID',
               'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
               'LEAD_ID':data['lead_id'],
@@ -58,20 +63,43 @@ def post_to_leadconduit(data,test=False):
                 lead_id = root.find('leadId').text
             except:
                 lead_id = None
+
+            lead.lc_url = url
+            lead.lc_id = data['lead_id']
             #TODO may need to create extra field on lead or create new table with key to lead to store the leadconduit url and status
             if response == 'success':
                 # get/store lead id and do whatever else needs to be done
-                pass
-            if response == 'queued':
-                pass
-            if response == 'failure':
+                lead.lc_error = False
+                lead.save()
+            elif response == 'queued':
+                lead.lc_error = False
+                lead.save()
+            elif response == 'failure':
+                reasons_list = []
+                if lead:
+                    reasons = Reasons.objects.get(lead=lead)
                 for x in root.findall('reason'):
-                    #store reason, url, and lead id
-                    print 'failure reason was %s' % x.text
-            if response == 'error':
-                reasons = []
+                    reasons.reason = x.text
+                    reasons.save()
+                    reasons_list.append(x.text)
+                lead.lc_error = True
+                lead.save()
+                data = {'reasons':reasons,
+                        'lead_id':lead_id,
+                        'url':url,
+                        'params':params.items()}
+                send_conduit_error(data)
+
+            else response == 'error':
+                reasons_list = []
+                if lead:
+                        reasons = Reasons.objects.get(lead=lead)
                 for x in root.findall('reason'):
-                    reasons.append(x.text)
+                    reasons.reason = x.text
+                    reasons.save()
+                    reasons_list.append(x.text)
+                lead.lc_error = True
+                lead.save()
                 data = {'reasons':reasons,
                         'lead_id':lead_id,
                         'url':url,

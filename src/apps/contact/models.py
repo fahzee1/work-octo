@@ -84,6 +84,7 @@ class GoogleExperiment(models.Model):
     def __unicode__(self):
         return '%s : %s' % (self.google_id, self.name,)
 
+
 class Lead(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
@@ -99,9 +100,21 @@ class Lead(models.Model):
     referer_page = models.CharField(max_length=256, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    lc_url = models.CharField(max_length=256, blank=True, null=True, help_text='Url of Lead Conduit Submission')
+    lc_id = models.CharField(max_length=256, blank=True, null=True, help_text='Lead Conduit lead id')
+    lc_error = models.BooleanField(default=False,help_text='Was there a error with the Lead Conduit submission?')
+
     def __unicode__(self):
         return '%s | %s - %s : %s %s' % (self.id,
             self.agent_id, self.source, self.name, self.phone)
+
+
+class Reasons(models.Model):
+    lead = models.ForeignKey(Lead,blank=True, null=True, default='')
+    reason = models.CharField(max_length=255, blank=True, null=True, help_text='Reason Lead Conduit submission didnt go through')
+
+    def __unicode__(self):
+        return 'Reason Lead Conduit #%s submission failed ' % self.lead.id
 
 class EcomLead(Lead):
     city = models.CharField(max_length=32, blank=True, null=True)
