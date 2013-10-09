@@ -148,10 +148,23 @@ elif settings.SITE_ID == 3:
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
         dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
-        dtt(r'^rep/?$', 'affiliates/sem-landing-page/refresh-responsive.html', 'squeeze'),
-        dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test.html', 'squeeze'),
+        dtt(r'^rep/?$', 'affiliates/sem-landing-page/orange-test-two.html', 'squeeze'),
+        dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test-content.html', 'orange-test'),
+
+
+        dtt(r'^blue/?$', 'affiliates/sem-landing-page/blue-test.html', 'blue-test'),
+        dtt(r'^green/?$', 'affiliates/sem-landing-page/green-test.html', 'green-test'),
+        dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-order.html', 'green-test'),
+
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
+        dtt(r'^ipod/?$', 'affiliates/sem-landing-page/ipod.html', 'ipod'),
+
+
+
+        # GEO Landing Pages
+        dtt(r'^texas-home-security/?$', 'affiliates/sem-landing-page/geo/texas.html', 'geo-texas'),
+
 
 
     )
@@ -427,14 +440,25 @@ else:
 
         # Shop
         dtt(r'^shop-home-security-packages/?$', 'packages/index.html', 'shop'),
+        dtt(r'^shop-home-security-packages-new/?$', 'packages/index-test.html', 'shop-new'),
 
             # Product > Packages
 
             dtt(r'^shop-home-security-packages/copper/?$', 'packages/copper.html', 'copper', 'shop'),
+            dtt(r'^shop-home-security-packages/copper-new/?$', 'packages/copper-test.html', 'copper-new', 'shop'),
+
             dtt(r'^shop-home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'shop'),
+            dtt(r'^shop-home-security-packages/bronze-new/?$', 'packages/bronze-test.html', 'bronze-new', 'shop'),
+            
             dtt(r'^shop-home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'shop'),
+            dtt(r'^shop-home-security-packages/silver-new/?$', 'packages/silver-test.html', 'silver-new', 'shop'),
+
             dtt(r'^shop-home-security-packages/gold/?$', 'packages/gold.html', 'gold', 'shop'),
+            dtt(r'^shop-home-security-packages/gold-new/?$', 'packages/gold-test.html', 'gold-new', 'shop'),
+
             dtt(r'^shop-home-security-packages/platinum/?$', 'packages/platinum.html', 'platinum', 'shop'),
+            dtt(r'^shop-home-security-packages/platinum-new/?$', 'packages/platinum-test.html', 'platinum-new', 'shop'),
+
             dtt(r'^shop-home-security-packages/business/?$', 'packages/business.html', 'business', 'shop'),
             dtt(r'^shop-home-security-packages/existing/?$', 'products/cell-takeover/index.html', 'cell-takeover', 'shop'),
 
