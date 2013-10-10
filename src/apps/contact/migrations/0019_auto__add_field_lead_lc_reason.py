@@ -8,19 +8,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding model 'Reasons'
-        db.create_table('contact_reasons', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('lead', self.gf('django.db.models.fields.related.ForeignKey')(default='', to=orm['contact.Lead'], null=True, blank=True)),
-            ('reason', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-        ))
-        db.send_create_signal('contact', ['Reasons'])
+        # Adding field 'Lead.lc_reason'
+        db.add_column('contact_lead', 'lc_reason', self.gf('django.db.models.fields.CharField')(max_length=256, null=True, blank=True), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Deleting model 'Reasons'
-        db.delete_table('contact_reasons')
+        # Deleting field 'Lead.lc_reason'
+        db.delete_column('contact_lead', 'lc_reason')
 
 
     models = {
@@ -85,6 +80,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'lc_error': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'lc_id': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
+            'lc_reason': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'lc_url': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'phone': ('django.contrib.localflavor.us.models.PhoneNumberField', [], {'max_length': '20'}),
@@ -122,12 +118,6 @@ class Migration(SchemaMigration):
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '64'})
-        },
-        'contact.reasons': {
-            'Meta': {'object_name': 'Reasons'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'lead': ('django.db.models.fields.related.ForeignKey', [], {'default': "''", 'to': "orm['contact.Lead']", 'null': 'True', 'blank': 'True'}),
-            'reason': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
         },
         'contact.submission': {
             'Meta': {'object_name': 'Submission'},

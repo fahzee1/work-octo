@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.contact.models import Submission, ContactUs, MovingKit, CEOFeedback, TellAFriend, GoogleExperiment, Lead, PayItForward, Reasons
+from apps.contact.models import Submission, ContactUs, MovingKit, CEOFeedback, TellAFriend, GoogleExperiment, Lead, PayItForward
 
 class SubmissionAdmin(admin.ModelAdmin):
     model = Submission
@@ -28,14 +28,11 @@ class GoogleExperimentAdmin(admin.ModelAdmin):
     model = GoogleExperiment
 admin.site.register(GoogleExperiment, GoogleExperimentAdmin)
 
-class ReasonsAdmin(admin.TabularInline):
-    model = Reasons
-
 class LeadAdmin(admin.ModelAdmin):
     model = Lead
     list_filter = ('agent_id',)
     search_fields = ['id', 'agent_id', 'phone', 'email', 'search_keywords']
-    inlines = [ReasonsAdmin,]
+    readonly_fields = ('lc_url','lc_id','lc_error','lc_reason')
 
 admin.site.register(Lead, LeadAdmin)
 

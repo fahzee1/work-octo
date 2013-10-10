@@ -11,7 +11,7 @@ from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
 from django.conf import settings
-from apps.contact.models import GoogleExperiment, Lead, Reasons
+from apps.contact.models import GoogleExperiment, Lead
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
     CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm, PayItForwardForm)
 from apps.affiliates.models import Affiliate
@@ -21,22 +21,24 @@ from xml.etree import ElementTree as ET
 render_to_string = loader.render_to_string
 
 
-def send_conduit_error(data):
-    message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
-    from_email = 'Protect America <noreply@protectamerica.com>'
-    send_mail('LeadConduit Error',message,from_email,['cjogbuehi@protectamerica.com'])
+def send_conduit_error(data,test=False):
+    if not test:
+        message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
+        from_email = 'Protect America <noreply@protectamerica.com>'
+        send_mail('LeadConduit Error',message,from_email,['cjogbuehi@protectamerica.com'])
 
 def post_to_leadconduit(data,test=False):
-    #pdb.set_trace()
+    pdb.set_trace()
     try:
         lead = Lead.objects.get(id=data['lead_id'])
     except:
         lead = None
 
-    params = {'xxAccountId':'settings.LEAD_ACCOUNT_ID',
+    # items lead conduit needs
+    params = {'xxAccountId':settings.LEAD_ACCOUNT_ID,
               'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
               'LEAD_ID':data['lead_id'],
-              'TCPA_Cert_URL':data['trusted_url'],
+              'xxTrustedFormCertUrl':data['trusted_url'],
               'Name':data['name'],
               'Phone1':data['phone'],
               'email':data['email'],
@@ -53,65 +55,68 @@ def post_to_leadconduit(data,test=False):
     try:
         xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params)
         if xml_request.status_code == 200: 
+            reasons_list = []
             root = ET.fromstring(xml_request.content)
             response = root.find('result').text
+            # get lead submission url from response
             try:
                 url = root.find('url').text
             except:
                 url = None
+            # get lead submission id from response
             try:
                 lead_id = root.find('leadId').text
             except:
                 lead_id = None
 
-            lead.lc_url = url
-            lead.lc_id = data['lead_id']
-            #TODO may need to create extra field on lead or create new table with key to lead to store the leadconduit url and status
-            if response == 'success':
-                # get/store lead id and do whatever else needs to be done
-                lead.lc_error = False
-                lead.save()
-            elif response == 'queued':
-                lead.lc_error = False
-                lead.save()
-            elif response == 'failure':
-                reasons_list = []
-                if lead:
-                    reasons = Reasons.objects.get(lead=lead)
-                for x in root.findall('reason'):
-                    reasons.reason = x.text
-                    reasons.save()
-                    reasons_list.append(x.text)
-                lead.lc_error = True
-                lead.save()
-                data = {'reasons':reasons,
-                        'lead_id':lead_id,
-                        'url':url,
-                        'params':params.items()}
-                send_conduit_error(data)
+            if lead:
+                lead.lc_url = url
+                lead.lc_id = lead_id
 
-            else response == 'error':
-                reasons_list = []
+            if response == 'success':
                 if lead:
-                        reasons = Reasons.objects.get(lead=lead)
+                    lead.lc_error = False
+                    lead.save()
+            elif response == 'queued':
+                if lead:
+                    lead.lc_error = False
+                    lead.save()
+            elif response == 'failure':
+                # if it fails loop through the reasons and save in db/email
                 for x in root.findall('reason'):
-                    reasons.reason = x.text
-                    reasons.save()
                     reasons_list.append(x.text)
-                lead.lc_error = True
-                lead.save()
-                data = {'reasons':reasons,
+                if lead:
+                    lead.lc_reason = str(reasons_list)
+                    lead.lc_error = True
+                    lead.save()
+                data = {'reasons':reasons_list,
                         'lead_id':lead_id,
                         'url':url,
                         'params':params.items()}
-                send_conduit_error(data)
+                send_conduit_error(data,settings.DEBUG)
+            elif  response == 'error':
+                # if it fails loop through the reasons and save in db/email
+                for x in root.findall('reason'):
+                    reasons_list.append(x.text)
+                if lead:
+                    lead.lc_reason = str(reasons_list)
+                    lead.lc_error = True
+                    lead.save()
+                data = {'reasons':reasons_list,
+                        'lead_id':lead_id,
+                        'url':url,
+                        'params':params.items()}
+                send_conduit_error(data,settings.DEBUG)
 
                     
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
             #retry request
             pass
-        else:
+        elif xml_request.status_code != 502 or xml_request.status_code != 503 or xml_request.status_code != 504 or xml_request.status_code != 200:
             # report to support@activeprospect.com
+            msg = "Full url: %s\n Type: POST\n Http Status Code: %s\n Parameters: %s" %(xml_request.url,xml_request.status_code,params.items())
+            from_email = 'Protect America <noreply@protectamerica.com>'
+            send_mail('Bad Http Status Code',msg,from_email,['support@activeprospect.com','cjogbuehi@protectamerica.com'])
             pass
 
     except:
@@ -336,11 +341,9 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        post_to_leadconduit(lead_data,test=True)
-        #send_leadimport(emaildata)
-        #send_thankyou(emaildata)
-        #send_caroline_thankyou(request,emaildata,request_data['agent'])
-        
+        post_to_leadconduit(lead_data,settings.DEBUG)
+        send_leadimport(emaildata)
+        send_caroline_thankyou(request,emaildata,request_data['agent'])
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
