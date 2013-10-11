@@ -28,7 +28,7 @@ def send_conduit_error(data,test=False):
         send_mail('LeadConduit Error',message,from_email,['cjogbuehi@protectamerica.com'])
 
 def post_to_leadconduit(data,test=False):
-    pdb.set_trace()
+    #pdb.set_trace()
     try:
         lead = Lead.objects.get(id=data['lead_id'])
     except:
@@ -93,7 +93,7 @@ def post_to_leadconduit(data,test=False):
                         'lead_id':lead_id,
                         'url':url,
                         'params':params.items()}
-                send_conduit_error(data,settings.DEBUG)
+                send_conduit_error(data,test=settings.LEAD_TESTING)
             elif  response == 'error':
                 # if it fails loop through the reasons and save in db/email
                 for x in root.findall('reason'):
@@ -106,7 +106,7 @@ def post_to_leadconduit(data,test=False):
                         'lead_id':lead_id,
                         'url':url,
                         'params':params.items()}
-                send_conduit_error(data,settings.DEBUG)
+                send_conduit_error(data,test=settings.LEAD_TESTING)
 
                     
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
@@ -341,7 +341,7 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        post_to_leadconduit(lead_data,settings.DEBUG)
+        post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         send_leadimport(emaildata)
         send_caroline_thankyou(request,emaildata,request_data['agent'])
         formset.thank_you_url = request_data['thank_you_url']
