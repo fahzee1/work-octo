@@ -1,4 +1,5 @@
 {% load sekizai_tags %}
+
 <form id="quote-form" {% if page_name = "index" %}class="sleepy"{% endif %}  method="post" action="">
     {% csrf_token %}
     
@@ -13,6 +14,13 @@
 		
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
+        {% endblock %}
+        {% block consent %}
+             <div class="consent-box">
+            <input id="id_consent" type="checkbox" maxlength="20" name="consent">
+            <label class="consent-label" for="id_consent">I consent to receive autodialed calls from Protect America and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
+        </div>
         {% endblock %}
 	</div>
     
@@ -32,30 +40,34 @@
         {% endcomment %}
     </div>
 </form>
+
 {% addtoblock "js" %}
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-    console.log("{% csrf_token %}");
     $('#quote-form input').keypress(function(e){
         if(e.which == 13){
-            console.log('enter pressed');
             $('#quote-form button').click();
         }
     });
     var submitting = false;
 
     $('#quote-form button').click(function() {
-        $(this).attr('disabled', true);
-        $('#quote-form div').removeClass('.error-state');
-        var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'form': 'basic'}
-        $.ajax({
-            type: "POST",
-            url: "/contact/ajaxpost/",
-            data: data,
-            dataType: "json",
-            success: newFormSuccess
-        });
+        if ($('#id_consent').is(':checked')){
+            $('#quote-form div').removeClass('.error-state');
+            var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
+            $.ajax({
+                type: "POST",
+                url: "/contact/ajaxpost/",
+                data: data,
+                dataType: "json",
+                success: newFormSuccess
+                });
+        }
+        else{
+            alert('Please check the consent box before proceeding.');
+        }
+
 
         function newFormSuccess(json) {
             submitting = false;
@@ -64,7 +76,6 @@ $(document).ready(function() {
                 window.location = '{{ thank_you }}';
                 {% else %}
                 url = json.thank_you
-                console.log(url);
                 window.location = "http://www.protectamerica.com" + url;
                 {% endif %}
                 _gaq.push([  

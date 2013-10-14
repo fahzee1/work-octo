@@ -76,6 +76,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'sekizai.context_processors.sekizai',
     'apps.common.context_processors.last_day_of_month',
     'apps.common.context_processors.business_time',
+    'apps.common.context_processors.detect_agent_id',
     'django.contrib.messages.context_processors.messages',
     )
 
@@ -180,6 +181,7 @@ WIRELESS_KEYWORD_LIST = ['wireless-home-security-systems', 'wireless-home-securi
 ADT_KEYWORD_LIST = ['adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services']
 #path where all the local page files reside. Using file backed system instead of DB backed
 LOCAL_PAGE_PATH = '/virtual/customer/www2.protectamerica.com/localpages/'
+
 #exclude these cities for local pages and create respective static pages
 EXCLUDE_CITIES = {
 'New York':'NY',
@@ -303,6 +305,11 @@ WEATHER_CODE_MAP = {
     '116': 'partly-cloudy',
     '113': 'sunny',
 }
+
+#LeadConduit data
+LEAD_ACCOUNT_ID = '1626fa3'
+LEAD_CAMPAIGN_ID = '054irukv1'
+LEAD_TESTING = False
 
 
 # override these settings with those from settings.local,

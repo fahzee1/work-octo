@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.db import models
 from django.contrib.localflavor.us.models import (PhoneNumberField, 
     USStateField)
@@ -85,6 +84,7 @@ class GoogleExperiment(models.Model):
     def __unicode__(self):
         return '%s : %s' % (self.google_id, self.name,)
 
+
 class Lead(models.Model):
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
@@ -100,9 +100,15 @@ class Lead(models.Model):
     referer_page = models.CharField(max_length=256, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    lc_url = models.CharField(max_length=256, blank=True, null=True, help_text='Url of Lead Conduit Submission')
+    lc_id = models.CharField(max_length=256, blank=True, null=True, help_text='Lead Conduit lead id')
+    lc_error = models.BooleanField(default=False,blank=True, help_text='Was there a error with the Lead Conduit submission?')
+    lc_reason = models.CharField(max_length=256, blank=True, null=True, help_text='Lead Conduit reason for not submitting if one')
+
     def __unicode__(self):
         return '%s | %s - %s : %s %s' % (self.id,
             self.agent_id, self.source, self.name, self.phone)
+
 
 class EcomLead(Lead):
     city = models.CharField(max_length=32, blank=True, null=True)
@@ -190,6 +196,7 @@ class CEOFeedback(models.Model):
 
     rating = models.CharField(max_length=4, default='0')
     converted = models.BooleanField(default=False)
+    read = models.BooleanField(default=False)
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
@@ -240,8 +247,26 @@ class CEOFeedback(models.Model):
             return
     
         self.date_read = datetime.now()
+        self.read = True
         self.save()
         return True
+
+    def remove_duplicate_state(self):
+        if self.city and 'Washington, DC' not in self.city:
+            name = self.city.split(',')
+            self.city = name[0]
+            self.save()
+            print self.city
+        elif self.city and 'Washington, DC' in self.city:
+            name = self.city.split(',')
+            self.city = name[0]
+            self.state = 'DC'
+            self.save()
+            print self.city,self.state
+        else:
+            print self.city
+            print 'no city or its Washington'
+
 
 
     def __unicode__(self):

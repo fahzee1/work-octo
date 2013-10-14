@@ -23,8 +23,6 @@ from apps.crimedatamodels.models import (State,
                                          ZipCode)
 
 
-
-
 def get_timezone(state):
     tz = timezone(dsettings.TIMEZONES[state])
     utc_dc = datetime.datetime.now(tz=pytz.utc)
@@ -58,9 +56,9 @@ def local_page_wrapper(request, keyword, city, state):
         first,second,third=words[0].capitalize(),words[1].lower(),words[2].capitalize()
         new_state=first+' '+second+' '+third
 
-
+    statecode = None
     for x in US_STATES:
-        if x[1]==(new_state if three==3 else state):
+        if x[1] == (new_state if three == 3 else state) or x[0] == state.upper():
             statecode=x[0]   
         else:        
             for x in US_STATES:
@@ -75,6 +73,9 @@ def local_page_wrapper(request, keyword, city, state):
                     _state=None
                 if _state == state:
                     statecode=x[0]
+    if not statecode:
+        raise Http404
+
     if '-' and '.' in city:
         city=city.replace('-',' ').replace('.','')
     if '-' in city:
@@ -141,12 +142,10 @@ def local_page(request, state, city, keyword=None):
         response = render(request,'local-pages/wireless-home-security-systems.html',
             crime_stats_ctx)
     elif keyword in dsettings.ADT_KEYWORD_LIST:
-
         response = render(request,'landing-pages/adt.html',
             crime_stats_ctx)
     else:        
-        response = render(request,'local-pages/index.html',
-            crime_stats_ctx)
+        response = render(request,'local-pages/index.html',crime_stats_ctx)
 
     expire_time = datetime.timedelta(days=90)
     response.set_cookie('affkey',

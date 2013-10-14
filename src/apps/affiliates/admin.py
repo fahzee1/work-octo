@@ -12,6 +12,7 @@ admin.site.register(AffTemplate, AffTemplateAdmin)
 
 class LandingPageAdmin(admin.ModelAdmin):
     model = LandingPage
+    list_filter = ['affiliate',]
 admin.site.register(LandingPage, LandingPageAdmin)
 
 class ProfileAdmin(admin.ModelAdmin):

@@ -7,5 +7,6 @@ admin.site.register(Category, CategoryAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
     model = Article
+    search_fields = ['heading','content','summary']
 admin.site.register(Article, ArticleAdmin)
 
