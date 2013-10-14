@@ -155,6 +155,9 @@ def local_page(request, state, city, keyword=None):
                         domain='.protectamerica.com',
                         expires=datetime.datetime.now() + expire_time)
             return response
+    response = render(request,'local-pages/index.html',crime_stats_ctx)
+    return response
+
 
 
 
@@ -198,7 +201,7 @@ def local_page_wrapper2(request,city,state):
         city=city.replace('-',' ')
     if '.' in city:
         city=city.replace('.',' ')
-    if '(' or ')' in city:
+    if '(' in city or ')' in city:
         city=city.replace('(','').replace(')','')
     if ',' in city:
         city=city.replace(',','')
