@@ -14,7 +14,9 @@ states = r_states()
 #Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
 LOCAL_KEYWORDS = settings.LOCAL_KEYWORDS
+
 
 
 # a simple direct_to_template wrapper
@@ -70,7 +72,7 @@ sitemaps={
    'crimestats-state':FreeCrimeStatsStateSitemap,
     #'crimestats-city':FreeCrimeStatsCitySitemap,
    # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
-    'keyword':KeywordSitemapIndex(LOCAL_KEYWORDS)
+    'keyword':KeywordSitemapIndex(settings.LOCAL_KEYWORDS)
 
 
 }
@@ -732,13 +734,16 @@ else:
         # > forward to homepage
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
-            'apps.local.views.local_page_wrapper',
-            name='local-page-keyword'),
+
+        #url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+            #'apps.local.views.local_page_wrapper',
+            #name='local-page-keyword'),
+        url(r'^(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-keyword2'),
+
         url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.sitemap',
             name='local-page-sitemap-state'),
-        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(settings.LOCAL_KEYWORDS)),
             'apps.local.views.sitemap_state',
             name='local-page-sitemap'),
         url(r'^local-pages-sitemap-index\.xml', 'apps.local.views.sitemap_index',
@@ -1319,6 +1324,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/help/low-price-guarantee/',permanent=True)),
     ('pa/copper/?$',
         RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
+    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        RedirectView.as_view(url='/%(city)s/%(state)s/',permanent=True)),
 
 )
 

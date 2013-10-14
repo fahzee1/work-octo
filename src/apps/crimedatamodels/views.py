@@ -23,57 +23,6 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          CrimeContent,
                                          MatchAddressLocation)
 
-WEATHER_CODE_MAP = {
-    '395': 'snow',
-    '392': 'snow',
-    '389': 'rain',
-    '386': 'rain',
-    '377': 'snow',
-    '374': 'snow',
-    '371': 'snow',
-    '368': 'rain',
-    '365': 'rain',
-    '362': 'snow',
-    '359': 'rain',
-    '356': 'rain',
-    '353': 'rain',
-    '350': 'snow',
-    '338': 'snow',
-    '335': 'snow',
-    '332': 'snow',
-    '329': 'snow',
-    '326': 'snow',
-    '323': 'snow',
-    '320': 'rain',
-    '317': 'rain',
-    '314': 'rain',
-    '311': 'rain',
-    '308': 'rain',
-    '305': 'rain',
-    '302': 'rain',
-    '299': 'rain',
-    '296': 'rain',
-    '293': 'rain',
-    '284': 'rain',
-    '281': 'rain',
-    '266': 'rain',
-    '263': 'rain',
-    '260': 'smoke',
-    '248': 'smoke',
-    '230': 'snow',
-    '227': 'snow',
-    '200': 'lightning',
-    '185': 'rain',
-    '182': 'rain',
-    '179': 'rain',
-    '176': 'rain',
-    '143': 'smoke',
-    '122': 'partly-cloudy',
-    '119': 'cloudy',
-    '116': 'partly-cloudy',
-    '113': 'sunny',
-}
-
 
 def query_weather(latitude, longitude, city, state):
     # first try to get cache
@@ -92,7 +41,7 @@ def query_weather(latitude, longitude, city, state):
 
         weather_info['temp'] = condition['temp_F']
         weather_info['desc'] = condition['weatherDesc'][0]['value']
-        weather_info['icon'] = WEATHER_CODE_MAP[condition['weatherCode']]
+        weather_info['icon'] = settings.WEATHER_CODE_MAP[condition['weatherCode']]
 
         cache.set('WEATHER:%s%s' %
             (city.lower().replace(' ', ''), state.lower()), weather_info, 60*60)

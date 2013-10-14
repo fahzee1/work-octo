@@ -8,7 +8,9 @@ from datetime import datetime
 from django import template
 from django.conf import settings
 from apps.common.models import SpunContent
+from apps.local.views import get_statecode
 from django.http import Http404
+from django.contrib.localflavor.us.us_states import US_STATES
 
 register = template.Library()
 
@@ -74,9 +76,21 @@ class ContentSpinnerNode(template.Node):
         self.replacements = content_replacements.split('|')
    
     def render(self, context):
+        #pdb.set_trace()
         request = self.request.resolve(context)
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
-        json_file = path+'.json'
+        city,state = path.split('/')
+        if '.' in city:
+            f,l = city.split('.')
+            city = f+ '.'+' '+l
+        if '-' in city:
+            if city.count('st',0,2) == 1:
+                f,l = city.split('-')
+                city = f+'.'+' '+l
+            else:
+                city = city.replace('-',' ')
+        statecode = get_statecode(state)
+        json_file = statecode+'/'+city.title()+'.json'
         default = '/virtual/customer/www2.protectamerica.com/localpages/'
         LOCAL_PAGE_PATH = getattr(settings,'LOCAL_PAGE_PATH',default)
         os.chdir(LOCAL_PAGE_PATH)
@@ -97,20 +111,17 @@ class ContentSpinnerNode(template.Node):
             except IOError:
                 raise Http404
         else:
-            url = path.split('/')
-            first,second,third=url[0],url[1],url[2]
-            full_url = first+'/'+second
-            if not os.path.exists(full_url):
-                os.makedirs(full_url)
-                os.chdir(full_url)
+            if not os.path.exists(statecode):
+                os.makedirs(statecode)
+                os.chdir(statecode)
                 obj = {self.name:choice(self.replacements)}
-                with open(third+'.json',"w+") as f:
+                with open(city.title()+'.json',"w+") as f:
                     f.write(json.dumps(obj))
                 content = obj[self.name]
             
-            elif os.path.exists(full_url):
-                os.chdir(full_url)
-                j_file=third+'.json'
+            elif os.path.exists(statecode):
+                os.chdir(statecode)
+                j_file = city.title() +'.json'
                 try:
                     _files = glob('*json')
                     _list=[]
@@ -136,7 +147,7 @@ class ContentSpinnerNode(template.Node):
                 except:
                     raise Http404
             else:
-                os.chdir(full_url+'/'+third)
+                os.chdir(statecode+'/'+city.title())
                 try:
                     #get first file that ends in json
                     _file = glob('*.json')[0]
