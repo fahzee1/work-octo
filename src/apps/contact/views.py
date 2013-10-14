@@ -19,13 +19,28 @@ from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
 render_to_string = loader.render_to_string
+TimeoutError = requests.exceptions.Timeout
 
+
+
+def send_leadimport(data):
+    from email import Charset
+    Charset.add_charset('utf-8',Charset.SHORTEST,None,'utf-8')
+    subject = '%s Lead Submission' % data['agent_id']
+    t = loader.get_template('_partials/lead_submission_email.html')
+    c = Context(data)
+    send_mail(subject, t.render(c),
+        'Protect America <noreply@protectamerica.com>',
+        ['leadimport@protectamerica.com','cjogbuehi@protectamerica.com'], fail_silently=False)
+
+    return True
 
 def send_conduit_error(data,test=False):
     if not test:
         message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
         from_email = 'Protect America <noreply@protectamerica.com>'
         send_mail('LeadConduit Error',message,from_email,['cjogbuehi@protectamerica.com'])
+
 
 def post_to_leadconduit(data,test=False):
     #pdb.set_trace()
@@ -39,10 +54,10 @@ def post_to_leadconduit(data,test=False):
               'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
               'LEAD_ID':data['lead_id'],
               'xxTrustedFormCertUrl':data['trusted_url'],
-              'Name':data['name'],
+              'Name':data['customername'],
               'Phone1':data['phone'],
               'email':data['email'],
-              'Referer_Page':data['referer_page'],
+              'Referer_Page':data['formlocation'],
               'Agent_ID':data['agentid'],
               'Source':data['source'],
               'Affkey':data['affkey'],
@@ -53,7 +68,7 @@ def post_to_leadconduit(data,test=False):
     if test:
         params.update({'xxTest':'true'})
     try:
-        xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params)
+        xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params,timeout=10)
         if xml_request.status_code == 200: 
             reasons_list = []
             root = ET.fromstring(xml_request.content)
@@ -119,8 +134,11 @@ def post_to_leadconduit(data,test=False):
             send_mail('Bad Http Status Code',msg,from_email,['support@activeprospect.com','cjogbuehi@protectamerica.com'])
             pass
 
+    except TimeoutError:
+        send_leadimport(params)
+
     except:
-        # TODO handle what to do if requests screws me maybe use urllib or try again
+        #something else happened
         pass
 
 
@@ -136,18 +154,6 @@ def post_to_old_pa(data):
     data = response.read()
     conn.close()
 
-
-def send_leadimport(data):
-    from email import Charset
-    Charset.add_charset('utf-8',Charset.SHORTEST,None,'utf-8')
-    subject = '%s Lead Submission' % data['agent_id']
-    t = loader.get_template('_partials/lead_submission_email.html')
-    c = Context(data)
-    send_mail(subject, t.render(c),
-        'Protect America <noreply@protectamerica.com>',
-        ['leadimport@protectamerica.com'], fail_silently=False)
-
-    return True
 
 def send_thankyou(data):
     subject = 'Hello, Thank you for your interest!'
@@ -311,9 +317,9 @@ def basic_post_login(request):
         lead_data.update(request_data)
         lead_data.update({'searchkeywords':searchkeywords,
                      'searchengine':request.session.get('search_engine',None),
-                     'referer_page':formset.referer_page,
+                     'formlocation':formset.referer_page,
                      'ip':request.META.get('REMOTE_ADDR',None),
-                     'name':fdata['name'],
+                     'customername':fdata['name'],
                      'phone':fdata['phone'],
                      'email':fdata['email']
                      })
@@ -342,12 +348,12 @@ def basic_post_login(request):
             'notes': notes
         }
         post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
-        send_leadimport(emaildata)
-        send_caroline_thankyou(request,emaildata,request_data['agent'])
+        #send_leadimport(emaildata)
+        if not settings.LEAD_TESTING:
+            send_caroline_thankyou(request,emaildata,request_data['agent'])
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
-
 
 
 def ajax_post(request):
