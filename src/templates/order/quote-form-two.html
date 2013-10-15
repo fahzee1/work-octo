@@ -1,5 +1,5 @@
 {% load sekizai_tags %}
-<form id="quote-form" method="post" action="">
+<form id="quote-form" class='not-sleepy' method="post" action="">
     {% csrf_token %}
     
 	<div>
@@ -14,46 +14,78 @@
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
+
 	</div>
     
 	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
+        {% block consent %}
+             <div class="consent-box-two">
+            <label class="consent-label-two" for="id_consent_two">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
+        </div>
+        {% endblock %}
 
-    <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+    <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">Your privacy is important and safe with us</a>
     <div id="third-party-container" class="v">
         <div class="third-party-badge vsign">
             <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
         </div>
-        {% comment %}
         <div class="third-party-badge truste">
             <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
         </div>
-        {% endcomment %}
     </div>
 </form>
 {% addtoblock "js" %}
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-    console.log("{% csrf_token %}");
-    $('#quote-form input').keypress(function(e){
+     function validateEmail(email){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+    }
+
+    $('.not-sleepy input').keypress(function(e){
         if(e.which == 13){
-            console.log('enter pressed');
-            $('#quote-form button').click();
+            $('.sleepy button').click();
         }
     });
     var submitting = false;
 
-    $('#quote-form button').click(function() {
-        $(this).attr('disabled', true);
+    $('.not-sleepy button').click(function() {
+        var name = $("#id_name_two").val();
+        var email = $("#id_email_two").val();
+        var phone = $("#id_phone_two").val();
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }}']);
+            return false;
+        }
+        if (email == ''){
+            alert('Please include your email before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Email Error', '{{ page_name }}']);
+            return false;
+        }
+        if (validateEmail(email) != true){
+            alert ('Please input a valid email before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Invalid Email Error', '{{ page_name }}']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+
         $('#quote-form div').removeClass('.error-state');
-        var data = {'name': $('#id_name_two').val(), 'email': $('#id_email_two').val(), 'phone': $('#id_phone_two').val(), 'form': 'basic'}
+        var data = {'name':name, 'email': email, 'phone': phone, 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
         $.ajax({
-            type: "POST",
-            url: "/contact/ajaxpost/",
-            data: data,
-            dataType: "json",
-            success: newFormSuccess
-        });
+                type: "POST",
+                url: "/contact/ajaxpost/",
+                data: data,
+                dataType: "json",
+                success: newFormSuccess
+                });
+
 
         function newFormSuccess(json) {
             submitting = false;
@@ -62,7 +94,6 @@ $(document).ready(function() {
                 window.location = '{{ thank_you }}';
                 {% else %}
                 url = json.thank_you
-                console.log(url);
                 window.location = "http://www.protectamerica.com" + url;
                 {% endif %}
                 _gaq.push([  

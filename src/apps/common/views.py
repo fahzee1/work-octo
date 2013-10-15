@@ -219,6 +219,8 @@ def index_test(request, test_name):
         template = 'tests/index-with-packages.html'
     elif test_name == 'price':
         template = 'tests/index-with-price.html'
+    elif test_name == 'concept':
+        template = 'tests/index-concept.html'
     elif test_name == 'packages-price':
         template = 'tests/index-with-price-and-packages.html'
     elif test_name == 'best-deal':

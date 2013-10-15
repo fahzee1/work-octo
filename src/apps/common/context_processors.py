@@ -97,8 +97,7 @@ def phone_number(request):
     session_call_measurement = request.session.get('call_measurement', None)
     check_affiliate = request.GET.get('agent', None)
 
-    if session_num is not None and session_call_measurement is not None:
-
+    if session_num is not None and session_call_measurement is not None and session_num != '':
         ctx['phone_number'] = session_num
         ctx['use_call_measurement'] = session_call_measurement
         return ctx
@@ -198,3 +197,13 @@ def business_hours(request):
         html = html + element
     ctx['business_hours'] = html
     return ctx
+
+def detect_agent_id(request):
+    data = {}
+    agent_id = request.session.get('refer_id',None)
+    if not agent_id:
+        agent_id = request.COOKIES.get('refer_id',None)
+    if agent_id and agent_id[0] == 'b':
+        data['b_agent'] = True
+    
+    return data 

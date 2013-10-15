@@ -76,6 +76,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'sekizai.context_processors.sekizai',
     'apps.common.context_processors.last_day_of_month',
     'apps.common.context_processors.business_time',
+    'apps.common.context_processors.detect_agent_id',
     'django.contrib.messages.context_processors.messages',
     )
 
@@ -172,6 +173,91 @@ TWITTER_ACCESS_TOKEN = '199333362-iUqm5j0TqbufpKcQRlPyuOqiwMArfLzwl0nmY3CJ'
 TWITTER_ACCESS_TOKEN_SECRET = 'jWBAmeUpFTZbpfyX7kXKhSJVWqow3uhtV8fRfI39URA'
 SESSION_COOKIE_AGE = 86400
 SESSION_SAVE_EVERY_REQUEST = True
+
+#keyword list for local pages
+LOCAL_KEYWORDS = ['home-security-systems-reviews', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'honeywell-home-security-systems', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'wireless-home-security-system-reviews', 'ge-home-security-system', 'diy-home-security-system', 'wireless-home-security-systems-reviews', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-security-systems-reviews', 'best-home-security-systems', 'home-security-systems-comparison', 'diy-home-security-systems', 'home-security-systems-consumer-reports', 'ge-home-security-systems', 'home-security-system', 'best-home-security-system', 'compare-home-security-systems', 'home-security-system-reviews', 'monitronics-home-security-systems', 'top-home-security-systems', 'home-security-systems-review', 'home-security-camera-systems', 'home-security-systems-ratings', 'home-security-systems-rating', 'ge-home-security-system', 'diy-home-security-system', 'home-security-store-home-security-systems', 'in-home-security-systems', 'free-home-security-systems', 'wired-home-security-system', 'monitored-home-security-systems', 'self-install-home-security-systems', 'home-security-systems-companies', 'home-security-system-monitoring', 'home-security-alarm-systems', 'cheap-home-security-system', 'home-security-systems-cost', 'home-surveillance-systems', 'home-surveillance-system', 'wireless-home-surveillance-systems', 'best-home-surveillance-system', 'home-video-surveillance-systems', 'home-surveillance-systems-reviews', 'home-surveillance-system-reviews', 'outdoor-home-surveillance-systems', 'home-video-surveillance-system', 'home-security-surveillance-systems', 'home-surveillance-cameras', 'hidden-home-surveillance-systems', 'surveillance-systems', 'wireless-surveillance-system', 'video-surveillance-systems', 'home-surveillance', 'best-home-surveillance-systems', 'home-video-surveillance', 'home-surveillance-camera', 'video-surveillance-system', 'surveillance-camera-system', 'surveillance-system', 'surveillance-camera-systems', 'wireless-surveillance-systems', 'security-surveillance-systems', 'home-surveillance-camera-systems', 'home-surveillance-equipment', 'home-surveillance-systems-review', 'camera-surveillance-systems', 'wireless-home-surveillance-system', 'best-home-surveillance-system-reviews', 'home-security-surveillance', 'home-video-surveillance-systems-reviews', 'diy-home-surveillance-systems', 'wireless-home-video-surveillance-systems', 'surveillance-systems-reviews', 'wireless-surveillance-camera-system', 'surveillance-system-reviews', 'dvr-surveillance-system', 'home-surveillance-camera-system', 'home-security-surveillance-system', 'cheap-home-surveillance-systems', 'home-camera-surveillance', 'wireless-video-surveillance-systems', 'surveillance-cameras-systems', 'home-surveillance-systems-iphone', 'camera-surveillance-system', 'outdoor-surveillance-systems', 'adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services','wireless-home-security-systems', 'wireless-home-security-products', 'wireless-home-security', 'home-surveillance-systems-wireless','wireless-home-security-systems-reviews', 'wireless-home-security-system-reviews', 'home-security-systems-wireless','wireless-home-security-system', 'wireless-home-security-systems', 'home-security-systems-wireless', 'wireless-home-security-system','wireless-home-security-systems','wireless-alarm-systems','wireless-alarms', 'wireless-alarm-system','best-wireless-alarm-system','top-wireless-security-systems','best-wireless-homesecurity-systems','wireless-homesecurity','wireless-ge-security',]
+CUSTOM_KEYWORD_LIST = ['']
+WIRELESS_KEYWORD_LIST = ['wireless-home-security-systems', 'wireless-home-security-products', 'wireless-home-security', 'home-surveillance-systems-wireless','wireless-home-security-systems-reviews', 'wireless-home-security-system-reviews', 'home-security-systems-wireless','wireless-home-security-system', 'wireless-home-security-systems', 'home-security-systems-wireless', 'wireless-home-security-system','wireless-home-security-systems','wireless-alarm-systems','wireless-alarms', 'wireless-alarm-system','best-wireless-alarm-system','top-wireless-security-systems','best-wireless-homesecurity-systems','wireless-homesecurity','wireless-ge-security','wireless-ge-security']
+ADT_KEYWORD_LIST = ['adt-pulse','adt-pulse-cost','adt-pulse-pricing','adt-pulse-pricing','adt-pulse-security','adt-security-pulse','adt-pulse-price','pulse-adt','adt-pulse-system','adt-home-alarm','adt-home-alarms','adt-security-services']
+#path where all the local page files reside. Using file backed system instead of DB backed
+LOCAL_PAGE_PATH = '/virtual/customer/www2.protectamerica.com/localpages/'
+#exclude these cities for local pages and create respective static pages
+EXCLUDE_CITIES = {
+'New York':'NY',
+'Los Angeles':'CA',
+'Chicago':'IL',
+'Washington':'DC',
+'Boston':'MA',
+'San Jose':'CA',
+'Philadelphia':'PA',
+'Dallas':'TX',
+'Houston':'TX',
+'Atlanta':'GA',
+'Miami':'FL',
+'Detroit':'MI',
+'Phoenix':'AZ',
+'Seattle':'WA',
+'Minneapolis':'MN'
+}
+
+TIMEZONES = {
+    'AL': 'America/Chicago',
+    'AK': 'America/Anchorage',
+    'AZ': 'America/Phoenix',
+    'AR': 'America/Chicago',
+    'CA': 'America/Los_Angeles',
+    'CO': 'America/Denver',
+    'CT': 'America/New_York',
+    'DE': 'America/New_York',
+    'DC': 'America/New_York',
+    'FL': 'America/New_York',
+    'GA': 'America/New_York',
+    'HI': 'Pacific/Honolulu',
+    'ID': 'America/Denver',
+    'IL': 'America/Chicago',
+    'IN': 'America/Indianapolis',
+    'IA': 'America/Chicago',
+    'KS': 'America/Chicago',
+    'KY': 'America/New_York',
+    'LA': 'America/Chicago',
+    'ME': 'America/New_York',
+    'MD': 'America/New_York',
+    'MA': 'America/New_York',
+    'MI': 'America/New_York',
+    'MN': 'America/Chicago',
+    'MS': 'America/Chicago',
+    'MO': 'America/Chicago',
+    'MT': 'America/Denver',
+    'NE': 'America/Chicago',
+    'NV': 'America/Los_Angeles',
+    'NH': 'America/New_York',
+    'NJ': 'America/New_York',
+    'NM': 'America/Denver',
+    'NY': 'America/New_York',
+    'NC': 'America/New_York',
+    'ND': 'America/Chicago',
+    'OH': 'America/New_York',
+    'OK': 'America/Chicago',
+    'OR': 'America/Los_Angeles',
+    'PA': 'America/New_York',
+    'RI': 'America/New_York',
+    'SC': 'America/New_York',
+    'SD': 'America/Chicago',
+    'TN': 'America/Chicago',
+    'TX': 'America/Chicago',
+    'UT': 'America/Denver',
+    'VT': 'America/New_York',
+    'VA': 'America/New_York',
+    'WA': 'America/Los_Angeles',
+    'WV': 'America/New_York',
+    'WI': 'America/Chicago',
+    'WY': 'America/Denver'
+}
+
+#LeadConduit data
+LEAD_ACCOUNT_ID = '1626fa3'
+LEAD_CAMPAIGN_ID = '054irukv1'
+LEAD_TESTING = False
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings

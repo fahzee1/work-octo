@@ -1,11 +1,13 @@
 {% load content_tags content_filters sekizai_tags %}
 {% load url from future %}
+{% block doctype %}
 <!DOCTYPE html>
 <!-- HTML5 Boilerplate -->
 <!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
 <!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+{% endblock %}
 <head>
 
 {% block google_experiment %}
@@ -49,6 +51,7 @@
     <meta name="MSSmartTagsPreventParsing" content="true" />
     <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
     <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
+
 {% block favicon %}
     <!-- Icons -->
     <!-- 16x16 -->
@@ -196,7 +199,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                     <i class="icon-phone-sign"></i>
                     {% block main-phone %}
                         {% if phone_number %}
-                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                         {% endif %}
                     {% endblock %}
                 </div>
@@ -210,12 +213,11 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             <a href="{% url 'home' %}">
                 <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
             </a>
-
             <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
-                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a>
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                 </div>
             {% endif %}
             {% block navigation %}
@@ -257,32 +259,30 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 
 <!-- Order Footer -->
 {% block order-footer %}
-{% comment %}
         <div id="order-footer">
             <div id="footer-package-section">
                 {% block page-product %}
                 <h3>Search Our Site.</h3>
-                <p>Try searching our site to find what you are looking for.</p>
+                <p>Looking for something? Search our entire site and find what you seek.</p>
                 <form id="search-form" method="GET" action="http://www.protectamerica.com/search/">
                     <input type="text" id="q" name="q" placeholder="Enter Keywords"></input>
-                    <button class="button-link" onClick="_gaq.push(['_trackEvent', 'Search', 'Footer Search Button', '{{ page.name }}']);">Search Now ></button>
+                    <button class="button-link" onClick="_gaq.push(['_trackEvent', 'Search', 'Footer Search Button', '{{ page.name }}']);">Search Now <i class="icon-chevron-right"></i></button>
                 </form>
                 {% endblock %}
             </div>
             <div id="footer-call-now">
                 <h3>Give us a call.</h3>
-                <p>Our security experts are here to answer any questions and help you protect your home and family today.</p>
+                <p>Security experts are standing by to answer questions and help create a security package for your home and family.</p>
                 <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span>
             </div>
             <div id="footer-chat-now">
                 <h3>Chat online.</h3>
                 <p>Have a question about a system? Ready to order? Our security experts are available to chat online right now.</p>
-                <div class="button-link"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1&SESSIONVAR!skill=Customer%20Service&imageUrl=https://www.protectamerica.com/images/liveperson" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', '{{ page.name }}']);">Online Chat ></a></div>
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" class="button-link easy-chat-click" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', '{{ page.name }}']);">Online Chat <i class="icon-chevron-right"></i></a>
             </div>
             <div class="clear"></div>
 
         </div>
-{% endcomment %}
 {% endblock %}
 
 <!-- Footer -->
@@ -370,9 +370,11 @@ $(document).ready(function() {
 <!-- Javascript -->
 
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+{% comment %}
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+    /*
 
         $.ajax({
             url:"{% url 'render-feed' %}",
@@ -387,29 +389,15 @@ $(document).ready(function(){
             }
 
         });
+    */
 
 });
 
-    setInterval(checkExpired,3600000);
-    function checkExpired(){
-        $.ajax({
-            url:"/hourlycheck",
-        });
-    }
- 
-  
-
-
 
 
 </script>
+{% endcomment %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/placeholder.js"></script>
-<script>Modernizr.load({
-            test: Modernizr.input.placeholder,
-            nope: ['Placeholder.js'],
-            complete: function(){Placeholders.init();}
-        });
-</script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
 
@@ -460,22 +448,32 @@ $(document).ready(function(){
             };
             return false;
         });
+        /*
         $('#newsfeed').cycle({
            fx:     'blindY',
            speed:   500,
            timeout: 6000,
            delay:  -3000
         });
+        */
         $('.easy-chat-click').click(function() {
             window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1', 'chatter', "height=465,width=400");
             return false;
         });
-        $('#header-wrapper').waypoint('sticky', {
-		  offset: -85 // Apply "stuck" when element 30px from top
-		});
+
+
 
     </script>
 
+    <!--[if !IE]><!-->
+    <script type="text/javascript">
+
+        $('#header-wrapper').waypoint('sticky', {
+		  offset: -85 // Apply "stuck" when element 30px from top
+		});
+    </script>
+
+	<!--<![endif]-->
 {% endblock %}
 {% block extra_javascript %}
 
@@ -552,5 +550,23 @@ var google_remarketing_only = true;
 </noscript>
 
 {% endblock %}
+
+{% block trustedform %}
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true; 
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
+{% endblock %}
+
 </body>
 </html>

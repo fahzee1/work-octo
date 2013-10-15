@@ -30,11 +30,65 @@
             height: 24px;
             float: left;
         }
-        #main-navigation {
+        #mobile-main-navigation {
+            float: right;
+            width: 464px;
+            li {
+                color: @white;
+                font-weight: 100;
+                display: block;
+                float: left;
+                width: 100px;
+                margin-right: 16px;
+                text-align: center;
+                font-size: 16px;
+                height: 40px;
+                margin-top: 8px;
+                position: relative;
+                padding-bottom: 4px;
+                a {
+                    text-decoration: none;
+                    width: 100px;
+                    color: @white;
+                    display: block;
+                    padding: 8px 0 8px;
+                    .border-radius (5px,5px,5px,5px);
+                    .fade-slow;
+                    &:hover {
+                        background: @grey;
+                        .fade-fast;
+                    }
+                }
+                &.active {
+                    background: @blue;
+                    .border-radius(5px, 5px, 0, 0);
+                    a {
+                        border-bottom: 1px solid #6598b9;
+                        .border-radius(0,0,0,0);
+                        width: 84px;
+                        margin: 0 auto;
+                        padding-bottom: 4px;
+                        &:hover {
+                            background: none;
+                        }
+                    }
+                    .icon-caret-down {
+                        position: absolute;
+                        top: 25px;
+                        left: 9px;
+                        width: 84px;
+                        color: #6598b9;
+                        
+                    }
+                }
+                
+            }
+
             float: right;
             width: 166px;
             margin-right: 4px;
             margin-top: 3px;
+
             li {
                 width: 75px;
                 margin-top: 0;
@@ -77,7 +131,7 @@
     }
     &.stuck {
         #header {
-            #main-navigation {
+            #mobile-main-navigation {
                 display: block;
             }
             .stuck-phone {
@@ -403,7 +457,7 @@
                     th {
                         color: @grey;
                         text-align: center;
-                        font-size: 16px;
+                        font-size: 12px;
                         padding: 8px 0;
                         font-weight: bold;
                         vertical-align: middle;
@@ -422,13 +476,13 @@
                         line-height: 32px;
                         border-bottom: 1px solid @light-grey;
                         width: 200px;
-                        font-size: 20px;
+                        font-size: 12px;
                         font-weight: 100;
                         vertical-align: middle;
                         padding: 8px 0;
                         i {
                             color: @light-grey;
-                            font-size: 32px;
+                            font-size: 24px;
                         }
                         &.y-axis {
                             text-align: right;
