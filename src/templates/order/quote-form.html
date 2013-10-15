@@ -1,6 +1,6 @@
 {% load sekizai_tags %}
 
-<form id="quote-form" {% if page_name = "index" %}class="sleepy"{% endif %}  method="post" action="">
+<form id="quote-form" {% if page_name = "index" %}class="sleepy" {% else %} class="droopy"{% endif %}  method="post" action="">
     {% csrf_token %}
     
 	<div>
@@ -48,14 +48,14 @@ $(document).ready(function() {
     return re.test(email);
     }
 
-    $('.sleepy input').keypress(function(e){
+    $('.sleepy, .droopy input').keypress(function(e){
         if(e.which == 13){
             $('.sleepy button').click();
         }
     });
     var submitting = false;
 
-    $('.sleepy button').click(function() {
+    $('.sleepy, .droopy button').click(function() {
         var name = $("#id_name").val();
         var email = $("#id_email").val();
         var phone = $("#id_phone").val();
