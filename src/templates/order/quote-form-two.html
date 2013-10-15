@@ -77,20 +77,16 @@ $(document).ready(function() {
             _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
             return false;
         }
-        if ($('#id_consent_two').is(':checked')){
-            $('#quote-form div').removeClass('.error-state');
-            var data = {'name':name, 'email': email, 'phone': phone, 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
-            $.ajax({
+
+        $('#quote-form div').removeClass('.error-state');
+        var data = {'name':name, 'email': email, 'phone': phone, 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
+        $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
                 data: data,
                 dataType: "json",
                 success: newFormSuccess
                 });
-        }
-        else{
-            alert('Please check the consent box before proceeding.');
-            return false;
         }
 
         function newFormSuccess(json) {
