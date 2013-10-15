@@ -14,6 +14,13 @@
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
+        {% block consent %}
+             <div class="consent-box-two">
+            <input id="id_consent_two" type="checkbox" maxlength="20" name="consent">
+            <label class="consent-label-two" for="id_consent_two">I consent to receive autodialed calls from Protect America and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
+        </div>
+        {% endblock %}
 	</div>
     
 	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
