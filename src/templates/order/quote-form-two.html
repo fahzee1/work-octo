@@ -14,27 +14,25 @@
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
-        {% block consent %}
-             <div class="consent-box-two">
-            <input id="id_consent_two" type="checkbox" maxlength="20" name="consent">
-            <label class="consent-label-two" for="id_consent_two">I consent to receive autodialed calls from Protect America and understand this is not a condition of purchase.</label>
-            <div class="clear"></div>
-        </div>
-        {% endblock %}
+
 	</div>
     
 	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
+        {% block consent %}
+             <div class="consent-box-two">
+            <label class="consent-label-two" for="id_consent_two">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
+        </div>
+        {% endblock %}
 
-    <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+    <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">Your privacy is important and safe with us</a>
     <div id="third-party-container" class="v">
         <div class="third-party-badge vsign">
             <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
         </div>
-        {% comment %}
         <div class="third-party-badge truste">
             <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
         </div>
-        {% endcomment %}
     </div>
 </form>
 {% addtoblock "js" %}
