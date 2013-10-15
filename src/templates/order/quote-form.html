@@ -49,6 +49,23 @@ $(document).ready(function() {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
     }
+    function checkEmpty(fields){
+        for (var i=0;i<fields.length;i++){
+            var val = fields[i].attr('name');
+            if (fields[i].val() == ''){
+                alert('Please include your' + ' '+val + ' ' + 'before proceeding');
+                return false;
+            }
+            if (val == 'email'){
+                var val_ = fields[i].val();
+                if (validateEmail(val_) != true){
+                    alert('Please input a valid email before proceeding');
+                    return false;
+                }
+
+            }
+        }
+    }
 
     $('.sleepy input').keypress(function(e){
         if(e.which == 13){
@@ -58,31 +75,13 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.sleepy button').click(function() {
-        var name = $("#id_name").val();
-        var email = $("#id_email").val();
-        var phone = $("#id_phone").val();
-        if (name == ''){
-            alert('Please include your name before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }}']);
-            return false;
-        }
-        if (email == ''){
-            alert('Please include your email before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Email Error', '{{ page_name }}']);
-            return false;
-        }
-        if (validateEmail(email) != true){
-            alert ('Please input a valid email before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Invalid Email Error', '{{ page_name }}']);
-            return false;
-        }
-        if (phone == ''){
-            alert('Please include your phone number before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
-            return false;
-        }
+        var name = $("#id_name");
+        var email = $("#id_email");
+        var phone = $("#id_phone");
+        var fields = [name,email,phone];
+        checkEmpty(fields);
         $('#quote-form div').removeClass('.error-state');
-        var data = {'name':name, 'email': email, 'phone': phone, 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
+        var data = {'name':name.val(), 'email': email.val(), 'phone': phone.val(), 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
@@ -90,7 +89,6 @@ $(document).ready(function() {
                 dataType: "json",
                 success: newFormSuccess
                 });
-            }
        
         function newFormSuccess(json) {
             submitting = false;
