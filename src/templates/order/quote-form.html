@@ -45,6 +45,11 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
+    function validateEmail(email){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+    }
+
     $('#quote-form input').keypress(function(e){
         if(e.which == 13){
             $('#quote-form button').click();
@@ -53,9 +58,28 @@ $(document).ready(function() {
     var submitting = false;
 
     $('#quote-form button').click(function() {
+        var name = $("#id_name").val();
+        var email = $("#id_email").val();
+        var phone = $("#id_phone").val();
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            return false;
+        }
+        if (email == ''){
+            alert('Please include your email before proceeding.');
+            return false;
+        }
+        if (validateEmail(email) != true){
+            alert ('Please input a valid email before proceeding.');
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            return false;
+        }
         if ($('#id_consent').is(':checked')){
             $('#quote-form div').removeClass('.error-state');
-            var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
+            var data = {'name':name, 'email': email, 'phone': phone, 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
             $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
@@ -66,6 +90,7 @@ $(document).ready(function() {
         }
         else{
             alert('Please check the consent box before proceeding.');
+            return false;
         }
 
 
