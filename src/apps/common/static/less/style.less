@@ -594,7 +594,7 @@ table#licenses-table {
        margin-bottom: 0; 
     }
     .form-fields {
-        padding: 8px 32px 16px;
+        padding: 8px 32px 0px;
         p {
             font-size: 11px;
             line-height: 13px;
@@ -605,26 +605,28 @@ table#licenses-table {
             display: block;
             font-size: 13px;
         }
-        .consent-box {
-            border-top: 1px solid @black;
-            border-bottom: 1px solid @black;
-            padding: 4px 0;
-            margin-top: 8px;
+
+    }
+    .consent-box, .consent-box-2 {
+        border-top: 1px solid @black;
+        border-bottom: 1px solid @black;
+        padding: 4px 0;
+        margin: 8px auto;
+        width: 90%;
+        #id_consent, #id_consent_two {
+            float: left;
+            margin: 8px 8px 8px 32px;
+            width: 16px;
+        }
+        label.consent-label, label.consent-label-two {
+            font-size: 10px;
+            line-height: 15px;
+            text-align: justify;
+            float: left;
+            width: 233px;
+            margin-left: 10px;
             cursor: pointer;
             cursor: hand;
-            #id_consent {
-                float: left;
-                margin: 8px 8px;
-                width: 16px;
-            }
-            label.consent-label {
-                font-size: 10px;
-                line-height: 15px;
-                text-align: justify;
-                float: left;
-                width: 196px;
-                margin-left: 10px;
-            }
         }
     }
     button {
@@ -732,7 +734,7 @@ table#licenses-table {
     &.sleepy {
         width: 275px;
         .form-fields {
-            padding: 8px 16px 16px;
+            padding: 8px 16px 0px;
             p {
                 font-size: 11px;
                 line-height: 13px;
@@ -748,6 +750,14 @@ table#licenses-table {
             }
             button {
                 width: 244px;
+            }
+        }
+        .consent-box {
+            #id_consent {
+                margin: 8px 8px 8px 8px;
+            }
+            label.consent-label {
+                width: 196px;
             }
         }
     }
