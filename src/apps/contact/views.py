@@ -1,5 +1,6 @@
 import urls
 import pdb
+import requests
 from datetime import datetime, timedelta
 from string import Template
 from django.http import HttpResponseRedirect
@@ -10,13 +11,136 @@ from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.utils import simplejson
 from django.conf import settings
-from apps.contact.models import GoogleExperiment
+from apps.contact.models import GoogleExperiment, Lead
 from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
     CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm, PayItForwardForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
+from xml.etree import ElementTree as ET
 render_to_string = loader.render_to_string
+TimeoutError = requests.exceptions.Timeout
+
+
+
+def send_leadimport(data):
+    from email import Charset
+    Charset.add_charset('utf-8',Charset.SHORTEST,None,'utf-8')
+    subject = '%s Lead Submission' % data['agent_id']
+    t = loader.get_template('_partials/lead_submission_email.html')
+    c = Context(data)
+    send_mail(subject, t.render(c),
+        'Protect America <noreply@protectamerica.com>',
+        ['leadimport@protectamerica.com','cjogbuehi@protectamerica.com'], fail_silently=False)
+
+    return True
+
+def send_conduit_error(data,test=False):
+    if not test:
+        message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
+        from_email = 'Protect America <noreply@protectamerica.com>'
+        send_mail('LeadConduit Error',message,from_email,['cjogbuehi@protectamerica.com'])
+
+
+def post_to_leadconduit(data,test=False):
+    #pdb.set_trace()
+    try:
+        lead = Lead.objects.get(id=data['lead_id'])
+    except:
+        lead = None
+
+    # items lead conduit needs
+    params = {'xxAccountId':settings.LEAD_ACCOUNT_ID,
+              'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
+              'LEAD_ID':data['lead_id'],
+              'xxTrustedFormCertUrl':data['trusted_url'],
+              'Name':data['customername'],
+              'Phone1':data['phone'],
+              'email':data['email'],
+              'Referer_Page':data['formlocation'],
+              'Agent_ID':data['agentid'],
+              'Source':data['source'],
+              'Affkey':data['affkey'],
+              'Search_Keywords':data['searchkeywords'],
+              'Search_Engine':data['searchengine'],
+              'ip_address':data['ip'],
+                }
+    if test:
+        params.update({'xxTest':'true'})
+    try:
+        xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params,timeout=10)
+        if xml_request.status_code == 200: 
+            reasons_list = []
+            root = ET.fromstring(xml_request.content)
+            response = root.find('result').text
+            # get lead submission url from response
+            try:
+                url = root.find('url').text
+            except:
+                url = None
+            # get lead submission id from response
+            try:
+                lead_id = root.find('leadId').text
+            except:
+                lead_id = None
+
+            if lead:
+                lead.lc_url = url
+                lead.lc_id = lead_id
+
+            if response == 'success':
+                if lead:
+                    lead.lc_error = False
+                    lead.save()
+            elif response == 'queued':
+                if lead:
+                    lead.lc_error = False
+                    lead.save()
+            elif response == 'failure':
+                # if it fails loop through the reasons and save in db/email
+                for x in root.findall('reason'):
+                    reasons_list.append(x.text)
+                if lead:
+                    lead.lc_reason = str(reasons_list)
+                    lead.lc_error = True
+                    lead.save()
+                data = {'reasons':reasons_list,
+                        'lead_id':lead_id,
+                        'url':url,
+                        'params':params.items()}
+                send_conduit_error(data,test=settings.LEAD_TESTING)
+            elif  response == 'error':
+                # if it fails loop through the reasons and save in db/email
+                for x in root.findall('reason'):
+                    reasons_list.append(x.text)
+                if lead:
+                    lead.lc_reason = str(reasons_list)
+                    lead.lc_error = True
+                    lead.save()
+                data = {'reasons':reasons_list,
+                        'lead_id':lead_id,
+                        'url':url,
+                        'params':params.items()}
+                send_conduit_error(data,test=settings.LEAD_TESTING)
+
+                    
+        elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
+            #retry request
+            pass
+        elif xml_request.status_code != 502 or xml_request.status_code != 503 or xml_request.status_code != 504 or xml_request.status_code != 200:
+            # report to support@activeprospect.com
+            msg = "Full url: %s\n Type: POST\n Http Status Code: %s\n Parameters: %s" %(xml_request.url,xml_request.status_code,params.items())
+            from_email = 'Protect America <noreply@protectamerica.com>'
+            send_mail('Bad Http Status Code',msg,from_email,['support@activeprospect.com','cjogbuehi@protectamerica.com'])
+            pass
+
+    except TimeoutError:
+        send_leadimport(params)
+
+    except:
+        #something else happened
+        pass
+
 
 
 def post_to_old_pa(data):
@@ -30,18 +154,6 @@ def post_to_old_pa(data):
     data = response.read()
     conn.close()
 
-
-def send_leadimport(data):
-    from email import Charset
-    Charset.add_charset('utf-8',Charset.SHORTEST,None,'utf-8')
-    subject = '%s Lead Submission' % data['agent_id']
-    t = loader.get_template('_partials/lead_submission_email.html')
-    c = Context(data)
-    send_mail(subject, t.render(c),
-        'Protect America <noreply@protectamerica.com>',
-        ['leadimport@protectamerica.com'], fail_silently=False)
-
-    return True
 
 def send_thankyou(data):
     subject = 'Hello, Thank you for your interest!'
@@ -166,12 +278,19 @@ def prepare_data_from_request(request):
         }
 
 def basic_post_login(request):
+    try:
+        # url for Trusted Form 
+        trusted_url = request.POST['trusted_form']
+    except:
+        trusted_url = None
+
+    lead_data = {'trusted_url': trusted_url}
+
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
 
         request_data = prepare_data_from_request(request)
-
         formset = form.save(commit=False)
         referer_page = None
         if 'referer_page' in request.POST:
@@ -194,6 +313,16 @@ def basic_post_login(request):
         
         if request_data['lead_id'] is None:
             request_data['lead_id'] = formset.id
+
+        lead_data.update(request_data)
+        lead_data.update({'searchkeywords':searchkeywords,
+                     'searchengine':request.session.get('search_engine',None),
+                     'formlocation':formset.referer_page,
+                     'ip':request.META.get('REMOTE_ADDR',None),
+                     'customername':fdata['name'],
+                     'phone':fdata['phone'],
+                     'email':fdata['email']
+                     })
 
         # notes field information
         package = request.POST.get('package', None)
@@ -218,14 +347,13 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        send_leadimport(emaildata)
-        #send_thankyou(emaildata)
-        send_caroline_thankyou(request,emaildata,request_data['agent'])
-        
+        post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
+        #send_leadimport(emaildata)
+        if not settings.LEAD_TESTING:
+            send_caroline_thankyou(request,emaildata,request_data['agent'])
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
-
 
 
 def ajax_post(request):
