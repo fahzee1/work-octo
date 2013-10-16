@@ -114,8 +114,10 @@ def query_by_state_city(state, city, get_content=True,local=False):
         raise Http404
 
     city_crime_objs = CrimesByCity.objects.filter(
-        fbi_city_name=city.city_name, fbi_state=state.abbreviation)
+        fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
+    per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
 
+    '''
     crime_stats = {}
     years = []
     for crimesbycity in city_crime_objs:
@@ -141,7 +143,7 @@ def query_by_state_city(state, city, get_content=True,local=False):
             pop_type = 'METROPOLIS'
     else:
         pop_type = 'METROPOLIS'
-
+    '''
 
      # Google Weather API
     #weather_info = query_weather(city.latitude, city.longitude,
@@ -149,7 +151,8 @@ def query_by_state_city(state, city, get_content=True,local=False):
     weather_info = None
 
     context = {
-               'crime_stats': (crime_stats if crime_stats else None),
+               'crime_stats': city_crime_objs,
+               'crimestats_per100k':per100,
                'years': years[:3],
                'latest_year': (crime_stats[years[0]] if crime_stats else None),
                'latest_year_':(city_crime_objs[0] if city_crime_objs else None),
