@@ -247,10 +247,10 @@ window.Chart = function(context){
 		chart.Pie.defaults = {
 			segmentShowStroke : true,
 			segmentStrokeColor : "#fff",
-			segmentStrokeWidth : 2,
+			segmentStrokeWidth : 1,
 			animation : true,
-			animationSteps : 100,
-			animationEasing : "easeOutBounce",
+			animationSteps : 150,
+			animationEasing : "easeOutQuart",
 			animateRotate : true,
 			animateScale : false,
 			onAnimationComplete : null
@@ -258,7 +258,7 @@ window.Chart = function(context){
 
 		var config = (options)? mergeChartConfig(chart.Pie.defaults,options) : chart.Pie.defaults;
 		
-		return new Pie(data,config,context);				
+		return new Pie(data,config,context);
 	};
 	
 	this.Doughnut = function(data,options){
