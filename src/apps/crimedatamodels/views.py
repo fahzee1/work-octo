@@ -151,8 +151,8 @@ def query_by_state_city(state, city, get_content=True,local=False):
     weather_info = None
 
     context = {
-               'crime_stats': city_crime_objs,
-               'crimestats_per100k':per100,
+               'crime_stats': city_crime_objs[0],
+               'crimestats_per100k':per100[0],
                'state': state.abbreviation,
                'state_long': state.name,
                'city': city.city_name,
