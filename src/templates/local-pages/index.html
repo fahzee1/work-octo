@@ -80,19 +80,19 @@ $(document).ready(function() {
 
 					var pieData = [
 									{
-									value: 30,{% comment %} overall robbery stat 2013 {% endcomment %}
+									value: {{ crime_stats.robbery }},
 									color:"#cccccc"
 									},
 									{
-									value : 50, {% comment %} overall auto theft stat 2013 {% endcomment %}
+									value : {{ crime_stats.motor_vehicle_theft }}, 
 									color : "#ffc000"
 									},
 									{
-									value : 100, {% comment %} overall burglary stat 2013 {% endcomment %}
+									value : {{ crime_stats.burglary }},
 									color : "#2f394a"
 									},
 									{
-									value : 200, {% comment %} overall larceny stat 2013 {% endcomment %}
+									value : {{ crime_stats.larceny_theft }},
 									color : "#eb292b"
 									}
 
@@ -127,22 +127,22 @@ $(document).ready(function() {
 				<div class="crime-tiles-four">
 					<h4>Burglary<h4>
 					<p>per 100k</p>
-					<h3>{% comment %}Burglary stat for 2013 per 100k{% endcomment %}59</h3>
+					<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
 				</div>
 				<div class="crime-tiles-four">
 					<h4>Robbery<h4>
 					<p>per 100k</p>
-					<h3>{% comment %}Robbery stat for 2013 per 100k{% endcomment %}41</h3>
+					<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
 				</div>
 				<div class="crime-tiles-four">
 					<h4>Auto theft<h4>
 					<p>per 100k</p>
-					<h3>{% comment %}Auto theft for 2013 stat per 100k{% endcomment %}66</h3>
+					<h3>{{ crimestats_per100k.motor_vehicle_theft_rank_per100k }}</h3>
 				</div>
 				<div class="crime-tiles-four" id="omega">
 					<h4>Larceny<h4>
 					<p>per 100k</p>
-					<h3>{% comment %}Larceny for 2013 stat per 100k{% endcomment %}859</h3>
+					<h3>{{ crimestats_per100k.larceny_theft_rank_per100k }}</h3>
 				</div>
 			</div>
 		<div class="clear"></div>
