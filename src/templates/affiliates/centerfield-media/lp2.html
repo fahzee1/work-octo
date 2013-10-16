@@ -359,7 +359,12 @@ $(document).ready(function() {
     $('#quoteForm #lp2-button').click(function() {
         $(this).attr('disabled', true);
         $('#quoteForm div').removeClass('.error-state');
-        var data = {'name': $('#_name').val(), 'email': $('#_email').val(), 'phone': $('#_phone').val(), 'form': 'basic','csrfmiddlewaretoken':'{{csrf_token}}'}
+        var data = {'name': $('#_name').val(),
+                    'email': $('#_email').val(), 
+                    'phone': $('#_phone').val(), 
+                    'form': 'basic',
+                    'csrfmiddlewaretoken':'{{csrf_token}}',
+                    'referer_page':$(location).attr("href")}
         $.ajax({
             type: "POST",
             url: "{% url contact-ajax %}",

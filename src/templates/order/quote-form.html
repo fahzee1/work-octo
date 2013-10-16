@@ -56,12 +56,13 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.sleepy button, .droopy button').click(function() {
+        $(this).attr('disabled', true);
         var name = $("#id_name").val();
         var email = $("#id_email").val();
         var phone = $("#id_phone").val();
         if (name == ''){
             alert('Please include your name before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }}']);
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
             return false;
         }
         if (email == ''){
@@ -71,7 +72,7 @@ $(document).ready(function() {
         }
         if (validateEmail(email) != true){
             alert ('Please input a valid email before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Invalid Email Error', '{{ page_name }}']);
+            _gaq.push(['_trackEvent', 'Form Error', 'Invalid Email Error', email]);
             return false;
         }
         if (phone == ''){
@@ -80,7 +81,12 @@ $(document).ready(function() {
             return false;
         }
         $('#quote-form div').removeClass('.error-state');
-        var data = {'name':name, 'email': email, 'phone': phone, 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $("[name ='CertUrl']").val(),
+                    'form': 'basic',
+                    'referer_page':$(location).attr("href")}
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
