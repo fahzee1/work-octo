@@ -385,7 +385,7 @@ class MatchAddressLocation(models.Model):
             super(MatchAddressLocation,self).save(*args, **kwargs) 
 
     
-def return_sums(crime,state,city=None,year=2011,per100=False):
+def return_sums(crime,state,city=None,year=2012,per100=False):
     if per100:
         if city:
             locations = CrimesByCity.objects.filter(year=year,fbi_city_name=city.title(),fbi_state=state.upper())
