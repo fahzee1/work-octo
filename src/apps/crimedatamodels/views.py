@@ -153,26 +153,24 @@ def query_by_state_city(state, city, get_content=True,local=False):
     context = {
                'crime_stats': city_crime_objs,
                'crimestats_per100k':per100,
-               'years': years[:3],
-               'latest_year': (crime_stats[years[0]] if crime_stats else None),
-               'latest_year_':(city_crime_objs[0] if city_crime_objs else None),
                'state': state.abbreviation,
                'state_long': state.name,
                'city': city.city_name,
                'lat': city.latitude,
                'long': city.longitude,
                'weather_info': weather_info,
-               'pop_type': pop_type,
+               #'pop_type': pop_type,
                'city_id': city_id
             }
 
     # get content
+    '''
     if get_content and city_crime_objs and crime_stats:
         content = CrimeContent.objects.get(
             grade=crime_stats[years[0]]['stats'].average_grade,
             population_type=pop_type)
         context.update(content=content.render(city))
-
+    '''
 
     try:
         #try to see if the local page has an address associated with it 
