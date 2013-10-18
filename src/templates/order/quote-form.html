@@ -56,23 +56,14 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.sleepy button, .droopy button').click(function() {
-        $(this).attr('disabled', true);
-        var name = $("#id_name").val();
-        var email = $("#id_email").val();
-        var phone = $("#id_phone").val();
+        var $form = $(this).closest('#quote-form');
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
         if (name == ''){
             alert('Please include your name before proceeding.');
             _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
-            return false;
-        }
-        if (email == ''){
-            alert('Please include your email before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Email Error', '{{ page_name }}']);
-            return false;
-        }
-        if (validateEmail(email) != true){
-            alert ('Please input a valid email before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Invalid Email Error', email]);
             return false;
         }
         if (phone == ''){
@@ -80,13 +71,15 @@ $(document).ready(function() {
             _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
             return false;
         }
-        $('#quote-form div').removeClass('.error-state');
+        */
+        $form.children('div').removeClass('.error-state');
         var data = {'name':name, 
                     'email': email,
                     'phone': phone, 
-                    'trusted_form': $("[name ='CertUrl']").val(),
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
                     'form': 'basic',
-                    'referer_page':$(location).attr("href")}
+                    'referer_page':$form.find(location).attr("href")}
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",

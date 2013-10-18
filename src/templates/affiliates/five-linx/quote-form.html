@@ -40,17 +40,33 @@ $(document).ready(function() {
         if(e.which == 13){
             $('.form-quote button').click();
         }
-    });
+    });  
     var submitting = false;
 
     $('.form-quote button').click(function() {
-        if(submitting==true) {
+        var $form = $(this).closest('.form-quote');
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
             return false;
         }
-        submitting = true;
-        $('.form-quote div').removeClass('.error-state');
-        var data = $(this).parent().serialize();
-        
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        $form.children('div').removeClass('.error-state');
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'form': 'basic',
+                    'referer_page':$form.find(location).attr("href")}
         $.ajax({
             type: "POST",
             url: "/contact/ajaxpost/",
