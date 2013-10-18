@@ -347,7 +347,6 @@ function blackin() {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    console.log("{% csrf_token %}");
     $('#quoteForm input').keypress(function(e){
         if(e.which == 13){
             console.log('enter pressed');
@@ -362,6 +361,7 @@ $(document).ready(function() {
         var data = {'name': $('#_name').val(),
                     'email': $('#_email').val(), 
                     'phone': $('#_phone').val(), 
+                    'trusted_form':$("[name ='XXTrustedFormToken']").val(),
                     'form': 'basic',
                     'csrfmiddlewaretoken':'{{csrf_token}}',
                     'referer_page':$(location).attr("href")}
