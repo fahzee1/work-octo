@@ -376,7 +376,8 @@ $(document).ready(function() {
                     'trusted_form':$form.find("[name ='xxTrustedFormToken']").val(),
                     'form': 'basic',
                     'csrfmiddlewaretoken':'{{csrf_token}}',
-                    'referer_page':$form.find(location).attr("href")}
+                    'referer_page':$form.find(location).attr("href"),
+                    'form_values':$form.serialize()}
         $.ajax({
             type: "POST",
             url: "{% url contact-ajax %}",

@@ -78,14 +78,14 @@ $(document).ready(function() {
                     'trusted_form2': $form.find("[name ='CertUrl']").val(),
                     'form': 'basic',
                     'referer_page':$form.find(location).attr("href"),
-                    'form_values':$form.find}
+                    'form_values':$form.serialize()}
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
                 data: data,
                 dataType: "json",
                 success: newFormSuccess,
-                error:newFormError
+                error: newFormError
                 });
        
          function newFormError(){
