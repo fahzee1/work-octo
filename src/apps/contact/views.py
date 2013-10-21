@@ -57,7 +57,7 @@ def post_to_leadconduit(data,test=False):
               'Name':data['customername'],
               'Phone1':data['phone'],
               'email':data['email'],
-              'Referer_Page':data['formlocation'],
+              'Referrer_Page':data['formlocation'],
               'Agent_ID':data['agentid'],
               'Source':data['source'],
               'Affkey':data['affkey'],
@@ -278,14 +278,10 @@ def prepare_data_from_request(request):
         }
 
 def basic_post_login(request):
-    try:
-        # url for Trusted Form 
-        trusted_url = request.POST['trusted_form']
-    except:
-        trusted_url = None
-
-    lead_data = {'trusted_url': trusted_url}
-
+    # url for Trusted Form 
+    trusted_url = request.POST.get('trusted_form',None)
+    f_values = request.POST.get('form_values',None)
+    lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
@@ -309,6 +305,7 @@ def basic_post_login(request):
         
         formset.search_engine = request.session['search_engine']
         formset.search_keywords = searchkeywords
+        formset.form_values = f_values
         formset.save()
         
         if request_data['lead_id'] is None:

@@ -16,7 +16,10 @@
 
 	</div>
 	<button type="button" class="redbutton">Get Quote ></button>
-
+             <div class="consent-box">
+            <label class="consent-label" for="id_consent" style="font-size: 10px; line-height: 12px; border-bottom: 1px solid #000; padding-bottom: 4px; text-align:center;">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
+        </div>
     <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
     <div class="quote-form-error">
         <img src="{{ STATIC_URL }}/img/base/error-arrow.png" class="error-arrow" />
@@ -40,25 +43,65 @@ $(document).ready(function() {
         if(e.which == 13){
             $('.form-quote button').click();
         }
-    });
+    });  
     var submitting = false;
 
     $('.form-quote button').click(function() {
-        if(submitting==true) {
+        var $form = $(this).closest('.form-quote');
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
             return false;
         }
-        submitting = true;
-        $('.form-quote div').removeClass('.error-state');
-        var data = $(this).parent().serialize();
-        
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        $form.children('div').removeClass('.error-state');
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'form': 'basic',
+                    'referer_page':$form.find(location).attr("href"),
+                    'form_values':$form.serialize()}
         $.ajax({
             type: "POST",
             url: "/contact/ajaxpost/",
             data: data,
             dataType: "json",
-            success: newFormSuccess
+            success: newFormSuccess,
+            error: newFormError
         });
         
+        function newFormError(){
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
@@ -95,7 +138,6 @@ $(document).ready(function() {
             
             $(".quote-form-error ul").html(error_string);
             } else $(".quote-form-error").hide();
-
         }
         return false;
         });

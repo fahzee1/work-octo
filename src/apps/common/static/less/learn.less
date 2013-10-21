@@ -1896,9 +1896,15 @@ body.glossary, body.resources-101 {
         }
     }
 }
-body.advantage {
-
+body.advantage, body.index {
     
+    .title-section {
+        font-size: 28px;
+        text-align: center;
+        font-weight: bold;
+        padding: 5px 0;
+        margin-bottom: 0px;
+    }
     #top-section-wrapper #top-section {
         width: 960px;
     }
@@ -1906,6 +1912,67 @@ body.advantage {
     #hero-wrapper {
         background: url(/static/img/base/adv_hero.jpg) no-repeat scroll -220px -40px #fcfbf7 !important;
         height: 580px !important;
+        #hero-image, #index-hero-image {
+            #hero-content {
+                width: 485px;
+                margin-top: 96px;
+                padding: 16px;
+                background: #fff;
+                background: rgba(255, 255, 255, 0.85);
+                p {
+                    text-align: justify;
+                }
+            }
+            #quote-form {
+                display: block;
+                top: 0;
+                background: #2f394a;
+                .drop-shadow(0,0,0,0);
+                input {
+                    margin-bottom: 16px;
+                }
+                p.form-title {
+                    margin-bottom: 24px;
+                }
+                .consent-label {
+                    margin-bottom: 24px;
+                }
+            }
+        }
+        #index-hero-image {
+            width: 960px;
+            margin: 0 auto;
+            position: relative;
+                background: none;
+                #hero-content {
+                    float: left;
+                    margin-top: 0px;
+                    background: none;
+                    width: 620px;
+                    padding-top: 8px;
+                    h1 {
+                        font-size: 48px;
+                        font-weight: bold;
+                        line-height: 54px;
+                        text-align: center;
+                        color: #2f394a;
+                        padding-top: 18px;
+                    }
+                    h2 {
+                        font-size: 17px;
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                        margin-bottom: 20px;
+                        text-align: center;
+                        margin-top: 28px;
+                        color: #333;
+                    }
+                    .button-link.stylized {
+                        margin: 8px 215px;
+                    }
+                }
+        }
     }
     
     #header-wrapper #header {
@@ -2013,13 +2080,83 @@ body.advantage {
     }
     .home-security-comparisons {
         width: 960px;
-        margin: 70px auto 0;
+        margin: 32px auto 0;
         clear: both;
         p { 
             text-align: left;
         }
         .package-box-bronze {
             margin-right: 200px;
+        }
+        table {
+            td {
+                width: 17%;
+                text-align: center;
+                vertical-align: middle;
+                padding: 8px 0;
+                border: 1px solid @light-grey;
+                border-left: none;
+                border-top: none;
+                .fade-fast;
+                &:hover {
+                  background: @v-light-blue+10;
+                  .fade-fast;
+                }
+                span {
+                    font-size: 14px;
+                    display: block;
+                    font-weight: bold;
+                }
+                &.button {
+                    border-right: none;
+                }
+                &.omega {
+                    border-bottom: none;
+                }
+                &.call-out {
+                    background: #fffee4;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                .strike {
+                    text-decoration: line-through;
+                }
+                .free {
+                    color: @red;
+                }
+            }
+            tr {
+                .fade-slow;
+                &:hover {
+                    background: @v-light-blue;
+                    .fade-fast;   
+                }
+                
+            }
+            .blank-box {
+                border-right: 1px solid @light-grey;
+            }
+            th {
+                background: @light-blue;
+                border: 1px solid @light-grey;
+                padding: 5px;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 15px;
+                font-weight: bold;
+                border-left: none;
+                &.alpha {
+                    background: none;
+                    border-top: none;
+                    border-bottom: none;
+                }
+                &.omega {
+                    background: none;
+                    border-top: none;
+                    border-right: none;
+                    border-bottom: none;
+                }
+            }
         }
         .package-box-copper, .package-box-bronze, .package-box-silver, .package-box-gold, .package-box-platinum {
             border: 1px solid #ddd;
@@ -2141,6 +2278,7 @@ body.advantage {
                 letter-spacing: 1px;
                 left: 45px;
                 top: -14px;
+                width: 105px;
             }
         }
     }
@@ -2150,55 +2288,7 @@ body.advantage {
         width: 100%;
         padding-top: 50px;
         clear: both;
-        .left {
-            float: left;
-            width: 225px;
-            margin-right: 100px;
-            h1 {
-                font-size: 36px;
-                line-height: 48px;
-                font-weight: bold;
-                color: #333;
-            }
-            .box {
-                background-color: #fcfcfc;
-                border: 1px solid #eee;
-                padding: 100px 15px 15px;
-                text-align: center;
-                background: url(/static/img/base/adv_standard.png) no-repeat scroll center 10px #fcfcfc;
-                h2 {
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    font-weight: bold;
-                    color: #333;
-                    font-size: 18px;
-                    line-height: 22px;
-                }
-                ul {
-                    li {
-                        padding: 4px 0;
-                    }
-                }
-            }
-            .request {
-                background-color: #1570ab;
-                color: #fff;
-                font-size: 14px;
-                text-align: center;
-                padding: 10px;
-            }
-        }
-        .right{
-            float: left;
-            width: 630px;
-            h1 {
-                font-size: 18px;
-                font-weight: bold;
-                letter-spacing: 1px;
-                text-transform: uppercase;
-                color: #333;
-            }
-        }
+
         .top {
             .chart{
                 float: right;
@@ -2251,7 +2341,61 @@ body.advantage {
             margin-bottom: 25px;
         }
     }
-
+    .left {
+        float: left;
+        width: 225px;
+        margin-right: 100px;
+        .box {
+            background-color: #fcfcfc;
+            border: 1px solid #eee;
+            padding: 100px 15px 15px;
+            text-align: center;
+            background: url(/static/img/base/adv_standard.png) no-repeat scroll center 10px #fcfcfc;
+            h2 {
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: bold;
+                color: #333;
+                font-size: 18px;
+                line-height: 22px;
+            }
+            ul {
+                li {
+                    padding: 4px 0;
+                }
+            }
+        }
+        .request {
+            background-color: #1570ab;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            padding: 10px;
+            a {
+                color: @white;
+                text-decoration: none;
+                display: block;
+            }
+        }
+    }
+    .right-box{
+        float: left;
+        width: 630px;
+        h2 {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #333;
+        }
+        h3 {
+            font-size: 16px;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 5px 0;
+        }
+    }
     /* advantage page commitment */
     
     .our-advantage-commitment{

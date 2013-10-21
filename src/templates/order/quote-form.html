@@ -2,7 +2,6 @@
 
 <form id="quote-form" {% if page_name = "index" %}class="sleepy" {% else %} class="droopy"{% endif %}  method="post" action="">
     {% csrf_token %}
-    
 	<div>
         <p class="form-title">Free Security Quote</p>
         {% block formfields %}
@@ -15,7 +14,6 @@
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
-
 	</div>
     
 	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
@@ -33,7 +31,7 @@
         <div class="third-party-badge vsign">
             <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
         </div>
-        <div class="third-party-badge truste" style="float: right;">
+        <div class="third-party-badge truste" style="width: 115px; float: right;">
             <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
         </div>
     </div>
@@ -56,22 +54,14 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.sleepy button, .droopy button').click(function() {
-        var name = $("#id_name").val();
-        var email = $("#id_email").val();
-        var phone = $("#id_phone").val();
+        var $form = $(this).closest('#quote-form');
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
         if (name == ''){
             alert('Please include your name before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }}']);
-            return false;
-        }
-        if (email == ''){
-            alert('Please include your email before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Email Error', '{{ page_name }}']);
-            return false;
-        }
-        if (validateEmail(email) != true){
-            alert ('Please input a valid email before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Invalid Email Error', '{{ page_name }}']);
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
             return false;
         }
         if (phone == ''){
@@ -79,16 +69,47 @@ $(document).ready(function() {
             _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
             return false;
         }
-        $('#quote-form div').removeClass('.error-state');
-        var data = {'name':name, 'email': email, 'phone': phone, 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
+        */
+        $form.children('div').removeClass('.error-state');
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'form': 'basic',
+                    'referer_page':$form.find(location).attr("href"),
+                    'form_values':$form.serialize()}
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
                 data: data,
                 dataType: "json",
-                success: newFormSuccess
+                success: newFormSuccess,
+                error: newFormError
                 });
        
+         function newFormError(){
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {

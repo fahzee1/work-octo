@@ -83,13 +83,13 @@ function blackin() {
                 <td><div class="form-header">GET A FREE QUOTE</div><div class="form-subheader">Fill in your contact information and one of our advisors will contact you directly</div></td>
               </tr>
               <tr>
-                <td><div class="form-field sprite"><input name="name" class="fields" id="_name" type="text" value="" placeholder="*Full Name" onclick="blackout();" /></div></td>
+                <td><div class="form-field sprite"><input name="name" class="fields" id="_name" type="text" placeholder="*Full Name" onclick="blackout();" /></div></td>
               </tr>
               <tr>
-                <td><div class="form-field sprite"><input name="email" class="fields" id="_email" type="text" value="" placeholder="*Email Address" onclick="blackout();" /></div></td>
+                <td><div class="form-field sprite"><input name="email" class="fields" id="_email" type="text" placeholder="*Email Address" onclick="blackout();" /></div></td>
               </tr>
               <tr>
-                <td><div class="form-field sprite"><input name="phone" class="fields" id="_phone" type="text" value="" placeholder="*Phone Number" onclick="blackout();" /></div></td>
+                <td><div class="form-field sprite"><input name="phone" class="fields" id="_phone" type="text" placeholder="*Phone Number" onclick="blackout();" /></div></td>
               </tr>
               <tr>
                 <td><div class="form-divider sprite"></div></td>
@@ -347,7 +347,6 @@ function blackin() {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    console.log("{% csrf_token %}");
     $('#quoteForm input').keypress(function(e){
         if(e.which == 13){
             console.log('enter pressed');
@@ -357,15 +356,35 @@ $(document).ready(function() {
     var submitting = false;
 
     $('#quoteForm #lp2-button').click(function() {
-        $(this).attr('disabled', true);
-        $('#quoteForm div').removeClass('.error-state');
-        var data = {'name': $('#_name').val(), 'email': $('#_email').val(), 'phone': $('#_phone').val(), 'form': 'basic','csrfmiddlewaretoken':'{{csrf_token}}'}
+        var $form = $(this).closest('#quoteForm');
+        var name = $form.find("#_name");
+        var email = $form.find("#_email");
+        var phone = $form.find("#_phone");
+        if (name.val() == '*Full Name'){
+          name.val('');
+        }
+        if (email.val() == '*Email Address'){
+          email.val('');
+        }
+        if (phone.val() == '*Phone Number'){
+          phone.val('');
+        }
+       $form.children('div').removeClass('.error-state');
+        var data = {'name': name.val(),
+                    'email': email.val(), 
+                    'phone': phone.val(), 
+                    'trusted_form':$form.find("[name ='xxTrustedFormToken']").val(),
+                    'form': 'basic',
+                    'csrfmiddlewaretoken':'{{csrf_token}}',
+                    'referer_page':$form.find(location).attr("href"),
+                    'form_values':$form.serialize()}
         $.ajax({
             type: "POST",
             url: "{% url contact-ajax %}",
             data: data,
             dataType: "json",
-            success: newFormSuccess
+            success: newFormSuccess,
+            error: newFormError
         });
 
         function newFormSuccess(json) {
@@ -414,6 +433,20 @@ $(document).ready(function() {
             
             $("#quoteForm-error ul").html(error_string);
             } else $("#quoteForm-error").hide();
+        }
+        function newFormError(){
+           if (!name.val() && !phone.val()){
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone.val() && name.val()){
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name.val() && phone.val()){
+                alert('Please Enter Your Name.');
+            }
+            
+
+
         }
         return false;
         });
