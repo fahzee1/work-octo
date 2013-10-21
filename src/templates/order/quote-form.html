@@ -1,6 +1,6 @@
 {% load sekizai_tags %}
 
-<form id="quote-form" {% if page_name = "index" %}class="sleepy"{% endif %}  method="post" action="">
+<form id="quote-form" {% if page_name = "index" %}class="sleepy" {% else %} class="droopy"{% endif %}  method="post" action="">
     {% csrf_token %}
     
 	<div>
@@ -43,30 +43,51 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#quote-form input').keypress(function(e){
+    function validateEmail(email){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+    }
+
+    $('.sleepy input, .droopy input').keypress(function(e){
         if(e.which == 13){
-            $('#quote-form button').click();
+            $('.sleepy button').click();
         }
     });
     var submitting = false;
 
-    $('#quote-form button').click(function() {
-        if ($('#id_consent').is(':checked')){
-            $('#quote-form div').removeClass('.error-state');
-            var data = {'name': $('#id_name').val(), 'email': $('#id_email').val(), 'phone': $('#id_phone').val(), 'trusted_form': $("[name ='CertUrl']").val(),'form': 'basic'}
-            $.ajax({
+    $('.sleepy button, .droopy button').click(function() {
+        var $form = $(this).closest('#quote-form');
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        $form.children('div').removeClass('.error-state');
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'form': 'basic',
+                    'referer_page':$form.find(location).attr("href")}
+        $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
                 data: data,
                 dataType: "json",
                 success: newFormSuccess
                 });
-        }
-        else{
-            alert('Please check the consent box before proceeding.');
-        }
-
-
+       
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
