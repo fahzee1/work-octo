@@ -4,7 +4,20 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css?v3.0.4">
-    <!--[if lt IE 9]>
+        <script type="text/javascript" src="{{ STATIC_URL }}js/Chart.js"></script>
+
+	<!--[if lte IE 8]>
+        <style>
+            #hero-content #hero-videos .content-section h2 {
+                /*color: #555;*/
+                filter: glow(color=black,strength=3);
+            }
+            #validation-badges {
+                display: none;
+            }
+        </style>
+	<![endif]-->
+    <!--[if IE ]>
         <style>
             #hero-content #hero-videos .content-section h2 {
                 /*color: #555;*/
@@ -158,9 +171,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             </div>
             <video class="opacityZero" id="vider-1" poster="{{ STATIC_URL }}video/touchscreen.jpg" autoplay  muted="true" loop="loop"  height="960" width="540">
 
-                <source type="video/webm" src="http://www.protectamerica.com/static/video/Touch_Blue.webmsd.webm">
-                <source type="video/mp4" src="http://www.protectamerica.com/static/video/Touch_Blue.mp4">
-
+                <source type="video/webm" src="http://www.protectamerica.com/static/video/touch.webmsd.webm">
+                <source type="video/mp4" src="http://www.protectamerica.com/static/video/touch.mp4">
+                <img src="{{ STATIC_URL }}video/touchscreen.jpg" style="width: 100%;" />
 
             </video>
         </div>
@@ -172,8 +185,8 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             </div>
             <video class="opacityZero" id="vider-2" poster="{{ STATIC_URL }}video/smart-connect.jpg" autoplay  muted="true" loop="loop"  height="960" width="540">
 
-                <source type="video/webm" src="http://www.protectamerica.com/static/video/Connect_Green.webmsd.webm">
-                <source type="video/mp4" src="http://www.protectamerica.com/static/video/Connect_Green.mp4">
+                <source type="video/mp4" src="http://www.protectamerica.com/static/video/smart-connect.mp4">
+                <img src="{{ STATIC_URL }}video/smart-connect.jpg" style="width: 100%" />
 
 
 
@@ -185,8 +198,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 <a href="{% url shop %}" class="button-link stylized">Shop Now <i class="icon-chevron-right"></i></a>
             </div>
             <video id="service-vid" id="vider-3" class="opacityZero" poster="{{ STATIC_URL }}video/family.jpg" autoplay  muted="true" loop="loop"  height="960" width="540">
-                <source type="video/webm" src="http://www.protectamerica.com/static/video/Family_Yellow.webmsd.webm">
-                <source type="video/mp4" src="http://www.protectamerica.com/static/video/Family_Yellow.mp4">
+                <source type="video/webm" src="http://www.protectamerica.com/static/video/family.webmsd.webm">
+                <source type="video/mp4" src="http://www.protectamerica.com/static/video/family.mp4">
+                <img src="{{ STATIC_URL }}video/family.jpg" style="width: 100%;"" />
+
             </video>
         </div>
     </div>
@@ -197,8 +212,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </div>
     <div class="clear"></div>
 </div>
-<div style="background: #333">
+<div style="background: #2f394a">
     <div id="main-benefits">
+        <span class="learn-more"><i class="icon-chevron-down"></i> Learn More <i class="icon-chevron-down"></i></span>
         <h1>Your #1 Trusted Home Security System</h1>
         <p>Protect America makes it easy to secure and protect your home and family. </p>
         <ul>
@@ -207,24 +223,25 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 <p>Our systems provide state-of-the-art 24/7 security so you don't have to worry about a thing.</p>
             </li>
             <li class="alt">
-                <h3><i class="icon-user"></i>Security Designed for your Life</h3>
-                <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
-            </li>
-            <li>
                 <h3><i class="icon-rss"></i>Easy Wireless Set-Up</h3>
                 <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
             </li>
-            <li>
-                <h3><i class="icon-dollar"></i>The Best Price, Period</h3>
+            <li class="">
+                <h3><i class="icon-money"></i>The Best Price, Period</h3>
                 <p>The equipment is included, there are no activation fees, and our alarm monitoring starts at $19.99 per month.</p>
+            </li>
+
+            <li class="">
+                <h3><i class="icon-user"></i>Security Designed for your Life</h3>
+                <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
             </li>
             <li class="alt">
-                <h3><i class="icon-dollar"></i>The Best Price, Period</h3>
-                <p>The equipment is included, there are no activation fees, and our alarm monitoring starts at $19.99 per month.</p>
+                <h3><i class="icon-thumbs-up"></i>Saving You More</h3>
+                <p>Home security is good you and your pocket. Save up to 20% on your homeowners insurance with a home security system.</p>
             </li>
             <li>
-                <h3><i class="icon-dollar"></i>The Best Price, Period</h3>
-                <p>The equipment is included, there are no activation fees, and our alarm monitoring starts at $19.99 per month.</p>
+                <h3><i class="icon-heart"></i>Committed To You</h3>
+                <p>For the past 20 years, Protect America is proud to protect over half a million homes all across the country.</p>
             </li>
         </ul>
         <div class="clear"></div>
@@ -255,13 +272,69 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <h2>Home Security</h2>
         <p>It’s important to feel safe in your home. We know protection for your home and family is not an easy decision. Our security systems are custom built to combine the best price with the best equipment and service.</p>
         <p>We believe in providing the best service at the lowest price.  Our security systems are simple to use, provide unlimited customer support, and a free lifetime equipment warranty.</p>
+        <a href="{% url copper %}" class="button-link">Alarm Systems <i class="icon-chevron-right"></i></a>
+        <div class="clear"></div>
         <h3>Basic savings versus ADT over 3 years</h3>
-        <b>$1177</b>
+        <b>$1178</b>
     </div>
+    <div id="home-security-graph">
+            <h3>How much does your security system cost you?</h3>
+            <div id="canvas-graph">
+
+                <!--[if !IE]><!-->
+                <canvas id="canvas" height="325" width="360"></canvas>
+                <span class="total-price" style="top:233px; right: 28px;">$720 <i class="icon-caret-down"></i></span>
+                <span class="total-price">$1898 <i class="icon-caret-down"></i></span>
+                <p style="text-align: center;"><span style="color: #1570ab; font-weight: bold; padding-right: 16px;"><i class="icon-circle"></i> Protect America</span> <span style="color: #ff8200; font-weight: bold; padding-right: 16px;"><i class="icon-circle"></i> Vivint</span> <span style="color: #aaa; font-weight: bold;"><i class="icon-circle"></i> ADT</span></p>
+                <script>
+    
+                    var lineChartData = {
+                        labels : ["Install","1 year","2 years","3 years"],
+                        datasets : [
+                            {
+                                fillColor : "rgba(204,204,204,1)",
+                                strokeColor : "rgba(204,204,204,1)",
+                                pointColor : "rgba(255,255,255,1)",
+                                pointStrokeColor : "#ccc",
+                                data : [350,866,1382,1898]
+                            },
+    
+                            {
+                                fillColor : "#ff8200",
+                                strokeColor : "#ff8200",
+                                pointColor : "#fff",
+                                pointStrokeColor : "#ff8200",
+                                data : [100,699,1299,1898]
+                            },
+                            {
+                                fillColor : "#1570ab",
+                                strokeColor : "#1570ab",
+                                pointColor : "#fff",
+                                pointStrokeColor : "#1570ab",
+                                data : [0,240,480,720]
+                            },
+    
+    
+    
+                        ]
+                        
+                    }
+                    var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+                
+            </script>
+            <!--<![endif]-->
+            <!--[if gte IE 7]>
+                <img src="{{ STATIC_URL }}img/extra/savings-chart.png" alt="savings-chart" width="360" height="398" />
+            <![endif]-->
+            </div>
+            
+    </div>
+    
 </div>
 {% endblock %}
 <div class="clear"></div>
 {% addtoblock "js" %}
+
     <script type="text/javascript">
 
     $(".extra-content").siblings('p').append(' <a href="" class="read-more">Read More</a>')
@@ -322,7 +395,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
  
 
 
-                        console.log('playing:' + currentSlider);
                         video.trigger('play'); 
                         currentSlider = currentSlider + 1;
 
@@ -330,13 +402,12 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                             currentSlider = 1;
                         }; 
 
-                        console.log('now on:' + currentSlider);
             },7000);
             image_height_reset($('video'));
 
             $('#review-cycle-container').cycle({
         		fx: 'scrollRight',
-                timeout:  15000,
+                timeout:  15000
      	
             });
         });
