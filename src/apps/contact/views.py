@@ -283,9 +283,7 @@ def basic_post_login(request):
         trusted_url = request.POST['trusted_form']
     except:
         trusted_url = None
-
-    lead_data = {'trusted_url': trusted_url}
-
+    lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data

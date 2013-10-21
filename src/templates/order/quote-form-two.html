@@ -39,7 +39,7 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-     function validateEmail(email){
+    function validateEmail(email){
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
     }
@@ -51,14 +51,15 @@ $(document).ready(function() {
     });
     var submitting = false;
 
-    $('.not-sleepy button').click(function() {
-        var name = $("#id_name_two").val();
-        var email = $("#id_email_two").val();
-        var phone = $("#id_phone_two").val();
+    $('.not-sleepy button,').click(function() {
+        var $form = $(this).closest('#quote-form');
+        var name = $form.find("#id_name_two").val();
+        var email = $form.find("#id_email_two").val();
+        var phone = $form.find("#id_phone_two").val();
         /*
         if (name == ''){
             alert('Please include your name before proceeding.');
-            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }}']);
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
             return false;
         }
         if (phone == ''){
@@ -67,22 +68,45 @@ $(document).ready(function() {
             return false;
         }
         */
-        $('#quote-form div').removeClass('.error-state');
-        var data = {'name':name,
+        $form.children('div').removeClass('.error-state');
+        var data = {'name':name, 
                     'email': email,
-                    'phone': phone,
-                    'trusted_form': $("[name ='xxTrustedFormToken']").val(),
-                    'trusted_form2':$("[name ='CertUrl']").val(),
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
                     'form': 'basic',
-                    'referer_page':$(location).attr("href")}
+                    'referer_page':$form.find(location).attr("href"),
+                    'form_values':$form.find}
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
                 data: data,
                 dataType: "json",
-                success: newFormSuccess
+                success: newFormSuccess,
+                error:newFormError
                 });
-
+       
+        function newFormError(){
+            if (!name && !phone){
+                $('#id_name_two').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone_two').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone_two').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name_two').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name_two').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone_two').css('border-color','');
+            }
+        }
 
         function newFormSuccess(json) {
             submitting = false;
@@ -101,6 +125,7 @@ $(document).ready(function() {
                 ]);
                 return;
             }
+       
         if(json.errors) {
             $('#quote-form button').attr('disabled', false); 
             $("#quote-form-error").show();

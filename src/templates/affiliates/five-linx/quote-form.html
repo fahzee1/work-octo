@@ -72,9 +72,32 @@ $(document).ready(function() {
             url: "/contact/ajaxpost/",
             data: data,
             dataType: "json",
-            success: newFormSuccess
+            success: newFormSuccess,
+            error: newFormError
         });
         
+        function newFormError(){
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
@@ -111,7 +134,6 @@ $(document).ready(function() {
             
             $(".quote-form-error ul").html(error_string);
             } else $(".quote-form-error").hide();
-
         }
         return false;
         });

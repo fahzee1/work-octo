@@ -87,7 +87,7 @@ class GoogleExperiment(models.Model):
 
 class Lead(models.Model):
     name = models.CharField(max_length=128)
-    email = models.EmailField(max_length=128)
+    email = models.EmailField(max_length=128,blank=True,null=True)
     phone = PhoneNumberField()
 
     agent_id = models.CharField(max_length=24, blank=True, null=True)
