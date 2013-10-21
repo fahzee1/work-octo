@@ -87,7 +87,7 @@ class GoogleExperiment(models.Model):
 
 class Lead(models.Model):
     name = models.CharField(max_length=128)
-    email = models.EmailField(max_length=128,blank=True,null=True)
+    email = models.EmailField(default='',max_length=128,blank=True,null=True)
     phone = PhoneNumberField()
 
     agent_id = models.CharField(max_length=24, blank=True, null=True)
@@ -104,6 +104,8 @@ class Lead(models.Model):
     lc_id = models.CharField(max_length=256, blank=True, null=True, help_text='Lead Conduit lead id')
     lc_error = models.BooleanField(default=False,blank=True, help_text='Was there a error with the Lead Conduit submission?')
     lc_reason = models.CharField(max_length=256, blank=True, null=True, help_text='Lead Conduit reason for not submitting if one')
+
+    form_values = models.TextField(default='',blank=True,null=True)
 
     def __unicode__(self):
         return '%s | %s - %s : %s %s' % (self.id,
