@@ -1319,6 +1319,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/help/low-price-guarantee/',permanent=True)),
     ('pa/copper/?$',
         RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
+    ('equipment/home-screen/touch-screen/?$',
+        RedirectView.as_view(url='/equipment/home-security/touch-screen/',permanent=True)),
 
 )
 

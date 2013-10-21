@@ -57,7 +57,7 @@ def post_to_leadconduit(data,test=False):
               'Name':data['customername'],
               'Phone1':data['phone'],
               'email':data['email'],
-              'Referer_Page':data['formlocation'],
+              'Referrer_Page':data['formlocation'],
               'Agent_ID':data['agentid'],
               'Source':data['source'],
               'Affkey':data['affkey'],
