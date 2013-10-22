@@ -97,7 +97,7 @@ function blackin() {
 
               <tr>
 
-                <td><div id='lp2-button' class="cta sprite"></div></td>
+                <td><div id='lp2-button' class="cta sprite"></div><img style="position:absolute;top:290px;right:-25px;display:none;" id='form-loading' height='150px' width='150px' src="{{ STATIC_URL }}/img/loading2.gif"></td>
               </tr>
               <tr>
                 <td>
@@ -384,7 +384,12 @@ $(document).ready(function() {
             data: data,
             dataType: "json",
             success: newFormSuccess,
-            error: newFormError
+            error: newFormError,
+            beforeSend:function(){
+                    $("#quoteForm .icon-chevron-right").hide();
+                    $('#quoteForm #form-loading').show();
+                    $('#quoteForm button').attr('disabled',true);
+                    }
         });
 
         function newFormSuccess(json) {
@@ -405,36 +410,11 @@ $(document).ready(function() {
                 ]);
                 return;
             }
-        if(json.errors) {
-            $('#quoteForm button').attr('disabled', false); 
-            $("#quoteForm-error").show();
-            $("#quoteForm-error ul").html("");
-            var error_string = "";
-            if(typeof json.errors == "object") { //this is an array of error messages
-                $.each(json.errors, function(k,v) {
-                    switch(k) {
-                        case 'phone':
-                            error_string += "<li> Phone: "+v+"</li>";
-                            break;
-                        case 'email':
-                            error_string += "<li> Email: "+v+"</li>";
-                            break;
-                        case 'name':
-                            error_string += "<li> Name: "+v+"</li>";
-                            break;
-                        default:
-                            error_string += "<li>"+v+"</li>";
-                            break;
-                    }
-                });
-            } else {
-                error_string = "<li>"+json.errors+"</li>\n";
-            }
-            
-            $("#quoteForm-error ul").html(error_string);
-            } else $("#quoteForm-error").hide();
         }
         function newFormError(){
+          $('#quoteForm #form-loading').hide();
+          $("#quoteForm .icon-chevron-right").show();
+          $('#quoteForm button').attr('disabled',false);
            if (!name.val() && !phone.val()){
                 alert('Please Enter Your Name and Phone Number.');
             }
