@@ -1,6 +1,7 @@
 import urls
 import pdb
 import requests
+import logging
 from datetime import datetime, timedelta
 from string import Template
 from django.http import HttpResponseRedirect
@@ -20,7 +21,13 @@ from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
 render_to_string = loader.render_to_string
 TimeoutError = requests.exceptions.Timeout
-
+logger = logging.getLogger('lead_conduit')
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+fh = logging.FileHandler(settings.LC_LOG)
+fh.setLevel(logging.DEBUG)
+fh.setFormatter(formatter)
+logger.addHandler(fh)
 
 
 def send_leadimport(data):
@@ -68,8 +75,10 @@ def post_to_leadconduit(data,test=False):
     if test:
         params.update({'xxTest':'true'})
     try:
+        logger.info('Starting request to lead conduit...')
         xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params,timeout=10)
         if xml_request.status_code == 200: 
+            logger.info('Status code is %s' % xml_request.status_code)
             reasons_list = []
             root = ET.fromstring(xml_request.content)
             response = root.find('result').text
@@ -88,6 +97,7 @@ def post_to_leadconduit(data,test=False):
                 lead.lc_url = url
                 lead.lc_id = lead_id
 
+            logger.info('API response is %s' % response)
             if response == 'success':
                 if lead:
                     lead.lc_error = False
@@ -125,9 +135,11 @@ def post_to_leadconduit(data,test=False):
 
                     
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
-            #retry request
+            logger.error('NO! Status Code is %s. Should retry request. Sending email to notify' % xml_request.status_code)
+            #retry request, email lead, log to console
             pass
         elif xml_request.status_code != 502 or xml_request.status_code != 503 or xml_request.status_code != 504 or xml_request.status_code != 200:
+            logger.error('NO! Status Code is %s. Something bad happened notify activeprospect' % xml_request.status_code)
             # report to support@activeprospect.com
             msg = "Full url: %s\n Type: POST\n Http Status Code: %s\n Parameters: %s" %(xml_request.url,xml_request.status_code,params.items())
             from_email = 'Protect America <noreply@protectamerica.com>'
@@ -135,10 +147,12 @@ def post_to_leadconduit(data,test=False):
             pass
 
     except TimeoutError:
+        logger.error('Leadconduit timed out! Send email to lead import and notify')
         send_leadimport(params)
 
-    except:
-        #something else happened
+    except Exception as e:
+        logger.error('SHIT! something VERY unexpected happened. Notify everyone. Here is exception %s' % e)
+        #something else happened email everyone
         pass
 
 

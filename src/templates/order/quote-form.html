@@ -1,5 +1,4 @@
 {% load sekizai_tags %}
-
 <form id="quote-form" {% if page_name = "index" %}class="sleepy" {% else %} class="droopy"{% endif %}  method="post" action="">
     {% csrf_token %}
 	<div>
@@ -15,8 +14,7 @@
             {{ form.phone }}
         {% endblock %}
 	</div>
-    
-	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}</button>
+	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i><img id='form-loading' {% if page_name = "index" %}style="position:absolute;top:185px;right:-15px;display:none;"{% else %}style="position:absolute;top:185px;right:30px;display:none;" {% endif %}height='120px' width='120px' src="{{ STATIC_URL }}/img/loading2.gif">{% endblock %}</button>
         {% block consent %}
              <div class="consent-box">
             <label class="consent-label" for="id_consent">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
@@ -86,10 +84,19 @@ $(document).ready(function() {
                 data: data,
                 dataType: "json",
                 success: newFormSuccess,
-                error: newFormError
+                error: newFormError,
+                beforeSend:function(){
+                    $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                    $(".sleepy #form-loading, .droopy #form-loading").show();
+                    $('#quote-form button').attr('disabled',true);
+                    }
                 });
        
+
          function newFormError(){
+            $(".sleepy #form-loading, .droopy #form-loading").hide();
+            $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $('#quote-form button').attr('disabled',false);
             if (!name && !phone){
                 $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
                 $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
@@ -112,6 +119,7 @@ $(document).ready(function() {
         }
 
         function newFormSuccess(json) {
+            $('#form-loading').hide();
             submitting = false;
             if(json.success) {
                 {% if thank_you %}
@@ -128,34 +136,6 @@ $(document).ready(function() {
                 ]);
                 return;
             }
-        if(json.errors) {
-            $('#quote-form button').attr('disabled', false); 
-            $("#quote-form-error").show();
-            $("#quote-form-error ul").html("");
-            var error_string = "";
-            if(typeof json.errors == "object") { //this is an array of error messages
-                $.each(json.errors, function(k,v) {
-                    switch(k) {
-                        case 'phone':
-                            error_string += "<li> Phone: "+v+"</li>";
-                            break;
-                        case 'email':
-                            error_string += "<li> Email: "+v+"</li>";
-                            break;
-                        case 'name':
-                            error_string += "<li> Name: "+v+"</li>";
-                            break;
-                        default:
-                            error_string += "<li>"+v+"</li>";
-                            break;
-                    }
-                });
-            } else {
-                error_string = "<li>"+json.errors+"</li>\n";
-            }
-            
-            $("#quote-form-error ul").html(error_string);
-            } else $("#quote-form-error").hide();
         }
         return false;
         });
