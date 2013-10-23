@@ -4,7 +4,7 @@ import os
 import settings
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -258,10 +258,11 @@ TIMEZONES = {
 LEAD_ACCOUNT_ID = '1626fa3'
 LEAD_CAMPAIGN_ID = '054irukv1'
 LEAD_TESTING = False
-
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
 try:
     from etc.django.local import *
 except ImportError:
     pass
+
+LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
