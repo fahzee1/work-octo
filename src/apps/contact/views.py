@@ -346,7 +346,7 @@ def basic_post_login(request):
         }
         post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         #send_leadimport(emaildata)
-        if not settings.LEAD_TESTING:
+        if not settings.LEAD_TESTING and fdata['email']:
             send_caroline_thankyou(request,emaildata,request_data['agent'])
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
