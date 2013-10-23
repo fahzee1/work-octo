@@ -1,9 +1,10 @@
-
+{% load content_tags content_filters sekizai_tags %}
+{% load url from future %}
 <h4>Find Your Neighborhood. <span>Find the Crime.</span></h4>
 <div id="search-box">
 	<div id="search-form">
 	    <div id="form">
-	        <form name="input" action="{% url search %}" method="get">
+	        <form name="input" action="{% url 'search' %}" method="get">
 
 	            <div class="search-area">
 	                <input style="" type="text" spellcheck="true" name="q" placeholder="(Enter City/State or Zip Code)">
@@ -14,7 +15,7 @@
 	        </form>
 	    </div>
 	</div>
-	<p id="state-headline"><a href="{% url states %}" title="Search Crime Statistics by State">Or Search By State By Clicking Here</a></p>
+	<p id="state-headline"><a href="{% url 'states' %}" title="Search Crime Statistics by State">Or Search By State By Clicking Here</a></p>
 </div>
 <div id="top-ad">
     <a href="http://www.protectamerica.com">

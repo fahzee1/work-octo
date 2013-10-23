@@ -3,21 +3,20 @@ import urls
 import urllib
 import urllib2
 import operator
-
-
+import random
+from django.http import Http404
 from decimal import Decimal
 from datetime import datetime, timedelta
 
 from urllib import urlencode
-
+from django.db.models import Q
 import twitter
-
+from django.contrib.localflavor.us.us_states import US_STATES
 from django.core.urlresolvers import reverse, resolve
 from django.core.cache import cache
-from django.views.generic.simple import redirect_to
 from django.views.decorators.cache import cache_page, never_cache
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render,redirect
 from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse, \
@@ -31,6 +30,8 @@ from apps.affiliates.models import Affiliate
 from apps.common.forms import LinxContextForm
 from apps.news.models import Article
 from apps.pricetable.models import Package
+from apps.newsfeed.models import TheFeed,FallBacks
+from itertools import chain, izip
 
 consumer_key=settings.TWITTER_CONSUMER_KEY
 consumer_secret=settings.TWITTER_CONSUMER_SECRET
@@ -152,9 +153,7 @@ def simple_dtt(request, template, extra_context, expire_days=90):
         visited_pages.append(extra_context['page_name'])
         request.session['vpages'] = visited_pages
 
-    response = render_to_response(template,
-                              extra_context,
-                              context_instance=RequestContext(request))
+    response = render(request,template,extra_context)
     patch_vary_headers(response, ('Host',))
     return response
 
@@ -210,16 +209,26 @@ def payitforward(request):
 
 
 @cache_page(60 * 60 * 4)
-def index(request): 
+def index(request):
     return index_render(request, 'index.html', {})
 
 
 @cache_page(60 * 60 * 4)
 def index_test(request, test_name):
-    if test_name == 'new-page':
-        template = 'tests/new-page.html'
+    if test_name == 'packages':
+        template = 'tests/index-with-packages.html'
+    if test_name == 'advantage':
+        template = 'tests/test-advantage.html'
+    elif test_name == 'price':
+        template = 'tests/index-with-price.html'
+    elif test_name == 'concept':
+        template = 'tests/index-concept.html'
+    elif test_name == 'packages-price':
+        template = 'tests/index-with-price-and-packages.html'
+    elif test_name == 'best-deal':
+        template = 'tests/index-with-best-deal.html'
     else:
-        raise Http404
+        return redirect('home')
 
     return index_render(request, template, {})
 
@@ -255,6 +264,8 @@ def index_render(request, template, context):
         request.session['no_mobile'] = True
     
     return simple_dtt(request, template, context)
+
+
 
 
 def family_of_companies(request):

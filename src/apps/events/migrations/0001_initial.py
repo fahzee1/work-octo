@@ -29,8 +29,8 @@ class Migration(SchemaMigration):
             ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
             ('event_url', self.gf('django.db.models.fields.CharField')(default=u'', max_length=500, blank=True)),
             ('eventdate', self.gf('django.db.models.fields.DateField')(blank=True)),
-            ('eventstart', self.gf('django.db.models.fields.TimeField')(default=u'', blank=True)),
-            ('eventfinish', self.gf('django.db.models.fields.TimeField')(default=u'', blank=True)),
+            ('eventstart', self.gf('django.db.models.fields.TimeField')(null=True, blank=True)),
+            ('eventfinish', self.gf('django.db.models.fields.TimeField')(null=True, blank=True)),
             ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, blank=True)),
         ))
         db.send_create_signal('events', ['Event'])
@@ -51,8 +51,8 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'event_url': ('django.db.models.fields.CharField', [], {'default': "u''", 'max_length': '500', 'blank': 'True'}),
             'eventdate': ('django.db.models.fields.DateField', [], {'blank': 'True'}),
-            'eventfinish': ('django.db.models.fields.TimeField', [], {'default': "u''", 'blank': 'True'}),
-            'eventstart': ('django.db.models.fields.TimeField', [], {'default': "u''", 'blank': 'True'}),
+            'eventfinish': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
+            'eventstart': ('django.db.models.fields.TimeField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '256'}),

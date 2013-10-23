@@ -3,6 +3,7 @@ from apps.affiliates.models import Affiliate, AffTemplate, LandingPage, Profile
 
 class AffiliateAdmin(admin.ModelAdmin):
     model = Affiliate
+    search_fields=['agent_id','name']
 admin.site.register(Affiliate, AffiliateAdmin)
 
 class AffTemplateAdmin(admin.ModelAdmin):
@@ -11,6 +12,7 @@ admin.site.register(AffTemplate, AffTemplateAdmin)
 
 class LandingPageAdmin(admin.ModelAdmin):
     model = LandingPage
+    list_filter = ['affiliate',]
 admin.site.register(LandingPage, LandingPageAdmin)
 
 class ProfileAdmin(admin.ModelAdmin):

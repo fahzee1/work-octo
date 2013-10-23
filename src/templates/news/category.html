@@ -1,4 +1,4 @@
-{% extends "news/base.html" %}
+{% extends "learn/base.html" %}
 
 {% load sekizai_tags %}
 {% block page_title %}{{ category.name }} | Home Security News | Protect America{% endblock %}
@@ -8,46 +8,49 @@
 	<meta name="description" content="Home Security News in {{ category.name }} brought to you by Protect America - the leading distributor of state-of-the-art GE Wireless Home Security Systems" />	
 	<meta name="ROBOTS" content="NOINDEX,FOLLOW"/>
 {% endaddtoblock "css" %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="news-hero-image">
+            {% if headline.image %}
+            <div id="headline-image">
+                <a href="{{ headline.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ headline.image }}" class="main-image" alt="{{ headline.image_caption }}" title="{{ headline.image_caption }}" /></a>
+                <img src="{{ STATIC_URL }}img/base/news-decorator.png" class="decorator" alt="news-decorator" width="420" height="498" />
+            </div>
+            {% else %}
+            <div class="news-date">
+                <p>{{ headline.date_created|date:"M" }}<span>{{ headline.date_created|date:"d" }}</span><strong>{{ headline.date_created|date:"Y" }}</strong></p>
+            </div>
+            {% endif %}
+        </div>
+        <div id="hero-content">
+            <i class="icon-home-security"></i>
+            <h1>{{ category.name }}</h1>
 
-<div id="security-news-headline" class="news-headline">
-    {% if headline.image %}
-    <div id="headline-image">
-        <a href="{{ headline.get_absolute_url }}"><img src="{{ MEDIA_URL }}{{ headline.image }}" alt="{{ headline.image_caption }}" title="{{ headline.image_caption }}" /></a>
+            <h2><a href="{{ headline.get_absolute_url }}" title="{{ headline.heading }}">{{ headline.heading }}</a></h2>
+            <p>{{ headline.content|truncatewords_html:40|safe }}</p>
+            <a href="{{ headline.get_absolute_url }}" class="button-link alt" title="Read Full Article: {{ headline.heading }}">Read More <i class="icon-chevron-right"></i></a>
+            <div class="clear"></div>
+            <ul>
+                LOCATED IN:
+                {% for category in headline.categories.all %}
+                <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
     </div>
-    {% else %}
-    <div class="news-date">
-        <p>{{ headline.date_created|date:"M" }}<span>{{ headline.date_created|date:"d" }}</span><strong>{{ headline.date_created|date:"Y" }}</strong></p>
+</div>
+{% include "order/generic-call-box.html" %}
+
+<div class="wrapper">
+    <div id="article-container">
+        {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
     </div>
+    {% if articles|length == 8 %}
+    <div class="button-ajax"><a href="#"  title="Load More Articles">Click to Load More Articles</a></div>
     {% endif %}
-    <div id="headline-article">
-        <h1>{{ category.name }}</h1>
-        <h2><a href="{{ headline.get_absolute_url }}" title="{{ headline.heading }}">{{ headline.heading }}</a></h2>
-        {% comment %}
-        <p>{{ headline.summary }}</p>
-        <p>City-wide shoplifting arrests hit 204 during 2011, more than a 50 percent increase over 2010, when there were 133 such arrests, according to the St. Louis Post-Dispatch...</p>
-        {% endcomment %}
-        <p>{{ headline.content|truncatewords_html:40|safe }}</p>
-        <div class="button-link"><a href="{{ headline.get_absolute_url }}" title="Read Full Article: {{ headline.heading }}">Read More From This Article ></a></div>
-        <ul>
-            {% for category in headline.categories.all %}
-            <li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
-
     <div class="clear"></div>
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
-
-<div class="clear"></div>
-<div id="article-container">
-    {% include "news/_partial/news_article_index_snippet.html" with articles=articles %}
-    {% include "order/generic-call-box.html" %}
-</div>
-{% if articles|length == 8 %}
-<div class="button-ajax"><a href="#"  title="Load More Articles">Click to Load More Articles</a></div>
-{% endif %}
-
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {

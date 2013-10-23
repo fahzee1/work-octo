@@ -1,22 +1,66 @@
 {% extends "base.html" %}
+
+{% load sekizai_tags %}
+
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/support.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/support-2.css?v3.0.7">
 {% endblock %}
-{% block subnav_child %}
 
-{% endblock %}
-{% block subnav_parent %}
-<ul id="sub-nav-parent">
-    <li {% if 'news' in active_pages %}class="active"{% endif %}><a href="{% url news:news-home %}" title="Read exciting home security news from around the country.">News</a></li>
-    <li {% if 'blog' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/home-security-blog/" title="Read the Protect America Blog: The Home Security Blanket">Home Security Blog</a></li>
-    <li {% if 'crime-rate' in active_pages %}class="active"{% endif %}><a href="http://www.protectamerica.com/crime-rate/" title="How Safe is your Neighborhood? Learn More With our Crime Stats">Local Crime Stats</a></li>
-    <li {% if 'installation' in active_pages %}class="active"{% endif %}><a href="{% url installation %}" title="Step by step installation instructions and video for your wireless home security system.">Installation</a></li>
-    <li {% if 'operation' in active_pages %}class="active"{% endif %}><a href="{% url operation %}" title="Learn how to use your Protect America system.">Operation</a></li>
-    <li {% if 'troubleshooting' in active_pages %}class="active"{% endif %}><a href="{% url troubleshooting %}" title="Have a Problem with your System? Try to fix it yourself with easy troubleshooting.">Troubleshooting</a></li>
-    <li {% if 'moving-kit' in active_pages %}class="active"{% endif %}><a href="{% url moving-kit %}" title="Click here request a Moving Kit for your Security System">Moving Kit</a></li>
-    <li {% if 'faq' in active_pages %}class="active"{% endif %}><a href="{% url faq %}" title="Click here to review our Frequently Asked Questions">FAQs</a></li>
+{% block subnav %}
+<div id="subnav-wrapper">
+    <ul id="subnav">
+        <li class="{% if 'customer-service' in active_pages %}active{% endif %} menu-item" data-menu="customer-service">
+            <a href="{% url customer-service %}">Customer Service</a>
+            <div class="child-nav">
+                <ul class="customer-service">
+                    <li class="{% if 'installation' in active_pages %}active{% endif %}"><a href="{% url installation %}">Installation</a></li>
+                    <li class="{% if 'operation' in active_pages %}active{% endif %}"><a href="{% url operation %}">Operation</a></li>
 
+                    <li class="{% if 'troubleshooting' in active_pages %}active{% endif %}"><a href="{% url troubleshooting %}">Troubleshooting</a></li>
 
+                    <li class="{% if 'faq' in active_pages %}active{% endif %}"><a href="{% url faq %}">FAQs</a></li>
 
-</ul>
+                    <li class="{% if 'moving-kit' in active_pages %}active{% endif %}"><a href="{% url moving-kit %}">EasyMove Kit</a></li>
+
+                </ul>
+                <div class="clear"></div>
+
+            </div>
+        </li>
+        <li class="{% if 'installation' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url installation %}">Installation Videos</a>
+        </li>
+        <li class="{% if 'find-us' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url find-us %}">Find Us</a>
+        </li>
+        <li class="{% if 'careers' in active_pages %}active{% endif %} menu-item"  data-menu="careers">
+            <a href="{% url careers %}">Careers</a>
+            <div class="child-nav">
+                <ul class="careers" >
+                    <li class="{% if 'jobs' in active_pages %}active{% endif %}"><a href="{% url jobs %}" title="View Current Job Openings">Job Openings</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="{% if 'agent-two' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url agent-two %}">Dealer Program</a>
+        </li>
+        <li class="{% if 'affilaite-program' in active_pages %}active{% endif %} menu-item">
+            <a href="{% url affiliate-program %}">Affiliates</a>
+        </li>
+        <li class="{% if 'contact-us' in active_pages %}active{% endif %} menu-item" data-menu="contact-areas">
+            <a href="{% url contact-us %}">Contact Us</a>
+            <div class="child-nav">
+                <ul class="contact-areas">
+                    <li class="{% if 'department-listing' in active_pages %}active{% endif %}"><a href="{% url department-listing %}">Department Listing</a></li>
+                    <li class="{% if 'feedback-ceo' in active_pages %}active{% endif %}"><a href="{% url feedback-ceo %}">Send Feedback to Our CEO</a></li>
+                    <li class="{% if 'send-testimonial' in active_pages %}active{% endif %}"><a href="{% url send-testimonial %}">Write a Review</a></li>
+                </ul>
+                <div class="clear"></div>
+
+            </div>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
 {% endblock %}

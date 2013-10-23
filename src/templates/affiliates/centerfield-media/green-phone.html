@@ -1,0 +1,513 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+{% block page_title %}Best Home Security | Protect America Home Security{% endblock %}
+{% block page_description %}Get a home security system at an affordable price. Protect America home security and alarm systems will protect your home. Get a free GE home security system today!{% endblock %}
+{% block google_experiment %}
+
+{% endblock %}   
+{% block navigation %}{% endblock %}
+{% block subnav %}{% endblock %}
+{% block header %}{% endblock %}
+{% block order-footer %}{% endblock %}
+{% block css %}
+        <link href='http://fonts.googleapis.com/css?family=Sanchez:400italic,400|Open+Sans:400italic,400,700,600,600italic' rel='stylesheet' type='text/css'/>
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/centerfield-media/cf-style-v2.css" type="text/css" media="screen" charset="utf-8" /> 
+        <!--[if gt IE 5.5]>
+        <link rel="stylesheet" type="text/css" href="./css/ie.css" />
+        <![endif]-->
+
+{% endblock %}
+{% block typekit %}{% endblock %}
+{% block content %}
+<div id="main-header" style="padding: 24px 0; height: 48px; ">
+    <div id="header-wrapper">
+        <div>
+            {% block company-logo %}
+            <div id="company-logo">
+                <a href="http://www.protectamerica.com/" title="Protect America Home Security">
+                    <img src="{{ STATIC_URL }}img/base/protect-america-home-security.png"  alt="home security systems" id="protect-america-logo" width="288" height="48" />
+          
+                </a>
+            </div>
+            {% endblock %}
+            {% block third-party-nav %}
+
+            <img src="{{ STATIC_URL }}img/external/ge-logo-transparent.png" id="ge-logo" alt="GE Home Security" />
+            {% endblock %}
+            {% block main-phone %}
+                {% if phone_number %}
+                <div id="phone-number" class="tk-jaf-facitweb">
+                    <p>Call Today and Save! <span>
+                    {% if request.GET.phone %}
+{% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                        {% else %}
+                            <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+                        {% endif %}
+                    {% else %}
+                        <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                    {% endif %}</a></span></p>
+                </div>
+                {% endif %}
+            {% endblock %}
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+
+
+    </div>
+    <div class="clear"></div>
+</div>
+        <div id="mainContainer">
+            <!-- content -->
+			<div id="centeredContainer">
+                <div id="content">
+                    <div id="topContainer">
+                        <div id="header">
+                            <div class="contentHolder">
+                                <div class="price">
+                                    <div class="starting">Starting at JUST</div>
+                                    <div class="month">
+                                        <span class="usd"><sup>$</sup></span>19.99<span class="asterisk"><sup>*</sup></span>
+                                    </div>
+                                    <div class="permonth">
+                                        per month
+                                    </div>
+                                </div>
+                                <div class="form-wrap">
+	                                <div class="title-form">
+                                        <div>Get a FREE Quote!</div>
+                                    </div>
+                                    {% include "order/quote-form-noview.html" with form=forms.basic %}
+                                    <div class="bottom"></div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="middleContent">
+                            <div id="getstarted">
+                                <div id="phone-her" class="contentHolder">
+                                    <div id="call-box" class="tk-jaf-facitweb">
+                                        {% block call-box-text %}<p><strong>Call Now! {% endblock %}<span>{% if request.GET.phone %}
+{% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
+                                                <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                                            {% else %}
+                                                <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
+                                            {% endif %}
+                                        {% else %}
+                                            <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
+                                        {% endif %}
+</a></span></strong></p>
+                                    </div>                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                            <div id="mainContent" class="contentHolder">
+                                <div id="mainContentOutline">
+                                    <div class="titleHolder">
+                                        <div class="title">
+                                            <h3>Advantages Over Our Competitors</h3>
+                                        </div>
+                                    </div>
+                                    <div class="advantages">
+                                        <div class="advantagesTopGroups">
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img01.png" alt="img01"/>
+                                                <span class="advantagesTopTitle">Lowest Price Guaranteed</span>
+                                                <span class="advantagesTopDescription">If you find a better offer, let us know. We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</span>
+                                            </div>
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img02.png" alt="img02"/>
+                                                <span class="advantagesTopTitle">Lifetime Equipment Warranty</span>
+                                                <span class="advantagesTopDescription">As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free. We want to make sure your home is always secure.</span>
+                                            </div>
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img03.png" alt="img03"/>
+                                                <span class="advantagesTopTitle">Homeowner's Insurance Discount</span>
+                                                <span class="advantagesTopDescription">Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</span>
+                                            </div>
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img04.png" alt="img04"/>
+                                                <span class="advantagesTopTitle">Relocation Kit</span>
+                                                <span class="advantagesTopDescription">With Protect America, you own your security equipment. If you happen to move, we will send you a relocation kit to easily take your security system with you.</span>
+                                            </div>
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img05.png" alt="img05"/>
+                                                <span class="advantagesTopTitle">Free Tech Support</span>
+                                                <span class="advantagesTopDescription">Included with your home security system is our knowledgeable technical support staff. From simple operation to the advanced settings, they are here to help you.</span>
+                                            </div>
+                                        </div>
+                                        <div class="advantagesBottomGroups">
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img_big_01.png" alt="img_big_01"/>
+                                                <span class="advantagesTopTitle titleBig1">Wireless Interactive Cellular Connection</span>
+                                                <span class="advantagesTopDescription">The alarm panel is built with a GSM cellular device that directly contacts our monitoring station in case of trouble or alarm.</span>
+                                            </div>
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img_big_02.png" alt="img_big_02"/>
+                                                <span class="advantagesTopTitle titleBig2">High-Speed Interactive Broadband Connection</span>
+                                                <span class="advantagesTopDescription">No phone, no problem! Using your broadband modem or router, your alarm panel contacts our monitoring station and dispatches emergency in case of trouble or alarm.</span>
+                                            </div>
+                                            <div class="advantagesGroup">
+                                                <img class="advantagesTopImage" src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/img_big_03.png" alt="img_big_03"/>
+                                                <span class="advantagesTopTitle titleBig3">Standard Landline Connection</span>
+                                                <span class="advantagesTopDescription">Using a standard telephone line, your panel directly contacts our monitoring station in time of trouble or alarm and dispatches emergency.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="titleHolder">
+                                        <div class="title">
+                                            <h3>Security Packages We Offer</h3>
+                                        </div>
+                                    </div>
+                                    <div class="security">
+                                        <div class="securitySmall">
+                                            <div class="securityColumn">
+                                                <div class="securityRow firstRow">
+                                                    <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/security_table_copp.png" alt="copper"/>
+                                                    <span>Copper</span>
+                                                </div>
+                                                <div class="securityRow titleRow orangeRow">
+                                                    <span class="rowPrice"><sup>$</sup>19.<sup>99</sup></span>
+                                                    <span class="rowMonthly">monthly</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Simon XT Control</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">3</span>
+                                                    <span class="rowText">Door/Window Sensors</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Motion Detector</span>
+                                                </div>
+                                                <div class="securityRow lastRow">
+                                                    <span class="rowText">NO EQUIPMENT FEES</span>
+                                                    <span class="rowText">NO ACTIVATION FEES</span>
+                                                </div>
+                                            </div>
+                                            <div class="securityColumn">
+                                                <div class="securityRow firstRow">
+                                                    <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/security_table_bronze.png" alt="bronze"/>
+                                                    <span>Bronze</span>
+                                                </div>
+                                                <div class="securityRow titleRow bronzeRow">
+                                                    <span class="rowPrice"><sup>$</sup>35.<sup>99</sup></span>
+                                                    <span class="rowMonthly">monthly</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Simon XT Control</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">7</span>
+                                                    <span class="rowText">Door/Window Sensors</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Motion Detector</span>
+                                                </div>
+                                                <div class="securityRow lastRow">
+                                                    <span class="rowText">NO EQUIPMENT FEES</span>
+                                                    <span class="rowText">NO ACTIVATION FEES</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="securityLarge">
+                                            <div class="securityLargeTitle">PREMIUM PACKAGE</div>
+                                            <div class="securityColumn">
+                                                <div class="securityRow firstRow">
+                                                    <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/security_table_silver.png" alt="silver"/>
+                                                    <span>Silver</span>
+                                                </div>
+                                                <div class="securityRow titleRow silverRow">
+                                                    <span class="rowPrice"><sup>$</sup>37.<sup>99</sup></span>
+                                                    <span class="rowMonthly">monthly</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Simon XT Control</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber rowNumberGreen">10</span>
+                                                    <span class="rowText">Door/Window Sensors</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Motion Detector</span>
+                                                </div>
+                                                <div class="securityRow exclusiveRow">
+                                                    <span class="rowExclusive">exclusive</span>
+                                                    <span class="rowSmart">SMART Connect<sup>™</sup></span>
+                                                </div>
+                                                <div class="securityRow lastRow">
+                                                    <span class="rowText">NO EQUIPMENT FEES</span>
+                                                    <span class="rowText">NO ACTIVATION FEES</span>
+                                                </div>
+                                            </div>
+                                            <div class="securityColumn">
+                                                <div class="securityRow firstRow">
+                                                    <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/security_table_gold.png" alt="gold"/>
+                                                    <span>Gold</span>
+                                                </div>
+                                                <div class="securityRow titleRow goldRow">
+                                                    <span class="rowPrice"><sup>$</sup>39.<sup>99</sup></span>
+                                                    <span class="rowMonthly">monthly</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Simon XT Control</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber rowNumberGreen">12</span>
+                                                    <span class="rowText">Door/Window Sensors</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Motion Detector</span>
+                                                </div>
+                                                <div class="securityRow exclusiveRow">
+                                                    <span class="rowExclusive">exclusive</span>
+                                                    <span class="rowSmart">SMART Connect<sup>™</sup></span>
+                                                </div>
+                                                <div class="securityRow lastRow">
+                                                    <span class="rowText">NO EQUIPMENT FEES</span>
+                                                    <span class="rowText">NO ACTIVATION FEES</span>
+                                                </div>
+                                            </div>
+                                            <div class="securityColumn">
+                                                <div class="securityRow firstRow">
+                                                    <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/security_table_plat.png" alt="plat"/>
+                                                    <span>Platinum</span>
+                                                </div>
+                                                <div class="securityRow titleRow platinumRow">
+                                                    <span class="rowPrice"><sup>$</sup>42.<sup>99</sup></span>
+                                                    <span class="rowMonthly">monthly</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Simon XT Control</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber rowNumberGreen">15</span>
+                                                    <span class="rowText">Door/Window Sensors</span>
+                                                </div>
+                                                <div class="securityRow middleRow">
+                                                    <span class="rowNumber">1</span>
+                                                    <span class="rowText">Motion Detector</span>
+                                                </div>
+                                                <div class="securityRow exclusiveRow">
+                                                    <span class="rowExclusive">exclusive</span>
+                                                    <span class="rowSmart">SMART Connect<sup>™</sup></span>
+                                                </div>
+                                                <div class="securityRow lastRow">
+                                                    <span class="rowText">NO EQUIPMENT FEES</span>
+                                                    <span class="rowText">NO ACTIVATION FEES</span>
+                                                </div>
+                                            </div>
+                                            <div class="securityRowImage">
+                                                <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/security_table_img.jpg" alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="titleHolder">
+                                        <div class="title">
+                                            <h3>What Sets Protect America Apart?</h3>
+                                        </div>
+                                    </div>
+                                    <div class="whatProtect">
+                                        <div class="protectTable">
+                                            <div class="protectColumn labelColumn">
+                                                <div class="protectRow firstRow"></div>
+                                                <div class="protectRow">Installation</div>
+                                                <div class="protectRow">Monthly Rate</div>
+                                                <div class="protectRow">Homeowner’s Discount</div>
+                                                <div class="protectRow">24/7 Monitoring</div>
+                                                <div class="protectRow">Interactive Features*</div>
+                                                <div class="protectRow">Lifetime Replacement</div>
+                                                <div class="protectRow">Parts Warranty</div>
+                                                <div class="protectRow">Free EasyMove</div>
+                                                <div class="protectRow">Moving Kit</div>
+                                                <div class="protectRow">Lowest Price Guaranteed</div>
+                                                <div class="protectRow">Locked-in Rate</div>
+                                                <div class="protectRow lastRow"></div>
+                                            </div> 
+                                            <div class="protectColumn americaColumn">
+                                                <div class="protectRow firstRow">
+                                                    <div class="americaTitle">
+                                                        <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/protect.png" alt="protect"/>
+                                                        <span>PROTECT AMERICA</span>
+                                                    </div>
+                                                </div>
+                                                <div class="protectRow">$0</div>
+                                                <div class="protectRow">$19.99</div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_green.png" alt="green" /></div></div>
+                                                <div class="protectRow lastRow"><a href="#"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/getquote_small.png" alt="getquote"/></a></div>
+                                            </div>
+                                            <div class="protectColumn adtColumn">
+                                                <div class="protectRow firstRow">
+                                                    <div class="adtTitle">
+                                                        <span>ADT</span>
+                                                    </div>
+                                                </div>
+                                                <div class="protectRow">$49</div>
+                                                <div class="protectRow">$42.99</div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_blue.png" alt="blue" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_blue.png" alt="blue" /></div></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow lastRow"></div>
+                                            </div>
+                                            <div class="protectColumn frontpointColumn">
+                                                <div class="protectRow firstRow">
+                                                    <div class="adtTitle">
+                                                        <span>Frontpoint</span>
+                                                    </div>
+                                                </div>
+                                                <div class="protectRow">$99</div>
+                                                <div class="protectRow">$34.99</div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_blue.png" alt="blue" /></div></div>
+                                                <div class="protectRow"><div class="protectCenterImage"><img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/check_blue.png" alt="blue" /></div></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow"></div>
+                                                <div class="protectRow lastRow"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="titleHolder">
+                                        <div class="title">
+                                            <h3>What Our Customers Say About Us?</h3>
+                                        </div>
+                                    </div>
+                                    <div class="aboutUs">
+                                        <div class="commentsColumn">
+                                            <div class="comment">
+                                                <div class="commentFrom">from <span>Escondido,Ca, CA</span></div>
+                                                <div class="commentWrite">Michael writes:</div>
+                                                <div class="commentBox">
+                                                    <div class="commentBoxTop"></div>
+                                                    <div class="commentBoxMiddle">
+                                                        Noel was excellent: very thorough and patient. As I've mentioned, I installed this alarm many years ago when I worked long hours and traveled for my catering business and was concerned about my Apple computer being stolen. I sold my business, bought a laptop, and stay closer to home, so I don't use the system regularly. I travel 4-5 times/year max, and turn the alarm on then, but pay the monthly fee so I can have peace of mind when I do travel. The new unit looks great, an improvement on the old without being more complicated. I especially appreciate all your help with this replacement. Thanks.
+                                                    </div>
+                                                    <div class="commentBoxBottom"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="commentsColumn">
+                                            <div class="comment">
+                                                <div class="commentFrom">from <span>thomasville, NC</span></div>
+                                                <div class="commentWrite">Jodi writes:</div>
+                                                <div class="commentBox">
+                                                    <div class="commentBoxTop"></div>
+                                                    <div class="commentBoxMiddle">
+                                                        Avery was great. I was very nervous about the process of setting up and using the system. Avery was patient and walked me through the process step-by-step. He put me at ease about using the system in general. Avery seemed passionate about the service being provided and that is rare these days.
+                                                    </div>
+                                                    <div class="commentBoxBottom"></div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <div class="commentFrom">from <span>ENOIR, NC</span></div>
+                                                <div class="commentWrite">EARL writes:</div>
+                                                <div class="commentBox">
+                                                    <div class="commentBoxTop"></div>
+                                                    <div class="commentBoxMiddle">
+                                                        L THOMAS WAS VERY MUCH HELPFUL. VERY CARING, VERY FREINDLY. COULD NOT HAVE NO ONE ANY NICER.
+                                                    </div>
+                                                    <div class="commentBoxBottom"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="commentsColumn">
+                                            <div class="comment">
+                                                <div class="commentFrom">from <span>Baltimore , MD</span></div>
+                                                <div class="commentWrite">Richard  writes:</div>
+                                                <div class="commentBox">
+                                                    <div class="commentBoxTop"></div>
+                                                    <div class="commentBoxMiddle">
+                                                        I got notified today that Bltimore Gas and Electric was turning off power in my neighborhood for about 6 hours on Thursday. Not knowing what that would do the system I called customer service and was fortunate enough to reach Jessica Palma who talked me through all the possible contingencies. Great service Thanks
+                                                    </div>
+                                                    <div class="commentBoxBottom"></div>
+                                                </div>
+                                            </div>
+                                            <div class="comment">
+                                                <div class="commentFrom">from <span>alley Village, CA</span></div>
+                                                <div class="commentWrite">Ben writes:</div>
+                                                <div class="commentBox">
+                                                    <div class="commentBoxTop"></div>
+                                                    <div class="commentBoxMiddle">
+                                                        Jessika did a great job patiently answering all my questions and addressing my needs. She is excellent.
+                                                    </div>
+                                                    <div class="commentBoxBottom"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="companies">
+                                        <img src="{{ STATIC_URL }}img/affiliates/centerfield-media/lp/companies.jpg" alt="companies"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bottomContainer">
+                        <div class="contentHolder">
+                            <div id="bottomTerms">
+                                <div class="bottomColumn">
+                                * Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: 04/30/2013
+                                <br/><br/>
+                                * Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan".
+                                </div>
+                                <div class="bottomColumn">
+                                GE and GE Security logos are registered trademarks of General Electric.
+                                    <br/><br/>
+                                The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.
+                                    <br/><br/>
+                                © 1992 — 2013 Protect America, Inc. All rights reserved
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% addtoblock "js" %}
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+			$('#getstarted').waypoint('sticky', {
+			  offset: -200 // Apply "stuck" when element 30px from top
+			});
+            animated = 0;
+		});
+	</script>
+{% endaddtoblock "js" %}
+            
+
+{% endblock %}
+{% block main-footer %}{% endblock %}
+{% block terms %}{% endblock %}

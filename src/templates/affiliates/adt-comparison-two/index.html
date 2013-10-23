@@ -28,9 +28,13 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/adt-comparison-two/adt-comparison-two.css">
-
+    <style>
+        body.alternate #hero-banner.alt-form #quote-form .consent-box-two label.consent-label-two {
+            display: block;
+        }
+    </style>
 {% endblock %}
-
+{% block extra_class %}alternate{% endblock %}
 {% block active_tab_trigger %}
 <script>
 $(document).ready(function() {
@@ -41,7 +45,7 @@ $(document).ready(function() {
 
 {% block hero-block %}
 </div>
-<div id="hero-banner">
+<div id="hero-banner" class="alt-form">
 
     <div class="wrapper">
         <div id="top-hero-banner">
@@ -52,7 +56,7 @@ $(document).ready(function() {
         {% include "order/quote-form-noview.html" with form=forms.basic %}
     </div>
 </div>
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with no_promo=False %}
 
 <div class="wrapper">
 <div class="clear"></div>

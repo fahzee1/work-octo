@@ -1,64 +1,39 @@
-{% extends "products/base.html" %}
+{% extends "base.html" %}
 
 {% load sekizai_tags %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/products.css">
-    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/shop.css?v3.0.7">
 {% endblock %}
 
-{% block subnav_child %}
-<ul id="packages-navigation">
-	<li class="copper {% if 'copper' in active_pages %}active{% endif %}">
-	   <a href="{% url copper %}" title="Copper Home Security System">
-    	   Copper Security
-    	   <span>3 Doors / Windows &bull; Motion Detector</span>
-	   </a>
-	   {% if 'copper' in active_pages %}
-	   <img src="{{ STATIC_URL }}/img/products/package-nav-arrow.png" width="16" height="8" id="package-active-arrow" alt="interested home security package" />
-	   {% endif %}
-    </li>
-	<li class="bronze {% if 'bronze' in active_pages %}active{% endif %}">
-	   <a href="{% url bronze %}" title="Bronze Home Security System">
-	       Bronze Security
-	       <span>7 Doors / Windows &bull; Motion Detector</span>
-	   </a>
-	   {% if 'bronze' in active_pages %}
-	   <img src="{{ STATIC_URL }}/img/products/package-nav-arrow.png" width="16" height="8" id="package-active-arrow" alt="interested home security package" />
-	   {% endif %}
-    </li>
-	<li class="silver {% if 'silver' in active_pages %}active{% endif %}">
-	   <img src="{{ STATIC_URL }}img/products/featured-package.png" style="position: absolute; left: -1px; top: -2px;" alt="Featured Package" width="65" height="62" />
-	   <a href="{% url silver %}" title="Silver Home Security System">
-	       Silver Security
-	       <span>10 Doors / Windows &bull; Motion Detector</span>
-	   </a>
-	   {% if 'silver' in active_pages %}
-	   <img src="{{ STATIC_URL }}/img/products/package-nav-arrow.png" width="16" height="8" id="package-active-arrow" alt="interested home security package" />
-	   {% endif %}
-    </li>
-	<li class="gold {% if 'gold' in active_pages %}active{% endif %}">
-	   <img src="{{ STATIC_URL }}img/products/featured-package.png" style="position: absolute; left: -1px; top: -2px;" alt="Featured Package" width="65" height="62" />
-
-	   <a href="{% url gold %}" title="Gold Home Security System">
-	       Gold Security
-	       <span>12 Doors / Windows &bull; Motion Detector</span>
-	   </a>
-	   {% if 'gold' in active_pages %}
-	   <img src="{{ STATIC_URL }}/img/products/package-nav-arrow.png" width="16" height="8" id="package-active-arrow" alt="interested home security package" />
-	   {% endif %}
-    </li>
-	<li class="platinum omega {% if 'platinum' in active_pages %}active{% endif %}">
-	   <img src="{{ STATIC_URL }}img/products/featured-package.png" style="position: absolute; left: -1px; top: -2px;" alt="Featured Package" width="65" height="62" />
-
-	   <a href="{% url platinum %}" title="Platinum Home Security System">
-	       Platinum Security
-	       <span>15 Doors / Windows &bull; Motion Detector</span>
-	   </a>
-	   {% if 'platinum' in active_pages %}
-	   <img src="{{ STATIC_URL }}/img/products/package-nav-arrow.png" width="16" height="8" id="package-active-arrow" alt="interested home security package" />
-	   {% endif %}
-    </li>
-</ul>
+{% block subnav %}
+<div id="subnav-wrapper">
+    <ul id="subnav">
+        <li {% if 'copper' in active_pages %}class="active"{% endif %}>
+            <a href="{% url copper %}" title="Copper Package 3 door/window sensors 1 motion detector">Copper</a>
+        </li>
+        <li {% if 'bronze' in active_pages %}class="active"{% endif %}>
+            <a href="{% url bronze %}" title="Bronze Package 7 door/window sensors 1 motion detector">Bronze</a>
+        </li>
+        <li {% if 'silver' in active_pages %}class="active"{% endif %}>
+            <a href="{% url silver %}" title="Silver Package 10 door/window sensors 1 motion detector">Silver</a>
+        </li>
+        <li {% if 'gold' in active_pages %}class="active"{% endif %}>
+            <a href="{% url gold %}" title="Gold Package 12 door/window sensors 1 motion detector">Gold</a>
+        </li>
+        <li {% if 'platinum' in active_pages %}class="active"{% endif %}>
+            <a href="{% url platinum %}" title="Platinum Package 15 door/window sensors 1 motion detector">Platinum</a>
+        </li>
+        <li {% if 'business' in active_pages %}class="active"{% endif %}>
+            <a href="{% url business %}" title="Business Package Web Page">Business</a>
+        </li>
+        <li {% if 'cell-takeover' in active_pages %}class="active"{% endif %}>
+            <a href="{% url cell-takeover %}" title="Cell Takeover Web Page">Existing Systems</a>
+        </li>
+        <li {% if 'order-package' in active_pages %}class="active"{% endif %}>
+            <a href="{% url order-package %}" title="Oder Now Page">Order Now</a>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
 {% endblock %}

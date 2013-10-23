@@ -2,35 +2,90 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Automation | X-10 Home Automation | Protect America{% endblock %}
 {% block page_keywords %}home automation devices, home security, x10 lamp module, x10 appliance module, x10 power horn module,{% endblock %}
-{% block page_description %}Wireless home security system equipment by GE uses state-of-the-art wireless home security system technology to provide the reliability our customers know they can trust. Get a GE wireless home security system from Protect America today.{% endblock %}
+{% block page_description %}Protect America offers complete home automated control with Z-Wave techonology.{% endblock %}
 
 {% block content %}
-<div id="home-automation-overview">
-    <img src="{{ STATIC_URL }}img/products/equipment/home-automation/x10-lamp-module.jpg" alt="X-10 Home Automation Modules" width="325" height="270" />
-    <div id="home-automation-content">
-        <h1>Home Automation Accessories</h1>
-        <p>Home automation devices help complete everyday household tasks, like turning lights off and on and controlling various appliances. Customers interested in home automation can seamlessly add necessary devices to their wireless home security systems. Home management equipment from Protect America uses X10, the most widely recognized standard for home automation. Most home automation service requires a monthly fee but Protect America only charges for equipment.</p>
+<div id="hero-wrapper" class="yellow">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-home-automation"></i>
+            <h2>Protect America Equipment</h2>
+            <h1>Home Automation</h1>
+            <p>Home automation can seamlessly add wireless control to  everyday household tasks, like turning lights off and on and controlling various appliances. It even can lock and unlock your front door. Protect America proudly offers home management equipment featuring Z-Wave technology, the most widely recognized standard for home automation.</p>
+            <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add secure your home now.</h3>
+
+            <img src="{{ STATIC_URL }}img/products/home-automation/home-auto-icon.png" class="main-hero-image" />
+
+
+        </div>
+
+    </div>
+</div>
+{% include "order/call-box.html" with no_promo=False %}
+<div id="in-home-wrapper">
+    <div id="in-your-home">
+        <div class="home-img">
+            <img src="{{ STATIC_URL }}img/products/simon-xt/in-the-home-simon-xt.jpg" alt="in-the-home-simon-xt" />
+        </div>
+        <div class="home-content">
+            <strong>In The Home:</strong>
+            <h2>Home Automation</h2>
+            <p>Z-Wave automation is the perfect way to turn your house into a 'Smart' Home.  Combined with our interactive SMART Connect app, you can control various appliances and controls from anywhere.  Set up scenes to have your home just the way you like it when you get home from work. Or if you lost your keys, just use your i-Phone to unlock the door. Anything is possible with Z-Wave home automation.</p>
+            <a href="{% url interactive-control %}" class="button-link">SMART Connect <i class="icon-chevron-right"></i></a>
+        </div>
+    </div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="inside-home" class="in-home-bg" />
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div class="wrapper">
+    <div id="featured-equipment">
+        <h2>Featured Equipment</h2>
+        {% comment %}
+        <div class="equipment-piece">
+            <a href="{% url door-lock %}" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/zwave-door-lock/zwave-door-lock-small.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+                <h3>Z-Wave Door Lock</h3>
+            </a>
+            <div class="clear"></div>
+            <a href="{% url door-lock %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+        </div>
+        {% endcomment %}
+        <div class="equipment-piece">
+            <a href="{% url appliance-module %}" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/appliance-module/appliance-module-white.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+                <h3>Appliance Module</h3>
+            </a>
+            <div class="clear"></div>
+            <a href="{% url appliance-module %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+        </div>
+        <div class="equipment-piece">
+            <a href="{% url indoor-siren %}" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/indoor-siren/indoor-siren-white.jpg" alt="in-the-home-door-window-sensor" width="192" height="192" />
+                <h3>Indoor Siren</h3>
+            </a>
+            <div class="clear"></div>
+            <a href="{% url indoor-siren %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+        </div>
+        <div class="equipment-piece">
+            <a href="{% url freeze-sensor %}" title="Freeze Sensor" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/freeze-sensor/freeze-sensor-small.jpg" alt="Freeze Sesnor" width="192" height="192" />
+                <h3>Freeze Sensor</h3>
+            </a>
+            <div class="clear"></div>
+            <a href="{% url freeze-sensor %}" title="Freeze Sensor" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+        </div>
+        <div class="equipment-piece">
+            <a href="{% url flood-sensor %}" title="Flood Sensor" class="equipment-piece">
+                <img src="{{ STATIC_URL }}img/products/equipment/flood-sensor/flood-sensor-white-small.jpg" alt="Flood Sensor" width="192" height="192" />
+                <h3>Flood Sensor</h3>
+            </a>
+            <div class="clear"></div>
+            <a href="{% url flood-sensor %}" title="Flood Sensor" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
+        </div>
 
     </div>
     <div class="clear"></div>
 </div>
-{% include "order/quote-form.html" with form=forms.basic %}
-<div class="clear"></div>
-<div id="x10-lamp">
-    <img src="{{ STATIC_URL }}img/products/equipment/home-automation/x10-lamp-module.jpg" alt="X-10 Lamp Module" width="325" height="270" />
-    <h2>X-10 Lamp Module</h2>
-    <p>This module is built to control any table lamp, or incandescent lamp from your Simon 3 or Simon XT control panel. Simply plug the Lamp Module into any wall socket, then plug your lamp into the module, and you have wireless versatility. The Lamp Module is an ideal solution for hard-to-reach light switches and rooms with multiple floor lamps or displays.</p>
-</div>
-<div id="x10-appliance">
-    <img src="{{ STATIC_URL }}img/products/equipment/home-automation/x10-appliance-module.jpg" alt="X-10 Appliance Module" width="325" height="270" />
-    <h2>X-10 Appliance Module</h2>
-    <p>With this extension to your home security system you can automate or remotely control appliances from your Simon 3 or Simon XT control panel. Controllable appliances include: fans, air conditioners, dehumidifiers, coffee pots, stereos, and more.</p>
-</div>
-<div id="x10-power-horn">
-    <img src="{{ STATIC_URL }}img/products/equipment/home-automation/x10-powerhorn-module.jpg" alt="X-10 Power Horn Module" width="325" height="270" />
-    <h2>X-10 Power Horn Module</h2>
-    <p>The power horn module can be added anywhere around your home and communicates with your control panel to produce a loud siren when the alarm is triggered. No intruder will hang around when one of these sirens sound.</p>
-</div>
-<div class="clear"></div>
 {% endblock %}  
 

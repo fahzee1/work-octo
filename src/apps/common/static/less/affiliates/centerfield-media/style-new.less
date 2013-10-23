@@ -2,64 +2,37 @@
 .wrapper {
     padding-bottom: 0;
 }
-#header {
-    .header-button {
-        display: none;
-    }
-    &.stuck {
-        background: @white;
-        position: fixed;
-        top: 0;
-        .drop-shadow;
-        z-index: 999;
-        width: 100%; 
-        padding-top: 4px;
-        border-bottom: 5px solid @red;
-        #quick-link-navigation {
-            display: none;
-        }
-        #company-logo {
-            bottom: 0;
-        }
-        .header-button {
-            display: block;
-            float: right;
-            margin-top: 4px;
-            padding: 8px 48px;
-            .border-radius(3px, 3px, 3px, 3px);
-            background: #00bbf4;
-            text-shadow: 0px 1px 0px #2a6273;
-            color: @white;
-            &:hover {
-                border: 1px solid #2272a2;
-            }
-        }
-        
-    }
+#top-section-wrapper {
+    display: none;
 }
 #header-wrapper {
-    width: auto;
-    padding: 0 16px;
-    #company-logo {
-        bottom: 11px;
-    }
-}
-#header-wrapper #phone-number {
-    p {
-        span {
+    height: 54px;
+    #header {
+        .stuck-phone {
+            display: block;
+            margin-top: 16px;
+            font-size: 22px;
+            font-weight: normal;
+            float: right;
+            color: #ffffff;
+            margin-right: 16px;
             a {
-                color: @blue;
+                color: @white;
+                text-decoration: none;
             }
         }
     }
 }
+#main-navigation {
+    display: none;
+}
+
 #big-hero-banner {
-    height: 620px;
+    height: 560px;
     min-height: 100px;
     width: 100%;
     position: relative;
     overflow: hidden;
-    margin-bottom: 8px;
     #hero-wrapper {
         background: url(/static/img/affiliates/centerfield-media/light-blue-bg.png) repeat;
         width: 100%;
@@ -80,7 +53,7 @@
         }
         .happy-family {
             position: absolute;
-            bottom: 70px;
+            bottom: 0px;
             left: auto;
             right: 80%;
         }
@@ -113,7 +86,7 @@
             }
             .badge {
                 position: absolute;
-                bottom: 83px;
+                bottom: 13px;
                 left: 18%;
             }
         }
@@ -191,35 +164,7 @@
                 }
             }
         }
-        #call-box {
-            width: 100%;
-            background: #76ba00;
-            margin: 0;
-            padding: 24px 0;
-            border: 1px solid #3c7a00;
-        
-            p {
-                color: @white;
-                text-shadow: 1px 2px 0px #3c7a00;
-                font-weight: bold;
-                strong {
-                    color: @white;
-                    a {
-                        color: @white;
-                    }
-                }
-            }
-            &:hover {
-                background: #76ba00;
-                border-top: 4px solid #3c7a00;
-        
-            }
-            &.main {
-                border: none;
-                border-top: 4px solid #3c7a00;
-        
-            }
-        }
+
     }
     #hero-backdrop {
         position: absolute;
@@ -280,7 +225,43 @@
     }
 
 }
-
+#security-information {
+    margin-top: 16px;
+    #quote-form {
+        display: block;
+        position: relative;
+        float: left;
+        .drop-shadow(0,0,0,0);
+        width: 265px;
+        top: 0;
+        border: 1px solid @black;
+        label {
+            display: none;
+        }
+        input {
+            margin: 16px auto;
+            width: 225px;
+            display: block;
+        }
+        button {
+            width: 234px;
+        }
+        .consent-box-two {
+            #id_consent_two {
+            }
+            label {
+                display: block;
+                float: left;
+                font-size: 10px;
+                line-height: 15px;
+                text-align: justify;
+                float: left;
+                cursor: pointer;
+                cursor: hand;
+            }
+        }
+    }
+}
 
 .top-information {
     border-bottom: 1px solid @v-light-grey;
@@ -307,6 +288,11 @@
                 line-height: 28px;
                 padding: 16px 32px;
                 font-weight: 200;
+            }
+            .button-link {
+                float: none;
+                margin: 0 auto;
+                width: 120px;
             }
         }
     }

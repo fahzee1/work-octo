@@ -1,0 +1,28 @@
+{% load sekizai_tags %}
+
+
+<ul class="testimonials">
+    {% for testimonial in testimonials %}
+
+    <li class="testimonial {% cycle '' 'mid' %}">
+        <h3>{{ testimonial.first_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}
+        {% if testimonial.rating > '0' %}
+            <div class="rating">
+                {% if testimonial.rating >= '1' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '2' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '3' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '4' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '5' %}<i class="icon-star"></i>{% endif %}
+            </div>
+        {% endif %}
+        </span></h3>
+        <i class="icon-caret-up"></i>
+        <p>{{ testimonial.testimonial|safe }}</p>
+ 
+        <div class="clear"></div>
+    </li>
+    {% endfor %}
+    <div class="clear"></div>
+</ul>
+<div class="clear"></div>
+

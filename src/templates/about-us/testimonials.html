@@ -1,18 +1,11 @@
-{% extends "about-us/base.html" %}
+{% extends "learn/base.html" %}
 
 {% load sekizai_tags %}
 
-{% block page_title %}Protect America Reviews and Testimonials | Page {{ paginator.number }} of {{ paginator.paginator.num_pages }} | Testimonials{% endblock %}
+{% block page_title %}Learn About Security | Testimonials | Protect America{% endblock %}
 {% block page_keywords %}crime prevention, security, security system, home security, home security system{% endblock %}
 {% block page_description %}Crime prevention tips will help protect your home and family. The best crime prevention tool for your home is a home security system. Get a GE home security...{% endblock %}
 
-{% block subnav_child %}
-<ul>
-    <li {% if page_name == 'testimonials'%}class="active"{% endif %}><a href="{% url testimonials %}" title="View all our Customer Submitted Testimonials">All Reviews and Testimonials</a></li>
-    <li {% if page_name == 'video-testimonials'%}class="active"{% endif %}><a href="{% url video-testimonials %}" title="Watch all our Customer Submitted Video Testimonials">Video Reviews and Testimonials</a></li>
-    <li><a href="{% url send-testimonial %}" title="Share Your Own Protect America Testimonial with Us!">Tell Us Your Testimonial</a></li>
-</ul>
-{% endblock %}
 {% block content %}
 {% addtoblock "js" %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.infinitescroll.js"></script>
@@ -32,31 +25,27 @@ $('#customer-testimonial-boxes').infinitescroll({
 
 </script>
 {% endaddtoblock "js" %}
-{% comment %}
-The reason this div is ending here is because the content 
-needs to be out of the wrapper. So we break the div and then style a wrapper
-that expands
-{% endcomment %}
-<div id="testimonial-header">
-    <h1>Protect America Reviews and Testimonials
-</div>
-</div>
-<div id="customer-testimonial-boxes">
-    {% include "about-us/_partials/testimonial_columns.html" with left_column=left_ts middle_column=middle_ts right_column=right_ts %} 
-    <div class="pagination">
-    <span class="step-links">
-        {% if paginator.has_previous %}
-            <a href="?page={{ paginator.previous_page_number }}" class="prev">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ paginator.number }} of {{ paginator.paginator.num_pages }}.
+<div class="wrapper">
+    <div id="testimonial-header">
+        <h1>Protect America Reviews and Testimonials <span>{{ test_count }} Happy Reviews and Counting</span></h1>
+    </div>
+    <div id="customer-testimonial-boxes">
+        {% include "about-us/_partials/testimonial_columns.html" with left_column=left_ts middle_column=middle_ts right_column=right_ts %} 
+        <div class="pagination">
+        <span class="step-links">
+            {% if paginator.has_previous %}
+                <a href="?page={{ paginator.previous_page_number }}" class="prev">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ paginator.number }} of {{ paginator.paginator.num_pages }}.
+            </span>
+    
+            {% if paginator.has_next %}
+                <a href="?page={{ paginator.next_page_number }}" class="next">next</a>
+            {% endif %}
         </span>
-
-        {% if paginator.has_next %}
-            <a href="?page={{ paginator.next_page_number }}" class="next">next</a>
-        {% endif %}
-    </span>
+        </div>
     </div>
 </div>
 {% endblock %}

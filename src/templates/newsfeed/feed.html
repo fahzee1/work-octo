@@ -1,0 +1,45 @@
+
+{% for feed in GeoFeed %}
+     <li>
+        {% if feed.icon %}
+            <i class="{{ feed.icon }}"></i>
+        {% endif %}
+     	{% if feed.feed_name.icon %}
+         	<i class="{{ feed.feed_name.icon }}"></i>
+     	{% endif %}
+        {% if not feed.feed_name %}
+            {% if not feed.icon and not feed.text %}
+                <i class="icon-arrow-right"></i>
+            {% endif %}
+        {% endif %}
+        {% if not feed %}
+         	{% if not feed.feed_name.icon and not feed.text %}
+            <i class="icon-arrow-right"></i>
+         	{% endif %}
+        {% endif %}
+     	{% if feed.text %}
+         	<i class="icon-twitter"></i>
+     	{% endif %}
+        {% if feed.message %}
+            {% if feed.link %}
+                <a href="{{ feed.link }}">{{ feed.message }}</a>
+            {% else %}
+                {{ feed.message }}
+            {% endif %}
+        {% endif %}
+     	{% if feed.feed_name.message %}
+            {% if feed.feed_name.link %}
+         		<a href="{{ feed.feed_name.link }}">{{ feed.feed_name.message }}</a>
+            {% else %}
+                {{ feed.feed_name.message }}
+            {% endif %}
+     	{% endif %}
+     	{% if feed.text %}
+     		<a href="http://www.twitter.com/ProtectAmerica/" target="_blank" title="Protect America's Twitter Page">{{ feed.text|slice:":50" }}...</a>
+     	{% endif %}
+        {% if feed.GetRelativeCreatedAt %}
+            <span class="tweet-date">{{ feed.GetRelativeCreatedAt }}</span>
+        {% endif %}
+     </li>
+{% endfor %}
+

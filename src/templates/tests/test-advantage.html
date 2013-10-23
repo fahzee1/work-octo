@@ -1,0 +1,487 @@
+{% extends "learn/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security Reviews ADT vs Protect America vs Vivint {% endblock %}
+{% block page_keywords %}adt,adt security,security,home security,home security system,security system{% endblock %}
+{% block page_description %}Home Security Reviews: Learn who offers more security for the money ADT, Vivint, or Protect America. Who has NO equipment and NO installation fees{% endblock %}
+
+{% block subnav %}
+
+
+{% endblock %}
+{% block content %}
+
+    <div id="hero-wrapper" class="v-light-grey" style="background: url(/static/img/base/adv_hero.jpg) no-repeat scroll -220px 0px #fcfbf7 !important;">
+        <div id="index-hero-image">
+            <div id="hero-content">
+                <h1>Protect What Makes a House a Home.</h1>
+                <h2>home security starting at $19.99 per month</h2>
+                <a href="{% url shop %}" class="button-link stylized">Get Started Now <i class="icon-chevron-right"></i></a>
+
+            </div>
+            {% include "order/quote-form-refresh.html" with form=forms.basic %}
+
+        </div>
+    </div>
+    {% include "order/call-box.html" with no_promo=False %}
+
+
+<div class="wrapper">
+
+
+    {% addtoblock "js" %}
+        <script type="text/javascript">
+
+        $(function() {
+          $( "#tabs" ).tabs();
+        });
+        
+        $('#review-cycle-container').cycle({
+                    fx: 'scrollRight',
+                    timeout:  15000,
+                });
+
+        </script>
+    {% endaddtoblock "js" %}
+
+    <div id="our-advantage-menu">
+        <h2>Our Advantage</h2>
+        <ul>
+            <li><a href="#reasons">Why choose us</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#comparisons">Comparisons</a></li>
+            <li><a href="#commitment">Our commitment</a></li>
+        <ul>
+    </div>
+
+<a id="reasons"></a>
+    <div class="our-advantage-reasons">
+        <div class="content">
+        <h2>Home security systems comparison</h2>
+        <h3>Three reasons why customers choose Protect America:</h3>
+        <div class="left">
+            <dl>
+                <dt><img src="{{ STATIC_URL }}img/base/adv_1.png">No installation, activation, or equipment cost</dt>
+                <dd>The Protect America advantage is unlike any other. Why should safeguarding your home involve activation fees, installation costs or equipment charges? We believe peace of mind is priceless, but it should be affordable nonetheless. No installation, equipment or activation fees &ndash; defend your home and your wallet.</dd>
+                <dt><img src="{{ STATIC_URL }}img/base/adv_2.png">Lowest price guaranteed</dt>
+                <dd>You're just in time for the industry's best home security deal. For a limited time, we're offering monthly monitoring rates starting at just $19.99. This includes a free home security system! If you've researched ADT prices or AT&amp;T security, you're aware that no offer even comes close. Think beyond security! Home control systems are your all-encompassing solution to a smarter house. Stay more connected than ever with home lighting automation, door lock and appliance control &ndash; all from a smartphone or computer. If another company does manage to beat our price, we'll match their offer. That's our Lowest Price Guarantee!</dd>
+                <dt><img src="{{ STATIC_URL }}img/base/adv_3.png">Top rated, everywhere</dt>
+                <dd>Protect America is a pioneer of wireless security technology. We've spent the past 20 years developing an award-winning reputation. We've been ranked the number one home security company by TopConsumerReviews for the past five years! Since 2008, our Copper security package has been named a Consumer's Digest "Best Buy" for quality and affordability.</dd>
+            </dl>
+        </div>
+        <div class="right">
+
+            <canvas id="canvas" height="325" width="360"></canvas>
+            <p><span style="color: #eb292b; font-weight: bold;">Protect America</span> vs. <span style="color: #aaa; font-weight: bold;">ADT</span><br /><br />Copper package price comparison between ADT and Protect America over standard 36 month contract length.</p>
+
+            <script>
+
+                var lineChartData = {
+                    labels : ["Install","1 year","2 years","3 years"],
+                    datasets : [
+                        {
+                            fillColor : "rgba(204,204,204,1)",
+                            strokeColor : "rgba(204,204,204,1)",
+                            pointColor : "rgba(255,255,255,1)",
+                            pointStrokeColor : "#ccc",
+                            data : [350,866,1382,1898]
+                        },
+                        {
+                            fillColor : "rgba(235,41,43,1)",
+                            strokeColor : "rgba(235,41,43,1)",
+                            pointColor : "rgba(255,255,255,1)",
+                            pointStrokeColor : "#eb292b",
+                            data : [0,240,480,720]
+                        }
+
+                    ]
+                    
+                }
+
+            var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+            
+            </script>
+
+            <img src="{{ STATIC_URL }}img/base/adv_venn.png" alt="Price comparison between Protect America and ADT over 36 months" title="Price comparison between Protect America and ADT over 36 months">
+
+        </div>
+        <div class="clear"></div>
+        <img src="{{ STATIC_URL }}img/extra/validation-icons.png" style="display: block; margin: 0 auto;"alt="validation-icons" width="904" height="96" />
+        </div>
+    </div>
+</div>
+<a id="testimonials"></a>
+    <div id="hero-testimonial">
+        <div id="hero-testimonial-wrapper" class="wrapper">
+            <div id="review-cycle-container">
+                <div class="review">
+                    <p>Mr. Joshua Oliver-Adams was great!!! He did a fantastic job of assisting me in making sure all of my zones were covered and updating the system with my information. I was previously with ADT and didn't have any problems. Thanks again for the assistance and the knowledge to answer and and all questions. Job well done!</p>
+                    <b>Jason of Donaldsonville, LA<span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+                </div>
+                <div class="review">
+                    <p>Alexis was very nice, She helped me install my wireless monitor without a problem. Everyone that I have dealt with so far at your Company has been Wonderful. Keep up the great work!! FYI, I switched from ADT because of poor customer service</p>
+                    <b>John of Alton, NH<span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+                </div>
+                <div class="review">
+                    <p>My husband and I purchased the Protect America Security System.  We had the pleasure of working with William McClure for the installation.  He was very polite and professional and helped us with all of our questions.  We were very impressed with William and wanted to give him positive feedback.  We have been long time customers of ADT.  We researched other companies and Protect America beat out all of the other competition for price and service. Thank you. </p>
+                    <b>Melissa of Gardendale, AL<span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="wrapper">
+    <h2 class="title-section">Compare Home Security Packages from Protect America</h2>
+
+<a id="comparisons"></a>
+<div class="home-security-comparisons">
+        <div id="tabs">
+            <ul>
+                <li>
+                    <a href="#tabs-1">
+                    <div class="package-box-copper">
+                        <h3>Copper</h3>
+                        <div class="package-blue-strip"><strong>$19.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>3 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-2">
+                    <div class="package-box-bronze">
+                        <h3>Bronze</h3>
+                        <div class="package-blue-strip"><strong>$35.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>7 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-3">
+                    <div class="package-box-silver">
+                        <h2>Most popular</h2>
+                        <h3>Silver</h3>
+                        <div class="package-green-strip"><strong>$37.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>10 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-4">
+                    <div class="package-box-gold">
+                        <h3>Gold</h3>
+                        <div class="package-blue-strip"><strong>$39.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>12 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-5">
+                    <div class="package-box-platinum">
+                        <h3>Platinum</h3>
+                        <div class="package-blue-strip"><strong>$42.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>15 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="tabs-1">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$349</td>
+                            <td align="center">$0</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$19.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="/products/order-package?package=copper">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$699</td>
+                            <td align="center">$240</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$35.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=bronze">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-3">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$937</td>
+                            <td align="center">$420</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$37.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=silver">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-4">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$1099</td>
+                            <td align="center">$540</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$39.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=gold">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-5">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$1339</td>
+                            <td align="center">$720</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$42.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=platinum">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+                <div class="left">
+                    <div class="box">
+                        <h2>All Protect America packages come with:</h2>
+                        <ul>
+                            <li>Internal siren and door chime</li>
+                            <li>Battery backup</li>
+                            <li>One-button arming</li>
+                            <li>3 window decals</li>
+                            <li>1 yard sign</li>
+                        </ul>
+
+                    </div>
+                    <div class="request"><a href="{% url order-package %}">Request a quote</a></div>
+                </div>
+                <div class="right-box">
+                    <h2>What ADT won't say speaks volumes!</h2>
+                        <div class="big_wrapper" id="faq2">
+                            <ul>
+                              <li>
+                                <div>
+                                  <a href="#">ADT Changes Your Monthly Rate (After One Year)</a>
+                                  <p>
+                                    Protect America keeps your monitoring rate the same for the entirety of your contract. With ADT, they can increase your monthly monitoring rate every year after the first year! It's hidden in their 'Terms and Conditions.'
+                                  </p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <a href="#">Repairs with ADT will Cost You</a>
+                                  <p>If your system malfunctions with ADT, they will charge you for the replacement of parts which can cost hundreds of dollars. With Protect America, if any part of your system breaks, we replace it. With our Lifetime Replacement Parts warranty, you can rest easy knowing your home is safe and sound.</p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <a href="#">ADT Charges for Moving</a>
+                                  <p>If you have service with ADT, it could cost you hundreds of dollars when you move. Home security companies that sell wired security systems often require additional fees for relocation. A benefit of a Protect America wireless home security system is that you can transfer your system and your service to your new home for free!</p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <a href="#">ADT Won't Give You a Quote Over the Phone</a>
+                                  <p>If you want to know the cost of an ADT system, you'll have to wait for a technician come to your home. At Protect America, our home security experts are standing by to take your call. Protect America will give you a free home security analysis over the phone in minutes. Call Protect America today!</p>
+                                </div>
+                              </li>
+                            </ul>
+                        </div>
+                    <h2>Vivint vs Protect America</h2>
+                    <h3>What Vivint won't say about Pricing</h3>
+                    <p>Equipment from Vivint is incredibly expensive. Their home security and automation devices can cost as much as $699 and useful accessories, like smoke detectors, are priced far higher than most security companies. Vivint's complicated home automation platform increases costs to consumers without providing comprehensive protection. If you're looking for reliable and affordable security, then you're looking for Protect America!</p>
+                </div>
+        </div>
+    </div>
+</div>
+
+<a id="commitment"></a>
+    <div class="our-advantage-commitment">
+        <div class="content">
+            <img src="{{ STATIC_URL }}img/base/adv_commitment.png" style="float: left; padding: 0 100px 100px 0;"><h1>Home security commitment</h1>
+            <p>Protect America is committed to excellence and affordability when it comes to securing your home. That's why we're a Consumers Digest Best Buy for home security systems and the best choice for a world-class security system backed by a company that is dedicated to serving your security needs. Your family is your top priority. Your home is probably your largest investment. Why not take the extra precaution of providing a security system and monitoring for your residence? Protect America is committed to helping you meet your home security needs and providing you with quality home security systems and service you can depend on.</p>
+            <hr>
+            <img src="{{ STATIC_URL }}img/base/adv_value.png" style="float: right; padding: 0 0 100px 100px;"><h1>Home security value</h1>
+            <p>The average yearly home insurance premium in the U.S. costs over $800. The good news is that many plans offer discounts up to 20% on home insurance for homes with home security systems installed. You could save $14 or more per month on your insurance with any of our GE home alarm systems. For many, the monthly cost of a Protect America security system would be less than $16 per month once a home insurance discount is applied. For 50 cents a day, you can have the peace of mind knowing that your family and home will have the extra protection you want.</p>
+            <hr>
+            <img src="{{ STATIC_URL }}img/base/adv_choices.png" style="float: left; padding: 0 100px 100px 0;"><h1>Home security choices</h1>
+            <p>Protect America offers the best home security systems and monitoring deals you'll find. We install premium security hardware with GE security products, and have the most flexible range of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of GE wireless home security components. And, our security packages are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today. </p>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}  

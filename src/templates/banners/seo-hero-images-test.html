@@ -1,17 +1,22 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-
-<div id="{{ pa_ads.hero_banner.sub_id }}">
-
-    <div class="wrapper">
-        {% if pa_ads.hero_banner_backdrop %}
-            {% include "adspace/adspace_render.html" with ad=pa_ads.hero_banner_backdrop %}
-        {% endif %}
-        <div id="top-hero-banner">
-
-            <div id="main-banner" data-url="{% url order-package %}">
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/february/keychains-premium-packages.jpg" style="position: absolute; left: -167px;" alt="Our best promotion ever! free equipment, $19.99 per month plus two free keychains on any premium package" width="1076" height="409" />
-            </div>
-        </div>
-        {% include "order/quote-form-noview.html" with form=forms.basic %}
+<style type="text/css">
+    #hero-wrapper {
+        background: #2b80b8 url({{ STATIC_URL }}img/base/bg-blue.png) repeat;
+    }
+    #hero-wrapper #hero-image .main-hero-image {
+        left: -36px;
+    }
+    #hero-wrapper #hero-image h1 {
+        position: absolute;
+        font-weight: bold;
+        top: 36px;
+        left: 7px;
+        font-size: 42px;
+    }
+</style>
+<div id="hero-wrapper" class="blue">
+    <div id="hero-image" class="{% if not business_time %}sleepy{% endif %}">
+            <h1>The Best Deal in Home Security</h1>
+            <img src="{{ STATIC_URL }}img/banners/july/best-deal-home-security.jpg" class="main-hero-image" alt="dependable-security-hero" />
     </div>
 </div>

@@ -1,44 +1,32 @@
 
-{% extends "about-us/base.html" %}
+{% extends "learn/base.html" %}
 {% block page_title %}{{ testimonial.first_name }} {{ testimonial.last_name }} of {{ testimonial.city }}, {{ testimonial.state }} Review | Protect America Home Security | Testimonials{% endblock %}
 {% block page_keywords %}crime prevention, security, security system, home security, home security system{% endblock %}
 {% block page_description %}Crime prevention tips will help protect your home and family. The best crime prevention tool for your home is a home security system. Get a GE home security...{% endblock %}
 
-{% block subnav_child %}
-<ul>
-    <li class="active"><a href="{% url testimonials %}" title="View all of our Customer Submitted Testimonials">All Reviews and Testimonials</a></li>
-	<li><a href="{% url video-testimonials %}" title="Watch all our Customer Submitted Video Testimonials">Video Reviews and Testimonials</a></li>
-	<li><a href="{% url send-testimonial %}" title="Share Your Own Protect America Testimonial with Us!">Tell Us Your Testimonial</a></li>
-</ul>
-{% endblock %}
+
 {% block content %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <i class="icon-customer-care"></i>
+            <h2>{% if testimonial.rating >= '1' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '2' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '3' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '4' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '5' %}<i class="icon-star"></i>{% endif %}
+            </h2>
+            <h1>{{ testimonial.first_name }} of {{ testimonial.city }}, {{ testimonial.state }}</h1>
+            <p>{{ testimonial.message|safe }}</p>
+            <a href="{% url testimonials %}" class="button-link alt" title="Read more reviews about Protect America">Read More Reviews <i class="icon-chevron-right"></i></a>
+
+            
+
+        </div>
+    </div>
 </div>
 <div class="clear"></div>
-<div id="testimonial-wrapper">
-    <ul id="search-testimonial-box">
-            <li class="one-testimonial">
-                <img src="/static/img/base/testimonial-guy.png" alt="Testimonial Icon" width="208" height="160" class="testimonial-guy" />
 
-                <h1>{{ testimonial.first_name }} of {{ testimonial.city }}, {{ testimonial.state }} Writes:</h1>
-                <p class="extra-info">on <strong>{{ testimonial.date_created|date:"F d, Y" }}</strong></p>
-                <p>{{ testimonial.message|safe }}</p>
-                {% if testimonial.rating > '0' %}
-                <div class="star-container">
-                    <div class="star {% if testimonial.rating >= '1' %}active{% endif %}">&nbsp;</div>
-                    <div class="star {% if testimonial.rating >= '2' %}active{% endif %}">&nbsp;</div>
-                    <div class="star {% if testimonial.rating >= '3' %}active{% endif %}">&nbsp;</div>
-                    <div class="star {% if testimonial.rating >= '4' %}active{% endif %}">&nbsp;</div>
-                    <div class="star {% if testimonial.rating >= '5' %}active{% endif %}">&nbsp;</div>
-                    <div class="clear"></div>
-                </div>
-                {% endif %}
-
-                <div class="button-link">
-                    <a href="{% url testimonials %}" title="Read More Testimonials">Read More Testimonials ></a>
-                </div>
-            </li>
-    </ul>
-</div>
 
 
 {% endblock %}

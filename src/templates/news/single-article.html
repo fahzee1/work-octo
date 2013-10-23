@@ -14,38 +14,39 @@
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "e120b57d-de18-41e4-9f08-4c602e36df66"}); </script>
 {% endaddtoblock "js" %}
-<div id="single-article" itemscope itemtype="http://schema.org/Article">
-    <div id="article-header">
-        {% if article.image %}
-        <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" alt="{{ article.image_caption }}" itemprop="image" />
-        {% endif %}
-        <div class="news-date">
-            <p><time itemprop="dateCreated" datetime="{{ article.date_created|date:"Y-m-d" }}">{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</time></strong></p>
-            
-        </div>
-
-    </div>
-
-    <h1 itemprop="name">{{ article.heading }}</h1>
+<div class="wrapper">
+    <div id="single-article" itemscope itemtype="http://schema.org/Article">
+        <div id="article-header">
+            {% if article.image %}
+            <img src="{{ MEDIA_URL}}{{ article.image }}" title="{{ article.image_caption }}" alt="{{ article.image_caption }}" itemprop="image" />
+            {% endif %}
+            <div class="news-date">
+                <p><time itemprop="dateCreated" datetime="{{ article.date_created|date:"Y-m-d" }}">{{ article.date_created|date:"M" }}<span>{{ article.date_created|date:"d" }}</span><strong>{{ article.date_created|date:"Y" }}</time></strong></p>
+                
+            </div>
     
-    <p itemprop="articleBody">{{ article.content|safe }}</p>
-    <ul id="article-breadcrumb">
-        <li class="right-slash"><a href="{% url news:news-home %}">Home Security News</a></li>
-        <li class="right-slash left-slash"><a href="{% url news:news-articles %}">Articles</a></li>
-        <li class="left-slash omega page-turn">{{ article.heading }}</li>
-    </ul>
-    <ul id="article-topics">
-        {% for category in article.categories.all %}
-        <li itemprop="articleSection"><a href="{{ category.get_absolute_url }}" title="Read more articles about {{ category.name }}">{{ category.name }}</a></li>
-        {% endfor %}
-    </ul>
-    <meta itemprop="wordCount" content="{{ article.content|wordcount }}" />
-    <meta itemprop="sourceOrganization" content="Protect America" />
-    <meta itemprop="inLanguage" content="English" />
-
+        </div>
+    
+        <h1 itemprop="name">{{ article.heading }}</h1>
+        
+        <p itemprop="articleBody">{{ article.content|safe }}</p>
+        <ul id="article-breadcrumb">
+            <li class="right-slash"><a href="{% url news:news-home %}">Home Security News</a></li>
+            <li class="right-slash left-slash"><a href="{% url news:news-articles %}">Articles</a></li>
+            <li class="left-slash omega page-turn">{{ article.heading }}</li>
+        </ul>
+        <ul id="article-topics">
+            {% for category in article.categories.all %}
+            <li itemprop="articleSection"><a href="{{ category.get_absolute_url }}" title="Read more articles about {{ category.name }}">{{ category.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <meta itemprop="wordCount" content="{{ article.content|wordcount }}" />
+        <meta itemprop="sourceOrganization" content="Protect America" />
+        <meta itemprop="inLanguage" content="English" />
+    
+    </div>
 </div>
 <div id="right-column">
-    {% include "order/quote-form.html" with form=forms.basic %}
     <div id="social-media">
         <h3>Share this with Friends:</h3>
         <span class='st_facebook_vcount' displayText='Facebook'></span>
@@ -54,14 +55,15 @@
         <span class='st_plusone_vcount' displayText='Google +1'></span>
         <div class="clear"></div>
     </div>
-    <a href="http://www.protectamerica.com" title="Get a Free Home Security System with Protect America"><img src="{{ STATIC_URL }}img/banners/250x250/250x250-superhero.jpg" alt="Even Superheroes have Security Systems" width="250" height="250" class="security-ad" /></a>
 </div>
 
 <div class="clear"></div>
 {% include "order/generic-call-box.html" %}
-
-<div id="article-container">
-    {% include "news/_partial/news_article_index_snippet.html" with articles=related %}
+<div class="wrapper">
+    <div id="article-container">
+        {% include "news/_partial/news_article_index_snippet.html" with articles=related %}
+    </div>
+    <div class="clear"></div>
 </div>
 {% endblock %}  
 {{ block.super }}
