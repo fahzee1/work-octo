@@ -42,14 +42,15 @@ def send_leadimport(data):
 
     return True
 
-def send_conduit_error(data,test=False):
+def send_conduit_error(data,title='LeadConduit Error',message=None,test=False):
     if not test:
-        message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
+        if not message:
+            message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
         from_email = 'Protect America <noreply@protectamerica.com>'
-        send_mail('LeadConduit Error',message,from_email,['cjogbuehi@protectamerica.com'])
+        send_mail(title,message,from_email,['cjogbuehi@protectamerica.com','development@protectamerica.com'])
 
 
-def post_to_leadconduit(data,test=False):
+def post_to_leadconduit(data,test=False,retry=False):
     #pdb.set_trace()
     try:
         lead = Lead.objects.get(id=data['lead_id'])
@@ -94,6 +95,8 @@ def post_to_leadconduit(data,test=False):
                 lead_id = None
 
             if lead:
+                if retry:
+                    lead.number_of_retries += 1
                 lead.lc_url = url
                 lead.lc_id = lead_id
 
@@ -101,10 +104,14 @@ def post_to_leadconduit(data,test=False):
             if response == 'success':
                 if lead:
                     lead.lc_error = False
+                    lead.retry = False
+                    lead.reason ='reason gone, successful retry'
                     lead.save()
             elif response == 'queued':
                 if lead:
                     lead.lc_error = False
+                    lead.retry = False
+                    lead.reason ='reason gone, successful retry'
                     lead.save()
             elif response == 'failure':
                 # if it fails loop through the reasons and save in db/email
@@ -113,6 +120,7 @@ def post_to_leadconduit(data,test=False):
                 if lead:
                     lead.lc_reason = str(reasons_list)
                     lead.lc_error = True
+                    lead.retry = True
                     lead.save()
                 data = {'reasons':reasons_list,
                         'lead_id':lead_id,
@@ -126,6 +134,7 @@ def post_to_leadconduit(data,test=False):
                 if lead:
                     lead.lc_reason = str(reasons_list)
                     lead.lc_error = True
+                    lead.retry = True
                     lead.save()
                 data = {'reasons':reasons_list,
                         'lead_id':lead_id,
@@ -135,25 +144,39 @@ def post_to_leadconduit(data,test=False):
 
                     
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
-            logger.error('NO! Status Code is %s. Should retry request. Sending email to notify' % xml_request.status_code)
             #retry request, email lead, log to console
-            pass
+            logger.error('NO! Status Code is %s. Should retry request. Sending email to notify' % xml_request.status_code)
+            if lead:
+                lead.retry = True
+                lead.save()
+            send_conduit_error(data,test=settings.LEAD_TESTING)
+           
+         
         elif xml_request.status_code != 502 or xml_request.status_code != 503 or xml_request.status_code != 504 or xml_request.status_code != 200:
             logger.error('NO! Status Code is %s. Something bad happened notify activeprospect' % xml_request.status_code)
             # report to support@activeprospect.com
             msg = "Full url: %s\n Type: POST\n Http Status Code: %s\n Parameters: %s" %(xml_request.url,xml_request.status_code,params.items())
             from_email = 'Protect America <noreply@protectamerica.com>'
             send_mail('Bad Http Status Code',msg,from_email,['support@activeprospect.com','cjogbuehi@protectamerica.com'])
-            pass
+            if lead:
+                lead.retry = True
+                lead.save()
 
     except TimeoutError:
-        logger.error('Leadconduit timed out! Send email to lead import and notify')
+        logger.error('Leadconduit timed out! Send email to lead import, notify, and retry')
+        if lead:
+            lead.retry = True
+            lead.save()
+        send_conduit_error(data,title='Leadconduit Timeout',test=settings.LEAD_TESTING)
 
     except Exception as e:
+        #something else happened email everyone
         from traceback import format_exc
         logger.error('SHIT! something VERY unexpected happened. Notify everyone. Here is exception %s' % format_exc())
-        #something else happened email everyone
-        pass
+        if lead:
+            lead.retry = True
+            lead.save()
+        send_conduit_error(data,title='Unknown Lead Conduit exception',message='%s' % format_exc(),test=settings.LEAD_TESTING)
 
 
 
@@ -320,6 +343,8 @@ def basic_post_login(request):
         formset.search_engine = request.session['search_engine']
         formset.search_keywords = searchkeywords
         formset.form_values = f_values
+        formset.trusted_url = trusted_url
+        formset.ip_address = request.META.get('REMOTE_ADDR',None)
         formset.save()
         
         if request_data['lead_id'] is None:
