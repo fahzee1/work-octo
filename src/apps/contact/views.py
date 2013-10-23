@@ -75,10 +75,10 @@ def post_to_leadconduit(data,test=False):
     if test:
         params.update({'xxTest':'true'})
     try:
-        logger.info('Starting request to lead conduit...')
+        logger.info('Starting request to lead conduit... (lead id = %s)' % data['lead_id'])
         xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params,timeout=10)
         if xml_request.status_code == 200: 
-            logger.info('Status code is %s' % xml_request.status_code)
+            logger.info('Status code is %s.' % xml_request.status_code)
             reasons_list = []
             root = ET.fromstring(xml_request.content)
             response = root.find('result').text
@@ -148,10 +148,10 @@ def post_to_leadconduit(data,test=False):
 
     except TimeoutError:
         logger.error('Leadconduit timed out! Send email to lead import and notify')
-        send_leadimport(params)
 
     except Exception as e:
-        logger.error('SHIT! something VERY unexpected happened. Notify everyone. Here is exception %s' % e)
+        from traceback import format_exc
+        logger.error('SHIT! something VERY unexpected happened. Notify everyone. Here is exception %s' % format_exc())
         #something else happened email everyone
         pass
 
