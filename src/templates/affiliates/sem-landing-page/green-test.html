@@ -126,23 +126,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
 
 {% block content %}
-<div id="hero-wrapper" class="blue">
+<div id="hero-wrapper" class="blue">    
     <div id="hero-image">
-        {% comment %}
-        <div id="hero-content">
-            <h1>Home Security <span>We Make It Simple and Easy</span></h1>
-            <ul>
-                <li><i class="icon-check-sign"></i>24/7 Nationwide Monitoring</li>
-                <li><i class="icon-check-sign"></i>No Equipment or Activation Fees</li>
-                <li><i class="icon-check-sign"></i>Warranty on all Alarm Systems</li>
-
-            </ul>
-            <h3>Prices You Can't Find Anywhere Else.</h3>
-            <p><span>starting at:</span> $19.99 <em>per month</em></p>
-            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/simon-xt-slice.jpg" class="best-logo" alt="best-home-security-company-logo" />
-            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/third-party.png" class="thirdparty" alt="third-party" width="232" height="57" />
-        </div>
-        {% endcomment %}
+{% comment %}
         <div id="best-deal">
             <h1>Best Deal Ever!</h1>
             <h2>Home Security Starting at $19.99 </h2>
@@ -161,15 +147,37 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             <div class="clear"></div>
         </a>
     </div>
-    {% comment %}
+{% endcomment %}
+
+
+    <div id="tablet-deal">
+        <a href="tel:{{ phone_number|format_number }}">
+        <img src="{{ STATIC_URL }}img/banners/tablet-banner/order-now-button.png" class="no-mobile" alt="order-now-button" width="296" height="87" />
+        </a>
+        <a href="http://www.protectamerica.com/products/order-package?promo=true">    
+        <img src="{{ STATIC_URL }}img/banners/tablet-banner/order-now-button.png" class="no-desktop" alt="order-now-button" width="296" height="87" />
+        </a>
+            <ul>
+                <li><i class="icon-shield"></i>24/7 Reliable<br />Easy-To-Use<br />Security</li>
+                <li><i class="icon-home"></i>No Equipment<br/>No Activation<br />Fees</li>
+                <li><i class="icon-money"></i>$19.99<br/>monthly<br/>monitoring</li>
+
+            </ul>
+    </div>
+    {% include "order/quote-form-responsive.html" with form=forms.basic %}
+
+
+    </div>
     <div id="mobile-main-promo">
         <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
-            <img src="{{ STATIC_URL }}img/banners/call-banner/free-shipping-icon.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
-            <p><span>Today Only! Free Shipping</span> When you Order Any Package</p>
+            <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/keychain-promo.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
+            <p><span>2 Keychain Remotes</span> with Your Home Security System</p>
             <div class="clear"></div>
         </a>
     </div>
-    {% endcomment %}
+    <div id="main-tablet-image"></div>
+    <img src="{{ STATIC_URL }}img/hero-backgrounds/grassy-park.jpg" id="tablet-background" alt="grassy-park" width="800" height="533" />
+
 
 </div>
 
