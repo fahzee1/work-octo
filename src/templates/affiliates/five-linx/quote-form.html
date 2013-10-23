@@ -16,10 +16,7 @@
 
 	</div>
 	<button type="button" class="redbutton">Get Quote ></button>
-             <div class="consent-box">
-            <label class="consent-label" for="id_consent" style="font-size: 10px; line-height: 12px; border-bottom: 1px solid #000; padding-bottom: 4px; text-align:center;">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
-            <div class="clear"></div>
-        </div>
+
     <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
     <div class="quote-form-error">
         <img src="{{ STATIC_URL }}/img/base/error-arrow.png" class="error-arrow" />
@@ -69,7 +66,7 @@ $(document).ready(function() {
                     'phone': phone, 
                     'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
                     'form': 'basic',
-                    'referer_page':$form.find(location).attr("href"),
+                    'referer_page':window.location.href,
                     'form_values':$form.serialize()}
         $.ajax({
             type: "POST",
@@ -77,7 +74,7 @@ $(document).ready(function() {
             data: data,
             dataType: "json",
             success: newFormSuccess,
-            error: newFormError
+            error: newFormError,
         });
         
         function newFormError(){

@@ -32,7 +32,7 @@ class LeadAdmin(admin.ModelAdmin):
     model = Lead
     list_filter = ('agent_id',)
     search_fields = ['id', 'agent_id', 'phone', 'email', 'search_keywords']
-    readonly_fields = ('lc_url','lc_id','lc_error','lc_reason')
+    readonly_fields = ('lc_url','lc_id','lc_error','lc_reason','trusted_url','number_of_retries')
 
 admin.site.register(Lead, LeadAdmin)
 
