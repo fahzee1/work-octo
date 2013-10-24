@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
+from django.views.decorators.csrf import csrf_exempt
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate,Profile
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
@@ -42,15 +43,30 @@ def affiliate_view(request, affiliate, page_name=None):
         request.session['source'] = affiliate.name
     except Affiliate.DoesNotExist:
         raise Http404
+    landingpage = LandingPage.objects.filter(affiliate=affiliate)
+    htmlfilename = 'affiliates/%s/%s' % (landingpage[0].template.folder, landingpage[0].get_filename(page_name))
 
-    landingpage = LandingPage.objects.get(affiliate=affiliate)
+    return simple_dtt(request, htmlfilename, {'page_name': page_name,
+        'agent_id': affiliate.agent_id})
+
+def delta_view(request, affiliate, page_name=None):
+    if page_name is None:
+        page_name = 'index'
+    try:
+        affiliate = Affiliate.objects.get(agent_id=affiliate)
+        request.session['refer'] = affiliate.name
+        request.session['source'] = affiliate.name
+    except Affiliate.DoesNotExist:
+        raise Http404
+    template = AffTemplate.objects.get(name=affiliate.name)
+    landingpage = LandingPage.objects.get(affiliate=affiliate,template=template)
     htmlfilename = 'affiliates/%s/%s' % (landingpage.template.folder, landingpage.get_filename(page_name))
 
     return simple_dtt(request, htmlfilename, {'page_name': page_name,
         'agent_id': affiliate.agent_id})
 
 def delta_sky(request):
-    return affiliate_view(request, 'a03005')
+    return delta_view(request, 'a03005')
     
 def resources(request):
     """
@@ -160,7 +176,7 @@ def semlanding_response(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    response = render_to_response('affiliates/sem-landing-page/refresh-responsive.html',
+    response = render_to_response('affiliates/sem-landing-page/green-test.html',
                                   {'forms': forms},
                                   context_instance=RequestContext(request))
     
@@ -303,7 +319,7 @@ def signup(request):
 
     return simple_dtt(request, 'contact-us/affiliates.html', ctx)
 
-
+@csrf_exempt
 def accept_affiliate(request):
     # API listener to accept affiliate submissions
     if request.method != "POST":

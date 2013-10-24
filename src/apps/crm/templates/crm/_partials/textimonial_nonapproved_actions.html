@@ -1,4 +1,4 @@
-<a href="#" class="btn textimonial_view" data-url="{% url crm:textimonial_view textimonial.id %}">
+<a href="#" class="btn textimonial_view" data-url="{% if textimonial.first_name %} {% url crm:textimonial_view textimonial.id %} {% else %} {% url crm:feedback_view textimonial.id %} {% endif %}">
     <i class="icon-eye-open"></i>
 </a>
 <a href="{% url crm:textimonial_approve textimonial.id %}" class="btn btn-primary textimonial_approve">

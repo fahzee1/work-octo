@@ -12,15 +12,13 @@
 
 
     {% endfor %}
-    {% comment %}
+
+    <button type = 'button' >Continue <i class="icon-chevron-right"></i></button>
     <div class="consent-box">
-        <input id="id_consent" type="checkbox" maxlength="20" name="consent">
-        <label class="consent-label" for="id_consent">I agree that Protect America and their representatives may contact me at the email address and phone number stated above.</label>
+        <label class="consent-label" for="id_consent_box">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
         <div class="clear"></div>
     </div>
-    {% endcomment %}
-    <button>Continue <i class="icon-chevron-right"></i></button>
-    <a href="{% url privacy-policy %}" id="privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+    <a href="{% url privacy-policy %}" id="privacy-policy" title="View our Privacy Policy">Your privacy is important and safe with us.</a>
 </form>
 {% addtoblock "js" %}
 {% comment %}
@@ -72,6 +70,125 @@
     });
 </script>
 {% endcomment %}
-<script>utmx_section("feedback-js")</script>
-</noscript>
+<script type="text/javascript">
+$(document).ready(function() {
+    function validateEmail(email){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+    }
+
+    $('#package-form input').keypress(function(e){
+        if(e.which == 13){
+            $('#package-form button').click();
+        }
+    });
+    var submitting = false;
+
+    $('#package-form button').click(function() {
+        var $form = $(this).closest('#package-form');
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        $form.children('div').removeClass('.error-state');
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'form': 'basic',
+                    'referer_page':window.location.href,
+                    'form_values':$form.serialize()}
+        $.ajax({
+                type: "POST",
+                url: "/contact/ajaxpost/",
+                data: data,
+                dataType: "json",
+                success: newFormSuccess,
+                error: newFormError
+                });
+       
+         function newFormError(){
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
+        function newFormSuccess(json) {
+            submitting = false;
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                url = json.thank_you
+                window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        if(json.errors) {
+            $('#quote-form button').attr('disabled', false); 
+            $("#quote-form-error").show();
+            $("#quote-form-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quote-form-error ul").html(error_string);
+            } else $("#quote-form-error").hide();
+        }
+        return false;
+        });
+    });   
+</script>
 {% endaddtoblock "js" %}

@@ -1,432 +1,656 @@
 {% extends "learn/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}ADT Security | Protect America Advantage over Competitors{% endblock %}
+{% block page_title %}Home Security Reviews ADT vs Protect America vs Vivint {% endblock %}
 {% block page_keywords %}adt,adt security,security,home security,home security system,security system{% endblock %}
-{% block page_description %}Protect America works harder to beat out larger competitors offering alarm systems and home security monitoring for much cheaper with no loss in protection.{% endblock %}
+{% block page_description %}Home Security Reviews: Learn who offers more security for the money ADT, Vivint, or Protect America. Who has NO equipment and NO installation fees{% endblock %}
+
 
 {% block content %}
-<div id="hero-wrapper" class="v-light-grey">
-    <div id="hero-image">
-        <div id="hero-content">
-            <i class="icon-home-security"></i>
-            <h2>Learn About Home Security</h2>
-            <h1>The Protect America Advantage</h1>
-            <p>We are driven to provide only the highest quality products and dedicated service at an affordable price. Our <a href="http://www.protectamerica.com/best-home-security-system/" title="home security">home security</a> packages provide the equipment necessary to protect your entire home for a fraction of the cost of our competitors. Other companies usually offer a "starter" package which usually provide little or no security.  See the charts below to compare our prices to the competition, such as ADT Home Security, to discover the Protect America Advantage.</p>
-        </div>
-        <img src="{{ STATIC_URL }}img/base/protect-america-hero.jpg" class="main-hero-image" alt="Protect America Logo" />
 
+    <div id="hero-wrapper" class="v-light-grey">
+        <div id="hero-image">
+            <div id="hero-content">
+                <h1>The Protect America Advantage</h1>
+                <p>We are driven to provide only the highest quality products and dedicated service at an affordable price. Our <a href="http://www.protectamerica.com/best-home-security-system/" title="home security">home security</a> packages provide the equipment necessary to protect your entire home for a fraction of the cost of our competitors. Other companies usually offer a "starter" package which usually provide little or no security.  See the charts below to compare our prices to the competition, such as ADT Home Security, to discover the Protect America Advantage.</p>
+            </div>
+        </div>
     </div>
-</div>
-{% include "order/call-box.html" with no_promo=False %}
+    {% include "order/call-box.html" with no_promo=False %}
+
+
 <div class="wrapper">
-    <div class="home-security-comparisons">
-        <h2>Home Security Systems Comparison</h2>
-        <div id="copper-package-comparison">
-            <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-simon-xt-2.jpg" alt="Copper Package - GE Simon XT with 3 Door / Window Sensors and 1 Motion Detector"  id="copper-package-image" />
-            <div id="copper-package-information">
-                <h3>The Copper Package</h3>
-                <ul>
-                    <li><strong>1 Simon XT Control Panel</strong></li>
-                    <li><strong>3 Door / Window Sensors</strong></li>
-                    <li><strong>1 Motion Detector</strong></li>
-                    <li>Internal Siren and Door Chime</li>
-                    <li>Battery Backup</li>
-                    <li>One-Button Arming</li>
-                    <li>3 Window Decals</li>
-                    <li>1 Yard Sign</li>
-                    <div class="clear"></div>
-                </ul>
-                <table class="product_table">
-                    <thead>
-                        <tr>
-                            <th class="alpha">&nbsp;</th>
-                            <th>OUR PRICE wireless*</th>
-                            <th>ADT Home wireless*</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span>Equipment Price:</span></td>
-                            <td class="call-out">
-                                <span class="free">Included</span>
-                            </td>
- 
-                            <td>$349</td>
-                        </tr>
-                        <tr>
-                            <td><span>Monthly Cost:</td>
-                            <td class="call-out">$19.99</td>
-                            <td>$42.99</td>
-                        </tr>
-                        <tr>
-                            <td><span>Contract Length:</td>
-                            <td class="call-out">36 Months</td>
-                            <td>36 Months</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-            <div id="copper-package-bar">
-                <div class="order-link">
-                    <a href="{% url order-package %}?package=copper" title="Order Copper Package - GE Simon XT with 3 Door/Window Sensors and 1 motion detector" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
-                </div>
-                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-    
-                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-                <img src="{{ STATIC_URL }}img/products/copper-package/copper-package-protect-america-vs-adt.png" alt="Save $379 compared to ADT" class="adt-badge" />
-    
-            </div>
-            <div class="clear"></div>
-        </div>
-        <!-- Bronze Package -->
-        <div id="bronze-package-comparison">
-            <img src="{{ STATIC_URL }}img/products/bronze-package/bronze-package-simon-xt-lowest-price.jpg" alt="Bronze Package - GE Simon XT with 7 Door / Window Sensors and 1 Motion Detector" id="bronze-package-image" />
-            <div id="bronze-package-information">
-                <h3>The Bronze Package</h3>
-                <ul>
-                    <li><strong>1 Simon XT Control Panel</strong></li>
-                    <li><strong>7 Door / Window Sensors</strong></li>
-                    <li><strong>1 Motion Detector</strong></li>
-                    <li>Internal Siren and Door Chime</li>
-                    <li>Battery Backup</li>
-                    <li>One-Button Arming</li>
-                    <li>3 Window Decals</li>
-                    <li>1 Yard Sign</li>
-                    <div class="clear"></div>
-                </ul>
-                <table class="product_table">
-                    <thead>
-                        <tr>
-                            <th class="alpha">&nbsp;</th>
-                            <th>OUR PRICE wireless*</th>
-                            <th>ADT Home wireless*</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span>Equipment Price:</span></td>
-                            <td class="call-out">
-                                <span class="free">Included</span>
-                            </td>
 
-                            <td>$699</td>
-                        </tr>
-                        <tr>
-                            <td><span>Monthly Cost:</td>
-                            <td class="call-out">$35.99</td>
-                            <td>$42.99</td>
-                        </tr>
-                        <tr>
-                            <td><span>Contract Length:</td>
-                            <td class="call-out">36 Months</td>
-                            <td>36 Months</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-            <div id="bronze-package-bar">
-                <div class="order-link">
-                    <a href="{% url order-package %}?package=bronze" title="Order Bronze Package - GE Simon XT with 7 Door / Window Sensors and 1 Motion Detector" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
-                </div>
-                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-    
-                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-                <img src="{{ STATIC_URL }}img/products/bronze-package/bronze-package-protect-america-vs-adt.png" alt="Save $699 compared to ADT" class="adt-badge" />
-    
-            </div>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <div class="home-security-comparisons">
-        <!-- Silver Package -->
-        <div id="silver-package-comparison">
-            <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-simon-xt-lowest-price.jpg" alt="Silver Package - GE Simon XT with 10 Door / Window Sensors and 1 Motion Detector" id="silver-package-image" />
-            <div id="silver-package-information">
-                <h3>The Silver Package</h3>
-                <ul>
-                    <li><strong>1 Simon XT Control Panel</strong></li>
-                    <li><strong>10 Door / Window Sensors</strong></li>
-                    <li><strong>1 Motion Detector</strong></li>
-                    <li>Internal Siren and Door Chime</li>
-                    <li>Battery Backup</li>
-                    <li>One-Button Arming</li>
-                    <li>3 Window Decals</li>
-                    <li>1 Yard Sign</li>
-                    <div class="clear"></div>
-                </ul>
-                <table class="product_table">
-                    <thead>
-                        <tr>
-                            <th class="alpha">&nbsp;</th>
-                            <th>OUR PRICE wireless*</th>
-                            <th>ADT Home wireless*</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span>Equipment Price:</span></td>
-                            <td class="call-out">
-                                <span class="free">Included</span>
-                            </td>
 
-                            <td>$939</td>
-                        </tr>
-                        <tr>
-                            <td><span>Monthly Cost:</td>
-                            <td class="call-out">$37.99</td>
-                            <td>$42.99</td>
-                        </tr>
-                        <tr>
-                            <td><span>Contract Length:</td>
-                            <td class="call-out">36 Months</td>
-                            <td>36 Months</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-            <div id="silver-package-bar">
-                <div class="order-link">
-                    <a href="{% url order-package %}?package=silver" title="Order Silver Package - GE Simon XT with 10 Door / Window Sensors and 1 Motion Detector" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
-                </div>
-                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-    
-                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-                <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-protect-america-vs-adt.png" alt="Save $939 compared to ADT" class="adt-badge" />
-    
-            </div>
-        </div>
-        <!-- Gold Package -->
-        <div id="gold-package-comparison">
-            <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-simon-xt-lowest-price.jpg" alt="Gold Package - GE Simon XT with 12 Door / Window Sensors and 1 Motion Detector" id="gold-package-image" />
-            <div id="gold-package-information">
-                <h3>The Gold Package</h3>
-                <ul>
-                    <li><strong>1 Simon XT Control Panel</strong></li>
-                    <li><strong>12 Door / Window Sensors</strong></li>
-                    <li><strong>1 Motion Detector</strong></li>
-                    <li>Internal Siren and Door Chime</li>
-                    <li>Battery Backup</li>
-                    <li>One-Button Arming</li>
-                    <li>3 Window Decals</li>
-                    <li>1 Yard Sign</li>
-                    <div class="clear"></div>
-                </ul>
-                <table class="product_table">
-                    <thead>
-                        <tr>
-                            <th class="alpha">&nbsp;</th>
-                            <th>OUR PRICE wireless*</th>
-                            <th>ADT Home wireless*</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span>Equipment Price:</span></td>
-                            <td class="call-out">
-                                <span class="free">Included</span>
-                            </td>
+    {% addtoblock "js" %}
+        <script type="text/javascript">
 
-                            <td>$1099</td>
-                        </tr>
-                        <tr>
-                            <td><span>Monthly Cost:</td>
-                            <td class="call-out">$39.99</td>
-                            <td>$42.99</td>
-                        </tr>
-                        <tr>
-                            <td><span>Contract Length:</td>
-                            <td class="call-out">36 Months</td>
-                            <td>36 Months</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-            <div id="gold-package-bar">
-                <div class="order-link">
-                    <a href="{% url order-package %}?package=gold" title="Order Gold Package - GE Simon XT with 12 Door / Window Sensors and 1 Motion Detector" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
-                </div>
-                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-    
-                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-                <img src="{{ STATIC_URL }}img/products/gold-package/gold-package-protect-america-vs-adt.png" alt="Save $1099 compared to ADT" class="adt-badge" />
-    
-            </div>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <div class="home-security-comparisons">
-        <!-- Platinum Package -->
-        <div id="platinum-package-comparison">
-            <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-simon-xt-lowest-price.jpg" alt="Platinum Package - GE Simon XT with 15 Door / Window Sensors and 1 Motion Detector" id="platinum-package-image" />
-            <div id="platinum-package-information">
-                <h3>The Platinum Package</h3>
-                <ul>
-                    <li><strong>1 Simon XT Control Panel</strong></li>
-                    <li><strong>15 Door / Window Sensors</strong></li>
-                    <li><strong>1 Motion Detector</strong></li>
-                    <li>Internal Siren and Door Chime</li>
-                    <li>Battery Backup</li>
-                    <li>One-Button Arming</li>
-                    <li>3 Window Decals</li>
-                    <li>1 Yard Sign</li>
-                    <div class="clear"></div>
-                </ul>
-                <table class="product_table">
-                    <thead>
-                        <tr>
-                            <th class="alpha">&nbsp;</th>
-                            <th>OUR PRICE wireless*</th>
-                            <th>ADT Home wireless*</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span>Equipment Price:</span></td>
-                            <td class="call-out">
-                                <span class="free">Included</span>
-                            </td>
-                            <td>$1339</td>
-                        </tr>
-                        <tr>
-                            <td><span>Monthly Cost:</td>
-                            <td class="call-out">$42.99</td>
-                            <td>$42.99</td>
-                        </tr>
-                        <tr>
-                            <td><span>Contract Length:</td>
-                            <td class="call-out">36 Months</td>
-                            <td>36 Months</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-            <div id="platinum-package-bar">
-                <div class="order-link">
-                    <a href="{% url order-package %}?package=platinum" title="Order Platinum Package - GE Simon XT with 15 Door / Window Sensors and 1 Motion Detector" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-                    <b class="phone-alt">or call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> now.</b>
-                </div>
-                <img src="{{ STATIC_URL }}img/external/top-consumer-reviews/top-consumer-sml-v-light-blue.jpg" alt="Rated 5 Stars by Top Consumer Reviews" width="136" height="101" class="top-consumer-badge" />
-    
-                <a href="{% url low-price-guarantee %}" title="Click here for more information on our Low Price Guarantee"><img src="{{ STATIC_URL }}img/extra/lowest-price-badge-sml-blue.jpg" alt="Protect America has the Lowest Price for Home Security Guaranteed" width="128" height="101" class="lowest-badge" /></a>
-                <img src="{{ STATIC_URL }}img/products/platinum-package/platinum-package-protect-america-vs-adt.png" alt="Save $1339 compared to ADT" class="adt-badge" />
-    
-            </div>
-        </div>    
+        $(function() {
+          $( "#tabs" ).tabs();
+        });
         
-    </div>
-    <div id="protect-america-security">
-        <h2>Home Security Commitment</h2>
-        <p>
-            Protect America is committed to excellence and affordability when it comes to securing your home. That's why we're a <a href="/home-security-system" title="home security system">Consumers Digest Best Buy™</a> for home security systems and the best choice for a world-class security system backed by a company that is dedicated to serving your security needs. Your family is your top priority. Your home is probably your largest investment. Why not take the extra precaution of providing a security system and monitoring for your residence? <a href="/home-security-system" title="Protect America">Protect America</a> is committed to helping you meet your home security needs and providing you with quality home security systems and service you can depend on.
-        </p>
-        <h2>Home Security Value</h2>
-        <p>
-            The average yearly home insurance premium in the U.S. costs over $800. The good news is that many plans offer discounts up to 20% on home insurance for homes with home security systems installed. You could save $14 or more per month on your insurance with any of our <a href="/home-alarm-systems" title="GE home alarm systems">GE home alarm systems</a>. For many, the monthly cost of a Protect America security system would be less than $16 per month once a home insurance discount is applied. For 50 cents a day, you can have the peace of mind knowing that your family and home will have the extra protection you want. 
-        </p>
+        $('#review-cycle-container').cycle({
+                    fx: 'scrollRight',
+                    timeout:  15000,
+                });
 
-        <h2>Home Security Choices</h2>
-        <p>
-            Protect America offers the best home security systems and monitoring deals you'll find. We install premium security hardware with <a href="/ge-home-security" title="GE Security Products">GE security products</a>, and have the most flexible range of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of GE wireless home security components. And, our security packages are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today.
-        </p>
+        </script>
+    {% endaddtoblock "js" %}
+
+    <div id="our-advantage-menu">
+        <h2>Our Advantage</h2>
+        <ul>
+            <li><a href="#reasons">Why choose us</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#comparisons">Comparisons</a></li>
+            <li><a href="#commitment">Our commitment</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+        <ul>
     </div>
+
+<a id="reasons"></a>
+    <div class="our-advantage-reasons">
+        <div class="content">
+        <h2>Home security systems comparison</h2>
+        <h3>Three reasons why customers choose Protect America:</h3>
+        <div class="left">
+            <dl>
+                <dt><img src="{{ STATIC_URL }}img/base/adv_1.png">No installation, activation, or equipmet cost</dt>
+                <dd>The Protect America advantage is unlike any other. Why should safeguarding your home involve activation fees, installation costs or equipment charges? We believe peace of mind is priceless, but it should be affordable nonetheless. No installation, equipment or activation fees – defend your home and your wallet.</dd>
+                <dt><img src="{{ STATIC_URL }}img/base/adv_2.png">Lowest price guaranteed</dt>
+                <dd>You’re just in time for the industry’s best home security deal. For a limited time, we’re offering monthly monitoring rates starting at just $19.99. This includes a free home security system! If you’ve researched ADT prices or AT&amp;T security, you’re aware that no offer even comes close. Think beyond security! Home control systems are your all-encompassing solution to a smarter house. Stay more connected than ever with home lighting automation, door lock and appliance control – all from a smartphone or computer. If another company does manage to beat our price, we’ll match their offer. That’s our Lowest Price Guarantee!</dd>
+                <dt><img src="{{ STATIC_URL }}img/base/adv_3.png">Top rated, everywhere</dt>
+                <dd>Protect America is a pioneer of wireless security technology. We’ve spent the past 20 years developing an award-winning reputation. We’ve been ranked the number one home security company by TopConsumerReviews for the past five years! Since 2008, our Copper security package has been named a Consumer’s Digest “Best Buy” for quality and affordability.</dd>
+            </dl>
+        </div>
+        <div class="right">
+
+            <canvas id="canvas" height="325" width="360"></canvas>
+            <p><span style="color: #eb292b; font-weight: bold;">Protect America</span> vs. <span style="color: #aaa; font-weight: bold;">ADT</span><br /><br />Copper package price comparison between ADT and Protect America over standard 36 month contract length.</p>
+
+            <script>
+
+                var lineChartData = {
+                    labels : ["Install","1 year","2 years","3 years"],
+                    datasets : [
+                        {
+                            fillColor : "rgba(204,204,204,1)",
+                            strokeColor : "rgba(204,204,204,1)",
+                            pointColor : "rgba(255,255,255,1)",
+                            pointStrokeColor : "#ccc",
+                            data : [350,866,1382,1898]
+                        },
+                        {
+                            fillColor : "rgba(235,41,43,1)",
+                            strokeColor : "rgba(235,41,43,1)",
+                            pointColor : "rgba(255,255,255,1)",
+                            pointStrokeColor : "#eb292b",
+                            data : [0,240,480,720]
+                        }
+
+                    ]
+                    
+                }
+
+            var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+            
+            </script>
+
+            <img src="{{ STATIC_URL }}img/base/adv_venn.png" alt="Price comparison between Protect America and ADT over 36 months" title="Price comparison between Protect America and ADT over 36 months">
+
+        </div>
+        <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<a id="testimonials"></a>
+    <div id="hero-testimonial">
+        <div id="hero-testimonial-wrapper" class="wrapper">
+            <div id="review-cycle-container">
+                <div class="review">
+                    <p>Mr. Joshua Oliver-Adams was great!!! He did a fantastic job of assisting me in making sure all of my zones were covered and updating the system with my information. I was previously with ADT and didn't have any problems. Thanks again for the assistance and the knowledge to answer and and all questions. Job well done!</p>
+                    <b>Jason of Donaldsonville, LA<span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+                </div>
+                <div class="review">
+                    <p>Alexis was very nice, She helped me install my wireless monitor without a problem. Everyone that I have dealt with so far at your Company has been Wonderful. Keep up the great work!! FYI, I switched from ADT because of poor customer service</p>
+                    <b>John of Alton, NH<span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+                </div>
+                <div class="review">
+                    <p>My husband and I purchased the Protect America Security System.  We had the pleasure of working with William McClure for the installation.  He was very polite and professional and helped us with all of our questions.  We were very impressed with William and wanted to give him positive feedback.  We have been long time customers of ADT.  We researched other companies and Protect America beat out all of the other competition for price and service. Thank you. </p>
+                    <b>Melissa of Gardendale, AL<span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="wrapper">
+    <h2 class="title-section">Compare Home Security Packages from Protect America</h2>
+
+<a id="comparisons"></a>
+<div class="home-security-comparisons">
+        <div id="tabs">
+            <ul>
+                <li>
+                    <a href="#tabs-1">
+                    <div class="package-box-copper">
+                        <h3>Copper</h3>
+                        <div class="package-blue-strip"><strong>$19.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>3 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-2">
+                    <div class="package-box-bronze">
+                        <h3>Bronze</h3>
+                        <div class="package-blue-strip"><strong>$35.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>7 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-3">
+                    <div class="package-box-silver">
+                        <h2>Most popular</h2>
+                        <h3>Silver</h3>
+                        <div class="package-green-strip"><strong>$37.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>10 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-4">
+                    <div class="package-box-gold">
+                        <h3>Gold</h3>
+                        <div class="package-blue-strip"><strong>$39.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>12 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tabs-5">
+                    <div class="package-box-platinum">
+                        <h3>Platinum</h3>
+                        <div class="package-blue-strip"><strong>$42.99</strong><small>monthly</small></div>
+                        <p>1 Simon XT control panel</p>
+                        <p>15 Door / window sensors</p>
+                        <p>1 Motion detector</p>
+                        <hr>
+                        <p>No equipment fees</p>
+                        <p>No activation fees</p>
+                    </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="tabs-1">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$349</td>
+                            <td align="center">$0</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$19.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="/products/order-package?package=copper">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$699</td>
+                            <td align="center">$240</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$35.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=bronze">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-3">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$937</td>
+                            <td align="center">$420</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$37.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=silver">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-4">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$1099</td>
+                            <td align="center">$540</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$39.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=gold">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+            <div id="tabs-5">
+                <div class="top">
+                    <div class="chart">
+                        <table width="640" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="190">&nbsp;</td>
+                            <td width="170" align="center" bgcolor="#2f394a"><strong style="color: #fff;">Our price wireless*</strong></td>
+                            <td width="170" align="center"><strong>ADT Home wireless*</strong></td>
+                            <td width="110" align="center"><strong>Vivint*</strong></td>
+                          </tr>
+                          <tr>
+                            <td>INSTALLATION PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$99</td>
+                            <td align="center">$99</td>
+                          </tr>
+                          <tr>
+                            <td>EQUIPMENT PRICE:</td>
+                            <td align="center" bgcolor="#d9f2ff">$0</td>
+                            <td align="center">$1339</td>
+                            <td align="center">$720</td>
+                          </tr>
+                          <tr>
+                            <td>MONTHLY COST:</td>
+                            <td align="center" bgcolor="#d9f2ff">$42.99</td>
+                            <td align="center">$42.99</td>
+                            <td align="center">$49.99</td>
+                          </tr>
+                          <tr>
+                            <td>CONTRACT LENGTH:</td>
+                            <td align="center" bgcolor="#d9f2ff">36 months</td>
+                            <td align="center">36 months</td>
+                            <td align="center">42 months</td>
+                          </tr>
+                        </table>
+                        <a class="button-link" title="Buy now" href="{% url order-package %}/?package=platinum">Buy now <i class="icon-chevron-right"></i></a>
+                        <div style="clear: both;"></div>
+                        <p style="float: right;">or call 1-800-951-5190</a>
+                    </div>
+                </div>
+            </div>
+                <div class="left">
+                    <div class="box">
+                        <h2>All Protect America packages come with:</h2>
+                        <ul>
+                            <li>Internal siren and door chime</li>
+                            <li>Battery backup</li>
+                            <li>One-button arming</li>
+                            <li>3 window decals</li>
+                            <li>1 yard sign</li>
+                        </ul>
+
+                    </div>
+                    <div class="request"><a href="{% url order-package %}">Request a quote</a></div>
+                </div>
+                <div class="right-box">
+                    <h2>What ADT won't say speaks volumes!</h2>
+                        <div class="big_wrapper" id="faq2">
+                            <ul>
+                              <li>
+                                <div>
+                                  <a href="#">ADT Changes Your Monthly Rate (After One Year)</a>
+                                  <p>
+                                    Protect America keeps your monitoring rate the same for the entirety of your contract. With ADT, they can increase your monthly monitoring rate every year after the first year! It's hidden in their ‘Terms and Conditions.’
+                                  </p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <a href="#">Repairs with ADT will Cost You</a>
+                                  <p>If your system malfunctions with ADT, they will charge you for the replacement of parts which can cost hundreds of dollars. With Protect America, if any part of your system breaks, we replace it. With our Lifetime Replacement Parts warranty, you can rest easy knowing your home is safe and sound.</p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <a href="#">ADT Charges for Moving</a>
+                                  <p>If you have service with ADT, it could cost you hundreds of dollars when you move. Home security companies that sell wired security systems often require additional fees for relocation. A benefit of a Protect America wireless home security system is that you can transfer your system and your service to your new home for free!</p>
+                                </div>
+                              </li>
+                              <li>
+                                <div>
+                                  <a href="#">ADT Won't Give You a Quote Over the Phone</a>
+                                  <p>If you want to know the cost of an ADT system, you’ll have to wait for a technician come to your home. At Protect America, our home security experts are standing by to take your call. Protect America will give you a free home security analysis over the phone in minutes. Call Protect America today!</p>
+                                </div>
+                              </li>
+                            </ul>
+                        </div>
+                    <h2>Vivint vs Protect America</h2>
+                    <h3>What Vivint won't say about Pricing</h3>
+                    <p>Equipment from Vivint is incredibly expensive. Their home security and automation devices can cost as much as $699 and useful accessories, like smoke detectors, are priced far higher than most security companies. Vivint’s complicated home automation platform increases costs to consumers without providing comprehensive protection. If you’re looking for reliable and affordable security, then you’re looking for Protect America!</p>
+                </div>
+        </div>
+    </div>
+</div>
+
+<a id="commitment"></a>
+    <div class="our-advantage-commitment">
+        <div class="content">
+            <img src="{{ STATIC_URL }}img/base/adv_commitment.png" style="float: left; padding: 0 100px 100px 0;"><h1>Home security commitment</h1>
+            <p>Protect America is committed to excellence and affordability when it comes to securing your home. That's why we're a Consumers Digest Best Buy™ for home security systems and the best choice for a world-class security system backed by a company that is dedicated to serving your security needs. Your family is your top priority. Your home is probably your largest investment. Why not take the extra precaution of providing a security system and monitoring for your residence? Protect America is committed to helping you meet your home security needs and providing you with quality home security systems and service you can depend on.</p>
+            <hr>
+            <img src="{{ STATIC_URL }}img/base/adv_value.png" style="float: right; padding: 0 0 100px 100px;"><h1>Home security value</h1>
+            <p>The average yearly home insurance premium in the U.S. costs over $800. The good news is that many plans offer discounts up to 20% on home insurance for homes with home security systems installed. You could save $14 or more per month on your insurance with any of our GE home alarm systems. For many, the monthly cost of a Protect America security system would be less than $16 per month once a home insurance discount is applied. For 50 cents a day, you can have the peace of mind knowing that your family and home will have the extra protection you want.</p>
+            <hr>
+            <img src="{{ STATIC_URL }}img/base/adv_choices.png" style="float: left; padding: 0 100px 100px 0;"><h1>Home security choices</h1>
+            <p>Protect America offers the best home security systems and monitoring deals you'll find. We install premium security hardware with GE security products, and have the most flexible range of monitoring services, including cellular monitoring, two-way voice monitoring, HomePulse broadband monitoring, or standard talking command station monitoring over landline. We provide an extensive selection of GE wireless home security components. And, our security packages are designed to fit most any budget. Let us help you find the right system for your needs, so you can start protecting your home and family today. </p>
+        </div>
+    </div>
+
+{% comment %}
+<a id="faqs"></a>
+    <div class="big_wrapper" id="faq">
+      <div class="wrapper clearfix">
+        <h3>Frequently Asked Questions</h3>
+        <ul>
+          <li>
+            <div>
+              <a href="#">Does my local police department require that I have an alarm permit?</a>
+              <p>
+                Some police departments require that you have an alarm permit or at least just register with them so they know you have an alarm. In some cases, they will charge a fee for the permit. It is very important that you contact your local police department to find out if they require you to have a permit. In some cities, if you fail to secure the permit, the police will not allow us to dispatch them to your home in case of an alarm so make sure you contact your police right away.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What happens when my alarm system is triggered? How will the monitoring station respond?</a>
+              <p>When your alarm is triggered by a burglary protection device (door sensor, motion detector, etc), your system sends a signal to our monitoring facility. We will wait for 60 seconds to allow you the chance to enter your four-digit code. If you enter your code and disarm the system within 60 seconds, there will be no further response from the monitoring facility.<br><br>
+              If your alarm is triggered and you do not enter your four-digit code within 60 seconds, the Monitoring station will call your premise phone number on the account to ask for your verbal password and double check to see if it’s a false alarm. If you do not answer or if we do not get the correct password for any reason, we will dispatch local authorities to your home and then contact your emergency contact list.<br><br>
+              If your alarm system is triggered by a panic signal, the monitoring station will dispatch the police first, and then contact your emergency contact list.</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What happens at the end of my initial 36 month monitoring agreement?</a>
+              <p>
+                It's important to remember that your alarm monitoring service agreement is for 36 months. At the end of 36 months, the agreement will automatically switch to a month to month contract unless you provide at least a 30 days written notice before your renewal date.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Arm and Disarm my new alarm system?</a>
+              <p>You may arm the doors and windows while exiting by pressing "doors and windows” once on the panel. The alarm system will start beeping to inform you that the system is arming. Now you may exit.<br><br>
+              To arm your system using doors and windows with no ENTRY delay, press "Doors and windows" two times. This allows time to leave and will sound the alarm immediately if any sensors are tripped.<br><br>
+              To arm the system using doors, windows and motions: press "Doors and windows" one time and "Motions" one time. This will allow time to leave and also to return without causing a false alarm.<br><br>
+              To disarm your alarm system, type in your “master code” or “user code”.</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I send a panic signal?</a>
+              <p>
+                To send an Emergency, Fire or Police panic signal simply press and hold the appropriate button for 2 seconds, (Cross = Emergency, Fire = Fire, Police badge= Police).
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What is a “Duress code”?</a>
+              <p>
+                The “duress code” is a 4 digit code used in place of your master code when someone is forcing you to disarm your system. Using this code will disarm the alarm system and send a silent duress signal to the monitoring station.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <a href="#">Why is it important to notify us about a change of the Phone or IP service provider?</a>
+              <p>Not all service providers are compatible with your alarm system.<br><br>
+              Some providers do not ensure that communication has been restored to your alarm system.<br><br>
+              It is very important to inform us before and after any changes so that we can confirm that the service provider is compatible, also so that we can test and confirm that your system is communicating.<p>
+            </div>
+          </li>
+        </ul>
+
+
+        <ul class="col2">
+          <li>
+            <div>
+              <a href="#">Why is it important to notify us about a future move?</a>
+              <p>Your system is wireless which makes it easy for you to take the existing equipment with you and set it up at the new location. The best part is we allow you to transfer your system and your service at no charge!<br><br>
+              Contact Customer CARE at 1(800)-951-5111 to request a relocation kit.<br><br>
+              The “Relocation Kit” includes extra Velcro and mounting tape for your sensors. Use these to mount the sensors securely in the new home. Contact us during the move to make this process simple.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Change the Master Code?</a>
+              <p>Open the cover.<br>
+              Using the red numbered keys enter the existing 4-digit Master Code. The panel will say, "Please select from Start Menu."<br><br>
+              Press the Add button. The panel will say, "Select from Main Menu."<br><br>
+              Press the Access Code button one time. The panel will say, "Master Code, press again for next Access Code or Done to select."<br><br>
+              Press the Done button. The Panel will say, "Use numbered keys to enter Master Code."<br><br>
+              Enter the new Master Code. The panel will repeat the new Master Code.<br><br>
+              Close the cover when completed.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Program Additional User Codes?</a>
+              <p>Note: System can have up to five access codes in addition to the Master Code.<br><br>
+
+        Open the cover.<br><br>
+        Using the red numbered keys enter the 4-digit Master Code. The panel will say, "Please select from Start Menu."<br><br>
+        Press Add. The panel will say, "Please select from Main Menu".<br><br>
+        Press Access Code. The panel will say, "Master Code press again for next Access Code or Done to select".<br><br>
+        Press Access Code again. The panel will say, "Access code 1 press again for next access code or Done to select".<br><br>
+        Press Done. The panel will say, "Use number keys to enter access code 1".<br><br>
+        Enter access code. The panel will repeat access code.<br><br>
+        Close the cover when completed.<br><br>
+
+              Note: For additional access codes repeat steps 1 through 5. At Step 3 continue pressing "Access Code" button until you hear the next available location, i.e. access code 2.</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">Why is testing your system important?</a>
+              <p>
+                We encourage you to test your system at least once a month to ensure that the system is functioning properly. Also try our new live chat feature for any questions or concerns, by visiting www.ProtectAmerica.com. Once you are on the website, click the “chat” option on the top of the page and chat with a representative instantly.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What is the difference between the Master Code and a User Code?</a>
+              <p>The Master Code can be used to arm and disarm the system, add user codes, as well as change basic settings in the system programming.<br><br>
+              The user code (you can have up to 8 user codes in addition to the Master Code) can only be used to arm and disarm, (Ideal for Family members, Caretakers, cleaning staff…etc.).</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Test My System?</a>
+              <p>
+                To ensure your GE wireless alarm monitoring system is communicating properly, an alarm will have to be sent to the alarm company monitoring station. Call the alarm company monitoring station to place your account on test; this is to prevent false alarms. The number to the alarm company monitoring station is 877-274-0604. Ask for Customer Care. The alarm company monitoring station will ask you to provide them with your name or the address where the system is located and your password. You will be able to place the account on test for one hour. After your account has been placed on test, please follow these steps.<br><br>
+
+                
+                Arm system by pressing the Arm Doors and Windows button twice.<br><br>
+                Press the Arm Motion button once.<br><br>
+                When the panel stops beeping, your exit delay has expired. The system is now armed.<br><br>
+                Now open an entry/exit door. When the alarm sounds close the door. Open and close all remaining entry/exit doors.<br><br>
+                With the alarm still sounding, open and close all remaining doors and window that are contacted.<br><br>
+                With the alarm still sounding, walk in front of the motion detector.<br><br>
+                With the alarm still sounding, open the panel cover until the panel starts talking. Close the cover. This will activate the panel tamper.<br><br>
+                Now press and hold the Emergency Aux button for three seconds.<br><br>
+                Now press and hold the Emergency Police button for three seconds.<br><br>
+                Repeat this step on the second Emergency Aux button as well.<br><br>
+
+                Reminder: The motion detector can only be activated once every four minutes. If you walked in front of the motion you will need to wait at least four minutes, while the alarm is still sounding, before the motion detector will detect you again.<br><br>
+                Disarm the system with the 4-digit Master Code. The System Status light will be on.<br><br>
+                Press System Status button. This will indicate which zones have been activated.<br><br>
+
+                Important Note: Listen carefully to make sure that all zones have been activated. Not all panics will be mentioned. Only the last panic pressed will be mentioned.<br><br>
+                If any zones are not mentioned, re-arm the system. Trip only those specific devices that were not indicated by the panel.<br><br>
+                Enter the 4-digit Master Code to disarm system.<br><br>
+                Press System Status button. This will indicate that each specific device has been activated.<br><br>
+
+                Special Note: Listen carefully again to make sure all zones are mentioned, including the zones that were not mentioned the first time that the System Status was checked.<br><br>
+                Now that all the signals for all zones have been verified press System Status. Immediately after the system stops talking, press the Disarm button to clear the alarm memory.<br><br>
+                If all zones are closed, the System Status light will now be off.<br><br>
+                Wait 3 to 4 minutes and call the alarm company monitoring station to verify the signals have been received.<br><br>
+                If the alarm company monitoring station received the signals, notify the operator to take your account off test. Your monthly system test is now complete.<br><br>
+                If the alarm company monitoring station did not receive the signals, call Technical Support at (800) 951-5111 option 2.
+
+              </p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    
     <div class="clear"></div>
 </div>
-    <div id="big-choices">
-        <div id="home-security-choice" class="big-info" style="display:block">
-            <div class="big-wrapper">
-                <div class="clear"></div>
-                <table id="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <th><img src="{{ STATIC_URL }}img/protectamerica/protect-america-logo.png" alt="Protect America Logo" width="248" height="40" /></th>
-                            <th>ADT</th>
-                            <th>ADT Pulse</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="alpha title">Installation</td>
-                            <td class="alpha pa">$0</td>
-                            <td class="alpha">$49</td>
-                            <td class="alpha">$49</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Monthly Rate</td>
-                            <td class="pa">$19.99</td>
-                            <td>$42.99</td>
-                            <td>$50.99</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Homeowner's Discount</td>
-                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America's Homeowners Discount" width="40" height="40" /></td>
-                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Homeowners Dicount" width="40" height="40" /></td>
-                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse Homeowners Discount" width="40" height="40" /></td>
-                        </tr>
-                        <tr>
-                            <td class="title">24/7 Monitoring</td>
-                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has 24/7 Monitoring" width="40" height="40" /></td>
-                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT has 24/7 Monitoring" width="40" height="40" /></td>
-                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse has 24/7 Monitoring" width="40" height="40" /></td>
-                        </tr>
-                        <tr>
-                            <td class="title">Interactive Features*</td>
-                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has Interactive Apps" width="40" height="40" /></td>
-                            <td>&nbsp;</td>
-                            <td><img src="{{ STATIC_URL }}img/protectamerica/blue-check.png" alt="Check: ADT Pulse has Interactive Apps" width="40" height="40" /></td>
-                        </tr>
-                        <tr>
-                            <td class="title">Lifetime Replacement<br/> Parts Warranty</td>
-                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has Lifetime Replacement Parts Warranty" width="40" height="40" /></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Free EasyMove<br/> Moving Kit</td>
-                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has a Free EasyMove Moving Kit" width="40" height="40" /></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="title">Lowest Price Guaranteed</td>
-                            <td class="pa"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America has the Lowest Price Guaranteed" width="40" height="40" /></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td class="title omega">Locked-in Rate</td>
-                            <td class="pa omega"><img src="{{ STATIC_URL }}img/protectamerica/green-check.png" alt="Check: Protect America's Rates are Locked-In" width="40" height="40" /></td>
-                            <td class="omega">&nbsp;</td>
-                            <td class="omega">&nbsp;</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td><a href="{% url order-package %}" class="button-link header-button">Order Now</a></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </tfoot>
-                </table>
-    
-            </div>
-        
-        </div>
-    </div>
+{% endcomment %}
+
 
 {% endblock %}  

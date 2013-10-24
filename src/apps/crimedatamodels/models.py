@@ -80,32 +80,51 @@ class CityLocation(models.Model):
             self.city_name])
 
     def join_name(self,local=False):
+        kv = {}
+        slug = self.city_name_slug
         if "'" in self.city_name:
-            return self.city_name_slug.title()
+            kv['name'],kv['slug'] = slug.title(),slug 
+            return kv
 
-        names=self.city_name.split(' ')
+        names = self.city_name
+        if '(' or ')' in names:
+            names.replace('(','').replace(')','')
+        names = names.split(' ')
+
         if len(names) == 1:
-            name=self.city_name
+            name = self.city_name
             if local:
-                return name.lower()
+                kv['name'],kv['slug'] = name.lower(),slug
+                return kv
             else:
-                return name
-        elif len(names)==2:
+                kv['name'],kv['slug'] = name,slug
+                return kv
+        elif len(names) == 2:
             if '.' in self.city_name:
                 names=self.city_name.replace('.','').split(' ')
-                if len(names)==2:
-                    first,second=names[0],names[1].lower()
-                    return first+second
-                if len(names)==3:
-                    first,second,third=names[0],names[1].lower(),names[2].lower()
-                    return first+second+third
+                if len(names) == 2:
+                    first,second = names[0],names[1].lower()
+                    kv['name'],kv['slug'] = first+second,slug
+                    return kv
+                if len(names) == 3:
+                    first,second,third = names[0],names[1].lower(),names[2].lower()
+                    kv['name'],kv['slug'] = first+second+third,slug
+                    return kv
             first,second=names[0],names[1].lower()
-            name=first+second
-            return name
+            kv['name'],kv['slug'] = first+second,slug
+            return kv
         elif len(names) == 3:
             first,second,third=names[0],names[1].lower(),names[2].lower()
-            name=first+second+third
-            return name
+            kv['name'],kv['slug'] = first+second+third,slug
+            return kv
+        elif len(names) == 4:
+            first,second,third,fourth=names[0],names[1].lower(),names[2].lower(),names[3].lower()
+            kv['name'],kv['slug'] = first+second+third+fourth,slug
+            return kv
+        elif len(names) == 5:
+            first,second,third,fourth,fifth=names[0],names[1].lower(),names[2].lower(),names[3].lower(),names[4].lower()
+            kv['name'],kv['slug'] = first+second+third+fourth+fifth,slug
+            return kv
         else:
             pass
 

@@ -1,6 +1,8 @@
 from django import template
 from django.template import resolve_variable, NodeList
 from django.contrib.auth.models import Group
+from django.utils.safestring import mark_safe
+import re 
 
 register = template.Library()
 
@@ -53,3 +55,9 @@ class GroupCheckNode(template.Node):
             
         
         return self.nodelist_false.render(context)
+
+
+@register.filter(name='highlight')
+def highlight(text, filter):
+    pattern = re.compile(r"(?P<filter>%s)" % filter, re.IGNORECASE)
+    return mark_safe(re.sub(pattern, r"<span class='highlight'>\g<filter></span>", text))
