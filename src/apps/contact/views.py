@@ -176,7 +176,7 @@ def post_to_leadconduit(data,test=False,retry=False):
         if lead:
             lead.retry = True
             lead.save()
-        send_conduit_error(data,title='Unknown Lead Conduit exception',message='%s' % format_exc(),test=settings.LEAD_TESTING)
+        send_conduit_error(data,title='Unknown Lead Conduit exception (lead id = %s)' % data['lead_id'],message='%s' % format_exc(),test=settings.LEAD_TESTING)
 
 
 

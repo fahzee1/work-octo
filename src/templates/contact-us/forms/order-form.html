@@ -13,7 +13,11 @@
 
     {% endfor %}
 
+<<<<<<< HEAD
     <button>Continue <i class="icon-chevron-right"></i><img style="position:absolute;top:300px;left:310px;display:none;" id='form-loading' height='120px' width='120px' src="{{ STATIC_URL }}/img/loading2.gif"></button>
+=======
+    <button type = 'button' >Continue <i class="icon-chevron-right"></i></button>
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
     <div class="consent-box">
         <label class="consent-label" for="id_consent_box">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
         <div class="clear"></div>
@@ -71,7 +75,10 @@
 </script>
 {% endcomment %}
 <script type="text/javascript">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
 $(document).ready(function() {
     function validateEmail(email){
     var re = /\S+@\S+\.\S+/;
@@ -80,7 +87,11 @@ $(document).ready(function() {
 
     $('#package-form input').keypress(function(e){
         if(e.which == 13){
+<<<<<<< HEAD
             $('.sleepy button').click();
+=======
+            $('#package-form button').click();
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
         }
     });
     var submitting = false;
@@ -93,6 +104,7 @@ $(document).ready(function() {
         /*
         if (name == ''){
             alert('Please include your name before proceeding.');
+<<<<<<< HEAD
             _gaq.push(['_trackEvent', 'Form Error', 'Name Error', 'moving-kit']);
             return false;
         }
@@ -104,11 +116,18 @@ $(document).ready(function() {
         if (validateEmail(email) != true){
             alert ('Please input a valid email before proceeding.');
             _gaq.push(['_trackEvent', 'Form Error', 'Invalid Email Error', 'moving-kit']);
+=======
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
             return false;
         }
         if (phone == ''){
             alert('Please include your phone number before proceeding.');
+<<<<<<< HEAD
             _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', 'moving-kit']);
+=======
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
             return false;
         }
         */
@@ -127,6 +146,7 @@ $(document).ready(function() {
                 data: data,
                 dataType: "json",
                 success: newFormSuccess,
+<<<<<<< HEAD
                 error: newFormError,
                 beforeSend:function(){
                     $("#package-form .icon-chevron-right").hide();
@@ -139,6 +159,12 @@ $(document).ready(function() {
             $('#package-form #form-loading').hide();
             $("#package-form .icon-chevron-right").show();
             $('#package-form button').attr('disabled',false);
+=======
+                error: newFormError
+                });
+       
+         function newFormError(){
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
             if (!name && !phone){
                 $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
                 $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
@@ -159,8 +185,13 @@ $(document).ready(function() {
                 $('#id_phone').css('border-color','');
             }
         }
+<<<<<<< HEAD
          function newFormSuccess(json) {
             $('#package-form #form-loading').hide();
+=======
+
+        function newFormSuccess(json) {
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
             submitting = false;
             if(json.success) {
                 {% if thank_you %}
@@ -177,10 +208,44 @@ $(document).ready(function() {
                 ]);
                 return;
             }
+<<<<<<< HEAD
+=======
+        if(json.errors) {
+            $('#quote-form button').attr('disabled', false); 
+            $("#quote-form-error").show();
+            $("#quote-form-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+            
+            $("#quote-form-error ul").html(error_string);
+            } else $("#quote-form-error").hide();
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
         }
         return false;
         });
     });   
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1eae82562e89b4b26a96a525f8176d43a7f6c54e
 </script>
 {% endaddtoblock "js" %}
