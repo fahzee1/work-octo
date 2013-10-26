@@ -22,8 +22,29 @@
 #no-mobile-button {
     display: none;
 }
+.no-mobile {
+    display: none !important;
+}
 #hero-wrapper {
     z-index: auto;
+    #main-tablet-image {
+        position: absolute;
+        left:0;
+        top: 0px;
+        z-index: 1;
+        width: 492px;
+        height: 441px;
+        background: url('/static/img/banners/tablet-banner/main-tablet-image-768.png') no-repeat;
+    }
+    #tablet-background {
+        width: auto;
+        position: absolute;
+        bottom: 0%;
+        height: 100%;
+        left: 0;
+        z-index: 0;
+        
+    }
     #hero-image {
         z-index: auto;
         width: 100%;
@@ -58,6 +79,41 @@
                 
             }
         }
+        #tablet-deal {
+            width: 520px;
+
+            z-index: 500;
+            height: 100%;
+            position: relative;
+            img {
+                position: absolute;
+                right: 0%;
+                top: 43%;
+            }
+            ul {
+                position: absolute;
+                right: 0%;
+                bottom: 86px;
+                li {
+                    i {
+                        display: block;
+                        text-align: center;
+                        font-size: 48px;
+                        line-height: 56px;
+                    }
+                    float: left;
+                    color: #fff;
+                    width: 96px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    text-align: center;
+                    font-size: 10px;
+                    line-height: 12px;
+                    text-shadow: 0px 1px 1px rgba(0,0,0,.75);
+                }
+            }
+        }
+
     }
 
     #hero-content {
@@ -188,12 +244,12 @@
         background: @blue;
         .drop-shadow(0px, 2px, 5px, rgba(0,0,0,.7));
         button {
-            background: #1fb867;
+            background: #cf2a2c;
             i {
-                border-left: 1px solid @dark-green;
+                border-left: 1px solid @dark-red;
             }
             &:hover {
-                background: @green;
+                background: #a51b1d;
             }
         }
     }
@@ -619,6 +675,8 @@
         }
     }
     #main-promo {
+        z-index: 425;
+        background: #333;
         #main-promo-content {
             width: 100%;
             .main-promo-image {
@@ -630,9 +688,8 @@
                 width: auto;
             }
         }
-        background: #3d7394;
         &:hover {
-            background: #3d7394;
+            background: #333;
         }
     }
 }
