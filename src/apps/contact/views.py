@@ -54,7 +54,7 @@ def post_to_leadconduit(data,test=False,retry=False):
     #pdb.set_trace()
     try:
         lead = Lead.objects.get(id=data['lead_id'])
-    except:
+    except Lead.DoesNotExist:
         lead = None
 
     # items lead conduit needs
@@ -345,11 +345,10 @@ def basic_post_login(request):
         formset.form_values = f_values
         formset.trusted_url = trusted_url
         formset.ip_address = request.META.get('REMOTE_ADDR',None)
+        formset.retry = True
         formset.save()
-        
-        if request_data['lead_id'] is None:
-            request_data['lead_id'] = formset.id
-
+        request_data['lead_id'] = formset.id
+        '''
         lead_data.update(request_data)
         lead_data.update({'searchkeywords':searchkeywords,
                      'searchengine':request.session.get('search_engine',None),
@@ -359,7 +358,7 @@ def basic_post_login(request):
                      'phone':fdata['phone'],
                      'email':fdata['email']
                      })
-
+        '''
         # notes field information
         package = request.POST.get('package', None)
         notes_list = []
@@ -383,7 +382,7 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
+        #post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         #send_leadimport(emaildata)
         if not settings.LEAD_TESTING and fdata['email']:
             send_caroline_thankyou(request,emaildata,request_data['agent'])

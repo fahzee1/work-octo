@@ -53,6 +53,7 @@ $(document).ready(function() {
     var submitting = false;
 
     $('#quote-form button').click(function() {
+        $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('#quote-form');
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
@@ -84,10 +85,18 @@ $(document).ready(function() {
                 data: data,
                 dataType: "json",
                 success: newFormSuccess,
-                error: newFormError
+                error: newFormError,
+                beforeSend:function(){
+                    $("#quote-form .icon-chevron-right").hide();
+                    $('#quote-form #form-loading').show();
+                    $('#quote-form button').attr('disabled',true);
+                    }
                 });
        
          function newFormError(){
+            $('#quote-form #form-loading').hide();
+            $("#quote-form .icon-chevron-right").show();
+            $('#quote-form button').attr('disabled',false);
             if (!name && !phone){
                 $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
                 $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');

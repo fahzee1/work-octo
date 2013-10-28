@@ -356,6 +356,7 @@ $(document).ready(function() {
     var submitting = false;
 
     $('#quoteForm #lp2-button').click(function() {
+      $('#quoteForm #lp2-button').attr('disabled',true);
         var $form = $(this).closest('#quoteForm');
         var name = $form.find("#_name");
         var email = $form.find("#_email");
@@ -388,7 +389,7 @@ $(document).ready(function() {
             beforeSend:function(){
                     $("#quoteForm .icon-chevron-right").hide();
                     $('#quoteForm #form-loading').show();
-                    $('#quoteForm button').attr('disabled',true);
+                    $('#quoteForm #lp2-button').attr('disabled',true);
                     }
         });
 

@@ -44,6 +44,7 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.form-quote button').click(function() {
+        $('.form-quote button').attr('disabled',true);
         var $form = $(this).closest('.form-quote');
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
@@ -75,9 +76,17 @@ $(document).ready(function() {
             dataType: "json",
             success: newFormSuccess,
             error: newFormError,
+            beforeSend:function(){
+                    $(".form-quote .icon-chevron-right").hide();
+                    $('.form-quote #form-loading').show();
+                    $('.form-quote button').attr('disabled',true);
+                    }
         });
         
         function newFormError(){
+            $(".form-quote .icon-chevron-right").show();
+            $('.form-quote #form-loading').hide;
+            $('.form-quote button').attr('disabled',false);
             if (!name && !phone){
                 $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
                 $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');

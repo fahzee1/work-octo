@@ -17,7 +17,7 @@ class Command(BaseCommand):
 		logger.info('About to retry %s leads' % leads.count())
 		print 'about to retry %s leads' % leads.count()
 		for x in leads:
-			print 'retrying %s' % x.name
+			logger.info('retrying %s' % x.name)
 			data = {
 					'xxAccountId':settings.LEAD_ACCOUNT_ID,
 	                'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
