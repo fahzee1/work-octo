@@ -114,7 +114,7 @@ def query_by_state_city(state, city, get_content=True,local=False):
         raise Http404
 
     city_crime_objs = CrimesByCity.objects.filter(
-        fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
+        fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2014)
     per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
 
     '''
@@ -151,8 +151,8 @@ def query_by_state_city(state, city, get_content=True,local=False):
     weather_info = None
 
     context = {
-               'crime_stats': city_crime_objs[0],
-               'crimestats_per100k':per100[0],
+               'crime_stats': (city_crime_objs[0] if city_crime_objs else None),
+               'crimestats_per100k':(per100[0] if per100 else None),
                'state': state.abbreviation,
                'state_long': state.name,
                'city': city.city_name,
