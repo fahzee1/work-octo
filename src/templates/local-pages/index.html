@@ -1,183 +1,224 @@
-{% extends "local-pages/base.html" %}
-
+{% extends "base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
 {% block page_title %}{% if keyword %}{{ keyword }} |{% endif %} {{ city }}, {{ state }} | Protect America{% endblock %}
-
 {% block page_description %}{{ city }} {{ state }} Home Security Systems from Protect America. Voted #1 Home Security Company by Top Consumer Reviews{% endblock %}
-
 {% block page_keywords %}{{ city }} Home Security, Home Security {{ city }}, {{ city }} Alarm Monitoring, Home Security {{ city }} {{ state_long }}, {{ city }} Alarm Systems, {{ city }} Security Alarms, {{ city }} Alarm Security, {{ city }} Alarm Companies, {{ city }} Alarms, Alarms {{ city }} {{ state_long }}, {{ city }} Alarm, {{ city }} Smart Home, {{ city }} Home Automation, Home Security Systems {{ city }}, Security Systems {{ city }}, {{ city }} Alarm Company, Alarm Monitoring {{ city }}{% endblock %}
 
 {% block css %}
-{{ block.super }}
+<meta name="description" content="Protect America {% content_spinner "meta3" "looked at|talked with|gathered feedback from|collected the opinions of" %} many families from around {{ city }}, regarding their home security system needs and goals. We are proud to offer {% content_spinner "meta2" "affordable|low priced|top of the line" %} {% content_spinner 'meta1' 'alarm systems|home security systems|securtiy systems|GE systems| GE wireless home security systems' %} that will fulfill your home security needs and most importantly, fit your budget." />
 <meta name="robots" content="FOLLOW,INDEX"/>
 <meta name="revisit-after" content="2 days"/>
 <meta name="geo.region" content="US-{{ state }}" />
 <meta name="geo.placename" content="{{ city }}" />
 <meta name="geo.position" content="{{ lat }};{{ long }}" />
 <meta name="ICBM" content="{{ lat }}, {{ long }}" />
-{% endblock %}
-{% block comment %}
-Current Temp: <img src="{{ STATIC_URL }}/img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" alt="{{ weather_info.desc }}" title="{{ weather_info.desc }}"/> {{ weather_info.temp }}&deg;F
+<meta name = "viewport" content ="initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/local-generic.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/style-responsive.css">
 {% endblock %}
 
-{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
-    {% block quick-links %}
-	<ul id="quick-link-navigation">
-        <li class="city-info"><span id="city-info">{{ city }}, {{ state }}: <strong>Population:{% if latest_year.info %} {{ latest_year.info.population|intcomma }} {% else %} {{ latest_year_.population|intcomma }} {% endif %}</strong></span></li>
-        <li id="quick-social">                
-            <div id="google-button">
-                <g:plusone size="small" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Quick Social', '{{ page_name }}']);"></g:plusone>
-            </div>
-            <div id="facebook-button">
-                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.protectamerica.com&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=133351296712555" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Quick Social', '{{ page_name }}']);"></iframe>
-            </div>
-            <div class="clear"></div>
-        </li>
-        <li><a href="http://homesecuritysystems.protectamerica.com" title="See Home Security Deals in your Area" id="change-local-city">Change City</a></li>
-	</ul>
-	{% endblock %}
 {% block content %}
-{% addtoblock "css" %}
-<meta name="description" content="Protect America {% content_spinner "meta3" "looked at|talked with|gathered feedback from|collected the opinions of" %} many families from around {{ city }}, regarding their home security system needs and goals. We are proud to offer {% content_spinner "meta2" "affordable|low priced|top of the line" %} {% content_spinner 'meta1' 'alarm systems|home security systems|securtiy systems|GE systems| GE wireless home security systems' %} that will fulfill your home security needs and most importantly, fit your budget." />
 
-<style type="text/css">
-    .wrapper {
-        background: #fff\9;
-    }
-</style>
-{% endaddtoblock "css" %}
-</div>
-    {% include "banners/hero-images-old.html" %}
-
-<div class="wrapper">
-    {% include "order/call-box.html" %}
-<div id="protect-america-difference">
-	<div>
-		<h2>Protect America Home Security</h2>
-		<p>Even in a growing city like {{ city }}, Protect America has a {% content_spinner "diff1" "alarm system|home security system|securtiy system|GE system| GE wireless home security system" %} that will fulfill your home security needs and most importantly, fit your budget. Here are just a few of the reasons to trust your home security with Protect America:</p>
-	</div>
-	<div id="best-priced-home-security">
-    	<img src="/static/img/extra/dollar-sign-token.png" alt="Lowest Priced Home Security" title="Lowest Priced Home Security in {{ city }}, {{ state }} Guaranteed" />
-		<h3>The Best Priced Home Security System</h3>
-		<p>Tailored to {{ city }}, you get the best price around guaranteed</p>
-	</div>
-	<div id="all-day-monitoring">
-		<img src="/static/img/extra/24-7-token.png" title="24/7 Home Security Monitoring" alt="24/7 Home Security Monitoring" />
-
-		<h3>Affordable 24/7 Home Security Monitoring</h3>
-		<p>Keeping your home protected day and night</p>
-	</div>
-	<div id="ge-wireless-equipment">
-		<img src="/static/img/extra/wireless-token.png" title="GE Wireless Home Security Equipment" alt="GE Wireless Home Security Equipment" />
-
-		<h3>Simple to Use Wireless GE Security</h3>
-		<p>Trusted UL listed top of the line security equipment</p>
-	</div>
-	<div id="save-on-homeowners-insurance">
-    	<img src="/static/img/extra/20-percent-token.png" title="Up to 20% off Homeowner's Insurance with a Home Security System" alt="Up to 20% off Homeowner's Insurance with a Home Security System" />
-		<h3>Discounted Homeowner's Insurance in {{ city }}</h3>
-		<p>Protecting your home and saving you money</p>
-	</div>
-	<div id="replacement-parts-warranty">
-    	<img src="/static/img/extra/hammer-token.png" alt="Lifetime Replacement Parts Warranty" title="Lifetime Replacement Parts Warranty" />
-		<h3>Lifetime Replacement Parts Warranty</h3>
-		<p>Making sure you are always safe and secure</p>
-	</div>
-
-
-</div>
-
-<div id="home-security-advantage">
-	<div id="protect-america-advantage">
-		<div id="advantage-background">
-
-		</div>
-		<div id="protect-america-advantage-content">
-			<h2>Protect America's Home Security Advantage</h2>
-			<p>Protection for your residence {% content_spinner "ad1" "is not an easy decision|can be a difficult decision|may prove to be a difficult decision|is something you will want to give serious thought" %}. And with all the different home security companies in {{ city}}, you want to make sure you get the best deal.</p> 
-			<p>Protect America is proud to offer home security system packages for the {{ city }}, {{ state_long }} area that combine the best price with GE security equipment and service. {% content_spinner "ad2" "Look to see|You will see|See|Learn" %} how our alarm packages stack up against other {% content_spinner "ad3" "leaders|well-known competitors|competition" %} in the home security industry.</p>
-			<div class="clear"></div>
-		</div>
-	</div>
-	<table id="protect-america-vs-adt">
-		<thead>
-			<tr>
-				<th id="blank-box"></th>
-				<th id="protect-america-table-title">Protect America</th>
-				<th id="adt-table-title">ADT*</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td id="copper-package"><span>Copper Package</span>3 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="copper-package-protect-america-price"><span>{{ pricetable.COPPER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.COPPER.standard_monitoring }}/monthly)</td>
-				<td id="copper-package-adt-price"><span>{{ pricetable.COPPER.adt_upfront }}</span>({{ pricetable.COPPER.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="bronze-package"><span>Bronze Package</span>7 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="bronze-package-protect-america-price"><span>{{ pricetable.BRONZE.upfront|default_if_none:"FREE" }}</span>({{ pricetable.BRONZE.standard_monitoring }}/monthly)</td>
-				<td id="bronze-package-adt-price"><span>{{ pricetable.BRONZE.adt_upfront }}</span>({{ pricetable.BRONZE.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="silver-package"><span>Silver Package</span>10 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="silver-package-protect-america-price"><span>{{ pricetable.SILVER.upfront|default_if_none:"FREE" }}</span>({{ pricetable.SILVER.standard_monitoring }}/monthly)</td>
-				<td id="silver-package-adt-price"><span>{{ pricetable.SILVER.adt_upfront }}</span>({{ pricetable.SILVER.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="gold-package"><span>Gold Package</span>12 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="gold-package-protect-america-price"><span>{{ pricetable.GOLD.upfront|default_if_none:"FREE" }}</span>({{ pricetable.GOLD.standard_monitoring }}/monthly)</td>
-				<td id="gold-package-adt-price"><span>{{ pricetable.GOLD.adt_upfront }}</span>({{ pricetable.GOLD.adt_monitoring }}/monthly)</td>
-			</tr>
-			<tr>
-				<td id="platinum-package"><span>Platinum Package</span>15 Door / Window Sensors<br />1 Motion Detector</td>
-				<td id="platinum-package-protect-america-price"><span>{{ pricetable.PLATINUM.upfront|default_if_none:"FREE" }}</span>({{ pricetable.PLATINUM.standard_monitoring }}/monthly)</td>
-				<td id="platinum-package-adt-price"><span>{{ pricetable.PLATINUM.adt_upfront }}</span>({{ pricetable.PLATINUM.adt_monitoring }}/monthly)</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="clear"></div>
-</div>
-{% include "order/call-box.html" %}
-
-<div id="customer-testimonials">
-    <h2>Real {{ state_long }} Customers Talking about Protect America:</h2>
-    <ul id="main-testimonials">
-    {% testimonial_search "" "state={{ state }}&limit=10&words=75" %}
-    </ul>
-</div>
-<div id="protect-america-content">
-    <div id="more-choices">
-        <h2>{% content_spinner "more-choices-header" "More Home Security. More Choices.|More Choices. More Secure.|More Choices for Proven Home Security." %}</h2>
-        <p>{% content_spinner "mc1" "As far as|When it comes to|Regarding|When considering" %} your {% content_spinner "mc2" "options|choices" %} in {{ city }}, {% content_spinner "mc4" "you will find|many would agree" %} that Protect America is the best for {% content_spinner "mc5" "home security|home alarm systems|monitored home alarm systems" %}. {% content_spinner "mc6" "Protect America is|We are" %} an authorized dealer of {% content_spinner "m7" "premium GE Home Security|wireless GE home alarm systems" %} hardware and products. We also {% content_spinner "mc8" "have|offer|provide" %} the most flexible range of monitoring services including: {% content_spinner "mc9" "cellular| cellular GSM" %} monitoring, two-way voice monitoring, HomePulse {% content_spinner "mc10" "broadband|Internet|IP" %} monitoring, and our {% content_spinner "mc11" "standard|popular" %} monitoring over {% content_spinner "mc12" "landline|landline PSTN|landline telephone connection" %}.</p>
-        <p>Our {% content_spinner "mc13" "home security|home alarm" %} packages are {% content_spinner "mc14" "designed to fit|created to accommodate" %} most any budget while providing the {% content_spinner "mc15" "excellence and security|world-class security|proven security|proven protection" %} you deserve. That's why we're the only {% content_spinner "mc16" "home security|security" %} company to receive the Top Consumer Reviews 5-star Rating for home security. Let us help you secure your {{ city }}, {{ state }} home and find the right {% content_spinner "mc17" "wireless home alarm|GE home alarm|GE alarm" %} system {% content_spinner "mc18" "for your|to fit your|to meet your|to work with your" %} needs. </p>
-        <div class="button-link"><a href="http://www.protectamerica.com/pa/monitoring/security-system" title="Learn about Flexible Monitoring Solutions" alt="Learn about Flexible Monitoring Solutions">Flexible Monitoring Solutions ></a></div>
-
-    </div>
-    <div id="unrivaled-security">
-        <h2>Unrivaled Home Security Commitment</h2>
-        <p>{% content_spinner "un1" "With all the |Considering the" %} {% content_spinner "un2" "many options for| varied|numerous" %} security companies out there, {% content_spinner "un3" "you might ask yourself|you might wonder|you're right to ask|an important question for you may be" %}, Why choose Protect America? We {% content_spinner "un4" "looked at|talked with|gathered feedback from|collected the opinions of" %}  many families from around the United States including those in {{ city }}, regarding their home security system needs and goals. From this, we have created a range of GE Home Security packages that are designed {% content_spinner "un5" "to secure|to provide proven security" %} and protect your home. And being ranked the best home security company by Top Consumers Review should provide evidence that we are the best choice for a world-class security system. {% content_spinner "un6" "We are a company that is|We are fully|We are unquestionably" %} dedicated to serving your home security needs. {% content_spinner "un7" "We|At Protect America we" %} strive to provide you with the most affordable home security system, without compromising the safety of your home or family. </p>
-        <div class="button-link"><a href="http://www.protectamerica.com/ge-simon-security-systems/wireless-home-alarm/copper-package" title="Learn about the Copper Package" alt="Learn about the Copper Package">The Copper Package ></a></div>
-    </div>
-</div>
 {% addtoblock "js" %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.cycle.all.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $('.testimonials').cycle({
-        fx: 'fade',
-        timeout: 9000
-    });
-    $('body').css({
-        backgroundImage: 'url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg),url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-right.jpg)',
-        background: '#fff url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg) left bottom fixed no-repeat\9',
-    });
+    $('#review-cycle-container').cycle({
+                fx: 'scrollRight',
+                timeout:  15000,
+            });
 });
 </script>
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>
-<script>
-var options={ "publisher": "e120b57d-de18-41e4-9f08-4c602e36df66", "position": "left", "ad": { "visible": false, "openDelay": 5, "closeDelay": 0}, "chicklets": { "items": ["facebook", "twitter", "google", "email", "sharethis"]}};
-var st_hover_widget = new sharethis.widgets.hoverbuttons(options);
-</script>
 {% endaddtoblock "js" %}
-{% endblock %}  
+
+</div>
+
+	<div id="generic-banner">
+		<div class="wrapper">
+			<div class="left">
+				<h1>THE BEST HOME SECURITY IN {{city}}</h1>
+				<p>Over the past 20 years, Protect America has revolutionized the home security industry; making it easy to protect your family with quality home security products at an affordable price.</p>
+				<h2>Plans start at only</h2>
+				<h3>$19.99</h3>
+				<a class="button-link" title="Shop now" href="/shop-home-security-packages">Shop now <i class="icon-chevron-right"></i></a>
+			</div>
+			<div class="right">
+				<div id="hero-content">
+					<div id="slide-form-area">
+						{% include "order/quote-form-noview.html" with form=forms.basic %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>		
+
+<div class="wrapper">
+    
+	<div id="local-first-paragraph">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porttitor sapien pharetra felis interdum, ac dignissim tortor imperdiet. Ut dignissim lobortis elit, ut dignissim mauris egestas sit amet. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc euismod neque id placerat vestibulum. Sed blandit consectetur ipsum nec varius. Nullam purus urna, volutpat ac mi vel, hendrerit iaculis augue. Vivamus tortor lacus, aliquet sit amet suscipit ac, interdum vel sem.</p>
+	</div>
+
+</div>
+
+	<div id="local-banner">
+		<div class="left">
+			<p>Get Started Now,<br>Call Today!<br><strong>1-800-657-2717</strong></p>
+		</div>
+		<div class="right">
+			<p>Protecting your home in {{ city }} has never been easier.</p>
+		</div>
+
+		<div class="clear"></div>
+	</div>
+
+<div class="wrapper">
+
+	<div id="protect-america-content">
+	
+		<h2>With Protect America, you get more than just home security</h2>
+		
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id eros feugiat, vestibulum diam non, rhoncus neque. Cras porta in nibh eget consequat. Ut accumsan porttitor ante dignissim consequat. Suspendisse pulvinar at lectus at consectetur. Sed eu elit commodo, eleifend nibh in, ultricies mi. Mauris sed orci fermentum, ullamcorper ipsum non, interdum nisi. Vestibulum quis diam mauris.</p>
+
+		<p>Sed faucibus, felis et molestie tempus, massa risus ultrices est, convallis ultricies purus enim ultricies augue. In pretium aliquam diam. Suspendisse potenti. Integer non velit mauris. Donec sed pretium purus, eu fermentum erat. In laoreet euismod dolor. Etiam volutpat, orci sit amet viverra ultricies, nunc ipsum porta purus, sed mollis dui sapien sit amet orci. Maecenas non laoreet ante, quis sodales orci.</p>
+
+		<div class="content-smart-connect">
+
+			<p>We realize that modern homeowners need flexible, mobile products. That’s why Protect America offers security with landline, cellular, or broadband monitoring. Leave the house in a rush? Don’t worry: you can arm your security on the go with our mobile app.
+			<br><br>
+			<a class="button-link" title="Buy now" href="/shop-home-security-packages">Buy now <i class="icon-chevron-right"></i></a>
+			</p>	
+
+		</div>
+
+	</div>
+
+	<div id="main-benefits">
+		
+		<ul>
+	        <li>
+	            <h3><i class="icon-home"></i>Simply Peace of Mind.</h3>
+	            <p>Our systems provide state-of-the-art security so you don't have to worry about a thing.</p>
+	        </li>
+	        <li>
+	            <h3><i class="icon-user"></i>Security Designed for your Life.</h3>
+	            <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
+	        </li>
+	        <li>
+	            <h3><i class="icon-rss"></i>Easy Wireless Set-Up</h3>
+	            <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
+	        </li>
+	        <li id="omega">
+	            <h3><i class="icon-dollar"></i>The Best Price, Period.</h3>
+	            <p>Protect America makes it easy to secure and protect your home and family.</p>
+	        </li>
+	    </ul>
+
+	</div>
+
+	<div class="clear"></div>
+
+</div>
+
+	<div id="hero-testimonial">
+	    <div id="hero-testimonial-wrapper" class="wrapper">
+	        <div id="review-cycle-container">
+	            <div class="review">
+
+	                <p>My husband and I recently got married and bought a house. We were uncertain about which security system to go with but were convinced by your reviews, contract agreement, and pricing that Protect America was a good fit for us. From the day we received our security system in the mail Protect America remained in constant contact with us to ensure that the system was installed and working as soon as possible. Thank you for your great customer service, I now feel safer in my new home.</p>
+	                <b>Jamese of Lynnwood, IL <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+	            </div>
+	            <div class="review">
+	                <p>I have never felt more relieved knowing my family is safer now that I have your security system watching over our house 24/7 and 365 days of the year. Ms. Nwaka was very informative about the active and passive side of the security system and how well I could utilize them to their fullest extent. I am very happy that I chose Protect America, and commend you on having such an excellent and very friendly staff, who actually care about their clients.</p>
+	                <b>Edward of Duluth, MN <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+	            </div>
+	            <div class="review">
+	                <p>I phoned your company today after receiving a recommendation from my police dept. and going online to find out about what you offered. Mike was extremely helpful in explaining the many features available and the equipment you have to offer. I've never had a system before, so I appreciated his patience in dealing with me. It is so important to find businesses that are trustworthy in this day and age! Looking forward to my new protection</p>
+	                <b>Gail of Deer Park, TX <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+<div class="wrapper">
+
+	<div id="crime-statistics">
+		<h2>{{ city }}</h2>
+		<h3>2012 Crime statistics</h3>
+		<div class="pie">
+			<canvas id="canvas" height="265" width="265"></canvas>
+			<script>
+
+					var pieData = [
+									{
+									value: {{ crime_stats.robbery }},
+									color:"#cccccc"
+									},
+									{
+									value : {{ crime_stats.motor_vehicle_theft }}, 
+									color : "#ffc000"
+									},
+									{
+									value : {{ crime_stats.burglary }},
+									color : "#2f394a"
+									},
+									{
+									value : {{ crime_stats.larceny_theft }},
+									color : "#eb292b"
+									}
+
+					];
+
+					var myPie = new Chart(document.getElementById("canvas").getContext("2d")).Pie(pieData);
+	            
+	        </script>
+	        <div class="pie-legend">
+				<table width="110" border="0">
+				  <tr>
+				    <td width="10" bgcolor="#2f394a">&nbsp;</td>
+				    <td width="100">Burglary</td>
+				  </tr>
+				  <tr>
+				    <td width="10" bgcolor="#cccccc">&nbsp;</td>
+				    <td width="100">Robbery</td>
+				  </tr>
+				  <tr>
+				    <td width="10" bgcolor="#ffc000">&nbsp;</td>
+				    <td width="100">Auto theft</td>
+				  </tr>
+				  <tr>
+				    <td width="10" bgcolor="#eb292b">&nbsp;</td>
+				    <td width="100">Larceny</td>
+				  </tr>
+				</table>
+	        </div>
+	        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id eros feugiat, vestibulum diam non, rhoncus neque. Cras porta in nibh eget consequat. Ut accumsan porttitor ante dignissim consequat. Suspendisse pulvinar at lectus at consectetu. Sed eu elit commodo, eleifend nibh in, ultricies mi. Mauris sed orci fermentum, ullamcorper ipsum non, interdum nisi. Vestibulum quis diam mauris.</p>
+	    </div>
+			<div class="crime-tiles">
+				<div class="crime-tiles-four">
+					<h4>Burglary<h4>
+					<p>per 100k</p>
+					<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
+				</div>
+				<div class="crime-tiles-four">
+					<h4>Robbery<h4>
+					<p>per 100k</p>
+					<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
+				</div>
+				<div class="crime-tiles-four">
+					<h4>Auto theft<h4>
+					<p>per 100k</p>
+					<h3>{{ crimestats_per100k.motor_vehicle_theft_rank_per100k }}</h3>
+				</div>
+				<div class="crime-tiles-four" id="omega">
+					<h4>Larceny<h4>
+					<p>per 100k</p>
+					<h3>{{ crimestats_per100k.larceny_theft_rank_per100k }}</h3>
+				</div>
+			</div>
+		<div class="clear"></div>
+	</div>
+
+</div>
+
+{% endblock %}
+
+
