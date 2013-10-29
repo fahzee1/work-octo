@@ -23,57 +23,6 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          CrimeContent,
                                          MatchAddressLocation)
 
-WEATHER_CODE_MAP = {
-    '395': 'snow',
-    '392': 'snow',
-    '389': 'rain',
-    '386': 'rain',
-    '377': 'snow',
-    '374': 'snow',
-    '371': 'snow',
-    '368': 'rain',
-    '365': 'rain',
-    '362': 'snow',
-    '359': 'rain',
-    '356': 'rain',
-    '353': 'rain',
-    '350': 'snow',
-    '338': 'snow',
-    '335': 'snow',
-    '332': 'snow',
-    '329': 'snow',
-    '326': 'snow',
-    '323': 'snow',
-    '320': 'rain',
-    '317': 'rain',
-    '314': 'rain',
-    '311': 'rain',
-    '308': 'rain',
-    '305': 'rain',
-    '302': 'rain',
-    '299': 'rain',
-    '296': 'rain',
-    '293': 'rain',
-    '284': 'rain',
-    '281': 'rain',
-    '266': 'rain',
-    '263': 'rain',
-    '260': 'smoke',
-    '248': 'smoke',
-    '230': 'snow',
-    '227': 'snow',
-    '200': 'lightning',
-    '185': 'rain',
-    '182': 'rain',
-    '179': 'rain',
-    '176': 'rain',
-    '143': 'smoke',
-    '122': 'partly-cloudy',
-    '119': 'cloudy',
-    '116': 'partly-cloudy',
-    '113': 'sunny',
-}
-
 
 def query_weather(latitude, longitude, city, state):
     # first try to get cache
@@ -92,7 +41,7 @@ def query_weather(latitude, longitude, city, state):
 
         weather_info['temp'] = condition['temp_F']
         weather_info['desc'] = condition['weatherDesc'][0]['value']
-        weather_info['icon'] = WEATHER_CODE_MAP[condition['weatherCode']]
+        weather_info['icon'] = settings.WEATHER_CODE_MAP[condition['weatherCode']]
 
         cache.set('WEATHER:%s%s' %
             (city.lower().replace(' ', ''), state.lower()), weather_info, 60*60)
@@ -165,8 +114,10 @@ def query_by_state_city(state, city, get_content=True,local=False):
         raise Http404
 
     city_crime_objs = CrimesByCity.objects.filter(
-        fbi_city_name=city.city_name, fbi_state=state.abbreviation)
+        fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
+    per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
 
+    '''
     crime_stats = {}
     years = []
     for crimesbycity in city_crime_objs:
@@ -192,7 +143,7 @@ def query_by_state_city(state, city, get_content=True,local=False):
             pop_type = 'METROPOLIS'
     else:
         pop_type = 'METROPOLIS'
-
+    '''
 
      # Google Weather API
     #weather_info = query_weather(city.latitude, city.longitude,
@@ -200,27 +151,26 @@ def query_by_state_city(state, city, get_content=True,local=False):
     weather_info = None
 
     context = {
-               'crime_stats': (crime_stats if crime_stats else None),
-               'years': years[:3],
-               'latest_year': (crime_stats[years[0]] if crime_stats else None),
-               'latest_year_':(city_crime_objs[0] if city_crime_objs else None),
+               'crime_stats': city_crime_objs[0],
+               'crimestats_per100k':per100[0],
                'state': state.abbreviation,
                'state_long': state.name,
                'city': city.city_name,
                'lat': city.latitude,
                'long': city.longitude,
                'weather_info': weather_info,
-               'pop_type': pop_type,
+               #'pop_type': pop_type,
                'city_id': city_id
             }
 
     # get content
+    '''
     if get_content and city_crime_objs and crime_stats:
         content = CrimeContent.objects.get(
             grade=crime_stats[years[0]]['stats'].average_grade,
             population_type=pop_type)
         context.update(content=content.render(city))
-
+    '''
 
     try:
         #try to see if the local page has an address associated with it 
