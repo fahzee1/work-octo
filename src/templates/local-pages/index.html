@@ -196,22 +196,39 @@ $(document).ready(function() {
 				<div class="crime-tiles-four">
 					<h4>Burglary<h4>
 					<p>per 100k</p>
-					<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
+					{% if crimestats_per100k %} 
+						<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
+						
 				</div>
 				<div class="crime-tiles-four">
 					<h4>Robbery<h4>
 					<p>per 100k</p>
-					<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
+					{% if crimestats_per100k %} 
+						<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
 				</div>
 				<div class="crime-tiles-four">
 					<h4>Auto theft<h4>
 					<p>per 100k</p>
+					{% if crimestats_per100k %} 
 					<h3>{{ crimestats_per100k.motor_vehicle_theft_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
 				</div>
 				<div class="crime-tiles-four" id="omega">
 					<h4>Larceny<h4>
 					<p>per 100k</p>
+					{% if crimestats_per100k %} 
 					<h3>{{ crimestats_per100k.larceny_theft_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
 				</div>
 			</div>
 		<div class="clear"></div>
