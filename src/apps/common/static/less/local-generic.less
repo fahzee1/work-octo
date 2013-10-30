@@ -1,11 +1,18 @@
 @import "style.less";
 
 #generic-banner {
-    background: url(/static/img/base/city-generic.png) no-repeat fixed #f2eee7;
+    background: url(/static/img/local-pages/tan-bg.png) repeat;
     text-align: center;
     display: inline-block;
     width: 100%;
     position: relative;
+    overflow: hidden;
+    .map-background {
+        position: absolute;
+        left: -50px;;
+        top: 0;
+        z-index: -1;
+    }
     .left {
         float: left;
         width: 550px;
@@ -51,7 +58,7 @@
                     border: none;
                     background: none;
                     right: 0;
-                    top: 45px;
+                    top: 8px;
                     float: none;
                     margin-left: 0;
                     position: relative;
@@ -75,7 +82,7 @@
                         display: block;
                         min-width: 200px;
                         width: 85%;
-                        margin-bottom: 16px;
+                        margin-bottom: 8px;
                     }
                     label {
                         font-size: 10px;
@@ -86,6 +93,13 @@
                         display: block;
                         min-width: 200px;
                         width: 85%;
+                        text-align: left;
+                        &.consent-label-two {
+                            font-size: 8px;
+                            text-align: justify;
+                            width: 100%;
+                            color: #aaa;
+                        }
                     }
                     #third-party-container {
                         display: none;
@@ -273,6 +287,14 @@
     border-bottom: 1px solid #555;
     margin-bottom: 24px;
     #hero-testimonial-wrapper {
+        .reviews {
+            position: absolute;
+            right: 0;
+            top: 529px;
+            color: #eee;
+            text-transform: uppercase;
+            font-size: 8px;
+        }
         #review-cycle-container {
             height: 450px;
             width: 500px;

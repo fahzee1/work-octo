@@ -65,3 +65,7 @@ CACHES = {
 }
 
 GEOIP_LIBRARY_PATH = '/usr/local/lib/libGeoIP.so'
+
+LEAD_TESTING = True
+LOCAL_PAGE_PATH = '/Users/rylanfrancis/localpages'
+
