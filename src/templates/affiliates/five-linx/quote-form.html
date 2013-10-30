@@ -66,6 +66,7 @@ $(document).ready(function() {
                     'email': email,
                     'phone': phone, 
                     'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize()}
@@ -88,23 +89,23 @@ $(document).ready(function() {
             $('.form-quote #form-loading').hide;
             $('.form-quote button').attr('disabled',false);
             if (!name && !phone){
-                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
-                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+               $form.find("#id_name").css('border-color','red').attr('placeholder','Please Enter Name');
+               $form.find("#id_phone").css('border-color','red').attr('placeholder','Please Enter Phone Number');
                 alert('Please Enter Your Name and Phone Number.');
             }
             if (!phone && name){
-                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                $form.find("#id_phone").css('border-color','red').attr('placeholder','Please Enter Phone Number');
                 alert('Please Enter Your Phone Number.');
             }
             if (!name && phone){
-                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                $form.find("#id_name").css('border-color','red').attr('placeholder','Please Enter Your Name');
                 alert('Please Enter Your Name.');
             }
             if (name){
-                $('#id_name').css('border-color','');
+                $form.find("#id_name").css('border-color','');
             }
             if (phone){
-                $('#id_phone').css('border-color','');
+                $form.find("#id_phone").css('border-color','');
             }
         }
 
