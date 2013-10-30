@@ -30,7 +30,7 @@
     
     <title>{% block page_title %}{% endblock %}</title>
     <meta name="description" content="{% block page_description %}{% endblock %}" />
-    <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
+    {% comment %}<meta name="keywords" content="{% block page_keywords %}{% endblock %}" />{% endcomment %}
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/Chart.js"></script>
     <meta property="fb:admins" content="586942929" />
@@ -43,7 +43,7 @@
     {% endif %}
 {% endblock %}
     <meta name="rating" content="general" />
-    <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
+    <meta name="copyright" content="Copyright &copy; 2013 Protect America, Inc., all rights reserved" />
     <meta name="author" content="Protect America" />
     <meta name="contact_addr" content="webmaster@protectamerica.com" />
     <meta name="distribution" content="global" />
@@ -56,9 +56,8 @@
 {% block favicon %}
     <!-- Icons -->
     <!-- 16x16 -->
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico">
     <!-- 32x32 -->
-    <link rel="shortcut icon" href="/favicon.png">
     <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
     <!-- <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png"> -->
     <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
@@ -184,6 +183,8 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
 {% endcomment %}
             <div id="company-links">
+                <a href="http://www.myprotectamerica.com" class="interactive-customer" target="blank">Interactive Customers</a> 
+
                 <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" class="easy-chat-click" id="online-chat-button" target="blank">Online Chat</a>
 
                 <ul id="international-selection">
@@ -212,7 +213,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
         <div id="header">
 
             <a href="{% url 'home' %}">
-                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="company-logo">
             </a>
             <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
             {% if phone_number %}
@@ -297,6 +298,8 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/learn/" title="Learn about Home Security">Learn</a></li>
                 <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/" title="Get Help for your Home Security System">Support</a></li>
                 <li class="{% if 'order-package' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/products/order-package/" title="Order Home Security Today">Order</a></li>
+                <li class=""><a href="http://www.protectamerica.com/home-security-blog/" title="Order Home Security Today">Security Blog</a></li>
+
                 <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/sitemap/" title="View our Sitemap">Sitemap</a></li>
             </ul>
             <ul id="footer-care-nav">
@@ -305,7 +308,10 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/state-licenses/" title="View our Licenses for Each State">State Licenses</a></li>
                 <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
                 <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
+                <li class="{% if 'dealer-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/dealers" title="Interested in Selling Home Security? Join our Dealer Program">Dealer Program</a></li>
+
                 <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
+
             </ul> 
             <ul id="footer-contact-info">
                 <li><strong>Telephone</strong></li>
@@ -314,8 +320,12 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li><span>SAT</span> 8AM - 8PM CT</li>
                 <li><span>SUN</span> 9AM - 9PM CT</li>
                 <li id="footer-social-icons">
-                    <a href="http://www.twitter.com/ProtectAmerica" title="Visit our Twitter Page"><i class="icon-twitter"></i></a>
+                    <a href="https://plus.google.com/+ProtectAmerica/" title="Visit us on Google +"><i class="icon-google-plus"></i></a>
+
                     <a href="http://www.facebook.com/ProtectAmerica" title="Visit our Facebook Page"><i class="icon-facebook"></i>
+                    <div class="clear" style="padding-bottom: 16px;"></div>
+                    <a href="http://www.twitter.com/ProtectAmerica" title="Visit our Twitter Page"><i class="icon-twitter"></i></a>
+
                     <a href="http://www.youtube.com/user/ProtectAmerica" title="Watch our Tutorials and Videos on our YouTube Page"><i class="icon-youtube"></i></a>
 
                 </li>
@@ -398,9 +408,6 @@ $(document).ready(function(){
 
 </script>
 {% endcomment %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/placeholder.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
 
 
 {% render_block "js" %}

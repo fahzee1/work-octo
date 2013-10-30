@@ -112,7 +112,6 @@ def query_by_state_city(state, city, get_content=True,local=False):
     except CityLocation.DoesNotExist:
         print 'none'
         raise Http404
-
     city_crime_objs = CrimesByCity.objects.filter(
         fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2014)
     per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
