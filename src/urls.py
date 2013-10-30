@@ -405,6 +405,13 @@ elif settings.SITE_ID == 23:
 
     )
 
+# acn
+elif settings.SITE_ID == 24:
+    urlpatterns += patterns('',
+            dtt(r'^$', 'affiliates/acn/index.html', 'home'),
+    )
+
+
 
 # defaults
 else:
