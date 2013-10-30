@@ -468,8 +468,8 @@ else:
             
             # Equipment > Home Security
                 dtt(r'^equipment/home-security/?$', 'products/equipment/home-security.html', 'home-security-equipment', 'equipment'),
-                
-                    dtt(r'^equipment/home-security/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
+                # redirect from ge-simon-xt to simon-xt 
+                    dtt(r'^equipment/home-security/simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/wireless-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/motion-sensors/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/touch-screen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'home-security-equipment'),
