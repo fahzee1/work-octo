@@ -652,6 +652,8 @@ else:
 
             # Help Pages > Return Policy
                 dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),
+                dtt(r'^help/equipment-return/?$', 'help/equipment-return.html', 'equipment-return', 'help'),
+
 
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
