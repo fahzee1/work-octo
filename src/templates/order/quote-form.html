@@ -2,7 +2,9 @@
 <form id="quote-form" {% if page_name = "index" %}class="sleepy" {% else %} class="droopy"{% endif %}  method="post" action="">
     {% csrf_token %}
 	<div>
+	    {% block form-title %}
         <p class="form-title">Free Security Quote</p>
+        {% endblock %}
         {% block formfields %}
 		  <label>Name</label>
             {{ form.name }}
