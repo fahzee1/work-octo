@@ -10,9 +10,9 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
 from django.conf import settings
-
+from apps.testimonials.models import Textimonial
 from django.contrib.localflavor.us.us_states import US_STATES
-
+from django.db.models import Avg
 from apps.contact.forms import PAContactForm
 from django.template.defaultfilters import slugify
 from apps.crimedatamodels.models import (CrimesByCity,
@@ -113,8 +113,21 @@ def query_by_state_city(state, city, get_content=True,local=False):
         print 'none'
         raise Http404
     city_crime_objs = CrimesByCity.objects.filter(
-        fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2009)
+        fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
     per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
+
+    #this powers the 'rated 4 out of 5 stars customer reviews' part on local page
+    reviews = Textimonial.objects.filter(city=city.city_name,state=state.abbreviation)
+    if reviews:
+        total = reviews.count()
+        ratings_avg = reviews.aggregate(Avg('rating')).values()
+        first_sum = ratings_avg[0] * total
+        second_sum = first_sum + 4
+        final_sum = second_sum/(total+1)
+    else:
+        final_sum = 0
+        total = 0
+
 
     '''
     crime_stats = {}
@@ -150,8 +163,8 @@ def query_by_state_city(state, city, get_content=True,local=False):
     weather_info = None
 
     context = {
-               'crime_stats': city_crime_objs[0],
-               'crimestats_per100k':per100[0],
+               'crime_stats': (city_crime_objs[0] if city_crime_objs else None),
+               'crimestats_per100k':(per100[0] if per100 else None),
                'state': state.abbreviation,
                'state_long': state.name,
                'city': city.city_name,
@@ -159,7 +172,9 @@ def query_by_state_city(state, city, get_content=True,local=False):
                'long': city.longitude,
                'weather_info': weather_info,
                #'pop_type': pop_type,
-               'city_id': city_id
+               'city_id': city_id,
+               'review_avg':final_sum,
+               'review_total':total
             }
 
     # get content

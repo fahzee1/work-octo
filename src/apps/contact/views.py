@@ -21,6 +21,7 @@ from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
 render_to_string = loader.render_to_string
 TimeoutError = requests.exceptions.Timeout
+from requests.exceptions import SSLError
 logger = logging.getLogger('lead_conduit')
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -42,12 +43,16 @@ def send_leadimport(data):
 
     return True
 
-def send_conduit_error(data,title='LeadConduit Error',message=None,test=False):
+def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
+    if notify_all:
+        contact_list = ['cjogbuehi@protectamerica.com','development@protectamerica']
+    else:
+        contact_list = ['cjogbuehi@protectamerica.com']
     if not test:
         if not message:
             message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
         from_email = 'Protect America <noreply@protectamerica.com>'
-        send_mail(title,message,from_email,['cjogbuehi@protectamerica.com','development@protectamerica.com'])
+        send_mail(title,message,from_email,contact_list)
 
 
 def post_to_leadconduit(data,test=False,retry=False):
@@ -169,6 +174,16 @@ def post_to_leadconduit(data,test=False,retry=False):
             lead.save()
         send_conduit_error(data,title='Leadconduit Timeout',test=settings.LEAD_TESTING)
 
+    except SSLError:
+        logger.error('SSL Error. Pretty common should be retried and go through soon.')
+        if lead:
+            lead.retry = True
+            lead.save()
+        title='Leadconduit SSLError'
+        message='SSLError. Dont worry will be fixed soon'
+        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING,notify_all=False)
+
+
     except Exception as e:
         #something else happened email everyone
         from traceback import format_exc
@@ -176,7 +191,9 @@ def post_to_leadconduit(data,test=False,retry=False):
         if lead:
             lead.retry = True
             lead.save()
-        send_conduit_error(data,title='Unknown Lead Conduit exception (lead id = %s)' % data['lead_id'],message='%s' % format_exc(),test=settings.LEAD_TESTING)
+        title='Unknown Lead Conduit exception (lead id = %s)' % data['lead_id']
+        message='%s' % format_exc()
+        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING)
 
 
 
