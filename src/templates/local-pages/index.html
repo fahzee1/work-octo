@@ -125,7 +125,7 @@ $(document).ready(function() {
 	    <div id="hero-testimonial-wrapper" class="wrapper">
             <div class="reviews"  itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Protect America Rated:
                 <meta itemprop="name" content="{{ city }} Home Security Systems" />
-                <span itemprop="ratingValue">4.63 </span> out of 5 stars based on over <span itemprop="reviewCount"> 7288 </span> Protect America {{ state_long }} Customer Reviews
+                <span itemprop="ratingValue">{{ review_avg|floatformat }} </span> out of 5 stars based on over <span itemprop="reviewCount"> {{ review_total }} </span> Protect America {{ state_long }} Customer Reviews
             </div>
 	        <div id="review-cycle-container">
                 {% testimonial_search "" "limit=5&template=local&state={{ state }}&words=100" %}
@@ -137,6 +137,7 @@ $(document).ready(function() {
 <div class="wrapper">
 
 	<div id="crime-statistics">
+
 		<h2>{{ city }}</h2>
 		<h3>2012 Crime statistics</h3>
 		<div class="pie">
@@ -186,28 +187,46 @@ $(document).ready(function() {
 				  </tr>
 				</table>
 	        </div>
-	        <p>{% content_spinner "diff7" "FBI crime statistics about {{ city }} speak volumes. As you can see, burglaries take up a significant portion of crime in your area.|Crime statistics from the FBI are very telling. Burglary is a substantial portion of crime in {{ city }}.|{{ city }} crime statistics are an interesting glimpse into the types of challenges America faces." %} {% content_spinner "diff8" "While many cities in {{ state }} are great places to live (including {{ city }}), the danger of burglary is an ever-present reality.| While {{ city }} is a great place to live (along with many places in {{ state }} for that matter), burglary remains a reality.| While {{ city }} any many other cities in the great state of {{ state }} are fantastic places to live, the reality of burglary cannot be ignored." %} {% content_spinner "diff9" "Whether you know someone who has been victimized or you yourself have suffered a burglary, you know how traumatizing they can be.|We all know someone who has been victimized and how traumatizing the experience can be.|Whether you have experienced a break-in or know someone who has fallen victim, you know how traumatizing they can be." %} {% content_spinner "diff10" "A proactive approach to combatting burglary is the best method of defending your home, and a wireless security system is one of the greatest investments you can make for your household and family.|A proactive approach is the best way to combat burglary and defend your home and family.|Taking a proactive approach with a wireless alarm system can make all the difference in defending your home and family.|" %}</p>
+
+	        <p>{% content_spinner "diff7" "FBI crime statistics about {{ city }} speak volumes. As you can see, burglaries take up a significant portion of crime in your area.|Crime statistics from the FBI are very telling. Burglary is a substantial portion of crime in {{ city }}.|{{ city }} crime statistics are an interesting glimpse into the types of challenges America faces." %} {% content_spinner "diff8" "While many cities in {{ state }} are great places to live (including {{ city }}), the danger of burglary is an ever-present reality.| While {{ city }} is a great place to live (along with many places in {{ state }} for that matter), burglary remains a reality.| While {{ city }} and many other cities in the great state of {{ state }} are fantastic places to live, the reality of burglary cannot be ignored." %} {% content_spinner "diff9" "Whether you know someone who has been victimized or you yourself have suffered a burglary, you know how traumatizing they can be.|We all know someone who has been victimized and how traumatizing the experience can be.|Whether you have experienced a break-in or know someone who has fallen victim, you know how traumatizing they can be." %} {% content_spinner "diff10" "A proactive approach to combatting burglary is the best method of defending your home, and a wireless security system is one of the greatest investments you can make for your household and family.|A proactive approach is the best way to combat burglary and defend your home and family.|Taking a proactive approach with a wireless alarm system can make all the difference in defending your home and family.|" %}</p>
 	    </div>
 			<div class="crime-tiles">
 				<div class="crime-tiles-four">
 					<h4>Burglary<h4>
 					<p>per 100k</p>
-					<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
+					{% if crimestats_per100k %} 
+						<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
+						
 				</div>
 				<div class="crime-tiles-four">
 					<h4>Robbery<h4>
 					<p>per 100k</p>
-					<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
+					{% if crimestats_per100k %} 
+						<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
 				</div>
 				<div class="crime-tiles-four">
 					<h4>Auto theft<h4>
 					<p>per 100k</p>
+					{% if crimestats_per100k %} 
 					<h3>{{ crimestats_per100k.motor_vehicle_theft_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
 				</div>
 				<div class="crime-tiles-four" id="omega">
 					<h4>Larceny<h4>
 					<p>per 100k</p>
+					{% if crimestats_per100k %} 
 					<h3>{{ crimestats_per100k.larceny_theft_rank_per100k }}</h3>
+					{% else %}
+						<h5>no stats available</h5>
+					{% endif %}
 				</div>
 			</div>
 		<div class="clear"></div>
