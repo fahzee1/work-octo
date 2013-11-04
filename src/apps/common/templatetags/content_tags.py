@@ -14,6 +14,25 @@ from django.contrib.localflavor.us.us_states import US_STATES
 
 register = template.Library()
 
+
+def paragraph_spinner(parser,token):
+    """
+    use will be like this...
+    {% paragraph spinner %}
+        <p></p>
+        <p></p>
+        <p></p>
+    this paragraph should chose a random paragraph then that 
+    random paragraph has spinners within itself alos to spin 
+    content
+
+    """
+    tag_name = None
+    paragraph = None
+    try:
+        tag_name, paragraph = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError( '%r tag requires at least 1 arguments' % token.contents.split()[0]))
 def business_time(parser, token):
     # template block that will display contents only if
     # it is business time
