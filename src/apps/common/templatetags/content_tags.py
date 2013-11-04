@@ -11,6 +11,7 @@ from apps.common.models import SpunContent
 from apps.local.views import get_statecode
 from django.http import Http404
 from django.contrib.localflavor.us.us_states import US_STATES
+from bs4 import BeautifulSoup
 
 register = template.Library()
 
@@ -18,21 +19,32 @@ register = template.Library()
 def paragraph_spinner(parser,token):
     """
     use will be like this...
-    {% paragraph spinner %}
+    {% paragraph_spinner %}
         <p></p>
         <p></p>
         <p></p>
-    this paragraph should chose a random paragraph then that 
-    random paragraph has spinners within itself alos to spin 
-    content
+    {% endparagraph_spinner %}
+    chooses a random paragraph paragraph (p tag)
+    and render it
 
     """
-    tag_name = None
-    paragraph = None
-    try:
-        tag_name, paragraph = token.split_contents()
-    except ValueError:
-        raise template.TemplateSyntaxError( '%r tag requires at least 1 arguments' % token.contents.split()[0]))
+    nodelist = parser.parse(('endparagraph_spinner',))
+    parser.delete_first_token()
+    return ParagraphSpinnerNode(nodelist)
+
+paragraph_spinner = register.tag('paragraph_spinner',paragraph_spinner)
+
+class ParagraphSpinnerNode(template.Node):
+    def __init__(self,nodelist):
+        self.nodelist = nodelist
+
+    def render(self,context):
+        html_output = self.nodelist.render(context)
+        html = BeautifulSoup(html_output)
+        paragraphs = html.find_all('p')
+        return choice(paragraphs)
+
+
 def business_time(parser, token):
     # template block that will display contents only if
     # it is business time
