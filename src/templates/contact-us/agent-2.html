@@ -102,4 +102,116 @@
 
  
 <div class="clear"></div>
-{% endblock %}  
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    function validateEmail(email){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+    }
+
+    $('.sleepy input, .droopy input').keypress(function(e){
+        if(e.which == 13){
+            $('.sleepy button').click();
+        }
+    });
+    var submitting = false;
+
+    $('#form-area button').click(function() {
+        $('#form-area button').attr('disabled',true);
+        var $form = $(this).closest('#form-area');
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'form': 'basic',
+                    'referer_page':window.location.href,
+                    'form_values':$form.serialize()}
+    
+  
+        $.ajax({
+                type: "POST",
+                url: "/contact/ajaxpost/",
+                data: data,
+                dataType: "json",
+                success: newFormSuccess,
+                error: newFormError,
+                beforeSend:function(){
+                    $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                    $(".sleepy #form-loading, .droopy #form-loading").show();
+                    $("#form-area button").text('Thank You');
+                    $('#form-area button').attr('disabled',true);
+                    }
+                });
+       
+
+         function newFormError(){
+            $(".sleepy #form-loading, .droopy #form-loading").hide();
+            $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $('#form-area button').attr('disabled',false);
+            $("#form-area button").text('Get Started');
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
+        function newFormSuccess(json) {
+            $('#form-loading').hide();
+            submitting = false;
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                url = json.thank_you
+                window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }
+        return false;
+        });
+    });   
+</script>
+{% endblock %}
+{% endaddtoblock "js" %}
+
+{% endblock %}
