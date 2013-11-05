@@ -44,7 +44,10 @@ def affiliate_view(request, affiliate, page_name=None):
     except Affiliate.DoesNotExist:
         raise Http404
     landingpage = LandingPage.objects.filter(affiliate=affiliate)
-    htmlfilename = 'affiliates/%s/%s' % (landingpage[0].template.folder, landingpage[0].get_filename(page_name))
+    if landingpage:
+        htmlfilename = 'affiliates/%s/%s' % (landingpage[0].template.folder, landingpage[0].get_filename(page_name))
+    else:
+        raise Http404
 
     return simple_dtt(request, htmlfilename, {'page_name': page_name,
         'agent_id': affiliate.agent_id})
