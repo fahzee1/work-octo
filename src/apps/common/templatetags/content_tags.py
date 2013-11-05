@@ -12,14 +12,28 @@ from apps.local.views import get_statecode
 from django.http import Http404
 from django.contrib.localflavor.us.us_states import US_STATES
 from bs4 import BeautifulSoup
+from HTMLParser import HTMLParser
 
 register = template.Library()
 
+class MLStripper(HTMLParser):
+    def __init__(self):
+        self.reset()
+        self.fed = []
+    def handle_data(self, d):
+        self.fed.append(d)
+    def get_data(self):
+        return ''.join(self.fed)
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
 
 def paragraph_spinner(parser,token):
     """
     use will be like this...
-    {% paragraph_spinner %}
+    {% paragraph_spinner "p1" %}
         <p></p>
         <p></p>
         <p></p>
@@ -28,21 +42,85 @@ def paragraph_spinner(parser,token):
     and render it
 
     """
+    try:
+        tag_name,content_name = token.split_contents()
+    except ValueError:
+        raise template.TemplateSyntaxError(
+            '%r tag requires at least 1 arguments' %
+            token.contents.split()[0])
     nodelist = parser.parse(('endparagraph_spinner',))
     parser.delete_first_token()
-    return ParagraphSpinnerNode(nodelist)
+    return ParagraphSpinnerNode(nodelist,content_name[1:-1])
 
 paragraph_spinner = register.tag('paragraph_spinner',paragraph_spinner)
 
 class ParagraphSpinnerNode(template.Node):
-    def __init__(self,nodelist):
+    def __init__(self,nodelist,content_name):
+        self.request = template.Variable('request')
         self.nodelist = nodelist
+        self.name = content_name
 
     def render(self,context):
+        request = self.request.resolve(context)
         html_output = self.nodelist.render(context)
+        default = '/virtual/customer/www2.protectamerica.com/localpages/'
+        path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
+        chop_up = path.split('/')
+        state, city = chop_up[1], chop_up[2]
+        if '.' in city:
+            f,l = city.split('.')
+            city = f+ '.'+' '+l
+        if '-' in city:
+            if city.count('st',0,2) == 1:
+                f,l = city.split('-')
+                city = f+'.'+' '+l
+            else:
+                city = city.replace('-',' ')
+        statecode = get_statecode(state)
+        json_file = statecode+'/'+city.title()+'/paragraph.json'
         html = BeautifulSoup(html_output)
         paragraphs = html.find_all('p')
-        return choice(paragraphs)
+        LOCAL_PAGE_PATH = getattr(settings,'LOCAL_PAGE_PATH',default)
+        os.chdir(LOCAL_PAGE_PATH)
+        if os.path.exists(json_file):  
+            try:
+                the_file = open(json_file,'r+')
+                new_file = json.load(the_file)
+                try:
+                    content = new_file[self.name]
+                except KeyError:
+                    if self.name not in new_file.keys():
+                        p = str(paragraphs[0])
+                        final = strip_tags(p)
+                        obj = {self.name:final}
+                        new_file.update(obj)
+                        with open(json_file, 'w+') as f:
+                            f.write(json.dumps(new_file))
+                        content = new_file[self.name]
+
+            except IOError:
+                raise Http404
+
+        else:
+            if not os.path.exists(statecode+'/'+city.title()):
+                os.makedirs(statecode+'/'+city.title())
+                os.chdir(statecode+'/'+city.title())
+                p = str(paragraphs[0])
+                final = strip_tags(p)
+                obj = {self.name:final}
+                with open('paragraph.json',"w+") as f:
+                    f.write(json.dumps(obj))
+                content = obj[self.name]
+            else:
+                os.chdir(statecode+'/'+city.title())
+                p = str(paragraphs[0])
+                final = strip_tags(p)
+                obj = {self.name:final}
+                with open('paragraph.json',"w+") as f:
+                    f.write(json.dumps(obj))
+                content = obj[self.name]
+
+        return content
 
 
 def business_time(parser, token):
@@ -107,10 +185,10 @@ class ContentSpinnerNode(template.Node):
         self.replacements = content_replacements.split('|')
    
     def render(self, context):
-        #pdb.set_trace()
         request = self.request.resolve(context)
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
-        city,state = path.split('/')
+        chop_up = path.split('/')
+        state, city = chop_up[1], chop_up[2]
         if '.' in city:
             f,l = city.split('.')
             city = f+ '.'+' '+l
