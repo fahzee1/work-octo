@@ -316,8 +316,10 @@ def prepare_data_from_request(request):
 
 def basic_post_login(request):
     # url for Trusted Form 
+    pdb.set_trace()
     trusted_url = request.POST.get('trusted_form',None)
     f_values = request.POST.get('form_values',None)
+    browser = request.META.get('HTTP_USER_AGENT',None)
     lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
