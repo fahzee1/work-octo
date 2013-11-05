@@ -378,7 +378,8 @@ $(document).ready(function() {
                     'form': 'basic',
                     'csrfmiddlewaretoken':'{{csrf_token}}',
                     'referer_page':window.location.href,
-                    'form_values':$form.serialize()}
+                    'form_values':$form.serialize(),
+                    'operating_system':OSName}
         $.ajax({
             type: "POST",
             url: "{% url contact-ajax %}",

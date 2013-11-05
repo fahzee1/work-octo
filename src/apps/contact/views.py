@@ -316,10 +316,10 @@ def prepare_data_from_request(request):
 
 def basic_post_login(request):
     # url for Trusted Form 
-    pdb.set_trace()
     trusted_url = request.POST.get('trusted_form',None)
     f_values = request.POST.get('form_values',None)
     browser = request.META.get('HTTP_USER_AGENT',None)
+    OS = request.POST.get('operating_system',False)
     lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
@@ -348,6 +348,8 @@ def basic_post_login(request):
         formset.trusted_url = trusted_url
         formset.ip_address = request.META.get('REMOTE_ADDR',None)
         formset.retry = True
+        formset.browser = browser
+        formset.operating_system = OS
         formset.save()
         request_data['lead_id'] = formset.id
         '''
