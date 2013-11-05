@@ -409,6 +409,10 @@ elif settings.SITE_ID == 23:
 elif settings.SITE_ID == 24:
     urlpatterns += patterns('',
             dtt(r'^$', 'affiliates/acn/index.html', 'home'),
+            dtt(r'^features/$', 'affiliates/acn/features.html', 'features'),
+            dtt(r'^packages/$', 'affiliates/acn/packages.html', 'packages'),
+            dtt(r'^order/$', 'affiliates/acn/order.html', 'order'),
+            dtt(r'^support/$', 'affiliates/acn/support.html', 'support'),
     )
 
 
