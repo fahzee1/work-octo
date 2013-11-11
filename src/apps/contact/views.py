@@ -319,7 +319,8 @@ def basic_post_login(request):
     trusted_url = request.POST.get('trusted_form',None)
     f_values = request.POST.get('form_values',None)
     browser = request.META.get('HTTP_USER_AGENT',None)
-    OS = request.POST.get('operating_system',False)
+    OS = request.POST.get('operating_system',None)
+    device = request.POST.get('device',None)
     lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
@@ -350,6 +351,7 @@ def basic_post_login(request):
         formset.retry = True
         formset.browser = browser
         formset.operating_system = OS
+        formset.device = device
         formset.save()
         request_data['lead_id'] = formset.id
         '''

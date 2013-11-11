@@ -576,6 +576,30 @@ var google_remarketing_only = true;
     if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
 </script>
 {% endblock %}
+{% block device-tracking %}
+<script type="text/javascript">
+$(document).ready(function(){
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+var device = getParameterByName('device');
+if (device == 'm'){
+    alert('mobile');
+    var device = 'mobile'
+}
+if (device == 't'){
+    var device = 'tablet';
+}
+if (device == 'd'){
+ var device = 'desktop';
+}
+
+});
+</script>
+{% endblock %}
 
 </body>
 </html>
