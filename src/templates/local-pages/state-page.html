@@ -1,1 +1,18 @@
 {% extends "base.html" %}
+{% block content %}
+
+	   {% for key, value in cities.iteritems %}
+    	<div id="{{ key }}_cities" class="alphabet-content">
+        <h2>{{ key }}</h2>
+        <ul>
+        {% for city in value %}
+            <li><a href="{% url local-page-keyword2 state city.city_name %}">{{ city.city_name }}</a></li>
+        {% endfor %}
+        </ul>
+        {% comment %}
+        "/{{ state }}/{{ city.city_name }}/"
+        {% endcomment %}
+    </div>
+    <div class="clear"></div>
+    {% endfor %}
+{% endblock %}

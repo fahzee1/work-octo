@@ -141,7 +141,6 @@ def local_page(request, state, city=None, keyword=None):
 
     background_time = get_timezone(crime_stats_ctx['state'])
     crime_stats_ctx['background_time'] = background_time
-
     if dsettings.READY_FOR_STATIC and city: 
         if (city.upper(),crime_stats_ctx['state']) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
             background_time=get_timezone(crime_stats_ctx['state'])
@@ -156,6 +155,17 @@ def local_page(request, state, city=None, keyword=None):
                         expires=datetime.datetime.now() + expire_time)
             return response
     elif not city:
+        try:
+            state = State.objects.get(abbreviation=state)
+            cities = CityLocation.objects.filter(state=state.abbreviation)
+            city_by_first_letter = {}
+            for city in cities:
+                if city.city_name[0] not in city_by_first_letter:
+                    city_by_first_letter[city.city_name[0]] = []
+                city_by_first_letter[city.city_name[0]].append(city)
+            crime_stats_ctx.update({'cities':city_by_first_letter})
+        except State.DoesNotExist:
+            pass
         response = render(request,'local-pages/state-page.html',crime_stats_ctx)
         expire_time = datetime.timedelta(days=90)
         response.set_cookie('affkey',
