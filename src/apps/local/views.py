@@ -165,7 +165,7 @@ def local_page(request, state, city=None, keyword=None):
                 city_by_first_letter[city.city_name[0]].append(city)
             crime_stats_ctx.update({'cities':city_by_first_letter})
         except State.DoesNotExist:
-            pass
+            raise Http404
         response = render(request,'local-pages/state-page.html',crime_stats_ctx)
         expire_time = datetime.timedelta(days=90)
         response.set_cookie('affkey',
