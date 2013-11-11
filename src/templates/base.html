@@ -480,6 +480,7 @@ $(document).ready(function(){
 {% if use_call_measurement %}
 <script type="text/javascript"> 
     var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'i10237' or request.COOKIES.refer_id == 'a01415' or request.COOKIES.refer_id == 'i10237' or request.GET.agent == 'i10237' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'i10240' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}";
+    var device = getParameterByName('device');
     var thisref = document.referrer.replace(/&/g, "zzzzz");
     var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
     document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
@@ -574,32 +575,16 @@ var google_remarketing_only = true;
     if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
     if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
     if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
-</script>
-{% endblock %}
-{% block device-tracking %}
-<script type="text/javascript">
-$(document).ready(function(){
-    function getParameterByName(name) {
+
+ function getParameterByName(name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
         return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
-var device = getParameterByName('device');
-if (device == 'm'){
-    alert('mobile');
-    var device = 'mobile'
-}
-if (device == 't'){
-    var device = 'tablet';
-}
-if (device == 'd'){
- var device = 'desktop';
-}
-
-});
 </script>
 {% endblock %}
+
 
 </body>
 </html>

@@ -314,13 +314,28 @@ def prepare_data_from_request(request):
             'thank_you_url': thank_you_url,
         }
 
+def device_type(request,device):
+    #opm only wants to use cookie tracking on mobile
+    if device == 'm':
+        device = 'mobile'
+        request.COOKIES['device'] = device
+    if device == 't':
+        device = 'tablet'
+    if device == 'd':
+        device = 'desktop'
+    if not device:
+        device = 'no device parameter found'
+    return device
+
+
 def basic_post_login(request):
     # url for Trusted Form 
     trusted_url = request.POST.get('trusted_form',None)
     f_values = request.POST.get('form_values',None)
     browser = request.META.get('HTTP_USER_AGENT',None)
     OS = request.POST.get('operating_system',None)
-    device = request.POST.get('device',None)
+    get_device = request.POST.get('device',None)
+    device = device_type(request,get_device)
     lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
