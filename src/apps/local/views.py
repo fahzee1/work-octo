@@ -113,9 +113,9 @@ def local_page_wrapper(request, keyword, city, state):
 
 
 
-def local_page(request, state, city, keyword=None):
+def local_page(request, state, city=None, keyword=None):
     crime_stats_ctx = query_by_state_city(state, city)
-    if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
+    if crime_stats_ctx.get('city_id',False) is not None and dsettings.SITE_ID == 4:
         json_file = os.path.join(settings.PROJECT_ROOT, 'src',
             'apps', 'crimedatamodels', 'external', 'city_state_redirect.json')
         json_data = open(json_file)
@@ -141,8 +141,7 @@ def local_page(request, state, city, keyword=None):
 
     background_time = get_timezone(crime_stats_ctx['state'])
     crime_stats_ctx['background_time'] = background_time
-
-    if dsettings.READY_FOR_STATIC: 
+    if dsettings.READY_FOR_STATIC and city: 
         if (city.upper(),crime_stats_ctx['state']) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
             background_time=get_timezone(crime_stats_ctx['state'])
             try:
@@ -155,7 +154,28 @@ def local_page(request, state, city, keyword=None):
                         domain='.protectamerica.com',
                         expires=datetime.datetime.now() + expire_time)
             return response
+    elif not city:
+        try:
+            state = State.objects.get(abbreviation=state)
+            cities = CityLocation.objects.filter(state=state.abbreviation)
+            city_by_first_letter = {}
+            for city in cities:
+                if city.city_name[0] not in city_by_first_letter:
+                    city_by_first_letter[city.city_name[0]] = []
+                city_by_first_letter[city.city_name[0]].append(city)
+            crime_stats_ctx.update({'cities':city_by_first_letter})
+        except State.DoesNotExist:
+            raise Http404
+        response = render(request,'local-pages/state-page.html',crime_stats_ctx)
+        expire_time = datetime.timedelta(days=90)
+        response.set_cookie('affkey',
+                        value='%s' % (state),
+                        domain='.protectamerica.com',
+                        expires=datetime.datetime.now() + expire_time)
+        return response
+
     response = render(request,'local-pages/index.html',crime_stats_ctx)
+
     return response
 
 
@@ -191,22 +211,25 @@ def local_city(request, state):
                 'state': state.abbreviation,
             }, context_instance=RequestContext(request))
 
-def local_page_wrapper2(request,city,state):
+def local_page_wrapper2(request,state,city=None):
     statecode = get_statecode(state)
     if not statecode:
         raise Http404
-    if '-' and '.' in city:
-        city=city.replace('-',' ').replace('.','')
-    if '-' in city:
-        city=city.replace('-',' ')
-    if '.' in city:
-        city=city.replace('.',' ')
-    if '(' in city or ')' in city:
-        city=city.replace('(','').replace(')','')
-    if ',' in city:
-        city=city.replace(',','')
+    if city:
+        if '-' and '.' in city:
+            city=city.replace('-',' ').replace('.','')
+        if '-' in city:
+            city=city.replace('-',' ')
+        if '.' in city:
+            city=city.replace('.',' ')
+        if '(' in city or ')' in city:
+            city=city.replace('(','').replace(')','')
+        if ',' in city:
+            city=city.replace(',','')
 
-    return local_page(request,statecode,city.title())
+        return local_page(request,statecode,city.title())
+    else:
+        return local_page(request,statecode)
 
 
 

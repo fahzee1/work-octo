@@ -752,7 +752,8 @@ else:
         #url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             #'apps.local.views.local_page_wrapper',
             #name='local-page-keyword'),
-        url(r'^(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-keyword2'),
+        url(r'^home-security/(?P<state>[A-Za-z\-]+)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-keyword2'),
+        url(r'^home-security/(?P<state>[A-Za-z\-]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-state2'),
 
         url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.sitemap',
@@ -1341,7 +1342,7 @@ urlpatterns += patterns('',
     ('equipment/home-screen/touch-screen/?$',
         RedirectView.as_view(url='/equipment/home-security/touch-screen/',permanent=True)),
     ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
-        RedirectView.as_view(url='/%(city)s/%(state)s/',permanent=True)),
+        RedirectView.as_view(url='/home-security/%(state)s/%(city)s/',permanent=True)),
 
 )
 
