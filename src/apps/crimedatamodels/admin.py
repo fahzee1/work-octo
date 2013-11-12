@@ -1,6 +1,6 @@
 from django.contrib import admin
 from apps.crimedatamodels.models import (CrimesByCity, CityCrimeStats, CrimeContent, 
-										 State, CityLocation, ZipCode, MatchAddressLocation,LocalAddress)
+										 State, CityLocation, ZipCode, MatchAddressLocation,LocalAddress,StateCrimeStats)
 
 class CrimesByCityAdmin(admin.ModelAdmin):
     model = CrimesByCity
@@ -37,6 +37,10 @@ class StateAdmin(admin.ModelAdmin):
 
 admin.site.register(State,StateAdmin)
 
+class CrimeStateAdmin(admin.ModelAdmin):
+	model = StateCrimeStats
+
+admin.site.register(StateCrimeStats,CrimeStateAdmin)
 
 
 
