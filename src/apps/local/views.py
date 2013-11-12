@@ -22,7 +22,7 @@ from apps.crimedatamodels.models import (State,
                                          CityLocation,
                                          ZipCode,
                                          CrimesByCity,
-                                         CityCrimeStats)
+                                         StateCrimeStats)
 
 
 def get_timezone(state):
@@ -165,8 +165,9 @@ def local_page(request, state, city=None, keyword=None):
                 if city.city_name[0] not in city_by_first_letter:
                     city_by_first_letter[city.city_name[0]] = []
                 city_by_first_letter[city.city_name[0]].append(city)
-            crims_stats = Crimes
-            crime_stats_ctx.update({'cities':city_by_first_letter})
+            crime_stats = StateCrimeStats.objects.filter(state=state,year=2012)
+            crime_stats_ctx.update({'cities':city_by_first_letter,
+                                    'crime_stats':(crime_stats[0] if crime_stats else None)})
         except State.DoesNotExist:
             raise Http404
         response = render(request,'local-pages/state-page.html',crime_stats_ctx)
