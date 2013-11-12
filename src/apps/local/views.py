@@ -20,7 +20,9 @@ from apps.local.sitemaps import KeywordCitySitemap, KeywordStateSitemap, Keyword
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
-                                         ZipCode)
+                                         ZipCode,
+                                         CrimesByCity,
+                                         CityCrimeStats)
 
 
 def get_timezone(state):
@@ -163,6 +165,7 @@ def local_page(request, state, city=None, keyword=None):
                 if city.city_name[0] not in city_by_first_letter:
                     city_by_first_letter[city.city_name[0]] = []
                 city_by_first_letter[city.city_name[0]].append(city)
+            crims_stats = Crimes
             crime_stats_ctx.update({'cities':city_by_first_letter})
         except State.DoesNotExist:
             raise Http404

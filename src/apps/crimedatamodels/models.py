@@ -289,7 +289,7 @@ class StateCrimeStats(models.Model):
     state = models.ForeignKey(State)
     year = models.IntegerField()
     number_of_cities = models.IntegerField()
-    population = models.IntegerField()
+    population = models.IntegerField(null=True)
     aggravated_assault = models.IntegerField(null=True)
     arson = models.IntegerField(null=True)
     burglary = models.IntegerField(null=True)
