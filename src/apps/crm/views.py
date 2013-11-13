@@ -2,7 +2,7 @@ import urllib2
 import feedparser
 import pdb
 from datetime import datetime
-
+from itertools import chain
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import login, authenticate, logout
@@ -26,6 +26,19 @@ from django.db.models import Q
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
                         content_type='application/json; charset=UTF-8')
+
+
+
+
+def count_gmail_cities(city,state):
+    q1 = Q(city=city)| Q(city=city.lower())
+    ceo_list = CEOFeedback.objects.filter(q1,state=state,feedback_type='positive')
+    the_list = []
+    for x in ceo_list:
+        if '@gmail' in x.email or '@GMAIL' in x.email:
+            the_list.append(x)
+    return len(the_list)
+
 
 
 
@@ -84,10 +97,12 @@ def crm_render_wrapper(request, template, context):
         # CEO FEEDBACK COUNTS
         ceo_feedbacks = CEOFeedback.objects.all().count()
         unread_feedback_count = CEOFeedback.objects.filter(date_read=None).count()
-        general_feeback_count = CEOFeedback.objects.filter(feedback_type='general').count()
-        positive_feedback_count = CEOFeedback.objects.filter(feedback_type='positive').count()
-        negative_feedback_count = CEOFeedback.objects.filter(feedback_type='negative').count()
-        other_count = CEOFeedback.objects.filter(feedback_type='other').count()
+        read_feedback_count = CEOFeedback.objects.filter(read=True).count()
+        general_feeback_count = CEOFeedback.objects.filter(feedback_type='general',read=False,converted=False).count()
+        positive_feedback_count = CEOFeedback.objects.filter(feedback_type='positive',read=False,converted=False).count()
+        negative_feedback_count = CEOFeedback.objects.filter(feedback_type='negative',read=False,converted=False).count()
+        other_count = CEOFeedback.objects.filter(feedback_type='other',read=False,converted=False).count()
+        converted_count = CEOFeedback.objects.filter(converted=True).count()
 
         counts['textimonials'] = (unread_textimonial_count,
                                   displayed_textimonial_count,
@@ -98,7 +113,41 @@ def crm_render_wrapper(request, template, context):
                                   general_feeback_count,
                                   positive_feedback_count,
                                   negative_feedback_count,
-                                  other_count)
+                                  other_count,
+                                  converted_count,
+                                  read_feedback_count)
+
+        newyork_count = count_gmail_cities('New York','NY')
+        boston_count = count_gmail_cities('Boston','MA')
+        la_count = count_gmail_cities('Los Angeles','CA')
+        atl_count = count_gmail_cities('Atlanta','GA')
+        chicago_count = count_gmail_cities('Chicago','IL')
+        dallas_count = count_gmail_cities('Dallas','TX')
+        detroit_count = count_gmail_cities('Detroit','MI')
+        houston_count = count_gmail_cities('Houston','TX')
+        miami_count = count_gmail_cities('Miami','FL')
+        mn_count = count_gmail_cities('Minneapolis','MN')
+        philly_count = count_gmail_cities('Philadelphia','PA')
+        phoenix_count = count_gmail_cities('Phoenix','AZ')
+        sj_count = count_gmail_cities('San Jose','CA')
+        seattle_count = count_gmail_cities('Seattle','WA')
+        washington_count = count_gmail_cities('Washington','DC')
+
+        counts['cities'] = (newyork_count,
+                            boston_count,
+                            la_count,
+                            atl_count,
+                            chicago_count,
+                            dallas_count,
+                            detroit_count,
+                            houston_count,
+                            miami_count,
+                            mn_count,
+                            philly_count,
+                            phoenix_count,
+                            sj_count,
+                            seattle_count,
+                            washington_count)
 
 
     context['counts'] = counts
@@ -500,35 +549,48 @@ def ceo_feedbacks_unread(request):
             'ceo_feedbacks': ceo_feedbacks,
         })
 
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_read(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(read=True).order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    return crm_render_wrapper(request, 'crm/ceo_feedback_list.html', {
+            'ceo_feedbacks': ceo_feedbacks,
+        })
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_general(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='general').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='general',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_positive(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='positive').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='positive',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_negative(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='negative').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='negative',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 @login_required(login_url='/crm/login/')
 def ceo_feedbacks_other(request):
-    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='other').order_by('-date_created')
+    ceo_feedback_list = CEOFeedback.objects.filter(feedback_type='other',read=False,converted=False).order_by('-date_created')
     ceo_feedbacks = paginate_this(request,ceo_feedback_list)
     ctx={'ceo_feedbacks':ceo_feedbacks}
     return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_posted(request):
+    ceo_feedback_list = CEOFeedback.objects.filter(converted=True).order_by('-date_created')
+    ceo_feedbacks = paginate_this(request,ceo_feedback_list)
+    ctx={'ceo_feedbacks':ceo_feedbacks}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list.html',ctx)
 
 
 
@@ -571,7 +633,6 @@ def comment_posted(request):
         kwargs={'affiliate_id': comment.object_pk}))
 
 def search(request):
-    #pdb.set_trace()
     ctx = {}
     query = request.GET.get('q', None)
     came_from = request.META.get('HTTP_REFERER',None)
@@ -582,10 +643,31 @@ def search(request):
     q1 = Q(first_name__iexact=query)
     q2 = Q(last_name__iexact=query)
     q3 = Q(message__contains=query)
-    textimonials=Textimonial.objects.filter(q1|q2|q3).order_by('-date_created')
-
-    ctx['textimonials'] = textimonials
+    z1 = Q(name__iexact=query)
+    textimonials = Textimonial.objects.filter(q1|q2|q3).order_by('-date_created')
+    feeds = CEOFeedback.objects.filter(q3|z1).order_by('-date_created')
+    ctx['textimonials'] = chain(textimonials,feeds)
     ctx['query'] = query
     return crm_render_wrapper(request,'crm/search-results.html',ctx)
+
+@login_required(login_url='/crm/login/')
+def ceo_feedbacks_cities(request):
+    city,state = request.GET['city'],request.GET['state']
+    q1 = Q(city=city)| Q(city=city.lower())
+    ceo_list = CEOFeedback.objects.filter(q1,state=state,feedback_type='positive')
+    the_list = []
+    for x in ceo_list:
+        if '@gmail' in x.email or '@GMAIL' in x.email:
+            the_list.append(x)
+
+    ceo_feedbacks = paginate_this(request,the_list)
+    ctx={'ceo_feedbacks':the_list}
+    return crm_render_wrapper(request,'crm/ceo_feedback_list_temp.html',ctx)
+
+
+
+
+
+
 
 

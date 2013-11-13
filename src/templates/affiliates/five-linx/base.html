@@ -154,6 +154,31 @@ yepnope({
 
 <!-- http://mths.be/aab -->
 
+{% block trustedform %}
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true; 
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
+{% endblock %}
+{% block OS %}
+<script type="text/javascript">
+ var OSName="Unknown OS";
+    if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+    if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+    if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+    if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+</script>
+{% endblock %}
 
 </body>
 </html>

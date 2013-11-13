@@ -1,13 +1,10 @@
 import ast
 from decimal import Decimal
-
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils import simplejson
-
 from apps.common.views import simple_dtt
 from apps.contact.views import prepare_data_from_request, send_leadimport
-
 from shopping_cart import Cart
 from models import Package, PackageCode
 from forms import EcomForm

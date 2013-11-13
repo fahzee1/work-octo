@@ -1,10 +1,10 @@
 {% load sekizai_tags %}
 
 
-<div class="testimonials">
+<ul class="testimonials">
     {% for testimonial in testimonials %}
 
-    <div class="testimonial {% cycle '' 'mid' %}">
+    <li class="testimonial {% cycle '' 'mid' %}">
         <h3>{{ testimonial.first_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}
         {% if testimonial.rating > '0' %}
             <div class="rating">
@@ -20,9 +20,9 @@
         <p>{{ testimonial.testimonial|safe }}</p>
  
         <div class="clear"></div>
-    </div>
+    </li>
     {% endfor %}
     <div class="clear"></div>
-</div>
+</ul>
 <div class="clear"></div>
 
