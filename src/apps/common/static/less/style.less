@@ -1,6 +1,11 @@
 @charset "UTF-8";
 @import "font-awesome/font-awesome.less";
-
+#arm-icon {
+    position: absolute;
+    left: 0%;
+    z-index: 999;
+    top: -5%;
+}
 
 /************************************
 *   Reset                           *
@@ -235,7 +240,7 @@ table#licenses-table {
         }
         #company-links {
             float: right;
-            width: 450px;
+            width: 600px;
             position: relative;
             #international-selection {
                 margin-top: 6px;
@@ -309,7 +314,7 @@ table#licenses-table {
                     }
                 }
             }
-            #online-chat-button {
+            #online-chat-button, .interactive-customer {
                 float: right;
                 width: 68px;
                 color: @white;
@@ -326,6 +331,9 @@ table#licenses-table {
                 &:hover {
                     background: #00aee4;
                 }
+            }
+            .interactive-customer {
+                width: 130px;
             }
             #main-phone {
                 float: right;
@@ -590,39 +598,42 @@ table#licenses-table {
 
     p.form-title {
        background: #1fb867;
-       line-height: 64px; 
+       line-height: 64px;
+       margin-bottom: 8px; 
     }
     .form-fields {
-        padding: 8px 32px 16px;
+        padding: 8px 32px 0px;
         p {
             font-size: 11px;
             line-height: 13px;
             text-align: justify;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
         label {
             display: block;
             font-size: 13px;
         }
-        .consent-box {
-            border-top: 1px solid @black;
-            border-bottom: 1px solid @black;
-            padding: 4px 0;
-            margin-top: 8px;
+
+    }
+    .consent-box, .consent-box-two {
+        border-bottom: 1px solid #333333;
+        padding: 4px 0;
+        margin: 8px auto;
+        width: 87%;
+        color: #ccc;
+        #id_consent, #id_consent_two {
+            float: left;
+            margin: 8px 8px 8px 32px;
+            width: 16px;
+        }
+        label.consent-label, label.consent-label-two {
+            font-size: 10px;
+            line-height: 15px;
+            text-align: justify;
+            float: left;
             cursor: pointer;
             cursor: hand;
-            #id_consent {
-                float: left;
-                margin: 8px 8px;
-                width: 16px;
-            }
-            label.consent-label {
-                font-size: 11px;
-                line-height: 15px;
-                text-align: justify;
-                float: left;
-                width: 260px;
-            }
+            color: #ccc;
         }
     }
     button {
@@ -634,7 +645,7 @@ table#licenses-table {
         text-decoration: none;
         border: none;
         font-size: 24px;
-        margin: 0 auto;
+        margin: 8px auto;
         width: 265px;
         .fade-slow;
         cursor: pointer;
@@ -658,7 +669,7 @@ table#licenses-table {
     #third-party-container {
         background: @white;
         text-align: center;
-        padding: 0;
+        padding: 0 8px;
         overflow: hidden;
         height: 76px;
         .third-party-badge {
@@ -730,7 +741,7 @@ table#licenses-table {
     &.sleepy {
         width: 275px;
         .form-fields {
-            padding: 8px 16px 16px;
+            padding: 8px 16px 0px;
             p {
                 font-size: 11px;
                 line-height: 13px;
@@ -746,6 +757,16 @@ table#licenses-table {
             }
             button {
                 width: 244px;
+            }
+        }
+        button {
+            width: 244px;
+        }
+        .consent-box, .consent-box-two {
+            #id_consent, #id_consent_two {
+                margin: 8px 8px 8px 8px;
+            }
+            label.consent-label, label.consent-label-two {
             }
         }
     }
@@ -837,13 +858,13 @@ body.alternate {
 
 /************** Call Box ****************/
 #call-box {
-    background: @grey;
+    background: #1fb867;
     border-top: 1px solid @black;
     width: 100%;
     border-bottom: 1px solid @black;
     position: relative;
     #main-promo {
-        background: url(/static/img/base/promo-bg.png) repeat;
+        background: #333;
         width: 100%;
         height: 56px;
         position: absolute;
@@ -868,6 +889,8 @@ body.alternate {
                 padding: 6px 0;
                 text-shadow: none;
                 padding-left: 127px;
+                display: block;
+                width: 800px;
                 span {
                     display: block;
                     text-transform: uppercase;
@@ -905,6 +928,118 @@ body.alternate {
 }
 
 /************** Footer ****************/
+#order-footer {
+    .content-box(960px);
+    background: @off-white;
+    border: 1px solid @light-grey;
+    padding: 0px;
+    margin: 8px auto 8px;
+    float: none;
+    .fade-fast;
+    h3 {
+        font-weight: bold;
+        padding-bottom: 16px;
+        padding-top: 0
+    }
+    #footer-package-section {
+        width: 309px;
+        border-right: 1px solid @v-light-grey;
+        padding: 16px 16px;
+        float: left;
+        input {
+            background: @white url(/static/img/base/search-icon.png) no-repeat 4px 4px;
+            padding-left: 24px;
+            font-size: 14px;
+            line-height: 20px;
+            height: 20px;
+            width: 260px;
+        }
+        button {
+            margin: 8px 0 0 0;
+            display: block;
+            float: left;
+            padding: 8px 16px;
+            border-radius: 5px 5px 5px 5px;
+            -moz-border-radius: 5px 5px 5px 5px;
+            -webkit-border-top-left-radius: 5px;
+            -webkit-border-top-right-radius: 5px;
+            -webkit-border-bottom-left-radius: 5px;
+            -webkit-border-bottom-right-radius: 5px;
+            color: #ffffff;
+            background: #1570ab;
+            text-decoration: none;
+            margin-right: 16px;
+            -webkit-transition: background-color 0.7s ease-out;
+            -moz-transition: background-color 0.7s ease-out;
+            transition: background-color 0.7s ease-out;
+            border: none;
+            font-size: 14px;
+            i {
+                border-left: 1px solid #6598b9;
+                padding: 4px 0 4px 8px;
+                margin-left: 4px;
+            }
+        }
+        p {
+            font-size: 12px;
+            line-height: 16px;
+            padding: 0px 0 8px;
+            span {
+                font-size: 16px;
+                display: block;
+                line-height: 18px;
+                em {
+                    text-decoration: line-through;
+                    position: relative;
+                    color: @grey;
+                    top: 0;
+                    font-size: 16px;
+                    line-height: 18px;
+                    padding-right: 4px;
+                }
+            }
+        }
+        em {
+            font-size: 11px;
+            line-height: 12px;
+            position: absolute;
+            top: 112px;
+            color: @blue;
+        }
+    }
+    #footer-call-now, #footer-chat-now {
+        width: 276px;
+        border-right: 1px solid @v-light-grey;
+        float: left;
+        padding: 16px 16px;
+        height: 128px;
+
+
+        p {
+            font-size: 12px;
+            line-height: 16px;
+            padding: 0 8px 8px 0;
+            margin-bottom: 0;
+        }
+        span {
+            color: @red;
+            display: block;
+            font-size: 32px;
+            line-height: 32px;
+            padding-top: 9px;
+            font-weight: bold;
+            a {
+                text-decoration: none;
+                color: @red;
+            }
+        }
+
+    }
+    #footer-chat-now {
+        border-right: none;
+    }
+
+}
 #footer-wrapper {
     background: @black;
     #footer {
@@ -963,15 +1098,15 @@ body.alternate {
                     background: transparent;
                 }
                 &#footer-social-icons {
-                    margin-top: 32px;
-                    .icon-twitter, .icon-facebook, .icon-youtube {
+                    margin-top: 22px;
+                    .icon-twitter, .icon-facebook, .icon-youtube, .icon-google-plus {
                         background: #76c1c5;
                         padding: 4px 6px;
                         color: @black;
                         font-size: 28px;
                         .border-radius(20px, 20px, 20px, 20px);
                         .fade-slow;
-                        margin-right: 1px;
+                        margin-right: 4px;
                         &:hover {
                             background: @light-grey;
                             .fade-fast;
@@ -983,6 +1118,9 @@ body.alternate {
                     }
                     .icon-youtube {
                         background: #ff5a5a;
+                    }
+                    .icon-google-plus {
+                        background: #dc5931;
                     }
                 }
             }
@@ -1056,6 +1194,9 @@ body.alternate {
     z-index: 0;
     width: 100%;
     overflow: hidden;
+    &.tablet {
+        z-index: 400;
+    }
     &.red {
         background: @red url(/static/img/base/bg-red.png) repeat;
     }

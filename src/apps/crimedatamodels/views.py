@@ -10,9 +10,9 @@ from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response, render, redirect
 from django.template import RequestContext
 from django.conf import settings
-
+from apps.testimonials.models import Textimonial
 from django.contrib.localflavor.us.us_states import US_STATES
-
+from django.db.models import Avg
 from apps.contact.forms import PAContactForm
 from django.template.defaultfilters import slugify
 from apps.crimedatamodels.models import (CrimesByCity,
@@ -22,57 +22,6 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          ZipCode,
                                          CrimeContent,
                                          MatchAddressLocation)
-
-WEATHER_CODE_MAP = {
-    '395': 'snow',
-    '392': 'snow',
-    '389': 'rain',
-    '386': 'rain',
-    '377': 'snow',
-    '374': 'snow',
-    '371': 'snow',
-    '368': 'rain',
-    '365': 'rain',
-    '362': 'snow',
-    '359': 'rain',
-    '356': 'rain',
-    '353': 'rain',
-    '350': 'snow',
-    '338': 'snow',
-    '335': 'snow',
-    '332': 'snow',
-    '329': 'snow',
-    '326': 'snow',
-    '323': 'snow',
-    '320': 'rain',
-    '317': 'rain',
-    '314': 'rain',
-    '311': 'rain',
-    '308': 'rain',
-    '305': 'rain',
-    '302': 'rain',
-    '299': 'rain',
-    '296': 'rain',
-    '293': 'rain',
-    '284': 'rain',
-    '281': 'rain',
-    '266': 'rain',
-    '263': 'rain',
-    '260': 'smoke',
-    '248': 'smoke',
-    '230': 'snow',
-    '227': 'snow',
-    '200': 'lightning',
-    '185': 'rain',
-    '182': 'rain',
-    '179': 'rain',
-    '176': 'rain',
-    '143': 'smoke',
-    '122': 'partly-cloudy',
-    '119': 'cloudy',
-    '116': 'partly-cloudy',
-    '113': 'sunny',
-}
 
 
 def query_weather(latitude, longitude, city, state):
@@ -92,15 +41,16 @@ def query_weather(latitude, longitude, city, state):
 
         weather_info['temp'] = condition['temp_F']
         weather_info['desc'] = condition['weatherDesc'][0]['value']
-        weather_info['icon'] = WEATHER_CODE_MAP[condition['weatherCode']]
+        weather_info['icon'] = settings.WEATHER_CODE_MAP[condition['weatherCode']]
 
         cache.set('WEATHER:%s%s' %
             (city.lower().replace(' ', ''), state.lower()), weather_info, 60*60)
     return weather_info
 
 
-def query_by_state_city(state, city, get_content=True,local=False):
+def query_by_state_city(state, city=None, get_content=True,local=False):
     # validate city and state
+
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
@@ -108,125 +58,148 @@ def query_by_state_city(state, city, get_content=True,local=False):
     except State.DoesNotExist:
         print 'none'
         raise Http404
-    try:
-        print city
-        if ' ' not in city:
-            cities = CityLocation.objects.filter(state=state.abbreviation)
-            city_here=False
-            local=(True if local else False)
-            for x in cities:
-                if x.join_name(local) == city:
-                    city_here=True
-                    city=x
-                    print "this is city and length was 1 %s" % city
-            if not city_here:
-                raise Http404
-        else:
-            city = city.replace('+', ' ').replace('-', ' ').split(' ')
-            _city=None
-            city_slug=None
-
-            if len(city)==2:
-                f,l=city[0],city[1]
-                if len(str(f))==2:
-                    city=f+'.'+' '+l
-                    _city=f+' '+l
-                    _city_=f+'-'+l
-                else:
-                    city_slug=f.lower()+'-'+l.lower()
-            if len(city)==3:
-                f,s,t=city[0].lower(),city[1].lower(),city[2].lower()
-                a,b,c=city[0],city[1],city[2]
-                city_slug=f+'-'+s+'-'+t
-                city=f+' '+s+' '+t
-            if len(city)==4:
-                f,s,t,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower()
-                city_slug=f+'-'+s+'-'+t+'-'+l
-            if len(city)==5:
-                f,s,t,a,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower(),city[4].lower()
-                city_slug=f+'-'+s+'-'+t+'-'+a+'-'+l
-            print "this is city blah blah %s" % city
-            if city_slug:
-                city=CityLocation.objects.get(city_name_slug=city_slug,state=state.abbreviation)
-            elif _city:
-                aa=Q(city_name__iexact=city)
-                bb=Q(city_name__iexact=_city)
-                cc=Q(city_name__iexact=_city_)
-                city=CityLocation.objects.get(aa|bb|cc,state=state.abbreviation)
-            else:
-                city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
-
-        print "this is edited city %s" % city
-        city_id = city.id
-    except CityLocation.DoesNotExist:
-        print 'none'
-        raise Http404
-
-    city_crime_objs = CrimesByCity.objects.filter(
-        fbi_city_name=city.city_name, fbi_state=state.abbreviation)
-
-    crime_stats = {}
-    years = []
-    for crimesbycity in city_crime_objs:
-        year = crimesbycity.year
+    if city:
         try:
-            crime_stats[year] = {
-                'stats': CityCrimeStats.objects.get(year=year,
-                    city=crimesbycity),
-                'info': crimesbycity}
-        except CityCrimeStats.DoesNotExist:
-            pass
-        years.append(year)
+            print city
+            if ' ' not in city:
+                cities = CityLocation.objects.filter(state=state.abbreviation)
+                city_here=False
+                local=(True if local else False)
+                for x in cities:
+                    data = x.join_name(local)
+                    if city == data['name'] or slugify(city) == data['slug']:
+                        city_here=True
+                        city=x
+                        print "this is city and length was 1 %s" % city
+                if not city_here:
+                    raise Http404
+            else:
+                city = city.replace('+', ' ').replace('-', ' ').split(' ')
+                _city=None
+                city_slug=None
 
-    years.sort(reverse=True)
+                if len(city)==2:
+                    f,l=city[0],city[1]
+                    if len(str(f))==2:
+                        city=f+'.'+' '+l
+                        _city=f+' '+l
+                        _city_=f+'-'+l
+                    else:
+                        city_slug=f.lower()+'-'+l.lower()
+                if len(city)==3:
+                    f,s,t=city[0].lower(),city[1].lower(),city[2].lower()
+                    a,b,c=city[0],city[1],city[2]
+                    city_slug=f+'-'+s+'-'+t
+                    city=f+' '+s+' '+t
+                if len(city)==4:
+                    f,s,t,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower()
+                    city_slug=f+'-'+s+'-'+t+'-'+l
+                if len(city)==5:
+                    f,s,t,a,l=city[0].lower(),city[1].lower(),city[2].lower(),city[3].lower(),city[4].lower()
+                    city_slug=f+'-'+s+'-'+t+'-'+a+'-'+l
+                print "this is city blah blah %s" % city
+                if city_slug:
+                    city=CityLocation.objects.get(city_name_slug=city_slug,state=state.abbreviation)
+                elif _city:
+                    aa=Q(city_name__iexact=city)
+                    bb=Q(city_name__iexact=_city)
+                    cc=Q(city_name__iexact=_city_)
+                    city=CityLocation.objects.get(aa|bb|cc,state=state.abbreviation)
+                else:
+                    city=CityLocation.objects.get(city_name__iexact=city,state=state.abbreviation)
 
-    if city_crime_objs:
-        # get population type
-        if crimesbycity.population <= 40000:
-            pop_type = 'TOWN'
-        elif crimesbycity.population > 40000 and crimesbycity.population <= 750000:
-            pop_type = 'CITY'
+            print "this is edited city %s" % city
+            city_id = city.id
+        except CityLocation.DoesNotExist:
+            print 'none'
+            raise Http404
+        city_crime_objs = CrimesByCity.objects.filter(
+            fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
+        per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
+
+        #this powers the 'rated 4 out of 5 stars customer reviews' part on local page
+        reviews = Textimonial.objects.filter(city=city.city_name,state=state.abbreviation)
+        if reviews:
+            total = reviews.count()
+            ratings_avg = reviews.aggregate(Avg('rating')).values()
+            first_sum = ratings_avg[0] * total
+            second_sum = first_sum + 4
+            final_sum = second_sum/(total+1)
+        else:
+            final_sum = 0
+            total = 0
+
+
+        '''
+        crime_stats = {}
+        years = []
+        for crimesbycity in city_crime_objs:
+            year = crimesbycity.year
+            try:
+                crime_stats[year] = {
+                    'stats': CityCrimeStats.objects.get(year=year,
+                        city=crimesbycity),
+                    'info': crimesbycity}
+            except CityCrimeStats.DoesNotExist:
+                pass
+            years.append(year)
+
+        years.sort(reverse=True)
+
+        if city_crime_objs:
+            # get population type
+            if crimesbycity.population <= 40000:
+                pop_type = 'TOWN'
+            elif crimesbycity.population > 40000 and crimesbycity.population <= 750000:
+                pop_type = 'CITY'
+            else:
+                pop_type = 'METROPOLIS'
         else:
             pop_type = 'METROPOLIS'
-    else:
-        pop_type = 'METROPOLIS'
+        '''
 
+         # Google Weather API
+        #weather_info = query_weather(city.latitude, city.longitude,
+         #   city.city_name, state.abbreviation)
+        weather_info = None
 
-     # Google Weather API
-    weather_info = query_weather(city.latitude, city.longitude,
-        city.city_name, state.abbreviation)
+        context = {
+                   'crime_stats': (city_crime_objs[0] if city_crime_objs else None),
+                   'crimestats_per100k':(per100[0] if per100 else None),
+                   'state': state.abbreviation,
+                   'state_long': state.name,
+                   'city': city.city_name,
+                   'lat': city.latitude,
+                   'long': city.longitude,
+                   'weather_info': weather_info,
+                   #'pop_type': pop_type,
+                   'city_id': city_id,
+                   'review_avg':final_sum,
+                   'review_total':total
+                }
 
-    context={'crime_stats': (crime_stats if crime_stats else None),
-           'years': years[:3],
-           'latest_year': (crime_stats[years[0]] if crime_stats else None),
-           'latest_year_':(city_crime_objs[0] if city_crime_objs else None),
-           'state': state.abbreviation,
-           'state_long': state.name,
-           'city': city.city_name,
-           'lat': city.latitude,
-           'long': city.longitude,
-           'weather_info': weather_info,
-           'pop_type': pop_type,
-           'city_id': city_id}
+        # get content
+        '''
+        if get_content and city_crime_objs and crime_stats:
+            content = CrimeContent.objects.get(
+                grade=crime_stats[years[0]]['stats'].average_grade,
+                population_type=pop_type)
+            context.update(content=content.render(city))
+        '''
 
-    # get content
-    if get_content and city_crime_objs and crime_stats:
-        content = CrimeContent.objects.get(
-            grade=crime_stats[years[0]]['stats'].average_grade,
-            population_type=pop_type)
-        context.update(content=content.render(city))
+        try:
+            #try to see if the local page has an address associated with it 
+            location_match=MatchAddressLocation.objects.select_related().get(location=city)
+            context.update(local_street=location_match.address.street_name,
+                           local_city=location_match.address.city,
+                           local_state=location_match.address.state,
+                           local_zipcode=location_match.address.zip_code)
+        except MatchAddressLocation.DoesNotExist:
+            pass
 
-
-    try:
-        #try to see if the local page has an address associated with it 
-        location_match=MatchAddressLocation.objects.select_related().get(location=city)
-        context.update(local_street=location_match.address.street_name,
-                       local_city=location_match.address.city,
-                       local_state=location_match.address.state,
-                       local_zipcode=location_match.address.zip_code)
-    except MatchAddressLocation.DoesNotExist:
-        pass
-
+        return context
+    context = {'state': state.abbreviation,
+               'state_long': state.name}
     return context
 
 def crime_stats(request, state, city):
@@ -603,3 +576,15 @@ def crime_sitemap(request, state, city):
     from django.contrib.sitemaps.views import sitemap
     from apps.crimedatamodels.sitemaps import FreeCrimeStatsCrimeSitemap
     return sitemap(request, {'keyword-sitemap-index' : FreeCrimeStatsCrimeSitemap(state, city)})
+
+def r_states():
+    st = [(x[1].lower(),x[1].title()) for x in US_STATES]
+    states = []
+    for x in st:
+        states.append(x[0])
+        states.append(x[1])
+    for x in states:
+        if ' ' in x:
+            x = x.replace(' ','-')
+            states.append(x)
+    return states

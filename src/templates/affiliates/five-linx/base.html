@@ -98,13 +98,13 @@ License: http://creativecommons.org/licenses/MIT
     <div id="navigation">
         <ul>
             <li class="first {% if 'copper' in active_pages %}active{% endif %}{% if 'bronze' in active_pages %}active{% endif %}{% if 'silver' in active_pages %}active{% endif %}{% if 'gold' in active_pages %}active{% endif %}{% if 'platinum' in active_pages %}active{% endif %}"><a href="{% url copper %}">Security Systems</a></li>
-            <li class="video-security {% if 'video' in active_pages %}active{% endif %}"><a href="{% url video %}">Video Security</a></li>
             <li class="gps-tracking {% if 'gps' in active_pages %}active{% endif %}"><a href="{% url gps %}">GPS</a></li>
+            <li class="video-security {% if 'video' in active_pages %}active{% endif %}"><a href="{% url video %}">Video Security</a></li>
             <li class="place-order {% if 'order' in active_pages %}active{% endif %}"><a href="{% url order %}">Order Now</a></li>
 
 
         </ul>
-        <a href="{% url home %}"><img src="{{ STATIC_URL }}img/affiliates/five-linx/5-linx-nav-logo.jpg" alt="5-linx-nav-logo" /></a>
+        <a href="{% url home %}"><img src="{{ STATIC_URL }}img/affiliates/five-linx/5Linx.png" alt="5-linx-nav-logo" /></a>
     </div>
     
     {% block content %}
@@ -129,7 +129,20 @@ License: http://creativecommons.org/licenses/MIT
     {% endblock %}
 </div>
 
-
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true; 
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
 
 <!-- Scripts -->
 <script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>

@@ -114,9 +114,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             {% endblock %}
             {% block third-party-nav %}
 
-            <div id="ge-logo" title="GE Logo">
-                <p>GE Security Authorized Dealer</p>
-            </div>
+            
             {% endblock %}
             {% block main-phone %}
                 {% if phone_number %}
@@ -535,5 +533,22 @@ var google_conversion_value = 0;
                     <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
 
 {% endif %}
+{% block trustedform %}
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true; 
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
+{% endblock %}
+
 </body>
 </html>

@@ -1,96 +1,11 @@
-{% extends "base.html" %}
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        {% block css %}
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/flexslider.css" type="text/css">
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/styles.css">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-        {% endblock %}
+{% extends "affiliates/acn/base.html" %}
 
 
-    </head>
-    <body>
-    {% block header %}
-        <div class="mainContainer order">
-
-            <div class="headerPhone inverse">
-                <div class="container">
-                    <div class="row">
-                        <p>CALL NOW TO ORDER <span>800-867-0151</span></p>
-                    </div><!-- /row -->
-                </div><!-- /container -->
-            </div><!-- /headerPhone -->
-
-            <div id="header" class="inverse">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-9 col-sm-4 col-md-6 col-lg-7">
-                            <div class="logoWrapper">
-                                <h1><a href="{% url home %}" title="ACN Business Security"><img src="{{ STATIC_URL }}img/affiliates/acn/ProtectAmericaForACN.png" alt="ACN" title="ACN" width="380"></a></h1>
-                            </div><!-- /logoWrapper -->
-                        </div>
-
-                        <div class="col-xs-3 visible-xs">
-                            <div id="mobileBlogNavTrigger">
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                            </div>
-                        </div>
-                        <div class="col-sm-8 col-md-6 col-lg-5 mobileClear">
-                                <div class="nav">
-                                    {% block navigation %}
-                                    <ul id="mainNav">
-                                        <li><a href="{% url home %}">Home</a></li>
-                                        <li><a href="{% url features %}">Features</a></li>
-                                        <li><a href="{% url packages %}">Packages</a></li>
-                                        <li><a href="{% url order %}">Order</a></li>
-                                        <li><a href="{% url support %}">Support</a></li>
-                                    </ul>
-                                    {% endblock %}
-                                </div><!-- /nav -->
-                        </div>
-                    </div><!-- /row -->
-                </div><!-- /container -->
-            </div><!-- /header -->
-            {% endblock %}
 
 
-            {% block content %}
-            <div class="contactFooter section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-                            <div class="formWrapper mobileSection">
-                                {% include "affiliates/acn/quote-form.html" with form=forms.basic %}
-                            </div><!-- /formWrapper -->
-                        </div><!-- /col -->
+{% block content %}
+            {% include "affiliates/acn/_partials/contact-footer.html" %}
 
-                        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
-                            <h2>Get in Touch</h2>
-                            <p>We are available to offer you assistance concerning any questions you might have about our business security systems.</p>
-                            <p>Give us a call to start your discussion about the security choice for your business today.</p>
-                            <p>One of our security experts will help determine which package best meets your needs.</p>
-                            <p class="orCall">Or Call:<span class="phone">800-867-0151</span></p>
-                        </div><!-- /col -->
-                    </div><!-- /row -->
-                </div><!-- /container -->
-            </div><!-- /contactFooter -->
 
             <div class="hero testimonials section inverse center">
                 <div class="container">
@@ -129,47 +44,5 @@
                 </div><!-- /container -->
             </div><!-- /hero -->
 
-            <div id="footer" class="footerPhone section inverse center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
-                            <ul class="footerNav">
-                                <li><a href="{% url home %}">Home</a></li>
-                                <li><a href="{% url features %}">Security System Features</a></li>
-                                <li><a href="{% url packages %}">Packages</a></li>
-                                <li><a href="{% url order %}">Order</a></li>
-                                <li><a href="{% url order %}">Support</a></li>
-                            </ul>
-                        </div><!-- /col -->
-                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
-                           <p>CALL TO ORDER NOW:<br><span>800-867-0151</span></p>
-                       </div><!-- /col -->
-                    </div><!-- /row -->
-                </div><!-- /container -->
-            </div><!-- /footer -->
 
-            <!-- ScrollBubble -->
-            <div id="scrollBubble"><p class="sprite">Scroll</p></div>
-
-        </div><!-- /mainContainer -->
-        <!-- jquery -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="{{ STATIC_URL }}js/affiliates/acn/bootstrap.min.js"></script>
-        <script src="{{ STATIC_URL }}js/affiliates/acn/jquery.flexslider-min.js"></script>
-        <script src="http://static.protectamericasecurity.net/js/placeholder.js"></script>
-        <script type="text/javascript" charset="utf-8">
-            $(window).load(function() {
-                $('.flexslider').flexslider();
-            });
-            $( "#mobileBlogNavTrigger" ).click(function() {
-              $( "#mainNav" ).toggle( "fast" );
-            });
-            $( window ).scroll(function() {
-                $( "#scrollBubble" ).fadeOut( "slow" );
-            });
-        </script>
-        {% endblock %}
-{% block main-footer %}{% endblock %}
-{% block terms %}{% endblock %}
-    </body>
-</html>
+{% endblock %}

@@ -1,5 +1,5 @@
 {% extends "crm/base.html" %}
-{% load sekizai_tags %}
+{% load sekizai_tags crm_tags %}
 
 {% block content %}
 {% addtoblock "css" %}
@@ -8,6 +8,7 @@
 .star-button{width:40px;height:40px;background:url({{ STATIC_URL }}img/extra/testimonial-stars-light-grey.png) -40px 0 no-repeat;float:left;cursor:pointer;cursor:hand;}
 .star-button.active{background:url({{ STATIC_URL }}img/extra/testimonial-stars-light-grey.png) 0px 0 no-repeat;}
 .star-button.hover{background:url({{ STATIC_URL }}img/extra/testimonial-stars-light-grey.png) -80px 0 no-repeat;}
+.highlight{background-color: yellow;}
 </style>
 {% endaddtoblock "css" %}
 	<div class="row">
@@ -22,7 +23,7 @@
     <tr>
         <th width="112px">Name</th>
         <th width="96px">Location</th>
-        <th>Message</th>
+        <th width="150px">Message</th>
         <th>Rating</th>
         <th width="112px"></th>
     </tr>
@@ -30,7 +31,7 @@
     <tr class="textimonial_{{ textimonial.id }}">
         <td>{{ textimonial.first_name }} {{ textimonial.last_name }}</td>
         <td>{{ textimonial.city }}, {{ textimonial.state }}</td>
-        <td>{{ textimonial.message|truncatewords:20 }}</td>
+        <td>{{ textimonial.message|truncatewords:20|highlight:query }}</td>
         <td>
             <div class="star-container">
                 {% with rating=textimonial.rating %}
