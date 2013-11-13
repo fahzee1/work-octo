@@ -339,7 +339,7 @@ def device_type(request,device):
         request.session['device'] = device 
     if device == 't':
         device = 'tablet'
-    if device == 'd':
+    if device == 'd' or device == 'c':
         device = 'desktop'
     if not device:
         device = ''
