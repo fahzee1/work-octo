@@ -1,36 +1,14 @@
 {% extends "order/quote-form.html" %}
-<form id="quote-form" {% if page_name = "index" %}class="sleepy"{% endif %}  method="post" action="">
-
-    
-	<div>
-		{% block formfields %}
-			<h2 class="form-title">Order Now</h2>
-		    <div class="form-fields">
-		        <p>Enter your information below and we'll show you how to secure your home.</p>
-		           
-		        <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name">
-		           
-		           
-		        <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email">
-		           
-		           
-		        <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone">
-		        {% comment %}
-		        <div class="consent-box">
-		            <input id="id_consent" type="checkbox" maxlength="20" name="consent">
-		            <label class="consent-label" for="id_consent">I agree that Protect America and their representatives may contact me at the email address and phone number stated above.</label>
-		            <div class="clear"></div>
-		        </div>
-		        {% endcomment %}
-		    </div>
-		{% endblock %}
-
-	</div>
-    
-	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);">{% block quote-button %}Order Now <i class="icon-chevron-right"></i>{% endblock %}</button>
-    <div id="third-party-container" class="v">
-        <div class="third-party-badge vsign">
-            <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
-        </div>
-    </div>
-</form>
+{% block formfields %}
+	<h2 class="form-title">Order Now</h2>
+	<div class="form-fields">
+       <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name">
+       <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email">
+       <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone">
+   </div>
+{% endblock %}
+{% block quote-button %}Order Now <i class="icon-chevron-right"></i>{% endblock %}
+{% block privacy-policy %}
+<div>By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</div>
+<a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">We never share your information with anyone</a>
+{% endblock %}
