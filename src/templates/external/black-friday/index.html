@@ -61,11 +61,16 @@
                                 <img src="{{ STATIC_URL }}img/external/black-friday/blackFridayDealsProtectAmerica.png" alt="Black Friday Deals Protect America" title="Black Friday Deals Protect America">
                                 <h2>The countdown begins. Huge savings on home security.</h2>
                                 <h4>Sign up, follow us or like us now for exclusive deals:</h4>
-                                <form class="BfForm" method="post" action="">
-                                    {% csrf_token %}
-                                    <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
-                                    <input type="submit" value="Subscribe" class="primaryBtn">
-                                </form>
+                                <div class="formWrapper">
+                                    <form class="BfForm" method="post" action="">
+                                        {% csrf_token %}
+                                        <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
+                                        <input type="submit" value="Subscribe" class="primaryBtn">
+                                    </form>
+                                </div><!-- /FormWrapper -->
+                                <div class="thankYouMessageWrapper" style="display:none;">
+                                    <p>You have subscribed successfully, thank you.</p>
+                                </div><!-- /thankYouMessageWrapper -->
                                 <div class="socialWrapper">
                                     <a href="http://twitter.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconTwitterLg.png"></a>
                                     <a href="https://www.facebook.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconFaceBookLg.png"></a>
@@ -145,11 +150,16 @@
         </div>
         <div class="modal-body">
             <p>Enter your email address to sign up to our newsletter.</p>
-        <form class="BfForm" method="post" action="">
-            {% csrf_token %}
-            <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
-            <input type="submit" value="Subscribe" class="primaryBtn">
-        </form>
+        <div class="formWrapper">
+            <form class="BfForm" method="post" action="">
+                {% csrf_token %}
+                <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
+                <input type="submit" value="Subscribe" class="primaryBtn">
+            </form>
+        </div><!-- /FormWrapper -->
+        <div class="thankYouMessageWrapper" style="display:none;">
+            <p>You have subscribed successfully, thank you.</p>
+        </div><!-- /thankYouMessageWrapper -->
             <div class="socialWrapper">
                 <a href="http://twitter.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconTwitterLg.png"></a>
                 <a href="https://www.facebook.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconFaceBookLg.png"></a>
