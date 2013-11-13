@@ -72,6 +72,7 @@ def post_to_leadconduit(data,test=False,retry=False):
               'Search_Keywords':data['searchkeywords'],
               'Search_Engine':data['searchengine'],
               'ip_address':data['ip'],
+              'web_device':data['device']
                 }
     if test:
         params.update({'xxTest':'true'})
@@ -319,12 +320,13 @@ def device_type(request,device):
     if device == 'm':
         device = 'mobile'
         request.COOKIES['device'] = device
+        request.session['device'] = device 
     if device == 't':
         device = 'tablet'
     if device == 'd':
         device = 'desktop'
     if not device:
-        device = 'no device parameter found'
+        device = ''
     return device
 
 
@@ -334,8 +336,8 @@ def basic_post_login(request):
     f_values = request.POST.get('form_values',None)
     browser = request.META.get('HTTP_USER_AGENT',None)
     OS = request.POST.get('operating_system',None)
-    get_device = request.POST.get('device',None)
-    device = device_type(request,get_device)
+    device_letter = request.POST.get('device',None)
+    device_name = device_type(request,device_letter)
     lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
@@ -366,7 +368,7 @@ def basic_post_login(request):
         formset.retry = True
         formset.browser = browser
         formset.operating_system = OS
-        formset.device = device
+        formset.device = device_name
         formset.save()
         request_data['lead_id'] = formset.id
         '''
@@ -377,7 +379,8 @@ def basic_post_login(request):
                      'ip':request.META.get('REMOTE_ADDR',None),
                      'customername':fdata['name'],
                      'phone':fdata['phone'],
-                     'email':fdata['email']
+                     'email':fdata['email'],
+                     'device':device_name
                      })
         '''
         # notes field information
