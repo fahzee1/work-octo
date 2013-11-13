@@ -61,8 +61,11 @@
                                 <img src="{{ STATIC_URL }}img/external/black-friday/blackFridayDealsProtectAmerica.png" alt="Black Friday Deals Protect America" title="Black Friday Deals Protect America">
                                 <h2>The countdown begins. Huge savings on home security.</h2>
                                 <h4>Sign up, follow us or like us now for exclusive deals:</h4>
-                                <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
-                                <input type="submit" value="Subscribe" class="primaryBtn">
+                                <form class="BfForm" method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
+                                    <input type="submit" value="Subscribe" class="primaryBtn">
+                                </form>
                                 <div class="socialWrapper">
                                     <a href="http://twitter.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconTwitterLg.png"></a>
                                     <a href="https://www.facebook.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconFaceBookLg.png"></a>
@@ -142,8 +145,11 @@
         </div>
         <div class="modal-body">
             <p>Enter your email address to sign up to our newsletter.</p>
+        <form class="BfForm" method="post" action="">
+            {% csrf_token %}
             <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
             <input type="submit" value="Subscribe" class="primaryBtn">
+        </form>
             <div class="socialWrapper">
                 <a href="http://twitter.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconTwitterLg.png"></a>
                 <a href="https://www.facebook.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconFaceBookLg.png"></a>
@@ -152,8 +158,48 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('form .primaryBtn').click(function(){
+        $('form .primaryBtn').attr('disabled',true);
+        var $form = $(this).closest(".BfForm");
+        var email = $form.find('.email').val();
+        $.ajax({
+            type: "POST",
+            url: "black-friday/contact/",
+            data: {'email':email},
+            dataType: "json",
+            success: newFormSuccess,
+            error: newFormError,
+            beforeSend:sayThanks
 
+        });
 
+        function newFormError(){
+            $('form .primaryBtn').attr('disabled',false);
+            $('form .primaryBtn').val('Subscribe');
+            if (!email){
+                alert('Please enter your email adress.');
+                return false;
+            }
+        }
+        function newFormSuccess(){
+            window.location = 'http://www.protectamerica.com/thank-you';
+            return;
+        }
+        function sayThanks(){
+        $('form .primaryBtn').val('Thank You');
+        }
+        return false;
+
+    });
+
+});
+</script>
+{% endblock %}
+{% endaddtoblock "js" %}
 {% endblock %}
 {% block order-footer %}
 {% endblock %}
