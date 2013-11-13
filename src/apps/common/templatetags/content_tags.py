@@ -185,21 +185,25 @@ class ContentSpinnerNode(template.Node):
         self.replacements = content_replacements.split('|')
    
     def render(self, context):
+        city, state = None, None
         request = self.request.resolve(context)
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
         chop_up = path.split('/')
-        state, city = chop_up[1], chop_up[2]
-        if '.' in city:
-            f,l = city.split('.')
-            city = f+ '.'+' '+l
-        if '-' in city:
-            if city.count('st',0,2) == 1:
-                f,l = city.split('-')
-                city = f+'.'+' '+l
-            else:
-                city = city.replace('-',' ')
+        if len(chop_up) == 3:
+            state, city = chop_up[1], chop_up[2]
+            if '.' in city:
+                f,l = city.split('.')
+                city = f+ '.'+' '+l
+            if '-' in city:
+                if city.count('st',0,2) == 1:
+                    f,l = city.split('-')
+                    city = f+'.'+' '+l
+                else:
+                    city = city.replace('-',' ')
+        if len(chop_up) == 2:
+            state = chop_up[1]
         statecode = get_statecode(state)
-        json_file = statecode+'/'+city.title()+'.json'
+        json_file = (statecode+'/'+city.title()+'.json' if city else statecode+'/'+state+'.json')
         default = '/virtual/customer/www2.protectamerica.com/localpages/'
         LOCAL_PAGE_PATH = getattr(settings,'LOCAL_PAGE_PATH',default)
         os.chdir(LOCAL_PAGE_PATH)
@@ -224,13 +228,15 @@ class ContentSpinnerNode(template.Node):
                 os.makedirs(statecode)
                 os.chdir(statecode)
                 obj = {self.name:choice(self.replacements)}
-                with open(city.title()+'.json',"w+") as f:
+                
+                the_file = (city.title()+'.json' if city else state+'.json')
+                with open(the_file,"w+") as f:
                     f.write(json.dumps(obj))
                 content = obj[self.name]
             
             elif os.path.exists(statecode):
                 os.chdir(statecode)
-                j_file = city.title() +'.json'
+                j_file = (city.title() +'.json' if city else state + '.json') 
                 try:
                     _files = glob('*json')
                     _list=[]
@@ -256,7 +262,8 @@ class ContentSpinnerNode(template.Node):
                 except:
                     raise Http404
             else:
-                os.chdir(statecode+'/'+city.title())
+                move_here = (statecode+'/'+city.title() if city else statecode+'/'+state)
+                os.chdir(move_here)
                 try:
                     #get first file that ends in json
                     _file = glob('*.json')[0]
