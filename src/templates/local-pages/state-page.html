@@ -23,6 +23,69 @@ $(document).ready(function() {
 });
 </script>
 {% endaddtoblock "js" %}
+	<div id="generic-banner">
+		<div class="wrapper">
+			<div class="left">
+				<h1>The Best Home Security in {{ state_long }}</h1>
+				<p></p>
+				<h2>starting at only</h2>
+				<h3>$19.99</h3>
+				<a class="button-link" title="Shop now" href="/shop-home-security-packages">Shop now <i class="icon-chevron-right"></i></a>
+			</div>
+			<div class="right">
+				<div id="hero-content">
+					<div id="slide-form-area">
+						{% include "order/quote-form-noview.html" with form=forms.basic %}
+					</div>
+				</div>
+			</div>
+		</div>
+        <iframe width="115%" class="map-background" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q={{ city }}%2B{{ state_long }}&ie=UTF8&z=6&iwloc=near&scrollwheel=false&maptypecontrol=false&disabledefaultUI=true&iwloc=near&navigationcontrol=false&output=embed"></iframe>
+
+	</div>
+<div class="wrapper" style="padding-bottom: 64px;">
+    <div class="crime-tiles" >
+    	<div class="crime-tiles-four">
+    		<h4>Burglary<h4>
+    		<p>per 100k</p>
+    		{% if crimestats_per100k %} 
+    			<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
+    		{% else %}
+    			<h5>no stats available</h5>
+    		{% endif %}
+    			
+    	</div>
+    	<div class="crime-tiles-four">
+    		<h4>Robbery<h4>
+    		<p>per 100k</p>
+    		{% if crimestats_per100k %} 
+    			<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
+    		{% else %}
+    			<h5>no stats available</h5>
+    		{% endif %}
+    	</div>
+    	<div class="crime-tiles-four">
+    		<h4>Auto theft<h4>
+    		<p>per 100k</p>
+    		{% if crimestats_per100k %} 
+    		<h3>{{ crimestats_per100k.motor_vehicle_theft_rank_per100k }}</h3>
+    		{% else %}
+    			<h5>no stats available</h5>
+    		{% endif %}
+    	</div>
+    	<div class="crime-tiles-four" id="omega">
+    		<h4>Larceny<h4>
+    		<p>per 100k</p>
+    		{% if crimestats_per100k %} 
+    		<h3>{{ crimestats_per100k.larceny_theft_rank_per100k }}</h3>
+    		{% else %}
+    			<h5>no stats available</h5>
+    		{% endif %}
+    	</div>
+    </div>
+    <div class="clear"></div>
+</div>
+    <div class="clear"></div>
 
 <div id="hero-testimonial">
 
