@@ -1,0 +1,402 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% block css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/flexslider.css" type="text/css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/styles.css">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+        {% endblock %}
+
+
+    </head>
+    <body>
+    {% block header %}
+        <div id="packagesPage" class="mainContainer">
+
+            <div class="headerPhone inverse">
+                <div class="container">
+                    <div class="row">
+                        <p>CALL NOW TO ORDER <span>800-867-0151</span></p>
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /headerPhone -->
+
+            <div id="header" class="inverse">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-9 col-sm-4 col-md-6 col-lg-7">
+                            <div class="logoWrapper">
+                                <h1><a href="{% url home %}" title="ACN Business Security"><img src="{{ STATIC_URL }}img/affiliates/acn/ProtectAmericaForACN.png" alt="ACN" title="ACN" width="380"></a></h1>
+                            </div><!-- /logoWrapper -->
+                        </div>
+
+                        <div class="col-xs-3 visible-xs">
+                            <div id="mobileBlogNavTrigger">
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                                <i></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 col-md-6 col-lg-5 mobileClear">
+                                <div class="nav">
+                                    {% block navigation %}
+                                    <ul id="mainNav">
+                                        <li><a href="{% url home %}">Home</a></li>
+                                        <li><a href="{% url features %}">Features</a></li>
+                                        <li><a href="{% url packages %}">Packages</a></li>
+                                        <li><a href="{% url order %}">Order</a></li>
+                                        <li><a href="{% url support %}">Support</a></li>
+                                    </ul>
+                                    {% endblock %}
+                                </div><!-- /nav -->
+                        </div>
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /header -->
+            {% endblock %}
+
+
+            {% block content %}
+            <div class="hero section inverse">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-6">
+                            <div class="heroIntroWrapper">
+                                <h1>Business Security Packages</h1>
+                                <h4>We recommend the "<a href="#premiumBusinessPackage">Premium Business Package</a>"</h4>
+                                <ul>
+                                    <li class="sprite one"><a href="#premiumBusinessPackage">Select a package</a></li>
+                                    <li class="sprite two"><a href="{% url order %}">Get in Touch</a></li>
+                                    <li class="sprite three"><a href="#premiumBusinessPackage">Secure your Business</a></li>
+                                </ul>
+                            </div><!-- /heroIntro -->
+                        </div><!--  /leftCol -->
+                        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                            <div class="formWrapper mobileSection">
+                                <p class="form-title">Order Now</p>
+                                {% include "order/quote-form-refresh.html" with form=forms.basic %}
+                            </div><!-- /formWrapper -->
+                        </div><!-- /RightCol -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /hero -->
+
+            <div class="call-box center inverse section">
+            Get Started Now, Call Today! 800-867-0151
+            </div>
+
+            <div id="premiumBusinessPackage" class="premiumBusinessPackage section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6  col-md-6 col-lg-5">
+                            <h2 class="title">Premium Business Package</h2>
+                                <ul>
+                                    <li>2 Door Sensors</li>
+                                    <li>GE Control Panel</li>
+                                    <li>1 Interactive Video Camera</li>
+                                    <li>1 Motion Detector</li>
+                                    <li>1 Glass Break Detector</li>
+                                    <li>Battery Backup</li>
+                                    <li>3 Window Decals</li>
+                                    <li>Broadband Interactive Monitoring</li>
+                                </ul>
+                                <h3>
+                                    One-Time Equipment Fee: $99<br>
+                                    Monthly Monitoring: $46.99<br>
+                                    No Installation Fees
+                                </h3>
+                        </div><!-- /col -->
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <p class="recommendedForBusinessTitle">Recommended for Business</p><div class="recommendedBubble"></div>
+                            <img class="premiumBusinessPackageImage" src="{{ STATIC_URL }}img/affiliates/acn/ACNbusinessPremiumPackage.jpg" alt="ACN Premium Business Package" title="ACN Premium Business Package">
+                        </div><!-- /col -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /premiumBusinessPackage -->
+
+
+
+            <div class="packagesTable section">
+                <div class="container">
+                    <div class="row">
+                        <div>
+                            <div class="col-lg-12">
+                                <h2 class="title">Other Business Packages</h2>
+                            </div><!-- /col -->
+                            <div id="tabs">
+                                <ul>
+                                    <li>
+                                        <div class="package-box-copper">
+                                            <h2>Copper</h2>
+                                            <div class="package-blue-strip"><strong>$19.99</strong> <small>monthly</small></div>
+                                            <p>1 Simon XT control panel</p>
+                                            <p>3 Door / window sensors</p>
+                                            <p>1 Motion detector</p>
+                                            <hr>
+                                            <p>No equipment fees</p>
+                                            <p>No activation fees</p>
+                                            <hr>
+                                            <a href="{% url order %}">Request this plan</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="package-box-bronze">
+                                            <h2>Bronze</h2>
+                                            <div class="package-blue-strip"><strong>$35.99</strong> <small>monthly</small></div>
+                                            <p>1 Simon XT control panel</p>
+                                            <p>7 Door / window sensors</p>
+                                            <p>1 Motion detector</p>
+                                            <hr>
+                                            <p>No equipment fees</p>
+                                            <p>No activation fees</p>
+                                            <hr>
+                                            <a href="{% url order %}">Request this plan</a>
+                                        </div>
+                                    </li>
+                                    <li class="package-box-silver">
+                                        <div class="package-box-silver">
+                                            <h2>Silver</h2>
+                                            <div class="package-blue-strip"><strong>$37.99</strong> <small>monthly</small></div>
+                                            <p>1 Simon XT control panel</p>
+                                            <p>10 Door / window sensors</p>
+                                            <p>1 Motion detector</p>
+                                            <hr>
+                                            <p>No equipment fees</p>
+                                            <p>No activation fees</p>
+                                            <hr>
+                                            <a href="{% url order %}">Request this plan</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="package-box-gold">
+                                            <h2>Gold</h2>
+                                            <div class="package-blue-strip"><strong>$39.99</strong> <small>monthly</small></div>
+                                            <p>1 Simon XT control panel</p>
+                                            <p>12 Door / window sensors</p>
+                                            <p>1 Motion detector</p>
+                                            <hr>
+                                            <p>No equipment fees</p>
+                                            <p>No activation fees</p>
+                                            <hr>
+                                            <a href="{% url order %}">Request this plan</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="package-box-platinum">
+                                            <h2>Platinum</h2>
+                                            <div class="package-blue-strip"><strong>$42.99</strong> <small>monthly</small></div>
+                                            <p>1 Simon XT control panel</p>
+                                            <p>15 Door / window sensors</p>
+                                            <p>1 Motion detector</p>
+                                            <hr>
+                                            <p>No equipment fees</p>
+                                            <p>No activation fees</p>
+                                            <hr>
+                                            <a href="{% url order %}">Request this plan</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div><!-- /tabs -->
+                        </div>
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /packagesTable -->
+
+
+            <div class="additionalProducts section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h2 class="title">Additional Products</h2>
+                        </div><!-- /col -->
+                        
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/productDoorSensor.png" alt="Door/Window Sensor" title="Door/Window Sensor">
+                                <p>Door/Window Sensor</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/productPanic.png" alt="Panic Pendant" title="Panic Pendant">
+                                <p>Panic Pendant</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 mobileClear">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodVideoCamera.png" alt="Video Camera" title="Video Camera">
+                                <p>Video Camera</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodMotionDetector.png" alt="Motion Detector" title="Motion Detector">
+                                <p>Motion Detector</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 mobileClear">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodExtraKeyPad.png" alt="Extra Key Pad" title="Extra Key Pad">
+                                <p>Extra Key Pad</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodSign.png" alt="Sign" title="Sign">
+                                <p>Sign</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 mobileClear clearRow">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodGlassBreakDetector.png" alt="Glass Break Detector" title="Glass Break Detector">
+                                <p>Glass Break Detector</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodKeyChainRemote.png" alt="Keychain Remote" title="Keychain Remote">
+                                <p>Keychain Remote</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 mobileClear">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/garageSensor.png" alt="Overhead Garage Sensor" title="Overhead Garage Sensor">
+                                <p>Overhead Garage Sensor</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodSolarSign.png" alt="Solar Sign" title="Solar Sign">
+                                <p>Solar Sign</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 mobileClear">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodSmokeDetector.png" alt="Smoke Detector" title="Smoke Detector">
+                                <p>Smoke Detector</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodLowTemperatureSensor.png" alt="Low Temperature Sensor" title="Low Temperature Sensor">
+                                <p>Low Temperature Sensor</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+
+
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 mobileClear clearRow">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodGPSModule.png" alt="GPS Module" title="GPS Module">
+                                <p>GPS Module</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodWirelessSecretPad.png" alt="Wireless Secret Keypad" title="Wireless Secret Keypad">
+                                <p>Wireless Secret Keypad</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2 mobileClear">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodFloodDetector.png" alt="Flood Detector" title="Flood Detector">
+                                <p>Flood Detector</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+                        <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                            <div class="productWrapper">
+                                <img src="{{ STATIC_URL }}img/affiliates/acn/prodTouchscreenPad.png" alt="Touch-screen Keypad" title="Touch-screen Keypad">
+                                <p>Touch-screen Keypad</p>
+                            </div> <!-- /productWrapper -->
+                        </div><!-- /col -->
+
+
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /packagesTable -->
+
+
+
+
+            <div class="contactFooter section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                            <h2>Get in Touch</h2>
+                            <p>We are available to offer you assistance concerning any questions you might have about our business security systems.</p>
+                            <p>Give us a call to start your discussion about the security choice for your business today.</p>
+                            <p>One of our security experts will help determine which package best meets your needs.</p>
+                            <p class="orCall">Or Call:<span class="phone">800-867-0151</span></p>
+                        </div><!-- /col -->
+
+                        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+                            <div class="formWrapper mobileSection">
+                                <p class="form-title">Order Now</p>
+                                {% include "order/quote-form-refresh.html" with form=forms.basic %}
+                            </div><!-- /formWrapper -->
+                        </div><!-- /col -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /contactFooter -->
+
+
+            <div id="footer" class="footerPhone section inverse center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
+                            <ul class="footerNav">
+                                <li><a href="{% url home %}">Home</a></li>
+                                <li><a href="{% url features %}">Security System Features</a></li>
+                                <li><a href="{% url packages %}">Packages</a></li>
+                                <li><a href="{% url order %}">Order</a></li>
+                                <li><a href="{% url order %}">Support</a></li>
+                            </ul>
+                        </div><!-- /col -->
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                           <p>CALL TO ORDER NOW:<br><span>800-867-0151</span></p>
+                       </div><!-- /col -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /footer -->
+
+            <!-- ScrollBubble -->
+            <div id="scrollBubble"><p class="sprite">Scroll</p></div>
+
+        </div><!-- /mainContainer -->
+        <!-- jquery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}js/affiliates/acn/bootstrap.min.js"></script>
+        <script src="{{ STATIC_URL }}js/affiliates/acn/jquery.flexslider-min.js"></script>
+        <script src="http://static.protectamericasecurity.net/js/placeholder.js"></script>
+
+        <script type="text/javascript" charset="utf-8">
+            $(window).load(function() {
+                $('.flexslider').flexslider();
+            });
+            $( "#mobileBlogNavTrigger" ).click(function() {
+              $( "#mainNav" ).toggle( "fast" );
+            });
+            $( window ).scroll(function() {
+                $( "#scrollBubble" ).fadeOut( "slow" );
+            });
+        </script>
+    {% endblock %}
+{% block main-footer %}{% endblock %}
+{% block terms %}{% endblock %}
+    </body>
+</html>
