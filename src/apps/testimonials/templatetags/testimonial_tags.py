@@ -9,7 +9,7 @@ from django.conf import settings
 from apps.testimonials.models import Testimonial, Textimonial
 
 register = template.Library()
-
+"limit=5&template=local&state={{ state }}&words=100" 
 
 def testimonial_search(parser, token, *args, **kwargs):
     tag_name = None
@@ -44,7 +44,6 @@ class TestimonialSearchNode(template.Node):
 
     def render(self, context):
         testimonial_array = []
-
         if self.search_term == '':
             testimonials = Textimonial.objects.filter(permission_to_post=True,
                 display=True).order_by('-date_created')
@@ -53,13 +52,28 @@ class TestimonialSearchNode(template.Node):
                 message__icontains=self.search_term,
                 display=True).order_by('-date_created')
         
+        # filter the testimonials by city
+        if 'city' in self.kwargs:
+            if self.kwargs['city'][0] == "{{ city }}":
+                testimonials = testimonials.filter(city=context['city'])
+            else:
+                testimonials = testimonials.filter(city=self.kwargs['city'][0])
         # filter the testimonials by state
         if 'state' in self.kwargs:
-            
-            if self.kwargs['state'][0] == "{{ state }}":
-                testimonials = testimonials.filter(state=context['state'])
+            if testimonials:
+                if self.kwargs['state'][0] == "{{ state }}":
+                    testimonials = testimonials.filter(state=context['state'])
+                else:
+                    testimonials = testimonials.filter(state=self.kwargs['state'][0])
             else:
-                testimonials = testimonials.filter(state=self.kwargs['state'][0])
+                testimonials = Textimonial.objects.filter(permission_to_post=True,
+                display=True).order_by('-date_created')
+                if self.kwargs['state'][0] == "{{ state }}":
+                    testimonials = testimonials.filter(state=context['state'])
+                else:
+                    testimonials = testimonials.filter(state=self.kwargs['state'][0])
+
+
         # limit the testimonials by the kwarg
         if 'limit' in self.kwargs:
             testimonials = testimonials[:self.kwargs['limit'][0]]
