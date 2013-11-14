@@ -433,6 +433,7 @@ elif settings.SITE_ID == 24:
             dtt(r'^packages/$', 'affiliates/acn/packages.html', 'packages'),
             dtt(r'^order/$', 'affiliates/acn/order.html', 'order'),
             dtt(r'^support/$', 'affiliates/acn/support.html', 'support'),
+            dtt(r'^thank-you/$', 'affiliates/acn/thank-you.html', 'thank-you'),
     )
 
 
