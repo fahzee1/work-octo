@@ -1,4 +1,5 @@
 import re
+import pdb
 from urlparse import parse_qs
 from datetime import datetime
 
@@ -72,12 +73,10 @@ class TestimonialSearchNode(template.Node):
                     testimonials = testimonials.filter(state=context['state'])
                 else:
                     testimonials = testimonials.filter(state=self.kwargs['state'][0])
-
-
         # limit the testimonials by the kwarg
         if 'limit' in self.kwargs:
             testimonials = testimonials[:self.kwargs['limit'][0]]
-
+            
         # bold the search term
         for testimonial in testimonials:
             if self.search_term != '':

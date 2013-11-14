@@ -53,8 +53,36 @@ $(document).ready(function() {
 	</div>		
 
 <div class="wrapper">
-    
+    		{% comment %} This is the test area for city video, icon, and competitors. Comment areas where you need data (rylan){% endcomment %}
+    		<div class="icons">
+    			<h3>Icons</h3>
+    			{% if local_icon %}
+    				<img src="{{ local_icon.icon.url }}" height="80px" width="70px">
+    			{% else %}
+    				<img src="" alt="no image available">
+    			{% endif %}
+    		</div>
+    		<div class="videos">
+    			<h3>Video</h3>
+    			{% if local_video %}
+    			<iframe width="{{ local_video.width }}" height="{{ local_video.height }}" src="{{ local_video.video_embed }}" frameborder="0" allowfullscreen>
+    			</iframe>
+
+    			{% else %}
+    				<h3>No video</h3>
+
+    			{% endif %}
+    		</div>
+    		<div class="rivals">
+    			<h3>City Competitors</h3>
+    			{% if local_rival %}
+    			{{ local_rivalå.rival }}
+    			{% else %}
+    			<h3>no rivals</h3>
+    			{% endif %}
+    		</div>
 	<div id="local-first-paragraph">
+
 			<p>{% content_spinner "diff4" "Wireless technology is the future of home security, and that future is now.|Home security has gone wireless, and that's great news for homeowners.|Wireless home security is the simple solution for homeowners seeking protection." %} {% content_spinner "diff5" "Peace of mind shouldn't come at a great cost; neither should it involve installation fees or expensive equipment.|The goal in arming yourself is to avoid stressful situations, so the process of securing your home should be painless. Installation and equipment fees shouldn't even be a part of the equation." %} In fact, our wireless security packages come with free equipment and zero installation costs. {% content_spinner "diff6" "Safety and comfort are now within anyone's grasp, and that's how it should be.|A safe home is now within anyone's grasp.|A safe home isn't just attainable, it's affordable." %}</p>
 	</div>
 
