@@ -35,6 +35,7 @@ $(document).ready(function() {
 </div>
 	<div id="generic-banner">
 		<div class="wrapper">
+
 			<div class="left">
 				<h1>{{ city }}'s {% content_spinner "headline1" "Best|Top Rated|Leading|Most Reliable|Most Affordable" %} {% content_spinner "headline2" "Home|" %} {% content_spinner "headline3" "Alarm Systems| Alarm|Burglar Alarm| Security Automation|Security Equipment|Security Monitoring|Security Monitoring|Security System|Security Systems|Security|Alarm Monitoring|Alarm System|Alarm System|Alarm Systems|Alarm Systems|Alarm|Alarm|Cellular Alarm|Security Alarms Systems|Security Monitoring Service|Security Monitoring System|Security Monitoring Systems|Security System Alarms|Security System Monitoring|Security System|Security Systems Equipment|Security Systems|Simon XT Alarm System|Security Monitoring" %}</h1>
 				<p>{% content_spinner "diff1" "Over the past 20 years|For over 20 years|Since 1992" %}, {% content_spinner "diff2" "Protect America has revolutionized the home security industry.|Protect America has been a pioneer of wireless home security|Protect America has revolutionized the industry by pioneering wireless alarm systems." %} {% content_spinner "diff3" "It's now easier than ever to protect your family|Defending your family from burglary is now easier than ever|Protecting your family is now simple" %} with quality home security products at an affordable price.</p>
@@ -55,10 +56,30 @@ $(document).ready(function() {
 	</div>		
 
 <div class="wrapper">
-    
-	<div id="local-first-paragraph">
+        <div id="featured-on">
+            <p>Featured On:</p>
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/abc.png" class="alpha" alt="Featured on ABC" width="96" height="96" />
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/best.png" alt="Featured on Best Home Security Companys" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/fox-news.png" alt="Featured on Fox News" width="96" height="96" />
+			{% if local_icon %}
+				<img src="{{ local_icon.icon.url }}"  width="96" height="96">
+			{% else %}
+                <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/cw.png" alt="Featured on The CW" width="96" height="96" />
+			{% endif %}
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/consumer-digest.png" alt="Rated a Consumer Digest Best Buy" width="96" height="96" />
+        </div>
+    		{% comment %} This is the test area for city video, icon, and competitors. Comment areas where you need data (rylan){% endcomment %}
+	<div id="local-first-paragraph" class="{% if local_video %}split{% endif %}">
 			<p>{% content_spinner "diff4" "Wireless technology is the future of home security, and that future is now.|Home security has gone wireless, and that's great news for {{ state }} homeowners.|Wireless home security is the simple solution for homeowners seeking protection." %} {% content_spinner "diff5" "Peace of mind shouldn't come at a great cost; neither should it involve installation fees or expensive equipment.|The goal in arming yourself is to avoid stressful situations, so the process of securing your home should be painless. Installation and equipment fees shouldn't even be a part of the equation." %} That is why our {% content_spinner "newdiff1" "wireless security packages|home security packages|alarm packages|home security systems|alarm systems" %} come with security equipment and have zero installation costs. {% content_spinner "diff6" "Safety and comfort are now within anyone's grasp, and that's how it should be.|A safe home is now within anyone's grasp.|A safe home isn't just attainable, it's affordable." %}</p>
+
 	</div>
+    {% if local_video %}
+    <div id="local-video">
+    {{ local_video.video_embed }}
+    </div>
+    {% endif %}
 
 </div>
 
@@ -140,7 +161,7 @@ $(document).ready(function() {
                 <span itemprop="ratingValue">{{ review_avg|floatformat }} </span> out of 5 stars based on over <span itemprop="reviewCount"> {{ review_total }} </span> Protect America {{ state_long }} Customer Reviews
             </div>
 	        <div id="review-cycle-container">
-                {% testimonial_search "" "limit=5&template=local&state={{ state }}&words=100" %}
+                {% testimonial_search "" "limit=5&template=local&city={{ city }}&state={{ state }}&words=100" %}
 
 	        </div>
 	    </div>

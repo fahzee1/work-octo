@@ -289,7 +289,7 @@ class StateCrimeStats(models.Model):
     state = models.ForeignKey(State)
     year = models.IntegerField()
     number_of_cities = models.IntegerField()
-    population = models.IntegerField()
+    population = models.IntegerField(null=True)
     aggravated_assault = models.IntegerField(null=True)
     arson = models.IntegerField(null=True)
     burglary = models.IntegerField(null=True)
@@ -384,7 +384,38 @@ class MatchAddressLocation(models.Model):
         else:
             super(MatchAddressLocation,self).save(*args, **kwargs) 
 
+class FeaturedCommon(models.Model):
+    city = models.ForeignKey("CityLocation")
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
     
+class FeaturedVideo(FeaturedCommon):
+    video_embed = models.CharField(max_length=255,blank=True,null=True)
+    height = models.IntegerField(max_length=4,blank=False)
+    width = models.IntegerField(max_length=4,blank=False)
+
+    def __unicode__(self):
+        return "%s's video " % self.city.city_name
+
+class FeaturedIcon(FeaturedCommon):
+    icon = models.ImageField(upload_to='featured_icons',height_field='image_height',width_field='image_width')
+    image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
+    image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
+
+    def __unicode__(self):
+        return "%s's icon" % self.city.city_name
+
+class CityCompetitor(FeaturedCommon):
+    rival = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "%s Competitor: %s" %(self.city.city_name,self.rival)
+
+
+
+
 def return_sums(crime,state,city=None,year=2012,per100=False):
     if per100:
         if city:

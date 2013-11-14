@@ -21,7 +21,10 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          CityLocation,
                                          ZipCode,
                                          CrimeContent,
-                                         MatchAddressLocation)
+                                         MatchAddressLocation,
+                                         FeaturedIcon,
+                                         FeaturedVideo,
+                                         CityCompetitor)
 
 
 def query_weather(latitude, longitude, city, state):
@@ -126,9 +129,29 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             second_sum = first_sum + 4
             final_sum = second_sum/(total+1)
         else:
-            final_sum = 0
+            reviews = Textimonial.objects.filter(state=state.abbreviation)
+            total = reviews.count()
+            ratings_avg = reviews.aggregate(Avg('rating')).values()
+            first_sum = ratings_avg[0] * total
+            second_sum = first_sum + 4
+            final_sum = second_sum/(total+1)
+        if not reviews:
             total = 0
+            final_sum = 0
+        try:
+            local_video = FeaturedVideo.objects.get(city=city)
+        except FeaturedVideo.DoesNotExist:
+            local_video = None
 
+        try:
+            local_icon = FeaturedIcon.objects.get(city=city)
+        except FeaturedIcon.DoesNotExist:
+            local_icon = None
+
+        try:
+            local_rival = CityCompetitor.objects.get(city=city)
+        except CityCompetitor.DoesNotExist:
+            local_rival = None
 
         '''
         crime_stats = {}
@@ -175,7 +198,10 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
                    #'pop_type': pop_type,
                    'city_id': city_id,
                    'review_avg':final_sum,
-                   'review_total':total
+                   'review_total':total,
+                   'local_video':local_video,
+                   'local_icon':local_icon,
+                   'local_rival':local_rival
                 }
 
         # get content
