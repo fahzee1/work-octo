@@ -306,10 +306,14 @@ def black_friday(request):
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
 
 def black_friday_ajax(request):
+    from models import BlackFriday
+    submission = BlackFriday()
     if request.method != "POST":
         return HttpResponseRedirect('/')
     email = request.POST.get('email',None)
     if email:
+        submission.email = email
+        submission.save()
         subject = 'Black Friday Subscriber!'
         message = 'Hey Caroline,\n\tYour new black friday subscriber is %s.\n\n From CJ :)' % email
         too = 'caroline@protectamerica.com'
