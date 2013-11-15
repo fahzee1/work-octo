@@ -324,6 +324,11 @@ except ImportError:
 
 if os.path.isdir('/Users/cjogbuehi'):
     LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-else:
+elif os.path.isdir('/Users/rylanfrancis'):
     LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+elif os.path.isdir('/Users/edgarrodriguez'):
+    LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+else:
+    pass
+
 

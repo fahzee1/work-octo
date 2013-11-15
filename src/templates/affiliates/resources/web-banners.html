@@ -31,27 +31,26 @@
 
         {% endfor %}
     
-    <div id="pop-up-wrapper" onclick="javascript:closePopup()">
-        <div id="popupEntry2" style="background-color:#444444;z-index:3000;position:absolute;color:white;padding:20px;">
-        
-        <br />
-         <div id="popupEntryInner" onclick="javascript:noPropogate(event)">
-         Enter Agent ID:
-            <input type="text" id="popupAgentID" size="7" value="axxxxxx" maxlength="7" onkeyup="updateLinkText()" onblur="selectLink();">
+        <div id="pop-up-wrapper" onclick="javascript:closePopup()">
+            <div id="popupEntry2" style="background-color:#444444;z-index:3000;position:absolute;color:white;padding:20px;">
             <br />
-            <br />
-            
-            <textarea  id="popupEntryTextBox" cols=50 rows=5> </textarea>
-            <br />
-            <br />
-            <br />
-            <br />
-            <span class="popUpButton" onclick="javascript:selectLink(event)">select</span>&nbsp;&nbsp;
-            <span class="popUpButton" onclick="javascript:closePopup()">close</span>
-     </div>
-     <div class="clear"></div>
+                <div id="popupEntryInner" onclick="javascript:noPropogate(event)">
+                    Enter Agent ID:
+                    <input type="text" id="popupAgentID" size="7" value="axxxxxx" maxlength="7" onkeyup="updateLinkText()" onblur="selectLink();">
+                    <br />
+                    <br />
+                    <textarea  id="popupEntryTextBox" cols=50 rows=5> </textarea>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <span class="popUpButton" onclick="javascript:selectLink(event)">select</span>&nbsp;&nbsp;
+                    <span class="popUpButton" onclick="javascript:closePopup()">close</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
 </div>
-
 
     {% addtoblock "js" %}
     
@@ -91,7 +90,7 @@
         {
             if($('#popupAgentID').val().length > 0)
             {
-                theBoxVal = '<a href="http://www.protectamerica.com/?agent='  + $('#popupAgentID').val().toLowerCase() + '">\n\t<img src="http://www.protectamerica.com' + thisImgSrc + '" />\n</a>';
+                theBoxVal = '<a href="http://www.protectamerica.com/?agent='  + $('#popupAgentID').val().toLowerCase() + '">\n\t<img src="'+thisImgSrc + '" />\n</a>';
             }
             else
             {

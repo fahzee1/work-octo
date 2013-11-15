@@ -28,8 +28,8 @@
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('/static/font/fontawesome-webfont.eot?v=3.2.1');
-  src: url('/static/font/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'), url('/static/font/fontawesome-webfont.woff?v=3.2.1') format('woff'), url('/static/font/fontawesome-webfont.ttf?v=3.2.1') format('truetype'), url('/static/font/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');
+  src: url('http://www.protectamerica.com/static/font/fontawesome-webfont.eot?v=3.2.1');
+  src: url('http://www.protectamerica.com/static/font/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'), url('http://www.protectamerica.com/static/font/fontawesome-webfont.woff?v=3.2.1') format('woff'), url('http://www.protectamerica.com/static/font/fontawesome-webfont.ttf?v=3.2.1') format('truetype'), url('http://www.protectamerica.com/static/font/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -1646,6 +1646,13 @@ table#licenses-table tr.license-requirement td {
   color: #ffffff;
   text-transform: uppercase;
 }
+#top-section-wrapper #top-section #newsfeed li a {
+  color: #ffffff;
+  text-decoration: none;
+}
+#top-section-wrapper #top-section #newsfeed li a:hover {
+  text-decoration: underline;
+}
 #top-section-wrapper #top-section #company-links {
   float: right;
   width: 450px;
@@ -1791,6 +1798,7 @@ table#licenses-table tr.license-requirement td {
   color: #ffffff;
   font-size: 9px;
   background: url(/static/img/base/base-sprite-new.png) -78px 0px no-repeat;
+  width: 86px;
 }
 #header-wrapper {
   background: #333333;
@@ -1948,6 +1956,7 @@ table#licenses-table tr.license-requirement td {
   -webkit-box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.15);
   position: relative;
+  z-index: 500;
 }
 #subnav-wrapper #subnav {
   margin: 0 auto;
@@ -1988,12 +1997,12 @@ table#licenses-table tr.license-requirement td {
   -webkit-border-bottom-left-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   z-index: 100;
+  display: none;
   -moz-box-shadow: 0px 2px 5px #4a505a;
   -webkit-box-shadow: 0px 2px 5px #4a505a;
   box-shadow: 0px 2px 5px #4a505a;
 }
 #subnav-wrapper #subnav li .child-nav ul {
-  display: none;
   padding: 8px;
 }
 #subnav-wrapper #subnav li .child-nav ul li {
@@ -2119,6 +2128,7 @@ table#licenses-table tr.license-requirement td {
 #quote-form p.form-title {
   background: #1fb867;
   line-height: 64px;
+  margin-bottom: 0;
 }
 #quote-form .form-fields {
   padding: 8px 32px 16px;
@@ -2127,7 +2137,7 @@ table#licenses-table tr.license-requirement td {
   font-size: 11px;
   line-height: 13px;
   text-align: justify;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 #quote-form .form-fields label {
   display: block;
@@ -2144,14 +2154,15 @@ table#licenses-table tr.license-requirement td {
 #quote-form .form-fields .consent-box #id_consent {
   float: left;
   margin: 8px 8px;
-  width: 32px;
+  width: 16px;
 }
 #quote-form .form-fields .consent-box label.consent-label {
-  font-size: 11px;
+  font-size: 10px;
   line-height: 15px;
   text-align: justify;
   float: left;
-  width: 260px;
+  width: 196px;
+  margin-left: 10px;
 }
 #quote-form button {
   display: block;
@@ -2263,6 +2274,51 @@ table#licenses-table tr.license-requirement td {
 #quote-form a:hover {
   text-decoration: underline;
 }
+#quote-form.sleepy {
+  width: 275px;
+}
+#quote-form.sleepy .form-fields {
+  padding: 8px 16px 16px;
+}
+#quote-form.sleepy .form-fields p {
+  font-size: 11px;
+  line-height: 13px;
+  text-align: justify;
+  margin-bottom: 16px;
+}
+#quote-form.sleepy .form-fields label {
+  display: block;
+  font-size: 13px;
+}
+#quote-form.sleepy .form-fields input {
+  width: 234px;
+}
+#quote-form.sleepy .form-fields button {
+  width: 244px;
+}
+body.alternate .request-quote-button {
+  display: none;
+}
+body.alternate #hero-banner.alt-form #quote-form {
+  display: block;
+  width: 275px;
+  top: 0;
+  -moz-box-shadow: 0 0 0 0;
+  -webkit-box-shadow: 0 0 0 0;
+  box-shadow: 0 0 0 0;
+  border: 1px solid #333333;
+}
+body.alternate #hero-banner.alt-form #quote-form label {
+  display: none;
+}
+body.alternate #hero-banner.alt-form #quote-form input {
+  margin: 16px auto;
+  width: 240px;
+  display: block;
+}
+body.alternate #hero-banner.alt-form #quote-form button {
+  width: 250px;
+}
 #quote-form-error {
   display: none;
   position: absolute;
@@ -2327,6 +2383,45 @@ table#licenses-table tr.license-requirement td {
   border-top: 1px solid #333333;
   width: 100%;
   border-bottom: 1px solid #333333;
+  position: relative;
+}
+#call-box #main-promo {
+  background: url(/static/img/base/promo-bg.png) repeat;
+  width: 100%;
+  height: 56px;
+  position: absolute;
+  top: -56px;
+  left: 0;
+}
+#call-box #main-promo #main-promo-content {
+  width: 960px;
+  margin: 0 auto;
+  text-decoration: none;
+  position: relative;
+  height: 56px;
+  display: block;
+}
+#call-box #main-promo #main-promo-content .main-promo-image {
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+}
+#call-box #main-promo #main-promo-content p {
+  font-size: 18px;
+  text-align: left;
+  line-height: 20px;
+  padding: 6px 0;
+  text-shadow: none;
+  padding-left: 127px;
+}
+#call-box #main-promo #main-promo-content p span {
+  display: block;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: normal;
+}
+#call-box #main-promo:hover {
+  background: #12a859;
 }
 #call-box.alt {
   background: #1fb867;
@@ -2335,15 +2430,15 @@ table#licenses-table tr.license-requirement td {
   width: 960px;
   margin: 0 auto;
   color: #ffffff;
-  font-weight: 100;
-  font-size: 42px;
+  font-weight: bold;
+  font-size: 38px;
   line-height: 42px;
   text-align: center;
   padding: 12px 0px;
   text-shadow: 1px 2px 0px #333333;
 }
 #call-box p strong {
-  font-weight: 100;
+  font-weight: bold;
 }
 #call-box p a {
   color: #ffffff;
@@ -2351,6 +2446,153 @@ table#licenses-table tr.license-requirement td {
   cursor: default;
 }
 /************** Footer ****************/
+#order-footer {
+  width: 960px;
+  margin: 0 0 15px;
+  float: left;
+  position: relative;
+  background: #fcfcfc;
+  border: 1px solid #cccccc;
+  padding: 0px;
+  margin: 8px auto 8px;
+  float: none;
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
+}
+#order-footer h1 {
+  color: #1570ab;
+  font-size: 26px;
+  font-weight: normal;
+  line-height: 36px;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+#order-footer h2 {
+  color: #555555;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  padding-bottom: 8px;
+}
+#order-footer h2 span {
+  display: block;
+}
+#order-footer p {
+  text-align: justify;
+  line-height: 24px;
+  margin-bottom: 8px;
+}
+#order-footer h3 {
+  color: #555555;
+  font-size: 18px;
+  border-bottom: none;
+  font-weight: bold;
+  padding: 8px 0px 8px;
+}
+#order-footer h3 {
+  font-weight: bold;
+  padding-bottom: 16px;
+  padding-top: 0;
+}
+#order-footer #footer-package-section {
+  width: 309px;
+  border-right: 1px solid #eeeeee;
+  padding: 16px 16px;
+  float: left;
+}
+#order-footer #footer-package-section input {
+  background: #ffffff url(/static/img/base/search-icon.png) no-repeat 4px 4px;
+  padding-left: 24px;
+  font-size: 14px;
+  line-height: 20px;
+  height: 20px;
+  width: 260px;
+}
+#order-footer #footer-package-section button {
+  margin: 8px 0 0 0;
+  display: block;
+  float: left;
+  padding: 8px 16px;
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  color: #ffffff;
+  background: #1570ab;
+  text-decoration: none;
+  margin-right: 16px;
+  -webkit-transition: background-color 0.7s ease-out;
+  -moz-transition: background-color 0.7s ease-out;
+  transition: background-color 0.7s ease-out;
+  border: none;
+  font-size: 14px;
+}
+#order-footer #footer-package-section button i {
+  border-left: 1px solid #6598b9;
+  padding: 4px 0 4px 8px;
+  margin-left: 4px;
+}
+#order-footer #footer-package-section p {
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0px 0 8px;
+}
+#order-footer #footer-package-section p span {
+  font-size: 16px;
+  display: block;
+  line-height: 18px;
+}
+#order-footer #footer-package-section p span em {
+  text-decoration: line-through;
+  position: relative;
+  color: #555555;
+  top: 0;
+  font-size: 16px;
+  line-height: 18px;
+  padding-right: 4px;
+}
+#order-footer #footer-package-section em {
+  font-size: 11px;
+  line-height: 12px;
+  position: absolute;
+  top: 112px;
+  color: #1570ab;
+}
+#order-footer #footer-call-now,
+#order-footer #footer-chat-now {
+  width: 276px;
+  border-right: 1px solid #eeeeee;
+  float: left;
+  padding: 16px 16px;
+  height: 128px;
+}
+#order-footer #footer-call-now p,
+#order-footer #footer-chat-now p {
+  font-size: 12px;
+  line-height: 16px;
+  padding: 0 8px 8px 0;
+  margin-bottom: 0;
+}
+#order-footer #footer-call-now span,
+#order-footer #footer-chat-now span {
+  color: #eb292b;
+  display: block;
+  font-size: 32px;
+  line-height: 32px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+#order-footer #footer-call-now span a,
+#order-footer #footer-chat-now span a {
+  text-decoration: none;
+  color: #eb292b;
+}
+#order-footer #footer-chat-now {
+  border-right: none;
+}
 #footer-wrapper {
   background: #333333;
 }
@@ -2524,6 +2766,7 @@ table#licenses-table tr.license-requirement td {
   background: #2b80b8 url(/static/img/base/bg-blue.png) repeat;
   position: relative;
   z-index: 0;
+  width: 100%;
   overflow: hidden;
 }
 #hero-wrapper.red {
@@ -2541,14 +2784,17 @@ table#licenses-table tr.license-requirement td {
 #hero-wrapper.yellow #hero-image #hero-content p {
   text-shadow: none;
 }
+#hero-wrapper.yellow #hero-image #hero-content h3 {
+  color: #555555;
+}
 #hero-wrapper.grey {
-  background: #555555 url(/static/img/base/bg-grey.png) repeat;
+  background: #555555 url(/static/img/base/bg-grey.jpg) repeat;
 }
 #hero-wrapper.green {
   background: #4bba29 url(/static/img/base/bg-green.png) repeat;
 }
 #hero-wrapper.v-light-grey {
-  background: #eeeeee url(/static/img/base/bg-v-light-grey.png) repeat;
+  background: #eeeeee url(/static/img/base/bg-v-light-grey.jpg) repeat;
 }
 #hero-wrapper.v-light-grey #hero-image #hero-content h1,
 #hero-wrapper.v-light-grey #hero-image #hero-content p,
@@ -2740,6 +2986,7 @@ table#licenses-table tr.license-requirement td {
 }
 #in-home-wrapper #in-your-home .home-content {
   width: 436px;
+  background: #ffffff;
   background: rgba(255, 255, 255, 0.85);
   float: left;
   height: 357px;

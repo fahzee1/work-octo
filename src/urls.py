@@ -157,6 +157,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^blue/?$', 'affiliates/sem-landing-page/blue-test.html', 'blue-test'),
         dtt(r'^green/?$', 'affiliates/sem-landing-page/green-test.html', 'green-test'),
         dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-free.html', 'green-test'),
+        dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
 
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
@@ -424,6 +425,18 @@ elif settings.SITE_ID == 23:
 
     )
 
+# acn
+elif settings.SITE_ID == 24:
+    urlpatterns += patterns('',
+            dtt(r'^$', 'affiliates/acn/index.html', 'home'),
+            dtt(r'^features/$', 'affiliates/acn/features.html', 'features'),
+            dtt(r'^packages/$', 'affiliates/acn/packages.html', 'packages'),
+            dtt(r'^order/$', 'affiliates/acn/order.html', 'order'),
+            dtt(r'^support/$', 'affiliates/acn/support.html', 'support'),
+            dtt(r'^thank-you/$', 'affiliates/acn/thank-you.html', 'thank-you'),
+    )
+
+
 
 # defaults
 else:
@@ -470,8 +483,8 @@ else:
             
             # Equipment > Home Security
                 dtt(r'^equipment/home-security/?$', 'products/equipment/home-security.html', 'home-security-equipment', 'equipment'),
-                
-                    dtt(r'^equipment/home-security/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
+                # redirect from ge-simon-xt to simon-xt 
+                    dtt(r'^equipment/home-security/simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/wireless-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/motion-sensors/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/touch-screen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'home-security-equipment'),
@@ -652,6 +665,8 @@ else:
 
             # Help Pages > Return Policy
                 dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),
+                dtt(r'^help/equipment-return/?$', 'help/equipment-return.html', 'equipment-return', 'help'),
+
 
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
