@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.SearchEngineReferrerMiddleware',
     'apps.common.middleware.CommonMiddlewareWrapper',
     'apps.common.middleware.DetectMobileBrowser',
+    'apps.common.middleware.LocalPageRedirect',
     'django.middleware.cache.FetchFromCacheMiddleware',
     #'apps.newsfeed.middleware.RenderNewsFeed',
     'apps.newsfeed.middleware.GetGeoIp',

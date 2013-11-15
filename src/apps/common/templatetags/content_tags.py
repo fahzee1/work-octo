@@ -67,7 +67,7 @@ class ParagraphSpinnerNode(template.Node):
         default = '/virtual/customer/www2.protectamerica.com/localpages/'
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
         chop_up = path.split('/')
-        if city:
+        if len(chop_up) == 3:
             state, city = chop_up[1], chop_up[2]
             if '.' in city:
                 f,l = city.split('.')
@@ -303,6 +303,11 @@ class ContentSpinnerNode(template.Node):
             content = content.replace('{{ state }}',state.title())
         if '{{state}}' in content:
             content = content.replace('{{state}}',state.title())
+        if '{{ state_long }}' in content:
+            content = content.replace('{{ state_long }}',context['state_long'])
+        if '{{state_long}}' in content:
+            content = content.replace('{{state_long}}',context['state_long'])
+
         return content
 
 register.tag(content_spinner)
