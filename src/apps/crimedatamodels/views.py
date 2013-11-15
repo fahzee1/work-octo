@@ -139,7 +139,6 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             else:
                 total = 0
                 final_sum = 0
-            
         try:
             local_video = FeaturedVideo.objects.get(city=city)
         except FeaturedVideo.DoesNotExist:
