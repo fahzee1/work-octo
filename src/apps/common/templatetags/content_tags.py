@@ -297,8 +297,12 @@ class ContentSpinnerNode(template.Node):
 
         if '{{ city }}' in content:
             content = content.replace('{{ city }}',city.title())
+        if '{{city}}' in content:
+            content = content.replace('{{city}}',city.title())
         if '{{ state }}' in content:
             content = content.replace('{{ state }}',state.title())
+        if '{{state}}' in content:
+            content = content.replace('{{state}}',state.title())
         return content
 
 register.tag(content_spinner)

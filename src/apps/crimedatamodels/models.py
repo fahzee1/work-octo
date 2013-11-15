@@ -393,8 +393,6 @@ class FeaturedCommon(models.Model):
     
 class FeaturedVideo(FeaturedCommon):
     video_embed = models.CharField(max_length=255,blank=True,null=True)
-    height = models.IntegerField(max_length=4,blank=False)
-    width = models.IntegerField(max_length=4,blank=False)
 
     def __unicode__(self):
         return "%s's video " % self.city.city_name

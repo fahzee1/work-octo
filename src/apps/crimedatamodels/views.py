@@ -130,14 +130,15 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             final_sum = second_sum/(total+1)
         else:
             reviews = Textimonial.objects.filter(state=state.abbreviation)
-            total = reviews.count()
-            ratings_avg = reviews.aggregate(Avg('rating')).values()
-            first_sum = ratings_avg[0] * total
-            second_sum = first_sum + 4
-            final_sum = second_sum/(total+1)
-        if not reviews:
-            total = 0
-            final_sum = 0
+            if reviews:
+                total = reviews.count()
+                ratings_avg = reviews.aggregate(Avg('rating')).values()
+                first_sum = ratings_avg[0] * total
+                second_sum = first_sum + 4
+                final_sum = second_sum/(total+1)
+            else:
+                total = 0
+                final_sum = 0
         try:
             local_video = FeaturedVideo.objects.get(city=city)
         except FeaturedVideo.DoesNotExist:
