@@ -4,6 +4,7 @@ import urllib
 import urllib2
 import operator
 import random
+import pdb
 from django.http import Http404
 from decimal import Decimal
 from datetime import datetime, timedelta
@@ -312,12 +313,13 @@ def black_friday_ajax(request):
         return HttpResponseRedirect('/')
     email = request.POST.get('email',None)
     if email:
-        submission.email = email
-        submission.save()
-        subject = 'Black Friday Subscriber!'
-        message = 'Hey Caroline,\n\tYour new black friday subscriber is %s.\n\n From CJ :)' % email
-        too = 'caroline@protectamerica.com'
-        from_email = 'Protect America <noreply@protectamerica.com>'
-        send_mail(subject,message,from_email,[too])
+        if not settings.LEAD_TESTING:
+            submission.email = email
+            submission.save()
+            subject = 'Black Friday Subscriber!'
+            message = 'Hey Caroline,\n\tYour new black friday subscriber is %s.\n\n From CJ :)' % email
+            too = 'caroline@protectamerica.com'
+            from_email = 'Protect America <noreply@protectamerica.com>'
+            send_mail(subject,message,from_email,[too])
         return HttpResponse()
     return HttpResponseBadRequest()

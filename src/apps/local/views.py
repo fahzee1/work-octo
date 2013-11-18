@@ -78,13 +78,7 @@ def get_statecode(state):
         return statecode.upper()
 
 
-
-
-@cache_page(60 * 60 * 4)
-def local_page_wrapper(request, keyword, city, state):
-    statecode = get_statecode(state)
-    if not statecode:
-        raise Http404
+def strip_city(city):
     if '-' and '.' in city:
         city=city.replace('-',' ').replace('.','')
     if '-' in city:
@@ -95,7 +89,17 @@ def local_page_wrapper(request, keyword, city, state):
         city=city.replace('(','').replace(')','')
     if ',' in city:
         city=city.replace(',','')
+    return city
 
+
+
+
+@cache_page(60 * 60 * 4)
+def local_page_wrapper(request, keyword, city, state):
+    statecode = get_statecode(state)
+    if not statecode:
+        raise Http404
+    city = strip_city(city)
     if (city.upper(),statecode) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
         background_time=get_timezone(statecode)
         ctx={'background_time':background_time}
@@ -217,20 +221,11 @@ def local_city(request, state):
 
 def local_page_wrapper2(request,state,city=None):
     statecode = get_statecode(state)
+    #pdb.set_trace()
     if not statecode:
         raise Http404
     if city:
-        if '-' and '.' in city:
-            city=city.replace('-',' ').replace('.','')
-        if '-' in city:
-            city=city.replace('-',' ')
-        if '.' in city:
-            city=city.replace('.',' ')
-        if '(' in city or ')' in city:
-            city=city.replace('(','').replace(')','')
-        if ',' in city:
-            city=city.replace(',','')
-
+        city = strip_city(city)
         return local_page(request,statecode,city.title())
     else:
         return local_page(request,statecode)

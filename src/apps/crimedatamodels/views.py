@@ -17,6 +17,7 @@ from apps.contact.forms import PAContactForm
 from django.template.defaultfilters import slugify
 from apps.crimedatamodels.models import (CrimesByCity,
                                          CityCrimeStats,
+                                         StateCrimeStats,
                                          State,
                                          CityLocation,
                                          ZipCode,
@@ -53,7 +54,6 @@ def query_weather(latitude, longitude, city, state):
 
 def query_by_state_city(state, city=None, get_content=True,local=False):
     # validate city and state
-
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
@@ -113,23 +113,26 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
 
             print "this is edited city %s" % city
             city_id = city.id
-        except CityLocation.DoesNotExist:
-            print 'none'
-            raise Http404
-        city_crime_objs = CrimesByCity.objects.filter(
-            fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
-        per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
 
-        #this powers the 'rated 4 out of 5 stars customer reviews' part on local page
-        reviews = Textimonial.objects.filter(city=city.city_name,state=state.abbreviation)
-        if reviews:
-            total = reviews.count()
-            ratings_avg = reviews.aggregate(Avg('rating')).values()
-            first_sum = ratings_avg[0] * total
-            second_sum = first_sum + 4
-            final_sum = second_sum/(total+1)
-        else:
-            reviews = Textimonial.objects.filter(state=state.abbreviation)
+            city_crime_objs = CrimesByCity.objects.filter(
+            fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
+            city_per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
+            try:
+                local_video = FeaturedVideo.objects.get(city=city)
+            except FeaturedVideo.DoesNotExist:
+                local_video = None
+
+            try:
+                local_icon = FeaturedIcon.objects.get(city=city)
+            except FeaturedIcon.DoesNotExist:
+                local_icon = None
+
+            try:
+                local_rival = CityCompetitor.objects.get(city=city)
+            except CityCompetitor.DoesNotExist:
+                local_rival = None
+
+            reviews = Textimonial.objects.filter(city=city.city_name,state=state.abbreviation)
             if reviews:
                 total = reviews.count()
                 ratings_avg = reviews.aggregate(Avg('rating')).values()
@@ -139,20 +142,55 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             else:
                 total = 0
                 final_sum = 0
-        try:
-            local_video = FeaturedVideo.objects.get(city=city)
-        except FeaturedVideo.DoesNotExist:
-            local_video = None
 
-        try:
-            local_icon = FeaturedIcon.objects.get(city=city)
-        except FeaturedIcon.DoesNotExist:
-            local_icon = None
+            # Google Weather API
+            #weather_info = query_weather(city.latitude, city.longitude,
+            #   city.city_name, state.abbreviation)
+            weather_info = None
 
-        try:
-            local_rival = CityCompetitor.objects.get(city=city)
-        except CityCompetitor.DoesNotExist:
-            local_rival = None
+            
+            context = {
+                   'crime_stats': (city_crime_objs[0] if city_crime_objs else None),
+                   'city_per100k':(city_per100[0] if city_per100 else None),
+                   'state': state.abbreviation,
+                   'state_long': state.name,
+                   'city': city.city_name,
+                   'lat': city.latitude,
+                   'long': city.longitude,
+                   'weather_info': weather_info,
+                   #'pop_type': pop_type,
+                   'city_id': city_id,
+                   'local_video':local_video,
+                   'local_icon':local_icon,
+                   'local_rival':local_rival
+                }
+             
+            try:
+                #try to see if the local page has an address associated with it 
+                location_match=MatchAddressLocation.objects.select_related().get(location=city)
+                context.update(local_street=location_match.address.street_name,
+                           local_city=location_match.address.city,
+                           local_state=location_match.address.state,
+                           local_zipcode=location_match.address.zip_code)
+            except MatchAddressLocation.DoesNotExist:
+                pass
+
+        except CityLocation.DoesNotExist:
+            print 'none'
+            raise Http404
+    if not city:
+        state_per100 = StateCrimeStats.objects.filter(year=2012,state=state)
+        #this powers the 'rated 4 out of 5 stars customer reviews' part on local page
+        reviews = Textimonial.objects.filter(state=state.abbreviation)
+        if reviews:
+            total = reviews.count()
+            ratings_avg = reviews.aggregate(Avg('rating')).values()
+            first_sum = ratings_avg[0] * total
+            second_sum = first_sum + 4
+            final_sum = second_sum/(total+1)
+        else:
+            total = 0
+            final_sum = 0
 
         '''
         crime_stats = {}
@@ -182,29 +220,6 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             pop_type = 'METROPOLIS'
         '''
 
-         # Google Weather API
-        #weather_info = query_weather(city.latitude, city.longitude,
-         #   city.city_name, state.abbreviation)
-        weather_info = None
-
-        context = {
-                   'crime_stats': (city_crime_objs[0] if city_crime_objs else None),
-                   'crimestats_per100k':(per100[0] if per100 else None),
-                   'state': state.abbreviation,
-                   'state_long': state.name,
-                   'city': city.city_name,
-                   'lat': city.latitude,
-                   'long': city.longitude,
-                   'weather_info': weather_info,
-                   #'pop_type': pop_type,
-                   'city_id': city_id,
-                   'review_avg':final_sum,
-                   'review_total':total,
-                   'local_video':local_video,
-                   'local_icon':local_icon,
-                   'local_rival':local_rival
-                }
-
         # get content
         '''
         if get_content and city_crime_objs and crime_stats:
@@ -214,19 +229,16 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             context.update(content=content.render(city))
         '''
 
-        try:
-            #try to see if the local page has an address associated with it 
-            location_match=MatchAddressLocation.objects.select_related().get(location=city)
-            context.update(local_street=location_match.address.street_name,
-                           local_city=location_match.address.city,
-                           local_state=location_match.address.state,
-                           local_zipcode=location_match.address.zip_code)
-        except MatchAddressLocation.DoesNotExist:
-            pass
+          
 
-        return context
-    context = {'state': state.abbreviation,
-               'state_long': state.name}
+        context = {'state': state.abbreviation,
+                   'state_long': state.name,
+                   'state_per100': (state_per100[0] if state_per100 else None),
+                   'review_avg':final_sum,
+                   'review_total':total}
+
+    context.update({'review_avg':final_sum,
+                   'review_total':total})
     return context
 
 def crime_stats(request, state, city):

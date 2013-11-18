@@ -39,7 +39,7 @@ def paragraph_spinner(parser,token):
         <p></p>
     {% endparagraph_spinner %}
     chooses a random paragraph paragraph (p tag)
-    and render it
+    and renders it
 
     """
     try:
@@ -78,8 +78,10 @@ class ParagraphSpinnerNode(template.Node):
                     city = f+'.'+' '+l
                 else:
                     city = city.replace('-',' ')
-        else:
+        elif len(chop_up) == 2:
             state = chop_up[1]
+        else:
+            raise Http404
         statecode = get_statecode(state)
         json_file = (statecode+'/'+city.title()+'/paragraph.json' if city else statecode+'/'+state.title()+'/paragraph.json')
         html = BeautifulSoup(html_output)

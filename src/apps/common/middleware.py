@@ -8,7 +8,7 @@ from django.utils.http import urlquote
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.conf import settings
 from django.contrib.localflavor.us.us_states import US_STATES
-from apps.local.views import get_statecode
+from apps.local.views import get_statecode, strip_city
 from django.shortcuts import redirect
 
 reg_b = re.compile(r"android.+mobile|avantgo|bada\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\/|plucker|pocket|psp|symbian|treo|up\\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino", re.I|re.M)
@@ -152,26 +152,29 @@ class LocalPageRedirect(object):
         #lets fist grab the url and check if its a local page
         url = request.path.rstrip('/').lstrip('/')
         #city page and state page
-        match_cp = re.compile(r'home-security/\w{3,}/\w+')
-        match_sp = re.compile(r'home-security/\w{3,}')
-        state_long = dict(US_STATES).values()
+        match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
+        match_sp = re.compile(r'home-security/[-\w]{3,}')
+        state_space = dict(US_STATES).values()
+        state_nospace = [x.replace(' ','') for x in state_space]
         if match_cp.match(url):
             # city page so lets redirect
             chop_up = url.split('/')
-            state, city = chop_up[1], chop_up[2]
-            for x in state_long:
-                if x.upper() == state.upper():
-                    statecode = get_statecode(state)
-                    return redirect('/home-security/%s/%s' % (statecode,city))
+            state, city = chop_up[1].replace('-',' '), strip_city(chop_up[2])
+            for x in state_space:
+                for y in state_nospace:
+                    if x.upper() == state.upper() or y.upper() == state.upper():
+                        statecode = get_statecode(state)
+                        return redirect('/home-security/%s/%s' % (statecode,city.replace(' ','-').title()))
 
         elif match_sp.match(url):
             #state page so lets redirect
             chop_up = url.split('/')
-            state = chop_up[1]
-            for x in state_long:
-                if x.upper() == state.upper():
-                    statecode = get_statecode(state)
-                    return redirect('/home-security/%s/' % (statecode))
+            state = chop_up[1].replace('-',' ')
+            for x in state_space:
+                for y in state_nospace:
+                    if x.upper() == state.upper() or y.upper() == state.upper():
+                        statecode = get_statecode(state)
+                        return redirect('/home-security/%s/' % (statecode))
 
         else:
             return None
