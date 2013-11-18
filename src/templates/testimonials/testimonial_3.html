@@ -1,6 +1,16 @@
 {% load sekizai_tags %}
 
+{% if template == 'local' %}
+    {% for testimonial in testimonials %}
 
+    <div class="review">
+
+        <p>{% if words %}{{ testimonial.testimonial|safe|truncatewords_html:words }}{% else %}{{ testimonial.testimonial|safe }}{% endif %}</p>
+        <b>{{ testimonial.first_name }} of {{ testimonial.city }}, {{ testimonial.state }} <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></b>
+    </div>
+    
+    {% endfor %}
+{% else %}
 <ul class="testimonials">
     {% for testimonial in testimonials %}
 
@@ -25,4 +35,4 @@
     <div class="clear"></div>
 </ul>
 <div class="clear"></div>
-
+{% endif %}

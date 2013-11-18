@@ -20,7 +20,9 @@
 
 	</div>
 	<button type="button" class="redbutton">Get Quote ></button>
-
+             <div class="consent-box">
+            <label class="consent-label" style="font-size: 10px; line-height: 14px; margin-bottom: 16px;"for="id_consent">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
     <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
     <div class="quote-form-error">
         <img src="{{ STATIC_URL }}/img/base/error-arrow.png" class="error-arrow" />
@@ -42,9 +44,9 @@
 $(document).ready(function() {
     $('.form-quote input').keypress(function(e){
         if(e.which == 13){
-            $('.form-quote button').click();
+            $(this).closest('.form-quote').find('button').click();   
         }
-    });  
+    });
     var submitting = false;
 
     $('.form-quote button').click(function() {
@@ -76,6 +78,7 @@ $(document).ready(function() {
                     'email': email,
                     'phone': phone, 
                     'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize(),
@@ -99,23 +102,23 @@ $(document).ready(function() {
             $('.form-quote #form-loading').hide;
             $('.form-quote button').attr('disabled',false);
             if (!name && !phone){
-                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
-                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+               $form.find("#id_name").css('border-color','red').attr('placeholder','Please Enter Name');
+               $form.find("#id_phone").css('border-color','red').attr('placeholder','Please Enter Phone Number');
                 alert('Please Enter Your Name and Phone Number.');
             }
             if (!phone && name){
-                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                $form.find("#id_phone").css('border-color','red').attr('placeholder','Please Enter Phone Number');
                 alert('Please Enter Your Phone Number.');
             }
             if (!name && phone){
-                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                $form.find("#id_name").css('border-color','red').attr('placeholder','Please Enter Your Name');
                 alert('Please Enter Your Name.');
             }
             if (name){
-                $('#id_name').css('border-color','');
+                $form.find("#id_name").css('border-color','');
             }
             if (phone){
-                $('#id_phone').css('border-color','');
+                $form.find("#id_phone").css('border-color','');
             }
         }
 

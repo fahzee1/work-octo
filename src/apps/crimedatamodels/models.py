@@ -384,8 +384,37 @@ class MatchAddressLocation(models.Model):
         else:
             super(MatchAddressLocation,self).save(*args, **kwargs) 
 
+class FeaturedCommon(models.Model):
+    city = models.ForeignKey("CityLocation")
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
     
-def return_sums(crime,state,city=None,year=2011,per100=False):
+class FeaturedVideo(FeaturedCommon):
+    video_embed = models.CharField(max_length=255,blank=True,null=True)
+
+    def __unicode__(self):
+        return "%s's video " % self.city.city_name
+
+class FeaturedIcon(FeaturedCommon):
+    icon = models.ImageField(upload_to='featured_icons',height_field='image_height',width_field='image_width')
+    image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
+    image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
+
+    def __unicode__(self):
+        return "%s's icon" % self.city.city_name
+
+class CityCompetitor(FeaturedCommon):
+    rival = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "%s Competitor: %s" %(self.city.city_name,self.rival)
+
+
+
+
+def return_sums(crime,state,city=None,year=2012,per100=False):
     if per100:
         if city:
             locations = CrimesByCity.objects.filter(year=year,fbi_city_name=city.title(),fbi_state=state.upper())

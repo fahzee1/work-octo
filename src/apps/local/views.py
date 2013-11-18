@@ -20,7 +20,9 @@ from apps.local.sitemaps import KeywordCitySitemap, KeywordStateSitemap, Keyword
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
-                                         ZipCode)
+                                         ZipCode,
+                                         CrimesByCity,
+                                         StateCrimeStats)
 
 
 def get_timezone(state):
@@ -42,8 +44,7 @@ def get_timezone(state):
     return background_time
 
 
-@cache_page(60 * 60 * 4)
-def local_page_wrapper(request, keyword, city, state):
+def get_statecode(state):
     if '-' in state:
         state=state.replace('-',' ').title()
     else:
@@ -59,23 +60,25 @@ def local_page_wrapper(request, keyword, city, state):
     statecode = None
     for x in US_STATES:
         if x[1] == (new_state if three == 3 else state) or x[0] == state.upper():
-            statecode=x[0]   
-        else:        
+            statecode = x[0]
+        else:
             for x in US_STATES:
-                mult=x[1].split(' ')
+                mult = x[1].split(' ')
                 if len(mult) == 2:
                     first,second=mult[0].title(),mult[1].lower()
                     _state=first+second
                 elif len(mult) == 3:
                     first,second,third=mult[0].title(),mult[1].lower(),mult[2].lower()
-                    _state=first+second+third
+                    _state = first+second+third
                 else:
                     _state=None
                 if _state == state:
-                    statecode=x[0]
-    if not statecode:
-        raise Http404
+                    statecode = x[0]
+    if statecode:
+        return statecode.upper()
 
+
+def strip_city(city):
     if '-' and '.' in city:
         city=city.replace('-',' ').replace('.','')
     if '-' in city:
@@ -86,12 +89,39 @@ def local_page_wrapper(request, keyword, city, state):
         city=city.replace('(','').replace(')','')
     if ',' in city:
         city=city.replace(',','')
-    return local_page(request, statecode, city.title(), keyword)
+    return city
 
 
-def local_page(request, state, city, keyword=None):
+
+
+@cache_page(60 * 60 * 4)
+def local_page_wrapper(request, keyword, city, state):
+    statecode = get_statecode(state)
+    if not statecode:
+        raise Http404
+    city = strip_city(city)
+    if (city.upper(),statecode) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
+        background_time=get_timezone(statecode)
+        ctx={'background_time':background_time}
+        try:
+            response = render(request,'local-pages/static-pages/%s.html'% city.replace(' ','-').lower(),ctx)
+        except:
+            response = render(request,'local-pages/static-pages/default.html',ctx)
+
+        expire_time = datetime.timedelta(days=90)
+        response.set_cookie('affkey',
+                    value='%s:%s' % (city.replace(' ', ''), state),
+                    domain='.protectamerica.com',
+                    expires=datetime.datetime.now() + expire_time)
+        return response
+    else:
+        return local_page(request, statecode, city.title(), keyword)
+
+
+
+def local_page(request, state, city=None, keyword=None):
     crime_stats_ctx = query_by_state_city(state, city)
-    if crime_stats_ctx['city_id'] is not None and dsettings.SITE_ID == 4:
+    if crime_stats_ctx.get('city_id',False) is not None and dsettings.SITE_ID == 4:
         json_file = os.path.join(settings.PROJECT_ROOT, 'src',
             'apps', 'crimedatamodels', 'external', 'city_state_redirect.json')
         json_data = open(json_file)
@@ -116,24 +146,47 @@ def local_page(request, state, city, keyword=None):
         crime_stats_ctx['keyword'] = keyword.replace('-', ' ').title()
 
     background_time = get_timezone(crime_stats_ctx['state'])
-
     crime_stats_ctx['background_time'] = background_time
+    if dsettings.READY_FOR_STATIC and city: 
+        if (city.upper(),crime_stats_ctx['state']) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
+            background_time=get_timezone(crime_stats_ctx['state'])
+            try:
+                response = render(request,'local-pages/static-pages/%s.html'% city.replace(' ','-').lower(),crime_stats_ctx)
+            except:
+                response = render(request,'local-pages/index.html',crime_stats_ctx)
+            expire_time = datetime.timedelta(days=90)
+            response.set_cookie('affkey',
+                        value='%s:%s' % (city.replace(' ', ''), state),
+                        domain='.protectamerica.com',
+                        expires=datetime.datetime.now() + expire_time)
+            return response
+    elif not city:
+        try:
+            state = State.objects.get(abbreviation=state)
+            cities = CityLocation.objects.filter(state=state.abbreviation)
+            city_by_first_letter = {}
+            for city in cities:
+                if city.city_name[0] not in city_by_first_letter:
+                    city_by_first_letter[city.city_name[0]] = []
+                city_by_first_letter[city.city_name[0]].append(city)
+            crime_stats = StateCrimeStats.objects.filter(state=state,year=2012)
+            crime_stats_ctx.update({'cities':city_by_first_letter,
+                                    'crime_stats':(crime_stats[0] if crime_stats else None)})
+        except State.DoesNotExist:
+            raise Http404
+        response = render(request,'local-pages/state-page.html',crime_stats_ctx)
+        expire_time = datetime.timedelta(days=90)
+        response.set_cookie('affkey',
+                        value='%s' % (state),
+                        domain='.protectamerica.com',
+                        expires=datetime.datetime.now() + expire_time)
+        return response
 
-    if keyword in dsettings.CUSTOM_KEYWORD_LIST:
-        response = render(request,'local-pages/%s.html', crime_stats_ctx) % keyword
-    elif keyword in dsettings.WIRELESS_KEYWORD_LIST:
-        response = render(request,'local-pages/wireless-home-security-systems.html',crime_stats_ctx)
-    elif keyword in dsettings.ADT_KEYWORD_LIST:
-        response = render(request,'landing-pages/adt.html',crime_stats_ctx)
-    else:        
-        response = render(request,'local-pages/index.html',crime_stats_ctx)
+    response = render(request,'local-pages/index.html',crime_stats_ctx)
 
-    expire_time = datetime.timedelta(days=90)
-    response.set_cookie('affkey',
-                    value='%s:%s' % (city.replace(' ', ''), state),
-                    domain='.protectamerica.com',
-                    expires=datetime.datetime.now() + expire_time)
     return response
+
+
 
 
 def local_state(request):
@@ -165,6 +218,18 @@ def local_city(request, state):
                 'forms': forms,
                 'state': state.abbreviation,
             }, context_instance=RequestContext(request))
+
+def local_page_wrapper2(request,state,city=None):
+    statecode = get_statecode(state)
+    #pdb.set_trace()
+    if not statecode:
+        raise Http404
+    if city:
+        city = strip_city(city)
+        return local_page(request,statecode,city.title())
+    else:
+        return local_page(request,statecode)
+
 
 
 def html_sitemap(request, state, keyword):
@@ -200,5 +265,6 @@ def sitemap_state(request, keyword):
 def sitemap_index(request):
     from django.contrib.sitemaps.views import sitemap
     return sitemap(request, {'keyword-sitemap-index' : KeywordSitemapIndex(dsettings.LOCAL_KEYWORDS)})
+
 
 
