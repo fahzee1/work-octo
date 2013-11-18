@@ -288,6 +288,7 @@ elif settings.SITE_ID == 9:
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
         url(r'^$', 'apps.common.views.black_friday', name='index'),
+        url(r'^black-friday/contact/$', 'apps.common.views.black_friday_ajax', name='BF-ajax'),
     )
 
 # GetAHomeSecuritySystem.com

@@ -43,6 +43,7 @@ class CrimeStateAdmin(admin.ModelAdmin):
 
 admin.site.register(StateCrimeStats,CrimeStateAdmin)
 
+
 class FeaturedIconAdmin(admin.ModelAdmin):
 	model = FeaturedIcon
 	raw_id_fields = ('city',)
@@ -61,8 +62,6 @@ class CityCompeteAdmin(admin.ModelAdmin):
 	raw_id_fields = ('city',)
 
 admin.site.register(CityCompetitor,CityCompeteAdmin)
-
-
 
 
 
