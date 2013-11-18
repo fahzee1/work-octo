@@ -137,7 +137,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block hero_banner_area %}
     {% include "banners/seo-hero-images.html" %}
 {% endblock %}
-{% include "order/call-box.html" with no_promo=False %}
+{% include "order/call-box.html" %}
 
 <div class="wrapper">
     {% comment %}
@@ -171,7 +171,18 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </div>
     <div class="clear"></div>
     {% endcomment %}
-    
+    <div id="featured-on">
+        <p>Featured On:</p>
+        <img src="{{ STATIC_URL }}img/extra/validation-icons/abc.png" class="alpha" alt="Featured on ABC" width="96" height="96" />
+        <img src="{{ STATIC_URL }}img/extra/validation-icons/best.png" alt="Featured on Best Home Security Companys" width="96" height="96" />
+
+        <img src="{{ STATIC_URL }}img/extra/validation-icons/fox-news.png" alt="Featured on Fox News" width="96" height="96" />
+
+        <img src="{{ STATIC_URL }}img/extra/validation-icons/cw.png" alt="Featured on The CW" width="96" height="96" />
+
+        <img src="{{ STATIC_URL }}img/extra/validation-icons/consumer-digest.png" alt="Rated a Consumer Digest Best Buy" width="96" height="96" />
+        <img src="{{ STATIC_URL }}img/extra/validation-icons/daily-buzz.png" class="omega" alt="Featured on The Daily Buzz" width="96" height="96" />
+    </div>
     <div id="categories">
         <div class="category">
             <i class="category-img"></i>
@@ -189,7 +200,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
             <div class="category-info">
                 <h2>Protecting Against More than Home Break-ins.</h2>
-                <p><a href="{% url touchscreen %}" title="Protect America security systems">Protect America security systems</a> have evolved beyond the ability to just prevent burglary. Each one of our systems has the ability to add important sensors including life saving devices like: <a href="{% url smoke-detector %}" title="Smoke Detector">Smoke Detectors</a>, <a href="{% url medical-pendant %}" title="Medical Panic Alert">Medical Panic Alert</a>, and more.</p>
+                <p><a href="{% url touchscreen %}" title="Protect America security systems">Home security systems</a> have evolved beyond the ability to just prevent burglary. Each one of our systems has the ability to add important sensors including life saving devices like: <a href="{% url smoke-detector %}" title="Smoke Detector">Smoke Detectors</a>, <a href="{% url medical-pendant %}" title="Medical Panic Alert">Medical Panic Alert</a>, and more.</p>
                 <p class="extra-content"  style="display:none;">Our home alarm systems can be programmed to have various life-saving sensors. Home security is not just being able to protect your home; it’s about being able to protect your life. Our life safety sensors provide security against smoke and fires, help for medical situations, as well as detection of carbon monoxide leaks.</p>
                 <a href="{% url life-safety-equipment %}" title="Life Safety Equipment" class="button-link">Life Safety <i class="icon-chevron-right"></i></a>
             </div>
@@ -225,8 +236,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div class="clear"></div>
 {% addtoblock "js" %}
     <script type="text/javascript">
-    $('#quote-form').show();
-    $('.request-quote-button').addClass('active');
     $(".extra-content").siblings('p').append(' <a href="" class="read-more">Read More</a>')
     $(".read-more").click(function() {
         $(this).hide()

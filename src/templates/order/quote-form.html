@@ -1,8 +1,11 @@
-{% load sekizai_tags %}
-<form id="quote-form" {% if page_name = "index" %}class="sleepy" {% else %} class="droopy"{% endif %}  method="post" action="">
+
+{% load content_tags content_filters sekizai_tags %}
+<form id="quote-form" class="sleepy"  method="post" action="">
     {% csrf_token %}
 	<div>
+	    {% block form-title %}
         <p class="form-title">Free Security Quote</p>
+        {% endblock %}
         {% block formfields %}
 		  <label>Name</label>
             {{ form.name }}
@@ -25,6 +28,7 @@
     <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">Your privacy is important and safe with us.</a>
 
     {% endblock %}
+    {% block quote-validation %}
     <div id="third-party-container" class="v">
         <div class="third-party-badge vsign">
             <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
@@ -33,6 +37,7 @@
             <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
         </div>
     </div>
+    {% endblock %}
 </form>
 
 {% addtoblock "js" %}
@@ -52,7 +57,17 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.sleepy button, .droopy button').click(function() {
+        
+        $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('#quote-form');
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
+        var device = getParameterByName('device');
+        /*if (!trusted){
+            $form.remove();
+            $('#trusted-error').show();
+            return false;
+        }
+        */
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
@@ -75,7 +90,9 @@ $(document).ready(function() {
                     'trusted_form2': $form.find("[name ='CertUrl']").val(),
                     'form': 'basic',
                     'referer_page':window.location.href,
-                    'form_values':$form.serialize()}
+                    'form_values':$form.serialize(),
+                    'operating_system':OSName,
+                    'device':device}
     
   
         $.ajax({

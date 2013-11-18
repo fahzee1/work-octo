@@ -19,3 +19,10 @@ class LinxContext(models.Model):
     def __unicode__(self):
         return '%s - %s - %s - %s' % (self.name,
             self.rin, self.phone, self.email)
+
+class BlackFriday(models.Model):
+    email = models.EmailField(max_length=128)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.email

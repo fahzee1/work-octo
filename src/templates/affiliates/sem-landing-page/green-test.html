@@ -2,30 +2,25 @@
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block google_experiment %}
-<script> 
-_udn = "protectamerica.com";
-</script>
-<!-- Google Analytics Content Experiment code -->
-<script>function utmx_section(){}function utmx(){}(function(){var
-k='61445283-78',d=document,l=d.location,c=d.cookie;
-if(l.search.indexOf('utm_expid='+k)>0)return;
-function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
-indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
-length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
-'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
-'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
-'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
-valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
-</script><script>utmx('url','A/B');</script>
-<!-- End of Google Analytics Content Experiment code -->
 
 {% endblock %}
 {% block css %}
+    <!--[if IE]><!-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-c.css">
+
+    <link rel="stylesheet"  href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-c.css?v3.0">
+
+
+	<!--<![endif]-->
     <link rel="stylesheet" media="only screen and (max-width: 767px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/320-c.css">
 
     <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-c.css">
     <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-c.css?v3.0">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+
+    <![endif]-->
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <style>
         #hero-wrapper {
@@ -126,6 +121,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
 
 {% block content %}
+{% comment %}
 <div id="hero-wrapper" class="blue">    
     <div id="hero-image">
         <div id="best-deal">
@@ -135,7 +131,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             <div class="clear"></div>
             <img src="{{ STATIC_URL }}img/extra/validation-icons/paid-validation-icons-transparent.png" class="validation-icons" alt="paid-validation-icons" width="357" height="74" />
         </div>
-        {% include "order/quote-form-responsive.html" with form=forms.basic %}
 
 
     </div>
@@ -146,199 +141,97 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             <div class="clear"></div>
         </a>
     </div>
-{% comment %}
+
+</div>
+{% endcomment %}
+<div id="hero-wrapper" class="blue bf">
+    <div id="hero-image" style="z-index:0;">
+        <div class="deal-content">
+            <h2>Pre Black Friday Security Deals</h2>
+            <img src="{{ STATIC_URL }}img/promo/bf/why-wait.png" alt="why-wait" width="575" height="75" />
+            <h3>Home Security<span>starting at $19.99/mo</span></h3>
+            <div class="button-area">
+
+                <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized no-desktop">Get Started Now <i class="icon-chevron-right"></i></a>
+                <a href="tel:{{ phone_number|format_number }}" class="button-link stylized no-mobile" style="width: 123px;">Call Now <i class="icon-chevron-right"></i></a>
 
 
-    <div id="tablet-deal">
-        <a href="tel:{{ phone_number|format_number }}">
-        <img src="{{ STATIC_URL }}img/banners/tablet-banner/order-now-button.png" class="no-mobile" alt="order-now-button" width="296" height="87" />
-        </a>
-        <a href="http://www.protectamerica.com/products/order-package?promo=true">    
-        <img src="{{ STATIC_URL }}img/banners/tablet-banner/order-now-button.png" class="no-desktop" alt="order-now-button" width="296" height="87" />
-        </a>
-            <ul>
-                <li><i class="icon-shield"></i>24/7 Reliable<br />Easy-To-Use<br />Security</li>
-                <li><i class="icon-home"></i>No Equipment<br/>No Activation<br />Fees</li>
-                <li><i class="icon-money"></i>$19.99<br/>monthly<br/>monitoring</li>
+            </div>
+        </div>
+        <img src="{{ STATIC_URL }}img/promo/bf/black-friday-camera-deal-mobile.jpg" class="camera mobile no-mobile" alt="black-friday-camera-deal" />
+        <img src="{{ STATIC_URL }}img/promo/bf/black-friday-camera-deal.jpg" class="camera no-desktop" alt="black-friday-camera-deal" width="926" height="496" />
 
-            </ul>
-    </div>
     {% include "order/quote-form-responsive.html" with form=forms.basic %}
 
-
     </div>
-    <div id="mobile-main-promo">
-        <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
-            <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/keychain-promo.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
-            <p><span>2 Keychain Remotes</span> with Your Home Security System</p>
-            <div class="clear"></div>
-        </a>
-    </div>
-{% endcomment %}
-
-{% comment %}
-    <div id="main-tablet-image"></div>
-    <img src="{{ STATIC_URL }}img/hero-backgrounds/grassy-park.jpg" id="tablet-background" alt="grassy-park" width="800" height="533" />
-{% endcomment %}
+    <a href="http://www.protectamerica.com/equipment/home-security/security-camera?promo=true"><img src="{{ STATIC_URL }}img/promo/bf/camera-button.png" width="137" height="137" class="camera-button no-desktop" alt="camera-button" /></a>
+   <img src="{{ STATIC_URL }}img/promo/bf/camera-button.png" width="137" height="137" class="camera-button no-mobile" alt="camera-button" />
 
 </div>
 
-{% include "order/call-box.html" with no_promo=False %}
+{% include "order/call-box.html" %}
 <div id="wireless-security">
     <div class="wrapper">
+        <div id="featured-on">
+            <p>Featured On:</p>
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/abc.png" class="alpha" alt="Featured on ABC" width="96" height="96" />
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/best.png" alt="Featured on Best Home Security Companys" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/fox-news.png" alt="Featured on Fox News" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/cw.png" alt="Featured on The CW" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/consumer-digest.png" alt="Rated a Consumer Digest Best Buy" width="96" height="96" />
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/daily-buzz.png" class="omega" alt="Featured on The Daily Buzz" width="96" height="96" />
+        </div>
         <div id="security-information">
-            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/simon-xt.jpg" class="simon-xt" alt="simon-xt" width="701" height="533" />
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/simon-xt-touch.jpg" class="simon-xt" alt="simon-xt" width="701" height="533" />
             <div id="one-hundred-percent">
                 <div id="wireless-security">
                     <h1>Wireless Home Security.<br/>100% Protection.</h1>
                     <p>For the past 20 years, Protect America is proud to be the pioneer of wireless home security systems.  We believe in simple, easy to use security that protects your home.</p>
                     <p><strong>An alarm system that is built for you.</strong> You don’t have a phone line? Our cellular monitoring is 100% wireless. You have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>
                     <div class="order-link">
-                        <b class="phone-alt">call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+                        <b class="phone-alt">Call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
                     </div>
                 </div>
             </div>
             <div class="clear"></div>
-            <div id="advantages">
-                <div id="order-reassurance">
-                    <div id="lowest-price-guaranteed" class="left-side">
-                        <img src="/static/img/extra/dollar-sign-token.png" alt="Lowest Price Guaranteed" />
-                        <div class="text">
-                            <h3>Lowest Price Guaranteed</h3>
-                            <p>If you find a better offer, let us know.  We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <div id="lifetime-warranty">
-                        <img src="/static/img/extra/hammer-token.png" alt="Lifetime Equipment Warranty" />
-                        <div class="text">
-                
-                            <h3>Lifetime Equipment Warranty</h3>
-                            <p>As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free.  We want to make sure your home is always secure.</p>
-                        </div>
-                        <div class="clear"></div>
-            
-                    </div>
-                    <div id="homeowner-insurance-discount" class="left-side">
-                        <img src="/static/img/extra/20-percent-token.png" alt="20% Homeowner's Insurance Discount" />
-                        <div class="text">
-                            <h3>Homeowner's Insurance Discount</h3>
-                            <p>Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</p>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
+            <div id="main-benefits">
+                    <h1>Your #1 Trusted Home Security System</h1>
+                    <p>Protect America makes it easy to secure and protect your home and family. </p>
+                    <ul>
+                        <li>
+                            <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
+                            <p>Our systems provide state-of-the-art 24/7 security so you don't have to worry about a thing.</p>
+                        </li>
+                        <li class="mobile">
+                            <h3><i class="icon-rss"></i>Easy Wireless Set-Up</h3>
+                            <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
+                        </li>
+                        <li class="alt">
+                            <h3><i class="icon-money"></i>The Best Price, Period</h3>
+                            <p>The equipment is included, there are no activation fees, and our alarm monitoring starts at $19.99 per month.</p>
+                        </li>
+
+                        <li class="mobile">
+                            <h3><i class="icon-user"></i>Security Designed for your Life</h3>
+                            <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
+                        </li>
+                        <li class="mobile">
+                            <h3><i class="icon-thumbs-up"></i>Saving You More</h3>
+                            <p>Home security is good you and your pocket. Save up to 20% on your homeowners insurance with a home security system.</p>
+                        </li>
+                        <li class="alt">
+                            <h3><i class="icon-heart"></i>Committed To You</h3>
+                            <p>For the past 20 years, Protect America is proud to protect over half a million homes all across the country.</p>
+                        </li>
+                    </ul>
                 <div class="clear"></div>
             </div>
-            <img src="{{ STATIC_URL }}img/products/no-cost-banner.png" id="no-cost" alt="No Activation Fees, No Installation Fees, No Equipment Cost" width="960" height="77" />
         </div>
-        <div class="clear"></div>
     </div>
 </div>
-<div id="big-choices">
-    <div id="home-security-package-choices" style="display:block">
-        <div class="big-wrapper">
-        {% block packages %}
-            <div id="home-security-packages">
-                <div id="copper-security-package">
-                    <div class="package-name">
-                        <h3>Copper</h3>
-                        <p><sup>$</sup>19<sup>99</sup><span>monthly</span></p>
-                    </div>
-                    <div class="package-info">
-                        <ul>
-                            <li><strong>1</strong> Simon XT Control</li>
-                            <li><strong><span>3</span></strong> Door / Window Sensors</li>
-                            <li><strong>1</strong> Motion Detector</li>
-                        </ul>
-                        <ul class="extra-features">
-                            <li>No Equipment Fees</li>
-                            <li>No Activation Fees</li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="bronze-security-package">
-                    <div class="package-name">
-                        <h3>Bronze</h3>
-                        <p><sup>$</sup>35<sup>99</sup><span>monthly</span></p>
-                    </div>
-                    <div class="package-info">
-                        <ul>
-                            <li><strong>1</strong> Simon XT Control</li>
-                            <li><strong><span>7</span></strong> Door / Window Sensors</li>
-                            <li><strong>1</strong> Motion Detector</li>
-                        </ul>
-                        <ul class="extra-features">
-                            <li>No Equipment Fees</li>
-                            <li>No Activation Fees</li>
-                        </ul>
-                    </div>
-                </div>
-        
-                <div class="premium-packages">
-        
-                    <div id="silver-security-package">
-                        <div class="package-name">
-                            <h3>Silver</h3>
-                            <p><sup>$</sup>37<sup>99</sup><span>monthly</span></p>
-                        </div>
-                        <div class="package-info">
-                            <ul>
-                                <li><strong>1</strong> Simon XT Control</li>
-                                <li><strong><span>10</span></strong> Door / Window Sensors</li>
-                                <li><strong>1</strong> Motion Detector</li>
-                            </ul>
-                            <ul class="extra-features">
-                                <li>No Equipment Fees</li>
-                                <li>No Activation Fees</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="gold-security-package">
-                        <div class="package-name">
-                            <h3>Gold</h3>
-                            <p><sup>$</sup>39<sup>99</sup><span>monthly</span></p>
-                        </div>
-                        <div class="package-info">
-                            <ul>
-                                <li><strong>1</strong> Simon XT Control</li>
-                                <li><strong><span>12</span></strong> Door / Window Sensors</li>
-                                <li><strong>1</strong> Motion Detector</li>
-                            </ul>
-                            <ul class="extra-features">
-                                <li>No Equipment Fees</li>
-                                <li>No Activation Fees</li>
-                            </ul>
-                        </div>
-                    </div>
-        
-                    <div id="platinum-security-package">
-                        <div class="package-name">
-                            <h3>Platinum</h3>
-                            <p><sup>$</sup>42<sup>99</sup><span>monthly</span></p>
-                        </div>
-                        <div class="package-info">
-                            <ul>
-                                <li><strong>1</strong> Simon XT Control</li>
-                                <li><strong><span>15</span></strong> Door / Window Sensors</li>
-                                <li><strong>1</strong> Motion Detector</li>
-                            </ul>
-                            <ul class="extra-features">
-                                <li>No Equipment Fees</li>
-                                <li>No Activation Fees</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-            </div>
-        {% endblock %}
-            <div class="clear"></div>
-        </div>
-    </div>
-</div>  
 <div id="advantage-table-wrapper">
     <div id="advantage-table">
         <h2>Simply The Best in Home Security <span>(with the features and service to prove it)</span></h2>
@@ -426,5 +319,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div class="clear"></div>
 <a href="http://www.protectamerica.com/?no_mobile" class="button-link" id="no-mobile-button">View Full Site <i class="icon-chevron-right"></i></a>
 <div class="clear"></div>
+
 
 {% endblock %}

@@ -21,6 +21,7 @@ from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
 render_to_string = loader.render_to_string
 TimeoutError = requests.exceptions.Timeout
+from requests.exceptions import SSLError
 logger = logging.getLogger('lead_conduit')
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -42,19 +43,23 @@ def send_leadimport(data):
 
     return True
 
-def send_conduit_error(data,title='LeadConduit Error',message=None,test=False):
+def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
+    if notify_all:
+        contact_list = ['cjogbuehi@protectamerica.com','development@protectamerica']
+    else:
+        contact_list = ['cjogbuehi@protectamerica.com']
     if not test:
         if not message:
             message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
         from_email = 'Protect America <noreply@protectamerica.com>'
-        send_mail(title,message,from_email,['cjogbuehi@protectamerica.com','development@protectamerica.com'])
+        send_mail(title,message,from_email,contact_list)
 
 
 def post_to_leadconduit(data,test=False,retry=False):
     #pdb.set_trace()
     try:
         lead = Lead.objects.get(id=data['lead_id'])
-    except:
+    except Lead.DoesNotExist:
         lead = None
 
     # items lead conduit needs
@@ -72,6 +77,7 @@ def post_to_leadconduit(data,test=False,retry=False):
               'Search_Keywords':data['searchkeywords'],
               'Search_Engine':data['searchengine'],
               'ip_address':data['ip'],
+              'web_device':data['device']
                 }
     if test:
         params.update({'xxTest':'true'})
@@ -169,6 +175,15 @@ def post_to_leadconduit(data,test=False,retry=False):
             lead.save()
         send_conduit_error(data,title='Leadconduit Timeout',test=settings.LEAD_TESTING)
 
+    except SSLError:
+        logger.error('SSL Error. Pretty common should be retried and go through soon.')
+        if lead:
+            lead.retry = True
+            lead.save()
+        title='Leadconduit SSLError'
+        message='SSLError. Dont worry will be fixed soon'
+        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING,notify_all=False)
+
     except Exception as e:
         #something else happened email everyone
         from traceback import format_exc
@@ -176,7 +191,9 @@ def post_to_leadconduit(data,test=False,retry=False):
         if lead:
             lead.retry = True
             lead.save()
-        send_conduit_error(data,title='Unknown Lead Conduit exception',message='%s' % format_exc(),test=settings.LEAD_TESTING)
+        title='Unknown Lead Conduit exception (lead id = %s)' % data['lead_id']
+        message='%s' % format_exc()
+        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING)
 
 
 
@@ -314,10 +331,29 @@ def prepare_data_from_request(request):
             'thank_you_url': thank_you_url,
         }
 
+def device_type(request,device):
+    #opm only wants to use cookie tracking on mobile
+    if device == 'm':
+        device = 'mobile'
+        request.COOKIES['device'] = device
+        request.session['device'] = device 
+    if device == 't':
+        device = 'tablet'
+    if device == 'd' or device == 'c':
+        device = 'desktop'
+    if not device:
+        device = ''
+    return device
+
+
 def basic_post_login(request):
     # url for Trusted Form 
     trusted_url = request.POST.get('trusted_form',None)
     f_values = request.POST.get('form_values',None)
+    browser = request.META.get('HTTP_USER_AGENT',None)
+    OS = request.POST.get('operating_system',None)
+    device_letter = request.POST.get('device',None)
+    device_name = device_type(request,device_letter)
     lead_data = {'trusted_url': trusted_url}          
     form = LeadForm(request.POST)
     if form.is_valid():
@@ -345,11 +381,13 @@ def basic_post_login(request):
         formset.form_values = f_values
         formset.trusted_url = trusted_url
         formset.ip_address = request.META.get('REMOTE_ADDR',None)
+        formset.retry = True
+        formset.browser = browser
+        formset.operating_system = OS
+        formset.device = device_name
         formset.save()
-        
-        if request_data['lead_id'] is None:
-            request_data['lead_id'] = formset.id
-
+        request_data['lead_id'] = formset.id
+        '''
         lead_data.update(request_data)
         lead_data.update({'searchkeywords':searchkeywords,
                      'searchengine':request.session.get('search_engine',None),
@@ -357,9 +395,10 @@ def basic_post_login(request):
                      'ip':request.META.get('REMOTE_ADDR',None),
                      'customername':fdata['name'],
                      'phone':fdata['phone'],
-                     'email':fdata['email']
+                     'email':fdata['email'],
+                     'device':device_name
                      })
-
+        '''
         # notes field information
         package = request.POST.get('package', None)
         notes_list = []
@@ -383,7 +422,7 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
-        post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
+        #post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         #send_leadimport(emaildata)
         if not settings.LEAD_TESTING and fdata['email']:
             send_caroline_thankyou(request,emaildata,request_data['agent'])

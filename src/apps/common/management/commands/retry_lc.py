@@ -2,6 +2,7 @@ import pdb
 import requests
 import logging
 from django.conf import settings
+settings.SITE_ID = 1
 from django.core.management.base import BaseCommand, CommandError
 from apps.contact.models import Lead
 from apps.contact.views import post_to_leadconduit, send_conduit_error
@@ -16,7 +17,7 @@ class Command(BaseCommand):
 		logger.info('About to retry %s leads' % leads.count())
 		print 'about to retry %s leads' % leads.count()
 		for x in leads:
-			print 'retrying %s' % x.name
+			logger.info('retrying %s' % x.name)
 			data = {
 					'xxAccountId':settings.LEAD_ACCOUNT_ID,
 	                'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
@@ -32,5 +33,7 @@ class Command(BaseCommand):
 	                'searchkeywords':x.search_keywords,
 	                'searchengine':x.search_engine,
 	                'ip':x.ip_address,
+	                'device':x.device
 					}
+			logger.info('parameters sent were %s' % data)
 			post_to_leadconduit(data,test=settings.LEAD_TESTING,retry=True)

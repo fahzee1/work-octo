@@ -14,7 +14,9 @@ states = r_states()
 #Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
 LOCAL_KEYWORDS = settings.LOCAL_KEYWORDS
+
 
 
 # a simple direct_to_template wrapper
@@ -70,7 +72,7 @@ sitemaps={
    'crimestats-state':FreeCrimeStatsStateSitemap,
     #'crimestats-city':FreeCrimeStatsCitySitemap,
    # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
-    'keyword':KeywordSitemapIndex(LOCAL_KEYWORDS)
+    'keyword':KeywordSitemapIndex(settings.LOCAL_KEYWORDS)
 
 
 }
@@ -155,6 +157,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^blue/?$', 'affiliates/sem-landing-page/blue-test.html', 'blue-test'),
         dtt(r'^green/?$', 'affiliates/sem-landing-page/green-test.html', 'green-test'),
         dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-free.html', 'green-test'),
+        dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
 
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
@@ -285,6 +288,7 @@ elif settings.SITE_ID == 9:
 elif settings.SITE_ID == 10:
     urlpatterns += patterns('',
         url(r'^$', 'apps.common.views.black_friday', name='index'),
+        url(r'^black-friday/contact/$', 'apps.common.views.black_friday_ajax', name='BF-ajax'),
     )
 
 # GetAHomeSecuritySystem.com
@@ -422,6 +426,18 @@ elif settings.SITE_ID == 23:
 
     )
 
+# acn
+elif settings.SITE_ID == 24:
+    urlpatterns += patterns('',
+            dtt(r'^$', 'affiliates/acn/index.html', 'home'),
+            dtt(r'^features/$', 'affiliates/acn/features.html', 'features'),
+            dtt(r'^packages/$', 'affiliates/acn/packages.html', 'packages'),
+            dtt(r'^order/$', 'affiliates/acn/order.html', 'order'),
+            dtt(r'^support/$', 'affiliates/acn/support.html', 'support'),
+            dtt(r'^thank-you/$', 'affiliates/acn/thank-you.html', 'thank-you'),
+    )
+
+
 
 # defaults
 else:
@@ -468,8 +484,8 @@ else:
             
             # Equipment > Home Security
                 dtt(r'^equipment/home-security/?$', 'products/equipment/home-security.html', 'home-security-equipment', 'equipment'),
-                
-                    dtt(r'^equipment/home-security/ge-simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
+                # redirect from ge-simon-xt to simon-xt 
+                    dtt(r'^equipment/home-security/simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/wireless-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/motion-sensors/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/touch-screen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'home-security-equipment'),
@@ -650,6 +666,8 @@ else:
 
             # Help Pages > Return Policy
                 dtt(r'^help/return-policy/?$', 'help/return-policy.html', 'return-policy', 'help'),
+                dtt(r'^help/equipment-return/?$', 'help/equipment-return.html', 'equipment-return', 'help'),
+
 
             # Help Pages > State Licenses
                 dtt(r'^help/state-licenses/?$', 'help/state-licenses.html', 'state-licenses', 'help'),
@@ -732,13 +750,17 @@ else:
         # > forward to homepage
 
         # SEO Local Pages
-        url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
-            'apps.local.views.local_page_wrapper',
-            name='local-page-keyword'),
-        url(r'^(?P<keyword>%s)/(?P<state>[A-Za-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
+
+        #url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+            #'apps.local.views.local_page_wrapper',
+            #name='local-page-keyword'),
+        url(r'^home-security/(?P<state>\w{1,2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-keyword2'),
+        url(r'^home-security/(?P<state>\w{1,2})/?$','apps.local.views.local_page_wrapper2',name='local-page-state2'),
+
+        url(r'^(?P<keyword>%s)/(?P<state>[A-Z a-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
             'apps.local.views.sitemap',
             name='local-page-sitemap-state'),
-        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
+        url(r'^(?P<keyword>%s)/sitemap\.xml' % ('|'.join(settings.LOCAL_KEYWORDS)),
             'apps.local.views.sitemap_state',
             name='local-page-sitemap'),
         url(r'^local-pages-sitemap-index\.xml', 'apps.local.views.sitemap_index',
@@ -1321,9 +1343,9 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/shop-home-security-packages/copper/',permanent=True)),
     ('equipment/home-screen/touch-screen/?$',
         RedirectView.as_view(url='/equipment/home-security/touch-screen/',permanent=True)),
-
+    ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
+        RedirectView.as_view(url='/home-security/%(state)s/%(city)s/',permanent=True)),
 )
-
 '''
 urlpatterns += patterns('',
     ('home-security-blog/?$',

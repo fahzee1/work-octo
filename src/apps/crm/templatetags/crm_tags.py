@@ -59,5 +59,10 @@ class GroupCheckNode(template.Node):
 
 @register.filter(name='highlight')
 def highlight(text, filter):
+    """Highlights text that matches query in search results.
+
+    Usage: {{ object.attribute|highlight:query}}
+
+    """
     pattern = re.compile(r"(?P<filter>%s)" % filter, re.IGNORECASE)
     return mark_safe(re.sub(pattern, r"<span class='highlight'>\g<filter></span>", text))

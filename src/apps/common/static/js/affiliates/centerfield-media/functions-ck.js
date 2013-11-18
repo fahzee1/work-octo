@@ -1,0 +1,1 @@
+$(function(){if($("#top-bar").length){var e=$("#bar").offset().top;$(window).scroll(function(){var t=$(window).scrollTop();if(t>e)$("#top-bar").css("top",0);else{console.log("v1111ariable");$("#top-bar").css("top",-100)}})}});

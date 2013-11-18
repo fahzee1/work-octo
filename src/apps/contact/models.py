@@ -105,6 +105,10 @@ class Lead(models.Model):
     lc_error = models.BooleanField(default=False,blank=True, help_text='Was there a error with the Lead Conduit submission?')
     lc_reason = models.CharField(max_length=256, blank=True, null=True, help_text='Lead Conduit reason for not submitting if one')
 
+    device = models.CharField(max_length=256, blank=True, null=True, help_text='Type of device used')
+    operating_system = models.CharField(max_length=256, blank=True, null=True, help_text='Type of operating system used')
+    browser = models.CharField(max_length=256, blank=True, null=True, help_text='Type of browser used')
+
     form_values = models.TextField(default='',blank=True,null=True)
     trusted_url = models.CharField(max_length=256, blank=True, null=True, help_text='Trusted Url grabbed from homepage javascript')
     ip_address = models.CharField(max_length=256, blank=True, null=True)

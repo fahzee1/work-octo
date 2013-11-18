@@ -2,30 +2,25 @@
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block google_experiment %}
-<script> 
-_udn = "protectamerica.com";
-</script>
-<!-- Google Analytics Content Experiment code -->
-<script>function utmx_section(){}function utmx(){}(function(){var
-k='61445283-78',d=document,l=d.location,c=d.cookie;
-if(l.search.indexOf('utm_expid='+k)>0)return;
-function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
-indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
-length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
-'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
-'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
-'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
-valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
-</script><script>utmx('url','A/B');</script>
-<!-- End of Google Analytics Content Experiment code -->
+
 
 {% endblock %}
 {% block css %}
+    <!--[if IE]><!-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-d.css">
+
+    <link rel="stylesheet"  href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-d.css?v3.0">
+
+
+	<!--<![endif]-->
     <link rel="stylesheet" media="only screen and (max-width: 767px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/320-d.css">
 
     <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-d.css">
     <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-d.css?v3.0">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+
+    <![endif]-->
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <style>
         #hero-wrapper {
@@ -154,7 +149,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
             </ul>
             <div class="clear"></div>
 
-            <a href="http://www.protectamerica.com/products/order-package" class="button-link alt" style="width: 115px;">Order Now <i class="icon-chevron-right"></i></a>
+            <a href="http://www.protectamerica.com/products/order-package" class="button-link alt" style="width: 125px;">Order Now <i class="icon-chevron-right"></i></a>
             <div class="clear"></div>
             <img src="{{ STATIC_URL }}img/extra/validation-icons/paid-validation-icons-transparent.png" class="validation-icons" alt="paid-validation-icons" width="357" height="74" />
         </div>
@@ -237,6 +232,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     <div id="home-security-package-choices" style="display:block">
         <div class="big-wrapper">
         {% block packages %}
+            {% comment %}
             <div id="home-security-packages">
                 <div id="copper-security-package">
                     <div class="package-name">
@@ -332,6 +328,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
                 </div>
                 <div class="clear"></div>
             </div>
+            {% endcomment %}
         {% endblock %}
             <div class="clear"></div>
         </div>
