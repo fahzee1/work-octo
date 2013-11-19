@@ -132,7 +132,7 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             except CityCompetitor.DoesNotExist:
                 local_rival = None
 
-            reviews = Textimonial.objects.filter(city=city.city_name,state=state.abbreviation)
+            reviews = Textimonial.objects.filter(display=True,city=city.city_name,state=state.abbreviation).exclude(rating=0)
             if reviews:
                 total = reviews.count()
                 ratings_avg = reviews.aggregate(Avg('rating')).values()
@@ -140,8 +140,16 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
                 second_sum = first_sum + 4
                 final_sum = second_sum/(total+1)
             else:
-                total = 0
-                final_sum = 0
+                reviews = Textimonial.objects.filter(display=True,state=state.abbreviation).exclude(rating=0)
+                if reviews:
+                    total = reviews.count()
+                    ratings_avg = reviews.aggregate(Avg('rating')).values()
+                    first_sum = ratings_avg[0] * total
+                    second_sum = first_sum + 4
+                    final_sum = second_sum/(total+1)
+                else:
+                    total = 0
+                    final_sum = 0
 
             # Google Weather API
             #weather_info = query_weather(city.latitude, city.longitude,
@@ -181,7 +189,7 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
     if not city:
         state_per100 = StateCrimeStats.objects.filter(year=2012,state=state)
         #this powers the 'rated 4 out of 5 stars customer reviews' part on local page
-        reviews = Textimonial.objects.filter(state=state.abbreviation)
+        reviews = Textimonial.objects.filter(display=True,state=state.abbreviation).exclude(rating=0)
         if reviews:
             total = reviews.count()
             ratings_avg = reviews.aggregate(Avg('rating')).values()
