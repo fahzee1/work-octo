@@ -335,5 +335,6 @@ elif os.path.isdir('/Users/rylanfrancis'):
 elif os.path.isdir('/Users/edgarrodriguez'):
     LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 else:
-    pass
+    LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
+
 
