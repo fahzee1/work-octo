@@ -128,7 +128,7 @@ License: http://creativecommons.org/licenses/MIT
     </div>
     {% endblock %}
 </div>
-
+{% block trustedform %}
 <script type="text/javascript">
 (function() {
     var field = 'CertUrl';
@@ -143,6 +143,27 @@ License: http://creativecommons.org/licenses/MIT
 <noscript>
     <img src="http://api.trustedform.com/ns.gif" />
 </noscript>
+{% endblock %}
+{% block OS %}
+<script type="text/javascript">
+ var OSName="Unknown OS";
+    if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+    if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+    if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+    if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+function getParameterByName( name ){
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+</script>
+{% endblock %}
 
 <!-- Scripts -->
 <script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
