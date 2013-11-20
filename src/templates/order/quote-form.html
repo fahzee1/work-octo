@@ -1,9 +1,6 @@
+
 {% load content_tags content_filters sekizai_tags %}
-<div id="trusted-error" style="display:none;color:#ffffff;position:absolute;right:0px;top:52px;width:250px;height:300px;background:#1fb867;">
-    <h1>Oops!</h1>
-    <h1>There was an error submitting your form. Please call us at {{ phone_number|format_number }}</h1>
-</div>
-<form id="quote-form" {% if page_name = "index" %}class="sleepy" {% else %} class="droopy"{% endif %}  method="post" action="">
+<form id="quote-form" class="sleepy"  method="post" action="">
     {% csrf_token %}
 	<div>
 	    {% block form-title %}
@@ -47,6 +44,17 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
+    function getParameterByName( name ){
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
     function validateEmail(email){
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
@@ -60,14 +68,17 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.sleepy button, .droopy button').click(function() {
+        
         $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('#quote-form');
-        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val()
-        if (!trusted){
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
+        var device = getParameterByName('device');
+        /*if (!trusted){
             $form.remove();
             $('#trusted-error').show();
             return false;
         }
+        */
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
@@ -91,7 +102,8 @@ $(document).ready(function() {
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize(),
-                    'operating_system':OSName}
+                    'operating_system':OSName,
+                    'device':device}
     
   
         $.ajax({
@@ -137,6 +149,16 @@ $(document).ready(function() {
         function newFormSuccess(json) {
             $('#form-loading').hide();
             submitting = false;
+            try
+            {
+                var acn = $('.form-fields').data('acn');
+                if (acn){
+                    var url = $('.form-fields').data('thank-you');
+                    window.location = url;
+                    return;
+                    }
+            }
+            catch(err){var acn = false;}
             if(json.success) {
                 {% if thank_you %}
                 window.location = '{{ thank_you }}';

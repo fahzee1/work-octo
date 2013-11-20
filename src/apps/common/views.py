@@ -4,6 +4,7 @@ import urllib
 import urllib2
 import operator
 import random
+import pdb
 from django.http import Http404
 from decimal import Decimal
 from datetime import datetime, timedelta
@@ -20,7 +21,7 @@ from django.shortcuts import render_to_response,render,redirect
 from django.template import RequestContext
 from django.conf import settings
 from django.http import HttpResponseRedirect, HttpResponse, \
-    HttpResponsePermanentRedirect
+    HttpResponsePermanentRedirect, HttpResponseBadRequest
 from django.utils import simplejson
 from django.utils.cache import patch_vary_headers
 from django.contrib.sites.models import Site
@@ -32,6 +33,7 @@ from apps.news.models import Article
 from apps.pricetable.models import Package
 from apps.newsfeed.models import TheFeed,FallBacks
 from itertools import chain, izip
+from django.core.mail import send_mail
 
 consumer_key=settings.TWITTER_CONSUMER_KEY
 consumer_secret=settings.TWITTER_CONSUMER_SECRET
@@ -300,6 +302,24 @@ def family_of_companies(request):
 def black_friday(request):
     ctx = {}
     ctx['page_name'] = 'index'
-    ctx['black_friday_delta'] = datetime(2013, 11, 22) - datetime(
+    ctx['black_friday_delta'] = datetime(2013, 11, 29) - datetime(
         datetime.today().year, datetime.today().month, datetime.today().day)
     return simple_dtt(request, 'external/black-friday/index.html', ctx)
+
+def black_friday_ajax(request):
+    from models import BlackFriday
+    submission = BlackFriday()
+    if request.method != "POST":
+        return HttpResponseRedirect('/')
+    email = request.POST.get('email',None)
+    if email:
+        if not settings.LEAD_TESTING:
+            submission.email = email
+            submission.save()
+            subject = 'Black Friday Subscriber!'
+            message = 'Hey Caroline,\n\tYour new black friday subscriber is %s.\n\n From CJ :)' % email
+            too = 'caroline@protectamerica.com'
+            from_email = 'Protect America <noreply@protectamerica.com>'
+            send_mail(subject,message,from_email,[too])
+        return HttpResponse()
+    return HttpResponseBadRequest()

@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.SearchEngineReferrerMiddleware',
     'apps.common.middleware.CommonMiddlewareWrapper',
     'apps.common.middleware.DetectMobileBrowser',
+    'apps.common.middleware.LocalPageRedirect',
     'django.middleware.cache.FetchFromCacheMiddleware',
     #'apps.newsfeed.middleware.RenderNewsFeed',
     'apps.newsfeed.middleware.GetGeoIp',
@@ -313,6 +314,8 @@ WEATHER_CODE_MAP = {
 #LeadConduit data
 LEAD_ACCOUNT_ID = '1626fa3'
 LEAD_CAMPAIGN_ID = '054irukv1'
+# this variable is used in lead forms and black friday forms
+# use it so while testing we disable emails 
 LEAD_TESTING = False
 
 # override these settings with those from settings.local,
@@ -322,6 +325,9 @@ try:
 except ImportError:
     pass
 
+# depending on where/what user is running this code LC_LOG (lead conduit log) will be
+# one of the values below. It will either be a local directory or the directory on 
+# the live server 
 if os.path.isdir('/Users/cjogbuehi'):
     LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 elif os.path.isdir('/Users/rylanfrancis'):
@@ -329,6 +335,5 @@ elif os.path.isdir('/Users/rylanfrancis'):
 elif os.path.isdir('/Users/edgarrodriguez'):
     LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 else:
-    pass
-
+    LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
 

@@ -3,7 +3,7 @@
 {% block css %}
 <meta name="robots" content="FOLLOW,INDEX"/>
 <meta name="revisit-after" content="2 days"/>
-<meta name="geo.region" content="US-{{ state }}" />
+<meta name="geo.region" content="US-{{ state_long }}" />
 <meta name="geo.placename" content="{{ city }}" />
 <meta name="geo.position" content="{{ lat }};{{ long }}" />
 <meta name="ICBM" content="{{ lat }}, {{ long }}" />
@@ -43,13 +43,49 @@ $(document).ready(function() {
         <iframe width="115%" class="map-background" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q={{ city }}%2B{{ state_long }}&ie=UTF8&z=6&iwloc=near&scrollwheel=false&maptypecontrol=false&disabledefaultUI=true&iwloc=near&navigationcontrol=false&output=embed"></iframe>
 
 	</div>
+	<div id="local-banner">
+		<div class="left">
+			<p>Get Started Now,<br>Call Today!<br><strong>1-800-936-3385</strong></p>
+		</div>
+		<div class="right">
+			<p>Protecting your home in {{ state_long }} has never been easier.</p>
+		</div>
+
+		<div class="clear"></div>
+	</div>
 <div class="wrapper" style="padding-bottom: 64px;">
+	<div id="local-first-paragraph">
+			<p>{% content_spinner "diff1" "Home security systems provide you with the peace of mind you deserve.|Safety and assurance are essential in our lives.|A protected home is where you feel free. Imagine the concerns about the safety of your family and possessions melting away, because you know there's a web of security around you at all times.|"%} This freedom we all deserve is huge, but the price shouldn't be. {% content_spinner "diff2" "Comfort and freedom in {{ state }} is now easier than ever with wireless home security from Protect America.|Freedom from worry in {{ state }} is now simple, effortless and affordable with next-generation wireless home security from Protect America.|{{ state }} is arming itself with effortless, affordable and powerful wireless home security from Protect America." %}{% content_spinner "diff3" "The process of securing your home and family should itself be stress-free.|We've been the pioneer of wire-free, hassle-free and burglar-free security since 1992."%} Our dynamic technology is improving the quality of life in {{ state_long }}, one home at a time.</p>
+
+	</div>
+	<div id="main-benefits">
+		
+		<ul>
+	        <li>
+	            <h3><i class="icon-home"></i>Simply Peace of Mind.</h3>
+	            <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
+	        </li>
+	        <li>
+	            <h3><i class="icon-user"></i>Security Designed for your Life.</h3>
+	            <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
+	        </li>
+	        <li>
+	            <h3><i class="icon-rss"></i>Easy Wireless Set-Up</h3>
+	            <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
+	        </li>
+	        <li id="omega">
+	            <h3><i class="icon-dollar"></i>The Best Price, Period.</h3>
+	            <p>Protect America makes it easy to secure and protect your home and family.</p>
+	        </li>
+	    </ul>
+
+	</div>
     <div class="crime-tiles" >
     	<div class="crime-tiles-four">
     		<h4>Burglary<h4>
     		<p>per 100k</p>
-    		{% if crimestats_per100k %} 
-    			<h3>{{ crimestats_per100k.burglary_rank_per100k }}</h3>
+    		{% if state_per100.burglary_rank_per100k %} 
+    			<h3>{{ state_per100.burglary_rank_per100k }}</h3>
     		{% else %}
     			<h5>no stats available</h5>
     		{% endif %}
@@ -58,8 +94,8 @@ $(document).ready(function() {
     	<div class="crime-tiles-four">
     		<h4>Robbery<h4>
     		<p>per 100k</p>
-    		{% if crimestats_per100k %} 
-    			<h3>{{ crimestats_per100k.robbery_rank_per100k }}</h3>
+    		{% if state_per100.robbery_rank_per100k %} 
+    			<h3>{{ state_per100.robbery_rank_per100k }}</h3>
     		{% else %}
     			<h5>no stats available</h5>
     		{% endif %}
@@ -67,8 +103,8 @@ $(document).ready(function() {
     	<div class="crime-tiles-four">
     		<h4>Auto theft<h4>
     		<p>per 100k</p>
-    		{% if crimestats_per100k %} 
-    		<h3>{{ crimestats_per100k.motor_vehicle_theft_rank_per100k }}</h3>
+    		{% if state_per100.motor_vehicle_theft_rank_per100k %} 
+    		<h3>{{ state_per100.motor_vehicle_theft_rank_per100k }}</h3>
     		{% else %}
     			<h5>no stats available</h5>
     		{% endif %}
@@ -76,8 +112,8 @@ $(document).ready(function() {
     	<div class="crime-tiles-four" id="omega">
     		<h4>Larceny<h4>
     		<p>per 100k</p>
-    		{% if crimestats_per100k %} 
-    		<h3>{{ crimestats_per100k.larceny_theft_rank_per100k }}</h3>
+    		{% if state_per100.larceny_theft_rank_per100k %} 
+    		<h3>{{ state_per100.larceny_theft_rank_per100k }}</h3>
     		{% else %}
     			<h5>no stats available</h5>
     		{% endif %}
@@ -95,24 +131,24 @@ $(document).ready(function() {
             <span itemprop="ratingValue">{{ review_avg|floatformat }} </span> out of 5 stars based on over <span itemprop="reviewCount"> {{ review_total }} </span> Protect America {{ state_long }} Customer Reviews
         </div>
         <div id="review-cycle-container">
-            {% testimonial_search "" "limit=5&template=local&state={{ state }}&words=100" %}
+            {% testimonial_search "" "limit=5&template=local&state={{ state_long }}&words=100" %}
 
         </div>
     </div>
 </div>
 <div class="wrapper">
     <div id="city-list">
-        <h2>Select your {{ state_long }} city below to find home security deals in your neighborhood</h2>
+        <h2>Select your {{ state_long }} city below <span>find home security deals in your neighborhood</span></h2>
     	   {% for key, value in cities.iteritems %}
-        	<div id="{{ key }}_cities" class="alphabet-content {% cycle '' 'alt' '' %}">
-            <h2>{{ key }}</h2>
+        	<div id="{{ key }}_cities" class="alphabet-content {% cycle "" "alt" "" %}">
+            <p>{{ key }}</p>
             <ul>
             {% for city in value %}
                 <li><a href="{% url local-page-keyword2 state city.city_name %}">{{ city.city_name }}</a></li>
             {% endfor %}
             </ul>
             {% comment %}
-            "/{{ state }}/{{ city.city_name }}/"
+            "/{{ state_long }}/{{ city.city_name }}/"
             {% endcomment %}
         </div>
         {% endfor %}

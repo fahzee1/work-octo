@@ -24,50 +24,193 @@
 {% endblock %}
 
 {% block css %}
-<script type="text/javascript" src="//use.typekit.net/bjx1yby.js"></script>
+<script type="text/javascript" src="http://use.typekit.net/bjx1yby.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/black-friday.css">
-
+<script type="text/javascript" src="{{ STATIC_URL }}js/external/black-friday/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/black-friday/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/black-friday/styles.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
 
 {% endblock %}
 {% block typekit %}tk-museo-slab{% endblock %}
 {% block header %}
-    <div class="wrapper">
-        <div id="content-area">
-            <div id="header">
-                <h1>
-                    <span id="header-left-box-white">BlackFridayHomeSecurity.com</span>
-                </h1>
-            </div>
-        </div>
-    </div>
+            <div class="header section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="heroIntroWrapper">
+                                <h1><img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" alt="Protect America Security Systems" title="Protect America Security Systems"></h1>
+                            </div><!-- /heroIntro -->
+                        </div><!--  /leftCol -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /header -->
 {% endblock %}
 {% block content %}
-</div>
-<div id="special-display" style="height: 403px;">
-    <p><strong id="CounterNumber">{{ black_friday_delta.days }}</strong><span id="days-text">Days</span></p>
-</div>
+            <div class="hero section center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="heroIntroWrapper">
+                                <h3>Friday, November 29th</h3>
+                                <img src="{{ STATIC_URL }}img/external/black-friday/blackFridayDealsProtectAmerica.png" alt="Black Friday Deals Protect America" title="Black Friday Deals Protect America">
+                                <h2>The countdown begins. Huge savings on home security.</h2>
+                                <h4>Sign up, follow us or like us now for exclusive deals:</h4>
+                                <div class="formWrapper">
+                                    <form class="BfForm" method="post" action="">
+                                        {% csrf_token %}
+                                        <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
+                                        <input type="submit" value="Subscribe" class="primaryBtn">
+                                    </form>
+                                </div><!-- /FormWrapper -->
+                                <div class="thankYouMessageWrapper" style="display:none;">
+                                    <p>You have subscribed successfully, thank you.</p>
+                                </div><!-- /thankYouMessageWrapper -->
+                                <div class="socialWrapper">
+                                    <a href="http://twitter.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconTwitterLg.png"></a>
+                                    <a href="https://www.facebook.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconFaceBookLg.png"></a>
+                                </div><!-- /socialWrapper -->
+                            </div><!-- /heroIntro -->
+                        </div><!--  /leftCol -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /hero -->
 
-<div class="wrapper">
-    <div id="centered-subwrapper">
-        <div id="sub-special-centered">until the biggest black friday home security deal ever!</div>
-        <div id="like-us">Stay informed, Like us on Facebook</div>
-        <a  id="like-button" href="https://www.facebook.com/ProtectAmerica" target="_blank">Like Protect America</a>
-            
-        {% comment %}
-        <div id="other-tab">
-                <span id="other-tab-left">Other Black Friday</span><span id="other-tab-right">Deals</span>
-        </div>
-            
-        <div id="other-tab-content">
-                <a href="#"><img id="other-tab-left-image" src="{{ STATIC_URL }}img/black-friday/spacergrey.png"></a>
-                <a href="#"><img id="other-tab-mid-image" src="{{ STATIC_URL }}img/black-friday/spacergrey.png"></a>
-                <a href="#"><img id="other-tab-right-image" src="{{ STATIC_URL }}img/black-friday/spacergrey.png"></a>
-        </div>
-        {% endcomment %}
-    </div>
-</div>
+            <div class="section center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                            <div class="darkBox">
+                                <h3>We are counting down to Black Friday with new deals every Friday.</h3>
+                                <div class="counterWrapper roundedBlackBox">
+                                    <div class="roundedBlackBoxLeftCol">
+                                        <p class="counterNumber">{{ black_friday_delta.days }}<span id="days-text">Days</span></p>
+                                    </div><!-- roundedBlackBoxLeftCol -->
+                                    <div class="roundedBlackBoxRightCol">
+                                        <h4>Until Black Friday.</h4>
+                                        <p><a href="#modalForm" data-toggle="modal" class="primaryBtn">Sign up for notifications</a></p>
+                                    </div><!-- /roundedBlackBoxRightCol -->
+                                </div><!-- /counterWrapper -->
+                                <a href="#modalForm" data-toggle="modal"><img src="{{ STATIC_URL }}img/external/black-friday/dealsDates.png" alt="Protect America Black Friday Deals Dates" title="Protect America Black Friday Deals Dates" class="datesImage"></a>
+                            </div><!-- /darkBox -->
+                        </div><!--  /col-lg-6 -->
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mobileClear">
+                            <div class="darkBox">
+                                <h3>Deals happening on right now:</h3>
+                                
+                                <div class="cooperSale roundedBlackBox">
+                                    <div class="roundedBlackBoxLeftCol">
+                                        <p><span class="startingAt">starting at:</span>$19.99<span>monthly</span></p>
+                                    </div><!-- roundedBlackBoxLeftCol -->
+                                    <div class="roundedBlackBoxRightCol">
+                                        <h4>Cooper package.</h4>
+                                        <p>No Equipment or  installation fees.</p>
+                                        <p><a href="http://www.protectamerica.com/shop-home-security-packages/copper" class="primaryBtn">shop now</a></p>
+                                    </div><!-- /roundedBlackBoxRightCol -->
+                                </div><!-- /roundedBlackBox -->
+ 
+                                 <div class="roundedBlackBox">
+                                    <div class="roundedBlackBoxLeftCol">
+                                        <p><span class="startingAt">starting at:</span>$9.99<span>monthly</span></p>
+                                    </div><!-- roundedBlackBoxLeftCol -->
+                                    <div class="roundedBlackBoxRightCol">
+                                        <h4>Fire &amp; Smoke Protection.</h4>
+                                        <p>When you Order Any Package.</p>
+                                        <p><a href="#" class="primaryBtn">shop now</a></p>
+                                    </div><!-- /roundedBlackBoxRightCol -->
+                                </div><!-- /roundedBlackBox -->
+                            </div><!-- /darkBox -->
+                        </div><!--  /col-lg-6 -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /section -->
+            <div class="footer section center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1><img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" alt="Protect America Security Systems" title="Protect America Security Systems"></h1>
+                            <p><a href="https://plus.google.com/+ProtectAmerica/">Google+</a> | <a href="http://www.facebook.com/ProtectAmerica">Facebook</a> | <a href="http://www.twitter.com/ProtectAmerica">Twitter</a> | <a href="http://www.youtube.com/user/ProtectAmerica">YouTube</a></p>
+                        </div><!--  /col-lg-6 -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /section -->
 
+ <!-- Form in Modal Window -->
+  <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modalFormLabel" aria-hidden="true">
+    <div class="modal-dialog formModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Sign up, follow us or like us now for exclusive deals</h4>
+        </div>
+        <div class="modal-body">
+            <p>Enter your email address to sign up to our newsletter.</p>
+        <div class="formWrapper">
+            <form class="BfForm" method="post" action="">
+                {% csrf_token %}
+                <input type="email" placeholder="email address" id="mce-EMAIL" class="email" name="EMAIL" value="">
+                <input type="submit" value="Subscribe" class="primaryBtn">
+            </form>
+        </div><!-- /FormWrapper -->
+        <div class="thankYouMessageWrapper" style="display:none;">
+            <p>You have subscribed successfully, thank you.</p>
+        </div><!-- /thankYouMessageWrapper -->
+            <div class="socialWrapper">
+                <a href="http://twitter.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconTwitterLg.png"></a>
+                <a href="https://www.facebook.com/ProtectAmerica"><img src="{{ STATIC_URL }}img/external/black-friday/iconFaceBookLg.png"></a>
+            </div><!-- /socialWrapper -->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('form .primaryBtn').click(function(){
+        $('form .primaryBtn').attr('disabled',true);
+        var $form = $(this).closest(".BfForm");
+        var email = $form.find('.email').val();
+        $.ajax({
+            type: "POST",
+            url: "black-friday/contact/",
+            data: {'email':email},
+            dataType: "json",
+            success: newFormSuccess,
+            error: newFormError,
+            beforeSend:sayThanks
+
+        });
+
+        function newFormError(){
+            $('form .primaryBtn').attr('disabled',false);
+            $('form .primaryBtn').val('Subscribe');
+            if (!email){
+                alert('Please enter your email adress.');
+                return false;
+            }
+        }
+        function newFormSuccess(){
+            $('.formWrapper').remove();
+            $('.thankYouMessageWrapper').show();
+            return;
+        }
+        function sayThanks(){
+        $('form .primaryBtn').val('Thank You');
+        }
+        return false;
+
+    });
+
+});
+</script>
+{% endblock %}
+{% endaddtoblock "js" %}
 {% endblock %}
 {% block order-footer %}
 {% endblock %}

@@ -33,6 +33,7 @@ class Command(BaseCommand):
 	                'searchkeywords':x.search_keywords,
 	                'searchengine':x.search_engine,
 	                'ip':x.ip_address,
+	                'device':x.device
 					}
 			logger.info('parameters sent were %s' % data)
 			post_to_leadconduit(data,test=settings.LEAD_TESTING,retry=True)

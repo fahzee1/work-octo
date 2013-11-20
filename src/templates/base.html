@@ -52,6 +52,7 @@
     <meta name="MSSmartTagsPreventParsing" content="true" />
     <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
     <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
+    <meta name="p:domain_verify" content="1852cd0b77a74fd31961f243d35bc25e"/>
 
 {% block favicon %}
     <!-- Icons -->
@@ -570,6 +571,7 @@ var google_remarketing_only = true;
     '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
 )();
+
 </script>
 <noscript>
     <img src="http://api.trustedform.com/ns.gif" />
@@ -582,8 +584,20 @@ var google_remarketing_only = true;
     if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
     if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
     if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+function getParameterByName( name ){
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 </script>
 {% endblock %}
+
 
 </body>
 </html>

@@ -60,11 +60,14 @@ $(document).ready(function() {
         $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('#quote-form');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val()
+        var device = getParameterByName('device');
+        /*
         if (!trusted){
             $form.remove();
             $('#trusted-error').show();
             return false;
         }
+        */
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
@@ -89,7 +92,8 @@ $(document).ready(function() {
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize(),
-                    'operating_system':OSName}
+                    'operating_system':OSName,
+                    'device':device}
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",

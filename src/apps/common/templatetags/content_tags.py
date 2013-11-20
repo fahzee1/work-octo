@@ -39,7 +39,7 @@ def paragraph_spinner(parser,token):
         <p></p>
     {% endparagraph_spinner %}
     chooses a random paragraph paragraph (p tag)
-    and render it
+    and renders it
 
     """
     try:
@@ -61,23 +61,29 @@ class ParagraphSpinnerNode(template.Node):
         self.name = content_name
 
     def render(self,context):
+        city, state = None, None
         request = self.request.resolve(context)
         html_output = self.nodelist.render(context)
         default = '/virtual/customer/www2.protectamerica.com/localpages/'
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
         chop_up = path.split('/')
-        state, city = chop_up[1], chop_up[2]
-        if '.' in city:
-            f,l = city.split('.')
-            city = f+ '.'+' '+l
-        if '-' in city:
-            if city.count('st',0,2) == 1:
-                f,l = city.split('-')
-                city = f+'.'+' '+l
-            else:
-                city = city.replace('-',' ')
+        if len(chop_up) == 3:
+            state, city = chop_up[1], chop_up[2]
+            if '.' in city:
+                f,l = city.split('.')
+                city = f+ '.'+' '+l
+            if '-' in city:
+                if city.count('st',0,2) == 1:
+                    f,l = city.split('-')
+                    city = f+'.'+' '+l
+                else:
+                    city = city.replace('-',' ')
+        elif len(chop_up) == 2:
+            state = chop_up[1]
+        else:
+            raise Http404
         statecode = get_statecode(state)
-        json_file = statecode+'/'+city.title()+'/paragraph.json'
+        json_file = (statecode+'/'+city.title()+'/paragraph.json' if city else statecode+'/'+state.title()+'/paragraph.json')
         html = BeautifulSoup(html_output)
         paragraphs = html.find_all('p')
         LOCAL_PAGE_PATH = getattr(settings,'LOCAL_PAGE_PATH',default)
@@ -102,9 +108,10 @@ class ParagraphSpinnerNode(template.Node):
                 raise Http404
 
         else:
-            if not os.path.exists(statecode+'/'+city.title()):
-                os.makedirs(statecode+'/'+city.title())
-                os.chdir(statecode+'/'+city.title())
+            move_here = (statecode+'/'+city.title() if city else statecode+'/'+state.title())
+            if not os.path.exists(move_here):
+                os.makedirs(move_here)
+                os.chdir(move_here)
                 p = str(paragraphs[0])
                 final = strip_tags(p)
                 obj = {self.name:final}
@@ -112,7 +119,7 @@ class ParagraphSpinnerNode(template.Node):
                     f.write(json.dumps(obj))
                 content = obj[self.name]
             else:
-                os.chdir(statecode+'/'+city.title())
+                os.chdir(move_here)
                 p = str(paragraphs[0])
                 final = strip_tags(p)
                 obj = {self.name:final}
@@ -185,24 +192,33 @@ class ContentSpinnerNode(template.Node):
         self.replacements = content_replacements.split('|')
    
     def render(self, context):
+        city, state = None, None
         request = self.request.resolve(context)
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
+        #split up url and check if city and state or just state
         chop_up = path.split('/')
-        state, city = chop_up[1], chop_up[2]
-        if '.' in city:
-            f,l = city.split('.')
-            city = f+ '.'+' '+l
-        if '-' in city:
-            if city.count('st',0,2) == 1:
-                f,l = city.split('-')
-                city = f+'.'+' '+l
-            else:
-                city = city.replace('-',' ')
+        if len(chop_up) == 3:
+            #city and state present (city state page)
+            state, city = chop_up[1], chop_up[2]
+            if '.' in city:
+                f,l = city.split('.')
+                city = f+ '.'+' '+l
+            if '-' in city:
+                if city.count('st',0,2) == 1:
+                    f,l = city.split('-')
+                    city = f+'.'+' '+l
+                else:
+                    city = city.replace('-',' ')
+        if len(chop_up) == 2:
+            #just state present (state page)
+            state = chop_up[1]
         statecode = get_statecode(state)
-        json_file = statecode+'/'+city.title()+'.json'
+        #if city is present json file will be state/city.json else state/state.json
+        json_file = (statecode+'/'+city.title()+'.json' if city else statecode+'/'+state.title()+'.json')
         default = '/virtual/customer/www2.protectamerica.com/localpages/'
         LOCAL_PAGE_PATH = getattr(settings,'LOCAL_PAGE_PATH',default)
         os.chdir(LOCAL_PAGE_PATH)
+        # if json file at path exists open it and grab values using key
         if os.path.exists(json_file):  
             try:
                 the_file = open(json_file,'r+')
@@ -210,6 +226,7 @@ class ContentSpinnerNode(template.Node):
                 try:
                     content = new_file[self.name]
                 except KeyError:
+                    #key not in file, add key:value to file
                     if self.name not in new_file.keys():
                         obj = {self.name:choice(self.replacements)}
                         new_file.update(obj)
@@ -220,17 +237,22 @@ class ContentSpinnerNode(template.Node):
             except IOError:
                 raise Http404
         else:
+            #state directory hasnt yet been created, so create it, change into 
+            #directory, and create json file with key:value pair
             if not os.path.exists(statecode):
                 os.makedirs(statecode)
                 os.chdir(statecode)
                 obj = {self.name:choice(self.replacements)}
-                with open(city.title()+'.json',"w+") as f:
+                
+                the_file = (city.title()+'.json' if city else state.title()+'.json')
+                with open(the_file,"w+") as f:
                     f.write(json.dumps(obj))
                 content = obj[self.name]
-            
+            #state directory is there. go in and grab all json files and see if any match
+            #the one were looking for. if none match create it.
             elif os.path.exists(statecode):
                 os.chdir(statecode)
-                j_file = city.title() +'.json'
+                j_file = (city.title() +'.json' if city else state.title() + '.json') 
                 try:
                     _files = glob('*json')
                     _list=[]
@@ -256,7 +278,8 @@ class ContentSpinnerNode(template.Node):
                 except:
                     raise Http404
             else:
-                os.chdir(statecode+'/'+city.title())
+                move_here = (statecode+'/'+city.title() if city else statecode+'/'+state.title())
+                os.chdir(move_here)
                 try:
                     #get first file that ends in json
                     _file = glob('*.json')[0]
@@ -276,8 +299,17 @@ class ContentSpinnerNode(template.Node):
 
         if '{{ city }}' in content:
             content = content.replace('{{ city }}',city.title())
+        if '{{city}}' in content:
+            content = content.replace('{{city}}',city.title())
         if '{{ state }}' in content:
             content = content.replace('{{ state }}',state.title())
+        if '{{state}}' in content:
+            content = content.replace('{{state}}',state.title())
+        if '{{ state_long }}' in content:
+            content = content.replace('{{ state_long }}',context['state_long'])
+        if '{{state_long}}' in content:
+            content = content.replace('{{state_long}}',context['state_long'])
+
         return content
 
 register.tag(content_spinner)

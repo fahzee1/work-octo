@@ -20,7 +20,9 @@ from apps.local.sitemaps import KeywordCitySitemap, KeywordStateSitemap, Keyword
 from apps.crimedatamodels.views import query_by_state_city
 from apps.crimedatamodels.models import (State,
                                          CityLocation,
-                                         ZipCode)
+                                         ZipCode,
+                                         CrimesByCity,
+                                         StateCrimeStats)
 
 
 def get_timezone(state):
@@ -76,13 +78,7 @@ def get_statecode(state):
         return statecode.upper()
 
 
-
-
-@cache_page(60 * 60 * 4)
-def local_page_wrapper(request, keyword, city, state):
-    statecode = get_statecode(state)
-    if not statecode:
-        raise Http404
+def strip_city(city):
     if '-' and '.' in city:
         city=city.replace('-',' ').replace('.','')
     if '-' in city:
@@ -93,7 +89,17 @@ def local_page_wrapper(request, keyword, city, state):
         city=city.replace('(','').replace(')','')
     if ',' in city:
         city=city.replace(',','')
+    return city
 
+
+
+
+@cache_page(60 * 60 * 4)
+def local_page_wrapper(request, keyword, city, state):
+    statecode = get_statecode(state)
+    if not statecode:
+        raise Http404
+    city = strip_city(city)
     if (city.upper(),statecode) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
         background_time=get_timezone(statecode)
         ctx={'background_time':background_time}
@@ -163,7 +169,9 @@ def local_page(request, state, city=None, keyword=None):
                 if city.city_name[0] not in city_by_first_letter:
                     city_by_first_letter[city.city_name[0]] = []
                 city_by_first_letter[city.city_name[0]].append(city)
-            crime_stats_ctx.update({'cities':city_by_first_letter})
+            crime_stats = StateCrimeStats.objects.filter(state=state,year=2012)
+            crime_stats_ctx.update({'cities':city_by_first_letter,
+                                    'crime_stats':(crime_stats[0] if crime_stats else None)})
         except State.DoesNotExist:
             raise Http404
         response = render(request,'local-pages/state-page.html',crime_stats_ctx)
@@ -213,20 +221,11 @@ def local_city(request, state):
 
 def local_page_wrapper2(request,state,city=None):
     statecode = get_statecode(state)
+    #pdb.set_trace()
     if not statecode:
         raise Http404
     if city:
-        if '-' and '.' in city:
-            city=city.replace('-',' ').replace('.','')
-        if '-' in city:
-            city=city.replace('-',' ')
-        if '.' in city:
-            city=city.replace('.',' ')
-        if '(' in city or ')' in city:
-            city=city.replace('(','').replace(')','')
-        if ',' in city:
-            city=city.replace(',','')
-
+        city = strip_city(city)
         return local_page(request,statecode,city.title())
     else:
         return local_page(request,statecode)
