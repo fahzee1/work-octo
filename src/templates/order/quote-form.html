@@ -149,6 +149,16 @@ $(document).ready(function() {
         function newFormSuccess(json) {
             $('#form-loading').hide();
             submitting = false;
+            try
+            {
+                var acn = $('.form-fields').data('acn');
+                if (acn){
+                    var url = $('.form-fields').data('thank-you');
+                    window.location = url;
+                    return;
+                    }
+            }
+            catch(err){var acn = false;}
             if(json.success) {
                 {% if thank_you %}
                 window.location = '{{ thank_you }}';
