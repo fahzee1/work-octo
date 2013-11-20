@@ -219,6 +219,7 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
             final_sum = 0
 
 
+        '''
         if city_crime_objs:
             # get population type
             if crimesbycity.population <= 40000:
@@ -229,7 +230,7 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                 pop_type = 'METROPOLIS'
         else:
             pop_type = 'METROPOLIS'
-        
+        '''
 
         # get content
         '''
