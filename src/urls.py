@@ -159,6 +159,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^green/?$', 'affiliates/sem-landing-page/green-test.html', 'green-test'),
         dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-free.html', 'green-test'),
         dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
+        dtt(r'^medical-alert/?$', 'affiliates/sem-landing-page/medical-pendant.html', 'medical'),
 
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),

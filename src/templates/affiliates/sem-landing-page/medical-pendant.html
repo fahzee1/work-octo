@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block google_experiment %}
+
+{% endblock %}
+{% block css %}
+    <!--[if IE]><!-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-c.css">
+
+    <link rel="stylesheet"  href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-c.css?v3.0">
+
+
+	<!--<![endif]-->
+    {% comment %}
+    <link rel="stylesheet" media="only screen and (max-width: 767px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/320-c.css">
+    {% endcomment %}
+
+    <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-medical.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-medical.css">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+
+    <![endif]-->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/faq.js"></script>
+
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <style>
+        #hero-wrapper {
+            background: #b4ec0b;
+        }
+        #hero-wrapper #hero-image #best-deal h1 {
+            color: #555;
+        }
+        #hero-wrapper #hero-image h2 {
+            color: #555;
+        }
+    </style>
+{% endblock %}    
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+
+{% block header %}
+
+
+    <div id="header-wrapper">
+        <div id="header">
+            {% if phone_number %}
+                <div id="main-phone-number">
+                    <p>Call Now<em> and Save</em>! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a></span></p>
+                </div>
+            {% endif %}
+            <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+
+
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+            {% endif %}
+            <div class="">Our Security Experts are ready to help</div>
+            <ul id="mobile-main-navigation">
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+            </ul>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
+
+{% block content %}
+<div id="hero-wrapper" class="">
+    <div id="offer-area">
+    {% include "affiliates/sem-landing-page/medical/medical-quote-form.html" with form=forms.basic %}
+
+        <ul class="options">
+            <h2>Full Safety <br/>Package Includes:</h2>
+            <li><i class="icon-check"></i>Home Security</li>
+            <li><i class="icon-check"></i>Medical Pendant</li>
+            <li><i class="icon-check"></i>Family <br />Alert</li>
+            <li><i class="icon-check"></i>No Equipment Fees or Cost</li>
+
+        </ul>
+        <div class="price">
+            <p>starting at</p>
+            <strong>$5/week</strong>
+        </div>
+    </div>   
+    <div class="wrapper">
+        {% if request.GET.affkey == 'vet' %}
+        
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/veteran-person.png" class="person" alt="veteran-person" width="485" height="419" />
+        {% else %}
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/woman.png" class="person" style="right: 8%;" alt="veteran-person" />
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/price-badge.png" class="price-badge" alt="price-badge" width="170" height="170" />
+    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/home-background.jpg" class="house-bg" alt="camera-button" />
+
+</div>
+
+{% include "order/call-box.html" %}
+<div id="wireless-security">
+    <div class="wrapper">
+        <div id="featured-on">
+            <p>Featured On:</p>
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/fox-news.png" alt="Featured on Fox News" width="96" height="96" />
+            <img src="{{ STATIC_URL }}img/extra/validation-icons/bbb.png" alt="Rated with an A from the BBB" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/consumer-digest.png" alt="Rated a Consumer Digest Best Buy" width="96" height="96" />
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/abc.png" class="alpha" alt="Featured on ABC" width="96" height="96" />
+            <img src="{{ STATIC_URL }}img/extra/validation-icons/history.png" class="omega" alt="Featured on The History Channel" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/best.png" alt="Featured on Best Home Security Companys" width="96" height="96" />
+
+
+
+        </div>
+    </div>
+    <div id="medical-pendant-home">
+        <div class="wrapper">
+            <div id="home-content">
+                <h2>Simple and easy, medical <span>alert when you need it most.</span></h2>
+                <p>Wear it as a pendant or as a wristband and with a press of the button and you are instantly connected to help.</p>
+                <a href="" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div id="security-information">
+            <div id="main-benefits">
+                    <h1>For the Past 20 Years...</h1>
+                    <p>Saving lives and protecting homes</p>
+                    <ul>
+                        <li>
+                            <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
+                            <p>Our systems provide state-of-the-art <strong>24/7 security</strong> so you don't have to worry about a thing.</p>
+                        </li>
+                        <li>
+                            <h3><i class="icon-heart"></i>The Comfort of Knowing</h3>
+                            <p>Each system can be programmed to notify the <strong>right people</strong> in the event of an emergency.</p>
+                        </li>
+                        <li>
+                            <h3><i class="icon-money"></i>The Best Price, Period</h3>
+                            <p>The <strong>equipment is included</strong>, there are no activation fees, and our alarm monitoring starts at $19.99 per month.</p>
+                        </li>
+
+                        <li>
+                            <h3><i class="icon-thumbs-up"></i>Saving You More</h3>
+                            <p>Safety can be <strong>good for you and your pocket</strong>. Save up to 20% on your homeowners insurance.</p>
+                        </li>
+                        <li>
+                            <h3><i class="icon-user"></i>Security Designed for your Life</h3>
+                            <p>Each system is <strong>built to fit you</strong>, including options like: fire protection, car tracking, and video check-in.</p>
+                        </li>
+                    </ul>
+                <div class="clear"></div>
+            </div>
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/medical-alert-on-iphone.jpg" class="iphone-pic" alt="medical-alert-on-iphone" />
+        </div>
+    </div>
+</div>
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        <h2>A Step above the rest <span>providing more safety and security for less</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Equipment & Activation Fees</th>
+                    <th>Medical Alert Pendant</th>
+                    <th>24/7 Burglar Alarm</th>
+                    <th>One Button Security</th>
+                    <th></th>
+                    <th>Monthly Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="alpha">
+                    <td class="title">Protect America</td>
+                    <td class="price">$0</td>
+                    <td>Included</td>
+                    <td>Included</td>
+                    <td>Included</td>
+                    <td>Included</td>
+                    <td>$19.99</td>
+                </tr>
+                <tr>
+                    <td class="title">Lifealert</td>
+                    <td class="price">$95</td>
+                    <td>Included</td>
+                    <td class="na">Not Available</td>
+                    <td class="na">Not Available</td>
+                    <td class="na">Not Available</td>
+                    <td>$29.95</td>
+                </tr>
+                <tr>
+                    <td class="title">Medical Alert</td>
+                    <td class="price">$0</td>
+                    <td>Included</td>
+                    <td class="na">Not Available</td>
+                    <td class="na">Not Available</td>
+                    <td class="na">Not Available</td>
+                    <td>$29.95</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>
+<a id="faqs"></a>
+    <div class="big_wrapper" id="faq">
+      <div class="wrapper clearfix">
+        <h3>Frequently Asked Questions</h3>
+        <ul>
+          <li>
+            <div>
+              <a href="#">Does my local police department require that I have an alarm permit?</a>
+              <p>
+                Some police departments require that you have an alarm permit or at least just register with them so they know you have an alarm. In some cases, they will charge a fee for the permit. It is very important that you contact your local police department to find out if they require you to have a permit. In some cities, if you fail to secure the permit, the police will not allow us to dispatch them to your home in case of an alarm so make sure you contact your police right away.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What happens when my alarm system is triggered? How will the monitoring station respond?</a>
+              <p>When your alarm is triggered by a burglary protection device (door sensor, motion detector, etc), your system sends a signal to our monitoring facility. We will wait for 60 seconds to allow you the chance to enter your four-digit code. If you enter your code and disarm the system within 60 seconds, there will be no further response from the monitoring facility.<br><br>
+              If your alarm is triggered and you do not enter your four-digit code within 60 seconds, the Monitoring station will call your premise phone number on the account to ask for your verbal password and double check to see if it’s a false alarm. If you do not answer or if we do not get the correct password for any reason, we will dispatch local authorities to your home and then contact your emergency contact list.<br><br>
+              If your alarm system is triggered by a panic signal, the monitoring station will dispatch the police first, and then contact your emergency contact list.</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What happens at the end of my initial 36 month monitoring agreement?</a>
+              <p>
+                It's important to remember that your alarm monitoring service agreement is for 36 months. At the end of 36 months, the agreement will automatically switch to a month to month contract unless you provide at least a 30 days written notice before your renewal date.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Arm and Disarm my new alarm system?</a>
+              <p>You may arm the doors and windows while exiting by pressing "doors and windows” once on the panel. The alarm system will start beeping to inform you that the system is arming. Now you may exit.<br><br>
+              To arm your system using doors and windows with no ENTRY delay, press "Doors and windows" two times. This allows time to leave and will sound the alarm immediately if any sensors are tripped.<br><br>
+              To arm the system using doors, windows and motions: press "Doors and windows" one time and "Motions" one time. This will allow time to leave and also to return without causing a false alarm.<br><br>
+              To disarm your alarm system, type in your “master code” or “user code”.</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I send a panic signal?</a>
+              <p>
+                To send an Emergency, Fire or Police panic signal simply press and hold the appropriate button for 2 seconds, (Cross = Emergency, Fire = Fire, Police badge= Police).
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What is a “Duress code”?</a>
+              <p>
+                The “duress code” is a 4 digit code used in place of your master code when someone is forcing you to disarm your system. Using this code will disarm the alarm system and send a silent duress signal to the monitoring station.
+              </p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <a href="#">Why is it important to notify us about a change of the Phone or IP service provider?</a>
+              <p>Not all service providers are compatible with your alarm system.<br><br>
+              Some providers do not ensure that communication has been restored to your alarm system.<br><br>
+              It is very important to inform us before and after any changes so that we can confirm that the service provider is compatible, also so that we can test and confirm that your system is communicating.<p>
+            </div>
+          </li>
+        </ul>
+
+
+        <ul class="col2">
+          <li>
+            <div>
+              <a href="#">Why is it important to notify us about a future move?</a>
+              <p>Your system is wireless which makes it easy for you to take the existing equipment with you and set it up at the new location. The best part is we allow you to transfer your system and your service at no charge!<br><br>
+              Contact Customer CARE at 1(800)-951-5111 to request a relocation kit.<br><br>
+              The “Relocation Kit” includes extra Velcro and mounting tape for your sensors. Use these to mount the sensors securely in the new home. Contact us during the move to make this process simple.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Change the Master Code?</a>
+              <p>Open the cover.<br>
+              Using the red numbered keys enter the existing 4-digit Master Code. The panel will say, "Please select from Start Menu."<br><br>
+              Press the Add button. The panel will say, "Select from Main Menu."<br><br>
+              Press the Access Code button one time. The panel will say, "Master Code, press again for next Access Code or Done to select."<br><br>
+              Press the Done button. The Panel will say, "Use numbered keys to enter Master Code."<br><br>
+              Enter the new Master Code. The panel will repeat the new Master Code.<br><br>
+              Close the cover when completed.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Program Additional User Codes?</a>
+              <p>Note: System can have up to five access codes in addition to the Master Code.<br><br>
+
+        Open the cover.<br><br>
+        Using the red numbered keys enter the 4-digit Master Code. The panel will say, "Please select from Start Menu."<br><br>
+        Press Add. The panel will say, "Please select from Main Menu".<br><br>
+        Press Access Code. The panel will say, "Master Code press again for next Access Code or Done to select".<br><br>
+        Press Access Code again. The panel will say, "Access code 1 press again for next access code or Done to select".<br><br>
+        Press Done. The panel will say, "Use number keys to enter access code 1".<br><br>
+        Enter access code. The panel will repeat access code.<br><br>
+        Close the cover when completed.<br><br>
+
+              Note: For additional access codes repeat steps 1 through 5. At Step 3 continue pressing "Access Code" button until you hear the next available location, i.e. access code 2.</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">Why is testing your system important?</a>
+              <p>
+                We encourage you to test your system at least once a month to ensure that the system is functioning properly. Also try our new live chat feature for any questions or concerns, by visiting www.ProtectAmerica.com. Once you are on the website, click the “chat” option on the top of the page and chat with a representative instantly.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">What is the difference between the Master Code and a User Code?</a>
+              <p>The Master Code can be used to arm and disarm the system, add user codes, as well as change basic settings in the system programming.<br><br>
+              The user code (you can have up to 8 user codes in addition to the Master Code) can only be used to arm and disarm, (Ideal for Family members, Caretakers, cleaning staff…etc.).</p>
+            </div>
+          </li>
+
+          <li>
+            <div>
+              <a href="#">How do I Test My System?</a>
+              <p>
+                To ensure your GE wireless alarm monitoring system is communicating properly, an alarm will have to be sent to the alarm company monitoring station. Call the alarm company monitoring station to place your account on test; this is to prevent false alarms. The number to the alarm company monitoring station is 877-274-0604. Ask for Customer Care. The alarm company monitoring station will ask you to provide them with your name or the address where the system is located and your password. You will be able to place the account on test for one hour. After your account has been placed on test, please follow these steps.<br><br>
+
+                
+                Arm system by pressing the Arm Doors and Windows button twice.<br><br>
+                Press the Arm Motion button once.<br><br>
+                When the panel stops beeping, your exit delay has expired. The system is now armed.<br><br>
+                Now open an entry/exit door. When the alarm sounds close the door. Open and close all remaining entry/exit doors.<br><br>
+                With the alarm still sounding, open and close all remaining doors and window that are contacted.<br><br>
+                With the alarm still sounding, walk in front of the motion detector.<br><br>
+                With the alarm still sounding, open the panel cover until the panel starts talking. Close the cover. This will activate the panel tamper.<br><br>
+                Now press and hold the Emergency Aux button for three seconds.<br><br>
+                Now press and hold the Emergency Police button for three seconds.<br><br>
+                Repeat this step on the second Emergency Aux button as well.<br><br>
+
+                Reminder: The motion detector can only be activated once every four minutes. If you walked in front of the motion you will need to wait at least four minutes, while the alarm is still sounding, before the motion detector will detect you again.<br><br>
+                Disarm the system with the 4-digit Master Code. The System Status light will be on.<br><br>
+                Press System Status button. This will indicate which zones have been activated.<br><br>
+
+                Important Note: Listen carefully to make sure that all zones have been activated. Not all panics will be mentioned. Only the last panic pressed will be mentioned.<br><br>
+                If any zones are not mentioned, re-arm the system. Trip only those specific devices that were not indicated by the panel.<br><br>
+                Enter the 4-digit Master Code to disarm system.<br><br>
+                Press System Status button. This will indicate that each specific device has been activated.<br><br>
+
+                Special Note: Listen carefully again to make sure all zones are mentioned, including the zones that were not mentioned the first time that the System Status was checked.<br><br>
+                Now that all the signals for all zones have been verified press System Status. Immediately after the system stops talking, press the Disarm button to clear the alarm memory.<br><br>
+                If all zones are closed, the System Status light will now be off.<br><br>
+                Wait 3 to 4 minutes and call the alarm company monitoring station to verify the signals have been received.<br><br>
+                If the alarm company monitoring station received the signals, notify the operator to take your account off test. Your monthly system test is now complete.<br><br>
+                If the alarm company monitoring station did not receive the signals, call Technical Support at (800) 951-5111 option 2.
+
+              </p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    
+    <div class="clear"></div>
+</div>
+
+
+{% endblock %}
+{% block order-footer %}
+<div id="medical-order">
+    <div class="wrapper">
+        <div class="left-side">
+            <h2>Your Family's safety is important.</h2>
+            <p>Our security experts are ready to help:</p>
+            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><i class="icon-phone"></i> {{ phone_number|format_number }}</span></a>
+        </div>
+        <div class="right-side">
+            <a href="#" class="button-link">
+                Order Now <i class="icon-chevron-right"></i>
+            </a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+{% endblock %}
+{% block main-footer %}{% endblock %}
