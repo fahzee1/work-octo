@@ -300,15 +300,22 @@ def prepare_data_from_request(request):
 
     if agent is None:
         if agentid != 'HOMESITE' and source != 'PROTECT AMERICA':
+<<<<<<< HEAD
             '''
             send_error({
+=======
+            '''send_error({
+>>>>>>> offline-tracking
                     'agent': agentid,
                     'source': source,
                     'affkey': affkey, 
                 })
             '''
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> offline-tracking
     # we want to put the google experiment id if there is no affkey
     google_id = request.COOKIES.get('utm_expid', None)
     if affkey is None and google_id is not None:
@@ -378,6 +385,7 @@ def basic_post_login(request):
         
         formset.search_engine = request.session['search_engine']
         formset.search_keywords = searchkeywords
+<<<<<<< HEAD
         formset.form_values = f_values
         formset.trusted_url = trusted_url
         formset.ip_address = request.META.get('REMOTE_ADDR',None)
@@ -385,6 +393,16 @@ def basic_post_login(request):
         formset.browser = browser
         formset.operating_system = OS
         formset.device = device_name
+=======
+        try:
+            fdata['gclid']
+            formset.gclid = fdata['gclid']
+        except KeyError:
+            fdata['gclid'] = request.COOKIES.get('gclid',None)
+            if fdata['gclid']:
+                formset.gclid = fdata['gclid']
+
+>>>>>>> offline-tracking
         formset.save()
         request_data['lead_id'] = formset.id
         '''
@@ -422,10 +440,17 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
+<<<<<<< HEAD
         #post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         #send_leadimport(emaildata)
         if not settings.LEAD_TESTING and fdata['email']:
             send_caroline_thankyou(request,emaildata,request_data['agent'])
+=======
+        #send_leadimport(emaildata)
+        #send_thankyou(emaildata)
+        #send_caroline_thankyou(request,emaildata,request_data['agent'])
+        
+>>>>>>> offline-tracking
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)

@@ -263,6 +263,7 @@
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function() {
+<<<<<<< HEAD
 	var check = '{{ multiple }}';
 	if (check == 'True'){
 	    $("#review-cycle-container").cycle({
@@ -272,6 +273,16 @@ $(document).ready(function() {
 	}else{
 		$("#review-cycle-container .review").css('display','block');
 	}
+=======
+    $('.testimonials').cycle({
+        fx: 'fade',
+        timeout: 9000
+    });
+    $('body').css({
+        backgroundImage: 'url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg),url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-right.jpg)',
+        background: '#fff url({{ STATIC_URL }}img/local-pages/{{ pop_type|lower }}-{{ weather_info.icon }}-{{ background_time }}-left.jpg) left bottom fixed no-repeat\9',
+    });
+>>>>>>> offline-tracking
 });
 </script>
 {% endaddtoblock "js" %}

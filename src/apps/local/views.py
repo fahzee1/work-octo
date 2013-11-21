@@ -184,6 +184,20 @@ def local_page(request, state, city=None, keyword=None):
 
     response = render(request,'local-pages/index.html',crime_stats_ctx)
 
+    if keyword in dsettings.CUSTOM_KEYWORD_LIST:
+        response = render(request,'local-pages/%s.html', crime_stats_ctx) % keyword
+    elif keyword in dsettings.WIRELESS_KEYWORD_LIST:
+        response = render(request,'local-pages/wireless-home-security-systems.html',crime_stats_ctx)
+    elif keyword in dsettings.ADT_KEYWORD_LIST:
+        response = render(request,'landing-pages/adt.html',crime_stats_ctx)
+    else:        
+        response = render(request,'local-pages/index.html',crime_stats_ctx)
+
+    expire_time = datetime.timedelta(days=90)
+    response.set_cookie('affkey',
+                    value='%s:%s' % (city.replace(' ', ''), state),
+                    domain='.protectamerica.com',
+                    expires=datetime.datetime.now() + expire_time)
     return response
 
 
