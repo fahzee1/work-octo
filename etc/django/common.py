@@ -103,7 +103,7 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.LocalPageRedirect',
     'django.middleware.cache.FetchFromCacheMiddleware',
     #'apps.newsfeed.middleware.RenderNewsFeed',
-    'apps.newsfeed.middleware.GetGeoIp',
+    #'apps.newsfeed.middleware.GetGeoIp',
 )
 
 ROOT_URLCONF = 'urls'
