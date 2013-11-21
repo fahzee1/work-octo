@@ -97,6 +97,14 @@ class TestimonialSearchNode(template.Node):
               'testimonial': testimonial.message,
               'get_absolute_url': testimonial.get_absolute_url(),
               'date_created': testimonial.date_created})
+
+        if len(testimonial_array) > 1:
+            multiple = str(True)
+        else:
+            multiple = str(False)
+
+        context['multiple'] = multiple 
+
         t = template.loader.get_template('testimonials/testimonial_3.html')
         c = SekizaiContext({
             'testimonials': testimonial_array,

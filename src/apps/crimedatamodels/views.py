@@ -52,7 +52,7 @@ def query_weather(latitude, longitude, city, state):
     return weather_info
 
 
-def query_by_state_city(state, city=None, get_content=True,local=False):
+def query_by_state_city(state, city=None, get_content=True, local=False, freecrime=False):
     # validate city and state
     try:
         state = State.objects.get(abbreviation=state)
@@ -117,6 +117,22 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             city_crime_objs = CrimesByCity.objects.filter(
             fbi_city_name=city.city_name, fbi_state=state.abbreviation,year=2012)
             city_per100 = CityCrimeStats.objects.filter(city=city_crime_objs)
+
+            if freecrime:
+                crime_stats = {}
+                years = []
+                for crimesbycity in city_crime_objs:
+                    year = crimesbycity.year
+                    try:
+                        crime_stats[year] = {
+                            'stats': city_per100.get(year=year),
+                            'info': crimesbycity}
+                    except CityCrimeStats.DoesNotExist:
+                        pass
+                    years.append(year)
+
+                years.sort(reverse=True)
+
             try:
                 local_video = FeaturedVideo.objects.get(city=city)
             except FeaturedVideo.DoesNotExist:
@@ -132,7 +148,7 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             except CityCompetitor.DoesNotExist:
                 local_rival = None
 
-            reviews = Textimonial.objects.filter(city=city.city_name,state=state.abbreviation)
+            reviews = Textimonial.objects.filter(display=True,city=city.city_name,state=state.abbreviation).exclude(rating=0)
             if reviews:
                 total = reviews.count()
                 ratings_avg = reviews.aggregate(Avg('rating')).values()
@@ -140,8 +156,16 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
                 second_sum = first_sum + 4
                 final_sum = second_sum/(total+1)
             else:
-                total = 0
-                final_sum = 0
+                reviews = Textimonial.objects.filter(display=True,state=state.abbreviation).exclude(rating=0)
+                if reviews:
+                    total = reviews.count()
+                    ratings_avg = reviews.aggregate(Avg('rating')).values()
+                    first_sum = ratings_avg[0] * total
+                    second_sum = first_sum + 4
+                    final_sum = second_sum/(total+1)
+                else:
+                    total = 0
+                    final_sum = 0
 
             # Google Weather API
             #weather_info = query_weather(city.latitude, city.longitude,
@@ -151,6 +175,7 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             
             context = {
                    'crime_stats': (city_crime_objs[0] if city_crime_objs else None),
+                   '_crime_stats': (crime_stats if freecrime else None) ,
                    'city_per100k':(city_per100[0] if city_per100 else None),
                    'state': state.abbreviation,
                    'state_long': state.name,
@@ -162,7 +187,8 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
                    'city_id': city_id,
                    'local_video':local_video,
                    'local_icon':local_icon,
-                   'local_rival':local_rival
+                   'local_rival':local_rival,
+                   'years':(years if freecrime else None)
                 }
              
             try:
@@ -181,7 +207,7 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
     if not city:
         state_per100 = StateCrimeStats.objects.filter(year=2012,state=state)
         #this powers the 'rated 4 out of 5 stars customer reviews' part on local page
-        reviews = Textimonial.objects.filter(state=state.abbreviation)
+        reviews = Textimonial.objects.filter(display=True,state=state.abbreviation).exclude(rating=0)
         if reviews:
             total = reviews.count()
             ratings_avg = reviews.aggregate(Avg('rating')).values()
@@ -192,22 +218,8 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
             total = 0
             final_sum = 0
 
+
         '''
-        crime_stats = {}
-        years = []
-        for crimesbycity in city_crime_objs:
-            year = crimesbycity.year
-            try:
-                crime_stats[year] = {
-                    'stats': CityCrimeStats.objects.get(year=year,
-                        city=crimesbycity),
-                    'info': crimesbycity}
-            except CityCrimeStats.DoesNotExist:
-                pass
-            years.append(year)
-
-        years.sort(reverse=True)
-
         if city_crime_objs:
             # get population type
             if crimesbycity.population <= 40000:
@@ -235,7 +247,8 @@ def query_by_state_city(state, city=None, get_content=True,local=False):
                    'state_long': state.name,
                    'state_per100': (state_per100[0] if state_per100 else None),
                    'review_avg':final_sum,
-                   'review_total':total}
+                   'review_total':total,
+                   }
 
     context.update({'review_avg':final_sum,
                    'review_total':total})
@@ -459,8 +472,8 @@ def local(request, state, city):
         city=city.replace('(','').replace(')','')
     if ',' in city:
         city=city.replace(',','')
-    data = query_by_state_city(state, city, get_content=False,local=True)
-    data['cs_years'] = [(year, data['crime_stats'][year]) for year in data['years']]
+    data = query_by_state_city(state, city, get_content=False,local=True,freecrime=True)
+    data['cs_years'] = [(year, data['_crime_stats'][year]) for year in data['years']]
 
     forms = {}
     forms['basic'] = PAContactForm()
