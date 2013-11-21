@@ -407,6 +407,11 @@ class FeaturedIcon(FeaturedCommon):
 
 class CityCompetitor(FeaturedCommon):
     rival = models.CharField(max_length=255)
+    color_hex = models.CharField(max_length=255)
+    install = models.DecimalField()
+    year1 = models.IntegerField()
+    year2 = models.IntegerField()
+    year3 = models.IntegerField()
 
     def __unicode__(self):
         return "%s Competitor: %s" %(self.city.city_name,self.rival)
