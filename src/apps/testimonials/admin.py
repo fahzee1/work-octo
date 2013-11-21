@@ -10,4 +10,5 @@ admin.site.register(Vidimonial, VidimonialAdmin)
 class TextimonialAdmin(admin.ModelAdmin):
     model = Textimonial
     search_fields = ['message']
+    list_filter = ('state',)
 admin.site.register(Textimonial, TextimonialAdmin)

@@ -300,14 +300,11 @@ def prepare_data_from_request(request):
 
     if agent is None:
         if agentid != 'HOMESITE' and source != 'PROTECT AMERICA':
-            '''
             send_error({
                     'agent': agentid,
                     'source': source,
                     'affkey': affkey, 
                 })
-            '''
-
 
     # we want to put the google experiment id if there is no affkey
     google_id = request.COOKIES.get('utm_expid', None)
@@ -385,6 +382,13 @@ def basic_post_login(request):
         formset.browser = browser
         formset.operating_system = OS
         formset.device = device_name
+        try:
+            fdata['gclid']
+            formset.gclid = fdata['gclid']
+        except KeyError:
+            fdata['gclid'] = request.COOKIES.get('gclid',None)
+            if fdata['gclid']:
+                formset.gclid = fdata['gclid']
         formset.save()
         request_data['lead_id'] = formset.id
         '''
@@ -422,6 +426,7 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
+
         #post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         #send_leadimport(emaildata)
         if not settings.LEAD_TESTING and fdata['email']:

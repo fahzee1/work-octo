@@ -197,9 +197,13 @@ class ContentSpinnerNode(template.Node):
         path = request.META['PATH_INFO'].rstrip('/').lstrip('/')
         #split up url and check if city and state or just state
         chop_up = path.split('/')
+        local = (True if chop_up[0] == 'home-security' else False)
         if len(chop_up) == 3:
             #city and state present (city state page)
-            state, city = chop_up[1], chop_up[2]
+            if local:
+                state, city = chop_up[1], chop_up[2]
+            else:
+                state , city = chop_up[0], chop_up[1]
             if '.' in city:
                 f,l = city.split('.')
                 city = f+ '.'+' '+l
@@ -209,9 +213,11 @@ class ContentSpinnerNode(template.Node):
                     city = f+'.'+' '+l
                 else:
                     city = city.replace('-',' ')
+
         if len(chop_up) == 2:
             #just state present (state page)
             state = chop_up[1]
+
         statecode = get_statecode(state)
         #if city is present json file will be state/city.json else state/state.json
         json_file = (statecode+'/'+city.title()+'.json' if city else statecode+'/'+state.title()+'.json')

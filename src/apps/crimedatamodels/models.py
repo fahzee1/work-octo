@@ -392,7 +392,7 @@ class FeaturedCommon(models.Model):
         abstract = True
     
 class FeaturedVideo(FeaturedCommon):
-    video_embed = models.CharField(max_length=255,blank=True,null=True)
+    video_embed = models.TextField(blank=True,null=True)
 
     def __unicode__(self):
         return "%s's video " % self.city.city_name

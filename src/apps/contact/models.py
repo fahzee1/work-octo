@@ -93,6 +93,7 @@ class Lead(models.Model):
     agent_id = models.CharField(max_length=24, blank=True, null=True)
     source = models.CharField(max_length=64, blank=True, null=True)
     affkey = models.CharField(max_length=64, blank=True, null=True)
+    gclid = models.CharField(max_length=255, blank=True, null=True)
 
     search_engine = models.CharField(max_length=128, blank=True, null=True)
     search_keywords = models.CharField(max_length=128, blank=True, null=True)
