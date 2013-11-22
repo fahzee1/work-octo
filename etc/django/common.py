@@ -103,7 +103,7 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.LocalPageRedirect',
     'django.middleware.cache.FetchFromCacheMiddleware',
     #'apps.newsfeed.middleware.RenderNewsFeed',
-    'apps.newsfeed.middleware.GetGeoIp',
+    #'apps.newsfeed.middleware.GetGeoIp',
 )
 
 ROOT_URLCONF = 'urls'
@@ -335,5 +335,5 @@ elif os.path.isdir('/Users/rylanfrancis'):
 elif os.path.isdir('/Users/edgarrodriguez'):
     LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 else:
-    pass
+    LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
 

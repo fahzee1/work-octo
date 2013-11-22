@@ -32,7 +32,7 @@ class PAContactForm(ModelForm):
 class LeadForm(ModelForm):
     class Meta:
         model = Lead
-        fields = ('name', 'email', 'phone')
+        fields = ('name', 'email', 'phone','gclid')
         widgets = {
                 'name': TextInput(attrs={'placeholder':'Name'}),
                 'email': TextInput(attrs={'placeholder':'Email'}),

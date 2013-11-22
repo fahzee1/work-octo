@@ -8,20 +8,14 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Deleting field 'FeaturedVideo.height'
-        db.delete_column('crimedatamodels_featuredvideo', 'height')
-
-        # Deleting field 'FeaturedVideo.width'
-        db.delete_column('crimedatamodels_featuredvideo', 'width')
+        # Changing field 'FeaturedVideo.video_embed'
+        db.alter_column('crimedatamodels_featuredvideo', 'video_embed', self.gf('django.db.models.fields.TextField')(null=True))
 
 
     def backwards(self, orm):
         
-        # Adding field 'FeaturedVideo.height'
-        db.add_column('crimedatamodels_featuredvideo', 'height', self.gf('django.db.models.fields.IntegerField')(default='', max_length=4), keep_default=False)
-
-        # Adding field 'FeaturedVideo.width'
-        db.add_column('crimedatamodels_featuredvideo', 'width', self.gf('django.db.models.fields.IntegerField')(default='', max_length=4), keep_default=False)
+        # Changing field 'FeaturedVideo.video_embed'
+        db.alter_column('crimedatamodels_featuredvideo', 'video_embed', self.gf('django.db.models.fields.CharField')(max_length=255, null=True))
 
 
     models = {
@@ -106,7 +100,7 @@ class Migration(SchemaMigration):
             'city': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.CityLocation']"}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'video_embed': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
+            'video_embed': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
         },
         'crimedatamodels.localaddress': {
             'Meta': {'object_name': 'LocalAddress'},
