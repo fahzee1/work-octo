@@ -10,15 +10,19 @@ from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 from django.conf import settings
 from apps.contact.models import GoogleExperiment, Lead
-from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm, 
+from apps.contact.forms import (PAContactForm, ContactUsForm, OrderForm,
     CeoFeedbackForm, MovingKitForm, TellAFriendForm, DoNotCallForm, LeadForm, PayItForwardForm)
 from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
+
+
+
 render_to_string = loader.render_to_string
 TimeoutError = requests.exceptions.Timeout
 from requests.exceptions import SSLError
@@ -84,7 +88,7 @@ def post_to_leadconduit(data,test=False,retry=False):
     try:
         logger.info('Starting request to lead conduit... (lead id = %s)' % data['lead_id'])
         xml_request = requests.post('https://app.leadconduit.com/v2/PostLeadAction',params=params,timeout=10)
-        if xml_request.status_code == 200: 
+        if xml_request.status_code == 200:
             logger.info('Status code is %s.' % xml_request.status_code)
             reasons_list = []
             root = ET.fromstring(xml_request.content)
@@ -148,7 +152,7 @@ def post_to_leadconduit(data,test=False,retry=False):
                         'params':params.items()}
                 send_conduit_error(data,test=settings.LEAD_TESTING)
 
-                    
+
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
             #retry request, email lead, log to console
             logger.error('NO! Status Code is %s. Should retry request. Sending email to notify' % xml_request.status_code)
@@ -156,8 +160,8 @@ def post_to_leadconduit(data,test=False,retry=False):
                 lead.retry = True
                 lead.save()
             send_conduit_error(data,test=settings.LEAD_TESTING)
-           
-         
+
+
         elif xml_request.status_code != 502 or xml_request.status_code != 503 or xml_request.status_code != 504 or xml_request.status_code != 200:
             logger.error('NO! Status Code is %s. Something bad happened notify activeprospect' % xml_request.status_code)
             # report to support@activeprospect.com
@@ -221,7 +225,7 @@ def send_thankyou(data):
     return True
 
 def send_caroline_thankyou(request,data,agent):
-    phone =settings.DEFAULT_PHONE 
+    phone =settings.DEFAULT_PHONE
     if 'phone' in request.GET:
         data['pa_phone'] = request.GET['phone']
     elif agent is not None and agent.phone:
@@ -267,11 +271,11 @@ def prepare_data_from_request(request):
         source = request.session.get('source', None)
     if not source and 'source' in request.POST:
         source = request.POST['source']
-    
+
     lead_id = request.COOKIES.get('lead_id', None)
     if lead_id is None:
         lead_id = request.session.get('lead_id', None)
-    
+
     # get the aff from the database
     try:
         agent = Affiliate.objects.get(agent_id=agentid)
@@ -303,7 +307,7 @@ def prepare_data_from_request(request):
             send_error({
                     'agent': agentid,
                     'source': source,
-                    'affkey': affkey, 
+                    'affkey': affkey,
                 })
 
     # we want to put the google experiment id if there is no affkey
@@ -333,7 +337,7 @@ def device_type(request,device):
     if device == 'm':
         device = 'mobile'
         request.COOKIES['device'] = device
-        request.session['device'] = device 
+        request.session['device'] = device
     if device == 't':
         device = 'tablet'
     if device == 'd' or device == 'c':
@@ -344,14 +348,14 @@ def device_type(request,device):
 
 
 def basic_post_login(request):
-    # url for Trusted Form 
+    # url for Trusted Form
     trusted_url = request.POST.get('trusted_form',None)
     f_values = request.POST.get('form_values',None)
     browser = request.META.get('HTTP_USER_AGENT',None)
     OS = request.POST.get('operating_system',None)
     device_letter = request.POST.get('device',None)
     device_name = device_type(request,device_letter)
-    lead_data = {'trusted_url': trusted_url}          
+    lead_data = {'trusted_url': trusted_url}
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
@@ -372,7 +376,7 @@ def basic_post_login(request):
         cikw = request.COOKIES.get('cikw', None)
         if searchkeywords is None and cikw is not None:
             searchkeywords = cikw
-        
+
         formset.search_engine = request.session['search_engine']
         formset.search_keywords = searchkeywords
         formset.form_values = f_values
@@ -436,6 +440,14 @@ def basic_post_login(request):
     return (form, False)
 
 
+@csrf_exempt
+def ajax_post_unprotected(*args, **kwargs):
+    return ajax_post(*args, **kwargs)
+
+def ajax_post_protected(*args, **kwargs):
+    return ajax_post(*args, **kwargs)
+
+
 def ajax_post(request):
     if request.method != "POST":
         return HttpResponseRedirect('/')
@@ -462,12 +474,12 @@ def ajax_post(request):
             expires=datetime.now() + expire_time)
         return response
     return HttpResponseBadRequest()
-    
 
-  
+
+
 
 def post(request):
-    
+
     if request.method == "POST":
         formset = PAContactForm(request.POST)
         if formset.is_valid():
@@ -497,7 +509,7 @@ def main(request):
                                'formset': formset,
                                'forms': forms,
                                'pages': ['contact-us'],
-                               'page_name': 'contact-us'}) 
+                               'page_name': 'contact-us'})
 
 # This is the send feedback to CEO form
 def ceo(request):
@@ -562,7 +574,7 @@ def tell_a_friend(request):
 
 def order_form(request):
     if request.method == "POST":
-        formset, success = basic_post_login(request)         
+        formset, success = basic_post_login(request)
         if success:
             return HttpResponseRedirect('http://www.protectamerica.com%s' % formset.thank_you_url)
     else:
@@ -581,7 +593,7 @@ def order_form(request):
 
 def order_form_ca(request):
     if request.method == "POST":
-        formset, success = basic_post_login(request)         
+        formset, success = basic_post_login(request)
         if success:
             return HttpResponseRedirect('http://www.protectamericasecurity.ca%s' % formset.thank_you_url)
     else:
