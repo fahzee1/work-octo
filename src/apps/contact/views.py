@@ -442,16 +442,13 @@ def basic_post_login(request):
 
 @csrf_exempt
 def ajax_post_unprotected(*args, **kwargs):
-    print "GOT AJAX POST UNPROTECTED"
     return ajax_post(*args, **kwargs)
 
 def ajax_post_protected(*args, **kwargs):
-    print "GOT AJAX POST PROTECTED"
     return ajax_post(*args, **kwargs)
 
 
 def ajax_post(request):
-    print "GOT AJAX POST"
     if request.method != "POST":
         return HttpResponseRedirect('/')
 
