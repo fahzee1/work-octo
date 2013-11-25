@@ -10,6 +10,7 @@ from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.template import RequestContext, loader, Context
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 from django.conf import settings
 from apps.contact.models import GoogleExperiment, Lead
@@ -19,6 +20,9 @@ from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
+
+
+
 render_to_string = loader.render_to_string
 TimeoutError = requests.exceptions.Timeout
 from requests.exceptions import SSLError
@@ -438,13 +442,16 @@ def basic_post_login(request):
 
 @csrf_exempt
 def ajax_post_unprotected(*args, **kwargs):
+    print "GOT AJAX POST UNPROTECTED"
     return ajax_post(*args, **kwargs)
 
 def ajax_post_protected(*args, **kwargs):
+    print "GOT AJAX POST PROTECTED"
     return ajax_post(*args, **kwargs)
 
 
 def ajax_post(request):
+    print "GOT AJAX POST"
     if request.method != "POST":
         return HttpResponseRedirect('/')
 
