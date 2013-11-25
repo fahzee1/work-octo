@@ -3,16 +3,14 @@
 {% block content %}
 <div class="row">
     <div class="span4">
-        sdf
-    </div>
-    <div class="span4">
         <h3> <i class="icon-bullhorn"></i> Recent ProtectAmerica.com Changes </h3>
         <hr/>
         <ul class="unstyled">
+    {% if change_list %}
         {% for change in change_list %}
             <li style="margin-bottom: 8px;">
                 <div style="float:left;">
-                    <img src="{{ change.author_pic }}" class="thumbnail" />
+                    <img src="{{ change.author_pic }}" class="thumbnail" height="50px" width="40px"/>
                 </div>
                 <div style="margin-left: 48px;">
                    {{ change.date|date:"m-d-Y" }}<br/> <strong>{{ change.title }}</strong> 
@@ -20,6 +18,11 @@
                 <div style="clear:both;"></div>
             </li>
         {% endfor %}
+    {% else %}
+                <div style="margin-left: 48px;">
+                   <h1>No recent changes</h1>
+                </div>
+    {% endif %}
         </ul>
     </div>
 </div>

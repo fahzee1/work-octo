@@ -6,6 +6,7 @@ TEMPLATE_PAGES = (
     ('index', 'index.html'),
     ('test', 'test.html'),
     ('call', 'green-phone.html'),
+    ('lp2', 'lp2.html'),
 
 
 

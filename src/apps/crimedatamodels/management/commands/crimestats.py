@@ -61,7 +61,7 @@ def compute_all_state_stats_for_all_years():
     for year in all_years:
         compute_all_state_stats_for_year(year)
 
-@transaction.commit_manually
+#@transaction.commit_manually
 def save_state_stats(all_states_stats):
     for state_stats in all_states_stats:
         print "Saving %s %s" % (state_stats.state.name, state_stats.year)
@@ -208,7 +208,7 @@ def rylans_algorithm_a(rank_per100k_field, crimes_for_all_cities,
         for city in cities:
             setattr(city, grade_field, grade)
 
-@transaction.commit_manually
+#@transaction.commit_manually
 def save_ranks(ranks_for_all_cities):
     for rank in ranks_for_all_cities.values():
         print "Saving", rank.city.year, rank.city.fbi_city_name, \

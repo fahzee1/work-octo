@@ -1,0 +1,554 @@
+@charset "UTF-8";
+/************************************
+*   Reset                           *
+************************************/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+:focus {
+  outline: 0;
+}
+body {
+  line-height: 1;
+  color: #000;
+  background: #ffffff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+}
+blockquote,
+q {
+  quotes: "" "";
+}
+.container_full {
+  overflow: hidden;
+  width: 100%;
+}
+.padding_10 {
+  padding: 10px;
+}
+.center {
+  text-align: center;
+}
+.absolute {
+  position: absolute!important;
+}
+.relative {
+  position: relative!important;
+}
+.text-center {
+  text-align: center;
+}
+.float_left {
+  float: left;
+}
+.clear {
+  clear: both;
+  height: 0;
+  line-height: 0;
+}
+/********** Color Selection ***********/
+/* In place of black, PA uses a very dark grey. */
+/********** Mix-ins ***********/
+.fade-slow {
+  -webkit-transition: background-color 0.7s ease-out;
+  -moz-transition: background-color 0.7s ease-out;
+  transition: background-color 0.7s ease-out;
+}
+.fade-fast {
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
+}
+img.image-break {
+  left: -150px;
+  position: absolute;
+  z-index: -50;
+}
+.image-break-ribbon {
+  position: absolute;
+  right: -145px;
+  top: 0px;
+  z-index: -50;
+}
+.absolute {
+  position: absolute;
+  z-index: -50;
+}
+.flood-left {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -50;
+}
+.flood-right {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -50;
+}
+strong {
+  font-weight: bold;
+}
+#hero-wrapper {
+  background: #0069aa url(/static/img/affiliates/sem-landing-page/rep/mobile-hero-backdrop.jpg) right 55px no-repeat;
+  height: 350px;
+}
+#hero-wrapper ul li {
+  font-size: 12px;
+  line-height: 16px;
+}
+#hero-wrapper .price-tag {
+  top: 8px;
+  right: 8px;
+}
+#advantages #home-security-package-choices #home-security-packages #copper-security-package .package-info ul,
+#security-packages #home-security-package-choices #home-security-packages #copper-security-package .package-info ul,
+#sets-apart #home-security-package-choices #home-security-packages #copper-security-package .package-info ul,
+#customer-testimonials #home-security-package-choices #home-security-packages #copper-security-package .package-info ul,
+#advantages #home-security-package-choices #home-security-packages #bronze-security-package .package-info ul,
+#security-packages #home-security-package-choices #home-security-packages #bronze-security-package .package-info ul,
+#sets-apart #home-security-package-choices #home-security-packages #bronze-security-package .package-info ul,
+#customer-testimonials #home-security-package-choices #home-security-packages #bronze-security-package .package-info ul,
+#advantages #home-security-package-choices #home-security-packages #silver-security-package .package-info ul,
+#security-packages #home-security-package-choices #home-security-packages #silver-security-package .package-info ul,
+#sets-apart #home-security-package-choices #home-security-packages #silver-security-package .package-info ul,
+#customer-testimonials #home-security-package-choices #home-security-packages #silver-security-package .package-info ul,
+#advantages #home-security-package-choices #home-security-packages #gold-security-package .package-info ul,
+#security-packages #home-security-package-choices #home-security-packages #gold-security-package .package-info ul,
+#sets-apart #home-security-package-choices #home-security-packages #gold-security-package .package-info ul,
+#customer-testimonials #home-security-package-choices #home-security-packages #gold-security-package .package-info ul,
+#advantages #home-security-package-choices #home-security-packages #platinum-security-package .package-info ul,
+#security-packages #home-security-package-choices #home-security-packages #platinum-security-package .package-info ul,
+#sets-apart #home-security-package-choices #home-security-packages #platinum-security-package .package-info ul,
+#customer-testimonials #home-security-package-choices #home-security-packages #platinum-security-package .package-info ul {
+  padding: 19px 0px;
+  height: 67px;
+}
+#advantages #order-reassurance #lowest-price-guaranteed,
+#security-packages #order-reassurance #lowest-price-guaranteed,
+#sets-apart #order-reassurance #lowest-price-guaranteed,
+#customer-testimonials #order-reassurance #lowest-price-guaranteed,
+#advantages #alarm-monitoring-options #lowest-price-guaranteed,
+#security-packages #alarm-monitoring-options #lowest-price-guaranteed,
+#sets-apart #alarm-monitoring-options #lowest-price-guaranteed,
+#customer-testimonials #alarm-monitoring-options #lowest-price-guaranteed,
+#advantages #order-reassurance #lifetime-warranty,
+#security-packages #order-reassurance #lifetime-warranty,
+#sets-apart #order-reassurance #lifetime-warranty,
+#customer-testimonials #order-reassurance #lifetime-warranty,
+#advantages #alarm-monitoring-options #lifetime-warranty,
+#security-packages #alarm-monitoring-options #lifetime-warranty,
+#sets-apart #alarm-monitoring-options #lifetime-warranty,
+#customer-testimonials #alarm-monitoring-options #lifetime-warranty,
+#advantages #order-reassurance #homeowner-insurance-discount,
+#security-packages #order-reassurance #homeowner-insurance-discount,
+#sets-apart #order-reassurance #homeowner-insurance-discount,
+#customer-testimonials #order-reassurance #homeowner-insurance-discount,
+#advantages #alarm-monitoring-options #homeowner-insurance-discount,
+#security-packages #alarm-monitoring-options #homeowner-insurance-discount,
+#sets-apart #alarm-monitoring-options #homeowner-insurance-discount,
+#customer-testimonials #alarm-monitoring-options #homeowner-insurance-discount,
+#advantages #order-reassurance #relocation-kit,
+#security-packages #order-reassurance #relocation-kit,
+#sets-apart #order-reassurance #relocation-kit,
+#customer-testimonials #order-reassurance #relocation-kit,
+#advantages #alarm-monitoring-options #relocation-kit,
+#security-packages #alarm-monitoring-options #relocation-kit,
+#sets-apart #alarm-monitoring-options #relocation-kit,
+#customer-testimonials #alarm-monitoring-options #relocation-kit,
+#advantages #order-reassurance #free-tech-support,
+#security-packages #order-reassurance #free-tech-support,
+#sets-apart #order-reassurance #free-tech-support,
+#customer-testimonials #order-reassurance #free-tech-support,
+#advantages #alarm-monitoring-options #free-tech-support,
+#security-packages #alarm-monitoring-options #free-tech-support,
+#sets-apart #alarm-monitoring-options #free-tech-support,
+#customer-testimonials #alarm-monitoring-options #free-tech-support,
+#advantages #order-reassurance #cellular-monitoring-option,
+#security-packages #order-reassurance #cellular-monitoring-option,
+#sets-apart #order-reassurance #cellular-monitoring-option,
+#customer-testimonials #order-reassurance #cellular-monitoring-option,
+#advantages #alarm-monitoring-options #cellular-monitoring-option,
+#security-packages #alarm-monitoring-options #cellular-monitoring-option,
+#sets-apart #alarm-monitoring-options #cellular-monitoring-option,
+#customer-testimonials #alarm-monitoring-options #cellular-monitoring-option,
+#advantages #order-reassurance #broadband-monitoring-option,
+#security-packages #order-reassurance #broadband-monitoring-option,
+#sets-apart #order-reassurance #broadband-monitoring-option,
+#customer-testimonials #order-reassurance #broadband-monitoring-option,
+#advantages #alarm-monitoring-options #broadband-monitoring-option,
+#security-packages #alarm-monitoring-options #broadband-monitoring-option,
+#sets-apart #alarm-monitoring-options #broadband-monitoring-option,
+#customer-testimonials #alarm-monitoring-options #broadband-monitoring-option,
+#advantages #order-reassurance #landline-monitoring-option,
+#security-packages #order-reassurance #landline-monitoring-option,
+#sets-apart #order-reassurance #landline-monitoring-option,
+#customer-testimonials #order-reassurance #landline-monitoring-option,
+#advantages #alarm-monitoring-options #landline-monitoring-option,
+#security-packages #alarm-monitoring-options #landline-monitoring-option,
+#sets-apart #alarm-monitoring-options #landline-monitoring-option,
+#customer-testimonials #alarm-monitoring-options #landline-monitoring-option {
+  margin-bottom: 16px;
+}
+#advantages #order-reassurance #lowest-price-guaranteed img,
+#security-packages #order-reassurance #lowest-price-guaranteed img,
+#sets-apart #order-reassurance #lowest-price-guaranteed img,
+#customer-testimonials #order-reassurance #lowest-price-guaranteed img,
+#advantages #alarm-monitoring-options #lowest-price-guaranteed img,
+#security-packages #alarm-monitoring-options #lowest-price-guaranteed img,
+#sets-apart #alarm-monitoring-options #lowest-price-guaranteed img,
+#customer-testimonials #alarm-monitoring-options #lowest-price-guaranteed img,
+#advantages #order-reassurance #lifetime-warranty img,
+#security-packages #order-reassurance #lifetime-warranty img,
+#sets-apart #order-reassurance #lifetime-warranty img,
+#customer-testimonials #order-reassurance #lifetime-warranty img,
+#advantages #alarm-monitoring-options #lifetime-warranty img,
+#security-packages #alarm-monitoring-options #lifetime-warranty img,
+#sets-apart #alarm-monitoring-options #lifetime-warranty img,
+#customer-testimonials #alarm-monitoring-options #lifetime-warranty img,
+#advantages #order-reassurance #homeowner-insurance-discount img,
+#security-packages #order-reassurance #homeowner-insurance-discount img,
+#sets-apart #order-reassurance #homeowner-insurance-discount img,
+#customer-testimonials #order-reassurance #homeowner-insurance-discount img,
+#advantages #alarm-monitoring-options #homeowner-insurance-discount img,
+#security-packages #alarm-monitoring-options #homeowner-insurance-discount img,
+#sets-apart #alarm-monitoring-options #homeowner-insurance-discount img,
+#customer-testimonials #alarm-monitoring-options #homeowner-insurance-discount img,
+#advantages #order-reassurance #relocation-kit img,
+#security-packages #order-reassurance #relocation-kit img,
+#sets-apart #order-reassurance #relocation-kit img,
+#customer-testimonials #order-reassurance #relocation-kit img,
+#advantages #alarm-monitoring-options #relocation-kit img,
+#security-packages #alarm-monitoring-options #relocation-kit img,
+#sets-apart #alarm-monitoring-options #relocation-kit img,
+#customer-testimonials #alarm-monitoring-options #relocation-kit img,
+#advantages #order-reassurance #free-tech-support img,
+#security-packages #order-reassurance #free-tech-support img,
+#sets-apart #order-reassurance #free-tech-support img,
+#customer-testimonials #order-reassurance #free-tech-support img,
+#advantages #alarm-monitoring-options #free-tech-support img,
+#security-packages #alarm-monitoring-options #free-tech-support img,
+#sets-apart #alarm-monitoring-options #free-tech-support img,
+#customer-testimonials #alarm-monitoring-options #free-tech-support img,
+#advantages #order-reassurance #cellular-monitoring-option img,
+#security-packages #order-reassurance #cellular-monitoring-option img,
+#sets-apart #order-reassurance #cellular-monitoring-option img,
+#customer-testimonials #order-reassurance #cellular-monitoring-option img,
+#advantages #alarm-monitoring-options #cellular-monitoring-option img,
+#security-packages #alarm-monitoring-options #cellular-monitoring-option img,
+#sets-apart #alarm-monitoring-options #cellular-monitoring-option img,
+#customer-testimonials #alarm-monitoring-options #cellular-monitoring-option img,
+#advantages #order-reassurance #broadband-monitoring-option img,
+#security-packages #order-reassurance #broadband-monitoring-option img,
+#sets-apart #order-reassurance #broadband-monitoring-option img,
+#customer-testimonials #order-reassurance #broadband-monitoring-option img,
+#advantages #alarm-monitoring-options #broadband-monitoring-option img,
+#security-packages #alarm-monitoring-options #broadband-monitoring-option img,
+#sets-apart #alarm-monitoring-options #broadband-monitoring-option img,
+#customer-testimonials #alarm-monitoring-options #broadband-monitoring-option img,
+#advantages #order-reassurance #landline-monitoring-option img,
+#security-packages #order-reassurance #landline-monitoring-option img,
+#sets-apart #order-reassurance #landline-monitoring-option img,
+#customer-testimonials #order-reassurance #landline-monitoring-option img,
+#advantages #alarm-monitoring-options #landline-monitoring-option img,
+#security-packages #alarm-monitoring-options #landline-monitoring-option img,
+#sets-apart #alarm-monitoring-options #landline-monitoring-option img,
+#customer-testimonials #alarm-monitoring-options #landline-monitoring-option img {
+  width: 100px;
+  margin-right: 16px;
+}
+#advantages #order-reassurance #lowest-price-guaranteed .text,
+#security-packages #order-reassurance #lowest-price-guaranteed .text,
+#sets-apart #order-reassurance #lowest-price-guaranteed .text,
+#customer-testimonials #order-reassurance #lowest-price-guaranteed .text,
+#advantages #alarm-monitoring-options #lowest-price-guaranteed .text,
+#security-packages #alarm-monitoring-options #lowest-price-guaranteed .text,
+#sets-apart #alarm-monitoring-options #lowest-price-guaranteed .text,
+#customer-testimonials #alarm-monitoring-options #lowest-price-guaranteed .text,
+#advantages #order-reassurance #lifetime-warranty .text,
+#security-packages #order-reassurance #lifetime-warranty .text,
+#sets-apart #order-reassurance #lifetime-warranty .text,
+#customer-testimonials #order-reassurance #lifetime-warranty .text,
+#advantages #alarm-monitoring-options #lifetime-warranty .text,
+#security-packages #alarm-monitoring-options #lifetime-warranty .text,
+#sets-apart #alarm-monitoring-options #lifetime-warranty .text,
+#customer-testimonials #alarm-monitoring-options #lifetime-warranty .text,
+#advantages #order-reassurance #homeowner-insurance-discount .text,
+#security-packages #order-reassurance #homeowner-insurance-discount .text,
+#sets-apart #order-reassurance #homeowner-insurance-discount .text,
+#customer-testimonials #order-reassurance #homeowner-insurance-discount .text,
+#advantages #alarm-monitoring-options #homeowner-insurance-discount .text,
+#security-packages #alarm-monitoring-options #homeowner-insurance-discount .text,
+#sets-apart #alarm-monitoring-options #homeowner-insurance-discount .text,
+#customer-testimonials #alarm-monitoring-options #homeowner-insurance-discount .text,
+#advantages #order-reassurance #relocation-kit .text,
+#security-packages #order-reassurance #relocation-kit .text,
+#sets-apart #order-reassurance #relocation-kit .text,
+#customer-testimonials #order-reassurance #relocation-kit .text,
+#advantages #alarm-monitoring-options #relocation-kit .text,
+#security-packages #alarm-monitoring-options #relocation-kit .text,
+#sets-apart #alarm-monitoring-options #relocation-kit .text,
+#customer-testimonials #alarm-monitoring-options #relocation-kit .text,
+#advantages #order-reassurance #free-tech-support .text,
+#security-packages #order-reassurance #free-tech-support .text,
+#sets-apart #order-reassurance #free-tech-support .text,
+#customer-testimonials #order-reassurance #free-tech-support .text,
+#advantages #alarm-monitoring-options #free-tech-support .text,
+#security-packages #alarm-monitoring-options #free-tech-support .text,
+#sets-apart #alarm-monitoring-options #free-tech-support .text,
+#customer-testimonials #alarm-monitoring-options #free-tech-support .text,
+#advantages #order-reassurance #cellular-monitoring-option .text,
+#security-packages #order-reassurance #cellular-monitoring-option .text,
+#sets-apart #order-reassurance #cellular-monitoring-option .text,
+#customer-testimonials #order-reassurance #cellular-monitoring-option .text,
+#advantages #alarm-monitoring-options #cellular-monitoring-option .text,
+#security-packages #alarm-monitoring-options #cellular-monitoring-option .text,
+#sets-apart #alarm-monitoring-options #cellular-monitoring-option .text,
+#customer-testimonials #alarm-monitoring-options #cellular-monitoring-option .text,
+#advantages #order-reassurance #broadband-monitoring-option .text,
+#security-packages #order-reassurance #broadband-monitoring-option .text,
+#sets-apart #order-reassurance #broadband-monitoring-option .text,
+#customer-testimonials #order-reassurance #broadband-monitoring-option .text,
+#advantages #alarm-monitoring-options #broadband-monitoring-option .text,
+#security-packages #alarm-monitoring-options #broadband-monitoring-option .text,
+#sets-apart #alarm-monitoring-options #broadband-monitoring-option .text,
+#customer-testimonials #alarm-monitoring-options #broadband-monitoring-option .text,
+#advantages #order-reassurance #landline-monitoring-option .text,
+#security-packages #order-reassurance #landline-monitoring-option .text,
+#sets-apart #order-reassurance #landline-monitoring-option .text,
+#customer-testimonials #order-reassurance #landline-monitoring-option .text,
+#advantages #alarm-monitoring-options #landline-monitoring-option .text,
+#security-packages #alarm-monitoring-options #landline-monitoring-option .text,
+#sets-apart #alarm-monitoring-options #landline-monitoring-option .text,
+#customer-testimonials #alarm-monitoring-options #landline-monitoring-option .text {
+  width: 300px;
+}
+#advantages #order-reassurance #lowest-price-guaranteed .text h3,
+#security-packages #order-reassurance #lowest-price-guaranteed .text h3,
+#sets-apart #order-reassurance #lowest-price-guaranteed .text h3,
+#customer-testimonials #order-reassurance #lowest-price-guaranteed .text h3,
+#advantages #alarm-monitoring-options #lowest-price-guaranteed .text h3,
+#security-packages #alarm-monitoring-options #lowest-price-guaranteed .text h3,
+#sets-apart #alarm-monitoring-options #lowest-price-guaranteed .text h3,
+#customer-testimonials #alarm-monitoring-options #lowest-price-guaranteed .text h3,
+#advantages #order-reassurance #lifetime-warranty .text h3,
+#security-packages #order-reassurance #lifetime-warranty .text h3,
+#sets-apart #order-reassurance #lifetime-warranty .text h3,
+#customer-testimonials #order-reassurance #lifetime-warranty .text h3,
+#advantages #alarm-monitoring-options #lifetime-warranty .text h3,
+#security-packages #alarm-monitoring-options #lifetime-warranty .text h3,
+#sets-apart #alarm-monitoring-options #lifetime-warranty .text h3,
+#customer-testimonials #alarm-monitoring-options #lifetime-warranty .text h3,
+#advantages #order-reassurance #homeowner-insurance-discount .text h3,
+#security-packages #order-reassurance #homeowner-insurance-discount .text h3,
+#sets-apart #order-reassurance #homeowner-insurance-discount .text h3,
+#customer-testimonials #order-reassurance #homeowner-insurance-discount .text h3,
+#advantages #alarm-monitoring-options #homeowner-insurance-discount .text h3,
+#security-packages #alarm-monitoring-options #homeowner-insurance-discount .text h3,
+#sets-apart #alarm-monitoring-options #homeowner-insurance-discount .text h3,
+#customer-testimonials #alarm-monitoring-options #homeowner-insurance-discount .text h3,
+#advantages #order-reassurance #relocation-kit .text h3,
+#security-packages #order-reassurance #relocation-kit .text h3,
+#sets-apart #order-reassurance #relocation-kit .text h3,
+#customer-testimonials #order-reassurance #relocation-kit .text h3,
+#advantages #alarm-monitoring-options #relocation-kit .text h3,
+#security-packages #alarm-monitoring-options #relocation-kit .text h3,
+#sets-apart #alarm-monitoring-options #relocation-kit .text h3,
+#customer-testimonials #alarm-monitoring-options #relocation-kit .text h3,
+#advantages #order-reassurance #free-tech-support .text h3,
+#security-packages #order-reassurance #free-tech-support .text h3,
+#sets-apart #order-reassurance #free-tech-support .text h3,
+#customer-testimonials #order-reassurance #free-tech-support .text h3,
+#advantages #alarm-monitoring-options #free-tech-support .text h3,
+#security-packages #alarm-monitoring-options #free-tech-support .text h3,
+#sets-apart #alarm-monitoring-options #free-tech-support .text h3,
+#customer-testimonials #alarm-monitoring-options #free-tech-support .text h3,
+#advantages #order-reassurance #cellular-monitoring-option .text h3,
+#security-packages #order-reassurance #cellular-monitoring-option .text h3,
+#sets-apart #order-reassurance #cellular-monitoring-option .text h3,
+#customer-testimonials #order-reassurance #cellular-monitoring-option .text h3,
+#advantages #alarm-monitoring-options #cellular-monitoring-option .text h3,
+#security-packages #alarm-monitoring-options #cellular-monitoring-option .text h3,
+#sets-apart #alarm-monitoring-options #cellular-monitoring-option .text h3,
+#customer-testimonials #alarm-monitoring-options #cellular-monitoring-option .text h3,
+#advantages #order-reassurance #broadband-monitoring-option .text h3,
+#security-packages #order-reassurance #broadband-monitoring-option .text h3,
+#sets-apart #order-reassurance #broadband-monitoring-option .text h3,
+#customer-testimonials #order-reassurance #broadband-monitoring-option .text h3,
+#advantages #alarm-monitoring-options #broadband-monitoring-option .text h3,
+#security-packages #alarm-monitoring-options #broadband-monitoring-option .text h3,
+#sets-apart #alarm-monitoring-options #broadband-monitoring-option .text h3,
+#customer-testimonials #alarm-monitoring-options #broadband-monitoring-option .text h3,
+#advantages #order-reassurance #landline-monitoring-option .text h3,
+#security-packages #order-reassurance #landline-monitoring-option .text h3,
+#sets-apart #order-reassurance #landline-monitoring-option .text h3,
+#customer-testimonials #order-reassurance #landline-monitoring-option .text h3,
+#advantages #alarm-monitoring-options #landline-monitoring-option .text h3,
+#security-packages #alarm-monitoring-options #landline-monitoring-option .text h3,
+#sets-apart #alarm-monitoring-options #landline-monitoring-option .text h3,
+#customer-testimonials #alarm-monitoring-options #landline-monitoring-option .text h3 {
+  font-size: 20px;
+}
+#advantages #order-reassurance #lowest-price-guaranteed .text p,
+#security-packages #order-reassurance #lowest-price-guaranteed .text p,
+#sets-apart #order-reassurance #lowest-price-guaranteed .text p,
+#customer-testimonials #order-reassurance #lowest-price-guaranteed .text p,
+#advantages #alarm-monitoring-options #lowest-price-guaranteed .text p,
+#security-packages #alarm-monitoring-options #lowest-price-guaranteed .text p,
+#sets-apart #alarm-monitoring-options #lowest-price-guaranteed .text p,
+#customer-testimonials #alarm-monitoring-options #lowest-price-guaranteed .text p,
+#advantages #order-reassurance #lifetime-warranty .text p,
+#security-packages #order-reassurance #lifetime-warranty .text p,
+#sets-apart #order-reassurance #lifetime-warranty .text p,
+#customer-testimonials #order-reassurance #lifetime-warranty .text p,
+#advantages #alarm-monitoring-options #lifetime-warranty .text p,
+#security-packages #alarm-monitoring-options #lifetime-warranty .text p,
+#sets-apart #alarm-monitoring-options #lifetime-warranty .text p,
+#customer-testimonials #alarm-monitoring-options #lifetime-warranty .text p,
+#advantages #order-reassurance #homeowner-insurance-discount .text p,
+#security-packages #order-reassurance #homeowner-insurance-discount .text p,
+#sets-apart #order-reassurance #homeowner-insurance-discount .text p,
+#customer-testimonials #order-reassurance #homeowner-insurance-discount .text p,
+#advantages #alarm-monitoring-options #homeowner-insurance-discount .text p,
+#security-packages #alarm-monitoring-options #homeowner-insurance-discount .text p,
+#sets-apart #alarm-monitoring-options #homeowner-insurance-discount .text p,
+#customer-testimonials #alarm-monitoring-options #homeowner-insurance-discount .text p,
+#advantages #order-reassurance #relocation-kit .text p,
+#security-packages #order-reassurance #relocation-kit .text p,
+#sets-apart #order-reassurance #relocation-kit .text p,
+#customer-testimonials #order-reassurance #relocation-kit .text p,
+#advantages #alarm-monitoring-options #relocation-kit .text p,
+#security-packages #alarm-monitoring-options #relocation-kit .text p,
+#sets-apart #alarm-monitoring-options #relocation-kit .text p,
+#customer-testimonials #alarm-monitoring-options #relocation-kit .text p,
+#advantages #order-reassurance #free-tech-support .text p,
+#security-packages #order-reassurance #free-tech-support .text p,
+#sets-apart #order-reassurance #free-tech-support .text p,
+#customer-testimonials #order-reassurance #free-tech-support .text p,
+#advantages #alarm-monitoring-options #free-tech-support .text p,
+#security-packages #alarm-monitoring-options #free-tech-support .text p,
+#sets-apart #alarm-monitoring-options #free-tech-support .text p,
+#customer-testimonials #alarm-monitoring-options #free-tech-support .text p,
+#advantages #order-reassurance #cellular-monitoring-option .text p,
+#security-packages #order-reassurance #cellular-monitoring-option .text p,
+#sets-apart #order-reassurance #cellular-monitoring-option .text p,
+#customer-testimonials #order-reassurance #cellular-monitoring-option .text p,
+#advantages #alarm-monitoring-options #cellular-monitoring-option .text p,
+#security-packages #alarm-monitoring-options #cellular-monitoring-option .text p,
+#sets-apart #alarm-monitoring-options #cellular-monitoring-option .text p,
+#customer-testimonials #alarm-monitoring-options #cellular-monitoring-option .text p,
+#advantages #order-reassurance #broadband-monitoring-option .text p,
+#security-packages #order-reassurance #broadband-monitoring-option .text p,
+#sets-apart #order-reassurance #broadband-monitoring-option .text p,
+#customer-testimonials #order-reassurance #broadband-monitoring-option .text p,
+#advantages #alarm-monitoring-options #broadband-monitoring-option .text p,
+#security-packages #alarm-monitoring-options #broadband-monitoring-option .text p,
+#sets-apart #alarm-monitoring-options #broadband-monitoring-option .text p,
+#customer-testimonials #alarm-monitoring-options #broadband-monitoring-option .text p,
+#advantages #order-reassurance #landline-monitoring-option .text p,
+#security-packages #order-reassurance #landline-monitoring-option .text p,
+#sets-apart #order-reassurance #landline-monitoring-option .text p,
+#customer-testimonials #order-reassurance #landline-monitoring-option .text p,
+#advantages #alarm-monitoring-options #landline-monitoring-option .text p,
+#security-packages #alarm-monitoring-options #landline-monitoring-option .text p,
+#sets-apart #alarm-monitoring-options #landline-monitoring-option .text p,
+#customer-testimonials #alarm-monitoring-options #landline-monitoring-option .text p {
+  font-size: 14px;
+  line-height: 16px;
+}
+#advantages .testimonial h3,
+#security-packages .testimonial h3,
+#sets-apart .testimonial h3,
+#customer-testimonials .testimonial h3 {
+  background: url(/static/img/affiliates/sem-landing-page/rep/testimonial-arrow.png) center bottom no-repeat;
+  padding-left: 16px;
+  padding-bottom: 32px;
+}
+#advantages .testimonial p,
+#security-packages .testimonial p,
+#sets-apart .testimonial p,
+#customer-testimonials .testimonial p {
+  width: 317px;
+}

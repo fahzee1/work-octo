@@ -1,7 +1,6 @@
 import re
 import os
 from datetime import datetime, timedelta
-
 from django.shortcuts import render_to_response,render,redirect
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -10,7 +9,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import simplejson
 from django.core.urlresolvers import reverse
 from django.views.decorators.csrf import csrf_exempt
-
 from apps.affiliates.models import Affiliate, LandingPage, AffTemplate,Profile
 from apps.common.views import simple_dtt
 from apps.contact.forms import PAContactForm
@@ -45,15 +43,33 @@ def affiliate_view(request, affiliate, page_name=None):
         request.session['source'] = affiliate.name
     except Affiliate.DoesNotExist:
         raise Http404
+    landingpage = LandingPage.objects.filter(affiliate=affiliate)
+    if landingpage:
+        htmlfilename = 'affiliates/%s/%s' % (landingpage[0].template.folder, landingpage[0].get_filename(page_name))
+    else:
+        raise Http404
 
-    landingpage = LandingPage.objects.get(affiliate=affiliate)
+    return simple_dtt(request, htmlfilename, {'page_name': page_name,
+        'agent_id': affiliate.agent_id})
+
+def delta_view(request, affiliate, page_name=None):
+    if page_name is None:
+        page_name = 'index'
+    try:
+        affiliate = Affiliate.objects.get(agent_id=affiliate)
+        request.session['refer'] = affiliate.name
+        request.session['source'] = affiliate.name
+    except Affiliate.DoesNotExist:
+        raise Http404
+    template = AffTemplate.objects.get(name=affiliate.name)
+    landingpage = LandingPage.objects.get(affiliate=affiliate,template=template)
     htmlfilename = 'affiliates/%s/%s' % (landingpage.template.folder, landingpage.get_filename(page_name))
 
     return simple_dtt(request, htmlfilename, {'page_name': page_name,
         'agent_id': affiliate.agent_id})
 
 def delta_sky(request):
-    return affiliate_view(request, 'a03005')
+    return delta_view(request, 'a03005')
     
 def resources(request):
     """
@@ -110,7 +126,8 @@ def web_banners_page(request):
          
                          
     ctx={'page_name': 'aff-web-banners',
-            'google_ads':ads}
+         'google_ads':ads,
+          'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request, 'affiliates/resources/web-banners.html',ctx)
         
 def get_started_page(request):
@@ -135,21 +152,24 @@ def get_started_page(request):
 def logos_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
-    ctx={'page_name':'aff-logos'}
+    ctx={'page_name':'aff-logos',
+         'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request,'affiliates/resources/logos.html',ctx)
     
 def collateral_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
-    ctx={'page_name':'aff-collateral'}
+    ctx={'page_name':'aff-collateral',
+         'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request,'affiliates/resources/collateral.html',ctx)
     
-    'affiliates/resources/products.html'
+
     
 def products_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
-    ctx={'page_name':'aff-products'}
+    ctx={'page_name':'aff-products',
+         'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request,'affiliates/resources/products.html',ctx)
 
 
@@ -159,7 +179,7 @@ def semlanding_response(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    response = render_to_response('affiliates/sem-landing-page/responsive.html',
+    response = render_to_response('affiliates/sem-landing-page/green-test.html',
                                   {'forms': forms},
                                   context_instance=RequestContext(request))
     
@@ -370,7 +390,9 @@ def aff_login(request):
                     request.session['aff-logged-in']=True
                     request.session['aff_name']=aff.name
                     request.session['aff_id']=aff.agent_id
-                    return redirect('aff-get-started')
+                    response=redirect('aff-get-started')
+                    response['Location'] +='?agent_id=%s' % aff.agent_id
+                    return response
                 
             except Affiliate.DoesNotExist:
                 messages.info(request,'Please Enter The Correct Login.')

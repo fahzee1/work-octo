@@ -56,7 +56,7 @@
                 <div id="phone-number" class="tk-jaf-facitweb">
                     <p>Call Today and Save! <span>
                     {% if request.GET.phone %}
-                        {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' %}
+{% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
                             <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
                         {% else %}
                             <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}
@@ -125,7 +125,7 @@
                                         <span>or Request a Callback</span>
                                     </div>
                                     
-                                    {% include "order/quote-form-cf.html" with form=forms.basic %}
+                                    {% include "order/quote-form-two.html" with form=forms.basic %}
 
 
 
@@ -139,7 +139,7 @@
                                 <div id="phone-her" class="contentHolder">                                   
                                     <div id="call-box" class="tk-jaf-facitweb">
                                         {% block call-box-text %}<p><strong><span class="bluet">Call Now For a FREE Quote! </span>{% endblock %}<span>{% if request.GET.phone %}
-                                            {% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' %}
+{% if request.COOKIES.refer_id == 'a10058' or request.session.refer_id == 'a10058' or request.COOKIES.refer_id == 'a10447' or request.session.refer_id == 'a10447' or request.COOKIES.refer_id == 'a10449' or request.session.refer_id == 'a10449' %}
                                                 <a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}
                                             {% else %}
                                                 <a href="tel:{{ request.GET.phone|format_number }}">{{ request.GET.phone|format_number }}

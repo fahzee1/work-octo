@@ -96,6 +96,8 @@ class Textimonial(models.Model):
     def get_absolute_url(self):
         return reverse('single-testimonial', kwargs={'testimonial_id': self.id})
 
+
+
     def __unicode__(self):
         return '%s %s - %s - %s' % (self.first_name,
                                     self.last_name,
@@ -108,3 +110,14 @@ class Vidimonial(models.Model):
 
     def get_absolute_url(self):
         return reverse('video-testimonial', kwargs={'testimonial_id': self.id})
+
+ 
+def update_rating(reviews):
+    objects = reviews.objects.filter(rating=0)
+    print '%s reviews are 0' % objects.count()
+    for x in objects:
+        if x.display:
+            print 'saving %s rating as 5' % x.first_name
+            x.rating = 5
+            x.save()
+    print 'done!'
