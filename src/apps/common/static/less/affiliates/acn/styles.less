@@ -18,6 +18,11 @@ a:hover, a:focus {
     color: #3780CB;
     text-decoration: underline;
 }
+a.phonenumber,
+a.phonenumber:hover {
+    cursor: default;
+    text-decoration: inherit;
+}
 img {
     max-width: 100%;
 }
@@ -213,9 +218,10 @@ i.arrowIcon {
     line-height: 1;
     padding-bottom: 4px;
     padding-top: 6px;
+    position: relative;
 }
 .headerPhone .phoneNumber {
-    font-size: 18px;
+    font-size: 24px;
 }
 .headerPhone .slash {
     color: #4e6e8c;
@@ -238,9 +244,26 @@ i.arrowIcon {
     .headerPhone, .footerPhone {
         text-align: center;
     }
-    .headerPhone p,
-    .headerPhone p span {
+    .headerPhone .phoneNumber {
         font-size: 14px;
+    }
+}
+@media (min-width: 767px) {
+    .headerPhone .phoneNumber span {
+        display: block;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .scheduleWrapper {
+        position: absolute;
+        right: 20px;
+        text-align: right;
+        top: 10px;
+        width: 270px;
+    }
+    .headerPhone .slash {
+        display: block;
+        height: 0;
     }
 }
 /*Header*/
@@ -467,7 +490,14 @@ h2.form-title {
 .aboutPA {
     background-color: #fff;
 }
-.aboutPA h4,
+.aboutPA .logos {
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.5);
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 10px;
+}
 .supportInfo h4,
 .cellular h4 {
     line-height: 1.2;
@@ -476,7 +506,7 @@ h2.form-title {
 .aboutPA .halfCol {
     float: left;
     text-align: center;
-    width: 49%;
+    width: 25%;
 }
 /*contactFooter*/
 .contactFooter {
@@ -563,7 +593,6 @@ h2.form-title {
 .processArrow.right {
     background: url(../../../img/affiliates/acn/sprite.png) left -390px no-repeat;
 }
-
 /*Packages*/
 .packages {
     padding-top: 0;
@@ -808,6 +837,24 @@ h2.form-title {
 .support #scrollBubble {
     display: none;
 }
+/*Support*/
+.faq h3 {
+    background: url(../../../img/affiliates/acn/sprite.png) no-repeat -30px -1576px;
+    cursor: pointer;
+    border-top: 1px solid #D4DCE5;
+    margin: 0;
+    padding: 20px 0 20px 60px;
+}
+.faq.arrow_up h3 {
+    background-position: -30px -1497px;
+}
+.faq .faqAnswer {
+    display: none;
+}
+.faq .faqAnswer p,
+.faq .faqAnswer ul {
+    padding: 20px 0 20px 60px;
+}
 /*Thank You*/
 .thank-you .whatsNext p {
     padding-right: 80px;
@@ -821,6 +868,17 @@ h2.form-title {
 }
 #terms a {
     color: #ccc;
+}
+/*Order*/
+.orderHero {
+    background-color: #fff;
+    padding: 0;
+}
+.orderHero h2 {
+    margin-top: 40px;
+}
+.orderHero h3 {
+    color: #748598;
 }
 /*IE7 offset columns fix*/
 .lt-ie8 .col-lg-offset-12,

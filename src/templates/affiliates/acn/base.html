@@ -17,8 +17,8 @@
     <div class="headerPhone inverse">
         <div class="container">
             <div class="row">
-                <p class="phoneNumber">CALL NOW TO ORDER <span>800-867-0151</span></p>
-                 <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}RIN Number: {{ affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}{% endif %} <span class="slash">/</span> M-F 7AM - 11PM CT <span class="slash">/</span> SAT 8AM - 8PM CT <span class="slash">/</span> SUN 9AM - 9PM CT</p>
+                <p class="phoneNumber">Call Now To Order <span>800-867-0151</span></p>
+                 <p class="scheduleWrapper">M-F: 8AM - 10:00PM EST <span class="slash">/</span> SAT: 9AM - 9PM EST <span class="slash">/</span> SUN: 10AM - 10PM EST</p>
             </div><!-- /row -->
         </div><!-- /container -->
     </div><!-- /headerPhone -->
@@ -66,7 +66,7 @@
                                 <li><a href="{% url home %}">Home</a></li>
                                 <li><a href="{% url packages %}">Packages</a></li>
                                 <li><a href="{% url features %}">Features</a></li>
-                                <li><a href="{% url order %}">Support</a></li>
+                                <li><a href="{% url support %}">Support</a></li>
                                 <li><a href="{% url order %}">Order</a></li>
                             </ul>
                         </div><!-- /col -->
@@ -113,6 +113,14 @@
             $( window ).scroll(function() {
                 $( "#scrollBubble" ).fadeOut( "slow" );
             });
+           $('.faq').click(function() {
+               $(this).children(".faqAnswer").slideToggle('ease');
+               if ($(this).hasClass('arrow_up')) {
+                   $(this).removeClass('arrow_up')
+               } else {
+                   $(this).addClass('arrow_up')
+               }
+           }) 
         </script>
 {% endblock %}
 {% block order-footer %}{% endblock %}
