@@ -13,16 +13,6 @@
 {% endblock %}
 
 {% block content %}
-{% addtoblock "js" %}
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#review-cycle-container").cycle({
-                fx: "scrollRight",
-                timeout:  15000,
-            });
-});
-</script>
-{% endaddtoblock "js" %}
 	<div id="generic-banner">
 		<div class="wrapper">
 			<div class="left">
@@ -155,4 +145,19 @@ $(document).ready(function() {
         <div class="clear"></div>
     </div>
 </div>
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var check = '{{ multiple }}';
+    if (check == 'True'){
+        $("#review-cycle-container").cycle({
+                    fx: "scrollRight",
+                    timeout:  15000,
+                });
+    }else{
+        $("#review-cycle-container .review").css('display','block');
+    }
+});
+</script>
+{% endaddtoblock "js" %}
 {% endblock %}
