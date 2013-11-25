@@ -1,0 +1,330 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block google_experiment %}
+
+{% endblock %}
+{% block page_title %}Medical Panic Alert | Medical Alert for Seniors | Protect America{% endblock %}
+{% block css %}
+    <!--[if IE]><!-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-medical.css">
+
+    <link rel="stylesheet"  href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-medical.css?v3.0">
+
+
+	<!--<![endif]-->
+    <link rel="stylesheet" media="only screen and (max-width: 767px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/320-medical.css">
+
+    <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-medical.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-medical.css">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+
+    <![endif]-->
+    <script type="text/javascript" src="{{ STATIC_URL }}js/faq.js"></script>
+
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <style>
+        #hero-wrapper {
+            background: #b4ec0b;
+        }
+        #hero-wrapper #hero-image #best-deal h1 {
+            color: #555;
+        }
+        #hero-wrapper #hero-image h2 {
+            color: #555;
+        }
+    </style>
+{% endblock %}    
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+
+{% block header %}
+
+
+    <div id="header-wrapper">
+        <div id="header">
+            {% if phone_number %}
+                <div id="main-phone-number">
+                    <p>Call Now<em> and Save</em>! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a></span></p>
+                </div>
+            {% endif %}
+            <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+
+            <div class="phone-area no-desktop">Our Security Experts are ready to help <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></div>
+            <ul id="mobile-main-navigation">
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+            </ul>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
+
+{% block content %}
+<div id="hero-wrapper" class="">
+    <div id="offer-area">
+    {% include "affiliates/sem-landing-page/medical/medical-quote-form.html" with form=forms.basic %}
+
+        <ul class="options">
+            <h2>Full Safety <br/>Package Includes:</h2>
+            <li><i class="icon-check"></i>Medical Pendant</li>
+            <li><i class="icon-check"></i>Family Alert</li>
+            <li><i class="icon-check"></i>No Equipment Fees</li>
+            <li><i class="icon-check"></i>Home Security</li>
+
+        </ul>
+        <div class="price">
+            <p>starting at</p>
+            <strong>$5/week</strong>
+        </div>
+    </div>   
+    <div class="wrapper">
+        {% if request.GET.affkey == 'vet' %}
+        
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/veteran-person.png" class="person no-desktop" alt="veteran-person" width="485" height="419" />
+        {% else %}
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/woman-mobile.png" class="person no-mobile" style="right: auto; left: -6%" alt="veteran-person" />
+
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/woman.png" class="person no-desktop" style="right: 8%;" alt="veteran-person" />
+        {% endif %}
+    </div>
+    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/price-badge.png" class="price-badge" alt="price-badge" width="170" height="170" />
+    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/home-background.jpg" class="house-bg no-desktop" alt="camera-button" />
+    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/home-background-mobile.jpg" class="house-bg no-mobile" alt="camera-button" />
+
+
+</div>
+
+{% include "order/call-box.html" %}
+<div id="wireless-security">
+    <div class="wrapper">
+        <div id="featured-on">
+            <p>Featured On:</p>
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/fox-news.png" alt="Featured on Fox News" width="96" height="96" />
+            <img src="{{ STATIC_URL }}img/extra/validation-icons/bbb.png" alt="Rated with an A from the BBB" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/consumer-digest.png" alt="Rated a Consumer Digest Best Buy" width="96" height="96" />
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/abc.png" class="alpha" alt="Featured on ABC" width="96" height="96" />
+            <img src="{{ STATIC_URL }}img/extra/validation-icons/history.png" class="omega" alt="Featured on The History Channel" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/best.png" alt="Featured on Best Home Security Companys" width="96" height="96" />
+
+
+
+        </div>
+    </div>
+    <div id="medical-pendant-home">
+        <div class="wrapper">
+            <div id="home-content">
+                <h2>Simple and easy, medical <span>alert when you need it most.</span></h2>
+                <p>Wear it as a pendant or as a wristband and with a press of the button and you are instantly connected to help.</p>
+                <a href="" class="button-link  order-button no-desktop">Order Now <i class="icon-chevron-right"></i></a>
+                <a href="tel:{{ phone_number|format_number }}" class="button-link no-mobile">Order Now <i class="icon-chevron-right"></i></a>
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div id="security-information">
+            <div id="main-benefits">
+                    <h1>For the Past 20 Years...</h1>
+                    <p>Saving lives and protecting homes</p>
+                    <ul>
+                        <li>
+                            <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
+                            <p>Our systems provide state-of-the-art <strong>24/7 security</strong> so you don't have to worry about a thing.</p>
+                        </li>
+                        <li>
+                            <h3><i class="icon-heart"></i>The Comfort of Knowing</h3>
+                            <p>Each system can be programmed to notify the <strong>right people</strong> in the event of an emergency.</p>
+                        </li>
+                        <li>
+                            <h3><i class="icon-money"></i>The Best Price, Period</h3>
+                            <p>The <strong>equipment is included</strong>, there are no activation fees, and our alarm monitoring starts at $19.99 per month.</p>
+                        </li>
+
+                        <li>
+                            <h3><i class="icon-thumbs-up"></i>Saving You More</h3>
+                            <p>Safety can be <strong>good for you and your pocket</strong>. Save up to 20% on your homeowners insurance.</p>
+                        </li>
+                        <li>
+                            <h3><i class="icon-user"></i>Security Designed for your Life</h3>
+                            <p>Each system is <strong>built to fit you</strong>, including options like: fire protection, car tracking, and video check-in.</p>
+                        </li>
+                    </ul>
+                <div class="clear"></div>
+            </div>
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/medical/medical-alert-on-iphone.jpg" class="iphone-pic no-desktop" alt="medical-alert-on-iphone" />
+        </div>
+    </div>
+</div>
+
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        <h2>A Step above the rest <span>providing more safety and security for less</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Equipment & Activation Fees</th>
+                    <th>Medical Alert Pendant</th>
+                    <th>24/7 Burglar Alarm</th>
+                    <th class="extra">One Button Security</th>
+                    <th class="extra">Homeowner's Insurance Discount</th>
+                    <th>Monthly Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="alpha">
+                    <td class="title">Protect America</td>
+                    <td class="price">$0</td>
+                    <td>Included</td>
+                    <td>Included</td>
+                    <td class="extra">Included</td>
+                    <td class="extra">Up to 20%</td>
+                    <td class="price">$19.99</td>
+                </tr>
+                <tr>
+                    <td class="title">Lifealert</td>
+                    <td class="price">$95</td>
+                    <td>Included</td>
+                    <td class="na">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="price">$29.95</td>
+                </tr>
+                <tr>
+                    <td class="title">Medical Alert</td>
+                    <td class="price">$0</td>
+                    <td>Included</td>
+                    <td class="na">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="price">$29.95</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>
+<a id="faqs"></a>
+    <div class="big_wrapper" id="faq">
+      <div class="wrapper clearfix">
+        <h2>Frequently Asked Questions</h2>
+        <ul>
+          <li class="faq">
+            <div>
+              <h3>Why home security and a medical panic?</h3>
+                <p>We understand the importance of safety for you and your loved ones.  That’s why Protect America helps with accidents and burglaries alike.  Our technology is designed to improve the quality of home and life. The Protect America security network goes beyond home alarms - it helps safeguard loved ones too!</p>
+            </div>
+          </li>
+          <li  class="faq">
+            <div>
+              <h3>What happens when there is an emergency and I press the button?</h3>
+                <p>There are two things that happen:<br /><br /><strong>A.</strong> Your alarm will alert the local authorities immediately for dispatch.<br /><strong>B.</strong> After dispatch to the property, our monitoring station will attempt to reach your listed family / emergency contacts.</p>
+            </div>
+          </li>
+          <li  class="faq">
+            <div>
+              <h3>What if I accidentally press the medical panic button?</h3>
+              <p>We take every emergency seriously. When the button is pressed your alarm will begin to ring and the monitoring station will dispatch the authorities. We then attempt to reach you and your listed emergency contacts. If a false alarm is established, the authorities will be notified and canceled.</p>
+            </div>
+          </li>
+          <li class="faq">
+            <div>
+              <h3 >How do I send a panic signal?</h3>
+              <p>Besides the medical panic pendant, every security system comes with one button emergency buttons. To send an Emergency, Fire or Police panic signal simply press and hold the appropriate button for 2 seconds, (Cross = Emergency, Fire = Fire, Police badge= Police).</p>
+            </div>
+          </li>
+        </ul>
+        <ul class="col2">
+          <li class="faq">
+            <div>
+              <h3 >Can I get the medical panic wet?</h3>
+              <p>Yes, the medical panic pendant and watch are waterproof! This feature is important since your loved one should keep this device close at all times.</p>
+            </div>
+          </li>
+          <li class="faq">
+            <div>
+              <h3>What happens when my alarm system is triggered? How will the monitoring station respond?</h3>
+              <p>If your system is not disarmed after one minute, our monitoring station will attempt to reach you. If you do not answer, we will dispatch the local Police to the monitoring address and will attempt to reach your emergency contacts.</p>
+            </div>
+          </li>
+          <li class="faq">
+            <div>
+              <h3 >How do I Arm and Disarm my new alarm system?</h3>
+              <p>Simply press one button to arm your system, and enter your master code to disarm it. Protect America alarm systems are also interactive, so you can arm and disarm from a smartphone with our free “SMART Connect” app!</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    
+    <div class="clear"></div>
+</div>
+
+
+{% endblock %}
+{% block order-footer %}
+<div id="medical-order">
+    <div class="wrapper">
+        <div class="left-side">
+            <h2>Your Family's safety is important.</h2>
+            <p>Our security experts are ready to help:</p>
+            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><i class="icon-phone"></i> {{ phone_number|format_number }}</span></a>
+        </div>
+        <div class="right-side no-desktop">
+            <a href="#" class="button-link order-button">
+                Order Now <i class="icon-chevron-right"></i>
+            </a>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="lightbox">
+    <div id="light-quote-form">
+        <i class="icon-remove-sign"></i>
+        <div class="lightbox-info">
+            <h3>We're here for you.</h3>
+            <p>Our security experts are standing by to help you create the best security and safety solution for your home. Give us a call now at: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> or fill out the form for a no obligation security analysis.</p>
+        </div>
+        {% include "affiliates/sem-landing-page/medical/medical-quote-form.html" with form=forms.basic %}
+    </div>
+    <div class="lightbox-bg">&nbsp;</div>
+</div>
+{% endblock %}
+{% block main-footer %}
+<script type="text/javascript">
+    $('.faq').click(function() {
+        $(this).children("div").children("p").slideToggle('fast');
+        if ($(this).hasClass('arrow_up')) {
+            $(this).removeClass('arrow_up')
+        } else {
+            $(this).addClass('arrow_up')
+        }
+    })
+    $('.order-button').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeIn();
+        return false;
+    })
+    $('.lightbox-bg').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })
+    $('.icon-remove-sign').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })     
+</script>
+{% endblock %}
