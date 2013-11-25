@@ -40,7 +40,7 @@ def dtt_nocache(pattern, template, name, parent=None, ctx=None):
     return url(pattern, never_cache(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)
-        
+
 
 sitemaps={
     'home':StaticSitemap(['home','thank_you'],0.5),
@@ -95,18 +95,19 @@ urlpatterns = patterns('',
         'apps.affiliates.views.edit_affiliate'),
     (r'^django-admin/', include(admin.site.urls)),
 
-    #newsfeed 
+    #newsfeed
     url(r'^newsfeed/?$', 'apps.newsfeed.views.render_feed',name='render-feed'),
     url(r'^hourlycheck/?$', 'apps.newsfeed.views.hourly_check',name='hourly_check'),
     url(r'^nongeofeed/?$', 'apps.newsfeed.views.nongeo_feed',name='nongeo-feed'),
 
     #contact us
-    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post',name='contact-ajax'),
+    url(r'^contact/ajaxpost/?$', 'apps.contact.views.ajax_post_protected',name='contact-ajax'),
+    url(r'^contact/ajaxpost_blog/?$', 'apps.contact.views.ajax_post_unprotected', name='contact-ajax-blog'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
 
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
-    
-    
+
+
     url(r'^products/order-package/?$', 'apps.contact.views.order_form',
         name='order-package'),
 #    url(r'^sitemap.xml$', 'django.views.generic.simple.direct_to_template', {
@@ -123,8 +124,8 @@ urlpatterns = patterns('',
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
     url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
     url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
-    
-    
+
+
     # GLOBAL PAGES
     # Help Pages > Privacy Policy
     dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
@@ -446,7 +447,7 @@ else:
 
         # Test Pages
         url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/?$', 'apps.common.views.index_test', name='index_test'),
-        
+
         # Home Page
         url(r'^$', 'apps.common.views.index', name='home'),
         url(r'^thank-you/?$', 'apps.common.views.thank_you',
@@ -465,7 +466,7 @@ else:
 
             dtt(r'^shop-home-security-packages/bronze/?$', 'packages/bronze.html', 'bronze', 'shop'),
             dtt(r'^shop-home-security-packages/bronze-new/?$', 'packages/bronze-test.html', 'bronze-new', 'shop'),
-            
+
             dtt(r'^shop-home-security-packages/silver/?$', 'packages/silver.html', 'silver', 'shop'),
             dtt(r'^shop-home-security-packages/silver-new/?$', 'packages/silver-test.html', 'silver-new', 'shop'),
 
@@ -481,10 +482,10 @@ else:
 
         # Equipment
             dtt(r'^security-equipment/?$', 'products/equipment/index.html', 'equipment'),
-            
+
             # Equipment > Home Security
                 dtt(r'^equipment/home-security/?$', 'products/equipment/home-security.html', 'home-security-equipment', 'equipment'),
-                # redirect from ge-simon-xt to simon-xt 
+                # redirect from ge-simon-xt to simon-xt
                     dtt(r'^equipment/home-security/simon-xt/?$', 'products/equipment/simon-xt.html', 'simon-xt', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/wireless-sensor/?$', 'products/equipment/door-window-sensor.html', 'door-window-sensor', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/motion-sensors/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
@@ -497,11 +498,11 @@ else:
                     dtt(r'^equipment/home-security/panic-button/?$', 'products/equipment/two-button-panic.html', 'two-button-panic', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/extra-security/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
                     # > dtt(r'^products/security-equipment/accessories/?$', 'products/equipment/security-accessories.html', 'accessories', 'home-security-equipment'),
-                    
-                    # Moratorium 
+
+                    # Moratorium
                         dtt(r'^equipment/home-security/ge-simon-3/?$', 'products/equipment/simon-3.html', 'simon-3', 'home-security-equipment'),
                         dtt(r'^equipment/home-security/secret-keypad/?$', 'products/equipment/secret-keypad.html', 'secret-keypad', 'home-security-equipment'),
-   
+
             # Life Safety
                 dtt(r'^equipment/life-safety/?$', 'products/equipment/life-safety.html', 'life-safety-equipment', 'equipment'),
 
@@ -511,30 +512,30 @@ else:
 
                     dtt(r'^equipment/life-safety/freeze-sensor/?$', 'products/equipment/freeze-sensor.html', 'freeze-sensor', 'life-safety-equipment'),
                     dtt(r'^equipment/life-safety/flood-sensor/?$', 'products/equipment/flood-sensor.html', 'flood-sensor', 'life-safety-equipment'),
-            
+
             # Equipment > Home Automation
                 dtt(r'^equipment/home-automation/?$', 'products/equipment/home-automation.html', 'home-automation-equipment', 'equipment'),
                     dtt(r'^equipment/home-automation/z-wave-door-lock/?$', 'products/equipment/door-lock.html', 'door-lock', 'home-automation-equipment'),
                     dtt(r'^equipment/home-automation/z-wave-appliance-module/?$', 'products/equipment/appliance-module.html', 'appliance-module', 'home-automation-equipment'),
                     dtt(r'^equipment/home-automation/z-wave-indoor-siren/?$', 'products/equipment/indoor-siren.html', 'indoor-siren', 'home-automation-equipment'),
 
-            
+
             # SMART Connect
 
                     dtt(r'^equipment/smart-connect/?$', 'products/interactive/index.html', 'interactive-control', 'equipment'),
-            
+
             # Equipment > Automotive
-        
+
                     dtt(r'^equipment/automotive/gps-car-tracker/?$', 'products/gps/index.html', 'gps', 'equipment'),
                     # > dtt(r'^pa/vehicle-gps-tracking/gps-services/?$', 'products/gps/index.html', 'gps', 'equipment'),
 
 
-            
+
 
         # Learn
             dtt(r'^learn/?$', 'learn/index.html', 'learn'),
             # > dtt(r'^learn-about-security/?$', 'learn/index.html', 'learn'),
-            
+
             # Learn > Security Advantage
             dtt(r'^learn/security-advantage/?$', 'products/advantage.html', 'advantage', 'learn'),
             # > dtt(r'^security-advantage/?$', 'products/advantage.html', 'advantage', 'learn'),
@@ -548,7 +549,7 @@ else:
                 # > dtt(r'^products/alarm-monitoring/broadband/?$', 'products/monitoring/broadband.html', 'broadband', 'monitoring'),
                 dtt(r'^learn/alarm-monitoring/cellular/?$', 'products/monitoring/cellular.html', 'cellular', 'monitoring'),
                 # > dtt(r'^products/alarm-monitoring/cellular/?$', 'products/monitoring/cellular.html', 'cellular', 'monitoring'),
-            
+
             # Learn > About Us
                 dtt(r'^learn/protect-america/?$', 'about-us/index.html', 'about-us', 'learn'),
                 # > dtt(r'^learn-about-security/protect-america/?$', 'about-us/index.html', 'about-us', 'learn'),
@@ -602,7 +603,7 @@ else:
 
 
                 url(r'^pa/cust_ref/?$','apps.contact.views.tell_a_friend',name='tell-a-friend'),
-                               
+
                 # Remove dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
                 # remove dtt(r'^products/interactive-video/home-video-cameras?$', 'products/video/video-home.html', 'video-home', 'video'),
                 # remove dtt(r'^products/interactive-video/business-video-cameras?$', 'products/video/video-business.html', 'video-business', 'video'),
@@ -611,33 +612,33 @@ else:
 
         # Support
             dtt(r'^support/?$', 'support/index.html', 'support'),
-                
+
                 # Support > Customer Service
                     dtt(r'^support/customer-service/?$', 'support/customer-service.html', 'customer-service', 'support'),
                     dtt(r'^support/customer-service/installation/?$', 'support/installation.html', 'installation', 'customer-service'),
                     dtt(r'^support/customer-service/operation/?$', 'support/operation.html', 'operation', 'customer-service'),
                     dtt(r'^support/customer-service/troubleshoot/?$', 'support/troubleshooting.html', 'troubleshooting', 'customer-service'),
-                    dtt(r'^support/customer-service/faq/?$', 'support/faq.html', 'faq', 'customer-service'),                
+                    dtt(r'^support/customer-service/faq/?$', 'support/faq.html', 'faq', 'customer-service'),
                     url(r'^support/customer-service/moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
                     # > url(r'^pa/request-moving-kit/security-moving-kit/?$', 'apps.contact.views.moving_kit', name='moving-kit'),
 
-                    
+
                 # Support > Find Us
                 dtt(r'^support/find-us/?$', 'contact-us/find-us.html', 'find-us', 'support'),
 
                 # Support > Contact Us
                 url(r'^support/contact-us/?$', 'apps.contact.views.main', name='contact-us'),
                 # > url(r'^pa/contact/?$', 'apps.contact.views.main', name='contact-us'),
-                
+
                     dtt(r'^support/contact-us/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
                     # > dtt(r'^contact/department-listing/?$', 'contact-us/department-listing.html', 'department-listing', 'contact-us'),
-                    
+
                     url(r'^support/contact-us/feedback/?$', 'apps.contact.views.ceo', name='feedback-ceo'),
                     # > url(r'^pa/feedback/?$', 'apps.contact.views.ceo', name='feedback-ceo'),
-                    
-                    
-                    url(r'^support/contact-us/write-a-review/?$','apps.testimonials.views.send_testimonial', name='send-testimonial'), 
-                    # > url(r'^pa/share-your-testimonial/?$','apps.testimonials.views.send_testimonial', name='send-testimonial'), 
+
+
+                    url(r'^support/contact-us/write-a-review/?$','apps.testimonials.views.send_testimonial', name='send-testimonial'),
+                    # > url(r'^pa/share-your-testimonial/?$','apps.testimonials.views.send_testimonial', name='send-testimonial'),
 
 
                 # Support > Careers
@@ -648,15 +649,15 @@ else:
                     # > dtt(r'^contact/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
 
 
-                
+
                 # Support > Dealer Program
                 dtt(r'^support/dealers/?$', 'contact-us/agent-2.html', 'agent-two', 'contact-us'),
-                
+
                 # Support > Affiliate Program
                 url(r'^support/affiliates/?$', 'apps.affiliates.views.signup', name='affiliate-program'),
                 # > url(r'^contact/affiliate-program/?$', 'apps.affiliates.views.signup', name='affiliate-program'),
 
- 
+
         # Help Pages
 
         dtt(r'^help/?$', 'help/index.html', 'help'),
@@ -691,7 +692,7 @@ else:
 
         url(r'^thank-you/(?P<custom_url>.*)/?$',
             'apps.common.views.thank_you', name='custom_thank_you',),
-        
+
         # Landing Pages
             # Agent 2.0 Landing Page
                 dtt(r'^affiliate/agent-two/?$', 'affiliates/agent-two/index.html', 'agent-two-lp'),
@@ -709,13 +710,13 @@ else:
             dtt(r'^cj/?$', 'affiliates/cj/index.html', 'cj', 'index', ctx={'agent_id': 'a10028'}),
 
 
-        # Affiliate Resources 
+        # Affiliate Resources
         url(r'^affiliates/resources/get-started/?$', 'apps.affiliates.views.get_started_page', name='aff-get-started'),
         url(r'^affiliates/resources/logos/?$','apps.affiliates.views.logos_page' ,name='aff-logos'),
         url(r'^affiliates/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='aff-web-banners'),
         url(r'^affiliates/resources/collateral/?$', 'apps.affiliates.views.collateral_page', name='aff-collateral'),
         url(r'^affiliates/resources/products/?$', 'apps.affiliates.views.products_page', name='aff-products'),
-        url(r'^affiliates/login/?$', 'apps.affiliates.views.aff_login', name='aff-login'),                
+        url(r'^affiliates/login/?$', 'apps.affiliates.views.aff_login', name='aff-login'),
         url(r'^api/affiliate/?$', 'apps.affiliates.views.accept_affiliate'),
 
         url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/?$',
@@ -740,10 +741,10 @@ else:
         (r'^comments/', include('django.contrib.comments.urls')),
 
         ('^radioshack/?$',
-            RedirectView.as_view(url='http://radioshack.protectamerica.com/',permanent=True)), 
+            RedirectView.as_view(url='http://radioshack.protectamerica.com/',permanent=True)),
         ('^feedback/?$',
             RedirectView.as_view(url='/pa/contact',permanent=True)),
-            
+
 
         # SEM Landing Pages
         #dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
@@ -805,266 +806,266 @@ else:
 # redirect urls
 urlpatterns += patterns('',
     ('^pa/two-way-monitoring/Home-Security-System-Monitoring/?$',
-        RedirectView.as_view(url='/products/alarm-monitoring/landline',permanent=True)), 
+        RedirectView.as_view(url='/products/alarm-monitoring/landline',permanent=True)),
     ('^pa/two-way-monitoring/?$',
         RedirectView.as_view(url='/products/alarm-monitoring/landline',permanent=True)),
     ('^pa/affiliates/?$',
-        RedirectView.as_view(url='/contact/affiliate-program/',permanent=True)), 
+        RedirectView.as_view(url='/contact/affiliate-program/',permanent=True)),
     ('^pa/home-security-opportunities/home-security/?$',
-        RedirectView.as_view(url='/contact/careers/',permanent=True)), 
+        RedirectView.as_view(url='/contact/careers/',permanent=True)),
     ('^pa/home-security-opportunities/?$',
-        RedirectView.as_view(url='/contact/careers/',permanent=True)), 
+        RedirectView.as_view(url='/contact/careers/',permanent=True)),
     ('^pa/support/?$',
-        RedirectView.as_view(url='/support/',permanent=True)), 
+        RedirectView.as_view(url='/support/',permanent=True)),
     ('^pa/about/?$',
-        RedirectView.as_view(url='/pa/about/home-security-companies/',permanent=True)), 
+        RedirectView.as_view(url='/pa/about/home-security-companies/',permanent=True)),
     ('^pa/priv_p/?$',
         RedirectView.as_view(url='/help/privacy-policy/',permanent=True)),
     ('^pa/priv_p/protect-america/?$',
-        RedirectView.as_view(url='/help/privacy-policy/',permanent=True)), 
+        RedirectView.as_view(url='/help/privacy-policy/',permanent=True)),
     ('^pa/return-policy/Home-Security/?$',
-        RedirectView.as_view(url='/help/return-policy/',permanent=True)), 
+        RedirectView.as_view(url='/help/return-policy/',permanent=True)),
     ('^pa/do-not-call/?$',
         RedirectView.as_view(url='/help/do-not-call/',permanent=True)),
     ('^pa/site_map/?$',
-        RedirectView.as_view(url='/sitemap/',permanent=True)), 
+        RedirectView.as_view(url='/sitemap/',permanent=True)),
     ('^secretkeypad/?$',
         RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)),
     ('^pa/ge_simon_xt/?$',
-        RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-xt/',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-xt/',permanent=True)),
     ('^pa/ge_simon_3/?$',
         RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-3/',permanent=True)),
     ('^pa/learn/?$',
-        RedirectView.as_view(url='/pa/learn/alarm-companies/',permanent=True)), 
+        RedirectView.as_view(url='/pa/learn/alarm-companies/',permanent=True)),
     ('^pa/operation/?$',
-        RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)), 
+        RedirectView.as_view(url='/support/customer-service/operation/',permanent=True)),
     ('^pa/advantage/?$',
-        RedirectView.as_view(url='/security-advantage/',permanent=True)), 
+        RedirectView.as_view(url='/security-advantage/',permanent=True)),
     ('^pa/troubleshooting/?$',
         RedirectView.as_view(url='/support/customer-service/troubleshoot/',permanent=True)),
     ('^pa/security_sensors/?$',
         RedirectView.as_view(url='/products/security-equipment/sensors/',permanent=True)),
     ('^pa/faq/?$',
-        RedirectView.as_view(url='/support/customer-service/faq/',permanent=True)), 
+        RedirectView.as_view(url='/support/customer-service/faq/',permanent=True)),
     ('^pa/install/?$',
-        RedirectView.as_view(url='/support/installation/',permanent=True)), 
+        RedirectView.as_view(url='/support/installation/',permanent=True)),
     ('^pa/equipment/?$',
         RedirectView.as_view(url='/pa/equipment/wireless-home-security-system/',permanent=True)),
     ('^pa/license/?$',
-        RedirectView.as_view(url='/help/state-licenses/',permanent=True)), 
+        RedirectView.as_view(url='/help/state-licenses/',permanent=True)),
     ('^pa/profile/?$',
-        RedirectView.as_view(url='/pa/profile/home-alarm-systems/',permanent=True)), 
+        RedirectView.as_view(url='/pa/profile/home-alarm-systems/',permanent=True)),
     ('^pa/charities/?$',
-        RedirectView.as_view(url='/pa/charities/america-protect/',permanent=True)), 
+        RedirectView.as_view(url='/pa/charities/america-protect/',permanent=True)),
     ('^pa/how_it_works/?$',
-        RedirectView.as_view(url='/pa/how_it_works/ge-security-systems/',permanent=True)), 
+        RedirectView.as_view(url='/pa/how_it_works/ge-security-systems/',permanent=True)),
     ('^pa/warranty/?$',
-        RedirectView.as_view(url='/help/warranty/',permanent=True)), 
+        RedirectView.as_view(url='/help/warranty/',permanent=True)),
     ('^pa/monitoring/?$',
-        RedirectView.as_view(url='/pa/monitoring/security-system/',permanent=True)), 
+        RedirectView.as_view(url='/pa/monitoring/security-system/',permanent=True)),
     ('^pa/installv/?$',
-        RedirectView.as_view(url='/support/installation/',permanent=True)), 
+        RedirectView.as_view(url='/support/installation/',permanent=True)),
     ('^local-directory/?$',
-        RedirectView.as_view(url='http://homesecuritysystems.protectamerica.com/',permanent=True)), 
+        RedirectView.as_view(url='http://homesecuritysystems.protectamerica.com/',permanent=True)),
     ('^pa/safer_at_home/?$',
-        RedirectView.as_view(url='/pa/learn/alarm-companies/',permanent=True)), 
+        RedirectView.as_view(url='/pa/learn/alarm-companies/',permanent=True)),
     ('^pa/products/?$',
-        RedirectView.as_view(url='/shop/home-security-systems/',permanent=True)), 
+        RedirectView.as_view(url='/shop/home-security-systems/',permanent=True)),
     ('^pa/packages/alarms/?$',
-        RedirectView.as_view(url='/shop/home-security-systems/',permanent=True)), 
+        RedirectView.as_view(url='/shop/home-security-systems/',permanent=True)),
     ('^careers.php$',
-        RedirectView.as_view(url='/contact/careers/',permanent=True)), 
+        RedirectView.as_view(url='/contact/careers/',permanent=True)),
     ('^pa/map/?$',
-        RedirectView.as_view(url='/contact/find-us/',permanent=True)), 
+        RedirectView.as_view(url='/contact/find-us/',permanent=True)),
     ('^pa/careers/?$',
-        RedirectView.as_view(url='/contact/careers/',permanent=True)), 
+        RedirectView.as_view(url='/contact/careers/',permanent=True)),
     ('^pa/packages/?$',
-        RedirectView.as_view(url='/pa/packages/alarms/',permanent=True)), 
+        RedirectView.as_view(url='/pa/packages/alarms/',permanent=True)),
     ('^pa/mistakes/?$',
-        RedirectView.as_view(url='/pa/learn/alarm-companies/',permanent=True)), 
+        RedirectView.as_view(url='/pa/learn/alarm-companies/',permanent=True)),
     ('^pa/home_security_accessories/?$',
-        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)),
     ('^pa/home_automation/?$',
         RedirectView.as_view(url='/products/security-equipment/accessories/home-automation/',permanent=True)),
     ('^pa/copper/home-security-systems/?$',
         RedirectView.as_view(url='/shop-home-security-packages/copper',permanent=True)),
     ('^pa/home_automation/home-automation-devices/?$',
-        RedirectView.as_view(url='/products/security-equipment/accessories/home-automation',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories/home-automation',permanent=True)),
     ('^pa/advantage/adt-security/?$',
-        RedirectView.as_view(url='/security-advantage',permanent=True)), 
+        RedirectView.as_view(url='/security-advantage',permanent=True)),
     ('^pa/platinum/alarm-system/?$',
-        RedirectView.as_view(url='/shop-home-security-packages/platinum',permanent=True)), 
+        RedirectView.as_view(url='/shop-home-security-packages/platinum',permanent=True)),
     ('^pa/gold/alarm-systems/?$',
-        RedirectView.as_view(url='/shop-home-security-packages/gold',permanent=True)), 
+        RedirectView.as_view(url='/shop-home-security-packages/gold',permanent=True)),
     ('^pa/silver/alarm/?$',
         RedirectView.as_view(url='/shop-home-security-packages/silver',permanent=True)),
     ('^pa/bronze/security-systems/?$',
-        RedirectView.as_view(url='/shop-home-security-packages/bronze',permanent=True)), 
+        RedirectView.as_view(url='/shop-home-security-packages/bronze',permanent=True)),
     ('^pa/existing-home-security-system/cellular-monitoring/?$',
-        RedirectView.as_view(url='/products/existing-security-system',permanent=True)), 
+        RedirectView.as_view(url='/products/existing-security-system',permanent=True)),
     ('^pa/install/home-security-wireless/?$',
-        RedirectView.as_view(url='/support/installation',permanent=True)), 
+        RedirectView.as_view(url='/support/installation',permanent=True)),
     ('^pa/ge_simon_xt/ge-simon-xt/?$',
         RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-xt',permanent=True)),
     ('^pa/broadband-monitoring/Alarm-System-Without-Phone-Line/?$',
-        RedirectView.as_view(url='/products/alarm-monitoring/broadband',permanent=True)), 
+        RedirectView.as_view(url='/products/alarm-monitoring/broadband',permanent=True)),
     ('^pa/landline-monitoring/Home-Security-Monitoring-Service/?$',
-        RedirectView.as_view(url='/products/alarm-monitoring/landline',permanent=True)), 
+        RedirectView.as_view(url='/products/alarm-monitoring/landline',permanent=True)),
     ('^pa/troubleshooting/protect-america/?$',
-        RedirectView.as_view(url='/support/customer-service/troubleshoot/',permanent=True)), 
+        RedirectView.as_view(url='/support/customer-service/troubleshoot/',permanent=True)),
     ('^pa/home_security_accessories/home-security-accessories/?$',
-        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)),
     ('^pa/security_sensors/home-security-sensors/?$',
-        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)),
     ('^pa/cellular-monitoring/Wireless-Home-Security/?$',
-        RedirectView.as_view(url='/products/alarm-monitoring/cellular',permanent=True)), 
+        RedirectView.as_view(url='/products/alarm-monitoring/cellular',permanent=True)),
     ('^pa/simon-xt-touchscreen/ge-simon-xt-touchscreen/?$',
         RedirectView.as_view(url='/products/security-equipment/accessories/touchscreen',permanent=True)),
     ('^pa/return-policy/?$',
         RedirectView.as_view(url='/help/return-policy/',permanent=True)),
     ('^pa/request-moving-kit/?$',
-        RedirectView.as_view(url='/pa/request-moving-kit/security-moving-kit',permanent=True)), 
+        RedirectView.as_view(url='/pa/request-moving-kit/security-moving-kit',permanent=True)),
     ('^home-security/business-security-systems$',
-        RedirectView.as_view(url='/home-security/business-security-systems/',permanent=True)), 
+        RedirectView.as_view(url='/home-security/business-security-systems/',permanent=True)),
     ('^crimeprevention$',
-        RedirectView.as_view(url='crimeprevention/',permanent=True)), 
+        RedirectView.as_view(url='crimeprevention/',permanent=True)),
 
     ('^crimeprevention/?$',
-        RedirectView.as_view(url='/national-crime-prevention/?agent=i03248',permanent=True)),  
+        RedirectView.as_view(url='/national-crime-prevention/?agent=i03248',permanent=True)),
     #('^national-crime-prevention$',
     #    RedirectView.as_view(), {'url': '/national-crime-prevention/', 'permanent': True}),
 
     ('^livechat_iframe.php',
-        RedirectView.as_view(url='/support',permanent=True)), 
+        RedirectView.as_view(url='/support',permanent=True)),
     ('^pa/yard-sign/security-yard-sign',
-        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)),
     ('^pa/x10-appliance-module/home-security-automation',
-        RedirectView.as_view(url='/home-security-blog/tag/x10-home-automation',permanent=True)), 
+        RedirectView.as_view(url='/home-security-blog/tag/x10-home-automation',permanent=True)),
     ('^pa/outdoor_lighting/alarms-home',
-        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)),
     ('^pa/x10-powerhorn-siren/security-siren',
-        RedirectView.as_view(url='/home-security-blog/alarm-systems/simon-xt-alarm-system-features_2285',permanent=True)), 
+        RedirectView.as_view(url='/home-security-blog/alarm-systems/simon-xt-alarm-system-features_2285',permanent=True)),
     ('^pa/operation/monitoring-security',
-        RedirectView.as_view(url='/home-security-blog/home-security/how-to-remote-monitor-home-video-security-camera-2_1311',permanent=True)), 
+        RedirectView.as_view(url='/home-security-blog/home-security/how-to-remote-monitor-home-video-security-camera-2_1311',permanent=True)),
     ('^pa/compare/home-security-comparison',
         RedirectView.as_view(url='/home-security-blog/home-security-systems-2/home-security-systems-comparison-3_2604',permanent=True)),
     ('^pa/carbon-monoxide-detector/carbon-monoxide-detector',
-        RedirectView.as_view(url= '/home-security-blog/home-security/home-security-information/home-security-tips/carbon-monoxide-poisoning_2985',permanent=True)), 
+        RedirectView.as_view(url= '/home-security-blog/home-security/home-security-information/home-security-tips/carbon-monoxide-poisoning_2985',permanent=True)),
     ('^pa/x10-socket-rocket/home-security-automation',
-        RedirectView.as_view(url='/home-security-blog/tag/x10-home-automation',permanent=True)), 
+        RedirectView.as_view(url='/home-security-blog/tag/x10-home-automation',permanent=True)),
     ('^pa/landscaping/alarms-home-security',
-        RedirectView.as_view(url='/home-security-blog/home-security/home-security-information/best-home-security-diy-projects-and-quick-tips_148',permanent=True)), 
+        RedirectView.as_view(url='/home-security-blog/home-security/home-security-information/best-home-security-diy-projects-and-quick-tips_148',permanent=True)),
     ('^pa/low-temperature-sensor/low-temperature-sensor',
         RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)),
     ('^pa/safer_at_home/security',
         RedirectView.as_view(url='/news/article/keep-homes-safe-with-home-security-systems_1232',permanent=True)),
     ('^pa/glass_around/alarm-home-system',
-        RedirectView.as_view(url='/home-security/business-security-systems/',permanent=True)), 
+        RedirectView.as_view(url='/home-security/business-security-systems/',permanent=True)),
     ('^pa/license/protect-america-licenses',
         RedirectView.as_view(url='/help/state-licenses/',permanent=True)),
     ('^pa/motion-detector/motion-detector',
-        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)),
     ('^pa/faq/alarm-company-monitoring',
-        RedirectView.as_view(url='/support/customer-service/faq/',permanent=True)), 
+        RedirectView.as_view(url='/support/customer-service/faq/',permanent=True)),
     ('^pa/site_map/protect-america',
-        RedirectView.as_view(url='/sitemap/')), 
+        RedirectView.as_view(url='/sitemap/')),
     ('^pa/window-decal/security-window-sticker',
         RedirectView.as_view(url= '/products/security-equipment/accessories',permanent=True)),
     ('^pa/low-price-guarantee/GE-Security-System',
-        RedirectView.as_view(url='/help/low-price-guarantee',permanent=True)), 
+        RedirectView.as_view(url='/help/low-price-guarantee',permanent=True)),
     ('^pa/map/protect-america',
-        RedirectView.as_view(url='/contact/find-us',permanent=True)), 
+        RedirectView.as_view(url='/contact/find-us',permanent=True)),
     ('^pa/ge_simon_3/ge-simon-3',
-        RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-xt',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-xt',permanent=True)),
     ('^pa/secure_vacation/alarm-house',
         RedirectView.as_view(url='/news/article/consider-home-security-before-going-on-vacation_31',permanent=True)),
     ('^pa/smoke-detector/smoke-detector/',
-        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)),
     ('^pa/products/ge-home-security',
         RedirectView.as_view(url='/pa/equipment/wireless-home-security-system',permanent=True)),
     ('^https:/www.protectamerica.com/pa/security-affiliate-enrollment/security',
-        RedirectView.as_view(url='/contact/affiliate-program/',permanent=True)), 
+        RedirectView.as_view(url='/contact/affiliate-program/',permanent=True)),
     ('^pa/home_automation/home-automation-devices',
-        RedirectView.as_view(url='/home-security-blog/tag/home-automation-devices',permanent=True)), 
+        RedirectView.as_view(url='/home-security-blog/tag/home-automation-devices',permanent=True)),
     ('^pa/support/home-security-alarm-system',
-        RedirectView.as_view(url='/pa/monitoring/security-system',permanent=True)), 
+        RedirectView.as_view(url='/pa/monitoring/security-system',permanent=True)),
     ('^pa/warranty/monitoring-security-system',
-        RedirectView.as_view(url='/help/warranty',permanent=True)), 
+        RedirectView.as_view(url='/help/warranty',permanent=True)),
     ('^pa/talking-wireless-keypad/wireless-keypad',
-        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories',permanent=True)),
     ('^pa/solar-yard-sign-light/solar-yard-sign-light',
-        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)),
     ('^pa/careers/home-security-jobs',
-        RedirectView.as_view(url= '/contact/careers',permanent=True)), 
+        RedirectView.as_view(url= '/contact/careers',permanent=True)),
     ('^pa/complete-home-security/',
-        RedirectView.as_view(url='/complete-home-security',permanent=True)), 
+        RedirectView.as_view(url='/complete-home-security',permanent=True)),
     ('^pa/command-station/security-system',
-        RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-xt',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/control-panels/ge-simon-xt',permanent=True)),
     ('^pa/medical-panic-pendant/medical-panic-pendant',
-        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)),
     ('^pa/neighborhood_watch/burglar-alarm',
-        RedirectView.as_view(url='/news/article/serial-burglars-suspected-of-thefts-in-california-neighborhood_453',permanent=True)), 
+        RedirectView.as_view(url='/news/article/serial-burglars-suspected-of-thefts-in-california-neighborhood_453',permanent=True)),
     ('^pa/dept/protect-america',
-        RedirectView.as_view(url='/contact/department-listing',permanent=True)), 
+        RedirectView.as_view(url='/contact/department-listing',permanent=True)),
     ('^pa/glass-break-detector/glass-break-detector',
         RedirectView.as_view(url='/ge-simon-security-systems/wireless-business-security/business-package',permanent=True)),
     ('^pa/door-or-window-sensor/door-sensor',
         RedirectView.as_view(url='/products/security-equipment/sensors/door-window-sensor',permanent=True)),
     ('^pa/keychain-remote-control/security-keychain-remote',
-        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/accessories/',permanent=True)),
     ('^pa/security-of-information/protect-america',
-        RedirectView.as_view(url='/help/security-of-information',permanent=True)), 
+        RedirectView.as_view(url='/help/security-of-information',permanent=True)),
     ('^pa/order_2/home-security-monitoring-system',
-        RedirectView.as_view(url='/products/order-package',permanent=True)), 
+        RedirectView.as_view(url='/products/order-package',permanent=True)),
     ('^pa/home_security_checklist/home-protection',
         RedirectView.as_view(url='/home-security-blog/home-security/vacation-safety-tips_1684',permanent=True)),
     ('^pa/secure_garage/brinks-home-security',
-        RedirectView.as_view(url='/news/article/diy-tips-for-garage-security_1306',permanent=True)), 
+        RedirectView.as_view(url='/news/article/diy-tips-for-garage-security_1306',permanent=True)),
     ('^pa/video-home/',
         RedirectView.as_view(url='/pa/wireless-security-camera/ip-security-cameras',permanent=True)),
     ('^pa/flood-sensor/flood-sensor',
-        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)), 
+        RedirectView.as_view(url='/products/security-equipment/sensors',permanent=True)),
     ('^pa/x10-lamp-module/home-security-automation',
-        RedirectView.as_view(url='/home-security-blog/tag/x10-home-automation',permanent=True)), 
+        RedirectView.as_view(url='/home-security-blog/tag/x10-home-automation',permanent=True)),
     ('^pa/video-business/',
         RedirectView.as_view(url='/products/interactive-video/business-video-camera',permanent=True)),
 
     # direct mail
     ('^AA1/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10017',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10017',permanent=True)),
     ('^AA2/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10019',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10019',permanent=True)),
     ('^AA3/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10021',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10021',permanent=True)),
     ('^AA4/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10023',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10023',permanent=True)),
     ('^AA5/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10025',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10025',permanent=True)),
     ('^AB1/?$',
         RedirectView.as_view(url='/direct-mail/?agent=a10027',permanent=True)),
 
     ('^aa1/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10017',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10017',permanent=True)),
     ('^aa2/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10019',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10019',permanent=True)),
     ('^aa3/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10021',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10021',permanent=True)),
     ('^aa4/?$',
         RedirectView.as_view(url='/direct-mail/?agent=a10023',permanent=True)),
     ('^aa5/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10025',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10025',permanent=True)),
     ('^ab1/?$',
-        RedirectView.as_view(url='/direct-mail/?agent=a10027',permanent=True)), 
+        RedirectView.as_view(url='/direct-mail/?agent=a10027',permanent=True)),
     ('^feedback/?$',
-        RedirectView.as_view(url='/pa/feedback',permanent=True)), 
+        RedirectView.as_view(url='/pa/feedback',permanent=True)),
     ('^ceo/?$',
         RedirectView.as_view(url='/pa/feedback',permanent=True)),
     ('^familyofcompanies/?$',
-        RedirectView.as_view(url='/?agent=a02332',permanent=True)), 
+        RedirectView.as_view(url='/?agent=a02332',permanent=True)),
     ('^angies/?$',
-        RedirectView.as_view(url= '/?agent=a03103',permanent=True)), 
+        RedirectView.as_view(url= '/?agent=a03103',permanent=True)),
     ('^homesecurity/?$',
-        RedirectView.as_view(url='/?agent=gr banner',permanent=True)), 
+        RedirectView.as_view(url='/?agent=gr banner',permanent=True)),
     ('shop/home-security-systems/?$',
         RedirectView.as_view(url='/shop-home-security-packages/',permanent=True)),
     ('ge-simon-security-systems/wireless-home-alarm/copper-package/?$',
@@ -1288,19 +1289,19 @@ urlpatterns += patterns('',
     ('pa/billing/?$',
         RedirectView.as_view(url='/',permanent=True)),
     ('pa/glass_around/?$',
-        RedirectView.as_view(url='/',permanent=True)), 
+        RedirectView.as_view(url='/',permanent=True)),
     ('pa/search/?$',
         RedirectView.as_view(url='/search/',permanent=True)),
     ('pa/thank_you/?$',
-        RedirectView.as_view(url='/thank_you/',permanent=True)),      
+        RedirectView.as_view(url='/thank_you/',permanent=True)),
     ('pa/outdoor_lighting/?$',
-        RedirectView.as_view(url='/security-equipment',permanent=True)),      
+        RedirectView.as_view(url='/security-equipment',permanent=True)),
     ('pa/cellular-monitoring/?$',
-        RedirectView.as_view(url='/learn/alarm-monitoring/cellular/',permanent=True)),  
+        RedirectView.as_view(url='/learn/alarm-monitoring/cellular/',permanent=True)),
     ('pa/order/?$',
-        RedirectView.as_view(url='/products/order-package/',permanent=True)), 
+        RedirectView.as_view(url='/products/order-package/',permanent=True)),
     ('crime-rate?$',
-        RedirectView.as_view(url='/crime-rate/',permanent=True)),  
+        RedirectView.as_view(url='/crime-rate/',permanent=True)),
     ('pa/home/?$',
         RedirectView.as_view(url='/',permanent=True)),
     ('alarm/?$',

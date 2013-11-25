@@ -318,13 +318,6 @@ LEAD_CAMPAIGN_ID = '054irukv1'
 # use it so while testing we disable emails 
 LEAD_TESTING = False
 
-# override these settings with those from settings.local,
-# which may be a symlink to your local, version-controlled settings
-try:
-    from etc.django.local import *
-except ImportError:
-    pass
-
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
 # one of the values below. It will either be a local directory or the directory on 
 # the live server 
@@ -337,3 +330,10 @@ elif os.path.isdir('/Users/edgarrodriguez'):
 else:
     LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
 
+
+# override these settings with those from settings.local,
+# which may be a symlink to your local, version-controlled settings
+try:
+    from etc.django.local import *
+except ImportError:
+    pass
