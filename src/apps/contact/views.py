@@ -438,7 +438,7 @@ def basic_post_login(request):
 
 @csrf_exempt
 def ajax_post_unprotected(*args, **kwargs):
-    return ajaex_post(*args, **kwargs)
+    return ajax_post(*args, **kwargs)
 
 def ajax_post_protected(*args, **kwargs):
     return ajax_post(*args, **kwargs)
