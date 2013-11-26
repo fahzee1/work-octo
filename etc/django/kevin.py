@@ -88,3 +88,4 @@ if not ADMIN_REMOVE_DEBUG:
 
 
 LC_LOG = os.environ['VIRTUAL_ENV'] + '/local/leadconduit.log'
+ENGAGE_LOG_DIR = os.environ['VIRTUAL_ENV'] + '/local/silverpop_unsubscribe.log'

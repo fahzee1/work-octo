@@ -329,6 +329,14 @@ ENGAGE_CONFIG = {
 # Siverpop Engage Master Suppression List ID
 ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
 
+# Silverpop Engage logging for unsubscribe.htm
+ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
+ENGAGE_LOG_LEVEL = 'INFO'
+ENGAGE_LOG_ROTATION = {
+    'maxBytes': 1048576,  # 1MB
+    'backupCount': 5
+}
+
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
 # one of the values below. It will either be a local directory or the directory on
 # the live server

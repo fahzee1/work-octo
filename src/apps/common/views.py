@@ -5,6 +5,7 @@ import urllib2
 import operator
 import random
 import pdb
+import logging
 from django.http import Http404
 from decimal import Decimal
 from datetime import datetime, timedelta
@@ -335,11 +336,21 @@ def unsubscribe(request):
     # Siverpop Engage Master Suppression List ID
     MSL_ID = settings.ENGAGE_UNSUBSCRIBE_MSL_ID
 
+    # Logging
+    sp_logger = logging.getLogger('silverpoppy.api')
+    sp_logger.setLevel(settings.ENGAGE_LOG_LEVEL)
+    handler = logging.handlers.RotatingFileHandler(settings.ENGAGE_LOG_DIR,
+                                                   **settings.ENGAGE_LOG_ROTATION)
+    handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s - %(message)s'))
+    sp_logger.addHandler(handler)
+
     if request.method == 'POST':
         form = Unsubscribe(request.POST)
         if form.is_valid():
             email = form.cleaned_data['unsub_email']
             ctx['email'] = email
+
+            sp_logger.info('Unsubscribe request received for email: {0}'.format(email))
 
             eng = Engage(eng_config['api_url'],
                          username=eng_config['username'],
@@ -362,6 +373,10 @@ def unsubscribe(request):
             """.format(MSL_ID, email)
 
             resp = eng.xml_engage_request(xml_AddRecipient)
+
+            sp_logger.info(
+                'Unsubscribe email: {0} = {1}'.format(email,
+                                                      'SUCCESS' if resp.SUCCESS else 'FAIL'))
 
             eng.logout()
 
