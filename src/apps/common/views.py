@@ -329,8 +329,11 @@ def black_friday_ajax(request):
 def unsubscribe(request):
     ctx = {}
 
-    # Master Suppression List ID
-    MSL_ID ='1788700'
+    #Engage API Credentials
+    eng_config = settings.ENGAGE_CONFIG
+
+    # Siverpop Engage Master Suppression List ID
+    MSL_ID = settings.ENGAGE_UNSUBSCRIBE_MSL_ID
 
     if request.method == 'POST':
         form = Unsubscribe(request.POST)
@@ -338,9 +341,9 @@ def unsubscribe(request):
             email = form.cleaned_data['unsub_email']
             ctx['email'] = email
 
-            eng = Engage('http://api3.silverpop.com/XMLAPI',
-                         username='kevin@protectamerica.com',
-                         password='8RYbZ&YX')
+            eng = Engage(eng_config['api_url'],
+                         username=eng_config['username'],
+                         password=eng_config['password'])
             eng.login()
             xml_AddRecipient = """
             <Envelope>

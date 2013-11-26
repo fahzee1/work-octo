@@ -318,6 +318,17 @@ LEAD_CAMPAIGN_ID = '054irukv1'
 # use it so while testing we disable emails
 LEAD_TESTING = False
 
+#Silverpop Engage credentials for unsubscribe.htm
+ENGAGE_CONFIG = {
+    'username': 'kevin@protectamerica.com',
+    'password': '8RYbZ&YX',
+    'api_url': 'http://api3.silverpop.com/XMLAPI',
+    'ftp_url': 'transfer3.silverpop.com',
+}
+
+# Siverpop Engage Master Suppression List ID
+ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
+
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
 # one of the values below. It will either be a local directory or the directory on
 # the live server
