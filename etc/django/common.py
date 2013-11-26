@@ -333,7 +333,7 @@ ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
 
 # Silverpop Engage logging for unsubscribe.htm
 ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
-ENGAGE_LOG_LEVEL = 'INFO'
+ENGAGE_LOG_LEVEL = logging.INFO
 ENGAGE_LOG_ROTATION = {
     'maxBytes': 1048576,  # 1MB
     'backupCount': 5
@@ -365,10 +365,3 @@ handler = logging.handlers.RotatingFileHandler(ENGAGE_LOG_DIR,
                                             **ENGAGE_LOG_ROTATION)
 handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s - %(message)s'))
 sp_logger.addHandler(handler)
-
-# override these settings with those from settings.local,
-# which may be a symlink to your local, version-controlled settings
-try:
-    from etc.django.local import *
-except ImportError:
-    pass

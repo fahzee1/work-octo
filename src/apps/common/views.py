@@ -339,8 +339,6 @@ def unsubscribe(request):
     # Logging
     sp_logger = logging.getLogger('silverpoppy.api')
 
-    sp_logger.info('In the view')
-
     if request.method == 'POST':
         form = Unsubscribe(request.POST)
         if form.is_valid():
