@@ -2,7 +2,6 @@
 
 {% block css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/bootstrap.min.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/flexslider.css" type="text/css">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/styles.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,8 +17,8 @@
     <div class="headerPhone inverse">
         <div class="container">
             <div class="row">
-                <p>CALL NOW TO ORDER <span>800-867-0151</span></p>
-                 <p>{% if request.GET.affkey %}IBO Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}IBO Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}IBO Number: {{ affkey }}{% else %}{% endif %}{% endif %}{% endif %}</p>
+                <p class="phoneNumber">Call Now To Order <span>800-867-0151</span></p>
+                 <p class="scheduleWrapper">M-F: 8AM - 10:00PM EST <span class="slash">/</span> SAT: 9AM - 9PM EST <span class="slash">/</span> SUN: 10AM - 10PM EST</p>
             </div><!-- /row -->
         </div><!-- /container -->
     </div><!-- /headerPhone -->
@@ -46,10 +45,10 @@
                             {% block navigation %}
                             <ul id="mainNav">
                                 <li><a href="{% url home %}">Home</a></li>
-                                <li><a href="{% url features %}">Features</a></li>
                                 <li><a href="{% url packages %}">Packages</a></li>
-                                <li><a href="{% url order %}">Order</a></li>
+                                <li><a href="{% url features %}">Features</a></li>
                                 <li><a href="{% url support %}">Support</a></li>
+                                <li><a href="{% url order %}">Order</a></li>
                             </ul>
                             {% endblock %}
                         </div><!-- /nav -->
@@ -65,10 +64,10 @@
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
                             <ul class="footerNav">
                                 <li><a href="{% url home %}">Home</a></li>
-                                <li><a href="{% url features %}">Security System Features</a></li>
                                 <li><a href="{% url packages %}">Packages</a></li>
+                                <li><a href="{% url features %}">Features</a></li>
+                                <li><a href="{% url support %}">Support</a></li>
                                 <li><a href="{% url order %}">Order</a></li>
-                                <li><a href="{% url order %}">Support</a></li>
                             </ul>
                         </div><!-- /col -->
                         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
@@ -107,18 +106,21 @@
                 </div><!-- /container -->
             </div><!-- /terms -->
         <!-- jquery -->
-        <script src="{{ STATIC_URL }}js/affiliates/acn/bootstrap.min.js"></script>
-        <script src="{{ STATIC_URL }}js/affiliates/acn/jquery.flexslider-min.js"></script>
         <script type="text/javascript" charset="utf-8">
-            $(window).load(function() {
-                $('.flexslider').flexslider();
-            });
             $( "#mobileBlogNavTrigger" ).click(function() {
               $( "#mainNav" ).toggle( "fast" );
             });
             $( window ).scroll(function() {
                 $( "#scrollBubble" ).fadeOut( "slow" );
             });
+           $('.faq').click(function() {
+               $(this).children(".faqAnswer").slideToggle('ease');
+               if ($(this).hasClass('arrow_up')) {
+                   $(this).removeClass('arrow_up')
+               } else {
+                   $(this).addClass('arrow_up')
+               }
+           }) 
         </script>
 {% endblock %}
 {% block order-footer %}{% endblock %}
