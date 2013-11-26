@@ -1,6 +1,6 @@
 {% extends "order/quote-form.html" %}
 {% block form-title %}
-	<h2 class="form-title">Order Now</h2>
+	<h2 class="form-title">Contact Me</h2>
 {% endblock %}
 {% block formfields %}
 	<div class="form-fields" data-acn="true" data-thank-you="http://acnsecuritysystems.com/thank-you/">
@@ -11,10 +11,10 @@
        <label>Phone:</label>
        <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone">
        <label>Business ID:</label>
-       <input id="id_business" type="text" maxlength="20" name="phone" value="{% if request.GET.affkey %}{{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}{{ request.COOKIES.affkey }}{% else %}{% if affkey %}{{ affkey }}{% endif %}{% endif %}{% endif %}">
+       <input id="id_business" type="text" maxlength="20" name="business_id" value="{% if request.GET.affkey %}{{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}{{ request.COOKIES.affkey }}{% else %}{% if affkey %}{{ affkey }}{% endif %}{% endif %}{% endif %}" placeholder="Business ID">       
    </div>
 {% endblock %}
-{% block quote-button %}Order Now <i class="icon-chevron-right"></i>{% endblock %}
+{% block quote-button %}Contact Me <i class="icon-chevron-right"></i>{% endblock %}
 {% block privacy-policy %}
 {% endblock %}
     {% block quote-validation %}
