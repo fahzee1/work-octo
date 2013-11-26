@@ -321,6 +321,15 @@ LEAD_TESTING = False
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
 # one of the values below. It will either be a local directory or the directory on 
 # the live server 
+
+
+# override these settings with those from settings.local,
+# which may be a symlink to your local, version-controlled settings
+try:
+    from etc.django.local import *
+except ImportError:
+    pass
+
 if os.path.isdir('/Users/cjogbuehi'):
     LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 elif os.path.isdir('/Users/rylanfrancis'):
@@ -330,10 +339,3 @@ elif os.path.isdir('/Users/edgarrodriguez'):
 else:
     LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
 
-
-# override these settings with those from settings.local,
-# which may be a symlink to your local, version-controlled settings
-try:
-    from etc.django.local import *
-except ImportError:
-    pass
