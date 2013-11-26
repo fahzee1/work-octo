@@ -338,11 +338,8 @@ def unsubscribe(request):
 
     # Logging
     sp_logger = logging.getLogger('silverpoppy.api')
-    sp_logger.setLevel(settings.ENGAGE_LOG_LEVEL)
-    handler = logging.handlers.RotatingFileHandler(settings.ENGAGE_LOG_DIR,
-                                                   **settings.ENGAGE_LOG_ROTATION)
-    handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s - %(message)s'))
-    sp_logger.addHandler(handler)
+
+    sp_logger.info('In the view')
 
     if request.method == 'POST':
         form = Unsubscribe(request.POST)

@@ -2,6 +2,8 @@
 import sys
 import os
 import settings
+import logging
+import logging.handlers
 
 
 DEBUG = False
@@ -356,6 +358,13 @@ try:
 except ImportError:
     pass
 
+# Build logging for unsubscribe.htm
+sp_logger = logging.getLogger('silverpoppy.api')
+sp_logger.setLevel(ENGAGE_LOG_LEVEL)
+handler = logging.handlers.RotatingFileHandler(ENGAGE_LOG_DIR,
+                                            **ENGAGE_LOG_ROTATION)
+handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s - %(message)s'))
+sp_logger.addHandler(handler)
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
