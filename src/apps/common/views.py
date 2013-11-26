@@ -5,6 +5,7 @@ import urllib2
 import operator
 import random
 import pdb
+import logging
 from django.http import Http404
 from decimal import Decimal
 from datetime import datetime, timedelta
@@ -28,12 +29,14 @@ from django.contrib.sites.models import Site
 
 from apps.contact.forms import LeadForm, AffiliateLongForm
 from apps.affiliates.models import Affiliate
-from apps.common.forms import LinxContextForm
+from apps.common.forms import LinxContextForm, Unsubscribe
 from apps.news.models import Article
 from apps.pricetable.models import Package
 from apps.newsfeed.models import TheFeed,FallBacks
 from itertools import chain, izip
 from django.core.mail import send_mail
+
+from silverpoppy import Engage
 
 consumer_key=settings.TWITTER_CONSUMER_KEY
 consumer_secret=settings.TWITTER_CONSUMER_SECRET
@@ -264,7 +267,7 @@ def index_render(request, template, context):
 
     if 'no_mobile' in request.GET:
         request.session['no_mobile'] = True
-    
+
     return simple_dtt(request, template, context)
 
 
@@ -274,7 +277,7 @@ def family_of_companies(request):
     ctx = {}
     ctx['page_name'] = 'family'
     ctx['pages'] = ['about-us']
-    
+
     family_json_obj = cache.get('FAMILYJSON')
     if family_json_obj is None:
         try:
@@ -323,3 +326,63 @@ def black_friday_ajax(request):
             send_mail(subject,message,from_email,[too])
         return HttpResponse()
     return HttpResponseBadRequest()
+
+def unsubscribe(request):
+    ctx = {}
+
+    #Engage API Credentials
+    eng_config = settings.ENGAGE_CONFIG
+
+    # Siverpop Engage Master Suppression List ID
+    MSL_ID = settings.ENGAGE_UNSUBSCRIBE_MSL_ID
+
+    # Logging
+    sp_logger = logging.getLogger('silverpoppy.api')
+
+    sp_logger.info('In the view')
+
+    if request.method == 'POST':
+        form = Unsubscribe(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['unsub_email']
+            ctx['email'] = email
+
+            sp_logger.info('Unsubscribe request received for email: {0}'.format(email))
+
+            eng = Engage(eng_config['api_url'],
+                         username=eng_config['username'],
+                         password=eng_config['password'])
+            eng.login()
+            xml_AddRecipient = """
+            <Envelope>
+                <Body>
+                    <AddRecipient>
+                        <LIST_ID>{0}</LIST_ID>
+                        <CREATED_FROM>1</CREATED_FROM>
+                        <UPDATE_IF_FOUND>true</UPDATE_IF_FOUND>
+                        <COLUMN>
+                            <NAME>EMAIL</NAME>
+                            <VALUE>{1}</VALUE>
+                        </COLUMN>
+                    </AddRecipient>
+                </Body>
+            </Envelope>
+            """.format(MSL_ID, email)
+
+            resp = eng.xml_engage_request(xml_AddRecipient)
+
+            sp_logger.info(
+                'Unsubscribe email: {0} = {1}'.format(email,
+                                                      'SUCCESS' if resp.SUCCESS else 'FAIL'))
+
+            eng.logout()
+
+            ctx['SUCCESS'] = resp.SUCCESS
+
+    else:
+        form = Unsubscribe()
+
+    ctx['form'] = form
+
+    return render(request, 'unsubscribe/unsub.html', ctx)
+
