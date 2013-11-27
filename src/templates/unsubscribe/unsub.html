@@ -1,0 +1,47 @@
+{% extends "unsubscribe/base.html" %}
+{% block header %}
+    <title>Protect America - Unsubscribe</title>
+{% endblock %}
+{% block content %}
+    <div id="container">
+        <div id="logo">
+            <img src="{{ STATIC_URL }}img/protect-america-logo2.png" id="pa-logo" title="Protect America Home Security" />
+        </div>
+        <div id="privacy" class="right">
+            <a href="{% url privacy-policy %}">Privacy</a>
+        </div>
+        <br />
+        <HR class="clear">
+        {% if email %}
+            <p id="message" class="post" align="center">
+            {% if SUCCESS %}
+                The email address '{{ email }}' has been successfully unsubscribed.
+            {% else %}
+                The email address '{{ email }}' was unable to be unsubscribed at this time. Please try again later.
+            {% endif %}
+            </p>
+        {% else %}
+            <p id="message" align="center">
+            Welcome to Protect America's unsubscribe manager. We thank you for being a valued customer and we're sorry to see you go. Unsubscribe by entering your email below.
+            </p>
+            <br />
+            <div id="form">
+                <form id="unsub" method="POST">{% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div id="inputs" class="center">
+                        <div class="fieldWrapper">
+                            {% if form.unsub_email.errors %}
+                                {% for error in form.unsub_email.errors %}
+                                    <p class="error"><strong>{{ error|escape }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                            {{ form.unsub_email }}
+                        </div>
+                        <!--<input id="email_input" name="input_email" type="email" value="" autofocus placeholder="user@yourdomain.com">-->
+                        <input type="submit" class="submit" value="Unsubscribe">
+                    </div>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

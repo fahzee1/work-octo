@@ -160,6 +160,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-free.html', 'green-test'),
         dtt(r'^krbe/?$', 'affiliates/sem-landing-page/green-test.html', 'krbe'),
         dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
+        dtt(r'^medical-alert/?$', 'affiliates/sem-landing-page/medical-pendant.html', 'medical'),
 
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
@@ -801,6 +802,10 @@ else:
         dtt(r'^CFCLEVELAND/?$', 'affiliates/crime-stoppers-cf/cleveland.html', 'cf-cleveland'),
         dtt(r'^CFMIAMI/?$', 'affiliates/crime-stoppers-cf/miami.html', 'cf-miami'),
 
+
+        # UNSUBSCRIBE
+        url(r'^unsubscribe.html?$', 'apps.common.views.unsubscribe', name='unsubscribe'),
+        url(r'^unsubscribe/?$', 'apps.common.views.unsubscribe', name='unsubscribe'),
 
 )
 

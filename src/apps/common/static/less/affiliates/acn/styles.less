@@ -18,6 +18,11 @@ a:hover, a:focus {
     color: #3780CB;
     text-decoration: underline;
 }
+a.phonenumber,
+a.phonenumber:hover {
+    cursor: default;
+    text-decoration: inherit;
+}
 img {
     max-width: 100%;
 }
@@ -210,11 +215,21 @@ i.arrowIcon {
 }
 .headerPhone {
     text-align: center;
+    line-height: 1;
+    padding-bottom: 4px;
     padding-top: 6px;
+    position: relative;
+}
+.headerPhone .phoneNumber {
+    font-size: 24px;
+}
+.headerPhone .slash {
+    color: #4e6e8c;
+    padding: 0 5px;
 }
 .headerPhone p,
 .footerPhone p {
-    font-size: 16px;
+    font-size: 14px;
     margin-bottom: 6px;
 }
 .footerPhone {
@@ -229,9 +244,26 @@ i.arrowIcon {
     .headerPhone, .footerPhone {
         text-align: center;
     }
-    .headerPhone p,
-    .headerPhone p span {
+    .headerPhone .phoneNumber {
         font-size: 14px;
+    }
+}
+@media (min-width: 767px) {
+    .headerPhone .phoneNumber span {
+        display: block;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .scheduleWrapper {
+        position: absolute;
+        right: 20px;
+        text-align: right;
+        top: 10px;
+        width: 270px;
+    }
+    .headerPhone .slash {
+        display: block;
+        height: 0;
     }
 }
 /*Header*/
@@ -458,7 +490,14 @@ h2.form-title {
 .aboutPA {
     background-color: #fff;
 }
-.aboutPA h4,
+.aboutPA .logos {
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.5);
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 10px;
+}
 .supportInfo h4,
 .cellular h4 {
     line-height: 1.2;
@@ -467,7 +506,7 @@ h2.form-title {
 .aboutPA .halfCol {
     float: left;
     text-align: center;
-    width: 49%;
+    width: 25%;
 }
 /*contactFooter*/
 .contactFooter {
@@ -512,6 +551,12 @@ h2.form-title {
     color: #fff;
     text-decoration: none;
 }
+.home .homeFooterNav {
+    display: none;
+}
+.home .packagesFooterNav {
+    border-left: none;
+}
 @media (max-width: 767px) {
     .footerNav li {
         border-left: none;
@@ -554,90 +599,8 @@ h2.form-title {
 .processArrow.right {
     background: url(../../../img/affiliates/acn/sprite.png) left -390px no-repeat;
 }
-/*Testimonials*/
-.testimonials .flexslider {
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-}
-.testimonials .slidePadding {
-    color: #fff;
-    padding: 42px 0;
-    margin-bottom: 42px;
-    position: relative;
-}
-.flex-control-paging li a {
-    background-color: #fff;
-    border: 2px solid #fff;
-    box-shadow: none;
-}
-.flex-control-paging li a:hover {
-    background-color: #fff;
-}
-.testimonials .flex-control-paging li a.flex-active {
-    background-color: transparent;
-    border: 2px solid #fff;
-}
-.testimonials .arrow {
-    border-bottom: 2px solid #fff;
-    bottom: -20px;
-    display: block;
-    height: 40px;
-    left: 50%;
-    margin-left: -20px;
-    position: absolute;
-    width: 40px;
-}
-.testimonials .flex-direction-nav a {
-    background: url(../../../img/affiliates/acn/sprite.png) no-repeat center;
-    height: 42px;
-    opacity: 1;
-    text-align: left;
-    text-indent: -99999em;
-    width: 25px;
-}
-.testimonials .flexslider:hover .flex-prev,
-.testimonials .flexslider:hover .flex-next {
-}
-.testimonials .flexslider .flex-prev {
-    background-position: center -880px;
-    left: -120px;
-}
-.testimonials .flex-direction-nav .flex-next {
-    background-position: center -960px;
-    right: -120px;
-}
-@media (max-width: 767px){
-    .testimonials .slidePadding {
-        padding-top: 0;
-    }
-    .flex-control-nav {
-        bottom: -60px;
-    }
-    .flex-direction-nav {
-        bottom: -44px;
-        left: 0;
-        position: absolute;
-        right: 0;
-    }
-    .testimonials .flexslider .flex-prev {
-        left: 0;
-    }
-    .testimonials .flex-direction-nav .flex-next {
-        right: 0;
-    }
-}
-.testimonials p {
-    font-size: 16px;
-}
-.testimonials h3 i {
-    font-size: 16px;
-    font-weight: normal;
-}
 /*Packages*/
 .packages {
-    background-color: #fcfcfc;
     padding-top: 0;
 }
 .packages .hero ul {
@@ -668,60 +631,23 @@ h2.form-title {
     background-color: #fff;
 }
 .premiumBusinessPackage ul {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 200;
 }
 .premiumBusinessPackage h3 {
     color: #748598;
+    font-size: 20px;
     font-weight: 200;
     line-height: 1.5;
     margin-top: 24px;
 }
 .premiumBusinessPackageImage {
-    margin-top: 110px;
+    margin-top: 60px;
 }
 @media (max-width: 769px) and (min-width: 767px) {
     .premiumBusinessPackageImage {
         margin-top: 160px;
     }
-}
-.recommendedForBusinessTitle {
-    color: #fff;
-    font-weight: 200;
-    line-height: 1.2;
-    position: absolute;
-    right: 8px;
-    text-align: center;
-    text-transform: lowercase;
-    top: 49px;
-    width: 110px;
-    z-index: 1;
-}
-.recommendedBubble,
-.recommendedBubble:before,
-.recommendedBubble:after {
-    background-color: rgba(55, 128, 203, 0.5);
-    border-radius: 50%;
-    display: block;
-    height: 130px;
-    width: 130px;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-.recommendedBubble:after {
-    content: "";
-    height: 120px;
-    width: 120px;
-    right: 5px;
-    top: 5px;
-}
-.recommendedBubble:before {
-    content: "";
-    height: 110px;
-    width: 110px;
-    right: 10px;
-    top: 10px;
 }
 #tabs ul {
     padding-left: 0;
@@ -917,6 +843,24 @@ h2.form-title {
 .support #scrollBubble {
     display: none;
 }
+/*Support*/
+.faq h3 {
+    background: url(../../../img/affiliates/acn/sprite.png) no-repeat -30px -1576px;
+    cursor: pointer;
+    border-top: 1px solid #D4DCE5;
+    margin: 0;
+    padding: 20px 0 20px 60px;
+}
+.faq.arrow_up h3 {
+    background-position: -30px -1497px;
+}
+.faq .faqAnswer {
+    display: none;
+}
+.faq .faqAnswer p,
+.faq .faqAnswer ul {
+    padding: 20px 0 20px 60px;
+}
 /*Thank You*/
 .thank-you .whatsNext p {
     padding-right: 80px;
@@ -930,6 +874,23 @@ h2.form-title {
 }
 #terms a {
     color: #ccc;
+}
+/*Order*/
+.orderHero {
+    background-color: #E7EAEE;
+    padding: 0;
+}
+.orderHero h2 {
+    margin-top: 40px;
+}
+.orderHero h3 {
+    color: #748598;
+}
+.order .contactFooter {
+    background-color: #DFEDFE;
+}
+.order .footer {
+    background-color: #fff;
 }
 /*IE7 offset columns fix*/
 .lt-ie8 .col-lg-offset-12,
