@@ -362,14 +362,22 @@ except ImportError:
 
 # one of the values below. It will either be a local directory or the directory on
 # the live server
+
 if os.path.isdir('/Users/cjogbuehi'):
     LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    ENGAGE_LOG_DIR = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log')
 elif os.path.isdir('/Users/rylanfrancis'):
     LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    ENGAGE_LOG_DIR = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log')
 elif os.path.isdir('/Users/edgarrodriguez'):
     LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    ENGAGE_LOG_DIR = ('/Users/edgarrodriguez/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log')
 else:
-    LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
+    ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
+
+
+
+
 
 # Build logging for unsubscribe.htm
 sp_logger = logging.getLogger('silverpoppy.api')
