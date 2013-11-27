@@ -2,6 +2,8 @@
 import sys
 import os
 import settings
+import logging
+import logging.handlers
 
 
 DEBUG = False
@@ -315,7 +317,7 @@ WEATHER_CODE_MAP = {
 LEAD_ACCOUNT_ID = '1626fa3'
 LEAD_CAMPAIGN_ID = '054irukv1'
 # this variable is used in lead forms and black friday forms
-# use it so while testing we disable emails 
+# use it so while testing we disable emails
 LEAD_TESTING = False
 
 
@@ -326,10 +328,29 @@ try:
     from etc.django.local import *
 except ImportError:
     pass
+#Silverpop Engage credentials for unsubscribe.htm
+
+ENGAGE_CONFIG = {
+    'username': 'kevin@protectamerica.com',
+    'password': '8RYbZ&YX',
+    'api_url': 'http://api3.silverpop.com/XMLAPI',
+    'ftp_url': 'transfer3.silverpop.com',
+}
+
+# Siverpop Engage Master Suppression List ID
+ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
+
+# Silverpop Engage logging for unsubscribe.htm
+ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
+ENGAGE_LOG_LEVEL = logging.INFO
+ENGAGE_LOG_ROTATION = {
+    'maxBytes': 1048576,  # 1MB
+    'backupCount': 5
+}
 
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
-# one of the values below. It will either be a local directory or the directory on 
-# the live server 
+# one of the values below. It will either be a local directory or the directory on
+# the live server
 if os.path.isdir('/Users/cjogbuehi'):
     LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 elif os.path.isdir('/Users/rylanfrancis'):
@@ -338,3 +359,11 @@ elif os.path.isdir('/Users/edgarrodriguez'):
     LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 else:
     LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
+
+# Build logging for unsubscribe.htm
+sp_logger = logging.getLogger('silverpoppy.api')
+sp_logger.setLevel(ENGAGE_LOG_LEVEL)
+handler = logging.handlers.RotatingFileHandler(ENGAGE_LOG_DIR,
+                                            **ENGAGE_LOG_ROTATION)
+handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s - %(message)s'))
+sp_logger.addHandler(handler)

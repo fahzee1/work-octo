@@ -803,6 +803,10 @@ else:
         dtt(r'^CFMIAMI/?$', 'affiliates/crime-stoppers-cf/miami.html', 'cf-miami'),
 
 
+        # UNSUBSCRIBE
+        url(r'^unsubscribe.html?$', 'apps.common.views.unsubscribe', name='unsubscribe'),
+        url(r'^unsubscribe/?$', 'apps.common.views.unsubscribe', name='unsubscribe'),
+
 )
 
 # redirect urls
