@@ -341,7 +341,10 @@ ENGAGE_CONFIG = {
 ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
 
 # Silverpop Engage logging for unsubscribe.htm
-ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
+if os.path.isdir('/Users/rylanfrancis'):
+    ENGAGE_LOG_DIR = ('/Users/rylanfrancis/silverpop_unsubscribe.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+else:
+    ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
 ENGAGE_LOG_LEVEL = logging.INFO
 ENGAGE_LOG_ROTATION = {
     'maxBytes': 1048576,  # 1MB

@@ -2,8 +2,14 @@
 {% addtoblock "css" %}
 
 {% endaddtoblock "css" %}
-<div id="hero-wrapper" class="blue bf">
+<div id="hero-wrapper" class="blue bf" {% comment %}style="background: url({{ STATIC_URL }}img/promo/thanksgiving/bg.jpg) repeat-x"{% endcomment %}>
     <div id="hero-image" style="z-index:0;">
+        {% comment %}
+        <div class="deal-content">
+            <img src="{{ STATIC_URL }}img/promo/thanksgiving/turkey-icon.png" alt="turkey-icon" width="377" height="163" style="margin-top: 212px;" />
+        </div>
+        <img src="{{ STATIC_URL }}img/promo/thanksgiving/happy-thanksgiving.png" style="position: absolute; left: -380px; top: -46px; z-index: 50;"  alt="happy-thanksgiving" width="1396" height="210" />
+        {% endcomment %}
         <div class="deal-content">
             <h2>Pre Black Friday Security Deals</h2>
             <img src="{{ STATIC_URL }}img/promo/bf/why-wait.png" alt="why-wait" width="575" height="75" />
@@ -16,6 +22,20 @@
         </div>
         <a href="{% url video %}"><img src="{{ STATIC_URL }}img/promo/bf/black-friday-camera-deal.jpg" class="camera" alt="black-friday-camera-deal" width="926" height="496" /></a>
     {% comment %}
+        <div class="deal-content">
+            <h2>The Best Security Deal Ever</h2>
+            <img src="{{ STATIC_URL }}img/promo/bf/black-friday.png" alt="why-wait" />
+            <h3>Free Home Security System<span>save up to $1400 today</span></h3>
+            <div class="button-area">
+
+                <a href="{% url shop %}" class="button-link stylized">Order Now <i class="icon-chevron-right"></i></a>
+
+            </div>
+        </div>
+        <a href="{% url video %}"><img src="{{ STATIC_URL }}img/promo/bf/black-friday-camera-deal.jpg" class="camera" alt="black-friday-camera-deal" width="926" height="496" /></a>
+    {% endcomment %}
+
+    {% comment %}
         <div id="dependable-security">
             <h1>Dependable Security for Every Home.</h1>
             <p>Over the past 20 years, Protect America has revolutionized home security systems; <span>making it easy to protect your family with quality home security products at an affordable price.</span></p>
@@ -26,9 +46,10 @@
             <img src="{{ STATIC_URL }}img/banners/hero-banners/dependable-security/dependable-security-hero.jpg" class="main-hero-image" alt="dependable-security-hero" />
         </div>
     {% endcomment %}
+
     {% include "order/quote-form-refresh.html" with form=forms.basic %}
     </div>
-    <a href="{% url video %}"><img src="{{ STATIC_URL }}img/promo/bf/camera-button.png" width="137" height="137" class="camera-button" alt="camera-button" /></a>
-    {% comment %}<img src="{{ STATIC_URL }}img/promo/bf/save-648.png" class="save648" alt="save-648" width="129" height="129" />{% endcomment %}
+
+    {% comment %}<a href="{% url video %}"><img src="{{ STATIC_URL }}img/promo/bf/camera-button.png" width="137" height="137" class="camera-button" alt="camera-button" /></a>{% endcomment %}
 
 </div>
