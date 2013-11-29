@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block google_experiment %}
+
+{% endblock %}
+{% block css %}
+    <!--[if IE]><!-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-c.css">
+
+    <link rel="stylesheet"  href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-c.css?v3.0">
+
+
+	<!--<![endif]-->
+    <link rel="stylesheet" media="only screen and (max-width: 767px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/320-c.css">
+
+    <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-c.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-c.css?v3.0">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+
+    <![endif]-->
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    <style>
+        #hero-wrapper {
+            background: #b4ec0b;
+        }
+        #hero-wrapper #hero-image #best-deal h1 {
+            color: #555;
+        }
+        #hero-wrapper #hero-image h2 {
+            color: #555;
+        }
+    </style>
+{% endblock %}    
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+
+{% block header %}
+    <div id="top-section-wrapper">
+        <div id="top-section">
+            <ul id="newsfeed">
+            </ul>
+             
+{% comment %}
+   <li><i class="icon-twitter"></i> @owowdesigns thanks for the follow! <span>&ndash; About an Hour Ago</span></li>
+                <li><i class="icon-thumbs-up"></i> Like us on Facebook Today! <span>&ndash; About an Hour Ago</span></li>
+                <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
+{% endcomment %}
+            <div id="company-links">
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+
+                <ul id="international-selection">
+                    <li class="us active"><a href="">EN</a></li>
+                    <li class="es"><a href="http://www.protectamerica.com/es/">ES</a></li>
+                    <li class="ca"><a href="http://www.protectamericasecurity.ca">EN</a></li>
+                    <i class="icon-caret-down"></i>
+                </ul>
+                <form action="http://www.protectamerica.com/search/" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div id="header-wrapper">
+        <div id="header">
+            {% if phone_number %}
+                <div id="main-phone-number">
+                    <p>Call Now<em> and Save</em>! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);">{{ phone_number|format_number }}</a></span></p>
+                </div>
+            {% endif %}
+            <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+
+
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+            {% endif %}
+            <ul id="mobile-main-navigation">
+                    <li class="get-quote {% if 'squeeze-form' in active_pages %}active{% endif %}"><a href="{% url squeeze-form %}" title="Get Quote" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-usd"></i>Get Quote</a></li>
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+            </ul>
+            <ul id="main-navigation">
+                <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/shop-home-security-packages/">Shop</a>
+                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/security-equipment/">Equipment</a>
+                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/learn/">Learn</a>
+                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'support' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/support">Support</a>
+                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
+
+{% block content %}
+{% comment %}
+<div id="hero-wrapper" class="blue">    
+    <div id="hero-image">
+        <div id="best-deal">
+            <h1>Best Deal Ever!</h1>
+            <h2>Home Security Starting at $19.99 </h2>
+            <a href="http://www.protectamerica.com/products/order-package" class="button-link alt" style="width: 115px;">Order Now <i class="icon-chevron-right"></i></a>
+            <div class="clear"></div>
+            <img src="{{ STATIC_URL }}img/extra/validation-icons/paid-validation-icons-transparent.png" class="validation-icons" alt="paid-validation-icons" width="357" height="74" />
+        </div>
+
+
+    </div>
+    <div id="mobile-main-promo">
+        <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
+            <img src="{{ STATIC_URL }}img/products/equipment/keychain-remote/keychain-promo.png" class="main-promo-image" alt="keychain-promo" width="108" height="88" />
+            <p><span>2 Keychain Remotes</span> with Your Home Security System</p>
+            <div class="clear"></div>
+        </a>
+    </div>
+
+</div>
+{% endcomment %}
+<div id="hero-wrapper" class="blue bf">
+    <div id="hero-image" style="z-index:0;">
+        <div class="deal-content">
+            <h2>Pre Black Friday Security Deals</h2>
+            <img src="{{ STATIC_URL }}img/promo/bf/why-wait.png" alt="why-wait" width="575" height="75" />
+            <h3>Home Security<span>starting at $19.99/mo</span></h3>
+            <div class="button-area">
+
+                <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized no-desktop">Get Started Now <i class="icon-chevron-right"></i></a>
+                <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link stylized no-mobile" style="width: 123px;">Call Now <i class="icon-chevron-right"></i></a>
+
+
+            </div>
+        </div>
+        <img src="{{ STATIC_URL }}img/promo/bf/black-friday-camera-deal-mobile.jpg" class="camera mobile no-mobile" alt="black-friday-camera-deal" />
+        <img src="{{ STATIC_URL }}img/promo/bf/black-friday-camera-deal.jpg" class="camera no-desktop" alt="black-friday-camera-deal" width="926" height="496" />
+
+    {% include "order/quote-form-responsive.html" with form=forms.basic %}
+
+    </div>
+    <a href="http://www.protectamerica.com/equipment/home-security/security-camera?promo=true"><img src="{{ STATIC_URL }}img/promo/bf/camera-button.png" width="137" height="137" class="camera-button no-desktop" alt="camera-button" /></a>
+   <img src="{{ STATIC_URL }}img/promo/bf/camera-button.png" width="137" height="137" class="camera-button no-mobile" alt="camera-button" />
+
+</div>
+
+{% include "order/call-box.html" %}
+<div id="wireless-security">
+    <div class="wrapper">
+        <div id="featured-on">
+            <p>Featured On:</p>
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/abc.png" class="alpha" alt="Featured on ABC" width="96" height="96" />
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/best.png" alt="Featured on Best Home Security Companys" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/fox-news.png" alt="Featured on Fox News" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/cw.png" alt="Featured on The CW" width="96" height="96" />
+
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/consumer-digest.png" alt="Rated a Consumer Digest Best Buy" width="96" height="96" />
+            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/daily-buzz.png" class="omega" alt="Featured on The Daily Buzz" width="96" height="96" />
+        </div>
+        <div id="security-information">
+            <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/rep/simon-xt-touch.jpg" class="simon-xt" alt="simon-xt" width="701" height="533" />
+            <div id="one-hundred-percent">
+                <div id="wireless-security">
+                    <h1>Wireless Home Security.<br/>100% Protection.</h1>
+                    <p>For the past 20 years, Protect America is proud to be the pioneer of wireless home security systems.  We believe in simple, easy to use security that protects your home.</p>
+                    <p><strong>An alarm system that is built for you.</strong> You don’t have a phone line? Our cellular monitoring is 100% wireless. You have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>
+                    <div class="order-link">
+                        <b class="phone-alt">Call <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong> to get started now.</b>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div id="main-benefits">
+                    <h1>Your #1 Trusted Home Security System</h1>
+                    <p>Protect America makes it easy to secure and protect your home and family. </p>
+                    <ul>
+                        <li>
+                            <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
+                            <p>Our systems provide state-of-the-art 24/7 security so you don't have to worry about a thing.</p>
+                        </li>
+                        <li class="mobile">
+                            <h3><i class="icon-rss"></i>Easy Wireless Set-Up</h3>
+                            <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
+                        </li>
+                        <li class="alt">
+                            <h3><i class="icon-money"></i>The Best Price, Period</h3>
+                            <p>The equipment is included, there are no activation fees, and our alarm monitoring starts at $19.99 per month.</p>
+                        </li>
+
+                        <li class="mobile">
+                            <h3><i class="icon-user"></i>Security Designed for your Life</h3>
+                            <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
+                        </li>
+                        <li class="mobile">
+                            <h3><i class="icon-thumbs-up"></i>Saving You More</h3>
+                            <p>Home security is good you and your pocket. Save up to 20% on your homeowners insurance with a home security system.</p>
+                        </li>
+                        <li class="alt">
+                            <h3><i class="icon-heart"></i>Committed To You</h3>
+                            <p>For the past 20 years, Protect America is proud to protect over half a million homes all across the country.</p>
+                        </li>
+                    </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        <h2>Simply The Best in Home Security <span>(with the features and service to prove it)</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th><img src="{{ STATIC_URL }}img/base/protect-america-logo-transparent.png" class="table-logo" alt="Protect America Logo" width="207" height="35" /></th>
+                    <th>ADT</th>
+                    <th>Frontpoint</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="alpha">
+                    <td class="y-axis">Installation</td>
+                    <td class="pa">$0</td>
+                    <td>$99</td>
+                    <td class="last">$99</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Monthly Rate</td>
+                    <td class="pa">$19.99</td>
+                    <td>$42.99</td>
+                    <td class="last">$34.99</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Master Control Panel</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td><i class="icon-ok-sign"></i></td>
+                    <td class="last"><i class="icon-ok-sign"></i></td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Door / Window Sensors</td>
+                    <td class="pa">3</td>
+                    <td>2</td>
+                    <td class="last">2</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Pet Friendly Motion Detector</td>
+                    <td class="pa">1</td>
+                    <td>1</td>
+                    <td class="last">1</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Homeowner's Discount</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td><i class="icon-ok-sign"></i></td>
+                    <td class="last"><i class="icon-ok-sign"></i></td>
+                </tr>
+                <tr>
+                    <td class="y-axis">24/7 Monitoring</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td><i class="icon-ok-sign"></i></td>
+                    <td class="last"><i class="icon-ok-sign"></i></td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Lifetime Replacement Parts Warranty</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Free EasyMove Moving Kit</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="y-axis">Lowest Price Guaranteed</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
+                </tr>
+                <tr class="omega">
+                    <td class="y-axis">Locked-In Rate</td>
+                    <td class="pa"><i class="icon-ok-sign"></i></td>
+                    <td>&nbsp;</td>
+                    <td class="last">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="clear"></div>
+<a href="http://www.protectamerica.com/?no_mobile" class="button-link" id="no-mobile-button">View Full Site <i class="icon-chevron-right"></i></a>
+<div class="clear"></div>
+
+
+{% endblock %}

@@ -1,7 +1,8 @@
 import pdb
 import twitter
-from models import TheFeed,FallBacks
-from django.http import HttpResponse, HttpResponseBadRequest
+from random import shuffle
+from models import TheFeed,FallBacks,TweetBackup
+from django.http import HttpResponse, HttpResponseBadRequest,Http404
 from django.shortcuts import render 
 from itertools import chain, izip
 from django.core.cache import cache
@@ -15,16 +16,39 @@ access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 def give_me_tweets():
 	tweets=cache.get('TWEETS')
 	if not tweets:
-		try:
-			t_api=twitter.Api(consumer_key=consumer_key,
+	    try:
+		    t_api=twitter.Api(consumer_key=consumer_key,
 				              consumer_secret=consumer_secret,
 				              access_token_key=access_token,
 				              access_token_secret=access_secret)
-			tweets=t_api.GetUserTimeline('protectamerica')
-			cache.set('TWEETS',tweets,60*60)	
-			return tweets[:5]
-		except:
-			pass
+		    tweets=t_api.GetUserTimeline('protectamerica')
+		    cache.set('TWEETS',tweets,60*60)
+		    backups=TweetBackup.objects.all()
+		    b_count=backups.count()
+		    if b_count != 0:
+			    _list=[]
+			    for b in backups.values('text'):
+				    _list.append(b['text'])
+			    for t in tweets:
+				    if t.text not in _list:
+					    TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())
+			    for ba in backups:
+				    ba.remove_old()	
+
+		    else:
+			    for t in tweets:
+				    TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt())	
+
+	    except:
+		    tweets=TweetBackup.objects.all()
+		    for t in tweets:
+		    	t.remove_old()
+		    shuffle(list(tweets))
+			
+	if tweets:
+	    return tweets[:5]
+	else:
+	    return None
 
 def hourly_check(request):
 	if request.is_ajax():
@@ -49,10 +73,13 @@ def render_feed(request):
                     results.append(y)
                 if x not in results:
                     results.append(x)
-        ctx['GeoFeed']=results
     else:
-        results=data
-        ctx['GeoFeed']=results
+    	try:
+        	results=data['Feed']
+        except KeyError:
+        	raise Http404
+    if results:    	
+    	ctx['GeoFeed']=results
     return render(request,'newsfeed/feed.html',ctx)
 
 

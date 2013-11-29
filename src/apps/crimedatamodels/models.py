@@ -3,7 +3,9 @@ import pdb
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.db.models import Sum,Q
+from django.template.defaultfilters import slugify
+from geopy import geocoders
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
 
@@ -77,27 +79,52 @@ class CityLocation(models.Model):
         return reverse('crime-rate:crime-stats', args=[self.state,
             self.city_name])
 
-    def join_name(self):
-        names=self.city_name.split(' ')
+    def join_name(self,local=False):
+        kv = {}
+        slug = self.city_name_slug
+        if "'" in self.city_name:
+            kv['name'],kv['slug'] = slug.title(),slug 
+            return kv
+
+        names = self.city_name
+        if '(' or ')' in names:
+            names.replace('(','').replace(')','')
+        names = names.split(' ')
+
         if len(names) == 1:
-            name=self.city_name
-            return name
-        elif len(names)==2:
+            name = self.city_name
+            if local:
+                kv['name'],kv['slug'] = name.lower(),slug
+                return kv
+            else:
+                kv['name'],kv['slug'] = name,slug
+                return kv
+        elif len(names) == 2:
             if '.' in self.city_name:
                 names=self.city_name.replace('.','').split(' ')
-                if len(names)==2:
-                    first,second=names[0],names[1].lower()
-                    return first+second
-                if len(names)==3:
-                    first,second,third=names[0],names[1].lower(),names[2].lower()
-                    return first+second+third
+                if len(names) == 2:
+                    first,second = names[0],names[1].lower()
+                    kv['name'],kv['slug'] = first+second,slug
+                    return kv
+                if len(names) == 3:
+                    first,second,third = names[0],names[1].lower(),names[2].lower()
+                    kv['name'],kv['slug'] = first+second+third,slug
+                    return kv
             first,second=names[0],names[1].lower()
-            name=first+second
-            return name
+            kv['name'],kv['slug'] = first+second,slug
+            return kv
         elif len(names) == 3:
             first,second,third=names[0],names[1].lower(),names[2].lower()
-            name=first+second+third
-            return name
+            kv['name'],kv['slug'] = first+second+third,slug
+            return kv
+        elif len(names) == 4:
+            first,second,third,fourth=names[0],names[1].lower(),names[2].lower(),names[3].lower()
+            kv['name'],kv['slug'] = first+second+third+fourth,slug
+            return kv
+        elif len(names) == 5:
+            first,second,third,fourth,fifth=names[0],names[1].lower(),names[2].lower(),names[3].lower(),names[4].lower()
+            kv['name'],kv['slug'] = first+second+third+fourth+fifth,slug
+            return kv
         else:
             pass
 
@@ -138,6 +165,50 @@ class CrimesByCity(models.Model):
         return 1e5*val/max(1.0, self.population)
 
 
+    def check_create_if_none(self):
+        # run this multiple times cause most likely will run out of trys then throw an error
+        # note had to run 5 times first time using script
+        try:
+            #try and get city location in DB
+            city = CityLocation.objects.get(city_name_slug=slugify(self.fbi_city_name),state=self.fbi_state)
+            return ' skipping city %s,%s is there' % (self.fbi_city_name,self.fbi_state)
+        except CityLocation.DoesNotExist:
+            #if not there create one (also using geocode to get latitude longitude)
+            city_n = self.fbi_city_name
+            state = self.fbi_state
+            try:
+                g = geocoders.GoogleV3()
+                results = g.geocode(city_n+','+state,exactly_one=False)
+                addr ,(lat,lng) = results[0]
+            except:
+                try:
+                    g = geocoders.GeocoderDotUS()
+                    results = g.geocode(city_n+','+state,exactly_one=False)
+                    addr ,(lat,lng) = results[0]
+                except:
+                    try:
+                        g = geocoders.GeoNames()
+                        results = g.geocode(city_n+','+state,exactly_one=False)
+                        addr ,(lat,lng) = results[0]
+                    except:
+                        try:
+                            g = geocoders.MediaWiki("http://wiki.case.edu/%s")
+                            results = g.geocode(city_n+','+state,exactly_one=False)
+                            addr ,(lat,lng) = results[0]
+                        except:
+                            pass
+
+            city = CityLocation.objects.create(city_name=city_n,city_name_slug=slugify(city_n),state=state,latitude=lat,longitude=lng)
+            return 'created city %s, %s' % (city_n,state)
+    
+
+
+
+
+
+
+
+
 class CityCrimeStats(models.Model):
     """Volatile city crime stats computed from the CrimesByCity table.
 
@@ -174,6 +245,9 @@ class CityCrimeStats(models.Model):
     violent_crime_grade = models.CharField(null=True,
         max_length=1)
 
+    class Meta:
+        db_table = 'city_crime_stats'
+        unique_together = (('city', 'year'),)
 
     def __unicode__(self):
         return "%s" % self.city
@@ -200,9 +274,7 @@ class CityCrimeStats(models.Model):
         ag = int(round(float(sum(used_fields_for_avg)) / float(len(used_fields_for_avg))))
         return [k for k, v in GRADE_MAP.iteritems() if v == ag][0]
 
-    class Meta:
-        db_table = 'city_crime_stats'
-        unique_together = (('city', 'year'),)
+
 
 
 class StateCrimeStats(models.Model):
@@ -217,7 +289,7 @@ class StateCrimeStats(models.Model):
     state = models.ForeignKey(State)
     year = models.IntegerField()
     number_of_cities = models.IntegerField()
-    population = models.IntegerField()
+    population = models.IntegerField(null=True)
     aggravated_assault = models.IntegerField(null=True)
     arson = models.IntegerField(null=True)
     burglary = models.IntegerField(null=True)
@@ -312,7 +384,49 @@ class MatchAddressLocation(models.Model):
         else:
             super(MatchAddressLocation,self).save(*args, **kwargs) 
 
-    
+class FeaturedCommon(models.Model):
+    city = models.ForeignKey("CityLocation")
+    date_created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        abstract = True
+    
+class FeaturedVideo(FeaturedCommon):
+    video_embed = models.TextField(blank=True,null=True)
+
+    def __unicode__(self):
+        return "%s's video " % self.city.city_name
+
+class FeaturedIcon(FeaturedCommon):
+    icon = models.ImageField(upload_to='featured_icons',height_field='image_height',width_field='image_width')
+    image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
+    image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
+
+    def __unicode__(self):
+        return "%s's icon" % self.city.city_name
+
+class CityCompetitor(FeaturedCommon):
+    rival = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "%s Competitor: %s" %(self.city.city_name,self.rival)
+
+
+
+
+def return_sums(crime,state,city=None,year=2012,per100=False):
+    if per100:
+        if city:
+            locations = CrimesByCity.objects.filter(year=year,fbi_city_name=city.title(),fbi_state=state.upper())
+        else:
+            locations = CrimesByCity.objects.filter(year=year,fbi_state=state.upper())
+        end_string = '_rank_per100k'
+        return CityCrimeStats.objects.filter(city=locations).aggregate(Sum(crime.lower()+end_string))
+            
+    else:
+        if city:
+            return CrimesByCity.objects.filter(year=year,fbi_city_name=city.title(),fbi_state=state.upper()).aggregate(Sum(crime.lower()))
+        return CrimesByCity.objects.filter(year=year,fbi_state=state.upper()).aggregate(Sum(crime.lower()))
+    
 
     

@@ -38,16 +38,19 @@
     <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
     <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
     <!--[if (lt IE 9) & (!IEMobile)]>
-    <script src="js/selectivizr-min.js"></script>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+
     <![endif]-->
     
     <!-- JavaScript -->
-    <script src="js/modernizr-2.5.3-min.js"></script>
+    <script src="{{ STATIC_URL }}js/modernizr-2.5.3-min.js"></script>
     
     <!-- Icons -->
     
     <!-- 16x16 -->
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico">
+    {% comment %}
     <!-- 32x32 -->
     <link rel="shortcut icon" href="/favicon.png">
     <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
@@ -58,7 +61,7 @@
     <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png"> -->
     <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
-    
+    {% endcomment %}
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="apple-mobile-web-app-title" content="320 and Up"> -->
@@ -78,7 +81,7 @@
     <!-- <link rel="apple-touch-startup-image" sizes="1024x748" href="img/startup/startup-1024x748.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape)"> -->
     <!-- iPad Portrait -->
     <!-- <link rel="apple-touch-startup-image" sizes="768x1004" href="img/startup/startup-768x1004.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait)"> -->
-    
+
     <!-- Windows 8 / RT -->
     <meta name="msapplication-TileImage" content="img/apple-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#000">
@@ -105,6 +108,30 @@
     {% block bing-conversion-code %}{% endblock %}
 </head>
 <body class="clearfix {{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %}">
+<div style="position:absolute;left:9999px;">    
+<!-- Start Quantcast Tag -->
+<script type="text/javascript"> 
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push(
+{qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Search Landing Page"}
+);
+</script>
+<noscript>
+<img src="//pixel.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Search+Landing+Page" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+</div>
+
 {% block header %}
 <div id="header">
     <div id="header-wrapper">   
@@ -514,10 +541,10 @@
 
 {% endblock %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
-    <script src="js/plugins.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/helper.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/jquery-1.7.2.min.js"><\/script>')</script>
+    <script src="{{ STATIC_URL }}js/plugins.js"></script>
+    <script src="{{ STATIC_URL }}js/script.js"></script>
+    <script src="{{ STATIC_URL }}js/helper.js"></script>
     {% render_block "js" %}
     {% block extra_javascript %}
     	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
@@ -604,6 +631,43 @@
                         <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
     
     {% endif %}
+
+    {% block trustedform %}
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true; 
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
+{% endblock %}
+{% block OS %}
+<script type="text/javascript">
+ var OSName="Unknown OS";
+    if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+    if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+    if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+    if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+function getParameterByName( name ){
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+</script>
+{% endblock %}
 </body>
 </html>
 

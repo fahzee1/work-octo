@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/bootstrap.min.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/acn/styles.css">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<![endif]-->
+{% endblock %}
+
+{% block header %}
+<div class="mainContainer">
+
+    <div class="headerPhone inverse">
+        <div class="container">
+            <div class="row">
+                <p class="phoneNumber">Call Now To Order <span>800-867-0151</span></p>
+                 <p class="scheduleWrapper">M-F: 8AM - 10PM EST <span class="slash">/</span> SAT: 9AM - 9PM EST <span class="slash">/</span> SUN: 10AM - 10PM EST</p>
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div><!-- /headerPhone -->
+
+    <div id="header" class="inverse">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-9 col-sm-4 col-md-6 col-lg-7">
+                    <div class="logoWrapper">
+                        <h1><a href="{% url home %}" title="ACN Business Security"><img src="{{ STATIC_URL }}img/affiliates/acn/ProtectAmericaForACN.png" alt="ACN" title="ACN" width="380"></a></h1>
+                    </div><!-- /logoWrapper -->
+                </div>
+
+                <div class="col-xs-3 visible-xs">
+                    <div id="mobileBlogNavTrigger">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-6 col-lg-5 mobileClear">
+                        <div class="nav">
+                            {% block navigation %}
+                            <ul id="mainNav">
+                                <li><a href="{% url home %}">Home</a></li>
+                                <li><a href="{% url packages %}">Packages</a></li>
+                                <li><a href="{% url features %}">Features</a></li>
+                                <li><a href="{% url support %}">Support</a></li>
+                                <li><a href="{% url order %}">Order</a></li>
+                            </ul>
+                            {% endblock %}
+                        </div><!-- /nav -->
+                </div>
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div><!-- /header -->
+{% endblock %}
+{% block footer %}
+            <div id="footer" class="footerPhone section inverse center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7">
+                            <ul class="footerNav">
+
+                                <li class="homeFooterNav"><a href="{% url home %}">Home</a></li>
+                                <li class="packagesFooterNav"><a href="{% url packages %}">Packages</a></li>
+                                <li><a href="{% url features %}">Features</a></li>
+                                <li><a href="{% url support %}">Support</a></li>
+                                <li><a href="{% url order %}">Order</a></li>
+                            </ul>
+                        </div><!-- /col -->
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                           <p>CALL TO ORDER NOW:<br><span>800-867-0151</span></p>
+                            <p>{% if request.GET.affkey %}IBO Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}IBO Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}IBO Number: {{ affkey }}{% else %}{% endif %}{% endif %}{% endif %}</p>
+                       </div><!-- /col -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /footer -->
+
+            <!-- ScrollBubble -->
+            <div id="scrollBubble"><p class="sprite">Scroll</p></div>
+
+        </div><!-- /mainContainer -->
+            <div id="terms">
+                <div class="container">
+                    <div class="row">
+                        {% block terms %}
+                            <div class="col-lg-6">
+                                <div id="terms-conditions">
+                                    <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited.</p>
+                                    <p>* Information used for security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar security equipment packages; "MonitoIBOg" price listed includes the additional "warranty" or "extended service plan". </p>
+                                    {% block extra_terms %}
+                                    {% endblock %}
+                                </div>
+                           </div><!-- /col -->
+                            <div class="col-lg-6">
+                                <div id="copyrights">
+                                    {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
+                                    <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
+                                </div>
+                           </div><!-- /col -->
+
+                        {% endblock %}
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /terms -->
+        <!-- jquery -->
+        <script type="text/javascript" charset="utf-8">
+            $( "#mobileBlogNavTrigger" ).click(function() {
+              $( "#mainNav" ).toggle( "fast" );
+            });
+            $( window ).scroll(function() {
+                $( "#scrollBubble" ).fadeOut( "slow" );
+            });
+           $('.faq').click(function() {
+               $(this).children(".faqAnswer").slideToggle('ease');
+               if ($(this).hasClass('arrow_up')) {
+                   $(this).removeClass('arrow_up')
+               } else {
+                   $(this).addClass('arrow_up')
+               }
+           }) 
+        </script>
+{% endblock %}
+{% block order-footer %}{% endblock %}
+{% block main-footer %}{% endblock %}

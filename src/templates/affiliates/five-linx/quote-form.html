@@ -1,4 +1,4 @@
-{% load sekizai_tags %}
+{% load content_tags content_filters sekizai_tags %}
 <form id="quote-form" method="post" action="" class="form-quote">
     {% csrf_token %}
     <input type="hidden" name="form" value="basic" />
@@ -16,7 +16,9 @@
 
 	</div>
 	<button type="button" class="redbutton">Get Quote ></button>
-
+             <div class="consent-box">
+            <label class="consent-label" style="font-size: 10px; line-height: 14px; margin-bottom: 16px;"for="id_consent">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
     <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
     <div class="quote-form-error">
         <img src="{{ STATIC_URL }}/img/base/error-arrow.png" class="error-arrow" />
@@ -38,27 +40,84 @@
 $(document).ready(function() {
     $('.form-quote input').keypress(function(e){
         if(e.which == 13){
-            $('.form-quote button').click();
+            $(this).closest('.form-quote').find('button').click();   
         }
     });
     var submitting = false;
 
     $('.form-quote button').click(function() {
-        if(submitting==true) {
+        $('.form-quote button').attr('disabled',true);
+        var $form = $(this).closest('.form-quote');
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val()
+        if (!trusted){
+            $form.remove();
+            $('#trusted-error').show();
             return false;
         }
-        submitting = true;
-        $('.form-quote div').removeClass('.error-state');
-        var data = $(this).parent().serialize();
-        
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        $form.children('div').removeClass('.error-state');
+        var data = {'name':name, 
+                    'email': email,
+                    'phone': phone, 
+                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'form': 'basic',
+                    'referer_page':window.location.href,
+                    'form_values':$form.serialize(),
+                    'operating_system':OSName}
         $.ajax({
             type: "POST",
             url: "/contact/ajaxpost/",
             data: data,
             dataType: "json",
-            success: newFormSuccess
+            success: newFormSuccess,
+            error: newFormError,
+            beforeSend:function(){
+                    $(".form-quote .icon-chevron-right").hide();
+                    $('.form-quote #form-loading').show();
+                    $('.form-quote button').attr('disabled',true);
+                    }
         });
         
+        function newFormError(){
+            $(".form-quote .icon-chevron-right").show();
+            $('.form-quote #form-loading').hide;
+            $('.form-quote button').attr('disabled',false);
+            if (!name && !phone){
+               $form.find("#id_name").css('border-color','red').attr('placeholder','Please Enter Name');
+               $form.find("#id_phone").css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $form.find("#id_phone").css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $form.find("#id_name").css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $form.find("#id_name").css('border-color','');
+            }
+            if (phone){
+                $form.find("#id_phone").css('border-color','');
+            }
+        }
+
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
@@ -95,7 +154,6 @@ $(document).ready(function() {
             
             $(".quote-form-error ul").html(error_string);
             } else $(".quote-form-error").hide();
-
         }
         return false;
         });
