@@ -30,9 +30,8 @@
     
     <title>{% block page_title %}{% endblock %}</title>
     <meta name="description" content="{% block page_description %}{% endblock %}" />
-    {% comment %}<meta name="keywords" content="{% block page_keywords %}{% endblock %}" />{% endcomment %}
+    <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/Chart.js"></script>
     <meta property="fb:admins" content="586942929" />
 {% block robots_tag %}
     {% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>
@@ -43,7 +42,7 @@
     {% endif %}
 {% endblock %}
     <meta name="rating" content="general" />
-    <meta name="copyright" content="Copyright &copy; 2013 Protect America, Inc., all rights reserved" />
+    <meta name="copyright" content="Copyright &copy; 2012 Protect America, Inc., all rights reserved" />
     <meta name="author" content="Protect America" />
     <meta name="contact_addr" content="webmaster@protectamerica.com" />
     <meta name="distribution" content="global" />
@@ -52,13 +51,13 @@
     <meta name="MSSmartTagsPreventParsing" content="true" />
     <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
     <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
-    <meta name="p:domain_verify" content="1852cd0b77a74fd31961f243d35bc25e"/>
 
 {% block favicon %}
     <!-- Icons -->
     <!-- 16x16 -->
-    <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <!-- 32x32 -->
+    <link rel="shortcut icon" href="/favicon.png">
     <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
     <!-- <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png"> -->
     <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
@@ -184,8 +183,6 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li><i class="icon-money"></i> Huge Savings for Austin Residents Right Now! <span>&ndash; About an Hour Ago</span></li>
 {% endcomment %}
             <div id="company-links">
-                <a href="http://www.myprotectamerica.com" class="interactive-customer" target="blank">Interactive Customers</a> 
-
                 <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" class="easy-chat-click" id="online-chat-button" target="blank">Online Chat</a>
 
                 <ul id="international-selection">
@@ -214,7 +211,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
         <div id="header">
 
             <a href="{% url 'home' %}">
-                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="company-logo">
+                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
             </a>
             <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
             {% if phone_number %}
@@ -243,7 +240,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 </li>
             </ul>
             {% endblock %}
-            {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% include "order/quote-form-refresh.html" with form=forms.basic %}
 
             <div class="clear"></div>
         </div>
@@ -299,8 +296,6 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/learn/" title="Learn about Home Security">Learn</a></li>
                 <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/" title="Get Help for your Home Security System">Support</a></li>
                 <li class="{% if 'order-package' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/products/order-package/" title="Order Home Security Today">Order</a></li>
-                <li class=""><a href="http://www.protectamerica.com/home-security-blog/" title="Order Home Security Today">Security Blog</a></li>
-
                 <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/sitemap/" title="View our Sitemap">Sitemap</a></li>
             </ul>
             <ul id="footer-care-nav">
@@ -309,10 +304,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/state-licenses/" title="View our Licenses for Each State">State Licenses</a></li>
                 <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
                 <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
-                <li class="{% if 'dealer-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/dealers" title="Interested in Selling Home Security? Join our Dealer Program">Dealer Program</a></li>
-
                 <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
-
             </ul> 
             <ul id="footer-contact-info">
                 <li><strong>Telephone</strong></li>
@@ -321,12 +313,8 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li><span>SAT</span> 8AM - 8PM CT</li>
                 <li><span>SUN</span> 9AM - 9PM CT</li>
                 <li id="footer-social-icons">
-                    <a href="https://plus.google.com/+ProtectAmerica/" title="Visit us on Google +"><i class="icon-google-plus"></i></a>
-
-                    <a href="http://www.facebook.com/ProtectAmerica" title="Visit our Facebook Page"><i class="icon-facebook"></i>
-                    <div class="clear" style="padding-bottom: 16px;"></div>
                     <a href="http://www.twitter.com/ProtectAmerica" title="Visit our Twitter Page"><i class="icon-twitter"></i></a>
-
+                    <a href="http://www.facebook.com/ProtectAmerica" title="Visit our Facebook Page"><i class="icon-facebook"></i>
                     <a href="http://www.youtube.com/user/ProtectAmerica" title="Watch our Tutorials and Videos on our YouTube Page"><i class="icon-youtube"></i></a>
 
                 </li>
@@ -351,7 +339,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 {% endblock %}
             </div>
             <div id="copyrights">
-               
+                <p>GE and GE Security logos are registered trademarks of General Electric.</p>
                 {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
                 <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
             </div>
@@ -409,6 +397,9 @@ $(document).ready(function(){
 
 </script>
 {% endcomment %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/placeholder.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
 
 
 {% render_block "js" %}
@@ -557,86 +548,7 @@ var google_remarketing_only = true;
 <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/979438097/?value=0&amp;guid=ON&amp;script=0"/>
 </div>
 </noscript>
-{% endblock %}
-{% block offline-tracking %}
-<script type="text/javascript"> 
-  function setCookie(a,d,b){
-        var c=new Date;
-        c.setTime(c.getTime()+864E5*b);
-        b=";expires="+c.toUTCString();
-        document.cookie=a+"="+d+b
-    }
-  function getParam(a){
-        return (a=RegExp("[?&]"+a+"=([^&]*)").exec(window.location.search)) && decodeURIComponent(a[1].replace(/\+/g," "))
-    }
-  var gclid=getParam("gclid");
-  if(gclid){
-        var gclsrc=getParam("gclsrc");
-        (!gclsrc||-1!==gclsrc.indexOf("aw")) && setCookie("gclid",gclid,90)
-    };
-
-</script> 
- <script type="text/javascript"> 
-  function readCookie(name) { 
-  var n = name + "="; 
-  var cookie = document.cookie.split(';'); 
-  for(var i=0;i < cookie.length;i++) {      
-      var c = cookie[i];      
-      while (c.charAt(0)==' '){
-            c = c.substring(1,c.length);
-        }      
-      if (c.indexOf(n) == 0){
-        return c.substring(n.length,c.length);
-        }
-    } 
-  return null; 
-  } 
-
-  window.onload = function() {      
-      var gclid = document.getElementById('gclid')
-      gclid.value = readCookie('gclid'); 
-  } 
-  </script>
 
 {% endblock %}
-
-{% block trustedform %}
-<script type="text/javascript">
-(function() {
-    var field = 'CertUrl';
-    var provideReferrer = false;
-    var tf = document.createElement('script');
-    tf.type = 'text/javascript'; tf.async = true; 
-    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
-    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
-)();
-
-</script>
-<noscript>
-    <img src="http://api.trustedform.com/ns.gif" />
-</noscript>
-{% endblock %}
-{% block OS %}
-<script type="text/javascript">
- var OSName="Unknown OS";
-    if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
-    if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
-    if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
-    if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
-
-function getParameterByName( name ){
-  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-  var regexS = "[\\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var results = regex.exec( window.location.href );
-  if( results == null )
-    return "";
-  else
-    return decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-</script>
-{% endblock %}
-
 </body>
 </html>
