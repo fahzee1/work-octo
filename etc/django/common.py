@@ -343,6 +343,9 @@ ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
 # Silverpop Engage logging for unsubscribe.htm
 if os.path.isdir('/Users/rylanfrancis'):
     ENGAGE_LOG_DIR = ('/Users/rylanfrancis/silverpop_unsubscribe.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+elif os.path.isdir('/Users/waldemarprzybyslawsk'):
+    ENGAGE_LOG_DIR = ('/Users/waldemarprzybyslawsk/silverpop_unsubscribe.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+
 else:
     ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
 ENGAGE_LOG_LEVEL = logging.INFO
@@ -358,6 +361,8 @@ if os.path.isdir('/Users/cjogbuehi'):
     LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 elif os.path.isdir('/Users/rylanfrancis'):
     LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+elif os.path.isdir('/Users/waldemarprzybyslawsk'):
+    LC_LOG = ('/Users/waldemarprzybyslawsk/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 elif os.path.isdir('/Users/edgarrodriguez'):
     LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
 else:
