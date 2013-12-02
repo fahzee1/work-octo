@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/768-c.css">
     <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/960-c.css?v3.0">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh-responsive/cyber-monday.css">
+
     <!--[if (lt IE 9) & (!IEMobile)]>
     <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
@@ -144,12 +146,13 @@
 
 </div>
 {% endcomment %}
+
 <div id="hero-wrapper" class="blue bf">
     <div id="hero-image" style="z-index:0;">
         <div class="deal-content">
-            <h2>Pre Black Friday Security Deals</h2>
-            <img src="{{ STATIC_URL }}img/promo/bf/why-wait.png" alt="why-wait" width="575" height="75" />
-            <h3>Home Security<span>starting at $19.99/mo</span></h3>
+            <h2>The Best Security Deal Ever</h2>
+            <img src="{{ STATIC_URL }}img/promo/bf/black-friday.png" alt="why-wait" />
+            <h3>Free Home Security System<span style="color: #fff;"><em>No Installation Fees</em> <em>&bull; No Equipment Cost</em> <em>&bull; Save Up to $1400</em></span></h3>
             <div class="button-area">
 
                 <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized no-desktop">Get Started Now <i class="icon-chevron-right"></i></a>
@@ -168,7 +171,24 @@
    <img src="{{ STATIC_URL }}img/promo/bf/camera-button.png" width="137" height="137" class="camera-button no-mobile" alt="camera-button" />
 
 </div>
-
+{% comment %}
+<div id="hero-wrapper" class="cmonday">
+    <div id="hero-image" class="cmonday">
+        {% include "order/quote-form-white.html" with form=forms.basic %}
+        {% include "banners/deals.html" %}
+        <div id="cyber-monday">
+            <h1>Home security</h1>
+            <h2>for everyone</h2>
+            <p>Plans starting at only</p>
+            <div class="price-area">
+                <img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />
+            </div>
+            <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized no-desktop">Get Started Now</a>
+            <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link stylized no-mobile" style="width: 123px;">Call Now</a>
+        </div>
+    </div>
+</div>
+{% endcomment %}
 {% include "order/call-box.html" %}
 <div id="wireless-security">
     <div class="wrapper">

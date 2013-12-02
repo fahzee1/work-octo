@@ -158,10 +158,9 @@ elif settings.SITE_ID == 3:
         dtt(r'^blue/?$', 'affiliates/sem-landing-page/blue-test.html', 'blue-test'),
         dtt(r'^green/?$', 'affiliates/sem-landing-page/green-test.html', 'green-test'),
         dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-free.html', 'green-test'),
-        dtt(r'^krbe/?$', 'affiliates/sem-landing-page/green-test.html', 'krbe'),
         dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
         dtt(r'^medical-alert/?$', 'affiliates/sem-landing-page/medical-pendant.html', 'medical'),
-
+        dtt(r'^krbe/?$', 'affiliates/sem-landing-page/krbe.html', 'krbe'),
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
         dtt(r'^ipod/?$', 'affiliates/sem-landing-page/ipod.html', 'ipod'),
@@ -439,7 +438,6 @@ elif settings.SITE_ID == 24:
             dtt(r'^support/$', 'affiliates/acn/support.html', 'support'),
             dtt(r'^thank-you/$', 'affiliates/acn/thank-you.html', 'thank-you'),
     )
-
 
 
 # defaults

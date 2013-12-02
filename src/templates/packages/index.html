@@ -8,7 +8,7 @@
 {% block content %}
 
 <div id="big-choices">
-    <div id="home-security-package-choices" style="display:block">
+    <div id="home-security-package-choices" style="display:block; margin-bottom: 50px;">
         <div class="big-wrapper">
         {% block packages %}
             <div id="home-security-packages">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
         
-                <div class="premium-packages">
+                <div class="premium-packages" style="padding-bottom: 8px;">
                     <img src="{{ STATIC_URL }}img/canada/premium-packages-header.png" class="premium-packages-header" alt="premium-packages-header" />
         
                     <div id="silver-security-package">
@@ -93,9 +93,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="{% url interactive-control %}" title="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!">
-                        <img src="{{ STATIC_URL }}img/banners/596x80/arm-disarm-smart-connect.jpg" class="promo-banner" alt="Free SMART Connect Interactive Apps with Cellular and Broadband Monitoring - Arm your system from your smart phone!" />
-                    </a>
+
                     <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
@@ -105,7 +103,7 @@
         </div>
     </div>
 </div>  
-{% include "order/call-box.html" %}
+{% include "order/call-box.html" with cyber_promo="shop" no_promo=False %}
 
 <div class="wrapper">
     <div id="security-information">
