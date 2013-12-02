@@ -36,6 +36,8 @@ from apps.newsfeed.models import TheFeed,FallBacks
 from itertools import chain, izip
 from django.core.mail import send_mail
 
+from silverpoppy import Engage
+
 consumer_key=settings.TWITTER_CONSUMER_KEY
 consumer_secret=settings.TWITTER_CONSUMER_SECRET
 access_token=settings.TWITTER_ACCESS_TOKEN
