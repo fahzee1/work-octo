@@ -340,6 +340,16 @@ ENGAGE_CONFIG = {
 # Siverpop Engage Master Suppression List ID
 ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
 
+
+
+try:
+    if LC_LOG and ENGAGE_LOG_DIR:
+        pass
+except:
+    LC_LOG = None
+    ENGAGE_LOG_DIR = None
+
+
 # Silverpop Engage logging for unsubscribe.htm
 if not ENGAGE_LOG_DIR:  # If this wasn't already set in local.py . . .
     if os.path.isdir('/Users/rylanfrancis'):
@@ -355,10 +365,14 @@ ENGAGE_LOG_ROTATION = {
     'backupCount': 5
 }
 
+
+
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
 # one of the values below. It will either be a local directory or the directory on
 # the live server
-if not LC_LOG:  # If this wasn't already set in local.py . . .
+
+
+if not LC_LOG:
     if os.path.isdir('/Users/cjogbuehi'):
         LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
     elif os.path.isdir('/Users/rylanfrancis'):
