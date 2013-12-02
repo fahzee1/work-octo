@@ -150,11 +150,8 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
-        dtt(r'^business/?$', 'affiliates/ppc-business-package/index.html', 'paid-business-landing-page'),
         dtt(r'^rep/?$', 'affiliates/sem-landing-page/orange-test-two.html', 'squeeze'),
         dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test-content.html', 'orange-test'),
-
-
         dtt(r'^blue/?$', 'affiliates/sem-landing-page/blue-test.html', 'blue-test'),
         dtt(r'^green/?$', 'affiliates/sem-landing-page/green-test.html', 'green-test'),
         dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-free.html', 'green-test'),
@@ -165,6 +162,11 @@ elif settings.SITE_ID == 3:
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
         dtt(r'^ipod/?$', 'affiliates/sem-landing-page/ipod.html', 'ipod'),
 
+
+        # TESTS
+        dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
+        dtt(r'^cyber-alt-19/?$', 'affiliates/sem-landing-page/test/green-19-white.html', 'green-white-19'),
+        dtt(r'^cyber-19/?$', 'affiliates/sem-landing-page/test/green-19.html', 'green-19'),
 
 
         # GEO Landing Pages
