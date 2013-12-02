@@ -391,3 +391,4 @@ handler = logging.handlers.RotatingFileHandler(ENGAGE_LOG_DIR,
                                             **ENGAGE_LOG_ROTATION)
 handler.setFormatter(logging.Formatter('%(asctime)s | %(levelname)s - %(message)s'))
 sp_logger.addHandler(handler)
+
