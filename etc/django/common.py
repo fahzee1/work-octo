@@ -341,13 +341,14 @@ ENGAGE_CONFIG = {
 ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
 
 # Silverpop Engage logging for unsubscribe.htm
-if os.path.isdir('/Users/rylanfrancis'):
-    ENGAGE_LOG_DIR = ('/Users/rylanfrancis/silverpop_unsubscribe.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-elif os.path.isdir('/Users/waldemarprzybyslawsk'):
-    ENGAGE_LOG_DIR = ('/Users/waldemarprzybyslawsk/silverpop_unsubscribe.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+if not ENGAGE_LOG_DIR:  # If this wasn't already set in local.py . . .
+    if os.path.isdir('/Users/rylanfrancis'):
+        ENGAGE_LOG_DIR = '/Users/rylanfrancis/silverpop_unsubscribe.log'
+    elif os.path.isdir('/Users/waldemarprzybyslawsk'):
+        ENGAGE_LOG_DIR = '/Users/waldemarprzybyslawsk/silverpop_unsubscribe.log'
+    else:
+        ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
 
-else:
-    ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
 ENGAGE_LOG_LEVEL = logging.INFO
 ENGAGE_LOG_ROTATION = {
     'maxBytes': 1048576,  # 1MB
@@ -357,16 +358,17 @@ ENGAGE_LOG_ROTATION = {
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
 # one of the values below. It will either be a local directory or the directory on
 # the live server
-if os.path.isdir('/Users/cjogbuehi'):
-    LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-elif os.path.isdir('/Users/rylanfrancis'):
-    LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-elif os.path.isdir('/Users/waldemarprzybyslawsk'):
-    LC_LOG = ('/Users/waldemarprzybyslawsk/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-elif os.path.isdir('/Users/edgarrodriguez'):
-    LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-else:
-    LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
+if not LC_LOG:  # If this wasn't already set in local.py . . .
+    if os.path.isdir('/Users/cjogbuehi'):
+        LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    elif os.path.isdir('/Users/rylanfrancis'):
+        LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    elif os.path.isdir('/Users/waldemarprzybyslawsk'):
+        LC_LOG = ('/Users/waldemarprzybyslawsk/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    elif os.path.isdir('/Users/edgarrodriguez'):
+        LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    else:
+        LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
 
 # Build logging for unsubscribe.htm
 sp_logger = logging.getLogger('silverpoppy.api')
