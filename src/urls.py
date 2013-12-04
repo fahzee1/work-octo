@@ -1352,6 +1352,10 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/equipment/home-security/touch-screen/',permanent=True)),
     ('(?P<keyword>%s)/(?P<city>[-.,()\w]+)/(?P<state>[-\w]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
         RedirectView.as_view(url='/home-security/%(state)s/%(city)s/',permanent=True)),
+    ('equipment/home-security/ge-simon-xt/?$',
+        RedirectView.as_view(url='/equipment/home-security/simon-xt/',permanent=True)),
+    ('learn/protect/?$',
+        RedirectView.as_view(url='/learn/protect-america/',permanent=True)),
 )
 '''
 urlpatterns += patterns('',
