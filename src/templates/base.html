@@ -467,14 +467,41 @@ $(document).ready(function(){
 {% endblock %}
 {% block extra_javascript %}
 
-{% if use_call_measurement %}
+
 <script type="text/javascript"> 
-    var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'i10237' or request.COOKIES.refer_id == 'a01415' or request.COOKIES.refer_id == 'i10237' or request.GET.agent == 'i10237' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'i10240' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}";
+    function getParameterByName( name ){
+          name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+          var regexS = "[\\?&]"+name+"=([^&#]*)";
+          var regex = new RegExp( regexS );
+          var results = regex.exec( window.location.href );
+          if( results == null )
+            return "";
+          else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+
+        }
+
+    var device = getParameterByName('device');
+    var ci_search_source;
+    var cookie_refer_id = "{{ request.COOKIES.refer_id }}"
+    var session_refer_id = "{{ request.session.refer_id }}"
+    var agent = "{{ request.GET.agent }}"
+
+    if (cookie_refer_id == 'GOOGLEPPC' || session_refer_id == 'GOOGLEPPC' || cookie_refer_id =='a01415' || cookie_refer_id == 'i10237' || agent == 'i10237'){
+        ci_search_source = 'google'
+    }
+    if (cookie_refer_id == 'BINGPPC' || session_refer_id == 'BINGPPC' || session_refer_id == 'i10240'){
+        ci_search_source = 'bing'
+    }
+    if (device == 'm' || session_refer_id == 'i10045'){
+        ci_search_source = "mobile";
+    }
+
     var thisref = document.referrer.replace(/&/g, "zzzzz");
     var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
     document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
 </script>
-{% endif %}
+
 {% endblock %}
 
 {% block extra_pixels %}
@@ -614,6 +641,7 @@ function getParameterByName( name ){
     return "";
   else
     return decodeURIComponent(results[1].replace(/\+/g, " "));
+
 }
 </script>
 {% endblock %}
