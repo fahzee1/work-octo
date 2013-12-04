@@ -6,7 +6,6 @@
     {% if no_promo = True %}
 
     {% else %}
-{% comment %}
         {% if cyber_promo == "shop" %}
         <div id="main-promo" style="background: #2c3c56;">
             <a href="http://www.protectamerica.com/products/order-package?promo=cyber-security" id="main-promo-content">
@@ -52,11 +51,7 @@
             </a>
         </div>    
         {% endif %}
-{% endcomment %}
-{% comment %}
         {% if cyber_promo == Null %}
-{% endcomment %}
-            {% comment %}
             <div id="main-promo" style="background: #2c3c56;">
                 <a href="http://www.protectamerica.com/products/order-package?promo=cyber-security" id="main-promo-content">
                     <img src="{{ STATIC_URL }}img/promo/cyber-monday/cyber-monday-banner.png" alt="cyber-monday-banner" width="264" height="48" style="position: absolute; top: -4px;" />
@@ -64,7 +59,7 @@
                     <img src="{{ STATIC_URL }}img/promo/cyber-monday/security-right.png" style="float: right; padding-top: 4px;" alt="security-right" width="552" height="48" />
                 </a>
             </div>
-            {% endcomment %}
+            {% comment %}
             <div id="main-promo">
                 <a href="http://www.protectamerica.com/equipment/home-security/security-camera?promo=true" id="main-promo-content">
                     <img src="{{ STATIC_URL }}img/banners/promos/camera-banner.png" class="main-promo-image" style="width: 92px; left: 16px;" alt="keychain-promo" />
@@ -72,6 +67,7 @@
                     <div class="clear"></div>
                 </a>
             </div>
+            {% endcomment %}
             {% comment %}
             <div id="main-promo">
                 <a href="http://www.protectamerica.com/products/order-package?promo=true" id="main-promo-content">
@@ -103,9 +99,7 @@
                 </a>
             </div>
             {% endcomment %}
-{% comment %}
         {% endif %}
-{% endcomment %}
     {% endif %}
     {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Get Started Now, <strong>Call Today! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></a></p>
 </div>
