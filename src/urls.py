@@ -162,6 +162,8 @@ elif settings.SITE_ID == 3:
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
         dtt(r'^ipod/?$', 'affiliates/sem-landing-page/ipod.html', 'ipod'),
 
+        # KEYWORD BASED
+        dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
 
         # TESTS
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
