@@ -774,9 +774,6 @@ else:
         # SEO Content Pages
         dtt(r'^home-security-systems/?$', 'seo-pages/home-security-systems.html', 'seo-home-security-systems'),
         dtt(r'^alarm-systems/?$', 'seo-pages/alarm-systems.html', 'seo-alarm-systems'),
-        dtt(r'^ge-home-security/?$', 'seo-pages/ge-home-security.html', 'seo-ge-home-security'),
-        dtt(r'^ge-home-security-systems/?$', 'seo-pages/ge-home-security-systems.html', 'seo-ge-home-security-systems'),
-        dtt(r'^home-alarm-systems/?$', 'seo-pages/home-alarm-system.html', 'seo-home-alarm-systems'),
         dtt(r'^security-systems/?$', 'seo-pages/security-systems.html', 'seo-security-systems'),
         dtt(r'^home-security-system/?$', 'seo-pages/home-security-system.html', 'seo-home-security-system'),
         dtt(r'^best-home-security-system/?$', 'seo-pages/best-home-security-system.html', 'seo-best-home-security-system'),
