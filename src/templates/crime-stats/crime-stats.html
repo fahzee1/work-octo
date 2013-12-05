@@ -25,19 +25,7 @@
         <div id="city-bar">
             <div id="city-bar-info">
                 <h1>{{ city }}, {{ state }} </h1>
-                <span id="city-info">
-                    <strong>
-                        
-                    </strong>
-                    Current Temp: 
-                    {% if city == "Philadelphia" and state == "PA" %}
-                    <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/sunny-icon.png" title="It's always sunny in Philadelphia!" alt="It's always sunny in Philadelphia!"/> 
-        
-                    {% else %}
-                    <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" title="{{ weather_info.desc }}" alt="{{ weather_info.desc }}"/> 
-                    {% endif %}
-        
-                    {{ weather_info.temp }}&deg;F {% if city == "Forks" and state == "WA" %}&bull; Beware of Werewolves!{% endif %}</span>
+                <span id="city-info"></span>
 
                 <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
                 <div id="share-buttons">
