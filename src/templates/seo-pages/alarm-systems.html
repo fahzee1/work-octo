@@ -1,33 +1,49 @@
 {% extends "seo-pages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% load url from future %}
 
 {% block page_title %}Alarm Systems | Buy Alarm Systems | Protect America{% endblock %}
 {% block page_keywords %}alarm systems, alarm system, best alarm systems, home security, home security systems{% endblock %}
 {% block page_description %}Protect America alarm systems provide you and your family a safe and secure environment at a very affordable price.{% endblock %}
 
 
-{% block content %}
-    {{ block.super }}
+{% block "cs_2" %}
+    <h2 >The perfect alarm system <span>for your home.</span></h2>
+    <p><strong>An alarm system built for you.</strong> Don’t have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>
+    <a href="{% url 'shop' %}" class="button-link  order-button hide-mobile no-desktop" style="margin-top: 36px;">Get an Alarm System <i class="icon-chevron-right"></i></a>
+{% endblock %}
 
-    <div class="home-security-content">
-    <img src="{{ STATIC_URL }}img/products/monitoring/cellular-step-by-step.jpg" class="center" alt="cellular-step-by-step" width="640" height="145" />
+{% block "cs_3" %}
+    <div class="wrapper">
+        <div class="main-title">
+            <h2>Alarm Systems by Protect America</h2>
+            <p>We make it easy to secure and protect your home and family. </p>
+        </div>
+        <div class="home-security-content">
+            <p>Wireless <a href="{% url 'home' %}" title="alarm systems">alarm systems</a> for home security are becoming more common every day. This makes installing alarm systems much easier because there are very little holes to drill, no wires to pull through your walls, and replacing parts, should anything go wrong, is a breeze! And because Protect America provides easy instructions to follow on our website, you don’t need any experience to install the system yourself and no installation fees either. Just take it out of the box, follow the simple directions and you’ll have the comfort of knowing your family is safe and your home is being monitored when you’re not around.</p>
+            <img src="{{ STATIC_URL }}img/products/monitoring/cellular-step-by-step.jpg" style="padding: 24px 0;" class="center" alt="cellular-step-by-step" width="640" height="145" />
+            
+            <p>By installing your own <a href="http://www.protectamerica.com/home-security-blog/protect-america-2/ge-wireless-alarm-system_3695" title="wireless alarm system">wireless alarm system</a> you prevent drilling, hammering and unnecessary wires in your walls and wires running off the side of your house. This gives you an alarm system that will provide security to you and your family throughout the day, without the fear of potential intrusion or worrying about having stray wires all over the place.</p>
+            
+            <p><a href="http://www.protectamerica.com/home-security-blog/home-security-systems-2/how-to-install-a-home-security-system_2094" title="Hard-wired systems">Hard-wired systems</a> carry the risk of getting phone wires getting cut preventing calls to the monitoring facility and rendering alarm systems useless. A wireless system with cellular monitoring on the other hand is much more difficult to disarm, making for a safer and more secure environment.</p>
 
-        <h1>Alarm Systems by Protect America</h1>
-        
-        <p>Wireless <a href="{% url home %}" title="alarm systems">alarm systems</a> for home security are becoming more common every day. This makes installing alarm systems much easier because there are very little holes to drill, no wires to pull through your walls, and replacing parts, should anything go wrong, is a breeze! And because Protect America provides easy instructions to follow on our website, you don’t need any experience to install the system yourself and no installation fees either. Just take it out of the box, follow the simple directions and you’ll have the comfort of knowing your family is safe and your home is being monitored when you’re not around.</p>
-        
-        <p>By installing your own <a href="http://www.protectamerica.com/home-security-blog/protect-america-2/ge-wireless-alarm-system_3695" title="wireless alarm system">wireless alarm system</a> you prevent drilling, hammering and unnecessary wires in your walls and wires running off the side of your house. This gives you an alarm system that will provide security to you and your family throughout the day, without the fear of potential intrusion or worrying about having stray wires all over the place.</p>
-        
-        <p><a href="http://www.protectamerica.com/home-security-blog/home-security-systems-2/how-to-install-a-home-security-system_2094" title="Hard-wired systems">Hard-wired systems</a> carry the risk of getting phone wires getting cut preventing calls to the monitoring facility and rendering alarm systems useless. A wireless system with cellular monitoring on the other hand is much more difficult to disarm, making for a safer and more secure environment.</p>
-    </div>
-    {% include "order/call-box.html" %}
-    <div class="home-security-content">
-        <img src="{{ STATIC_URL }}img/products/silver-package/silver-package-simon-xt-lowest-price.jpg" alt="Silver Home Security Package" />
-        
-        <p>Out of all the known wireless alarm systems available, Protect America carries one of the best in the industry, a GE Simon XT Wireless Alarm. All five of our packages include the highest quality industry equipment when compared against our competition.</p>
-        
-        <p>All of our wireless alarm systems come with door/window sensors, a motion detector, security decals and a yard sign. You can also choose as much equipment or accessories for our alarm systems as you desire. One of the biggest features of owning one of our wireless alarm systems is the ability to use your mobile device to control it from anywhere in the world.</p>
-        
-        <p>Our top-notch alarm systems provide you the security you desire whether it’s for your home or business. If you decide to install the additional home security cameras, you’ll be able to see what’s happening in your house or work anytime as long as you have internet access and a computer. This is just one of the many perks owning a Protect America alarm system can provide.</p>
+        </div>        
+
+        <div class="clear"></div>
     </div>
 {% endblock %}
+
+{% block "cs_4" %}
+    <div class="wrapper">
+        <div class="home-security-content" style="padding-top: 32px;">
+            <img src="{{ STATIC_URL }}img/base/adv_silver.png" alt="Silver Home Security Package" />
+            <h2>A Top Rated Alarm System</h2>
+            <p>Out of all the known wireless alarm systems available, Protect America carries one of the best in the industry, a Simon XT Wireless Alarm. All five of our packages include the highest quality industry equipment when compared against our competition.</p>
+            
+            <p>All of our wireless alarm systems come with door/window sensors, a motion detector, security decals and a yard sign. You can also choose as much equipment or accessories for our alarm systems as you desire. One of the biggest features of owning one of our wireless alarm systems is the ability to use your mobile device to control it from anywhere in the world.</p>
+            
+            <p>Our top-notch alarm systems provide you the security you desire whether it’s for your home or business. If you decide to install the additional home security cameras, you’ll be able to see what’s happening in your house or work anytime as long as you have internet access and a computer. This is just one of the many perks owning a Protect America alarm system can provide.</p>
+        </div>
+    </div>
+{% endblock %}
+{% block "order-snippet" %}<p>Our alarm system experts are ready to help:</p>{% endblock %}
