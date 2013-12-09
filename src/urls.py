@@ -164,6 +164,8 @@ elif settings.SITE_ID == 3:
 
         # KEYWORD BASED
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
+        dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/adt.html', 'adt'),
+
 
         # TESTS
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
