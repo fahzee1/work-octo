@@ -15,7 +15,8 @@
                         {% if city == "Roswell" and state == "NM" %}&bull; Alien Abductions: 11.4{% endif %}</h2>
                 <p>The statistics provided for {{ city }} are compiled from the Uniform Crime Reports (UCR); official data about crime in the United States, published by the Federal Bureau of Investigation (FBI). UCR is a "a nationwide, cooperative statistical effort of nearly 18,000 city, university and college, county, state, tribal, and federal law enforcement agencies voluntarily reporting data on crimes brought to their attention."
             </div>
-    
+        <img src="{{ STATIC_URL }}img/base/protect-america-hero.jpg" class="main-hero-image" style="left: 0px;" alt="Protect America Logo" />
+
         </div>
     </div>
 {% include "order/call-box.html" with no_promo=False %}
@@ -24,19 +25,7 @@
         <div id="city-bar">
             <div id="city-bar-info">
                 <h1>{{ city }}, {{ state }} </h1>
-                <span id="city-info">
-                    <strong>
-                        
-                    </strong>
-                    Current Temp: 
-                    {% if city == "Philadelphia" and state == "PA" %}
-                    <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/sunny-icon.png" title="It's always sunny in Philadelphia!" alt="It's always sunny in Philadelphia!"/> 
-        
-                    {% else %}
-                    <img src="{{ STATIC_URL }}img/crime-stats/weather-icons/{{ weather_info.icon }}-icon.png" title="{{ weather_info.desc }}" alt="{{ weather_info.desc }}"/> 
-                    {% endif %}
-        
-                    {{ weather_info.temp }}&deg;F {% if city == "Forks" and state == "WA" %}&bull; Beware of Werewolves!{% endif %}</span>
+                <span id="city-info"></span>
 
                 <a href="/crime-rate/{{ state }}/" class="change-city">click to change city</a>
                 <div id="share-buttons">
