@@ -4,3 +4,5 @@ DEFAULT_AGENT = 'HOMESITE'
 DEFAULT_SOURCE = 'PROTECT AMERICA'
 
 from settings import *
+
+#DEBUG = True

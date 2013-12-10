@@ -62,7 +62,8 @@ sitemaps={
     'thankyou':StaticSitemap(['contact-thank-you','ceo-thank-you','moving-kit-thank-you','contact-tell-friend','affiliate-enroll'],0.5),
     'affiliates':StaticSitemap(['agent-two-lp','package-code','pa-spanish','pa-hialarm','cj','aff-get-started','aff-logos','aff-web-banners','aff-collateral',
                                 'aff-products','aff-login'],0.5),
-    'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems','seo-ge-home-security','seo-ge-home-security-systems','seo-ge-home-security-systems','seo-home-alarm-systems',
+    #'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems','seo-ge-home-security','seo-ge-home-security-systems','seo-ge-home-security-systems','seo-home-alarm-systems',
+    'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems',
                          'seo-security-systems','seo-home-security-systems','seo-best-home-security-system','seo-home-security-companies'],0.5),
     'paidlanding':StaticSitemap(['paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
                                  'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
@@ -761,7 +762,7 @@ else:
         #url(r'^(?P<keyword>%s)/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/(?P<state>[A-Za-z\-]+)/?$' % ('|'.join(LOCAL_KEYWORDS)),
             #'apps.local.views.local_page_wrapper',
             #name='local-page-keyword'),
-        url(r'^home-security/(?P<state>\w{1,2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-keyword2'),
+        url(r'^home-security/(?P<state>\w{1,2})/(?P<city>[a-zA-Z\-\_0-9\s+\(\),\'\.\/]+)/?$','apps.local.views.local_page_wrapper2',name='local-page-keyword2'),
         url(r'^home-security/(?P<state>\w{1,2})/?$','apps.local.views.local_page_wrapper2',name='local-page-state2'),
 
         url(r'^(?P<keyword>%s)/(?P<state>[A-Z a-z\-]+)/sitemap\.xml' % ('|'.join(LOCAL_KEYWORDS)),
