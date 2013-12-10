@@ -7,3 +7,4 @@ from settings import *
 
 #del SESSION_COOKIE_DOMAIN
 DEFAULT_PHONE = '8774597521'
+CACHES['default']['KEY_PREFIX'] = 'SITE_ID_14__'

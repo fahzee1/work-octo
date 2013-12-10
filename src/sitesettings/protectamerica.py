@@ -4,3 +4,5 @@ DEFAULT_AGENT = 'HOMESITE'
 DEFAULT_SOURCE = 'PROTECT AMERICA'
 
 from settings import *
+
+CACHES['default']['KEY_PREFIX'] = 'SITE_ID_1__'
