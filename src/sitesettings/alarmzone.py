@@ -6,3 +6,4 @@ DEFAULT_SOURCE = 'Organic'
 from settings import *
 
 CACHES['default']['KEY_PREFIX'] = 'SITE_ID_12__'
+SESSION_COOKIE_DOMAIN = '.alarmzone.com'
