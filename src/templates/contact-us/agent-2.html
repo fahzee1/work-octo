@@ -48,7 +48,6 @@
                 
         <h3>Call Now</h3>
         <p>1-888-951-5156</p>
-        {% comment %} 
         <div id="webinar">
         <img src="{{ STATIC_URL }}img/affiliates/new-dealer/video-icon.png" />
             <div id="head-title">
@@ -64,7 +63,6 @@
                 <button type="button" class="blue-button">Get Started | ></button>
             </form>
         </div>
-        {% endcomment %}
         <img src="{{ STATIC_URL }}img/affiliates/new-dealer/infographic.png">
     </div>
     <div class="clear"></div>
@@ -140,11 +138,9 @@ $(document).ready(function() {
         var data = {'name':name, 
                     'email': email,
                     'phone': phone, 
-                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
-                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
-                    'form': 'basic',
+                    'form': 'dealers',
                     'referer_page':window.location.href,
-                    'form_values':$form.serialize()}
+                   }
     
   
         $.ajax({
