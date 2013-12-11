@@ -47,6 +47,14 @@ def send_leadimport(data):
 
     return True
 
+def send_bizdev_email(data):
+    subject = 'New Lead From Dealers Page!'
+    message = 'Name : %s \n Email: %s \n Phone: %s' % (data['name'],data['email'],data['phone'])
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = 'BusinessDevelopment <BusinessDevelopment@protectamerica.com>'
+    send_mail(subject,message,from_email,to_email)
+
+
 def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
     if notify_all:
         contact_list = ['cjogbuehi@protectamerica.com','development@protectamerica']
@@ -445,6 +453,10 @@ def ajax_post(request):
 
     response_dict = {}
     form_type = request.POST['form']
+
+    if form_type == 'dealers':
+        send_bizdev_email(request.POST)
+        return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
 
     if form_type == 'basic':
         form, success = basic_post_login(request)
