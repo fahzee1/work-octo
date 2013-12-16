@@ -557,8 +557,19 @@ $(document).ready(function(){
     if (cookie_refer_id == 'BINGPPC' || session_refer_id == 'BINGPPC' || session_refer_id == 'i10240'){
         ci_search_source = 'bing'
     }
-    if (device == 'm' || session_refer_id == 'i10045'){
-        ci_search_source = "mobile";
+    if (!ci_search_source){
+        if (device == 'm' || session_refer_id == 'i10045'){
+            ci_search_source = "mobile";
+        }
+        else if (device =='t'){
+            ci_search_source = "tablet";
+        }
+        else if (device =='c'){
+            ci_search_source = "computer";
+        }
+        else{
+            ci_search_source = "none";
+        }
     }
 
     var thisref = document.referrer.replace(/&/g, "zzzzz");
