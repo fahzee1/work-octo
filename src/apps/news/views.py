@@ -53,31 +53,33 @@ def news_home(request):
 
     videos = []
     for entry in entries:
-        title = get_text(entry.getElementsByTagName('title'))
-        if title == 'Deleted video':
-            continue
-        description = get_text(entry.getElementsByTagName('media:description'))
-        views = entry.getElementsByTagName('yt:statistics')[0].getAttribute('viewCount')
-        links = entry.getElementsByTagName('link')
-        for ylink in links:
-            if ylink.getAttribute('rel') == 'alternate':
-                link = ylink.getAttribute('href')
-                break
+        try:
+            title = get_text(entry.getElementsByTagName('title'))
+            if title == 'Deleted video':
+                continue
+            description = get_text(entry.getElementsByTagName('media:description'))
+            views = entry.getElementsByTagName('yt:statistics')[0].getAttribute('viewCount')
+            links = entry.getElementsByTagName('link')
+            for ylink in links:
+                if ylink.getAttribute('rel') == 'alternate':
+                    link = ylink.getAttribute('href')
+                    break
 
-        video_group = re.search(r'v=(?P<video_id>.*)&', link, re.I)
+            video_group = re.search(r'v=(?P<video_id>.*)&', link, re.I)
 
-        videos.append({'description': description,
-                       'title': title,
-                       'views': views,
-                       'link': link,
-                       'id': video_group.groups()[0]})
-    
+            videos.append({'description': description,
+                           'title': title,
+                           'views': views,
+                           'link': link,
+                           'id': video_group.groups()[0]})
+        except:
+            pass
 
     return simple_dtt(request, 'news/index.html', {
         'headline': articles[0],
         'articles': articles[1:],
         'last_id': articles[4].pk,
-        'videos': videos[:3],
+        'videos': (videos[:3] if videos else None),
         'random_articles': random_articles,
         'categories': categories,
         'pages': ['support'],
