@@ -551,12 +551,20 @@ $(document).ready(function(){
     var session_refer_id = "{{ request.session.refer_id }}"
     var agent = "{{ request.GET.agent }}"
 
+    //check if google or bing but if also mobile then override and set as mobile
     if (cookie_refer_id == 'GOOGLEPPC' || session_refer_id == 'GOOGLEPPC' || cookie_refer_id =='a01415' || cookie_refer_id == 'i10237' || agent == 'i10237'){
         ci_search_source = 'google'
+        if (device == 'm' || session_refer_id == 'i10045'){
+            ci_search_source = "mobile";
+        }
     }
     if (cookie_refer_id == 'BINGPPC' || session_refer_id == 'BINGPPC' || session_refer_id == 'i10240'){
         ci_search_source = 'bing'
+        if (device == 'm' || session_refer_id == 'i10045'){
+            ci_search_source = "mobile";
+        }
     }
+    //if not google or bing then just check to see what type of device
     if (!ci_search_source){
         if (device == 'm' || session_refer_id == 'i10045'){
             ci_search_source = "mobile";
