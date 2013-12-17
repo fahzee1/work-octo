@@ -45,7 +45,7 @@ def news_home(request):
     categories = Category.objects.order_by('pk')
     
     # grab videos from youtube
-    """
+
     yt_feed = 'http://gdata.youtube.com/feeds/api/playlists/371901C9D9882FB8?v=2'
     xml_feed = urllib.urlopen(yt_feed)
     dom = parseString(xml_feed.read())
@@ -53,13 +53,16 @@ def news_home(request):
 
     videos = []
     for entry in entries:
-        description = get_text(entry.getElementsByTagName('media:description'))
         title = get_text(entry.getElementsByTagName('title'))
+        if title == 'Deleted video':
+            continue
+        description = get_text(entry.getElementsByTagName('media:description'))
         views = entry.getElementsByTagName('yt:statistics')[0].getAttribute('viewCount')
         links = entry.getElementsByTagName('link')
         for ylink in links:
             if ylink.getAttribute('rel') == 'alternate':
                 link = ylink.getAttribute('href')
+                break
 
         video_group = re.search(r'v=(?P<video_id>.*)&', link, re.I)
 
@@ -68,13 +71,13 @@ def news_home(request):
                        'views': views,
                        'link': link,
                        'id': video_group.groups()[0]})
-    """
+    
 
     return simple_dtt(request, 'news/index.html', {
         'headline': articles[0],
         'articles': articles[1:],
         'last_id': articles[4].pk,
-        #'videos': videos[:3],
+        'videos': videos[:3],
         'random_articles': random_articles,
         'categories': categories,
         'pages': ['support'],
