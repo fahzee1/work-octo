@@ -70,7 +70,7 @@ sitemaps={
     'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
     'article':ArticleSitemap,
    # 'crimestats':CrimeStatsSitemap,
-   'crimestats-state':FreeCrimeStatsStateSitemap,
+   #'crimestats-state':FreeCrimeStatsStateSitemap,
     #'crimestats-city':FreeCrimeStatsCitySitemap,
    # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
     'keyword':KeywordSitemapIndex(settings.LOCAL_KEYWORDS)
