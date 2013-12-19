@@ -165,7 +165,11 @@ elif settings.SITE_ID == 3:
 
         # KEYWORD BASED
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
+        
+        # COMPETITOR BASED
         dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/adt.html', 'adt'),
+        dtt(r'^frontpoint-security/?$', 'affiliates/sem-landing-page/frontpoint.html', 'frontpoint'),
+
 
 
         # TESTS

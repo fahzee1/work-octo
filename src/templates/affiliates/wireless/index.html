@@ -1,246 +1,70 @@
-
-{% extends "affiliates/generic-landing-base/index.html" %}
+{% extends "affiliates/sem-landing-page/paid-base.html" %}
 {% load sekizai_tags content_tags content_filters %}
 
 
-{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/wireless/wireless.css">
-    <script type="text/javascript" src="//use.typekit.net/qrm2ztf.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-{% endblock %}
+{% block page_title %}Wireless Home Security | Wireless Home Alarms | Protect America{% endblock %}
+{% block h1 %}Wireless Home Security{% endblock %}
 
-{% block typekit %}tk-museo-slab{% endblock %}
-{% block extra_class %}alternate{% endblock %}
-{% block hero-block %}
-</div>
-<div id="hero-banner" class="alt-form">
-
-    <div class="wrapper">
-        <div id="top-hero-banner">
-            <div id="main-banner" data-url="{% url order-package %}">
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/best-deal-banner.jpg" class="adt-banner" alt="adt-banner" width="1229" height="409" />
-            </div>
-        </div>
-        {% include "order/quote-form-noview.html" with form=forms.basic %}
-    </div>
-</div>
-{% include "order/call-box.html" %}
-
-<div class="wrapper">
-<div class="clear"></div>
-{% endblock %}
-{% block left-wrapper %}
-    <h1>Simple, Easy Wireless Home Security</h1>
-    <div class="icon">
-        <img src="{{ STATIC_URL }}img/affiliates/wireless/wireless-exp02.2013.png" alt="wireless-exp02.2013" width="307" height="139" />
-    </div>
-    <div class="touch">
-        <img src="{{ STATIC_URL }}img/affiliates/wireless/touch-screen.gif" alt="touch-screen" width="287" height="191" />
-    </div>
-{% endblock %}    
-
-{% block assurance-block-one %}
-    <img src="{{ STATIC_URL }}img/affiliates/wireless/easy-installation-call-out-logo.png" alt="easy-installation-call-out-logo" width="119" height="116" />
-    <h3 class="tk-freight-sans-pro">Easy Installation</h3>
-{% endblock %}
-
-{% block assurance-block-two %}
-    <img src="{{ STATIC_URL }}img/affiliates/wireless/customizable-call-out-logo.png" alt="customizable-call-out-logo" width="117" height="114" />
-    <h3 class="tk-freight-sans-pro">Customizable Security Packages</h3>
-{% endblock %}
-
-{% block assurance-block-three %}
-    <img src="{{ STATIC_URL }}img/affiliates/wireless/wire-cut-sm-icon.png" alt="wire-cut-sm-icon" width="113" height="111" />
-    <h3 class="tk-freight-sans-pro">Wireless Technology Benefits</h3>
-{% endblock %}
-
-{% block assurance-block-four %}
-    <img src="{{ STATIC_URL }}img/affiliates/wireless/interactive-call-out-logo.png" alt="interactive-call-out-logo" width="113" height="111" />
-    <h3 class="tk-freight-sans-pro">Free Interactive Access</h3>
-{% endblock %}
-
-{% block assurance-block-five %}
-    <img src="{{ STATIC_URL }}img/affiliates/wireless/moving-call-out-logo.png" alt="moving-call-out-logo" width="114" height="111" />
-    <h3 class="tk-freight-sans-pro">Free &amp; Easy Relocation</h3>
-{% endblock %}
-
-{% block assurance-card-one %}
-<div id="conv-install">
-    <div class="left-conv-install">
-        <img src="{{ STATIC_URL }}img/affiliates/wireless/easy-installation-para-section.jpg" alt="easy-installation-para-section" width="529" height="299" />
-    </div>
-    <div class="right-conv-install">
-        <h2 class="tk-freight-sans-pro">Quick &amp; Easy Self-Installation</h2>
-        <p>Installing your own wireless security system has never been easier! Protect America provides low-cost home alarm systems that customers install themselves. No need for power tools or expensive professionals! The installation process can be complete over the phone in as little as 30 minutes with help from our home security experts. Customers don’t just save time with Protect America, they also save hundreds of dollars that other companies charge for installation and activation.</p>
-    </div>
-</div>
-{% endblock %}
-
-{% block assurance-card-two %}
-<div id="house-features">
-    <h2 class="tk-freight-sans-pro">Customized to Fit Your Needs</h2>
-    <p class="tk-freight-sans-pro">Only Protect America will help you customize your security package to fit your needs.<span> Click on the blue dots to see all that we can protect, it’s your choice!</span></p>
-    <div id="equipment-features">
-        <div class="equipment-feature" style="left: 360px; top: 115px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content left">
-                <h3 class="tk-freight-sans-pro">Motion Detectors</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">Our Motion Detectors use both heat and movement to detect intruders when your alarm system is armed. They are very useful in case someone does enter your home. Therefore, a motion detector is best placed in a heavy traffic area of your home.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 375px; top: 375px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content right">
-                <h3 class="tk-freight-sans-pro">GE Simon XT Touch Screen</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">A touch screen acts as an optional point of access for your home security system. The GE Simon XT Touch Screen features one-touch arming and disarming, soothing voice feedback, and an emergency response signal.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 100px; top: 325px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content left">
-                <h3 class="tk-freight-sans-pro">Glass Break Sensor</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">This sensor is specially designed using pattern recognition technology to detect the sound of breaking glass within a 20-foot radius. Use this sensor around easily accessible windows or glass doors that could be shattered to gain entry into your home.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 195px; top: 150px;">
-            <div class="feature-icon active">+</div>
-            <div class="feature-content first-open">
-                <h3 class="tk-freight-sans-pro">The GE Simon XT</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">The control panel is the 'brains' of your home security system. And with the GE Simon XT, you get a full-featured home security platform that combines the best of home security with ease of use. Arming, emergency response, and status updates are all just one button press away. And with its robust programming system, the Simon XT allows you to upgrade and create an alarm system that fits your needs. Protecting your home and family couldn't be easier than with the GE Simon XT control panel.</p>
-            </div>
-        </div>
-                <div class="equipment-feature" style="left: 25px; top: 100px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content left">
-                <h3 class="tk-freight-sans-pro">Window Sensors</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">Window sensors are the most common piece of home security equipment and the front line defense for your home. A surprisingly simple device, door/window sensors create a magnetic field that, when broken, sends a signal to your central GE Simon XT control panel and sounds the alarm. Protect America only uses wireless sensors that can be used on either doors or windows, allowing for greater system customization. For most homes, we recommend one sensor for every accessible door and window.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 230px; top: 40px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content right">
-                <h3 class="tk-freight-sans-pro">Smoke Detector</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">Protect your home and family from fire by adding monitored smoke detectors to your security system. Monitored smoke detectors can identity smoke or rapidly rising temperatures 24 hours a day whether you're home or not. Even if your security system is disarmed, our monitoring facility notifies your local fire department if there is a fire.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 850px; top: 405px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content right">
-                <h3 class="tk-freight-sans-pro">Home Security Sign</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">Deter burglars from targeting your home with this warning sign that prominently displays that your house is secured with a home alarm system.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 635px; top: 385px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content left">
-                <h3 class="tk-freight-sans-pro">Keychain Remote Control</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">With the keychain remote control, you can enjoy the convenience of turning off your system as you pull into the driveway. You can also send a panic signal from anywhere inside your home allowing you to notify authorities.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 635px; top: 345px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content left">
-                <h3 class="tk-freight-sans-pro">GPS Vehicle Tracking</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">Protect America allows you to instantly locate and follow your car with real-time GPS vehicle tracking. Easily keep a "virtual eye" on your vehicle through an intuitive web interface. Get customizable alerts via email or text if your teenager is speeding or if they are going to places they shouldn't.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 635px; top: 300px;">
-            <div class="feature-icon">+</div>
-            <div class="feature-content right">
-                <h3 class="tk-freight-sans-pro">Garage Door Sensors</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">This sensor protects against entry though the biggest door in your house. By detecting the tilt of an overhead door, this sensor can alert your alarm system if your garage is opened while armed.</p>
-            </div>
-        </div>
-        <div class="equipment-feature" style="left: 479px; top: 100px;">
-            <div class="feature-icon">x</div>
-            <div class="feature-content left">
-                <h3 class="tk-freight-sans-pro">Interactive Video Cameras</h3>
-                <p style="width: 220px;" class="tk-freight-sans-pro">With our interactive video home security services, we bring you easy to use, high-quality video security. So you can easily check in at home anytime of day and from anywhere. Getting a cup of joe? Easy, log in with your laptop and view your cameras. On vacation? No problem, just use your smartphone to make sure everything is okay. With video home security, checking in at home is just a click away.</p>
-            </div>
-        </div>
-    </div>
-    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/house.gif" alt="house" width="957" height="475" />
-</div>
-{% addtoblock "js" %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#house-features .feature-icon').click(function(){
-            var icon = $(this).clone();
-            $('#house-features .feature-icon').removeClass('active').html('+');
-            $('#house-features .feature-content').slideUp(250, 'easeOutBounce');
-            if(!$(icon).hasClass('active')) {
-                $(this).addClass('active').html('x').next('#house-features .feature-content').slideDown(250, 'easeOutBounce');
-            }
-        });
-        $('#touchscreen-features .feature-icon').click(function(){
-            var icon = $(this).clone();
-            $('#touchscreen-features .feature-icon').removeClass('active').html('+');
-            $('#touchscreen-features .feature-content').slideUp(250, 'easeOutBounce');
-            if(!$(icon).hasClass('active')) {
-                $(this).addClass('active').html('x').next('#touchscreen-features .feature-content').slideDown(250, 'easeOutBounce');
-            }
-        });
-    });
-    </script>
-{% endaddtoblock "js" %}
-{% endblock %}
+{% block lifestyle-headline %}<h2>The perfect wireless system <span>for your home.</span></h2>{% endblock %}
+{% block benefits-headline %}<h2>Easy, Flexible, Wireless Alarm Protection</h2>{% endblock %}
 
 
-{% block assurance-card-three %}
-<div id="conv-install">
-    <div class="left-conv-install">
-      <img style="padding-top: 25px; padding-left: 25px;" src="{{ STATIC_URL }}img/affiliates/wireless/lots-of-wires.jpg" alt="lots-of-wires" width="455" height="264" />
-    </div>
-    <div class="right-conv-install">
-        <h2 class="tk-freight-sans-pro">Don’t Live Under the Wire</h1>
-        <p>Wireless technology makes your home security convenient and affordable! Other security systems can be a hassle that involves a professional technician drilling holes into your walls to install unnecessary wires. Protect America customers save time and money by installing their security systems themselves. And our installation process won’t damage your home! Wireless technology is also more secure than standard alternatives because burglars can’t disable your system by cutting wires.</p>
-    </div>
-</div>
-{% endblock %}
-
-{% block assurance-card-four %}
-<div class="copy-point">
-    <h2 class="tk-freight-sans-pro">Control Your Security from Anywhere in the World</h2> 
-    <p>Choose cellular or broadband monitoring and your account comes with FREE interactive features. Arm your system and program rules to fit your needs, anywhere, anytime through your computer or smartphone.</p>
-    <div class="image-area">
-        <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/interactive.png" alt="interactive" width="642" height="309" />
-    </div>
-</div>
-    <div id="interactive-call-out-box">
-        <div class="interactive-call-out">
+{% block faq %}
+    <a id="faqs"></a>
+        <div class="big_wrapper" id="faq">
+          <div class="wrapper clearfix">
+            <h2>Frequently Asked Questions</h2>
             <ul>
-                <li>
-                    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/security-system-control-small-icon-interactive.png" alt="security-system-control-small-icon-interactive" width="74" height="74" />
-                    <p><strong>Security System Control</strong>Use your smartphone to arm, disarm, and view the status of your alarm system easily in real time.</p>
-                    
-                </li>
-                <li>
-                    <img src="{{ STATIC_URL }}img/affiliates/adt-comparison/live-video-small-icon-automation.png" alt="live-video-small-icon-automation" width="74" height="74" />
-                    <p><strong>Live Video</strong>Keep an eye on your home from anywhere in the world with live video. (Video Service Required)</p>
-                </li>
+              <li class="faq">
+                <div>
+                  <h3>Why choose wireless security?</h3>
+                    <p>Wireless security systems are the future of home security. Wireless delivers trusted protection with no drilling in your walls, easy set-up, and saving you money.</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3>How do prices compare between companies?</h3>
+                    <p>Because the system is wireless, we cut out the installation guys and middlemen then pass the savings on to you. Protect America’s security packages come with free equipment and start at $19.99 a month. Compare that with ADT's upfront equipment fees and plans that begin at $42.99 a month.</p>
+                </div>
+              </li>
+              <li  class="faq">
+                <div>
+                  <h3>What if I have to move?</h3>
+                    <p>Take it with you! A big advantage of wireless technology is its flexibility. Protect America offers free EasyMove which allows you to secure your new home with the same system.</p>
+                </div>
+              </li>
+
+              <li class="faq">
+                <div>
+                  <h3>Do you offer cellular monitoring?</h3>
+                    <p>We do! Advanced wireless systems are the latest in home security technology. Our systems are built to the needs of your home. From cellular monitoring to smart home technology, we can provide the best home security system that fits your life at the most affordable price.</p>
+                </div>
+              </li>
             </ul>
+            <ul class="col2">
+              <li class="faq">
+                <div>
+                  <h3 >What if I don’t know exactly what I need?</h3>
+                  <p>We know that no two homes are alike, so our approach is to listen and learn your situation before making an affordable recommendation. Other companies can make recommendations too, but we can’t guarantee they will be affordable.</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3>What happens when my alarm system is triggered? How will the monitoring station respond?</h3>
+                  <p>If your system is not disarmed, our monitoring station will attempt to reach you. If you do not answer, we will dispatch the local Police to the monitoring address and will attempt to reach your emergency contacts.</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3 >How do I Arm and Disarm my new alarm system?</h3>
+                  <p>Simply press one button to arm your system, and enter your master code to disarm it. Protect America alarm systems are also interactive, so you can arm and disarm from a smartphone with our free "SMART Connect" app!</p>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-    </div>
-    <div class="clear"></div>
-{% endblock %}
-
-{% block assurance-card-five %}
-<div id="conv-install">
-    <div class="left-conv-install">
-        <img src="{{ STATIC_URL }}img/affiliates/wireless/relocation.jpg" alt="relocation" width="515" height="327" />
-    </div>
-    <div class="right-conv-install">
-        <h2 class="tk-freight-sans-pro">Free &amp; Easy Relocation</h1>
-        <p>Need home security but planning a move soon? It’s no problem with Protect America! You can easily move your security system between homes for no additional cost.</p>
-    </div>
-</div>
-{% endblock %}
-{% block page-product %}
-    <h2>Silver Security Package</h2>
-    <p><span>Equipment Price: <strong>FREE*</strong></span>monthly monitoring starting at $37.99/mo</p>
-    <div class="button-submit">
-        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Silver-B']);">Order Now ></a>
+    
+        
+        <div class="clear"></div>
     </div>
 {% endblock %}
-
