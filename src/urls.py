@@ -317,10 +317,11 @@ elif settings.SITE_ID == 11:
 elif settings.SITE_ID == 12:
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
-        dtt(r'^shop-home-security/?$', 'external/alarm-zone/shop.html', 'shop', ctx={'agent_id': 'a01415'}),
-        dtt(r'^home-alarm-monitoring-services/?$', 'external/alarm-zone/monitoring.html', 'monitoring', ctx={'agent_id': 'a01415'}),
-        dtt(r'^ge-security-equipment/?$', 'external/alarm-zone/equipment.html', 'equipment', ctx={'agent_id': 'a01415'}),
-        dtt(r'^thank-you/?$', 'external/alarm-zone/thanks.html', 'thank_you', ctx={'agent_id': 'a01415'}),
+        dtt(r'^build/?$', 'external/alarm-zone/build.html', 'build-package', ctx={'agent_id': 'a01415'}),
+        dtt(r'^equipment/?$', 'external/alarm-zone/equipment.html', 'equipment-page', ctx={'agent_id': 'a01415'}),
+        dtt(r'^learn/?$', 'external/alarm-zone/learn.html', 'learn-more', ctx={'agent_id': 'a01415'}),
+        dtt(r'^quote/?$', 'external/alarm-zone/quote.html', 'request-quote', ctx={'agent_id': 'a01415'}),
+        dtt(r'^thanks/?$', 'external/alarm-zone/thanks.html', 'thanks-page', ctx={'agent_id': 'a01415'}),
     )
 
 # SecuritySystemExpert.com

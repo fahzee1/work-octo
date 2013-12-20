@@ -1,0 +1,336 @@
+{% extends "external/alarm-zone/base.html" %}
+{% load content_filters content_tags sekizai_tags %}
+
+
+{% block content %}
+
+<!-- Primary Page Layout
+================================================== -->
+
+<div class="super container top">
+    <div class="header">
+        <a href="/">
+            <div class="logo"></div>
+                <div class="logo_mobile">
+                    <object type="image/svg+xml" width="100" height="22" data="{{ STATIC_URL }}img/external-lp/alarmzone/logo.svg"></object>
+                </div>
+        </a>
+        <div class="call">
+            <p>Call today</p>
+            <h2>1-800-951-5190</h2>
+        </div>
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="/" class="index-link">Home</a></li>
+            <li><a href="{% url equipment-page %}" class="equipment-link">Equipment</a></li>
+            <li><a href="{% url learn-more %}" class="learn-link">Learn More</a></li>
+            <li><a href="{% url request-quote %}" class="request-link">Request a Quote</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="super container">
+    <div class="full width">
+        <div class="build">
+            <div class="container">
+                <div class="sixteen columns">
+                    <p>Follow the steps below to build your own, personalized security package. We will then get in touch with you to discuss your solution further.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+        <div class="sixteen columns">
+            <div class="build-step1" class="selected">
+                <h3>Step 1: Select a plan</h3>
+                <ul>
+                    <a href="#" class="step1" data-plan="basic">
+                    <li>
+                        <h1>Basic</h1>
+                        <p>GE CONTROL PANEL<br>
+                        3 DOOR / WINDOW SENSORS<br>
+                        1 MOTION DETECTOR</p>
+                        <h2>$19.99</h2>
+                        <small>per month</small>
+                    </li>
+                    </a>
+                    <a href="#" class="step1" data-plan="standard">
+                    <li>
+                        <h1>Standard</h1>
+                        <p>GE CONTROL PANEL<br>
+                        10 DOOR / WINDOW SENSORS<br>
+                        1 MOTION DETECTOR</p>
+                        <h2>$37.99</h2>
+                        <small>per month</small>
+                    </li>
+                    </a>
+                    <a href="#" class="step1" data-plan="premier">
+                    <li style="margin-right: 0;">
+                        <h1>Premier</h1>
+                        <p>GE CONTROL PANEL<br>
+                        15 DOOR / WINDOW SENSORS<br>
+                        1 MOTION DETECTOR</p>
+                        <h2>$42.99</h2>
+                        <small>per month</small>
+                    </li>
+                    </a>
+                    <div style="clear: both;">
+                </ul>
+            </div>
+            <div class="build-step2">
+                <h3>Step 2: Choose a monitoring option</h3>
+                <ul>
+                    <a href="" class="step2" data-monitoring="landline">
+                    <li>
+                        <h1>Landline</h1>
+                        <p>Using a standard telephone line, your alarm system dials out in the event of an emergency.</p>
+                        <h2>+ $0</h2>
+                        <small>per month added to package</small>
+                    </li>
+                    </a>
+                    <a href="#" class="step2" data-monitoring="broadband">
+                    <li>
+                        <h1>Broadband</h1>
+                        <h3>with interactive access</h3>
+                        <p>Using your existing internet router, your alarm system uses high speed internet in the event of an emergency.</p>
+                        <h2>+ $7</h2>
+                        <small>per month added to package</small>
+                    </li>
+                    </a>
+                    <a href="#" class="step2" data-monitoring="cellular">
+                    <li style="margin-right: 0;">
+                        <h1>Cellular</h1>
+                        <h3>with interactive access</h3>
+                        <p>Just like a cell phone, your security system is wireless and uses cell communication in the event of an emergency.</p>
+                        <h2>+ $12</h2>
+                        <small>per month added to package</small>
+                    </li>
+                    </a>
+                    <div style="clear: both;">
+                </ul>
+            </div>
+            <div class="build-step3">
+                <h3>Step 3: Choose add-ons</h3>
+                <ul>
+                    <a href="#" class="step3" data-add-ons="garage-door-security">
+                    <li>
+                        <h1>Garage door security</h1>
+                        <img src="{{ STATIC_URL }}img/external-lp/alarmzone/icon_garage.png">
+                        <p>Extend security to your garage by detecting tilt with this special sensor.</p>
+                        <h2>+ $2</h2>
+                        <small>per month added to package</small>
+                    </li>
+                    </a>
+                    <a href="#" class="step3" data-add-ons="extreme-weather">
+                    <li>
+                        <h1>Extreme weather</h1>
+                        <img src="{{ STATIC_URL }}img/external-lp/alarmzone/icon_weather.png">
+                        <p>Prepare your home against harsh weather damage with a flood & a freeze sensor.</p>
+                        <h2>+ $4</h2>
+                        <small>per month added to package</small>
+                    </li>
+                    </a>
+                    <a href="#" class="step3" data-add-ons="fire-smoke-protection">
+                    <li>
+                        <h1>Fire / smoke protection</h1>
+                        <img src="{{ STATIC_URL }}img/external-lp/alarmzone/icon_fire.png">
+                        <p>Add Fire Protection with 2 Monitored Smoke Detectors and an Additional Siren</p>
+                        <h2>+ $10</h2>
+                        <small>per month added to package</small>
+                    </li>
+                    </a>
+                    <a href="#" class="step3" data-add-ons="gps-vehicle-tracking">
+                    <li style="margin-right: 0;">
+                        <h1>GPS vehicle tracking</h1>
+                        <img src="{{ STATIC_URL }}img/external-lp/alarmzone/icon_gps.png">
+                        <p>Track your vehicle from home with a hidden GPS Tracking Unit.</p>
+                        <h2>+ $10</h2>
+                        <small>per month added to package</small>
+                    </li>
+                    </a>
+                    <div style="clear: both;">
+                </ul>
+            </div>
+            <div class="build-step4">
+                <h3>Step 4: Let's get in touch</h3>
+                <ul>
+                    <li>
+                        <form method="POST" action="" class='build-form'>
+                            {% csrf_token %}
+                            <p>Name</p>
+                            <input tabindex="1" type="textfield" id="id_name" name="name">
+                            <p>Email</p>
+                            <input tabindex="2" type="textfield" id="id_email" name="email">
+                            <p>Phone</p>
+                            <input tabindex="3" type="textfield" id="id_phone" name="phone">
+                            <button tabindex="4" type="button" id="submit" name="submit">submit your info</button>
+                            <small>By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</small>
+                        </form>
+                    </li>
+                    <div style="clear: both;">
+                </ul>
+            </div>
+        </div>
+
+</div>
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+    var cart = {'plan':'',
+                'monitoring':'',
+                'add-ons':[]}
+    var list = list || {};
+
+    $(".step1").click(function(event){
+        event.preventDefault();
+        var value = $(this).data("plan");
+        if ($(this).children('li').hasClass('active')){
+            $(this).children('li').removeClass('active');
+            cart['plan'] = '';
+        }else{
+            $('.step1 li').removeClass('active');
+            $(this).children('li').addClass('active')
+            cart['plan'] = value;
+        }
+    })
+     $(".step2").click(function(event){
+        event.preventDefault();
+        var value = $(this).data("monitoring");
+        if ($(this).children('li').hasClass('active')){
+            $(this).children('li').removeClass('active');
+            cart['monitoring'] = '';
+        }else{
+            $('.step2 li').removeClass('active');
+            $(this).children('li').addClass('active')
+            cart['monitoring'] = value;
+        }
+    })
+    $(".step3").click(function(event){
+        event.preventDefault();
+        list = list || {};
+        var value = $(this).data("add-ons");
+        if ($.inArray(value,list) == -1){
+            list[value] = value
+        }
+        if ($(this).children('li').hasClass('active')){
+            $(this).children('li').removeClass('active');
+            if (cart['add-ons']){
+                delete cart['add-ons'][value]
+            }
+        }else{
+            $(this).children('li').addClass('active')
+            cart['add-ons'] = list;
+        }
+
+    })
+
+$(".build-form #submit").click(function(){
+    if (!cart['plan'] && !cart['monitoring']){
+        alert('Please select a plan and a monitoring option.');
+        return false;
+    }
+    if (!cart['plan'] && cart['monitoring']){
+        alert('Please select a plan');
+        return false;
+    }
+    if (cart['plan'] && !cart['monitoring']){
+        alert('Please select a monitoring option.');
+        return false;
+    }
+
+
+ $(".build-form #submit").attr('disabled',true);
+    var $form = $(this).closest('.build-form');
+    var name = $form.find("#id_name").val();
+    var email = $form.find("#id_email").val();
+    var phone = $form.find("#id_phone").val();
+    var data ={
+            'form': 'basic',
+             'name':name,
+             'email':email,
+             'phone':phone,
+             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+             'cart':cart,
+             'site':'alarmzone'
+         }
+
+
+
+  $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess,
+            error: newFormError,
+            beforeSend:function(){
+                    //$(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                    //$(".sleepy #form-loading, .droopy #form-loading").show();
+                    $("form #submit").attr('disabled',true);
+                    $("form #submit").text('SUBMIT YOUR INFO');
+                    }
+            }); // end ajax
+
+   function newFormError(){
+            //$(".sleepy #form-loading, .droopy #form-loading").hide();
+            //$(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $(".build-form #submit").attr('disabled',false);
+            $("form #submit").text('SUBMIT YOUR INFO');
+            if (!name && !phone){
+                $('#id_name').addClass('error').attr('placeholder','Please enter name');
+                $('#id_phone').addClass('error').attr('placeholder','Please enter phone number');
+                alert('Please enter your name and phone number.');
+            }
+            if (!phone && name){
+                $('#id_phone').addClass('error').attr('placeholder','Please enter phone number');
+                alert('Please enter your phone number.');
+            }
+            if (!name && phone){
+                $('#id_name').addClass('error').attr('placeholder','Please enter your name');
+                alert('Please enter your name.');
+            }
+            if (name){
+                $('#id_name').addClass('error');
+            }
+            if (phone){
+                $('#id_phone').addClass('error');
+            }
+        } // end newformerror
+
+        function newFormSuccess(json) {
+            //$('#form-loading').hide();
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                window.location = "{% url thanks-page %}"
+                {% endif %}
+                _gaq.push([  
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }// end newformsuccess
+        return false;
+
+    });
+
+
+
+});
+
+</script>
+
+
+{% endblock %}
+{% endaddtoblock "js" %}
+
+{% endblock %}
