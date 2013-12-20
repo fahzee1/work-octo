@@ -169,6 +169,9 @@ elif settings.SITE_ID == 3:
         # COMPETITOR BASED
         dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/adt.html', 'adt'),
         dtt(r'^frontpoint-security/?$', 'affiliates/sem-landing-page/frontpoint.html', 'frontpoint'),
+        dtt(r'^att-digital-life/?$', 'affiliates/sem-landing-page/att.html', 'att'),
+        dtt(r'^vivint/?$', 'affiliates/sem-landing-page/vivint.html', 'vivint'),
+
 
 
 
