@@ -1,4 +1,4 @@
-{% extends "base-old.html" %}
+{% extends "base.html" %}
 
 {% load content_filters content_tags sekizai_tags %}
 
@@ -7,135 +7,101 @@
 {% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
 
 {% block google_analytics %}
-<script type="text/javascript">
+    <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-5441302-3']);
-  _gaq.push(['_setDomainName', 'alarmzone.com']);
-  _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-5441302-3']);
+      _gaq.push(['_setDomainName', 'alarmzone.com']);
+      _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
 
-</script>
+    </script>
 {% endblock %}
+{% block typekit-code %}
+    <script type="text/javascript" src="//use.typekit.net/noa2fum.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block typekit %}tk-museo-sans{% endblock %}
 {% block css %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
-<script type="text/javascript" src="//use.typekit.net/noa2fum.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/external/alarmzone.css">
 
+    <script type="text/javascript" src="{{ STATIC_URL }}js/alarmzone/slider.js"></script>
 
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/skeleton.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/base.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+     <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/jquery.bxslider.css">
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/layout.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/960.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/960tablet.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/767.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/external/alarmzone/479.css">
 
 {% endblock %}
 {% block header %}
-    <div id="header-wrapper" class="tk-museo-sans">
-
-        <div id="header-inner">
-            &nbsp;
-        </div>
-        <div id="header">
-            <div id="header-left">
-
-                <div id="logo">
-                    <a href="/" title="Alarm Zone - Home Security Experts">
-                        <img src="{{ STATIC_URL }}img/external-lp/alarmzone/alarmzone-logo.png" alt="AlarmZone - Home Security Experts" width="71" height="61" />
-                        <h1>Alarm Zone <span>Home Security Experts</span></h1>
-                    </a>
-                    <div class="clear"></div>
-                </div>
-                <ul id="navigation">
-                    <li><a href="{% url shop %}" {% if 'shop' in active_pages %}class="active"{% endif %} title="Shop Home Security">Shop</a></li>
-                    <li><a href="{% url monitoring %}" {% if 'monitoring' in active_pages %}class="active"{% endif %} title="Home Security Monitoring">Monitoring</a></li>
-                    <li><a href="{% url equipment %}" {% if 'equipment' in active_pages %}class="active"{% endif %} title="Home Security Equipment">Equipment</a></li>
-
-                    <div class="clear"></div>
-                </ul>
-            </div>
-            <div id="phone-number">
-                <p>Security Experts are Standing By <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
-            </div>
-
-        </div>
-
-    </div>
+<a id="goTop">Top</a>
 {% endblock %}
-{% block navigation %}{% endblock %}
-{% block subnav %}
-<div id="request-quote">
-    <img src="{{ STATIC_URL }}img/external-lp/alarmzone/request-quote.png" id="request-quote-button" alt="Request a Home Security Quote" width="404" height="35" />
-</div>
+{% block navigation %}
 {% endblock %}
-{% block order-footer %}{% endblock %}
+{% block order-footer %}
+{% endblock %}
 {% block footer %}
-    <div class="wrapper">
-        <div id="terms-conditions" class="tk-museo-sans">
-            <div id="conditions-left">
-                <p>* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
-                <p>*Alarm Zone is an interactive service provided by Protect America, Inc. All required licensing is held and maintained by Protect America, Inc. For more information, visit <a href="http://www.protectamerica.com/agreement/includes/mon_agreement.php" title="Standard Monitoring Agreement" >Standard home security alarm monitoring agreement</a>. Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.</p>
+
+
+
+<div class="super container">
+
+        <div class="full width">
+            <div class="footer">
+                <div class="container">
+                    <div class="sixteen columns">
+                        <div class="nav">
+                            <ul>
+                                <li><a href="{% url build-package %}" class="build-link">Build a Package</a></li>
+                                <li><a href="{% url request-quote %}" class="request-link">Request a Quote</a></li>
+                            </ul>
+                        </div>
+                        <div class="disclaimer">
+                            <p>* Standard monitoring agreement required with approved credit. Internet Offer, Limited time only. Void where prohibited.<br><br>
+                            *Alarm Zone is an interactive service provided by Protect America, Inc.All required licensing is held and maintained by Protect America, Inc. For more information, visit Standard home security alarm monitoring agreement. Standard monitoring agreement required with approved credit.Internet Offer, Limited time only. Void where prohibited.</p>
+                        </div>
+                        <div class="contact">
+                            <p>Call Us Today Toll-Free at <strong>1-800-951-5132</strong></p>
+
+                            <p>Hours of Operation:<br>
+                            <strong>Mon - Fri: 07:00AM - 11:00PM CT</strong><br>
+                            <strong>Sat: 08:00AM- - 08:00PM CT</strong><br>
+                            <strong>Sun: 09:00AM - 09:00PM CT</strong></p>
+
+                            <small>&copy; 2013 Alarm Zone All rights reserved.</small>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="hours-right">
-                    <p>Call Us Today Toll-Free at <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
-                    <p>Hours of Operation:</p>
-                    <ul class="business_hours">
-                        {{ business_hours|safe }}
-                    </ul>
-                    <p>GE and GE Security logos are registered trademarks of General Electric.</p>
-                    <p>&copy; 2012 Alarm Zone All rights reserved.</p>
-            </div>
-            <div class="clear"></div>
         </div>
-    </div>
-    <div id="quote-form-wrapper" class="tk-museo-sans">
-        <div id="all-quote">
-            {% include "external/alarm-zone/quote-form.html" with form=forms.basic %}
-            <div id="quote-phone">
-                <p>or secure your home today, call now: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
-                
-            </div>
-            <a href="#" class="close-button" title="Close This Window">close [x]</a>
 
-        </div>
+</div>
 
-    </div>
-    <img src="{{ STATIC_URL }}img/external-lp/alarmzone/touchscreen-bg.jpg" id="img-bg" alt="GE Simon XT Touch Screen Background"  />
-{% addtoblock "js" %}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
-{% endaddtoblock "js" %}
-{% addtoblock "js" %}
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('.close-button').click(function() {
-            $('#quote-form-wrapper').fadeOut('fast');
-            $('#all-quote').css('top', '-50%');
-
-            return false;
-        });
-        $('#request-quote-button').click(function() {
-            $('#quote-form-wrapper').fadeIn('fast', function() {
-                $('#all-quote').show();
-                $('#all-quote').animate({top: '+=75%'}, 500, 'easeOutBounce');
-                return false;
-            });
-        });
-    });
-    </script>
-
-{% endaddtoblock "js" %}
 {% endblock %}
-{% block remarketing %}    
-    <span id="test1">
-    <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
-    </script>
-    <noscript>
-    <div style="display:inline;">
-    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
-    </div>
-    </noscript>
+{% block trustedform %}
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true; 
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
 
-    <!-- End Remarketing Code -->
-    </span>
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
 {% endblock %}
