@@ -171,9 +171,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^frontpoint-security/?$', 'affiliates/sem-landing-page/frontpoint.html', 'frontpoint'),
         dtt(r'^att-digital-life/?$', 'affiliates/sem-landing-page/att.html', 'att'),
         dtt(r'^vivint/?$', 'affiliates/sem-landing-page/vivint.html', 'vivint'),
-
-
-
+        dtt(r'^sloan-security/?$', 'affiliates/sem-landing-page/sloan-security.html', 'sloan-security'),
 
         # TESTS
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
