@@ -149,6 +149,7 @@ class LocalPageRedirect(object):
     """
 
     def process_request(self,request):
+        #pdb.set_trace()
         #lets fist grab the url and check if its a local page
         url = request.path.rstrip('/').lstrip('/')
         #pdb.set_trace()
@@ -184,6 +185,14 @@ class LocalPageRedirect(object):
                     if x.upper() == state.upper() or y.upper() == state.upper():
                         statecode = get_statecode(state)
                         return redirect('/home-security/%s/' % (statecode))
+
+        elif ' ' in url:
+            url = re.sub("\s+","-",url)
+            chop_up = url.split('/')
+            if len(chop_up) == 3:
+                return redirect('/' + chop_up[0].lower() + '/' + chop_up[1].capitalize() +'/' + chop_up[2].title())
+            else:
+                return None
 
         else:
             return None
