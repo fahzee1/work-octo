@@ -190,7 +190,7 @@ class LocalPageRedirect(object):
             url = re.sub("\s+","-",url)
             chop_up = url.split('/')
             if len(chop_up) == 3:
-                return redirect('/' + chop_up[0].lower() + '/' + chop_up[1].capitalize() +'/' + chop_up[2].title())
+                return redirect('/' + chop_up[0].lower() + '/' + chop_up[1].upper() +'/' + chop_up[2].title())
             else:
                 return None
 
