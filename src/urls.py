@@ -76,6 +76,7 @@ sitemaps={
     'keyword':KeywordSitemapIndex(settings.LOCAL_KEYWORDS)
 
 
+
 }
 
 
@@ -313,6 +314,7 @@ elif settings.SITE_ID == 11:
 
 # AlarmZone.com
 elif settings.SITE_ID == 12:
+    alarmzone_sitemap = {'AlarmZone':StaticSitemap(['home','build-package','equipment-page','learn-more','request-quote','thanks-page'],0.5)}
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
         dtt(r'^build/?$', 'external/alarm-zone/build.html', 'build-package', ctx={'agent_id': 'a01415'}),
@@ -320,6 +322,7 @@ elif settings.SITE_ID == 12:
         dtt(r'^learn/?$', 'external/alarm-zone/learn.html', 'learn-more', ctx={'agent_id': 'a01415'}),
         dtt(r'^quote/?$', 'external/alarm-zone/quote.html', 'request-quote', ctx={'agent_id': 'a01415'}),
         dtt(r'^thanks/?$', 'external/alarm-zone/thanks.html', 'thanks-page', ctx={'agent_id': 'a01415'}),
+        (r'^sitemap\.xml', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': alarmzone_sitemap}),
     )
 
 # SecuritySystemExpert.com

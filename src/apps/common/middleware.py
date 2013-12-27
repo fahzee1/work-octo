@@ -151,11 +151,20 @@ class LocalPageRedirect(object):
     def process_request(self,request):
         #lets fist grab the url and check if its a local page
         url = request.path.rstrip('/').lstrip('/')
+        #pdb.set_trace()
         #city page and state page
         match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
         match_sp = re.compile(r'home-security/[-\w]{3,}')
+        #match for new york - fix for rylan 
+        match_ny = re.compile(r'home-security/\bNY\b/[-\w]+',re.IGNORECASE)
         state_space = dict(US_STATES).values()
         state_nospace = [x.replace(' ','') for x in state_space]
+        if match_ny.match(url):
+            #hardcoded redirect for NY
+            ny = 'new-york-city'
+            if ny in url or ny.title() in url or ny.capitalize() in url:
+                return redirect('/home-security/NY/New-York')
+
         if match_cp.match(url):
             # city page so lets redirect
             chop_up = url.split('/')
