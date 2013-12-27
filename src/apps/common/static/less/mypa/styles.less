@@ -1,0 +1,381 @@
+/*--- Colors*/
+/*DarkBlues*/
+@navy-blue-dark: #2f394a;
+@navy-blue: #344a5f;
+
+/*Light Blues*/
+@blue: #2a94d6;
+@blue-darker: #1376b4;
+
+/*turquoise*/
+@turquoise: #51b1a6;
+
+/*Grays*/
+@gray-darker: #333;
+@gray-dark: #555;
+@gray-light: #999;
+@gray-lighter: #ccc;
+@gray-lightest: #eee;
+
+/*White*/
+@white: #fff;
+
+/*Reds*/
+@red: #eb292b;
+@red-darker: #cc1416;
+
+
+/*Layout*/
+.container {
+	width: 960px;
+	margin: 0 auto;
+}
+
+
+body{
+	background: @gray-lightest;
+	font-size: 14px;
+	font-family: "jaf-facitweb",sans-serif;
+}
+a {
+	color: @navy-blue;
+	text-decoration: none;
+}
+.clear {
+	clear: both;
+}
+/*Headers*/
+#headerBlue {
+	background-color: @navy-blue-dark;
+	color: @white;
+	overflow: hidden;
+	position: relative;
+	z-index: 2;
+	.logo {
+		float: left;
+		margin-top: 5px;
+	}
+	.liveChat a, .phone a {
+		background: url(../img/sprite.png) no-repeat @navy-blue;
+		padding-left: 36px;
+	}
+	.liveChat a{
+		background-position: -30px 17px;
+	}
+	.phone a {
+		background-position: -30px -64px;
+	}
+	.liveChat a:hover, .phone a:hover {
+		background-color: @navy-blue-dark;
+	}
+}
+#secondaryNav {
+	float: right;
+	margin: 0;
+	li:first-child{
+		border-left: none;
+	}
+	li {
+		border-left: 1px dotted @navy-blue;
+		float: left;
+		a {
+			background-color: @navy-blue;
+			color: @white;
+			display: block;
+			padding: 10px;
+		}
+	}
+}
+
+#headerWhite {
+	background-color: rgba(255,255,255,.65);
+	margin-bottom: 420px;
+	overflow: hidden;
+	position: relative;
+	z-index: 2;
+}
+#nav {
+	float: right;
+	margin: 0;
+	text-transform: uppercase;
+	li:first-child{
+		border-left: none;
+	}
+	li {
+		float: left;
+		a {
+			display: block;
+			padding: 10px;
+		}
+	}
+	.requestQuote a {
+		color: @red;
+	}
+	.separator {
+		padding: 10px;
+	}
+}
+
+/*Hero*/
+#hero {
+	background: url(../img/MyProtectAmericaBanner.jpg) no-repeat center top @white;
+	padding-top: 200px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+	h1, h2 {
+		text-align: center;
+		line-height: 1;
+		margin: 8px 0;
+	}
+	h1{
+		font-size: 36px;
+		font-weight: 600;
+	}
+	h2 {
+		font-size: 24px;
+		font-weight: 200;
+	}
+}
+/*Login Box*/
+.logingHeading {
+	background-color: rgba(47,57,74,.9);
+	color: #fff;
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px 0;
+	width: 720px;
+}
+.loginBox {
+	background: url(../img/loginGradient.png) repeat-x center top;
+	margin: 0 auto;
+	width: 720px;
+	fieldset {
+		border: none;
+		padding: 20px 50px 60px;
+	}
+	#login, #password {
+		color: @gray-dark;
+		font-size: 20px;
+		font-weight: 200;
+		border: 1px solid @gray-lighter;
+		height: 36px;
+		line-height: 36px;
+		padding-left: 1%;
+		width: 47%;
+	}
+	#login {
+		float: left;
+	}
+	#password {
+		float: right;
+	}
+	.smartConnectWrapper, .getHomeSecurityWrapper {
+		text-align: center;
+		width: 48%;
+		p {
+			font-size: 12px;
+			font-weight: 400;
+			color: @gray-dark;
+			margin: 1em 0 0;
+			text-transform: uppercase;
+		}
+	}
+	.smartConnectWrapper {
+		float: left;
+	}
+	.getHomeSecurityWrapper {
+		float: right;
+	}
+	button[type="submit"], .btnGetHomeSecurity {
+		font-family: "jaf-facitweb",sans-serif;
+		font-size: 18px;
+		font-weight: 600;
+		color: #fff;
+		text-transform: uppercase;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-bottom-width: 5px;
+		border-bottom-style: solid;
+		border-radius: 5px;
+		display: block;
+		padding: 8px 16px;
+		width: 100%;
+	}
+	button[type="submit"] {
+		background: @blue;
+		border-bottom-color: @blue-darker;
+	}
+	.btnGetHomeSecurity {
+		background: @red;
+		border-bottom-color: @red-darker; 
+	}
+}
+
+/*Featured On*/
+#featured-on {
+	text-align: center;
+	padding: 30px 0;
+	h2 {
+		font-size: 14px;
+		text-transform: uppercase;
+		margin: 0 0 40px;
+		color: @gray-light;
+	}
+	img {
+		margin: 0 30px;
+	}
+}
+
+/*Features*/
+#features {
+	color: @navy-blue-dark;
+	text-align: center;
+	overflow: hidden;
+	padding: 60px 0;
+	p {
+		color: @gray-light;
+		font-weight: 200;
+		margin-top: 0;
+	}
+	ul li {
+		float: left;
+		margin: 10px 1.5% 20px;
+		width: 30%;
+		h3 {
+			font-weight: 400;
+			margin-bottom: 10px;
+		}
+		h3 i {
+			font-size: 48px;
+			display: block;
+			margin-bottom: 30px;
+		}
+	}
+}
+
+/*Lifestyle*/
+#lifestyle {
+	color: @white;
+	background: url(../img/simonBackground.jpg) no-repeat center top @white;
+	padding: 0;
+	height: 420px;
+	.text {
+		margin-left: 55%;
+		padding-top: 88px;
+		padding-left: 100px;
+	}
+	h3 {
+		font-size: 18px;
+		margin-bottom: 0;
+		i {
+			font-size: 48px;
+			display: block;
+			margin-bottom: 20px;
+		}
+	}
+	p {
+		margin-top: 0;
+	}
+}
+
+/*Testimonials*/
+#testimonials {
+	color: @white;
+	font-size: 18px;
+	font-weight: 200;
+	line-height: 1.8;
+	background-color: @navy-blue-dark;
+	padding: 60px 0;
+	.testimonialText {
+		margin: 0 auto;
+		width: 80%;
+	}
+	.testimonialAuthor {
+		text-align: right;
+	}
+}
+
+/*Footer One*/
+#footerOne {
+	color: @white;
+	background-color: @gray-darker;
+	overflow: hidden;
+	padding: 40px 0;
+	a {
+		color: @white;
+	}
+	ul {
+		font-weight: 200;
+	}
+	.footerLogo {
+		float: left;
+	}
+	#footer-main-navigation, #footer-care-nav {
+		float: left;
+	}
+	#footer-contact-info, #footerSocial {
+		float: right;
+	}
+	#footerSocial a:hover {
+		text-decoration: none;
+	}
+	#footer-social-icons {
+		margin-top: 20px;
+	}
+	#footer-social-icons a i {
+		border-radius: 50%;
+		color: @gray-darker;
+		display: block;
+		font-size: 28px;
+		float: left;
+		line-height: 28px;
+		margin-right: 6px;
+		padding: 10px;
+		text-align: center;
+		text-decoration: none;
+		height: 28px;
+		width: 28px;
+		transition: all 0.25s ease-out;
+	}
+	#footer-social-icons a:hover i {
+		opacity: .5;
+	}
+	#footer-social-icons a i.icon-google-plus {
+		background-color: #DC5931;
+	}
+	#footer-social-icons a i.icon-facebook {
+		background-color: #698BD3;
+	}
+	#footer-social-icons a i.icon-twitter {
+		background-color: #76C1C5;
+	}
+	#footer-social-icons a i.icon-youtube {
+		background-color: #FF5A5A;
+	}
+	#footer-awards {
+		float: right;
+	}
+}
+
+/*Footer Two*/
+#footerTwo {
+	color: @white;
+	font-size: 12px;
+	font-weight: 200;
+	line-height: 1.2;
+	background-color: @gray-dark;
+	overflow: hidden;
+	padding: 30px 0;
+	.leftText {
+		float: left;
+		width: 40%;
+	}
+	.rightText {
+		float: right;
+		width: 40%;
+	}
+}
