@@ -335,7 +335,7 @@ elif settings.SITE_ID == 13:
 # Canada
 elif settings.SITE_ID == 14:
     urlpatterns += patterns('',
-        dtt(r'^$', 'canada/index.html', 'home'),
+        dtt(r'^$', 'canada/index-new.html', 'home'),
         dtt(r'^b?$', 'canada/packages.html', 'shop'),
         url(r'^shop/order/?$', 'apps.contact.views.order_form_ca', name='order-package-ca'),
         dtt(r'^thank-you/?$', 'thank-you/canada.html', 'thank_you'),

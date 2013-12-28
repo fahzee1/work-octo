@@ -19,6 +19,7 @@
 {% block liveperson-two %}{% endblock %}
 
 {% block header %}
+    {% block top-section %}
     <div id="top-section-wrapper">
         <div id="top-section">
             <div id="company-links">
@@ -39,11 +40,12 @@
             <div class="clear"></div>
         </div>
     </div>
-
+    {% endblock %}
     <div id="header-wrapper">
         <div id="header">
+            {% block logo %}
             <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
-
+            {% endblock %}
             <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="hide-mobile order-button">Get a Free Quote</a>
 
             {% if phone_number %}
@@ -84,7 +86,9 @@
     <div id="hero-wrapper" class="cmonday">
         <div id="hero-image" class="cmonday">
             {% include "order/quote-form-white.html" with form=forms.basic %}
-            {% include "banners/deals.html" %}
+            {% block party-box %}
+                {% include "banners/deals.html" %}
+            {% endblock %}
             <div id="cyber-monday">
                 <h1>{% block h1 %}Best Alarm System{% endblock %}</h1>
                 <h2>{% block h2 %}for any home{% endblock %}</h2>
@@ -92,8 +96,10 @@
                 <div class="price-area">
                     <img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />
                 </div>
-                <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
-                <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
+                {% block hero-buttons %}
+                    <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
+                    <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
+                {% endblock %}
             </div>
         </div>
     </div>

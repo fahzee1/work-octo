@@ -1,4 +1,6 @@
 {% extends "affiliates/sem-landing-page/paid-base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
 {% block page_title %}Home Security Systems | Home Alarm Systems | Protect America Canada{% endblock %}
 {% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
 {% block page_description %}Get a free home security system for your home. Sign up for home security monitoring and get a Simon security system at no cost. Now serving Alberta, Ontario, and British Columbia{% endblock %}
@@ -8,7 +10,13 @@
     <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
-{% endblock %}    
+{% endblock %}
+{% block robots_tag %}
+<meta name="ROBOTS" content="INDEX, FOLLOW"/>
+{% endblock %}
+{% block logo %}
+    <img src="{{ STATIC_URL }}/img/canada/protect-america-logo.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+{% endblock %}
 {% block main-navigation %}
     <ul id="main-navigation">
         <li>
@@ -33,6 +41,44 @@
         </li>
         {% endcomment %}
     </ul>
+{% endblock %}
+{% block top-section %}
+<div id="top-section-wrapper">
+    <div id="top-section">
+        <div id="company-links">
+            <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+
+            <div id="main-phone">
+                <i class="icon-phone-sign"></i>
+                {% block main-phone %}
+                    {% if phone_number %}
+                        <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                    {% endif %}
+                {% endblock %}
+            </div>
+            <ul id="international-selection">
+                <li class="ca active"><a href="http://www.protectamericasecurity.ca" rel="nofollow">EN</a></li>
+                <li class="us"><a href="http://www.protectamerica.com" rel="nofollow">EN</a></li>
+                <li class="es"><a href="http://www.protectamerica.com/es/" rel="nofollow">ES</a></li>
+                <i class="icon-caret-down"></i>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+{% endblock %}
+{% block party-box %}
+<div id="deals">
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/unbeatable-security-deals.png" alt="Unbeatable Home Security Deals" />
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/free-security-system.png" alt="Free Security System" />
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/free-video-camera.png" alt="Free Security Camera" />
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/smart-connect.png" alt="No Landline Required" />
+</div>
+{% endblock %}
+{% block h1 %}The Best Security{% endblock %}
+{% block hero-buttons %}
+    <a href="#" class="order-button button-link stylized hide-mobile no-desktop">Get Started Now</a>
+    <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
 {% endblock %}
 
 {% block lifestyle-headline %}<h2 >The perfect security system <span>for your home.</span></h2>{% endblock %}
