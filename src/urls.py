@@ -124,7 +124,9 @@ urlpatterns = patterns('',
     #url(r'^affiliate/resources/?$', 'apps.affiliates.views.resources', name='affiliate_resources'),
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate'),
     #url(r'^affiliate/(?P<affiliate>[a-zA-Z0-9]+)/(?P<page_name>.*)/?$', 'apps.affiliates.views.affiliate_view', name='affiliate_inside'),
-    url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
+    #url(r'^sky/?$', 'apps.affiliates.views.delta_sky', name='sky'),
+    ('sky/?$',
+        RedirectView.as_view(url='/',permanent=True)),
     url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
 
 
@@ -583,7 +585,8 @@ else:
                         dtt(r'^payitforward/thankyou/?$', 'payitforward/thankyou.html', 'payitforward-thankyou', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/teams/?$', 'payitforward/teams.html', 'payitforward-teams', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/teams/2012/spring/?$', 'payitforward/spring2012.html', 'payitforward-spring2012', 'payitforward', ctx={'agent_id': 'i03237'}),
-                        dtt(r'^payitforward/teams/2012/fall/?$', 'payitforward/fall2012.html', 'payitforward-fall2012', 'payitforward', ctx={'agent_id': 'i03237'}),
+                        dtt(r'^payitforward/teams/2012/fall/?$', 'payitforward/spring2012.html', 'payitforward-fall2012', 'payitforward', ctx={'agent_id': 'i03237'}),
+                        # no fall2012 template present so temporarily showing spring2012 
                         url(r'^payitforward/involved/?$', 'apps.contact.views.payitforward', name='payitforward-involved'),
                         url(r'^payitforward/point-tracking/?$', 'apps.payitforward.views.point_tracking', name='payitforward-point-tracking'),
                         dtt(r'^payitforward/awareness/?$', 'payitforward/awareness.html', 'payitforward-awareness', 'payitforward', ctx={'agent_id': 'i03237'}),
@@ -1367,6 +1370,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/equipment/home-security/simon-xt/',permanent=True)),
     ('learn/protect/?$',
         RedirectView.as_view(url='/learn/protect-america/',permanent=True)),
+
 )
 '''
 urlpatterns += patterns('',

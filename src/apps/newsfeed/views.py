@@ -3,7 +3,7 @@ import twitter
 from random import shuffle
 from models import TheFeed,FallBacks,TweetBackup
 from django.http import HttpResponse, HttpResponseBadRequest,Http404
-from django.shortcuts import render 
+from django.shortcuts import render , redirect
 from itertools import chain, izip
 from django.core.cache import cache
 from django.conf import settings
@@ -61,26 +61,30 @@ def hourly_check(request):
 
 
 def render_feed(request):
+	#this has been shut off for now
+	return redirect('home')
+
+
     #ajax request
-    ctx={}
-    tweets=give_me_tweets()
-    data=request.session.get('GeoFeedObjects',False)
-    if data and tweets:
-        results=list(chain.from_iterable(izip(data['Feed'],tweets)))
-        for x in data['Feed']:
-            for y in tweets:
-                if y not in results:
-                    results.append(y)
+	ctx={}
+	tweets=give_me_tweets()
+	data=request.session.get('GeoFeedObjects',False)
+	if data and tweets:
+		results=list(chain.from_iterable(izip(data['Feed'],tweets)))
+    	for x in data['Feed']:
+    		for y in tweets:
+    			if y not in results:
+    				results.append(y)
                 if x not in results:
-                    results.append(x)
-    else:
-    	try:
-        	results=data['Feed']
-        except KeyError:
-        	raise Http404
-    if results:    	
-    	ctx['GeoFeed']=results
-    return render(request,'newsfeed/feed.html',ctx)
+                	results.append(x)
+	else:
+		try:
+			results=data['Feed']
+		except KeyError:
+			raise Http404
+	if results:
+		ctx['GeoFeed']=results
+	return render(request,'newsfeed/feed.html',ctx)
 
 
 def nongeo_feed(request):
