@@ -242,6 +242,15 @@ elif settings.SITE_ID == 6:
         dtt_nocache(r'^order/?$', 'affiliates/five-linx/order.html', 'order', ctx={
             'agent_id': 'a01526'}),
 
+        dtt_nocache(r'^features/?$', 'affiliates/five-linx/features.html', 'features', ctx={
+            'agent_id': 'a01526'}),
+
+        dtt_nocache(r'^packages/?$', 'affiliates/five-linx/packages.html', 'packages', ctx={
+            'agent_id': 'a01526'}),
+
+        dtt_nocache(r'^support/?$', 'affiliates/five-linx/support.html', 'support', ctx={
+            'agent_id': 'a01526'}),
+
         dtt_nocache(r'^thank-you/5linx/?$', 'affiliates/five-linx/thank-you.html', 'thank-you', ctx={
             'agent_id': 'a01526'}),
     )

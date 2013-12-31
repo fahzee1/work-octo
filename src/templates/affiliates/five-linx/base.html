@@ -29,13 +29,15 @@ License: http://creativecommons.org/licenses/MIT
 
 {% block css %}
 <!-- For all browsers -->
-<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/five-linx/320.css">
+<!-- <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/five-linx/320.css"> -->
 <link rel="stylesheet" media="print" href="{{ STATIC_URL }}css/print.css">
 <!-- For progressively larger displays -->
-<link rel="stylesheet" media="only screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/five-linx/480.css">
-<link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/five-linx/600.css">
-<link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/five-linx/768.css">
-<link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/five-linx/960.css">
+<!-- <link rel="stylesheet" media="only screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/five-linx/480.css"> -->
+<!-- <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/five-linx/600.css"> -->
+<!-- <link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/five-linx/768.css"> -->
+<!-- <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/five-linx/960.css"> -->
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/five-linx/redesign.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/five-linx/normalize.css">
 
 {% endblock %}
 
@@ -89,7 +91,31 @@ License: http://creativecommons.org/licenses/MIT
 </head>
 
 <body class="{{ page_name }} clearfix">
-<div class="wrapper">
+<div id="header">
+    <div class="container">
+        <a href="{% url home %}"><img src="{{ STATIC_URL }}img/affiliates/five-linx/5Linx.png" alt="5-linx-nav-logo" width="172" /></a>
+
+        <div class="textRight">
+            <ul id="nav">
+                <li class="{% if 'home' in active_pages %}active{% endif %}"><a href="{% url home %}">Home</a></li>
+                <li class="{% if 'packages' in active_pages %}active{% endif %}"><a href="{% url packages %}">Packages</a></li>
+                <li class="{% if 'features' in active_pages %}active{% endif %}"><a href="{% url features %}">Features</a></li>
+                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="{% url support %}">Support</a></li>
+                <li class="{% if 'order' in active_pages %}active{% endif %}"><a href="{% url order %}">Order</a></li>
+            </ul>
+        </div><!-- /textRight -->
+
+        <div class="callbox">
+            <h3>Protect Your Family Now:</h3>
+            <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
+            <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}RIN Number: {{ affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}{% endif %}</p>
+        </div>
+
+    </div><!-- /container -->
+</div><!-- /header -->
+
+<!-- Delete -->
+<div class="delete">
     <div class="callbox">
         <h3>Protect Your Family Now:</h3>
         <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
@@ -101,33 +127,70 @@ License: http://creativecommons.org/licenses/MIT
             <li class="gps-tracking {% if 'gps' in active_pages %}active{% endif %}"><a href="{% url gps %}">GPS</a></li>
             <li class="video-security {% if 'video' in active_pages %}active{% endif %}"><a href="{% url video %}">Video Security</a></li>
             <li class="place-order {% if 'order' in active_pages %}active{% endif %}"><a href="{% url order %}">Order Now</a></li>
-
-
         </ul>
         <a href="{% url home %}"><img src="{{ STATIC_URL }}img/affiliates/five-linx/5Linx.png" alt="5-linx-nav-logo" /></a>
     </div>
-    
-    {% block content %}
-    {% endblock %}
-    {% block conversation-piece %}
-    <div id="bottom-form">
+</div><!-- /delete -->
+
+{% block content %}
+{% endblock %}
+{% block conversation-piece %}
+<div id="bottom-form">
+    <div class="container">
         <h2>Security is An Amazing Conversation Piece.</h2> 
+        <div class="leftCol">
+            <div id="call-us">
+                <h3>Give us a Call</h3>
+                <p>We offer home security systems at an affordable price for homes and small businesses. Each department is in place to offer you assistance concerning any questions you might have about our home security systems. Give us a call  to start your discussion about the security choice for your home today. One of our security experts will help determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call 5LINX Security Systems now and secure what matters most!</p>  
+                <h4><span>Call Today!</span><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
+            </div>
+        </div><!-- /leftCol -->
+        <div class="rightCol">
+            <div id="bottomForm">
+                {% include "affiliates/five-linx/quote-form.html" with form=forms.basic %}</div><!-- Added this Div because there is one div missing in form -->
+            </div>
+        </div><!-- /rightCol --> 
+    </div><!-- /container -->
+</div><!-- bottom-form -->
 
-        <div id="call-us">
-            <h3>Give us a Call</h3>
-            <p>We offer home security systems at an affordable price for homes and small businesses. Each department is in place to offer you assistance concerning any questions you might have about our home security systems. Give us a call  to start your discussion about the security choice for your home today. One of our security experts will help determine which package best meets your needs. With a home being burglarized every 14 seconds in the United States, there's no reason to wait. Call 5LINX Security Systems now and secure what matters most!</p>  
-            <h4><span>Call Today!</span><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
+<div id="footer">
+    <div class="container">
+        <div class="callbox">
+            <h3>Protect Your Family Now:</h3>
+            <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
+            <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}RIN Number: {{ affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}{% endif %}</p>
         </div>
-        {% include "affiliates/five-linx/quote-form.html" with form=forms.basic %}
+       <ul id="footerNav">
+            <li class="{% if 'home' in active_pages %}active{% endif %}"><a href="{% url home %}">Home</a></li>
+            <li class="{% if 'features' in active_pages %}active{% endif %}"><a href="{% url features %}">Features</a></li>
+            <li class="{% if 'packages' in active_pages %}active{% endif %}"><a href="{% url packages %}">Packages</a></li>
+            <li class="{% if 'order' in active_pages %}active{% endif %}"><a href="{% url order %}">Order</a></li>
+        </ul>
+    </div><!-- /container -->
+</div><!-- /footer -->
 
-    </div>
-    <div class="callbox">
-        <h3>Protect Your Family Now:</h3>
-        <h4><a href="tel:+1-800-713-0139" title="Call 5LINX Home Security today to Order your Home Security System">1-800-713-0139</a></h4>
-        <p>{% if request.GET.affkey %}RIN Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}RIN Number: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}RIN Number: {{ affkey }}{% else %}RIN Number: L100000{% endif %}{% endif %}{% endif %}</p>
-    </div>
-    {% endblock %}
-</div>
+
+<div id="terms">
+    <div class="container">
+        <div class="row">
+            {% block terms %}
+                    <div id="terms-conditions">
+                        <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited.</p>
+                        <p>* Information used for security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar security equipment packages; "MonitoIBOg" price listed includes the additional "warranty" or "extended service plan". </p>
+                        {% block extra_terms %}
+                        {% endblock %}
+                    </div>
+                    <div id="copyrights">
+                        {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
+                        <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
+                    </div>
+
+            {% endblock %}
+        </div><!-- /row -->
+    </div><!-- /container -->
+</div><!-- /terms -->
+
+{% endblock %}
 
 {% block trustedform %}
 <script type="text/javascript">
@@ -168,6 +231,7 @@ function getParameterByName( name ){
 
 <!-- Scripts -->
 <script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="{{ STATIC_URL }}js/plugins.js"></script>
 <script src="{{ STATIC_URL }}js/script.js"></script>
 <script src="{{ STATIC_URL }}js/helper.js"></script>
@@ -189,6 +253,25 @@ yepnope({
 
 <!-- http://mths.be/aab -->
 
-
+<!-- jquery -->
+<script type="text/javascript" charset="utf-8">
+    $( "#mobileBlogNavTrigger" ).click(function() {
+      $( "#mainNav" ).toggle( "fast" );
+    });
+    $( window ).scroll(function() {
+        $( "#scrollBubble" ).fadeOut( "slow" );
+    });
+   $('.faq').click(function() {
+       $(this).children(".faqAnswer").slideToggle('ease');
+       if ($(this).hasClass('arrow_up')) {
+           $(this).removeClass('arrow_up')
+       } else {
+           $(this).addClass('arrow_up')
+       }
+   })
+    $(function() {
+         $("#packagesTabs").tabs( { fx: { height: 'toggle', opacity: 'toggle' } } );
+  });
+</script>
 </body>
 </html>
