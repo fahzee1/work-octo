@@ -187,14 +187,16 @@ def post_to_leadconduit(data,test=False,retry=False):
             lead.save()
         send_conduit_error(data,title='Leadconduit Timeout',test=settings.LEAD_TESTING)
 
-    except SSLError:
+    except SSLError as sslerr:
+	import traceback
         logger.error('SSL Error. Pretty common should be retried and go through soon.')
+	logger.error('Traceback: {0}'.format(traceback.format_exc()))
         if lead:
             lead.retry = True
             lead.save()
         title='Leadconduit SSLError'
-        message='SSLError. Dont worry will be fixed soon'
-        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING,notify_all=False)
+        message='SSLError. Dont worry will be fixed soon, {0}'.format(traceback.format_exc())
+        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING)
 
     except Exception as e:
         #something else happened email everyone

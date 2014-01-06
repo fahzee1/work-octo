@@ -18,6 +18,7 @@ class Command(BaseCommand):
 		print 'about to retry %s leads' % leads.count()
 		for x in leads:
 			logger.info('retrying %s' % x.name)
+			print 'retrying {0}'.format(x.name)
 			data = {
 					'xxAccountId':settings.LEAD_ACCOUNT_ID,
 	                'xxCampaignId':settings.LEAD_CAMPAIGN_ID,
@@ -36,4 +37,5 @@ class Command(BaseCommand):
 	                'device':x.device
 					}
 			logger.info('parameters sent were %s' % data)
+			print 'parameters sent were {0}'.format(data)
 			post_to_leadconduit(data,test=settings.LEAD_TESTING,retry=True)
