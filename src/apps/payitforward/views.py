@@ -2,6 +2,10 @@ from apps.payitforward.models import Organization
 from apps.common.views import simple_dtt
 from django.utils import simplejson
 from django.conf import settings
+from django.shortcuts import render ,redirect
+from apps.newsfeed.views import give_me_tweets
+
+
 
 def point_tracking(request):
     org_data = []
@@ -13,3 +17,10 @@ def point_tracking(request):
             'page_name': 'payitforward-point-tracking',
             'agent_id': 'i03237',
         })
+
+
+def view_tweets(request):
+	ctx = {}
+	tweets = give_me_tweets(payitforward=(not settings.DEBUG))
+	ctx['tweets'] = tweets
+	return render(request,'payitforward/tweets.html',ctx)

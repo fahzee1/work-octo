@@ -8,6 +8,7 @@ from django.db import models
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.core.exceptions import ValidationError
 import pdb
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 
@@ -79,21 +80,24 @@ class FallBacks(models.Model):
 
 
 class TweetBackup(models.Model):
-	text = models.CharField(max_length=255)
+	text = models.CharField(max_length=255,unique=True)
 	GetRelativeCreatedAt = models.CharField(max_length=255)
 	created = models.DateTimeField(auto_now_add=True,default=timezone.now())
+	payitforward = models.BooleanField(default=False)
+	location = models.CharField(max_length=255)
 
 	def __unicode__(self):
 		return '%s' % self.text
 
 	def remove_old(self):
-		too_old=self.created + timedelta(days=1)
+		too_old=self.created + timedelta(days=2)
 		if timezone.now() >= too_old and TweetBackup.objects.all().count() > 5:
 			self.delete()
-		all_matches = TweetBackup.objects.filter(text=self.text)
-		for a in all_matches:
-			if self.text == a.text and len(all_matches) > 1:
-				self.delete()
+
+
+
+
+
 
 
 
