@@ -55,24 +55,24 @@ def get_csv_data(app,_file):
 			csv_dict = {}
 			if info['Disposition'] == 'SOLD':
 				try:
-					if info['Lead ID'].isdigit():
-						lead = Lead.objects.get(id=info['Lead ID'])
+					if info['Lead_Id'].isdigit():
+						lead = Lead.objects.get(id=info['Lead_Id'])
 						if lead.gclid:
 							have_gclid = True
 					else:
-						lead = info['Lead ID']
+						lead = info['Lead_Id']
 				except Lead.DoesNotExist:
 					lead = None
 
-				if 'DCS' in info['Credit Response']:
+				if 'DCS' in info['CreditResponse']:
 					value = 0
 				else:
-					value = (float(info['Monitoring Rate']) * 36) + int(info['Equipment Total'])
+					value = (float(info['MonitoringRate']) * 36) + (int(info['AdditionalEquipment'] if isinstance(info['AdditionalEquipment'],int) else float(info['AdditionalEquipment'])))
 				csv_dict['lead_found'] = (True if lead else False)
-				csv_dict['date'] = info['Disposition Date']
+				csv_dict['date'] = info['DispositionDate']
 				csv_dict['disposition'] = info['Disposition']
-				csv_dict['lead_id'] = info['Lead ID']
-				csv_dict['credit_response'] = info['Credit Response']
+				csv_dict['lead_id'] = info['Lead_Id']
+				csv_dict['credit_response'] = info['CreditResponse']
 				csv_dict['gclid'] = (lead.gclid if have_gclid else None)
 				csv_dict['conversion_value'] = value
 				data.append(csv_dict)
