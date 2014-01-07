@@ -21,6 +21,6 @@ def point_tracking(request):
 
 def view_tweets(request):
 	ctx = {}
-	tweets = give_me_tweets(payitforward=True)
+	tweets = give_me_tweets(payitforward=(not settings.DEBUG))
 	ctx['tweets'] = tweets
 	return render(request,'payitforward/tweets.html',ctx)

@@ -37,6 +37,7 @@ def give_me_tweets(payitforward=False,term=None):
 	search_results = None
 	tweets = None
 	backups=TweetBackup.objects.all()
+	b_count=backups.count()
 	for ba in backups:
 		ba.remove_old()
 	_list = [b for b in backups.values('text')]
@@ -68,15 +69,30 @@ def give_me_tweets(payitforward=False,term=None):
 			search_results = t_api.GetSearch(term=term)
 			if search_results:
 				cache.set('PAYITFOWARD_TWEETS',search_results,60*60)
-				for status in search_results:
-					if status.text not in _list:
+				if b_count != 0:
+					#got items in db so create backups and do duplicate checks
+					for status in search_results:
+						if status.text not in _list:
+							try:
+								TweetBackup.objects.create(text=status.text,
+									                       GetRelativeCreatedAt=status.relative_created_at,
+									                       payitforward=True,
+									                       location=status.location)
+							except IntegrityError:
+							#trying to create duplicate record
+								transaction.rollback()
+							else:
+								transaction.commit()
+				else:
+					#no items so create backups, should only ever be ran once
+					for status in search_results:
 						try:
 							TweetBackup.objects.create(text=status.text,
 								                       GetRelativeCreatedAt=status.relative_created_at,
 								                       payitforward=True,
 								                       location=status.location)
-						except IntegrityError:
-						#trying to create duplicate record
+						except:
+							#trying to create duplicate record
 							transaction.rollback()
 						else:
 							transaction.commit()
@@ -88,9 +104,8 @@ def give_me_tweets(payitforward=False,term=None):
 	else:
 		tweets = cache.get('TWEETS')
 		if not tweets:
-			tweets=t_api.GetUserTimeline('protectamerica')
+			tweets = t_api.GetUserTimeline('protectamerica')
 			cache.set('TWEETS',tweets,60*60)
-			b_count=backups.count()
 			if b_count != 0:
 				for t in tweets:
 					if t.text not in _list:
