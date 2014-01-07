@@ -93,7 +93,7 @@ def write_csv_data(app,the_file,data,time_zone):
 	writer.writerow([first_line])
 	writer.writerow(second_line)
 	for line in data:
-		if line['gclid'] is None or line['gclid'] != '' or line['conversion_value'] == 0:
+		if line['gclid'] is None or line['gclid'] == '' or line['conversion_value'] == 0:
 			continue
 		row_values = ('add',line['gclid'],'Lead Sold',line['conversion_value'],line['date'])
 		writer.writerow(row_values) 
