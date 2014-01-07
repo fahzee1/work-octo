@@ -85,7 +85,7 @@ def write_csv_data(app,the_file,data,time_zone):
 	first_line = 'Parameters:EntityType=OFFLINECONVERSION;TimeZone=%s;' % time_zone
 	second_line = ('Action','Google Click Id','Conversion Name','Conversion Value','Conversion Time')
 
-	csv_file = open('/Users/cjogbuehi/Documents/'+the_file,'wb')
+	csv_file = open(the_file,'wb')
 	writer = csv.writer(csv_file)
 	writer.writerow([first_line])
 	writer.writerow(second_line)
