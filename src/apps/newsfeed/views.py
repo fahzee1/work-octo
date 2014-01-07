@@ -17,7 +17,6 @@ consumer_secret=settings.TWITTER_CONSUMER_SECRET
 access_token=settings.TWITTER_ACCESS_TOKEN
 access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 
-
 @transaction.commit_manually
 def give_me_tweets(payitforward=False,term=None):
 	"""
@@ -63,7 +62,7 @@ def give_me_tweets(payitforward=False,term=None):
 	# if we're getting tweets for payitforward
 	if payitforward:
 		if not term:
-			term = '#payitforwardMSU OR #payitforwardUF OR #payitforwardUSA OR #payitforwardPA'
+			term = '#payitforwardMSU OR #payitforwardUFL OR #payitforwardUSA OR #payitforwardPA'
 		search_results = cache.get('PAYITFOWARD_TWEETS')
 		if not search_results:
 			search_results = t_api.GetSearch(term=term)
