@@ -116,6 +116,10 @@ class Lead(models.Model):
     retry = models.BooleanField(default=False,blank=True,help_text="Lead needs to be resent to Lead Conduit")
     number_of_retries = models.IntegerField(default=0,blank=True)
 
+    class Meta:
+        ordering = ['-date_created']
+
+
     def __unicode__(self):
         return '%s | %s - %s : %s %s' % (self.id,
             self.agent_id, self.source, self.name, self.phone)
