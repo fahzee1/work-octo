@@ -92,7 +92,8 @@ class TweetBackup(models.Model):
 	def remove_old(self):
 		too_old=self.created + timedelta(days=2)
 		if timezone.now() >= too_old and TweetBackup.objects.all().count() > 5:
-			self.delete()
+			if not self.payitforward:
+				self.delete()
 
 
 

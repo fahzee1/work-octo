@@ -20,6 +20,20 @@ access_secret=settings.TWITTER_ACCESS_TOKEN_SECRET
 
 @transaction.commit_manually
 def give_me_tweets(payitforward=False,term=None):
+	"""
+	If for payitforward page fetch tweets with payitforward hashtags.
+	If not fetch all posted PA Tweets.
+	Regardless of the above two, check cache first for tweets.
+	If we get any error along the way or no tweets return TweetBackups.
+
+	Tranactions are being manually handled to stop duplicate Tweet backups
+	from being created. If a duplicate or any type of error happens, 
+	rollback the commit
+
+	TODO maybe change order of operations like first cache, second backups,
+	then finally make api call 
+	"""
+
 	search_results = None
 	tweets = None
 	backups=TweetBackup.objects.all()
@@ -36,15 +50,13 @@ def give_me_tweets(payitforward=False,term=None):
 					      requests_timeout=10)
 	except:
 		if payitforward:
-			search_results = TweetBackup.objects.filter(payitforward=True)
-			transaction.commit()
+			search_results = backups.filter(payitforward=True)
+			transaction.rollback()
 			return search_results
 		else:
-			tweets=TweetBackup.objects.all()
-			#for t in tweets:
-			    #t.remove_old()
+			tweets = backups.objects.all()
 			shuffle(list(tweets))
-			transaction.commit()
+			transaction.rollback()
 			return tweets[:5]
 
 	# if we're getting tweets for payitforward
@@ -68,6 +80,9 @@ def give_me_tweets(payitforward=False,term=None):
 							transaction.rollback()
 						else:
 							transaction.commit()
+			else:
+				search_results = backups.filter(payitforward=True)
+
 
 	# if we're just getting recent tweets
 	else:
@@ -80,7 +95,9 @@ def give_me_tweets(payitforward=False,term=None):
 				for t in tweets:
 					if t.text not in _list:
 						try:
-							TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt(),location=t.location)
+							TweetBackup.objects.create(text=t.text,
+								                      GetRelativeCreatedAt=t.GetRelativeCreatedAt(),
+								                      location=t.location)
 						except IntegrityError:
 						#trying to create duplicate record
 							transaction.rollback()
@@ -89,7 +106,9 @@ def give_me_tweets(payitforward=False,term=None):
 			else:
 				for t in tweets:
 					try:
-						TweetBackup.objects.create(text=t.text,GetRelativeCreatedAt=t.GetRelativeCreatedAt(),location=t.location)
+						TweetBackup.objects.create(text=t.text,
+							                      GetRelativeCreatedAt=t.GetRelativeCreatedAt(),
+							                      location=t.location)
 					except IntegrityError:
 					#trying to create duplicate record
 						transaction.rollback()
@@ -99,9 +118,11 @@ def give_me_tweets(payitforward=False,term=None):
 				
 	# return based on what we're using
 	if payitforward and search_results:
+		transaction.commit()
 		return search_results
 
 	elif not payitforward and tweets:
+		transaction.commit()
 		return tweets[:5]
 
 	else:
