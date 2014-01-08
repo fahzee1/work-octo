@@ -35,16 +35,28 @@
 [class^="icon-"]:before, [class*=" icon-"]:before {
     display: block;
 }
-
+.border-radius (@top-left-radius: 10px, @top-right-radius: 10px, @bottom-right-radius: 10px, @bottom-left-radius: 10px) {
+    border-radius: @top-left-radius @top-right-radius @bottom-right-radius @bottom-left-radius;
+    -moz-border-radius: @top-left-radius @top-right-radius @bottom-right-radius @bottom-left-radius;
+    -webkit-border-top-left-radius: @top-left-radius;
+    -webkit-border-top-right-radius: @top-right-radius;
+    -webkit-border-bottom-left-radius: @bottom-left-radius;
+    -webkit-border-bottom-right-radius: @bottom-right-radius;
+}
 /*--- Basic*/
 body {
     background: url(/static/img/affiliates/five-linx/main-wrapper-bg.jpg) top center no-repeat #f0f2f3 !important;
     border-top: 3px solid #305678;
     color: #333;
+    font-family: "minion-pro",serif;
 }
 h1,h2,h3,h4 {
     color: @blue;
     font-weight: bold;
+    font-family: "brandon-grotesque",sans-serif !important;
+}
+h3 {
+    font-size: 1.8em;
 }
 a {
     color: @aqua;
@@ -129,6 +141,9 @@ hr{
 .call-box {
     p {
         margin: 5px 0;
+        font-family: "brandon-grotesque",sans-serif !important;
+        font-size: 1.2em;
+
     }
     background-color: @blue;
     border-bottom: 1px solid #305678;
@@ -180,15 +195,42 @@ hr{
         float: right;
         list-style: none;
         margin: 0;
+        margin-top: 9px;
         li:first-child{
             border-left: none;
         }
         li {
             float: left;
+            background:  url(/static/img/affiliates/five-linx/nav-bg.png) center top repeat-x;
             a {
-                color: @blue;
+                color: #004B8D;
                 display: block;
-                padding: 20px 10px;
+                padding: 11px 10px;
+                border-right: 1px solid #F6F8F5;
+                border-left: 1px solid #CFD7E5;
+                font-family: "brandon-grotesque",sans-serif !important;
+                &.first {
+                    border-left: none;
+                }
+            
+
+            }
+            &.first {
+                .border-radius(5px,0,0,5px);
+
+            }
+            &.last {
+                .border-radius(0,5px,5px,0);
+                a {
+                    border-right: none;
+                }
+
+            }
+            &.active {
+                background: @blue;
+                a {
+                    color: @white;
+                }
             }
         }
     }
@@ -256,16 +298,18 @@ hr{
         background: rgba(255,255,255,.5);
         float: right;
         margin-left: 20px;
-        margin-top: 90px;
+        margin-top: 64px;
         padding: 15px;
         text-align: left;
         width: 55%;
         h1 {
-            font-size: 26px;
+            font-size: 40px;
             font-weight: bold;
             color: @blue;
             margin: 0 !important;
             padding: 0 0 15px !important;
+            font-family: "brandon-grotesque",sans-serif;
+
         }
         h2 {
             font-size: 22px;
@@ -534,6 +578,9 @@ body.packages {
             margin-right: 1%;
             width: 32%;
         }
+        h3 {
+            font-size: 1.2em;
+        }
         h3 i {
             color: @aqua;
             font-size: 40px;
@@ -748,7 +795,7 @@ body.packages {
             &.chat {
                 background: #00adcf;
                 box-shadow: 3px 3px 0 #ccc;
-                width: 180px;
+                width: 160px;
                 margin: 0;
                 text-align: center;
                 padding: 10px 0 0;
@@ -762,6 +809,7 @@ body.packages {
                 p {
                     text-align: center;
                     color: #fff;
+                    margin: 13px 0;
                 }
             }
             p {
@@ -779,7 +827,7 @@ body.packages {
             &.care {
                 background: #2a2a2c;
                 box-shadow: 3px 3px 0 #ccc;
-                width: 180px;
+                width: 160px;
                 text-align: center;
                 padding: 10px 0 0;
                 h3 {
@@ -820,6 +868,7 @@ body.packages {
     }
     .faq .faqAnswer {
         display: none;
+        margin-left: 56px;
     }
     .faqAnswer {
         ul {
