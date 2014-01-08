@@ -39,7 +39,11 @@ def give_me_tweets(payitforward=False,term=None):
 	b_count=backups.count()
 	for ba in backups:
 		ba.remove_old()
-	_list = [b for b in backups.values('text')]
+	# grab all tweet backup values for text field
+	start_list = [b for b in backups.values('text')]
+	# got back a list of dicts so now create list with values
+	# will use to create set and check if value exists
+	check_list = [f['text'] for f in start_list]
 
 	# authenticate with twitter, if fail get and return backups
 	try:
@@ -71,7 +75,7 @@ def give_me_tweets(payitforward=False,term=None):
 				if b_count != 0:
 					#got items in db so create backups and do duplicate checks
 					for status in search_results:
-						if status.text not in _list:
+						if status.text not in set(check_list):
 							try:
 								TweetBackup.objects.create(text=status.text,
 									                       GetRelativeCreatedAt=status.relative_created_at,
@@ -107,7 +111,7 @@ def give_me_tweets(payitforward=False,term=None):
 			cache.set('TWEETS',tweets,60*60)
 			if b_count != 0:
 				for t in tweets:
-					if t.text not in _list:
+					if t.text not in set(check_list):
 						try:
 							TweetBackup.objects.create(text=t.text,
 								                      GetRelativeCreatedAt=t.GetRelativeCreatedAt(),
