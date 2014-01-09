@@ -170,13 +170,14 @@ elif settings.SITE_ID == 3:
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
         
         # COMPETITOR BASED
-        dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/adt.html', 'adt'),
-        dtt(r'^frontpoint-security/?$', 'affiliates/sem-landing-page/frontpoint.html', 'frontpoint'),
-        dtt(r'^att-digital-life/?$', 'affiliates/sem-landing-page/att.html', 'att'),
-        dtt(r'^vivint/?$', 'affiliates/sem-landing-page/vivint.html', 'vivint'),
-        dtt(r'^sloan-security/?$', 'affiliates/sem-landing-page/sloan-security.html', 'sloan-security'),
-        dtt(r'^guardian-security/?$', 'affiliates/sem-landing-page/guardian.html', 'guardian'),
-        dtt(r'^time-warner-intelligent-home/?$', 'affiliates/sem-landing-page/time-warner.html', 'time-warner'),
+        dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/competitors/adt.html', 'adt'),
+        dtt(r'^frontpoint-security/?$', 'affiliates/sem-landing-page/competitors/frontpoint.html', 'frontpoint'),
+        dtt(r'^att-digital-life/?$', 'affiliates/sem-landing-page/competitors/att.html', 'att'),
+        dtt(r'^vivint/?$', 'affiliates/sem-landing-page/competitors/vivint.html', 'vivint'),
+        dtt(r'^sloan-security/?$', 'affiliates/sem-landing-page/competitors/sloan-security.html', 'sloan-security'),
+        dtt(r'^guardian-security/?$', 'affiliates/sem-landing-page/competitors/guardian.html', 'guardian'),
+        dtt(r'^time-warner-intelligent-home/?$', 'affiliates/sem-landing-page/competitors/time-warner.html', 'time-warner'),
+        #dtt(r'^comcast-xfinity/?$', 'affiliates/sem-landing-page/competitors/xfinity.html', 'xfinity'),
 
 
 
