@@ -84,7 +84,7 @@ class TweetBackup(models.Model):
 	GetRelativeCreatedAt = models.CharField(max_length=255)
 	created = models.DateTimeField(auto_now_add=True,default=timezone.now())
 	payitforward = models.BooleanField(default=False)
-	location = models.CharField(max_length=255)
+	location = models.CharField(max_length=255,blank=True,null=True)
 
 	def __unicode__(self):
 		return '%s' % self.text

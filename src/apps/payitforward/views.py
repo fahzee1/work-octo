@@ -4,6 +4,7 @@ from django.utils import simplejson
 from django.conf import settings
 from django.shortcuts import render ,redirect
 from apps.newsfeed.views import give_me_tweets
+from random import choice
 
 
 
@@ -21,6 +22,29 @@ def point_tracking(request):
 
 def view_tweets(request):
 	ctx = {}
+	tweetsMSU = []
+	tweetsUF = []
+	tweetsUSA = []
+
 	tweets = give_me_tweets(payitforward=(not settings.DEBUG))
-	ctx['tweets'] = tweets
-	return render(request,'payitforward/tweets.html',ctx)
+	#tweets = give_me_tweets(payitforward=True)
+	if tweets:
+		for tweet in tweets:
+			if 'MSU' in tweet.text:
+				if tweet not in tweetsMSU:
+					tweetsMSU.append(tweet)
+			if 'UF' in tweet.text:
+				if tweet not in tweetsUF:
+					tweetsUF.append(tweet)
+			if 'USA' in tweet.text:
+				if tweet not in tweetsUSA:
+					tweetsUSA.append(tweet)
+	else:
+		tweetsMSU = None
+		tweetsUF = None
+		tweetsUSA = None
+
+	ctx['tweetsMSU'] = tweetsMSU
+	ctx['tweetsUF'] = tweetsUF
+	ctx['tweetsUSA'] = tweetsUSA
+	return render(request,'payitforward/payitforward.html',ctx)

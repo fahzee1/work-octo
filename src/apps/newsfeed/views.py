@@ -32,7 +32,7 @@ def give_me_tweets(payitforward=False,term=None):
 	TODO maybe change order of operations like first cache, second backups,
 	then finally make api call 
 	"""
-
+	#pdb.set_trace()
 	search_results = None
 	tweets = None
 	backups=TweetBackup.objects.all()
@@ -145,7 +145,7 @@ def give_me_tweets(payitforward=False,term=None):
 
 	else:
 		transaction.rollback()
-		return []
+		return None
 
 
 
