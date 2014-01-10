@@ -35,7 +35,7 @@ def view_tweets(request):
 			if 'MSU' in tweet.text:
 				if tweet not in tweetsMSU:
 					tweetsMSU.append(tweet)
-			if 'UF' in tweet.text:
+			if 'UFL' in tweet.text:
 				if tweet not in tweetsUFL:
 					tweetsUFL.append(tweet)
 			if 'USA' in tweet.text:
