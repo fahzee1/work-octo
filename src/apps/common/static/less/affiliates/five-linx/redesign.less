@@ -1,0 +1,890 @@
+/*--- Colors*/
+/*Blue*/
+@blue: #004B8D; /*Titles*/
+
+/*aqua*/
+@aqua: #00AED1; /*Links*/
+@aqua-dark: #2794B5; /*LinksHover*/
+
+/*Grays*/
+@gray-darker: #333;
+@gray-dark: #555;
+@gray-light: #999;
+@gray-lighter: #ccc;
+@gray-lightest: #eee; /*background*/
+
+/*Purple*/
+@purple: #6D859A; /*Text*/
+@purple-light: #F0F2F3; /*background*/
+
+/*White*/
+@white: #fff;
+
+/*Reds*/
+@red: #eb292b;
+@red-darker: #cc1416;
+
+/*Font Awesome*/
+@font-face{font-family:'FontAwesome';src:url('http://homesecurity.protectamerica.com/static/font/fontawesome-webfont.eot?v=3.2.1');src:url('http://homesecurity.protectamerica.com/static/font/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'),url('http://homesecurity.protectamerica.com/static/font/fontawesome-webfont.woff?v=3.2.1') format('woff'),url('http://homesecurity.protectamerica.com/static/font/fontawesome-webfont.ttf?v=3.2.1') format('truetype'),url('http://homesecurity.protectamerica.com/static/font/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');font-weight:normal;font-style:normal;}[class^="icon-"],[class*=" icon-"]{font-family:FontAwesome;font-weight:normal;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;*margin-right:.3em;}
+.icon-rss:before{content:"\f09e";}
+.icon-home:before{content:"\f015";}
+.icon-money:before{content:"\f0d6";}
+.icon-user:before{content:"\f007";}
+.icon-thumbs-up:before{content:"\f164";}
+.icon-heart:before{content:"\f004";}
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    display: block;
+}
+.border-radius (@top-left-radius: 10px, @top-right-radius: 10px, @bottom-right-radius: 10px, @bottom-left-radius: 10px) {
+    border-radius: @top-left-radius @top-right-radius @bottom-right-radius @bottom-left-radius;
+    -moz-border-radius: @top-left-radius @top-right-radius @bottom-right-radius @bottom-left-radius;
+    -webkit-border-top-left-radius: @top-left-radius;
+    -webkit-border-top-right-radius: @top-right-radius;
+    -webkit-border-bottom-left-radius: @bottom-left-radius;
+    -webkit-border-bottom-right-radius: @bottom-right-radius;
+}
+/*--- Basic*/
+body {
+    background: url(/static/img/affiliates/five-linx/main-wrapper-bg.jpg) top center no-repeat #f0f2f3 !important;
+    border-top: 3px solid #305678;
+    color: #333;
+    font-family: "minion-pro",serif;
+}
+h1,h2,h3,h4 {
+    color: @blue;
+    font-weight: bold;
+    font-family: "brandon-grotesque",sans-serif !important;
+}
+h3 {
+    font-size: 1.8em;
+}
+a {
+    color: @aqua;
+    text-decoration: none;
+}
+a:hover {
+    color: @aqua-dark;
+    text-decoration: underline;
+}
+.btn {
+    background-color: @aqua;
+    color: @white;
+    padding: 10px;
+    transition: all 250ms ease-out;
+}
+.btn:hover {
+    background-color: @aqua-dark;
+    color: @white;
+    text-decoration: none;
+}
+.secondaryBtn {
+    border: 2px solid @aqua;
+    padding: 10px 20px;
+    transition: all 250ms ease-out;
+}
+.secondaryBtn:hover {
+    background-color: @aqua;
+    color: @white;
+    border: 2px solid @aqua;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+}
+hr{
+    clear: both;
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid @gray-lighter;
+    margin:1em 0;
+    padding:0;
+}
+.clearRow {
+    clear: both;
+}
+.sprite {
+    background: url(/static/img/affiliates/five-linx/sprite.png) no-repeat 0 0;
+}
+.smallText {
+    font-size: 12px;
+}
+
+/*Columns*/
+.halfLeft {
+    float: left;
+    width: 59%;
+    &.chat {
+        width: 38%;
+        margin: 0 0 0 20px;
+    }
+}
+.halfRight {
+    float: right;
+    width: 40%;
+    &.care {
+        width: 50%;
+    }
+}
+.oneThird {
+    float: left;
+    margin-right: 1%;
+    width: 32%;
+}
+.container {
+    width: 960px;
+    margin: 0 auto;
+}
+
+/*Callbox*/
+.call-box {
+    p {
+        margin: 5px 0;
+        font-family: "brandon-grotesque",sans-serif !important;
+        font-size: 1.2em;
+
+    }
+    background-color: @blue;
+    border-bottom: 1px solid #305678;
+    border-top: 1px solid #305678;
+    color: @white;
+    font-size: 25pt;
+    font-weight: 200;
+    padding: 16px 0;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+/*--- Header*/
+#header{
+    text-align: left;
+    padding: 10px 0;
+    /*Callbox*/
+    .callbox {
+        left: 50%;
+        margin-left: -245px;
+        position: absolute;
+        text-align: center;
+        top: 0;
+        width: 240px;
+        h3 {
+            color: @blue;
+            font-size: 14px;
+            margin-top: 6px;
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+        h4 {
+            font-size: 24px;
+            margin: 0;
+            a {
+                font-size: 20px;
+            }
+        }
+        p {
+            margin-top: 2px;
+            font-size: 13px;
+        }
+    }
+    .textRight {
+        float: right;
+    }
+    /*Nav*/
+    #nav {
+        font-weight: bold;
+        float: right;
+        list-style: none;
+        margin: 0;
+        margin-top: 9px;
+        li:first-child{
+            border-left: none;
+        }
+        li {
+            float: left;
+            background:  url(/static/img/affiliates/five-linx/nav-bg.png) center top repeat-x;
+            a {
+                color: #004B8D;
+                display: block;
+                padding: 11px 10px;
+                border-right: 1px solid #F6F8F5;
+                border-left: 1px solid #CFD7E5;
+                font-family: "brandon-grotesque",sans-serif !important;
+                &.first {
+                    border-left: none;
+                }
+            
+
+            }
+            &.first {
+                .border-radius(5px,0,0,5px);
+
+            }
+            &.last {
+                .border-radius(0,5px,5px,0);
+                a {
+                    border-right: none;
+                }
+
+            }
+            &.active {
+                background: @blue;
+                a {
+                    color: @white;
+                }
+            }
+        }
+    }
+}
+/*---Hero*/
+#hero {
+    background: url(/static/img/affiliates/five-linx/heroBg.jpg) center top no-repeat;
+    overflow: hidden;
+    #heroForm {
+        background-color: @white;
+        float: left;
+        padding: 10px 10px;
+        width: 210px;
+        p {
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: none;
+            color: @blue;
+            margin: 5px 0 15px;
+            text-align: center;
+        }
+        label {
+            display: none;
+        }
+        input[type="text"] {
+            border: 1px solid #ccc;
+            font-size: 16px;
+            font-weight: 200;
+            height: 30px;
+            padding: 0 7px;
+            margin-bottom: 8px;
+            width: 93%;
+        }
+        button {
+            background-color: @aqua;
+            border: 1px solid @aqua;
+            color: @white;
+            font-size: 18px;
+            height: 38px;
+            margin-bottom: 10px;
+            width: 100%;
+            transition:all 250ms ease-out;
+        }
+        button:hover {
+            background-color: @aqua-dark;
+        }
+        .quote-form-error {
+            display: none;
+        }
+        .consent-box{
+            a {
+                font-size: 10px;
+            }
+            label {
+                display: block;
+                margin-bottom: 4px !important;
+                color: #666;
+            }
+            #third-party-container {
+                padding-top: 10px;
+            }
+        }
+    }
+    .intro {
+        background: rgba(255,255,255,.5);
+        float: right;
+        margin-left: 20px;
+        margin-top: 64px;
+        padding: 15px;
+        text-align: left;
+        width: 55%;
+        h1 {
+            font-size: 40px;
+            font-weight: bold;
+            color: @blue;
+            margin: 0 !important;
+            padding: 0 0 15px !important;
+            font-family: "brandon-grotesque",sans-serif;
+
+        }
+        h2 {
+            font-size: 22px;
+            font-weight: normal;
+            color: @purple;
+            margin-top: 0;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+            line-height: 24px;
+        }
+    }
+}
+
+body.packages {
+    #hero {
+        background: url(/static/img/affiliates/five-linx/heroBg2.jpg) center top no-repeat;
+    }
+}
+
+/*--- Highlights */
+#highlights {
+    text-align: center;
+    width: 960px;
+    clear: both;
+    margin: 0 auto;
+    .sprite {
+        height: 60px;
+        margin: 30px auto 0;
+        width: 100px;
+    }
+    .hl247{background-position:center 4px;}
+    .hlUnbeatablePrice{background-position:center -74px;}
+    .hlSimpleWireless{background-position:center -156px;}
+    .hlCertifiedGE{background-position:center -240px;}
+    .hlInteractiveSecSys{background-position:center -1267px;}
+    .hlVideo{background-position:center -305px;}
+    .hlGPS{background-position:center -392px;}
+    .hlBudget{background-position:center -467px;}
+    .hlGetInTouch{background-position:center -550px;}
+    .col {
+        float: left;
+        width: 20%;
+        margin: 0 24px;
+    }
+    h3 {
+        color: @blue;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    p {
+        margin-bottom: 30px;
+    }
+}
+
+/*About Protect America*/
+#aboutPA {
+    border-top: 1px solid @gray-lighter;
+    text-align: left;
+    line-height: 1.5;
+    margin: 30px auto;
+    height: 350px;
+    clear: both;
+    width: 960px;
+    padding: 30px 0 60px;
+    .colHalf {
+        float: left;
+        margin-right: 8%;
+        width: 42%;
+    }
+    .logos{
+        background:@white;
+        border-radius:3px;
+        box-shadow:0px 1px 2px rgba(0, 0, 0, 0.5);
+        overflow:hidden;
+        padding:10px;
+        margin-bottom:10px;
+        img {
+            float: left;
+            width: 25%;
+        }
+    }
+}
+
+
+/*See all Features*/
+#seeAllFeatures {
+    background: url(/static/img/affiliates/five-linx/home.png) no-repeat center center fixed @white;
+    height: 350px;
+    position: relative;
+    text-align: center;
+    border: 1px solid #ccc;
+    clear: both;
+    .btn {
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -15px;
+        line-height: 30px;
+        height: 30px;
+        width: 220px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+}
+
+/*Bottom Form*/
+.home #bottom-form .container {
+    border-top: none;
+    h2 {
+        text-align: center;
+    }
+}
+#bottom-form {
+    overflow: hidden;
+    .container {
+        border-top: 1px solid @gray-lighter;
+        .leftCol {
+            #call-us {
+                p {
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+    .leftCol {
+        float: left;
+        margin-right: 5%;
+        width: 48%;
+        h4 {
+            span {
+                display: block;
+            }
+            display: block;
+            font-size: 36px;
+        }
+    }
+    .rightCol {
+        float: right;
+        width: 30%;
+    }
+    #bottomForm {
+        float: left;
+        padding: 10px 10px;
+        p {
+            font-size: 17px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: @blue;
+            margin-bottom: 10px;
+        }
+        label {
+            display: none;
+        }
+        input[type="text"] {
+            border: 1px solid @gray-light;
+            font-size: 18px;
+            font-weight: 200;
+            height: 30px;
+            padding: 0 1%;
+            margin-bottom: 8px;
+            width: 98%;
+        }
+        button {
+            background-color: @aqua;
+            border: 1px solid @aqua;
+            color: @white;
+            font-size: 20px;
+            height: 48px;
+            margin-bottom: 10px;
+            width: 100%;
+            transition:all 250ms ease-out;
+        }
+        button:hover {
+            background-color: @aqua-dark;
+        }
+        .quote-form-error {
+            display: none;
+        }
+        .consent-box{
+            a {
+                font-size: 10px;
+            }
+            label {
+                display: block;
+                margin-bottom: 4px !important;
+            }
+            #third-party-container {
+                padding-top: 10px;
+            }
+        }
+    }
+}
+
+/*Footer*/
+#footer {
+    clear: both;
+    margin-top: 30px;
+    .container {
+        border-top: 3px solid @blue;
+        padding-top: 30px;
+
+    }
+    .callbox {
+        float: right;
+        text-align: right;
+        h3,h4,p {
+            margin: 0;
+        }
+    }
+    #footerNav {
+        font-weight: bold;
+        float: left;
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+        li:first-child{
+            border-left: none;
+        }
+        li:first-child a {
+            padding-left: 0;
+        }
+        li {
+            float: left;
+            a {
+                color: @blue;
+                display: block;
+                padding: 0 10px 20px;
+            }
+        }
+    }
+}
+
+/*Terms*/
+#terms {
+    font-size: 12px;
+    clear: both;
+    padding-top: 30px;
+    .container {
+        border-top: 1px solid @gray-lighter;
+    }
+    #terms-conditions {
+        float: left;
+        width: 46%;
+    }
+    #copyrights {
+        float: right;
+        width: 40%;
+    }
+}
+
+
+
+/* ---------- Features Page*/
+/*Security System Features */
+#securitySysFeatures {
+    overflow: hidden;
+    ul {
+        list-style: none;
+        text-align: center;
+        li {
+            float: left;
+            margin-right: 1%;
+            width: 32%;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        h3 i {
+            color: @aqua;
+            font-size: 40px;
+        }
+    }
+}
+
+/* --- videoSurveillance*/
+#videoSurveillance {
+    overflow: hidden;
+    clear: both;
+    padding: 30px 0;
+    .container {
+        border-top: 1px solid @gray-lighter;
+    }
+}
+
+/* --- GPS Tracking */
+#gpsTracking {
+    clear: both;
+    overflow: hidden;
+    padding: 30px 0;
+    .container {
+        border-top: 1px solid @gray-lighter;
+    }
+}
+
+
+/*---------- Packages Page*/
+#packagesDescription {
+    background-color: @white;
+    .container {
+        #packagesTabs {
+            .halfLeft {
+                p {
+                    font-size: 16px;
+                    line-height: 24px;
+                    margin-right: 20px;
+                }
+                ul {
+                    li {
+                        padding: 5px 0;
+                    }
+                }
+            }
+        }
+    }
+}
+#packagesTabs {
+    > ul {
+        font-weight: bold;
+        float: left;
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+        li:first-child{
+            border-left: none;
+        }
+        li:first-child a {
+            padding-left: 0;
+        }
+        li {
+            float: left;
+            a {
+                color: @blue;
+                display: block;
+                padding: 20px;
+            }
+        }
+        li.ui-tabs-active a {
+            text-decoration: underline;
+        }
+    }
+    .tabsContent {
+        clear: both;
+        overflow: hidden;
+    }
+}
+
+/*----- Tabs*/
+#tabs {
+    overflow: hidden;
+    padding: 30px 0;
+    ul {
+        padding: 0;
+    }
+    li {
+        background-color: @white;
+        border: 1px solid @gray-lighter;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+        float: left;
+        font-size: 12px;
+        list-style: none outside none;
+        margin-left: 0.25%;
+        margin-right: 0.25%;
+        padding-bottom: 6px;
+        position: relative;
+        text-align: center;
+        width: 19%;
+    }
+    h2 {
+        margin-bottom: 10px;
+    }
+    .package-blue-strip {
+        background: @blue;
+        color: @white;
+        height: 42px;
+        line-height: 47px;
+        margin-bottom: 12px;
+        position: relative;
+        img {
+            margin: 3px 0 0 0;
+        }
+        strong {
+            font-size: 24px;
+            margin-right: 42px;
+            font-weight: normal;
+            &.strike {
+                text-decoration: line-through;
+            }
+        }
+        small {
+            font-size: 11px;
+            font-weight: bold;
+            position: absolute;
+            right: 25px;
+            top: 0;
+        }
+    }
+}
+/*Monitoring Options*/
+#monitoringOptions {
+    clear: both;
+    overflow: hidden;
+    padding: 30px 0;
+    .whiteBox {
+        background-color: @white;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+        padding: 10px 20px;
+    }
+    h4 {
+        height: 36px;
+        line-height: 36px;
+        padding-left: 24px;
+    }
+    .landlineMonitoring h4 {
+        background-position: -43px -1672px;
+    }
+    .broadbandMonitoring h4 {
+        background-position: -43px -1752px;
+    }
+    .cellularMonitoring h4 {
+        background-position: -43px -1840px;
+    }
+}
+
+/*Additional Products*/
+#additionalProducts {
+    .productsGrid {
+        .col {
+            float: left;
+            margin-right: .5%;
+            margin-bottom: 5px;
+            width: 16%;
+        }
+        .productWrapper {
+            background: @white;
+            padding: 0 0 40px;
+            position: relative;
+            text-align: center;
+            p {
+                bottom: 10px;
+                left: 20px;
+                line-height: 1;
+                position: absolute;
+                right: 20px;
+            }
+        }
+    }
+}
+
+#cellularUplink {
+    clear: both;
+    overflow: hidden;
+    padding: 30px 0;
+    .container {
+        border-top: 1px solid @gray-lighter;
+    }
+}
+
+/*SupportPage*/
+#supportInfo {
+    padding: 30px 0;
+    height: 270px;
+    clear: both;
+    .container {
+        .halfLeft {
+            width: 50%;
+            margin-right: 30px;
+            h4 {
+                text-align: left;
+                font-size: 16px;
+                line-height: 20px;
+                margin: 0;
+            }
+            h3 {
+                font-size: 16px;
+                font-weight: 500;
+            }
+            &.chat {
+                background: #00adcf;
+                box-shadow: 3px 3px 0 #ccc;
+                width: 160px;
+                margin: 0;
+                text-align: center;
+                padding: 10px 0 0;
+                h3 {
+                    text-align: center;
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin: 8px 0 0 0;
+                }
+                p {
+                    text-align: center;
+                    color: #fff;
+                    margin: 13px 0;
+                }
+            }
+            p {
+                line-height: 20px;
+            }
+        }
+        .halfRight {
+            width: 45%;
+            float: right;
+            h4 {
+                text-align: left;
+                font-size: 16px;
+                line-height: 20px;
+            }
+            &.care {
+                background: #2a2a2c;
+                box-shadow: 3px 3px 0 #ccc;
+                width: 160px;
+                text-align: center;
+                padding: 10px 0 0;
+                h3 {
+                    text-align: center;
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin: 8px 0 0 0;
+                }
+                h2 {
+                    text-align: center;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: #fff;
+                }
+                img {
+                    width: 50px;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}
+
+/*FAQs*/
+#faqs {
+    padding: 30px 0;
+    clear: both;
+    .container {
+        border: none;
+    }
+    .faq h3 {
+        background: url(/static/img/affiliates/five-linx/sprite.png) no-repeat scroll -30px -1576px rgba(0, 0, 0, 0);
+        border-top: 1px solid #D4DCE5;
+        cursor: pointer;
+        margin: 0;
+        padding: 20px 0 20px 60px;
+    }
+    .faq .faqAnswer {
+        display: none;
+        margin-left: 56px;
+    }
+    .faqAnswer {
+        ul {
+            li {
+                list-style-type: circle;
+                margin: 0 -25px;
+                padding: 5px 0;
+            }
+        }
+    }
+}
+
+
+
+
+
+.delete {
+    display: none;
+}
