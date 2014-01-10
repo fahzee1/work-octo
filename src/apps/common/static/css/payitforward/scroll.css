@@ -53,7 +53,7 @@ body, .onepage-wrapper, html {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: rgba(0,0,0,0.15);
+  background: rgba(0,0,0,0.85);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -66,4 +66,29 @@ body, .onepage-wrapper, html {
   border: 1px solid black;
   margin-top: -4px;
   left: 8px;
+}
+
+.disabled-onepage-scroll, .disabled-onepage-scroll .wrapper {
+  overflow: auto;
+}
+
+.disabled-onepage-scroll .onepage-wrapper .section {
+  position: relative !important;
+  top: auto !important;
+}
+.disabled-onepage-scroll .onepage-wrapper {
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  transform: none !important;
+  -ms-transform: none !important;
+  min-height: 100%;
+}
+
+
+.disabled-onepage-scroll .onepage-pagination {
+  display: none;
+}
+
+body.disabled-onepage-scroll, .disabled-onepage-scroll .onepage-wrapper, html {
+  position: inherit;
 }

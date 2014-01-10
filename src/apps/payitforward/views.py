@@ -2,6 +2,13 @@ from apps.payitforward.models import Organization
 from apps.common.views import simple_dtt
 from django.utils import simplejson
 from django.conf import settings
+from django.shortcuts import render ,redirect
+from apps.newsfeed.views import give_me_tweets
+from random import choice
+from django.views.decorators.cache import cache_page
+
+
+
 
 def point_tracking(request):
     org_data = []
@@ -13,3 +20,33 @@ def point_tracking(request):
             'page_name': 'payitforward-point-tracking',
             'agent_id': 'i03237',
         })
+
+@cache_page(60 * 60 * 4)
+def view_tweets(request):
+	ctx = {}
+	tweetsMSU = []
+	tweetsUFL = []
+	tweetsUSA = []
+
+	tweets = give_me_tweets(payitforward=(not settings.DEBUG))
+	#tweets = give_me_tweets(payitforward=True)
+	if tweets:
+		for tweet in tweets:
+			if 'MSU' in tweet.text:
+				if tweet not in tweetsMSU:
+					tweetsMSU.append(tweet)
+			if 'UFL' in tweet.text:
+				if tweet not in tweetsUFL:
+					tweetsUFL.append(tweet)
+			if 'USA' in tweet.text:
+				if tweet not in tweetsUSA:
+					tweetsUSA.append(tweet)
+	else:
+		tweetsMSU = None
+		tweetsUF = None
+		tweetsUSA = None
+
+	ctx['tweetsMSU'] = (tweetsMSU[:5] if tweets else None)
+	ctx['tweetsUFL'] = (tweetsUFL[:5] if tweets else None)
+	ctx['tweetsUSA'] = (tweetsUSA[:5] if tweets else None)
+	return render(request,'payitforward/payitforward.html',ctx)
