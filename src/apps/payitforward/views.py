@@ -6,7 +6,7 @@ from django.shortcuts import render ,redirect
 from apps.newsfeed.views import give_me_tweets
 from random import choice
 from django.views.decorators.cache import cache_page
-
+import pdb
 
 
 
@@ -28,8 +28,8 @@ def view_tweets(request):
 	tweetsUFL = []
 	tweetsUSA = []
 
-	tweets = give_me_tweets(payitforward=(not settings.DEBUG))
-	#tweets = give_me_tweets(payitforward=True)
+	#tweets = give_me_tweets(payitforward=(not settings.DEBUG))
+	tweets = give_me_tweets(payitforward=True)
 	if tweets:
 		for tweet in tweets:
 			if 'MSU' in tweet.text:

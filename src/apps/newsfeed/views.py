@@ -78,6 +78,7 @@ def give_me_tweets(payitforward=False,term=None):
 						if status.text not in set(check_list):
 							try:
 								TweetBackup.objects.create(text=status.text,
+														   user=status.user.screen_name,
 									                       GetRelativeCreatedAt=status.relative_created_at,
 									                       payitforward=True,
 									                       location=status.location)
@@ -91,6 +92,7 @@ def give_me_tweets(payitforward=False,term=None):
 					for status in search_results:
 						try:
 							TweetBackup.objects.create(text=status.text,
+												       user=status.user,
 								                       GetRelativeCreatedAt=status.relative_created_at,
 								                       payitforward=True,
 								                       location=status.location)
