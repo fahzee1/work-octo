@@ -609,7 +609,7 @@ else:
                         dtt(r'^payitforward/revenue/?$', 'payitforward/revenue.html', 'payitforward-revenue', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/video/?$', 'payitforward/video.html', 'payitforward-video', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/press/?$', 'payitforward/press.html', 'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
-                        url(r'^payitforward/tweets/?$','apps.payitforward.views.view_tweets',name='payitforward-tweets'),
+                        url(r'^payitforward/challenge/?$','apps.payitforward.views.view_tweets',name='payitforward-tweets'),
 
             # Learn > Security 101
                 dtt(r'^learn/security-101/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'learn'),
