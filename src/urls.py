@@ -592,7 +592,7 @@ else:
                     # > dtt(r'^pa/charities/america-protect/?$', 'about-us/charities.html', 'charities', 'about-us'),
 
                   
-                    dtt(r'^payitforward/?$', 'payitforward/payitforward.html', 'payitforward', ctx={'agent_id': 'i03237'}),
+                     url(r'^payitforward/?$','apps.payitforward.views.view_tweets',name='payitforward-tweets'),
                         dtt(r'^payitforward/about/?$', 'payitforward/about.html', 'payitforward-about', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/press/?$', 'payitforward/press.html', 'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/extras/?$', 'payitforward/extras.html', 'payitforward-extras', 'payitforward', ctx={'agent_id': 'i03237'}),
@@ -609,7 +609,6 @@ else:
                         dtt(r'^payitforward/revenue/?$', 'payitforward/revenue.html', 'payitforward-revenue', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/video/?$', 'payitforward/video.html', 'payitforward-video', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/press/?$', 'payitforward/press.html', 'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
-                        url(r'^payitforward/challenge/?$','apps.payitforward.views.view_tweets',name='payitforward-tweets'),
 
             # Learn > Security 101
                 dtt(r'^learn/security-101/?$', 'about-us/learn-about-security.html', 'learn-about-security', 'learn'),
