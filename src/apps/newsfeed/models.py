@@ -81,6 +81,7 @@ class FallBacks(models.Model):
 
 class TweetBackup(models.Model):
 	text = models.CharField(max_length=255,unique=True)
+	user = models.CharField(max_length=255,blank=True,null=True)
 	GetRelativeCreatedAt = models.CharField(max_length=255)
 	created = models.DateTimeField(auto_now_add=True,default=timezone.now())
 	payitforward = models.BooleanField(default=False)
