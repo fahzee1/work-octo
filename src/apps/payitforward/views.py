@@ -5,6 +5,8 @@ from django.conf import settings
 from django.shortcuts import render ,redirect
 from apps.newsfeed.views import give_me_tweets
 from random import choice
+from django.views.decorators.cache import cache_page
+
 
 
 
@@ -19,11 +21,11 @@ def point_tracking(request):
             'agent_id': 'i03237',
         })
 
-
+@cache_page(60 * 60 * 4)
 def view_tweets(request):
 	ctx = {}
 	tweetsMSU = []
-	tweetsUF = []
+	tweetsUFL = []
 	tweetsUSA = []
 
 	tweets = give_me_tweets(payitforward=(not settings.DEBUG))
@@ -34,8 +36,8 @@ def view_tweets(request):
 				if tweet not in tweetsMSU:
 					tweetsMSU.append(tweet)
 			if 'UF' in tweet.text:
-				if tweet not in tweetsUF:
-					tweetsUF.append(tweet)
+				if tweet not in tweetsUFL:
+					tweetsUFL.append(tweet)
 			if 'USA' in tweet.text:
 				if tweet not in tweetsUSA:
 					tweetsUSA.append(tweet)
@@ -44,7 +46,7 @@ def view_tweets(request):
 		tweetsUF = None
 		tweetsUSA = None
 
-	ctx['tweetsMSU'] = tweetsMSU
-	ctx['tweetsUF'] = tweetsUF
-	ctx['tweetsUSA'] = tweetsUSA
+	ctx['tweetsMSU'] = (tweetsMSU[:5] if tweets else None)
+	ctx['tweetsUFL'] = (tweetsUFL[:5] if tweets else None)
+	ctx['tweetsUSA'] = (tweetsUSA[:5] if tweets else None)
 	return render(request,'payitforward/payitforward.html',ctx)

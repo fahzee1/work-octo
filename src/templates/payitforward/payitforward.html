@@ -107,42 +107,45 @@
         <div class="page_container">
           <h1>The feed</h1>
           <ul>
-            <li class="msu"><img src="{{ STATIC_URL }}img/payitforward/school_msu.png"><p>Michigan State University</p></li>
-            <li class="uf"><img src="{{ STATIC_URL }}img/payitforward/school_uf.png"><p>University of Florida</p></li>
-            <li class="usa"><img src="{{ STATIC_URL }}img/payitforward/school_usa.png"><p>University of Southern Alabama</p></li>
-            <div class="msuTweets">
-              {% if tweetsMSU %}
-                {% for tweet in tweetsMSU %}
-                    {{ tweet.text}}
-                {% endfor %}
+            <li class="msu"><img src="{{ STATIC_URL }}img/payitforward/school_msu.png">
+              <p>Michigan State University</p>
+              <div class="msuTweets">
+                {% if tweetsMSU %}
+                  {% for tweet in tweetsMSU %}
+                      {{ tweet.text}}</br></br>
+                  {% endfor %}
 
-              {% else %}
-                  <b>Feed Not available</b>
-              {% endif %}
-            </div>
-        
-          <div class="ufTweets">
-            {% if tweetsUF %}
-              {% for tweet in tweetsUF %}
-                  {{ tweet.text}}
-              {% endfor %}
+                {% else %}
+                    <b>Feed Not Available</b>
+                {% endif %}
+              </div>
+            </li>
+            <li class="uf"><img src="{{ STATIC_URL }}img/payitforward/school_uf.png">
+              <p>University of Florida</p>
+              <div class="ufTweets">
+                {% if tweetsUF %}
+                  {% for tweet in tweetsUF %}
+                      {{ tweet.text}} </br></br>
+                  {% endfor %}
 
-               {% else %}
-                <b>Feed Not available</b>
-            {% endif %}
-          </div>
-          
-          <div class="usaTweets">
-            {% if tweetsUSA %}
-              {% for tweet in tweetsUSA %}
-                  {{ tweet.text}}
-              {% endfor %}
+                   {% else %}
+                    <b>Feed Not Available</b>
+                {% endif %}
+              </div>
+            </li>
+            <li class="usa"><img src="{{ STATIC_URL }}img/payitforward/school_usa.png">
+              <p>University of Southern Alabama</p>
+                <div class="usaTweets">
+                  {% if tweetsUSA %}
+                    {% for tweet in tweetsUSA %}
+                        {{ tweet.text}}</br></br>
+                    {% endfor %}
 
-               {% else %}
-                <b>Feed Not available</b>
-            {% endif %}
-          </div>
-          
+                     {% else %}
+                      <b>Feed Not Available</b>
+                  {% endif %}
+                </div>
+            </li>
           </ul>
         </div>
       </section>

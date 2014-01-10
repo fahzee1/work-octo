@@ -37,8 +37,8 @@ def give_me_tweets(payitforward=False,term=None):
 	tweets = None
 	backups=TweetBackup.objects.all()
 	b_count=backups.count()
-	for ba in backups:
-		ba.remove_old()
+	#for ba in backups:
+		#ba.remove_old()
 	# grab all tweet backup values for text field
 	start_list = [b for b in backups.values('text')]
 	# got back a list of dicts so now create list with values
