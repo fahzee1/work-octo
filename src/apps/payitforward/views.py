@@ -23,31 +23,31 @@ def point_tracking(request):
 
 @cache_page(60 * 60 * 4)
 def view_tweets(request):
-	ctx = {}
-	tweetsMSU = []
-	tweetsUFL = []
-	tweetsUSA = []
+    ctx = {}
+    tweetsMSU = []
+    tweetsUFL = []
+    tweetsUSA = []
 
-	#tweets = give_me_tweets(payitforward=(not settings.DEBUG))
-	tweets = give_me_tweets(payitforward=True)
-	if tweets:
-		for tweet in tweets:
-			if 'MSU' in tweet.text:
-				if tweet not in tweetsMSU:
-					tweetsMSU.append(tweet)
-			if 'UFL' in tweet.text:
-				if tweet not in tweetsUFL:
-					tweetsUFL.append(tweet)
-			if 'USA' in tweet.text:
-				if tweet not in tweetsUSA:
-					tweetsUSA.append(tweet)
-	else:
-		tweetsMSU = None
-		tweetsUF = None
-		tweetsUSA = None
+    #tweets = give_me_tweets(payitforward=(not settings.DEBUG))
+    tweets = give_me_tweets(payitforward=True)
+    if tweets:
+        for tweet in tweets:
+            if 'MSU' in tweet.text:
+                if tweet not in tweetsMSU:
+                    tweetsMSU.append(tweet)
+            if 'UFL' in tweet.text:
+                if tweet not in tweetsUFL:
+                    tweetsUFL.append(tweet)
+            if 'USA' in tweet.text:
+                if tweet not in tweetsUSA:
+                    tweetsUSA.append(tweet)
+    else:
+        tweetsMSU = None
+        tweetsUF = None
+        tweetsUSA = None
 
-	ctx['tweetsMSU'] = (tweetsMSU[:5] if tweets else None)
-	ctx['tweetsUFL'] = (tweetsUFL[:5] if tweets else None)
-	ctx['tweetsUSA'] = (tweetsUSA[:5] if tweets else None)
-	ctx['agent_id'] = 'i03237'
-	return render(request,'payitforward/payitforward.html',ctx)
+    ctx['tweetsMSU'] = (tweetsMSU[:5] if tweets else None)
+    ctx['tweetsUFL'] = (tweetsUFL[:5] if tweets else None)
+    ctx['tweetsUSA'] = (tweetsUSA[:5] if tweets else None)
+    ctx['agent_id'] = 'i03237'
+    return render(request,'payitforward/payitforward.html',ctx)

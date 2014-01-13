@@ -125,9 +125,10 @@
             <li class="uf"><img src="{{ STATIC_URL }}img/payitforward/school_uf.png">
               <p>University of Florida</p>
               <div class="ufTweets">
-                {% if tweetsUF %}
-                  {% for tweet in tweetsUF %}
-                      {{ tweet.text}} 
+                {% if tweetsUFL %}
+                  {% for tweet in tweetsUFL %}
+                      {{ tweet.text}}
+                      <b>@{{ tweet.user.screen_name }}</b> 
 
                     </br></br>
                   {% endfor %}
@@ -142,7 +143,9 @@
                 <div class="usaTweets">
                   {% if tweetsUSA %}
                     {% for tweet in tweetsUSA %}
-                        {{ tweet.text}}</br></br>
+                        {{ tweet.text }} </br>
+                        <b>@{{ tweet.user.screen_name }}</b>
+                      </br></br>
                     {% endfor %}
 
                      {% else %}
