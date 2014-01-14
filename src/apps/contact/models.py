@@ -215,6 +215,9 @@ class CEOFeedback(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        ordering = ['-date_created']
 
     def email_company(self):
         t = loader.get_template('emails/ceo_feedback_to_company.html')
