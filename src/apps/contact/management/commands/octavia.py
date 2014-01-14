@@ -29,20 +29,23 @@ class Command(BaseCommand):
 def get_and_write_data(the_file):
     positives = CEOFeedback.objects.filter(feedback_type='positive')
     print positives.count()
+    positives = list(positives)
     found = False
     empty = []
     i = 0
     for x in positives:
+        index = positives.index(x)
         if x.name == 'Heather Oney':
             found = True
-        if found and i < 501:
-            empty.append(x)
-    print len(empty)
+        if not found:
+            del positives[index]
+
+    print len(positives)
 
     csvfile = open(the_file, 'wb')
     writer = csv.writer(csvfile)
-    for x in empty:
-        values = (x.name, x.email)
+    for x in positives[0:500]:
+        values = (x.name.decode("utf-8"), x.email.decode("utf-8"))
         writer.writerow(values)
 
     csvfile.close()
