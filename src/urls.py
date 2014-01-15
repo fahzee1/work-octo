@@ -178,8 +178,10 @@ elif settings.SITE_ID == 3:
         dtt(r'^sloan-security/?$', 'affiliates/sem-landing-page/competitors/sloan-security.html', 'sloan-security'),
         dtt(r'^guardian-security/?$', 'affiliates/sem-landing-page/competitors/guardian.html', 'guardian'),
         dtt(r'^time-warner-intelligent-home/?$', 'affiliates/sem-landing-page/competitors/time-warner.html', 'time-warner'),
-        #dtt(r'^comcast-xfinity/?$', 'affiliates/sem-landing-page/competitors/xfinity.html', 'xfinity'),
-
+        dtt(r'^comcast-xfinity/?$', 'affiliates/sem-landing-page/competitors/xfinity.html', 'xfinity'),
+        dtt(r'^lifeshield/?$', 'affiliates/sem-landing-page/competitors/lifeshield.html', 'lifeshield'),
+        dtt(r'^safemart/?$', 'affiliates/sem-landing-page/competitors/safemart.html', 'safemart'),
+        dtt(r'^protection-1/?$', 'affiliates/sem-landing-page/competitors/protection-1.html', 'protection-1'),
 
 
         # TESTS
