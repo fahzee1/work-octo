@@ -52,7 +52,7 @@ sitemaps={
                                 'mini-pinpad','two-button-panic','accessories','simon-3','life-safety-equipment','smoke-detector',
                                 'carbon-monoxide-detector','medical-pendant','freeze-sensor','flood-sensor','home-automation-equipment',
                              'interactive-control','gps'],0.5),
-    'learn':StaticSitemap(['learn','advantage','monitoring','landline','broadband','cellular','about-us','family','charities','payitforward',
+    'learn':StaticSitemap(['learn','advantage','monitoring','landline','broadband','cellular','about-us','family','charities','payitforward-tweets',
                             'payitforward-about','payitforward-press','payitforward-extras','payitforward-rules','payitforward-thankyou','payitforward-teams',
                              'payitforward-spring2012','payitforward-fall2012','payitforward-involved','payitforward-awareness','payitforward-point-scale',
                              'payitforward-revenue','payitforward-video','payitforward-press','learn-about-security','how-it-works','complete-home-security',
