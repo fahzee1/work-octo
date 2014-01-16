@@ -41,7 +41,11 @@ class Command(BaseCommand):
 
 
 def create_correct_date(string):
-	obj = datetime.strptime(string,'%m/%d/%y %H:%M')
+	if string != 'NULL':
+		obj = datetime.strptime(string,'%m/%d/%y  %H:%M %p').date()
+		obj = obj.strftime('%m/%d/%Y %H:%M:%S %p')
+	else:
+		obj = 'NULL'
 	return str(obj)
 
 def get_csv_data(app,_file):
@@ -69,7 +73,7 @@ def get_csv_data(app,_file):
 				else:
 					value = (float(info['MonitoringRate']) * 36) + (int(info['AdditionalEquipment'] if isinstance(info['AdditionalEquipment'],int) else float(info['AdditionalEquipment'])))
 				csv_dict['lead_found'] = (True if lead else False)
-				csv_dict['date'] = info['DispositionDate']
+				csv_dict['date'] = create_correct_date(info['DispositionDate'])
 				csv_dict['disposition'] = info['Disposition']
 				csv_dict['lead_id'] = info['Lead_Id']
 				csv_dict['credit_response'] = info['CreditResponse']
