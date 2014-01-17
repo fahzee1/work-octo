@@ -51,7 +51,7 @@ def send_bizdev_email(data):
     subject = 'New Lead From Dealers Page!'
     message = 'Name : %s \n Email: %s \n Phone: %s' % (data['name'],data['email'],data['phone'])
     from_email = 'Protect America <noreply@protectamerica.com>'
-    to_email = 'BusinessDevelopment <BusinessDevelopment@protectamerica.com>'
+    to_email = 'agent2.0@protectamerica.com'
     send_mail(subject,message,from_email,to_email)
 
 
