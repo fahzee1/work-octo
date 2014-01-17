@@ -227,7 +227,6 @@ class CEOFeedback(models.Model):
             t.render(c),
             '"Protect America" <noreply@protectamerica.com>',
             ['feedback@protectamerica.com'],
-            ['"Robert Johnson" <robert@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
 

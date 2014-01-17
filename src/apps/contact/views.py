@@ -47,6 +47,7 @@ def send_leadimport(data):
 
     return True
 
+
 def send_bizdev_email(data):
     subject = 'New Lead From Dealers Page!'
     message = 'Name : %s \n Email: %s \n Phone: %s' % (data['name'],data['email'],data['phone'])
@@ -65,6 +66,7 @@ def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,no
             message = "Error from lead conduit.\n The reason(s) are : %s \n The lead Id is %s \n The url is %s \n and the params sent to LC are %s" % (data['reasons'],data['lead_id'],data['url'],data['params'])
         from_email = 'Protect America <noreply@protectamerica.com>'
         send_mail(title,message,from_email,contact_list)
+
 
 
 def post_to_leadconduit(data,test=False,retry=False):
@@ -188,9 +190,9 @@ def post_to_leadconduit(data,test=False,retry=False):
         send_conduit_error(data,title='Leadconduit Timeout',test=settings.LEAD_TESTING)
 
     except SSLError as sslerr:
-	import traceback
+        import traceback
         logger.error('SSL Error. Pretty common should be retried and go through soon.')
-	logger.error('Traceback: {0}'.format(traceback.format_exc()))
+        logger.error('Traceback: {0}'.format(traceback.format_exc()))
         if lead:
             lead.retry = True
             lead.save()
@@ -232,6 +234,19 @@ def send_thankyou(data):
     msg.attach_alternative(t.render(c), 'text/html')
     msg.send()
 
+    return True
+
+def send_ceoposiive(data):
+    subject = 'Your Opinions Matter'
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = data['email']
+    html_content = render_to_string('emails/ceo_feedback_positive.html',data)
+    try:
+        msg = EmailMultiAlternatives(subject,html_content,from_email,[to_email])
+        msg.attach_alternative(html_content,'text/html')
+        msg.send()
+    except:
+        pass
     return True
 
 def send_caroline_thankyou(request,data,agent):
@@ -519,6 +534,12 @@ def main(request):
 # This is the send feedback to CEO form
 def ceo(request):
     if request.method == "POST":
+        if request.POST['rating'] == '4' or request.POST['rating'] == '5':
+            data = {'customer': request.POST['name'],
+                    'email': request.POST['email']}
+            send_ceoposiive(data)
+
+
         formset = CeoFeedbackForm(request.POST)
         if formset.is_valid():
             form = formset.save(commit=False)
