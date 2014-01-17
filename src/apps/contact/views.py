@@ -52,7 +52,7 @@ def send_bizdev_email(data):
     message = 'Name : %s \n Email: %s \n Phone: %s' % (data['name'],data['email'],data['phone'])
     from_email = 'Protect America <noreply@protectamerica.com>'
     to_email = 'agent2.0@protectamerica.com'
-    send_mail(subject,message,from_email,to_email)
+    send_mail(subject,message,from_email,[to_email])
 
 
 def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
