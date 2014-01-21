@@ -121,20 +121,34 @@ code.js {
 
 .main {
   section.page1 {
-      h1 {
-        background: url(/static/img/payitforward/logo_pif.png) no-repeat;
-        width: 250px;
-        height: 71px;
-        margin: 0 auto;
-        text-align: left;
-        text-indent: -999px;
-        overflow: hidden;
-        float: none;
-        display: block;
+    h1 {
+      background: url(/static/img/payitforward/logo_pif.png) no-repeat;
+      width: 250px;
+      height: 71px;
+      margin: 0 auto;
+      text-align: left;
+      text-indent: -999px;
+      overflow: hidden;
+      float: none;
+      display: block;
+    }
+    .logo_mobile {
+      display: none;
+    }
+    .schools {
+      background: #ffffff;
+      padding: 15px;
+      width: 560px;
+      margin: 0 auto;
+      img {
+        &.msu {
+          margin: 0 60px 0 0;
+        }
+        &.uf {
+          margin: 0 60px 0 0;
+        }
       }
-      .logo_mobile {
-        display: none;
-      }
+    }
   }
 }
 
@@ -231,12 +245,20 @@ code.js {
   list-style-type: none;
   margin: 0 20px;
   display: inline;
+  &.feed {
+    background: #efea28;
+    padding: 15px;
+  }
 }
 .top-menu li a{
-  color: #333;
+  color: #333333;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 400;
+  &.feed {
+    font-weight: 700;
+    color: #2f394a;
+  }
 }
 .top-menu li a:hover{
   color: #eb292b;
@@ -657,6 +679,14 @@ header {
             width: 60%;
           }
         }
+        .schools {
+          width: 60%;
+          img {
+            &.msu, &.uf {
+              margin: 0 20px 0 0;
+            }
+          }
+        }
       }
       section.page2 {
         p {
@@ -729,6 +759,14 @@ header {
     }
     .main {
       section.page1 {
+        .schools {
+          img {
+            height: 26px;
+            &.msu, &.uf {
+              margin: 0;
+            }
+          }
+        }
         h2 {
           background: rgba(255,255,255,0.2);
           padding: 15px;
@@ -801,6 +839,12 @@ header {
 
     .main {
       section.page1 {
+        .schools {
+          width: 90%;
+          img {
+            height: 32px;
+          }
+        }
         .page_container {
           iframe {
             width: 90%;
