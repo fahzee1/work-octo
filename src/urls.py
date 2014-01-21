@@ -52,7 +52,7 @@ sitemaps={
                                 'mini-pinpad','two-button-panic','accessories','simon-3','life-safety-equipment','smoke-detector',
                                 'carbon-monoxide-detector','medical-pendant','freeze-sensor','flood-sensor','home-automation-equipment',
                              'interactive-control','gps'],0.5),
-    'learn':StaticSitemap(['learn','advantage','monitoring','landline','broadband','cellular','about-us','family','charities','payitforward-tweets',
+    'learn':StaticSitemap(['learn','advantage','monitoring','landline','broadband','cellular','about-us','family','charities','payitforward',
                             'payitforward-about','payitforward-press','payitforward-extras','payitforward-rules','payitforward-thankyou','payitforward-teams',
                              'payitforward-spring2012','payitforward-fall2012','payitforward-involved','payitforward-awareness','payitforward-point-scale',
                              'payitforward-revenue','payitforward-video','payitforward-press','learn-about-security','how-it-works','complete-home-security',
@@ -594,7 +594,7 @@ else:
                     # > dtt(r'^pa/charities/america-protect/?$', 'about-us/charities.html', 'charities', 'about-us'),
 
                   
-                     url(r'^payitforward/?$','apps.payitforward.views.view_tweets',name='payitforward-tweets'),
+                     url(r'^payitforward/?$','apps.payitforward.views.view_tweets',name='payitforward'),
                         dtt(r'^payitforward/about/?$', 'payitforward/about.html', 'payitforward-about', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/press/?$', 'payitforward/press.html', 'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/extras/?$', 'payitforward/extras.html', 'payitforward-extras', 'payitforward', ctx={'agent_id': 'i03237'}),

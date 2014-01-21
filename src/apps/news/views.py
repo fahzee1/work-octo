@@ -117,7 +117,7 @@ def articles(request, **kwargs):
         'month': month,
         'article_years': article_years,
         'article_months': article_months,
-        'headline': articles[0],
+        'headline': (articles[0] if articles else None),
         'articles': articles[1:9],
         'months': months,
         'm_nums': m_nums,
