@@ -111,7 +111,7 @@
               <div class="msuTweets">
                 {% if tweetsMSU %}
                   {% for tweet in tweetsMSU %}
-                      {{ tweet.text}}</br>
+                      <p>{{ tweet.text|safe }}</p>
                       <b>@{{ tweet.user.screen_name }}</b>
 
                     </br></br>
@@ -127,10 +127,8 @@
               <div class="ufTweets">
                 {% if tweetsUFL %}
                   {% for tweet in tweetsUFL %}
-                      {{ tweet.text}}
+                     <p> {{ tweet.text|safe }}</p>
                       <b>@{{ tweet.user.screen_name }}</b> 
-
-                    </br></br>
                   {% endfor %}
 
                    {% else %}
@@ -143,9 +141,8 @@
                 <div class="usaTweets">
                   {% if tweetsUSA %}
                     {% for tweet in tweetsUSA %}
-                        {{ tweet.text }} </br>
+                       <p> {{ tweet.text|safe }} </p>
                         <b>@{{ tweet.user.screen_name }}</b>
-                      </br></br>
                     {% endfor %}
 
                      {% else %}

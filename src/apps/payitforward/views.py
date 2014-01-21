@@ -7,7 +7,7 @@ from apps.newsfeed.views import give_me_tweets
 from random import choice
 from django.views.decorators.cache import cache_page
 import pdb
-
+import re
 
 
 def point_tracking(request):
@@ -23,6 +23,7 @@ def point_tracking(request):
 
 @cache_page(60 * 60 * 4)
 def view_tweets(request):
+    r = re.compile(r"(http://[^ ]+)")
     ctx = {}
     tweetsMSU = []
     tweetsUFL = []
@@ -31,6 +32,7 @@ def view_tweets(request):
     tweets = give_me_tweets(payitforward=True)
     if tweets:
         for tweet in tweets:
+            tweet.text = r.sub(r"<a href='\1' target='_blank'>\1</a>", tweet.text)
             if 'MSU' in tweet.text:
                 if tweet not in tweetsMSU:
                     tweetsMSU.append(tweet)
