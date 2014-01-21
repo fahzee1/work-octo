@@ -27,7 +27,6 @@ def view_tweets(request):
     tweetsMSU = []
     tweetsUFL = []
     tweetsUSA = []
-
     #tweets = give_me_tweets(payitforward=(not settings.DEBUG))
     tweets = give_me_tweets(payitforward=True)
     if tweets:
