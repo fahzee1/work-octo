@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.views.generic.base import RedirectView
-from apps.sitemaps.sitemap import StaticSitemap
+from apps.sitemaps.sitemap import StaticSitemap, LocalStateSitemap , CrimeRateSitemap
 from apps.news.sitemaps import ArticleSitemap
 from apps.local.sitemaps import *
 from apps.crimedatamodels.sitemaps import *
@@ -44,37 +44,39 @@ def dtt_nocache(pattern, template, name, parent=None, ctx=None):
 
 
 sitemaps={
-    'home':StaticSitemap(['home','thank_you'],0.5),
-    'contact':StaticSitemap(['contact-us','find-us','order-package','privacy-policy'],0.5),
-    'shop':StaticSitemap(['shop','copper','bronze','silver','gold','platinum','business','cell-takeover'],0.5),
-    'equipment':StaticSitemap(['equipment','home-security-equipment','simon-xt','door-window-sensor','motion-detector',
+    'home':StaticSitemap(name=['home','thank_you'],priority=0.5),
+    'contact':StaticSitemap(name=['contact-us','find-us','order-package','privacy-policy'],priority=0.5),
+    'shop':StaticSitemap(name=['shop','copper','bronze','silver','gold','platinum','business','cell-takeover'],priority=0.5),
+    'equipment':StaticSitemap(name=['equipment','home-security-equipment','simon-xt','door-window-sensor','motion-detector',
                                 'touchscreen','video','talking-wireless-keypad','garage-door-sensor','glassbreak-sensor',
                                 'mini-pinpad','two-button-panic','accessories','simon-3','life-safety-equipment','smoke-detector',
                                 'carbon-monoxide-detector','medical-pendant','freeze-sensor','flood-sensor','home-automation-equipment',
-                             'interactive-control','gps'],0.5),
-    'learn':StaticSitemap(['learn','advantage','monitoring','landline','broadband','cellular','about-us','family','charities','payitforward',
+                             'interactive-control','gps'],priority=0.5),
+    'learn':StaticSitemap(name=['learn','advantage','monitoring','landline','broadband','cellular','about-us','family','charities','payitforward',
                             'payitforward-about','payitforward-press','payitforward-extras','payitforward-rules','payitforward-thankyou','payitforward-teams',
                              'payitforward-spring2012','payitforward-fall2012','payitforward-involved','payitforward-awareness','payitforward-point-scale',
                              'payitforward-revenue','payitforward-video','payitforward-press','learn-about-security','how-it-works','complete-home-security',
-                             'testimonials','video-testimonials','send-testimonial','tell-a-friend'],0.5),
-    'support':StaticSitemap(['support','installation','operation','troubleshooting','faq','moving-kit','find-us','contact-us','department-listing','feedback-ceo',
-                             'careers','jobs','agent-two','affiliate-program'],0.5),
-    'help':StaticSitemap(['help','low-price-guarantee','return-policy','state-licenses','do-not-call','security-of-information','warranty'],0.5),
-    'thankyou':StaticSitemap(['contact-thank-you','ceo-thank-you','moving-kit-thank-you','contact-tell-friend','affiliate-enroll'],0.5),
-    'affiliates':StaticSitemap(['agent-two-lp','package-code','pa-spanish','pa-hialarm','cj','aff-get-started','aff-logos','aff-web-banners','aff-collateral',
-                                'aff-products','aff-login'],0.5),
+                             'testimonials','video-testimonials','send-testimonial','tell-a-friend'],priority=0.5),
+    'support':StaticSitemap(name=['support','installation','operation','troubleshooting','faq','moving-kit','find-us','contact-us','department-listing','feedback-ceo',
+                             'careers','jobs','agent-two','affiliate-program'],priority=0.5),
+    'help':StaticSitemap(name=['help','low-price-guarantee','return-policy','state-licenses','do-not-call','security-of-information','warranty'],priority=0.5),
+    'thankyou':StaticSitemap(name=['contact-thank-you','ceo-thank-you','moving-kit-thank-you','contact-tell-friend','affiliate-enroll'],priority=0.5),
+    'affiliates':StaticSitemap(name=['agent-two-lp','package-code','pa-spanish','pa-hialarm','cj','aff-get-started','aff-logos','aff-web-banners','aff-collateral',
+                                'aff-products','aff-login'],priority=0.5),
     #'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems','seo-ge-home-security','seo-ge-home-security-systems','seo-ge-home-security-systems','seo-home-alarm-systems',
-    'seo':StaticSitemap(['seo-home-security-systems','seo-alarm-systems',
-                         'seo-security-systems','seo-home-security-systems','seo-best-home-security-system','seo-home-security-companies'],0.5),
-    'paidlanding':StaticSitemap(['paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
-                                 'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],0.5),
-    'crimestoppers':StaticSitemap(['cf-la','cf-chicago','cf-cleveland','cf-miami'],0.5),
-    'article':ArticleSitemap,
+    'seo':StaticSitemap(name=['seo-home-security-systems','seo-alarm-systems',
+                         'seo-security-systems','seo-home-security-systems','seo-best-home-security-system','seo-home-security-companies'],priority=0.5),
+    'paidlanding':StaticSitemap(name=['paid-adt-copy-cat','paid-adt-copy-cat','paid-adt-comparison-cat','frontpoint-vs-pa','paid-diy-landing-page',
+                                 'crime-prevention-month','wireless-landing-page','comcast-vs-protect-america','vivint-vs-protect-america','adt-two','direct-mail'],priority=0.5),
+    'crimestoppers':StaticSitemap(name=['cf-la','cf-chicago','cf-cleveland','cf-miami'],priority=0.5),
+    'article':ArticleSitemap(),
+    'local':LocalStateSitemap(states=[x[0] for x in US_STATES], priority=0.5),
+    'crime-rate':CrimeRateSitemap(states=[x[0] for x in US_STATES], priority=0.5)
    # 'crimestats':CrimeStatsSitemap,
    #'crimestats-state':FreeCrimeStatsStateSitemap,
     #'crimestats-city':FreeCrimeStatsCitySitemap,
    # 'crimestats-crime':FreeCrimeStatsCrimeSitemap,
-    'keyword':KeywordSitemapIndex(settings.LOCAL_KEYWORDS)
+   # 'keyword':KeywordSitemapIndex(settings.LOCAL_KEYWORDS)
 
 
 
