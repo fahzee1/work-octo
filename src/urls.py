@@ -335,7 +335,7 @@ elif settings.SITE_ID == 11:
 
 # AlarmZone.com
 elif settings.SITE_ID == 12:
-    alarmzone_sitemap = {'AlarmZone':StaticSitemap(['home','build-package','equipment-page','learn-more','request-quote','thanks-page'],0.5)}
+    alarmzone_sitemap = {'AlarmZone':StaticSitemap(name=['home','build-package','equipment-page','learn-more','request-quote','thanks-page'],priority=0.5)}
     urlpatterns += patterns('',
         dtt(r'^$', 'external/alarm-zone/index.html', 'home', ctx={'agent_id': 'a01415'}),
         dtt(r'^build/?$', 'external/alarm-zone/build.html', 'build-package', ctx={'agent_id': 'a01415'}),
