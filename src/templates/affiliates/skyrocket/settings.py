@@ -6,6 +6,8 @@ TEMPLATE_PAGES = (
     ('order', 'order.html'),
     ('testimonials', 'testimonials.html'),
     ('lander', 'lander.html'),
+    ('landing-page', 'jan-lander.html'),
+
 
 )
 
