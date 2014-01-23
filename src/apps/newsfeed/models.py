@@ -96,6 +96,32 @@ class TweetBackup(models.Model):
 			if not self.payitforward:
 				self.delete()
 
+	@classmethod
+	def get_payitforward(self,school):
+		tweets = []
+		for tweet in TweetBackup.objects.filter(payitforward=True):
+			if school == 'USA':
+				if '#payitforwardUSA' in tweet.text or \
+				   '#PayitforwardUSA' in tweet.text or \
+				   '#payitforwardusa' in tweet.text or \
+				   '#Payitforwardusa' in tweet.text:
+				   tweets.append(tweet)
+			if school == 'UFL':
+				if '#payitforwardUFL' in tweet.text or \
+				   '#PayitforwardUFL' in tweet.text or \
+				   '#payitforwardufl' in tweet.text or \
+				   '#Payitforwardufl' in tweet.text:
+				   tweets.append(tweet)
+
+			if school == 'MSU':
+				if '#payitforwardMSU' in tweet.text or \
+				   '#PayitforwardMSU' in tweet.text or \
+				   '#payitforwardmsu' in tweet.text or \
+				   '#Payitforwardmsu' in tweet.text:
+				   tweets.append(tweet)
+
+		return tweets
+
 
 
 

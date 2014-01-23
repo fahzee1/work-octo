@@ -7,6 +7,7 @@ from django.utils.html import urlize
 from django.conf import settings
 from django.shortcuts import render ,redirect
 from apps.newsfeed.views import give_me_tweets
+from apps.newsfeed.models import TweetBackup
 from random import choice
 from django.views.decorators.cache import cache_page
 
@@ -29,6 +30,7 @@ def view_tweets(request):
     tweetsMSU = []
     tweetsUFL = []
     tweetsUSA = []
+    backups = TweetBackup.objects.filter(payitforward=True)
     #tweets = give_me_tweets(payitforward=(not settings.DEBUG))
     tweets = give_me_tweets(payitforward=True)
     if tweets:
@@ -43,10 +45,16 @@ def view_tweets(request):
             if 'USA' in tweet.text:
                 if tweet not in tweetsUSA:
                     tweetsUSA.append(tweet)
-    else:
-        tweetsMSU = None
-        tweetsUF = None
-        tweetsUSA = None
+
+
+    if not tweetsUSA:
+        tweetsUSA = TweetBackup.get_payitforward('USA')
+    if not tweetsUFL:
+        tweetsUFL = TweetBackup.get_payitforward('UFL')
+    if not tweetsMSU:
+        tweetsMSU = TweetBackup.get_payitforward('MSU')
+
+
 
     ctx['tweetsMSU'] = (tweetsMSU[:5] if tweets else None)
     ctx['tweetsUFL'] = (tweetsUFL[:5] if tweets else None)

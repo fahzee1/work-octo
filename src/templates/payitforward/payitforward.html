@@ -117,7 +117,12 @@
                 {% if tweetsMSU %}
                   {% for tweet in tweetsMSU %}
                       <p>{{ tweet.text|safe }}</p>
-                      <b>@{{ tweet.user.screen_name }}</b>
+                      {% if tweet.user.screen_name %}
+                        <b>@{{ tweet.user.screen_name }}</b>
+                        {% endif %}
+                        {% if tweet.user and not tweet.user.screen_name %}
+                         <b>@{{ tweet.user }}</b>
+                        {% endif %}
 
                     </br></br>
                   {% endfor %}
@@ -133,7 +138,12 @@
                 {% if tweetsUFL %}
                   {% for tweet in tweetsUFL %}
                      <p> {{ tweet.text|safe }}</p>
-                      <b>@{{ tweet.user.screen_name }}</b> 
+                      {% if tweet.user.screen_name %}
+                        <b>@{{ tweet.user.screen_name }}</b>
+                        {% endif %}
+                        {% if tweet.user and not tweet.user.screen_name %}
+                         <b>@{{ tweet.user }}</b>
+                        {% endif %}
                   {% endfor %}
 
                    {% else %}
@@ -147,7 +157,13 @@
                   {% if tweetsUSA %}
                     {% for tweet in tweetsUSA %}
                        <p> {{ tweet.text|safe }} </p>
+                        {% if tweet.user.screen_name %}
                         <b>@{{ tweet.user.screen_name }}</b>
+                        {% endif %}
+                        {% if tweet.user and not tweet.user.screen_name %}
+                         <b>@{{ tweet.user }}</b>
+                        {% endif %}
+
                     {% endfor %}
 
                      {% else %}
