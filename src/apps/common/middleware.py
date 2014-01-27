@@ -156,10 +156,16 @@ class LocalPageRedirect(object):
         #city page and state page
         match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
         match_sp = re.compile(r'home-security/[-\w]{3,}')
+
+        # redirect /rep/get-quote to homesecurity.protectamerica.com/rep/get-quote
+        match_quote = re.compile(r'rep/get-quot')
         #match for new york - fix for rylan 
         match_ny = re.compile(r'home-security/\bNY\b/[-\w]+',re.IGNORECASE)
         state_space = dict(US_STATES).values()
         state_nospace = [x.replace(' ','') for x in state_space]
+        if match_quote.match(url):
+            return redirect('http://homesecurity.protectamerica.com/rep/get-quot')
+
         if match_ny.match(url):
             #hardcoded redirect for NY
             ny = 'new-york-city'
