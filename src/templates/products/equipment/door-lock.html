@@ -1,56 +1,230 @@
 {% extends "products/equipment/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Home Security Equipment | Z Wave Door Lock | Protect America{% endblock %}
+{% block page_title %}Yale Real Living Z-Wave Door Lock | Home Security Equipment | Protect America{% endblock %}
 {% block page_keywords %}wireless home security system, home security, home security monitoring, x10 home automation, homepulse, latchkey feature, pan{% endblock %}
 {% block page_description %}Protect America's Z-Wave door lock gives you complete home automated control over your front door from your computer or smartphone.{% endblock %}
 
 {% block content %}
-<div id="hero-wrapper" class="yellow">
-    <div id="hero-image">
+<div id="hero-wrapper" class="zwave">
+    <div id="hero-image" class="cmonday">
+        {% include "order/quote-form-white.html" with form=forms.basic %}
         <div id="hero-content">
-            <i class="icon-home-automation"></i>
-            <h2>Home Automation</h2>
-            <h1>Z-Wave Door Lock</h1>
-            <p>Lock your door from anywhere with your smart phone.</p>
-            {% if phone_number %}
-
-                <h3>Call <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> to add to your security package today.</h3>
-
-
-            {% endif %}
+            <h1>Yale Z-Wave door lock</h1>
+            <p>Built to work seamlessly with your Protect America alarm system, the Yale Real Living Touchscreen Door lock is a perfect addition to any home.</p>
             <a href="{% url shop %}" title="Shop Packages" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
-
         </div>
-        <img src="{{ STATIC_URL }}img/products/zwave-door-lock/zwave-door-lock.jpg" class="main-hero-image" alt="Z Wave Door Lock" />
-
     </div>
 </div>
 {% include "order/call-box.html" %}
 <div class="wrapper">
     <div class="video-features">
         <div class="video-content">
-            <h2>The Power To Lock Your House Up<span>Is Now Available On Your Phone.</span></h2>
-            <p>Introducing, Z-Wave Door Lock! With our interactive service Smart Connect, you can now lock your door locks from anywhere. Enjoy the convenience and safety of being able to lock your doors right from your smartphone or computer.</p>
+            <h2>Never be locked out again.</h2>
+            <p>Transform your house into a smart home with a lock that thinks. Unlock doors with your phone, program multiple user codes and check the status of your lock from anywhere, anytime.</p>
+            <p>Welcome to the easy life.</p>
+            <h3>Three ways to access your home:</h3>
+            <ul>
+                <li class="wke"><i class="fa fa-unlock-alt fa-2x"></i><strong>Wireless Keypad Entry</strong><p>Unlock your door digitally with a personalized user code and program multiple user codes for separate users.</p></li>
+                <li class="sci"><i class="fa fa-signal fa-2x"></i><strong>SMART Connect Integration</strong><p>Lock and unlock from anywhere with Protect America’s free smartphone app, SMART Connect. Your front door is now interactive.</p></li>
+                <li class="tkd"><i class="fa fa-key fa-2x"></i><strong>Traditional Key Deadbolt</strong><p>Enjoy the freedom of interactive, digital, and manual control of your lock. Use it however, whenever.</p></li>
+            </ul>
+
         </div>
-     
+        <div class="video-frame">
+            <iframe width="400" height="275" src="//www.youtube.com/embed/Iv6r-ZfDWXc" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
     <div class="clear"></div>
 </div>
-<div id="in-home-wrapper">
-    <div id="in-your-home">
-        <div class="home-img">
-            <img src="{{ STATIC_URL }}img/products/zwave-door-lock/zwave-door-lock-white.jpg" alt="In The Home; Z Wave Door Lock" />
-        </div>
-        <div class="home-content">
-            <strong>In The Home:</strong>
-            <h2>Z-Wave Door Lock</h2>
-            <p>A door lock is recommended for every entry of your home. Avoid letting a burglar walk right in. You can engage the security locks to the doors and ensure they are locked even when you are away from the home. </p>
-            <a href="{% url shop %}" title="Shop Packages" class="button-link">Shop Packages <i class="icon-chevron-right"></i></a>
+
+
+<div id="features">
+    <div class="container">
+        <ul>
+            <li>
+                <h3><i class="fa fa-key"></i>Traditional Key Deadbolt</h3>
+                <p>Open doors manually with key entry as well as digitally for a flexible home experience</p>
+            </li>
+            <li class="mobile">
+                <h3><i class="fa fa-mobile fa-3x"></i>Fully Interactive</h3>
+                <p>Lock and unlock doors remotely from your smartphone with Protect America’s free SMART Connect app</p>
+            </li>
+            <li class="alt">
+                <h3><i class="fa fa-hand-o-up"></i>Touchscreen Control</h3>
+                <p>An LCD touchscreen brings your front door into the future: unlock with a user code and lock with the touch of your hand</p>
+            </li>
+            <div class="clear"></div>
+            <li class="mobile">
+                <h3><i class="fa fa-th"></i>Multiple User Code Access</h3>
+                <p>Program up to 250 user codes for family members and visitors</p>
+            </li>
+            <li class="mobile">
+                <h3><i class="fa fa-home"></i>Security + Automation</h3>
+                <p>Integrates effortlessly with Protect America security systems for a home that is both safe and smart</p>
+            </li>
+            <li class="alt">
+                <h3><i class="fa fa-star"></i>Sleek Design</h3>
+                <p>Locks come in Oil Rubbed Bronze, Polished Brass or Satin Nickel to compliment any home.</p>
+            </li>
+        </ul>
+    </div><!-- /container -->
+</div><!-- /features -->
+
+{% block faq %}
+    <a id="faqs"></a>
+        <div class="big_wrapper" id="compatible">
+          <div class="wrapper clearfix">
+            <h2>Is my home Compatible?</h2>
+            <h3>Every home is different. Get all the installation information and requirements before you order</h3>
+            <a href="#" class="button-link check-button">Installation Requirements <i class="icon-chevron-right"></i></a>
+            <div id="check-area">
+                <div class="check">
+                    <img src="{{ STATIC_URL }}img/products/zwave-door-lock/lock-type.jpg" class="check-img" alt="lock-type" width="400" height="496" />
+                    <div class="check-content" style="margin-top: 150px;">
+                        <h2>Check your existing deadbolt latches</h2>
+                        <p>If the edge of the door has 2 individual latches, a Yale Z-Wave Deadbolt Lock can be installed. The longer plates of a Mortise lock or a 3 point locking system could prevent installation.</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="check">
+                    <img src="{{ STATIC_URL }}img/products/zwave-door-lock/measure-deadbolt.jpg" class="check-img" alt="measure-deadbolt" width="400" height="196" />
+                    <div class="check-content">
+                        <h2>Measure for available space needed</h2>
+                        <p>Check to ensure the hardware below the deadbolt allows enough room for the Yale Z-wave Deadbolt Lock to install properly. There must be at least 2’’ below the deadbolt.
+    </p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="check">
+                    <img src="{{ STATIC_URL }}img/products/zwave-door-lock/existing-deadbolt.jpg" class="check-img" alt="existing-deadbolt" width="400" height="196" />
+                    <div class="check-content">
+                        <h2>Check to see what may be installed above the existing deadbolt</h2>
+                        <p>If no additional locks or hardware interfere with the space required for installation, a Yale Z-wave Deadbolt should install properly.</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="check">
+                    <img src="{{ STATIC_URL }}img/products/zwave-door-lock/door-thick.jpg" class="check-img" alt="door-thick" width="400" height="183" />
+                    <div class="check-content">
+                        <h2>Check door thickness</h2>
+                        <p>If it is between 1-3/4"" and 2-1/4", the lock will work without additional parts. If it is to be installed on a 1-3/8" to 1-3/4"" door, a thin door gasket kit will be required to complete installation.</p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="check">
+                    <img src="{{ STATIC_URL }}img/products/zwave-door-lock/deadbolt-strike.jpg" class="check-img" alt="deadbolt-strike" width="400" height="338" />
+                    <div class="check-content">
+                        <h2>Check for proper alignment of latches</h2>
+                        <p>If the door has to be pushed or pulled with excessive force to lock the existing deadbolt hardware, some adjustments may be required.</p>
+                        <p>An enlarged strike, shown on the left is slightly larger than the existing standard strike on the door. Only use the enlarged strike to correct situations where excessive force is required to lock the existing deadbolt hardware. Yale locks also features a tapered deadbolt which help correct most misalignment conditions.
+    </p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Yes</th>
+                            <th>Further Information or Modification Required</th>
+                            <th>No</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Number of Holes on the Door</td>
+                            <td class="good">The door has two holes, one for a deadbolt and the other is a passage knob or lever. Verify 2 individual latches.</td>
+                            <td class="caution">There is only one hole on the door. An additional hole for the deadbolt is required.</td>
+                            <td class="bad">There is a mortise lock on the door.</td>
+                        </tr>
+                        <tr>
+                            <td>Additional Hardware (Above)</td>
+                            <td class="good">There is no additional hardware above the existing deadbolt.</td>
+                            <td class="caution">There is hardware above the existing deadbolt but can be removed or modified.</td>
+                            <td class="bad">There is hardware above the existing deadbolt, it cannot be removed or modified and would interfere with installation.</td>
+                        </tr>
+                        <tr>
+                            <td>Additional Hardware (Below)</td>
+                            <td class="good">There is sufficient space between the deadbolt and the hardware below &ndash; at least 2" below the deadbolt</td>
+                            <td class="caution">There is hardware in very close proximity to where the deadbolt would be installed.</td>
+                            <td class="bad">The hardware below the deadbolt will interfere with installation and it cannot be removed.</td>
+                        </tr>
+                        <tr>
+                            <td>Door Thickness</td>
+                            <td class="good">1-3/4" &mdash; 2-1/4", no additional parts required.</td>
+                            <td class="caution">1-3/8" &mdash; 1-3/4", gasket kit required</td>
+                            <td class="bad">Less than 1-3/8", or greater than 2-1/4"</td>
+                        </tr>
+                        <tr>
+                            <td>Ease of Locking</td>
+                            <td class="good">The door closes and locks easily with existing hardware without excess force.</td>
+                            <td class="caution">The door requires some excess force to close and lock with existing hardware (install enlarged strike if necessary).</td>
+                            <td class="bad">The door is extremely difficult to close and lock with existing hardware.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <img src="{{ STATIC_URL }}img/hero-backgrounds/inside-home.jpg" alt="In The Home;Background" class="in-home-bg" />
-    <div class="clear"></div>
-</div>
+    <a id="faqs"></a>
+        <div class="big_wrapper" id="faq">
+          <div class="wrapper clearfix">
+            <h2>Frequently Asked Questions</h2>
+            <ul>
+              <li class="faq">
+                <div>
+                  <h3>Why should my door be interactive?</h3>
+                    <p>You’ll never be locked out again. Plus, being connected to your home like never before means serious peace of mind. Imagine unlocking doors for a loved one from miles away, or even halfway across the country. Can’t remember if you locked the door on your way out? Check instantly with your smartphone. Supply separate user codes for loved ones and guests. The possibilities are endless, and life just got a little easier.</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3>How do I install my lock?</h3>
+                  <p>Yale Real Living Door Locks are so easy to install, you can do it yourself. A Yale technology expert will guide you through each step of the process, or you can opt to have a locksmith in your area install it for you! Simply call Yale Support at 1-800-810-9473. Yale Support is available from 8:00a.m. – 7:00p.m. (EST) Monday – Friday.<br><br>Once your lock is installed, if you need assistance with programming, interactive control access, or user code programming, please call Protect America Customer Care at 1-800-951-5111 option 4.</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3>How thick must my door be for this lock?</h3>
+                  <p>The Yale Real Living Door Lock can accommodate doors of 1-3/4” to 2-1/4” thickness. If it is to be installed on a 1-3/8’’ to 1-3/4’’ door, a thin door gasket kit will be required to complete installation. Speak with a Protect America security expert to learn more about this technology and its application to your home!</p>
+                </div>
+              </li>
+            </ul>
+            <ul class="col2">
+
+              <li class="faq">
+                <div>
+                  <h3>How many user codes can I program into my lock?</h3>
+                  <p>Program up to 250 user codes into your interactive door lock for truly customized access.</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3>What is Z-Wave?</h3>
+                  <p>Z-Wave is a home automation technology which lets you control locks, lights, appliances and more remotely with a smartphone, tablet or computer. Z-Wave technology works together with Protect America security systems to transform your house into an interactive, controllable home that is smart and safe. You’re now connected in ways never before possible!</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3>Can my lock be unlocked from the interior as well?</h3>
+                  <p>Yes! There is a standard thumb turn knob on the interior side of this lock so you can unlock/lock from the inside of your home.</p>
+                </div>
+              </li>
+              <li class="faq">
+                <div>
+                  <h3>Who do I call for customer support after I install my lock?</h3>
+                  <p>Once your lock is installed, if you need assistance with programming, interactive control access, or user code programming, please call Protect America Customer Care at 1-800-951-5111 option 4.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        
+        <div class="clear"></div>
+    </div>
+{% endblock %}
+
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.easing.1.3.js"></script>
     <script type="text/javascript">
@@ -64,17 +238,24 @@
                 $(this).addClass('active').html('x').next('.feature-content').slideDown(250, 'easeOutBounce');
             }
         });
+        $('.check-button').click(function(event){
+            $(this).fadeOut('slow');
+            $('#check-area').slideDown('slow')
+            event.preventDefault();
+        });
+
     });
+    $('.faq').click(function() {
+        $(this).children("div").children("p").slideToggle('fast');
+        if ($(this).hasClass('arrow_up')) {
+            $(this).removeClass('arrow_up')
+        } else {
+            $(this).addClass('arrow_up')
+        }
+    })   
     </script>
+
 {% endaddtoblock "js" %}
 {% endblock %}  
 
-{% block page-product %}
-    <h2>The GE Simon XT</h2>
-    <p><span>Included in any Package.</span></p>
-
-    <div class="button-submit">
-        <a href="{% url order-package %}?package=silver" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Simon XT Touchscreen']);">Order Now ></a>
-    </div>
-{% endblock %}
 
