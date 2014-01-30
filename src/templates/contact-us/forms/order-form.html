@@ -6,7 +6,7 @@
     {% endfor %}
     {% for field in formset.visible_fields %}
             {{ field.errors }}
-            
+
 
             {{ field }}
 
@@ -119,15 +119,15 @@ $(document).ready(function() {
         }
         */
         $form.children('div').removeClass('.error-state');
-        var data = {'name':name, 
+        var data = {'name':name,
                     'email': email,
-                    'phone': phone, 
-                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
-                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'phone': phone,
+                    'trusted_form': trusted,
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize(),
-                    'operating_system':OSName}
+                    'operating_system':(window.OSName + "_PA")
+                    };
         $.ajax({
                 type: "POST",
                 url: "/contact/ajaxpost/",
@@ -141,7 +141,7 @@ $(document).ready(function() {
                     $('#package-form button').attr('disabled',true);
                     }
                 });
-       
+
          function newFormError(){
             $('#package-form #form-loading').hide();
             $("#package-form .icon-chevron-right").show();
@@ -177,7 +177,7 @@ $(document).ready(function() {
                 url = json.thank_you
                 window.location = "http://www.protectamerica.com" + url;
                 {% endif %}
-                _gaq.push([  
+                _gaq.push([
                     '_trackEvent',
                     'Form Click',
                     'Form Events',
@@ -188,7 +188,7 @@ $(document).ready(function() {
         }
         return false;
         });
-    });   
+    });
 
 </script>
 {% endaddtoblock "js" %}
