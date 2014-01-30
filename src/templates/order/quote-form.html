@@ -13,7 +13,7 @@
 
 		  <label>Email</label>
             {{ form.email }}
-		
+
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
@@ -81,7 +81,7 @@ $(document).ready(function() {
     var submitting = false;
 
     $('.sleepy button, .droopy button').click(function() {
-        
+
         $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('#quote-form');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
@@ -107,19 +107,19 @@ $(document).ready(function() {
             return false;
         }
         */
-        var data = {'name':name, 
+        var data = {'name':name,
                     'email': email,
-                    'phone': phone, 
-                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
-                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'phone': phone,
+                    'trusted_form': trusted,
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize(),
-                    'operating_system':OSName,
+                    'operating_system':(window.OSName + "_PA"),
                     'device':device,
-                    'gclid':$("[name='gclid']").val()
+                    'gclid':$("[name='gclid']").val(),
+                    'form_js': 't/o/q-f.h'
                     }
-    
+
 
         $.ajax({
                 type: "POST",
@@ -134,7 +134,7 @@ $(document).ready(function() {
                     $('#quote-form button').attr('disabled',true);
                     }
                 });
-       
+
 
          function newFormError(){
             $(".sleepy #form-loading, .droopy #form-loading").hide();
@@ -181,7 +181,7 @@ $(document).ready(function() {
                 url = json.thank_you
                 window.location = "http://www.protectamerica.com" + url;
                 {% endif %}
-                _gaq.push([  
+                _gaq.push([
                     '_trackEvent',
                     'Form Click',
                     'Form Events',
@@ -192,7 +192,7 @@ $(document).ready(function() {
         }
         return false;
         });
-    });   
+    });
 </script>
 {% endblock %}
 {% endaddtoblock "js" %}
