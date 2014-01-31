@@ -10,7 +10,7 @@ from apps.newsfeed.views import give_me_tweets
 from apps.newsfeed.models import TweetBackup
 from random import choice
 from django.views.decorators.cache import cache_page
-
+from itertools import chain
 
 
 def point_tracking(request):
@@ -47,12 +47,13 @@ def view_tweets(request):
                     tweetsUSA.append(tweet)
 
 
-    if not tweetsUSA:
-        tweetsUSA = TweetBackup.get_payitforward('USA')
-    if not tweetsUFL:
-        tweetsUFL = TweetBackup.get_payitforward('UFL')
-    if not tweetsMSU:
-        tweetsMSU = TweetBackup.get_payitforward('MSU')
+    tweets_usa = TweetBackup.get_payitforward('USA')
+    tweets_ufl = TweetBackup.get_payitforward('UFL')
+    tweets_msu= TweetBackup.get_payitforward('MSU')
+
+    tweetsUSA = tweetsUSA + tweets_usa
+    tweetsUFL = tweetsUFL + tweets_ufl
+    tweetsMSU = tweetsMSU + tweets_msu
 
 
 
