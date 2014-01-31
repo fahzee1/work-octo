@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}
+
 {% block page_title %}Protect America | Home Security{% endblock %}
 {% block typekit %}{% endblock %}
 {% block css %}
@@ -24,7 +26,7 @@
             <div class="disp_no_phones">
             <div class="header_cta">
                     <p class="call">Call Now For A <b>FREE SYSTEM!</b></p>
-                    <p class="phone">1-800-657-2717</p>
+                    <p class="phone">{{ phone_number|format_number }}</p>
             </div>
             </div>
         </div>
@@ -124,7 +126,7 @@
         <div class="disp_no_phones">
         <div class="row">
             <div class="slot-0-1-2-3-4-5">
-                <p>Call now for a FREE system! 1-800-657-2717</p>
+                <p>Call now for a FREE system! {{ phone_number|format_number }}</p>
             </div>
         </div>
         </div>
@@ -389,7 +391,7 @@
         <div class="row">
             <div class="slot-0-1-2-3-4-5">
             <div class="blue_cta">
-                <p>Call now for a FREE system! 1-800-657-2717</p>
+                <p>Call now for a FREE system! {{ phone_number|format_number }}</p>
             </div>
             </div>
         </div>
