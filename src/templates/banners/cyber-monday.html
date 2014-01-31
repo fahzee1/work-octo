@@ -1,9 +1,15 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
-<div id="hero-wrapper" class="cmonday">
+<div id="hero-wrapper" class="superbowl">
     <div id="hero-image" class="cmonday">
         {% include "order/quote-form-white.html" with form=forms.basic %}
         {% include "banners/deals.html" %}
+        <div id="super-bowl">
+            <h1>Home security starting at</h1>
+            <img src="{{ STATIC_URL }}img/base/super-bowl.jpg" class="main-hero-image" alt="cyber-monday-hero" />
+        </div>
+
+        {% comment %}
         <div id="cyber-monday">
             <h1>Home security</h1>
             <h2>for everyone</h2>
@@ -14,5 +20,6 @@
             <a href="{% url shop %}" class="button-link stylized">Get Started Now</a>
             <img src="{{ STATIC_URL }}img/banners/hero-banners/cyber-monday/cyber_hero.jpg" class="main-hero-image" alt="cyber-monday-hero" />
         </div>
+        {% endcomment %}
     </div>
 </div>
