@@ -98,6 +98,7 @@ $('.sleepy input, .droopy input').keypress(function(e){
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
+        var business_name = $form.find("#id_business_name").val();
         /*
         if (name == ''){
             alert('Please include your name before proceeding.');
@@ -122,6 +123,11 @@ $('.sleepy input, .droopy input').keypress(function(e){
                     'gclid':$("[name='gclid']").val(),
                     'form_js': 't/o/q-f.h'
                     }
+
+        if (business_name){
+            data['business_name'] = business_name;
+        }
+
 
 
         $.ajax({
