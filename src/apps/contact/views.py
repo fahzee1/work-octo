@@ -373,6 +373,11 @@ def basic_post_login(request):
     device_letter = request.POST.get('device',None)
     device_name = device_type(request,device_letter)
     lead_data = {'trusted_url': trusted_url}
+    acn_business_name = request.POST.get('business_name')
+    if acn_business_name:
+        request.POST = request.POST.copy()
+        request.POST['name'] = '%s (%s)' % (acn_business_name,request.POST['name'])
+
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
@@ -446,6 +451,8 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
+        if acn_business_name:
+            emaildata['customername'] = '%s (%s)' %(acn_business_name,fdata['name'])
 
         #post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         #send_leadimport(emaildata)
