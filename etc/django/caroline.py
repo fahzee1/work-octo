@@ -65,3 +65,6 @@ CACHES = {
 }
 
 GEOIP_LIBRARY_PATH = '/usr/local/lib/libGeoIP.so'
+
+LC_LOG = '/Users/caroline/leadconduit.log'
+ENGAGE_LOG_DIR = '/Users/caroline/silverpop_unsubscribe.log'
