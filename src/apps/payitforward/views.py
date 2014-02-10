@@ -47,6 +47,7 @@ def view_tweets(request):
                     tweetsUSA.append(tweet)
 
 
+
     tweets_usa = TweetBackup.get_payitforward('USA')
     tweets_ufl = TweetBackup.get_payitforward('UFL')
     tweets_msu= TweetBackup.get_payitforward('MSU')
@@ -57,8 +58,8 @@ def view_tweets(request):
 
 
 
-    ctx['tweetsMSU'] = (tweetsMSU[:5] if tweets else None)
-    ctx['tweetsUFL'] = (tweetsUFL[:5] if tweets else None)
-    ctx['tweetsUSA'] = (tweetsUSA[:5] if tweets else None)
+    ctx['tweetsMSU'] = (tweetsMSU if tweets else None)
+    ctx['tweetsUFL'] = (tweetsUFL if tweets else None)
+    ctx['tweetsUSA'] = (tweetsUSA if tweets else None)
     ctx['agent_id'] = 'i03237'
     return render(request,'payitforward/payitforward.html',ctx)
