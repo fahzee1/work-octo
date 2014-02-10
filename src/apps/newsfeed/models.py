@@ -9,12 +9,13 @@ from django.contrib.localflavor.us.us_states import US_STATES
 from django.core.exceptions import ValidationError
 import pdb
 from django.core.urlresolvers import reverse
+from django.utils.html import urlize
 
 # Create your models here.
 
 
 
-			
+
 class AddType(models.Model):
 	name = models.CharField(max_length=200,blank=True,null=True,help_text='Type of newsfeed? Two words only for simplicity')
 
@@ -100,6 +101,7 @@ class TweetBackup(models.Model):
 	def get_payitforward(self,school):
 		tweets = []
 		for tweet in TweetBackup.objects.filter(payitforward=True):
+			tweet.text = urlize(tweet.text)
 			if school == 'USA':
 				if '#payitforwardUSA' in tweet.text or \
 				   '#PayitforwardUSA' in tweet.text or \
@@ -133,7 +135,7 @@ class TweetBackup(models.Model):
 
 
 
-	
+
 
 
 
