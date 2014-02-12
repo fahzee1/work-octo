@@ -1,0 +1,400 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/local-pages/austin.css?v3.9">
+{% endblock %}
+{% block typekit-code %}
+<script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block header %}
+
+    <div id="top-section-wrapper">
+        <div id="top-section">
+            <div id="company-links">
+                <a href="http://www.myprotectamerica.com" class="interactive-customer" target="blank">Interactive Customers</a>
+
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" class="easy-chat-click" id="online-chat-button" target="blank">Online Chat</a>
+                <form action="http://www.protectamerica.com/search/" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div id="header-wrapper">
+        <div id="header">
+
+            <a href="{% url home %}">
+                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="company-logo">
+            </a>
+            <a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+            {% endif %}
+            {% block navigation %}
+            <ul id="main-navigation">
+                <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+                    <a href="{% url shop %}">Shop</a>
+                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+                    <a href="{% url equipment %}">Equipment</a>
+                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+                    <a href="{% url learn %}">Learn</a>
+                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'support' in active_pages %}class="active"{% endif %}>
+                    <a href="{% url support %}">Support</a>
+                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+            {% endblock %}
+            {% include "order/quote-form-refresh.html" with form=forms.basic %}
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+<!-- Hero section -->
+<div id="hero" class="index">
+    <div class="container">
+        {% include "order/quote-form-local.html" with form=forms.basic %}
+
+        <div class="heading">
+            <h1 class="big">Austin's Experts <span>for home security systems</span></h1>
+            <h3>1-800-951-5111</h3>
+            <button type="button" class="yellow">Get started</button>
+        </div>
+    </div>
+</div>
+<!-- End hero -->
+{% block partybox %}
+<!-- Party box start -->
+<div id="party-box">
+    <div class="container">
+        <ul>
+            <li class="deal1"><img src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png"></li>
+            <li class="deal2"><img src="{{ STATIC_URL }}img/local-pages/party-free-camera.png"></li>
+            <li class="static"><img src="{{ STATIC_URL }}img/local-pages/party-no-landline-required.png"></li>
+        </ul>
+    </div>
+</div>
+<!-- End party box -->
+{% endblock %}
+<!-- Featured on banner -->
+
+<div id="featured-on">
+    <small>Proudly Featured on:</small>
+    <div id="featured-badges">
+        <div class="featured statesman">&nbsp;</div>
+        <div class="featured austin-chamber">&nbsp;</div>
+        <div class="featured kvue">&nbsp;</div>
+        <div class="featured fox-seven">&nbsp;</div>
+        <div class="featured besty">&nbsp;</div>
+        <div class="featured topconsumer">&nbsp;</div>
+        <div class="featured cw">&nbsp;</div>
+        <div class="featured history">&nbsp;</div>
+        <div class="featured kut">&nbsp;</div>
+        <div class="featured consumerdigest">&nbsp;</div>
+        <div class="featured buzz">&nbsp;</div>
+        <div class="featured bbb">&nbsp;</div>
+        <div class="featured gadgeteer">&nbsp;</div>
+        <div class="featured toptens">&nbsp;</div>
+    </div>
+</div>
+<!-- End featured banner -->
+<div class="container" id="overview">
+    <div class="eight columns">
+        <h2>Home Security Built by Austinites, for Austinites.</h2>
+        <p>Silicon Hills, The Live Music Capital of the World, or the City of the Violet Crown &ndash; whatever us Austinites may call it, our city is home to some of the most diverse, creative, and hardworking people anywhere in the States.</p>
+        <p>Protect America has provided Austin with affordable and reliable business and home security systems since 1992. We pride ourselves in bring a national company with an unmistakable Austin attitude. We're pioneers in wireless home automation &ndash; our SMART Connect app keeps you connected with your home while you're away; easily arm and disarm your system, adjust lights, and control thermostats.</p>
+        <p>Combined with our monitored alarm systems that start as low as $19.99 per month with free equipment, the choice for home security is clear.</p>
+    </div>
+    <div class="eight columns side">
+        <img src="{{ STATIC_URL }}img/local-pages/austin/smart-connect-security-app.jpg" alt="smart-connect-security-app" width="403" height="372" />
+    </div>
+</div>
+<!-- Features tiles -->
+<div id="features">
+    <div class="container">
+        <h2 class="light">Features</h2>
+        <ul>
+            <li>
+                <h3><i class="fa fa-key"></i>Traditional Key Deadbolt</h3>
+                <p>Open doors manually with key entry as well as digitally for a flexible home experience</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-smile-o"></i>Fully Interactive</h3>
+                <p>Lock and unlock doors remotely from your smartphone with Protect America's free SMART Connect app</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-hand-o-up"></i>Touchscreen Control</h3>
+                <p>An LCD touchscreen brings your front door into the future: unlock with a user code and lock with the touch of your hand</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-th"></i>Multiple User Code Access</h3>
+                <p>Program up to 250 user codes for family members and visitors</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-home"></i>Security + Automation</h3>
+                <p>Integrates effortlessly with Protect America security systems for a home that is both safe and smart</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-star"></i>Sleek Design</h3>
+                <p>Locks come in Oil Rubbed Bronze, Polished Brass or Satin Nickel to compliment any home.</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- End features -->
+<div id="community">
+    <div class="container">
+        <h2>Protect America in the Community</h2>
+        <p class="community-subhead"></p>
+    </div>
+    <div id="community-outreach-squares">
+        <div class="square"><a href="http://www.myfoxaustin.com/story/24627086/new-app-helps-keep-homes-secure" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-door-lock.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America features the latest home automation on myFOXaustin</p></a></div>
+        <div class="square"><a href="http://bit.ly/1b8bX9L" target="_blank"><img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-prn1/t31/p180x540/1553300_10152163673609551_1683699488_o.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America Employees Donate to SafePlace</p></a></div>
+        <div class="square"><a href="http://www.myfoxaustin.com/story/24445424/experts-proper-home-tech-can-prevent-fire-related-deaths" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-fire.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Proper home tech can prevent fire-related deaths</p></a></div>
+
+    </div>
+    <div class="container">
+        <h3>Why get a home security system?</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus. Quisque lacinia sodales sapien vel rutrum.</p>
+        <ul class="container">
+            <li class="eight columns alpha stat one-stat">
+                <h3>Every 15 seconds</h3>
+                <p>a break-in occurs in the United States.</p>
+            </li>
+            <li class="eight columns omega stat two-stat">
+                <h3>Night or day</h3>
+                <p>Daytime arming is important - 58% of burglaries take place during the day.</p>
+            </li>
+            <li class="eight columns alpha stat three-stat">
+                <h3>$4.7 billion</h3>
+                <p>in property loss due to burglaries in 2012 alone (over $2,000 per burglary on average).</p>
+            </li>
+            <li class="eight columns omega stat four-stat">
+                <h3>1 in 19</h3>
+                <p>chance of being a victim of property crime.</p>
+            </li>
+        </ul>
+        <div class="five columns alpha">
+            <h4>Protecting your family</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus.</p>
+        </div>
+        <div class="five columns middle-column">
+            <h4>Safeguarding your business</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus.</p>
+        </div>
+        <div class="five columns omega">
+            <h4>Peace of mind</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus.</p>
+        </div>
+    </div>
+</div>
+{% block testimonials %}
+<!-- Testimonials -->
+<div id="testimonials">
+    <div class="container">
+        <div id="review-container">
+            <div class="review">
+                <i class="icon-quote-left"></i>
+                <blockquote>Used chat from the website to get customer service. Was looking to update my account to reflect my city of Austin police department alarm permit number.  Gloria was very helpful, professional and was quick to resolve the item.
+                <p>Tom - Austin, TX</p>
+                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+
+                </blockquote>
+            </div>
+            <div class="review">
+                <img src="{{ STATIC_URL }}img/local-pages/austin/veronika.jpg" alt="veronika" width="168" height="201" />
+                <i class="icon-quote-left"></i>
+                <blockquote>Great live chat experience!  Helpful and quick availability. Thanks to Jackie.
+                <p>Veronika &ndash; Austin, TX</p>
+                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+
+                </blockquote>
+
+            </div>
+            <div class="review">
+                <i class="icon-quote-left"></i>
+                <blockquote>I have worked customer service for over 30 yrs and I appreciate good service when I get it. Jeremy was patient, explained everything as we were adding sensors and was very polite and willing to answer questions as we went thru the process. He is an excellent representative of your company!
+                    <p>Ernest &ndash; Austin, TX</p>
+                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+
+                </blockquote>
+                
+            </div>
+            <div class="review">
+                <i class="icon-quote-left"></i>
+                <blockquote>I just wanted to express my thanks to you and your excellent customer service agents. I recently moved to Austin, TX and Protect America has made the move a lot easier. I really appreciate the peace of mind that I have when I arrive at my new home every day. Sharon and Khadijah were excellent at assisting me in upgrading my system to Cellular Monitoring just one month after experiencing the quality of your service and equipment. Thanks guys!
+                    <p>Dillon &ndash; Austin, TX</p>
+                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+
+                </blockquote>
+                
+            </div>
+            <div class="review">
+                <i class="icon-quote-left"></i>
+                <blockquote>Emily was extremely nice & patient with me today, as I needed help w/ my system & installation of some glass breakage sensors.  She is very knowledgeable w/ a good-natured personality.  I really enjoyed talking with her!
+                    <p>Melissa &ndash; Austin, TX</p>
+                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+
+                </blockquote>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End testimonials -->
+{% endblock %}
+{% block lifestyle-button %}
+<div id="lifestyle-quote" class="container">
+    <a href="" class="button">Get a Free Quote</a>
+    <img src="{{ STATIC_URL }}img/local-pages/austin/longhorns-football-game.jpg" class="bg" alt="longhorns-football-game" width="1200" height="600" />
+</div>
+{% endblock %}
+{% block advantage %}
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        {% block advantage-header %}
+        <h2>A Step above the rest <span>providing more safety and security for less</span></h2>
+        {% endblock %}
+        <table>
+            <thead>
+                {% block table-headers %}
+
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Equipment & Activation Fees</th>
+                    <th>24/7 Alarm Monitoring</th>
+                    <th>Lowest Price Guaranteed</th>
+                    <th class="extra">Lifetime Equipment Warranty</th>
+                    <th class="extra">Locked-In Rate</th>
+                    <th>Monthly Cost</th>
+                </tr>
+                {% endblock %}
+            </thead>
+            <tbody>
+                {% block advantage-us %}
+
+                <tr class="alpha">
+                    <td class="title highlight">Protect America</td>
+                    <td class="price highlight">$0</td>
+                    <td class="highlight">Included</td>
+                    <td class="highlight">Included</td>
+                    <td class="extra highlight">Included</td>
+                    <td class="extra highlight">Included</td>
+                    <td class="price highlight">$19.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-1 %}
+                <tr>
+                    <td class="title">ADT</td>
+                    <td class="price">$99</td>
+                    <td>Included</td>
+                    <td class="na">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="price">$42.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-2 %}
+                <tr>
+                    <td class="title">Frontpoint</td>
+                    <td class="price">$99</td>
+                    <td>Included</td>
+                    <td class="na">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="price">$34.95</td>
+                </tr>
+                {% endblock %}
+            </tbody>
+        </table>
+        <div class="clear"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var owl = $("#featured-badges");
+        var outreach = $("#community-outreach-squares");
+        
+        owl.owlCarousel({
+          autoPlay: 7000,
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+        outreach.owlCarousel({
+          autoPlay: 7000,
+          stopOnHover: true,
+          items : 12,
+          itemsCustom: [[0, 1], [640, 2], [960, 3], [1280, 4],[1600, 5], [1920, 6], [2240, 7], [2560, 8]]
+        });
+        $("#review-container").owlCarousel({
+        
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          singleItem:true,
+          autoHeight: true,
+          pagination: false,
+
+        
+        });
+        $('.square').click(function() {
+            var link = $(this).data("link");
+            $(this).attr(link, '_blank');
+
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}
+{% block order-footer %}
+<div id="phone-chat-search">
+    <div class="container">
+        <div class="five columns">
+            <p>Your family's safety is important. Our security experts are ready to help:</p>
+            <p class="white"><i class="icon-phone"></i>1-800-657-2717</p>
+        </div>
+        <div class="six columns">
+            <p>Didn't find what you were looking for? Try searching our website below:</p>
+            <form>
+                <input type="text" name="findit" placeholder="I'm looking for..." class="search-field">
+                <button type="submit" class="icon-search" id="search-footer">&nbsp;</button>
+            </form>
+        </div>
+        <div class="five columns chat">
+            <p>Have a question you need answered right now? <a href="#" class="white">Try our online chat.</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
