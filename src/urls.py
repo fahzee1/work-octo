@@ -496,6 +496,7 @@ else:
 
         # Shop
         dtt(r'^shop-home-security-packages/?$', 'packages/index.html', 'shop'),
+        dtt(r'^shop-home-security-packages-b/?$', 'packages/index-b.html', 'shop-b'),
         dtt(r'^shop-home-security-packages-new/?$', 'packages/index-test.html', 'shop-new'),
 
             # Product > Packages
