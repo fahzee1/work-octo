@@ -83,18 +83,23 @@ $('.sleepy input, .droopy input').keypress(function(e){
     });
     var submitting = false;
 
-    $('.sleepy button, .droopy button').click(function() {
-
+    $('.sleepy, .droopy').on('click','button',function() {
         $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('#quote-form');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
         var device = getParameterByName('device');
-        /*if (!trusted){
-            $form.remove();
-            $('#trusted-error').show();
-            return false;
+        if (!trusted){
+            $('#quote-form button').attr('disabled',false);
+            var phone_number = $(".dynamic-phone-number").first().text();
+            if (phone_number){
+                alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
+            }
+            else{
+                alert("Sorry your form can't be submitted at this time. Please call us at the number above.");
+            }
+            return;
         }
-        */
+
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
@@ -129,20 +134,21 @@ $('.sleepy input, .droopy input').keypress(function(e){
         }
 
 
-
-        $.ajax({
-                type: "POST",
-                url: "/contact/ajaxpost/",
-                data: data,
-                dataType: "json",
-                success: newFormSuccess,
-                error: newFormError,
-                beforeSend:function(){
-                    $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
-                    $(".sleepy #form-loading, .droopy #form-loading").show();
-                    $('#quote-form button').attr('disabled',true);
-                    }
-                });
+        if (trusted){
+            $.ajax({
+                    type: "POST",
+                    url: "/contact/ajaxpost/",
+                    data: data,
+                    dataType: "json",
+                    success: newFormSuccess,
+                    error: newFormError,
+                    beforeSend:function(){
+                        $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                        $(".sleepy #form-loading, .droopy #form-loading").show();
+                        $('#quote-form button').attr('disabled',true);
+                        }
+                    });
+        }
 
 
          function newFormError(){

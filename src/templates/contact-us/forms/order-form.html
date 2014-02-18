@@ -89,9 +89,15 @@ $(document).ready(function() {
         var $form = $(this).closest('#package-form');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val()
         if (!trusted){
-            $form.remove();
-            $('#trusted-error').show();
-            return false;
+            $('#quote-form button').attr('disabled',false);
+            var phone_number = $("#dynamic-phone-number").first().text();
+            if (phone_number){
+                alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
+            }
+            else{
+                alert("Sorry your form can't be submitted at this time. Please call us at the number above.");
+            }
+            return;
         }
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
@@ -129,19 +135,22 @@ $(document).ready(function() {
                     'operating_system':(window.OSName + "_PA"),
                     'form_js': 't/c-s/f/o_f.h'
                     };
-        $.ajax({
-                type: "POST",
-                url: "/contact/ajaxpost/",
-                data: data,
-                dataType: "json",
-                success: newFormSuccess,
-                error: newFormError,
-                beforeSend:function(){
-                    $("#package-form .icon-chevron-right").hide();
-                    $('#package-form #form-loading').show();
-                    $('#package-form button').attr('disabled',true);
-                    }
-                });
+
+        if (trusted){
+            $.ajax({
+                    type: "POST",
+                    url: "/contact/ajaxpost/",
+                    data: data,
+                    dataType: "json",
+                    success: newFormSuccess,
+                    error: newFormError,
+                    beforeSend:function(){
+                        $("#package-form .icon-chevron-right").hide();
+                        $('#package-form #form-loading').show();
+                        $('#package-form button').attr('disabled',true);
+                        }
+                    });
+        }
 
          function newFormError(){
             $('#package-form #form-loading').hide();
