@@ -58,7 +58,7 @@ def send_bizdev_email(data):
 
 def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
     if notify_all:
-        contact_list = ['cjogbuehi@protectamerica.com','development@protectamerica']
+        contact_list = ['cjogbuehi@protectamerica.com','development@protectamerica','RYLAN@protectamerica.com']
     else:
         contact_list = ['cjogbuehi@protectamerica.com']
     if not test:
@@ -161,6 +161,13 @@ def post_to_leadconduit(data,test=False,retry=False):
                         'url':url,
                         'params':params.items()}
                 send_conduit_error(data,test=settings.LEAD_TESTING)
+
+            if not data['agentid']:
+                send_conduit_error(data,test=settings.LEAD_TESTING,
+                                        title='Lead missing Agent_ID',
+                                        message=' Lead id : %s \n Name: %s \n Phone: ' % (data['lead_id'],data['customername'],data['phone']),
+                                        notify_all = True
+                                        )
 
 
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
