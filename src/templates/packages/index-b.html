@@ -15,61 +15,61 @@
     <div class="container">
     <h1>Packaged home security systems for everyone</h1>
     <h2>with no installation or equipment fees.</h2>
-        <a href="http://www.protectamerica.com/products/order-package?package=copper" class="copper">
+        <a href="{% url copper %}" class="copper package">
             <h3>Copper</h3>
             <div class="price">
                 <div>$19.99<p>per month</p></div>
             </div>
-            <div class="button">Select plan</div>
+            <div class="button" data-link="copper">Select plan</div>
             <ul>
                 <li>1 Simon XT panel</li>
                 <li>3 door / window sensors</li>
                 <li>1 motion detector</li>
             </ul>
         </a>
-        <a href="http://www.protectamerica.com/products/order-package?package=bronze" class="bronze">
+        <a href="{% url bronze %}" class="bronze package">
             <h3>Bronze</h3>
             <div class="price">
                 <div>$35.99<p>per month</p></div>
             </div>
-            <div class="button">Select plan</div>
+            <div class="button" data-link="bronze">Select plan</div>
             <ul>
                 <li>1 Simon XT panel</li>
                 <li>7 door / window sensors</li>
                 <li>1 motion detector</li>
             </ul>
         </a>
-        <a href="http://www.protectamerica.com/products/order-package?package=silver" class="silver">
+        <a href="{% url silver %}" class="silver package">
             <img src="{{ STATIC_URL }}img/products/most-popular.png" alt="Most popular package">
             <h3>Silver</h3>
             <div class="price">
                 <div>$37.99<p>per month</p></div>
             </div>
-            <div class="button">Select plan</div>
+            <div class="button" data-link="silver">Select plan</div>
             <ul>
                 <li>1 Simon XT panel</li>
                 <li>10 door / window sensors</li>
                 <li>1 motion detector</li>
             </ul>
         </a>
-        <a href="http://www.protectamerica.com/products/order-package?package=gold" class="gold">
+        <a href="{% url gold %}" class="gold package">
             <h3>Gold</h3>
             <div class="price">
                 <div>$39.99<p>per month</p></div>
             </div>
-            <div class="button">Select plan</div>
+            <div class="button" data-link="gold">Select plan</div>
             <ul>
                 <li>1 Simon XT panel</li>
                 <li>12 door / window sensors</li>
                 <li>1 motion detector</li>
             </ul>
         </a>
-        <a href="http://www.protectamerica.com/products/order-package?package=platinum" class="platinum">
+        <a href="{% url platinum %}" class="platinum package">
             <h3>Platinum</h3>
             <div class="price">
                 <div>$42.99<p>per month</p></div>
             </div>
-            <div class="button">Select plan</div>
+            <div class="button" data-link="platinum">Select plan</div>
             <ul>
                 <li>1 Simon XT panel</li>
                 <li>15 door / window sensors</li>
@@ -81,8 +81,8 @@
             <strong>Triple Guarantee<strong></h2>
             <ul>
                 <li><i class="fa fa-check-circle"></i>Lowest price</li>
-                <li><i class="fa fa-check-circle"></i>No equipment fee</li>
-                <li class="last"><i class="fa fa-check-circle"></i>Lifetime warranty</li>
+                <li><i class="fa fa-check-circle"></i>No equipment fees</li>
+                <li class="last"><i class="fa fa-check-circle"></i>Lifetime replacement plan</li>
             </ul>
         </div>
     </div>
@@ -253,115 +253,18 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#copper-security-package").click(function() {
-                window.location.href = "{% url copper %}";
-            });
-            $("#bronze-security-package").click(function() {
-                window.location.href = "{% url bronze %}";
-            });
-            $("#silver-security-package").click(function() {
-                window.location.href = "{% url silver %}";
-            });
-            $("#gold-security-package").click(function() {
-                window.location.href = "{% url gold %}";
-            });
-            $("#platinum-security-package").click(function() {
-                window.location.href = "{% url platinum %}";
-            });
-            $(".video-add").click(function() {
-                window.location.href = "{% url video %}";
-            });
-            $(".garage-add").click(function() {
-                window.location.href = "{% url garage-door-sensor %}";
-            });
-            $(".glass-add").click(function() {
-                window.location.href = "{% url glassbreak-sensor %}";
-            });
-            $(".weather-add").click(function() {
-                window.location.href = "{% url freeze-sensor %}";
-            });
-            $(".medical-add").click(function() {
-                window.location.href = "{% url medical-pendant %}";
-            });
-            $(".fire-add").click(function() {
-                window.location.href = "{% url smoke-detector %}";
-            });
 			$('#header').waypoint('sticky', {
 			  offset: -85 // Apply "stuck" when element 30px from top
 			});
             animated = 0;
-            $("#alarm-category").click(function(){
-                if(animated == 0 && !$(this).hasClass('active')) {
-                    animated = 1;
-                    $('.security-choice').removeClass('active');
-                    $(this).addClass('active');
-                    $('.big-info').slideUp('fast');
-                    $('.button-link.active').fadeIn('slow');
-                    $('#home-security-button-choice').fadeOut('fast');
-                    $('#white-arrow').animate({left: '-935px'}, 500, function() {
-                        $('.button-link.active').removeClass('active');
-                        $('#home-security-choice').slideDown('fast', function() {
-                            animated = 0;
-    
-                            $("#home-security-button-choice").addClass('active');
-    
-    
-                        });
-                    });
-                    return false;
-                } else {
-                    return false;
-                }
-    
-            });
-            $("#video-category").click(function(){
-    
-                if(animated == 0 && !$(this).hasClass('active')) {
-                    animated = 1;
-                    $('.security-choice').removeClass('active');
-                    $(this).addClass('active');
-                    $('.big-info').slideUp('fast');
-                    $('.button-link.active').fadeIn('slow');
-                    $('#video-button-choice').fadeOut('fast');
-                    $('#white-arrow').animate({left: '-614px'}, 500, function() {
-                        $('.button-link.active').removeClass('active');
-                        $('#video-security-choice').slideDown('fast', function() {
-                            animated = 0;
-    
-                            $("#video-button-choice").addClass('active');
-    
-    
-                        });
-                    });
-                    return false;
-                } else {
-                    return false;
-                }
-            });
-            $("#smart-app-category").click(function(){
-                
-    
-                if(animated == 0 && !$(this).hasClass('active')) {
-                    animated = 1;
-                    $('.security-choice').removeClass('active');
-                    $(this).addClass('active');
-                    $('.big-info').slideUp('fast');
-                    $('.button-link.active').fadeIn('slow');
-                    $('#smart-app-button-choice').fadeOut('fast');
-                    $('#white-arrow').animate({left: '-295px'}, 500, function() {
-                        $('.button-link.active').removeClass('active');
-                        $('#smart-app-choice').slideDown('fast', function() {
-                            animated = 0;
-                            $("#smart-app-button-choice").addClass('active');
-                        });
-                    });
-                    return false;
-                } else {
-                    return false;
-                }
-            });
-
         });
+	    $('.package > .button').click(function(e) {
+	        e.preventDefault();
+	        link = $(this).data('link');
+            window.location.href = "{% url order-package %}?package="+link;
+
+	    });
+
 	    $('.faq').click(function() {
 	        $(this).children("div").children("p").slideToggle('fast');
 	        if ($(this).hasClass('arrow_up')) {
