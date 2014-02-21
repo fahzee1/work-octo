@@ -122,7 +122,11 @@ def post_to_leadconduit(data,test=False,retry=False):
                                            title='Lead retries exceeded 20 attempts',
                                            notify_all=True,
                                            message= 'The lead below was set to rety = False. \n'
-                                                    'Lead id : %s \n Name: %s \n Phone: %s' % (data['lead_id'],data['customername'],data['phone'])
+                                                    'Lead id : %s \n Name: %s \n Phone: %s \n Referrer Page: %s' % (data['lead_id'],
+                                                                                                                   data['customername'],
+                                                                                                                   data['phone'],
+                                                                                                                   data['formlocation'])
+
                                             )
 
                         lead.retry = False
@@ -180,7 +184,10 @@ def post_to_leadconduit(data,test=False,retry=False):
                 if not data['agentid']:
                     send_conduit_error(data,test=settings.LEAD_TESTING,
                                             title='Lead missing Agent_ID',
-                                            message=' Lead id : %s \n Name: %s \n Phone: %s' % (data['lead_id'],data['customername'],data['phone']),
+                                            message=' Lead id : %s \n Name: %s \n Phone: %s \n Referrer Page: %s' % (data['lead_id'],
+                                                                                                                    data['customername'],
+                                                                                                                    data['phone'],
+                                                                                                                    data['formlocation']),
                                             notify_all = True
                                             )
             except KeyError:
