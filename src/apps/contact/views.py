@@ -116,6 +116,20 @@ def post_to_leadconduit(data,test=False,retry=False):
 
             if lead:
                 if retry:
+                    if lead.number_of_retries > 20:
+                        send_conduit_error(data,
+                                           test=settings.LEAD_TESTING,
+                                           title='Lead retries exceeded 20 attempts',
+                                           notify_all=True,
+                                           message= 'The lead below was set to rety = False. \n'
+                                                    'Lead id : %s \n Name: %s \n Phone: %s' % (data['lead_id'],data['customername'],data['phone'])
+                                            )
+
+                        lead.retry = False
+                        lead.lc_error = True
+                        lead.save()
+                        return
+
                     lead.number_of_retries += 1
                 lead.lc_url = url
                 lead.lc_id = lead_id
