@@ -4,7 +4,8 @@
 
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/local-pages/austin.css?v3.9">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/local-pages/austin.css?v3.9">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 {% endblock %}
 {% block typekit-code %}
 <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
@@ -82,26 +83,23 @@
         {% include "order/quote-form-local.html" with form=forms.basic %}
 
         <div class="heading">
-            <h1 class="big">Austin's Experts <span>for home security systems</span></h1>
+            <h1 class="big">Austin's Best <span>Home Security Systems</span></h1>
             <h3>1-800-951-5111</h3>
-            <button type="button" class="yellow">Get started</button>
         </div>
+		{% block partybox %}
+		<!-- Party box start -->
+		<div id="party-box">
+			<img id="deal1" src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png">
+		    <img id="deal2" src="{{ STATIC_URL }}img/local-pages/party-free-camera.png">
+		    <img id="deal3" src="{{ STATIC_URL }}img/local-pages/party-signature-service_05.png">
+		</div>
+		<!-- End party box -->
+		{% endblock %}
     </div>
+
+
 </div>
 <!-- End hero -->
-{% block partybox %}
-<!-- Party box start -->
-<div id="party-box">
-    <div class="container">
-        <ul>
-            <li class="deal1"><img src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png"></li>
-            <li class="deal2"><img src="{{ STATIC_URL }}img/local-pages/party-free-camera.png"></li>
-            <li class="static"><img src="{{ STATIC_URL }}img/local-pages/party-no-landline-required.png"></li>
-        </ul>
-    </div>
-</div>
-<!-- End party box -->
-{% endblock %}
 <!-- Featured on banner -->
 
 <div id="featured-on">
@@ -132,37 +130,52 @@
         <p>Combined with our monitored alarm systems that start as low as $19.99 per month with free equipment, the choice for home security is clear.</p>
     </div>
     <div class="eight columns side">
-        <img src="{{ STATIC_URL }}img/local-pages/austin/smart-connect-security-app.jpg" alt="smart-connect-security-app" width="403" height="372" />
+        <script type='text/javascript' src='http://KTBC.images.worldnow.com/interface/js/WNVideo.js?rnd=77624;hostDomain=www.myfoxaustin.com;playerWidth=460;playerHeight=400;isShowIcon=true;clipId=9404243;flvUri=;partnerclipid=;adTag=News;advertisingZone=;enableAds=true;landingPage=;islandingPageoverride=false;playerType=STANDARD_EMBEDDEDscript;controlsType=overlay'></script><a href="http://www.myfoxaustin.com" title=""></a>
     </div>
 </div>
+
+<div id="signature">
+	<div class="container">
+		<div class="eight columns" id="signature-left">
+        		<img src="{{ STATIC_URL }}img/local-pages/austin/austin-signature-service.png" alt="smart-connect-security-app" />
+      
+		</div>
+		<div class="eight columns" id="signature-right">
+    		<h1 class="big">Howdy. <span>We're your neighbors.</span></h1>
+        	<p>We’ve protected nearly half a million homes in all 50 states but have humble beginnings right here in Austin. Our founders spent the weekends at Zilker Park and dreamed about starting a company that could affordably keep people safe, unaware that their security would cover homes from Barton Springs to Round Rock and quickly expand to all of North America.</p>
+        	<p>Our Austin Signature Service is a commitment to a city we love and a community that made us who we are today. Customers in the local Austin area can stop by our office and pick up their security systems the day they order. Have a question? Each customer is connected with a personal security expert who lives right here in Austin. We’ll keep you protected while you Keep Austin Weird.</p>
+		</div>
+	</div>
+</div>
+
 <!-- Features tiles -->
 <div id="features">
     <div class="container">
-        <h2 class="light">Features</h2>
+        <h2 class="light">Perfect for your Austin home</h2>
         <ul>
             <li>
-                <h3><i class="fa fa-key"></i>Traditional Key Deadbolt</h3>
-                <p>Open doors manually with key entry as well as digitally for a flexible home experience</p>
+                <h3><i class="fa fa-smile-o" id="feature1"></i>True Peace of Mind</h3>
+                <p>Experience world-class 24/7 monitoring right here in Austin for real coverage and real safety</p>
             </li>
             <li>
-                <h3><i class="fa fa-smile-o"></i>Fully Interactive</h3>
-                <p>Lock and unlock doors remotely from your smartphone with Protect America's free SMART Connect app</p>
+                <h3><i class="fa fa-scissors" id="feature2"></i>Lose the Wires</h3>
+                <p> From Hyde Park to Tarrytown, our wireless technology covers your entire home without destructive installation and drilling countless holes in your walls</p>
             </li>
             <li>
-                <h3><i class="fa fa-hand-o-up"></i>Touchscreen Control</h3>
-                <p>An LCD touchscreen brings your front door into the future: unlock with a user code and lock with the touch of your hand</p>
+                <h3><i class="fa fa-tag" id="feature3"></i>Prices Unmatched</h3>
+                <p>Security is important, but it shouldn’t cost an arm and a leg. Our packages begin at only $19.99 a month and we match any competitor price with our Lowest Price Guarantee</p>
             </li>
             <li>
-                <h3><i class="fa fa-th"></i>Multiple User Code Access</h3>
-                <p>Program up to 250 user codes for family members and visitors</p>
+                <h3><i class="fa fa-pencil" id="feature4"></i>Customize It</h3>
+                <p> Austin is full of different people with all kinds of homes. That’s why we designed our security systems to be customized to your specific needs. Swap equipment, add fire protection and even home automation. Keep Austin weird and secure</p>
             </li>
             <li>
-                <h3><i class="fa fa-home"></i>Security + Automation</h3>
-                <p>Integrates effortlessly with Protect America security systems for a home that is both safe and smart</p>
+                <h3><i class="fa fa-lock" id="feature5"></i>No Installation or Equipment Fees</h3>
+                <p>Securing your home should be stress-free. That’s why our DIY system packages come with free equipment and require no expensive expert installation</p>
             </li>
             <li>
-                <h3><i class="fa fa-star"></i>Sleek Design</h3>
-                <p>Locks come in Oil Rubbed Bronze, Polished Brass or Satin Nickel to compliment any home.</p>
+                <h3><i class="fa fa-map-marker" id="feature6"></i>Local Company, Local Service</h3>
+                <p>We might be a national company, but we started right here in Austin. Our security experts are your neighbors and available 7 days a week</p>
             </li>
         </ul>
     </div>
@@ -181,7 +194,7 @@
     </div>
     <div class="container">
         <h3>Why get a home security system?</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus. Quisque lacinia sodales sapien vel rutrum.</p>
+        <p>You can’t always be there to protect your home, and thieves are counting on it. Most burglaries occur during the daytime when no one is home, and the average burglary costs over $2,000 in stolen property and damage. Home security is a way to stay connected to your house and take comfort in knowing it’s safe no matter where you are.</p>
         <ul class="container">
             <li class="eight columns alpha stat one-stat">
                 <h3>Every 15 seconds</h3>
@@ -200,17 +213,17 @@
                 <p>chance of being a victim of property crime.</p>
             </li>
         </ul>
-        <div class="five columns alpha">
+        <div class="five columns alpha delta">
             <h4>Protecting your family</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus.</p>
+            <p>Your family is what makes a house a home. They are your most precious asset, and home security is an excellent way to protect them. Our security systems accept multiple programmable codes, including those that alert your smartphone when used – perfect for children.</p>
         </div>
-        <div class="five columns middle-column">
+        <div class="five columns middle-column delta gamma">
             <h4>Safeguarding your business</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus.</p>
+            <p>The flexibility of wireless technology allows our systems to secure any structure, including businesses. Protect America security cameras integrate seamlessly, record to cloud storage in event of alarm and are viewable live on a smartphone at any time. Austin businesses are the foundation of our community, and they deserve protection too.</p>
         </div>
-        <div class="five columns omega">
+        <div class="five columns omega delta">
             <h4>Peace of mind</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed blandit porttitor nibh, vitae consequat augue. Donec eleifend massa in dui sodales mollis. Sed dapibus id justo et rhoncus.</p>
+            <p>Knowing your home is defended from burglary 24/7 is priceless, but when you add fire protection, medial alert technology, and the ease of home automation – you’ve created real peace of mind.</p>
         </div>
     </div>
 </div>
@@ -220,6 +233,7 @@
     <div class="container">
         <div id="review-container">
             <div class="review">
+            	<img src="{{ STATIC_URL }}img/local-pages/austin/tom.jpg" alt="tom" />
                 <i class="icon-quote-left"></i>
                 <blockquote>Used chat from the website to get customer service. Was looking to update my account to reflect my city of Austin police department alarm permit number.  Gloria was very helpful, professional and was quick to resolve the item.
                 <p>Tom - Austin, TX</p>
@@ -228,9 +242,9 @@
                 </blockquote>
             </div>
             <div class="review">
-                <img src="{{ STATIC_URL }}img/local-pages/austin/veronika.jpg" alt="veronika" width="168" height="201" />
+                <img src="{{ STATIC_URL }}img/local-pages/austin/veronika.jpg" alt="veronika" />
                 <i class="icon-quote-left"></i>
-                <blockquote>Great live chat experience!  Helpful and quick availability. Thanks to Jackie.
+                <blockquote>Great live chat experience! Helpful and quick availability. Thanks to Jackie.
                 <p>Veronika &ndash; Austin, TX</p>
                 <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
 
@@ -238,6 +252,7 @@
 
             </div>
             <div class="review">
+            	<img src="{{ STATIC_URL }}img/local-pages/austin/ernest.jpg" alt="ernest" />
                 <i class="icon-quote-left"></i>
                 <blockquote>I have worked customer service for over 30 yrs and I appreciate good service when I get it. Jeremy was patient, explained everything as we were adding sensors and was very polite and willing to answer questions as we went thru the process. He is an excellent representative of your company!
                     <p>Ernest &ndash; Austin, TX</p>
@@ -247,8 +262,9 @@
                 
             </div>
             <div class="review">
+            	<img src="{{ STATIC_URL }}img/local-pages/austin/dillon.jpg" alt="dillon" />
                 <i class="icon-quote-left"></i>
-                <blockquote>I just wanted to express my thanks to you and your excellent customer service agents. I recently moved to Austin, TX and Protect America has made the move a lot easier. I really appreciate the peace of mind that I have when I arrive at my new home every day. Sharon and Khadijah were excellent at assisting me in upgrading my system to Cellular Monitoring just one month after experiencing the quality of your service and equipment. Thanks guys!
+                <blockquote><!--I just wanted to express my thanks to you and your excellent customer service agents. --> I recently moved to Austin, TX and Protect America has made the move a lot easier. I really appreciate the peace of mind that I have when I arrive at my new home every day. Sharon and Khadijah were excellent at assisting me in upgrading my system to Cellular Monitoring. <!--just one month after experiencing the quality of your service and equipment.--> Thanks guys!
                     <p>Dillon &ndash; Austin, TX</p>
                     <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
 
@@ -256,6 +272,7 @@
                 
             </div>
             <div class="review">
+            	<img src="{{ STATIC_URL }}img/local-pages/austin/melissa.jpg" alt="melissa" />
                 <i class="icon-quote-left"></i>
                 <blockquote>Emily was extremely nice & patient with me today, as I needed help w/ my system & installation of some glass breakage sensors.  She is very knowledgeable w/ a good-natured personality.  I really enjoyed talking with her!
                     <p>Melissa &ndash; Austin, TX</p>
@@ -392,7 +409,8 @@
             </form>
         </div>
         <div class="five columns chat">
-            <p>Have a question you need answered right now? <a href="#" class="white">Try our online chat.</a></p>
+            <p>Have a question you need answered right now?</p>
+            <p class="white"><i class="fa fa-comment"></i><a href="#">Try our online chat.</a></p>
         </div>
     </div>
 </div>

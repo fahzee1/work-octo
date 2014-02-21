@@ -59,6 +59,39 @@
         padding-top: 32px;
     }
 }
+
+
+#signature {
+	background: url(/static/img/local-pages/austin/austin-signature-bg.jpg) center top no-repeat @white;
+	width: 100%;
+	height: auto;
+	padding: 30px 0px;
+    margin: 50px auto 0px auto;
+    p {
+    	color: @dark-grey;
+    }
+    h1 {
+    	font-size: 40px;
+    	line-height: 50px;
+	    color: @dark-grey;
+	    text-transform: none;
+	    span {
+		    line-height: 50px;
+		    display: block;
+		    font-size: 36px;
+	    }
+    }
+	#signature-left {
+		text-align: center;
+		margin-top: 125px;
+	}
+	#signature-right {
+		background-color: fade(@white, 75%);
+		padding: 50px 30px;
+		width: 400px;
+	}
+}			
+
 #community {
     margin: 48px auto;
 
@@ -494,11 +527,11 @@
 }
 #lifestyle-quote {
     width: 100%;
-    height: 320px;
+    height: auto;
     overflow: hidden;
     .button {
         width: 200px;
-        margin: 122px auto 0;
+        margin: 122px auto 122px;
         text-align: center;
         display: block;
         font-size: 24px;
@@ -652,3 +685,107 @@
 	min-height: 150px;
 	background: url(AjaxLoader.gif) no-repeat center center
 }
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		#signature {
+			background: url(/static/img/local-pages/austin/austin-signature-bg-tablet.jpg) center top no-repeat @white;
+			width: 100%;
+			height: auto;
+			padding: 30px 0px;
+			margin: 48px auto 0px auto;
+				#signature-left {
+					margin-top: 215px;
+						img {
+							width: 300px;
+						}
+					}
+				#signature-right {
+					width: 300px;
+					span {
+						font-size: 25px;
+					}
+				}
+			}
+		#community {
+			ul {
+				li {
+					&.four-stat {
+		                background: url(/static/img/local-pages/learn-tile-house.png) 150px top no-repeat #f5f5f5;
+		                background-size: 250px 135px;
+		            }
+				}
+			}	
+		}
+	}
+		
+/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {
+		#signature {
+				background: url(/static/img/local-pages/austin/austin-signature-bg-tablet.jpg) center top no-repeat @white;
+				width: 100%;
+				height: auto;
+				padding: 0px 0px 50px 0px;
+					#signature-left {
+						margin: 50px 0px;
+						img {
+							width: 300px;
+						}
+					}
+					#signature-right {
+						width: 360px;
+						span {
+							font-size: 25px;
+						}
+					}
+		}
+		#community {
+	        ul {
+		        li {
+					&.four-stat {
+							background: url(/static/img/local-pages/learn-tile-house.png) 170px top no-repeat #f5f5f5;
+							background-size: 280px 151px;
+				    }
+				}
+			}
+		}
+		#lifestyle-quote {
+			.button {
+				margin: 15% auto 15% auto;
+				font-size: 20px;
+				padding: 10px;
+			}
+		}
+	}
+		
+/* Screen to Landscape Mobile */
+	@media only screen and (max-width: 479px) {
+		#signature {
+			background: url(/static/img/local-pages/austin/austin-signature-bg-mobile.jpg) center top no-repeat @white;
+			width: 100%;
+			height: auto;
+			padding: 0px 0px 50px 0px;
+				#signature-left {
+					margin: 50px 0px;
+					img {
+						width: 300px;
+					}
+				}
+				#signature-right {
+					width: 240px;
+					span {
+						font-size: 25px;
+					}
+				}
+		}	
+		#community {
+	        ul {
+		        li {
+					&.four-stat {
+						background: url(/static/img/local-pages/learn-tile-house.png) 100px top no-repeat #f5f5f5;
+						background-size: 230px 124px;
+					}
+				}
+			}
+		}
+    }
