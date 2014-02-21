@@ -162,12 +162,15 @@ def post_to_leadconduit(data,test=False,retry=False):
                         'params':params.items()}
                 send_conduit_error(data,test=settings.LEAD_TESTING)
 
-            if not data['agentid']:
-                send_conduit_error(data,test=settings.LEAD_TESTING,
-                                        title='Lead missing Agent_ID',
-                                        message=' Lead id : %s \n Name: %s \n Phone: %s' % (data['lead_id'],data['customername'],data['phone']),
-                                        notify_all = True
-                                        )
+            try:
+                if not data['agentid']:
+                    send_conduit_error(data,test=settings.LEAD_TESTING,
+                                            title='Lead missing Agent_ID',
+                                            message=' Lead id : %s \n Name: %s \n Phone: %s' % (data['lead_id'],data['customername'],data['phone']),
+                                            notify_all = True
+                                            )
+            except KeyError:
+                pass
 
 
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
