@@ -10,8 +10,9 @@ from apps.affiliates.models import Affiliate
 
 class AffiliateMiddleware(object):
 
-    
+
     def process_view(self, request, view_func, view_args, view_kwargs):
+        print 'in action'
         check_agent_request = request.GET.get('agent', None)
         if check_agent_request in settings.SUPER_AFFILIATES:
             try:
@@ -22,7 +23,9 @@ class AffiliateMiddleware(object):
                 request.session['call_measurement'] = False
 
             except Affiliate.DoesNotExist:
-                pass
+                request.session['refer_id'] = 'PROTECT AMERICA'
+                request.session['source'] = 'PROTECT AMERICA'
+
         if 'agent' not in request.GET:
             if settings.SITE_ID == 3:
                 viewname = view_func.__name__
@@ -70,7 +73,7 @@ class AffiliateMiddleware(object):
             default_agent = settings.DEFAULT_AGENT
         except AttributeError:
             default_agent = None
-            
+
         try:
             default_source = settings.DEFAULT_SOURCE
         except AttributeError:
@@ -90,8 +93,9 @@ class AffiliateMiddleware(object):
                 current_cookie = None
                 current_source = None
             except Affiliate.DoesNotExist:
-                pass
-            
+                request.session['refer_id'] = 'PROTECT AMERICA'
+                request.session['source'] = 'PROTECT AMERICA'
+
         elif current_cookie is None:
             refer_id = request.session.get('refer_id', None)
             if refer_id is not None:
@@ -99,18 +103,20 @@ class AffiliateMiddleware(object):
                     affiliate = Affiliate.objects.get(agent_id=refer_id)
                     request.session['refer_id'] = affiliate.agent_id
                     request.session['source'] = affiliate.name
-                
+
                 except Affiliate.DoesNotExist:
-                    pass
-                
+                    request.session['refer_id'] = 'PROTECT AMERICA'
+                    request.session['source'] = 'PROTECT AMERICA'
+
             elif 'agent' in request.GET:
                 try:
                     affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])
                     request.session['refer_id'] = affiliate.agent_id
                     request.session['source'] = affiliate.name
                 except Affiliate.DoesNotExist:
-                    pass
-                    
+                    request.session['refer_id'] = 'PROTECT AMERICA'
+                    request.session['source'] = 'PROTECT AMERICA'
+
             else:
                 if default_agent is not None and current_cookie is None:
                     # we are going to assume that because there is no
@@ -118,6 +124,9 @@ class AffiliateMiddleware(object):
                     # that the visitor is organic
                     request.session['refer_id'] = default_agent
                     request.session['source'] = default_source
+                else:
+                    request.session['refer_id'] = 'PROTECT AMERICA'
+                    request.session['source'] = 'PROTECT AMERICA'
 
         # Allow overwriting of affkey cookie
         if request.GET.get('affkey', None):
@@ -154,6 +163,6 @@ class AffiliateMiddleware(object):
                 expires=datetime.now() + expire_time)
 
 
-        
+
         return response
 
