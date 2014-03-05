@@ -494,6 +494,9 @@ else:
         dtt(r'^404/?$', '404.html', '404', 'home'),
         dtt(r'^blog404/?$', 'blog404.html', 'blog404', 'home'),
 
+        dtt(r'^nacho/?$', 'affiliates/sem-landing-page/alarm.html', 'nacho'),
+
+
         # Shop
         dtt(r'^shop-home-security-packages/?$', 'packages/index.html', 'shop'),
         dtt(r'^shop-home-security-packages-b/?$', 'packages/index-b.html', 'shop-b'),
