@@ -789,7 +789,7 @@ else:
 
         # KOKE.FM
         dtt(r'^koke/?$', 'koke/koke.html', 'koke', ctx={'agent_id': 'i10721'}),
-        dtt(r'^horn/?$', 'koke/koke.html', 'horn', ctx={'agent_id': 'i10721'}),
+        dtt(r'^horn/?$', 'koke/horn.html', 'horn', ctx={'agent_id': 'i10721'}),
 
         # SEM Landing Pages
         #dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
