@@ -173,7 +173,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
         dtt(r'^home-security/?$', 'affiliates/sem-landing-page/home-security.html', 'home-security'),
         dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system.html', 'security-system'),
-        
+
         # COMPETITOR BASED
         dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/competitors/adt.html', 'adt'),
         dtt(r'^frontpoint-security/?$', 'affiliates/sem-landing-page/competitors/frontpoint.html', 'frontpoint'),
@@ -599,7 +599,7 @@ else:
                     dtt(r'^learn/protect-america/charities/?$', 'about-us/charities.html', 'charities', 'about-us'),
                     # > dtt(r'^pa/charities/america-protect/?$', 'about-us/charities.html', 'charities', 'about-us'),
 
-                  
+
                      url(r'^payitforward/?$','apps.payitforward.views.view_tweets',name='payitforward'),
                         dtt(r'^payitforward/about/?$', 'payitforward/about.html', 'payitforward-about', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/press/?$', 'payitforward/press.html', 'payitforward-press', 'payitforward', ctx={'agent_id': 'i03237'}),
@@ -609,7 +609,7 @@ else:
                         dtt(r'^payitforward/teams/?$', 'payitforward/teams.html', 'payitforward-teams', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/teams/2012/spring/?$', 'payitforward/spring2012.html', 'payitforward-spring2012', 'payitforward', ctx={'agent_id': 'i03237'}),
                         dtt(r'^payitforward/teams/2012/fall/?$', 'payitforward/spring2012.html', 'payitforward-fall2012', 'payitforward', ctx={'agent_id': 'i03237'}),
-                        # no fall2012 template present so temporarily showing spring2012 
+                        # no fall2012 template present so temporarily showing spring2012
                         url(r'^payitforward/involved/?$', 'apps.contact.views.payitforward', name='payitforward-involved'),
                         url(r'^payitforward/point-tracking/?$', 'apps.payitforward.views.point_tracking', name='payitforward-point-tracking'),
                         dtt(r'^payitforward/awareness/?$', 'payitforward/awareness.html', 'payitforward-awareness', 'payitforward', ctx={'agent_id': 'i03237'}),
@@ -790,7 +790,6 @@ else:
         # KOKE.FM
         dtt(r'^koke/?$', 'koke/koke.html', 'koke', ctx={'agent_id': 'i10721'}),
         dtt(r'^horn/?$', 'koke/horn.html', 'horn', ctx={'agent_id': 'i10721'}),
-
         # SEM Landing Pages
         #dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
         # > forward to homepage
