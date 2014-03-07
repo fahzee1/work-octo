@@ -1,0 +1,107 @@
+{% extends "products/equipment/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Home Security Equipment | Protect America{% endblock %}
+{% block page_keywords %}wireless home security system, GE security, wireless GE security equipment,security, home security, security system, home sec{% endblock %}
+{% block page_description %}Protect America's GE wireless home security systems are easy to install and very reliable. These are some of the most advanced available and offer great protection.{% endblock %}
+
+{% block content %} 
+<div id="hero-wrapper">
+    <div id="hero-image">
+        {% include "order/quote-form-white.html" with form=forms.basic %}
+        <span>
+            <h1>Home security equipment</h1>
+            <p>Peace of mind for your entire family.</p>
+            <p>Explore our equipment solution below, or <a href="#">shop by package here.</a></p>
+        </span>
+        <div class="three-products">
+            <ul>
+                <li><img src="{{ STATIC_URL }}img/products/equipment-simon-panel.png" alt="Simon XT panel" /><p><strong>Control panels:</strong> The brains of your home security system.</p></li>
+                <li><img src="{{ STATIC_URL }}img/products/equipment-sensor.png" alt="Door / window sensor" /><p><strong>Motion detectors:</strong> Secure the inside of your home against anything that moves.</p></li>
+                <li class="last"><img src="{{ STATIC_URL }}img/products/equipment-motion.png" alt="Motion detector" /><p><strong>Door / window sensors:</strong> A mighty small package providing the front line defense for your home.</p></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+{% include "order/call-box.html" %}
+<div class="wrapper">
+    <div id="four-equipment">
+        <h2>Additional equipment customized to you</h2>
+        <p>From smart phone integration and medical pendants, to GPS tracking and garage sensors, you’ve got you covered.</p>
+        <div class="home-security">
+            <img src="#">
+            <span>
+            <h3>Home security</h3>
+            <p>Get customizable alerts via email or text if your teenager or loved one is speeding or even if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college. Our GPS vehicle tracking brings an added level of security and control to any vehicle.</p>
+            <a href="#" class="link">touch screen panel<a>
+            <a href="#" class="link">garage door sensor<a>
+            <a href="#" class="link">glass break sensor<a>
+            <a href="#" class="link">keychain remote<a>
+            <a href="#" class="button">Learn more</a>
+            </span>
+            <div class="clear"></div>
+        </div>
+        <div class="home-automation">
+            <img src="#">
+            <span>
+            <h3>Home automation</h3>
+            <p>Control lights and appliances to manage your energy usage. Lock and unlock doors, even be notified of water leaks and frozen pipes – all remotely on your smartphone. Control your home from any Apple or Android product.</p>
+            <a href="#" class="link">door locks<a>
+            <a href="#" class="link">lights<a>
+            <a href="#" class="link">freeze sensors<a>
+            <a href="#" class="link">flood sensors<a>
+            <a href="#" class="button">Learn more</a>
+            </span>
+            <div class="clear"></div>
+        </div>
+        <div class="life-safety">
+            <img src="#">
+            <span>
+            <h3>Life safety</h3>
+            <p>Important pieces of equipment, we offer life safety sensors and accessories that can extend your home security system to protect more than your home. From medical panic pendants to monitored smoke detectors, we realize that sometimes the difference between life and death is the press of a button, or the sound of an alarm.</p>
+            <a href="#" class="link">smoke detectors<a>
+            <a href="#" class="link">carbon dioxide sensor<a>
+            <a href="#" class="link">medical pendant<a>
+            <a href="#" class="button">Learn more</a>
+            </span>
+            <div class="clear"></div>
+        </div>
+        <div class="automotive">
+            <img src="#">
+            <span>
+            <h3>Automotive</h3>
+            <p>Get customizable alerts via email or text if your teenager or loved one is speeding or even if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college. Our GPS vehicle tracking brings an added level of security and control to any vehicle.</p>
+            <a href="#" class="button">Learn more</a>
+            </span>
+            <div class="clear"></div>
+        </div>
+    </div>
+<div class="clear"></div>
+</div>
+{% addtoblock "js" %}
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#home-security-category").click(function() {
+                window.location.href = "{% url home-security-equipment %}";
+            });
+            $("#life-safety-category").click(function() {
+                window.location.href = "{% url life-safety-equipment %}";
+            });
+            $("#home-automation-category").click(function() {
+                window.location.href = "{% url home-automation-equipment %}";
+            });
+            $("#smart-connect-category").click(function() {
+                window.location.href = "{% url interactive-control %}";
+            });
+            $("#automotive-category").click(function() {
+                window.location.href = "{% url gps %}";
+            });
+
+        });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}  
+
