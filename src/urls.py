@@ -187,7 +187,6 @@ elif settings.SITE_ID == 3:
         dtt(r'^safemart/?$', 'affiliates/sem-landing-page/competitors/safemart.html', 'safemart'),
         dtt(r'^protection-1/?$', 'affiliates/sem-landing-page/competitors/protection-1.html', 'protection-1'),
 
-
         # TESTS
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
         dtt(r'^cyber-alt-19/?$', 'affiliates/sem-landing-page/test/green-19-white.html', 'green-white-19'),
@@ -483,7 +482,6 @@ elif settings.SITE_ID == 24:
 else:
     urlpatterns += patterns('',
 
-
         # Test Pages
         url(r'^test/index/(?P<test_name>[a-zA-Z\_\-]+)/?$', 'apps.common.views.index_test', name='index_test'),
 
@@ -524,6 +522,7 @@ else:
 
         # Equipment
             dtt(r'^security-equipment/?$', 'products/equipment/index.html', 'equipment'),
+            dtt(r'^security-equipment-b/?$', 'products/equipment/index-b.html', 'equipment-b'),
 
             # Equipment > Home Security
                 dtt(r'^equipment/home-security/?$', 'products/equipment/home-security.html', 'home-security-equipment', 'equipment'),
@@ -788,6 +787,9 @@ else:
         ('^feedback/?$',
             RedirectView.as_view(url='/pa/contact',permanent=True)),
 
+        # KOKE.FM
+        dtt(r'^koke/?$', 'koke/koke.html', 'koke', ctx={'agent_id': 'i10721'}),
+        dtt(r'^horn/?$', 'koke/koke.html', 'horn', ctx={'agent_id': 'i10721'}),
 
         # SEM Landing Pages
         #dtt(r'^home-security/for-less/?$', 'affiliates/sem-landing-page/ppc-landing.html', 'sem-landing', 'home'),
