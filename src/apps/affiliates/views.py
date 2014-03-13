@@ -18,7 +18,7 @@ import mimetypes
 from django.contrib import messages
 
 
-         
+
 def json_response(x):
     return HttpResponse(simplejson.dumps(x, sort_keys=True, indent=2),
                         content_type='application/json; charset=UTF-8')
@@ -70,7 +70,7 @@ def delta_view(request, affiliate, page_name=None):
 
 def delta_sky(request):
     return delta_view(request, 'a03005')
-    
+
 def resources(request):
     """
     Function that gathers all the google ads from all the campaigns and
@@ -102,7 +102,7 @@ def resources(request):
             'page_name': 'affiliate_resources',
             'google_ads': ads,
         })
-        
+
 def web_banners_page(request):
     """
     Function that gathers all the google ads from all the campaigns and
@@ -123,13 +123,13 @@ def web_banners_page(request):
         for ad in campaign.ad_set.all():
             if ad.type.slug in ads:
                 ads[ad.type.slug][1].append(ad)
-         
-                         
+
+
     ctx={'page_name': 'aff-web-banners',
          'google_ads':ads,
           'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request, 'affiliates/resources/web-banners.html',ctx)
-        
+
 def get_started_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
@@ -141,12 +141,12 @@ def get_started_page(request):
     if request.session.get('aff_id',False):
         id_here=True
         aff_id=request.session['aff_id']
-        
+
     ctx={'page_name':'aff-get-started',
         'aff_name':(aff_name if name_here else None),
         'aff_id':(aff_id if id_here else None)}
-    return simple_dtt(request,'affiliates/resources/get-started.html',ctx)   
-    
+    return simple_dtt(request,'affiliates/resources/get-started.html',ctx)
+
 
 
 def logos_page(request):
@@ -155,16 +155,16 @@ def logos_page(request):
     ctx={'page_name':'aff-logos',
          'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request,'affiliates/resources/logos.html',ctx)
-    
+
 def collateral_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
     ctx={'page_name':'aff-collateral',
          'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request,'affiliates/resources/collateral.html',ctx)
-    
 
-    
+
+
 def products_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
@@ -182,7 +182,7 @@ def semlanding_response(request):
     response = render_to_response('affiliates/sem-landing-page/green-test.html',
                                   {'forms': forms},
                                   context_instance=RequestContext(request))
-    
+
     return response
 
 # used in the middleware to know what session to set
@@ -277,7 +277,7 @@ def edit_affiliate(request, affiliate_id):
 
 def request_agent_id(request):
     latest_agent = Affiliate.objects.latest('agent_id')
-    
+
     def increment(agent_id):
         poped = []
         for char in agent_id:
@@ -301,7 +301,7 @@ def request_agent_id(request):
         return json_response({'success': True, 'agent_id': new_id})
     return json_response({'success': False})
 
-def signup(request): 
+def signup(request):
     ctx = {}
     ctx['page_name'] = 'affiliate-program'
     ctx['pages'] = ['contact-us']
@@ -376,8 +376,8 @@ def get_affiliate_information(request, affiliate_id):
 
     return json_response({'success': True, 'affiliate': info})
 
-    
-    
+
+
 def aff_login(request):
     form=AffiliateLoginForm()
     if request.method == 'POST':
@@ -393,15 +393,23 @@ def aff_login(request):
                     response=redirect('aff-get-started')
                     response['Location'] +='?agent_id=%s' % aff.agent_id
                     return response
-                
+
             except Affiliate.DoesNotExist:
                 messages.info(request,'Please Enter The Correct Login.')
-                return redirect('aff-login')       
+                return redirect('aff-login')
     else:
        form=AffiliateLoginForm()
     ctx={'form':form,'page_name':'aff-login'}
-    return render(request,'affiliates/resources/login.html',ctx) 
-    
-    
-           
+    return render(request,'affiliates/resources/login.html',ctx)
+
+
+def agent_page(request):
+    ctx={'page_name':'aff-agent',
+         'aff_id':request.session.get('aff_id',None)}
+    return render(request,'affiliates/resources/agent.html',ctx)
+
+
+
+
+
 

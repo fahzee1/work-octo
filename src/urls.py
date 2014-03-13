@@ -758,7 +758,7 @@ else:
         url(r'^affiliates/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='aff-web-banners'),
         url(r'^affiliates/resources/collateral/?$', 'apps.affiliates.views.collateral_page', name='aff-collateral'),
         url(r'^affiliates/resources/products/?$', 'apps.affiliates.views.products_page', name='aff-products'),
-        # agent page: url(r'^affiliates/resources/agent/?$', 'apps.affiliates.views.agent_page', name='aff-agent'),
+        url(r'^affiliates/resources/agent/?$', 'apps.affiliates.views.agent_page', name='aff-agent'),
         url(r'^affiliates/login/?$', 'apps.affiliates.views.aff_login', name='aff-login'),
         url(r'^api/affiliate/?$', 'apps.affiliates.views.accept_affiliate'),
 
