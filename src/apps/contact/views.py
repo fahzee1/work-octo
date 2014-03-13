@@ -709,3 +709,21 @@ def payitforward(request):
                                'form': form,
                                'pages': ['about'],
                                'page_name': 'payitforward-involved'})
+
+
+def ajax_log(request):
+    if request.is_ajax():
+        number = request.POST.get('number',None)
+        link = request.POST.get('link',None)
+        timestamp = datetime.now()
+        if number and link:
+            logger.info('Call measurement returned %s.\n Link:%s \n Timestamp:%s' % (number,link,timestamp))
+
+        else:
+            if link:
+                logger.info('Call measurement didnt return number.\n Link:%s \n Timestamp:%s' % (link,timestamp))
+            else:
+                logger.info('Call measurement didnt return number.\n Timestamp:%s' % timestamp)
+        return HttpResponse()
+    return HttpResponseBadRequest()
+

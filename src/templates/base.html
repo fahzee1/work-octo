@@ -564,6 +564,7 @@ $(document).ready(function(){
             ci_search_source = "mobile";
         }
     }
+
     if (cookie_refer_id == 'BINGPPC' || session_refer_id == 'BINGPPC' || session_refer_id == 'i10240'){
         ci_search_source = 'bing'
         if (device == 'm' || session_refer_id == 'i10045'){
@@ -588,7 +589,26 @@ $(document).ready(function(){
 
     var thisref = document.referrer.replace(/&/g, "zzzzz");
     var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-    document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E"));
+    var script = unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E");
+
+    document.write(script);
+
+
+    var number = $('.dynamic-phone-number').first().text();
+
+    if (number){
+        var ctx = {'number':number,
+                   'link':script};
+         $.ajax({
+                type: "POST",
+                url: "/ajax/log/",
+                    data: ctx,
+                    dataType: "json",
+                    });
+}
+
+
+
 </script>
 {% endif %}
 {% endblock %}
