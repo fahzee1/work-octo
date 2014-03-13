@@ -1,26 +1,25 @@
-{% extends "base.html" %}
+{% extends "affiliates/resources/get-started.html" %}
 {% load sekizai_tags content_tags content_filters %}
 {% load url from future %}
 {% block page_title %}Protect America Affiliate Resources{% endblock %}
-{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/resources/resources.css">
+{% block navigation %}
 {% endblock %}
-
-
-
-
-{% block content %}
-
-
+{% block hero %}
+{% endblock %}
+{% block icon-nav %}
+{% endblock %}
+{% block resources-content %}
 {% include "affiliates/resources/_partials/resources-nav.html" %}
 
-<div class="wrapper">
+<div class="wrapper" id="web-banners">
+	<i class="fa fa-desktop" id="header-icon"></i> <h1>Web Banners</h1>
+	<p>To utilize these web banners, simply click on the image you would like to use. A pop up will appear for you to enter your Agent ID, and you may copy the code provided.</p>
+	<br><br>
        {% for key,value in google_ads.items %}
-       <div class="image-container" style="position:relative;">
-            <h3>{{ value.0 }}</h3>
+       <div class="image-container">
+            <h2>{{ value.0 }}</h2>
             <div class="content-area" id="aff-banners">
-             
-                              
+      
                     {% for x in value.1 %}
                     
                         <img src="{{ MEDIA_URL }}{{ x.ad }}" onclick="javascript:enterAgentID(this)" class="webBanner">
@@ -111,6 +110,7 @@
         }
     </script>
     {% endaddtoblock "js" %}
-
+{% block order-footer %}
+{% endblock %}
 {% endblock %}
 
