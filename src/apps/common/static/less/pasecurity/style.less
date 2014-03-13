@@ -305,7 +305,6 @@ a {
             right: 370px;
             width: 260px;
             padding: 20px;
-            background: url(/static/images/white-bg.png) repeat;
         }
     }
 } 
@@ -1168,6 +1167,7 @@ footer {
 
                 strong {
                     text-transform: uppercase;
+                    color: #fff;
                 }
                 span {
                     font-weight: normal;
@@ -1217,7 +1217,6 @@ footer {
 #terms-wrapper {
     background: @grey;
     #terms {
-        width: 960px;
         margin: 0 auto;
         padding-top: 8px;
         background: none;
@@ -1367,6 +1366,15 @@ footer {
 ================================================== */
 	/* Larger than standard 960 (devices and browsers) */
 	@media only screen and (min-width: 960px) {
+		#header-wrapper {
+			background: @black;
+			#header {
+				width: 930px !important;
+				margin: 0px auto;
+				
+				#menu-button { display: none; }
+			}
+		}
 		#hero {
 			background: url(/static/img/local-pages/austin/austin-hero-banner-1600px.jpg) center center no-repeat #66c2eb;
 			&.index {
@@ -1390,6 +1398,13 @@ footer {
 		#featured-on {
 			margin-top: 80px;
 		}
+		
+    #terms-wrapper {
+	    #terms {
+	        margin: 0 auto;
+	        width: 960px;
+	      }
+	}
 	}
 	
 	/* Larger than 1590px (devices and browsers) */
@@ -1401,6 +1416,30 @@ footer {
 	
 	/* Smaller than standard 960 (devices and browsers) */
 	@media only screen and (max-width: 959px) {
+		#header-wrapper {
+			background: @black;
+			#header {
+				width: 738px !important;
+				margin: 0px auto;
+			}
+		}
+		#top-section, #main-navigation { display: none; }
+		#menu-button {
+			background: @green;
+			border-radius: 5px 5px 5px 5px;
+			-moz-border-radius: 5px 5px 5px 5px;
+			-webkit-border-top-left-radius: 5px;
+			-webkit-border-top-right-radius: 5px;
+			-webkit-border-bottom-left-radius: 5px;
+			-webkit-border-bottom-right-radius: 5px;
+			text-decoration: none;
+			color: #ffffff;
+			float: right;
+			font-weight: normal;
+			font-size: 25px;
+			padding: 6px 13px;
+			margin: 8px 0px 0px 10px;
+		}
         #hero {
 	        &.index{
 		        .container {
@@ -1447,15 +1486,6 @@ footer {
                         }
                     }
 
-                }
-            }
-        }
-        footer {
-            .container {
-                ul {
-                    &.eight.columns {
-                        width: 500px;
-                    }
                 }
             }
         }
@@ -1532,7 +1562,7 @@ footer {
 	    #advantage-table-wrapper {
 	        background: @pa-blue;
 	        #advantage-table {
-	            width: 756px;
+	            width: 738px;
 	            margin: 0 auto;
 	            padding: 64px 0;
 	            h2 {
@@ -1647,10 +1677,25 @@ footer {
 	            }
 	        }
 	    }
+	#footer-wrapper {
+    background: #333;
+    #footer {
+        background: url(/static/img/base/protect-america-grey.png) 0px 25px no-repeat;
+        margin: 0 auto;
+        width: 515px;
+        padding: 32px 0px 32px 230px;
+        #footer-awards { display: none; }
     }
+}
+	#terms-wrapper {
+	    #terms {
+	        width: 738px;
+	    }
+	}
+}
 
-	/* Tablet Portrait size to standard 960 (devices and browsers) */
-	@media only screen and (min-width: 768px) and (max-width: 959px) {
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
 		#hero {
 			background: url(/static/img/local-pages/austin/austin-hero-banner-1000px.jpg) 0px center no-repeat #66c2eb;
     		&.index {
@@ -1690,6 +1735,13 @@ footer {
 	}
 	/* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
+		#header-wrapper {
+			background: @black;
+			#header {
+				width: 90% !important;
+				margin: 0px auto;
+			}
+		}
 		#hero {
 			background: url(/static/img/local-pages/austin/austin-hero-banner-1000px.jpg) center 0px no-repeat #66c2eb !important;
 			&.index {
@@ -1910,6 +1962,8 @@ footer {
 		                padding: 16px 0;
 		                text-transform: uppercase;
 		                letter-spacing: 2px;
+		                width: 420px;
+		                margin: 0px auto;
 		                span {
 		                    display: block;
 		                    font-size: 16px;
@@ -1920,9 +1974,9 @@ footer {
 		                }
 		            }
 		            table {
-		                width: 100%;
+		                width: 420px;
 		                vertical-align: middle;
-		                margin: 32px 0;
+		                margin: 32px auto;
 		                thead {
 		                    tr {
 		                        th {
@@ -2023,22 +2077,6 @@ footer {
         #faq {
             display: none;
         }
-        footer {
-            .container {
-                ul {
-                    &.three.columns {
-                        width: 125px;
-                        float: left;
-                    }
-                    &.eight.columns {
-                        width: 220px;
-                    }
-                    &.two.columns {
-
-                    }
-                }
-            }
-        }
         #terms {
             p {
                 &.copyright {
@@ -2088,6 +2126,100 @@ footer {
                 }
             }
         }
+		#terms-wrapper {
+		    #terms {
+		        width: 420px;
+		    }
+		}
+			#footer-wrapper {
+		    background: #333;
+		    #footer {
+		        background: url(/static/img/base/protect-america-grey.png) center 25px no-repeat;
+		        margin: 0px auto;
+		        width: 420px;
+		        padding: 80px 0px 32px 0px;
+		        #footer-main-navigation, #footer-care-nav, #footer-contact-info {
+		            display: block;
+		            float: left;
+		            padding-left: 16px;
+		            width: 124px;
+		            li {
+		                color: @white;
+		                font-weight: 100;
+		                font-size: 12px;
+		                line-height: 20px;
+		                margin-bottom: 8px;
+		                display: block;
+		                width: 108px;
+		                padding: 2px 8px;
+		                .border-radius(5px,5px,5px,5px);
+		                .fade-slow;
+		                &:hover {
+		                    background: @grey;
+		                    .fade-fast;
+		                }
+		                a {
+		                    color: @white;
+		                    text-decoration: none;
+		                }
+		                &.active {
+		                    background: @white;
+		                    color: @blue;
+		                    a {
+		                        color: @blue;
+		                    }
+		                }
+		            }
+		        }
+		        #footer-contact-info {
+		            li {
+						width: 132px;
+		                margin-bottom: 0;
+		
+		                strong {
+		                    text-transform: uppercase;
+		                }
+		                span {
+		                    font-weight: normal;
+		                }
+		                a {
+		                    color: @white;
+		                    text-decoration: none;
+		                }
+		                &:hover {
+		                    background: transparent;
+		                }
+		                &#footer-social-icons {
+		                    margin-top: 22px;
+		                    .icon-twitter, .icon-facebook, .icon-youtube, .icon-google-plus, .icon-linkedin {
+		                        background: #76c1c5;
+		                        padding: 4px 6px;
+		                        color: @black;
+		                        font-size: 28px;
+		                        .border-radius(20px, 20px, 20px, 20px);
+		                        .fade-slow;
+		                        margin-right: 4px;
+		                        &:hover {
+		                            background: @light-grey;
+		                            .fade-fast;
+		                        }
+		                    }
+		                    .icon-facebook {
+		                        background: #698bd3;
+		                        padding: 4px 13px;
+		                    }
+		                    .icon-youtube {
+		                        background: #ff5a5a;
+		                    }
+		                    .icon-google-plus {
+		                        background: #dc5931;
+		                    }
+		                }
+		            }
+		        }
+		    }
+		}
+
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -2107,6 +2239,7 @@ footer {
     }
 	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 	@media only screen and (max-width: 479px) {
+		 .request-quote-button { display: none; }
 		 #hero {
 		 		background: url(/static/img/local-pages/austin/austin-hero-banner-500px.jpg) 0px center no-repeat #66c2eb;
 			 &.index {
@@ -2374,7 +2507,13 @@ footer {
         }
 		#advantage-table-wrapper {
 	        #advantage-table {
+	        	h2 {
+		        	width: 300px;
+		        	margin: 0px auto;
+	        	}
 	            table {
+	            	width: 300px;
+	            	margin: 32px auto;
 	                tbody {
 	                    tr {
 	                        td {
@@ -2388,6 +2527,17 @@ footer {
 	            }
 	        }
 	    }
+		#terms-wrapper {
+		    #terms {
+		        width: 300px;
+		    }
+		}
+		#footer-wrapper {
+		    #footer {
+		        width: 300px;
+		    }
+		}
+
 	}
 	
 	/* Mobile Smallest */
