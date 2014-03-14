@@ -190,23 +190,10 @@ LOCAL_PAGE_PATH = '/virtual/customer/www2.protectamerica.com/localpages/'
 
 #exclude these cities for local pages and create respective static pages
 EXCLUDE_CITIES = {
-'New York':'NY',
-'Los Angeles':'CA',
-'Chicago':'IL',
-'Washington':'DC',
-'Boston':'MA',
-'San Jose':'CA',
-'Philadelphia':'PA',
-'Dallas':'TX',
-'Houston':'TX',
-'Atlanta':'GA',
-'Miami':'FL',
-'Detroit':'MI',
-'Phoenix':'AZ',
-'Seattle':'WA',
-'Minneapolis':'MN'
-}
 
+'Austin':'TX',
+}
+READY_FOR_STATIC = True
 TIMEZONES = {
     'AL': 'America/Chicago',
     'AK': 'America/Anchorage',
@@ -379,8 +366,11 @@ if not LC_LOG:
         LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
     elif os.path.isdir('/Users/waldemarprzybyslawsk'):
         LC_LOG = ('/Users/waldemarprzybyslawsk/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+
+    elif os.path.isdir('/Users/edgarrodriguez'):
+        LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
     elif os.path.isdir('/Users/jacquelynchastain'):
-        LC_LOG = ('/Users/jacquelynchastain/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+        LC_LOG = ('/Users/jacquelychastain/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
     else:
         LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
 
