@@ -197,7 +197,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^simplisafe/?$', 'affiliates/sem-landing-page/competitors/simplisafe.html', 'simplisafe'),
         dtt(r'^monotronics/?$', 'affiliates/sem-landing-page/competitors/monotronics.html', 'monotronics'),
         dtt(r'^verizon/?$', 'affiliates/sem-landing-page/competitors/verizon.html', 'verizon'),
-
+		dtt(r'^compare-us/?$', 'affiliates/sem-landing-page/competitors/compare-us.html', 'compare-us'),
 
         # TESTS
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
