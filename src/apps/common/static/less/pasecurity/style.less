@@ -77,6 +77,7 @@
 body {
     .san-serif-font;
     background: @white;
+    color: @white;
 }
 
 h1 {
@@ -181,33 +182,33 @@ a {
         .container {
             height: 483px;
             .heading {
-                width: 500px;
+            	text-align: center;
+            	background: url(/static/img/local-pages/austin/white-75.png);
+                width: 425px;
                 bottom: 210px;
-                right: 190px;
+                right: 8px;
                 h1 {
-                    color: @white;
+                    color: @pa-blue;
                     font-size: 37px;
                     line-height: 43px;
                     margin: 0;
-                    text-shadow: 1px 2px @dark-grey; 
+                    text-shadow: 1px 2px @white; 
                     &.big {
-                        font-size: 56px;
-                        line-height: 56px;
+                        font-size: 50px;
+                        line-height: 50px;
                     }
                     span {
-                        font-size: 35px;
-                        line-height: 55px;
+                        font-size: 28px;
+                        line-height: 28px;
                         display: block;
                     }
                 }
                 h3 {
                     color: @dark-grey;
                     font-size: 45px;
-                    background: @white;
-                    padding: 20px 30px;
-                    width: 350px;
+                    padding: 20px 30px 5px 30px;
                     text-align: center;
-                    margin: 25px 0px 0px 0px;
+                    margin: 0px 0px 0px 0px;
                     .slab-font;
                 }
             }
@@ -216,6 +217,7 @@ a {
                 top: 40px;
                 z-index: 500;
                 border: 1px solid #eee;
+                color: @black;
             }
         }
     }
@@ -1362,6 +1364,29 @@ footer {
     }
 }
 
+#mobile-menu-container {
+	display: none;
+	background-color: @grey;
+	margin-bottom: -20px;
+	text-align: center;
+	width: 100%;
+	position: static;
+	margin-top: 7px;
+	#mobile-navigation {
+		li {
+			height: 20px;
+			padding: 20px 0px;
+			border-bottom: 1px solid @black;
+			a {
+				text-decoration: none;
+				color: @white;
+				font-weight: 100;
+				font-size: 16px;
+			}
+		}
+	}
+}
+
 /* #Media Queries
 ================================================== */
 	/* Larger than standard 960 (devices and browsers) */
@@ -1376,12 +1401,8 @@ footer {
 			}
 		}
 		#hero {
-			background: url(/static/img/local-pages/austin/austin-hero-banner-1600px.jpg) center center no-repeat #66c2eb;
 			&.index {
 				.container {
-					.heading {
-						right: -30px;
-					}
 					.quote-form-white {
 						left: 10px;
 					}
@@ -1405,13 +1426,6 @@ footer {
 	        width: 960px;
 	      }
 	}
-	}
-	
-	/* Larger than 1590px (devices and browsers) */
-	@media only screen and (min-width: 1590px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-hero-banner-1900px.jpg) center center no-repeat #66c2eb;
-		}
 	}
 	
 	/* Smaller than standard 960 (devices and browsers) */
@@ -1439,6 +1453,10 @@ footer {
 			font-size: 25px;
 			padding: 6px 13px;
 			margin: 8px 0px 0px 10px;
+			cursor: pointer;
+		}
+		.stuck-phone {
+			display: none !important;
 		}
         #hero {
 	        &.index{
@@ -1478,7 +1496,7 @@ footer {
                 }
                 .six.columns {
                     width: 210px;
-                    padding: 0 0 0 10px;
+                    padding: 0px 29px 0px 29px;
                     input {
                         &.search-field {
                             width: 160px;
@@ -1697,13 +1715,12 @@ footer {
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 		#hero {
-			background: url(/static/img/local-pages/austin/austin-hero-banner-1000px.jpg) 0px center no-repeat #66c2eb;
     		&.index {
         		.container {
             		.heading {
-                		width: 500px;
+            			width: 411px;
 						bottom: 210px;
-						right: 0px;
+						right: 68px;
 					}
 					.quote-form-white {
 						left: 10px;
@@ -1732,6 +1749,22 @@ footer {
 				}
 			}
 		}
+		#testimonials {
+			height: 400px;
+			.review {
+				height: 400px;
+			}
+			.container {
+				blockquote {
+					width: 45%;
+					text-align: left;
+				}
+				span {
+					text-align: left;
+					margin: 0 0;
+				}
+			}
+		}
 	}
 	/* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
@@ -1743,15 +1776,15 @@ footer {
 			}
 		}
 		#hero {
-			background: url(/static/img/local-pages/austin/austin-hero-banner-1000px.jpg) center 0px no-repeat #66c2eb !important;
 			&.index {
 				margin-bottom: 100px;
         		.container {
         			width: 100%; 
 					.heading {
 						width: 100%;
+						height: 115px;
 						text-align: center;
-						margin: 0 auto;
+						margin: 0px auto;
 						position: absolute;
 						top: -15px;
 						left: auto;
@@ -1759,19 +1792,18 @@ footer {
 						h1 {
 							margin: 0px;
 							&.big {
-								font-size: 45px;
-								line-height: 45px;
+								font-size: 35px;
+								line-height: 35px;
 								}
 							span {
-								font-size: 25px;
-								line-height: 25px;
+								font-size: 20px;
+								line-height: 20px;
 							}
 						}
 						h3 {
-							font-size: 35px;
+							font-size: 40px;
 							padding: 15px 25px;
-							width: 350px;
-							margin: 25px auto 0px auto;
+							margin: 10px auto 0px auto;
 						}
 					}
 				.quote-form-white {
@@ -1934,11 +1966,7 @@ footer {
                     li {
                         width: 100%;
                         height: 170px;
-                        padding: 0;
-                        
-                        #feature4, #feature5, #feature6 {
-							display: none;
-						}
+                        padding: 0;  
                     }
                 }
             }
@@ -2219,17 +2247,21 @@ footer {
 		        }
 		    }
 		}
-
+		 #feature4, #feature5, #feature6 {
+							display: none !important;
+						}
 	}
 
 	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 	@media only screen and (min-width: 480px) and (max-width: 767px) {
 		 #hero {
-		 	background: url(/static/img/local-pages/austin/austin-hero-banner-1000px.jpg) 0px center no-repeat #66c2eb;
 		 	height: 275px;
 		 	padding: 50px 0px 0px 0px;
 		 	&.index {
 			 	.container {
+			 		.heading {
+				 		padding: 20px 0px;
+			 		}
 				 	#party-box {
 						bottom: 150px;
 				 	}
@@ -2240,26 +2272,24 @@ footer {
 	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 	@media only screen and (max-width: 479px) {
 		 .request-quote-button { display: none; }
-		 #hero {
-		 		background: url(/static/img/local-pages/austin/austin-hero-banner-500px.jpg) 0px center no-repeat #66c2eb;
+		 #hero { 
 			 &.index {
 				 .container {
 				 	.heading {
-						padding: 17% 0px 20px 0px;
+				 		padding: 20px 0px;
+				 		top: 50px;
 						h1 {
-		                    padding: 0px 20px;
 		                    &.big {
-		                        font-size: 43px;
-		                        line-height: 43px;
+		                        font-size: 30px;
+		                        line-height: 30px;
 		                    }
 		                    span {
-		                        font-size: 24px;
-		                        line-height: 24px;
+		                        font-size: 17px;
+		                        line-height: 17px;
 		                    }
 		                }
 		                h3 {
-		                    font-size: 28px;
-		                    width: 230px;
+		                    font-size: 35px;
 		                }
 		            } 
 		            #party-box {
@@ -2539,34 +2569,3 @@ footer {
 		}
 
 	}
-	
-	/* Mobile Smallest */
-	@media only screen and (max-width: 372px) {
-		 #hero.index {
-		 	margin-bottom: 80px;
-		 	.container {
-		 		.heading {
-		 			width: 100%;
-		 			text-align: center;
-		 			margin: 0 auto;
-		 			padding: 14% 0px 20px 0px;
-					h1 {
-	                    padding: 0px 20px;
-	                    &.big {
-	                        font-size: 40px;
-	                        line-height: 42px;
-	                    }
-	                    span {
-	                        font-size: 20px;
-	                        line-height: 22px;
-	                    }
-	                }
-	                h3 {
-	                    font-size: 26px;
-	                    width: 230px;
-	                }
-				}
-			}
-		}
-	}
-

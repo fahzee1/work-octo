@@ -41,7 +41,7 @@
             <a href="{% url home %}">
                 <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="company-logo">
             </a>
-            <a href="#" id="menu-button"><i class="fa fa-bars"></i></a>
+            <a id="menu-button"><i class="fa fa-bars"></i></a>
             <a href="{% url order-package %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
             {% if phone_number %}
                 <div class="stuck-phone">
@@ -70,11 +70,28 @@
             </ul>
             {% endblock %}
             {% include "order/quote-form-refresh.html" with form=forms.basic %}
-
+			
             <div class="clear"></div>
-        </div>
-    </div>
 
+        </div>
+        <div id="mobile-menu-container">
+			<ul id="mobile-navigation">
+                <li>
+                    <a href="{% url shop %}">Shop</a>
+                </li>
+                <li>
+                    <a href="{% url equipment %}">Equipment</a>
+                </li>
+                <li>
+                    <a href="{% url learn %}">Learn</a> 
+                </li>
+                <li>
+                    <a href="{% url support %}">Support</a>
+                </li>
+            </ul>
+		</div>
+    </div>
+	 
 {% endblock %}
 
 {% block content %}
@@ -130,8 +147,8 @@
         <p>Protect America has provided Austin with affordable and reliable business and home security systems since 1992. We pride ourselves in bring a national company with an unmistakable Austin attitude. We're pioneers in wireless home automation &ndash; our SMART Connect app keeps you connected with your home while you're away; easily arm and disarm your system, adjust lights, and control thermostats.</p>
         <p>Combined with our monitored alarm systems that start as low as $19.99 per month with free equipment, the choice for home security is clear.</p>
     </div>
-    <div class="eight columns side">
-        video goes here
+    <div class="eight columns side" id="austin-video">
+        <script type='text/javascript' src='http://KTBC.images.worldnow.com/interface/js/WNVideo.js?rnd=77624;hostDomain=www.myfoxaustin.com;playerWidth=460;playerHeight=400;isShowIcon=true;clipId=9404243;flvUri=;partnerclipid=;adTag=News;advertisingZone=;enableAds=true;landingPage=;islandingPageoverride=false;playerType=STANDARD_EMBEDDEDscript;controlsType=overlay'></script><a href="http://www.myfoxaustin.com" title=""></a>
     </div>
 </div>
 
@@ -154,28 +171,28 @@
     <div class="container">
         <h2 class="light">Perfect for your Austin home</h2>
         <ul>
-            <li>
-                <h3><i class="fa fa-smile-o" id="feature1"></i>True Peace of Mind</h3>
+            <li id="feature1">
+                <h3><i class="fa fa-smile-o"></i>True Peace of Mind</h3>
                 <p>Experience world-class 24/7 monitoring right here in Austin for real coverage and real safety</p>
             </li>
-            <li>
-                <h3><i class="fa fa-scissors" id="feature2"></i>Lose the Wires</h3>
+            <li id="feature2">
+                <h3><i class="fa fa-scissors"></i>Lose the Wires</h3>
                 <p> From Hyde Park to Tarrytown, our wireless technology covers your entire home without destructive installation and drilling countless holes in your walls</p>
             </li>
-            <li>
-                <h3><i class="fa fa-tag" id="feature3"></i>Prices Unmatched</h3>
+            <li id="feature3">
+                <h3><i class="fa fa-tag"></i>Prices Unmatched</h3>
                 <p>Security is important, but it shouldn’t cost an arm and a leg. Our packages begin at only $19.99 a month and we match any competitor price with our Lowest Price Guarantee</p>
             </li>
-            <li>
-                <h3><i class="fa fa-pencil" id="feature4"></i>Customize It</h3>
+            <li id="feature4">
+                <h3><i class="fa fa-pencil"></i>Customize It</h3>
                 <p> Austin is full of different people with all kinds of homes. That’s why we designed our security systems to be customized to your specific needs. Swap equipment, add fire protection and even home automation. Keep Austin weird and secure</p>
             </li>
-            <li>
-                <h3><i class="fa fa-lock" id="feature5"></i>No Installation or Equipment Fees</h3>
+            <li id="feature5">
+                <h3><i class="fa fa-lock"></i>No Installation or Equipment Fees</h3>
                 <p>Securing your home should be stress-free. That’s why our DIY system packages come with free equipment and require no expensive expert installation</p>
             </li>
-            <li>
-                <h3><i class="fa fa-map-marker" id="feature6"></i>Local Company, Local Service</h3>
+            <li id="feature6">
+                <h3><i class="fa fa-map-marker"></i>Local Company, Local Service</h3>
                 <p>We might be a national company, but we started right here in Austin. Our security experts are your neighbors and available 7 days a week</p>
             </li>
         </ul>
@@ -236,7 +253,7 @@
             <div class="review">
             	<img src="{{ STATIC_URL }}img/local-pages/austin/tom.jpg" alt="tom" />
                 <i class="icon-quote-left"></i>
-                <blockquote>Used chat from the website to get customer service. Was looking to update my account to reflect my city of Austin police department alarm permit number.  Gloria was very helpful, professional and was quick to resolve the item.
+                <blockquote>Used chat from the website to get customer service. Was looking to update my account to reflect my city of Austin police department alarm permit number.  Gloria was very helpful, professional and was quick to resolve the issue.
                 <p>Tom - Austin, TX</p>
                 <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
 
@@ -361,6 +378,11 @@
 
     <script type="text/javascript">
     $(document).ready(function() {
+    	$( "#menu-button" ).click(function() {
+			$( "#mobile-menu-container" ).slideToggle( "slow", function() {
+			});
+		});
+    	
         var owl = $("#featured-badges");
         var outreach = $("#community-outreach-squares");
         
@@ -393,7 +415,6 @@
         });
     });
     </script>
-    <script src="{{ STATIC_URL }}js/unslider.min.js"></script>
 {% endaddtoblock "js" %}
 {% endblock %}
 {% block order-footer %}
