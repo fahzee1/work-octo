@@ -49,6 +49,9 @@
                     <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                 </div>
             {% endif %}
+            <ul id="mobile-main-navigation" class="hide-desktop">
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+            </ul>
             {% block navigation %}
             <ul id="main-navigation">
                 <li {% if 'shop' in active_pages %}class="active"{% endif %}>
@@ -107,9 +110,9 @@
 		{% block partybox %}
 		<!-- Party box start -->
 		<div id="party-box">
-			<img id="deal1" src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png">
-		    <img id="deal2" src="{{ STATIC_URL }}img/local-pages/party-free-camera.png">
-		    <img id="deal3" src="{{ STATIC_URL }}img/local-pages/party-signature-service_05.png">
+			<a href="http://www.protectamerica.com/shop-home-security-packages"><img id="deal1" src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png"></a>
+		    <a href="http://www.protectamerica.com/equipment/home-security/security-camera"><img id="deal2" src="{{ STATIC_URL }}img/local-pages/party-free-camera.png"></a>
+		    <a href="#signature"><img id="deal3" src="{{ STATIC_URL }}img/local-pages/party-signature-service_05.png"></a>
 		</div>
 		<!-- End party box -->
 		{% endblock %}
@@ -152,6 +155,7 @@
     </div>
 </div>
 
+<a name="signature"></a>
 <div id="signature">
 	<div class="container">
 		<div class="eight columns" id="signature-left">
@@ -208,7 +212,6 @@
         <div class="square"><a href="http://www.myfoxaustin.com/story/24627086/new-app-helps-keep-homes-secure" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-door-lock.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America features the latest home automation on myFOXaustin</p></a></div>
         <div class="square"><a href="http://bit.ly/1b8bX9L" target="_blank"><img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-prn1/t31/p180x540/1553300_10152163673609551_1683699488_o.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America Employees Donate to SafePlace</p></a></div>
         <div class="square"><a href="http://www.myfoxaustin.com/story/24445424/experts-proper-home-tech-can-prevent-fire-related-deaths" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-fire.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Proper home tech can prevent fire-related deaths</p></a></div>
-
     </div>
     <div class="container">
         <h3>Why get a home security system?</h3>
@@ -395,18 +398,18 @@
         outreach.owlCarousel({
           autoPlay: 7000,
           stopOnHover: true,
-          items : 12,
-          itemsCustom: [[0, 1], [640, 2], [960, 3], [1280, 4],[1600, 5], [1920, 6], [2240, 7], [2560, 8]]
+          items : 3, //10 items above 1000px browser width
+          itemsDesktop : [1000,3], //5 items between 1000px and 901px
+          itemsDesktopSmall : [930,2], // betweem 900px and 601px
+          itemsTablet: [660,1], //2 items between 600 and 0
+          itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
         });
         $("#review-container").owlCarousel({
-        
           slideSpeed : 300,
           paginationSpeed : 400,
-          singleItem:true,
+          singleItem: true,
           autoHeight: true,
           pagination: false,
-
-        
         });
         $('.square').click(function() {
             var link = $(this).data("link");
