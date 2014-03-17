@@ -1,11 +1,40 @@
 {% extends "base.html" %}
 
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+{% block page_title %}Austin's Best Home Security Systems Since 1992 | Protect America Inc.{% endblock %}
+{% block page_description %}Serving Austin with high quality security systems since 1992. Call Protect America at (512) 218-8833 to save on Security Packages including Wireless Alarm Systems for your home or office.{% endblock %}
 
-
+{% block data_template %}itemscope itemtype="http://schema.org/Article"{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/local-pages/austin.css?v3.9">
-<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href="http://www.protectamerica.com/static/css/font-awesome/4.0.3/font-awesome.css" rel="stylesheet">
+
+
+<!-- Google Authorship and Publisher Markup -->
+<link rel="publisher" href="https://plus.google.com/+ProtectAmerica"/>
+
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="Austin's Best Home Security Systems">
+<meta itemprop="description" content="Serving Austin with high quality security systems since 1992. Call Protect America at (512) 218-8833 to save on Security Packages including Wireless Alarm Systems for your home or office.">
+<meta itemprop="image" content="http://www.protectamerica.com/static/img/local-pages/austin/austin-frog-bg-1000px.jpg">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ProtectAmerica">
+<meta name="twitter:title" content="Austin's Best Home Security Systems">
+<meta name="twitter:description" content="Serving Austin with high quality security systems since 1992. Call Protect America at (512) 218-8833 to save on Security Packages including Wireless Alarm Systems for your home or office.">
+<!-- Twitter summary card with large image must be at least 280x150px -->
+<meta name="twitter:image:src" content="http://www.protectamerica.com/static/img/local-pages/austin/austin-frog-bg-1000px.jpg">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="Austin's Best Home Security Systems" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://www.protectamerica.com/home-security/TX/Austin/" />
+<meta property="og:image" content="http://www.protectamerica.com/static/img/local-pages/austin/austin-frog-bg-1000px.jpg" />
+<meta property="og:description" content="Serving Austin with high quality security systems since 1992. Call Protect America at (512) 218-8833 to save on Security Packages including Wireless Alarm Systems for your home or office." />
+<meta property="og:site_name" content="Protect America" />
+
+
 {% endblock %}
 {% block typekit-code %}
 <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
@@ -24,7 +53,7 @@
                      <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
                 </form>
                 <div id="main-phone">
-                    <i class="icon-phone-sign"></i>
+                    <i class="fa fa-phone-square"></i>
                     {% block main-phone %}
                         {% if phone_number %}
                             <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
@@ -50,25 +79,25 @@
                 </div>
             {% endif %}
             <ul id="mobile-main-navigation" class="hide-desktop">
-                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="fa fa-phone"></i>Call Us</a></li>
             </ul>
             {% block navigation %}
             <ul id="main-navigation">
                 <li {% if 'shop' in active_pages %}class="active"{% endif %}>
                     <a href="{% url shop %}">Shop</a>
-                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                    {% if 'shop' in active_pages %}<i class="fa fa-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
                     <a href="{% url equipment %}">Equipment</a>
-                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                    {% if 'equipment' in active_pages %}<i class="fa fa-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'learn' in active_pages %}class="active"{% endif %}>
                     <a href="{% url learn %}">Learn</a>
-                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                    {% if 'learn' in active_pages %}<i class="fa fa-caret-down"></i>{% endif %}
                 </li>
                 <li {% if 'support' in active_pages %}class="active"{% endif %}>
                     <a href="{% url support %}">Support</a>
-                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                    {% if 'support' in active_pages %}<i class="fa fa-caret-down"></i>{% endif %}
                 </li>
             </ul>
             {% endblock %}
@@ -110,9 +139,9 @@
 		{% block partybox %}
 		<!-- Party box start -->
 		<div id="party-box">
-			<a href="http://www.protectamerica.com/shop-home-security-packages"><img id="deal1" src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png"></a>
-		    <a href="http://www.protectamerica.com/equipment/home-security/security-camera"><img id="deal2" src="{{ STATIC_URL }}img/local-pages/party-free-camera.png"></a>
-		    <a href="#signature"><img id="deal3" src="{{ STATIC_URL }}img/local-pages/party-signature-service_05.png"></a>
+			<a href="http://www.protectamerica.com/shop-home-security-packages" title="Save over $600 with a Free Security System"><img id="deal1" src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png" alt="Free Security System"></a>
+		    <a href="http://www.protectamerica.com/equipment/home-security/security-camera" title="Get a Free Security Camera with Select Packages"><img id="deal2" src="{{ STATIC_URL }}img/local-pages/party-free-camera.png" alt="Free Security Camera"></a>
+		    <a href="#signature" title="Austin Only Signature Service"><img id="deal3" src="{{ STATIC_URL }}img/local-pages/party-signature-service_05.png" title="Austin Signature Service"></a>
 		</div>
 		<!-- End party box -->
 		{% endblock %}
@@ -151,7 +180,9 @@
         <p>Combined with our monitored alarm systems that start as low as $19.99 per month with free equipment, the choice for home security is clear.</p>
     </div>
     <div class="eight columns side" id="austin-video">
-        <script type='text/javascript' src='http://KTBC.images.worldnow.com/interface/js/WNVideo.js?rnd=77624;hostDomain=www.myfoxaustin.com;playerWidth=460;playerHeight=400;isShowIcon=true;clipId=9404243;flvUri=;partnerclipid=;adTag=News;advertisingZone=;enableAds=true;landingPage=;islandingPageoverride=false;playerType=STANDARD_EMBEDDEDscript;controlsType=overlay'></script><a href="http://www.myfoxaustin.com" title=""></a>
+<!--        
+    <script type='text/javascript' src='http://KTBC.images.worldnow.com/interface/js/WNVideo.js?rnd=77624;hostDomain=www.myfoxaustin.com;playerWidth=460;playerHeight=400;isShowIcon=true;clipId=9404243;flvUri=;partnerclipid=;adTag=News;advertisingZone=;enableAds=true;landingPage=;islandingPageoverride=false;playerType=STANDARD_EMBEDDEDscript;controlsType=overlay'></script><a href="http://www.myfoxaustin.com" title=""></a>
+-->
     </div>
 </div>
 
@@ -159,11 +190,11 @@
 <div id="signature">
 	<div class="container">
 		<div class="eight columns" id="signature-left">
-        		<img src="{{ STATIC_URL }}img/local-pages/austin/austin-signature-service.png" alt="smart-connect-security-app" />
+        		<img src="{{ STATIC_URL }}img/local-pages/austin/austin-signature-service.png" alt="Austin Signature Service" title="Austin Signature Service" />
       
 		</div>
 		<div class="eight columns" id="signature-right">
-    		<h1 class="big">Howdy. <span>We're your neighbors.</span></h1>
+    		<h2 class="big">Howdy. <span>We're your neighbors.</span></h2>
         	<p>We’ve protected nearly half a million homes in all 50 states but have humble beginnings right here in Austin. Our founders spent the weekends at Zilker Park and dreamed about starting a company that could affordably keep people safe, unaware that their security would cover homes from Barton Springs to Round Rock and quickly expand to all of North America.</p>
         	<p>Our Austin Signature Service is a commitment to a city we love and a community that made us who we are today. Customers in the local Austin area can stop by our office and pick up their security systems the day they order. Have a question? Each customer is connected with a personal security expert who lives right here in Austin. We’ll keep you protected while you Keep Austin Weird.</p>
 		</div>
@@ -209,9 +240,9 @@
         <p class="community-subhead"></p>
     </div>
     <div id="community-outreach-squares">
-        <div class="square"><a href="http://www.myfoxaustin.com/story/24627086/new-app-helps-keep-homes-secure" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-door-lock.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America features the latest home automation on myFOXaustin</p></a></div>
-        <div class="square"><a href="http://bit.ly/1b8bX9L" target="_blank"><img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-prn1/t31/p180x540/1553300_10152163673609551_1683699488_o.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America Employees Donate to SafePlace</p></a></div>
-        <div class="square"><a href="http://www.myfoxaustin.com/story/24445424/experts-proper-home-tech-can-prevent-fire-related-deaths" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-fire.jpg" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Proper home tech can prevent fire-related deaths</p></a></div>
+        <div class="square"><a href="http://www.myfoxaustin.com/story/24627086/new-app-helps-keep-homes-secure" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-door-lock.jpg" title="Protect America features the latest home automation on myFOXaustin" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America features the latest home automation on myFOXaustin</p></a></div>
+        <div class="square"><a href="http://bit.ly/1b8bX9L" target="_blank"><img src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-prn1/t31/p180x540/1553300_10152163673609551_1683699488_o.jpg" title="Protect America Employees Donate to SafePlace" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Protect America Employees Donate to SafePlace</p></a></div>
+        <div class="square"><a href="http://www.myfoxaustin.com/story/24445424/experts-proper-home-tech-can-prevent-fire-related-deaths" target="_blank"><img src="{{ STATIC_URL }}img/local-pages/austin/fox-7-fire.jpg" title="Proper home tech can prevent fire-related deaths" alt="fox-7-door-lock" width="300" height="240" /><p class="caption">Proper home tech can prevent fire-related deaths</p></a></div>
     </div>
     <div class="container">
         <h3>Why get a home security system?</h3>
@@ -254,17 +285,8 @@
     <div class="container">
         <div id="review-container">
             <div class="review">
-            	<img src="{{ STATIC_URL }}img/local-pages/austin/tom.jpg" alt="tom" />
-                <i class="icon-quote-left"></i>
-                <blockquote>Used chat from the website to get customer service. Was looking to update my account to reflect my city of Austin police department alarm permit number.  Gloria was very helpful, professional and was quick to resolve the issue.
-                <p>Tom - Austin, TX</p>
-                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
-
-                </blockquote>
-            </div>
-            <div class="review">
                 <img src="{{ STATIC_URL }}img/local-pages/austin/veronika.jpg" alt="veronika" />
-                <i class="icon-quote-left"></i>
+                <i class="fa fa-quote-left"></i>
                 <blockquote>Great live chat experience! Helpful and quick availability. Thanks to Jackie.
                 <p>Veronika &ndash; Austin, TX</p>
                 <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
@@ -273,8 +295,27 @@
 
             </div>
             <div class="review">
+            	<img src="{{ STATIC_URL }}img/local-pages/austin/tom.jpg" alt="tom" />
+                <i class="fa fa-quote-left"></i>
+                <blockquote>Used chat from the website to get customer service. Was looking to update my account to reflect my city of Austin police department alarm permit number.  Gloria was very helpful, professional and was quick to resolve the issue.
+                <p>Tom - Austin, TX</p>
+                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+
+                </blockquote>
+            </div>
+            <div class="review">
+            	<img src="{{ STATIC_URL }}img/local-pages/austin/melissa.jpg" alt="melissa" />
+                <i class="fa fa-quote-left"></i>
+                <blockquote>Emily was extremely nice & patient with me today, as I needed help w/ my system & installation of some glass breakage sensors.  She is very knowledgeable w/ a good-natured personality.  I really enjoyed talking with her!
+                    <p>Melissa &ndash; Austin, TX</p>
+                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+
+                </blockquote>
+                
+            </div>
+            <div class="review">
             	<img src="{{ STATIC_URL }}img/local-pages/austin/ernest.jpg" alt="ernest" />
-                <i class="icon-quote-left"></i>
+                <i class="fa fa-quote-left"></i>
                 <blockquote>I have worked customer service for over 30 yrs and I appreciate good service when I get it. Jeremy was patient, explained everything as we were adding sensors and was very polite and willing to answer questions as we went thru the process. He is an excellent representative of your company!
                     <p>Ernest &ndash; Austin, TX</p>
                     <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
@@ -284,7 +325,7 @@
             </div>
             <div class="review">
             	<img src="{{ STATIC_URL }}img/local-pages/austin/dillon.jpg" alt="dillon" />
-                <i class="icon-quote-left"></i>
+                <i class="fa fa-quote-left"></i>
                 <blockquote><!--I just wanted to express my thanks to you and your excellent customer service agents. --> I recently moved to Austin, TX and Protect America has made the move a lot easier. I really appreciate the peace of mind that I have when I arrive at my new home every day. Sharon and Khadijah were excellent at assisting me in upgrading my system to Cellular Monitoring. <!--just one month after experiencing the quality of your service and equipment.--> Thanks guys!
                     <p>Dillon &ndash; Austin, TX</p>
                     <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
@@ -292,16 +333,7 @@
                 </blockquote>
                 
             </div>
-            <div class="review">
-            	<img src="{{ STATIC_URL }}img/local-pages/austin/melissa.jpg" alt="melissa" />
-                <i class="icon-quote-left"></i>
-                <blockquote>Emily was extremely nice & patient with me today, as I needed help w/ my system & installation of some glass breakage sensors.  She is very knowledgeable w/ a good-natured personality.  I really enjoyed talking with her!
-                    <p>Melissa &ndash; Austin, TX</p>
-                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
 
-                </blockquote>
-                
-            </div>
         </div>
     </div>
 </div>
@@ -310,7 +342,7 @@
 {% block lifestyle-button %}
 <div id="lifestyle-quote" class="container">
     <a href="" class="button">Get a Free Quote</a>
-    <img src="{{ STATIC_URL }}img/local-pages/austin/longhorns-football-game.jpg" class="bg" alt="longhorns-football-game" width="1200" height="600" />
+    <img src="{{ STATIC_URL }}img/local-pages/austin/longhorns-football-game.jpg" class="bg" alt="longhorns football game" width="1200" height="600" />
 </div>
 {% endblock %}
 {% block advantage %}
@@ -410,6 +442,8 @@
           singleItem: true,
           autoHeight: true,
           pagination: false,
+          autoPlay: 9000,
+
         });
         $('.square').click(function() {
             var link = $(this).data("link");
@@ -431,7 +465,7 @@
             <p>Didn't find what you were looking for? Try searching our website below:</p>
             <form>
                 <input type="text" name="findit" placeholder="I'm looking for..." class="search-field">
-                <button type="submit" class="icon-search" id="search-footer">&nbsp;</button>
+                <button type="submit" class="fa fa-search" id="search-footer">&nbsp;</button>
             </form>
         </div>
         <div class="five columns chat">
