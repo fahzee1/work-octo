@@ -20,6 +20,7 @@ from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
+from urlparse import urlparse, parse_qs
 
 
 
@@ -70,7 +71,6 @@ def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,no
 
 
 def post_to_leadconduit(data,test=False,retry=False):
-    #pdb.set_trace()
     try:
         lead = Lead.objects.get(id=data['lead_id'])
     except Lead.DoesNotExist:
@@ -405,6 +405,25 @@ def basic_post_login(request):
     device_name = device_type(request,device_letter)
     lead_data = {'trusted_url': trusted_url}
     acn_business_name = request.POST.get('business_name')
+
+    # for new search_engine param
+    new_se = None
+    current_url = request.POST.get('referer_page', None)
+    query = parse_qs(urlparse(current_url).query)
+    se = query.get('SE',None)
+    campaign = query.get('Campaign',None)
+    adgroup = query.get('AdGroup', None)
+    if se or campaign or adgroup:
+        if se:
+            se = se[0]
+        if campaign:
+            campaign = campaign[0]
+        if adgroup:
+            adgroup = adgroup[0]
+
+        new_se = '%s|%s|%s' % (se,campaign,adgroup)
+        new_se = new_se.replace(' ','')
+
     if acn_business_name:
         request.POST = request.POST.copy()
         request.POST['name'] = '%s (%s)' % (acn_business_name,request.POST['name'])
@@ -430,7 +449,7 @@ def basic_post_login(request):
         if searchkeywords is None and cikw is not None:
             searchkeywords = cikw
 
-        formset.search_engine = request.session['search_engine']
+        formset.search_engine = new_se
         formset.search_keywords = searchkeywords
         formset.form_values = f_values
         formset.trusted_url = trusted_url
@@ -477,7 +496,7 @@ def basic_post_login(request):
             'email': fdata['email'],
             'affkey': request_data['affkey'],
             'formlocation': formset.referer_page,
-            'searchengine': request.session['search_engine'],
+            'searchengine': new_se,
             'searchkeywords': searchkeywords,
             'lead_id': formset.id,
             'notes': notes
