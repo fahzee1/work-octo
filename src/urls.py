@@ -141,6 +141,9 @@ urlpatterns = patterns('',
     url(r'^pa/testimonials/(?P<testimonial_id>\d+)/?$',
         'apps.testimonials.views.testimonial',
         name='single-testimonial'),
+
+    # new order page
+    dtt(r'^order/order-package-b/?$', 'order/order-package-b.html', 'order-b'),
 )
 
 # Radioshack URLS
