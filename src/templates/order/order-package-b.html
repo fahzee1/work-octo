@@ -27,8 +27,8 @@
             <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name" class="order-b">
             <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email" class="order-b">
             <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone" class="order-b">
-            <select id="id_plan">
-                <option value="Copper">Copper</option>
+            <select id="id_package">
+                <option selected="selected" value="Copper">Copper</option>
                 <option value="Bronze">Bronze</option>
                 <option value="Silver">Silver</option>
                 <option value="Gold">Gold</option>
@@ -43,54 +43,51 @@
         <div class="triple-guarantee">
             <h3>Protect america</h3>
             <h4>Triple guarantee</h4>
+            <span><i class="fa fa-usd"></i><strong>Lowest price guaranteed</strong><p>If you find a better offer, let us know. We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p></span>
+            <span><i class="fa fa-thumbs-up"></i><strong>No equipment fees</strong><p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment to get you up and running as soon as possible.</p></span>
+            <span class="last"><i class="fa fa-refresh"></i><strong>Lifetime replacement plan</strong><p>As a Protect America customer, if your equipment ever happens to malfunction, we will repair it or get you a new one for free. We want to make sure your home is always secure.</p></span>
+            <div class="bottom"><p>Protect America is committed to excellence and affordability when it comes to securing your home. That's why we're a Consumers Digest Best Buy&trade; for home security systems and the best choice for a world-class security system backed by a company that is dedicated to serving your security needs. Your family is your top priority. Call <strong class="blue">1-800-951-5190</strong> for a fast <strong>FREE quote.</strong></p></div>
         </div>
     </div>
 </div>
 
 {% include "order/call-box.html" %}
     
-<div class="wrapper">
-
-    <div id="order-reassurance">
-        <div id="lowest-price-guaranteed">
-            <a href="{% url copper %}"><img src="/static/img/extra/dollar-sign-token.png" alt="Lowest Price Guaranteed" /></a>
-            <div class="text">
-                <h3>Lowest Price Guaranteed</h3>
-                <p>If you find a better offer, let us know.  We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p>
+{% block testimonials %}
+<!-- Testimonials -->
+<div id="testimonials">
+    <div class="container">
+        <div id="review-container">
+            <div class="review">
+                <img src="{{ STATIC_URL }}img/local-pages/austin/ernest.jpg" alt="ernest" />
+                <i class="icon-quote-left"></i>
+                <blockquote>I have worked customer service for over 30 yrs and I appreciate good service when I get it. Jeremy was patient, explained everything as we were adding sensors and was very polite and willing to answer questions as we went thru the process. He is an excellent representative of your company!
+                    <p>Ernest &ndash; Austin, TX</p>
+                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                </blockquote>
+            </div>
+            <div class="review">
+                <img src="{{ STATIC_URL }}img/local-pages/austin/dillon.jpg" alt="dillon" />
+                <i class="icon-quote-left"></i>
+                <blockquote><!--I just wanted to express my thanks to you and your excellent customer service agents. --> I recently moved to Austin, TX and Protect America has made the move a lot easier. I really appreciate the peace of mind that I have when I arrive at my new home every day. Sharon and Khadijah were excellent at assisting me in upgrading my system to Cellular Monitoring. <!--just one month after experiencing the quality of your service and equipment.--> Thanks guys!
+                    <p>Dillon &ndash; Austin, TX</p>
+                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                </blockquote>
+            </div>
+            <div class="review">
+                <img src="{{ STATIC_URL }}img/local-pages/austin/melissa.jpg" alt="melissa" />
+                <i class="icon-quote-left"></i>
+                <blockquote>Emily was extremely nice & patient with me today, as I needed help w/ my system & installation of some glass breakage sensors.  She is very knowledgeable w/ a good-natured personality.  I really enjoyed talking with her!
+                    <p>Melissa &ndash; Austin, TX</p>
+                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                </blockquote>
             </div>
         </div>
-        <div id="lifetime-warranty">
-            <a href="{% url warranty %}"><img src="/static/img/extra/hammer-token.png" alt="Lifetime Equipment Warranty" /></a>
-            <div class="text">
-    
-                <h3>Lifetime Equipment Warranty</h3>
-                <p>As a Protect America customer, if your equipment ever happens to mess up, we will repair it or get you a new one for free.  We want to make sure your home is always secure.</p>
-            </div>
-        </div>
-        <div id="homeowner-insurance-discount">
-            <img src="/static/img/extra/20-percent-token.png" alt="20% Homeowner's Insurance Discount" />
-            <div class="text">
-                <h3>Homeowner's Insurance Discount</h3>
-                <p>Many insurance companies provide discounts up to 20% with an active alarm system. And many times this can offset the price of your home security monitoring.</p>
-            </div>
-        </div>
-        <div id="relocation-kit">
-            <a href="{% url moving-kit %}"><img src="/static/img/extra/free-relocation-kit.png" alt="Free Relocation Kit" /></a>
-            <div class="text">
-                <h3>Relocation Kit</h3>
-                <p>With Protect America, you own your security equipment. If you happen to move, we will send you a relocation kit to easily take your security system with you.</p>
-            </div>
-        </div>
-        <div id="free-tech-support">
-            <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1<img src="><img src="/static/img/extra/tech-support-token.png" alt="Free Tech Support" /></a>
-            <div class="text">
-                <h3>Free Tech Support</h3>
-                <p>Included with your home security system is our knowledgeable technical support staff.  From simple operation to the advanced settings, they are here to help you.</p>
-            </div>
-        </div>
-        <div class="clear"></div>
     </div>
 </div>
+<!-- End testimonials -->
+{% endblock %}
+
 {% addtoblock "js" %}
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
 	<script type="text/javascript" src="{{ STATIC_URL }}js/waypoints-sticky.min.js"></script>
@@ -100,6 +97,48 @@
 			  offset: -85 // Apply "stuck" when element 30px from top
 			});
         });
+    </script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $( "#menu-button" ).click(function() {
+            $( "#mobile-menu-container" ).slideToggle( "slow", function() {
+            });
+        });
+        
+        var owl = $("#featured-badges");
+        var outreach = $("#community-outreach-squares");
+        
+        owl.owlCarousel({
+          autoPlay: 7000,
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+        outreach.owlCarousel({
+          autoPlay: 7000,
+          stopOnHover: true,
+          items : 3, //10 items above 1000px browser width
+          itemsDesktop : [1000,3], //5 items between 1000px and 901px
+          itemsDesktopSmall : [930,2], // betweem 900px and 601px
+          itemsTablet: [660,1], //2 items between 600 and 0
+          itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+        $("#review-container").owlCarousel({
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          singleItem: true,
+          autoHeight: true,
+          pagination: false,
+        });
+        $('.square').click(function() {
+            var link = $(this).data("link");
+            $(this).attr(link, '_blank');
+
+        });
+    });
     </script>
 
 {% endaddtoblock %}
