@@ -21,7 +21,7 @@
             <p>For your convenience and immediate attention, call <span>1-800-951-5190</span></p>
         </div>
         <div class="clear"></div>
-        <div class="quote-form-order">
+        <form class="quote-form-order">
             <h3>For your <span>FREE quote</span>, call<br> <span>1-800-951-5190</span> now!</h3>
             <p>or<br>please provide your information below</p>
             <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name" class="order-b">
@@ -39,7 +39,7 @@
             <div class="clear"></div>
             <a href="#">Your privacy is important and safe with us</a>
             <img src="/static/img/base/best-buy.png" alt="Consumer best buy" />
-        </div>
+        </form>
         <div class="triple-guarantee">
             <h3>Protect america</h3>
             <h4>Triple guarantee</h4>
@@ -52,7 +52,7 @@
 </div>
 
 {% include "order/call-box.html" %}
-    
+
 {% block testimonials %}
 <!-- Testimonials -->
 <div id="testimonials">
@@ -107,10 +107,10 @@
             $( "#mobile-menu-container" ).slideToggle( "slow", function() {
             });
         });
-        
+
         var owl = $("#featured-badges");
         var outreach = $("#community-outreach-squares");
-        
+
         owl.owlCarousel({
           autoPlay: 7000,
           items : 12,
@@ -141,9 +141,142 @@
     });
     </script>
 
+    <script type="text/javascript">
+    $('.quote-form-order input').keypress(function(e){
+        if(e.which == 13){
+            var $form = $(this).closest('.quote-form-order');
+            $form.find('button').click();
+        }
+    });
+
+    var submitting = false;
+
+    $('.quote-form-order').on('click','button',function() {
+        $('.quote-form-order button').attr('disabled',true);
+        var $form = $(this).closest('.quote-form-order');
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
+        var device = getParameterByName('device');
+        if (!trusted){
+            $('#quote-form button').attr('disabled',false);
+            var phone_number = $(".dynamic-phone-number").first().text();
+            if (phone_number){
+                alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
+            }
+            else{
+                alert("Sorry your form can't be submitted at this time. Please call us at the number above.");
+            }
+            return;
+        }
+
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        var business_name = $form.find("#id_business_name").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        var data = {'name':name,
+                    'email': email,
+                    'phone': phone,
+                    'trusted_form': trusted,
+                    'form': 'basic',
+                    'referer_page':window.location.href,
+                    'form_values':$form.serialize(),
+                    'operating_system':(window.OSName + "_PA"),
+                    'device':device,
+                    'gclid':$("[name='gclid']").val(),
+                    'form_js': 't/o/q-f.h'
+                    }
+
+        if (business_name){
+            data['business_name'] = business_name;
+        }
+
+
+        if (trusted){
+            $.ajax({
+                    type: "POST",
+                    url: "/contact/ajaxpost/",
+                    data: data,
+                    dataType: "json",
+                    success: newFormSuccess,
+                    error: newFormError
+                    });
+        }
+
+        function newFormError(){
+            $(".sleepy #form-loading, .droopy #form-loading").hide();
+            $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+              $('.quote-form-order button').attr('disabled',false);
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
+        function newFormSuccess(json) {
+            $('#form-loading').hide();
+            submitting = false;
+            try
+            {
+                var acn = $('.form-fields').data('acn');
+                if (acn){
+                    var url = $('.form-fields').data('thank-you');
+                    window.location = url;
+                    return;
+                    }
+            }
+            catch(err){var acn = false;}
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                url = json.thank_you
+                window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }
+
+
+        return false;
+        });
+
+</script>
+
 {% endaddtoblock %}
 
-{% endblock %}  
+{% endblock %}
 {% block order-footer %}{% endblock %}
 
 
