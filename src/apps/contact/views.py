@@ -56,6 +56,14 @@ def send_bizdev_email(data):
     to_email = 'agent2.0@protectamerica.com'
     send_mail(subject,message,from_email,[to_email])
 
+def send_alarmzone_email(data):
+    subject = 'New lead from AlarmZone!'
+    message = 'Name : %s \n Email: %s \n Phone: %s' % (data['customername'],data['email'],data['phone'])
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = 'bruce@icd365.com'
+    send_mail(subject,message,from_email,[to_email])
+
+
 
 def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
     if notify_all:
@@ -409,20 +417,22 @@ def basic_post_login(request):
     # for new search_engine param
     new_se = None
     current_url = request.POST.get('referer_page', None)
-    query = parse_qs(urlparse(current_url).query)
-    se = query.get('SE',None)
-    campaign = query.get('Campaign',None)
-    adgroup = query.get('AdGroup', None)
-    if se or campaign or adgroup:
-        if se:
-            se = se[0]
-        if campaign:
-            campaign = campaign[0]
-        if adgroup:
-            adgroup = adgroup[0]
+    if current_url:
+        if 'protectamerica' in current_url:
+            query = parse_qs(urlparse(current_url).query)
+            se = query.get('SE',None)
+            campaign = query.get('Campaign',None)
+            adgroup = query.get('AdGroup', None)
+            if se or campaign or adgroup:
+                if se:
+                    se = se[0]
+                if campaign:
+                    campaign = campaign[0]
+                if adgroup:
+                    adgroup = adgroup[0]
 
-        new_se = '%s|%s|%s' % (se,campaign,adgroup)
-        new_se = new_se.replace(' ','')
+                new_se = '%s|%s|%s' % (se,campaign,adgroup)
+                new_se = new_se.replace(' ','')
 
     if acn_business_name:
         request.POST = request.POST.copy()
@@ -508,6 +518,12 @@ def basic_post_login(request):
         #send_leadimport(emaildata)
         if not settings.LEAD_TESTING and fdata['email']:
             send_caroline_thankyou(request,emaildata,request_data['agent'])
+
+        site = request.POST.get('site', None)
+        if site:
+            if site == 'alarmzone':
+                send_alarmzone_email(emaildata)
+
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)

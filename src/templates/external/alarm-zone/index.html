@@ -82,7 +82,7 @@ Alarm Zone, Home security systems, GPS Trackers, Security cameras, secure your h
             <p class="small">Easily check on kids, maintenance workers, pets or babysitters. Simply access your home's secure LIVE video feed with our app while at work or vacation. We make it easy to add video home security into your house today.</p>
             </div>
         </div>
-        
+
         <div class="sixteen columns mobile-slider">
             <div class="bx-wrapper">
                 <ul class="bxslider">
@@ -164,13 +164,14 @@ $(".alarm-form-home button").click(function(){
              'name':name,
              'email':email,
              'phone':phone,
-             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val()
+             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+             'site':'alarmzone'
          }
 
 
     $.ajax({
             type: "POST",
-            url: "/contact/ajaxpost_blog/",
+            url: "/contact/ajaxpost/",
             data: data,
             dataType: "json",
             success: newFormSuccess,
@@ -182,7 +183,7 @@ $(".alarm-form-home button").click(function(){
                     $(".alarm-form-home button").text('Call me');
                     }
             }); // end ajax
-       
+
 
      function newFormError(){
             //$(".sleepy #form-loading, .droopy #form-loading").hide();
@@ -220,7 +221,7 @@ $(".alarm-form-home button").click(function(){
                 {% else %}
                 window.location = "{% url thanks-page %}"
                 {% endif %}
-                _gaq.push([  
+                _gaq.push([
                     '_trackEvent',
                     'Form Click',
                     'Form Events',
@@ -233,7 +234,7 @@ $(".alarm-form-home button").click(function(){
 
     }); // end click function
 
-}); //end document ready 
+}); //end document ready
 
 </script>
 {% endblock %}

@@ -67,13 +67,14 @@ $("form #submit").click(function(){
              'name':name,
              'email':email,
              'phone':phone,
-             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val()
+             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+             'site':'alarmzone'
          }
 
 
     $.ajax({
             type: "POST",
-            url: "/contact/ajaxpost_blog/",
+            url: "/contact/ajaxpost/",
             data: data,
             dataType: "json",
             success: newFormSuccess,
@@ -85,7 +86,7 @@ $("form #submit").click(function(){
                     $("form #submit");
                     }
             }); // end ajax
-       
+
 
      function newFormError(){
             //$(".sleepy #form-loading, .droopy #form-loading").hide();
@@ -122,7 +123,7 @@ $("form #submit").click(function(){
                 {% else %}
                 window.location = "{% url thanks-page %}"
                 {% endif %}
-                _gaq.push([  
+                _gaq.push([
                     '_trackEvent',
                     'Form Click',
                     'Form Events',
@@ -135,7 +136,7 @@ $("form #submit").click(function(){
 
     }); // end click function
 
-}); //end document ready 
+}); //end document ready
 
 </script>
 
