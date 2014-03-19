@@ -505,8 +505,7 @@ else:
 
 
         # Shop
-        dtt(r'^shop-home-security-packages/?$', 'packages/index.html', 'shop'),
-        dtt(r'^shop-home-security-packages-b/?$', 'packages/index-b.html', 'shop-b'),
+        dtt(r'^shop-home-security-systems/?$', 'packages/index-b.html', 'shop'),
 
             # Product > Packages
 
@@ -767,8 +766,17 @@ else:
         url(r'^affiliates/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='aff-web-banners'),
         url(r'^affiliates/resources/collateral/?$', 'apps.affiliates.views.collateral_page', name='aff-collateral'),
         url(r'^affiliates/resources/products/?$', 'apps.affiliates.views.products_page', name='aff-products'),
-        url(r'^affiliates/resources/agent/?$', 'apps.affiliates.views.agent_page', name='aff-agent'),
         url(r'^affiliates/login/?$', 'apps.affiliates.views.aff_login', name='aff-login'),
+
+        # Agent Resources
+        url(r'^agent/resources/?$', 'apps.affiliates.views.agent_page', name='agent-get-started'),
+        url(r'^agent/login/?$', 'apps.affiliates.views.aff_login', name='agent-login'),
+        url(r'^agent/resources/logos/?$','apps.affiliates.views.logos_page' ,name='agent-logos'),
+        url(r'^agent/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='agent-web-banners'),
+        url(r'^agent/resources/collateral/?$', 'apps.affiliates.views.collateral_page', name='agent-collateral'),
+        url(r'^agent/resources/products/?$', 'apps.affiliates.views.products_page', name='agent-products'),
+
+
         url(r'^api/affiliate/?$', 'apps.affiliates.views.accept_affiliate'),
 
         url(r'^api/affiliate/(?P<affiliate_id>[A-Za-z0-9\_-]+)/get/?$',
@@ -1403,9 +1411,8 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/home-security/%(state)s/%(city)s/',permanent=True)),
     ('equipment/home-security/ge-simon-xt/?$',
         RedirectView.as_view(url='/equipment/home-security/simon-xt/',permanent=True)),
-    ('learn/protect/?$',
-        RedirectView.as_view(url='/learn/protect-america/',permanent=True)),
-
+    ('shop-home-security-packages/?$',
+        RedirectView.as_view(url='/shop-home-security-systems',permanent=True)),
 )
 '''
 urlpatterns += patterns('',
