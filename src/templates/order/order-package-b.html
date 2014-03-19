@@ -11,22 +11,28 @@
 {% endblock %}
 
 {% block content %}
+<div class="top">
+    <h1>Start protecting what matters</h1>
+    <div class="wrapper">
+        <div class="arrow">
+            <h3>To place your order</h3>
+            <h4>or receive a free customized quote</h4>
+        </div>
+        <h2>call 
+
+            <span>{% businesstime %}<strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></strong>{% endbusinesstime %}</span> now!</h2>
+    </div>
+</div>
 <div class="wrapper">
     <div class="order-package-page">
-        <div class="titles">
-            <h1>Home security and automation</h1>
-            <h2>built for you</h2>
-        </div>
-        <div class="convenience">
-            <p>For your convenience and immediate attention, call <span>1-800-951-5190</span></p>
-        </div>
         <div class="clear"></div>
+        <p class="or">-or-</p>
         <form class="quote-form-order">
-            <h3>For your <span>FREE quote</span>, call<br> <span>1-800-951-5190</span> now!</h3>
-            <p>or<br>please provide your information below</p>
+            <p>please provide your information below</p>
             <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name" class="order-b">
             <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email" class="order-b">
             <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone" class="order-b">
+            <p class="select">selected package</p>
             <select id="id_package">
                 <option selected="selected" value="Copper">Copper</option>
                 <option value="Bronze">Bronze</option>
@@ -34,20 +40,38 @@
                 <option value="Gold">Gold</option>
                 <option value="Platinum">Platinum</option>
             </select>
-            <button type="button" class="order-b">continue</button>
+            <button type="button" class="order-b">call me</button>
             <span class="small">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</span>
             <div class="clear"></div>
-            <a href="#">Your privacy is important and safe with us</a>
-            <img src="/static/img/base/best-buy.png" alt="Consumer best buy" />
+            <a href="http://www.protectamerica.com/help/privacy-policy">Your privacy is important and safe with us</a>
         </form>
         <div class="triple-guarantee">
             <h3>Protect america</h3>
             <h4>Triple guarantee</h4>
             <span><i class="fa fa-usd"></i><strong>Lowest price guaranteed</strong><p>If you find a better offer, let us know. We are committed to providing the best possible security at the most affordable price. We match or beat anyone out there.</p></span>
-            <span><i class="fa fa-thumbs-up"></i><strong>No equipment fees</strong><p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment to get you up and running as soon as possible.</p></span>
+            <span><i class="fa fa-ban"></i><strong>No equipment fees</strong><p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment to get you up and running as soon as possible.</p></span>
             <span class="last"><i class="fa fa-refresh"></i><strong>Lifetime replacement plan</strong><p>As a Protect America customer, if your equipment ever happens to malfunction, we will repair it or get you a new one for free. We want to make sure your home is always secure.</p></span>
-            <div class="bottom"><p>Protect America is committed to excellence and affordability when it comes to securing your home. That's why we're a Consumers Digest Best Buy&trade; for home security systems and the best choice for a world-class security system backed by a company that is dedicated to serving your security needs. Your family is your top priority. Call <strong class="blue">1-800-951-5190</strong> for a fast <strong>FREE quote.</strong></p></div>
         </div>
+    </div>
+</div>
+
+<div id="featured-on">
+    <small>Proudly Featured on:</small>
+    <div id="featured-badges">
+        <div class="featured statesman">&nbsp;</div>
+        <div class="featured austin-chamber">&nbsp;</div>
+        <div class="featured kvue">&nbsp;</div>
+        <div class="featured fox-seven">&nbsp;</div>
+        <div class="featured besty">&nbsp;</div>
+        <div class="featured topconsumer">&nbsp;</div>
+        <div class="featured cw">&nbsp;</div>
+        <div class="featured history">&nbsp;</div>
+        <div class="featured kut">&nbsp;</div>
+        <div class="featured consumerdigest">&nbsp;</div>
+        <div class="featured buzz">&nbsp;</div>
+        <div class="featured bbb">&nbsp;</div>
+        <div class="featured gadgeteer">&nbsp;</div>
+        <div class="featured toptens">&nbsp;</div>
     </div>
 </div>
 
@@ -105,7 +129,6 @@
             $( "#mobile-menu-container" ).slideToggle( "slow", function() {
             });
         });
-
         var owl = $("#featured-badges");
         var outreach = $("#community-outreach-squares");
         owl.owlCarousel({
@@ -272,11 +295,7 @@
 </script>
 
 {% endaddtoblock %}
-
 {% endblock %}
 
 {% block order-footer %}{% endblock %}
-
-
-
 {% block subnav_parent %}{% endblock %}
