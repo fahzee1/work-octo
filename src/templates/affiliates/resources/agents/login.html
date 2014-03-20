@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load sekizai_tags content_tags content_filters %}{% load url from future %}
+{% block page_title %}Affiliate Resources Login{% endblock %}
+{% block page_description %}Protect America resources and logos for use by affiliates and authorized dealers.{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/resources/resources.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+<div id="hero-wrapper" class="v-light-grey">
+    <div id="hero-image">
+        <div id="hero-content">
+            <div class="login">
+                <i class="fa fa-user"></i>
+                <h2>Login to</h2>
+                <h1>Affiliate Resources</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <fieldset>
+                        {% for f in form %}
+                            <span>{{ f.errors }}</span>
+                            <h3>{{ f.label }}</br></h3>
+                            <div id="white-box">{{ f }}</br></div>
+                        {% endfor %}
+                    </fieldset></br>
+                    <button type="submit" value="Login" id="form" maxlength="128">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block order-footer %}
+{% endblock %}

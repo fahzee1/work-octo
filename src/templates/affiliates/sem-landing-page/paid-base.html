@@ -104,18 +104,24 @@
         </div>
     </div>
     {% include "order/call-box.html" %}
-    <div class="wrapper">
-        <div id="featured-on">
-            <p>Featured On:</p>
-            {% block validation %}
-            <div class="validation-icon abc">&nbsp;</div>
-            <div class="validation-icon best">&nbsp;</div>
-            <div class="validation-icon fox">&nbsp;</div>
-            <div class="validation-icon cw">&nbsp;</div>
-            <div class="validation-icon consumer">&nbsp;</div>
-            <div class="validation-icon history">&nbsp;</div>
-            <div class="clear"></div>
-            {% endblock %}
+    <!-- Featured on banner -->
+    
+    <div id="featured-on">
+        <small>Proudly Featured on:</small>
+        <div id="featured-badges">
+            <div class="featured abc">&nbsp;</div>
+            <div class="featured besty">&nbsp;</div>
+            <div class="featured npr">&nbsp;</div>
+            <div class="featured topconsumer">&nbsp;</div>
+            <div class="featured foxnews">&nbsp;</div>
+            <div class="featured consumerdigest">&nbsp;</div>
+            <div class="featured buzz">&nbsp;</div>
+            <div class="featured bbb">&nbsp;</div>
+            <div class="featured gadgeteer">&nbsp;</div>
+            <div class="featured toptens">&nbsp;</div>
+            <div class="featured cw">&nbsp;</div>
+            <div class="featured history">&nbsp;</div>
+
         </div>
     </div>
     {% block lifestyle %}
@@ -188,6 +194,15 @@
                 <div class="clear"></div>
             </div>
         </div>
+        <div class="triple-guarantee">
+            <h2>Protect America<br>
+            <strong>Triple Guarantee<strong></h2>
+            <ul>
+                <li><i class="icon-check-sign"></i>Lowest price</li>
+                <li><i class="icon-check-sign"></i>No equipment fees</li>
+                <li class="last"><i class="icon-check-sign"></i>Lifetime replacement plan</li>
+            </ul>
+        </div>
         <div class="clear"></div>
     </div>
     {% endblock %}
@@ -251,6 +266,7 @@
             </table>
             <div class="clear"></div>
         </div>
+
     </div>
     {% endblock %}
     {% block faq %}
@@ -369,4 +385,19 @@
 
     })     
 </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+    	
+        var owl = $("#featured-badges");
+        
+        owl.owlCarousel({
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+    });
+    </script>
 {% endblock %}
