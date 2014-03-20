@@ -144,6 +144,9 @@ urlpatterns = patterns('',
 
     # new order page
     dtt(r'^order/order-package-b/?$', 'order/order-package-b.html', 'order-b'),
+
+    # new index page
+    dtt(r'^tests/spring?$', 'tests/index-spring.html', 'index-spring'),
 )
 
 # Radioshack URLS
