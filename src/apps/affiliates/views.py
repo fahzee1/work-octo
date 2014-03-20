@@ -383,14 +383,21 @@ def aff_login(request):
     if request.method == 'POST':
         form=AffiliateLoginForm(request.POST)
         if form.is_valid():
-            check_agentid=form.cleaned_data['agent_id']
+            check_agentid = form.cleaned_data['agent_id']
             try:
-                aff=Affiliate.objects.get(agent_id=check_agentid)
+                aff = Affiliate.objects.get(agent_id=check_agentid)
                 if aff:
                     request.session['aff-logged-in']=True
                     request.session['aff_name']=aff.name
                     request.session['aff_id']=aff.agent_id
-                    response=redirect('aff-get-started')
+
+                    if check_agentid[0] == 'a' or check_agentid[0] == 'A':
+                        response = redirect('aff-get-started')
+                    elif check_agentid[0] == 'b' or check_agentid[0] == 'B':
+                        response = redirect('agent-get-started')
+                    else:
+                        response = redirect('aff-get-started')
+
                     response['Location'] +='?agent_id=%s' % aff.agent_id
                     return response
 
