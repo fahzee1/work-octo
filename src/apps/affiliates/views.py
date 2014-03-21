@@ -208,6 +208,7 @@ def agent_web_banners_page(request):
           'aff_id':request.session.get('aff_id',None)}
     return simple_dtt(request, 'affiliates/resources/agents/web-banners.html',ctx)
 
+
 def agent_logos_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
