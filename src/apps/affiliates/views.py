@@ -181,6 +181,33 @@ def agent_page(request):
     return simple_dtt(request,'affiliates/resources/agents/get-started.html',ctx)
 
 
+def agent_web_banners_page(request):
+    """
+    Function that gathers all the google ads from all the campaigns and
+    then sends them to the html to be rendered by banner size.
+    """
+    campaigns = Campaign.objects.all()
+    ads = {
+        'leaderboard': ('Leaderboard (728x90)', []),
+        'banner': ('Banner (468x60)', []),
+        'skyscaper': ('Skyscraper (120x600)', []),
+        'wide_skyscraper': ('Wide Skyscraper (160x600)', []),
+        'small_square': ('Small Square (200x200)', []),
+        'square': ('Square (250x250)', []),
+        'medium_rectangle': ('Medium Rectangle (300x250)', []),
+        'large_rectangle': ('Large Rectangle (336x280)', []),
+    }
+    for campaign in campaigns:
+        for ad in campaign.ad_set.all():
+            if ad.type.slug in ads:
+                ads[ad.type.slug][1].append(ad)
+
+
+    ctx={'page_name': 'agent-web-banners',
+         'google_ads':ads,
+          'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request, 'affiliates/resources/agents/web-banners.html',ctx)
+
 def agent_logos_page(request):
     if not request.session.get('aff-logged-in',False):
         return redirect('aff-login')
