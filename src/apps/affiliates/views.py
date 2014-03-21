@@ -173,6 +173,40 @@ def products_page(request):
     return simple_dtt(request,'affiliates/resources/products.html',ctx)
 
 
+def agent_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-get-started',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/get-started.html',ctx)
+
+
+def agent_logos_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-logos',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/logos.html',ctx)
+
+def agent_collateral_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-collateral',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/collateral.html',ctx)
+
+
+
+def agent_products_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-products',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/products.html',ctx)
+
+
+
+
 # SEM Landing Page Views
 def semlanding_response(request):
     expire_time = timedelta(days=90)
@@ -409,11 +443,6 @@ def aff_login(request):
     ctx={'form':form,'page_name':'aff-login'}
     return render(request,'affiliates/resources/login.html',ctx)
 
-
-def agent_page(request):
-    ctx={'page_name':'aff-agent',
-         'aff_id':request.session.get('aff_id',None)}
-    return render(request,'affiliates/resources/agent.html',ctx)
 
 
 
