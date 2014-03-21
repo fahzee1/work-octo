@@ -1,16 +1,30 @@
 @import "../pasecurity/style.less";
 
 @black: #333;
-
 .banner { position: relative; overflow: auto; }
     .banner li { list-style: none; }
         .banner ul li { float: left; }
-
-
 .quote-form-white {
 	left: 15px !important;
 }
-
+#houston-map {
+	margin-bottom: 20px;
+}
+.heading {
+	bottom: 188px !important;
+	.big {
+		font-size: 43px !important;
+	}
+	p {
+		margin: 15px 0 0 0;
+		color: @black;
+		font-weight: 600;
+		font-size: 20px;
+	}
+	h3 {
+		padding: 12px 30px 5px 30px !important;
+	}
+}
 .wrapper {
     margin:0 auto;
     position:relative;
@@ -61,15 +75,16 @@
 
 #overview {
     margin: 48px auto;
-    .side {
-        text-align: right;
-        padding-top: 32px;
-    }
 }
-
-
+#black-text {
+	color: @black !important;
+}
+#map {
+	height: 460px;
+	width: 460px;
+}
 #signature {
-	background: url(/static/img/local-pages/houston/houston-lifestyle.jpg) center no-repeat #c7e7fc;
+	background: url(/static/img/local-pages/houston/houston-life.jpg) center no-repeat #3d2d16;
 	width: 100%;
 	height: auto;
 	padding: 30px 0px;
@@ -245,6 +260,16 @@
             }
         }
     }
+}
+#image-copyright {
+	color: #999;
+	padding: 10px 0px;
+	text-align: center;
+	font-size: 10px;
+	background: #777;
+	a {
+		color: #999;
+	}
 }
 #hero {
 	background: url(/static/img/local-pages/houston/houston.jpg) center center no-repeat #e2ede9;
@@ -701,19 +726,27 @@
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
+		#video {
+			object, div {
+				width: 350px !important;
+				height: 350px;
+			}
+		}
+		#map {
+			height: 360px;
+			width: 360px;
+			margin-top: 80px;
+		}
 		#signature {
-			background: url(/static/img/local-pages/houston/houston-lifestyle-smaller.jpg) center no-repeat #c7e7fc;
 			width: 100%;
 			padding: 30px 0px;
 			margin: 48px auto 0px auto;
 				#signature-left {
-					margin-top: 215px;
-						img {
-							width: 300px;
-						}
+					display: none;
 					}
 				#signature-right {
 					width: 300px;
+					margin: 0px auto;
 					span {
 						font-size: 25px;
 					}
@@ -733,6 +766,14 @@
 		
 /* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
+		#add-padding {
+			padding-top: 40px;
+		}
+		#map {
+			height: 420px;
+			width: 420px;
+			margin-bottom: 20px;
+		}
         #mobile-menu-container {
             margin-top: 0;
             background: none;
@@ -752,6 +793,12 @@
                     }
                 }
             }
+        }
+        .heading {
+        	height: 170px !important;
+	        h3 {
+		        padding: 0px !important;
+	        }
         }
         #header-wrapper {
             #header {
@@ -836,7 +883,7 @@
             display: none;
         }
 		#signature {
-				background: url(/static/img/local-pages/houston/houston-lifestyle-mobile.jpg) center no-repeat #c7e7fc;
+				background: @green;
 				width: 100%;
 				height: auto;
 				padding: 0px !important;
@@ -887,7 +934,7 @@
 					}
 				}
 		}	
-		#community, #features, #austin-video {
+		#community, #features, #video {
 			display: none;
 		}
     }
