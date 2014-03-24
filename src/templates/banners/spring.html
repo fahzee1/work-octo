@@ -3,7 +3,6 @@
 <div id="hero-wrapper" class="cmonday">
     <div id="hero-image" class="cmonday">
         {% include "order/quote-form-spring.html" with form=forms.basic %}
-        {% include "banners/spring/deals.html" %}
         {% comment %}
         <div id="super-bowl">
             <h1>Home security starting at</h1>
@@ -11,14 +10,20 @@
         </div>
         {% endcomment %}
         <div id="cyber-monday">
-            <h1>Home security</h1>
-            <h2>for everyone</h2>
-            <p>Plans starting<br>at only</p>
-            <small>$</small>
-            <big>5</big>
-            <small class="month">/mo</small>
-            <a href="{% url shop %}" class="button-link stylized">Get Started Now</a>
+            <div class="copy">
+                <h1>Home security systems and home automation, designed just for you.</h1>
+                <h2>Call now to get started.</h2>
+                <h3>1-800-951-5190</h3>
+            </div>
+            <div class="plans">
+                <p>Plans starting at only</p>
+                <small>$</small>
+                <big>5</big>
+                <small class="month">/mo</small>
+                <a href="{% url shop %}" class="button-link stylized">Shop packages</a>
+            </div>
             <img src="{{ STATIC_URL }}img/banners/hero-banners/spring/home-security-protect-america.jpg" class="main-hero-image" alt="Home security systems by Protect America" />
         </div>
+        {% include "banners/spring/deals.html" %}
     </div>
 </div>
