@@ -134,7 +134,7 @@
 
         <div class="heading">
             <h1 class="big">Austin's Best <span>Home Security Systems</span></h1>
-            <h3>1-800-951-5111</h3>
+            <h3><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></h3>
         </div>
 		{% block partybox %}
 		<!-- Party box start -->
@@ -457,7 +457,7 @@
     <div class="container">
         <div class="five columns">
             <p>Your family's safety is important. Our security experts are ready to help:</p>
-            <p class="white"><i class="icon-phone"></i>1-800-657-2717</p>
+            <p class="white"><i class="icon-phone"></i><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
         </div>
         <div class="six columns">
             <p>Didn't find what you were looking for? Try searching our website below:</p>
