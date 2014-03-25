@@ -13,7 +13,252 @@ body.index-spring {
         }
     }
 }
+.not-desktop {
+    display: none !important;
+}
+header {
+    background: @pa-blue;
+    height: 40px;
+    position: relative;
+    .logo {
+        position: relative;
+        padding: 6px 0;
+        height: 28px;
+        width: 190px;
+        float: left;
+        overflow: hidden;
+        img {
+            width: 160px;
+        }
+    }
+    ul {
+        float: right;
+        margin-bottom: 0;
+        li {
+            float: left;
+            margin-bottom: 0;
+            a {
+                color: @v-light-grey;
+                text-decoration: none;
+                background: #344a5f;
+                padding: 12px 12px 0px;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 14px;
+                height: 28px;
+                text-transform: uppercase;
+                display: block;
+                border-right: 1px solid @pa-blue;
+                i {
+                    padding-right: 8px;
+                    font-size: 14px;
+                    &.alt {
+                        padding-right: 0;
+                        padding: 0 8px;
+                        font-size: 14px;
+                    }
+                }
+                &:hover {
+                    .fade-fast;
+                    background: @blue;
+                }
+                &.active {
+                    .fade-slow;
+                    background: @v-light-grey;
+                    color: @pa-blue;
+                }
+            }
+        }
+    }
+}
+nav {
+    background: url(/static/images/white-bg.png) repeat;
+    display: block;
+    border-bottom: 1px solid #ddd;
+    ul {
+        &.container {
+            .nav-collapse {
+                .collapse {
+                    position: relative;
+                    height: auto;
+                    overflow: hidden;
+                    -webkit-transition: height 0.35s ease;
+                    -moz-transition: height 0.35s ease;
+                    -o-transition: height 0.35s ease;
+                    transition: height 0.35s ease;
+                }
+                ul {
+                    &.nav {
+                        list-style: none;
+                        margin: 0;
+                        li {
+                            a {
+                                display: block;
+                                float: left;
+                                outline: none;
+                                &:hover {
+                                    background: @v-light-grey;
+                                }
+                                &.dropdown-toggle {
 
+                                }
+                            }
+                            &.open {
+                                a.dropdown-toggle {
+                                    background: @v-light-grey;
+                                }
+                            }
+                            ul {
+                                &.dropdown-menu {
+                                    position: absolute;
+                                    top: 100%;
+                                    left: 259px;
+                                    z-index: 1000;
+                                    float: none;
+                                    display: none;
+                                    float: left;
+                                    width: 220px;
+                                    padding: 10px 0;
+                                    margin: 0;
+                                    list-style: none;
+                                    background: @v-light-grey;
+                                    background-clip: padding-box;
+                                    border: 1px solid #ddd;
+                                    height: 238px;
+                                    &#dropdown-learn {
+                                        left: 182px;
+                                    }
+                                    &#dropdown-equipment {
+                                        left: 69px;
+                                    }
+                                    &#dropdown-shop {
+                                        left: 0px;
+                                    }
+                                    li {
+                                        a {
+                                            width: 84%;
+                                            text-transform: none;
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            text-shadow: none;
+                                            padding: 6px 15px;
+                                            color: @dark-grey;
+                                            i {
+                                                float: right;
+                                                font-size: 10px;
+                                                line-height: 18px;
+                                                text-decoration: none;
+                                            }
+                                            &:hover, &.maintainHover {
+                                                font-weight: 700;
+                                                color: @red;
+                                                text-decoration: underline;
+                                            }
+                                        }
+                                        .popover {
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            z-index: 1010;
+                                            display: none;
+                                            width: 400px;
+                                            padding: 1px;
+                                            text-align: left;
+                                            white-space: normal;
+                                            background: @white;
+                                            border: 1px solid #ddd;
+                                            h3 {
+                                                padding: 10px 25px;
+                                                margin: 0;
+                                                font-size: 18px;
+                                                font-weight: 700;
+                                                color: @blue;
+                                            }
+                                            .popover-content {
+                                                ul {
+                                                    margin: 5px 20px;
+                                                    li {
+                                                        a {
+                                                            width: auto;
+                                                            padding: 4px 6px;
+                                                            display: block;
+                                                            float: none;
+                                                            color: @dark-grey;
+                                                            font-weight: 400;
+                                                            text-decoration: underline;
+                                                            &:hover {
+                                                                font-weight: 700;
+                                                                background: none;
+                                                                color: @red;
+                                                            }
+                                                        }
+                                                    }
+                                                    &.left {
+                                                        width: 42%;
+                                                        float: left;
+                                                    }
+                                                    &.right {
+                                                        width: 38%;
+                                                        float: right;
+                                                    }
+                                                }
+                                                img {
+                                                    position: absolute;
+                                                    right: 0;
+                                                    bottom: 0;
+                                                    width: 225px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.open {
+                                ul {
+                                    &.dropdown-menu {
+                                        display: block;
+                                        *z-index: 1000;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ul {
+        li {
+            margin: 0;
+            a {
+               text-transform: uppercase;
+               text-decoration: none;
+               font-weight: 500;
+               color: @pa-blue;
+               padding: 16px;
+               display: block;
+               .fade-slow;
+               text-shadow: 0px 1px 0px @white;
+               font-size: 14px;
+               &:hover {
+                   color: @red;
+                   background: @white;
+                   .fade-fast;
+               }
+            }
+            &.quote {
+                float: right;
+                a {
+                    margin-right: 5px;
+                    padding: 16px 0;
+                    color: @red;
+                    background: none;
+                }
+            }
+        }
+    }
+}
 .banner { position: relative; overflow: auto; }
     .banner li { list-style: none; }
         .banner ul li { float: left; }
