@@ -9,7 +9,7 @@
 {% block icon-nav %}
 {% endblock %}
 {% block resources-content %}
-{% include "affiliates/resources/_partials/resources-nav.html" %}
+{% include "affiliates/resources/_partials/resources-nav-agent.html" %}
 
 <div class="wrapper" id="web-banners">
 	<i class="fa fa-desktop" id="header-icon"></i> <h1>Web Banners</h1>
@@ -19,18 +19,18 @@
        <div class="image-container">
             <h2>{{ value.0 }}</h2>
             <div class="content-area" id="aff-banners">
-      
+
                     {% for x in value.1 %}
-                    
+
                         <img src="{{ MEDIA_URL }}{{ x.ad }}" onclick="javascript:enterAgentID(this)" class="webBanner">
                     {% endfor %}
-            </div>        
+            </div>
             <div class="clear"></div>
         </div>
 
         {% endfor %}
-    
-        <div id="pop-up-wrapper" onclick="javascript:closePopup()">
+
+        <div id="pop-up-wrapper" onclick="javascript:closePopup()" style="display: none;">
             <div id="popupEntry2" style="background-color:#444444;z-index:3000;position:absolute;color:white;padding:20px;">
             <br />
                 <div id="popupEntryInner" onclick="javascript:noPropogate(event)">
@@ -52,13 +52,13 @@
 </div>
 
     {% addtoblock "js" %}
-    
-    
-    <script src="{{ STATIC_URL }}js/masonry.js"></script>   
+
+
+    <script src="{{ STATIC_URL }}js/masonry.js"></script>
 
     <script language="javascript">
       $(function(){
-            
+
             var $container = $('.content-area');
             $container.imagesLoaded(function(){
             $container.masonry({
@@ -69,7 +69,7 @@
             });
             });
             });
-                    
+
         var thisImgSrc = "";
         var theBoxVal = "";
         function enterAgentID(thisIMG)
@@ -95,8 +95,8 @@
             {
                 theBoxVal = '';
             }
-            
-            
+
+
            $('#popupEntryTextBox').val(theBoxVal);
         }
         function selectLink(event)

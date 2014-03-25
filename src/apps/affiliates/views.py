@@ -173,6 +173,68 @@ def products_page(request):
     return simple_dtt(request,'affiliates/resources/products.html',ctx)
 
 
+def agent_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-get-started',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/get-started.html',ctx)
+
+
+def agent_web_banners_page(request):
+    """
+    Function that gathers all the google ads from all the campaigns and
+    then sends them to the html to be rendered by banner size.
+    """
+    campaigns = Campaign.objects.all()
+    ads = {
+        'leaderboard': ('Leaderboard (728x90)', []),
+        'banner': ('Banner (468x60)', []),
+        'skyscaper': ('Skyscraper (120x600)', []),
+        'wide_skyscraper': ('Wide Skyscraper (160x600)', []),
+        'small_square': ('Small Square (200x200)', []),
+        'square': ('Square (250x250)', []),
+        'medium_rectangle': ('Medium Rectangle (300x250)', []),
+        'large_rectangle': ('Large Rectangle (336x280)', []),
+    }
+    for campaign in campaigns:
+        for ad in campaign.ad_set.all():
+            if ad.type.slug in ads:
+                ads[ad.type.slug][1].append(ad)
+
+
+    ctx={'page_name': 'agent-web-banners',
+         'google_ads':ads,
+          'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request, 'affiliates/resources/agents/web-banners.html',ctx)
+
+
+def agent_logos_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-logos',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/logos.html',ctx)
+
+def agent_collateral_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-collateral',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/collateral.html',ctx)
+
+
+
+def agent_products_page(request):
+    if not request.session.get('aff-logged-in',False):
+        return redirect('aff-login')
+    ctx={'page_name':'agent-products',
+         'aff_id':request.session.get('aff_id',None)}
+    return simple_dtt(request,'affiliates/resources/agents/products.html',ctx)
+
+
+
+
 # SEM Landing Page Views
 def semlanding_response(request):
     expire_time = timedelta(days=90)
@@ -383,14 +445,21 @@ def aff_login(request):
     if request.method == 'POST':
         form=AffiliateLoginForm(request.POST)
         if form.is_valid():
-            check_agentid=form.cleaned_data['agent_id']
+            check_agentid = form.cleaned_data['agent_id']
             try:
-                aff=Affiliate.objects.get(agent_id=check_agentid)
+                aff = Affiliate.objects.get(agent_id=check_agentid)
                 if aff:
                     request.session['aff-logged-in']=True
                     request.session['aff_name']=aff.name
                     request.session['aff_id']=aff.agent_id
-                    response=redirect('aff-get-started')
+
+                    if check_agentid[0] == 'a' or check_agentid[0] == 'A':
+                        response = redirect('aff-get-started')
+                    elif check_agentid[0] == 'b' or check_agentid[0] == 'B':
+                        response = redirect('agent-get-started')
+                    else:
+                        response = redirect('aff-get-started')
+
                     response['Location'] +='?agent_id=%s' % aff.agent_id
                     return response
 
@@ -402,11 +471,6 @@ def aff_login(request):
     ctx={'form':form,'page_name':'aff-login'}
     return render(request,'affiliates/resources/login.html',ctx)
 
-
-def agent_page(request):
-    ctx={'page_name':'aff-agent',
-         'aff_id':request.session.get('aff_id',None)}
-    return render(request,'affiliates/resources/agent.html',ctx)
 
 
 
