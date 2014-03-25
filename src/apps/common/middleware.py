@@ -163,9 +163,9 @@ class LocalPageRedirect(object):
         match_ny = re.compile(r'home-security/\bNY\b/[-\w]+',re.IGNORECASE)
         state_space = dict(US_STATES).values()
         state_nospace = [x.replace(' ','') for x in state_space]
-        #if match_quote.match(url):
-        #    if request.META['HTTP_HOST'] != 'homesecurity.protectamerica.com':
-        #        return redirect('http://homesecurity.protectamerica.com/rep/get-quot')
+        if match_quote.match(url):
+            if request.META['HTTP_HOST'] != 'homesecurity.protectamerica.com':
+                return redirect('http://homesecurity.protectamerica.com/rep/get-quot')
 
         if match_ny.match(url):
             #hardcoded redirect for NY
