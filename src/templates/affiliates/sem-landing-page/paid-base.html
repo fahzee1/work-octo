@@ -89,12 +89,14 @@
             {% block party-box %}
                 {% include "banners/deals.html" %}
             {% endblock %}
+            {% block deal-image %}
+            {% endblock %}
             <div id="cyber-monday">
                 <h1>{% block h2 %}Best Alarm System{% endblock %}</h1>
                 <h2>{% block h1 %}for any home{% endblock %}</h2>
                 <p>Plans starting at only</p>
                 <div class="price-area">
-                    <img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />
+                    {% block price-area %}<img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />{% endblock %}
                 </div>
                 {% block hero-buttons %}
                     <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
