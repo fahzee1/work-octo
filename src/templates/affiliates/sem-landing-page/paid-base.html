@@ -11,7 +11,7 @@
     <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0;">
-{% endblock %}    
+{% endblock %}
 {% block robots_tag %}
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
 {% endblock %}
@@ -85,16 +85,20 @@
 {% block content %}
     <div id="hero-wrapper" class="cmonday">
         <div id="hero-image" class="cmonday">
-            {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% block quoteform %}
+                {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% endblock %}
             {% block party-box %}
                 {% include "banners/deals.html" %}
+            {% endblock %}
+            {% block deal-image %}
             {% endblock %}
             <div id="cyber-monday">
                 <h1>{% block h2 %}Best Alarm System{% endblock %}</h1>
                 <h2>{% block h1 %}for any home{% endblock %}</h2>
                 <p>Plans starting at only</p>
                 <div class="price-area">
-                    <img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />
+                    {% block price-area %}<img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />{% endblock %}
                 </div>
                 {% block hero-buttons %}
                     <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
@@ -105,7 +109,7 @@
     </div>
     {% include "order/call-box.html" %}
     <!-- Featured on banner -->
-    
+
     <div id="featured-on">
         <small>Proudly Featured on:</small>
         <div id="featured-badges">
@@ -322,8 +326,8 @@
                 </ul>
               </div>
             </div>
-        
-            
+
+
             <div class="clear"></div>
         </div>
     {% endblock %}
@@ -383,21 +387,50 @@
         $('#lightbox').fadeOut();
         return false;
 
-    })     
+    })
 </script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
 
     <script type="text/javascript">
     $(document).ready(function() {
+    $( "#menu-button" ).click(function() {
+$( "#mobile-menu-container" ).slideToggle( "slow", function() {
+});
+});
 
-    	
         var owl = $("#featured-badges");
-        
+        var outreach = $("#community-outreach-squares");
+
         owl.owlCarousel({
+          autoPlay: 7000,
           items : 12,
           pagination: false,
           itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
         });
+        outreach.owlCarousel({
+          autoPlay: 7000,
+          stopOnHover: true,
+          items : 3, //10 items above 1000px browser width
+          itemsDesktop : [1000,3], //5 items between 1000px and 901px
+          itemsDesktopSmall : [930,2], // betweem 900px and 601px
+          itemsTablet: [660,1], //2 items between 600 and 0
+          itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+        $("#review-container").owlCarousel({
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          singleItem: true,
+          autoHeight: true,
+          pagination: false,
+          autoPlay: 9000,
+
+        });
+        $('.square').click(function() {
+            var link = $(this).data("link");
+            $(this).attr(link, '_blank');
+
+        });
     });
     </script>
+
 {% endblock %}
