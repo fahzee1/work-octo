@@ -189,6 +189,7 @@ LOCAL_PAGE_PATH = '/virtual/customer/www2.protectamerica.com/localpages/'
 EXCLUDE_CITIES = {
 'Austin':'TX',
 'Houston':'TX',
+'Cleveland':'OH',
 }
 READY_FOR_STATIC = True
 TIMEZONES = {
