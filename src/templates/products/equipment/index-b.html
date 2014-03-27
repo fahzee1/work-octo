@@ -4,23 +4,19 @@
 {% block page_keywords %}wireless home security system, GE security, wireless GE security equipment,security, home security, security system, home sec{% endblock %}
 {% block page_description %}Protect America's GE wireless home security systems are easy to install and very reliable. These are some of the most advanced available and offer great protection.{% endblock %}
 
-{% block content %} 
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/equipment-new.css">
+{% endblock %}
+
+{% block content %}
 <div id="hero-wrapper">
     <div id="hero-image">
-        {% include "order/quote-form-white.html" with form=forms.basic %}
+        {% include "order/quote-form-spring.html" with form=forms.basic %}
         <span>
             <h1>Home security equipment</h1>
             <p>Peace of mind for your entire family.</p>
             <p>Explore our equipment solution below, or <a href="#">shop by package here.</a></p>
         </span>
-        <div class="three-products">
-            <ul>
-                <li><img src="{{ STATIC_URL }}img/products/equipment-simon-panel.png" alt="Simon XT panel" /><p><strong>Control panels:</strong> The brains of your home security system.</p></li>
-                <li><img src="{{ STATIC_URL }}img/products/equipment-sensor.png" alt="Door / window sensor" /><p><strong>Motion detectors:</strong> Secure the inside of your home against anything that moves.</p></li>
-                <li class="last"><img src="{{ STATIC_URL }}img/products/equipment-motion.png" alt="Motion detector" /><p><strong>Door / window sensors:</strong> A mighty small package providing the front line defense for your home.</p></li>
-            </ul>
-            <div class="clear"></div>
-        </div>
     </div>
 </div>
 {% include "order/call-box.html" %}
