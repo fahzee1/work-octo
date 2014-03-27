@@ -1,0 +1,947 @@
+{% load content_tags content_filters sekizai_tags %}
+{% load url from future %}
+{% block doctype %}
+<!DOCTYPE html>
+<!-- HTML5 Boilerplate -->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" {% block data_template %}{% endblock %}><!--<![endif]-->
+{% endblock %}
+<head>
+
+{% block google_experiment %}
+
+{% endblock %}
+    {% comment %}
+    <!-- Begin Inspectlet Embed Code -->
+    <script type="text/javascript" id="inspectletjs">
+    	window.__insp = window.__insp || [];
+    	__insp.push(['wid', 1417973242]);
+    	(function() {
+    		function __ldinsp(){var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://www.inspectlet.com/inspectlet.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); }
+    		if (window.attachEvent){
+    			window.attachEvent('onload', __ldinsp);
+    		}else{
+    			window.addEventListener('load', __ldinsp, false);
+    		}
+    	})();
+    </script>
+    <!-- End Inspectlet Embed Code -->
+    {% endcomment %}
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta name="description" content="{% block page_description %}{% endblock %}" />
+    {% comment %}<meta name="keywords" content="{% block page_keywords %}{% endblock %}" />{% endcomment %}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <meta property="fb:admins" content="586942929" />
+{% block robots_tag %}
+    {% if request.GET.agent %}<meta name="ROBOTS" content="NOINDEX, FOLLOW"/>
+    {% else %}
+        {% if request.is_secure %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+        {% else %}<meta name="ROBOTS" content="INDEX, FOLLOW"/>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+    <meta name="rating" content="general" />
+    <meta name="copyright" content="Copyright &copy; 2013 Protect America, Inc., all rights reserved" />
+    <meta name="author" content="Protect America" />
+    <meta name="contact_addr" content="webmaster@protectamerica.com" />
+    <meta name="distribution" content="global" />
+    <meta name="resource-type" content="document" />
+    <meta http-equiv="imagetoolbar" content="false" />
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />
+    <link rel="author" href="https://plus.google.com/113573642727337197280/posts"/>
+    <meta name="p:domain_verify" content="1852cd0b77a74fd31961f243d35bc25e"/>
+
+{% block favicon %}
+    <!-- Icons -->
+    <!-- 16x16 -->
+    <link rel="shortcut icon" href="http://www.protectamerica.com/favicon.ico">
+    <!-- 32x32 -->
+    <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png"> -->
+    <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png"> -->
+    <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png"> -->
+    <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png"> -->
+    <!--iOS -->
+
+{% endblock %}
+{% block viewport %}
+<meta name="viewport" content="width=1024">
+{% endblock %}
+<meta http-equiv="cleartype" content="on">
+{% block css %}
+    <!-- For all browsers -->
+    <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/320.css">
+    <!-- For progressively larger displays -->
+    <link rel="stylesheet" media="screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/480.css">
+    <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
+    <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
+
+{% endblock %}
+
+<!--[if IE 7]>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome/font-awesome-ie7.min.css">
+<![endif]-->
+
+<!-- JavaScript -->
+<script src="{{ STATIC_URL }}js/modernizr-2.5.3-min.js"></script>
+
+{% block canonical %}
+
+        <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
+
+{% endblock %}
+
+{% block google_analytics %}
+    <script type="text/javascript">
+
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-5441302-2']);
+     _gaq.push(['_setDomainName', 'protectamerica.com']);
+     {% block ga_custom_variables %}{% endblock %}
+     _gaq.push(['_trackPageview']);
+
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+
+    </script>
+{% endblock %}
+{% block typekit-code %}
+    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block bing-conversion-code %}{% endblock %}
+
+</head>
+<body class="{{ page_name }} {% block typekit %}tk-jaf-facitweb{% endblock %} {% block extra_class %}{% endblock %} ">
+
+{% block quantcast-pixel %}
+<div style="position:absolute;">
+<!-- Start Quantcast Tag -->
+<script type="text/javascript">
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push(
+{qacct:"p-0f51KX-zUmMuU",labels:"_fp.event.Homepage"}
+);
+</script>
+<noscript>
+<img src="//pixel.quantserve.com/pixel/p-0f51KX-zUmMuU.gif?labels=_fp.event.Homepage" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+</noscript>
+<!-- End Quantcast tag -->
+</div>
+{% endblock %}
+{% block liveperson %}
+<!-- BEGIN LivePerson Monitor. -->
+<script type="text/javascript">
+$(function(){
+if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',protocol:location.protocol,events:{bind:function(app,ev,fn){lpTag.defer(function(){lpTag.events.bind(app,ev,fn)},0)},trigger:function(app,ev,json){lpTag.defer(function(){lpTag.events.trigger(app,ev,json)},1)}},defer:function(fn,fnType){if(fnType==0){this._defB=this._defB||[];this._defB.push(fn)}else if(fnType==1){this._defT=this._defT||[];this._defT.push(fn)}else{this._defL=this._defL||[];this._defL.push(fn)}},load:function(src,chr,id){var t=this;setTimeout(function(){t._load(src,chr,id)},0)},_load:function(src,chr,id){var url=src;if(!src){url=this.protocol+'//'+((this.ovr&&this.ovr.domain)?this.ovr.domain:'lptag.liveperson.net')+'/tag/tag.js?site='+this.site}var s=document.createElement('script');s.setAttribute('charset',chr?chr:'UTF-8');if(id){s.setAttribute('id',id)}s.setAttribute('src',url);document.getElementsByTagName('head').item(0).appendChild(s)},init:function(){this._timing=this._timing||{};this._timing.start=(new Date()).getTime();var that=this;if(window.attachEvent){window.attachEvent('onload',function(){that._domReady('domReady')})}else{window.addEventListener('DOMContentLoaded',function(){that._domReady('contReady')},false);window.addEventListener('load',function(){that._domReady('domReady')},false)}if(typeof(window._lptStop)=='undefined'){this.load()}},_domReady:function(n){if(!this.isDom){this.isDom=true;this.events.trigger('LPT','DOM_READY',{t:n})}this._timing[n]=(new Date()).getTime()}};lpTag.init()}
+});
+</script>
+{% endblock %}
+<!-- END LivePerson Monitor. -->
+<!-- Page Header -->
+    <header>
+{% block header %}
+
+        <div class="container">
+            <div class="logo">
+                <a href="/"><img src="{{ STATIC_URL }}img/base/logo-spring.png" alt="Protect America" /></a>
+            </div>
+            <ul>
+                <li class="not-mobile"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1"><i class="icon-comment"></i>Live Chat</a></li>
+                <li class=""><a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><i class="icon-phone not-mobile-v"></i><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></li>
+                <li class="not-mobile-v"><a href=""><i class="icon-search alt"></i></a></li>
+                <li class="not-mobile-v"><a href=""><i class="icon-home alt"></i></a></li>
+                <li class="not-desktop"><a href="" id="mobile-menu"><i class="icon-reorder alt"></i></a></li>
+                <li class="not-mobile-v">&nbsp;</li>
+            </ul>
+        </div>
+    </header>
+
+    {% block navigation_refresh %}
+    <!-- Navigation -->
+    <nav>
+        <ul class="container">
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Shop</a>
+                        <ul class="dropdown-menu dropdown-shop" id="dropdown-shop" role="menu">
+                            <li data-submenu-id="submenu-securityplans">
+                                <a href="#">Home security packages<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-securityplans" class="popover">
+                                    <h3 class="popover-title">Home security packages</h3>
+                                    <div class="popover-content">
+                                        <ul>
+                                            <li><a href="#">Copper</a></li>
+                                            <li><a href="#">Bronze</a></li>
+                                            <li><a href="#">Silver</a></li>
+                                            <li><a href="#">Gold</a></li>
+                                            <li><a href="#">Platinum</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-business">
+                                <a href="#">Business package</a>
+                            </li>
+                            <li data-submenu-id="submenu-existing-systems">
+                                <a href="#">Existing systems</a>
+                            </li>
+                            <li data-submenu-id="submenu-order-now">
+                                <a href="#">Order now</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Equipment</a>
+                        <ul class="dropdown-menu dropdown-equipment" id="dropdown-equipment" role="menu">
+                            <li data-submenu-id="submenu-homesecurity">
+                                <a href="/learn">Home security<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-homesecurity" class="popover">
+                                    <h3 class="popover-title">Home security</h3>
+                                    <div class="popover-content">
+                                        <ul class="left">
+                                            <li><a href="#">Simon XT control panel</a></li>
+                                            <li><a href="#">Door / window sensor</a></li>
+                                            <li><a href="#">Motion detector</a></li>
+                                            <li><a href="#">Simon XT touchscreen</a></li>
+                                            <li><a href="#">Video security camera</a></li>
+                                            <li><a href="#">Talking wireless keypad</a></li>
+                                        </ul>
+                                        <ul class="right">
+                                            <li><a href="#">Garage door sensor</a></li>
+                                            <li><a href="#">Glass break sensor</a></li>
+                                            <li><a href="#">Mini pinpad</a></li>
+                                            <li><a href="#">Two-button panic</a></li>
+                                            <li><a href="#">Other accessories</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-lifesafety">
+                                <a href="#">Life safety<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-lifesafety" class="popover">
+                                    <h3 class="popover-title">Life safety</h3>
+                                    <div class="popover-content">
+                                        <ul>
+                                            <li><a href="#">Monitored smoke detector</a></li>
+                                            <li><a href="#">Medical panic pendant</a></li>
+                                            <li><a href="#">Carbon monoxide detector</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-homeautomation">
+                                <a href="#">Home automation<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-homeautomation" class="popover">
+                                    <h3 class="popover-title">Home automation</h3>
+                                    <div class="popover-content">
+                                        <ul>
+                                            <li><a href="#">Z-wave door lock</a></li>
+                                            <li><a href="#">Z-wave appliance module</a></li>
+                                            <li><a href="#">Freeze sensor</a></li>
+                                            <li><a href="#">Flood sensor</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-smartconnect">
+                                <a href="#">SMART Connect</a>
+                            </li>
+                            <li data-submenu-id="submenu-automotive">
+                                <a href="#">Automotive</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Learn</a>
+                        <ul class="dropdown-menu dropdown-learn" id="dropdown-learn" role="menu">
+                            <li data-submenu-id="submenu-about">
+                                <a href="#">About us<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-about" class="popover">
+                                    <h3 class="popover-title">About us</h3>
+                                    <div class="popover-content">
+                                        <ul>
+                                            <li><a href="#">Reviews</a></li>
+                                            <li><a href="#">Our families</a></li>
+                                            <li><a href="#">Charity work</a></li>
+                                            <li><a href="#">Pay it Forward</a></li>
+                                        </ul>
+                                        <img src="images/support-girl.png" class="support">
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-monitoring">
+                                <a href="#">Monitoring<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-monitoring" class="popover">
+                                    <h3 class="popover-title">Monitoring</h3>
+                                    <div class="popover-content">
+                                        <ul>
+                                            <li><a href="#">Landline</a></li>
+                                            <li><a href="#">Broadband</a></li>
+                                            <li><a href="#">Cellular</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-101">
+                                <a href="#">Security 101<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-101" class="popover">
+                                    <h3 class="popover-title">Security 101</h3>
+                                    <div class="popover-content">
+                                        <ul>
+                                            <li><a href="#">How it works</a></li>
+                                            <li><a href="#">Complete home security</a></li>
+                                            <li><a href="#">Crime stats</a></li>
+                                            <li><a href="#">Glossary</a></li>
+                                            <li><a href="#">Resources</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-blog">
+                                <a href="#">Blog</a>
+                            </li>
+                            <li data-submenu-id="submenu-news">
+                                <a href="#">News</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="dropdown-toggle" data-toggle="dropdown" href="#">Support</a>
+                        <ul class="dropdown-menu dropdown-support" id="dropdown-support" role="menu">
+                            <li data-submenu-id="submenu-customer-service">
+                                <a href="/learn">Customer service<i class="icon-chevron-right"></i></a>
+                                <div id="submenu-customer-service" class="popover">
+                                    <h3 class="popover-title">Customer service</h3>
+                                    <div class="popover-content">
+                                        <ul>
+                                            <li><a href="#">Installation</a></li>
+                                            <li><a href="#">Operation</a></li>
+                                            <li><a href="#">Troubleshooting</a></li>
+                                            <li><a href="#">FAQs</a></li>
+                                            <li><a href="#">EaseMove kit</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li data-submenu-id="submenu-find-us">
+                                <a href="#">Find us</a>
+                            </li>
+                            <li data-submenu-id="submenu-careers">
+                                <a href="#">Careers</a>
+                            </li>
+                            <li data-submenu-id="submenu-dealer-programs">
+                                <a href="#">Dealer program</a>
+                            </li>
+                            <li data-submenu-id="submenu-affiliates">
+                                <a href="#">Affiliates</a>
+                            </li>
+                            <li data-submenu-id="submenu-contact-us">
+                                <a href="#">Contact us</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <li class="quote"><a href="/quote">Request Quote</a></li>
+
+        </ul>
+    </nav>
+    <!-- End nav -->
+    {% endblock %}
+
+{% endblock %}
+
+<!-- Sub Navigation -->
+{% block subnav %}{% endblock %}
+
+<!-- Main Content -->
+{% block content %}
+{% endblock %}
+
+
+
+<!-- Order Footer -->
+{% block order-footer %}
+        <div id="order-footer">
+            <div id="footer-package-section">
+                {% block page-product %}
+                <h3>Search Our Site.</h3>
+                <p>Looking for something? Search our entire site and find what you seek.</p>
+                <form id="search-form" method="GET" action="http://www.protectamerica.com/search/">
+                    <input type="text" id="q" name="q" placeholder="Enter Keywords"></input>
+                    <button class="button-link" onClick="_gaq.push(['_trackEvent', 'Search', 'Footer Search Button', '{{ page.name }}']);">Search Now <i class="icon-chevron-right"></i></button>
+                </form>
+                {% endblock %}
+            </div>
+            <div id="footer-call-now">
+                <h3>Give us a call.</h3>
+                <p>Security experts are standing by to answer questions and help create a security package for your home and family.</p>
+                <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span>
+            </div>
+            <div id="footer-chat-now">
+                <h3>Chat online.</h3>
+                <p>Have a question about a system? Ready to order? Our security experts are available to chat online right now.</p>
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" class="button-link easy-chat-click" title="Chat online with a security professional" target="_blank" onClick="_gaq.push(['_trackEvent', 'Chat Online', 'Online Chat Package Footer Click', '{{ page.name }}']);">Online Chat <i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+{% endblock %}
+
+<!-- Footer -->
+{% block footer %}
+    {% block main-footer %}
+    <div id="footer-wrapper">
+        <div id="footer">
+            <ul id="footer-main-navigation">
+                <li class="{% if 'shop' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/shop-home-security-packges/" title="Shop Home Security Packages">Shop</a></li>
+                <li class="{% if 'equipment' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/security-equipment/" title="View Equipment and Products">Equipment</a></li>
+
+                <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/learn/" title="Learn about Home Security">Learn</a></li>
+                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/" title="Get Help for your Home Security System">Support</a></li>
+                <li class=""><a href="http://www.protectamerica.com/home-security-blog/" title="Order Home Security Today">Security Blog</a></li>
+                <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/sitemap/" title="View our Sitemap">Sitemap</a></li>
+            </ul>
+            <ul id="footer-care-nav">
+
+                <li class="{% if 'customer-service' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/customer-service/" title="Customer Service">Customer Service</a></li>
+                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/privacy-policy/" title="View our Privacy Policy">Privacy Policy</a></li>
+                <li class="{% if 'return-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/return-policy/" title="View our Return Policy">Return Policy</a></li>
+
+                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/state-licenses/" title="View our Licenses for Each State">State Licenses</a></li>
+                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
+                <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
+                <li class="{% if 'dealer-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/dealers" title="Interested in Selling Home Security? Join our Dealer Program">Dealer Program</a></li>
+                {% comment %}
+                <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
+                {% endcomment %}
+            </ul>
+            <ul id="footer-contact-info">
+                <li><strong>Telephone</strong></li>
+                <li><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></li>
+                <li><span>M-F</span> 7AM - 11PM CT</li>
+                <li><span>SAT</span> 8AM - 8PM CT</li>
+                <li><span>SUN</span> 9AM - 9PM CT</li>
+                {% block social-icons %}
+                <li id="footer-social-icons">
+                    <a href="https://plus.google.com/+ProtectAmerica/" title="Visit Protect Americ on Google +"><i class="icon-google-plus"></i></a>
+
+                    <a href="http://www.facebook.com/ProtectAmerica" title="Visit Protect America's Facebook Page"><i class="icon-facebook"></i>
+                    <div class="clear" style="padding-bottom: 16px;"></div>
+                    <a href="http://www.twitter.com/ProtectAmerica" title="Visit Protect America's Twitter Page"><i class="icon-twitter"></i></a>
+
+                    <a href="http://www.youtube.com/user/ProtectAmerica" title="Watch our Tutorials and Videos on our YouTube Page"><i class="icon-youtube"></i></a>
+                    <a href="http://www.linkedin.com/company/protect-america" title="Visit Protect America's LinkedIn Page"><i class="icon-linkedin"></i></a>
+
+
+                </li>
+                {% endblock %}
+            </ul>
+            <div id="footer-awards" style="padding-left: 24px;">
+                <img src="{{ STATIC_URL }}img/base/besty-award.png" alt="Best Home Security Comapnys #1 Choice Overall" />
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    {% comment %}
+    {% if page_name == 'index' %}
+
+    <div id="footer-local-wrapper">
+        <div class="footer-local">
+            <h2>Select Your State <span>Find Home Security Deals In Your Area</span></h2>
+            <ul>
+                <li><a href="http://www.protectamerica.com/home-security/AL/">Alabama</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/AK/">Alaska</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/AZ/">Arizona</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/AR/">Arkansas</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/CA/">California</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/CO/">Colorado</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/CT/">Connecticut</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/DE/">Delaware</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/FL/">Florida</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/GA/">Georgia</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/HI/">Hawaii</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/ID/">Idaho</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/IL/">Illinois</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/IN/">Indiana</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/IA/">Iowa</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/KS/">Kansas</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/KY/">Kentucky</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/LA/">Louisiana</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/ME/">Maine</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/MD/">Maryland</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/MA/">Massachusetts</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/MI/">Michigan</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/MN/">Minnesota</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/MS/">Mississippi</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/MO/">Missouri</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/MT/">Montana</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/NE/">Nebraska</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/NV/">Nevada</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/NH/">New Hampshire</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/NJ/">New Jersey</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/NM/">New Mexico</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/NY/">New York</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/NC/">North Carolina</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/ND/">North Dakota</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/OH/">Ohio </a></li>
+                <li><a href="http://www.protectamerica.com/home-security/OK/">Oklahoma</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/OR/">Oregon</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/PA/">Pennsylvania</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/RI/">Rhode Island</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/SC/">South Carolina</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/SD/">South Dakota</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/TN">Tennessee</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/TX/">Texas</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/UT/">Utah</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/VT/">Vermont</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/VA/">Virginia</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/WA/">Washington</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/WV/">West Virginia</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/WI/">Wisconsin</a></li>
+                <li><a href="http://www.protectamerica.com/home-security/WY/">Wyoming</a></li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    {% endif %}
+    {% endcomment %}
+    {% endblock %}
+    {% block terms %}
+    <div id="terms-wrapper">
+        <div id="terms">
+            <div id="terms-conditions">
+                <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+                <p>* Information used for home security alarm system comparisons was obtained November 2013 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
+                <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
+                {% block extra_terms %}
+                {% endblock %}
+            </div>
+            <div id="copyrights">
+
+                {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
+                <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    {% endblock %}
+
+{% endblock %}
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.next-row-button').click(function() {
+        var current_row = $(this).parent().children('.slide-row:visible');
+        var row_count = $(this).parent().children('.slide-row').length;
+        if(current_row.index() == (row_count - 1) ) {
+            var next_slide = $(this).parent().children('.slide-row:eq(0)');
+        } else {
+            var next_slide = $(this).parent().children('.slide-row:eq('+(current_row.index() + 1)+')');
+        }
+        $(this).parent().children('.slide-row:visible').removeClass('active')
+        next_slide.addClass('active');
+    });
+});
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/spring/dropdown.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/spring/jquery.menu-aim.js"></script>
+<script type="text/javascript">
+
+        var $menu = $(".dropdown-menu");
+
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu
+        });
+
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = 260,
+                width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: width - 3,  // main should overlay submenu
+                height: height - 4  // padding for main dropdown's arrow
+            });
+
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+        
+        $(".dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+    </script>
+{% endaddtoblock "js" %}
+<!-- Javascript -->
+
+<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+{% comment %}
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    /*
+
+        $.ajax({
+            url:"{% url 'render-feed' %}",
+            success:function(data){
+                $("#newsfeed").html(data);
+                $('#newsfeed').cycle({
+                            fx:'blindY',
+                            speed:500,
+                            timeout:6000,
+                            delay:-3000
+                });
+            }
+
+        });
+    */
+
+});
+
+
+
+</script>
+{% endcomment %}
+
+
+{% render_block "js" %}
+{% block main_js %}
+
+    <script type="text/javascript">
+        $("#subnav > li.menu-item").mouseover(function(){
+            if ($(this).hasClass('open') || $(this).hasClass('hover')) {
+
+            } else {
+                if ($(this).data("menu")) {
+                    var menu = $(this).data("menu");
+                    $(this).addClass('hover');
+                    $(this).children('.child-nav').show();
+                }
+            }
+
+        }).mouseout(function(){
+            if ($(this).hasClass('open')) {
+
+            } else {
+                if ($(this).data("menu")) {
+                    var menu = $(this).data("menu");
+                    $(this).removeClass('hover');
+                    $(this).children('.child-nav').hide();
+
+                }
+            }
+        });
+        $("#international-selection > li.active").click(function(){
+            if ($("#international-selection").hasClass("active")) {
+                $("#international-selection").removeClass('active');
+            } else {
+                $("#international-selection").addClass('active');
+
+            }
+            return false;
+        });
+        $(".request-quote-button").click(function(){
+            if ($(this).hasClass('active')) {
+                $('#quote-form').hide();
+                $(this).removeClass('active');
+            } else {
+                $('#quote-form').show();
+                $(this).addClass('active');
+            };
+            return false;
+        });
+        /*
+        $('#newsfeed').cycle({
+           fx:     'blindY',
+           speed:   500,
+           timeout: 6000,
+           delay:  -3000
+        });
+        */
+        $('.easy-chat-click').click(function() {
+            window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1', 'chatter', "height=465,width=400");
+            return false;
+        });
+
+
+
+    </script>
+
+    <!--[if !IE]><!-->
+    <script type="text/javascript">
+
+        $('#header-wrapper').waypoint('sticky', {
+		  offset: -85 // Apply "stuck" when element 30px from top
+		});
+    </script>
+
+	<!--<![endif]-->
+{% endblock %}
+{% block extra_javascript %}
+
+{% if use_call_measurement %}
+<script type="text/javascript">
+    function getParameterByName( name ){
+          name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+          var regexS = "[\\?&]"+name+"=([^&#]*)";
+          var regex = new RegExp( regexS );
+          var results = regex.exec( window.location.href );
+          if( results == null )
+            return "";
+          else
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+
+        }
+
+    var device;
+    device  = getParameterByName('device');
+    var ci_search_source;
+    var cookie_refer_id = "{{ request.COOKIES.refer_id }}"
+    var session_refer_id = "{{ request.session.refer_id }}"
+    var agent = "{{ request.GET.agent }}"
+
+    //check if google or bing but if also mobile then override and set as mobile
+    if (cookie_refer_id == 'GOOGLEPPC' || session_refer_id == 'GOOGLEPPC' || cookie_refer_id =='a01415' || cookie_refer_id == 'i10237' || agent == 'i10237' || agent == 'GOOGLEPPC'){
+        ci_search_source = 'google'
+        if (device == 'm' || session_refer_id == 'i10045'){
+            ci_search_source = "mobile";
+        }
+    }
+
+    if (cookie_refer_id == 'BINGPPC' || session_refer_id == 'BINGPPC' || session_refer_id == 'i10240' || agent == 'BINGPPC'){
+        ci_search_source = 'bing'
+        if (device == 'm' || session_refer_id == 'i10045'){
+            ci_search_source = "mobile";
+        }
+    }
+    //if not google or bing then just check to see what type of device
+    if (!ci_search_source){
+        if (device == 'm' || session_refer_id == 'i10045'){
+            ci_search_source = "mobile";
+        }
+        else if (device =='t'){
+            ci_search_source = "tablet";
+        }
+        else if (device =='c'){
+            ci_search_source = "computer";
+        }
+        else{
+            ci_search_source = "none";
+        }
+    }
+
+    var thisref = document.referrer.replace(/&/g, "zzzzz");
+    var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
+    var script = unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E");
+
+    document.write(script);
+
+
+    var number = $('.dynamic-phone-number').first().text();
+
+    if (number){
+        var ctx = {'number':number,
+                   'link':script};
+         $.ajax({
+                type: "POST",
+                url: "/ajax/log/",
+                    data: ctx,
+                    dataType: "json",
+                    });
+}
+
+
+
+</script>
+{% endif %}
+{% endblock %}
+
+{% block extra_pixels %}
+{{ pixels|default_if_none:""|safe }}
+{% endblock %}
+{% if DEBUG == False %}
+{% block remarketing-one %}
+<!-- Google Code for Home Page Visit Remarketing List -->
+<script type="text/javascript">
+<!--
+var google_conversion_id = 1072079179;
+var google_conversion_language = "en";
+var google_conversion_format = "1";
+var google_conversion_color = "666666";
+var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
+var google_conversion_value = 0;
+//-->
+</script>
+<!-- Google + -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+{% endblock %}
+{% block remarketing %}
+<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+
+<!-- End Remarketing Code -->
+
+{% endblock %}
+
+<!-- Advertiser 'Protect America',  Include user in segment 'Protect America Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
+<img src="http://ads.yahoo.com/pixel?id=1732074&t=2" width="1" height="1" />
+<!-- End of segment tag -->
+{% block liveperson-two %}
+<script type="text/javascript">
+$(function() {
+document.write('<script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>');
+});
+</script>
+{% endblock %}
+{% endif %}
+{% block geo-pixel %}
+<!-- Google Code for Remarketing Tag -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 979438097;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/979438097/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+{% endblock %}
+{% block offline-tracking %}
+<script type="text/javascript">
+  function setCookie(a,d,b){
+        var c=new Date;
+        c.setTime(c.getTime()+864E5*b);
+        b=";expires="+c.toUTCString();
+        document.cookie=a+"="+d+b
+    }
+  function getParam(a){
+        return (a=RegExp("[?&]"+a+"=([^&]*)").exec(window.location.search)) && decodeURIComponent(a[1].replace(/\+/g," "))
+    }
+  var gclid=getParam("gclid");
+  if(gclid){
+        var gclsrc=getParam("gclsrc");
+        (!gclsrc||-1!==gclsrc.indexOf("aw")) && setCookie("gclid",gclid,90)
+    };
+
+</script>
+ <script type="text/javascript">
+  function readCookie(name) {
+  var n = name + "=";
+  var cookie = document.cookie.split(';');
+  for(var i=0;i < cookie.length;i++) {
+      var c = cookie[i];
+      while (c.charAt(0)==' '){
+            c = c.substring(1,c.length);
+        }
+      if (c.indexOf(n) == 0){
+        return c.substring(n.length,c.length);
+        }
+    }
+  return null;
+  }
+
+  window.onload = function() {
+      var gclid = document.getElementById('gclid')
+      if (gclid){
+            gclid.value = readCookie('gclid');
+            }
+  }
+  </script>
+
+{% endblock %}
+
+{% block trustedform %}
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true;
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
+
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
+{% endblock %}
+{% block OS %}
+<script type="text/javascript">
+ window.OSName="Unknown OS";
+if (navigator.appVersion.indexOf("Win")!=-1){
+    window.OSName="Windows";
+} else if (navigator.appVersion.indexOf("Mac")!=-1){
+    window.OSName="MacOS";
+} else if (navigator.appVersion.indexOf("X11")!=-1){
+    window.OSName="UNIX";
+} else if (navigator.appVersion.indexOf("Linux")!=-1){
+    window.OSName="Linux";
+} else {
+    window.OSName = 'Unknown--' + navigator.appVersion;
+}
+function getParameterByName( name ){
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+
+}
+</script>
+{% endblock %}
+
+</body>
+</html>

@@ -13,7 +13,252 @@ body.index-spring {
         }
     }
 }
+.not-desktop {
+    display: none !important;
+}
+header {
+    background: @pa-blue;
+    height: 40px;
+    position: relative;
+    .logo {
+        position: relative;
+        padding: 6px 0;
+        height: 28px;
+        width: 190px;
+        float: left;
+        overflow: hidden;
+        img {
+            width: 160px;
+        }
+    }
+    ul {
+        float: right;
+        margin-bottom: 0;
+        li {
+            float: left;
+            margin-bottom: 0;
+            a {
+                color: @v-light-grey;
+                text-decoration: none;
+                background: #344a5f;
+                padding: 12px 12px 0px;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 14px;
+                height: 28px;
+                text-transform: uppercase;
+                display: block;
+                border-right: 1px solid @pa-blue;
+                i {
+                    padding-right: 8px;
+                    font-size: 14px;
+                    &.alt {
+                        padding-right: 0;
+                        padding: 0 8px;
+                        font-size: 14px;
+                    }
+                }
+                &:hover {
+                    .fade-fast;
+                    background: @blue;
+                }
+                &.active {
+                    .fade-slow;
+                    background: @v-light-grey;
+                    color: @pa-blue;
+                }
+            }
+        }
+    }
+}
+nav {
+    background: url(/static/images/white-bg.png) repeat;
+    display: block;
+    border-bottom: 1px solid #ddd;
+    ul {
+        &.container {
+            .nav-collapse {
+                .collapse {
+                    position: relative;
+                    height: auto;
+                    overflow: hidden;
+                    -webkit-transition: height 0.35s ease;
+                    -moz-transition: height 0.35s ease;
+                    -o-transition: height 0.35s ease;
+                    transition: height 0.35s ease;
+                }
+                ul {
+                    &.nav {
+                        list-style: none;
+                        margin: 0;
+                        li {
+                            a {
+                                display: block;
+                                float: left;
+                                outline: none;
+                                &:hover {
+                                    background: @v-light-grey;
+                                }
+                                &.dropdown-toggle {
 
+                                }
+                            }
+                            &.open {
+                                a.dropdown-toggle {
+                                    background: @v-light-grey;
+                                }
+                            }
+                            ul {
+                                &.dropdown-menu {
+                                    position: absolute;
+                                    top: 100%;
+                                    left: 259px;
+                                    z-index: 1000;
+                                    float: none;
+                                    display: none;
+                                    float: left;
+                                    width: 220px;
+                                    padding: 10px 0;
+                                    margin: 0;
+                                    list-style: none;
+                                    background: @v-light-grey;
+                                    background-clip: padding-box;
+                                    border: 1px solid #ddd;
+                                    height: 238px;
+                                    &#dropdown-learn {
+                                        left: 182px;
+                                    }
+                                    &#dropdown-equipment {
+                                        left: 69px;
+                                    }
+                                    &#dropdown-shop {
+                                        left: 0px;
+                                    }
+                                    li {
+                                        a {
+                                            width: 84%;
+                                            text-transform: none;
+                                            font-size: 12px;
+                                            font-weight: 500;
+                                            text-shadow: none;
+                                            padding: 6px 15px;
+                                            color: @dark-grey;
+                                            i {
+                                                float: right;
+                                                font-size: 10px;
+                                                line-height: 18px;
+                                                text-decoration: none;
+                                            }
+                                            &:hover, &.maintainHover {
+                                                font-weight: 700;
+                                                color: @red;
+                                                text-decoration: underline;
+                                            }
+                                        }
+                                        .popover {
+                                            position: absolute;
+                                            top: 0;
+                                            left: 0;
+                                            z-index: 1010;
+                                            display: none;
+                                            width: 400px;
+                                            padding: 1px;
+                                            text-align: left;
+                                            white-space: normal;
+                                            background: @white;
+                                            border: 1px solid #ddd;
+                                            h3 {
+                                                padding: 10px 25px;
+                                                margin: 0;
+                                                font-size: 18px;
+                                                font-weight: 700;
+                                                color: @blue;
+                                            }
+                                            .popover-content {
+                                                ul {
+                                                    margin: 5px 20px;
+                                                    li {
+                                                        a {
+                                                            width: auto;
+                                                            padding: 4px 6px;
+                                                            display: block;
+                                                            float: none;
+                                                            color: @dark-grey;
+                                                            font-weight: 400;
+                                                            text-decoration: underline;
+                                                            &:hover {
+                                                                font-weight: 700;
+                                                                background: none;
+                                                                color: @red;
+                                                            }
+                                                        }
+                                                    }
+                                                    &.left {
+                                                        width: 42%;
+                                                        float: left;
+                                                    }
+                                                    &.right {
+                                                        width: 38%;
+                                                        float: right;
+                                                    }
+                                                }
+                                                img {
+                                                    position: absolute;
+                                                    right: 0;
+                                                    bottom: 0;
+                                                    width: 225px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            &.open {
+                                ul {
+                                    &.dropdown-menu {
+                                        display: block;
+                                        *z-index: 1000;
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ul {
+        li {
+            margin: 0;
+            a {
+               text-transform: uppercase;
+               text-decoration: none;
+               font-weight: 500;
+               color: @pa-blue;
+               padding: 16px;
+               display: block;
+               .fade-slow;
+               text-shadow: 0px 1px 0px @white;
+               font-size: 14px;
+               &:hover {
+                   color: @red;
+                   background: @white;
+                   .fade-fast;
+               }
+            }
+            &.quote {
+                float: right;
+                a {
+                    margin-right: 5px;
+                    padding: 16px 0;
+                    color: @red;
+                    background: none;
+                }
+            }
+        }
+    }
+}
 .banner { position: relative; overflow: auto; }
     .banner li { list-style: none; }
         .banner ul li { float: left; }
@@ -27,6 +272,10 @@ body.index-spring {
 }
 
 #hero-wrapper {
+    height: 450;
+    &.cmonday {
+        background: #fff;
+    }
     #hero-image {
         #quote-form {
             button {
@@ -65,6 +314,82 @@ body.index-spring {
         }
         &.cmonday {
             #deals {
+                width: 730px;
+                margin-left: 0;
+                .camera {
+                    width: 220px;
+                    height: 159px;
+                    overflow: hidden;
+                    float: left;
+                    img {
+                        &.video-camera {
+                            &:hover {
+                                float: right;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+                .security-system {
+                    width: 205px;
+                    height: 159px;
+                    overflow: hidden;
+                    float: left;
+                    margin-right: 10px;
+                    img {
+                        &.free-system {
+                            &:hover {
+                                float: right;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+                .three {
+                    margin-left: 454px;
+                    background: #ddd;
+                    width: 235px;
+                    height: 119px;
+                    padding: 20px;
+                    display: block;
+                    h3 {
+                        font-size: 18px;
+                        line-height: 20px;
+                        text-shadow: none;
+                        text-transform: uppercase;
+                        font-weight: 700;
+                        text-align: left;
+                        color: #333;
+                        padding: 0;
+                    }
+                    h4 {
+                        font-size: 14px;
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        text-align: left;
+                        text-shadow: none;
+                        color: #333;
+                    }
+                    p {
+                        color: #666;
+                        font-size: 14px;
+                        width: auto;
+                        line-height: 18px;
+                        text-shadow: none;
+                        text-transform: none;
+                        text-align: left;
+                        margin: 10px 0;
+                    }
+                }
+                img {
+                    float: left;
+                    &.free-system {
+                        margin-right: 10px;
+                    }
+                    &.video-camera {
+                        margin-right: 10px;
+                    }
+                }
                 .unbeatable {
                     width: 180px;
                     display: block;
@@ -92,22 +417,36 @@ body.index-spring {
             }
             #quote-form {
                 padding-top: 0;
+                height: 435px;
                 position: relative;
+                margin-top: 50px;
+                background: #fff;
+                border: 1px solid #eee;
                 #third-party-container {
-                    height: 81px;
+                    background: transparent;
+                    height: 52px;
+                    .third-party-badge {
+                        div {
+                            margin: 0;
+                        }
+                    }
                 }
                 .consent-box {
                     border-bottom: 1px solid #ccc;
+                    margin: 6px auto 0;
+                    padding: 2px 0 0;
                 }
                 p.form-title {
                     text-transform: uppercase;
                     font-size: 14px;
                     width: 195px;
                     padding: 5px;
-                    background: #e7e5df;
+                    background: #2e3849;
+                    color: #fff;
+                    font-weight: 600;
                 }
                 i {
-                    color: #e7e5df;
+                    color: #2e3849;
                     font-size: 30px;
                     line-height: 24px;
                     padding: 0;
@@ -127,64 +466,118 @@ body.index-spring {
                     label {
                         font-weight: 400;
                         line-height: 12px;
-                        margin-bottom: 16px;
+                        margin-bottom: 8px;
+                        color: #999;
                     }
                     input {
                         margin: 0 0 8px 15px !important;
+                        padding: 1px 3px;
                         width: 166px;
+                        border-radius: 4px;
+                        border-bottom: 1px solid #ccc;
+                        border-left: 1px solid #ccc;
+                        border-right: 1px solid #ccc;
+                        border-top: 1px solid #999;
+                        font-size: 14px;
                     }
                 }
             }
         }
         #cyber-monday {
-            h1 {
-                margin: 0 0 0 340px;
-                font-size: 34px;
-                font-weight: 600;
+            width: 753px;
+            height: 327px;
+            float: left;
+            text-align: left;
+            .copy {
+                display: block;
+                float: left;
+                padding-top: 42px;
+                width: 500px;
+                h1 {
+                    margin: 10px 0 2px 50px;
+                    font-size: 32px;
+                    line-height: 32px;
+                    font-weight: 500;
+                    text-transform: none;
+                }
+                h2 {
+                    margin: 20px 0 0 50px;
+                    font-size: 16px;
+                    line-height: 18px;
+                    font-weight: 400;
+                    text-transform: none;
+                }
+                h3 {
+                    background: #2e3849;
+                    font-size: 22px;
+                    font-weight: 800;
+                    padding: 8px;
+                    text-align: center;
+                    width: 180px;
+                    margin: 10px 0 0 50px;
+                    color: #ef2922;
+                    text-shadow: none;
+                    text-transform: none;
+                }
+                h4 {
+                    text-transform: none;
+                    font-size: 22px;
+                    font-weight: 400;
+                    line-height: 38px;
+                    margin: 0 0 10px 50px;
+                    color: #666;
+                    text-transform: none;
+                }
             }
-            h2 {
-                margin: 0 0 0 340px;
-                font-size: 30px;
-                font-weight: 400;
-            }
-            p {
-                margin: 0 0 0 340px;
-                font-size: 13px;
-                line-height: 16px;
-            }
-            big {
-                font-size: 200px;
-                color: #2f394a;
-                position: absolute;
-                top: 213px;
-                left: 434px;
-            }
-            small {
-                font-size: 40px;
-                color: #2f394a;
-                position: absolute;
-                top: 155px;
-                left: 425px;
-                &.month {
-                    font-size: 18px;
-                    left: 540px;
-                    top: 278px;
+            .plans {
+                width: 165px;
+                height: 145px;
+                margin: 85px 0 0 50px;
+                padding: 10px;
+                background: url(/static/img/banners/spring/form_bg.png) repeat;
+                float: left;
+                display: block;
+                p {
+                    margin: 0;
+                    font-size: 13px;
+                    line-height: 16px;
+                    text-align: left;
+                    color: #0f64c3;
+                }
+                big {
+                    font-size: 80px;
+                    margin: 32px 0 40px 0;
+                    display: block;
+                    float: left;
+                    font-weight: 600;
+                    color: #2f394a;
+                }
+                small {
+                    font-size: 30px;
+                    display: block;
+                    float: left;
+                    margin: 14px 0 0 0;
+                    color: #2f394a;
+                    &.month {
+                        font-size: 18px;
+                        margin: 50px 0 0;
+                    }
+                }
+                a.button-link {
+                    width: 161px;
+                    text-align: center;
+                    margin: 0;
+                    clear: both;
                 }
             }
             .main-hero-image {
-                bottom: 0;
-                left: -35px;
+                top: 0;
+                left: -500px;
             }
             .price-area {
                 img {
                     margin: 20px 0 0 340px;
                 }
-            }
-            a.button-link {
-                position: absolute;
-                left: 60px;
-                top: 310px;
-
             }
         }
     }
@@ -536,7 +929,7 @@ body.index-spring {
                 line-height: 32px;
                 margin: 0 0 8px;
                 width: 300px;
-                padding-left: 8px;
+                padding: 1px 3px;
                 .border-radius (5px,5px, 5px, 5px);
                 border: 1px solid @black;
             }
@@ -590,6 +983,7 @@ body.index-spring {
     }
 
     #header {
+        width: 960px !important;
         .wrapper;
         #company-logo {
             margin-top: 10px;
@@ -894,223 +1288,130 @@ body.index-spring {
     }
 }
 
-/* Larger than standard 960 (devices and browsers) */
-	@media only screen and (min-width: 960px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center center no-repeat #3f4f5a;
-			}
-	}
-/* Larger than 1590px (devices and browsers) */
-	@media only screen and (min-width: 1590px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center center no-repeat #3f4f5a;
-		}
-	}
+/* #Media Queries
+================================================== */
 
-/* Tablet Portrait size to standard 960 (devices and browsers) */
-	@media only screen and (min-width: 768px) and (max-width: 959px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) 0px center no-repeat #3f4f5a;}
-		#signature {
-			background: url(/static/img/local-pages/austin/austin-frog-bg-1000px.jpg) center top no-repeat @white;
-			width: 100%;
-			height: auto;
-			padding: 30px 0px;
-			margin: 48px auto 0px auto;
-				#signature-left {
-					margin-top: 215px;
-						img {
-							width: 300px;
-						}
-					}
-				#signature-right {
-					width: 300px;
-					span {
-						font-size: 25px;
-					}
-				}
-			}
-		#community {
-			ul {
-				li {
-					&.four-stat {
-		                background: url(/static/img/local-pages/learn-tile-house.png) 150px top no-repeat #f5f5f5;
-		                background-size: 250px 135px;
-		            }
-				}
-			}	
-		}
-	}
-		
-/* All Mobile Sizes (devices and browser) */
-	@media only screen and (max-width: 767px) {
-        #mobile-menu-container {
-            margin-top: 0;
-            background: none;
-            #mobile-navigation {
-                li {
-                    height: auto;
-                    padding: 0;
-                    margin: 0;
-                    a {
-                       height: 20px;
-                       padding: 20px;
-                       display: block;
-                       background: #555;
-                       &:hover {
-                        background: #333;
-                       }
-                    }
-                }
-            }
+    /* Smaller than standard 960 (devices and browsers) */
+    @media only screen and (max-width: 959px) {}
+
+    /* Tablet Portrait size to standard 960 (devices and browsers) */
+    @media only screen and (min-width: 768px) and (max-width: 959px) {
+
+        .wrapper {
+            width: 740px !important;
         }
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center 0px no-repeat #3f4f5a !important;
-		}
         #header-wrapper {
             #header {
-                #mobile-main-navigation {
-                    display: block;
-                    float: right;
-                    width: auto;
-                    margin-bottom: 0;
-                    li {
-                        color: @white;
-                        font-weight: 100;
-                        display: block;
-                        margin-right: 16px;
-                        text-align: center;
-                        font-size: 16px;
-                        height: 28px;
-                        margin-top: 8px;
-                        position: relative;
-                        padding-bottom: 4px;
-                        float: right;
-                        a {
-                            text-decoration: none;
-                            color: @white;
-                            display: block;
-                            padding: 8px 0 8px;
-                            .border-radius (5px,5px,5px,5px);
-                            .fade-slow;
-                            &:hover {
-                                background: @grey;
-                                .fade-fast;
-                            }
+                width: 740px !important;
+            }
+        }
+        #hero-wrapper {
+            #hero-image {
+                width: 740px;
+                &.cmonday {
+                    #deals {
+                        width: 510px;
+                        .three {
+                            display: none;
                         }
-                        &.active {
-                            background: @blue;
-                            .border-radius(5px, 5px, 0, 0);
-                            a {
-                                border-bottom: 1px solid #6598b9;
-                                .border-radius(0,0,0,0);
-                                margin: 0 auto;
-                                padding-bottom: 4px;
-                                &:hover {
-                                    background: none;
-                                }
-                            }
-                            .icon-caret-down {
-                                position: absolute;
-                                top: 25px;
-                                left: 9px;
-                                color: #6598b9;
-                                
-                            }
-                        }
-                        
                     }
-                    li {
-                        width: 45px;
-                        height: 28px;
-                        margin-top: 8px;
-                        margin-right: 8px;
-                        margin-left: 8px;
-                        float: right;
-                        i {
-                            display: block;
-                            font-size: 16px;
-                            line-height: 16px;
+                }
+                #cyber-monday {
+                    width: 533px;
+                    .copy {
+                        width: 313px;
+                        h1 {
+                            font-size: 22px;
+                            line-height: 22px;
+                        }
+                    }
+                    .plans {
+                        margin: 85px 0 0 35px;
+                    }
+                }
+            }
+        }
+
+    }
+
+    /* All Mobile Sizes (devices and browser) */
+    @media only screen and (max-width: 767px) {
+
+        #footer-wrapper, #terms-wrapper {
+            display: none;
+        }
+        .wrapper {
+            width: 480px !important;
+            #categories {
+                display: none;
+                .category {
+                    .category-img {
+                        float: none !important;
+                        width: 230px;
+                        margin: 0 auto 20px;
+                        padding: 0;
+                    }
+                    .category-info {
+                        width: 100%;
+                        h2 {
+                            text-align: center;
+                        }
+                        p {
+                            text-align: center;
                         }
                         a {
-                            font-size: 10px;
-                            text-transform: uppercase;
-                            line-height: 16px;
-                            width: 45px;
-                            height: 28px;
-                            background: @red;
-                            padding: 4px 0;
-                            font-weight: normal;
+                            &.button-link {
+                                margin: 0 auto;
+                                float: none;
+                                width: 160px;
+                                text-align: center;
+                            }
                         }
                     }
                 }
             }
         }
-        #mobile-main-navigation {
-            display: none;
+        #header-wrapper {
+            #header {
+                width: 480px !important;
+            }
         }
-	
-		#signature {
-				background: url(/static/img/local-pages/austin/austin-frog-bg-1000px.jpg) center top no-repeat @white;
-				width: 100%;
-				height: auto;
-				padding: 0px 0px 50px 0px;
-					#signature-left {
-						margin: 50px 0px;
-						img {
-							width: 300px;
-						}
-					}
-					#signature-right {
-						width: 360px;
-						span {
-							font-size: 25px;
-						}
-					}
-		}
-		#community {
-	        ul {
-		        li {
-					&.four-stat {
-							background: url(/static/img/local-pages/learn-tile-house.png) 170px top no-repeat #f5f5f5;
-							background-size: 280px 151px;
-				    }
-				}
-			}
-		}
-		#lifestyle-quote {
-			.button {
-				margin: 15% auto 15% auto;
-				font-size: 20px;
-				padding: 10px;
-			}
-		}
-	}
-		
-/* Screen to Landscape Mobile */
-	@media only screen and (max-width: 479px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center 0px no-repeat #3f4f5a !important;
-		}
-		#signature {
-			background: url(/static/img/local-pages/austin/austin-frog-bg-700px.jpg) center top no-repeat @white;
-			width: 100%;
-			height: auto;
-			padding: 0px 0px 50px 0px;
-				#signature-left {
-					margin: 50px 0px;
-					img {
-						width: 300px;
-					}
-				}
-				#signature-right {
-					width: 240px;
-					span {
-						font-size: 25px;
-					}
-				}
-		}	
-		#community, #features, #austin-video {
-			display: none;
-		}
+        #hero-wrapper {
+            #hero-image {
+                width: 480px;
+                &.cmonday {
+                    #deals {
+                        display: none;
+                        .three {
+                            display: none;
+                        }
+                    }
+                }
+                #cyber-monday {
+                    width: 273px;
+                    .copy {
+                        width: 273px;
+                        padding-top: 10px;
+                        h1 {
+                            font-size: 23px;
+                            line-height: 27px;
+                        }
+                    }
+                    .plans {
+                        width: 175px;
+                        margin: 30px 0 0 50px;
+                        a.button-link {
+                            width: 171px;
+                        }
+                    }
+                }
+            }
+        }
+
     }
+
+    /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+    @media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+    /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+    @media only screen and (max-width: 479px) {}
