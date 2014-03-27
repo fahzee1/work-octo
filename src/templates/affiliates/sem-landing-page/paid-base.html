@@ -85,7 +85,9 @@
 {% block content %}
     <div id="hero-wrapper" class="cmonday">
         <div id="hero-image" class="cmonday">
-            {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% block quoteform %}
+                {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% endblock %}
             {% block party-box %}
                 {% include "banners/deals.html" %}
             {% endblock %}
