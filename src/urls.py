@@ -196,6 +196,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^protection-1/?$', 'affiliates/sem-landing-page/competitors/protection-1.html', 'protection-1'),
         dtt(r'^simplisafe/?$', 'affiliates/sem-landing-page/competitors/simplisafe.html', 'simplisafe'),
         dtt(r'^monotronics/?$', 'affiliates/sem-landing-page/competitors/monotronics.html', 'monotronics'),
+        dtt(r'^verizon/?$', 'affiliates/sem-landing-page/competitors/verizon.html', 'verizon'),
 
 
         # TESTS
