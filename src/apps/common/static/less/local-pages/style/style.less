@@ -2,7 +2,6 @@
 @import "skeleton/skeleton.less";
 @import "owl.less";
 
-
 @blue: #2a94d6;
 @dark-blue: #0065aa;
 @pa-blue: #2e3849;
@@ -173,8 +172,6 @@ a {
 .not-desktop {
     display: none !important;
 }
-
-
 #hero {
     height: 420px;
     &.index {
@@ -182,7 +179,7 @@ a {
         .container {
             height: 483px;
             .heading {
-            	margin-top: 5px;
+            	margin: 5px 8px 0 0;
             	padding: 20px;
             	text-align: center;
             	background: url(/static/img/local-pages/austin/white-75.png);
@@ -211,6 +208,13 @@ a {
                     text-align: center;
                     margin: 0px 0px 0px 0px;
                     .slab-font;
+                }
+                p {
+	                margin: 15px 0 0 0;
+					color: @black;
+					font-weight: 600;
+					font-size: 20px;
+					line-height: 24px;
                 }
             }
             #party-box-new {
@@ -392,6 +396,15 @@ a {
 	    }
 	}
 } 
+.redbutton {
+	margin-left: 18px;
+}
+.request-quote-button {
+	padding: 8px 20px !important;
+}
+#quote-form {
+	top: 45px !important;
+}
 #featured-on {
 
     width: 100%;
@@ -1233,6 +1246,7 @@ footer {
 
                 strong {
                     text-transform: uppercase;
+                    color: #fff;
                 }
                 span {
                     font-weight: normal;
@@ -1246,8 +1260,7 @@ footer {
                 }
                 &#footer-social-icons {
                     margin-top: 22px;
-                    color: @red;
-                    .fa-twitter, .fa-facebook, .fa-youtube, .fa-google-plus, .fa-linkedin {
+                    .icon-twitter, .icon-facebook, .icon-youtube, .icon-google-plus, .icon-linkedin {
                         background: #76c1c5;
                         padding: 4px 6px;
                         color: @black;
@@ -1260,14 +1273,14 @@ footer {
                             .fade-fast;
                         }
                     }
-                    .fa-facebook {
+                    .icon-facebook {
                         background: #698bd3;
                         padding: 4px 13px;
                     }
-                    .fa-youtube {
+                    .icon-youtube {
                         background: #ff5a5a;
                     }
-                    .fa-google-plus {
+                    .icon-google-plus {
                         background: #dc5931;
                     }
                 }
@@ -1482,6 +1495,9 @@ footer {
 	}
 	/* Smaller than standard 960 (devices and browsers) */
 	@media only screen and (max-width: 959px) {
+		#quote-form {
+			right: 56px !important;
+		}
 		#header-wrapper {
 			background: @black;
 			#header {
@@ -1727,6 +1743,7 @@ footer {
 	}
 	/* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
+		.request-quote-button { display: none; }
 		#header-wrapper {
 			background: @black;
 			#header {
@@ -2084,10 +2101,8 @@ footer {
 		    }
 		}
 		#footer-wrapper {
-		    background: #333;
 		    #footer {
 		        background: url(/static/img/base/protect-america-grey.png) center 25px no-repeat;
-		        margin: 0px auto;
 		        width: 420px;
 		        padding: 80px 0px 32px 0px;
 		        #footer-main-navigation, #footer-care-nav, #footer-contact-info {
@@ -2095,82 +2110,8 @@ footer {
 		            float: left;
 		            padding-left: 16px;
 		            width: 124px;
-		            li {
-		                color: @white;
-		                font-weight: 100;
-		                font-size: 12px;
-		                line-height: 20px;
-		                margin-bottom: 8px;
-		                display: block;
-		                width: 108px;
-		                padding: 2px 8px;
-		                .border-radius(5px,5px,5px,5px);
-		                .fade-slow;
-		                &:hover {
-		                    background: @grey;
-		                    .fade-fast;
-		                }
-		                a {
-		                    color: @white;
-		                    text-decoration: none;
-		                }
-		                &.active {
-		                    background: @white;
-		                    color: @blue;
-		                    a {
-		                        color: @blue;
-		                    }
-		                }
-		            }
 		        }
-		        #footer-contact-info {
-		            li {
-						width: 132px;
-		                margin-bottom: 0;
-		
-		                strong {
-		                    text-transform: uppercase;
-		                }
-		                span {
-		                    font-weight: normal;
-		                }
-		                a {
-		                    color: @white;
-		                    text-decoration: none;
-		                }
-		                &:hover {
-		                    background: transparent;
-		                }
-		                &#footer-social-icons {
-		                    margin-top: 22px;
-		                    color: @red;
-		                    .fa-twitter, .fa-facebook, .fa-youtube, .fa-google-plus, .fa-linkedin {
-		                        background: #76c1c5;
-		                        padding: 4px 6px;
-		                        color: @black;
-		                        font-size: 28px;
-		                        .border-radius(20px, 20px, 20px, 20px);
-		                        .fade-slow;
-		                        margin-right: 4px;
-		                        &:hover {
-		                            background: @light-grey;
-		                            .fade-fast;
-		                        }
-		                    }
-		                    .fa-facebook {
-		                        background: #698bd3;
-		                        padding: 4px 13px;
-		                    }
-		                    .fa-youtube {
-		                        background: #ff5a5a;
-		                    }
-		                    .fa-google-plus {
-		                        background: #dc5931;
-		                    }
-		                }
-		            }
-		        }
-		    }
+			}
 		}
 		#feature4, #feature5, #feature6 {
 			display: none !important;
@@ -2193,27 +2134,19 @@ footer {
     }
 	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 	@media only screen and (max-width: 479px) {
-		 .request-quote-button { display: none; }
 		 #hero { 
 			 &.index {
 				 .container {
 				 	.heading {
 				 		padding: 20px 0px;
-				 		top: 50px;
-						h1 {
-		                    &.big {
-		                        font-size: 30px;
-		                        line-height: 30px;
-		                    }
-		                    span {
-		                        font-size: 17px;
-		                        line-height: 17px;
-		                    }
-		                }
-		                h3 {
-		                    font-size: 35px;
-		                }
+				 		margin-top: 50px;
 		            } 
+		            #party-box-new {
+		            	width: 225px;
+			            #security-camera {
+				            display: none;
+			            }
+		            }
 		        }
 	        }
 		}
@@ -2478,5 +2411,4 @@ footer {
 		        width: 300px;
 		    }
 		}
-
 	}
