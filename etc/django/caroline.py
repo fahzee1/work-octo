@@ -4,7 +4,7 @@ import settings
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-SITE_ID=3
+SITE_ID=1
 
 DATABASES = {
     'default': {
