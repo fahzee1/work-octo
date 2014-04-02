@@ -541,6 +541,7 @@ $(document).ready(function(){
 {% block extra_javascript %}
 
 {% if use_call_measurement %}
+
 <script type="text/javascript">
     function getParameterByName( name ){
           name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -591,29 +592,34 @@ $(document).ready(function(){
         }
     }
 
-    var thisref = document.referrer.replace(/&/g, "zzzzz");
+    var thisref = document.referrer.replace("/&/g", "zzzzz");
     var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
     var script = unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E");
 
     document.write(script);
 
+    setTimeout(function(){
+        var number = $('.dynamic-phone-number').first().text();
 
-    var number = $('.dynamic-phone-number').first().text();
+            if (number){
+                var ctx = {'number':number,
+                           'link':script};
+                 $.ajax({
+                        type: "POST",
+                        url: "/ajax/log/",
+                            data: ctx,
+                            dataType: "json",
+                            });
 
-    if (number){
-        var ctx = {'number':number,
-                   'link':script};
-         $.ajax({
-                type: "POST",
-                url: "/ajax/log/",
-                    data: ctx,
-                    dataType: "json",
-                    });
-}
+             }
+        },5000);
+
+
 
 
 
 </script>
+
 {% endif %}
 {% endblock %}
 
