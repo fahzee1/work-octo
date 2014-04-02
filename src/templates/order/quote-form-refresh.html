@@ -2,7 +2,7 @@
 {% load content_tags content_filters sekizai_tags %}
        
 {% block formfields %}
-    <p class="phone-area">to place an order or receive a quote <b>call <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a> now!</b> <small>- or -</small><small>please provide your information below:</small></p>
+    {% if business_time %}<p class="phone-area">to place an order or receive a quote <b>call <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a> now!</b> <small>- or -</small><small>please provide your information below:</small></p>{% endif %}
     
     <div class="form-fields">
            
@@ -16,4 +16,4 @@
 
     </div>
 {% endblock %}
->{% block quote-button %}Call Me{% endblock %}
+>{% block quote-button %}{% if business_time %}Call Me{% else %}Get Quote{% endif %}{% endblock %}
