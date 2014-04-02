@@ -83,7 +83,7 @@ class CityLocation(models.Model):
         kv = {}
         slug = self.city_name_slug
         if "'" in self.city_name:
-            kv['name'],kv['slug'] = slug.title(),slug 
+            kv['name'],kv['slug'] = slug.title(),slug
             return kv
 
         names = self.city_name
@@ -200,7 +200,7 @@ class CrimesByCity(models.Model):
 
             city = CityLocation.objects.create(city_name=city_n,city_name_slug=slugify(city_n),state=state,latitude=lat,longitude=lng)
             return 'created city %s, %s' % (city_n,state)
-    
+
 
 
 
@@ -251,7 +251,7 @@ class CityCrimeStats(models.Model):
 
     def __unicode__(self):
         return "%s" % self.city
-        
+
     @property
     def average_grade(self):
 
@@ -356,10 +356,11 @@ class LocalAddress(models.Model):
     """
     Local address of all Protect America Locations.
     """
-    street_name=models.CharField(max_length=255,blank=True,null=True)
-    city=models.CharField(max_length=255,blank=True,null=True)
-    state=models.CharField(max_length=255,blank=True,null=True)
-    zip_code=models.IntegerField(max_length=5,blank=True,null=True)
+    street_name = models.CharField(max_length=255,blank=True,null=True)
+    city = models.CharField(max_length=255,blank=True,null=True)
+    state = models.CharField(max_length=255,blank=True,null=True)
+    zip_code = models.IntegerField(max_length=5,blank=True,null=True)
+    googleplus_url = models.CharField(max_length=255,blank=True,null=True)
 
     def __unicode__(self):
         return '%s, %s, %s, %s' % (self.street_name,self.city,self.state,self.zip_code)
@@ -382,7 +383,7 @@ class MatchAddressLocation(models.Model):
         if addr_state != match_state:
             raise ValidationError('The states of the location and the address must match!')
         else:
-            super(MatchAddressLocation,self).save(*args, **kwargs) 
+            super(MatchAddressLocation,self).save(*args, **kwargs)
 
 class FeaturedCommon(models.Model):
     city = models.ForeignKey("CityLocation")
@@ -390,7 +391,7 @@ class FeaturedCommon(models.Model):
 
     class Meta:
         abstract = True
-    
+
 class FeaturedVideo(FeaturedCommon):
     video_embed = models.TextField(blank=True,null=True)
 
@@ -422,11 +423,11 @@ def return_sums(crime,state,city=None,year=2012,per100=False):
             locations = CrimesByCity.objects.filter(year=year,fbi_state=state.upper())
         end_string = '_rank_per100k'
         return CityCrimeStats.objects.filter(city=locations).aggregate(Sum(crime.lower()+end_string))
-            
+
     else:
         if city:
             return CrimesByCity.objects.filter(year=year,fbi_city_name=city.title(),fbi_state=state.upper()).aggregate(Sum(crime.lower()))
         return CrimesByCity.objects.filter(year=year,fbi_state=state.upper()).aggregate(Sum(crime.lower()))
-    
 
-    
+
+
