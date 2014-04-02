@@ -7,6 +7,8 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
+    <link href="http://www.protectamerica.com/static/css/font-awesome/4.0.3/font-awesome.css" rel="stylesheet">
+
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,32 +17,22 @@
 
 {% block header %}
     <div id="top-phone-number">
-        <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Phone', '{{ page_name }}']);">Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+        <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Phone', '{{ page_name }}']);">Tap to Call: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
     </div>
-    <div id="header">
+    <div class="header">
         <div id="company-logo">
-            <a href="/" title="Protect America"><img src="{{ STATIC_URL }}img/mobile/protect-america-logo.png" alt="Protect America Home Security" width="163" height="29" /></a>
+            <a href="/" title="Protect America"><img src="{{ STATIC_URL }}img/mobile/protect-america-security.png" alt="Protect America Home Security" width="140" height="24" /></a>
         </div>
-        <ul id="main-navigation">
-            <li id="menu_icon"><img src="{{ STATIC_URL }}img/mobile/menu-icon.png" alt="Home Security Menu" width="32" height="40" /></li>
-            <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
-            <li><a href="{% url cart %}" title="View Your Home Security Shopping Cart">{% if current_cart.has_items %}<img src="{{ STATIC_URL }}img/mobile/cart-notify.png" alt="You have items in your shopping cart" id="cart-notify" width="24" height="24" />{% endif %}<img src="{{ STATIC_URL }}img/mobile/shop-icon.png" alt="Shopping Cart" width="32" height="40" /></a></li>
+        <ul class="main-navigation">
+            <li><a href=""><i class="fa fa-bars"></i>Menu</a></li>
+            <li class="alpha"><a href=""><i class="fa fa-phone"></i>Call Us</a></li>
+
         </ul>
     </div>
 {% endblock %}
-{% block navigation %}
-    <div id="search-area">
-        <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
-            <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
-            <button>Go</button>
-        </form>
-    </div>
-{% endblock %}
+{% block navigation %}{% endblock %}
 {% block subnav %}
-<div id="sub-navigate">
-    {% include "mobile/_partial/nav.html" %}
 
-</div>
 {% addtoblock "js" %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 {% endaddtoblock "js" %}
@@ -59,6 +51,9 @@ $(document).ready(function(){
 {% endaddtoblock "js" %}
 {% endblock %}
 {% block content %}
+<div class="hero">
+    <a href=""><img src="{{ STATIC_URL }}img/mobile/mobile-ads/five-per-week.jpg" alt="five-per-week" width="320" height="120" /></a>
+</div>
 {% endblock %}
 {% block order-footer %}
 {% endblock %}
