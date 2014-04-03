@@ -775,10 +775,11 @@ else:
         url(r'^agent/resources/?$', 'apps.affiliates.views.agent_page', name='agent-get-started'),
         url(r'^agent/login/?$', 'apps.affiliates.views.aff_login', name='agent-login'),
         url(r'^agent/resources/logos/?$','apps.affiliates.views.agent_logos_page' ,name='agent-logos'),
-        url(r'^agent/resources/web-banners/?$', 'apps.affiliates.views.web_banners_page', name='agent-web-banners'),
+        url(r'^agent/resources/web-banners/?$', 'apps.affiliates.views.agent_web_banners_page', name='agent-web-banners'),
         url(r'^agent/resources/collateral/?$', 'apps.affiliates.views.agent_collateral_page', name='agent-collateral'),
         url(r'^agent/resources/products/?$', 'apps.affiliates.views.agent_products_page', name='agent-products'),
-
+        url(r'^agent/resources/support/?$', 'apps.affiliates.views.agent_support_page', name='agent-support'),
+        
 
         url(r'^api/affiliate/?$', 'apps.affiliates.views.accept_affiliate'),
 
