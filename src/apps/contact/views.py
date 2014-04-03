@@ -762,3 +762,35 @@ def ajax_log(request):
         return HttpResponse()
     return HttpResponseBadRequest()
 
+
+def ajax_post_agent(request):
+    if request.method != "POST":
+        return HttpResponseRedirect('/')
+
+
+    name = request.POST.get('name',None)
+    email = request.POST.get('email',None)
+    phone = request.POST.get('phone', None)
+    agent = request.POST.get('agent', None)
+    company = request.POST.get('company', None)
+    ticket_type = request.POST.get('ticket_type', None)
+    comments = request.POST.get('comments', None)
+
+    subject = 'Assistance Needed from Support'
+    message = 'Name : %s \n Agent ID: %s Email: %s \n Phone: %s Company: %s \n Ticket Type: %s \n Comments:%s' \
+        % (name, agent, email, phone, company, ticket_type, comments)
+
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = 'operationcompliance@protectamerica.com'
+    send_mail(subject,message,from_email,[to_email])
+    return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
+
+
+
+
+
+
+
+
+
+
