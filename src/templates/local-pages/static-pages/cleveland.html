@@ -57,7 +57,7 @@
                     <i class="fa fa-phone-square"></i>
                     {% block main-phone %}
                         {% if phone_number %}
-                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                         {% endif %}
                     {% endblock %}
                 </div>
@@ -76,7 +76,7 @@
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
-                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                 </div>
             {% endif %}
             <ul id="mobile-main-navigation" class="hide-desktop">
@@ -136,36 +136,9 @@
         <div class="heading">
             <h1 class="big">Cleveland's <span>Home Security Systems</span> Company</h1>
             <p>For a free quote, call now!</p>
-            <h3>1-800-951-5111</h3>
+            <h3><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></h3>
         </div>
-		{% block partybox %}
-		<!-- Party box start -->
-		<div id="party-box-new">
-				<a href="http://www.protectamerica.com/shop-home-security-systems" title="Shop for the best home security systems.">
-					<div class="partybox" id="free-system">
-						<img src="{{ STATIC_URL }}img/local-pages/touch-screen.png" alt="Touch screen interface." id="screen" />
-				    	<h3>Free <span>Security System</span></h3>
-				    	<div id="party-link">Get This Deal</div>
-				    	<img src="{{ STATIC_URL }}img/local-pages/party-ribbon.png" alt="$600 Value" id="ribbon" />
-				    </div>
-				</a>
-			    <a href="http://www.protectamerica.com/equipment/home-security/security-camera" title="Add video security to your package.">
-				    <div class="partybox" id="security-camera">
-				    	<img src="{{ STATIC_URL }}img/local-pages/hand-with-phone-video.png" alt="View your cameras from your phone anytime, anywhere." />
-				    	<h3>Get A <span>Security Camera</span></h3>
-				    	<div id="party-link">Find Out How</div>
-				    </div>
-			    </a>
-			    <a href="http://www.protectamerica.com/equipment/smart-connect" tile="Take advantage of the best we have to offer.">
-				<div class="partybox" id="no-landline">
-				    	<h3>No Landline <span>Required</span></h3>
-				    	<p>Connect to the national Protect America monitoring grid with cellular technology.</p>
-				    	<div id="party-link">Learn More</div>
-				    </div>
-			    </a>
-		</div>
-		<!-- End party box -->
-		{% endblock %}
+		{% include "local-pages/static-pages/_partials/party-box.html" %}
     </div>
 
 
@@ -287,7 +260,7 @@
     </div>
 </div>
 <div class="container" id="overview" class="hide-this" style="font-size:16px;">
-	<div class="eight columns side" id="houston-map">
+	<div class="eight columns side" id="local-map">
 		<iframe src="https://mapsengine.google.com/map/embed?mid=zZomU8UD5470.kOufxrZFRA4Q" id="map"></iframe>
 		<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
 			<script type="text/javascript">
@@ -307,7 +280,7 @@
 					<span itemprop="addressLocality">Cleveland</span>,
 					<span itemprop="addressRegion">OH</span>
 				</div> 
-				<strong>Phone</strong>: <span itemprop="telephone"><a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+				<strong>Phone</strong>: <span itemprop="telephone"><a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
 </span>
 			</div><br />
 			<strong>Hours</strong>:<br />
@@ -487,7 +460,7 @@
     <div class="container">
         <div class="five columns">
             <p>Your family's safety is important. Our security experts are ready to help:</p>
-            <p class="white"><i class="icon-phone"></i>1-800-657-2717</p>
+            <p class="white"><i class="icon-phone"></i><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></p>
         </div>
         <div class="six columns">
             <p>Didn't find what you were looking for? Try searching our website below:</p>
@@ -517,3 +490,24 @@
     
     </li>
 {% endblock %}
+{% block terms %}
+    <div id="terms-wrapper">
+        <div id="terms">
+            <div id="terms-conditions">
+                <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+                <p>* Information used for home security alarm system comparisons was obtained November 2013 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
+                <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
+                <p>Images sourced from <a href="http://commons.wikimedia.org/wiki/File:HOF-Guitars.jpg" target="_blank" title="Middle Image">Andrew Hitchcock</a> and <a href="https://www.flickr.com/photos/edsel_/5192184395" target="_blank" title="Footer Image">Edsel Little</a> provided under a <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" title="License">Creative Commons Attribution License</a>.<br /></p>
+                {% block extra_terms %}
+                {% endblock %} 
+            </div>
+            <div id="copyrights">
+
+                {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
+                <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    {% endblock %}
