@@ -14,12 +14,13 @@
 
 {% block resources-content %}
 <div class="wrapper">
-    <i class="fa fa-comments" id="header-icon"></i><h1>Need Assistance?</h1>  
-    <p>If you have any further question, please feel free to fill out this form and one of our representatives will contact you shortly.</p>      
+    <i class="fa fa-comments" id="header-icon"></i><h1>Need Assistance?</h1>
+    <p>If you have any further question, please feel free to fill out this form and one of our representatives will contact you shortly.</p>
         <div id="agent-box-area">
-                <div id="agent-form-box">        
+                <div id="agent-form-box">
                         <div id="form-area">
-                                <form>
+                                <form class="jiggy" action="">
+                                    {% csrf_token %}
                                     <div id="form-content">
                                         <h2>Enter Your Information Here</h2>
                                         <label>Requestor Name</label>
@@ -29,27 +30,207 @@
                                         <label>Requestor Email</label>
                                         <input id="id_request_email" type="text" placeholder="Requestor Email" name="requestor-email" maxlength="140">
                                         <label>Dealer Company Name</label>
-                                        <input id="id_name" type="text" placeholder="Dealer Company Name" name="dealer-name" maxlength="140">
+                                        <input id="id_company_name" type="text" placeholder="Dealer Company Name" name="dealer-name" maxlength="140">
                                         <label>Requestor Phone Number</label>
                                         <input id="id_request_phone" type="text" placeholder="Requestor Phone" name="requestor-phone" maxlength="140">
 
-                                                                            
+
                                         <label>Ticket Type</label>
-                                        <select name="ticket-type">
+                                        <select name="ticket-type" id="ticket">
                                             <option value="" selected="selected">Please Select a Ticket Type</option>
                                             <option value="Billing">Billing</option>
-    
+
                                             <option value="System Issue / Troubleshooting">System Issue / Troubleshooting</option>
                                             <option value="Account Setup">Account Setup</option>
                                             <option value="Other">Other</option>
                                         </select>
                                         <label>Comments</label>
-                                        <textarea placeholder="Please Enter your Comments or Concerns Here" name="requestor-comments"></textarea>
+                                        <textarea placeholder="Please Enter your Comments or Concerns Here" name="requestor-comments" id='comments'></textarea>
                                         <input type="submit" class="button" value="Submit">
                                     </div>
-                                </form> 
+                                </form>
                         </div>
                 </div>
         </div>
 </div>
+
+
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+function errorAlert(name){
+    alert('Please enter' + ' ' + name + ' ' + 'field');
+}
+
+$('.jiggy input').keypress(function(e){
+        if(e.which == 13){
+            var $form = $(this).closest('.jiggy');
+            $form.find('input').click();
+        }
+    });
+    var submitting = false;
+
+    $('.jiggy .button').click(function(evt) {
+        evt.preventDefault();
+        $('.jiggy .button').attr('disabled',true);
+        var $form = $(this).closest('.jiggy');
+
+        /*
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
+        var device = getParameterByName('device');
+        if (!trusted){
+            $('#quote-form button').attr('disabled',false);
+            var phone_number = $(".dynamic-phone-number").first().text();
+            if (phone_number){
+                alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
+            }
+            else{
+                alert("Sorry your form can't be submitted at this time. Please call us at the number above.");
+            }
+            return;
+        }
+
+        */
+
+
+        var name = $form.find("#id_request_name").val();
+        var agent = $form.find("#id_name").val();
+        var email = $form.find("#id_request_email").val();
+        var phone = $form.find("#id_request_phone").val();
+        var business_name = $form.find("#id_company_name").val();
+        var ticket_type = $form.find("#ticket :selected").text();
+        var comments = $form.find("#comments").val();
+
+        if (!name){
+            errorAlert('Requestor Name');
+            $('.jiggy .button').attr('disabled',false);
+            return;
+        }
+
+        if (!phone){
+            errorAlert('Requestor Phone');
+            $('.jiggy .button').attr('disabled',false);
+            return;
+        }
+
+        if (!agent){
+            errorAlert('Agent/Dealer ID');
+            $('.jiggy .button').attr('disabled',false);
+            return;
+        }
+
+        if (!business_name){
+            errorAlert('Dealer Company Name');
+            $('.jiggy .button').attr('disabled',false);
+            return;
+        }
+
+        if (!ticket_type){
+            alert('Please choose ticket type');
+            $('.jiggy .button').attr('disabled',false);
+            return;
+        }
+
+
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        var data = {'name':name,
+                    'email': email,
+                    'phone': phone,
+                    'agent': agent,
+                    'company':business_name,
+                    'ticket_type':ticket_type,
+                    'comments':comments,
+                    'site': 'agent-support'
+                    }
+
+
+        $.ajax({
+                type: "POST",
+                url: "/contact/agent/ajaxpost/",
+                data: data,
+                dataType: "json",
+                success: newFormSuccess,
+                error: newFormError,
+                beforeSend:function(){
+                    $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                    $(".sleepy #form-loading, .droopy #form-loading").show();
+                    $('#quote-form button').attr('disabled',true);
+                    }
+                });
+
+
+         function newFormError(){
+            $(".sleepy #form-loading, .droopy #form-loading").hide();
+            $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $('#quote-form button').attr('disabled',false);
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
+        function newFormSuccess(json) {
+            $('#form-loading').hide();
+            submitting = false;
+            try
+            {
+                var acn = $('.form-fields').data('acn');
+                if (acn){
+                    var url = $('.form-fields').data('thank-you');
+                    window.location = url;
+                    return;
+                    }
+            }
+            catch(err){var acn = false;}
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                url = json.thank_you
+                window.location = "http://www.protectamerica.com" + url;
+                {% endif %}
+                _gaq.push([
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }
+        return false;
+        });
+    });
+</script>
+{% endaddtoblock "js" %}
+
 {% endblock %}
+
+
