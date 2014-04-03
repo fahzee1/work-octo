@@ -8,12 +8,14 @@ from django.db import models
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.core.exceptions import ValidationError
 import pdb
+from django.core.urlresolvers import reverse
+from django.utils.html import urlize
 
 # Create your models here.
 
 
 
-			
+
 class AddType(models.Model):
 	name = models.CharField(max_length=200,blank=True,null=True,help_text='Type of newsfeed? Two words only for simplicity')
 
@@ -79,29 +81,61 @@ class FallBacks(models.Model):
 
 
 class TweetBackup(models.Model):
-	text = models.CharField(max_length=255)
+	text = models.CharField(max_length=255,unique=True)
+	user = models.CharField(max_length=255,blank=True,null=True)
 	GetRelativeCreatedAt = models.CharField(max_length=255)
 	created = models.DateTimeField(auto_now_add=True,default=timezone.now())
+	payitforward = models.BooleanField(default=False)
+	location = models.CharField(max_length=255,blank=True,null=True)
 
 	def __unicode__(self):
 		return '%s' % self.text
 
 	def remove_old(self):
-		too_old=self.created + timedelta(days=1)
+		too_old=self.created + timedelta(days=2)
 		if timezone.now() >= too_old and TweetBackup.objects.all().count() > 5:
-			self.delete()
-		all_matches = TweetBackup.objects.filter(text=self.text)
-		for a in all_matches:
-			if self.text == a.text and len(all_matches) > 1:
+			if not self.payitforward:
 				self.delete()
 
+	@classmethod
+	def get_payitforward(self,school):
+		tweets = []
+		for tweet in TweetBackup.objects.filter(payitforward=True):
+			tweet.text = urlize(tweet.text)
+			if school == 'USA':
+				if '#payitforwardUSA' in tweet.text or \
+				   '#PayitforwardUSA' in tweet.text or \
+				   '#payitforwardusa' in tweet.text or \
+				   '#Payitforwardusa' in tweet.text:
+				   tweets.append(tweet)
+			if school == 'UFL':
+				if '#payitforwardUFL' in tweet.text or \
+				   '#PayitforwardUFL' in tweet.text or \
+				   '#payitforwardufl' in tweet.text or \
+				   '#Payitforwardufl' in tweet.text:
+				   tweets.append(tweet)
+
+			if school == 'MSU':
+				if '#payitforwardMSU' in tweet.text or \
+				   '#PayitforwardMSU' in tweet.text or \
+				   '#payitforwardmsu' in tweet.text or \
+				   '#Payitforwardmsu' in tweet.text:
+				   tweets.append(tweet)
+
+		return tweets
 
 
 
 
 
 
-	
+
+
+
+
+
+
+
 
 
 

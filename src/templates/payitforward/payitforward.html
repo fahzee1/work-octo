@@ -1,4 +1,4 @@
- {% extends "base.html" %}
+{% extends "base.html" %}
 
 
 {% load testimonial_tags sekizai_tags %}
@@ -8,25 +8,18 @@
 {% block page_description %}Protect America presents the Pay It Forward Challenge. The Pay It Forward challenge provides a platform for students at Universities and Colleges to help local charities by creating fundraising and marketing campaigns. Students learn from real life team building experiences. Do you pay it forward?{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/payitforward/payitforward.css">
-    <script type="text/javascript" src="//use.typekit.net/hcr8tqq.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#control_arrow').click(function(e) {
-        e.preventDefault();
-        var $next = null;
-        $next = $(this).next();
-        if($next.length === 0) {
-            $next = $(this).siblings().first();
-        }
-        $(this).hide();
-        $next.show();
-    });
-});
-</script>//-->
+  <link href='http://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Karla:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}js/payitforward/modernizr.custom.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/payitforward.css">
+    
+
 {% endblock %}
+
+
 
 {% block navigation %}
 {% endblock %}
@@ -38,83 +31,145 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
-<div id="body">
-    <div id="grunge">
-        <div id="top-container">
-            <div id="hero-image">
-                <a href="{% url payitforward %}" title="Visit the Pay it Forward Website"><img src="{{ STATIC_URL }}img/payitforward/hero-image2.gif" alt="Pay it Forward" width="591" height="183" /></a>
+
+
+
+  <div class="wrapper">
+    <ul class="top-menu">
+      <li><a href="#page1">Home</a></li>
+      <li><a href="#page2">About</a></li>
+      <li><a href="#page3">Rules</a></li>
+      <li class="feed"><a href="#page4" class="feed">The Feed</a></li>
+      <li><a href="#page5">Get involved</a></li>
+    </ul>
+      <div class="main">
+
+      <a name="page1"></a>  
+      <section class="page1">
+        <div class="pa-header"><a href="http://www.protectamerica.com/"><img src="{{ STATIC_URL }}img/payitforward/logo_pa.png" alt="Protect America"></a><p>1-800-657-2717</p></div>
+        <div class="page_container">
+          <h1>Pay it Forward Challenge</h1>
+          <div class="logo_mobile">
+              <object type="image/svg+xml" width="280" height="80" data="{{ STATIC_URL }}img/payitforward/logo.svg" title="Pay It Forward Logo" alt="Pay It Forward"></object>
+          </div>
+          <h2>The Pay It Forward Challenge has been designed to create a learning experience for students while creating a charitable platform for worthwhile local organizations.</h2>
+            <div class="schools">
+              <img src="{{ STATIC_URL }}img/payitforward/school_msu.png" class="msu">
+              <img src="{{ STATIC_URL }}img/payitforward/school_uf.png" class="uf">
+              <img src="{{ STATIC_URL }}img/payitforward/school_usa_2.png">
             </div>
-            <div id="hero-video">
-                <iframe width="329" height="185" src="http://www.youtube.com/embed/gu-18gI7pWg?rel=0" frameborder="0" allowfullscreen></iframe>
-            </div>
+          <iframe width="560" height="315" src="//www.youtube.com/embed/Jatw45EZGjQ" frameborder="0" allowfullscreen></iframe><br><br>
         </div>
-        <div class="clear"></div>
-            <div id="navigation">
-            <ul id="nav">
-                <li class="tk-etica"><a href="{% url payitforward-about %}" title="About Us">ABOUT</a>
-                    <ul>
-                        <li><a href="{% url payitforward-press %}" title="Press Room">Press Room</a></li>
-                    </ul>
-                </li>  
-                <li class="tk-etica"><a href="{% url payitforward-rules %}" title="Rules">RULES</a>
-                    <ul>
-                        <li><a href="{% url payitforward-awareness %}" title="Awareness">Awareness</a></li>
-                        <li><a href="{% url payitforward-point-scale %}" title="Point Scale">Point-Scale</a></li>
-                        <li><a href="{% url payitforward-revenue %}" title="Revenues">Revenue</a></li>
-                        <li><a href="{% url payitforward-video %}" title="video">Video</a></li>
-                    </ul>
-                </li>
-                <li class="tk-etica"><a href="{% url payitforward-point-tracking %}" title="point tracking">POINT TRACKING</a></li>
-                <li class="tk-etica"><a href="{% url payitforward-teams %}" title="teams">TEAMS</a>
-                    <ul>
-                        <li><a href="{% url payitforward-spring2012 %}" title="Spring 2012 Completed Challenge">Spring 2012 Completed Challenge</a></li>
-                    </ul>
-                </li>
-                <li class="tk-etica"><a href="{% url payitforward-extras %}" title="extras">EXTRAS</a></li>
-                <li class="tk-etica"><a href="{% url payitforward-involved %}" title="get involved">GET INVOLVED</a></li>
-            </ul>
+      </section>
+
+        <a name="page2"></a>
+        <section class="page2">
+          <div class="page_container">
+            <h1>about</h1>
+            <p>Protect America is committed to improving the quality of home and life for everyone. The Pay It Forward Challenge is the company’s way of giving back to the community and also the future homeowners of America while staying true to our passion. Since 2011, the Pay It Forward Challenge has tasked marketing and advertising students at major universities with helping local charitable organizations raise funds and awareness.</p>
+            <p>To jump start the Challenge, students are broken into teams that form mini agencies. Each agency chooses their own local charity and is given the same stipend from Protect America to fund their work.</p>
+            <p>Once they create their team and have chosen a charity, students start the challenge by drawing up plans, creating awareness and generating funds for their client. Creatively, every team will respond to the challenge differently and create a unique experience. Each team will be able to learn and adapt by facing challenges exclusive to their particular charities.</p>
+            <p>The Pay It Forward Challenge is a great opportunity for students to put their education into real world practice. Students gain valuable experience in marketing and advertising while helping charities that serve their local community.</p>
+            <h3>Market a charity. Market yourself. Pay It Forward!</h3>
+          </div>
+      </section>
+
+        <a name="page3"></a>
+        <section class="page3">
+          <div class="page_container">
+          <h1>Rules</h1>
+          <div class="left">
+            <p>The rules for the challenge are quite simple. The students must gather into teams for the challenge. Each team then creates a marketing and advertising agency that will identify their team. Once they create their team brand and identity, they will pick a charity. Each team will then create marketing campaigns to generate funds and awareness for the charity they partner with.</p>
+            <h1 style="text-align: left;">WHAT ARE YOU GOING TO DO TO CHANGE THE WORLD TODAY?</h1>
+          </div>
+          <div class="right">
+            <ul>
+              <li><img src="{{ STATIC_URL }}img/payitforward/num_1.png"><h2>Teams</h2><p>Break up into teams, and create your marketing group.</p></li>
+              <li><img src="{{ STATIC_URL }}img/payitforward/num_2.png"><h2>Charity</h2><p>Pick a charity that you will be helping with your team.</p></li>
+              <li><img src="{{ STATIC_URL }}img/payitforward/num_3.png"><h2>Planning</h2><p>Make a plan and create ideas to help the charity. You should develop marketing and fundraising strategies with your team.</p></li>
+              <li><img src="{{ STATIC_URL }}img/payitforward/num_4.png"><h2>Reporting</h2><p>Each team will report their progress in generating awareness and revenue at least once a month.</p></li>
+              <li><img src="{{ STATIC_URL }}img/payitforward/num_5.png"><h2>Presentation</h2><p>Turn in your final presentation to your professor displaying your team's accomplishments and creativity during the course of the challenge.</p></li> 
+          </div>
         </div>
-        <div id="body-container">
-            <div class="body-left">
-                <h2 style="padding-top: 100px;" class="tk-etica">Welcome!</h2><p>The Pay It Forward Challenge has been designed to create a learning experience for students while creating a charitable platform for worthwhile local organizations.</p><p>Students in the Challenge are tasked with creating their own marketing/advertising agencies that design a marketing plan for specific charities. Specific details of each agency plan will ultimately rely on the skills of individual team members but standard industry collateral is expected. In past Challenges, teams have created websites, overhauled charities, social media, raised funds and goods, attracted media coverage, and more.</p>
-            </div>
-            <div class="body-right">
-                <iframe style="margin-top: 65px;" width="380" height="214" src="http://www.youtube.com/embed/7v6H4X0IB14?rel=0" frameborder="0" allowfullscreen></iframe>
-            </div>
+      </section>
+
+      <a name="page4"></a>
+      <section class="page4">
+        <div class="page_container">
+          <h1>The feed</h1>
+          <ul>
+            <li class="msu"><img src="{{ STATIC_URL }}img/payitforward/school_msu.png">
+              <p>Michigan State University</p>
+              <div class="msuTweets">
+                {% if tweetsMSU %}
+                  {% for tweet in tweetsMSU %}
+                      <p>{{ tweet.text|safe }}</p>
+                      {% if tweet.user.screen_name %}
+                        <b>@{{ tweet.user.screen_name }}</b>
+                        {% endif %}
+                        {% if tweet.user and not tweet.user.screen_name %}
+                         <b>@{{ tweet.user }}</b>
+                        {% endif %}
+
+                    </br></br>
+                  {% endfor %}
+
+                {% else %}
+                    <b>Feed Not Available</b>
+                {% endif %}
+              </div>
+            </li>
+            <li class="uf"><img src="{{ STATIC_URL }}img/payitforward/school_uf.png">
+              <p>University of Florida</p>
+              <div class="ufTweets">
+                {% if tweetsUFL %}
+                  {% for tweet in tweetsUFL %}
+                     <p> {{ tweet.text|safe }}</p>
+                      {% if tweet.user.screen_name %}
+                        <b>@{{ tweet.user.screen_name }}</b>
+                        {% endif %}
+                        {% if tweet.user and not tweet.user.screen_name %}
+                         <b>@{{ tweet.user }}</b>
+                        {% endif %}
+                  {% endfor %}
+
+                   {% else %}
+                    <b>Feed Not Available</b>
+                {% endif %}
+              </div>
+            </li>
+            <li class="usa"><img src="{{ STATIC_URL }}img/payitforward/school_usa.png">
+              <p>University of South Alabama</p>
+                <div class="usaTweets">
+                  {% if tweetsUSA %}
+                    {% for tweet in tweetsUSA %}
+                       <p> {{ tweet.text|safe }} </p>
+                        {% if tweet.user.screen_name %}
+                        <b>@{{ tweet.user.screen_name }}</b>
+                        {% endif %}
+                        {% if tweet.user and not tweet.user.screen_name %}
+                         <b>@{{ tweet.user }}</b>
+                        {% endif %}
+
+                    {% endfor %}
+
+                     {% else %}
+                      <b>Feed Not Available</b>
+                  {% endif %}
+                </div>
+            </li>
+          </ul>
         </div>
-        <div id="tail">
-            <div class="logos">
-                <img src="{{ STATIC_URL }}img/payitforward/protect-america-logo.png" alt="Protect America Logo" width="200" height="43" />
-            </div>
-            <div class="twitter-icons">
-                <a href="http://www.twitter.com/protectamerica" title="twitter" target="_blank">
-                    <img width="46" height="46" alt="Twitter" src="http://static.protectamericasecurity.net/img/payitforward/Twitter%20Icon.png">
-                </a>
-            </div>
-            <div class="facebook-icon">
-                <a href="http://www.facebook.com/protectamerica" title="facebook" target="_blank">
-                    <img width="46" height="46" alt="facebook" src="http://static.protectamericasecurity.net/img/payitforward/facebook%20icon.png">
-                </a>
-            </div>
-            <div class="linked-in">
-                <a href="http://www.linkedin.com/company/protect-america" title="linkedin"target="_blank">
-                    <img src="{{ STATIC_URL }}img/payitforward/linked-in.png" alt="LinkedIn" width="50" height="45" />
-                </a>
-            </div>
-            <div class="google-plus">
-                <a href="https://plus.google.com/113573642727337197280/posts" title="google plus" target="_blank">
-                    <img style="padding-left: 6px;" src="{{ STATIC_URL }}img/payitforward/google-plus.png" alt="Google Plus" width="46" height="46" />
-                </a>
-            </div>
-            <div class="blog">
-                 <a href="http://www.protectamerica.com/home-security-blog" title="Protect America Home Security Blog" target="_blank">
-                    <img style="padding-left: 3px;" src="{{ STATIC_URL }}img/payitforward/blog-icon.png" alt="Protect America Home Security Blog" width="46" height="46" />
-                </a>
-            </div>
-            <div class="url">
-                <h1 style="padding-left: 15px;" class="tk-etica"><a href="http://www.protectamerica.com" title="Protect America"target="_blank">protectamerica.com</</h1>
-            </div>
+      </section>
+
+      <a name="page5"></a>
+      <section class="page5">
+        <div class="page_container">
+          <h1>Want to get involved?</h1>
+          <h2>Anyone can become a part of the Pay It Forward Challenge and help any charity. We encourage you, no matter who you are, to pay it forward. If you would like to get involved or have a specific charity you want to help, <a href="mailto:timkrebs@protectamerica.com">contact us today!</a></h2>
         </div>
+      </section>
     </div>
-</div>
+  </div>
+
 {% endblock %}

@@ -1,42 +1,242 @@
 {% extends "external/alarm-zone/base.html" %}
 {% load content_filters content_tags sekizai_tags %}
 
+{% block page_title %}
+Alarm Zone |  Home Security Systems | GPS Trackers | Security Cameras
+{% endblock %}
+{% block page_description %}
+Alarm Zone has top products at affordible prices for all your security needs, including home security systems, burglar alarms, GPS Trackers, Security Cameras
+{% endblock %}
+{% block page_keywords %}
+Alarm Zone, Home security systems, GPS Trackers, Security cameras, secure your home, residential, windows, door locks, living room, dwelling, pets, neighbor, residence, family, house, alarm, burglar, wireless
+{% endblock %}
 
 {% block content %}
-    <div id="hero-banner" class="tk-museo-sans">
-        <img src="{{ STATIC_URL }}img/external-lp/alarmzone/home-security-header.png" alt="Home Security Header" class="hero-header" />
-        <a href="{% url shop %}" title="Home Security Designed to your Specifications - Monitoring Starting at $19.99"><img src="{{ STATIC_URL }}img/external-lp/alarmzone/home-security-hero.jpg" alt="Home Security Designed to Your Specifications" /></a>
-        <p>{{ phone_number|format_number }}</p>
-    </div>
-    <div id="secondary-items">
-        <div class="sub-deal">
-            <a href="{% url shop %}#extra-security" title="Extreme Weather Protection for only $4 per month">
-                <img src="{{ STATIC_URL }}img/external-lp/alarmzone/extreme-weather.jpg" alt="Extreme Weather Protection - Flood and Freeze Sensors" width="266" height="225" />
-                <p>
-                   Extreme Weather Add-On
-                   <span>Learn More ></span> 
-                </p>
-            </a>
+
+<!-- Primary Page Layout
+================================================== -->
+
+
+
+<div class="super container">
+
+        <div class="full width">
+            <div class="phone">
+                <div class="container">
+                    <div class="sixteen columns">
+                        <div class="left column">
+                            <h1>Home security systems designed to your specifications.</h1>
+                            <p>Starting at</p>
+                            <h2>$19.99</h2>
+                            <p>per month</p>
+                            <br>
+                            <a class="build-btn" href="{% url build-package %}" title="Build a package">Build a package</a>
+                        </div>
+                        <div class="quote-form">
+                            <h2>We'll contact you</h2>
+                            <p>Submit your information and we'll contact you.</p>
+                            <form method="POST" action="" class="alarm-form-home">
+                                <input type="text" name="Name" id="id_name" placeholder="Name"></input>
+                                <input type="email" name="Email" id="id_email" placeholder="Email"></input>
+                                <input type="text" name="Phone" id="id_phone" placeholder="Phone"></input>
+                                <button>Call me</button>
+                                <p class="small">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="sub-deal">
-            <a href="{% url shop %}#extra-security" title="Fire & Smoke Protection for $10 per month">
-                <img src="{{ STATIC_URL }}img/external-lp/alarmzone/fire-protection.jpg" alt="Fire & Smoke Protection - Monitored Smoke Detectors and Sirens" width="266" height="225" />
-                <p>
-                   Fire & Smoke Monitoring
-                   <span>Learn More ></span> 
-                </p>
-            </a>
+
+</div>
+
+<div class="super container fullzone">
+
+    <div class="container">
+        <div class="sixteen columns">
+            <div class="fullzone top">
+                <iframe width="360" height="240" src="//www.youtube.com/embed/7lABP3I6QAI" align="right" frameborder="0" style="margin-top: 10px;" allowfullscreen></iframe>
+                <h2>Take your home with you</h2>
+                <p>Your whole home – one app. Control everything from lights, locks, security and more, all from a smartphone. Alarm Zone cloaks your home in an interactive web with strategically placed devices; making home life easy and safe. It’s not security. It’s a way of life.</p>
+            </div>
         </div>
-        <div class="sub-deal omega">
-            <a href="{% url shop %}#extra-security" title="Vehicle GPS Tracking for $10 per month">
-                <img src="{{ STATIC_URL }}img/external-lp/alarmzone/gps-tracking.jpg" alt="Vehicle GPS Tracking" />
-            
-                <p class="long">
-                   GPS Vehicle Tracking
-                   <span>Learn More ></span>
-                </p>
-            </a>
+        <hr>
+        <div class="one-third column">
+            <div class="fullzone">
+            <h3>Smoke detectors</h3>
+            <img src="{{ STATIC_URL }}img/external-lp/alarmzone/product_smoke.jpg" alt="Smoke detectors" title="Smoke detectors" width="150">
+            <p class="small">A smoke detector's recommended placement is on on each level of a home along with a siren. Whether you have a basement or a 2 to 3-story home, you will need to place one on each level per fire department regulations.</p>
+            </div>
+        </div>
+        <div class="one-third column">
+            <div class="fullzone">
+            <h3>GPS trackers</h3>
+            <img src="{{ STATIC_URL }}img/external-lp/alarmzone/product_gps.jpg" alt="GPS trackers" title="GPS trackers" width="150">
+            <p class="small">Get customizable alerts via email or text if your teenager or loved one is speeding or even if they are going to places they shouldn't. Keep an eye on them while they are away from home or at college.</p>
+            </div>
+        </div>
+        <div class="one-third column">
+            <div class="fullzone">
+            <h3>Security cameras</h3>
+            <img src="{{ STATIC_URL }}img/external-lp/alarmzone/security_cameras.png" alt="Security cameras" title="Security cameras" width="150">
+            <p class="small">Easily check on kids, maintenance workers, pets or babysitters. Simply access your home's secure LIVE video feed with our app while at work or vacation. We make it easy to add video home security into your house today.</p>
+            </div>
+        </div>
+
+        <div class="sixteen columns mobile-slider">
+            <div class="bx-wrapper">
+                <ul class="bxslider">
+                  <li><img src="{{ STATIC_URL }}img/external-lp/alarmzone/product_gps.jpg" title="GPS vehicle tracking" alt="GPS tracking" /></li>
+                  <li><img src="{{ STATIC_URL }}img/external-lp/alarmzone/product_sensor.jpg" title="Security sensors" alt="Security sensors" /></li>
+                  <li><img src="{{ STATIC_URL }}img/external-lp/alarmzone/product_smoke.jpg" title="Smoke detectors" alt="Smoke detectors" /></li>
+                </ul>
+            </div>
         </div>
 
     </div>
+</div>
+
+<div class="super container">
+    <div id="woman">
+        <p>Control your home security <strong>from anywhere.</strong></p>
+    </div>
+</div>
+
+<div class="super container">
+    <div class="icons">
+        <ul>
+            <li>
+                <h3><i class="fa fa-home fa-2x" title="Simply Peace of Mind"></i>Simply Peace of Mind</h3>
+                <p>Our systems provide state-of-the-art 24/7 security so you don't have to worry about a thing.</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-rss fa-2x" title="Easy Wireless Set-up"></i>Easy Wireless Set-up</h3>
+                <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
+            </li>
+            <li class="alt">
+                <h3><i class="fa fa-usd fa-2x" title="The Best Price, Period"></i>The Best Price, Period</h3>
+                <p>All the equipment in the package you customize is included and there are no hidden activation fees.</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-wrench fa-2x" title="Safety Designed for You"></i>Safety Designed for You</h3>
+                <p>Each system is built to your specifications, including options like: fire protection and smartphone control.</p>
+            </li>
+            <li>
+                <h3><i class="fa fa-thumbs-up fa-2x" title="Saving You More"></i>Saving You More</h3>
+                <p>Home security is good to you and your pocket. Save up to 20% on your homeowners insurance with a home security system.</p>
+            </li>
+            <li class="alt">
+                <h3><i class="fa fa-smile-o fa-2x" title="Committed To You"></i>Committed To You</h3>
+                <p>Our dedicated team of service professionals helps you along the way to make sure you're up and running in no time.</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/alarmzone/jquery.bxslider.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.bxslider').bxSlider({
+      adaptiveHeight: true,
+      mode: 'horizontal',
+      controls: false,
+      pager: true,
+      captions: true
+    });
+  });
+</script>
+{% endaddtoblock "js" %}
+
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+
+$(".alarm-form-home button").click(function(){
+    $(".alarm-form-home button").attr('disabled',true);
+    var $form = $(this).closest('.alarm-form-home');
+    var name = $form.find("#id_name").val();
+    var email = $form.find("#id_email").val();
+    var phone = $form.find("#id_phone").val();
+    var data ={
+            'form': 'basic',
+             'name':name,
+             'email':email,
+             'phone':phone,
+             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+             'site':'alarmzone'
+         }
+
+
+    $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost_blog/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess,
+            error: newFormError,
+            beforeSend:function(){
+                    $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                    $(".sleepy #form-loading, .droopy #form-loading").show();
+                    $(".alarm-form-home button").attr('disabled',true);
+                    $(".alarm-form-home button").text('Call me');
+                    }
+            }); // end ajax
+
+
+     function newFormError(){
+            //$(".sleepy #form-loading, .droopy #form-loading").hide();
+            //$(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $(".alarm-form-home button").attr('disabled',false);
+            $(".alarm-form-home button").text('Call me');
+            if (!name && !phone){
+                $('#id_name').addClass('error').attr('placeholder','Please enter name');
+                $('#id_phone').addClass('error').attr('placeholder','Please enter phone number');
+                alert('Please enter your name and phone number.');
+            }
+            if (!phone && name){
+                $('#id_phone').addClass('error').attr('placeholder','Please Enter Phone Number');
+                alert('Please enter your phone number.');
+            }
+            if (!name && phone){
+                $('#id_name').addClass('error').attr('placeholder','Please enter your name');
+                alert('Please enter your name.');
+            }
+            if (name){
+                $('#id_name').addClass('error');
+            }
+            if (phone){
+                $('#id_phone').addClass('error');
+            }
+
+        } // end newformerror
+
+
+        function newFormSuccess(json) {
+            //$('#form-loading').hide();
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                window.location = "{% url thanks-page %}"
+                {% endif %}
+                _gaq.push([
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }
+        return false;
+
+    }); // end click function
+
+}); //end document ready
+
+</script>
+{% endblock %}
+{% endaddtoblock "js" %}
 {% endblock %}

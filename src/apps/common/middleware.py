@@ -149,13 +149,30 @@ class LocalPageRedirect(object):
     """
 
     def process_request(self,request):
+        #pdb.set_trace()
         #lets fist grab the url and check if its a local page
         url = request.path.rstrip('/').lstrip('/')
+        #pdb.set_trace()
         #city page and state page
         match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
         match_sp = re.compile(r'home-security/[-\w]{3,}')
+
+        # redirect /rep/get-quote to homesecurity.protectamerica.com/rep/get-quote
+        match_quote = re.compile(r'rep/get-quot')
+        #match for new york - fix for rylan 
+        match_ny = re.compile(r'home-security/\bNY\b/[-\w]+',re.IGNORECASE)
         state_space = dict(US_STATES).values()
         state_nospace = [x.replace(' ','') for x in state_space]
+        if match_quote.match(url):
+            if request.META['HTTP_HOST'] != 'homesecurity.protectamerica.com':
+                return redirect('http://homesecurity.protectamerica.com/rep/get-quot')
+
+        if match_ny.match(url):
+            #hardcoded redirect for NY
+            ny = 'new-york-city'
+            if ny in url or ny.title() in url or ny.capitalize() in url:
+                return redirect('/home-security/NY/New-York')
+
         if match_cp.match(url):
             # city page so lets redirect
             chop_up = url.split('/')
@@ -175,6 +192,14 @@ class LocalPageRedirect(object):
                     if x.upper() == state.upper() or y.upper() == state.upper():
                         statecode = get_statecode(state)
                         return redirect('/home-security/%s/' % (statecode))
+
+        elif ' ' in url:
+            url = re.sub("\s+","-",url)
+            chop_up = url.split('/')
+            if len(chop_up) == 3:
+                return redirect('/' + chop_up[0].lower() + '/' + chop_up[1].upper() +'/' + chop_up[2].title())
+            else:
+                return None
 
         else:
             return None

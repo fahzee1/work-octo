@@ -3,23 +3,23 @@
     {% csrf_token %}
     <input type="hidden" name="form" value="basic" />
 	<div>
-		<p>Free Security Quote</p>
+		<p>Get free security, today!</p>
 		<label>Name</label>
         {{ form.name }}
 
 		<label>Email</label>
         {{ form.email }}
-		
+
         <label>Phone Number</label>
         {{ form.phone }}
 
 
 	</div>
-	<button type="button" class="redbutton">Get Quote ></button>
+	<button type="button" class="redbutton">Call me</button>
              <div class="consent-box">
             <label class="consent-label" style="font-size: 10px; line-height: 14px; margin-bottom: 16px;"for="id_consent">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
             <div class="clear"></div>
-    <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
+    <a href="http://www.protectamerica.com/pa/priv_p" rel="nofollow" title="View our Privacy Policy">We never share your information with anyone</a>
     <div class="quote-form-error">
         <img src="{{ STATIC_URL }}/img/base/error-arrow.png" class="error-arrow" />
         <strong>Whoops!</strong>
@@ -40,7 +40,7 @@
 $(document).ready(function() {
     $('.form-quote input').keypress(function(e){
         if(e.which == 13){
-            $(this).closest('.form-quote').find('button').click();   
+            $(this).closest('.form-quote').find('button').click();
         }
     });
     var submitting = false;
@@ -50,9 +50,15 @@ $(document).ready(function() {
         var $form = $(this).closest('.form-quote');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val()
         if (!trusted){
-            $form.remove();
-            $('#trusted-error').show();
-            return false;
+            $('#quote-form button').attr('disabled',false);
+            var phone_number = $("#dynamic-phone-number").first().text();
+            if (phone_number){
+                alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
+            }
+            else{
+                alert("Sorry your form can't be submitted at this time. Please call us at the number above.");
+            }
+            return;
         }
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
@@ -70,29 +76,32 @@ $(document).ready(function() {
         }
         */
         $form.children('div').removeClass('.error-state');
-        var data = {'name':name, 
+        var data = {'name':name,
                     'email': email,
-                    'phone': phone, 
+                    'phone': phone,
                     'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
                     'trusted_form2': $form.find("[name ='CertUrl']").val(),
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize(),
                     'operating_system':OSName}
-        $.ajax({
-            type: "POST",
-            url: "/contact/ajaxpost/",
-            data: data,
-            dataType: "json",
-            success: newFormSuccess,
-            error: newFormError,
-            beforeSend:function(){
-                    $(".form-quote .icon-chevron-right").hide();
-                    $('.form-quote #form-loading').show();
-                    $('.form-quote button').attr('disabled',true);
-                    }
-        });
-        
+
+        if (trusted){
+            $.ajax({
+                type: "POST",
+                url: "/contact/ajaxpost/",
+                data: data,
+                dataType: "json",
+                success: newFormSuccess,
+                error: newFormError,
+                beforeSend:function(){
+                        $(".form-quote .icon-chevron-right").hide();
+                        $('.form-quote #form-loading').show();
+                        $('.form-quote button').attr('disabled',true);
+                        }
+            });
+        }
+
         function newFormError(){
             $(".form-quote .icon-chevron-right").show();
             $('.form-quote #form-loading').hide;
@@ -151,12 +160,12 @@ $(document).ready(function() {
             } else {
                 error_string = "<li>"+json.errors+"</li>\n";
             }
-            
+
             $(".quote-form-error ul").html(error_string);
             } else $(".quote-form-error").hide();
         }
         return false;
         });
-    }); 
+    });
 </script>
 {% endaddtoblock "js" %}

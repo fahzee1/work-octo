@@ -1,10 +1,28 @@
 
 {% extends "packages/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Order Your {% if request.GET.package %} {{ request.GET.package|title }}{% endif %}Home Security Products | Order | Protect America{% endblock %}
+{% block page_title %}Order Your Security System | Order Home Security | Protect America{% endblock %}
 {% block page_description %}Order a wireless home security from Protect America today. Starting at $19.99 per month, Our alarm systems are rated a Consumer Digest Best Buy and #1 from Best Home Security Companys.{% endblock %}
 {% block page_keywords %}Protect America, buy home security system, buy home security, order home security, home security systems review, best buy home security, buy home security alarm, best home security systems, where to buy home security systems{% endblock %}
-
+{% block google_experiment %}
+<script> 
+_udn = "protectamerica.com";
+</script> 
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='61445283-88',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
+{% endblock %}
 
 {% block content %}
 <div class="order-package-page">

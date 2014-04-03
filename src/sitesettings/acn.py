@@ -6,3 +6,4 @@ DEFAULT_SOURCE = 'ACN Opportunity LLC'
 from settings import *
 
 CACHES['default']['KEY_PREFIX'] = 'SITE_ID_24__'
+SESSION_COOKIE_DOMAIN = '.acnsecuritysystems.com'

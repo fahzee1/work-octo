@@ -1,0 +1,145 @@
+{% extends "external/alarm-zone/base.html" %}
+{% load content_filters content_tags sekizai_tags %}
+
+{% block page_title %}
+Buy Home Security Systems & Alarm Equipment |Get a Quote| Alarm Zone
+{% endblock %}
+{% block page_description %}
+Shop Alarm Zone for Home Automation & Alarm equipment, Home Security Systems, Best Prices, Top of the Line Equipment & Unbeatable Alarm Monitoring Service.
+{% endblock %}
+{% block page_keywords %}
+Alarm Zone, Home security systems, GPS Trackers, Security cameras, secure your home, residential, windows, door locks, living room, dwelling, pets, neighbor, residence, family, house, alarm, burglar, wireless
+{% endblock %}
+
+{% block content %}
+
+<!-- Primary Page Layout
+================================================== -->
+
+<div class="super container">
+    <div class="full width">
+        <div class="quote">
+            <div class="container">
+                <div class="sixteen columns">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="sixteen columns">
+        <div class="build-step4">
+            <h1>Get a quote on security systems and monitoring services</h1>
+            <ul>
+                <li>
+                    <form method="POST" action="" class="alarm-quote">
+                        {% csrf_token %}
+                        <p>Name</p>
+                        <input tabindex="1" type="textfield" id="id_name" name="name">
+                        <p>Email</p>
+                        <input tabindex="2" type="textfield" id="id_email" name="email">
+                        <p>Phone</p>
+                        <input tabindex="3" type="textfield" id="id_phone" name="phone">
+                        <button tabindex="4" type="button" id="submit" name="submit">submit your info</button>
+                        <small>By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</small>
+                    </form>
+                </li>
+                <div style="clear: both;">
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+
+$("form #submit").click(function(){
+    $("form #submit").attr('disabled',true);
+    var $form = $(this).closest('.alarm-quote');
+    var name = $form.find("#id_name").val();
+    var email = $form.find("#id_email").val();
+    var phone = $form.find("#id_phone").val();
+    var data ={
+            'form': 'basic',
+             'name':name,
+             'email':email,
+             'phone':phone,
+             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+             'site':'alarmzone'
+         }
+
+
+    $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost_blog/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess,
+            error: newFormError,
+            beforeSend:function(){
+                    //$(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                    //$(".sleepy #form-loading, .droopy #form-loading").show();
+                    $("form #submit").attr('disabled',true);
+                    $("form #submit");
+                    }
+            }); // end ajax
+
+
+     function newFormError(){
+            //$(".sleepy #form-loading, .droopy #form-loading").hide();
+            //$(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $("form #submit").attr('disabled',false);
+            $("form #submit").text('SUBMIT YOUR INFO');
+            if (!name && !phone){
+                $('#id_name').addClass('error').attr('placeholder','Please enter your name');
+                $('#id_phone').addClass('error').attr('placeholder','Please enter phone number');
+                alert('Please enter your name and phone number.');
+            }
+            if (!phone && name){
+                $('#id_phone').addClass('error').attr('placeholder','Please enter phone number');
+                alert('Please enter your phone number.');
+            }
+            if (!name && phone){
+                $('#id_name').addClass('error').attr('placeholder','Please enter your name');
+                alert('Please enter your name.');
+            }
+            if (name){
+                $('#id_name').addClass('error');
+            }
+            if (phone){
+                $('#id_phone').addClass('error');
+            }
+        } // end newformerror
+
+
+        function newFormSuccess(json) {
+            //$('#form-loading').hide();
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                window.location = "{% url thanks-page %}"
+                {% endif %}
+                _gaq.push([
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }
+        return false;
+
+    }); // end click function
+
+}); //end document ready
+
+</script>
+
+{% endblock %}
+{% endaddtoblock "js" %}
+{% endblock %}

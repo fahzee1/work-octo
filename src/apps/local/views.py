@@ -80,15 +80,17 @@ def get_statecode(state):
 
 def strip_city(city):
     if '-' and '.' in city:
-        city=city.replace('-',' ').replace('.','')
+        city = city.replace('-',' ').replace('.','')
     if '-' in city:
-        city=city.replace('-',' ')
+        city = city.replace('-',' ')
     if '.' in city:
-        city=city.replace('.',' ')
+        city = city.replace('.',' ')
     if '(' or ')' in city:
-        city=city.replace('(','').replace(')','')
+        city = city.replace('(','').replace(')','')
     if ',' in city:
-        city=city.replace(',','')
+        city = city.replace(',','')
+    if '/' in city:
+        city = city.replace('/','')
     return city
 
 

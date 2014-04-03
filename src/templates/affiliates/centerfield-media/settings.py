@@ -7,6 +7,9 @@ TEMPLATE_PAGES = (
     ('test', 'test.html'),
     ('call', 'green-phone.html'),
     ('lp2', 'lp2.html'),
+    ('midform', 'pa-midform.html'),
+    ('smallform', 'pa-midform-small.html'),
+
 
 
 

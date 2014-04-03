@@ -1,4 +1,4 @@
-{% extends "affiliates/sem-landing-page/responsive.html" %}
+{% extends "affiliates/sem-landing-page/paid-base.html" %}
 
 {% block page_title %}Request a Home Security Quote | Free  | Protect America{% endblock %}
 {% block page_keywords %}Home Security System Quotes, Home Security Quote, Alarm System Prices, online alarm quotes{% endblock %}
@@ -8,10 +8,9 @@
 
 
 {% block content %}
-<div id="quote-wrapper-single">
-    <div id="quote-area">
-        {% include "order/quote-form.html" with form=forms.basic thank_you='/thank-you/' %}
-        <div class="clear"></div>
-    </div>
+<div id="mobile-form">
+    {% include "order/quote-form-refresh.html" with form=forms.basic %}
 </div>
+{% endblock %}
+{% block order-footer %}
 {% endblock %}

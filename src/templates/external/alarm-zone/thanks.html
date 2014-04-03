@@ -1,34 +1,54 @@
 {% extends "external/alarm-zone/base.html" %}
 {% load content_filters content_tags sekizai_tags %}
 
-{% block page_title %}Thank You for Requesting a Quote | Alarm Zone{% endblock %}
-{% block page_description %}You are one step closer to securing your home! Thanks for choosing Alamzone for your home security. We've received your request for a free security quote and one of our security professionals will be contacting you within 24 hours.{% endblock %}
-{% block page_keywords %}home security, home alarm quotes, alarm system quotes{% endblock %}
-
 
 {% block content %}
-    <div id="hero-banner" class="tk-museo-sans">
-        <a href="{% url shop %}"><img src="{{ STATIC_URL }}img/external-lp/alarmzone/thanks.jpg" alt="home-security-hero" /></a>
-        <p>{{ phone_number|format_number }}</p>
+
+<!-- Primary Page Layout
+================================================== -->
+
+<div class="super container top">
+    <div class="header">
+        <a href="/">
+            <div class="logo"></div>
+                <div class="logo_mobile">
+                    <object type="image/svg+xml" width="100" height="22" data="{{ STATIC_URL }}img/external-lp/alarmzone/logo.svg"></object>
+                </div>
+        </a>
+        <div class="call">
+            <p>Call today</p>
+            <h2>1-800-951-5190</h2>
+        </div>
     </div>
-{% addtoblock "js" %}
-<!-- Google Code for Lead Conversion Page -->
-<script type="text/javascript">
-/* <![CDATA[ */
-var google_conversion_id = 1065718014;
-var google_conversion_language = "en_US";
-var google_conversion_format = "3";
-var google_conversion_color = "ffffff";
-var google_conversion_label = "EkgbCPqZURD-oZb8Aw";
-var google_conversion_value = 0;
-/* ]]> */
-</script>
-<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1065718014/?value=0&amp;label=EkgbCPqZURD-oZb8Aw&amp;guid=ON&amp;script=0"/>
+    <div class="nav">
+        <ul>
+            <li><a href="/" class="index-link">Home</a></li>
+            <li><a href="{% url build-package %}" class="build-link">Build a package</a></li>
+            <li><a href="{% url equipment-page %}" class="equipment-link">Equipment</a></li>
+            <li><a href="{% url learn-more %}" class="learn-link">Learn more</a></li>
+            <li><a href="{% url request-quote %}" class="request-link">Request a quote</a></li>
+        </ul>
+    </div>
 </div>
-</noscript>
-{% endaddtoblock "js" %}
+
+<div class="super container">
+    <div class="full width">
+        <div class="thanks-header">
+            <div class="container">
+                <div class="sixteen columns">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="sixteen columns">
+        <div class="thanks">
+            <h2>Thanks!</h2>
+            <p>Thank you for getting in touch with us. We'll contact you soon.</p>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

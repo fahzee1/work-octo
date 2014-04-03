@@ -1,0 +1,436 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block google_experiment %}
+
+{% endblock %}
+{% block page_title %}Alarm Systems | Home Alarms | Protect America{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/alarm.css?v=3.27">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;">
+{% endblock %}
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+{% block liveperson %}{% endblock %}
+{% block liveperson-two %}{% endblock %}
+
+{% block header %}
+    {% block top-section %}
+    <div id="top-section-wrapper">
+        <div id="top-section">
+            <div id="company-links">
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+                <form action="http://www.protectamerica.com/search/" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    {% endblock %}
+    <div id="header-wrapper">
+        <div id="header">
+            {% block logo %}
+            <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+            {% endblock %}
+            <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="hide-mobile order-button">Get a Free Quote</a>
+
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+            {% endif %}
+            <ul id="mobile-main-navigation" class="hide-desktop">
+                    <li class="get-quote"><a href="#" class="order-button" title="Get Quote" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-usd"></i>Get Quote</a></li>
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+            </ul>
+            {% block main-navigation %}
+            <ul id="main-navigation">
+                <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/shop-home-security-packages/">Shop</a>
+                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/security-equipment/">Equipment</a>
+                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/learn/">Learn</a>
+                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'support' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/support">Support</a>
+                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+            {% endblock %}
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div id="hero-wrapper" class="cmonday">
+        <div id="hero-image" class="cmonday">
+            {% block quoteform %}
+                {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% endblock %}
+            {% block party-box %}
+                {% include "banners/deals.html" %}
+            {% endblock %}
+            {% block deal-image %}
+            {% endblock %}
+            <div id="cyber-monday">
+                <h1>{% block h2 %}Best Alarm System{% endblock %}</h1>
+                <h2>{% block h1 %}for any home{% endblock %}</h2>
+                <p>Plans starting at only</p>
+                <div class="price-area">
+                    {% block price-area %}<img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />{% endblock %}
+                </div>
+                {% block hero-buttons %}
+                    <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
+                    <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% include "order/call-box.html" %}
+    <!-- Featured on banner -->
+
+    <div id="featured-on">
+        <small>Proudly Featured on:</small>
+        <div id="featured-badges">
+            <div class="featured abc">&nbsp;</div>
+            <div class="featured besty">&nbsp;</div>
+            <div class="featured npr">&nbsp;</div>
+            <div class="featured topconsumer">&nbsp;</div>
+            <div class="featured foxnews">&nbsp;</div>
+            <div class="featured consumerdigest">&nbsp;</div>
+            <div class="featured buzz">&nbsp;</div>
+            <div class="featured bbb">&nbsp;</div>
+            <div class="featured gadgeteer">&nbsp;</div>
+            <div class="featured toptens">&nbsp;</div>
+            <div class="featured cw">&nbsp;</div>
+            <div class="featured history">&nbsp;</div>
+
+        </div>
+    </div>
+    {% block lifestyle %}
+    <div id="lifestyle-shot">
+        <div class="wrapper">
+            <div id="home-content">
+                {% block lifestyle-headline %}<h2 >The perfect alarm system <span>for your home.</span></h2>{% endblock %}
+                {% block lifestyle-subhead %}<p><strong>An alarm system built for you.</strong> Don't have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>{% endblock %}
+                <a href="" class="button-link  order-button hide-mobile no-desktop">Order Now <i class="icon-chevron-right"></i></a>
+                <a href="tel:{{ phone_number|format_number }}" class="button-link hide-desktop no-mobile">Order Now <i class="icon-chevron-right"></i></a>
+
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block benefits %}
+    <div class="wrapper">
+        <div id="security-information">
+            <div id="main-benefits">
+                    {% block benefits-headline %}<h2>Easy, Flexible, Trusted Alarm Protection</h2>{% endblock %}
+                    {% block benefits-subhead %}<p>Protect America makes it easy to secure and protect your home and family. </p>{% endblock %}
+                    <ul>
+                        {% block benefits-1 %}
+                        <li>
+                            <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
+                            <p>Our alarm systems provide state-of-the-art 24/7 protection so you don't have to worry about a thing.</p>
+                        </li>
+                        {% endblock %}
+                        {% block benefits-2 %}
+
+                        <li class="mobile">
+                            <h3><i class="icon-rss"></i>No Wires. No Hassle.</h3>
+                            <p>Wireless alarm systems means an amazingly simple install. We've taken user-friendly to a new level.</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-3 %}
+
+                        <li class="alt">
+                            <h3><i class="icon-money"></i>The Lowest Price. Period.</h3>
+                            <p>Our alarm packages start at $19.99 a month. We'll also match any competitor's prices with our lowest price guarantee!</p>
+                        </li>
+                        {% endblock %}
+                        <div class="clear"></div>
+                        {% block benefits-4 %}
+
+                        <li class="mobile">
+                            <h3><i class="icon-user"></i>Customizable Alarm Packages</h3>
+                            <p>Each system is tailored to you, including options like: home automation, fire protection, and iPhone control.</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-5 %}
+
+                        <li class="mobile">
+                            <h3><i class="icon-thumbs-up"></i>No Installation or Equipment Fees</h3>
+                            <p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment and no installation fees.</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-6 %}
+
+                        <li class="alt">
+                            <h3><i class="icon-heart"></i>Top Rated. Everywhere.</h3>
+                            <p>Our Copper alarm package has been named a Consumer's Digest "Best Buy" and we are ranked number one by BestHomeSecurityCompanys.com</p>
+                        </li>
+                        {% endblock %}
+
+                    </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="triple-guarantee">
+            <h2>Protect America<br>
+            <strong>Triple Guarantee<strong></h2>
+            <ul>
+                <li><i class="icon-check-sign"></i>Lowest price</li>
+                <li><i class="icon-check-sign"></i>No equipment fees</li>
+                <li class="last"><i class="icon-check-sign"></i>Lifetime replacement plan</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {% endblock %}
+    {% block advantage %}
+    <div id="advantage-table-wrapper">
+        <div id="advantage-table">
+            {% block advantage-header %}
+            <h2>A Step above the rest <span>providing more safety and security for less</span></h2>
+            {% endblock %}
+            <table>
+                <thead>
+                    {% block table-headers %}
+
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Equipment & Activation Fees</th>
+                        <th>24/7 Alarm Monitoring</th>
+                        <th>Lowest Price Guaranteed</th>
+                        <th class="extra">Lifetime Equipment Warranty</th>
+                        <th class="extra">Locked-In Rate</th>
+                        <th>Monthly Cost</th>
+                    </tr>
+                    {% endblock %}
+                </thead>
+                <tbody>
+                    {% block advantage-us %}
+
+                    <tr class="alpha">
+                        <td class="title">Protect America</td>
+                        <td class="price">$0</td>
+                        <td>Included</td>
+                        <td>Included</td>
+                        <td class="extra">Included</td>
+                        <td class="extra">Included</td>
+                        <td class="price">$19.99</td>
+                    </tr>
+                    {% endblock %}
+                    {% block advantage-competitor-1 %}
+                    <tr>
+                        <td class="title">ADT</td>
+                        <td class="price">$99</td>
+                        <td>Included</td>
+                        <td class="na">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="price">$42.99</td>
+                    </tr>
+                    {% endblock %}
+                    {% block advantage-competitor-2 %}
+                    <tr>
+					    <td class="title">ADT Pulse</td>
+					    <td class="price">$99</td>
+					    <td>Included</td>
+					    <td class="na">Not Available</td>
+					    <td class="na extra">Not Available</td>
+					    <td class="na extra">Not Available</td>
+					    <td class="price">$52.99</td>
+					</tr>
+                    {% endblock %}
+                </tbody>
+            </table>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    {% endblock %}
+    {% block faq %}
+        <a id="faqs"></a>
+            <div class="big_wrapper" id="faq">
+              <div class="wrapper clearfix">
+                <h2>Frequently Asked Questions</h2>
+                <ul>
+                  <li class="faq">
+                    <div>
+                      <h3>Why home security and a medical panic?</h3>
+                        <p>We understand the importance of safety for you and your loved ones.  That's why Protect America helps with accidents and burglaries alike.  Our technology is designed to improve the quality of home and life. The Protect America security network goes beyond home alarms - it helps safeguard loved ones too!</p>
+                    </div>
+                  </li>
+                  <li  class="faq">
+                    <div>
+                      <h3>What happens when there is an emergency and I press the button?</h3>
+                        <p>There are two things that happen:<br /><br /><strong>A.</strong> Your alarm will alert the local authorities immediately for dispatch.<br /><strong>B.</strong> After dispatch to the property, our monitoring station will attempt to reach your listed family / emergency contacts.</p>
+                    </div>
+                  </li>
+                  <li  class="faq">
+                    <div>
+                      <h3>What if I accidentally press the medical panic button?</h3>
+                      <p>We take every emergency seriously. When the button is pressed your alarm will begin to ring and the monitoring station will dispatch the authorities. We then attempt to reach you and your listed emergency contacts. If a false alarm is established, the authorities will be notified and canceled.</p>
+                    </div>
+                  </li>
+                  <li class="faq">
+                    <div>
+                      <h3 >How do I send a panic signal?</h3>
+                      <p>Besides the medical panic pendant, every security system comes with one button emergency buttons. To send an Emergency, Fire or Police panic signal simply press and hold the appropriate button for 2 seconds, (Cross = Emergency, Fire = Fire, Police badge= Police).</p>
+                    </div>
+                  </li>
+                </ul>
+                <ul class="col2">
+                  <li class="faq">
+                    <div>
+                      <h3 >Can I get the medical panic wet?</h3>
+                      <p>Yes, the medical panic pendant and watch are waterproof! This feature is important since your loved one should keep this device close at all times.</p>
+                    </div>
+                  </li>
+                  <li class="faq">
+                    <div>
+                      <h3>What happens when my alarm system is triggered? How will the monitoring station respond?</h3>
+                      <p>If your system is not disarmed after one minute, our monitoring station will attempt to reach you. If you do not answer, we will dispatch the local Police to the monitoring address and will attempt to reach your emergency contacts.</p>
+                    </div>
+                  </li>
+                  <li class="faq">
+                    <div>
+                      <h3 >How do I Arm and Disarm my new alarm system?</h3>
+                      <p>Simply press one button to arm your system, and enter your master code to disarm it. Protect America alarm systems are also interactive, so you can arm and disarm from a smartphone with our free "SMART Connect" app!</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+
+{% endblock %}
+{% block order-footer %}
+    <div id="order-final">
+        <div class="wrapper">
+            <div class="left-side">
+                <h2>Your Family's safety is important.</h2>
+                <p>Our alarm experts are ready to help:</p>
+                <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ highlightge_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><i class="icon-phone"></i> {{ phone_number|format_number }}</span></a>
+            </div>
+            <div class="right-side no-desktop">
+                <a href="#" class="button-link order-button">
+                    Order Now <i class="icon-chevron-right"></i>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div id="lightbox">
+        <div id="light-quote-form">
+            <i class="icon-remove-sign"></i>
+            <div class="lightbox-info">
+                <h3>We're here for you.</h3>
+                <p>Our security experts are standing by to help you create the best security and safety solution for your home. Give us a call now at: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> or fill out the form for a no obligation security analysis.</p>
+            </div>
+            {% include "affiliates/sem-landing-page/medical/medical-quote-form.html" with form=forms.basic %}
+        </div>
+        <div class="lightbox-bg">&nbsp;</div>
+    </div>
+{% endblock %}
+{% block main-footer %}
+<script type="text/javascript">
+    $('.faq').click(function() {
+        $(this).children("div").children("p").slideToggle('fast');
+        if ($(this).hasClass('arrow_up')) {
+            $(this).removeClass('arrow_up')
+        } else {
+            $(this).addClass('arrow_up')
+        }
+    })
+    $('.order-button').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeIn();
+        return false;
+    })
+    $('.lightbox-bg').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })
+    $('.icon-remove-sign').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })
+</script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $( "#menu-button" ).click(function() {
+$( "#mobile-menu-container" ).slideToggle( "slow", function() {
+});
+});
+
+        var owl = $("#featured-badges");
+        var outreach = $("#community-outreach-squares");
+
+        owl.owlCarousel({
+          autoPlay: 7000,
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+        outreach.owlCarousel({
+          autoPlay: 7000,
+          stopOnHover: true,
+          items : 3, //10 items above 1000px browser width
+          itemsDesktop : [1000,3], //5 items between 1000px and 901px
+          itemsDesktopSmall : [930,2], // betweem 900px and 601px
+          itemsTablet: [660,1], //2 items between 600 and 0
+          itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+        $("#review-container").owlCarousel({
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          singleItem: true,
+          autoHeight: true,
+          pagination: false,
+          autoPlay: 9000,
+
+        });
+        $('.square').click(function() {
+            var link = $(this).data("link");
+            $(this).attr(link, '_blank');
+
+        });
+    });
+    </script>
+
+{% endblock %}

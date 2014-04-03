@@ -1,0 +1,391 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block google_experiment %}
+
+{% endblock %}
+{% block page_title %}Compare Us | Home Security Systems | Protect America{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/compare-us.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;">
+{% endblock %}    
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+{% block liveperson %}{% endblock %}
+{% block liveperson-two %}{% endblock %}
+
+{% block header %}
+    {% block top-section %}
+    <div id="top-section-wrapper">
+        <div id="top-section">
+            <div id="company-links">
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+                <form action="http://www.protectamerica.com/search/" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    {% endblock %}
+    <div id="header-wrapper">
+        <div id="header">
+            {% block logo %}
+            <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+            {% endblock %}
+            <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="hide-mobile order-button">Get a Free Quote</a>
+
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+            {% endif %}
+            <ul id="mobile-main-navigation" class="hide-desktop">
+                    <li class="get-quote {% if 'squeeze-form' in active_pages %}active{% endif %}"><a href="#" class="order-button" title="Get Quote" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-usd"></i>Get Quote</a></li>
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+            </ul>
+            {% block main-navigation %}
+            <ul id="main-navigation">
+                <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/shop-home-security-packages/">Shop</a>
+                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/security-equipment/">Equipment</a>
+                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/learn/">Learn</a>
+                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'support' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/support">Support</a>
+                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+            {% endblock %}
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+{% block content %}
+    <div id="hero-wrapper" class="cmonday">
+        <div id="hero-image" class="cmonday">
+            {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% block party-box %}
+                {% include "banners/deals.html" %}
+            {% endblock %}
+            <div id="cyber-monday">
+                <h1>{% block h1 %}The Authority in{% endblock %}</h1>
+                <h2>{% block h2 %}Home Security Systems{% endblock %}</h2>
+                <p>Plans starting at only</p>
+                <div class="price-area">
+                    <img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />
+                </div>
+                {% block hero-buttons %}
+                    <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
+                    <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% include "order/call-box.html" %}
+    <div class="wrapper">
+        <div id="featured-on">
+            <p>Featured On:</p>
+            {% block validation %}
+            <div class="validation-icon abc">&nbsp;</div>
+            <div class="validation-icon best">&nbsp;</div>
+            <div class="validation-icon fox">&nbsp;</div>
+            <div class="validation-icon cw">&nbsp;</div>
+            <div class="validation-icon consumer">&nbsp;</div>
+            <div class="validation-icon history">&nbsp;</div>
+            <div class="clear"></div>
+            {% endblock %}
+        </div>
+    </div>
+    {% block lifestyle %}
+    <div id="lifestyle-shot">
+        <div class="wrapper">
+            <div id="home-content">
+                {% block lifestyle-headline %}<h2>Your safety isn’t just important. <span><strong>It’s essential.</strong></span></h2>{% endblock %}
+                {% block lifestyle-subhead %}<p>When it comes to the protection of home and family, mediocre is not an option. Home is where you should feel the safest, and we all deserve to go to bed each night with peace of mind. We’ve dedicated ourselves to the idea that every home and family has the right to be protected - affordably and with quality technology. With this in mind, we’ve secured over half a million homes over 22 years.</p>{% endblock %}
+                <a href="" class="button-link  order-button hide-mobile no-desktop">Order Now <i class="icon-chevron-right"></i></a>
+                <a href="tel:{{ phone_number|format_number }}" class="button-link hide-desktop no-mobile">Order Now <i class="icon-chevron-right"></i></a>
+
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block benefits %}
+    <div class="wrapper">
+        <div id="security-information">
+            <div id="main-benefits">
+                    {% block benefits-headline %}<h2>Compare and Research Your Options</h2>{% endblock %}
+                    {% block benefits-subhead %}<p>We’re confident you’ll choose quality, affordability and our Triple Guarantee.</p>{% endblock %}
+                    <ul>
+                        {% block benefits-1 %}
+                        <li>
+                            <h3><i class="fa fa-scissors"></i>Lose the Wires</h3>
+                            <p>Forget drilling holes and running wires through walls. This technology is “plug and play” and uses wireless technology for a truly simple user experience. Skip the hassle of unprofessional installation technicians and easily shield your home without the huge fees.</p>
+                        </li>
+                        {% endblock %}
+                        {% block benefits-2 %}
+
+                        <li class="mobile">
+                            <h3><i class="fa fa-money"></i>Lowest Price in the Industry</h3>
+                            <p>Security is extremely important, but it shouldn’t break the bank. We secure homes at a wide range of budgets and start at only $19.99 a month with no equipment fees. Compare that to competitor prices that begin in the $40-$55 range plus installation and equipment fees in the hundreds of dollars.</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-3 %}
+
+                        <li class="alt">
+                            <h3><i class="fa fa-clock-o"></i>Real 24/7 Protection Monitoring</h3>
+                            <p>Plug in to the national Protect America monitoring grid and know your home is under our watch at all times. Want to be more connected? Have your home text you if there’s a problem or when someone arrives home – not available from some other companies. Walk out of the door with confidence.</p>
+                        </li>
+                        {% endblock %}
+                        <div class="clear"></div>
+                        {% block benefits-4 %}
+
+                        <li class="mobile">
+                            <h3><i class="fa fa-mobile"></i>Smartphone Ready</h3>
+                            <p>Use our free app and control your home from anywhere with a smartphone. Arm/disarm your security system, view camera footage and receive text notifications.</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-5 %}
+
+                        <li class="mobile">
+                            <h3><i class="fa fa-lightbulb-o"></i>Home Automation Experts</h3>
+                            <p>Make home life safer and ultra-convenient with home automation technology. Control lights, appliances and even digital door locks from Apple or Android devices. Modern convenience should be available to any homeowner, and we offer the same capabilities for less than other big name providers.</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-6 %}
+
+                        <li class="alt">
+                            <h3><i class="fa fa-heart"></i>Top Rated. Everywhere.</h3>
+                            <p>Our Copper alarm package has been named a Consumer's Digest "Best Buy" and we are ranked number one by BestHomeSecurityCompanys.com</p>
+                        </li>
+                        {% endblock %}
+
+                    </ul>
+                <div class="clear"></div>
+                <img id="triple" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/triple-guarantee.png" alt="triple guaruntee" />
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {% endblock %}
+	{% block advantage %}
+	<div id="advantage-table-wrapper">
+	    <div id="advantage-table">
+	        {% block advantage-header %}
+	        <h2>Consistently the Best <span>Solid Home Defense Without the Crazy Prices</span></h2>
+	        {% endblock %}
+	        <table>
+	            <thead>
+	                {% block table-headers %}
+	
+	                <tr>
+	                    <th>&nbsp;</th>
+	                    <th>Equipment & Activation Fees</th>
+	                    <th>24/7 Alarm Monitoring</th>
+	                    <th>Lowest Price Guaranteed</th>
+	                    <th class="extra">Lifetime Equipment Warranty</th>
+	                    <th class="extra">Locked-In Rate</th>
+	                    <th>Monthly Cost</th>
+	                </tr>
+	                {% endblock %}
+	            </thead>
+	            <tbody>
+	                {% block advantage-us %}
+	
+	                <tr class="alpha">
+	                    <td class="title highlight">Protect America</td>
+	                    <td class="price highlight">$0</td>
+	                    <td class="highlight">Included</td>
+	                    <td class="highlight">Included</td>
+	                    <td class="extra highlight">Included</td>
+	                    <td class="extra highlight">Included</td>
+	                    <td class="price highlight">$19.99</td>
+	                </tr>
+	                {% endblock %}
+	                {% block advantage-competitor-1 %}
+	                <tr>
+	                    <td class="title">Ackerman</td>
+	                    <td class="price">$399</td>
+	                    <td>Included</td>
+	                    <td class="na">Not Available</td>
+	                    <td class="na extra">Not Available</td>
+	                    <td class="extra">Included</td>
+	                    <td class="price">$30.07</td>
+	                </tr>
+	                {% endblock %}
+	                {% block advantage-competitor-2 %}
+	                <tr>
+	                    <td class="title">Fort Knox</td>
+	                    <td class="price">$0</td>
+	                    <td>Included</td>
+	                    <td class="na">Not Available</td>
+	                    <td class="na extra">Not Available</td>
+	                    <td class="extra">Included</td>
+	                    <td class="price">$24.95</td>
+	                </tr>
+	                {% endblock %}
+	                {% block advantage-competitor-3 %}
+	                <tr>
+	                    <td class="title">Lifeshield</td>
+	                    <td class="price">$99</td>
+	                    <td>Included</td>
+	                    <td class="na">Not Available</td>
+	                    <td class="na extra">Not Available</td>
+	                    <td class="na extra">Not Available</td>
+	                    <td class="price">$29.99</td>
+	                </tr>
+	                {% endblock %}
+	                {% block advantage-competitor-4 %}
+	                <tr>
+	                    <td class="title">Safe Touch</td>
+	                    <td class="price">$0</td>
+	                    <td>Included</td>
+	                    <td class="na">Not Available</td>
+	                    <td class="na extra">Not Available</td>
+	                    <td class="extra">Included</td>
+	                    <td class="price">$29.99</td>
+	                </tr>
+	                {% endblock %}
+	            </tbody>
+	        </table>
+	        <div class="clear"></div>
+	    </div>
+	</div>
+	{% endblock %}
+
+    {% block faq %}
+        <a id="faqs"></a>
+            <div class="big_wrapper" id="faq">
+              <div class="wrapper clearfix">
+                <h2>Frequently Asked Questions</h2>
+                <ul>
+                  <li class="faq">
+                    <div>
+                      <h3>Why Protect America?</h3>
+                        <p>Security is extremely important, but it shouldn’t be expensive. Protect America has secured over half a million homes in all 50 states because our wireless technology is affordable, simple, interactive and user-friendly. We’ve perfected security and automation and have made it accessible for anyone seeking to protect their home and family without breaking the bank. We’re happy to help explore your best options and will match any competitor price with our Lowest Price Guarantee!</p>
+                    </div>
+                  </li>
+                  <li  class="faq">
+                    <div>
+                      <h3>What if there’s a problem with my equipment?</h3>
+                        <p>While other companies might charge hundreds of dollars to replace equipment, Protect America offers a Lifetime Replacement Plan that covers all equipment. If equipment breaks or malfunctions, we replace it. Period.</p>
+                    </div>
+                  </li>
+                  <li  class="faq">
+                    <div>
+                      <h3>What is the biggest difference between Protect America and other companies?</h3>
+                      <p>Price, flexibility and convenience. Security should be available for everyone, so we make it attainable within any budget. Not only does every package come with free equipment, monthly monitoring costs begin at only $19.99. Find a better price? We’ll match it with our lowest price guarantee. We also make customizing security a breeze. Swap equipment as you like, add fire protection and home automation – whatever makes sense for your home. Our DIY security packages save you the hassle of paying expensive installation fees with other companies. Simply open your package, call our designated security experts, and we’ll walk you through the installation process which usually takes less than an hour!</p>
+                    </div>
+                  </li>
+                  <li class="faq">
+                    <div>
+                      <h3>Do you offer home automation?</h3>
+                      <p>Yes! Home automation features are easily added to your security package. They make a safe home even safer, and much more convenient. Home automation simply means making more parts of your house digital and under your command from a mobile device. Door locks and even lights are now controllable from anywhere – making life easier but also more secure.</p>
+                    </div>
+                  </li>
+                </ul>
+                <ul class="col2">
+                  <li class="faq">
+                    <div>
+                      <h3>What if I secure my home and then have to move?</h3>
+                      <p>No problem. Protect America’s wireless technology and easy move policy make moving a breeze. We’ll even send you a kit to help re-install your system. All sensors and devices are wireless (not hardwired) and don’t require special equipment or a professional to remove and place in another home. Need help? Give us a call. We will walk you through it, step by step. Other companies charge fees to move your system to a new residence. Not so with Protect America. Call us and we’ll make sure your new address is monitored.</p>
+                    </div>
+                  </li>
+                  <li class="faq">
+                    <div>
+                      <h3>Is service available everywhere?</h3>
+                      <p>With Protect America it is. We’re a national home security company serving all 50 states and Canada since 1992. Many security companies aren’t available everywhere and won’t serve some areas.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        
+            
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+
+{% endblock %}
+{% block order-footer %}
+    <div id="order-final">
+        <div class="wrapper">
+            <div class="left-side">
+                <h2>Let’s Explore Your Options.</h2>
+                <p>Our security experts are here to help:</p>
+                <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ highlightge_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><i class="icon-phone"></i> {{ phone_number|format_number }}</span></a>
+            </div>
+            <div class="right-side no-desktop">
+                <a href="#" class="button-link order-button">
+                    Order Now <i class="icon-chevron-right"></i>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div id="lightbox">
+        <div id="light-quote-form">
+            <i class="icon-remove-sign"></i>
+            <div class="lightbox-info">
+                <h3>We're here for you.</h3>
+                <p>Our security experts are standing by to help you create the best security and safety solution for your home. Give us a call now at: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> or fill out the form for a no obligation security analysis.</p>
+            </div>
+            {% include "affiliates/sem-landing-page/medical/medical-quote-form.html" with form=forms.basic %}
+        </div>
+        <div class="lightbox-bg">&nbsp;</div>
+    </div>
+{% endblock %}
+{% block main-footer %}
+<script type="text/javascript">
+    $('.faq').click(function() {
+        $(this).children("div").children("p").slideToggle('fast');
+        if ($(this).hasClass('arrow_up')) {
+            $(this).removeClass('arrow_up')
+        } else {
+            $(this).addClass('arrow_up')
+        }
+    })
+    $('.order-button').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeIn();
+        return false;
+    })
+    $('.lightbox-bg').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })
+    $('.icon-remove-sign').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })     
+</script>
+{% endblock %}

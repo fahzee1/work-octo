@@ -1,7 +1,9 @@
 @charset "UTF-8";
 @import "../../style-paid.less";
+@import "../../pasecurity/owl.less";
+
 body {
-    background: #f7f8fa;
+    background: #fff;
 }
 .hide-desktop {
     display: none !important;
@@ -11,7 +13,7 @@ body {
 }
 #header {
     .order-button {
-        background: #74b24e;
+        background: #55b1a6;
         .border-radius(5px,5px,5px,5px);
         text-decoration: none;
         color: #ffffff;
@@ -22,7 +24,7 @@ body {
         margin-top: 8px;
         .fade-slow;
         &:hover {
-            background: #578d36;
+            background: #84d2c9;
             .fade-fast;
         }
     }
@@ -394,22 +396,147 @@ body {
     }
 }
 #call-box {
-    background: #0a9ec8;
+    background: #55b1a6;
 }
 #featured-on {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: none;
-    p {
+
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    padding-top: 24px;
+    small {
         text-align: center;
+        color: @light-grey;
+        font-size: 12px;
         text-transform: uppercase;
-        color: #ccc;
-        padding: 10px 0 5px;
+        display: block;
+        
     }
-    img {
-        margin: 0 30px;
+    .featured {
+        width: 120px;
+        background: url(/static/img/local-pages/featured-sprite.png) 0 0 no-repeat;
+        height: 64px;
+        margin: 0 auto;
+        &.abc {
+            background-position: 0 0; 
+        }
+        &.besty {
+            background-position: -120px 0; 
+
+        }
+        &.topconsumer {
+            background-position: -240px 0; 
+
+        }
+        &.npr {
+            background-position: -360px 0; 
+
+        }
+        &.foxnews {
+            background-position: 0 -64px; 
+        }
+        &.cw {
+            background-position: -120px -64px; 
+        }
+        &.history {
+            background-position: -240px -64px; 
+
+        }
+        &.kut {
+            background-position: -360px -64px; 
+
+        }
+        &.consumerdigest {
+            background-position: 0 -128px;
+
+        }
+        &.buzz {
+            background-position: -120px -128px; 
+
+        }
+        &.bbb {
+            background-position: -240px -128px; 
+
+        }
+        &.krbe {
+            background-position: -360px -128px; 
+
+        }
+        &.gadgeteer {
+            background-position: 0 -192px; 
+        }
+        &.toptens {
+            background-position: -120px -192px; 
+
+        }
+        &.ksat {
+            background-position: -240px -192px; 
+
+        }
+        &.ktsa {
+            background-position: -360px -192px; 
+
+        }
+        &.statesman {
+            background-position: 0 -256px; 
+        }
+        &.austin-chamber {
+            background-position: -120px -256px; 
+        }
+        &.kvue {
+            background-position: -240px -256px; 
+        }
+        &.fox-seven {
+            background-position: -360px -256px;
+
+        }
     }
 }
+.triple-guarantee {
+    padding: 0 0 20px;
+    height: 80px;
+    clear: both;
+    h2 {
+        float: left;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 26px;
+        text-align: left;
+        color: #2e3849;
+        text-transform: uppercase;
+        strong {
+            color: @blue;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+    }
+    ul {
+        float: right;
+        width: 695px;
+        padding: 8px 0 0 0;
+        li {
+            float: left;
+            font-size: 14px;
+            line-height: 34px;
+            color: #333;
+            font-weight: 600;
+            width: auto;
+            margin-right: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            &.last {
+                margin-right: 0;
+            }
+            i {
+                font-size: 32px;
+                color: @blue;
+                margin-right: 10px;
+                float: left;
+            }
+        }
+    }
+}
+
 #lifestyle-shot {
     background: #4c3119 url(/static/img/products/touchscreen/touchscreen-lifestyle.jpg) no-repeat center center;
     height: 482px;
@@ -437,12 +564,12 @@ body {
         }
         .button-link {
             margin-top: 100px;
-            background: #74b24e;
-            border: 1px solid #745030;
+            background: #55b1a6;
+            border: 1px solid #55b1a6;
             font-size: 16px;
             padding: 12px 40px;
             &:hover {
-                background: #578d36;
+                background: #84d2c9;
             }
         }
     }
@@ -506,11 +633,12 @@ body {
         display:block;
     }
     ul li p {
-        font-size:14px;
-        line-height:26px;
-        font-weight:300;
-        color:#666;
+        font-size:12px;
+        line-height:20px;
+        font-weight:normal;
+        color:#777;
         margin-bottom:32px;
+        padding: 0 16px;
     }
     ul li.alt {
         margin:20px 0;
@@ -533,11 +661,11 @@ body {
         color:#555;
         font-size:10px;
     }
-    h1 {
+    h2 {
         font-size:38px;
         font-weight:bold;
         margin-bottom:8px;
-        line-height:28px;
+        line-height:42px;
         color:#0a9ec8;
         text-align:left;
         text-transform: uppercase;
@@ -595,7 +723,7 @@ body {
 }
 
 #advantage-table-wrapper {
-    background: #0a9ec8;
+    background: #2f394a;
     #advantage-table {
         width: 960px;
         margin: 0 auto;
@@ -627,12 +755,12 @@ body {
                     th {
                         color: @white;
                         text-align: center;
-                        font-size: 12px;
+                        font-size: 11px;
                         padding: 8px 0;
-                        font-weight: bold;
+                        font-weight: normal;
                         vertical-align: middle;
-                        border-bottom: 1px solid #76dbf7;
-                        border-right: 1px solid #76dbf7;
+                        border-bottom: 1px solid #555;
+                        border-right: 1px solid #555;
                         text-transform: uppercase;
                         line-height: 14px;
                         letter-spacing: 1px;
@@ -645,8 +773,8 @@ body {
                         text-align: center;
                         color: @white;
                         line-height: 32px;
-                        border-bottom: 1px solid #76dbf7;
-                        border-right: 1px solid #76dbf7;
+                        border-bottom: 1px solid #555;
+                        border-right: 1px solid #555;
                         width: 200px;
                         font-size: 13px;
                         font-weight: normal;
@@ -666,14 +794,21 @@ body {
                             line-height: 24px;
                         }
                         &.title {
-                            
+                            line-height: 16px;
                         }
                         &.price {
-                            font-size: 24px;
+                            font-size: 20px;
                             font-weight: bold;
+                            span {
+                                display: block;
+                                font-size: 12px;
+                                line-height: 14px;
+                                font-weight: normal;
+                                color: #2e7285;
+                            }
                         }
                         &.na {
-                            color: #2e7285;
+                            color: #55b1a6;
                             font-size: 12px;
                         }
                         &.highlight {
@@ -686,6 +821,9 @@ body {
                     &.alpha {
                         td {
                             border-top: none;
+                            background: #ffe28a;
+                            border: 1px solid #ffe28a;
+                            color: #2f394a;
                             &.pa {
                                 border-top: 1px solid @light-grey;
                                 .border-radius(5px,5px,0,0);
@@ -706,8 +844,25 @@ body {
         }
     }
 }
+#mobile-form {
+    #quote-form {
+        display: block;
+        position: relative;
+        width: 100%;
+        .drop-shadow(0,0,0,0);
+        margin-left: 0;
+        border: none;
+        top: 0;
+        right: 0;
+        .form-fields {
+            input {
+                width: 97%;
+            }
+        }
+    }
+}
 #order-final {
-    background: #74b24e;
+    background: #55b1a6;
     margin-bottom: 24px;
     .left-side {
         padding: 64px 16px;
@@ -741,7 +896,7 @@ body {
         float: left;
         .button-link {
             background: @white;
-            color: #74b24e;
+            color: #55b1a6;
             width: 250px;
             float: right;
             display: block;
@@ -820,9 +975,9 @@ body {
         z-index: 1000;
         margin-left: -320px;
         margin-top: -240px;
-        background: #0a9ec8;
+        background: #2f394a;
         #quote-form {
-            background: #0a9ec8;
+            background: #2f394a;
             position: absolute;
             right: 0;
             display: block;
@@ -831,7 +986,7 @@ body {
             .drop-shadow(0,0,0,0);
             button {
                 background: #74b24e;
-                border: 1px soli d@blue;
+                border: 1px solid #2f394a;
                 i {
                     border-left: 1px solid @dark-green;
                 }
@@ -859,6 +1014,93 @@ body {
             .consent-box label.consent-label {}
         }
     }
+}
+#faq {
+    width: 90%;
+    margin: 0 auto 300px;
+}
+
+#faq2, #faq3, #faq4, #faq5, #faq6 {
+    width: 100%;   
+}
+
+#faq .wrapper, #faq2 .wrapper, #faq3 .wrapper, #faq4 .wrapper, #faq5 .wrapper, #faq6 .wrapper {
+    padding: 50px 0;
+}
+#faq h2, #faq2 h2, #faq3 h2, #faq4 h2, #faq5 h2, #faq6 h2 {
+    text-align: center;
+    color: #333;
+    font-size: 36px;
+    line-height: 52px;
+    font-weight: bold;
+    padding: 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+#faq ul {
+    float: left;
+    padding-top: 43px;
+    width: 50%;
+}
+
+#faq2 ul, #faq3 ul, #faq4 ul, #faq5 ul, #faq6 ul {
+    float: left;
+    padding-top: 10px;
+    width: 630px;
+    position: relative;
+}
+
+#faq ul li {
+    background: url(/static/img/base/adv_faq_arrowdown.png) no-repeat scroll 0 7px transparent;
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    padding: 0 40px 25px 30px;
+    width: 80%;
+    list-style-type: none;
+    cursor: pointer;
+    cursor: hand;
+}
+
+#faq2 ul li, #faq3 ul li, #faq4 ul li, #faq5 ul li, #faq6 ul li {
+    background: url(/static/img/base/adv_faq_arrowdown.png) no-repeat scroll 0 7px transparent;
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+    padding: 0 40px 25px 30px;
+    width: 100%;
+    list-style-type: none;
+}
+
+#faq ul li h3, #faq2 ul li h3, #faq3 ul li h3, #faq4 ul li h3, #faq5 ul li h3, #faq6 ul li h3 {
+    color: #333;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 16px;
+    text-align: left;
+    text-transform: inherit;
+    line-height: 20px;
+    padding: 0;
+    letter-spacing: 0;
+}
+
+#faq ul li p, #faq2 ul li p, #faq3 ul li p, #faq4 ul li p, #faq5 ul li p, #faq6 ul li p {
+    display: none;
+    line-height: 24px;
+    padding: 16px 0 0;
+    font-weight: normal;
+    font-size: 14px;
+    color: #666;
+}
+
+#faq ul li.arrow_up, #faq2 ul li.arrow_up, #faq3 ul li.arrow_up, #faq4 ul li.arrow_up, #faq5 ul li.arrow_up, #faq6 ul li.arrow_up {
+    background: url(/static/img/base/adv_faq_arrowup.png) no-repeat scroll 0 7px transparent;
+}
+#faq ul li.arrow_up a, #faq2 ul li.arrow_up a, #faq3 ul li.arrow_up a, #faq4 ul li.arrow_up a, #faq5 ul li.arrow_up a, #faq6 ul li.arrow_up a {
+    color: #eb292b;
+    font-weight: bold;
 }
 /**************** 768 to 960 *****************/
 @import "768-base.less";

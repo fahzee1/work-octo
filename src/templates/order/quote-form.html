@@ -1,6 +1,7 @@
 
 {% load content_tags content_filters sekizai_tags %}
-<form id="quote-form" class="sleepy"  method="post" action="">
+<form id="quote-form" class="sleepy quote-form-white"  method="post" action="">
+    {% block form-extra %}{% endblock %}
     {% csrf_token %}
 	<div>
 	    {% block form-title %}
@@ -12,7 +13,7 @@
 
 		  <label>Email</label>
             {{ form.email }}
-		
+
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
@@ -30,10 +31,12 @@
     {% endblock %}
     {% block quote-validation %}
     <div id="third-party-container" class="v">
+{% comment %}
         <div class="third-party-badge vsign">
             <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
         </div>
-        <div class="third-party-badge truste" style="width: 115px; float: right;">
+{% endcomment %}
+        <div class="third-party-badge truste" style="width: 140px; margin: 0 auto; float:none!important;">
             <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
         </div>
     </div>
@@ -59,6 +62,7 @@ $(document).ready(function() {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
     }
+
    function getParameterByName( name ){
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
   var regexS = "[\\?&]"+name+"=([^&#]*)";
@@ -70,28 +74,36 @@ $(document).ready(function() {
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-    $('.sleepy input, .droopy input').keypress(function(e){
+
+$('.sleepy input, .droopy input').keypress(function(e){
         if(e.which == 13){
-            $('.sleepy button').click();
+            var $form = $(this).closest('#quote-form');
+            $form.find('button').click();
         }
     });
     var submitting = false;
 
-    $('.sleepy button, .droopy button').click(function() {
-        
+    $('.sleepy, .droopy').on('click','button',function() {
         $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('#quote-form');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
         var device = getParameterByName('device');
-        /*if (!trusted){
-            $form.remove();
-            $('#trusted-error').show();
-            return false;
+        if (!trusted){
+            $('#quote-form button').attr('disabled',false);
+            var phone_number = $(".dynamic-phone-number").first().text();
+            if (phone_number){
+                alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
+            }
+            else{
+                alert("Sorry your form can't be submitted at this time. Please call us at the number above.");
+            }
+            return;
         }
-        */
+
         var name = $form.find("#id_name").val();
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
+        var business_name = $form.find("#id_business_name").val();
         /*
         if (name == ''){
             alert('Please include your name before proceeding.');
@@ -104,34 +116,40 @@ $(document).ready(function() {
             return false;
         }
         */
-        var data = {'name':name, 
+        var data = {'name':name,
                     'email': email,
-                    'phone': phone, 
-                    'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
-                    'trusted_form2': $form.find("[name ='CertUrl']").val(),
+                    'phone': phone,
+                    'trusted_form': trusted,
                     'form': 'basic',
                     'referer_page':window.location.href,
                     'form_values':$form.serialize(),
-                    'operating_system':OSName,
+                    'operating_system':(window.OSName + "_PA"),
                     'device':device,
-                    'gclid':$("[name='gclid']").val()
+                    'gclid':$("[name='gclid']").val(),
+                    'form_js': 't/o/q-f.h'
                     }
-    
 
-        $.ajax({
-                type: "POST",
-                url: "/contact/ajaxpost/",
-                data: data,
-                dataType: "json",
-                success: newFormSuccess,
-                error: newFormError,
-                beforeSend:function(){
-                    $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
-                    $(".sleepy #form-loading, .droopy #form-loading").show();
-                    $('#quote-form button').attr('disabled',true);
-                    }
-                });
-       
+        if (business_name){
+            data['business_name'] = business_name;
+        }
+
+
+        if (trusted){
+            $.ajax({
+                    type: "POST",
+                    url: "/contact/ajaxpost/",
+                    data: data,
+                    dataType: "json",
+                    success: newFormSuccess,
+                    error: newFormError,
+                    beforeSend:function(){
+                        $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                        $(".sleepy #form-loading, .droopy #form-loading").show();
+                        $('#quote-form button').attr('disabled',true);
+                        }
+                    });
+        }
+
 
          function newFormError(){
             $(".sleepy #form-loading, .droopy #form-loading").hide();
@@ -178,7 +196,7 @@ $(document).ready(function() {
                 url = json.thank_you
                 window.location = "http://www.protectamerica.com" + url;
                 {% endif %}
-                _gaq.push([  
+                _gaq.push([
                     '_trackEvent',
                     'Form Click',
                     'Form Events',
@@ -189,7 +207,7 @@ $(document).ready(function() {
         }
         return false;
         });
-    });   
+    });
 </script>
 {% endblock %}
 {% endaddtoblock "js" %}

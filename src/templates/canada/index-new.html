@@ -1,0 +1,188 @@
+{% extends "affiliates/sem-landing-page/paid-base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% block page_title %}Home Security Systems | Home Alarm Systems | Protect America Canada{% endblock %}
+{% block page_keywords %}home security,home security system,security,security system,security systems,alarm system{% endblock %}
+{% block page_description %}Get a free home security system for your home. Sign up for home security monitoring and get a Simon security system at no cost. Now serving Alberta, Ontario, and British Columbia{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/canada-new.css">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;">
+{% endblock %}
+{% block robots_tag %}
+<meta name="ROBOTS" content="INDEX, FOLLOW"/>
+{% endblock %}
+{% block logo %}
+    <img src="{{ STATIC_URL }}/img/canada/protect-america-logo.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+{% endblock %}
+
+{% block google_analytics %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5441302-17']);
+  _gaq.push(['_setDomainName', 'protectamericasecurity.ca']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+{% endblock %} 
+{% block main-navigation %}
+    <ul id="main-navigation">
+        <li>
+        &nbsp;
+        </li>
+        {% comment %}
+        <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+            <a href="http://www.protectamerica.com/shop-home-security-packages/">Shop</a>
+            {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+        </li>
+        <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+            <a href="http://www.protectamerica.com/security-equipment/">Equipment</a>
+            {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+        </li>
+        <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+            <a href="http://www.protectamerica.com/learn/">Learn</a>
+            {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+        </li>
+        <li {% if 'support' in active_pages %}class="active"{% endif %}>
+            <a href="http://www.protectamerica.com/support">Support</a>
+            {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+        </li>
+        {% endcomment %}
+    </ul>
+{% endblock %}
+{% block top-section %}
+<div id="top-section-wrapper">
+    <div id="top-section">
+        <div id="company-links">
+            <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+
+            <div id="main-phone">
+                <i class="icon-phone-sign"></i>
+                {% block main-phone %}
+                    {% if phone_number %}
+                        <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                    {% endif %}
+                {% endblock %}
+            </div>
+            <ul id="international-selection">
+                <li class="ca active"><a href="http://www.protectamericasecurity.ca" rel="nofollow">EN</a></li>
+                <li class="us"><a href="http://www.protectamerica.com" rel="nofollow">EN</a></li>
+                <li class="es"><a href="http://www.protectamerica.com/es/" rel="nofollow">ES</a></li>
+                <i class="icon-caret-down"></i>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+{% endblock %}
+{% block party-box %}
+<div id="deals">
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/unbeatable-security-deals.png" alt="Unbeatable Home Security Deals" />
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/free-security-system.png" alt="Free Security System" />
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/free-video-camera.png" alt="Free Security Camera" />
+    <img src="{{ STATIC_URL }}img/banners/unbeatable-deals/smart-connect.png" alt="No Landline Required" />
+</div>
+{% endblock %}
+{% block h1 %}The Best Security{% endblock %}
+{% block hero-buttons %}
+    <a href="#" class="order-button button-link stylized hide-mobile no-desktop">Get Started Now</a>
+    <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
+{% endblock %}
+
+{% block lifestyle-headline %}<h2 >The perfect security system <span>for your home.</span></h2>{% endblock %}
+{% block lifestyle-subhead %}<p>From Texas to Toronto, Protect America is driven to provide only the highest quality products and dedicated service at an affordable price. Our alarm systems fulfill your home security needs and most importantly, fit your budget.</p>{% endblock %}
+{% block benefits-headline %}<h2>Easy, Flexible, Trusted Home Security</h2>{% endblock %}
+{% block benefits-subhead %}<p>Protect America makes it easy to secure and protect your home and family. </p>{% endblock %}
+{% block benefits-1 %}
+<li>
+    <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
+    <p>Our security systems provide state-of-the-art 24/7 protection so you don't have to worry about a thing.</p>
+</li>
+{% endblock %}
+{% block benefits-2 %}
+
+<li class="mobile">
+    <h3><i class="icon-rss"></i>No Wires. No Hassle.</h3>
+    <p>Wireless alarm systems means an amazingly simple install. We've taken user-friendly to a new level.</p>
+</li>
+{% endblock %}
+
+{% block benefits-3 %}
+
+<li class="alt">
+    <h3><i class="icon-money"></i>The Lowest Price. Period.</h3>
+    <p>Our alarm packages start at $19.99 a month. We'll also match any competitor's prices with our lowest price guarantee!</p>
+</li>
+{% endblock %}
+
+{% block benefits-4 %}
+
+<li class="mobile">
+    <h3><i class="icon-user"></i>Customizable Alarm Packages</h3>
+    <p>Each system is tailored to you, including options like: home automation, fire protection, and iPhone control.</p>
+</li>
+{% endblock %}
+
+{% block benefits-5 %}
+
+<li class="mobile">
+    <h3><i class="icon-thumbs-up"></i>No Installation or Equipment Fees</h3>
+    <p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment and no installation fees.</p>
+</li>
+{% endblock %}
+
+{% block benefits-6 %}
+
+<li class="alt">
+    <h3><i class="icon-heart"></i>New Serving Canada</h3>
+    <p>Protect America Canada is currently available only to residents in Alberta, Ontario, and British Columbia</p>
+</li>
+{% endblock %}
+
+
+
+{% block advantage-competitor-2 %}
+<tr>
+    <td class="title">ADT Pulse</td>
+    <td class="price">$99</td>
+    <td>Included</td>
+    <td class="na">Not Available</td>
+    <td class="na extra">Not Available</td>
+    <td class="na extra">Not Available</td>
+    <td class="price">$52.99</td>
+</tr>
+{% endblock %}
+
+{% block faq %}
+<div id="information-area">
+    <div id="value-content">
+        <h3>Home Security Value</h3>
+        <p>The average yearly home insurance premium in Canada costs $840. The good news is that a home alarm system could reduce the premiums on your homeowners insurance by as much as 20 percent. After the home insurance discount is applied, the monthly cost of a Protect America home security system is less than $16 per month. Get the peace of mind that your home and family are safe for only 50 cents a day. Our wireless home security system is one investment you can't afford to ignore.</p>
+    </div>
+    <div id="value-content">
+        <h3>Home Security Choices</h3>
+        <p>Protect America offers the best home security system and monitoring deal you'll find. We install premium security hardware and have the most flexible range of monitoring services. Every Protect America security system comes with your pick of HomePulse broadband monitoring or standard landline monitoring. Protect America security packages are designed to fit almost any budget and can also support an extensive selection of wireless security accessories. Let us help you find the right systems for your needs, so you can start protecting your home and family today.</p>
+    </div>
+    <h2>Canadian Home Security Statistics</h2>
+    <p>There is no better time than today to protect your residence with a monitored home security alarm system. Protect America offers the most affordable home alarm systems in the industry. Wherever you live, we have a home security solution that will fit your needs and budget. And with our lowest price guarantee, you won't worry about overpaying! Sign up today for a free home security system that includes a lifetime replacement parts warranty, a free movers program, and dedicated customer support.</p>
+    <ul>
+        <li><i class="icon-time"></i><span class="one-line">A Crime is committed every 12 seconds</span></li>
+        <li class="alt one-line"><i class="icon-sun"></i><span class="one-line">Most burglaries occur during the day between 6am and 6pm.</span></li>
+        <li><i class="icon-dollar"></i><span class="one-line">Every year, burglary costs every Canadian an average of $947</span></li>
+        <li class="alt"><i class="icon-home"></i><span class="two-line">In more than a third of all burglaries, the burglar enters the front door (and most of the time does so forcefully).</span></li>
+        <li><i class="icon-shield"></i><span>Homes without a monitored security alarm system are 3 times more likely to be burglarized or robbed than those with a monitored home security system.</span></li>
+        <li class="alt"><i class="icon-signal"></i><span class="one-line">More than 200,000 burglaries occur annually in Canada</span></li>
+
+    </ul>
+    <div class="clear"></div>
+</div>
+{% endblock %}

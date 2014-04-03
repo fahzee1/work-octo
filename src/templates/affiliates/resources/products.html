@@ -1,144 +1,104 @@
-{% extends "base.html" %}
+{% extends "affiliates/resources/get-started.html" %}
 {% load sekizai_tags content_tags content_filters %}
 {% load url from future %}
 {% block page_title %}Protect America Affiliate Resources{% endblock %}
-{% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/resources/resources.css">
-{% endblock %}
-
 {% block navigation %}
 {% endblock %}
-
-
-{% block content %}
-
-
-</div>
+{% block hero %}
+{% endblock %}
+{% block icon-nav %}
+{% endblock %}
+{% block resources-content %}
 {% include "affiliates/resources/_partials/resources-nav.html" %}
-
-<div class="globe">
-    <div class="wrapper">
-        <div id="security-system">
-            <h1>Security Systems</h1>
-            <div id="image-container">
-                <div id="simon-xt-image">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/simon-xt.jpg" class="product-image" />
-                    <h2>Simon XT</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/simon-xt.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="touchscreen">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/touchscreen.jpg" class="product-image"/>
-                    <h2>Touchscreen</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/touchscreen.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-            </div>
-    
+<div class="wrapper" id="products">
+	<div id="security-top-border">
+		<div id="security-heading"><i class="fa fa-tags" id="header-icon"></i> <h1>Products</h1></div>
+		<p>These images are for advertising or for reference. Each download is a ZIP archive which contains two JPEGs -- one for print, and one for web use.</p>
+		<br><br>
+		<h3>Panels</h3>
+        <div class="item-container">
+        	<img src="{{ STATIC_URL }}img/affiliates/resources/products/simon-xt.jpg" class="product-image" />
+			<h2>Simon XT</h2>
+			<a href="{{ STATIC_URL }}img/affiliates/resources/products/simon-xt.zip" class="button download">Download Here</a>
         </div>
-        <div class="clear"></div>
-        <div id="security-system">
-            <h1>Sensors</h1>
-            <div id="image-container">
-                <div id="simon-xt-image">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/motion-detector.jpg" class="product-image" />
-                    <h2>Motion Detector</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/motion-detector.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="smoke-detector">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/smoke-detector.jpg" class="product-image"/>
-                    <h2>Smoke Detector</h2>
-                    
-                        <a href="{{ STATIC_URL }}img/affiliates/resources/products/smoke-detector.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="glass-break">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/glass-break-sensor.jpg" class="product-image"/>
-                    <h2>Glass Break Sensor</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/glass-break.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-            </div>        
-            <div class="clear"></div>
-            <div id="image-container">
-                <div id="freeze-sensor">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/freeze-sensor.jpg" class="product-image" />
-                    <h2>Freeze Sensor</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/freeze-sensor.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="simon-xt-image">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/flood-sensor.jpg" class="product-image" />
-                    <h2>Flood Sensor</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/flood-sensor.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="window-sensor">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/window-door-sensor.jpg" class="product-image" />
-                    <h2>Window/Door Sensor</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/window-door-sensor.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="garage-door">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/garage-door-sensor.jpg" class="product-image" />
-                    <h2>Garage Door Sensor</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/garage-door-sensor.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>                
-            </div>
-        </div>
-        <div class="clear"></div>
-        <div id="security-system">
-            <h1>Interactive</h1>
-            <div id="image-container">
-                <div id="video-camera">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/video-camera-image.jpg"/>
-                    <h2>Video Camera</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/camera.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="i-pad">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/i-pad.jpg" class="product-image"/>
-                    <h2>Smart Connect App Ipad</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/i-pad.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="i-phone">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/i-phone.jpg" class="product-image"/>
-                    <h2>Smart Connect App Iphone</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/i-phone.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-            </div>        
-        </div>
-        <div class="clear"></div>
-        <div id="security-system">
-            <h1>Accessories</h1>
-            <div id="image-container">
-                <div id="key-fab">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/key-fab.jpg" class="product-image" />
-                    <h2>Key Chain Remote</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/key-chain.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="yard-sign">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/yard-signs.jpg" class="product-image"/>
-                    <h2>Yard Sign/Window Stickers</h2>
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/yard-sign.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-                <div id="medical-pendant">
-                    <img src="{{ STATIC_URL }}img/affiliates/resources/products/medical-pendant.jpg" class="product-image"/>
-                    <h2>Medical Pendant</h2>
-                    
-                    <a href="{{ STATIC_URL }}img/affiliates/resources/products/medical-pendant.zip" class="button-link">Download Here <i class="icon-download-alt"></i></a>
-                </div>
-            </div>        
-        </div>
+        <div class="item-container">
+        	<img src="{{ STATIC_URL }}img/affiliates/resources/products/touchscreen.jpg" class="product-image"/>
+			<h2>Touchscreen</h2>
+			<a href="{{ STATIC_URL }}img/affiliates/resources/products/touchscreen.zip" class="button download">Download Here</a>
+		</div>
+	</div>
+    <div id="security-middle-border">
+    	<h3>Sensors</h3>
+    	<div class="item-container">
+        	<img src="{{ STATIC_URL }}img/affiliates/resources/products/motion-detector.jpg" class="product-image" />
+            <h2>Motion Detector</h2>
+			<a href="{{ STATIC_URL }}img/affiliates/resources/products/motion-detector.zip" class="button download">Download Here</a>
+		</div>
+        <div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/smoke-detector.jpg" class="product-image"/>
+			 <h2>Smoke Detector</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/smoke-detector.zip" class="button download">Download Here</a>
+		</div>
+        <div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/glass-break-sensor.jpg" class="product-image"/>
+             <h2>Glass Break Sensor</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/glass-break.zip" class="button download">Download Here</a>
+		</div>
+        <div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/freeze-sensor.jpg" class="product-image" />
+             <h2>Freeze Sensor</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/freeze-sensor.zip" class="button download">Download Here</a>
+		</div>
+        <div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/window-door-sensor.jpg" class="product-image" />
+             <h2>Window/Door Sensor</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/window-door-sensor.zip" class="button download">Download Here</a>
+		</div>
+        <div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/garage-door-sensor.jpg" class="product-image" />
+             <h2>Garage Door Sensor</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/garage-door-sensor.zip" class="button download">Download Here</a>
+		</div>
+    </div>    
+    <div class="security-bottom-border">
+    	<h3>Interactive</h3>
+    	<div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/video-camera-image.jpg" class="product-image"/>
+             <h2>Video Camera</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/camera.zip" class="button download">Download Here</a>
+		</div>
+        <div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/i-pad.jpg" class="product-image"/>
+             <h2>iPad Smart Connect App</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/i-pad.zip" class="button download">Download Here</a>
+		</div> 
+        <div class="item-container">
+        	 <img src="{{ STATIC_URL }}img/affiliates/resources/products/new-i-phone.jpg" class="product-image"/>
+             <h2>iPhone Smart Connect App</h2>
+			 <a href="{{ STATIC_URL }}img/affiliates/resources/products/new-i-phone.zip" class="button download">Download Here</a>
+		</div>   
+    </div>
+    <div class="security-bottom-border">
+    	<h3>Accessories</h3>
+    	<div class="item-container">
+        	<img src="{{ STATIC_URL }}img/affiliates/resources/products/key-fab.jpg" class="product-image" />
+            <h2>Key Chain Remote</h2>
+            <p>&nbsp;</p>
+			<a href="{{ STATIC_URL }}img/affiliates/resources/products/key-chain.zip" class="button download">Download Here</a>
+		</div>
+		<div class="item-container">
+        	<img src="{{ STATIC_URL }}img/affiliates/resources/products/yard-signs.jpg" class="product-image"/>
+            <h2>Yard Sign/Window Stickers</h2>
+			<a href="{{ STATIC_URL }}img/affiliates/resources/products/yard-sign.zip" class="button download">Download Here</a>
+		</div>
+		<div class="item-container">
+        	<img src="{{ STATIC_URL }}img/affiliates/resources/products/medical-pendant.jpg" class="product-image"/>
+            <h2>Medical Pendant</h2>
+			<a href="{{ STATIC_URL }}img/affiliates/resources/products/medical-pendant.zip" class="button download">Download Here</a>
+		</div>
     </div>
 </div>
 <div class="clear"></div>
-
-
-
 
 {% endblock %}
 {% block order-footer %}

@@ -20,6 +20,7 @@ from apps.affiliates.models import Affiliate
 from apps.common.views import get_active, simple_dtt
 from django.template.loader import render_to_string
 from xml.etree import ElementTree as ET
+from urlparse import urlparse, parse_qs
 
 
 
@@ -47,9 +48,26 @@ def send_leadimport(data):
 
     return True
 
+
+def send_bizdev_email(data):
+    subject = 'New Lead From Dealers Page!'
+    message = 'Name : %s \n Email: %s \n Phone: %s' % (data['name'],data['email'],data['phone'])
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = 'agent2.0@protectamerica.com'
+    send_mail(subject,message,from_email,[to_email])
+
+def send_alarmzone_email(data):
+    subject = 'New lead from AlarmZone!'
+    message = 'Name : %s \n Email: %s \n Phone: %s' % (data['customername'],data['email'],data['phone'])
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = 'bruce@icd365.com'
+    send_mail(subject,message,from_email,[to_email])
+
+
+
 def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
     if notify_all:
-        contact_list = ['cjogbuehi@protectamerica.com','development@protectamerica']
+        contact_list = ['cjogbuehi@protectamerica.com','development@protectamerica.com','RYLAN@protectamerica.com']
     else:
         contact_list = ['cjogbuehi@protectamerica.com']
     if not test:
@@ -59,8 +77,8 @@ def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,no
         send_mail(title,message,from_email,contact_list)
 
 
+
 def post_to_leadconduit(data,test=False,retry=False):
-    #pdb.set_trace()
     try:
         lead = Lead.objects.get(id=data['lead_id'])
     except Lead.DoesNotExist:
@@ -106,6 +124,24 @@ def post_to_leadconduit(data,test=False,retry=False):
 
             if lead:
                 if retry:
+                    if lead.number_of_retries > 20:
+                        send_conduit_error(data,
+                                           test=settings.LEAD_TESTING,
+                                           title='Lead retries exceeded 20 attempts',
+                                           notify_all=True,
+                                           message= 'The lead below was set to rety = False. \n'
+                                                    'Lead id : %s \n Name: %s \n Phone: %s \n Referrer Page: %s' % (data['lead_id'],
+                                                                                                                   data['customername'],
+                                                                                                                   data['phone'],
+                                                                                                                   data['formlocation'])
+
+                                            )
+
+                        lead.retry = False
+                        lead.lc_error = True
+                        lead.save()
+                        return
+
                     lead.number_of_retries += 1
                 lead.lc_url = url
                 lead.lc_id = lead_id
@@ -152,6 +188,19 @@ def post_to_leadconduit(data,test=False,retry=False):
                         'params':params.items()}
                 send_conduit_error(data,test=settings.LEAD_TESTING)
 
+            try:
+                if not data['agentid']:
+                    send_conduit_error(data,test=settings.LEAD_TESTING,
+                                            title='Lead missing Agent_ID',
+                                            message=' Lead id : %s \n Name: %s \n Phone: %s \n Referrer Page: %s' % (data['lead_id'],
+                                                                                                                    data['customername'],
+                                                                                                                    data['phone'],
+                                                                                                                    data['formlocation']),
+                                            notify_all = True
+                                            )
+            except KeyError:
+                pass
+
 
         elif xml_request.status_code == 502 or xml_request.status_code == 503 or xml_request.status_code == 504:
             #retry request, email lead, log to console
@@ -179,14 +228,16 @@ def post_to_leadconduit(data,test=False,retry=False):
             lead.save()
         send_conduit_error(data,title='Leadconduit Timeout',test=settings.LEAD_TESTING)
 
-    except SSLError:
+    except SSLError as sslerr:
+        import traceback
         logger.error('SSL Error. Pretty common should be retried and go through soon.')
+        logger.error('Traceback: {0}'.format(traceback.format_exc()))
         if lead:
             lead.retry = True
             lead.save()
         title='Leadconduit SSLError'
-        message='SSLError. Dont worry will be fixed soon'
-        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING,notify_all=False)
+        message='SSLError. Dont worry will be fixed soon, {0}'.format(traceback.format_exc())
+        send_conduit_error(data,title=title,message=message,test=settings.LEAD_TESTING)
 
     except Exception as e:
         #something else happened email everyone
@@ -222,6 +273,19 @@ def send_thankyou(data):
     msg.attach_alternative(t.render(c), 'text/html')
     msg.send()
 
+    return True
+
+def send_ceoposiive(data):
+    subject = 'Your Opinions Matter'
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email = data['email']
+    html_content = render_to_string('emails/ceo_feedback_positive.html',data)
+    try:
+        msg = EmailMultiAlternatives(subject,html_content,from_email,[to_email])
+        msg.attach_alternative(html_content,'text/html')
+        msg.send()
+    except:
+        pass
     return True
 
 def send_caroline_thankyou(request,data,agent):
@@ -348,6 +412,32 @@ def basic_post_login(request):
     device_letter = request.POST.get('device',None)
     device_name = device_type(request,device_letter)
     lead_data = {'trusted_url': trusted_url}
+    acn_business_name = request.POST.get('business_name')
+
+    # for new search_engine param
+    new_se = None
+    current_url = request.POST.get('referer_page', None)
+    if current_url:
+        if 'protectamerica' in current_url:
+            query = parse_qs(urlparse(current_url).query)
+            se = query.get('SE',None)
+            campaign = query.get('Campaign',None)
+            adgroup = query.get('AdGroup', None)
+            if se or campaign or adgroup:
+                if se:
+                    se = se[0]
+                if campaign:
+                    campaign = campaign[0]
+                if adgroup:
+                    adgroup = adgroup[0]
+
+                new_se = '%s|%s|%s' % (se,campaign,adgroup)
+                new_se = new_se.replace(' ','')
+
+    if acn_business_name:
+        request.POST = request.POST.copy()
+        request.POST['name'] = '%s (%s)' % (acn_business_name,request.POST['name'])
+
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
@@ -369,7 +459,7 @@ def basic_post_login(request):
         if searchkeywords is None and cikw is not None:
             searchkeywords = cikw
 
-        formset.search_engine = request.session['search_engine']
+        formset.search_engine = new_se
         formset.search_keywords = searchkeywords
         formset.form_values = f_values
         formset.trusted_url = trusted_url
@@ -416,16 +506,24 @@ def basic_post_login(request):
             'email': fdata['email'],
             'affkey': request_data['affkey'],
             'formlocation': formset.referer_page,
-            'searchengine': request.session['search_engine'],
+            'searchengine': new_se,
             'searchkeywords': searchkeywords,
             'lead_id': formset.id,
             'notes': notes
         }
+        if acn_business_name:
+            emaildata['customername'] = '%s (%s)' %(acn_business_name,fdata['name'])
 
         #post_to_leadconduit(lead_data,test=settings.LEAD_TESTING)
         #send_leadimport(emaildata)
         if not settings.LEAD_TESTING and fdata['email']:
             send_caroline_thankyou(request,emaildata,request_data['agent'])
+
+        site = request.POST.get('site', None)
+        if site:
+            if site == 'alarmzone':
+                send_alarmzone_email(emaildata)
+
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
@@ -445,6 +543,10 @@ def ajax_post(request):
 
     response_dict = {}
     form_type = request.POST['form']
+
+    if form_type == 'dealers':
+        send_bizdev_email(request.POST)
+        return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
 
     if form_type == 'basic':
         form, success = basic_post_login(request)
@@ -505,6 +607,12 @@ def main(request):
 # This is the send feedback to CEO form
 def ceo(request):
     if request.method == "POST":
+        if request.POST['rating'] == '4' or request.POST['rating'] == '5':
+            data = {'customer': request.POST['name'],
+                    'email': request.POST['email']}
+            send_ceoposiive(data)
+
+
         formset = CeoFeedbackForm(request.POST)
         if formset.is_valid():
             form = formset.save(commit=False)
@@ -636,3 +744,21 @@ def payitforward(request):
                                'form': form,
                                'pages': ['about'],
                                'page_name': 'payitforward-involved'})
+
+
+def ajax_log(request):
+    if request.is_ajax():
+        number = request.POST.get('number',None)
+        link = request.POST.get('link',None)
+        timestamp = datetime.now()
+        if number and link:
+            logger.info('Call measurement returned %s.\n Link:%s \n Timestamp:%s' % (number,link,timestamp))
+
+        else:
+            if link:
+                logger.info('Call measurement didnt return number.\n Link:%s \n Timestamp:%s' % (link,timestamp))
+            else:
+                logger.info('Call measurement didnt return number.\n Timestamp:%s' % timestamp)
+        return HttpResponse()
+    return HttpResponseBadRequest()
+

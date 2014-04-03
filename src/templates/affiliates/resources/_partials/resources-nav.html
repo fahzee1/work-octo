@@ -1,62 +1,28 @@
 {% load sekizai_tags content_tags content_filters %}
 {% load url from future %}
-<div id="hero-wrapper" class="v-light-grey">
-    <div id="hero-image">
-        <div id="text-area"> 
-            
-            <img src="{{ STATIC_URL  }}img/affiliates/resources/man-icon.png" alt="man-icon" id="man-icon"/>   
-                 
-             <h1>Help Your Business Grow</h1>
-                <h2>We provide the tools you need to get your business started </h2>
-        </div>    
-        <ul>
-            <li class="alpha">
-                    <div class="nav-item{% if  page_name = "aff-get-started" or page_name = "affiliate_resources" %} active{% endif %}">
-                        <h3>Get Started</h3>
-                        <p>Access your affiliate reports and learn about Protect America</p>
-                        {% if  page_name != "aff-get-started" %}
-                            <a href="{% url 'aff-get-started' %}/?agent_id={{ aff_id }}" class="button-link alt">Click Here <i class="icon-chevron-right"></i></a>
-                        {% endif %}
-                    </div>
-            </li>
-            <li>
-                    <div class="nav-item{% if  page_name = "aff-logos" %} active{% endif %}">
-                        <h3>Logos</h3>
-                        <p>Learn about our branding standards and download our logos for print or web</p>
-                        {% if  page_name != "aff-logos" %}
-                            <a href="{% url 'aff-logos' %}/?agent_id={{ aff_id }}" class="button-link alt">Click Here <i class="icon-chevron-right"></i></a>
-                        {% endif %}
-            </li>
-            <li>
-                    <div class="nav-item{% if  page_name = "aff-web-banners" %} active{% endif %}">
-                        <h3>Web Banners</h3>
-                        <p>We offer a wide array of downloadable web banners for advertising</p>
-                        {% if  page_name != "aff-web-banners" %}
-
-                            <a href="{% url 'aff-web-banners' %}/?agent_id={{ aff_id }}" class="button-link alt">Click Here <i class="icon-chevron-right"></i></a>
-                        {% endif %}
-                    </div>
-            </li>
-            <li>
-                    <div class="nav-item{% if  page_name = "aff-collateral" %} active{% endif %}">
-                        <h3>Collateral</h3>
-                        <p>To get started we offer print and web materials for downloading</p>
-                        {% if  page_name != "aff-collateral" %}
-
-                            <a href="{% url 'aff-collateral' %}/?agent_id={{ aff_id }}" class="button-link alt">Click Here <i class="icon-chevron-right"></i></a>
-                        {% endif %}
-                    </div>
-            </li>
-            <li>
-                    <div class="nav-item{% if  page_name = "aff-products" %} active{% endif %}">
-                        <h3>Products</h3>
-                        <p>We offer numerous product images to download for print or web</p>
-                        {% if  page_name != "aff-products" %}
-                            <a href="{% url 'aff-products' %}/?agent_id={{ aff_id }}" class="button-link alt">Click Here <i class="icon-chevron-right"></i></a>
-                        {% endif %}
-                    </div>
-            </li>
-            <img src="{{ STATIC_URL }}img/affiliates/resources/blue-point.png" class="blue-point {{ page_name }}" alt="blue-point" />
-        </ul>
-    </div>
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/resources/resources.css">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+{% endblock %}
+<div id="hero-area-extra">
+	<div id="hero-heading">
+		<h1>Business & home security,</h1>
+		<h2>We make it simple</h2>
+	</div>
+</div>
+<div class="wrapper">
+	<div class="nav-area">
+            <ul>
+            	<li><i class="fa fa-home"></i><a href="{% url 'aff-get-started' %}" class="button">HOME</a>
+                    <p>Get started with training essentials and educational presentations</p></li>
+                <li><i class="fa fa-folder-open-o"></i><a href="{% url 'aff-logos' %}" class="button">LOGOS</a>
+                    <p>Learn about our branding standards and download our logos for print or web</p></li>
+                <li><i class="fa fa-desktop"></i><a href="{% url 'aff-web-banners' %}" class="button">WEB BANNER</a>
+                    <p>We offer a wide array of downloadable web banners for advertising</p></li>
+                <li><i class="fa fa-thumb-tack"></i><a href="{% url 'aff-collateral' %}" class="button">COLLATERAL</a>
+                    <p>Editable print material is available for download here</p></li>
+                <li><i class="fa fa-tags"></i><a href="{% url 'aff-products' %}" class="button">PRODUCTS</a>
+                    <p>Product images are available for a variety of purposes</p></li>
+            </ul>
+	</div>
 </div>

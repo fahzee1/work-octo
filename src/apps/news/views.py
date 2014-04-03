@@ -1,4 +1,5 @@
 import os
+import pdb
 import re
 import urllib
 import datetime
@@ -44,6 +45,7 @@ def news_home(request):
     categories = Category.objects.order_by('pk')
     
     # grab videos from youtube
+
     yt_feed = 'http://gdata.youtube.com/feeds/api/playlists/371901C9D9882FB8?v=2'
     xml_feed = urllib.urlopen(yt_feed)
     dom = parseString(xml_feed.read())
@@ -51,27 +53,33 @@ def news_home(request):
 
     videos = []
     for entry in entries:
-        description = get_text(entry.getElementsByTagName('media:description'))
-        title = get_text(entry.getElementsByTagName('title'))
-        views = entry.getElementsByTagName('yt:statistics')[0].getAttribute('viewCount')
-        links = entry.getElementsByTagName('link')
-        for ylink in links:
-            if ylink.getAttribute('rel') == 'alternate':
-                link = ylink.getAttribute('href')
+        try:
+            title = get_text(entry.getElementsByTagName('title'))
+            if title == 'Deleted video':
+                continue
+            description = get_text(entry.getElementsByTagName('media:description'))
+            views = entry.getElementsByTagName('yt:statistics')[0].getAttribute('viewCount')
+            links = entry.getElementsByTagName('link')
+            for ylink in links:
+                if ylink.getAttribute('rel') == 'alternate':
+                    link = ylink.getAttribute('href')
+                    break
 
-        video_group = re.search(r'v=(?P<video_id>.*)&', link, re.I)
+            video_group = re.search(r'v=(?P<video_id>.*)&', link, re.I)
 
-        videos.append({'description': description,
-                       'title': title,
-                       'views': views,
-                       'link': link,
-                       'id': video_group.groups()[0]})
+            videos.append({'description': description,
+                           'title': title,
+                           'views': views,
+                           'link': link,
+                           'id': video_group.groups()[0]})
+        except:
+            pass
 
     return simple_dtt(request, 'news/index.html', {
         'headline': articles[0],
         'articles': articles[1:],
         'last_id': articles[4].pk,
-        'videos': videos[:3],
+        'videos': (videos[:3] if videos else None),
         'random_articles': random_articles,
         'categories': categories,
         'pages': ['support'],
@@ -109,7 +117,7 @@ def articles(request, **kwargs):
         'month': month,
         'article_years': article_years,
         'article_months': article_months,
-        'headline': articles[0],
+        'headline': (articles[0] if articles else None),
         'articles': articles[1:9],
         'months': months,
         'm_nums': m_nums,
