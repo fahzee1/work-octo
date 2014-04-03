@@ -162,7 +162,7 @@ LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
 DEFAULT_PHONE = '8009515190'
-SUPER_AFFILIATES = ("a10058","a10447","a10449")
+SUPER_AFFILIATES = ("a10058","a10447","a10449","a10632")
 
 
 GEOIP_PATH = os.path.join(settings.PROJECT_ROOT, 'src', 'apps', 'crimedatamodels', 'external', 'data')
@@ -324,18 +324,10 @@ LEAD_TESTING = False
 
 # override these settings with those from settings.local,
 # which may be a symlink to your local, version-controlled settings
-# one of the values below. It will either be a local directory or the directory on
-# the live server
-if os.path.isdir('/Users/cjogbuehi'):
-    LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-elif os.path.isdir('/Users/rylanfrancis'):
-    LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-elif os.path.isdir('/Users/edgarrodriguez'):
-    LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
-else:
-    LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
-
-
+try:
+    from etc.django.local import *
+except ImportError:
+    pass
 #Silverpop Engage credentials for unsubscribe.htm
 
 ENGAGE_CONFIG = {
@@ -348,24 +340,49 @@ ENGAGE_CONFIG = {
 # Siverpop Engage Master Suppression List ID
 ENGAGE_UNSUBSCRIBE_MSL_ID = '1788700'
 
+
+
+try:
+    if LC_LOG and ENGAGE_LOG_DIR:
+        pass
+except:
+    LC_LOG = None
+    ENGAGE_LOG_DIR = None
+
+
 # Silverpop Engage logging for unsubscribe.htm
-ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
+if not ENGAGE_LOG_DIR:  # If this wasn't already set in local.py . . .
+    if os.path.isdir('/Users/rylanfrancis'):
+        ENGAGE_LOG_DIR = '/Users/rylanfrancis/silverpop_unsubscribe.log'
+    elif os.path.isdir('/Users/waldemarprzybyslawsk'):
+        ENGAGE_LOG_DIR = '/Users/waldemarprzybyslawsk/silverpop_unsubscribe.log'
+    else:
+        ENGAGE_LOG_DIR = '/virtual/customer/www2.protectamerica.com/logs/silverpop_unsubscribe.log'
+
 ENGAGE_LOG_LEVEL = logging.INFO
 ENGAGE_LOG_ROTATION = {
     'maxBytes': 1048576,  # 1MB
     'backupCount': 5
 }
 
+
+
 # depending on where/what user is running this code LC_LOG (lead conduit log) will be
-# one of the values below. It will either be a local directory or the directory on 
-# the live server 
-try:
-    from etc.django.local import *
-except ImportError:
-    pass
+# one of the values below. It will either be a local directory or the directory on
+# the live server
 
 
-
+if not LC_LOG:
+    if os.path.isdir('/Users/cjogbuehi'):
+        LC_LOG = ('/Users/cjogbuehi/virtualenvs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    elif os.path.isdir('/Users/rylanfrancis'):
+        LC_LOG = ('/Users/rylanfrancis/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    elif os.path.isdir('/Users/waldemarprzybyslawsk'):
+        LC_LOG = ('/Users/waldemarprzybyslawsk/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    elif os.path.isdir('/Users/edgarrodriguez'):
+        LC_LOG = ('/Users/edgarrodriguez/logs/example.log' if LEAD_TESTING else '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log')
+    else:
+        LC_LOG = '/virtual/customer/www2.protectamerica.com/logs/leadconduit.log'
 
 # Build logging for unsubscribe.htm
 sp_logger = logging.getLogger('silverpoppy.api')

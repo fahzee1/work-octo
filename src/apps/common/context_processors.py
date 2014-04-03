@@ -122,6 +122,8 @@ def phone_number(request):
         ctx['use_call_measurement'] = affiliate.use_call_measurement
         request.session['call_measurement'] = affiliate.use_call_measurement
 
+    ctx['use_call_measurement'] = True
+
     return ctx
 
 
