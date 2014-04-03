@@ -126,12 +126,12 @@ def get_and_write_data(the_file):
             lead = Lead.objects.get(id=id)
             values = (id.decode("utf-8"), lead.ip_address.decode("utf-8"))
             writer.writerow(values)
-            csvfile.close()
             print 'done writing %s and %s to file' % (id,lead.ip_address)
         except Lead.DoesNotExist:
             print 'lead id %s not found' % id
             continue
 
+    csvfile.close()
     print 'done!!!!!'
 
 
