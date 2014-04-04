@@ -4,6 +4,8 @@
 TEMPLATE_PAGES = (
     ('fluid', 'fluid-index.html'),
     ('index', 'index.html'),
+    ('canada', 'flag.html'),
+
     ('test', 'test.html'),
     ('call', 'green-phone.html'),
     ('lp2', 'lp2.html'),
