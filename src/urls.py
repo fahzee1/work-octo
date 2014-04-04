@@ -313,7 +313,9 @@ elif settings.SITE_ID == 8:
 # Mobile Website
 elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
-        url(r'^$', 'apps.pricetable.views.index', name='home'),
+        dtt(r'^$', 'mobile/index.html', 'home'),
+        dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
+
         url(r'^promo/click-here/?$', 'apps.pricetable.views.test_click', name='home'),
         url(r'^promo/click-call/?$', 'apps.pricetable.views.test_call', name='home'),
         url(r'^promo/click-order/?$', 'apps.pricetable.views.test_order', name='home'),

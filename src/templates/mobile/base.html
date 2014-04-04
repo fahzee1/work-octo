@@ -8,12 +8,17 @@
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
     <link href="http://www.protectamerica.com/static/css/font-awesome/4.0.3/font-awesome.css" rel="stylesheet">
+    <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{% endblock %}
 
+{% endblock %}
+{% block typekit-code %}
+    <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
 
 {% block header %}
     <div id="top-phone-number">
@@ -30,11 +35,9 @@
         </ul>
     </div>
 {% endblock %}
-{% block navigation %}{% endblock %}
 {% block subnav %}
 
 {% addtoblock "js" %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 {% endaddtoblock "js" %}
 {% addtoblock "js" %}
 <script type="text/javascript">
@@ -58,19 +61,26 @@ $(document).ready(function(){
 {% block order-footer %}
 {% endblock %}
 {% block footer %}
-{% block bottom-nav %}
-    {% include "mobile/_partial/nav.html" %}
-{% endblock %}
-<div id="phone-number">
-    <h3>Call Today and Save!</h3>
-    <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Footer', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
-</div>
-<img src="{{ STATIC_URL }}img/mobile/ge-security.jpeg" class="ge-logo" alt="GE Security Authorized Dealer" width="275" height="101" />
-
-<div id="terms">
-    <p>* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
-</div>
-<div class="button-link full-site">
-    <a href="http://www.protectamerica.com/?no_mobile" title="Visit the Protect America Full Site">Full Site ></a>
-</div>
+    {% block bottom-nav %}
+        <div id="sub-footer">
+            <ul id="hoop">
+                <li><strong>Hours of Operation</strong></li>
+                <li>M-F 7AM - 11pm CT</li>
+                <li>SAT 8AM - 8pm CT</li>
+                <li>SUN 9AM - 9pm CT</li>
+            </ul>
+            <h4>Give us a call, we're open <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Footer', '{{ page_name }}']);">{{ phone_number|format_number }}</a></h4>
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+    <div class="footer">
+        <ul>
+            <li><a href="">State Licenses</a></li>
+            <li><a href="">Terms and Conditions</a></li>
+            <li><a href="">Privacy Policy</a></li>
+            <div class="clear"></div>
+        </ul>
+        <p>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
+        <a href="" class="full-site">Visit Full Site</a>
+    </div>
 {% endblock %}
