@@ -23,7 +23,7 @@ class AffiliateMiddleware(object):
                 request.session['call_measurement'] = False
 
             except Affiliate.DoesNotExist:
-                request.session['refer_id'] = 'PROTECT AMERICA'
+                request.session['refer_id'] = 'HOMESITE'
                 request.session['source'] = 'PROTECT AMERICA'
 
         if 'agent' not in request.GET:
@@ -93,7 +93,7 @@ class AffiliateMiddleware(object):
                 current_cookie = None
                 current_source = None
             except Affiliate.DoesNotExist:
-                request.session['refer_id'] = 'PROTECT AMERICA'
+                request.session['refer_id'] = 'HOMESITE'
                 request.session['source'] = 'PROTECT AMERICA'
 
         elif current_cookie is None:
@@ -105,7 +105,7 @@ class AffiliateMiddleware(object):
                     request.session['source'] = affiliate.name
 
                 except Affiliate.DoesNotExist:
-                    request.session['refer_id'] = 'PROTECT AMERICA'
+                    request.session['refer_id'] = 'HOMESITE'
                     request.session['source'] = 'PROTECT AMERICA'
 
             elif 'agent' in request.GET:
@@ -114,7 +114,7 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = affiliate.agent_id
                     request.session['source'] = affiliate.name
                 except Affiliate.DoesNotExist:
-                    request.session['refer_id'] = 'PROTECT AMERICA'
+                    request.session['refer_id'] = 'HOMESITE'
                     request.session['source'] = 'PROTECT AMERICA'
 
             else:
@@ -125,7 +125,7 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = default_agent
                     request.session['source'] = default_source
                 else:
-                    request.session['refer_id'] = 'PROTECT AMERICA'
+                    request.session['refer_id'] = 'HOMESITE'
                     request.session['source'] = 'PROTECT AMERICA'
 
         # Allow overwriting of affkey cookie
