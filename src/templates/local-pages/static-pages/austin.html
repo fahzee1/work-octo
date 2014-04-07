@@ -195,8 +195,8 @@
         <p>Protect America has provided Austin with affordable and reliable business and home security systems since 1992. We pride ourselves in bring a national company with an unmistakable Austin attitude. We're pioneers in wireless home automation &ndash; our SMART Connect app keeps you connected with your home while you're away; easily arm and disarm your system, adjust lights, and control thermostats.</p>
         <p>Combined with our monitored alarm systems that start as low as $19.99 per month with free equipment, the choice for home security is clear.</p>
     </div>
-    <div class="eight columns side" id="austin-video">
-    <script type='text/javascript' src='http://KTBC.images.worldnow.com/interface/js/WNVideo.js?rnd=77624;hostDomain=www.myfoxaustin.com;playerWidth=460;playerHeight=400;isShowIcon=true;clipId=9404243;flvUri=;partnerclipid=;adTag=News;advertisingZone=;enableAds=true;landingPage=;islandingPageoverride=false;playerType=STANDARD_EMBEDDEDscript;controlsType=overlay'></script><a href="http://www.myfoxaustin.com" title=""></a>
+    <div class="eight columns" id="side-image">
+    	<img src="{{ STATIC_URL}}img/local-pages/smart-connect-security-app.jpg" alt="Stay connected to your home from anywhere, at any time, with our free smart phone application." />
     </div>
 </div>
 
@@ -205,7 +205,6 @@
 	<div class="container">
 		<div class="eight columns" id="signature-left">
         		<img src="{{ STATIC_URL }}img/local-pages/austin/austin-signature-service.png" alt="Austin Signature Service" title="Austin Signature Service" />
-      
 		</div>
 		<div class="eight columns" id="signature-right">
     		<h2 class="big">Howdy. <span>We're your neighbors.</span></h2>
@@ -293,6 +292,39 @@
         </div>
     </div>
 </div>
+<div class="container local-data" id="overview">
+	<div class="eight columns side" id="local-map">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3438.7867749155066!2d-97.686458!3d30.470476999999995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5339e0fe593a9e0e!2sProtect+America!5e0!3m2!1sen!2sus!4v1396901621872" id="map"></iframe>
+		<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
+			<script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/platform.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+		</div>
+		<div class="eight columns" id="local-business-info">
+			<div itemscope itemtype="http://schema.org/LocalBusiness">
+				<h3 id="h3-top-spacing"><span itemprop="name">Protect America</span></h3>
+				<span itemprop="description">Home Security Systems in Austin, TX</span>
+				<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+					<span itemprop="streetAddress">3800 Quick Hill Rd #1-100</span>
+					<span itemprop="addressLocality">Austin</span>,
+					<span itemprop="addressRegion">TX</span>
+				</div> 
+				<span id="title">Phone</span>: <span itemprop="telephone"><a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+</span>
+			</div><br />
+			<span id="title">Hours</span>:<br />
+			<meta itemprop="openingHours" content="Mo-Fr 7:00-23:00"><em>Monday - Friday</em> : 7:00 AM - 11:00 PM<br />
+			<meta itemprop="openingHours" content="Sa 8:00-20:00"><em>Saturday</em> : 8:00 AM - 8:00 PM <br />
+			<meta itemprop="openingHours" content="Su 9:00-21:00"><em>Sunday</em> : 9:00 PM - 9:00 PM <br /><br />
+			</div>
+		</div>
+	</div>
+</div>
+
 {% block testimonials %}
 <!-- Testimonials -->
 <div id="testimonials">

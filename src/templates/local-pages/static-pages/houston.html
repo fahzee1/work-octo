@@ -166,8 +166,8 @@
 </div>
 <!-- End featured banner -->
 <div class="container" id="overview">
-	<div class="nine columns side" id="video">
-    	<iframe id="houston-video" src="//www.youtube.com/embed/488KjwKlV-Q" frameborder="0" allowfullscreen></iframe>
+	<div class="eight columns" id="side-image">
+    	<img src="{{ STATIC_URL}}img/local-pages/smart-connect-security-app.jpg" alt="Stay connected to your home from anywhere, at any time, with our free smart phone application." />
     </div>
     <div class="seven columns" id="add-padding">
     	<h2>Security systems for every Houston home.</h2>
@@ -269,8 +269,8 @@
         <div class="clear"></div>
     </div>
 
-<div class="container" id="overview" style="font-size:16px;">
-	<div class="eight columns side-map" id="houston-map">
+<div class="container local-data" id="overview">
+	<div class="eight columns side-map" id="local-map">
 		<iframe src="https://mapsengine.google.com/map/embed?mid=zZomU8UD5470.kOufxrZFRA4Q" id="map"></iframe>
 		<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
 			<script type="text/javascript">
@@ -281,7 +281,7 @@
 			  })();
 			</script>
 		</div>
-		<div class="eight columns" id="black-text">
+		<div class="eight columns" id="local-business-info">
 			<div itemscope itemtype="http://schema.org/LocalBusiness">
 				<h3><span itemprop="name">Protect America</span></h3>
 				<span itemprop="description">Home Security Systems in Houston, TX</span>
@@ -290,13 +290,14 @@
 					<span itemprop="addressLocality">Houston</span>,
 					<span itemprop="addressRegion">TX</span>
 				</div> 
-				<strong>Phone</strong>: <span itemprop="telephone">888-936-3385</span>
+				<span id="title">Phone</span>: <span itemprop="telephone"><a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+</span>
+
 			</div><br />
-			<strong>Hours</strong>:<br />
-			<meta itemprop="openingHours" content="Mo-Fr  7:00-23:00">Mon-Fri 7am - 11:00pm<br />
-			<meta itemprop="openingHours" content="Sa 8:00-20:00">Sat 8am- 8pm <br />
-			<meta itemprop="openingHours" content="Su 9:00-21:00">Sun 9pm - 9pm <br /><br />
-			<p>From the Galleria to Discovery Green, if you are looking for Home Security Systems in Houston, The Woodlands, Katy, Sugar Land, Pearland or Jersey Village, Protect America has quality wireless home security systems and monitored burglar alarms perfect for apartments or houses in the Greater Houston, TX area.</p>
+			<span id="title">Hours</span>:<br />
+			<meta itemprop="openingHours" content="Mo-Fr 6:00-23:00"><em>Monday - Friday</em> : 6:00 AM - 11:00 PM<br />
+			<meta itemprop="openingHours" content="Sa 7:00-19:00"><em>Saturday</em> : 7:00 AM - 7:00 PM <br />
+			<meta itemprop="openingHours" content="Su 8:00-20:00"><em>Sunday</em> : 8:00 PM - 8:00 PM <br /><br />
 			</div>
 		</div>
 	</div>
