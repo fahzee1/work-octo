@@ -1,27 +1,35 @@
 @import "style/style.less";
 @import "austin.less";
 
-.heading {
-	bottom: 188px !important;
-	.big {
-		font-size: 43px !important;
-	}
-	p {
-		margin: 15px 0 0 0;
-		color: @black;
-		font-weight: 600;
-		font-size: 20px;
-	}
-	h3 {
-		padding: 12px 30px 5px 30px !important;
+#hero {
+	&.index {
+		.container {
+			.heading {
+				right: 8px;
+				.big {
+					font-size: 43px !important;
+				}
+				p {
+					margin: 15px 0 0 0;
+					color: @black;
+					font-weight: 600;
+					font-size: 20px;
+				}
+				h3 {
+					padding: 12px 30px 5px 30px !important;
+				}
+			}
+			#party-box-new {
+				right: 8px;
+				bottom: 20px;
+			}
+		}
+		.quote-form-white {
+			left: 15px;
+		}
 	}
 }
-#party-box-new {
-	margin-top: 62px !important;
-}
-#hero.index .container .quote-form-white {
-	left: 15px;
-}
+ 
 .wrapper {
     margin:0 auto;
     position:relative;
@@ -586,13 +594,23 @@
 			}	
 		}
 	}
-		
-/* All Mobile Sizes (devices and browser) */
-	@media only screen and (max-width: 767px) {
-		#party-box-new {
-			top: -20px;
-			position: relative;
+	
+	@media only screen and (max-width: 959px) {	
+		#hero {
+			&.index {
+				.container {
+					.heading {
+						right: 50px;
+					}
+					#party-box-new {
+						right: 65px;
+					}
+				}
+			}
 		}
+	}
+
+	@media only screen and (max-width: 767px) {
 		#add-padding {
 			padding-top: 40px;
 		}
@@ -621,12 +639,28 @@
                 }
             }
         }
-        .heading {
-        	height: 170px !important;
-	        h3 {
-		        padding: 0px !important;
-	        }
-        }
+        #hero {
+			&.index {
+				.container {
+					.heading {
+						right: 0px;
+						height: 170px !important;
+				        h3 {
+					        padding: 0px !important;
+				        }
+					}
+					#party-box-new  { 
+						float: none;
+						position: absolute;
+					 	bottom: 120px;
+					 	left: 50%;
+						margin-left: -225px;
+						right: auto;
+						width: 450px;
+					}
+				}
+			}
+		}
         #header-wrapper {
             #header {
                 #mobile-main-navigation {

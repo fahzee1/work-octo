@@ -188,8 +188,9 @@ LOCAL_PAGE_PATH = '/virtual/customer/www2.protectamerica.com/localpages/'
 #exclude these cities for local pages and create respective static pages
 EXCLUDE_CITIES = {
 'Austin':'TX',
-'Houston':'TX'
+'Houston':'TX',
 }
+
 READY_FOR_STATIC = True
 TIMEZONES = {
     'AL': 'America/Chicago',
