@@ -1,30 +1,27 @@
 {% extends "affiliates/acn/base.html" %}
 
 {% block content %}
-    <div class="aboutPA hero inverse section">
+    <div class="hero" id="new-header">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <h2>About Protect America</h2>
-                </div><!-- /col -->
-                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-                    <p>Founded in 1992 by Thad Paschall, Protect America Inc. has protected over half a million customers nationwide. Protect America has revolutionized the security industry for over 20 years; making it easy to protect your business with quality security products at an affordable price.</p>
-                    <hr>
-                    <p>Protect America is one of the fastest growing business security companies nationwide and uses cutting-edge technology to provide instantaneous product support and 24-hour protection of your home and family.</p>
+                <div id="quote-form-container">
+                     {% include "affiliates/acn/_partials/quote-form.html" %}
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
-                    <p>We work diligently to serve our current and future customers and take the protection of every business very seriously. Protect America is proud to be ranked #1 from many home security review sites including: Best Home Security Companys, HomeSecuritySystems.net, and Top Consumer Reviews.</p>
-                    <div class="logos">
-                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/consumerDigestLogo.jpg"></div>
-                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/bestHomeSecurityCompanys.jpg"></div>
-                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/topConsumerReviews.jpg"></div>
-                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/homeSecuritySystemsNet.jpg"></div>
-                    </div><!-- /logos -->
-                    <p class="smallText">The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
+                <div id="heading-container">
+                	<div id="heading">
+			            <h1>First-Rate Business Security Systems</h1>
+			            <h2>Powerful. Interactive. Unrivaled.</h2>
+			            
+						<a id="quote-button" type="button" class="redbutton" href="{% url order %}" class="redButton">Get A Free <span id="hide-this">Security</span> Quote <i class="icon-chevron-right"></i></a>
+					</div>
+					<div id="heading-video">
+						<h2>Wireless cameras connect to your smartphone and record to the cloud.</h2>
+						<a href="{% url features %}" class="primaryBtn noBgBtn">Learn More About Video Surveillance <i class="arrowIcon sprite"></i></a>
+					</div>
                 </div>
             </div><!-- /row -->
         </div><!-- /container -->
-    </div><!-- /aboutPA -->
+    </div><!-- /hero -->
 
 
     <div class="call-box center inverse section">
@@ -35,7 +32,7 @@
     <div class="highlights center section">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2"><h2 class="center"><a href="{% url packages %}">We Offer Reliable, User-Friendly Business Security Systems At An Affordable Price..</a></h2>
+                <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2"><h2 class="center" id="top-headline"><a href="{% url packages %}">We Offer Reliable, User-Friendly Business Security Systems At An Affordable Price</a></h2>
                 </div>
                 <div class="clearRow">&nbsp;</div>
                 <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
@@ -88,7 +85,31 @@
             </div><!-- /row -->
         </div><!-- /container -->
     </div><!-- /highlights -->
-    {% include "affiliates/acn/_partials/contact-footer.html" %}
+    <div class="aboutPA section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>About Protect America</h2>
+                </div><!-- /col -->
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+                    <p>Founded in 1992 by Thad Paschall, Protect America Inc. has protected over half a million customers nationwide. Protect America has revolutionized the security industry for over 20 years; making it easy to protect your business with quality security products at an affordable price.</p>
+                    <hr>
+                    <p>Protect America is one of the fastest growing business security companies nationwide and uses cutting-edge technology to provide instantaneous product support and 24-hour protection of your home and family.</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+                    <p>We work diligently to serve our current and future customers and take the protection of every business very seriously. Protect America is proud to be ranked #1 from many home security review sites including: Best Home Security Companys, HomeSecuritySystems.net, and Top Consumer Reviews.</p>
+                    <div class="logos">
+                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/consumerDigestLogo.jpg"></div>
+                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/bestHomeSecurityCompanys.jpg"></div>
+                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/topConsumerReviews.jpg"></div>
+                        <div class="halfCol"><img src="{{ STATIC_URL }}img/affiliates/acn/homeSecuritySystemsNet.jpg"></div>
+                    </div><!-- /logos -->
+                    <p class="smallText">The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>
+                </div>
+            </div><!-- /row -->
+        </div><!-- /container -->
+    </div><!-- /aboutPA -->
+
 {% endblock %}
 
 
