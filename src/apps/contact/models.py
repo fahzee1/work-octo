@@ -1,9 +1,10 @@
 from datetime import datetime
 from django.db import models
-from django.contrib.localflavor.us.models import (PhoneNumberField, 
+from django.contrib.localflavor.us.models import (PhoneNumberField,
     USStateField)
 from django.template import loader, Context
 from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 
 # Create your models here.
 DEPARTMENT_CHOICES = (
@@ -13,7 +14,7 @@ DEPARTMENT_CHOICES = (
     ('monitoring_station', 'Monitoring Station'),
     ('monitoring_agreement', 'Monitoring Agreement'),
     ('other', 'Other'),
-    ('sales', 'Sales'), 
+    ('sales', 'Sales'),
 )
 
 FEEDBACK_CHOICES = (
@@ -37,7 +38,7 @@ class Submission(models.Model):
         ('BELOW_AVERAGE', 'Below Average (580 - 619)'),
         ('POOR', 'Poor (579 or Below)'),
     )
-    
+
     name = models.CharField(max_length=128)
     email = models.EmailField(max_length=128)
     phone = PhoneNumberField()
@@ -66,7 +67,7 @@ class Submission(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
 
-    
+
     def get_first_name(self):
         return self.name.split(' ')[0]
 
@@ -142,17 +143,21 @@ class ContactUs(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
 
+
+
     def email_company(self):
         t = loader.get_template('emails/contact_us_to_company.html')
         c = Context({'sub': self})
-        email = EmailMessage(
-            'Contact Form Submission',
-            t.render(c),
-            '"Protect America" <noreply@protectamerica.com>',
-            ['careops@protectamerica.com'],
-            ['"Robert Johnson" <robert@protectamerica.com>'],
-             headers = {'Reply-To': 'noreply@protectamerica.com'})
-        email.send()
+        from_email = 'Protect America <noreply@protectamerica.com>'
+        to_email = 'chat@protectamerica.com'
+        try:
+            send_mail('Contact Form Submission',
+                      t.render(c),
+                      from_email,
+                      [to_email],fail_silently=False)
+        except:
+            print 'error sending contact us email'
+
 
     def __unicode__(self):
         return '%s : %s' % (self.name, self.phone,)
@@ -215,7 +220,7 @@ class CEOFeedback(models.Model):
 
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
-    
+
     class Meta:
         ordering = ['-date_created']
 
@@ -262,7 +267,7 @@ class CEOFeedback(models.Model):
     def mark_as_read(self):
         if self.date_read:
             return
-    
+
         self.date_read = datetime.now()
         self.read = True
         self.save()
@@ -310,7 +315,7 @@ class TellAFriend(models.Model):
             ['"Protect America" <noreply@protectamerica.com>'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
-        
+
     def __unicode__(self):
         return '%s -> %s' % (self.name, self.friend_name,)
 
