@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Home Security | Alarm Systems | Protect America{% endblock %}
+{% block page_title %}Home Security & Alarm Systems | Protect America{% endblock %}
 {% block page_keywords %}Home Security, Alarm Systems, Home Security Systems, GE Simon XT{% endblock %}
-{% block page_description %}Get a home security systems for your home at the lowest cost. Sign up for alarm monitoring and get a GE Simon XT home alarm at no cost.{% endblock %}
+{% block page_description %}Secure your home for less with a Protect America home security system. Lowest price guaranteed, free security equipment, and lifetime warranty. Call Today!{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
@@ -13,12 +13,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 {% endblock %}
 {% block typekit-code %}
     <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
 {% endblock %}
 
 {% block header %}
@@ -30,11 +30,67 @@
             <a href="/" title="Protect America"><img src="{{ STATIC_URL }}img/mobile/protect-america-security.png" alt="Protect America Home Security" width="140" height="24" /></a>
         </div>
         <ul class="main-navigation">
-            <li><a href=""><i class="fa fa-bars"></i>Menu</a></li>
-            <li class="alpha"><a href=""><i class="fa fa-phone"></i>Call Us</a></li>
+            <li><a href="#" id="mobile-menu"><i class="fa fa-bars"></i>Menu</a></li>
+            <li class="alpha"><a href="tel:{{ phone_number|format_number }}"><i class="fa fa-phone"></i>Call Us</a></li>
 
         </ul>
+        <ul class="main-menu">
+            <li>
+                <a href="/">
+                    <i class="fa fa-home"></i>
+                    <p>Home</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{% url home-security %}">
+                    <i class="fa fa-shield"></i>
+                    <p>Home Security</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{% url equipment-mobile %}">
+                    <i class="fa fa-lightbulb-o"></i>
+                    <p>Security Solutions</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url learn %}">
+                    <i class="fa fa-book"></i>
+                    <p>Learning Center</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url about-us %}">
+                    <i class="fa fa-info-circle"></i>
+                    <p>About Us</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url contact-mobile %}">
+                    <i class="fa fa-envelope-o"></i>
+                    <p>Contact Us</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url quote-mobile %}">
+                    <i class="fa fa-tag"></i>
+                    <p>Request Quote</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
     </div>
+
 {% endblock %}
 {% block subnav %}
 
@@ -43,13 +99,16 @@
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#menu_icon').toggle(function() {
-        $(this).addClass('active');
-        $('#sub-navigate').slideDown('fast');
-    }, function() {
-        $(this).removeClass('active');
-        $('#sub-navigate').slideUp('false');
-    })
+    $("#mobile-menu").click(function( event ){
+        event.preventDefault();
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $(".main-menu").slideUp('fast');
+        } else {
+            $(this).addClass('active');
+            $(".main-menu").slideDown('fast');
+        };
+    });
 });
 </script>
 {% endaddtoblock "js" %}
@@ -82,6 +141,7 @@ $(document).ready(function(){
             <div class="clear"></div>
         </ul>
         <p>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
-        <a href="" class="full-site">Visit Full Site</a>
+        <a href="http://www.protectamerica.com/?no_mobile" class="full-site">Visit Full Site</a>
     </div>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.scrollTo-1.4.3.1.js"></script>
 {% endblock %}

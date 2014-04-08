@@ -315,6 +315,12 @@ elif settings.SITE_ID == 9:
     urlpatterns += patterns('',
         dtt(r'^$', 'mobile/index.html', 'home'),
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
+        dtt(r'^learn-about-home-security/$', 'mobile/learn.html', 'learn'),
+        dtt(r'^home-security-equipment/$', 'mobile/equipment.html', 'equipment-mobile'),
+        dtt(r'^about-protect-america/$', 'mobile/about-us.html', 'about-us'),
+        dtt(r'^contact-protect-america/$', 'mobile/contact-us.html', 'contact-mobile'),
+        dtt(r'^request-security-quote/$', 'mobile/request-quote.html', 'quote-mobile'),
+
 
         url(r'^promo/click-here/?$', 'apps.pricetable.views.test_click', name='home'),
         url(r'^promo/click-call/?$', 'apps.pricetable.views.test_call', name='home'),
