@@ -134,15 +134,31 @@
 
         <div class="heading">
             <h1 class="big">Austin's Best <span>Home Security Systems</span></h1>
-            <h3><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></h3>
+            <p>For a free quote, call now!</p>
+            <h3><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></h3>
         </div>
 		{% block partybox %}
 		<!-- Party box start -->
-		<div id="party-box">
-			<a href="http://www.protectamerica.com/shop-home-security-packages" title="Save over $600 with a Free Security System"><img id="deal1" src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png" alt="Free Security System"></a>
-		    <a href="http://www.protectamerica.com/equipment/home-security/security-camera" title="Get a Free Security Camera with Select Packages"><img id="deal2" src="{{ STATIC_URL }}img/local-pages/party-free-camera.png" alt="Free Security Camera"></a>
-		    <a href="#signature" title="Austin Only Signature Service"><img id="deal3" src="{{ STATIC_URL }}img/local-pages/party-signature-service_05.png" title="Austin Signature Service"></a>
-		</div>
+		<div id="party-box-new">
+				<a href="http://www.protectamerica.com/shop-home-security-systems" title="Shop for the best home security systems.">
+					<div class="partybox" id="free-system">
+						<img src="{{ STATIC_URL }}img/local-pages/touch-screen.png" alt="Touch screen interface." id="screen" />
+				    	<h3>Free <span>Security System</span></h3>
+				    	<div id="party-link">Get This Deal</div>
+				    	<img src="{{ STATIC_URL }}img/local-pages/party-ribbon.png" alt="$600 Value" id="ribbon" />
+				    </div>
+				</a>
+			    <a href="http://www.protectamerica.com/equipment/home-security/security-camera" title="Add video security to your package.">
+				    <div class="partybox" id="security-camera">
+				    	<img src="{{ STATIC_URL }}img/local-pages/hand-with-phone-video.png" alt="View your cameras from your phone anytime, anywhere." />
+				    	<h3>Get A <span>Security Camera</span></h3>
+				    	<div id="party-link">Find Out How</div>
+				    </div>
+			    </a>
+			    <a href="#signature" title="Austin's Exclusive Signature Service">
+			    	<img id="signature-service" src="{{ STATIC_URL }}img/local-pages/austin/austin-signature-service-party.png" alt="Austin Signature Service">
+			    </a>
+	    </div>
 		<!-- End party box -->
 		{% endblock %}
     </div>
@@ -179,8 +195,8 @@
         <p>Protect America has provided Austin with affordable and reliable business and home security systems since 1992. We pride ourselves in bring a national company with an unmistakable Austin attitude. We're pioneers in wireless home automation &ndash; our SMART Connect app keeps you connected with your home while you're away; easily arm and disarm your system, adjust lights, and control thermostats.</p>
         <p>Combined with our monitored alarm systems that start as low as $19.99 per month with free equipment, the choice for home security is clear.</p>
     </div>
-    <div class="eight columns side" id="austin-video">
-    <script type='text/javascript' src='http://KTBC.images.worldnow.com/interface/js/WNVideo.js?rnd=77624;hostDomain=www.myfoxaustin.com;playerWidth=460;playerHeight=400;isShowIcon=true;clipId=9404243;flvUri=;partnerclipid=;adTag=News;advertisingZone=;enableAds=true;landingPage=;islandingPageoverride=false;playerType=STANDARD_EMBEDDEDscript;controlsType=overlay'></script><a href="http://www.myfoxaustin.com" title=""></a>
+    <div class="eight columns" id="side-image">
+    	<img src="{{ STATIC_URL}}img/local-pages/smart-connect-security-app.jpg" alt="Stay connected to your home from anywhere, at any time, with our free smart phone application." />
     </div>
 </div>
 
@@ -189,7 +205,6 @@
 	<div class="container">
 		<div class="eight columns" id="signature-left">
         		<img src="{{ STATIC_URL }}img/local-pages/austin/austin-signature-service.png" alt="Austin Signature Service" title="Austin Signature Service" />
-      
 		</div>
 		<div class="eight columns" id="signature-right">
     		<h2 class="big">Howdy. <span>We're your neighbors.</span></h2>
@@ -277,6 +292,40 @@
         </div>
     </div>
 </div>
+<!--
+<div class="container local-data" id="overview">
+	<div class="eight columns side" id="local-map">
+		<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3438.7867749155066!2d-97.686458!3d30.470476999999995!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5339e0fe593a9e0e!2sProtect+America!5e0!3m2!1sen!2sus!4v1396901621872" id="map"></iframe>
+		<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
+			<script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/platform.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+		</div>
+		<div class="eight columns" id="local-business-info">
+			<div itemscope itemtype="http://schema.org/LocalBusiness">
+				<h3 id="h3-top-spacing"><span itemprop="name">Protect America</span></h3>
+				<span itemprop="description">Home Security Systems in Austin, TX</span>
+				<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+					<span itemprop="streetAddress">3800 Quick Hill Rd #1-100</span>
+					<span itemprop="addressLocality">Austin</span>,
+					<span itemprop="addressRegion">TX</span>
+				</div> 
+				<span id="title">Phone</span>: <span itemprop="telephone"><a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+</span>
+			</div><br />
+			<span id="title">Hours</span>:<br />
+			<meta itemprop="openingHours" content="Mo-Fr 7:00-23:00"><em>Monday - Friday</em> : 7:00 AM - 11:00 PM<br />
+			<meta itemprop="openingHours" content="Sa 8:00-20:00"><em>Saturday</em> : 8:00 AM - 8:00 PM <br />
+			<meta itemprop="openingHours" content="Su 9:00-21:00"><em>Sunday</em> : 9:00 PM - 9:00 PM <br /><br />
+			</div>
+		</div>
+	</div>
+</div>
+-->
 {% block testimonials %}
 <!-- Testimonials -->
 <div id="testimonials">
@@ -287,7 +336,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>Great live chat experience! Helpful and quick availability. Thanks to Jackie.
                 <p>Veronika &ndash; Austin, TX</p>
-                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
 
                 </blockquote>
 
@@ -297,7 +346,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>Used chat from the website to get customer service. Was looking to update my account to reflect my city of Austin police department alarm permit number.  Gloria was very helpful, professional and was quick to resolve the issue.
                 <p>Tom - Austin, TX</p>
-                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
 
                 </blockquote>
             </div>
@@ -306,7 +355,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>Emily was extremely nice & patient with me today, as I needed help w/ my system & installation of some glass breakage sensors.  She is very knowledgeable w/ a good-natured personality.  I really enjoyed talking with her!
                     <p>Melissa &ndash; Austin, TX</p>
-                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                    <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
 
                 </blockquote>
                 
@@ -316,7 +365,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>I have worked customer service for over 30 yrs and I appreciate good service when I get it. Jeremy was patient, explained everything as we were adding sensors and was very polite and willing to answer questions as we went thru the process. He is an excellent representative of your company!
                     <p>Ernest &ndash; Austin, TX</p>
-                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                    <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
 
                 </blockquote>
                 
@@ -326,7 +375,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote><!--I just wanted to express my thanks to you and your excellent customer service agents. --> I recently moved to Austin, TX and Protect America has made the move a lot easier. I really appreciate the peace of mind that I have when I arrive at my new home every day. Sharon and Khadijah were excellent at assisting me in upgrading my system to Cellular Monitoring. <!--just one month after experiencing the quality of your service and equipment.--> Thanks guys!
                     <p>Dillon &ndash; Austin, TX</p>
-                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                    <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
 
                 </blockquote>
                 
@@ -487,3 +536,24 @@
     
     </li>
 {% endblock %}
+{% block terms %}
+    <div id="terms-wrapper">
+        <div id="terms">
+            <div id="terms-conditions">
+                <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+                <p>* Information used for home security alarm system comparisons was obtained November 2013 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
+                <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
+                <p>Image sourced from <a href="https://www.flickr.com/photos/zwww/3359412688" target="_blank" title="Middle Image">Zach Welty</a> provided under a <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" title="License">Creative Commons Attribution License</a>.<br /></p>
+                {% block extra_terms %}
+                {% endblock %} 
+            </div>
+            <div id="copyrights">
+
+                {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
+                <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+    </div>
+    {% endblock %}

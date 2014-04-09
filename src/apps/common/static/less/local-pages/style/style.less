@@ -179,12 +179,13 @@ a {
         .container {
             height: 483px;
             .heading {
-            	margin: 5px 8px 0 0;
             	padding: 20px;
             	text-align: center;
             	background: url(/static/img/local-pages/austin/white-75.png);
                 width: 425px;
-                float: right;
+				position: absolute;
+				right: 16px;
+				top: 45px;
                 h1 {
                     color: @pa-blue;
                     font-size: 37px;
@@ -218,8 +219,9 @@ a {
                 }
             }
             #party-box-new {
-            	float: left;
-            	margin: 143px 0 0 243px;
+            	position: absolute;
+            	right: 10px;
+            	bottom: 13px;
             	cursor: pointer;
             	h3 {
 	            	color: @black;
@@ -371,7 +373,6 @@ a {
 	                color: @red;
 	                text-align: center;
 	                display: block;
-	                padding: 7px 0 2px;
 	                img {
 	                    width: 120px;
 	                    margin: 10px auto 0;
@@ -397,13 +398,36 @@ a {
 	}
 } 
 .redbutton {
-	margin-left: 18px;
+	margin-left: 16px;
+}
+#local-business-info {
+	color: @grey;
+	#title {
+		color: @black !important;
+		font-weight: bold;
+	}
+	a {
+		text-decoration: none;
+		color: @grey;
+	}
 }
 .request-quote-button {
 	padding: 8px 20px !important;
 }
 #quote-form {
 	top: 45px !important;
+}
+.phone-area {
+	font-size: 14px !important;
+	.dynamic-phone-number {
+		font-size: 38px;
+	}
+}
+#header-wrapper #quote-form.sleepy .form-fields {
+padding: 8px 14px 0px !important;
+}
+.local-data {
+	font-size: 16px;
 }
 #featured-on {
 
@@ -1260,7 +1284,7 @@ footer {
                 }
                 &#footer-social-icons {
                     margin-top: 22px;
-                    .icon-twitter, .icon-facebook, .icon-youtube, .icon-google-plus, .icon-linkedin {
+                    .fa-twitter, .fa-facebook, .fa-youtube, .fa-google-plus, .fa-linkedin {
                         background: #76c1c5;
                         padding: 4px 6px;
                         color: @black;
@@ -1273,14 +1297,14 @@ footer {
                             .fade-fast;
                         }
                     }
-                    .icon-facebook {
+                    .fa-facebook {
                         background: #698bd3;
                         padding: 4px 13px;
                     }
-                    .icon-youtube {
+                    .fa-youtube {
                         background: #ff5a5a;
                     }
-                    .icon-google-plus {
+                    .fa-google-plus {
                         background: #dc5931;
                     }
                 }
@@ -1509,11 +1533,13 @@ footer {
 			&.index {
 				.container {
 					.heading {
-						float: left;
-						margin-left: 243px;
+						top: 8px;
+						right: 60px;
 					}
 					#party-box-new {
-						#no-landline {
+						bottom: 21px;
+						right: 75px;
+						#no-landline, #signature-service {
 							display: none;
 						}
 					}
@@ -1759,6 +1785,7 @@ footer {
 					.heading {
 						width: 100%;
 						height: 115px;
+						right: 0px;
 						text-align: center;
 						margin: 0px auto 60px;
 						h1 {
@@ -1781,12 +1808,14 @@ footer {
 					.quote-form-white {
 						display: none !important;
 					}
-					#party-box-new  {  
-						margin: 20px auto 0;
-						width: 450px;
+					#party-box-new  { 
 						float: none;
-						clear: both;
-						display: block;
+						position: absolute;
+					 	bottom: 150px;
+					 	left: 50%;
+						margin-left: -225px;
+						right: auto;
+						width: 450px;
 					}
 				}
 			}
@@ -1863,6 +1892,9 @@ footer {
         #testimonials {
             display: none;
         }
+        #black-text {
+			margin-top: 50px;
+		}
         #installation {
             .container {
                 .simonxt {
@@ -2136,16 +2168,14 @@ footer {
 	@media only screen and (max-width: 479px) {
 		 #hero { 
 			 &.index {
+			 	 margin-bottom: 60px;
 				 .container {
 				 	.heading {
 				 		padding: 20px 0px;
 				 		margin-top: 50px;
 		            } 
 		            #party-box-new {
-		            	width: 225px;
-			            #security-camera {
-				            display: none;
-			            }
+				    	display: none;
 		            }
 		        }
 	        }
@@ -2410,5 +2440,11 @@ footer {
 		    #footer {
 		        width: 300px;
 		    }
+		}
+		#black-text {
+			margin-top: 0px;
+		}
+		#map, #local-map {
+			display: none;
 		}
 	}

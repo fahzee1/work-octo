@@ -135,18 +135,10 @@
         <div class="heading">
             <h1 class="big">Your Houston <span>Home Security Systems</span> Experts</h1>
             <p>For a free quote, call now!</p>
-            <h3><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></h3>
+            <h3><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></h3>
         </div>
 
-		{% block partybox %}
-		<!-- Party box start -->
-		<div id="party-box">
-			<a href="http://www.protectamerica.com/shop-home-security-packages" title="Save over $600 with a Free Security System"><img id="deal1" src="{{ STATIC_URL }}img/local-pages/party-free-security-system.png" alt="Free Security System"></a>
-		    <a href="http://www.protectamerica.com/equipment/home-security/security-camera" title="Get a Free Security Camera with Select Packages"><img id="deal2" src="{{ STATIC_URL }}img/local-pages/party-free-camera.png" alt="Free Security Camera"></a>
-		    <a href="" title=""><img id="deal3" src="{{ STATIC_URL }}img/local-pages/party-no-landline-required.png" alt=""></a>
-		</div>
-		<!-- End party box -->
-		{% endblock %}
+		{% include "local-pages/static-pages/_partials/party-box.html" %}
     </div>
 
 
@@ -174,8 +166,8 @@
 </div>
 <!-- End featured banner -->
 <div class="container" id="overview">
-	<div class="nine columns side" id="video">
-    	<script src="http://www.khou.com/templates/belo_embedWrapper.js?storyid=218604831&pos=top&swfw=470"></script><object name="player" id="_fp_0.0732129686512053" width="100%" height="460"    data="http://swfs.bimvid.com/player-3.2.15.swf"  type="application/x-shockwave-flash">    <param value="true" name="allowfullscreen"/>    <param value="always" name="allowscriptaccess"/>    <param value="transparent" name="wmode"/>    <param value="high" name="quality"/>    <param name="movie" value="http://swfs.bimvid.com/player-3.2.15.swf" />    <param value="config=http://www.khou.com/?j=embed_218604831&ref=http://www.khou.com/news/crime/Burglars-caught-on-video-inside-home-in-The-Woodlands--218604831.html" name="flashvars"/></object><script src="http://www.khou.com/templates/belo_embedWrapper.js?storyid=218604831&pos=bottom&ref=http://www.khou.com/news/crime/Burglars-caught-on-video-inside-home-in-The-Woodlands--218604831.html"></script>
+	<div class="eight columns" id="side-image">
+    	<img src="{{ STATIC_URL}}img/local-pages/smart-connect-security-app.jpg" alt="Stay connected to your home from anywhere, at any time, with our free smart phone application." />
     </div>
     <div class="seven columns" id="add-padding">
     	<h2>Security systems for every Houston home.</h2>
@@ -277,8 +269,8 @@
         <div class="clear"></div>
     </div>
 
-<div class="container" id="overview" style="font-size:16px;">
-	<div class="eight columns side" id="houston-map">
+<div class="container local-data" id="overview">
+	<div class="eight columns side-map" id="local-map">
 		<iframe src="https://mapsengine.google.com/map/embed?mid=zZomU8UD5470.kOufxrZFRA4Q" id="map"></iframe>
 		<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="300"></div>
 			<script type="text/javascript">
@@ -289,7 +281,7 @@
 			  })();
 			</script>
 		</div>
-		<div class="eight columns" id="black-text">
+		<div class="eight columns" id="local-business-info">
 			<div itemscope itemtype="http://schema.org/LocalBusiness">
 				<h3><span itemprop="name">Protect America</span></h3>
 				<span itemprop="description">Home Security Systems in Houston, TX</span>
@@ -298,13 +290,14 @@
 					<span itemprop="addressLocality">Houston</span>,
 					<span itemprop="addressRegion">TX</span>
 				</div> 
-				<strong>Phone</strong>: <span itemprop="telephone">888-936-3385</span>
+				<span id="title">Phone</span>: <span itemprop="telephone"><a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span {% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+</span>
+
 			</div><br />
-			<strong>Hours</strong>:<br />
-			<meta itemprop="openingHours" content="Mo-Fr  7:00-23:00">Mon-Fri 7am - 11:00pm<br />
-			<meta itemprop="openingHours" content="Sa 8:00-20:00">Sat 8am- 8pm <br />
-			<meta itemprop="openingHours" content="Su 9:00-21:00">Sun 9pm - 9pm <br /><br />
-			<p>From the Galleria to Discovery Green, if you are looking for Home Security Systems in Houston, The Woodlands, Katy, Sugar Land, Pearland or Jersey Village, Protect America has quality wireless home security systems and monitored burglar alarms perfect for apartments or houses in the Greater Houston, TX area.</p>
+			<span id="title">Hours</span>:<br />
+			<meta itemprop="openingHours" content="Mo-Fr 6:00-23:00"><em>Monday - Friday</em> : 6:00 AM - 11:00 PM<br />
+			<meta itemprop="openingHours" content="Sa 7:00-19:00"><em>Saturday</em> : 7:00 AM - 7:00 PM <br />
+			<meta itemprop="openingHours" content="Su 8:00-20:00"><em>Sunday</em> : 8:00 PM - 8:00 PM <br /><br />
 			</div>
 		</div>
 	</div>
@@ -319,7 +312,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>Morgan was very helpful and went above and beyond my expectations. I was having some difficulty understanding installation, but Protect America provided their best technician to help me get up and running. Morgan was positive, polite and extremely helpful. She reassured me that she was there to help me and get my system started so that my home would be secure. Thank you Morgan!
                 <p>Eileen &ndash; Houston, TX</p>
-                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                 </blockquote>
             </div>
             <div class="review">
@@ -327,7 +320,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>I the reason I chose Protect America was not just for the great product but the great experience as well. No other company could compare. I now know it is because your product is the best. I will not hesitate to recommended Protect America to my friends. Thank you.                
                 <p>Scott - Houston, TX</p>
-                <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                 </blockquote>
             </div>
             <div class="review">
@@ -335,7 +328,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>Ever since we installed our alarm we have been so impressed! We had never seen a system like yours on the market before; it was way ahead of its time. Over the years we have added many new and unique services that we've really enjoyed. Protect America has kept my family safe for years and always will.
                     <p>Carole &ndash; Houston, TX</p>
-                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                    <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                 </blockquote> 
             </div>
             <div class="review">
@@ -343,7 +336,7 @@
                 <i class="fa fa-quote-left"></i>
                 <blockquote>I've never experienced such great service. Both representatives that assisted me proved patience and persistence pays when solving customer issues. I truly felt like these two fulfilled my need for protection in my home and I'm glad to be with Protect America.
                     <p>Javon &ndash; Houston, TX</p>
-                    <span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span>
+                    <span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
                 </blockquote>
             </div>
         </div>
@@ -507,7 +500,7 @@
                 <p>* <a href="https://secure.protectamerica.com/preview/en/" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
                 <p>* Information used for home security alarm system comparisons was obtained November 2013 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
                 <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
-                <p>Images sourced from <a href="http://flickr.com/photos/erionshehaj/2414390329/in/photostream/" target="_blank" title="Header Image">Erion Shehaj</a>, <a href="http://www.flickr.com/photos/32345848@N07/3419411665/in/photolist-6danXx-6dr1mN-6hVUt8-6hVUvZ-6hVUyc-6hVUDn-6hVUP8-6hVV5c-6hVV8i-6hVVap-6hVVe4-6i1489-6i14cf-6i14jG-6i14oy-6i14rq-6i14FY-6i14JA-6i14LJ-6i14P9-6qRF25-6s83K3-kMUJ1k-fX6jCU-dngV9u-8jvPXQ-8jsA5M" target="_blank" title="Header Image">Patrick Feller</a>, and <a href="http://www.flickr.com/photos/atbaker/126381608/" target="_blank" title="Footer Image">Adam Baker</a> provided under <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" title="License">Creative Commons Attribution License</a>.<br /></p>
+                <p>Images sourced from <a href="http://flickr.com/photos/erionshehaj/2414390329/in/photostream/" target="_blank" title="Header Image">Erion Shehaj</a>, <a href="http://www.flickr.com/photos/32345848@N07/3419411665/in/photolist-6danXx-6dr1mN-6hVUt8-6hVUvZ-6hVUyc-6hVUDn-6hVUP8-6hVV5c-6hVV8i-6hVVap-6hVVe4-6i1489-6i14cf-6i14jG-6i14oy-6i14rq-6i14FY-6i14JA-6i14LJ-6i14P9-6qRF25-6s83K3-kMUJ1k-fX6jCU-dngV9u-8jvPXQ-8jsA5M" target="_blank" title="Middle Image">Patrick Feller</a>, and <a href="http://www.flickr.com/photos/atbaker/126381608/" target="_blank" title="Footer Image">Adam Baker</a> provided under a <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" title="License">Creative Commons Attribution License</a>.<br /></p>
                 {% block extra_terms %}
                 {% endblock %} 
             </div>

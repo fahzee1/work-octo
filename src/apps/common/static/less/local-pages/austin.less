@@ -1,17 +1,14 @@
 @import "style/style.less";
 
-@black: #333;
-
-.banner { position: relative; overflow: auto; }
-    .banner li { list-style: none; }
-        .banner ul li { float: left; }
-
 .wrapper {
     margin:0 auto;
     position:relative;
     width:960px;
     z-index: 0;
     clear: both;
+}
+#hero {
+	background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center center no-repeat #3f4f5a;
 }
 .content-box (@content-width: 960px) {
     width: @content-width;
@@ -50,17 +47,18 @@
         padding: 8px 0px 8px;
     }
 }
-
-
-
 #overview {
     margin: 48px auto;
-    .side {
+   	#side-image {
         text-align: right;
-        padding-top: 32px;
     }
 }
 
+.heading {
+	h3 {
+		padding-top: 10px !important;
+	}
+}
 
 #signature {
 	background: url(/static/img/local-pages/austin/austin-frog-bg-2000px.jpg) center top no-repeat @white;
@@ -92,7 +90,10 @@
 		width: 400px;
 	}
 }			
-
+#map {
+	height: 460px;
+	width: 460px;
+}
 #community {
     margin: 48px auto;
 
@@ -690,25 +691,24 @@
 	background: url(AjaxLoader.gif) no-repeat center center
 }
 
-
-
-/* Larger than standard 960 (devices and browsers) */
-	@media only screen and (min-width: 960px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center center no-repeat #3f4f5a;
-			}
-	}
-/* Larger than 1590px (devices and browsers) */
-	@media only screen and (min-width: 1590px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center center no-repeat #3f4f5a;
-		}
+/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 960px) {
+		#overview {
+		   	#side-image {
+		        img {
+		        	margin-right: 10px;
+			        width: 350px;
+		        }
+		    }
+	    }
 	}
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 	@media only screen and (min-width: 768px) and (max-width: 959px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) 0px center no-repeat #3f4f5a;}
+		#map {
+			height: 360px;
+			width: 360px;
+		}
 		#signature {
 			background: url(/static/img/local-pages/austin/austin-frog-bg-1000px.jpg) center top no-repeat @white;
 			width: 100%;
@@ -742,6 +742,11 @@
 		
 /* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {
+		#map {
+			height: 420px;
+			width: 420px;
+			margin-bottom: 20px;
+		}
         #mobile-menu-container {
             margin-top: 0;
             background: none;
@@ -762,8 +767,12 @@
                 }
             }
         }
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center 0px no-repeat #3f4f5a !important;
+		.heading {
+			height: 140px !important;
+			h3 {
+				padding-top: 10px !important;
+				margin-top: 0px !important;
+			}
 		}
         #header-wrapper {
             #header {
@@ -847,7 +856,15 @@
         #mobile-main-navigation {
             display: none;
         }
-	
+		#overview {
+		   	#side-image {
+		   		text-align: left;
+		        img {
+		        	margin-right: 0px;
+			        width: 400px;
+		        }
+		    }
+	    }
 		#signature {
 				background: url(/static/img/local-pages/austin/austin-frog-bg-1000px.jpg) center top no-repeat @white;
 				width: 100%;
@@ -887,9 +904,6 @@
 		
 /* Screen to Landscape Mobile */
 	@media only screen and (max-width: 479px) {
-		#hero {
-			background: url(/static/img/local-pages/austin/austin-barton-creek-1600px.jpg) center 0px no-repeat #3f4f5a !important;
-		}
 		#signature {
 			background: url(/static/img/local-pages/austin/austin-frog-bg-700px.jpg) center top no-repeat @white;
 			width: 100%;
@@ -908,7 +922,7 @@
 					}
 				}
 		}	
-		#community, #features, #austin-video {
+		#community, #features, #side-image, #side-video {
 			display: none;
 		}
     }
