@@ -30,27 +30,20 @@
             <a href="/" title="Protect America"><img src="{{ STATIC_URL }}img/mobile/protect-america-security.png" alt="Protect America Home Security" width="140" height="24" /></a>
         </div>
         <ul class="main-navigation">
-            <li><a href="#" id="mobile-menu"><i class="fa fa-bars"></i>Menu</a></li>
+            <li><a href="#" id="mobile-menu"><i class="fa fa-bars" title="Menu"></i>Menu</a></li>
             <li class="alpha"><a href="tel:{{ phone_number|format_number }}"><i class="fa fa-phone"></i>Call Us</a></li>
 
         </ul>
         <ul class="main-menu">
             <li>
-                <a href="/">
-                    <i class="fa fa-home"></i>
-                    <p>Home</p>
-                    <i class="fa fa-angle-right"></i>
-                </a>
-            </li>
-            <li>
-                <a href="{% url home-security %}">
+                <a href="{% url home-security %}" title="Home Security">
                     <i class="fa fa-shield"></i>
                     <p>Home Security</p>
                     <i class="fa fa-angle-right"></i>
                 </a>
             </li>
             <li>
-                <a href="{% url equipment-mobile %}">
+                <a href="{% url equipment-mobile %}" title="Security Solutions">
                     <i class="fa fa-lightbulb-o"></i>
                     <p>Security Solutions</p>
                     <i class="fa fa-angle-right"></i>
@@ -58,7 +51,7 @@
         
             </li>
             <li>
-                <a href="{% url learn %}">
+                <a href="{% url learn %}" title="Learn about Home Security">
                     <i class="fa fa-book"></i>
                     <p>Learning Center</p>
                     <i class="fa fa-angle-right"></i>
@@ -66,7 +59,7 @@
         
             </li>
             <li>
-                <a href="{% url about-us %}">
+                <a href="{% url about-us %}" title="About Protect America">
                     <i class="fa fa-info-circle"></i>
                     <p>About Us</p>
                     <i class="fa fa-angle-right"></i>
@@ -74,7 +67,7 @@
         
             </li>
             <li>
-                <a href="{% url contact-mobile %}">
+                <a href="{% url contact-mobile %}" title="Contact Protect America">
                     <i class="fa fa-envelope-o"></i>
                     <p>Contact Us</p>
                     <i class="fa fa-angle-right"></i>
@@ -82,9 +75,16 @@
         
             </li>
             <li>
-                <a href="{% url quote-mobile %}">
+                <a href="{% url quote-mobile %}" title="Get a Security Quote">
                     <i class="fa fa-tag"></i>
                     <p>Request Quote</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://secure.protectamerica.com" title="Sign your Agreement">
+                    <i class="fa fa-pencil"></i>
+                    <p>Sign Agreement</p>
                     <i class="fa fa-angle-right"></i>
                 </a>
             </li>
@@ -109,13 +109,23 @@ $(document).ready(function(){
             $(".main-menu").slideDown('fast');
         };
     });
+    $("#terms-button").click(function( event ){
+        event.preventDefault();
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $(".terms").slideUp('fast');
+        } else {
+            $(this).addClass('active');
+            $(".terms").slideDown('fast');
+        };
+    });
 });
 </script>
 {% endaddtoblock "js" %}
 {% endblock %}
 {% block content %}
 <div class="hero">
-    <a href=""><img src="{{ STATIC_URL }}img/mobile/mobile-ads/five-per-week.jpg" alt="five-per-week" width="320" height="120" /></a>
+    <a href="tel:{{ phone_number|format_number }}" title="Free Home Security, Montly Monitoring starting at $5 per week"><img src="{{ STATIC_URL }}img/mobile/mobile-ads/five-per-week.jpg" alt="Free Home Security, Montly Monitoring starting at $5 per week" width="320" height="120" /></a>
 </div>
 {% endblock %}
 {% block order-footer %}
@@ -129,17 +139,18 @@ $(document).ready(function(){
                 <li>SAT 8AM - 8pm CT</li>
                 <li>SUN 9AM - 9pm CT</li>
             </ul>
-            <h4>Give us a call, we're open <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Footer', '{{ page_name }}']);">{{ phone_number|format_number }}</a></h4>
+            <h4>{% if business_time %}Give us a call, we're open{% else %}Get Started now, call today{% endif %} <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Footer', '{{ page_name }}']);">{{ phone_number|format_number }}</a></h4>
             <div class="clear"></div>
         </div>
     {% endblock %}
     <div class="footer">
         <ul>
-            <li><a href="">State Licenses</a></li>
-            <li><a href="">Terms and Conditions</a></li>
-            <li><a href="">Privacy Policy</a></li>
+            <li><a href="http://www.protectamerica.com/help/state-licenses/?no_mobile" title="We are licensed in all 50 states">State Licenses</a></li>
+            <li><a href="#" title="View the Terms and Conditions" id="terms-button">Terms and Conditions</a></li>
+            <li><a href="http://www.protectamerica.com/help/privacy-policy/?no_mobile" title="View our Privacy Policy">Privacy Policy</a></li>
             <div class="clear"></div>
         </ul>
+        <p class="terms">* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
         <p>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
         <a href="http://www.protectamerica.com/?no_mobile" class="full-site">Visit Full Site</a>
     </div>

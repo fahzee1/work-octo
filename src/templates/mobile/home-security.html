@@ -2,10 +2,12 @@
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
+{% block page_title %}Home Security Systems & Security Services Provider  | Protect America{% endblock %}
+{% block page_description %}Choose the right home security package with Protect America.  We make it easy to customize your security to fit your needs. Call Today!{% endblock %}
 
 {% block content %}
 <div class="hero inner">
-    <img src="{{ STATIC_URL }}/img/mobile/home-security-icon.png" class="hero-icon" />
+    <img src="{{ STATIC_URL }}/img/mobile/home-security-icon.png" class="hero-icon" alt="Home security systems" />
     <div class="hero-content">
         <h1>Home Security Systems</h1>
         <p>Each of our packages are customized to fit your home and family, without the expensive fees. It's that easy.</p>
@@ -14,7 +16,7 @@
             <li><i class="fa fa-check-circle"></i> No Equipment Fees</li>
             <div class="clear"></div>
         </ul>
-        <a href="tel:{{ phone_number|format_number }}" class="button">Tap to Get Started</a>
+        <a href="tel:{{ phone_number|format_number }}" title="Tap to order your home security system" class="button">Tap to Get Started</a>
     </div>
 </div>
 <ul class="index-nav">
@@ -36,7 +38,7 @@
             </ol>
 
         </div>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
         <div class="clear"></div>
 
@@ -59,7 +61,7 @@
             </ol>
 
         </div>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
         <div class="clear"></div>
 
@@ -82,7 +84,7 @@
             </ol>
 
         </div>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
         <div class="clear"></div>
 
@@ -105,7 +107,7 @@
             </ol>
 
         </div>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
         <div class="clear"></div>
 
@@ -127,7 +129,7 @@
             </ol>
 
         </div>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
         <div class="clear"></div>
 
@@ -142,9 +144,14 @@
             $(".package-info."+packagec).slideUp('fast');
         } else {
             $(this).addClass('active');
-            $(".package-info."+packagec).slideDown('fast');
+            $(".package-info."+packagec).slideDown('fast', function() {
+                    // Animation complete.
+                    $.scrollTo((".package-info."+packagec), 100, {over:-0.2});
+                });
+
         };
     });
     </script>
+
 {% endblock %}
 

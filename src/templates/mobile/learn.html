@@ -2,14 +2,16 @@
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
+{% block page_title %}Home Security Monitoring and Information | Protect America{% endblock %}
+{% block page_description %}Choose the security company you can trust with Protect America. Get more security monitoring and more options that work for you. Call Today!{% endblock %}
 
 {% block content %}
 <div class="hero inner learn">
-    <img src="{{ STATIC_URL }}/img/mobile/learn-icon.png" class="hero-icon" />
+    <img src="{{ STATIC_URL }}/img/mobile/learn-icon.png" alt="Learn about security monitoring" class="hero-icon" />
     <div class="hero-content">
         <h1>Learn about Home Security</h1>
         <p>When you choose a home security company, make it one you can trust. Protect America safeguards your home at a price you can afford.</p>
-        <a href="tel:{{ phone_number|format_number }}" class="button" style="margin-top: 8px;">Tap to Get Started</a>
+        <a href="tel:{{ phone_number|format_number }}" title="Tap to order your home security system" class="button" style="margin-top: 8px;">Tap to Get Started</a>
     </div>
 </div>
 <ul class="index-nav">
@@ -19,10 +21,10 @@
         <i class="fa fa-angle-right"></i>
     </li>
     <div class="content-section why-security">
-        <img src="{{ STATIC_URL }}img/mobile/home-security.png" class="centered" />
+        <img src="{{ STATIC_URL }}img/mobile/home-security.png" alt="monitored home security system" class="centered" />
         <h2>Home Security Built for you.</h2>
         <p>A security system helps protect your home and family while also making life more convenient. Protect America provides peace of mind with 24/7 UL Certified Security Equipment, and also allows you to control your house with home automation equipment. This makes choosing a home security system easy and more affordable than ever. We offer free security equipment, no installation fees, and lifetime warranty: all starting at $19.99 per month.</p>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
 
     </div>
@@ -32,12 +34,12 @@
         <i class="fa fa-angle-right"></i>
     </li>
     <div class="content-section alarm-monitoring">
-        <img src="{{ STATIC_URL }}img/mobile/alarm-monitoring.png" class="centered" />
+        <img src="{{ STATIC_URL }}img/mobile/alarm-monitoring.png" alt="home security monitoring company" class="centered" />
         <h2>More Alarm <br />Monitoring Options</h2>
         <p> Having a home security system installed is just the first half of a secured home. When your alarm goes off, the security system sends out a signal to our monitoring station which, in turn, contacts you and the authorities. Without a home security monitoring service, an alarm that is tripped never contacts the police. We are proud to offer a variety of monitoring solutions to fit your home, lifestyle, and budget.</p>
         <ul class="monitoring-options">
             <li>
-                <img src="{{ STATIC_URL }}img/mobile/cellular-monitoring.png" />
+                <img src="{{ STATIC_URL }}img/mobile/cellular-monitoring.png" alt="no phone line required, wireless cellular monitoring" />
                 <div class="monitoring-option">
                     <h4>Cellular Monitoring</h4>
                     <p>The control panel is built with a cellular device that directly contacts authorities in the event of an alarm.</p>
@@ -45,7 +47,7 @@
                 <div class="clear"></div>
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/mobile/broadband-monitoring.png" />
+                <img src="{{ STATIC_URL }}img/mobile/broadband-monitoring.png" alt="no phone required, high speed broadband monitoring" />
 
                 <div class="monitoring-option">
                     <h4>Broadband Monitoring</h4>
@@ -55,7 +57,7 @@
 
             </li>
             <li>
-                <img src="{{ STATIC_URL }}img/mobile/landline-monitoring.png" />
+                <img src="{{ STATIC_URL }}img/mobile/landline-monitoring.png" alt="standard landline monitoring" />
                 <div class="monitoring-option">
                     <h4>Landline Monitoring</h4>
                     <p>Using a standard telephone line, the control panel directly contacts authorities in the event of an alarm.</p>
@@ -64,7 +66,7 @@
 
             </li>
         </ul>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
 
     </div>
@@ -74,18 +76,18 @@
         <i class="fa fa-angle-right"></i>
     </li>
     <div class="content-section security-equipment">
-        <img src="{{ STATIC_URL }}img/mobile/ul-listed-security-equipment.png" class="centered" />
+        <img src="{{ STATIC_URL }}img/mobile/ul-listed-security-equipment.png" alt="UL Listed security equipment" class="centered" />
         <h2>Experience You Can Trust</h2>
         <p>With over 20 years of experience in the alarm industry, our monitoring station is UL Listed and is the standard for burglary signaling. We don't stop there however, our employees undergo weeks of intensive training, testing, and certification to make sure your alarm is handled with knowledgeable expertise and extreme professionalism. It is our philosophy and our training that provide our customers with the absolute best alarm response.</p>
-        <img src="{{ STATIC_URL }}img/mobile/redundent-backup-alarm-monitoring.png" class="centered" />
+        <img src="{{ STATIC_URL }}img/mobile/redundent-backup-alarm-monitoring.png" alt="Triple redundant backup security monitoring" class="centered" />
 
         <h2>Triple Redundant Backup</h2>
         <p>Protect America uses three monitoring stations running 24/7 to ensure that all of our customers are always protected. That means when your alarm goes off and sends a signal to one of our facilities, there are two more back-up facilities ready and waiting just in case.</p>
-        <img src="{{ STATIC_URL }}img/mobile/on-the-level-pricing.png" class="centered" />
+        <img src="{{ STATIC_URL }}img/mobile/on-the-level-pricing.png" alt="On the level pricing" class="centered" />
 
         <h2>On The Level Pricing</h2>
         <p>We provide top of the line home security at the most affordable price. In fact, we guarantee the lowest price. We also guarantee that your monitoring rate is locked-in. There are no introductory rates that change, or monitoring rates that magically raise one month. Your monthly payment will stay the same throughout your contract.</p>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
 
     </div>
@@ -95,12 +97,12 @@
         <i class="fa fa-angle-right"></i>
     </li>
     <div class="content-section home-automation">
-        <img src="{{ STATIC_URL }}img/mobile/home-automation-flexibility.png" class="centered" />
+        <img src="{{ STATIC_URL }}img/mobile/home-automation-flexibility.png" alt="Customizable home automation packages" class="centered" />
         <h2>A Security System That Does More</h2>
         <p>Home automation can seamlessly add wireless control to everyday household tasks like turning lights off and on and controlling various appliances. It can even lock and unlock your front door. Protect America proudly offers home management equipment featuring Z-Wave technology, the most widely recognized standard for home automation.</p>
         <h2>Included with your system</h2>
         <p>Many security companies charge extra for interactive features. Our Broadband and Cellular security systems come with interactive and home automation features free of charge. Arm/disarm your system, watch your live video cameras, control lights and home appliances, receive event notifications and much more!</p>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
 
     </div>
@@ -110,11 +112,11 @@
         <i class="fa fa-angle-right"></i>
     </li>
     <div class="content-section nationwide">
-        <img src="{{ STATIC_URL }}img/mobile/us-map.jpg" class="centered" />
+        <img src="{{ STATIC_URL }}img/mobile/us-map.jpg" alt="Nationwide security company" class="centered" />
         <h2>Protection for Everyone.</h2>
         <p>Being a national security company simply means we can offer more for less. Protect America uses three of the best monitoring facilities throughout the United States to make sure your home is always protected. We offer three different types of monitoring options to fit your needs and budget. Many smaller companies offer only one type of monitoring. Before choosing a home security company, make sure the system is a good fit for your home.</p>
         <p>The most important part of choosing a home security system is trusting the company you choose. Not only are we a nationally recognized pioneer of wireless security systems, Protect America has secured over half a million homes in the past 20 years throughout the United States and Canada.</p>
-        <a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+        {% include "mobile/_partial/cta.html" %}
         <i class="fa fa-caret-up"></i>
 
     </div>
@@ -128,7 +130,10 @@
             $(".content-section."+packagec).slideUp('fast');
         } else {
             $(this).addClass('active');
-            $(".content-section."+packagec).slideDown('fast');
+            $(".content-section."+packagec).slideDown('fast', function() {
+                    // Animation complete.
+                    $.scrollTo((".content-section."+packagec), 100, {over:-0.2});
+                });
         };
     });
     </script>

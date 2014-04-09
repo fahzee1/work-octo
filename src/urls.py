@@ -320,26 +320,25 @@ elif settings.SITE_ID == 9:
         dtt(r'^about-protect-america/$', 'mobile/about-us.html', 'about-us'),
         dtt(r'^contact-protect-america/$', 'mobile/contact-us.html', 'contact-mobile'),
         dtt(r'^request-security-quote/$', 'mobile/request-quote.html', 'quote-mobile'),
+        dtt(r'^thank-you/$', 'mobile/request-quote.html', 'quote-mobile'),
 
 
-        url(r'^promo/click-here/?$', 'apps.pricetable.views.test_click', name='home'),
-        url(r'^promo/click-call/?$', 'apps.pricetable.views.test_call', name='home'),
-        url(r'^promo/click-order/?$', 'apps.pricetable.views.test_order', name='home'),
 
 
+        #redirect to home-security
         url(r'^home-security-packages/?$', 'apps.pricetable.views.packages', name='packages'),
+        #redirect to equipment-mobile
         url(r'^security-add-ons/?$', 'apps.pricetable.views.adds', name='add-ons'),
-        url(r'^home-security/?$', 'apps.pricetable.views.home_security', name='home-security'),
+        #redirect to learn
         url(r'^home-security-monitoring/?$', 'apps.pricetable.views.monitoring', name='monitoring'),
+        #redirect to learn
         url(r'^interactive-monitoring-features/?$', 'apps.pricetable.views.interactive', name='interactive'),
+        #redirect to contact-mobile
         url(r'^customer-info/?$', 'apps.pricetable.views.customer_info', name='customer-info'),
-
+        #redirect to quote-mobile
         url(r'^request-quote/?$', 'apps.pricetable.views.quote', name='get-quote'),
+        #redirect to quote-mobile
         url(r'^cart/?$', 'apps.pricetable.views.mobile_cart', name='cart'),
-        url(r'^add-to-cart/?$', 'apps.pricetable.views.add_to_cart', name='add_to_cart'),
-        url(r'^remove-from-cart/?$', 'apps.pricetable.views.remove_from_cart', name='remove_from_cart'),
-        url(r'^cart-checkout/?$', 'apps.pricetable.views.mobile_cart_checkout', name='cart-checkout'),
-        url(r'^thank-you/?$', 'apps.pricetable.views.thank_you', name='thank_you'),
     )
 
 # Black Friday Site
