@@ -45,7 +45,7 @@ class SearchEngineReferrerMiddleware(object):
     Usage example:
     ==============
     Show ads only to visitors coming from a searh engine
-    
+
     {% if request.search_referrer_engine %}
         html for ads...
     {% endif %}
@@ -67,10 +67,10 @@ class SearchEngineReferrerMiddleware(object):
         (?P<top_level>(?:\.[a-z]{2,3}){1,2})
         (?P<port>:\d+)?
         $(?ix)"""
-    
+
     @classmethod
     def parse_search(cls, url):
-        
+
         """
         Extract the search engine, domain, and search term from `url`
         and return them as (engine, domain, term). For example,
@@ -95,8 +95,8 @@ class SearchEngineReferrerMiddleware(object):
                     term = ' '.join(term[0].split()).lower()
                     return (engine, network, term)
         return (None, network, None)
-    
-    
+
+
     def process_request(self, request):
         referrer = request.META.get('HTTP_REFERER')
         engine, domain, term = self.parse_search(referrer)
@@ -141,6 +141,53 @@ class CommonMiddlewareWrapper(object):
             newurl += '?' + request.META['QUERY_STRING']
         return HttpResponsePermanentRedirect(newurl)
 
+
+
+class MobilePageRedirect(object):
+    def process_request(self,request):
+        if settings.SITE_ID == 9:
+            request.session['is_mobile'] = True
+            url = request.path.rstrip('/').lstrip('/')
+
+            match1 = re.compile(r'home-security-packages')
+            match2 = re.compile(r'security-add-ons')
+            match3 = re.compile(r'home-security-monitoring')
+            match4 = re.compile(r'interactive-monitoring-features')
+            match5 = re.compile(r'customer-info')
+            match6 = re.compile(r'request-quote')
+            match7 = re.compile(r'cart')
+
+            if match1.match(url):
+                return redirect('/home-security/')
+
+            if match2.match(url):
+                return redirect('/home-security-equipment/')
+
+            if match3.match(url):
+                return redirect('/learn-about-home-security/')
+
+            if match4.match(url):
+                return redirect('/learn-about-home-security/')
+
+            if match5.match(url):
+                return redirect('/contact-protect-america/')
+
+            if match6.match(url):
+                return redirect('/request-security-quote/')
+
+            if match7.match(url):
+                return redirect('/request-security-quote/')
+
+        else:
+            request.session['is_mobile'] = False
+            return None
+
+
+
+
+
+
+
 class LocalPageRedirect(object):
     """
     We dont want any local pages going to urls with full state names.
@@ -149,17 +196,16 @@ class LocalPageRedirect(object):
     """
 
     def process_request(self,request):
-        #pdb.set_trace()
         #lets fist grab the url and check if its a local page
         url = request.path.rstrip('/').lstrip('/')
-        #pdb.set_trace()
+
         #city page and state page
         match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
         match_sp = re.compile(r'home-security/[-\w]{3,}')
 
         # redirect /rep/get-quote to homesecurity.protectamerica.com/rep/get-quote
         match_quote = re.compile(r'rep/get-quot')
-        #match for new york - fix for rylan 
+        #match for new york - fix for rylan
         match_ny = re.compile(r'home-security/\bNY\b/[-\w]+',re.IGNORECASE)
         state_space = dict(US_STATES).values()
         state_nospace = [x.replace(' ','') for x in state_space]

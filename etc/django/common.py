@@ -103,6 +103,7 @@ MIDDLEWARE_CLASSES = (
     'apps.common.middleware.CommonMiddlewareWrapper',
     'apps.common.middleware.DetectMobileBrowser',
     'apps.common.middleware.LocalPageRedirect',
+    'apps.common.middleware.MobilePageRedirect',
     'django.middleware.cache.FetchFromCacheMiddleware',
     #'apps.newsfeed.middleware.RenderNewsFeed',
     #'apps.newsfeed.middleware.GetGeoIp',

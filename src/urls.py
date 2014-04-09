@@ -312,6 +312,7 @@ elif settings.SITE_ID == 8:
 
 # Mobile Website
 elif settings.SITE_ID == 9:
+    mobile_sitemap = {'Mobile':StaticSitemap(name=['home','home-security','learn','equipment-mobile','about-us','contact-mobile','quote-mobile','thank-you'],priority=0.5)}
     urlpatterns += patterns('',
         dtt(r'^$', 'mobile/index.html', 'home'),
         dtt(r'^home-security/$', 'mobile/home-security.html', 'home-security'),
@@ -320,7 +321,7 @@ elif settings.SITE_ID == 9:
         dtt(r'^about-protect-america/$', 'mobile/about-us.html', 'about-us'),
         dtt(r'^contact-protect-america/$', 'mobile/contact-us.html', 'contact-mobile'),
         dtt(r'^request-security-quote/$', 'mobile/request-quote.html', 'quote-mobile'),
-        dtt(r'^thank-you/$', 'mobile/request-quote.html', 'quote-mobile'),
+        dtt(r'^thank-you/$', 'mobile/thank-you.html', 'thank-you'),
 
 
 
@@ -339,6 +340,8 @@ elif settings.SITE_ID == 9:
         url(r'^request-quote/?$', 'apps.pricetable.views.quote', name='get-quote'),
         #redirect to quote-mobile
         url(r'^cart/?$', 'apps.pricetable.views.mobile_cart', name='cart'),
+
+        (r'^sitemap\.xml', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': mobile_sitemap}),
     )
 
 # Black Friday Site
@@ -1425,6 +1428,7 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/equipment/home-security/simon-xt/',permanent=True)),
     ('shop-home-security-packages/?$',
         RedirectView.as_view(url='/shop-home-security-systems',permanent=True)),
+
 )
 '''
 urlpatterns += patterns('',
