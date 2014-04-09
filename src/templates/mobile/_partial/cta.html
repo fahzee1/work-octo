@@ -1,0 +1,7 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+{% if business_time %}
+<a href="tel:{{ phone_number|format_number }}" class="button"><i class="fa fa-phone"></i> Call Us</a>
+{% else %}
+<a href="{% url quote-mobile %}" class="button">Get Quote</a>
+{% endif %}

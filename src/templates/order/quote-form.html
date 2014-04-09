@@ -129,6 +129,9 @@ $('.sleepy input, .droopy input').keypress(function(e){
                     'form_js': 't/o/q-f.h'
                     }
 
+
+
+
         if (business_name){
             data['business_name'] = business_name;
         }
@@ -190,11 +193,19 @@ $('.sleepy input, .droopy input').keypress(function(e){
             }
             catch(err){var acn = false;}
             if(json.success) {
-                {% if thank_you %}
+                var is_mobile = "{{ request.session.is_mobile }}";
+
+                {% if request.session.is_mobile %}
+                    window.location = "http://m.protectamerica.com/thank-you"
+                {% endif %}
+
+                {% if thank_you and not request.session.is_mobile %}
                 window.location = '{{ thank_you }}';
                 {% else %}
-                url = json.thank_you
-                window.location = "http://www.protectamerica.com" + url;
+                    {% if not thank_you and not request.session.is_mobile %}
+                        url = json.thank_you
+                        window.location = "http://www.protectamerica.com" + url;
+                    {% endif %}
                 {% endif %}
                 _gaq.push([
                     '_trackEvent',

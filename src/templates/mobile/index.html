@@ -28,13 +28,50 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     {% endblock %}
 
 {% block content %}
-    <div class="orange-bg">
-        <a href="tel:{{ phone_number|format_number }}">
-            <img src="{{ STATIC_URL }}img/banners/mobile/banner-orange-order-now.png" alt="Security for Every Home Starting at $19.99 - and Receive Two Keychains with any Premium Package." width="320" height="280" />
-
+<div class="hero">
+    <a href="tel:{{ phone_number|format_number }}" class="hero-image"><img src="{{ STATIC_URL }}img/mobile/mobile-ads/five-per-week.jpg" alt="five-per-week" width="480" height="120" /></a>
+</div>
+<ul class="index-nav">
+    <li class="alpha">
+        <a href="{% url home-security %}">
+            <i class="fa fa-shield"></i>
+            <h3>Home Security <span>Protect your home and family today</span></h3>
+            <i class="fa fa-angle-right"></i>
         </a>
-    </div>
-{% endblock %}
+    </li>
+    <li>
+        <a href="{% url equipment-mobile %}">
+            <i class="fa fa-lightbulb-o"></i>
+            <h3>Security Solutions <span>From Home Automation to Smoke Detector</span></h3>
+            <i class="fa fa-angle-right"></i>
+        </a>
 
+    </li>
+    <li>
+        <a href="{% url learn %}">
+            <i class="fa fa-book"></i>
+            <h3>Learning Center <span>Everything you need to know about security</span></h3>
+            <i class="fa fa-angle-right"></i>
+        </a>
+
+    </li>
+    <li>
+        <a href="{% url about-us %}">
+            <i class="fa fa-info-circle"></i>
+            <h3>About Us <span>Get to know the Protect America family</span></h3>
+            <i class="fa fa-angle-right"></i>
+        </a>
+
+    </li>
+    <li class="omega">
+        <a href="{% url contact-mobile %}">
+            <i class="fa fa-envelope-o"></i>
+            <h3>Contact Us <span>We're here to help you</span></h3>
+            <i class="fa fa-angle-right"></i>
+        </a>
+
+    </li>
+</ul>
+{% endblock %}
 
 

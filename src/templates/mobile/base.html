@@ -1,81 +1,158 @@
 {% extends "base.html" %}
 
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
-{% block page_title %}Home Security | Alarm Systems | Protect America{% endblock %}
+{% block page_title %}Home Security & Alarm Systems | Protect America{% endblock %}
 {% block page_keywords %}Home Security, Alarm Systems, Home Security Systems, GE Simon XT{% endblock %}
-{% block page_description %}Get a home security systems for your home at the lowest cost. Sign up for alarm monitoring and get a GE Simon XT home alarm at no cost.{% endblock %}
+{% block page_description %}Secure your home for less with a Protect America home security system. Lowest price guaranteed, free security equipment, and lifetime warranty. Call Today!{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/mobile.css">
+    <link href="http://www.protectamerica.com/static/css/font-awesome/4.0.3/font-awesome.css" rel="stylesheet">
+    <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 {% endblock %}
+{% block typekit-code %}
+    <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
+{% endblock %}
 
 {% block header %}
     <div id="top-phone-number">
-        <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Phone', '{{ page_name }}']);">Call Now! <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+        <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Phone', '{{ page_name }}']);">Tap to Call: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
     </div>
-    <div id="header">
+    <div class="header">
         <div id="company-logo">
-            <a href="/" title="Protect America"><img src="{{ STATIC_URL }}img/mobile/protect-america-logo.png" alt="Protect America Home Security" width="163" height="29" /></a>
+            <a href="/" title="Protect America"><img src="{{ STATIC_URL }}img/mobile/protect-america-security.png" alt="Protect America Home Security" width="140" height="24" /></a>
         </div>
-        <ul id="main-navigation">
-            <li id="menu_icon"><img src="{{ STATIC_URL }}img/mobile/menu-icon.png" alt="Home Security Menu" width="32" height="40" /></li>
-            <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><img src="{{ STATIC_URL }}img/mobile/call-icon.png" alt="Call Protect America" width="32" height="40" /></a></li>
-            <li><a href="{% url cart %}" title="View Your Home Security Shopping Cart">{% if current_cart.has_items %}<img src="{{ STATIC_URL }}img/mobile/cart-notify.png" alt="You have items in your shopping cart" id="cart-notify" width="24" height="24" />{% endif %}<img src="{{ STATIC_URL }}img/mobile/shop-icon.png" alt="Shopping Cart" width="32" height="40" /></a></li>
+        <ul class="main-navigation">
+            <li><a href="#" id="mobile-menu"><i class="fa fa-bars" title="Menu"></i>Menu</a></li>
+            <li class="alpha"><a href="tel:{{ phone_number|format_number }}"><i class="fa fa-phone"></i>Call Us</a></li>
+
+        </ul>
+        <ul class="main-menu">
+            <li>
+                <a href="{% url home-security %}" title="Home Security">
+                    <i class="fa fa-shield"></i>
+                    <p>Home Security</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            <li>
+                <a href="{% url equipment-mobile %}" title="Security Solutions">
+                    <i class="fa fa-lightbulb-o"></i>
+                    <p>Security Solutions</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url learn %}" title="Learn about Home Security">
+                    <i class="fa fa-book"></i>
+                    <p>Learning Center</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url about-us %}" title="About Protect America">
+                    <i class="fa fa-info-circle"></i>
+                    <p>About Us</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url contact-mobile %}" title="Contact Protect America">
+                    <i class="fa fa-envelope-o"></i>
+                    <p>Contact Us</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+        
+            </li>
+            <li>
+                <a href="{% url quote-mobile %}" title="Get a Security Quote">
+                    <i class="fa fa-tag"></i>
+                    <p>Request Quote</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+            <li>
+                <a href="http://secure.protectamerica.com" title="Sign your Agreement">
+                    <i class="fa fa-pencil"></i>
+                    <p>Sign Agreement</p>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
         </ul>
     </div>
-{% endblock %}
-{% block navigation %}
-    <div id="search-area">
-        <form name="search2" method="GET" action="http://www.protectamerica.com/search/">
-            <input type="text" id="q" name="q" placeholder="Enter Keywords" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" onClick="_gaq.push(['_trackEvent', 'Search', 'Top Navigation', '{{ page_name }}']);"/>
-            <button>Go</button>
-        </form>
-    </div>
+
 {% endblock %}
 {% block subnav %}
-<div id="sub-navigate">
-    {% include "mobile/_partial/nav.html" %}
 
-</div>
 {% addtoblock "js" %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 {% endaddtoblock "js" %}
 {% addtoblock "js" %}
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#menu_icon').toggle(function() {
-        $(this).addClass('active');
-        $('#sub-navigate').slideDown('fast');
-    }, function() {
-        $(this).removeClass('active');
-        $('#sub-navigate').slideUp('false');
-    })
+    $("#mobile-menu").click(function( event ){
+        event.preventDefault();
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $(".main-menu").slideUp('fast');
+        } else {
+            $(this).addClass('active');
+            $(".main-menu").slideDown('fast');
+        };
+    });
+    $("#terms-button").click(function( event ){
+        event.preventDefault();
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $(".terms").slideUp('fast');
+        } else {
+            $(this).addClass('active');
+            $(".terms").slideDown('fast');
+        };
+    });
 });
 </script>
 {% endaddtoblock "js" %}
 {% endblock %}
 {% block content %}
+<div class="hero">
+    <a href="tel:{{ phone_number|format_number }}" title="Free Home Security, Montly Monitoring starting at $5 per week"><img src="{{ STATIC_URL }}img/mobile/mobile-ads/five-per-week.jpg" alt="Free Home Security, Montly Monitoring starting at $5 per week" width="320" height="120" /></a>
+</div>
 {% endblock %}
 {% block order-footer %}
 {% endblock %}
 {% block footer %}
-{% block bottom-nav %}
-    {% include "mobile/_partial/nav.html" %}
-{% endblock %}
-<div id="phone-number">
-    <h3>Call Today and Save!</h3>
-    <p><a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Footer', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
-</div>
-<img src="{{ STATIC_URL }}img/mobile/ge-security.jpeg" class="ge-logo" alt="GE Security Authorized Dealer" width="275" height="101" />
-
-<div id="terms">
-    <p>* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
-</div>
-<div class="button-link full-site">
-    <a href="http://www.protectamerica.com/?no_mobile" title="Visit the Protect America Full Site">Full Site ></a>
-</div>
+    {% block bottom-nav %}
+        <div id="sub-footer">
+            <ul id="hoop">
+                <li><strong>Hours of Operation</strong></li>
+                <li>M-F 7AM - 11pm CT</li>
+                <li>SAT 8AM - 8pm CT</li>
+                <li>SUN 9AM - 9pm CT</li>
+            </ul>
+            <h4>{% if business_time %}Give us a call, we're open{% else %}Get Started now, call today{% endif %} <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Footer', '{{ page_name }}']);">{{ phone_number|format_number }}</a></h4>
+            <div class="clear"></div>
+        </div>
+    {% endblock %}
+    <div class="footer">
+        <ul>
+            <li><a href="http://www.protectamerica.com/help/state-licenses/?no_mobile" title="We are licensed in all 50 states">State Licenses</a></li>
+            <li><a href="#" title="View the Terms and Conditions" id="terms-button">Terms and Conditions</a></li>
+            <li><a href="http://www.protectamerica.com/help/privacy-policy/?no_mobile" title="View our Privacy Policy">Privacy Policy</a></li>
+            <div class="clear"></div>
+        </ul>
+        <p class="terms">* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+        <p>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
+        <a href="http://www.protectamerica.com/?no_mobile" class="full-site">Visit Full Site</a>
+    </div>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.scrollTo-1.4.3.1.js"></script>
 {% endblock %}
