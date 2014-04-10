@@ -31,6 +31,7 @@ class AffiliateMiddleware(object):
                 if device:
                     if device == 'm':
                         request.session['refer_id'] = 'i10045'
+                        return None
 
             if settings.SITE_ID == 3:
                 viewname = view_func.__name__
