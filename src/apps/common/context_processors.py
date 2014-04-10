@@ -62,7 +62,7 @@ def mobile_check(request):
         if detect_mobile_browser(ua):
             # Redirect the visitor from a web site to a mobile site
             is_mobile = True
-    return {'is_mobile':is_mobile} 
+    return {'is_mobile':is_mobile}
 
 
 def get_affiliate_from_request(request):
@@ -90,7 +90,7 @@ def phone_number(request):
     from django.conf import settings
     ctx = {'phone_number': settings.DEFAULT_PHONE,
             'use_call_measurement': False}
-    # we want to set the phone number in the session to keep from hVaving 
+    # we want to set the phone number in the session to keep from hVaving
     # more than 1 databasecall
 
     session_num = request.session.get('phone_number', None)
@@ -159,7 +159,7 @@ def business_hours(request):
         if gstr not in day_format:
             day_format[gstr] = []
         day_format[gstr].append(index)
-        
+
 
     def itemgetter(*items):
         if len(items) == 1:
@@ -171,7 +171,7 @@ def business_hours(request):
                 return tuple(obj[item] for item in items)
         return g
 
-    
+
     html = ''
     for key, value in sorted(day_format.iteritems(), key=itemgetter(1)):
         # get datetimes
@@ -188,7 +188,7 @@ def business_hours(request):
                          int(end[:2]),
                          int(end[2:])).strftime('%I:%M%p')
 
-        # start html                 
+        # start html
         element = '<li>'
         element = element + '%s' % (day_table[value[0]].capitalize())
         if len(value) > 1:
@@ -207,5 +207,5 @@ def detect_agent_id(request):
         agent_id = request.COOKIES.get('refer_id',None)
     if agent_id and agent_id[0] == 'b':
         data['b_agent'] = True
-    
-    return data 
+
+    return data

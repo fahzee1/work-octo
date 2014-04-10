@@ -26,6 +26,12 @@ class AffiliateMiddleware(object):
                 request.session['source'] = 'PROTECT AMERICA'
 
         if 'agent' not in request.GET:
+            if 'device' in request.GET:
+                device = request.GET.get('device', None)
+                if device:
+                    if device == 'm':
+                        request.session['refer_id'] = 'i10045'
+
             if settings.SITE_ID == 3:
                 viewname = view_func.__name__
                 if viewname == 'semlanding_home':
