@@ -16,7 +16,7 @@ reg_v = re.compile(r"1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er
 
 class DetectMobileBrowser():
     def process_request(self, request):
-        if settings.SITE_ID != 1:
+        if settings.SITE_ID != 1 and settings.SITE_ID != 3:
             return None
         request.mobile = False
         current_cookie = request.session.get('redirect_mobile', None)
