@@ -12,7 +12,6 @@ class AffiliateMiddleware(object):
 
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        print 'in action'
         check_agent_request = request.GET.get('agent', None)
         if check_agent_request in settings.SUPER_AFFILIATES:
             try:
@@ -37,6 +36,14 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = 'BINGPPC'
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
+
+        if 'device' in request.GET:
+            device = request.GET.get('device', None)
+            if device:
+                if device == 'm':
+                    request.session['refer_id'] = 'i10045'
+
+
 
         return None
 
