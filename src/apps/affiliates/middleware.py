@@ -44,11 +44,10 @@ class AffiliateMiddleware(object):
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
 
-        if 'device' in request.GET:
-            device = request.GET.get('device', None)
-            if device:
-                if device == 'm':
-                    request.session['refer_id'] = 'i10045'
+        if settings.SITE_ID == 3:
+            if check_agent_request == 'GOOGLEPPC':
+                request.session['refer_id'] = 'i10045'
+
 
 
 
