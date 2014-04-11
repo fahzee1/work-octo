@@ -80,10 +80,6 @@ def get_affiliate_from_request(request):
         cookie_affiliate = request.COOKIES.get('refer_id', None)
         affiliate = cookie_affiliate
 
-    # 1.5 did I already set it somewhere in other middleware
-    if request.session['affiliate']:
-        return request.session['affiliate']
-
     # 2. Refer_id on session
     if not affiliate:
         # try pulling the affiliate from the session
@@ -151,7 +147,7 @@ def phone_number(request):
         # Otherwise, figure it out now.
         if not affiliate:
             affiliate = get_affiliate_from_request(request)
-            request.session['affiliate']
+            request.session['affiliate'] = affiliate
 
         if request.GET.get('who'):
             print 'get_affiliate_from_request gave back %r' % affiliate
@@ -182,18 +178,19 @@ def phone_number(request):
         return ctx
     except:
         import traceback
-        print traceback.format_esc()
+        print traceback.format_exc()
         return dict(phone_number='1-800-951-5111', use_call_measurement=False)
 
 
 
 def tracking_pixels(request):
-    ctx={}
+    ctx=dict(pixels=None)
     try:
         affiliate=request.session['affiliate']
-        ctx['pixels']=affiliate.pixels
+        if affiliate:
+            ctx['pixels']=affiliate.pixels
     except KeyError:
-        ctx['pixels']=None
+        pass
     return ctx
 
 def business_hours(request):
