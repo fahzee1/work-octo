@@ -80,6 +80,9 @@ def get_affiliate_from_request(request):
         cookie_affiliate = request.COOKIES.get('refer_id', None)
         affiliate = cookie_affiliate
 
+    # 1.5 did I already set it somewhere in other middleware
+    if request.session['affiliate']:
+        return request.session['affiliate']
 
     # 2. Refer_id on session
     if not affiliate:
@@ -141,15 +144,23 @@ def phone_number(request):
         # `source` GET var is set), or they do not have a source
         # So, first we check the cookie. If it doesn't exist, we check
         # the GET var. If neither of those exist, there is no affiliate
-        affiliate = get_affiliate_from_request(request)
+
+        # Has some other middleware figured out your affiliate?  If so, use that.
+        affiliate = request.session.get('affiliate')
+
+        # Otherwise, figure it out now.
+        if not affiliate:
+            affiliate = get_affiliate_from_request(request)
+            request.session['affiliate']
+
         if request.GET.get('who'):
             print 'get_affiliate_from_request gave back %r' % affiliate
             if affiliate:
                 print affiliate.__dict__
 
         if affiliate:
-            print "Setting session's affiliate to: %r" % affiliate
-            request.session['affiliate'] = affiliate
+            #print "Setting session's affiliate to: %r" % affiliate
+            #request.session['affiliate'] = affiliate
             if 'phone' in request.GET:
                 if request.GET.get('who'):
                     print 'Setting phone_number in session to %r' % request.GET.get('phone')
