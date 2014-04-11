@@ -103,70 +103,76 @@ def get_affiliate_from_request(request):
 
 
 def phone_number(request):
-    if request.GET.get('who'):
-        print 'process_view, %r' % request.get_full_path()
-        print "session[refer_id] = %r" % request.session.get('refer_id')
-        print "session[affiliate] = %r" % request.session.get('affiliate')
-        if request.session.get('affiliate'):
-            print request.session.get('affiliate').__dict__
-
-    from django.conf import settings
-    ctx = {'phone_number': settings.DEFAULT_PHONE,
-            'use_call_measurement': False}
-    # we want to set the phone number in the session to keep from hVaving
-    # more than 1 databasecall
-
-
-    session_num = request.session.get('phone_number', None)
-    session_call_measurement = request.session.get('call_measurement', None)
-    check_affiliate = request.GET.get('agent', None)
-
-    if request.GET.get('who'):
-        print 'Phone number in session: %r', % session_num
-        print 'agent in GET: %r' % check_affiliate
-
-
-    if session_num is not None and session_call_measurement is not None and session_num != '':
+    try:
         if request.GET.get('who'):
-            print 'Using session\'s phone %r' % session_num
-        ctx['phone_number'] = session_num
-        ctx['use_call_measurement'] = session_call_measurement
-        return ctx
+            print 'process_view, %r' % request.get_full_path()
+            print "session[refer_id] = %r" % request.session.get('refer_id')
+            print "session[affiliate] = %r" % request.session.get('affiliate')
+            if request.session.get('affiliate'):
+                print request.session.get('affiliate').__dict__
 
-    # the affiliate cookie is not available on the first request
-    # because of the nature of http. what this does is first check
-    # the cookie (for subsequent visits), and if that doesn't exist
-    # then we know the user either just got a cookie set (the
-    # `source` GET var is set), or they do not have a source
-    # So, first we check the cookie. If it doesn't exist, we check
-    # the GET var. If neither of those exist, there is no affiliate
-    affiliate = get_affiliate_from_request(request)
-    if request.GET.get('who'):
-        print 'get_affiliate_from_request gave back %r' % affiliate
+        from django.conf import settings
+        ctx = {'phone_number': settings.DEFAULT_PHONE,
+                'use_call_measurement': False}
+        # we want to set the phone number in the session to keep from hVaving
+        # more than 1 databasecall
+
+
+        session_num = request.session.get('phone_number', None)
+        session_call_measurement = request.session.get('call_measurement', None)
+        check_affiliate = request.GET.get('agent', None)
+
+        if request.GET.get('who'):
+            print 'Phone number in session: %r' % session_num
+            print 'agent in GET: %r' % check_affiliate
+
+
+        if session_num is not None and session_call_measurement is not None and session_num != '':
+            if request.GET.get('who'):
+                print 'Using session\'s phone %r' % session_num
+            ctx['phone_number'] = session_num
+            ctx['use_call_measurement'] = session_call_measurement
+            return ctx
+
+        # the affiliate cookie is not available on the first request
+        # because of the nature of http. what this does is first check
+        # the cookie (for subsequent visits), and if that doesn't exist
+        # then we know the user either just got a cookie set (the
+        # `source` GET var is set), or they do not have a source
+        # So, first we check the cookie. If it doesn't exist, we check
+        # the GET var. If neither of those exist, there is no affiliate
+        affiliate = get_affiliate_from_request(request)
+        if request.GET.get('who'):
+            print 'get_affiliate_from_request gave back %r' % affiliate
+            if affiliate:
+                print affiliate.__dict__
+
         if affiliate:
-            print affiliate.__dict__
+            request.session['affiliate'] = affiliate
+            if 'phone' in request.GET:
+                if request.GET.get('who'):
+                    print 'Setting phone_number in session to %r' % request.GET.get('phone')
 
-    if affiliate:
-        request.session['affiliate'] = affiliate
-        if 'phone' in request.GET:
-            if request.GET.get('who'):
-                print 'Setting phone_number in session to %r' % request.GET.get('phone')
+                ctx['phone_number'] = request.GET['phone']
+                request.session['phone_number'] = request.GET['phone']
+            else:
+                if request.GET.get('who'):
+                    print 'Setting phone_number in session to affiliate\'s phone, %r' % affiliate.phone
 
-            ctx['phone_number'] = request.GET['phone']
-            request.session['phone_number'] = request.GET['phone']
-        else:
-            if request.GET.get('who'):
-                print 'Setting phone_number in session to affiliate\'s phone, %r' % affiliate.phone
+                ctx['phone_number'] = affiliate.phone
+                request.session['phone_number'] = affiliate.phone
 
-            ctx['phone_number'] = affiliate.phone
-            request.session['phone_number'] = affiliate.phone
+            ctx['use_call_measurement'] = affiliate.use_call_measurement
+            request.session['call_measurement'] = affiliate.use_call_measurement
 
-        ctx['use_call_measurement'] = affiliate.use_call_measurement
-        request.session['call_measurement'] = affiliate.use_call_measurement
+        ctx['use_call_measurement'] = True
 
-    ctx['use_call_measurement'] = True
+        return ctx
+    except:
+        import traceback
+        print traceback.format_esc()
+        return dict(phone_number='1-800-951-5111', use_call_measurement=False)
 
-    return ctx
 
 
 def tracking_pixels(request):
