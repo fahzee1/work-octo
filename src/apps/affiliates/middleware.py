@@ -12,6 +12,8 @@ class AffiliateMiddleware(object):
 
 
     def process_view(self, request, view_func, view_args, view_kwargs):
+        print 'process_view, %r' % request.get_full_path()
+        print 'refer id was %r ' % request.session.get('refer_id')
         check_agent_request = request.GET.get('agent', None)
         if check_agent_request in settings.SUPER_AFFILIATES:
             try:
@@ -26,13 +28,6 @@ class AffiliateMiddleware(object):
                 request.session['source'] = 'PROTECT AMERICA'
 
         if 'agent' not in request.GET:
-            if 'device' in request.GET:
-                device = request.GET.get('device', None)
-                if device:
-                    if device == 'm':
-                        request.session['refer_id'] = 'i10045'
-                        return None
-
             if settings.SITE_ID == 3:
                 viewname = view_func.__name__
                 if viewname == 'semlanding_home':
@@ -44,17 +39,21 @@ class AffiliateMiddleware(object):
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
 
-        if settings.SITE_ID == 3:
-            if check_agent_request == 'GOOGLEPPC':
-                request.session['refer_id'] = 'i10045'
+        if 'device' in request.GET:
+                device = request.GET.get('device', None)
+                if device:
+                    if device == 'm':
+                        request.session['refer_id'] = 'i10045'
+                        print 'refer id changed to %r ' % request.session.get('refer_id')
+                        return None
 
 
-
-
+        print 'refer_id is now %r' % request.session.get('refer_id')
         return None
 
     def process_response(self, request, response):
-
+        print 'process_response, %r' % request.get_full_path()
+        print 'refer id was %r ' % request.session.get('refer_id')
         # first get the domain parts and information
         domain_parts = request.get_host().split('.')
         if (len(domain_parts) > 2):
@@ -141,6 +140,10 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = 'HOMESITE'
                     request.session['source'] = 'PROTECT AMERICA'
 
+
+
+
+
         # Allow overwriting of affkey cookie
         if request.GET.get('affkey', None):
             request.session['affkey'] = request.GET.get('affkey')
@@ -176,6 +179,7 @@ class AffiliateMiddleware(object):
                 expires=datetime.now() + expire_time)
 
 
-
+        print 'refer is %r ' % request.session.get('refer_id')
+        
         return response
 

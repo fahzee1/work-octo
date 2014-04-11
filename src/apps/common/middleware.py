@@ -29,10 +29,19 @@ class DetectMobileBrowser():
 
         if request.META.has_key('HTTP_USER_AGENT') and current_cookie is None:
             user_agent = request.META['HTTP_USER_AGENT']
+            print user_agent
             b = reg_b.search(user_agent)
             v = reg_v.search(user_agent[0:4])
             if b or v:
-                return redirect("http://m.protectamerica.com/", request.GET)
+                g = request.GET.copy()
+                next = "http://m.protectamerica.com/"
+                if request.META['QUERY_STRING']:
+                    next += "?" + request.META['QUERY_STRING']
+                r =  redirect("http://m.protectamerica.com/", request.GET)
+                r = redirect(next)
+                print 'mobileredirect'
+                print r.__dict__, g
+                return r
 
 class SearchEngineReferrerMiddleware(object):
     """
