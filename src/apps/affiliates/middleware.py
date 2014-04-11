@@ -39,13 +39,16 @@ class AffiliateMiddleware(object):
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
 
-        if 'device' in request.GET:
-                device = request.GET.get('device', None)
-                if device:
-                    if device == 'm':
-                        request.session['refer_id'] = 'i10045'
-                        print 'refer id changed to %r ' % request.session.get('refer_id')
-                        return None
+        from apps.common.middleware import get_affiliate_from_request
+        current_affiliate = get_affiliate_from_request(request)
+
+        if request.GET.get('device') == 'm' and current_affiliate and current_affiliate.agent_id='GOOGLEPPC':
+            googlemobile_affiliate = Affiliate.objects.get(agent_id='i10045')
+            request.session['refer_id'] = 'i10045'
+            request.session['affiliate'] = googlemobile_affiliate
+            print 'refer id changed to %r ' % request.session.get('refer_id')
+            print 'affiliate id changed to %r' % request.session.get('affiliate')
+            return None
 
 
         print 'refer_id is now %r' % request.session.get('refer_id')
@@ -180,6 +183,6 @@ class AffiliateMiddleware(object):
 
 
         print 'refer is %r ' % request.session.get('refer_id')
-        
+
         return response
 
