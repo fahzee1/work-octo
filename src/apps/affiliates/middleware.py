@@ -39,7 +39,7 @@ class AffiliateMiddleware(object):
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
 
-        from apps.common.middleware import get_affiliate_from_request
+        from apps.common.context_processors import get_affiliate_from_request
         current_affiliate = get_affiliate_from_request(request)
 
         if request.GET.get('device') == 'm' and current_affiliate and current_affiliate.agent_id == 'GOOGLEPPC':
