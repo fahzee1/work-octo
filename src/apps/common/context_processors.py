@@ -105,7 +105,7 @@ def get_affiliate_from_request(request):
 def phone_number(request):
     try:
         if request.GET.get('who'):
-            print 'process_view, %r' % request.get_full_path()
+            print 'phone_number, %r' % request.get_full_path()
             print "session[refer_id] = %r" % request.session.get('refer_id')
             print "session[affiliate] = %r" % request.session.get('affiliate')
             if request.session.get('affiliate'):
@@ -148,6 +148,7 @@ def phone_number(request):
                 print affiliate.__dict__
 
         if affiliate:
+            print "Setting session's affiliate to: %r" % affiliate
             request.session['affiliate'] = affiliate
             if 'phone' in request.GET:
                 if request.GET.get('who'):
