@@ -204,6 +204,12 @@ elif settings.SITE_ID == 3:
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
         dtt(r'^cyber-alt-19/?$', 'affiliates/sem-landing-page/test/green-19-white.html', 'green-white-19'),
         dtt(r'^cyber-19/?$', 'affiliates/sem-landing-page/test/green-19.html', 'green-19'),
+        dtt(r'^alarm-b/?$', 'affiliates/sem-landing-page/alarm-b.html', 'alarm-b'),
+        dtt(r'^home-security-b/?$', 'affiliates/sem-landing-page/home-security-b.html', 'home-security-b'),
+        dtt(r'^security-system-b/?$', 'affiliates/sem-landing-page/security-system-b.html', 'security-system-b'),
+        dtt(r'^adt-security-b/?$', 'affiliates/sem-landing-page/competitors/adt-b.html', 'adt-b'),
+        dtt(r'^compare-us-b/?$', 'affiliates/sem-landing-page/competitors/compare-us-b.html', 'compare-us-b'),
+
 
 
         # GEO Landing Pages

@@ -6,7 +6,7 @@
 {% endblock %}
 {% block page_title %}Alarm Systems | Home Alarms | Protect America{% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/alarm.css?v=3.28">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/alarm.css?v=3.27">
     <!--[if (lt IE 9) & (!IEMobile)]>
     <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
     <![endif]-->
@@ -22,7 +22,6 @@
 {% block liveperson %}{% endblock %}
 {% block liveperson-two %}{% endblock %}
 {% block typekit %}san-serif-font{% endblock %}
-
 {% block header %}
     {% block top-section %}
     <div id="top-section-wrapper">
@@ -106,7 +105,7 @@
                     {% block price-area %}<img src="{{ STATIC_URL }}img/banners/cyber-monday/5-per-week.png" alt="$5 per week" />{% endblock %}
                 </div>
                 {% block hero-buttons %}
-                    <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
+                    <a href="http://www.protectamerica.com/products/order-package" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
                     <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
                 {% endblock %}
             </div>
@@ -115,79 +114,48 @@
     {% include "order/call-box.html" %}
     <!-- Featured on banner -->
 
-    <div id="featured-on">
-        <small>Proudly Featured on:</small>
-        <div id="featured-badges">
-            <div class="featured abc">&nbsp;</div>
-            <div class="featured besty">&nbsp;</div>
-            <div class="featured npr">&nbsp;</div>
-            <div class="featured topconsumer">&nbsp;</div>
-            <div class="featured foxnews">&nbsp;</div>
-            <div class="featured consumerdigest">&nbsp;</div>
-            <div class="featured buzz">&nbsp;</div>
-            <div class="featured bbb">&nbsp;</div>
-            <div class="featured gadgeteer">&nbsp;</div>
-            <div class="featured toptens">&nbsp;</div>
-            <div class="featured cw">&nbsp;</div>
-            <div class="featured history">&nbsp;</div>
 
-        </div>
-    </div>
-    {% block lifestyle %}
-    <div id="lifestyle-shot">
-        <div class="wrapper">
-            <div id="home-content">
-                {% block lifestyle-headline %}<h2 >The perfect alarm system <span>for your home.</span></h2>{% endblock %}
-                {% block lifestyle-subhead %}<p><strong>An alarm system built for you.</strong> Don't have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>{% endblock %}
-                <a href="" class="button-link  order-button hide-mobile no-desktop">Order Now <i class="icon-chevron-right"></i></a>
-                <a href="tel:{{ phone_number|format_number }}" class="button-link hide-desktop no-mobile">Order Now <i class="icon-chevron-right"></i></a>
-
-            </div>
-        </div>
-    </div>
-    {% endblock %}
     {% block benefits %}
     <div class="wrapper">
         <div id="security-information">
             <div id="main-benefits">
-                    {% block benefits-headline %}<h2>Easy, Flexible, Trusted Alarm Protection</h2>{% endblock %}
+                    {% block benefits-headline %}<h2>Smart Wireless Alarms That Can't Be Beat</h2>{% endblock %}
                     {% block benefits-subhead %}<p>Protect America makes it easy to secure and protect your home and family. </p>{% endblock %}
                     <ul>
                         {% block benefits-1 %}
-                        <li>
+                        <li class="">
+                            <h3><i class="icon-money"></i>The Lowest Price. Period.</h3>
+                            <p>Our alarm packages start at $19.99 a month. We'll also match any competitor's prices with our lowest price guarantee!</p>
+                        </li>
+
+                        {% endblock %}
+                        {% block benefits-2 %}
+                        <li class="mobile">
+                            <h3><i class="icon-thumbs-up"></i>No Installation or Equipment Fees</h3>
+                            <p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment and no installation fees.</p>
+                        </li>
+
+                        {% endblock %}
+
+                        {% block benefits-3 %}
+                        <li class="alt">
                             <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
                             <p>Our alarm systems provide state-of-the-art 24/7 protection so you don't have to worry about a thing.</p>
                         </li>
                         {% endblock %}
-                        {% block benefits-2 %}
-
+                        <div class="clear"></div>
+                        {% block benefits-4 %}
                         <li class="mobile">
                             <h3><i class="icon-rss"></i>No Wires. No Hassle.</h3>
                             <p>Wireless alarm systems means an amazingly simple install. We've taken user-friendly to a new level.</p>
                         </li>
-                        {% endblock %}
 
-                        {% block benefits-3 %}
-
-                        <li class="alt">
-                            <h3><i class="icon-money"></i>The Lowest Price. Period.</h3>
-                            <p>Our alarm packages start at $19.99 a month. We'll also match any competitor's prices with our lowest price guarantee!</p>
-                        </li>
-                        {% endblock %}
-                        <div class="clear"></div>
-                        {% block benefits-4 %}
-
-                        <li class="mobile">
-                            <h3><i class="icon-user"></i>Customizable Alarm Packages</h3>
-                            <p>Each system is tailored to you, including options like: home automation, fire protection, and iPhone control.</p>
-                        </li>
                         {% endblock %}
 
                         {% block benefits-5 %}
-
                         <li class="mobile">
-                            <h3><i class="icon-thumbs-up"></i>No Installation or Equipment Fees</h3>
-                            <p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment and no installation fees.</p>
+                            <h3><i class="icon-user"></i>Customizable Alarm Packages</h3>
+                            <p>Each system is tailored to you, including options like: home automation, fire protection, and iPhone control.</p>
                         </li>
                         {% endblock %}
 
@@ -209,12 +177,13 @@
             <ul>
                 <li><i class="icon-check-sign"></i>Lowest price</li>
                 <li><i class="icon-check-sign"></i>No equipment fees</li>
-                <li class="last"><i class="icon-check-sign"></i>Lifetime replacement plan</li>
+                <li class="last"><i class="icon-check-sign"></i>Lifetime Warranty</li>
             </ul>
         </div>
         <div class="clear"></div>
     </div>
     {% endblock %}
+
     {% block advantage %}
     <div id="advantage-table-wrapper">
         <div id="advantage-table">
@@ -276,6 +245,37 @@
             <div class="clear"></div>
         </div>
 
+    </div>
+    {% endblock %}
+    <div id="featured-on">
+        <small>Proudly Featured on:</small>
+        <div id="featured-badges">
+            <div class="featured abc">&nbsp;</div>
+            <div class="featured besty">&nbsp;</div>
+            <div class="featured npr">&nbsp;</div>
+            <div class="featured topconsumer">&nbsp;</div>
+            <div class="featured foxnews">&nbsp;</div>
+            <div class="featured consumerdigest">&nbsp;</div>
+            <div class="featured buzz">&nbsp;</div>
+            <div class="featured bbb">&nbsp;</div>
+            <div class="featured gadgeteer">&nbsp;</div>
+            <div class="featured toptens">&nbsp;</div>
+            <div class="featured cw">&nbsp;</div>
+            <div class="featured history">&nbsp;</div>
+
+        </div>
+    </div>
+    {% block lifestyle %}
+    <div id="lifestyle-shot">
+        <div class="wrapper">
+            <div id="home-content">
+                {% block lifestyle-headline %}<h2 >The perfect alarm system <span>for your home.</span></h2>{% endblock %}
+                {% block lifestyle-subhead %}<p><strong>An alarm system built for you.</strong> Don't have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>{% endblock %}
+                <a href="" class="button-link  order-button hide-mobile no-desktop">Order Now <i class="icon-chevron-right"></i></a>
+                <a href="tel:{{ phone_number|format_number }}" class="button-link hide-desktop no-mobile">Order Now <i class="icon-chevron-right"></i></a>
+
+            </div>
+        </div>
     </div>
     {% endblock %}
     {% block faq %}
