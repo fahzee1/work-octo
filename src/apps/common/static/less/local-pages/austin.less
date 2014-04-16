@@ -1,5 +1,28 @@
 @import "style/style.less";
 
+// Shades of Grey
+@white: #fff;
+@off-white: #fcfcfc;
+@v-light-grey: #eee;
+@light-grey: #ccc;
+@grey: #555;
+@dark-grey: #4A505A;
+@black: #333; /* In place of black, PA uses a very dark grey. */
+
+// Shades of Blue
+@v-light-blue: #f2fdff;
+@light-blue: #d9f2ff;
+@blue: #1570ab;
+@dark-blue: #023269;
+@link-blue: #0066B3;
+@navy-blue: #2f394a;
+
+// Shades of Blood
+@light-red: #ffdfdf;
+@red: #eb292b;
+@dark-red: #8b0404;
+
+
 .wrapper {
     margin:0 auto;
     position:relative;
@@ -187,7 +210,7 @@
             float: right;
             width: 600px;
             position: relative;
-            height: 36px;
+            height: 32px;
             #online-chat-button, .interactive-customer {
                 float: right;
                 width: 68px;
@@ -196,6 +219,7 @@
                 text-decoration: none;
                 background: @black;
                 font-size: 10px;
+                font-weight: 600;
                 padding: 0 4px;
                 text-align: center;
                 text-transform: uppercase;
@@ -220,6 +244,11 @@
                 a {
                     color: @white;
                     text-decoration: none;
+                    span {
+                        &.dynamic-phone-number {
+                            font-weight: 600;
+                        }
+                    }
                 }
 
             }
@@ -246,9 +275,10 @@
     position: relative;
     z-index: 900;
     height: 52px;
+    /************** Quote Form ****************/
     #quote-form {
         .content-box(376px);
-        background: #555;
+        background: @navy-blue;
         float: left;
         margin-left: 16px;
         position: relative;
@@ -262,15 +292,49 @@
         border-top: none;
         .border-radius(0,0,5px,5px);
         padding: 0;
+        p {
+            margin-bottom: 2px;
+        }
         .drop-shadow(0px,2px,5px,#000);
-    
         p.form-title {
-           background: #55b1a6;
-           line-height: 64px;
-           margin-bottom: 8px; 
+           background: #54b0a4;
+           line-height: 56px;
+           margin-bottom: 8px;
+           font-size: 18px;
+           font-weight: 600;
+           text-transform: uppercase;
+        }
+        p.phone-area {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 600;
+            b {
+                display: block;
+                display: block;
+                font-size: 20px;
+                line-height: 24px;
+                font-weight: 600;
+                a {
+                    color: @red;
+                    display: inline;
+                    font-size: 20px;
+                    font-weight: bold;
+                    span {
+                        font-size: 24px;
+                        font-weight: 600;
+                    }
+                }
+            }
+            small {
+                display: block;
+                font-size: 10px;
+                line-height: 18px;
+                color: #ccc;
+                font-weight: 600;
+            }
         }
         .form-fields {
-            padding: 8px 32px 0px;
+            padding: 0px 32px 0px;
             p {
                 font-size: 11px;
                 line-height: 13px;
@@ -281,22 +345,22 @@
                 display: block;
                 font-size: 13px;
             }
-    
+
         }
         .consent-box, .consent-box-two {
             border-bottom: 1px solid #333333;
             padding: 4px 0;
             margin: 8px auto;
             width: 87%;
-            color: #ccc;
+            color: #555;
             #id_consent, #id_consent_two {
                 float: left;
                 margin: 8px 8px 8px 32px;
                 width: 16px;
             }
             label.consent-label, label.consent-label-two {
-                font-size: 10px;
-                line-height: 15px;
+                font-size: 9px !important;
+                line-height: 14px;
                 text-align: justify;
                 float: left;
                 cursor: pointer;
@@ -305,6 +369,35 @@
             }
         }
         button {
+            display: block;
+            padding: 10px 16px;
+            .border-radius(5px,5px,5px,5px);
+            color: @white;
+            background: #54b0a4;
+            text-decoration: none;
+            border: none;
+            font-size: 18px;
+            margin: 8px auto;
+            width: 265px;
+            .fade-slow;
+            cursor: pointer;
+            cursor: hand;
+            text-transform: uppercase;
+            &:hover {
+                color: @white;
+                .fade-fast;
+                background: #83d3c9;
+                text-decoration: none;
+                i {
+                    border-left: 1px solid @red;
+
+                }
+            }
+            i {
+                border-left: 1px solid @dark-red;
+                padding: 4px 0 4px 24px;
+                margin-left: 12px;
+            }
         }
         #third-party-container {
             background: @white;
@@ -331,7 +424,7 @@
                     img {
                         width: 100%;
                     }
-    
+
                 }
                 &.vsign {
                     position: relative;
@@ -356,24 +449,23 @@
             input {
                 color: @black;
                 font-size: 14px;
-                height: 32px;
-                line-height: 32px;
+                height: 24px;
+                line-height: 24px;
                 margin: 0 0 8px;
                 width: 300px;
                 padding-left: 8px;
-                .border-radius (5px,5px, 5px, 5px);
                 border: 1px solid @black;
             }
             
         }
-    
+
         a {
             display: block;
             text-align: center;
-            font-size: 10px;
+            font-size: 11px !important;
             padding-top: 4px;
             text-decoration: none;
-            color: @white;
+            color: #eee;
             &:hover {
                 text-decoration: underline;
             }
@@ -381,7 +473,7 @@
         &.sleepy {
             width: 275px;
             .form-fields {
-                padding: 8px 16px 0px;
+                padding: 0px 16px 0px;
                 p {
                     font-size: 11px;
                     line-height: 13px;
@@ -410,10 +502,10 @@
                 }
             }
         }
-    
-    }
 
+    }
     #header {
+        width: 960px !important;
         .wrapper;
         #company-logo {
             margin-top: 10px;
@@ -434,7 +526,7 @@
                 width: 100px;
                 margin-right: 16px;
                 text-align: center;
-                font-size: 16px;
+                font-size: 17px;
                 height: 40px;
                 margin-top: 8px;
                 position: relative;
