@@ -56,7 +56,7 @@ sitemaps={
                             'payitforward-about','payitforward-press','payitforward-extras','payitforward-rules','payitforward-thankyou','payitforward-teams',
                              'payitforward-spring2012','payitforward-fall2012','payitforward-involved','payitforward-awareness','payitforward-point-scale',
                              'payitforward-revenue','payitforward-video','payitforward-press','learn-about-security','how-it-works','complete-home-security',
-                             'testimonials','video-testimonials','send-testimonial','tell-a-friend'],priority=0.5),
+                             'testimonials','video-testimonials','send-testimonial'],priority=0.5),
     'support':StaticSitemap(name=['support','installation','operation','troubleshooting','faq','moving-kit','find-us','contact-us','department-listing','feedback-ceo',
                              'careers','jobs','agent-two','affiliate-program'],priority=0.5),
     'help':StaticSitemap(name=['help','low-price-guarantee','return-policy','state-licenses','do-not-call','security-of-information','warranty'],priority=0.5),
