@@ -672,7 +672,7 @@ else:
 
 
 
-                url(r'^pa/cust_ref/?$','apps.contact.views.tell_a_friend',name='tell-a-friend'),
+                #url(r'^pa/cust_ref/?$','apps.contact.views.tell_a_friend',name='tell-a-friend'),
 
                 # Remove dtt(r'^products/security-equipment/sensors/?$', 'products/equipment/security-sensors.html', 'sensors', 'equipment'),
                 # remove dtt(r'^products/interactive-video/home-video-cameras?$', 'products/video/video-home.html', 'video-home', 'video'),
