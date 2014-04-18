@@ -414,6 +414,7 @@ def basic_post_login(request):
     lead_data = {'trusted_url': trusted_url}
     acn_business_name = request.POST.get('business_name')
 
+
     # for new search_engine param
     new_se = None
     current_url = request.POST.get('referer_page', None)
@@ -519,11 +520,6 @@ def basic_post_login(request):
         if not settings.LEAD_TESTING and fdata['email']:
             send_caroline_thankyou(request,emaildata,request_data['agent'])
 
-        site = request.POST.get('site', None)
-        if site:
-            if site == 'alarmzone':
-                send_alarmzone_email(emaildata)
-
         formset.thank_you_url = request_data['thank_you_url']
         return (formset, True)
     return (form, False)
@@ -543,12 +539,23 @@ def ajax_post(request):
 
     response_dict = {}
     form_type = request.POST['form']
+    site = request.POST.get('site', None)
 
     if form_type == 'dealers':
         send_bizdev_email(request.POST)
         return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
 
-    if form_type == 'basic':
+    if form_type == 'basic' and site == 'alarmzone':
+        data = {
+        'customername': request.POST.get('name',None),
+        'phone': request.POST.get('phone',None),
+        'email': request.POST.get('email',None)
+        }
+        send_alarmzone_email(data)
+        return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
+
+
+    if form_type == 'basic' and site != 'alarmzone':
         form, success = basic_post_login(request)
         if success:
             response_dict.update({'success': True,
