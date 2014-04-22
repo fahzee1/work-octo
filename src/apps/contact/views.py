@@ -61,7 +61,8 @@ def send_alarmzone_email(data):
     message = 'Name : %s \n Email: %s \n Phone: %s' % (data['customername'],data['email'],data['phone'])
     from_email = 'Protect America <noreply@protectamerica.com>'
     to_email = 'bruce@icd365.com'
-    send_mail(subject,message,from_email,[to_email])
+    to_email2 = 'maronowitz@icd365.com'
+    send_mail(subject,message,from_email,[to_email,to_email2])
 
 
 
