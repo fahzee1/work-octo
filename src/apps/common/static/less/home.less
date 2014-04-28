@@ -1,5 +1,21 @@
 @import "style.less";
 
+#header-wrapper {
+    #header {
+        .request-quote-button {
+            background: #ffc000;
+            color: #222;
+            font-weight: 400;
+            &:hover {
+                color: #666;
+                .fade-fast;
+                background: #ffd75e;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
 #hero-wrapper.bf {
     background: #222 url(/static/img/promo/bf/bf-bg.png) repeat-x center bottom;
     #hero-image {
@@ -304,6 +320,62 @@
         }
     }
 }
+
+body.index {
+    #featured-on {
+        small {
+            margin-bottom: 10px;
+        }
+    }
+    .wrapper {
+        #categories {
+            h2 {
+                color: #555;
+                letter-spacing: 1px;
+                font-weight: 400;
+            }
+            .category {
+                .category-info {
+                    p {
+                        color: #888;
+                    }
+                    a {
+                        &.button-link {
+                            background: #ffc000;
+                            color: #222;
+                            i {
+                                border-left: 1px solid #d5a100;
+                            }
+                            &:hover {
+                                color: #666;
+                                .fade-fast;
+                                background: #ffd75e;
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #call-box {
+        background: #f24141;
+        border: none;
+        p {
+            a {
+                text-transform: uppercase;
+                text-shadow: none;
+                font-size: 28px;
+                font-weight: 400;
+                color: #f1f1f1;
+                span {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 960px) {
     #hero-content {
         #slide-form-area {
@@ -718,20 +790,24 @@
                 }
             }
         }
-        #cyber-monday {
+        
+        #spring-savings {
             text-align: center;
+            background: transparent;
             .main-hero-image {
                 position: absolute;
                 z-index: -1;
-                left: -230px;
-                bottom: -29px;
+                left: -16px;
+                bottom: 0;
+                top: 0;
             }
             a {
                 &.button-link {
-                    padding: 8px 2px;
+                    padding: 10px 12px;
                     background: #ffc000;
                     color: #222;
-                    margin-left: 360px;
+                    margin-left: 500px;
+                    margin-top: 270px;
                     float: none;
                     width: 160px;
                     &:hover {
@@ -746,18 +822,22 @@
                 }
             }
             h1 {
-                color: #2f394a;
-                font-size: 28px;
-                font-weight: 600;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 400;
                 text-shadow: none;
-                padding: 30px 0 0;
-                margin: 0 0 0 233px;
+                text-transform: uppercase;
+                padding: 14px 0 0;
+                margin: 0 0 0 225px;
+                letter-spacing: 1px;
             }
             h2 {
-                color: #2f394a;
-                font-size: 28px;
-                font-weight: 100;
-                margin: 0 0 0 233px;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                margin: 20px 0 0 225px;
             }
             p {
                 color: #08ba64;
@@ -770,6 +850,19 @@
             img {
                 padding-right: 15px;
                 margin: 0 0 0 233px;
+            }
+            .ssavings-deals {
+                width: 692px;
+                margin: 0 20px 0 0;
+                float: right;
+                img {
+                    padding: 0;
+                    margin: 0;
+                    border-right: 1px solid #898f99;
+                    &.border-none {
+                        border: none;
+                    }
+                }
             }
         }
         &.sleepy {
@@ -831,6 +924,9 @@
 
     &.cmonday {
         background: #fffcf5;
+    }
+    &.ssavings {
+        background: #2f394a;
     }
     &.superbowl {
         background: url(/static/img/base/yellow-grain.jpg) repeat;
@@ -975,7 +1071,7 @@
 
 #hero-image.cmonday {
     #quote-form {
-        height: 476px;
+        height: 500px;
         border-radius: 0;
         .content-box(376px);
         background: #fff;
@@ -1070,7 +1166,7 @@
             text-align: center;
             padding: 0;
             overflow: hidden;
-            height: 76px;
+            height: 45px;
             .third-party-badge {
                 margin: 0 auto; 
                 width: 135px; 
