@@ -14,6 +14,24 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <script type="text/javascript">
+    $(function () {
+        if (window.devicePixelRatio == 2) {
+              var images = $("img.hires");
+              // loop through the images and make them hi-res
+              for(var i = 0; i < images.length; i++) {
+                // create new image name
+                var imageType = images[i].src.substr(-5);
+                var imageName = images[i].src.substr(0, images[i].src.length - 5);
+                imageName += "-hires" + imageType;
+                //rename image
+                images[i].src = imageName;
+              }
+         }
+    });
+    </script>
+
 {% endblock %}
 {% block typekit-code %}
     <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
