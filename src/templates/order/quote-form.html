@@ -8,12 +8,13 @@
         <p class="form-title">Free Security Quote</p>
         {% endblock %}
         {% block formfields %}
-		  <label>Name</label>
-            {{ form.name }}
-
-		  <label>Email</label>
-            {{ form.email }}
-
+            <label>Name</label>
+                {{ form.name }}
+            
+            {% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' or request.GET.agent == 'BINGPPC' %}
+                <label>Email</label>
+                {{ form.email }}
+            {% endif %}
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}

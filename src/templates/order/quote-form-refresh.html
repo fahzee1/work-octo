@@ -2,14 +2,15 @@
 {% load content_tags content_filters sekizai_tags %}
        
 {% block formfields %}
-    {% if business_time %}<p class="phone-area">to place an order or receive a quote <b>call <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a> now!</b> <small>- or -</small><small>please provide your information below:</small></p>{% endif %}
+    {% if business_time %}<p class="phone-area">to place an order or receive a quote <b>call <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a> now!</b> <small>- or -</small><small>we'll give you a call back</small></p>{% endif %}
     
     <div class="form-fields">
            
         <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name">
            
-           
-        <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email">
+            {% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' or request.GET.agent == 'BINGPPC' %}
+                <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email">
+            {% endif %}        
            
            
         <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone">
