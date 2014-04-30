@@ -180,7 +180,7 @@ elif settings.SITE_ID == 3:
         # KEYWORD BASED
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
         dtt(r'^home-security/?$', 'affiliates/sem-landing-page/home-security.html', 'home-security'),
-        dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system.html', 'security-system'),
+        dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system-b.html', 'security-system'),
         dtt(r'^yahoo/?$', 'affiliates/sem-landing-page/yahoo.html', 'yahoo'),
 
         # COMPETITOR BASED
@@ -198,17 +198,13 @@ elif settings.SITE_ID == 3:
         dtt(r'^simplisafe/?$', 'affiliates/sem-landing-page/competitors/simplisafe.html', 'simplisafe'),
         dtt(r'^monotronics/?$', 'affiliates/sem-landing-page/competitors/monotronics.html', 'monotronics'),
         dtt(r'^verizon/?$', 'affiliates/sem-landing-page/competitors/verizon.html', 'verizon'),
-		dtt(r'^compare-us/?$', 'affiliates/sem-landing-page/competitors/compare-us.html', 'compare-us'),
+		dtt(r'^compare-us/?$', 'affiliates/sem-landing-page/competitors/compare-us-b.html', 'compare-us'),
 
         # TESTS
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
         dtt(r'^cyber-alt-19/?$', 'affiliates/sem-landing-page/test/green-19-white.html', 'green-white-19'),
         dtt(r'^cyber-19/?$', 'affiliates/sem-landing-page/test/green-19.html', 'green-19'),
-        dtt(r'^alarm-b/?$', 'affiliates/sem-landing-page/alarm-b.html', 'alarm-b'),
-        dtt(r'^home-security-b/?$', 'affiliates/sem-landing-page/home-security-b.html', 'home-security-b'),
-        dtt(r'^security-system-b/?$', 'affiliates/sem-landing-page/security-system-b.html', 'security-system-b'),
-        dtt(r'^adt-security-b/?$', 'affiliates/sem-landing-page/competitors/adt-b.html', 'adt-b'),
-        dtt(r'^compare-us-b/?$', 'affiliates/sem-landing-page/competitors/compare-us-b.html', 'compare-us-b'),
+
 
 
 
