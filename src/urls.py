@@ -190,6 +190,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^security-system-monitoring/?$', 'affiliates/sem-landing-page/security-system-monitoring.html', 'security-system-monitoring'),
         dtt(r'^protect-america-monitoring/?$', 'affiliates/sem-landing-page/protect-america-monitoring.html', 'protect-america-monitoring'),
 
+
         # COMPETITOR BASED
         dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/competitors/adt.html', 'adt'),
         dtt(r'^frontpoint-security/?$', 'affiliates/sem-landing-page/competitors/frontpoint.html', 'frontpoint'),
