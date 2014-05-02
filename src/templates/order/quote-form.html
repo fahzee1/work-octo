@@ -1,6 +1,6 @@
 
 {% load content_tags content_filters sekizai_tags %}
-<form id="quote-form" class="sleepy quote-form-white"  method="post" action="">
+<form id="quote-form" class="sleepy quote-form-white {% if not request.COOKIES.refer_id == 'BINGPPC' or not request.session.refer_id == 'BINGPPC' or not request.GET.agent == 'BINGPPC' %}no-email{% endif %}"  method="post" action="">
     {% block form-extra %}{% endblock %}
     {% csrf_token %}
 	<div>
@@ -8,12 +8,13 @@
         <p class="form-title">Free Security Quote</p>
         {% endblock %}
         {% block formfields %}
-		  <label>Name</label>
-            {{ form.name }}
-
-		  <label>Email</label>
-            {{ form.email }}
-
+            <label>Name</label>
+                {{ form.name }}
+            
+            {% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' or request.GET.agent == 'BINGPPC' %}
+                <label>Email</label>
+                {{ form.email }}
+            {% endif %}
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
