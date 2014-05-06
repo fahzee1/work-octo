@@ -211,11 +211,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
         dtt(r'^cyber-alt-19/?$', 'affiliates/sem-landing-page/test/green-19-white.html', 'green-white-19'),
         dtt(r'^cyber-19/?$', 'affiliates/sem-landing-page/test/green-19.html', 'green-19'),
-<<<<<<< HEAD
 
-
-
-=======
         dtt(r'^alarm-b/?$', 'affiliates/sem-landing-page/alarm-b.html', 'alarm-b'),
         dtt(r'^home-security-b/?$', 'affiliates/sem-landing-page/home-security-b.html', 'home-security-b'),
         dtt(r'^security-system-b/?$', 'affiliates/sem-landing-page/security-system-b.html', 'security-system-b'),
@@ -235,7 +231,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^simplisafe-b/?$', 'affiliates/sem-landing-page/competitors/simplisafe-b.html', 'simplisafe-b'),
         dtt(r'^monotronics-b/?$', 'affiliates/sem-landing-page/competitors/monotronics-b.html', 'monotronics-b'),
         dtt(r'^verizon-b/?$', 'affiliates/sem-landing-page/competitors/verizon-b.html', 'verizon-b'),
->>>>>>> switched all files to duplicates for testing
+
 
         # GEO Landing Pages
         dtt(r'^texas-home-security/?$', 'affiliates/sem-landing-page/geo/texas.html', 'geo-texas'),
