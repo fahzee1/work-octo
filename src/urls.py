@@ -182,6 +182,13 @@ elif settings.SITE_ID == 3:
         dtt(r'^home-security/?$', 'affiliates/sem-landing-page/home-security.html', 'home-security'),
         dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system-b.html', 'security-system'),
         dtt(r'^yahoo/?$', 'affiliates/sem-landing-page/yahoo.html', 'yahoo'),
+        dtt(r'^wireless-alarm/?$', 'affiliates/sem-landing-page/wireless-alarm.html', 'wireless-alarm'),
+		dtt(r'^wireless-home-security/?$', 'affiliates/sem-landing-page/wireless-home-security.html', 'wireless-home-security'),
+		dtt(r'^wireless-security-system/?$', 'affiliates/sem-landing-page/wireless-security-system.html', 'wireless-security-system'),
+        dtt(r'^alarm-monitoring/?$', 'affiliates/sem-landing-page/alarm-monitoring.html', 'alarm-monitoring'),
+        dtt(r'^home-security-monitoring/?$', 'affiliates/sem-landing-page/home-security-monitoring.html', 'home-security-monitoring'),
+        dtt(r'^security-system-monitoring/?$', 'affiliates/sem-landing-page/security-system-monitoring.html', 'security-system-monitoring'),
+        dtt(r'^protect-america-monitoring/?$', 'affiliates/sem-landing-page/protect-america-monitoring.html', 'protect-america-monitoring'),
 
         # COMPETITOR BASED
         dtt(r'^adt-security/?$', 'affiliates/sem-landing-page/competitors/adt.html', 'adt'),
