@@ -1641,7 +1641,7 @@ body {
   line-height: 0;
 }
 a {
-  color: #0066b3;
+  color: #3f99fe;
 }
 a h2 {
   text-decoration: none;
@@ -1968,7 +1968,8 @@ table#licenses-table tr.license-requirement td {
   color: #6598b9;
 }
 #header-wrapper #header .request-quote-button {
-  background: #54b0a4;
+  background: #ffc000;
+  color: #222;
   border-radius: 5px 5px 5px 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   -webkit-border-top-left-radius: 5px;
@@ -1976,15 +1977,21 @@ table#licenses-table tr.license-requirement td {
   -webkit-border-bottom-left-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
   text-decoration: none;
-  color: #ffffff;
   float: right;
-  font-weight: 100;
+  font-weight: 400;
   font-size: 16px;
   padding: 8px 16px;
   margin-top: 8px;
+  -webkit-transition: background-color 0.7s ease-out;
+  -moz-transition: background-color 0.7s ease-out;
+  transition: background-color 0.7s ease-out;
 }
 #header-wrapper #header .request-quote-button:hover {
-  background: #83d3c9;
+  background: #ffd75e;
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
+  color: #666;
 }
 #header-wrapper #header .request-quote-button.active {
   border-radius: 5px 5px 0 0;
@@ -2202,11 +2209,12 @@ table#licenses-table tr.license-requirement td {
   padding: 8px 0px 8px;
 }
 #quote-form p.form-title {
-  background: #54b0a4;
+  background: #ffc000;
   line-height: 56px;
   margin-bottom: 8px;
   font-size: 18px;
   text-transform: uppercase;
+  color: #2f394a;
 }
 #quote-form p.phone-area {
   font-size: 12px;
@@ -2245,8 +2253,8 @@ table#licenses-table tr.license-requirement td {
 }
 #quote-form .consent-box,
 #quote-form .consent-box-two {
-  border-bottom: 1px solid #333333;
-  padding: 4px 0;
+  border-bottom: 1px solid #ccc;
+  padding: 4px 0 8px;
   margin: 8px auto;
   width: 87%;
   color: #555;
@@ -2264,7 +2272,7 @@ table#licenses-table tr.license-requirement td {
 #quote-form .consent-box label.consent-label-two,
 #quote-form .consent-box-two label.consent-label-two {
   font-size: 10px;
-  line-height: 15px;
+  line-height: 12px;
   text-align: justify;
   float: left;
   cursor: pointer;
@@ -2280,8 +2288,8 @@ table#licenses-table tr.license-requirement td {
   -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
-  color: #ffffff;
-  background: #54b0a4;
+  color: #2f394a;
+  background: #ffc000;
   text-decoration: none;
   border: none;
   font-size: 18px;
@@ -2407,6 +2415,9 @@ table#licenses-table tr.license-requirement td {
 #quote-form.sleepy .consent-box-two #id_consent_two {
   margin: 8px 8px 8px 8px;
 }
+#quote-form.no-email .quote-content {
+  margin-bottom: 8px;
+}
 body.alternate .request-quote-button {
   display: none;
 }
@@ -2470,10 +2481,10 @@ body.alternate #hero-banner.alt-form #quote-form button {
   top: 32%;
 }
 #order-footer-wrapper {
-  background: #fcfcfc;
+  background: #fad20f;
 }
 #order-footer-wrapper #order-footer {
-  width: 960px;
+  width: 100%;
   margin: 0 auto;
 }
 #order-footer-wrapper #order-footer #footer-package-section {
@@ -2560,48 +2571,15 @@ body.alternate #hero-banner.alt-form #quote-form button {
 }
 /************** Footer ****************/
 #order-footer {
-  width: 960px;
-  margin: 0 0 15px;
-  float: left;
-  position: relative;
-  background: #fcfcfc;
-  border: 1px solid #cccccc;
+  width: 100%;
+  background: #fad20f;
+  border: none;
   padding: 0px;
-  margin: 8px auto 8px;
+  margin: 20px auto 0;
   float: none;
   -webkit-transition: background-color 0.3s ease-out;
   -moz-transition: background-color 0.3s ease-out;
   transition: background-color 0.3s ease-out;
-}
-#order-footer h1 {
-  color: #1570ab;
-  font-size: 26px;
-  font-weight: normal;
-  line-height: 36px;
-  margin-bottom: 10px;
-  letter-spacing: -1px;
-}
-#order-footer h2 {
-  color: #555555;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
-  padding-bottom: 8px;
-}
-#order-footer h2 span {
-  display: block;
-}
-#order-footer p {
-  text-align: justify;
-  line-height: 24px;
-  margin-bottom: 8px;
-}
-#order-footer h3 {
-  color: #555555;
-  font-size: 18px;
-  border-bottom: none;
-  font-weight: bold;
-  padding: 8px 0px 8px;
 }
 #order-footer h3 {
   font-weight: bold;
@@ -2611,7 +2589,7 @@ body.alternate #hero-banner.alt-form #quote-form button {
 #order-footer #footer-package-section {
   width: 309px;
   border-right: 1px solid #eeeeee;
-  padding: 16px 16px;
+  padding: 16px;
   float: left;
 }
 #order-footer #footer-package-section input {
@@ -2676,32 +2654,48 @@ body.alternate #hero-banner.alt-form #quote-form button {
 }
 #order-footer #footer-call-now,
 #order-footer #footer-chat-now {
-  width: 276px;
-  border-right: 1px solid #eeeeee;
-  float: left;
-  padding: 16px 16px;
-  height: 128px;
+  width: 960px;
+  border-right: none;
+  float: none;
+  padding: 80px 0 30px;
+  height: 140px;
+  margin: 0 auto;
+}
+#order-footer #footer-call-now h3,
+#order-footer #footer-chat-now h3 {
+  font-size: 24px;
+  padding-bottom: 10px;
 }
 #order-footer #footer-call-now p,
 #order-footer #footer-chat-now p {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 16px;
   padding: 0 8px 8px 0;
   margin-bottom: 0;
 }
 #order-footer #footer-call-now span,
 #order-footer #footer-chat-now span {
-  color: #eb292b;
+  color: #333;
   display: block;
-  font-size: 32px;
+  font-size: 28px;
   line-height: 32px;
-  padding-top: 9px;
+  padding-top: 6px;
   font-weight: bold;
+  float: left;
 }
 #order-footer #footer-call-now span a,
 #order-footer #footer-chat-now span a {
   text-decoration: none;
-  color: #eb292b;
+  color: #333;
+  background: transparent;
+}
+#order-footer #footer-call-now a.button-link.stylized,
+#order-footer #footer-chat-now a.button-link.stylized {
+  float: right;
+  background: #fff;
+  color: #2f394a;
+  font-size: 18px;
+  padding: 15px 20px;
 }
 #order-footer #footer-chat-now {
   border-right: none;
@@ -2895,7 +2889,7 @@ body.alternate #hero-banner.alt-form #quote-form button {
 }
 /************* Big Hero Banner Default *****************/
 #hero-wrapper {
-  height: 496px;
+  height: 470px;
   background: #2b80b8 url(/static/img/base/bg-blue.png) repeat;
   position: relative;
   z-index: 0;
@@ -3131,8 +3125,8 @@ body.alternate #hero-banner.alt-form #quote-form button {
   font-size: 13px;
 }
 #hero-wrapper #hero-image.cmonday #quote-form .form-fields .consent-box {
-  border-top: 1px solid #dfdfdf;
-  border-bottom: 1px solid #dfdfdf;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   padding: 4px 0;
   margin-top: 8px;
   cursor: pointer;
@@ -3563,19 +3557,6 @@ body.alternate #hero-banner.alt-form #quote-form button {
 .testimonials .testimonial.mid {
   margin: 0 24px;
 }
-#header-wrapper #header .request-quote-button {
-  background: #ffc000;
-  color: #222;
-  font-weight: 400;
-}
-#header-wrapper #header .request-quote-button:hover {
-  color: #666;
-  -webkit-transition: background-color 0.3s ease-out;
-  -moz-transition: background-color 0.3s ease-out;
-  transition: background-color 0.3s ease-out;
-  background: #ffd75e;
-  text-decoration: none;
-}
 #hero-wrapper.bf {
   background: #222222 url(/static/img/promo/bf/bf-bg.png) repeat-x center bottom;
 }
@@ -3896,18 +3877,15 @@ body.index .wrapper #categories .category .category-info p {
   color: #888;
 }
 body.index .wrapper #categories .category .category-info a.button-link {
-  background: #ffc000;
-  color: #222;
-}
-body.index .wrapper #categories .category .category-info a.button-link i {
-  border-left: 1px solid #d5a100;
+  background: #3f99fe;
+  color: #fff;
 }
 body.index .wrapper #categories .category .category-info a.button-link:hover {
-  color: #666;
+  color: #fff;
   -webkit-transition: background-color 0.3s ease-out;
   -moz-transition: background-color 0.3s ease-out;
   transition: background-color 0.3s ease-out;
-  background: #ffd75e;
+  background: #78b7fe;
   text-decoration: none;
 }
 body.index #call-box {
@@ -4392,16 +4370,16 @@ body.index #call-box p a span {
 #hero-wrapper #hero-image #spring-savings .main-hero-image {
   position: absolute;
   z-index: -1;
-  left: -16px;
+  left: 20px;
   bottom: 0;
   top: 0;
 }
 #hero-wrapper #hero-image #spring-savings a.button-link {
-  padding: 10px 12px;
+  padding: 8px 4px;
   background: #ffc000;
   color: #222;
-  margin-left: 500px;
-  margin-top: 270px;
+  margin-left: 508px;
+  margin-top: 250px;
   float: none;
   width: 160px;
 }
@@ -4422,7 +4400,7 @@ body.index #call-box p a span {
   font-weight: 400;
   text-shadow: none;
   text-transform: uppercase;
-  padding: 14px 0 0;
+  padding: 10px 0 0;
   margin: 0 0 0 225px;
   letter-spacing: 1px;
 }
@@ -4743,8 +4721,8 @@ body.index #call-box p a span {
   font-size: 13px;
 }
 #hero-image.cmonday #quote-form .form-fields .consent-box {
-  border-top: 1px solid #dfdfdf;
-  border-bottom: 1px solid #dfdfdf;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
   padding: 4px 0;
   margin-top: 8px;
   cursor: pointer;
@@ -4756,8 +4734,8 @@ body.index #call-box p a span {
   width: 16px;
 }
 #hero-image.cmonday #quote-form .form-fields .consent-box label.consent-label {
-  font-size: 9px;
-  line-height: 14px;
+  font-size: 10px;
+  line-height: 12px;
   text-align: left;
   float: left;
   width: 148px;
