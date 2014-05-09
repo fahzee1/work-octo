@@ -65,6 +65,24 @@ def send_alarmzone_email(data):
     send_mail(subject,message,from_email,[to_email,to_email2])
 
 
+def send_larryhunt_email(data):
+    subject = 'New lead!'
+    message = """
+              Name : %s \n
+              Email: %s \n
+              Phone: %s \n
+              Lead ID: %s \n
+              Location: %s \n""" % (data['customername'],
+                                    data['email'],
+                                    data['phone'],
+                                    data['lead_id'],
+                                    data['formlocation'])
+
+    from_email = 'Protect America <noreply@protectamerica.com>'
+    to_email =  'larryhunt07@gmail.com'
+    send_mail(subject,message,from_email,[to_email])
+
+
 
 def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,notify_all=True):
     if notify_all:
@@ -467,6 +485,8 @@ def basic_post_login(request):
         formset.trusted_url = trusted_url
         formset.ip_address = request.META.get('REMOTE_ADDR',None)
         formset.retry = True
+        if request_data['agentid'] == 'b10744':
+            formset.retry = False
         formset.browser = browser
         formset.operating_system = OS
         formset.device = device_name
@@ -513,6 +533,9 @@ def basic_post_login(request):
             'lead_id': formset.id,
             'notes': notes
         }
+        if request_data['agentid'] == 'b10744':
+            send_larryhunt_email(emaildata)
+
         if acn_business_name:
             emaildata['customername'] = '%s (%s)' %(acn_business_name,fdata['name'])
 
