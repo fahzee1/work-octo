@@ -51,6 +51,35 @@ class AffiliateMiddleware(object):
             return None
 
 
+        refer = request.session.get('refer_id')
+        cookie = request.COOKIES.get('refer_id')
+
+        bing = False
+        if refer == 'i10797':
+            bing = True
+        if refer == 'i10798':
+            bing = True
+        if refer == 'i10799':
+            bing = True
+        if refer == 'i10800':
+            bing = True
+        if refer == 'i10801':
+            bing = True
+        if refer == 'i10802':
+            bing = True
+        if refer == 'BINGPPC':
+            bing = True
+        if cookie == 'BINGPPC':
+            bing = True
+        if request.GET.get('agent') == 'BINGPPC':
+            bing = True
+
+
+        request.session['is_bing'] = bing
+
+        print 'request session %s' % request.session['is_bing']
+
+
         print 'refer_id is now %r' % request.session.get('refer_id')
         return None
 
@@ -186,31 +215,6 @@ class AffiliateMiddleware(object):
         cookie = request.COOKIES.get('refer_id')
         print 'refer is %r ' % refer
 
-
-        bing = False
-        if refer == 'i10797':
-            bing = True
-        if refer == 'i10798':
-            bing = True
-        if refer == 'i10799':
-            bing = True
-        if refer == 'i10800':
-            bing = True
-        if refer == 'i10801':
-            bing = True
-        if refer == 'i10802':
-            bing = True
-        if refer == 'BINGPPC':
-            bing = True
-        if cookie == 'BINGPPC':
-            bing = True
-        if request.GET.get('agent') == 'BINGPPC':
-            bing = True
-
-
-        request.session['is_bing'] = bing
-
-        print 'request session %s' % request.session['is_bing']
 
         return response
 
