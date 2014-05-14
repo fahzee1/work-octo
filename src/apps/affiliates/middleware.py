@@ -75,7 +75,9 @@ class AffiliateMiddleware(object):
             bing = True
 
 
+
         request.session['is_bing'] = bing
+        request.COOKIES['is_bing'] = bing
 
         print 'request session %s' % request.session['is_bing']
 
