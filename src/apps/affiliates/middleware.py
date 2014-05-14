@@ -10,6 +10,48 @@ from apps.affiliates.models import Affiliate
 
 class AffiliateMiddleware(object):
 
+    def process_request(self,request):
+        if 'agent' in request.GET:
+                try:
+                    affiliate = Affiliate.objects.get(agent_id=request.GET['agent'])
+                    request.session['refer_id'] = affiliate.agent_id
+                    request.session['source'] = affiliate.name
+                except Affiliate.DoesNotExist:
+                    request.session['refer_id'] = 'HOMESITE'
+                    request.session['source'] = 'PROTECT AMERICA'
+
+
+        refer = request.session.get('refer_id')
+        cookie = request.COOKIES.get('refer_id')
+
+        bing = False
+        if refer == 'i10797':
+            bing = True
+        if refer == 'i10798':
+            bing = True
+        if refer == 'i10799':
+            bing = True
+        if refer == 'i10800':
+            bing = True
+        if refer == 'i10801':
+            bing = True
+        if refer == 'i10802':
+            bing = True
+        if refer == 'BINGPPC':
+            bing = True
+        if cookie == 'BINGPPC':
+            bing = True
+        if request.GET.get('agent') == 'BINGPPC':
+            bing = True
+
+
+
+        request.session['is_bing'] = bing
+        request.COOKIES['is_bing'] = bing
+
+        print 'request session %s' % request.session['is_bing']
+
+
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         print 'process_view, %r' % request.get_full_path()
@@ -38,6 +80,7 @@ class AffiliateMiddleware(object):
                     request.session['refer_id'] = 'BINGPPC'
             if settings.SITE_ID == 4:
                 request.session['refer_id'] = 'LocalSearch'
+
 
         from apps.common.context_processors import get_affiliate_from_request
         current_affiliate = get_affiliate_from_request(request)
