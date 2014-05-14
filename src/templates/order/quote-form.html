@@ -10,8 +10,7 @@
         {% block formfields %}
             <label>Name</label>
                 {{ form.name }}
-            
-            {% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'BINGPPC' or request.GET.agent == 'BINGPPC' %}
+            {% if request.session.is_bing %}
                 <label>Email</label>
                 {{ form.email }}
             {% endif %}
