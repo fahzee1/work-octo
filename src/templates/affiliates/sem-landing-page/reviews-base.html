@@ -1,0 +1,298 @@
+{% extends "affiliates/sem-landing-page/paid-base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block page_title %}Alarm System Reviews | Home Alarms | Protect America{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/review-base.css">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;">
+    <link href="http://www.protectamerica.com/static/css/font-awesome/4.0.3/font-awesome.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div id="hero-wrapper" class="reviewsbg">
+	<img id="banner" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-banner.png" alt="">
+    <div id="hero-image" class="cmonday">
+        {% include "order/quote-form-white.html" with form=forms.basic %}
+        <div id="reviews-header">
+            <h1>{% block header-h1 %}The Best Alarm System{% endblock %}</h1>
+            <p>{% block header-p %} With so many choices from alarm security companies, it’s nice to hear from real people about their recommendations. The results are in, and Protect America is consistently top-notch! {% endblock %}</p>
+			<img id="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-head-stars.png" alt="">
+			<h2>5 Star Service for just <span>$5 a week</span></h2>
+			<img id="sprite" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-head-sprite.png" alt="">
+			<a href="#reviews" class="button-link">Read Our Reviews</a>
+        </div>
+    </div>
+</div>
+    {% include "order/call-box.html" %}
+    <!-- Featured on banner -->
+
+    <div id="featured-on">
+        <small>Proudly Featured on:</small>
+        <div id="featured-badges">
+            <div class="featured abc">&nbsp;</div>
+            <div class="featured besty">&nbsp;</div>
+            <div class="featured npr">&nbsp;</div>
+            <div class="featured topconsumer">&nbsp;</div>
+            <div class="featured foxnews">&nbsp;</div>
+            <div class="featured consumerdigest">&nbsp;</div>
+            <div class="featured buzz">&nbsp;</div>
+            <div class="featured bbb">&nbsp;</div>
+            <div class="featured gadgeteer">&nbsp;</div>
+            <div class="featured toptens">&nbsp;</div>
+            <div class="featured cw">&nbsp;</div>
+            <div class="featured history">&nbsp;</div>
+
+        </div>
+    </div>
+    {% block lifestyle %}
+
+    {% endblock %}
+	{% block benefits %}
+	
+    {% endblock %}
+    <div class="wrapper">
+        <div id="security-information">
+            <div id="main-benefits">
+                    {% block benefits-headline %}<h2>The Protect America Advantage</h2>{% endblock %}
+                    {% block benefits-subhead %}<p>WE MAKE IT EASY TO SECURE AND PROTECT YOUR HOME AND FAMILY.</p>{% endblock %}
+                    <ul>
+                        {% block benefits-1 %}
+                        <li>
+                            <h3><i class="fa fa-money"></i>The Lowest Price. Period.</h3>
+                            <p>Protect America wireless packages begin at just $19.99 a month. We’re dedicated to making home security affordable for everyone.</p>
+                        </li>
+                        {% endblock %}
+                        {% block benefits-2 %}
+
+                        <li class="mobile">
+                            <h3><i class="fa fa-home"></i>Top Security System Monitoring</h3>
+                            <p>Plug in to the Protect America 24/7 national monitoring grid for peace of mind like never before.</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-3 %}
+
+                        <li class="alt">
+                            <h3><i class="fa fa-rss"></i>Welcome to Wireless</h3>
+                            <p>Wireless alarm technology means no hassle, no complicated equipment and no expensive professional installation. It also means no drilling holes and no running wires.</p>
+                        </li>
+                        {% endblock %}
+                        <div class="clear"></div>
+                        {% block benefits-4 %}
+
+                        <li class="mobile">
+                            <h3><i class="fa fa-heart"></i>We’re Celebrated!</h3>
+                            <p>Our Copper security system and monitoring package has been named a Consumer's Digest "Best Buy" and we are ranked number one by BestHomeSecurityCompanys.com</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-5 %}
+
+                        <li class="mobile">
+                            <h3><i class="fa fa-user"></i>Flexible is Better</h3>
+                            <p>Each system is tailored to your home by a Protect America security expert. Explore a variety of home security and monitoring options!</p>
+                        </li>
+                        {% endblock %}
+
+                        {% block benefits-6 %}
+
+                        <li class="alt">
+                            <h3><i class="fa fa-thumbs-o-up "></i>No Installation or <span>Equipment Fees</span></h3>
+                            <p>Setting up your alarm should be stress-free and easy on your wallet. That’s why our packages come with free equipment and no installation fees.</p>
+                        </li>
+                        {% endblock %}
+
+                    </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="triple-guarantee">
+            <h2>Protect America<br>
+            <strong>Triple Guarantee<strong></h2>
+            <ul>
+                <li><i class="icon-check-sign"></i>Lowest price</li>
+                <li><i class="icon-check-sign"></i>No equipment fees</li>
+                <li class="last"><i class="icon-check-sign"></i>Lifetime replacement plan</li>
+            </ul>
+        </div>
+        <div class="clear" id="reviews"></div>
+    </div>
+    {% block reviews %}
+    <div id="review-background-wrapper">
+	    <div class="wrapper">
+	        <div id="review-wrapper">
+				{% block reviews-headline %}<h2>What our customers say</h2>{% endblock %}
+				{% block reviews-subhead %}<p>Don’t just take our word for it, real customers are talking!</p>{% endblock %}
+				
+				<div id="left-column">
+				    {% block review-1 %}
+		            <div class="review">
+		            	<div class="box">
+			            	<p>We are very pleased with our new alarm system. The rep that signed us up was very helpful in providing us with different options and was always available when we had questions. Best of all there was no activation fee or hidden charges. I would recommend them to anyone looking for a security system at a decent cost.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>Raymond <span>of</span> Hemet, CA</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+		            {% endblock %}
+		            {% block review-2 %}
+		            <div class="review">
+		            	<div class="box">
+			            	<p>I just got my Protect America home security system yesterday. Brian was my sales rep, and was very helpful changing my package to meet my needs, when I called the company to set up my system Avery helped me set it up. He was great, answered all my questions, and had me safe and protected in half an hour. This system works great and I have a med alert button to wear for health reasons. Because we have stalkers and live in a bad neighborhood , my children and I have had to take shifts (armed) to feel safe. We all slept with loaded guns, but last night I slept like a baby!!! Thank you for your great service! And this company calls the sheriff, fire dept, and the first responders for you within 60 seconds if an alarm goes off and you do not answer your phone. They also provide a duress code if you are being forced to turn off your alarm against your will... I highly recommend this system.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>Melody <span>of</span> Hartville, MI</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+		            {% endblock %}
+		            {% block review-3 %}
+		            <div class="review">
+		            	<div class="box">
+			            	<p>I'm overall very pleased with the service. I had other alarm systems before but now I actually feel like my home and family are protected and the amount of coverage you get for the price is amazing. I'm a happy customer with Protect America.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>Lisa <span>of</span> Elkins Park, PA</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+		            {% endblock %}
+		            {% block review-4 %}
+		            <div class="review">
+		            	<div class="box">
+			            	<p>I have to admit my experience was very good. We requested an upgrade to motion sensors and they were sent in a reasonable amount of time. The website videos for installation were very helpful. I also found the suggestions for equipment location to be helpful. Once I had everything in place I called for activation assistance and was very pleased with how I was walked through the activation of the door/window sensors, smoke alarm, key fobs and motion detectors. I am very happy with the cellular connection and notification system. I am confident that my home and family are safe and secure.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>George <span>of</span> Eastpointe, MI</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+		            {% endblock %}
+				</div>
+				<div id="right-column">
+					{% block review-5 %}
+		            <div class="review">
+		            	<div class="box">
+			            	<p>I have been extremely pleased with entire process of of buying, installing and setting up iPhone control of my mothers' alarm system. Your personnel were all courteous, professional, and efficient. The set up was a breeze. It was so simple. I had everything up in 20 minutes and thanks to josh the process was simple and not tedious or difficult. With your support anyone can set this up. Josh was extremely patient and professional and did not try to rush and at the end asked if he could do anything else to help. My mom now has a great alarm and an emergency button hanging around her neck, what peace of mind for her and me who lives 200 miles away. Rick ** was exceptional and very charismatic in helping me set up her iPhone to control the alarm. I have ADT. There is no comparison and I will be switching to protect america when my contract expires this June. Thank you all.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>Cesar <span>of</span> Baltimore, MD</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+		            {% endblock %}
+		            {% block review-6 %}
+		            <div class="review">
+		            	<div class="box">
+			            	<p>I have been a satisfied customer for 11 years now. I’ve upgraded my alarm system twice and my experience with the sales, set up, activation and customer service have been nothing short of excellent! Protect America has the best customer service in the business. No doubt about it. Everyone is pleasant and a true professional. Protect America has the best equipment and the lowest monthly monitoring fee out there.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>Michael <span>of</span> Seattle, WA</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+					{% endblock %}
+					{% block review-7 %}
+		            <div class="review">
+		            	<div class="box">
+			            	<p>I have used Protect America for over 4 years to make me feel safe and secure both at home and when I am away. I have protection which will alert the fire department whether I am home or not. If someone breaks a window, walks through my home or opens any door or window, an alarm will send them running and notify the police. If you want the same peace of mind that I have, I highly recommend Protect America. One additional note; I would suggest the remote touch pad which can set the alarms after I have gone to bed.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>Steven</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+		            {% endblock %}
+					{% block review-8 %}
+					<div class="review">
+		            	<div class="box">
+			            	<p>The time that I have had with the company has been great always had a great relationship with Protect America. Always called to make sure things was going ok if the alarm was triggered. Thank you for a fantastic service.</p>
+		            	</div>
+		            	<div class="info">
+		            	<img class="triangle" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-triangle.png" alt"">
+		            	<h3>Melinda</h3>
+		            	<img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+		            	</div>
+		            </div>
+		            {% endblock %}
+				</div>
+				<div class="clear"></div>
+	        </div>
+	        <div class="clear"></div>
+	    </div>
+    </div>
+    {% block advantage %}
+    <div id="advantage-table-wrapper">
+        <div id="advantage-table">
+            {% block advantage-header %}
+            <h2>A Step above the rest <span>providing more safety and security for less</span></h2>
+            {% endblock %}
+            <table>
+                <thead>
+                    {% block table-headers %}
+
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Equipment & Activation Fees</th>
+                        <th>24/7 Alarm Monitoring</th>
+                        <th>Lowest Price Guaranteed</th>
+                        <th class="extra">Lifetime Equipment Warranty</th>
+                        <th class="extra">Locked-In Rate</th>
+                        <th>Monthly Cost</th>
+                    </tr>
+                    {% endblock %}
+                </thead>
+                <tbody>
+                    {% block advantage-us %}
+
+                    <tr class="alpha">
+                        <td class="title">Protect America</td>
+                        <td class="price">$0</td>
+                        <td>Included</td>
+                        <td>Included</td>
+                        <td class="extra">Included</td>
+                        <td class="extra">Included</td>
+                        <td class="price">$19.99</td>
+                    </tr>
+                    {% endblock %}
+                    {% block advantage-competitor-1 %}
+                    <tr>
+                        <td class="title">Frontpoint</td>
+                        <td class="price">$99</td>
+                        <td>Included</td>
+                        <td class="na">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="price">$34.95</td>
+                    </tr>
+                    {% endblock %}
+                    {% block advantage-competitor-2 %}
+                    <tr>
+                        <td class="title">ADT</td>
+                        <td class="price">$99</td>
+                        <td>Included</td>
+                        <td class="na">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="price">$42.99</td>
+                    </tr>
+                    {% endblock %}
+                </tbody>
+            </table>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+    {% endblock %}
+{% endblock %}
+{% endblock %}
