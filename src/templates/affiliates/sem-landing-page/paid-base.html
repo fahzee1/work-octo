@@ -6,7 +6,7 @@
 {% endblock %}
 {% block page_title %}Alarm Systems | Home Alarms | Protect America{% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/adt.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/paid-base.css">
     <!--[if (lt IE 9) & (!IEMobile)]>
     <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
     <![endif]-->
@@ -89,34 +89,33 @@
 {% endblock %}
 {% block content %}
 
-<div id="hero-wrapper" class="ssavings">
-    <div id="hero-image" class="cmonday">
-        {% include "order/quote-form-white.html" with form=forms.basic %}
-        <div id="spring-savings">
-            <h1>{% block h2 %}Best Alarm System{% endblock %}</h1>
-            <a href="http://www.protectamerica.com/shop-home-security-packages/" class="button-link stylized">Get Started Now</a>
-            <h3>Other unbeatable deals</h3>
-            <div class="ssavings-deals">
-                <a href="http://www.protectamerica.com/equipment/home-security/security-camera"><img src="{{ STATIC_URL }}img/banners/hero-banners/spring-savings/free-security-camera.png" class="border-right" alt="Get a free security camera" /></a>
-                <a href="http://www.protectamerica.com/shop-home-security-packages"><img src="{{ STATIC_URL }}img/banners/hero-banners/spring-savings/free-security-system.png" class="border-right" alt="Free security system" /></a>
-                <img src="{{ STATIC_URL }}img/banners/hero-banners/spring-savings/home-automation.png" class="border-none" alt="Home automation" />
+
+    <div id="hero-wrapper" class="cmonday">
+        <div id="hero-image" class="cmonday">
+            {% block quoteform %}
+                {% include "order/quote-form-white.html" with form=forms.basic %}
+            {% endblock %}
+            {% block party-box %}
+                {% include "banners/deals.html" %}
+            {% endblock %}
+            {% block deal-image %}
+            {% endblock %}
+            <div id="cyber-monday">
+                <h1>{% block h2 %}Best Alarm System{% endblock %}</h1>
+                <h2>{% block h1 %}for any home{% endblock %}</h2>
+                <p>Plans starting at only</p>
+                <div class="price-area">
+                    {% block price-area %}<img src="{{ STATIC_URL }}img/banners/cyber-monday/1999_NEW.png" alt="$19.99 per month" />{% endblock %}
+                </div>
+                {% block hero-buttons %}
+                    <a href="http://www.protectamerica.com/shop-home-security-packages" class="button-link stylized hide-mobile no-desktop">Get Started Now</a>
+                    <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);" class="button-link hide-desktop stylized no-mobile" style="width: 123px;">Call Now</a>
+                {% endblock %}
             </div>
-            <img src="{{ STATIC_URL }}img/banners/hero-banners/spring-savings/header.jpg" class="main-hero-image" alt="Spring Savings event" />
         </div>
-        {% comment %}
-        <div id="mothers-day">
-            <h1>Home security systems</h1>
-            <h2>Deals Just for Her</h2>
-            <div class="mothers-day-deals">
-                <a href="http://www.protectamerica.com/shop-home-security-systems"><img src="{{ STATIC_URL }}img/banners/hero-banners/mothers-day/free-security-system.png" class="border-right" alt="Get a free security system" /></a>
-                <a href="http://www.protectamerica.com/equipment/life-safety/smoke-detector"><img src="{{ STATIC_URL }}img/banners/hero-banners/mothers-day/fire-smoke.png" class="border-right" alt="Fire and smoke protect for 9.99" /></a>
-                <a href="http://www.protectamerica.com/equipment/life-safety/medical-alert"><img src="{{ STATIC_URL }}img/banners/hero-banners/mothers-day/free-medical-pendant.png" class="border-none" alt="Free medical pendant" /></a>
-            </div>
-            <img src="{{ STATIC_URL }}img/banners/hero-banners/mothers-day/header.jpg" class="main-hero-image" alt="Spring Savings event" />
-        </div>
-        {% endcomment %}
     </div>
-</div>   
+
+
 
  {% include "order/call-box.html" %}
     <!-- Featured on banner -->
@@ -139,19 +138,6 @@
 
         </div>
     </div>
-    {% block lifestyle %}
-    <div id="lifestyle-shot">
-        <div class="wrapper">
-            <div id="home-content">
-                {% block lifestyle-headline %}<h2 >The perfect alarm system <span>for your home.</span></h2>{% endblock %}
-                {% block lifestyle-subhead %}<p><strong>An alarm system built for you.</strong> Don't have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>{% endblock %}
-                <a href="" class="button-link  order-button hide-mobile no-desktop">Order Now <i class="icon-chevron-right"></i></a>
-                <a href="tel:{{ phone_number|format_number }}" class="button-link hide-desktop no-mobile">Order Now <i class="icon-chevron-right"></i></a>
-
-            </div>
-        </div>
-    </div>
-    {% endblock %}
     {% block benefits %}
     <div class="wrapper">
         <div id="security-information">
@@ -219,6 +205,19 @@
             </ul>
         </div>
         <div class="clear"></div>
+    </div>
+    {% endblock %}
+    {% block lifestyle %}
+    <div id="lifestyle-shot">
+        <div class="wrapper">
+            <div id="home-content">
+                {% block lifestyle-headline %}<h2 >The perfect alarm system <span>for your home.</span></h2>{% endblock %}
+                {% block lifestyle-subhead %}<p><strong>An alarm system built for you.</strong> Don't have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>{% endblock %}
+                <a href="" class="button-link  order-button hide-mobile no-desktop">Order Now <i class="icon-chevron-right"></i></a>
+                <a href="tel:{{ phone_number|format_number }}" class="button-link hide-desktop no-mobile">Order Now <i class="icon-chevron-right"></i></a>
+
+            </div>
+        </div>
     </div>
     {% endblock %}
     {% block advantage %}
