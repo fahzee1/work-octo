@@ -4,7 +4,8 @@ from django.contrib.localflavor.us.models import (PhoneNumberField,
     USStateField)
 from django.template import loader, Context
 from django.core.mail import EmailMessage
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 # Create your models here.
 DEPARTMENT_CHOICES = (
@@ -224,7 +225,27 @@ class CEOFeedback(models.Model):
     class Meta:
         ordering = ['-date_created']
 
-    def email_company(self):
+
+    def email_company(self,data):
+        subject = 'Your Opinions Matter'
+        from_email = 'Protect America <noreply@protectamerica.com>'
+        to_email = 'feedback@protectamerica.com'
+        data['sub'] = self
+        html_content = render_to_string('emails/ceo_feedback_to_company.html',data)
+        try:
+            msg = EmailMultiAlternatives(subject,html_content,from_email,[to_email])
+            msg.attach_alternative(html_content,'text/html')
+            msg.send()
+        except:
+            subject = 'CEO Feedback email failed sending to feedback@protectamerica.com'
+            to_email = 'Development <Development@protectamerica.com>'
+            msg = EmailMultiAlternatives(subject,html_content,from_email,[to_email])
+            msg.attach_alternative(html_content,'text/html')
+            msg.send()
+
+
+    """
+    def email_company(self,data):
         t = loader.get_template('emails/ceo_feedback_to_company.html')
         c = Context({'sub': self})
         email = EmailMessage(
@@ -234,6 +255,8 @@ class CEOFeedback(models.Model):
             ['feedback@protectamerica.com'],
              headers = {'Reply-To': 'noreply@protectamerica.com'})
         email.send()
+
+    """
 
     def convert_to_textimonial(self):
         from apps.testimonials.models import Textimonial

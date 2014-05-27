@@ -641,7 +641,8 @@ def ceo(request):
     if request.method == "POST":
         if request.POST['rating'] == '4' or request.POST['rating'] == '5':
             data = {'customer': request.POST['name'],
-                    'email': request.POST['email']}
+                    'email': request.POST['email'],
+                    'ip_address': request.META.get('REMOTE_ADDR',None)}
             send_ceoposiive(data)
 
 
@@ -649,7 +650,7 @@ def ceo(request):
         if formset.is_valid():
             form = formset.save(commit=False)
             form.save()
-            form.email_company()
+            form.email_company(data)
 
             return HttpResponseRedirect(reverse('ceo-thank-you'))
     else:
