@@ -227,7 +227,7 @@ class CEOFeedback(models.Model):
 
 
     def email_company(self,data):
-        subject = 'Your Opinions Matter'
+        subject = 'CEO Feedback: %s' % self.feedback_type
         from_email = 'Protect America <noreply@protectamerica.com>'
         to_email = 'feedback@protectamerica.com'
         data['sub'] = self
