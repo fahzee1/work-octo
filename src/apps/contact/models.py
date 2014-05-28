@@ -222,6 +222,8 @@ class CEOFeedback(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
 
+    ip_address = models.CharField(max_length=128, blank=True, null=True)
+
     class Meta:
         ordering = ['-date_created']
 

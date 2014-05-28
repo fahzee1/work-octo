@@ -639,15 +639,20 @@ def main(request):
 # This is the send feedback to CEO form
 def ceo(request):
     if request.method == "POST":
+        ip_address = request.META.get('REMOTE_ADDR',None)
         data = {'customer': request.POST['name'],
                     'email': request.POST['email'],
-                    'ip_address': request.META.get('REMOTE_ADDR',None)}
+                    'ip_address': ip_address}
 
         if request.POST['rating'] == '4' or request.POST['rating'] == '5':
             send_ceoposiive(data)
 
 
-        formset = CeoFeedbackForm(request.POST)
+
+        temp = request.POST.copy()
+        temp['ip_address'] = ip_address
+        formset = CeoFeedbackForm(temp)
+
         if formset.is_valid():
             form = formset.save(commit=False)
             form.save()

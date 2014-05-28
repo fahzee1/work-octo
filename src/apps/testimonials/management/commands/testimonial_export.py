@@ -25,7 +25,7 @@ class Command(BaseCommand):
         csv_file_path = os.path.join(settings.MEDIA_ROOT, 'month_to_date_ceo_feedbacks.csv')
         writer = csv.writer(open(csv_file_path, 'w'),
             delimiter=',', quotechar='"')
-        
+
         writer.writerow([
             'name',
             'email',
@@ -37,8 +37,9 @@ class Command(BaseCommand):
             'rep_name',
             'message',
             'rating',
-            'date_created'
-        ])    
+            'date_created',
+            'ip_address',
+        ])
         for feedback in feedbacks:
             writer.writerow([
                 feedback.name.encode('ascii', 'ignore'),
@@ -52,4 +53,5 @@ class Command(BaseCommand):
                 feedback.message.encode('ascii', 'ignore'),
                 feedback.rating,
                 feedback.date_created,
+                feedback.ip_address,
             ])
