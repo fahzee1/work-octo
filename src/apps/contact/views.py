@@ -639,10 +639,11 @@ def main(request):
 # This is the send feedback to CEO form
 def ceo(request):
     if request.method == "POST":
-        if request.POST['rating'] == '4' or request.POST['rating'] == '5':
-            data = {'customer': request.POST['name'],
+        data = {'customer': request.POST['name'],
                     'email': request.POST['email'],
                     'ip_address': request.META.get('REMOTE_ADDR',None)}
+
+        if request.POST['rating'] == '4' or request.POST['rating'] == '5':
             send_ceoposiive(data)
 
 
