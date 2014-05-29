@@ -7,7 +7,7 @@ import logging
 import pdb
 
 from django.http import Http404, HttpResponseRedirect, HttpResponsePermanentRedirect
-from django.shortcuts import render_to_response, render 
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.contrib.localflavor.us.us_states import US_STATES
 from django.utils import simplejson
@@ -133,9 +133,16 @@ def local_page(request, state, city=None, keyword=None):
         if zipcode:
             zipcodestr = zipcode[0].zip
         state_obj = State.objects.get(abbreviation=state)
+
+        try:
+            city_id = csr[str(crime_stats_ctx['city_id'])]
+
+        except KeyError:
+            city_id = None
+
         return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' %
             (
-                csr[str(crime_stats_ctx['city_id'])],
+                city_id,
                 city.lower().replace(' ', '-'),
                 state_obj.name.lower().replace(' ', '-'),
                 zipcodestr,
@@ -149,7 +156,7 @@ def local_page(request, state, city=None, keyword=None):
 
     background_time = get_timezone(crime_stats_ctx['state'])
     crime_stats_ctx['background_time'] = background_time
-    if dsettings.READY_FOR_STATIC and city: 
+    if dsettings.READY_FOR_STATIC and city:
         if (city.upper(),crime_stats_ctx['state']) in ((k.upper(),v) for k,v in dsettings.EXCLUDE_CITIES.iteritems()):
             background_time=get_timezone(crime_stats_ctx['state'])
             try:
@@ -192,7 +199,7 @@ def local_page(request, state, city=None, keyword=None):
         response = render(request,'local-pages/wireless-home-security-systems.html',crime_stats_ctx)
     elif keyword in dsettings.ADT_KEYWORD_LIST:
         response = render(request,'landing-pages/adt.html',crime_stats_ctx)
-    else:        
+    else:
         response = render(request,'local-pages/index.html',crime_stats_ctx)
 
     expire_time = datetime.timedelta(days=90)
