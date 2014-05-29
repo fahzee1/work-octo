@@ -138,7 +138,7 @@ def local_page(request, state, city=None, keyword=None):
             city_id = csr[str(crime_stats_ctx['city_id'])]
 
         except KeyError:
-            city_id = None
+            city_id = 00000
 
         return HttpResponsePermanentRedirect('http://www.protectamerica.com/%s/%s/%s/%s/' %
             (
