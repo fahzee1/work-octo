@@ -3,11 +3,13 @@
 <form id="quote-form" class="sleepy quote-form-white {% if not request.COOKIES.refer_id == 'BINGPPC' or not request.session.refer_id == 'BINGPPC' or not request.GET.agent == 'BINGPPC' %}no-email{% endif %}"  method="post" action="">
     {% block form-extra %}{% endblock %}
     {% csrf_token %}
-	<div>
+<div>
 	    {% block form-title %}
         <p class="form-title">Free Security Quote</p>
         {% endblock %}
+        <div class="form-shadow">
         {% block formfields %}
+    
             <label>Name</label>
                 {{ form.name }}
 
@@ -17,9 +19,13 @@
             {% endif %}
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
+
         {% endblock %}
-	</div>
+
 	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);" style="position: relative;">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}<img id='form-loading' {% if page_name = "index" %}style="position:absolute;top:50%;right:24px;margin-top:-10px;right:0px;display:none;width:20px;height:20px;"{% else %}style="position:absolute;top:50%;right:24px;margin-top:-10px;display:none;width:20px;height:20px;" {% endif %}height='20px' width='20px' src="{{ STATIC_URL }}img/loading2.gif"></button>
+
+    </div>
+</div>
         {% block consent %}
              <div class="consent-box">
             <label class="consent-label" for="id_consent" style="display: block; font-size: 8px;">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
