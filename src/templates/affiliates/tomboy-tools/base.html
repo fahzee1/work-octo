@@ -38,16 +38,10 @@ License: http://creativecommons.org/licenses/MIT
 <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0">
 
 {% block css %}
-<!-- For all browsers -->
-<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/320.css">
-<link rel="stylesheet" media="print" href="{{ STATIC_URL }}css/print.css">
-<!-- For progressively larger displays -->
-<link rel="stylesheet" media="only screen and (min-width: 480px)" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/480.css">
-<link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/600.css">
-<link rel="stylesheet" media="only screen and (min-width: 768px)" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/768.css">
-<link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/960.css">
-<!-- For Retina displays -->
-<link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5)" href="{{ STATIC_URL }}css/2x.css">
+<!-- Skeleton -->
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/base.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/skeleton.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/tomboy-tools/layout.css">
 {% endblock %}
 
 <!--[if (lt IE 9) & (!IEMobile)]>
@@ -81,6 +75,7 @@ License: http://creativecommons.org/licenses/MIT
 <!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script><script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script><![endif]-->
 
 <!-- http://t.co/y1jPVnT -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 <link rel="canonical" href="/">
 <script type="text/javascript">
 
@@ -99,46 +94,49 @@ License: http://creativecommons.org/licenses/MIT
 </head>
 
 <body class="{{ page_name }} clearfix">
-<div class="wrapper">
-    <div class="callbox">
-        <h3>Protect Your Family Now:</h3>
-        <h4><a href="tel:+1-888-648-9606" title="Call 5LINX Home Security today to Order your Home Security System">1-888-648-9606</a></h4>
-        <p>{% if request.GET.affkey %}Consultant ID Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID Number: {{ request.COOKIES.affkey }}{% else %}{% endif %}{% endif %}</p>
+
+<div class="header">
+    <div class="container">
+        <div class="ten columns">
+            <img src="{{ STATIC_URL }}img/affiliates/tomboy-tools/tomboy-tools-logo.png" alt="Tomboy Tools Home Security Systems" id="company-logo" />
+        </div>
+        <div class="six columns">
+            <p>{% if request.GET.affkey %}Consultant ID Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID Number: {{ request.COOKIES.affkey }}{% else %}{% endif %}{% endif %}</p>
+            <p style="margin: 40px 0 0 0; text-align: right;">Protect your family now:</p>
+            <h2 style="text-align: right;">1-888-648-9606</h2>
+        </div>
     </div>
-    <a href="/" title="Tomboy Tools Home Security Systems">
-        <img src="{{ STATIC_URL }}img/affiliates/tomboy-tools/tomboy-tools-logo.png" alt="Tomboy Tools Home Security Systems" id="company-logo" />
-    </a>
-    <div class="clear"></div>
-    <div id="navigation">
-        <ul>
-            <li class="{% if 'copper' in active_pages %}active{% endif %}{% if 'bronze' in active_pages %}active{% endif %}{% if 'silver' in active_pages %}active{% endif %}{% if 'gold' in active_pages %}active{% endif %}{% if 'platinum' in active_pages %}active{% endif %}"><a href="{% url copper %}">Security Systems</a></li>
-            <li class="video-security {% if 'video' in active_pages %}active{% endif %}"><a href="{% url video %}">Video Security</a></li>
-            <li class="gps-tracking {% if 'gps' in active_pages %}active{% endif %}"><a href="{% url gps %}">GPS</a></li>
-            <li class="place-order {% if 'order' in active_pages %}active{% endif %}"><a href="{% url order %}">Order Now</a></li>
-        </ul>
+</div>
+
+<div class="nav">
+    <div class="container">
+        <div class="sixteen columns">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url copper %}">Security systems</a></li>
+                <li><a href="{% url video %}">Video security</a></li>
+                <li><a href="{% url gps %}">GPS</a></li>
+                <li><a href="{% url order %}">Order now</a></li>
+            </ul>
+        </div>
     </div>
+</div>
+
+<div class="lifestyle">
+    <div class="container">
+        <div class="four columns offset-by-twelve">
+        {% include "affiliates/tomboy-tools/quote-form.html" with form=forms.basic %}
+        </div>
+    </div>
+</div>
     
     {% block content %}
-    {% endblock %}
-    {% block conversation-piece %}
-    <div id="bottom-form">
-        <h2>Security is An Amazing Conversation Piece.</h2> 
 
-        <div id="call-us">
-            <h3>Give us a Call</h3>
-            <p>Get a GE home security system for your home or business! Simply order one of our award-winning monitoring solutions and a wireless GE home security system will be sent to your door for FREE. Give us a call to start the conversation with one of our home security experts. We’ll go over the security specifics of your home to determine which security package best fits your needs. There’s no time to wait! In the United States, a home is attacked by burglars every 14 seconds. Call Tomboy Tools Home Security Systems now to secure your home and family!</p>  
-            <h4><span>Call Today!</span><a href="tel:+1-888-648-9606" title="Call 5LINX Home Security today to Order your Home Security System">1-888-648-9606</a></h4>
-        </div>
-        {% include "affiliates/tomboy-tools/quote-form.html" with form=forms.basic %}
 
-    </div>
-    <div class="callbox footer">
-        <h3>Protect Your Family Now:</h3>
-        <h4><a href="tel:+1-888-648-9606" title="Call 5LINX Home Security today to Order your Home Security System">1-888-648-9606</a></h4>
-        <p>{% if request.GET.affkey %}Consultant ID Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID Number: {{ request.COOKIES.affkey }}{% else %}Consultant ID Number: 000000{% endif %}{% endif %}</p>
-    </div>
+
     {% endblock %}
-</div>
+
+
 
 
 
