@@ -820,7 +820,7 @@ def ajax_post_agent(request):
         % (name, agent, email, phone, company, ticket_type, comments)
 
     from_email = 'Protect America <noreply@protectamerica.com>'
-    to_email = 'operationcompliance@protectamerica.com'
+    to_email = 'operationsupport@protectamerica.com'
     send_mail(subject,message,from_email,[to_email])
     return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
 
