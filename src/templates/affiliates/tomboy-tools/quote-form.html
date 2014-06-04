@@ -37,24 +37,38 @@ $(document).ready(function() {
             $('.form-quote button').click();
         }
     });
-    var submitting = false;
 
     $('.form-quote button').click(function() {
-        if(submitting==true) {
-            return false;
-        }
-        submitting = true;
         $('.form-quote div').removeClass('.error-state');
-        var data = $(this).parent().serialize();
-        
+
+        var $form = $(this).closest('.form-quote');
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+
+        var data = {'name':name,
+                    'email': email,
+                    'phone': phone,
+                    'trusted_form': trusted,
+                    'form': 'basic',
+                    'referer_page':window.location.href,
+                    'form_values':$form.serialize(),
+                    'operating_system':(window.OSName + "_PA"),
+                    'gclid':$("[name='gclid']").val(),
+                    'form_js': 't/o/q-f.h'
+                    }
+
+
         $.ajax({
             type: "POST",
             url: "/contact/ajaxpost/",
             data: data,
             dataType: "json",
-            success: newFormSuccess
+            success: newFormSuccess,
+            error: newFormError
         });
-        
+
         function newFormSuccess(json) {
             submitting = false;
             if(json.success) {
@@ -85,13 +99,40 @@ $(document).ready(function() {
             } else {
                 error_string = "<li>"+json.errors+"</li>\n";
             }
-            
+
             $(".quote-form-error ul").html(error_string);
             } else $(".quote-form-error").hide();
 
         }
+
+
+        function newFormError(){
+            $(".sleepy #form-loading, .droopy #form-loading").hide();
+            $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            //$('#quote-form button').attr('disabled',false);
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
         return false;
         });
-    }); 
+    });
 </script>
 {% endaddtoblock "js" %}
