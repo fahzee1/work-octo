@@ -25,10 +25,10 @@ body {
 #header-wrapper {
     #header {
         .order-button {
-            background: @yellow;
+            background: #ff8d31;
             .border-radius(5px,5px,5px,5px);
             text-decoration: none;
-            color: @navy-blue;
+            color: @white;
             float: right;
             font-weight: 100;
             font-size: 16px;
@@ -36,8 +36,8 @@ body {
             margin-top: 8px;
             .fade-slow;
             &:hover {
-                color: #666;
-                background: #ffd75e;
+                color: #fff;
+                background: #ff8d31;
                 text-decoration: none;
                 .fade-fast;
             }
@@ -192,6 +192,7 @@ body {
                 text-shadow: none;
                 padding: 30px 0 0;
                 margin: 0 0 0 233px;
+                width: 100%;
                 .slab-font;
             }
             h2 {
@@ -218,13 +219,13 @@ body {
             height: 100%;
             border-radius: 0;
             background: #fff;
-            float: left;
+            float: right;
             margin: 0;
             position: absolute;
             z-index: 999;
             top: 0;
             display: block;
-            left: 0;
+            right: 0;
             border: none;
             padding: 20px 0 0;
             box-shadow: none;
@@ -570,14 +571,21 @@ body {
     }
 }
 #lifestyle-shot {
-    background: #4c3119 url(/static/img/products/touchscreen/touchscreen-lifestyle.jpg) no-repeat center center;
     height: 482px;
+    .lifestyle-img {
+        float: left;
+        img {
+            margin-top: 64px;
+            margin-left: 8px;
+            .border-radius;
+        }
+    }
     #home-content {
         float: right;
         width: 400px;
         padding: 0 40px;
         h2 {
-            color: #fefefe;
+            color: #2f394a;
             font-size: 24px;
             line-height: 28px;
             font-weight: bold;
@@ -589,19 +597,21 @@ body {
             }
         }
         p {
-            color: #eee;
+            color: #777;
             font-size: 18px;
             line-height: 21px;
             font-weight: 100;
         }
         .button-link {
             margin-top: 50px;
-            background: #55b1a6;
-            border: 1px solid #55b1a6;
+            background: #ff8d31;
             font-size: 16px;
             padding: 12px 40px;
+            i {
+                display: none;
+            }
             &:hover {
-                background: #84d2c9;
+                background: #ff8d31;
             }
         }
     }
@@ -899,7 +909,7 @@ body {
     }
 }
 #order-final {
-    background: #55b1a6;
+    background: #ff8d31;
     margin-bottom: 24px;
     .left-side {
         padding: 64px 16px;
@@ -933,7 +943,7 @@ body {
         float: left;
         .button-link {
             background: @white;
-            color: #55b1a6;
+            color: #ff8d31;
             width: 250px;
             float: right;
             display: block;
@@ -941,6 +951,9 @@ body {
             text-align: center;
             font-size: 20px;
             padding: 16px 0;
+            i {
+                display: none;
+            }
             &:hover {
                 background: #555;
                 color: @white;
@@ -1024,14 +1037,14 @@ body {
             border: none;
             .drop-shadow(0,0,0,0);
             button {
-                background: @yellow;
+                background: #ff8d31;
                 border: 1px solid #2f394a;
-                color: @navy-blue;
+                color: @white;
                 i {
-                    border-left: 1px solid @dark-green;
+                    display: none;
                 }
                 &:hover {
-                    background: #578d36;
+                    background: #ff8d31;
                 }
             }
             .form-title {
@@ -1210,7 +1223,7 @@ body {
 }
 
 #hero-wrapper {
-    background: #fffcf5;
+    background: #fffcf5 url(/static/img/affiliates/sem-landing-page/security-system.jpg) center center no-repeat;
     #hero-image {
         z-index: 400;
         &.cmonday {
@@ -1220,6 +1233,77 @@ body {
                         font-size: 8px !important;
                         line-height: 11px !important;
                     }
+                }
+                p.form-title {
+                    background: #ff8d31;
+                    color: @white;
+                }
+                .icon-caret-down {
+                    color: #ff8d31;
+                }
+                button {
+                    background: #ff8d31;
+                    color: @white;
+                }
+
+            }
+            .hero-content {
+                background: rgb(0,0,0);
+                background: rgba(0,0,0, .6);
+                position: absolute;
+                left: 306px;
+                padding: 16px;
+                top: 50px;
+                width: 415px;
+                h1 {
+                    font-size: 30px;
+                    width: 100%;
+                }
+                h2 {
+                    line-height: 28px;
+                }
+                p {
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    color: #ccc;
+                    padding: 11px 0;
+                    span {
+                        display: block;
+                        font-size: 32px;
+                        line-height: 36px;
+                        color: @white;
+                    }
+                }
+            }
+            .ssavings-deals {
+                position: relative;
+                padding-top: 16px;
+                margin-top: 16px;
+                border-top: 1px solid #555;
+                .june-free {
+                    padding-right: 12px;
+                }
+            }
+            .triple-guarantee {
+                position: absolute;
+                left: 8px;
+                bottom: 64px;
+                li {
+                    font-size: 16px;
+                    line-height: 28px;
+                    color: @white;
+                }
+                h2 {
+                    font-weight: bold;
+                }
+                i {
+                    color: @blue;
+                    font-size: 24px;
+                    line-height: 24px;
+                    padding-right: 8px;
+                    position: relative;
+                    top: 3px;
                 }
             }
         }
@@ -1332,12 +1416,33 @@ body {
 
 /* Smaller than standard 960 (devices and browsers) */
   @media only screen and (max-width: 959px) {
-
+      #hero-wrapper {
+            .triple-guarantee {
+                display: none;
+            }
+            #hero-image.cmonday {
+                .hero-content {
+                    left: auto;
+                    right: 200px;
+                }
+            }
+      }
   }
  
   /* Tablet Portrait size to standard 960 (devices and browsers) */
   @media only screen and (min-width: 768px) and (max-width: 959px) {
-
+    #lifestyle-shot {
+        .lifestyle-img {
+            width: 40%;
+            img {
+                width: 90%;
+                margin-top: 87px;
+            }
+        }
+        #home-content {
+            width: 48%;
+        }
+    }
     
 
   }
@@ -1370,14 +1475,53 @@ body {
                     margin: 10px auto 0;
                 }
             }
+            &.cmonday {
+                .hero-content {
+                    top: 16px;
+                    right: 0;
+                    width: auto;
+                    .get-started {
+                        display: none;
+                    }
+                    .ssavings-deals {
+                        display: none;
+                    }
+                }
+            }
         }
+    }
+    #lifestyle-shot {
+        background: none;
+        .lifestyle-img {
+            width: 480px;
+            margin: 0 auto;
+            float: none;
+            img {
+                width: 480px;
+                margin-left: 0;
+                margin-top: 0;
+            }
+        }
+        #home-content {
+        margin: 0 auto;
+        float: none;
+        width: 480px;
+            h2 {
+                color: #2f394a;
+            }
+            p {
+                color: #777;
+            }
+        }
+    }
+    #advantage-table-wrapper {
+        margin-top: 32px;
     }
 
   }
  
   /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
   @media only screen and (min-width: 480px) and (max-width: 767px) {
-
   }
  
   /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
@@ -1392,8 +1536,21 @@ body {
             }
         }
     }
-
+    #lifestyle-shot {
+        background: none;
+        .lifestyle-img {
+            width: 300px;
+            img {
+                width: 300px;
+            }
+        }
+        #home-content {
+            width: 300px;
+        }
+    }
     #hero-wrapper {
+        background-size: cover;
+
         #hero-image {
             #cyber-monday {
                 background: url(/static/img/banners/hero-banners/cyber-monday/cyber_hero_mobile.jpg) 72% -40px no-repeat #fffcf3;
@@ -1416,6 +1573,14 @@ body {
                 }
                 a.button-link {
                     margin: 0 auto;
+                }
+            }
+            &.cmonday {
+                .hero-content {
+                    position: relative;
+                    top: 8px;
+                    left: auto;
+                    right: auto;
                 }
             }
         }

@@ -165,11 +165,7 @@ elif settings.SITE_ID == 3:
         url(r'^google/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^grbanner/?$', 'apps.affiliates.views.semlanding_google'),
         url(r'^msn/?$', 'apps.affiliates.views.semlanding_bing'),
-        dtt(r'^rep/?$', 'affiliates/sem-landing-page/orange-test-two.html', 'squeeze'),
-        dtt(r'^refresh/?$', 'affiliates/sem-landing-page/orange-test-content.html', 'orange-test'),
-        dtt(r'^blue/?$', 'affiliates/sem-landing-page/blue-test.html', 'blue-test'),
-        dtt(r'^green/?$', 'affiliates/sem-landing-page/green-test.html', 'green-test'),
-        dtt(r'^green-order/?$', 'affiliates/sem-landing-page/green-test-free.html', 'green-test'),
+        dtt(r'^green/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
         dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
         dtt(r'^medical-alert/?$', 'affiliates/sem-landing-page/medical-pendant.html', 'medical'),
         dtt(r'^krbe/?$', 'affiliates/sem-landing-page/krbe.html', 'krbe'),
@@ -180,8 +176,8 @@ elif settings.SITE_ID == 3:
         # KEYWORD BASED
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
         dtt(r'^home-security/?$', 'affiliates/sem-landing-page/home-security.html', 'home-security'),
-        dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system-b.html', 'security-system'),
-        dtt(r'^yahoo/?$', 'affiliates/sem-landing-page/yahoo.html', 'yahoo'),
+        dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system.html', 'security-system'),
+        dtt(r'^yahoo/?$', 'affiliates/sem-landing-page/alarm.html', 'yahoo'),
         dtt(r'^wireless-alarm/?$', 'affiliates/sem-landing-page/wireless-alarm.html', 'wireless-alarm'),
 		dtt(r'^wireless-home-security/?$', 'affiliates/sem-landing-page/wireless-home-security.html', 'wireless-home-security'),
 		dtt(r'^wireless-security-system/?$', 'affiliates/sem-landing-page/wireless-security-system.html', 'wireless-security-system'),
@@ -210,32 +206,9 @@ elif settings.SITE_ID == 3:
         dtt(r'^simplisafe/?$', 'affiliates/sem-landing-page/competitors/simplisafe.html', 'simplisafe'),
         dtt(r'^monotronics/?$', 'affiliates/sem-landing-page/competitors/monotronics.html', 'monotronics'),
         dtt(r'^verizon/?$', 'affiliates/sem-landing-page/competitors/verizon.html', 'verizon'),
-		dtt(r'^compare-us/?$', 'affiliates/sem-landing-page/competitors/compare-us-b.html', 'compare-us'),
+		dtt(r'^compare-us/?$', 'affiliates/sem-landing-page/competitors/compare-us.html', 'compare-us'),
 
         # TESTS
-        dtt(r'^cyber-alt/?$', 'affiliates/sem-landing-page/test/green-white.html', 'green-white'),
-        dtt(r'^cyber-alt-19/?$', 'affiliates/sem-landing-page/test/green-19-white.html', 'green-white-19'),
-        dtt(r'^cyber-19/?$', 'affiliates/sem-landing-page/test/green-19.html', 'green-19'),
-
-        dtt(r'^alarm-b/?$', 'affiliates/sem-landing-page/alarm-b.html', 'alarm-b'),
-        dtt(r'^home-security-b/?$', 'affiliates/sem-landing-page/home-security-b.html', 'home-security-b'),
-        dtt(r'^security-system-b/?$', 'affiliates/sem-landing-page/security-system-b.html', 'security-system-b'),
-        dtt(r'^compare-us-b/?$', 'affiliates/sem-landing-page/competitors/compare-us-b.html', 'compare-us-b'),
-        
-		dtt(r'^adt-security-b/?$', 'affiliates/sem-landing-page/competitors/adt-b.html', 'adt-b'),
-        dtt(r'^frontpoint-security-b/?$', 'affiliates/sem-landing-page/competitors/frontpoint-b.html', 'frontpoint-b'),
-        dtt(r'^att-digital-life-b/?$', 'affiliates/sem-landing-page/competitors/att-b.html', 'att-b'),
-        dtt(r'^vivint-b/?$', 'affiliates/sem-landing-page/competitors/vivint-b.html', 'vivint-b'),
-        dtt(r'^sloan-security-b/?$', 'affiliates/sem-landing-page/competitors/sloan-security-b.html', 'sloan-security-b'),
-        dtt(r'^guardian-security-b/?$', 'affiliates/sem-landing-page/competitors/guardian-b.html', 'guardian-b'),
-        dtt(r'^time-warner-intelligent-home-b/?$', 'affiliates/sem-landing-page/competitors/time-warner-b.html', 'time-warner-b'),
-        dtt(r'^comcast-xfinity-b/?$', 'affiliates/sem-landing-page/competitors/xfinity-b.html', 'xfinity-b'),
-        dtt(r'^lifeshield-b/?$', 'affiliates/sem-landing-page/competitors/lifeshield-b.html', 'lifeshield-b'),
-        dtt(r'^safemart-b/?$', 'affiliates/sem-landing-page/competitors/safemart-b.html', 'safemart-b'),
-        dtt(r'^protection-1-b/?$', 'affiliates/sem-landing-page/competitors/protection-1-b.html', 'protection-1-b'),
-        dtt(r'^simplisafe-b/?$', 'affiliates/sem-landing-page/competitors/simplisafe-b.html', 'simplisafe-b'),
-        dtt(r'^monotronics-b/?$', 'affiliates/sem-landing-page/competitors/monotronics-b.html', 'monotronics-b'),
-        dtt(r'^verizon-b/?$', 'affiliates/sem-landing-page/competitors/verizon-b.html', 'verizon-b'),
 
 
         # GEO Landing Pages
