@@ -32,10 +32,9 @@ License: http://creativecommons.org/licenses/MIT
 <meta http-equiv="imagetoolbar" content="false" />
 <meta name="MSSmartTagsPreventParsing" content="true" />
 
-
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
-<meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 
 {% block css %}
 <!-- Skeleton -->
@@ -101,8 +100,12 @@ License: http://creativecommons.org/licenses/MIT
             <div class="four columns">
                 <a href="/"><img src="{{ STATIC_URL }}img/affiliates/tomboy-tools/tomboy-tools-logo.png" alt="Tomboy Tools Home Security Systems" width="100%" /></a>
             </div>
-            <div class="nine columns">
-                <ul>
+            <div class="eight columns">
+                <ul class="main-navigation">
+                    <li><a href="#" id="mobile-menu"><i class="fa fa-bars" title="Menu"></i><strong>Menu</strong></a></li>
+                    <li class="alpha"><a href="tel:1-888-648-9606"><i class="fa fa-phone"></i><strong>Call Us</strong></a></li>
+                </ul>
+                <ul class="standard-main-menu">
                     <li><a href="/" class="{% if 'home' in active_pages %}active{% endif %}">Home</a></li>
                     <li><a href="{% url copper %}" class="{% if 'copper' in active_pages %}active{% endif %}">Security systems</a></li>
                     <li><a href="{% url video %}" class="{% if 'video' in active_pages %}active{% endif %}">Video security</a></li>
@@ -117,6 +120,14 @@ License: http://creativecommons.org/licenses/MIT
             </div>
         </div>
     </div>
+
+    <ul class="main-menu">
+        <li><a href="/" class="{% if 'home' in active_pages %}active{% endif %}">Home</a></li>
+        <li><a href="{% url copper %}" class="{% if 'copper' in active_pages %}active{% endif %}">Security systems</a></li>
+        <li><a href="{% url video %}" class="{% if 'video' in active_pages %}active{% endif %}">Video security</a></li>
+        <li><a href="{% url gps %}" class="{% if 'gps' in active_pages %}active{% endif %}">GPS</a></li>
+        <li><a href="{% url order %}" class="{% if 'order' in active_pages %}active{% endif %}">Order now</a></li>
+    </ul>
 
     <div class="nav">
         <div class="container">
@@ -187,7 +198,8 @@ License: http://creativecommons.org/licenses/MIT
     {% endblock %}
 
     {% block packages %}
-    <div id="shop2">
+    <div class="shop
+    ">
         <div class="container">
         <h2>Packaged home security systems for everyone</h2>
         <h3>with no installation or equipment fees.</h3>
@@ -202,7 +214,7 @@ License: http://creativecommons.org/licenses/MIT
                 <div class="button-link" data-link="copper">Select plan</div>
 
             </a>
-            <a href="{% url order %}" class="package three columns">
+            <a href="{% url order %}" class="bronze package three columns">
                 <h3>Bronze</h3>
                 <p>$35.99<span>per month</span></p>
                 <ul>
@@ -225,7 +237,7 @@ License: http://creativecommons.org/licenses/MIT
                 <div class="button-link" data-link="silver">Select plan</div>
 
             </a>
-            <a href="{% url order %}" class="package three columns">
+            <a href="{% url order %}" class="gold package three columns">
                 <h3>Gold</h3>
                 <p>$39.99<span>per month</span></p>
                 <ul>
@@ -236,7 +248,7 @@ License: http://creativecommons.org/licenses/MIT
                 <div class="button-link" data-link="gold">Select plan</div>
 
             </a>
-            <a href="{% url order %}" class="package three columns">
+            <a href="{% url order %}" class="platinum package three columns">
                 <h3>Platinum</h3>
                 <p>$42.99<span>per month</span></p>
                 <ul>
@@ -302,6 +314,21 @@ yepnope({
   nope : ['{{ STATIC_URL }}js/respond.min.js']
 });
 </script>
-
+{% addtoblock "js" %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#mobile-menu").click(function( event ){
+        event.preventDefault();
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $(".main-menu").slideUp('fast');
+        } else {
+            $(this).addClass('active');
+            $(".main-menu").slideDown('fast');
+        };
+    });
+});
+</script>
+{% endaddtoblock "js" %}
 </body>
 </html>
