@@ -8,19 +8,19 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
-        # Adding field 'Lead.gclid'
-        db.add_column('contact_lead', 'gclid', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True), keep_default=False)
+        # Adding field 'CEOFeedback.ip_address'
+        db.add_column('contact_ceofeedback', 'ip_address', self.gf('django.db.models.fields.CharField')(max_length=128, null=True, blank=True), keep_default=False)
 
 
     def backwards(self, orm):
         
-        # Deleting field 'Lead.gclid'
-        db.delete_column('contact_lead', 'gclid')
+        # Deleting field 'CEOFeedback.ip_address'
+        db.delete_column('contact_ceofeedback', 'ip_address')
 
 
     models = {
         'contact.ceofeedback': {
-            'Meta': {'object_name': 'CEOFeedback'},
+            'Meta': {'ordering': "['-date_created']", 'object_name': 'CEOFeedback'},
             'city': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True', 'blank': 'True'}),
             'converted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
@@ -29,6 +29,7 @@ class Migration(SchemaMigration):
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '128'}),
             'feedback_type': ('django.db.models.fields.CharField', [], {'max_length': '32'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'ip_address': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'message': ('django.db.models.fields.TextField', [], {}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'phone': ('django.contrib.localflavor.us.models.PhoneNumberField', [], {'max_length': '20'}),
@@ -55,7 +56,7 @@ class Migration(SchemaMigration):
             'phone': ('django.contrib.localflavor.us.models.PhoneNumberField', [], {'max_length': '20'})
         },
         'contact.ecomlead': {
-            'Meta': {'object_name': 'EcomLead', '_ormbases': ['contact.Lead']},
+            'Meta': {'ordering': "['-date_created']", 'object_name': 'EcomLead', '_ormbases': ['contact.Lead']},
             'address': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'address_2': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'city': ('django.db.models.fields.CharField', [], {'max_length': '32', 'null': 'True', 'blank': 'True'}),
@@ -72,19 +73,31 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'})
         },
         'contact.lead': {
-            'Meta': {'object_name': 'Lead'},
+            'Meta': {'ordering': "['-date_created']", 'object_name': 'Lead'},
             'affkey': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
             'agent_id': ('django.db.models.fields.CharField', [], {'max_length': '24', 'null': 'True', 'blank': 'True'}),
+            'browser': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '128'}),
+            'device': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
+            'email': ('django.db.models.fields.EmailField', [], {'default': "''", 'max_length': '128', 'null': 'True', 'blank': 'True'}),
+            'form_values': ('django.db.models.fields.TextField', [], {'default': "''", 'null': 'True', 'blank': 'True'}),
             'gclid': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'ip_address': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
+            'lc_error': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'lc_id': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
+            'lc_reason': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
+            'lc_url': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'number_of_retries': ('django.db.models.fields.IntegerField', [], {'default': '0', 'blank': 'True'}),
+            'operating_system': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
             'phone': ('django.contrib.localflavor.us.models.PhoneNumberField', [], {'max_length': '20'}),
             'referer_page': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'}),
+            'retry': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'search_engine': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
             'search_keywords': ('django.db.models.fields.CharField', [], {'max_length': '128', 'null': 'True', 'blank': 'True'}),
-            'source': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'})
+            'source': ('django.db.models.fields.CharField', [], {'max_length': '64', 'null': 'True', 'blank': 'True'}),
+            'trusted_url': ('django.db.models.fields.CharField', [], {'max_length': '256', 'null': 'True', 'blank': 'True'})
         },
         'contact.movingkit': {
             'Meta': {'object_name': 'MovingKit'},

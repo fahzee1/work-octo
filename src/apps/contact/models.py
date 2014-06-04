@@ -222,12 +222,14 @@ class CEOFeedback(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     date_read = models.DateTimeField(null=True, blank=True)
 
+    ip_address = models.CharField(max_length=128, blank=True, null=True)
+
     class Meta:
         ordering = ['-date_created']
 
 
     def email_company(self,data):
-        subject = 'Your Opinions Matter'
+        subject = 'CEO Feedback: %s' % self.feedback_type
         from_email = 'Protect America <noreply@protectamerica.com>'
         to_email = 'feedback@protectamerica.com'
         data['sub'] = self

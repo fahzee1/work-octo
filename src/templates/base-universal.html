@@ -25,7 +25,7 @@
     	})();
     </script>
     <!-- End Inspectlet Embed Code -->
-    
+
     <title>{% block page_title %}{% endblock %}</title>
     <meta name="description" content="{% block page_description %}{% endblock %}" />
     <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
@@ -80,7 +80,7 @@
     <!-- <link rel="apple-touch-startup-image" sizes="1024x748" href="img/startup/startup-1024x748.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:landscape)"> -->
     <!-- iPad Portrait -->
     <!-- <link rel="apple-touch-startup-image" sizes="768x1004" href="img/startup/startup-768x1004.png" media="screen and (min-device-width:481px) and (max-device-width:1024px) and (orientation:portrait)"> -->
-    
+
     <!-- Windows 8 / RT -->
     <meta name="msapplication-TileImage" content="img/apple-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#000">
@@ -94,7 +94,7 @@
     <link rel="stylesheet" media="only screen and (min-width: 600px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/600.css">
     <link rel="stylesheet" media="only screen and (min-width: 960px)" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/960.css">
 
-{% endblock %}    
+{% endblock %}
 
 <!--[if IE 7]>
   <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome/font-awesome-ie7.min.css">
@@ -108,22 +108,22 @@
         <link rel="canonical" href="http://www.protectamerica.com{{ request.META.PATH_INFO }}"/>
     {% endif %}
 {% endblock %}
-    
+
 {% block google_analytics %}
     <script type="text/javascript">
-    
+
      var _gaq = _gaq || [];
      _gaq.push(['_setAccount', 'UA-5441302-2']);
      _gaq.push(['_setDomainName', 'protectamerica.com']);
      {% block ga_custom_variables %}{% endblock %}
      _gaq.push(['_trackPageview']);
-    
+
      (function() {
        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
        ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
      })();
-    
+
     </script>
 {% endblock %}
     <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
@@ -145,7 +145,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
         <div id="top-section">
             <ul id="newsfeed">
             </ul>
-             
+
 {% comment %}
    <li><i class="icon-twitter"></i> @owowdesigns thanks for the follow! <span>&ndash; About an Hour Ago</span></li>
                 <li><i class="icon-thumbs-up"></i> Like us on Facebook Today! <span>&ndash; About an Hour Ago</span></li>
@@ -179,11 +179,11 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
     <div id="header-wrapper">
         <div id="header">
 
-            <a href="{% url 'home' %}">
+            <a href="http://www.protectamerica.com">
                 <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
             </a>
 
-            <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
+            <a href="http://www.protectamerica.com/products/order-package/" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
@@ -214,7 +214,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             <div class="clear"></div>
         </div>
     </div>
-        
+
 {% endblock %}
 
 <!-- Sub Navigation -->
@@ -275,7 +275,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
                 <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
                 <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
-            </ul> 
+            </ul>
             <ul id="footer-contact-info">
                 <li><strong>Telephone</strong></li>
                 <li><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></li>
@@ -295,7 +295,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
             <div class="clear"></div>
         </div>
     </div>
-    
+
     {% endblock %}
     {% block terms %}
     <div id="terms-wrapper">
@@ -311,7 +311,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
                 <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
             </div>
         </div>
-        <div class="clear"></div> 
+        <div class="clear"></div>
 
     </div>
     {% endblock %}
@@ -323,7 +323,7 @@ if(typeof window.lpTag==='undefined'){window.lpTag={site:'34774121',_v:'1.3',pro
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-    
+
 /*
         $.ajax({
             url:"{% url 'render-feed' %}",
@@ -343,7 +343,7 @@ $(document).ready(function(){
 
 {% comment %}
 /*
-   
+
     function getFeed(citystate){
         $.ajax({
             url:"{% url 'render-feed' %}",
@@ -372,7 +372,7 @@ $(document).ready(function(){
         });
     }
     */
-  
+
 
 
 
@@ -395,7 +395,7 @@ $(document).ready(function(){
     <script type="text/javascript">
         $("#subnav > li.menu-item").mouseover(function(){
             if ($(this).hasClass('open') || $(this).hasClass('hover')) {
-                
+
             } else {
                 if ($(this).data("menu")) {
                     var menu = $(this).data("menu");
@@ -406,7 +406,7 @@ $(document).ready(function(){
 
         }).mouseout(function(){
             if ($(this).hasClass('open')) {
-                
+
             } else {
                 if ($(this).data("menu")) {
                     var menu = $(this).data("menu");
@@ -415,7 +415,7 @@ $(document).ready(function(){
 
                 }
             }
-        });        
+        });
         $("#international-selection > li.active").click(function(){
             if ($("#international-selection").hasClass("active")) {
                 $("#international-selection").removeClass('active');
@@ -452,11 +452,11 @@ $(document).ready(function(){
 {% block extra_javascript %}
 
 {% if use_call_measurement %}
-<script type="text/javascript"> 
+<script type="text/javascript">
     var ci_search_source = "{% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'GOOGLEPPC' or request.session.refer_id == 'i10045' or request.session.refer_id == 'i10237' or request.COOKIES.refer_id == 'a01415' or request.COOKIES.refer_id == 'i10237' or request.GET.agent == 'i10237' %}google{% else %}{% if request.COOKIES.refer_id == 'BINGPPC' or request.session.refer_id == 'i10240' or request.session.refer_id == 'BINGPPC' %}bing{% endif %}{% endif %}";
     var thisref = document.referrer.replace(/&/g, "zzzzz");
     var ciJsHost = (("https:" == document.location.protocol) ? "https://" : "http://");
-    document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E")); 
+    document.write(unescape("%3Cscript src='" + ciJsHost + "tracking.callmeasurement.com/clickx/click_matrix.cfm?munique=" + new Date().getTime() + "&dpi=" + ci_search_source + "&prev=" + thisref + "' type='text/javascript'%3E%3C/script%3E"));
 </script>
 {% endif %}
 {% endblock %}
