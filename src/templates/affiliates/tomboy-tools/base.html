@@ -74,7 +74,6 @@ License: http://creativecommons.org/licenses/MIT
 <!--[if lt IE 7 ]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script><script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script><![endif]-->
 
 <!-- http://t.co/y1jPVnT -->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Open+Sans+Condensed:300,700' rel='stylesheet' type='text/css'>
 <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="canonical" href="/">
 <script type="text/javascript">
@@ -116,7 +115,8 @@ License: http://creativecommons.org/licenses/MIT
             <div class="three columns">
                 <p>{% if request.GET.affkey %}Consultant ID Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID Number: {{ request.COOKIES.affkey }}{% else %}{% endif %}{% endif %}</p>
                 <p style="margin: 0; text-align: right;">Protect your family now:</p>
-                <h2 style="text-align: right;">1-888-648-9606</h2>
+                <h2 style="margin: 0; text-align: right;">1-888-648-9606</h2>
+                <p style="margin: 0; text-align: right;">{% if request.GET.affkey %}Consultant ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}Consultant ID: {{ affkey }}{% else %}Consultant ID: L100000{% endif %}{% endif %}{% endif %}</p>
             </div>
         </div>
     </div>
@@ -295,6 +295,8 @@ License: http://creativecommons.org/licenses/MIT
 
 
 <!-- Scripts -->
+<script type="text/javascript" src="//use.typekit.net/czn3ncv.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 <script src="{{ STATIC_URL }}js/jquery-1.6.2.min.js"></script>
 <script src="{{ STATIC_URL }}js/plugins.js"></script>
 <script src="{{ STATIC_URL }}js/script.js"></script>
