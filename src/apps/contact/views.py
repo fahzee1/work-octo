@@ -462,7 +462,6 @@ def basic_post_login(request):
     form = LeadForm(request.POST)
     if form.is_valid():
         fdata = form.cleaned_data
-        fdata['email'] = ''
         request_data = prepare_data_from_request(request)
         formset = form.save(commit=False)
         referer_page = None
