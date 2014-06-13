@@ -13,6 +13,8 @@ admin.site.register(AffTemplate, AffTemplateAdmin)
 class LandingPageAdmin(admin.ModelAdmin):
     model = LandingPage
     list_filter = ['affiliate',]
+    raw_id_fields = ('affiliate',)
+
 admin.site.register(LandingPage, LandingPageAdmin)
 
 class ProfileAdmin(admin.ModelAdmin):
