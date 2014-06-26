@@ -102,9 +102,11 @@
                 <li><i class="icon-check-sign"></i>Lifetime Replacement Plan</li>
             </ul>
             <div class="hero-content">
-                <h1>{% block h2 %}Best Alarm System{% endblock %}</h1>
-                <p>Plans starting at only <span>$19.99 per month</span></p>
-                <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/get-started-now.png" class="get-started" alt="Get a free security system">
+                <h1>{% block h2 %}The Best Alarm System{% endblock %}</h1>
+                <p>Plans starting at only <span>$19.99<small>/mo</small></span></p>
+                {% if phone_number %}
+                    <a href="tel:{{ phone_number|format_number }}" class="tfn" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                {% endif %}
                 <div class="ssavings-deals">
                     <a href="http://www.protectamerica.com/shop-home-security-packages"><img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/free-system.png" class="june-free" alt="Get a free security system"></a>
                     <a href="http://www.protectamerica.com/equipment/life-safety/smoke-detector"><img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/smoke-detector.png" class="june-smoke" alt="Monitored smoke protection"></a>
