@@ -1,0 +1,66 @@
+<script type="text/javascript" src="{{ STATIC_URL }}js/affiliates/flipclock.js"></script>
+<link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/flipclock.css">
+
+<div id="countdown" class="dead">
+	<div class="wrapper">
+		<div class="left">
+			<p>Free shipping<span>if you order before <b class="verbiage">noon</b>!</span></p>
+		</div>
+
+		<div class="middle">
+			<p class="only">Only</p>
+			<div class="clock"></div>
+			<div class="message"></div>
+			<p class="left">left</p>
+			<script type="text/javascript">
+				var clock;
+				
+				$(document).ready(function() {
+					var clock;
+					var d = new Date();
+					var h = d.getHours();
+					var m = d.getMinutes();
+					var day = d.getDay();
+					console.log('day: '+day);
+					if (day == 1 && h >= 11 && h <= 14)  {
+						setCountdown(14, "2PM")
+					}
+					if (day == 2 && h >= 10 && h <= 13)  {
+						setCountdown(13, "1PM")
+					}
+					if (day == 3 && h >= 14 && h <= 17)  {
+						setCountdown(17, "5PM")
+					}
+					if (day == 4 && h >= 9 && h <= 12)  {
+						setCountdown(12, "Noon")
+					}
+					// if (day == 5 && h >= 19 && h <=22)  {
+					//  	setCountdown(22, "7PM")
+					// }
+					function setCountdown(endTime, verbiage) {
+						$('.dead').slideDown();
+						$('.verbiage').text(verbiage);
+						var currentTime = ((h * 60) * 60)+(m * 60);
+						var endSeconds = (endTime * 60) * 60;
+						var finalTime = endSeconds - currentTime;
+						clock = $('.clock').FlipClock(finalTime, {
+					        clockFace: 'HourlyCounter',
+					        countdown: true, 
+					        callbacks: {
+					        	stop: function() {
+					        		$('.dead').slideUp();
+					        	}
+					        }
+					    });             // the function returns the product of p1 and p2
+					}
+
+
+				});
+			</script>
+		</div>
+
+		<div class="right">
+			<p>Just mention promo code<span>ship4free</span></p>
+		</div>
+	</div>
+</div>
