@@ -228,8 +228,15 @@ class CEOFeedback(models.Model):
         ordering = ['-date_created']
 
 
+
+    def sanitized_name(self):
+        import re
+        cleaned_name = re.sub(r'\W+','',self.name)
+        return cleaned_name
+
+
     def email_company(self,data):
-        subject = 'CEO Feedback: %s' % self.feedback_type
+        subject = 'CEO Feedback: %s : %s' % (self.feedback_type,self.sanitized_name())
         from_email = 'Protect America <noreply@protectamerica.com>'
         to_email = 'feedback@protectamerica.com'
         data['sub'] = self
