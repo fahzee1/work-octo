@@ -169,6 +169,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
         dtt(r'^medical-alert/?$', 'affiliates/sem-landing-page/medical-pendant.html', 'medical'),
         dtt(r'^krbe/?$', 'affiliates/sem-landing-page/krbe.html', 'krbe'),
+        dtt(r'^2014/?$', 'affiliates/sem-landing-page/paid-base-new.html', 'new-base'),
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
         dtt(r'^ipod/?$', 'affiliates/sem-landing-page/ipod.html', 'ipod'),
@@ -873,7 +874,7 @@ else:
         dtt(r'^adt-comparison/?$', 'affiliates/adt-comparison/index.html', 'adt-two'),
 
 
-        dtt(r'^direct-mail/?$', 'affiliates/direct-mail/index.html', 'direct-mail'),
+        dtt(r'^direct-mail/?$', 'affiliates/direct-mail/index.html', 'direct-mail'),    
 
         # CRIME STOPPERS
         dtt(r'^CFLA/?$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),
