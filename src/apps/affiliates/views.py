@@ -490,7 +490,8 @@ def aff_login(request):
 
                     if check_agentid[0] == 'a' or check_agentid[0] == 'A':
                         response = redirect('aff-get-started')
-                    elif check_agentid[0] == 'b' or check_agentid[0] == 'B':
+                    elif (check_agentid[0] == 'b' or check_agentid[0] == 'B' or
+                          check_agentid[0] == 'd' or check_agentid[0] == 'D'):
                         response = redirect('agent-get-started')
                     else:
                         response = redirect('aff-get-started')
