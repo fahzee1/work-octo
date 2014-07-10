@@ -11,15 +11,64 @@
             font-size: 16px;
             font-weight: 600;
             color: #222;
+            &:hover {
+                background: #ffd75e;
+                color: #666;
+            }
         }
     }
 }
 #hero-wrapper {
     background: url(/static/img/banners/hero-banners/july-deals/july-bg.jpg) top center no-repeat #e5eaec;
     background-size: cover;
+    position: relative;
+    height: 430px;
+    #top-rated {
+        width: 237px;
+        height: 238px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
     #hero-image {
+        height: 420px;
         #quote-form {
             padding: 10px 0 0;
+            i {
+                display: none;
+            }
+            a {
+                width: 95%;
+                font-size: 9px;
+                line-height: 12px;
+                padding-top: 2px;
+            }
+            .quote-content {
+                p {
+                    font-size: 12px;
+                    line-height: 12px;
+                    color: @dark-grey;
+                    margin: 0;
+                    padding: 0;
+                    width: auto;
+                    display: block;
+                }
+                strong {
+                    display: block;
+                    clear: both;
+                    font-size: 18px;
+                    padding: 5px 0 0;
+                }
+                span {
+                    margin: 0;
+                    padding: 0;
+                    width: auto;
+                    font-size: 11px;
+                    line-height: 11px;
+                    font-style: italic;
+                    color: #999;
+                }
+            }
             button {
                 .san-serif-font;
                 font-size: 16px;
@@ -29,10 +78,11 @@
             }
             p.form-title {
                 font-size: 14px;
+                font-weight: 800;
             }
         }
         #paid-deals {
-            margin: 30px 0 0 245px;
+            margin: 20px 0 0 245px;
             float: left;
             h1 {
                 .san-serif-font;
@@ -78,9 +128,140 @@
                 font-size: 16px;
                 font-weight: 600;
             }
+            img {
+                &.deal {
+                    display: block;
+                    margin-top: 45px;
+                    margin-right: 20px;
+                    float: left;
+                }
+            }
         }
     }
 }
+#lightbox {
+    .icon-remove-sign {
+        color: #e4002b;
+        right: 5px;
+        top: 5px;
+        left: auto;
+        font-size: 24px;
+    }
+    .lightbox-info {
+        float: right;
+        border-left: 1px solid #ddd;
+        border-right: none;
+        width: 280px;
+        background: #eee;
+        margin: 0;
+        padding: 15px 15px 0 25px;
+        h3 {
+            color: #333;
+            font-weight: 600;
+            text-transform: none;
+            font-size: 24px;
+            line-height: 30px;
+            padding: 15px 10px 0;
+            .san-serif-font;
+        }
+        p {
+            font-size: 16px;
+            line-height: 22px;
+            color: #555;
+            padding: 15px 10px;
+            span {
+                font-weight: 800;
+            }
+        }
+    }
+    #light-quote-form {
+        background: @white;
+        height: 455px;
+        #quote-form {
+            width: 319px;
+            top: 15px;
+            left: 0;
+            margin-left: 0;
+            .consent-box {
+                label.consent-label {
+                    font-size: 11px !important;
+                    line-height: 17px !important;
+                    cursor: auto;
+                }
+            }
+            .form-fields {
+                background: #eee;
+                border-top: 1px solid #c5c5c5;
+                border-bottom: 1px solid #c5c5c5;
+                padding: 15px 54px 5px;
+                margin-bottom: 15px;
+                input {
+                    box-shadow: inset 3px 2px 3px 0px #eee;
+                    -webkit-box-shadow: inset 3px 2px 3px 0px #eee;
+                    -moz-box-shadow: inset 3px 2px 3px 0px #eee;
+                    border: 1px solid #ddd;
+                    font-size: 12px;
+                    padding: 5px;
+                    color: #666;
+                    line-height: 22px;
+                    height: 22px;
+                    width: 200px;
+                }
+            }
+            a {
+                color: @blue;
+            }
+            button {
+                background: @yellow;
+                color: #222;
+                font-weight: 800px;
+                .san-serif-font;
+                &:hover {
+                    &:hover {
+                        background: #ffd75e;
+                        color: #666;
+                    }
+                }
+            }
+            .form-title {
+                color: #333;
+                font-weight: 600;
+                text-transform: none;
+                font-size: 24px;
+                line-height: 30px;
+                padding-top: 15px;
+                .san-serif-font;
+                text-align: center;
+            }
+        }
+    }
+}
+body {
+    #call-box {
+        background: @yellow;
+        p {
+            .san-serif-font;
+            background: @yellow;
+            color: @black;
+            line-height: 32px;
+            width: auto;
+            a {
+                font-size: 24px;
+                color: @black;
+            }
+        }
+    }
+}
+
+#staff-pick {
+    background: @navy;
+    img {
+        margin: 0 auto;
+        display: block;
+        padding: 15px 0;
+    }
+}
+
 #order-final {
     .right-side {
         .button-link {
@@ -127,6 +308,11 @@
 #faq {
     margin: 0 auto 60px;
     padding: 0;
+    ul {
+        li {
+            margin-top: 10px;
+        }
+    }
 }
 #order-final {
     padding: 0;
@@ -180,6 +366,14 @@
 }
 .overpay {
     margin: 60px 0;
+    .blockquote {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 15px;
+        h3 {
+            font-size: 18px;
+        }
+    }
     a {
         text-decoration: none;
     }
@@ -193,9 +387,39 @@ h2 {
         padding: 60px 0 0;
     }
 }
+#shop {
+    padding: 25px 0;
+    .container {
+        a.package {
+            h3 {
+                color: #666;
+                padding: 14px 0 0;
+            }
+            .button {
+                margin: 10px auto 20px;
+            }
+            &.silver {
+                .button {
+                    margin: 10px auto 20px;
+                }
+                h3 {
+                    padding: 36px 0 0;
+                }
+            }
+        }
+        .triple-guarantee {
+            h2 {
+                margin-left: 30px;
+            }
+        }
+    }
+}
+
 #review-background-wrapper {
-    margin-top: 20px;
-    background: #eee;
+    margin-top: 0;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
     .wrapper {
         #review-wrapper {
             padding-bottom: 0;
@@ -234,10 +458,10 @@ h2 {
                 }
             }
             .review {
-                margin-bottom: 100px;
+                margin-bottom: 60px;
                 clear: both;
                 .box {
-                    background: @white;
+                    background: #eee;
                     padding: 25px;
                     height: auto;
                     z-index: 2;
@@ -266,15 +490,202 @@ h2 {
                         width: 290px;
                         float: left;
                         margin-top: 4px;
+                        padding: 0 0 0 20px;
                         span {
                             font-weight: normal;
                         }
                     }
                     .stars {
                         float: left;
+                        padding-top: 10px;
                     }
                 }
             }
         }
     }
 }
+#terms {
+    background: transparent;
+}
+
+
+/* #Media Queries
+================================================== */
+ 
+  /* Smaller than standard 960 (devices and browsers) */
+  @media only screen and (max-width: 959px) {
+    h2 {
+        font-size: 28px;
+        line-height: 42px;
+    }
+    #main-benefits {
+        width: 720px;
+        ul {
+            width: 100%;
+            li {
+                width: 320px;
+                &.mobile {
+                    display: none;
+                }
+            }
+        }
+    }
+    ul.check-list {
+        li {
+            font-size: 14px;
+            line-height: 22px;
+        }
+    }
+    h3 {
+        font-size: 18px;
+    }
+    ul.comparison-boxes {
+        li {
+            width: 38%;
+            font-size: 11px; 
+        }
+    }
+    #shop {
+        .container {
+            .triple-guarantee {
+                h2 {
+                    font-size: 18px;
+                    line-height: 20px;
+                    font-weight: 800;
+                    .san-serif-font;
+                }
+                ul {
+                    width: 525px;
+                    li {
+                        font-size: 12px;
+                        line-height: 24px;
+                        margin-right: 14px;
+                        i {
+                            font-size: 22px;
+                        }
+                    }
+                }
+            }
+            a.package {
+                .button {
+                    font-size: 12px;
+                    width: 80px;
+                }
+                p {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+    #review-background-wrapper {
+        .wrapper {
+            #review-wrapper {
+                .review {
+                    .info {
+                        .stars {
+                            margin-left: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #lifestyle-shot {
+        #home-content {
+            margin-top: 12px;
+            .button-link {
+                margin-top: 20px;
+            }
+        }
+    }
+    #faq {
+        width: 720px;
+        ul {
+            li {
+                padding: 0 40px 16px 45px;
+                h3 {
+                    line-height: 26px;
+                }
+            }
+        }
+    }
+    #order-final {
+        .left-side {
+            h2, p, a, i {
+                color: #222;
+            }
+        }
+    }
+  }
+ 
+  /* Tablet Portrait size to standard 960 (devices and browsers) */
+  @media only screen and (min-width: 768px) and (max-width: 959px) {}
+ 
+  /* All Mobile Sizes (devices and browser) */
+  @media only screen and (max-width: 767px) {
+
+    #shop {
+        .container {
+            .triple-guarantee {
+                h2 {
+                    font-size: 38px;
+                    line-height: 40px;
+                    text-align: center;
+                }
+                ul {
+                    width: 420px;
+
+                    li {
+                        font-size: 20px;
+                        line-height: 44px;
+                        margin-left: 40px;
+                        i {
+                            font-size: 22px;
+                            line-height: 42px;
+                        }
+                    }
+                }
+            }
+            a.package {
+                &.copper {
+                    margin-left: 0;
+                }
+                ul {
+                    li {
+
+                    }
+                }
+                .button {
+                    font-size: 16px;
+                    width: 120px;
+                }
+            }
+        }
+    }
+    #hero-wrapper {
+        #hero-image {
+            #quote-form {
+                &.sleepy {
+                    display: none;
+                }
+            }
+        }
+    }
+    #lightbox {
+        #light-quote-form {
+            #quote-form {
+                width: 275px;
+                .form-fields {
+                    padding: 15px 30px 5px;
+                }
+            }
+        }
+    }
+
+  }
+ 
+  /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+  @media only screen and (min-width: 480px) and (max-width: 767px) {}
+ 
+  /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+  @media only screen and (max-width: 479px) {}
