@@ -169,13 +169,13 @@ elif settings.SITE_ID == 3:
         dtt(r'^camera/?$', 'affiliates/sem-landing-page/camera.html', 'camera'),
         dtt(r'^medical-alert/?$', 'affiliates/sem-landing-page/medical-pendant.html', 'medical'),
         dtt(r'^krbe/?$', 'affiliates/sem-landing-page/krbe.html', 'krbe'),
-        dtt(r'^2014/?$', 'affiliates/sem-landing-page/paid-base-new.html', 'new-base'),
 
         dtt(r'^rep/get-quote?$', 'affiliates/sem-landing-page/mobile-quote-form.html', 'squeeze-form'),
         dtt(r'^ipod/?$', 'affiliates/sem-landing-page/ipod.html', 'ipod'),
 
         # KEYWORD BASED
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
+        dtt(r'^alarms/?$', 'affiliates/sem-landing-page/paid-base-new.html', 'alarms'),
         dtt(r'^home-security/?$', 'affiliates/sem-landing-page/home-security.html', 'home-security'),
         dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system.html', 'security-system'),
         dtt(r'^yahoo/?$', 'affiliates/sem-landing-page/alarm.html', 'yahoo'),
