@@ -175,6 +175,7 @@ elif settings.SITE_ID == 3:
 
         # KEYWORD BASED
         dtt(r'^alarm/?$', 'affiliates/sem-landing-page/alarm.html', 'alarm'),
+        dtt(r'^alarms/?$', 'affiliates/sem-landing-page/paid-base-new.html', 'alarms'),
         dtt(r'^home-security/?$', 'affiliates/sem-landing-page/home-security.html', 'home-security'),
         dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system.html', 'security-system'),
         dtt(r'^yahoo/?$', 'affiliates/sem-landing-page/alarm.html', 'yahoo'),
@@ -873,7 +874,7 @@ else:
         dtt(r'^adt-comparison/?$', 'affiliates/adt-comparison/index.html', 'adt-two'),
 
 
-        dtt(r'^direct-mail/?$', 'affiliates/direct-mail/index.html', 'direct-mail'),
+        dtt(r'^direct-mail/?$', 'affiliates/direct-mail/index.html', 'direct-mail'),    
 
         # CRIME STOPPERS
         dtt(r'^CFLA/?$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),

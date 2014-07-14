@@ -1,0 +1,502 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block google_experiment %}
+
+{% endblock %}
+{% block page_title %}Alarm Systems | Home Alarms | Protect America{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/paid-base-new.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;">
+{% endblock %}
+{% block robots_tag %}
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+{% endblock %}
+{% block typekit-code %}
+        <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block liveperson %}{% endblock %}
+{% block liveperson-two %}{% endblock %}
+{% block typekit %}san-serif-font{% endblock %}
+
+{% block header %}
+    {% block top-section %}
+    <div id="top-section-wrapper">
+        <div id="top-section">
+            <div id="company-links">
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" id="online-chat-button" target="blank">Online Chat</a>
+                <form action="http://www.protectamerica.com/search/" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    {% endblock %}
+    <div id="header-wrapper">
+        <div id="header">
+            {% block logo %}
+            <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
+            {% endblock %}
+            <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="hide-mobile order-button">Get a Free Quote</a>
+
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+            {% endif %}
+            <ul id="mobile-main-navigation" class="hide-desktop">
+                    <li class="get-quote"><a href="#" class="order-button" title="Get Quote" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-usd"></i>Get Quote</a></li>
+                    <li><a href="tel:{{ phone_number|format_number }}" title="Call Protect America" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Call Icon', '{{ page_name }}']);"><i class="icon-phone"></i>Call Us</a></li>
+            </ul>
+            {% block main-navigation %}
+            <ul id="main-navigation">
+                <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/shop-home-security-packages/">Shop</a>
+                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/security-equipment/">Equipment</a>
+                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/learn/">Learn</a>
+                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'support' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/support">Support</a>
+                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+            {% endblock %}
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+    {% block content %}
+        <div id="hero-wrapper">
+            <div id="top-rated">
+                <img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/top-rated.png">
+            </div>
+            <div id="hero-image">
+                {% block quoteform %}
+                    {% include "order/quote-form-white-paid.html" with form=forms.basic %}
+                {% endblock %}
+                <div id="paid-deals">
+                    <h1>The best alarm system</h1>
+                    <h2>Your security should be simple.</h2>
+                    <h3>And it starts at <strong>just $19.99 per month.</strong></h3>
+                    <ul>
+                        <li><i class="fa fa-check"></i>24/7 alarm monitoring</i></li>
+                        <li><i class="fa fa-check"></i>Easy to setup - no tools required</li>
+                        <li><i class="fa fa-check"></i>Free equipment and no installation fees</li>
+                    </ul>
+                    <a href="http://www.protectamerica.com/shop-home-security-systems" class="button yellow stylized">Start securing your home</a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    <!-- countdown -->
+    <!-- end countdown -->
+
+
+    {% include "order/call-box.html" %}
+    <!-- Featured on banner -->
+    <div id="staff-pick">
+        <img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/best-winner.png">
+    </div>
+    <div class="container">
+        <div class="seven columns overpay">
+            <h3 class="subhead">Protect Every Door, Window, and Entry Point</h3>
+            <p>Sounds simple right? Most home alarm companies offer two security sensors and force you to pay for the rest. This means unless you spend hundreds of dollars, your home isn't protected and your alarm doesn't go off until the burglar is already in your house. Our alarm packages are built so you get the protection you need.</p>
+            <div class="blockquote">
+                <h3>20 years of home security experience</h3>
+                <ul class="check-list">
+                    <li><i class="fa fa-check-circle"></i> 24/7 triple redundant alarm monitoring</li>
+                    <li><i class="fa fa-check-circle"></i> Lowest price guaranteed</li>
+                    <li><i class="fa fa-check-circle"></i> Sets up in minutes</li>
+                    <li><i class="fa fa-check-circle"></i> Smart phone app available</li>
+                </ul>
+            </div>
+        </div>
+        <div class="seven columns offset-by-two basic-stats overpay">
+            <h3>Don't overpay for your equipment!</h3>
+            <ul class="comparison-boxes">
+                <li>Save <span>$<b id="stat1" data-stat="612" class="big-number inactive">612</b></span> vs ADT</li>
+                <li>Save <span>$<b id="stat2" data-stat="1478" class="big-number inactive">1478</b></span> vs Vivint</li>
+                <li>Save <span>$<b id="stat3" data-stat="630" class="big-number inactive">630</b></span> vs AT&T Digital Life</li>
+                <li>Save <span>$<b id="stat4" data-stat="578" class="big-number inactive">578</b></span> vs Xfinity</li>
+                <li>Save <span>$<b id="stat5" data-stat="360" class="big-number inactive">360</b></span> vs Lifeshield</li>
+                <li>Save <span>$<b id="stat6" data-stat="639" class="big-number inactive">639</b></span> vs Frontpoint</li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div id="shop">
+    <div class="container">
+    <h2>Packaged Home Security Systems</h2>
+    <p>With no installation or equipment fees</p>
+        <a href="http://www.protectamerica.com/shop-home-security-packages/copper" class="copper package three columns">
+            <h3>Copper</h3>
+            <p>$19.99<span>monthly</span></p>
+            <ul>
+                <li>1 Simon XT panel</li>
+                <li>3 door / window sensors</li>
+                <li>1 motion detector</li>
+            </ul>
+            <div class="button" data-link="copper">Select plan</div>
+
+        </a>
+        <a href="http://www.protectamerica.com/shop-home-security-packages/bronze" class="bronze package three columns">
+            <h3>Bronze</h3>
+            <p>$35.99<span>monthly</span></p>
+            <ul>
+                <li>1 Simon XT panel</li>
+                <li>7 door / window sensors</li>
+                <li>1 motion detector</li>
+            </ul>
+            <div class="button" data-link="copper">Select plan</div>
+
+        </a>
+        <a href="http://www.protectamerica.com/shop-home-security-packages/silver" class="silver package three columns">
+            <b>Most Popular</b>
+            <h3>Silver</h3>
+            <p>$37.99<span>monthly</span></p>
+            <ul>
+                <li>1 Simon XT panel</li>
+                <li>10 door / window sensors</li>
+                <li>1 motion detector</li>
+            </ul>
+            <div class="button" data-link="copper">Select plan</div>
+
+        </a>
+        <a href="http://www.protectamerica.com/shop-home-security-packages/gold" class="gold package three columns">
+            <h3>Gold</h3>
+            <p>$39.99<span>monthly</span></p>
+            <ul>
+                <li>1 Simon XT panel</li>
+                <li>12 door / window sensors</li>
+                <li>1 motion detector</li>
+            </ul>
+            <div class="button" data-link="copper">Select plan</div>
+
+        </a>
+        <a href="http://www.protectamerica.com/shop-home-security-packages/platinum" class="platinum package three columns">
+            <h3>Platinum</h3>
+            <p>$42.99<span>monthly</span></p>
+            <ul>
+                <li>1 Simon XT panel</li>
+                <li>15 door / window sensors</li>
+                <li>1 motion detector</li>
+            </ul>
+            <div class="button" data-link="copper">Select plan</div>
+
+        </a>
+
+        <div class="triple-guarantee">
+            <h2>Protect America<br>
+            <strong>Triple Guarantee</strong></h2>
+            <ul>
+                <li><i class="fa fa-check-circle"></i>Lowest price</li>
+                <li><i class="fa fa-check-circle"></i>No equipment fees</li>
+                <li class="last"><i class="fa fa-check-circle"></i>Lifetime replacement plan</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+    <script type="text/javascript">
+        $(".packages-button").click(function() {
+            $('.packages-container').slideDown('fast');
+            $(this).fadeOut('fast');
+            $.scrollTo( '.packages-container', 800, {offset:-100} );
+            return false;
+        });
+    </script>
+
+{% block benefits %}
+    <div class="wrapper">
+        <div id="security-information">
+            <div id="main-benefits">
+                <h2>The perfect alarm system for your home.</h2>
+                <p><strong>An alarm system built for you.</strong> Don't have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>
+                <ul>
+                    {% block benefits-1 %}
+                    <li>
+                        <h3><i class="icon-home"></i>Simply Peace of Mind</h3>
+                        <p>Our alarm systems provide state-of-the-art 24/7 protection so you don't have to worry about a thing.</p>
+                    </li>
+                    {% endblock %}
+                    {% block benefits-2 %}
+
+                    <li class="mobile">
+                        <h3><i class="icon-rss"></i>No Wires. No Hassle.</h3>
+                        <p>Wireless alarm systems means an amazingly simple install. We've taken user-friendly to a new level.</p>
+                    </li>
+                    {% endblock %}
+
+                    {% block benefits-3 %}
+
+                    <li class="alt">
+                        <h3><i class="icon-money"></i>The Lowest Price. Period.</h3>
+                        <p>Our alarm packages start at $19.99 a month. We'll also match any competitor's prices with our lowest price guarantee!</p>
+                    </li>
+                    {% endblock %}
+                    <div class="clear"></div>
+                    {% block benefits-4 %}
+
+                    <li class="mobile">
+                        <h3><i class="icon-user"></i>Customizable Alarm Packages</h3>
+                        <p>Each system is tailored to you, including options like: home automation, fire protection, and iPhone control.</p>
+                    </li>
+                    {% endblock %}
+
+                    {% block benefits-5 %}
+
+                    <li>
+                        <h3><i class="icon-thumbs-up"></i>No Installation or Equipment Fees</h3>
+                        <p>Setting up your alarm should be stress-free and easy on your wallet. Our packages come with free equipment and no installation fees.</p>
+                    </li>
+                    {% endblock %}
+
+                    {% block benefits-6 %}
+
+                    <li class="alt">
+                        <h3><i class="icon-heart"></i>Top Rated. Everywhere.</h3>
+                        <p>Our Copper alarm package has been named a Consumer's Digest "Best Buy" and we are ranked number one by BestHomeSecurityCompanys.com</p>
+                    </li>
+                    {% endblock %}
+
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    {% endblock %}
+    <div id="automation">
+    <div class="container">
+        <div class="right">
+            <h4>PROTECT YOUR HOME AND FAMILY</h4>
+            <p>Your safety is far too important, and leaving anything to chance just isn't an option. Protect America security systems are affordable and customized to perfectly fit your home, because that's how security should be! Our experts provide all the help, equipment and resources you need to protect your home.</p>
+            <a href="http://www.protectamerica.com/shop-home-security-systems" class="button yellow stylized">Secure your home</a>
+        </div>
+    </div>
+</div>
+    {% block reviews %}
+    <div id="review-background-wrapper">
+        <div class="wrapper">
+            <div id="review-wrapper">
+                {% block reviews-headline %}<h2>What our customers say</h2>{% endblock %}
+                {% block reviews-subhead %}<p>Don’t just take our word for it, real customers are talking!</p>{% endblock %}
+                
+                <div id="left-column">
+                    {% block review-1 %}
+                    <div class="review">
+                        <div class="box">
+                            <p>We are very pleased with our new alarm system. The rep that signed us up was very helpful in providing us with different options and was always available when we had questions. Best of all there was no activation fee or hidden charges. I would recommend them to anyone looking for a security system at a decent cost.</p>
+                        </div>
+                        <div class="info">
+                        <h3>Raymond <span>of</span> Hemet, CA</h3>
+                        <img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+                        </div>
+                    </div>
+                    {% endblock %}
+                    {% block review-2 %}
+                    <div class="review">
+                        <div class="box">
+                            <p>I just got my Protect America home security system yesterday. Brian was my sales rep, and was very helpful changing my package to meet my needs, when I called the company to set up my system Avery helped me set it up. He was great, answered all my questions, and had me safe and protected in half an hour. This system works great and I have a med alert button to wear for health reasons. Because we have stalkers and live in a bad neighborhood , my children and I have had to take shifts (armed) to feel safe. We all slept with loaded guns, but last night I slept like a baby!!! Thank you for your great service! And this company calls the sheriff, fire dept, and the first responders for you within 60 seconds if an alarm goes off and you do not answer your phone. They also provide a duress code if you are being forced to turn off your alarm against your will... I highly recommend this system.</p>
+                        </div>
+                        <div class="info">
+                        <h3>Melody <span>of</span> Hartville, MI</h3>
+                        <img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+                        </div>
+                    </div>
+                    {% endblock %}
+                </div>
+                <div id="right-column">
+                    {% block review-5 %}
+                    <div class="review">
+                        <div class="box">
+                            <p>I have been extremely pleased with entire process of of buying, installing and setting up iPhone control of my mothers' alarm system. Your personnel were all courteous, professional, and efficient. The set up was a breeze. It was so simple. I had everything up in 20 minutes and thanks to josh the process was simple and not tedious or difficult. With your support anyone can set this up. Josh was extremely patient and professional and did not try to rush and at the end asked if he could do anything else to help. My mom now has a great alarm and an emergency button hanging around her neck, what peace of mind for her and me who lives 200 miles away. Rick ** was exceptional and very charismatic in helping me set up her iPhone to control the alarm. I have ADT. There is no comparison and I will be switching to protect america when my contract expires this June. Thank you all.</p>
+                        </div>
+                        <div class="info">
+                        <h3>Cesar <span>of</span> Baltimore, MD</h3>
+                        <img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+                        </div>
+                    </div>
+                    {% endblock %}
+                    {% block review-6 %}
+                    <div class="review">
+                        <div class="box">
+                            <p>I have been a satisfied customer for 11 years now. I’ve upgraded my alarm system twice and my experience with the sales, set up, activation and customer service have been nothing short of excellent! Protect America has the best customer service in the business. No doubt about it. Everyone is pleasant and a true professional. Protect America has the best equipment and the lowest monthly monitoring fee out there.</p>
+                        </div>
+                        <div class="info">
+                        <h3>Michael <span>of</span> Seattle, WA</h3>
+                        <img class="stars" src="{{ STATIC_URL }}img/affiliates/sem-landing-page/review-stars.png" alt"">
+                        </div>
+                    </div>
+                    {% endblock %}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}
+    
+
+
+{% endblock %}
+{% block order-footer %}
+    <div id="order-final">
+        <div class="wrapper">
+            <div class="left-side">
+                <h2>Your Family's safety is important.</h2>
+                <p>Our alarm experts are ready to help:</p>
+                <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ highlightge_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><i class="icon-phone"></i> {{ phone_number|format_number }}</span></a>
+            </div>
+            <div class="right-side no-desktop">
+                <a href="#" class="button-link order-button">
+                    Order Now <i class="icon-chevron-right"></i>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div id="lightbox">
+        <div id="light-quote-form">
+            <i class="icon-remove-sign"></i>
+            <div class="lightbox-info">
+                <h3>We're here for you.</h3>
+                <p>Our security experts are standing by to help you create the best security and safety solution for your home. Give us a call now at: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span> or fill out the form for a no obligation security analysis.</p>
+            </div>
+            {% include "affiliates/sem-landing-page/medical/medical-quote-form.html" with form=forms.basic %}
+        </div>
+        <div class="lightbox-bg">&nbsp;</div>
+    </div>
+{% endblock %}
+{% block main-footer %}
+<script type="text/javascript">
+    $('.faq').click(function() {
+        $(this).children("div").children("p").slideToggle('fast');
+        if ($(this).hasClass('arrow_up')) {
+            $(this).removeClass('arrow_up')
+        } else {
+            $(this).addClass('arrow_up')
+        }
+    })
+    $('.order-button').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeIn();
+        return false;
+    })
+    $('.lightbox-bg').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })
+    $('.icon-remove-sign').click(function(e) {
+        e.preventDefault();
+        $('#lightbox').fadeOut();
+        return false;
+
+    })
+</script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    $( "#menu-button" ).click(function() {
+$( "#mobile-menu-container" ).slideToggle( "slow", function() {
+});
+});
+
+        var outreach = $("#community-outreach-squares");
+
+        $('.square').click(function() {
+            var link = $(this).data("link");
+            $(this).attr(link, '_blank');
+
+        });
+    });
+    </script>
+
+
+{% endblock %}
+
+{% addtoblock "js" %}
+    <script type="text/javascript" charset="utf-8" src="{{ STATIC_URL }}js/waypoints.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}/js/countTo.js"></script>
+    <script type="text/javascript">
+    
+        $(".packages-button").click(function() {
+            $('.packages-container').slideDown('fast');
+            $(this).fadeOut('fast');
+            $.scrollTo( '.packages-container', 800, {offset:-100} );
+            return false;
+        });
+        
+        $(document).ready(function() {
+            $('#same-as-account input').change(function () {
+            if ($(this).hasClass("active")) {
+                $('#shipping-address').slideUp();
+                $(this).removeClass('active');
+            } else {
+                $('#shipping-address').slideDown();
+                $(this).addClass('active');
+            }
+            return false;
+        });
+        var comp;
+        var aniPlay = null;
+        aniPlay2 = 0;
+
+        AdobeEdge.bootstrapCallback(function(compId) {
+            comp = AdobeEdge.getComposition(compId).getStage();
+            aniPlay = 0;
+        
+        });
+        $('.big-number').text('0');
+        $('.big-number').removeClass('inactive');
+        for (i = 1; i < 7; i++) {
+            newSavings = $('#stat'+i).data('stat');
+            console.log(newSavings)
+            $('#stat'+i).countTo({from: 0, to: newSavings, speed: 5000});
+        }
+
+        function vc_stop(){
+            comp.stop();
+        }
+        function vc_play(){
+            comp.play();
+        }
+        $('.howitworks').waypoint(function(direction) {
+            if (aniPlay == 0) {
+                vc_play();
+                aniPlay = 1;
+        
+            }
+        }, { offset: '40%' });;
+        
+        });
+    
+    </script>
+{% endaddtoblock "js" %}
