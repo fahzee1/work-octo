@@ -178,6 +178,7 @@ elif settings.SITE_ID == 3:
         dtt(r'^alarms/?$', 'affiliates/sem-landing-page/paid-base-new.html', 'alarms'),
         dtt(r'^home-security/?$', 'affiliates/sem-landing-page/home-security.html', 'home-security'),
         dtt(r'^security-system/?$', 'affiliates/sem-landing-page/security-system.html', 'security-system'),
+        dtt(r'^security-systems/?$', 'affiliates/sem-landing-page/security-systems.html', 'security-systems'),
         dtt(r'^yahoo/?$', 'affiliates/sem-landing-page/alarm.html', 'yahoo'),
         dtt(r'^wireless-alarm/?$', 'affiliates/sem-landing-page/wireless-alarm.html', 'wireless-alarm'),
 		dtt(r'^wireless-home-security/?$', 'affiliates/sem-landing-page/wireless-home-security.html', 'wireless-home-security'),

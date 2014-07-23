@@ -7,6 +7,7 @@
 {% block page_title %}Alarm Systems | Home Alarms | Protect America{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/paid-base.css">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <!--[if (lt IE 9) & (!IEMobile)]>
     <script src="{{ STATIC_URL }}js/selectivizr-min.js"></script>
     <![endif]-->
@@ -52,7 +53,6 @@
             <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" alt="Protect America Home Security" id="company-logo">
             {% endblock %}
             <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="hide-mobile order-button">Get a Free Quote</a>
-
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
@@ -96,17 +96,30 @@
                 {% include "order/quote-form-white.html" with form=forms.basic %}
             {% endblock %}
             <div class="hero-content">
-                <h1>{% block h2 %}The best alarm system{% endblock %}</h1>
-                <p>Plans starting at only <span>$19.99<small>/mo</small></span></p>
+                <h1>{% block h2 %}The best alarm system.{% endblock %}</h1>
+                <p>Starting at <span>just $19.99 per month.</span></p>
+                <ul>
+                    <li><i class="fa fa-check"></i>24/7 security monitoring</li>
+                    <li><i class="fa fa-check"></i>Easy to setup, no tools required</li>
+                    <li><i class="fa fa-check"></i>Free equipment and no installation</li>
+                </ul>
+
+                <button type="button" class="yellow">Click here to get started</button>
+                <div class="clear"></div>
+
                 {% if phone_number %}
-                    <a href="tel:{{ phone_number|format_number }}" class="tfn" style="width:275px;" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                <span>or call</span><a href="tel:{{ phone_number|format_number }}" class="tfn" style="width:275px;" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                 {% endif %}
+
                 <div class="ssavings-deals">
                     <a href="http://www.protectamerica.com/shop-home-security-packages"><img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/free-system.png" class="june-free" alt="Get a free security system"></a>
                     <a href="http://www.protectamerica.com/equipment/home-security/motion-sensors"><img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/motion-detector.png" class="june-smoke" alt="FREE Motion detector!"></a>
-    
                 </div>
             </div>
+            <div class="deal">
+                <a href="#"><img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/gradient-deal.png"></a>
+            </div>
+            {% block triple-guarantee %}
             <ul class="triple-guarantee">
                 <h3>What the other guys won't give you:</h3>
                 <h2>Our Triple Guarantee</h2>
@@ -114,6 +127,7 @@
                 <li><i class="icon-check-sign"></i>No Equipment Fees</li>
                 <li><i class="icon-check-sign"></i>Lifetime Replacement Plan</li>
             </ul>
+            {% endblock %}
         </div>
     </div>
 
