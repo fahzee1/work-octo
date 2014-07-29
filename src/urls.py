@@ -508,6 +508,16 @@ elif settings.SITE_ID == 24:
             dtt(r'^thank-you/$', 'affiliates/acn/thank-you.html', 'thank-you'),
     )
 
+# zhunrize
+elif settings.SITE_ID == 25:
+    urlpatterns += patterns('',
+            dtt(r'^$', 'affiliates/zhunrize/index.html', 'home'),
+            dtt(r'^security-systems/$', 'affiliates/zhunrize/security-systems.html', 'security-systems'),
+            dtt(r'^video-security-cameras/$', 'affiliates/zhunrize/video-security-cameras.html', 'video-security-cameras'),
+            dtt(r'^order/$', 'affiliates/zhunrize/order.html', 'order'),
+            dtt(r'^thank-you/$', 'affiliates/zhunrize/thank-you.html', 'thank-you'),
+    )
+
 
 # defaults
 else:

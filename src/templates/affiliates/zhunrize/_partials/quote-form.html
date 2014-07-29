@@ -1,0 +1,138 @@
+{% load sekizai_tags %}
+<form id="quote-form" method="post" action="" class="form-quote">
+    {% csrf_token %}
+    <input type="hidden" name="form" value="basic" />
+    <p>Get a free security quote</p>
+	<div class="fields">
+		<label>Name</label>
+        {{ form.name }}
+		<label>Email</label>
+        {{ form.email }}
+        <label>Phone Number</label>
+        {{ form.phone }}
+	<button type="button" class="redbutton">Get quote</button>
+    </div>
+    <small>By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</small>
+    <a href="http://www.protectamerica.com/pa/priv_p" title="View our Privacy Policy">We never share your information with anyone</a>
+    <div class="quote-form-error">
+        <img src="{{ STATIC_URL }}/img/base/error-arrow.png" class="error-arrow" />
+        <strong>Whoops!</strong>
+        <ul></ul>
+    </div>
+    <div id="third-party-container" class="v">
+        <div class="third-party-badge vsign">
+            <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
+        </div>
+        <div class="third-party-badge truste">
+            <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
+        </div>
+    </div>
+</form>
+{% addtoblock "js" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.form-quote input').keypress(function(e){
+        if(e.which == 13){
+            $('.form-quote button').click();
+        }
+    });
+
+    $('.form-quote button').click(function() {
+        $('.form-quote div').removeClass('.error-state');
+
+        var $form = $(this).closest('.form-quote');
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+
+        var data = {'name':name,
+                    'email': email,
+                    'phone': phone,
+                    'trusted_form': trusted,
+                    'form': 'basic',
+                    'referer_page':window.location.href,
+                    'form_values':$form.serialize(),
+                    'operating_system':(window.OSName + "_PA"),
+                    'gclid':$("[name='gclid']").val(),
+                    'form_js': 't/o/q-f.h'
+                    }
+
+
+        $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess,
+            error: newFormError
+        });
+
+        function newFormSuccess(json) {
+            submitting = false;
+            if(json.success) {
+                url = json.thank_you
+                window.location = "http://www.tomboytoolssecurity.com/thank-you/tomboy-tools/";
+            }
+        if(json.errors) {
+            $(".quote-form-error").show();
+            $(".quote-form-error ul").html("");
+            var error_string = "";
+            if(typeof json.errors == "object") { //this is an array of error messages
+                $.each(json.errors, function(k,v) {
+                    switch(k) {
+                        case 'phone':
+                            error_string += "<li> Phone: "+v+"</li>";
+                            break;
+                        case 'email':
+                            error_string += "<li> Email: "+v+"</li>";
+                            break;
+                        case 'name':
+                            error_string += "<li> Name: "+v+"</li>";
+                            break;
+                        default:
+                            error_string += "<li>"+v+"</li>";
+                            break;
+                    }
+                });
+            } else {
+                error_string = "<li>"+json.errors+"</li>\n";
+            }
+
+            $(".quote-form-error ul").html(error_string);
+            } else $(".quote-form-error").hide();
+
+        }
+
+
+        function newFormError(){
+            $(".sleepy #form-loading, .droopy #form-loading").hide();
+            $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            //$('#quote-form button').attr('disabled',false);
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
+        return false;
+        });
+    });
+</script>
+{% endaddtoblock "js" %}
