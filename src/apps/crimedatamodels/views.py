@@ -16,11 +16,18 @@ from django.db.models import Avg
 from apps.contact.forms import PAContactForm
 from django.template.defaultfilters import slugify
 from apps.news.models import Article
-from apps.crimedatamodels.models import (CrimesByCity,CityCrimeStats,StateCrimeStats,
-                                         State,CityLocation,ZipCode,CrimeContent,
-                                         MatchAddressLocation,FeaturedIcon,FeaturedVideo,
-                                         CityCompetitor,Resources,Permits,Demographics,
-                                         FarmersMarket,Universities,LocalEducation)
+from apps.crimedatamodels.models import (CrimesByCity,
+                                         CityCrimeStats,
+                                         StateCrimeStats,
+                                         State,
+                                         CityLocation,
+                                         ZipCode,
+                                         CrimeContent,
+                                         MatchAddressLocation,
+                                         FeaturedIcon,
+                                         FeaturedVideo,
+                                         CityCompetitor,
+                                         Resources)
 
 
 def query_weather(latitude, longitude, city, state):
@@ -155,31 +162,6 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                 if not articles:
                     articles = None
 
-            permits = Permits.objects.filter(city=city,state=state)
-            if not permits:
-                permits = Permits.objects.filter(state=state)
-                if not permits:
-                    permits = None
-
-
-            farmersmarkets = FarmersMarket.objects.filter(city=city,state=state)
-            if not farmersmarkets:
-                farmersmarkets = FarmersMarket.call_data(city=city,state=state)
-
-            universities = Universities.objects.filter(city=city,state=state)
-            if not universities:
-                universities = Universities.call_data(city=city,state=state)
-
-            localeducation = LocalEducation.objects.filter(city=city,state=state)
-            if not localeducation:
-                localeducation = LocalEducation.call_data(city=city,state=state)
-
-            try:
-                demographics = Demographics.objects.get(city=city,state=state)
-            except Demographics.DoesNotExist:
-                demographics = Demographics.call_data(city=city,state=state)
-
-
 
 
             reviews = Textimonial.objects.filter(display=True,city=city.city_name,state=state.abbreviation).exclude(rating=0)
@@ -224,12 +206,7 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                    'local_rival':local_rival,
                    'years':(years if freecrime else None),
                    'resources':resources,
-                   'articles':articles,
-                   'permits':permits,
-                   'farmersmarkets':farmersmarkets,
-                   'universities':universities,
-                   'localeducation':localeducation,
-                   'demographics':demographics
+                   'articles':articles
                 }
 
             try:

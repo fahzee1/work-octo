@@ -7,7 +7,7 @@ from django import template
 from sekizai.context import SekizaiContext
 from django.conf import settings
 
-from apps.testimonials.models import Testimonial, Textimonial, TextimonialCityCache
+from apps.testimonials.models import Testimonial, Textimonial
 
 register = template.Library()
 "limit=5&template=local&state={{ state }}&words=100"
@@ -44,44 +44,48 @@ class TestimonialSearchNode(template.Node):
             self.words = self.kwargs['words'][0]
 
 
-    def filter_states(self,context,testimonials=None,city=None,state=None):
+    def filter_states(self,context,testimonials=None):
         # filter the testimonials by state
+        if 'state' in self.kwargs:
+            if testimonials:
+                if self.kwargs['state'][0] == "{{ state }}":
+                    testimonials = testimonials.filter(state=context['state'])
+                else:
+                    testimonials = testimonials.filter(state=self.kwargs['state'][0])
 
-        if testimonials:
-            testimonials = testimonials.filter(state__iexact=state)
+                if testimonials.count() < 4:
+                    testi = Textimonial.objects.filter(permission_to_post=True, display=True).order_by('-date_created')
+                    if self.kwargs['state'][0] == "{{ state }}":
+                        testi = testimonials.filter(state=context['state'])
+                    else:
+                        testi = testimonials.filter(state=self.kwargs['state'][0])
 
-            if testimonials.count() < 4:
-                testi = Textimonial.objects.filter(permission_to_post=True, display=True).order_by('-date_created')
-                testi = testi.filter(state__iexact=state)
-
-                testimonials = testimonials | testi
-                testimonials = testimonials[:4]
-
-        else:
-            testimonials = Textimonial.objects.filter(permission_to_post=True,display=True).order_by('-date_created')
-            testimonials = testimonials.filter(state__iexact=state)
+                    testimonials = testimonials + testi
 
 
+            else:
+                testimonials = Textimonial.objects.filter(permission_to_post=True,display=True).order_by('-date_created')
+                if self.kwargs['state'][0] == "{{ state }}":
+                    testimonials = testimonials.filter(state=context['state'])
+                else:
+                    testimonials = testimonials.filter(state=self.kwargs['state'][0])
 
-        if testimonials:
-            textimonial_cache = TextimonialCityCache.objects.create(city=city,state=state)
-            for x in testimonials[:4]:
-                textimonial_cache.testimonials.add(x)
 
             shuffle(list(testimonials))
 
+            return testimonials
+
+
         return testimonials
-
-
 
 
     def filter_cities(self,context,testimonials=None):
         # filter the testimonials by city
         if 'city' in self.kwargs:
             if self.kwargs['city'][0] == "{{ city }}":
-                testimonials = testimonials.filter(city__iexact=context['city'])
+                testimonials = testimonials.filter(city=context['city'])
             else:
-                testimonials = testimonials.filter(city__iexact=self.kwargs['city'][0])
+                testimonials = testimonials.filter(city=self.kwargs['city'][0])
 
             return testimonials
 
@@ -117,52 +121,24 @@ class TestimonialSearchNode(template.Node):
 
 
     def render(self, context):
-        testimonials = None
-        city = None
-        state = None
-        if 'city' in self.kwargs and 'state' in self.kwargs:
-            if self.kwargs['city'][0] == "{{ city }}":
-                city = context['city']
-            else:
-                city = self.kwargs['city'][0]
-
-            if self.kwargs['state'][0] == "{{ state }}":
-                state = context['state']
-            else:
-                state = self.kwargs['state'][0]
-
-            try:
-                testimonials_cache = TextimonialCityCache.objects.get(city__iexact=city,state__iexact=state)
-                testimonials = testimonials_cache.testimonials.all()
-
-            except TextimonialCityCache.DoesNotExist:
-                pass
+        if self.search_term == '':
+            testimonials = Textimonial.objects.filter(permission_to_post=True,
+                display=True).order_by('-date_created')
+        else:
+            testimonials = Textimonial.objects.filter(permission_to_post=True,
+                message__icontains=self.search_term,
+                display=True).order_by('-date_created')
 
 
 
+        testimonials = self.filter_cities(context,testimonials)
 
-        if not testimonials:
-            if self.search_term == '':
-                testimonials = Textimonial.objects.filter(permission_to_post=True,
-                    display=True).order_by('-date_created')
-            else:
-                testimonials = Textimonial.objects.filter(permission_to_post=True,
-                    message__icontains=self.search_term,
-                    display=True).order_by('-date_created')
+        testimonials = self.filter_states(context,testimonials)
 
-
-            testimonials = self.filter_cities(context,testimonials)
-
-            testimonials = self.filter_states(context,testimonials,city,state)
-
+        pdb.set_trace()
         # limit the testimonials by the kwarg
         if 'limit' in self.kwargs:
-            if isinstance(self.kwargs['limit'],list):
-                limit = int(self.kwargs['limit'][0])
-            else:
-                limit = int(self.kwargs['limit'])
-
-            testimonials = testimonials[:limit]
+            testimonials = testimonials[:self.kwargs['limit'][0]]
 
 
         testimonial_array = self.final_list(testimonials)
