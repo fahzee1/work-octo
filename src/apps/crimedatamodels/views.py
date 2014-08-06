@@ -15,6 +15,7 @@ from django.contrib.localflavor.us.us_states import US_STATES
 from django.db.models import Avg
 from apps.contact.forms import PAContactForm
 from django.template.defaultfilters import slugify
+from apps.news.models import Article
 from apps.crimedatamodels.models import (CrimesByCity,
                                          CityCrimeStats,
                                          StateCrimeStats,
@@ -25,7 +26,8 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          MatchAddressLocation,
                                          FeaturedIcon,
                                          FeaturedVideo,
-                                         CityCompetitor)
+                                         CityCompetitor,
+                                         Resources)
 
 
 def query_weather(latitude, longitude, city, state):
@@ -148,6 +150,20 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
             except CityCompetitor.DoesNotExist:
                 local_rival = None
 
+            resources = Resources.objects.filter(city=city,state=state)
+            if not resources:
+                resources = Resources.objects.filter(state=state)
+                if not resources:
+                    resources = None
+
+            articles = Article.objects.filter(city=city,state=state)
+            if not articles:
+                articles = Article.objects.filter(state=state)
+                if not articles:
+                    articles = None
+
+
+
             reviews = Textimonial.objects.filter(display=True,city=city.city_name,state=state.abbreviation).exclude(rating=0)
             if reviews:
                 total = reviews.count()
@@ -172,7 +188,7 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
             #   city.city_name, state.abbreviation)
             weather_info = None
 
-            
+
             context = {
                    'crime_stats': (city_crime_objs[0] if city_crime_objs else None),
                    '_crime_stats': (crime_stats if freecrime else None) ,
@@ -188,11 +204,13 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                    'local_video':local_video,
                    'local_icon':local_icon,
                    'local_rival':local_rival,
-                   'years':(years if freecrime else None)
+                   'years':(years if freecrime else None),
+                   'resources':resources,
+                   'articles':articles
                 }
-             
+
             try:
-                #try to see if the local page has an address associated with it 
+                #try to see if the local page has an address associated with it
                 location_match=MatchAddressLocation.objects.select_related().get(location=city)
                 context.update(local_street=location_match.address.street_name,
                            local_city=location_match.address.city,
@@ -241,7 +259,7 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
             context.update(content=content.render(city))
         '''
 
-          
+
 
         context = {'state': state.abbreviation,
                    'state_long': state.name,
@@ -509,7 +527,7 @@ def crime(request, state, city, crime):
 def search(request):
     """Render a search results page based on the query string in the GET params"""
     # Extract Query Parameters
-    
+
     q_str = request.GET.get('q', None)
     city_and_state = False
     city_or_state = False
@@ -534,7 +552,7 @@ def search(request):
         _city,_state = None,None
         city_or_state = True
 
-       
+
     # Get any State objects from params, and replace
     # full state name params with abbreviations
     if not is_zipcode:
@@ -602,9 +620,9 @@ def search(request):
     forms = {}
     forms['basic'] = PAContactForm()
 
-    ctx={'num_cities': (n_cities if n_cities else None), 
-         'cities': (city_objs if city_objs else None), 
-         'forms': forms, 
+    ctx={'num_cities': (n_cities if n_cities else None),
+         'cities': (city_objs if city_objs else None),
+         'forms': forms,
          'search_query': q_str}
 
     if list_all_cities:

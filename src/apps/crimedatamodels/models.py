@@ -26,6 +26,14 @@ POPULATION_TYPES = (
 )
 
 
+RESOURCE_CHOICES = (
+    ('rylan','Rylan'),
+    ('waldy','Waldy'),
+    ('cj','Cj')
+
+    )
+
+
 class ZipCode(models.Model):
     zip = models.CharField(primary_key=True, max_length=5, unique=True)
     city = models.CharField(max_length=64)
@@ -46,6 +54,7 @@ class State(models.Model):
     name = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
     abbreviation = models.CharField(max_length=2, unique=True)
+    license = models.TextField(blank=True,null=True, help_text='License #')
 
     def __unicode__(self):
         return '%s %s' % (self.abbreviation, self.name)
@@ -359,6 +368,7 @@ class LocalAddress(models.Model):
     street_name = models.CharField(max_length=255,blank=True,null=True)
     city = models.CharField(max_length=255,blank=True,null=True)
     state = models.CharField(max_length=255,blank=True,null=True)
+    phone_number = models.CharField(max_length=255,blank=True,null=True)
     zip_code = models.IntegerField(max_length=5,blank=True,null=True)
     googleplus_url = models.CharField(max_length=255,blank=True,null=True)
 
@@ -407,10 +417,33 @@ class FeaturedIcon(FeaturedCommon):
         return "%s's icon" % self.city.city_name
 
 class CityCompetitor(FeaturedCommon):
-    rival = models.CharField(max_length=255)
+    rival = models.CharField(max_length=255,help_text='Name of our competitor?')
+    door_window = models.CharField(default='3',max_length=255,help_text='Door/Window protection?')
+    alarm_monitoring = models.BooleanField(default=False,help_text='24/7 Alarm Monitoring?')
+    free_equipment = models.BooleanField(default=False,help_text='Free security equipment?')
+    no_fees = models.BooleanField(default=False,help_text='No installation fees')
+    warranty = models.BooleanField(default=False,help_text='Lifetime equipment warrant?')
+    monthly_cost = models.CharField(default='19.99',max_length=255,help_text='How much a month?')
+
 
     def __unicode__(self):
         return "%s Competitor: %s" %(self.city.city_name,self.rival)
+
+
+
+class Resources(models.Model):
+    """
+    used to show resources section on local pages
+    """
+
+    city = models.ForeignKey("CityLocation",blank=True,null=True)
+    state = models.ForeignKey("State")
+    name = models.CharField(max_length=255)
+    url = models.TextField()
+    category = models.CharField(max_length=200,choices=RESOURCE_CHOICES)
+
+    def __unicode__(self):
+        return '%s - %s' % (self.name,self.city)
 
 
 
