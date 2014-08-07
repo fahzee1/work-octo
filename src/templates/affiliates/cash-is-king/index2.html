@@ -14,24 +14,24 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cash-is-king/bootstrap.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cash-is-king/bootstrap-theme.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cash-is-king/main.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cash-is-king/media.css">    
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/cash-is-king/media.css">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
     <script src="{{ STATIC_URL }}js/affiliates/cash-is-king/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">    
-  
-    
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
   </head>
   <body>
   <!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
   <![endif]-->
- 
+
 <section class="section-1">
   <div class="container">
     <div class="row">
       <div class="col-sm-6"><a href="/"><img src="{{ STATIC_URL }}img/affiliates/cash-is-king/img/logo.png" class="logo"></a></div>
-      <div class="col-sm-6 hidden-xs" align="right"><h3>Call Now For A FREE SYSTEM!<br><span>1-888-305-9673</span></h3></div>      
+      <div class="col-sm-6 hidden-xs" align="right"><h3>Call Now For A FREE SYSTEM!<br><span>1-888-305-9673</span></h3></div>
     </div>
    </div>
 </section>
@@ -52,14 +52,15 @@
         <div class="clr divider-line"></div>
 
         <p align="center"><img src="{{ STATIC_URL }}img/affiliates/cash-is-king/img/s2-img-2.png"><span><strong>LIMITED TIME OFFER!</strong><br>Call now for 2 FREE keychain remotes.<br></span><img src="{{ STATIC_URL }}img/affiliates/cash-is-king/img/s2-img-3.png"></p>
-       
+
       </div>
       <div class="col-md-5">
         <div class="form-wrap" align="center">
          <span class="promo">NEW PRICE $19.99 A MONTH</span>
          <h3>GET YOUR <strong>FREE SYSTEM!</strong></h3>
          <p align="center">Provide your contact info and we will contact you directly!</p>
-          <form role="form">
+          <form role="form" class='cash-form'>
+            {% csrf_token %}
           <div class="form-group">
             <label for="yourname" class="sr-only">name</label>
             <input type="text" class="form-control" id="name" placeholder="Your complete name">
@@ -68,14 +69,14 @@
             <label for="phonenumber" class="sr-only">phone</label>
             <input type="text" class="form-control" id="phonenumber" placeholder="Enter phone number">
           </div>
-          
-          <button type="submit" class="btn btn-default">GET SYSTEM</button>
+
+          <button type="submit" class="btn btn-default" id="submit">GET SYSTEM</button>
         </form>
         <p><small>By submitting this form, I agree that Protect America, including its affiliates, may contact me regarding its programs and offers via email or telephone using automated technology to any wireless number I provide.</small></p>
         <p align="center"><img src="{{ STATIC_URL }}img/affiliates/cash-is-king/img/norton.png"><img src="{{ STATIC_URL }}img/affiliates/cash-is-king/img/mcaffee.png"></p>
         </div>
       </div>
-       
+
     </div>
    </div>
 
@@ -141,8 +142,8 @@
 </div>
 
 
-  
-<div class="footer"> 
+
+<div class="footer">
     <div class="container">
       <div class="row">
       <div class="col-sm-4">
@@ -157,9 +158,9 @@
           <p>GE and GE Security logos are registered trademarks of General Electric.</p>
 
 
-          </p>             
+          </p>
         </div>
-      </div>   
+      </div>
     </div>
 </div>
  <!-- Modal -->
@@ -178,19 +179,116 @@
        <button class="search-button">Search</button></p>
        </form>
       </div>
-     
+
     </div>
   </div>
 </div>
 {% endcomment %}
-   
+
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
   <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/affiliates/cash-is-king/vendor/jquery-1.10.2.min.js"><\/script>')</script>
   <script src="{{ STATIC_URL }}js/affiliates/cash-is-king/vendor/bootstrap.min.js"></script>
   <script src="{{ STATIC_URL }}js/affiliates/cash-is-king/main.js"></script>
 
-  
+<script type="text/javascript">
+$(document).ready(function(){
+
+$.ajaxSetup({
+     beforeSend: function(xhr, settings) {
+         function getCookie(name) {
+             var cookieValue = null;
+             if (document.cookie && document.cookie != '') {
+                 var cookies = document.cookie.split(';');
+                 for (var i = 0; i < cookies.length; i++) {
+                     var cookie = jQuery.trim(cookies[i]);
+                     // Does this cookie string begin with the name we want?
+                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                     break;
+                 }
+             }
+         }
+         return cookieValue;
+         }
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+         }
+     }
+});
+
+
+
+$("form #submit").click(function(){
+    $("form #submit").attr('disabled',true);
+    var $form = $(this).closest('.cash-form');
+    var name = $form.find("#name").val();
+    var phone = $form.find("#phonenumber").val();
+    var data ={
+            'form': 'basic',
+             'name':name,
+             'phone':phone,
+             'trusted_form': $form.find("[name ='xxTrustedFormToken']").val(),
+             'site':'cash-is-king'
+         }
+
+
+    $.ajax({
+            type: "POST",
+            url: "/contact/ajaxpost/",
+            data: data,
+            dataType: "json",
+            success: newFormSuccess,
+            error: newFormError
+            }); // end ajax
+
+
+     function newFormError(){
+            //$(".sleepy #form-loading, .droopy #form-loading").hide();
+            //$(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $("form #submit").attr('disabled',false);
+            //$("form #submit").text('SUBMIT YOUR INFO');
+            if (!name && !phone){
+                alert('Please enter your name and phone number.');
+            }
+            if (!phone && name){
+                alert('Please enter your phone number.');
+            }
+            if (!name && phone){
+                alert('Please enter your name.');
+            }
+
+            alert('Make sure you entered a valid phone number with dashes');
+        } // end newformerror
+
+
+        function newFormSuccess(json) {
+            //$('#form-loading').hide();
+            if(json.success) {
+                {% if thank_you %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                window.location = "{% url thank_you %}"
+                {% endif %}
+                _gaq.push([
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }
+        return false;
+
+    }); // end click function
+
+}); //end document ready
+
+</script>
+
+
 
 
   </body>
