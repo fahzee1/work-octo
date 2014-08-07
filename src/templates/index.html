@@ -238,39 +238,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         return false;
     });
 
-    $(document).ready(function() {
-            $(".copper").click(function() {
-                window.location.href = "{% url copper %}";
-            });
-            $(".bronze").click(function() {
-                window.location.href = "{% url bronze %}";
-            });
-            $(".silver").click(function() {
-                window.location.href = "{% url silver %}";
-            });
-            $(".gold").click(function() {
-                window.location.href = "{% url gold %}";
-            });
-            $(".platinum").click(function() {
-                window.location.href = "{% url platinum %}";
-            });
-
-            $('#top-hero-banner > div').click(function(e) {
-            if($(this).attr('data-url')) {
-                window.location = $(this).attr('data-url');
-                _gaq.push([  
-                    '_trackEvent',
-                    'Hero Banner',
-                    'Front Page Hero Banner Click',
-                    $(this).attr('id')
-                ]);
-                return;
-            }
-
-        });
-        {% if debug %}
-        $('#top-hero-banner').cycle('pause');
-        {% endif %}
         {% if 'hic_test' in request.GET %}
         setCookie('hic_test', 'true');
         {% endif %}
