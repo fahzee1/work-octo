@@ -136,8 +136,6 @@ urlpatterns = patterns('',
 
 
 
-    dtt(r'^help/cjgrow/?$', 'affiliates/cash-is-king/index2.html', 'privacy-policy', 'help'),
-
     # GLOBAL PAGES
     # Help Pages > Privacy Policy
     dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
