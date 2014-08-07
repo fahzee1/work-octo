@@ -3,8 +3,8 @@
 # All templates require a index template.
 TEMPLATE_PAGES = (
     ('index', 'index.html'),
-    ('order', 'order.html'),
-    ('testimonials', 'testimonials.html'),
+    ('index2', 'index2.html'),
+
 
 )
 

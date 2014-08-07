@@ -135,6 +135,9 @@ urlpatterns = patterns('',
     url(r'^affiliate/', include('apps.affiliates.urls', namespace='affiliates')),
 
 
+
+    dtt(r'^help/cjgrow/?$', 'affiliates/cash-is-king/index2.html', 'privacy-policy', 'help'),
+
     # GLOBAL PAGES
     # Help Pages > Privacy Policy
     dtt(r'^help/privacy-policy/?$', 'help/privacy-policy.html', 'privacy-policy', 'help'),
@@ -875,7 +878,7 @@ else:
         dtt(r'^adt-comparison/?$', 'affiliates/adt-comparison/index.html', 'adt-two'),
 
 
-        dtt(r'^direct-mail/?$', 'affiliates/direct-mail/index.html', 'direct-mail'),    
+        dtt(r'^direct-mail/?$', 'affiliates/direct-mail/index.html', 'direct-mail'),
 
         # CRIME STOPPERS
         dtt(r'^CFLA/?$', 'affiliates/crime-stoppers-cf/losangeles.html', 'cf-la'),
