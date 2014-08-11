@@ -27,7 +27,8 @@ from apps.crimedatamodels.models import (CrimesByCity,
                                          FeaturedIcon,
                                          FeaturedVideo,
                                          CityCompetitor,
-                                         Resources)
+                                         Resources,
+                                         Permits)
 
 
 def query_weather(latitude, longitude, city, state):
@@ -162,6 +163,12 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                 if not articles:
                     articles = None
 
+            permits = Permits.objects.filter(city__iexact=city,state__iexact=state)
+            if not permits:
+                permits = Permits.objects.filter(state__iexact=state)
+                if not permits:
+                    permits = None
+
 
 
             reviews = Textimonial.objects.filter(display=True,city=city.city_name,state=state.abbreviation).exclude(rating=0)
@@ -206,7 +213,8 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                    'local_rival':local_rival,
                    'years':(years if freecrime else None),
                    'resources':resources,
-                   'articles':articles
+                   'articles':articles,
+                   'permits':permits
                 }
 
             try:

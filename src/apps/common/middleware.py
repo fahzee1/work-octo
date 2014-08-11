@@ -244,6 +244,7 @@ class LocalPageRedirect(object):
 
         #city page and state page
         match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
+        match_cp2 = re.compile(r'home-security/[-\w]{2}/[-\w]+')
         match_sp = re.compile(r'home-security/[-\w]{3,}')
 
         # redirect /rep/get-quote to homesecurity.protectamerica.com/rep/get-quote
@@ -252,6 +253,7 @@ class LocalPageRedirect(object):
         match_ny = re.compile(r'home-security/\bNY\b/[-\w]+',re.IGNORECASE)
         state_space = dict(US_STATES).values()
         state_nospace = [x.replace(' ','') for x in state_space]
+
         if match_quote.match(url):
             if request.META['HTTP_HOST'] != 'homesecurity.protectamerica.com':
                 return redirect('http://homesecurity.protectamerica.com/rep/get-quot')
@@ -271,6 +273,17 @@ class LocalPageRedirect(object):
                     if x.upper() == state.upper() or y.upper() == state.upper():
                         statecode = get_statecode(state)
                         return redirect('/home-security/%s/%s' % (statecode,city.replace(' ','-').title()))
+
+
+        elif match_cp2.match(url):
+            # city page so lets redirect
+            chop_up = url.split('/')
+            state, city = chop_up[1].replace('-',' '), strip_city(chop_up[2])
+            if state.islower() and city.islower():
+                return redirect('/home-security/%s/%s' % (state.upper(),city.replace(' ','-').title()))
+
+            elif state.islower():
+                return redirect('/home-security/%s/%s' % (state.upper(),city.replace(' ','-')))
 
         elif match_sp.match(url):
             #state page so lets redirect

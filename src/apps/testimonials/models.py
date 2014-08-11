@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.db import models
-from django.contrib.localflavor.us.models import (PhoneNumberField, 
+from django.contrib.localflavor.us.models import (PhoneNumberField,
     USStateField)
 from django.template import loader, Context
 from django.core.urlresolvers import reverse
@@ -32,7 +32,7 @@ class Testimonial(models.Model):
     city = models.CharField(max_length=24)
     state = models.CharField(max_length=24)
     email = models.EmailField(blank=True, null=True)
-    
+
 
     experience = models.CharField(max_length=10,
         choices=EXPERIENCE_CHOICES,
@@ -49,7 +49,7 @@ class Testimonial(models.Model):
 
     display = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
-    
+
     def get_absolute_url(self):
         return reverse('single-testimonial', kwargs={'testimonial_id': self.id})
 
@@ -88,7 +88,7 @@ class Textimonial(models.Model):
     def mark_as_read(self):
         if self.date_read:
             return
-    
+
         self.date_read = datetime.now()
         self.save()
         return True
@@ -111,7 +111,7 @@ class Vidimonial(models.Model):
     def get_absolute_url(self):
         return reverse('video-testimonial', kwargs={'testimonial_id': self.id})
 
- 
+
 def update_rating(reviews):
     objects = reviews.objects.filter(rating=0)
     print '%s reviews are 0' % objects.count()
@@ -121,3 +121,19 @@ def update_rating(reviews):
             x.rating = 5
             x.save()
     print 'done!'
+
+
+
+
+class TextimonialCityCache(models.Model):
+    city = models.CharField(max_length=24)
+    state = USStateField(max_length=24)
+    testimonials = models.ManyToManyField(Textimonial,max_length=4)
+
+
+    def __unicode__(self):
+        return '%s, %s' % (self.city, self.state)
+
+    class Meta:
+        unique_together = ('city','state')
+

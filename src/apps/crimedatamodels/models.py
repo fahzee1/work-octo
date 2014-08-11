@@ -6,6 +6,8 @@ from django.core.exceptions import ValidationError
 from django.db.models import Sum,Q
 from django.template.defaultfilters import slugify
 from geopy import geocoders
+from django.contrib.localflavor.us.models import (PhoneNumberField,
+    USStateField)
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
 
@@ -444,6 +446,26 @@ class Resources(models.Model):
 
     def __unicode__(self):
         return '%s - %s' % (self.name,self.city)
+
+
+PROPERTY_CHOICES = (
+        ('r','residential'),
+        ('c','commerical'),
+
+    )
+class Permits(models.Model):
+    city = models.CharField(max_length=24)
+    state = USStateField(max_length=24)
+    permit_fee = models.CharField(max_length=255,blank=True,null=True)
+    permit_url = models.CharField(max_length=255,blank=True,null=True)
+    addendum_fee = models.CharField(max_length=255,blank=True,null=True)
+    addendum_template = models.CharField(max_length=255,blank=True,null=True)
+    property_type = models.CharField(max_length=255,blank=True,null=True, choices=PROPERTY_CHOICES)
+    no_tech_install = models.BooleanField(default=True)
+    no_self_install = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return '%s, %s permits' % (self.city,self.state)
 
 
 
