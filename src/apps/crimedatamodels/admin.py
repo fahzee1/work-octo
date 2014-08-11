@@ -1,7 +1,7 @@
 from django.contrib import admin
 from apps.crimedatamodels.models import (CrimesByCity, CityCrimeStats, CrimeContent,
 										 State, CityLocation, ZipCode, MatchAddressLocation,LocalAddress,StateCrimeStats,
-										 FeaturedIcon,FeaturedVideo,CityCompetitor, Resources)
+										 FeaturedIcon,FeaturedVideo,CityCompetitor, Resources,Permits)
 
 class CrimesByCityAdmin(admin.ModelAdmin):
     model = CrimesByCity
@@ -70,5 +70,7 @@ class ResourcesAdmin(admin.ModelAdmin):
     raw_id_fields = ('city',)
 
 admin.site.register(Resources,ResourcesAdmin)
+
+admin.site.register(Permits)
 
 
