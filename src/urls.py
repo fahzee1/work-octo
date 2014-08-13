@@ -511,11 +511,16 @@ elif settings.SITE_ID == 24:
 # zhunrize
 elif settings.SITE_ID == 25:
     urlpatterns += patterns('',
-            dtt(r'^$', 'affiliates/zhunrize/index.html', 'home'),
-            dtt(r'^security-systems/$', 'affiliates/zhunrize/security-systems.html', 'security-systems'),
-            dtt(r'^video-security-cameras/$', 'affiliates/zhunrize/video-security-cameras.html', 'video-security-cameras'),
-            dtt(r'^order/$', 'affiliates/zhunrize/order.html', 'order'),
-            dtt(r'^thank-you/$', 'affiliates/zhunrize/thank-you.html', 'thank-you'),
+            dtt(r'^$', 'affiliates/zhunrize/index.html', 'home', ctx={
+            'agent_id': 'a10713'}),
+            dtt(r'^security-systems/$', 'affiliates/zhunrize/security-systems.html', 'security-systems', ctx={
+            'agent_id': 'a10713'}),
+            dtt(r'^video-security-cameras/$', 'affiliates/zhunrize/video-security-cameras.html', 'video-security-cameras', ctx={
+            'agent_id': 'a10713'}),
+            dtt(r'^order/$', 'affiliates/zhunrize/order.html', 'order', ctx={
+            'agent_id': 'a10713'}),
+            dtt(r'^thank-you/$', 'affiliates/zhunrize/thank-you.html', 'thank-you', ctx={
+            'agent_id': 'a10713'}),
     )
 
 
