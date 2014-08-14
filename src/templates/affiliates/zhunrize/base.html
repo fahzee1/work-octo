@@ -1,7 +1,7 @@
 <!doctype html>
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 
-<!-- 
+<!--
 320 and Up boilerplate extension
 Andy Clarke http://about.me/malarkey
 Keith Clark http://twitter.com/keithclarkcouk
@@ -107,11 +107,11 @@ License: http://creativecommons.org/licenses/MIT
                 <div class="fourteen columns">
                     <div class="top-phone">
                         <p class="last">{% if request.GET.affkey %}Consultant ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}Consultant ID: {{ affkey }}{% else %}Consultant ID: L100000{% endif %}{% endif %}{% endif %}</p>
-                        
+
                         <p class="phone">855-330-0270</p>
                         <p class="extra">Protect your family now:</p>
                         <p>{% if request.GET.affkey %}Consultant ID Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID Number: {{ request.COOKIES.affkey }}{% else %}{% endif %}{% endif %}</p>
-                        
+
                     </div>
                     <ul class="main-navigation">
                         <li><a href="#" id="mobile-menu"><i class="fa fa-bars" title="Menu"></i><strong>Menu</strong></a></li>
@@ -137,7 +137,7 @@ License: http://creativecommons.org/licenses/MIT
 
         <div class="nav">
             <div class="container">
-                
+
             </div>
         </div>
 
@@ -172,7 +172,7 @@ License: http://creativecommons.org/licenses/MIT
 
     {% block content %}
     {% endblock %}
-    
+
     {% block advantage %}
     <div class="container">
         <div class="advantages">
@@ -182,7 +182,7 @@ License: http://creativecommons.org/licenses/MIT
             </div>
             <div class="four columns">
                 <i class="fa fa-dollar"></i>
-                <p><strong>Lowest Price Guarantee</strong>Dollars go further without loss of security.</p> 
+                <p><strong>Lowest Price Guarantee</strong>Dollars go further without loss of security.</p>
             </div>
             <div class="four columns">
                 <i class="fa fa-signal"></i>
@@ -318,6 +318,24 @@ $(document).ready(function(){
     });
 });
 </script>
+
+{% block trustedform %}
+<script type="text/javascript">
+(function() {
+    var field = 'CertUrl';
+    var provideReferrer = false;
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true;
+    tf.src = 'http' + ('https:' == document.location.protocol ? 's' : '') +
+    '://api.trustedform.com/trustedform.js?provide_referrer=' + escape(provideReferrer) + '&field=' + escape(field) + '&l='+new Date().getTime()+Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s); }
+)();
+
+</script>
+<noscript>
+    <img src="http://api.trustedform.com/ns.gif" />
+</noscript>
+{% endblock %}
 {% endaddtoblock "js" %}
 </div>
 </body>
