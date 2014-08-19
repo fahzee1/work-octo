@@ -1,5 +1,7 @@
 import re
 import pdb
+import requests
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -433,6 +435,7 @@ class CityCompetitor(FeaturedCommon):
 
 
 
+
 class Resources(models.Model):
     """
     used to show resources section on local pages
@@ -448,14 +451,24 @@ class Resources(models.Model):
         return '%s - %s' % (self.name,self.city)
 
 
+class CityAndState(models.Model):
+    city = models.CharField(max_length=24)
+    state = USStateField(max_length=24)
+    zip = models.CharField(max_length=5, unique=True,blank=True,null=True)
+
+    class Meta:
+        abstract = True
+
+
+
+
+
 PROPERTY_CHOICES = (
         ('r','residential'),
         ('c','commerical'),
 
     )
-class Permits(models.Model):
-    city = models.CharField(max_length=24)
-    state = USStateField(max_length=24)
+class Permits(CityAndState):
     permit_fee = models.CharField(max_length=255,blank=True,null=True)
     permit_url = models.CharField(max_length=255,blank=True,null=True)
     addendum_fee = models.CharField(max_length=255,blank=True,null=True)
@@ -466,6 +479,116 @@ class Permits(models.Model):
 
     def __unicode__(self):
         return '%s, %s permits' % (self.city,self.state)
+
+
+
+class Demographics(CityAndState):
+    """
+    affordability_avgHomeValue, home_ownVsRent,home_homeSize
+    are charts.
+
+    home_ownVsRent is depreciated
+
+    Data pulled from Zillows API for local pages
+    """
+    avg_commute_time = models.CharField(max_length=255,blank=True,null=True)
+    median_age = models.CharField(max_length=255,blank=True,null=True)
+    median_household_income = models.CharField(max_length=255,blank=True,null=True)
+    median_home_size = models.CharField(max_length=255,blank=True,null=True)
+    median_list_price = models.CharField(max_length=255,blank=True,null=True)
+    owners_renters = models.CharField(max_length=255,blank=True,null=True,help_text='Percent of home owners to renters')
+    median_list_price = models.CharField(max_length=255,blank=True,null=True)
+    chart_avgHomeValue = models.CharField(max_length=255,blank=True,null=True)
+    chart_homeSize = models.CharField(max_length=255,blank=True,null=True)
+    chart_ownVsRent = models.CharField(max_length=255,blank=True,null=True)
+
+    def __unicode__(self):
+        return '%s, %s Demographics' % (self.city,self.state)
+
+
+    @classmethod
+    def call_zillow(cls,city,state):
+        from bs4 import BeautifulSoup
+        try:
+            r = requests.get('http://www.zillow.com/webservice/GetDemographics.htm?zws-id=%s&state=%s&city=%s' % (settings.ZILLOW,state,city), timeout=10)
+            if r.status_code == 200:
+                data = {}
+                soup = BeautifulSoup(r.text)
+                code = int(soup.message.code.contents[0])
+                if code == 0:
+                    # success
+                    # get charts
+                    for chart in soup.find_all('chart'):
+                        chart_url = None
+                        if chart.find('name').contents[0] == 'Median Home Value':
+                            chart_url = chart.find('url').contents[0]
+                            data['avgHomeValue'] = chart_url
+
+                        if chart.find('name').contents[0] == 'Home Size in Square Feet':
+                            chart_url = chart.find('url').contents[0]
+                            data['homeSize'] = chart_url
+
+                        if chart.find('name').contents[0] == 'Owners vs. Renters':
+                            chart_url = chart.find('url').contents[0]
+                            data['ownVsRent'] = chart_url
+
+
+
+
+
+
+
+
+
+
+            else:
+                return None
+
+        except requests.exceptions.Timeout:
+            print 'timed out'
+            return None
+
+
+
+
+class Universities(CityAndState):
+    """
+    Data pulled from inventory.data.gov
+    """
+    instnm = models.CharField(max_length=255,blank=True,null=True, help_text='University Name')
+    website = models.CharField(max_length=255,blank=True,null=True, help_text='Website')
+    addr = models.CharField(max_length=255,blank=True,null=True, help_text='Address')
+
+    def __unicode__(self):
+        return '%s, %s Universities' % (self.city,self.state)
+
+
+class LocalEducation(CityAndState):
+    """
+    Data pulled from inventory.data.gov
+    """
+
+    name = models.CharField(max_length=255,blank=True,null=True, help_text='Local education name')
+
+    def __unicode__(self):
+        return '%s, %s Local Education' % (self.city,self.state)
+
+
+class FarmersMarket(CityAndState):
+    """
+    Data pulled from search.ams.usda.gov
+    """
+    name = models.CharField(max_length=255,blank=True,null=True, help_text='Market name')
+    website = models.CharField(max_length=255,blank=True,null=True, help_text='Website')
+
+    def __unicode__(self):
+        return '%s, %s FarmersMarket' % (self.city,self.state)
+
+
+
+
+
+
 
 
 
