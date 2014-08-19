@@ -1453,6 +1453,17 @@ urlpatterns += patterns('',
         RedirectView.as_view(url='/equipment/home-security/simon-xt/',permanent=True)),
     ('shop-home-security-packages/?$',
         RedirectView.as_view(url='/shop-home-security-systems',permanent=True)),
+    ('indexb.htm/?$',
+        RedirectView.as_view(url='/',permanent=True)),
+    ('products.htm/?$',
+        RedirectView.as_view(url='/shop-home-security-systems',permanent=True)),
+    ('support/customer?$',
+        RedirectView.as_view(url='/support',permanent=True)),
+    ('products/alarm-monitoring/cellular/?$',
+        RedirectView.as_view(url='/learn/alarm-monitoring/cellular',permanent=True)),
+    ('payitforward/contact/?$',
+        RedirectView.as_view(url='/support/contact-us',permanent=True)),
+
 
 )
 '''

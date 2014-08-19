@@ -195,6 +195,40 @@ class MobilePageRedirect(object):
 
 
 
+class BlogRedirect(object):
+    def __init__(self):
+        self.redirects = {'home-security-blog/category/home-security/home-security-information/home-security-tips':'http://www.protectamerica.com/home-security-blog/category/breakin-robbery-theft-crime',
+                          'home-security-blog/author/cjogbuehi':'http://www.protectamerica.com/home-security-blog/',
+                          'home-security-blog/tag/burglars-youtube':'http://www.protectamerica.com/home-security-blog/',
+                          'homesecurity-blog/home/tornado-safety_3355':'http://www.protectamerica.com/home-security-blog/protect-america-2/home-security-during-tornadoes_4250',
+                          'cmp/3c310ce98813b4541babf267821b1d64':'http://www.protectamerica.com',
+                          'articles/terrorism-research-guide.php':'http://www.protectamerica.com',
+                          'pdf/inst_man.pdf':'http://www.protectamerica.com/support/customer-service/installation',
+                          'cmp/8152f2d4b1fff8d77f73f22196db9f2f':'http://www.protectamerica.com',
+                          'static/pdf/neighborhood-watch-pdfs/preventing-burglary':'http://www.protectamerica.com/static/pdf/preventing-burglary.pdf',
+                          'home-security/system/manhattan/newyork/10027':'http://www.protectamerica.com/home-security/NY/New-York',
+                          'home-security-blog/home-security/how-to-use-your-home-security-system-to-survive-the-zombie-apocalypse_1467/attachment/booby-trap-home-security':'http://www.protectamerica.com/home-security-blog/',
+                          'home-security-blog/security-history/the-most-expensive-items-ever-stolen_2042':'http://www.protectamerica.com/home-security-blog/breakin-robbery-theft-crime/guns-money-jewelry-electronics_4713',
+                          'articles/how-to-start-a-neighborhood-watch-group.php':'http://www.protectamerica.com/home-security-blog/home-security/set-neighborhood-watch_5813',
+                          'home-security-alarm-system/florham-park/jew-jersey/07932':'http://www.protectamerica.com/home-security/NJ/Florham-Park',
+                          'home-security-blog/tag/leonardo-notarbartolo':'http://www.protectamerica.com/home-security-blog/',
+                          'video-surveilance-system/washington/dc/20036/':'http://www.protectamerica.com/home-security/DC/Washington',
+                          'surveillance-camera-system/washington/d.c.':'http://www.protectamerica.com/home-security/DC/Washington'
+
+
+
+                          }
+
+
+    def process_request(self,request):
+        url = request.path.rstrip('/').lstrip('/')
+        for key in self.redirects.keys():
+            if key == url:
+                return redirect(self.redirects[key],permanent=True)
+
+
+
+
 
 
 class LocalPageRedirect(object):
