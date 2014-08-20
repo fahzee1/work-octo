@@ -164,12 +164,12 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
 
             farmersmarkets = FarmersMarket.objects.filter(city=city,state=state)
             if not farmersmarkets:
-                farmersmarkets = FarmersMarket.call_usda(city=city,state=state)
+                farmersmarkets = FarmersMarket.call_data(city=city,state=state)
 
             try:
                 demographics = Demographics.objects.get(city=city,state=state)
             except Demographics.DoesNotExist:
-                demographics = Demographics.call_zillow(city=city,state=state)
+                demographics = Demographics.call_data(city=city,state=state)
 
 
 

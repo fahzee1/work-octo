@@ -506,7 +506,7 @@ class Demographics(CityAndState):
 
 
     @classmethod
-    def call_zillow(cls,city,state,zipcode=None):
+    def call_data(cls,city,state,zipcode=None):
         """
         Graphs are charts.chart
         Three pages of data..
@@ -625,6 +625,53 @@ class Universities(CityAndState):
         return '%s Universities' % (self.city)
 
 
+    @classmethod
+    def call_data(cls,city,state):
+        """
+        FLITER ISNT WORKING YET
+        """
+        resource_id = '38625c3d-5388-4c16-a30f-d105432553a4'
+        url = 'https://inventory.data.gov/api/action/datastore_search?resource_id=%s' % resource_id
+        params = {'resource_id':resource_id,
+                  'filters':{'STABBR':state.abbreviation,
+                             'CITY':city.city_name}
+                  }
+        params = json.dumps(params)
+        headers = {'content-type': 'application/json'}
+
+        try:
+            r = requests.get(url,params=params,headers=headers,timeout=10)
+            if r.status_code == 200:
+                data = r.json()
+                if data['success']:
+                    print 'found %s matching records from inventory.data.gov' % data['result']['total']
+                    for data_dict in data['result']['records']:
+                        university = Universities()
+                        website = data_dict['WEBADDR']
+                        name = data_dict['INSTNM']
+                        address = data_dict['ADDR']
+                        print 'University name %s' % name
+
+                        university.instnm = name
+                        university.website = website
+                        university.addr = address
+                        university.city = city
+                        university.state = state
+                        university.save()
+
+
+                    return Universities.objects.filter(city=city,state=state)
+
+                return None
+
+            return None
+
+
+        except requests.exceptions.Timeout:
+            print 'timed out'
+            return None
+
+
 class LocalEducation(CityAndState):
     """
     Data pulled from inventory.data.gov
@@ -649,7 +696,7 @@ class FarmersMarket(CityAndState):
 
 
     @classmethod
-    def call_usda(cls,city,state):
+    def call_data(cls,city,state):
         try:
             url = 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=%s&lng=%s' % (city.latitude,city.longitude)
             r = requests.get(url,timeout=10)
