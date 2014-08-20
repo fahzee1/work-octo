@@ -115,7 +115,6 @@ class TestimonialSearchNode(template.Node):
 
 
     def render(self, context):
-        pdb.set_trace()
         testimonials = None
         city = None
         state = None

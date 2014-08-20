@@ -452,8 +452,8 @@ class Resources(models.Model):
 
 
 class CityAndState(models.Model):
-    city = models.CharField(max_length=24)
-    state = USStateField(max_length=24)
+    city = models.ForeignKey("CityLocation")
+    state = models.ForeignKey("State")
     zip = models.CharField(max_length=5, unique=True,blank=True,null=True)
 
     class Meta:
@@ -497,46 +497,108 @@ class Demographics(CityAndState):
     median_home_size = models.CharField(max_length=255,blank=True,null=True)
     median_list_price = models.CharField(max_length=255,blank=True,null=True)
     owners_renters = models.CharField(max_length=255,blank=True,null=True,help_text='Percent of home owners to renters')
-    median_list_price = models.CharField(max_length=255,blank=True,null=True)
     chart_avgHomeValue = models.CharField(max_length=255,blank=True,null=True)
     chart_homeSize = models.CharField(max_length=255,blank=True,null=True)
     chart_ownVsRent = models.CharField(max_length=255,blank=True,null=True)
 
     def __unicode__(self):
-        return '%s, %s Demographics' % (self.city,self.state)
+        return '%s Demographics' % (self.city)
 
 
     @classmethod
-    def call_zillow(cls,city,state):
+    def call_zillow(cls,city,state,zipcode=None):
+        """
+        Graphs are charts.chart
+        Three pages of data..
+        Affordability -- median list price,
+        Homes & Real Estate -- median home size,median household income
+        People -- median age, average commute time
+
+        """
+
+        def get_median_list_price(tag):
+            return tag.string == 'Median List Price'
+
+        def get_median_home_size(tag):
+            return tag.string == 'Median Home Size (Sq. Ft.)'
+
+        def get_median_household_income(tag):
+            return tag.string == 'Median Household Income'
+
+        def get_median_age(tag):
+            return tag.string == 'Median Age'
+
+        def get_average_commute_time(tag):
+            return tag.string == 'Average Commute Time (Minutes)'
+
+
         from bs4 import BeautifulSoup
         try:
-            r = requests.get('http://www.zillow.com/webservice/GetDemographics.htm?zws-id=%s&state=%s&city=%s' % (settings.ZILLOW,state,city), timeout=10)
+            r = requests.get('http://www.zillow.com/webservice/GetDemographics.htm?zws-id=%s&state=%s&city=%s' % (settings.ZILLOW,state.name,city.city_name), timeout=10)
             if r.status_code == 200:
-                data = {}
                 soup = BeautifulSoup(r.text)
                 code = int(soup.message.code.contents[0])
                 if code == 0:
                     # success
-                    # get charts
+
+                    # add to database for later use
+                    demographics = Demographics()
+
+
+                    # get charts (soup.charts.chart)
                     for chart in soup.find_all('chart'):
                         chart_url = None
                         if chart.find('name').contents[0] == 'Median Home Value':
                             chart_url = chart.find('url').contents[0]
-                            data['avgHomeValue'] = chart_url
+                            demographics.chart_avgHomeValue = chart_url
 
                         if chart.find('name').contents[0] == 'Home Size in Square Feet':
                             chart_url = chart.find('url').contents[0]
-                            data['homeSize'] = chart_url
+                            demographics.chart_homeSize = chart_url
 
                         if chart.find('name').contents[0] == 'Owners vs. Renters':
                             chart_url = chart.find('url').contents[0]
-                            data['ownVsRent'] = chart_url
+                            demographics.chart_ownVsRent = chart_url
+
+
+                    # get pages
+                    median_list_price = soup.find(get_median_list_price)
+                    if median_list_price:
+                        siblings = median_list_price.next_sibling
+                        median_list_price = siblings.contents[0].string
+
+                    median_home_size = soup.find(get_median_home_size)
+                    if median_home_size:
+                        siblings = median_home_size.next_sibling
+                        median_home_size = siblings.contents[0].string
+
+                    median_household_income = soup.find(get_median_household_income)
+                    if median_household_income:
+                        siblings = median_household_income.next_sibling
+                        median_household_income = siblings.contents[0].string
+
+                    median_age = soup.find(get_median_age)
+                    if median_age:
+                        siblings = median_age.next_sibling
+                        median_age = siblings.contents[0].string
+
+                    avg_commute_time = soup.find(get_average_commute_time)
+                    if avg_commute_time:
+                        siblings = avg_commute_time.next_sibling
+                        avg_commute_time = siblings.contents[0].string
 
 
 
+                    demographics.avg_commute_time = avg_commute_time
+                    demographics.median_age = median_age
+                    demographics.median_household_income = median_household_income
+                    demographics.median_home_size = median_home_size
+                    demographics.median_list_price = median_list_price
+                    demographics.city = city
+                    demographics.state = state
+                    demographics.save()
 
-
-
+                    return demographics
 
 
 
@@ -560,7 +622,7 @@ class Universities(CityAndState):
     addr = models.CharField(max_length=255,blank=True,null=True, help_text='Address')
 
     def __unicode__(self):
-        return '%s, %s Universities' % (self.city,self.state)
+        return '%s Universities' % (self.city)
 
 
 class LocalEducation(CityAndState):
@@ -571,7 +633,7 @@ class LocalEducation(CityAndState):
     name = models.CharField(max_length=255,blank=True,null=True, help_text='Local education name')
 
     def __unicode__(self):
-        return '%s, %s Local Education' % (self.city,self.state)
+        return '%s Local Education' % (self.city)
 
 
 class FarmersMarket(CityAndState):
@@ -580,9 +642,55 @@ class FarmersMarket(CityAndState):
     """
     name = models.CharField(max_length=255,blank=True,null=True, help_text='Market name')
     website = models.CharField(max_length=255,blank=True,null=True, help_text='Website')
+    address = models.CharField(max_length=255,blank=True,null=True)
 
     def __unicode__(self):
-        return '%s, %s FarmersMarket' % (self.city,self.state)
+        return '%s, %s' % (self.name,self.city)
+
+
+    @classmethod
+    def call_usda(cls,city,state):
+        try:
+            url = 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=%s&lng=%s' % (city.latitude,city.longitude)
+            r = requests.get(url,timeout=10)
+            if r.status_code == 200:
+                market_results = r.json()['results']
+                for market_dict in market_results:
+                    farmersmarket = FarmersMarket()
+                    # name is in this format (6.0 Collin County Farmers Market)
+                    # so remove numbers
+                    name = market_dict['marketname'].split('.')[1][2:]
+                    print 'farmersmarket name is %s' % name
+                    farmersmarket.name = name
+
+                    detail_url = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=%s" % market_dict['id']
+                    r2 = requests.get(detail_url,timeout=10)
+                    if r2.status_code == 200:
+                        details = r2.json()['marketdetails']
+                        farmersmarket.website = details['GoogleLink']
+                        farmersmarket.address = details['Address']
+                        farmersmarket.city = city
+                        farmersmarket.state = state
+                        farmersmarket.save()
+
+
+
+                    else:
+                        if farmersmarket.name:
+                            farmersmarket.save()
+                        else:
+                            continue
+
+
+                return cls.objects.filter(city=city,state=state)
+
+            else:
+                return None
+
+        except requests.exceptions.Timeout:
+            print 'timed out'
+            return None
+
 
 
 
