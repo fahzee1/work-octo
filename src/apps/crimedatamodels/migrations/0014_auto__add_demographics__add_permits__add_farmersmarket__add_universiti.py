@@ -11,23 +11,42 @@ class Migration(SchemaMigration):
         # Adding model 'Demographics'
         db.create_table('crimedatamodels_demographics', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=24)),
-            ('state', self.gf('django.contrib.localflavor.us.models.USStateField')(max_length=2)),
+            ('city', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.CityLocation'])),
+            ('state', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.State'])),
             ('zip', self.gf('django.db.models.fields.CharField')(max_length=5, unique=True, null=True, blank=True)),
             ('avg_commute_time', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('median_age', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('median_household_income', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('median_home_size', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('owners_renters', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('median_list_price', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('owners_renters', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('chart_avgHomeValue', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('chart_homeSize', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('chart_ownVsRent', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
         ))
         db.send_create_signal('crimedatamodels', ['Demographics'])
+
+        # Adding model 'Permits'
+        db.create_table('crimedatamodels_permits', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('city', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.CityLocation'])),
+            ('state', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.State'])),
+            ('zip', self.gf('django.db.models.fields.CharField')(max_length=5, unique=True, null=True, blank=True)),
+            ('permit_fee', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('permit_url', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('addendum_fee', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('addendum_template', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('property_type', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('no_tech_install', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('no_self_install', self.gf('django.db.models.fields.BooleanField')(default=True)),
+        ))
+        db.send_create_signal('crimedatamodels', ['Permits'])
 
         # Adding model 'FarmersMarket'
         db.create_table('crimedatamodels_farmersmarket', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=24)),
-            ('state', self.gf('django.contrib.localflavor.us.models.USStateField')(max_length=2)),
+            ('city', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.CityLocation'])),
+            ('state', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.State'])),
             ('zip', self.gf('django.db.models.fields.CharField')(max_length=5, unique=True, null=True, blank=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('website', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
@@ -37,8 +56,8 @@ class Migration(SchemaMigration):
         # Adding model 'Universities'
         db.create_table('crimedatamodels_universities', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=24)),
-            ('state', self.gf('django.contrib.localflavor.us.models.USStateField')(max_length=2)),
+            ('city', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.CityLocation'])),
+            ('state', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.State'])),
             ('zip', self.gf('django.db.models.fields.CharField')(max_length=5, unique=True, null=True, blank=True)),
             ('instnm', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
             ('website', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
@@ -49,21 +68,21 @@ class Migration(SchemaMigration):
         # Adding model 'LocalEducation'
         db.create_table('crimedatamodels_localeducation', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(max_length=24)),
-            ('state', self.gf('django.contrib.localflavor.us.models.USStateField')(max_length=2)),
+            ('city', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.CityLocation'])),
+            ('state', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['crimedatamodels.State'])),
             ('zip', self.gf('django.db.models.fields.CharField')(max_length=5, unique=True, null=True, blank=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
         ))
         db.send_create_signal('crimedatamodels', ['LocalEducation'])
-
-        # Adding field 'Permits.zip'
-        db.add_column('crimedatamodels_permits', 'zip', self.gf('django.db.models.fields.CharField')(max_length=5, unique=True, null=True, blank=True), keep_default=False)
 
 
     def backwards(self, orm):
         
         # Deleting model 'Demographics'
         db.delete_table('crimedatamodels_demographics')
+
+        # Deleting model 'Permits'
+        db.delete_table('crimedatamodels_permits')
 
         # Deleting model 'FarmersMarket'
         db.delete_table('crimedatamodels_farmersmarket')
@@ -73,9 +92,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'LocalEducation'
         db.delete_table('crimedatamodels_localeducation')
-
-        # Deleting field 'Permits.zip'
-        db.delete_column('crimedatamodels_permits', 'zip')
 
 
     models = {
@@ -155,22 +171,25 @@ class Migration(SchemaMigration):
         'crimedatamodels.demographics': {
             'Meta': {'object_name': 'Demographics'},
             'avg_commute_time': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '24'}),
+            'chart_avgHomeValue': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'chart_homeSize': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'chart_ownVsRent': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
+            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.CityLocation']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'median_age': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'median_home_size': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'median_household_income': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'median_list_price': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'owners_renters': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'state': ('django.contrib.localflavor.us.models.USStateField', [], {'max_length': '2'}),
+            'state': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.State']"}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '5', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'crimedatamodels.farmersmarket': {
             'Meta': {'object_name': 'FarmersMarket'},
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '24'}),
+            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.CityLocation']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'state': ('django.contrib.localflavor.us.models.USStateField', [], {'max_length': '2'}),
+            'state': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.State']"}),
             'website': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '5', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
@@ -202,10 +221,10 @@ class Migration(SchemaMigration):
         },
         'crimedatamodels.localeducation': {
             'Meta': {'object_name': 'LocalEducation'},
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '24'}),
+            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.CityLocation']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'state': ('django.contrib.localflavor.us.models.USStateField', [], {'max_length': '2'}),
+            'state': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.State']"}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '5', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'crimedatamodels.matchaddresslocation': {
@@ -218,14 +237,14 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Permits'},
             'addendum_fee': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'addendum_template': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '24'}),
+            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.CityLocation']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'no_self_install': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'no_tech_install': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'permit_fee': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'permit_url': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'property_type': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'state': ('django.contrib.localflavor.us.models.USStateField', [], {'max_length': '2'}),
+            'state': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.State']"}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '5', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },
         'crimedatamodels.resources': {
@@ -286,10 +305,10 @@ class Migration(SchemaMigration):
         'crimedatamodels.universities': {
             'Meta': {'object_name': 'Universities'},
             'addr': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'city': ('django.db.models.fields.CharField', [], {'max_length': '24'}),
+            'city': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.CityLocation']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'instnm': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'state': ('django.contrib.localflavor.us.models.USStateField', [], {'max_length': '2'}),
+            'state': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['crimedatamodels.State']"}),
             'website': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'zip': ('django.db.models.fields.CharField', [], {'max_length': '5', 'unique': 'True', 'null': 'True', 'blank': 'True'})
         },

@@ -16,19 +16,11 @@ from django.db.models import Avg
 from apps.contact.forms import PAContactForm
 from django.template.defaultfilters import slugify
 from apps.news.models import Article
-from apps.crimedatamodels.models import (CrimesByCity,
-                                         CityCrimeStats,
-                                         StateCrimeStats,
-                                         State,
-                                         CityLocation,
-                                         ZipCode,
-                                         CrimeContent,
-                                         MatchAddressLocation,
-                                         FeaturedIcon,
-                                         FeaturedVideo,
-                                         CityCompetitor,
-                                         Resources,
-                                         Permits)
+from apps.crimedatamodels.models import (CrimesByCity,CityCrimeStats,StateCrimeStats,
+                                         State,CityLocation,ZipCode,CrimeContent,
+                                         MatchAddressLocation,FeaturedIcon,FeaturedVideo,
+                                         CityCompetitor,Resources,Permits,Demographics,
+                                         FarmersMarket)
 
 
 def query_weather(latitude, longitude, city, state):
@@ -163,11 +155,22 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                 if not articles:
                     articles = None
 
-            permits = Permits.objects.filter(city__iexact=city,state__iexact=state)
+            permits = Permits.objects.filter(city=city,state=state)
             if not permits:
-                permits = Permits.objects.filter(state__iexact=state)
+                permits = Permits.objects.filter(state=state)
                 if not permits:
                     permits = None
+
+
+            farmersmarkets = FarmersMarket.objects.filter(city=city,state=state)
+            if not farmersmarkets:
+                farmersmarkets = FarmersMarket.call_usda(city=city,state=state)
+
+            try:
+                demographics = Demographics.objects.get(city=city,state=state)
+            except Demographics.DoesNotExist:
+                demographics = Demographics.call_zillow(city=city,state=state)
+
 
 
 
@@ -214,7 +217,9 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                    'years':(years if freecrime else None),
                    'resources':resources,
                    'articles':articles,
-                   'permits':permits
+                   'permits':permits,
+                   'farmersmarkets':farmersmarkets,
+                   'demographics':demographics
                 }
 
             try:
