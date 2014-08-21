@@ -31,9 +31,9 @@ POPULATION_TYPES = (
 
 
 RESOURCE_CHOICES = (
-    ('rylan','Rylan'),
-    ('waldy','Waldy'),
-    ('cj','Cj')
+    ('1','Get from rylan 1'),
+    ('2','Get from rylan 2'),
+    ('cj','Get from rylan 3')
 
     )
 
@@ -601,13 +601,12 @@ class Demographics(CityAndState):
                     return demographics
 
 
-
-
-            else:
                 return None
 
+            return None
+
         except requests.exceptions.Timeout:
-            print 'timed out'
+            print 'demographics api timed out'
             return None
 
 
@@ -665,7 +664,7 @@ class Universities(CityAndState):
 
 
         except requests.exceptions.Timeout:
-            print 'timed out'
+            print 'universities api timed out'
             return None
 
 
@@ -717,7 +716,7 @@ class LocalEducation(CityAndState):
 
 
         except requests.exceptions.Timeout:
-            print 'timed out'
+            print 'local education api timed out'
             return None
 
 
@@ -769,8 +768,11 @@ class FarmersMarket(CityAndState):
                 return None
 
         except requests.exceptions.Timeout:
-            print 'timed out'
+            print 'farmers market api timed out'
             return None
+
+
+
 
 
 
