@@ -62,11 +62,13 @@ class TestimonialSearchNode(template.Node):
             testimonials = testimonials.filter(state__iexact=state)
 
 
-        textimonial_cache = TextimonialCityCache.objects.create(city=city,state=state)
-        for x in testimonials[:4]:
-            textimonial_cache.testimonials.add(x)
 
-        shuffle(list(testimonials))
+        if testimonials:
+            textimonial_cache = TextimonialCityCache.objects.create(city=city,state=state)
+            for x in testimonials[:4]:
+                textimonial_cache.testimonials.add(x)
+
+            shuffle(list(testimonials))
 
         return testimonials
 

@@ -454,7 +454,7 @@ class Resources(models.Model):
 class CityAndState(models.Model):
     city = models.ForeignKey("CityLocation")
     state = models.ForeignKey("State")
-    zip = models.CharField(max_length=5, unique=True,blank=True,null=True)
+    zip = models.CharField(max_length=5,blank=True,null=True)
 
     class Meta:
         abstract = True
@@ -627,40 +627,37 @@ class Universities(CityAndState):
 
     @classmethod
     def call_data(cls,city,state):
-        """
-        FLITER ISNT WORKING YET
-        """
+        import json
         resource_id = '38625c3d-5388-4c16-a30f-d105432553a4'
-        url = 'https://inventory.data.gov/api/action/datastore_search?resource_id=%s' % resource_id
-        params = {'resource_id':resource_id,
-                  'filters':{'STABBR':state.abbreviation,
-                             'CITY':city.city_name}
-                  }
-        params = json.dumps(params)
-        headers = {'content-type': 'application/json'}
-
+        filters = {'STABBR':state.abbreviation,
+                   'CITY':city.city_name}
+        url = 'https://inventory.data.gov/api/action/datastore_search?resource_id=%s&filters=%s' % (resource_id,json.dumps(filters))
         try:
-            r = requests.get(url,params=params,headers=headers,timeout=10)
+            r = requests.get(url,timeout=10)
             if r.status_code == 200:
                 data = r.json()
                 if data['success']:
-                    print 'found %s matching records from inventory.data.gov' % data['result']['total']
+                    print 'found %s matching records from inventory.data.gov (universities)' % len(data['result']['records'])
+                    university_list = []
                     for data_dict in data['result']['records']:
-                        university = Universities()
                         website = data_dict['WEBADDR']
                         name = data_dict['INSTNM']
                         address = data_dict['ADDR']
+                        state_abbr = data_dict['STABBR']
+                        zipcode = data_dict['ZIP']
                         print 'University name %s' % name
 
-                        university.instnm = name
-                        university.website = website
-                        university.addr = address
-                        university.city = city
-                        university.state = state
-                        university.save()
+                        if state_abbr == state.abbreviation:
+                            university = Universities.objects.get_or_create(instnm=name,
+                                                                            website=website,
+                                                                            addr=address,
+                                                                            city=city,
+                                                                            state=state,
+                                                                            zip=zipcode)
+                            university_list.append(university)
 
 
-                    return Universities.objects.filter(city=city,state=state)
+                    return university_list
 
                 return None
 
@@ -683,6 +680,50 @@ class LocalEducation(CityAndState):
         return '%s Local Education' % (self.city)
 
 
+    @classmethod
+    def call_data(cls,city,state):
+        import json
+
+        resource_id = '37e62816-d097-42c5-9ec9-6b56abe6c4c9'
+        filters = {'LSTATE09':state.abbreviation,
+                   'LCITY09':city.city_name.upper()}
+        url = 'https://inventory.data.gov/api/action/datastore_search?resource_id=%s&filters=%s' % (resource_id,json.dumps(filters))
+        try:
+            r = requests.get(url,timeout=10)
+            if r.status_code == 200:
+                data = r.json()
+                if data['success']:
+                    print 'found %s matching records from inventory.data.gov (local education)' % len(data['result']['records'])
+                    education_list = []
+                    for data_dict in data['result']['records']:
+                        name = data_dict['NAME09']
+                        state_abbr = data_dict['LSTATE09']
+                        zipcode = data_dict['MZIP09']
+                        print 'University name %s' % name
+
+                        if state_abbr == state.abbreviation:
+                            education = Education.objects.get_or_create(name=name,
+                                                                        state=state,
+                                                                        city=city,
+                                                                        zip=zipcode)
+                            education_list.append(education)
+
+
+                    return education_list
+
+                return None
+
+            return None
+
+
+        except requests.exceptions.Timeout:
+            print 'timed out'
+            return None
+
+
+
+
+
 class FarmersMarket(CityAndState):
     """
     Data pulled from search.ams.usda.gov
@@ -702,34 +743,27 @@ class FarmersMarket(CityAndState):
             r = requests.get(url,timeout=10)
             if r.status_code == 200:
                 market_results = r.json()['results']
+                farmersmarket_list = []
                 for market_dict in market_results:
-                    farmersmarket = FarmersMarket()
                     # name is in this format (6.0 Collin County Farmers Market)
                     # so remove numbers
                     name = market_dict['marketname'].split('.')[1][2:]
                     print 'farmersmarket name is %s' % name
-                    farmersmarket.name = name
-
                     detail_url = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=%s" % market_dict['id']
                     r2 = requests.get(detail_url,timeout=10)
                     if r2.status_code == 200:
                         details = r2.json()['marketdetails']
-                        farmersmarket.website = details['GoogleLink']
-                        farmersmarket.address = details['Address']
-                        farmersmarket.city = city
-                        farmersmarket.state = state
-                        farmersmarket.save()
+                        farmersmarket = FarmersMarket.objects.get_or_create(name=name,
+                                                                            website=details['GoogleLink'],
+                                                                            address=details['Address'],
+                                                                            city=city,
+                                                                            state=state)
+                        farmersmarket_list.append(farmersmarket)
 
 
 
-                    else:
-                        if farmersmarket.name:
-                            farmersmarket.save()
-                        else:
-                            continue
 
-
-                return cls.objects.filter(city=city,state=state)
+                return farmersmarket_list
 
             else:
                 return None
