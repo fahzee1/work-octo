@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/refer-a-friend/refer-a-friend.css">
+{% endblock %}
+{% block robots_tag %}
+
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW"/>
+
+{% endblock %}
+{% block typekit-code %}
+    <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block header %}{% endblock %}
+{% block content %}
+    <div id="main-container">
+        <div class="container">
+            <img src="{{ STATIC_URL }}img/logo-navy.png" class="logo" />
+            <h1>Refer your Friends</h1>
+            <h3>It's simple! Every friend that signs up for Protect America earns you $100 credit toward new equipment or your monthly bill. <br/>In return, your friend also gets a $100 credit to protect their home. Its good to be your friend.</h3>
+            <form>
+                <label>Your Friend's Email Address</label>
+                <input type="text" placeholder="example@abc.com" />
+                <div class="personal-section">
+                    <label>Your Email Address</label>
+                    <input type="text" placeholder="example@abc.com" value="{% if request.GET.custemail %}{{ request.GET.custemail }}{% endif %}" />
+                    <label>Your Personal Referral Code</label>
+                    <input type="text" placeholder="EX. 123456" value="{% if request.GET.referral %}{{ request.GET.referral }}{% endif %}" />
+                </div>
+                <button>Send your Invitation</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block order-footer %}{% endblock %}
+{% block footer %}{% endblock %}
