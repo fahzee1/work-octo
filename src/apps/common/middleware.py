@@ -279,7 +279,7 @@ class LocalPageRedirect(object):
             # city page so lets redirect
             chop_up = url.split('/')
             state, city = chop_up[1].replace('-',' '), strip_city(chop_up[2])
-            if state.islower() and city.islower():
+            if state.islower() or city.islower():
                 return redirect('/home-security/%s/%s' % (state.upper(),city.replace(' ','-').title()))
 
             elif state.islower():
