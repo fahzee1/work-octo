@@ -1,6 +1,7 @@
 import re
 import pdb
 import requests
+import traceback
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -501,6 +502,7 @@ class Demographics(CityAndState):
     chart_homeSize = models.CharField(max_length=255,blank=True,null=True)
     chart_ownVsRent = models.CharField(max_length=255,blank=True,null=True)
 
+
     def __unicode__(self):
         return '%s Demographics' % (self.city)
 
@@ -610,6 +612,12 @@ class Demographics(CityAndState):
             return None
 
 
+        except:
+            print 'unkown error'
+            traceback.print_exc()
+            return None
+
+
 
 
 class Universities(CityAndState):
@@ -668,6 +676,12 @@ class Universities(CityAndState):
             return None
 
 
+        except:
+            print 'unkown error'
+            traceback.print_exc()
+            return None
+
+
 class LocalEducation(CityAndState):
     """
     Data pulled from inventory.data.gov
@@ -720,6 +734,12 @@ class LocalEducation(CityAndState):
             return None
 
 
+        except:
+            print 'unkown error'
+            traceback.print_exc()
+            return None
+
+
 
 
 
@@ -769,6 +789,12 @@ class FarmersMarket(CityAndState):
 
         except requests.exceptions.Timeout:
             print 'farmers market api timed out'
+            return None
+
+
+        except:
+            print 'unkown error'
+            traceback.print_exc()
             return None
 
 
