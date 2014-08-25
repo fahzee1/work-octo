@@ -20,7 +20,7 @@ from apps.crimedatamodels.models import (CrimesByCity,CityCrimeStats,StateCrimeS
                                          State,CityLocation,ZipCode,CrimeContent,
                                          MatchAddressLocation,FeaturedIcon,FeaturedVideo,
                                          CityCompetitor,Resources,Permits,Demographics,
-                                         FarmersMarket,Universities,LocalEducation)
+                                         FarmersMarket,Universities,LocalEducation,LifeStyles)
 
 
 def query_weather(latitude, longitude, city, state):
@@ -179,7 +179,12 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
             except Demographics.DoesNotExist:
                 demographics = Demographics.call_data(city=city,state=state)
 
+            liveshere = None
+            if demographics:
+                liveshere = demographics.liveshere.all()
 
+
+            lifestyles = LifeStyles.objects.filter(city=city,state=state)
 
 
             reviews = Textimonial.objects.filter(display=True,city=city.city_name,state=state.abbreviation).exclude(rating=0)
@@ -229,7 +234,9 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                    'farmersmarkets':farmersmarkets,
                    'universities':universities,
                    'localeducation':localeducation,
-                   'demographics':demographics
+                   'demographics':demographics,
+                   'liveshere':liveshere,
+                   'lifestyles':lifestyles
                 }
 
             try:

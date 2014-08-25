@@ -483,6 +483,21 @@ class Permits(CityAndState):
 
 
 
+class LifeStyles(CityAndState):
+    image = models.ImageField(upload_to='lifestyles',height_field='image_height',width_field='image_width')
+    image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
+    image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
+
+
+class LivesHere(models.Model):
+    title = models.CharField(max_length=255,blank=True,null=True)
+    name = models.CharField(max_length=255,blank=True,null=True)
+    description = models.CharField(max_length=255,blank=True,null=True)
+
+    def __unicode__(self):
+        return '%s -- liveshere' % (self.name)
+
+
 class Demographics(CityAndState):
     """
     affordability_avgHomeValue, home_ownVsRent,home_homeSize
@@ -501,6 +516,7 @@ class Demographics(CityAndState):
     chart_avgHomeValue = models.CharField(max_length=255,blank=True,null=True)
     chart_homeSize = models.CharField(max_length=255,blank=True,null=True)
     chart_ownVsRent = models.CharField(max_length=255,blank=True,null=True)
+    liveshere = models.ManyToManyField(LivesHere,related_name='demographics',blank=True,null=True)
 
 
     def __unicode__(self):
@@ -563,6 +579,9 @@ class Demographics(CityAndState):
                             demographics.chart_ownVsRent = chart_url
 
 
+
+                        #save this
+
                     # get pages
                     median_list_price = soup.find(get_median_list_price)
                     if median_list_price:
@@ -591,6 +610,8 @@ class Demographics(CityAndState):
 
 
 
+
+
                     demographics.avg_commute_time = avg_commute_time
                     demographics.median_age = median_age
                     demographics.median_household_income = median_household_income
@@ -599,6 +620,24 @@ class Demographics(CityAndState):
                     demographics.city = city
                     demographics.state = state
                     demographics.save()
+
+                    #pdb.set_trace()
+                    # get who lives here data
+                    liveshere = soup.find_all('liveshere')
+                    for person in liveshere:
+                        title = person.title.string
+                        name = person.find('name').string
+                        description = person.description.string
+
+                        obj = LivesHere()
+                        obj.title = title
+                        obj.name = name
+                        obj.description = description
+                        obj.save()
+
+                        print 'adding %s to LivesHere' % name
+                        demographics.liveshere.add(obj)
+
 
                     return demographics
 
@@ -645,7 +684,7 @@ class Universities(CityAndState):
                 data = r.json()
                 if data['success']:
                     print 'found %s matching records from inventory.data.gov (universities)' % len(data['result']['records'])
-                    university_list = []
+                    #university_list = []
                     for data_dict in data['result']['records']:
                         website = data_dict['WEBADDR']
                         name = data_dict['INSTNM']
@@ -661,10 +700,10 @@ class Universities(CityAndState):
                                                                             city=city,
                                                                             state=state,
                                                                             zip=zipcode)
-                            university_list.append(university)
+                            #university_list.append(university)
 
 
-                    return university_list
+                    return Universities.objects.filter(city=city,state=state)
 
                 return None
 
@@ -707,7 +746,7 @@ class LocalEducation(CityAndState):
                 data = r.json()
                 if data['success']:
                     print 'found %s matching records from inventory.data.gov (local education)' % len(data['result']['records'])
-                    education_list = []
+                    #education_list = []
                     for data_dict in data['result']['records']:
                         name = data_dict['NAME09']
                         state_abbr = data_dict['LSTATE09']
@@ -719,10 +758,10 @@ class LocalEducation(CityAndState):
                                                                         state=state,
                                                                         city=city,
                                                                         zip=zipcode)
-                            education_list.append(education)
+                            #education_list.append(education)
 
 
-                    return education_list
+                    return LocalEducation.objects.filter(city=city,state=state)
 
                 return None
 
@@ -762,7 +801,7 @@ class FarmersMarket(CityAndState):
             r = requests.get(url,timeout=10)
             if r.status_code == 200:
                 market_results = r.json()['results']
-                farmersmarket_list = []
+                #farmersmarket_list = []
                 for market_dict in market_results:
                     # name is in this format (6.0 Collin County Farmers Market)
                     # so remove numbers
@@ -777,12 +816,12 @@ class FarmersMarket(CityAndState):
                                                                             address=details['Address'],
                                                                             city=city,
                                                                             state=state)
-                        farmersmarket_list.append(farmersmarket)
+                        #farmersmarket_list.append(farmersmarket)
 
 
 
 
-                return farmersmarket_list
+                return FarmersMarket.objects.filter(city=city,state=state)
 
             else:
                 return None

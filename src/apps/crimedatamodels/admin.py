@@ -2,7 +2,8 @@ from django.contrib import admin
 from apps.crimedatamodels.models import (CrimesByCity, CityCrimeStats, CrimeContent,
 										 State, CityLocation, ZipCode, MatchAddressLocation,LocalAddress,StateCrimeStats,
 										 FeaturedIcon,FeaturedVideo,CityCompetitor, Resources,Permits,
-                                         Demographics,Universities,LocalEducation, FarmersMarket)
+                                         Demographics,Universities,LocalEducation, FarmersMarket,LifeStyles,
+                                         LivesHere)
 
 class CrimesByCityAdmin(admin.ModelAdmin):
     model = CrimesByCity
@@ -77,4 +78,6 @@ admin.site.register(Demographics)
 admin.site.register(Universities)
 admin.site.register(LocalEducation)
 admin.site.register(FarmersMarket)
+admin.site.register(LifeStyles)
+admin.site.register(LivesHere)
 
