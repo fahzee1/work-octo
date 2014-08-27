@@ -231,6 +231,7 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
                    'resources':resources,
                    'articles':articles,
                    'permits':permits,
+                   'reviews':reviews,
                    'farmersmarkets':farmersmarkets,
                    'universities':universities,
                    'localeducation':localeducation,

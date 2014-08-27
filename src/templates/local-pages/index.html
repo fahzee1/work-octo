@@ -13,6 +13,8 @@
 <meta name="ICBM" content="{{ lat }}, {{ long }}" />
 <meta name = "viewport" content ="initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="{{ STATIC_URL }}css/local.css">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 {% endblock %}
 {% block typekit-code %}
 <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
@@ -20,18 +22,19 @@
 {% endblock %}
 {% block content %}
 </div>
-<div class="">
+<div id="hero-wrapper" class="">
     <div class="container">
         <div class="left"
         {% include "order/quote-form-white.html" with form=forms.basic %}
-    	<div class="heading">
-    		<h1>Alarm System Sensors and Equipment</h1>
-             <p>When looking to find peace of mind when it comes to your family, an alarm system can help make the difference to make your home feel secure. And we realize that importance of feeling safe. With over 20 years in the security industry, Protect America offers various security equipment pieces to customize your security system to your home and budget.</p>
-             <a href="" class="button">Get Started Now</a>
-    	</div>
-        <img src="{{ STATIC_URL }}img/equipment/home.png" class="background-image" alt="home" />
+        </div>
+        <div class="right">
+        	<div class="heading">
+        		<h1>{{ city }}, Your Security Should be Simple</h1>
+                 <p>When looking to find peace of mind when it comes to your family, an alarm system can help make the difference to make your home feel secure. And we realize that importance of feeling safe. With over 20 years in the security industry, Protect America offers various security equipment pieces to customize your security system to your home and budget.</p>
+                 <a href="" class="button">Get Started Now</a>
+        	</div>
+        </div>
     </div>
-
 </div>
 {% include "order/call-box.html" %}
 <div id="featured-on">
@@ -55,12 +58,14 @@
 <div class="container">
     <h2 class="title center">Protect what matters most.</h2>
     <div class="seven columns">
-        <p></p>
+		<p>With Protect America, you get more than just home security. {% content_spinner "para1" "You get a commitment. It's why Protect America is a Consumers Digest Best Buy and why we continue to serve more families and households every day. We have a responsibility to provide you with the security and peace of mind you deserve.|You get a commitment. We have a responsibility to provide you with the security and peace of mind you deserve, and we take that responsibility seriously. It's why Protect America is a Consumers Digest Best Buy!|You get a commitment. It's no wonder Consumers Digest named Protect America as a Best Buy. Our customer service and pledge to excellence are unrivaled in the industry, because we know we have a responsibility to your security and peace of mind." %}</p>
+
     </div>
     <div class="seven columns offset-by-two">
-        <p></p>
+        <p>{% content_spinner "closer-para1" "Our award-winning security experts take time to learn about your specific needs before helping you create a security system that perfectly fits your home. It doesn't end there, however. Professionals are constantly standing by to answer any questions you might have about home security, wireless technology and beyond. We take the well-being of your home seriously: as if it is our own.|We take the well-being of your home personally: as if it is our own. Your household deserves the same safety and quality of life afforded to every home across the nation. Experience wireless security that goes above and beyond with Protect America!|Our security experts are specially trained to listen and learn before making any recommendations, because no two homes or homeowners are the same. Our service doesn't end there, however. We are with you every step of the way &ndash; always available by phone or chat to answer questions about wireless technology, home security, home automation and beyond. " %}</p>
     </div>
-    <a href=""></a>
+    <div class="clear"></div>
+    <a href="" class="button center">Shop Our Packages</a>
 </div>
 <div id="advantage-table-wrapper">
     <div id="advantage-table">
@@ -128,10 +133,23 @@
 <div id="community-section">
     <div class="community-slide moving container">
         <div class="eight columns">
-            <h4>Moving to {{ city }}?</h4>
-            <p>Welcome to the neighborhood!</p>
+            {% if local_video %}
+                {{ local_video.video_embed|safe }}
+            {% endif %}
         </div>
-        <div class="eight columns"></div>
+        <div class="eight columns">
+
+            {% if articles %}
+                <ul>
+                    {% for article in articles %}
+                        <li>
+                            <div class=""></div>
+                        {{ article.heading }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
     </div>
     {% if demographics %}
     <div class="community-slide people container">
@@ -154,10 +172,45 @@
         </div>
     </div>
     {% endif %}
+    {% if liveshere %}
+    <div class="community-slide people container">
+
+        <h4 class="center">Who Lives Here?</h4>
+        {% for data in liveshere %}
+            <div class="four columns liveshere">
+                <i class="fa fa-users"></i>
+                <strong>{{ data.title }}</strong>
+                <span>{{ data.name }}</span>
+                <p>{{ data.description }}</p>
+            </div>
+            {% if forloop.counter|divisibleby:4 %}
+            <div class="clear"></div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
     {% if farmersmarkets %}
     <div class="community-slide farmers container">
         <div class="eight columns">
             <h4>Enjoy your community.</h4>
+            <p>Check out some of the great community Farmer's Markets located throughout the city</p>
+        </div>
+        <div class="eight columns">
+            <ul>
+                {% for market in farmersmarkets %}
+                <li>
+                    {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
+                    <span>{{ market.address }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+    {% if farmersmarkets %}
+    <div class="community-slide farmers container">
+        <div class="eight columns">
+            <h4>Online Resources.</h4>
             <p>Check out some of the great community Farmer's Markets located throughout the city</p>
         </div>
         <div class="eight columns">
@@ -228,24 +281,46 @@
 </div>
 <div id="main-benefits" class="container">
     <div class="four columns">
-        <h3><i class="icon-home"></i>Simply Peace of Mind.</h3>
+        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
         <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
     </div>
     <div class="four columns">
-        <h3><i class="icon-home"></i>Simply Peace of Mind.</h3>
+        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
         <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
     </div>
     <div class="four columns">
-        <h3><i class="icon-home"></i>Simply Peace of Mind.</h3>
+        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
         <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
     </div>
     <div class="four columns">
-        <h3><i class="icon-home"></i>Simply Peace of Mind.</h3>
+        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
         <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
     </div>
 
 </div>
-
+<div>
+    <h2 class="title center bottom">What People are Saying</h2>
+    <h4 class="subhead">Rated {{ review_avg|floatformat }} out of 5 stars based on over <span itemprop="reviewCount"> {{ review_total }} </span> Protect America {{ state_long }} Customer Reviews</h4>
+    <div class="container">
+        {% if reviews %}
+            {% for review in reviews %}
+            <div class="seven columns testimonial {% if forloop.counter|divisibleby:2 %}offset-by-two{% endif %}">
+                <p class="message">{{ review.message|safe }}</p>
+                <div class="five columns">
+                    <h4 class="name"><strong>{{ review.first_name }}</strong> of <strong> {{ review.city }}, {{ review.state }}</strong></p>
+                </div>
+                <div class="stars">
+                    {% if review.rating >= '1' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '2' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '3' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '4' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '5' %}<i class="fa fa-star"></i>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
@@ -282,7 +357,6 @@
           singleItem: true,
           autoHeight: true,
           pagination: false,
-          autoPlay: 9000,
           stopOnHover: true,
     
         });
