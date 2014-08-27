@@ -135,22 +135,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 
 {% block content %}
 {% block hero_banner_area %}
-    {% comment %}{% include "banners/night.html" %}{% endcomment %}
+    {% comment %}{% include "banners/spring-savings.html" %}{% endcomment %}
     {% include "banners/night.html" %}
 {% endblock %}
-{% include "order/call-box-night.html" %}
-
-<div id="lightbox">
-    <div id="light-quote-form">
-        <i class="icon-remove-sign"></i>
-        <div class="lightbox-info">
-            <h3>We're here for you.</h3>
-            <p>Our security experts are standing by to help you create the best security and safety solution for your home. Fill out the form for a no obligation security analysis.</p>
-        </div>
-        {% include "order/quote-form-white-night.html" with form=forms.basic %}
-    </div>
-    <div class="lightbox-bg">&nbsp;</div>
-</div>
+{% include "order/call-box.html" %}
 
 <div id="featured-on">
     <small>Proudly Featured on:</small>
@@ -171,7 +159,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div class="wrapper">
 
     <div id="categories">
-        <h2>The Protect America advantage</h2>
+        <h2>The Protect America advantage aaa</h2>
         <div class="category">
             <i class="category-img" style="float: right;"></i>
             <div class="category-info">
@@ -223,26 +211,9 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 </div>
 <div class="clear"></div>
 {% addtoblock "js" %}
-    
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+
     <script type="text/javascript">
-    $('.night-button').click(function(e) {
-        e.preventDefault();
-        $('#lightbox').fadeIn();
-        return false;
-    })
-    $('.lightbox-bg').click(function(e) {
-        e.preventDefault();
-        $('#lightbox').fadeOut();
-        return false;
-
-    })
-    $('.icon-remove-sign').click(function(e) {
-        e.preventDefault();
-        $('#lightbox').fadeOut();
-        return false;
-
-    })
     $(document).ready(function() {
     	$( "#menu-button" ).click(function() {
 			$( "#mobile-menu-container" ).slideToggle( "slow", function() {
