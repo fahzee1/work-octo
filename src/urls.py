@@ -736,7 +736,9 @@ else:
                 # > url(r'^contact/careers/?$', 'apps.events.views.careers', name='careers'),
 
                     dtt(r'^support/careers/jobs/?$', 'contact-us/jobs.html', 'jobs', 'careers'),
+                    dtt(r'^support/careers/jobs/application?$', 'contact-us/online-application.html', 'application', 'careers'),
                     # > dtt(r'^contact/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
+
 
 
 

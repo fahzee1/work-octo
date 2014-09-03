@@ -1,0 +1,1147 @@
+{% extends "support/base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags i18n %}
+{% block page_title %}Online Application | Protect America{% endblock %}
+{% block page_keywords %}home security jobs, security sales, security, home security, home security system, security system{% endblock %}
+{% block page_description %}Come grow with us! Voted as one of the top places to work in Austin, Protect America provides state-of-the-art security systems to 1000s of families.{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/online-app.css">
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+    
+        <h2>Application for Employment</h2>
+        <br>
+        <form action="">
+            <h3>Personal Information</h3>
+            <hr>
+            <div class="row">
+                <div class="one-third column alpha">
+                    <input type="text" id="regularInput" placeholder="First Name"/>
+                </div>
+                <div class="one-third column">
+                    <input type="text" id="regularInput" placeholder="Middle Name"/>
+                </div>
+                <div class="one-third column omega">
+                    <input type="text" id="regularInput" placeholder="Last Name"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="two-thirds column alpha">
+                    <input type="text" id="regularInput" placeholder="Street Address"/>
+                </div>
+                <div class="one-third column">
+                    <input type="text" id="regularInput" placeholder="Apartment #"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one-third column alpha">
+                    <input type="text" id="regularInput" placeholder="City"/>
+                </div>
+                <div class="one-third column">
+                    <select id="selectList">
+                        <option>Alabama</option>
+                        <option>Alaska</option>
+                        <option>Arizona</option>
+                        <option>Arkansas</option>
+                        <option>California</option>
+                        <option>Colorado</option>
+                        <option>Connecticut</option>
+                        <option>Delaware</option>
+                        <option>Florida</option>
+                        <option>Georgia</option>
+                        <option>Hawaii</option>
+                        <option>Idaho</option>
+                        <option>Illinois</option>
+                        <option>Indiana</option>
+                        <option>Iowa</option>
+                        <option>Kansas</option>
+                        <option>Kentucky</option>
+                        <option>Louisiana</option>
+                        <option>Maine</option>
+                        <option>Maryland</option>
+                        <option>Massachusetts</option>
+                        <option>Michigan</option>
+                        <option>Minnesota</option>
+                        <option>Mississippi</option>
+                        <option>Missouri</option>
+                        <option>Montana</option>
+                        <option>Nebraska</option>
+                        <option>Nevada</option>
+                        <option>New Hampshire</option>
+                        <option>New Jersey</option>
+                        <option>New Mexico</option>
+                        <option>New York</option>
+                        <option>North Carolina</option>
+                        <option>North Dakota</option>
+                        <option>Ohio</option>
+                        <option>Oklahoma</option>
+                        <option>Oregon</option>
+                        <option>Pennsylvania</option>
+                        <option>Rhode Island</option>
+                        <option>South Carolina</option>
+                        <option>South Dakota</option>
+                        <option>Tennessee</option>
+                        <option>Texas</option>
+                        <option>Utah</option>
+                        <option>Vermont</option>
+                        <option>Virginia</option>
+                        <option>Washington</option>
+                        <option>West Virginia</option>
+                        <option>Wisconsin</option>
+                        <option>Wyoming</option>
+                    </select>
+                </div>
+                <div class="one-third column omega">
+                    <input type="text" id="regularInput" placeholder="Zip"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="four columns alpha">
+                    <input type="text" id="regularInput" placeholder="Home Phone"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Cell Phone"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Email"/>
+                </div>
+                <div class="four columns omega">
+                    <input type="text" id="regularInput" placeholder="Social Security #"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="">Are you under the age of 18?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="regularTextarea">How did you hear about us?</label>
+                    <textarea id="regularTextarea" placeholder="(include referral name)"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="selectList">Have you ever been convicted of or pleaded guilty to any misdemeanor or felony within the past seven (7) years*?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="regularTextarea">If yes, please explain:</label>
+                    <textarea id="regularTextarea"></textarea>
+                    <small>Please note: Exclude minor traffic offenses and convictions which have been sealed, impounded, erased, expunged, annulled or nulled. Other factors will be taken into account such as the nature of the offense, the time that has passed since the conviction and the type of job being sought. Further, this information will be used only for job-related purposes and only to the extent permitted by applicable law.</small>
+                </div>
+            </div>
+            <br>
+            <h3>Employment Desired</h3>
+            <hr>
+            <div class="row">
+                <div class="four columns alpha">
+                    <input type="text" id="regularInput" placeholder="Date Available to Start"/>
+                </div>
+                <div class="eight columns">
+                    <input type="text" id="regularInput" placeholder="Position Applied For"/>
+                </div>
+                <div class="four columns omega">
+                    <input type="text" id="regularInput" placeholder="Rate of Pay"/>
+                </div>
+            </div>
+            <br>
+            <h3>Availability</h3>
+            <hr>
+            <p>Please list the times you are available to work. If you are available to begin or end at any time for that day, please list your availability as 'OPEN'. If you are unable to work on that day, please list your availability as 'UNAVAILABLE'.</p>
+
+            <div class="row">
+                <div class="two columns alpha">
+                    <label>MONDAY</label>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>START TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>END TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="two columns omega">
+                    <label>TUESDAY</label>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>START TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="three columns omega">
+                    <select id="selectList">
+                        <option>END TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="two columns alpha">
+                    <label>WEDNESDAY</label>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>START TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>END TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="two columns omega">
+                    <label>THURSDAY</label>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>START TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="three columns omega">
+                    <select id="selectList">
+                        <option>END TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="two columns alpha">
+                    <label>FRIDAY</label>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>START TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>END TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="two columns omega">
+                    <label>SATURDAY</label>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>START TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="three columns omega">
+                    <select id="selectList">
+                        <option>END TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="two columns alpha">
+                    <label>SUNDAY</label>
+                </div>
+                <div class="three columns">
+                    <select id="selectList">
+                        <option>START TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+                <div class="three columns omega">
+                    <select id="selectList">
+                        <option>END TIME</option>
+                        <option>OPEN</option>
+                        <option>UNAVAILABLE</option>
+                        <option>6:00AM</option>
+                        <option>6:30AM</option>
+                        <option>7:00AM</option>
+                        <option>7:30AM</option>
+                        <option>8:00AM</option>
+                        <option>8:30AM</option>
+                        <option>9:00AM</option>
+                        <option>9:30AM</option>
+                        <option>10:00AM</option>
+                        <option>10:30AM</option>
+                        <option>11:00AM</option>
+                        <option>11:30AM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                        <option>1:00PM</option>
+                        <option>1:30PM</option>
+                        <option>2:00PM</option>
+                        <option>2:30PM</option>
+                        <option>3:00PM</option>
+                        <option>3:30PM</option>
+                        <option>4:00PM</option>
+                        <option>4:30PM</option>
+                        <option>5:00PM</option>
+                        <option>5:30PM</option>
+                        <option>6:00PM</option>
+                        <option>6:30PM</option>
+                        <option>7:00PM</option>
+                        <option>7:30PM</option>
+                        <option>8:00PM</option>
+                        <option>8:30PM</option>
+                        <option>9:00PM</option>
+                        <option>9:30PM</option>
+                        <option>10:00PM</option>
+                        <option>10:30PM</option>
+                        <option>11:00PM</option>
+                        <option>11:30PM</option>
+                        <option>12:00PM</option>
+                        <option>12:30PM</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <h3>Education History</h3>
+            <hr>
+            <div class="row">
+                <div class="four columns alpha">
+                    <input type="text" id="regularInput" placeholder="High School or Prep School Name"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Major"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                </div>
+                <div class="four columns omega">
+                    <label for="">Did you Graduate?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="four columns alpha">
+                    <input type="text" id="regularInput" placeholder="College"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Major"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                </div>
+                <div class="four columns omega">
+                    <label for="">Did you Graduate?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="four columns alpha">
+                    <input type="text" id="regularInput" placeholder="College or Graduate"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Major"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                </div>
+                <div class="four columns omega">
+                    <label for="">Did you Graduate?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="four columns alpha">
+                    <input type="text" id="regularInput" placeholder="Other"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Major"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                </div>
+                <div class="four columns omega">
+                    <label for="">Did you Graduate?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <br>
+            <h3>Professional History</h3>
+            <hr>
+            <div class="row">
+                <div class="eight columns alpha">
+                    <label for="">Have you applied to PA before?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+                <div class="eight columns omega">
+                    <label for="">Are you currently employed?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="">Do you feel that you are capable of performing the essential functions of the job/position for which you are applying for, with or without reasonable accommodation?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <br>
+            <h3>Recent Employment</h3>
+            <hr>
+            <p>List the 3 most recent places of employment beginning with your most recent employer (month &amp; year):</p>
+            <br>
+            <div class="row">
+                <div class="two columns alpha">
+                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                </div>
+                <div class="two columns">
+                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Name of Business"/>
+                </div>
+                <div class="eight columns omega">
+                    <label for="">Was the termination of this employment voluntary?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="regularTextarea">If yes, please explain:</label>
+                    <textarea id="regularTextarea"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="two columns alpha">
+                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                </div>
+                <div class="two columns">
+                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Name of Business"/>
+                </div>
+                <div class="eight columns omega">
+                    <label for="">Was the termination of this employment voluntary?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="regularTextarea">If yes, please explain:</label>
+                    <textarea id="regularTextarea"></textarea>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="two columns alpha">
+                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                </div>
+                <div class="two columns">
+                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                </div>
+                <div class="four columns">
+                    <input type="text" id="regularInput" placeholder="Name of Business"/>
+                </div>
+                <div class="eight columns omega">
+                    <label for="">Was the termination of this employment voluntary?</label>
+                    <label for="regularRadio">
+                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <span>Yes</span>
+                    </label>
+                    <label for="secondRegularRadio">
+                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <span>No</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sixteen columns alpha">
+                    <label for="regularTextarea">If yes, please explain:</label>
+                    <textarea id="regularTextarea"></textarea>
+                </div>
+            </div>
+            <br>
+            <h3>Recent Unemployment</h3>
+            <hr>
+            <p>Please list all periods of unemployment.</p>
+            <div class="row">
+                <div class="two columns alpha">
+                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                </div>
+                <div class="two columns">
+                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                </div>
+                <div class="twelve columns omega">
+                    <input type="text" id="regularInput" placeholder="How was this time spent?"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="two columns alpha">
+                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                </div>
+                <div class="two columns">
+                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                </div>
+                <div class="twelve columns omega">
+                    <input type="text" id="regularInput" placeholder="How was this time spent?"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="two columns alpha">
+                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                </div>
+                <div class="two columns">
+                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                </div>
+                <div class="twelve columns omega">
+                    <input type="text" id="regularInput" placeholder="How was this time spent?"/>
+                </div>
+            </div>
+            <br>
+            
+            <h3>Professional References</h3>
+            <hr>
+            <div class="row">
+                <div class="one-third column alpha">
+                    <input type="text" id="regularInput" placeholder="Reference Name"/>
+                </div>
+                <div class="one-third column">
+                    <input type="text" id="regularInput" placeholder="Home Phone"/>
+                </div>
+                <div class="one-third column omega">
+                    <input type="text" id="regularInput" placeholder="Relation or Comapny"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one-third column alpha">
+                    <input type="text" id="regularInput" placeholder="Reference Name"/>
+                </div>
+                <div class="one-third column">
+                    <input type="text" id="regularInput" placeholder="Home Phone"/>
+                </div>
+                <div class="one-third column omega">
+                    <input type="text" id="regularInput" placeholder="Relation or Comapny"/>
+                </div>
+            </div>
+            <br>
+            <h3>Equal Opportunity Employer</h3>
+            <hr>
+            <p>Protect America, Inc. is an equal opportunity employer and does not discriminate against any applicant or employee because of race, color, religion, sex, national origin, disability, age, or military or veteran status in accordance with federal law. In addition, Protect America, Inc. complies with applicable state and local laws governing non-discrimination in employment in every jurisdiction in which it maintains facilities. Protect America, Inc. also provides reasonable accommodation to qualified individuals with disabilities in accordance with applicable laws.</p>
+            <br>
+            <h3>Please Read Carefully</h3>
+            <hr>
+            <p>My signature attests to the fact that the information that I have provided on my application, resume, given verbally, or provided on any other materials, is true and complete to the best of my knowledge and also constitutes authority to verify and and all information submitted on this application. I understand that any misrepresentation or omission of any fact in my application, resume or any other materials, or during any interviews, can be justification for refusal of employment, or, if employed, termination from the employ of Protect America, Inc.</p>
+            <p>Protect America, Inc., or its agents may seek to verify the information on this application. As such, I hereby authorize Protect America, Inc., or its agents to contact any former employer or any representative of any other organization to which I have reference in this application, and I hereby authorize said employer and/or representative to provide information to Protect America, Inc. on my behalf.</p>
+            <p>I also affirm that I have not signed any kind of restrictive document creating any obligation to any former employer that would restrict my acceptance of employment with Protect America, Inc. in the position I am seeking.</p>
+            <p><strong>I understand that this application is not an employment contract for any specific length of time between Protect America, Inc. and myself, and that in the event I am hired, my employment will be "at will" and either Protect America, Inc. or I can terminate my employment with or without cause and with or without notice at any time. Nothing contained in any handbook, manual, policy and the like, distributed by Protect America, Inc. to its employees is intended to or can create an employment contract, an offer of employment or any obligation on the part of Protect America, Inc. Protect America, Inc. may, at its sole discretion, hold in abeyance or revoke, amend, abridge, or change any benefit, policy practice, condition or process affecting its employees.</strong></p>
+            <p>By signing below, I acknowledge that I have read all of the above statements, and that I understand them.</p>
+            <div class="six columns alpha">
+                <input type="text" id="regularInput" placeholder="First and Last Name"/>
+            </div>
+            <div class="three columns">
+                <input type="text" id="regularInput" placeholder="Date"/>
+            </div>
+            <div class="clear"><br><br></div>
+            <br><br>
+            <button type="submit" class="yellow">Submit</button>
+        </form>
+    </div>
+
+
+{% endblock %}
