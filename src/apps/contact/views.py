@@ -824,6 +824,32 @@ def ajax_post_agent(request):
     return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
 
 
+def ajax_employment(request):
+    import json
+    if request.is_ajax():
+        data = request.POST.get('data',None)
+        if data:
+            #pdb.set_trace()
+            data = json.loads(data)
+            personal_info = data['personal_information']
+            employment_desired = data['employment_desired']
+            availability = data['availability']
+            education_history = data['education_history']
+            professional_history = data['professional_history']
+            recent_employment = data['recent_employment']
+            recent_unemployment = data['recent_unemployment']
+            professional_references = data['professional_references']
+            end = data['end']
+
+
+        return HttpResponse()
+
+    return HttpResponseBadRequest()
+
+
+
+
+
 
 
 

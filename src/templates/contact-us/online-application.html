@@ -13,37 +13,38 @@
 {% block content %}
 
 <div class="container">
-    
+
         <h2>Application for Employment</h2>
         <br>
-        <form action="">
+        <form action="" method="POST" id="employ-form">
+            {% csrf_token %}
             <h3>Personal Information</h3>
             <hr>
             <div class="row">
                 <div class="one-third column alpha">
-                    <input type="text" id="regularInput" placeholder="First Name"/>
+                    <input type="text" id="regularInput" class="pi-1" placeholder="First Name"/>
                 </div>
                 <div class="one-third column">
-                    <input type="text" id="regularInput" placeholder="Middle Name"/>
+                    <input type="text" id="regularInput" class="pi-2" placeholder="Middle Name"/>
                 </div>
                 <div class="one-third column omega">
-                    <input type="text" id="regularInput" placeholder="Last Name"/>
+                    <input type="text" id="regularInput" class="pi-3" placeholder="Last Name"/>
                 </div>
             </div>
             <div class="row">
                 <div class="two-thirds column alpha">
-                    <input type="text" id="regularInput" placeholder="Street Address"/>
+                    <input type="text" id="regularInput" class="pi-4" placeholder="Street Address"/>
                 </div>
                 <div class="one-third column">
-                    <input type="text" id="regularInput" placeholder="Apartment #"/>
+                    <input type="text" id="regularInput" class="pi-5" placeholder="Apartment #"/>
                 </div>
             </div>
             <div class="row">
                 <div class="one-third column alpha">
-                    <input type="text" id="regularInput" placeholder="City"/>
+                    <input type="text" id="regularInput" class="pi-6" placeholder="City"/>
                 </div>
                 <div class="one-third column">
-                    <select id="selectList">
+                    <select id="selectList" class="pi-7">
                         <option>Alabama</option>
                         <option>Alaska</option>
                         <option>Arizona</option>
@@ -97,32 +98,32 @@
                     </select>
                 </div>
                 <div class="one-third column omega">
-                    <input type="text" id="regularInput" placeholder="Zip"/>
+                    <input type="text" id="regularInput" class="pi-8" placeholder="Zip"/>
                 </div>
             </div>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" placeholder="Home Phone"/>
+                    <input type="text" id="regularInput" class="pi-9" placeholder="Home Phone"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Cell Phone"/>
+                    <input type="text" id="regularInput" class="pi-10" placeholder="Cell Phone"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Email"/>
+                    <input type="text" id="regularInput" class="pi-11" placeholder="Email"/>
                 </div>
                 <div class="four columns omega">
-                    <input type="text" id="regularInput" placeholder="Social Security #"/>
+                    <input type="text" id="regularInput" class="pi-12" placeholder="Social Security #"/>
                 </div>
             </div>
             <div class="row">
                 <div class="sixteen columns alpha">
                     <label for="">Are you under the age of 18?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="No" />
+                        <input type="radio" name="radios" id="regularRadio" class="pi-13" value="No" />
                         <span>No</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="Yes" />
+                        <input type="radio" name="radios" id="secondRegularRadio" class="pi-14" value="Yes" />
                         <span>Yes</span>
                     </label>
                 </div>
@@ -130,18 +131,18 @@
             <div class="row">
                 <div class="sixteen columns alpha">
                     <label for="regularTextarea">How did you hear about us?</label>
-                    <textarea id="regularTextarea" placeholder="(include referral name)"></textarea>
+                    <textarea id="regularTextarea" class="pi-15" placeholder="(include referral name)"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="sixteen columns alpha">
                     <label for="selectList">Have you ever been convicted of or pleaded guilty to any misdemeanor or felony within the past seven (7) years*?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="No" />
+                        <input type="radio" name="radios" id="regularRadio" class="pi-16" value="No" />
                         <span>No</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="Yes" />
+                        <input type="radio" name="radios" id="secondRegularRadio" class="pi-17" value="Yes" />
                         <span>Yes</span>
                     </label>
                 </div>
@@ -149,7 +150,7 @@
             <div class="row">
                 <div class="sixteen columns alpha">
                     <label for="regularTextarea">If yes, please explain:</label>
-                    <textarea id="regularTextarea"></textarea>
+                    <textarea id="regularTextarea" class="pi-18"></textarea>
                     <small>Please note: Exclude minor traffic offenses and convictions which have been sealed, impounded, erased, expunged, annulled or nulled. Other factors will be taken into account such as the nature of the offense, the time that has passed since the conviction and the type of job being sought. Further, this information will be used only for job-related purposes and only to the extent permitted by applicable law.</small>
                 </div>
             </div>
@@ -158,13 +159,13 @@
             <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" placeholder="Date Available to Start"/>
+                    <input type="text" id="regularInput" class="ed-1" placeholder="Date Available to Start"/>
                 </div>
                 <div class="eight columns">
-                    <input type="text" id="regularInput" placeholder="Position Applied For"/>
+                    <input type="text" id="regularInput" class="ed-2" placeholder="Position Applied For"/>
                 </div>
                 <div class="four columns omega">
-                    <input type="text" id="regularInput" placeholder="Rate of Pay"/>
+                    <input type="text" id="regularInput" class="ed-3" placeholder="Rate of Pay"/>
                 </div>
             </div>
             <br>
@@ -177,7 +178,7 @@
                     <label>MONDAY</label>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="mon-start">
                         <option>START TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -222,7 +223,7 @@
                     </select>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="mon-end">
                         <option>END TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -270,7 +271,7 @@
                     <label>TUESDAY</label>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="tue-start">
                         <option>START TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -315,7 +316,7 @@
                     </select>
                 </div>
                 <div class="three columns omega">
-                    <select id="selectList">
+                    <select id="selectList" class="tue-end">
                         <option>END TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -365,7 +366,7 @@
                     <label>WEDNESDAY</label>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="wed-start">
                         <option>START TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -410,7 +411,7 @@
                     </select>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="wed-end">
                         <option>END TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -458,7 +459,7 @@
                     <label>THURSDAY</label>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="thur-start">
                         <option>START TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -503,7 +504,7 @@
                     </select>
                 </div>
                 <div class="three columns omega">
-                    <select id="selectList">
+                    <select id="selectList" class="thur-end">
                         <option>END TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -553,7 +554,7 @@
                     <label>FRIDAY</label>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="fri-start">
                         <option>START TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -598,7 +599,7 @@
                     </select>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="fri-end">
                         <option>END TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -646,7 +647,7 @@
                     <label>SATURDAY</label>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="sat-start">
                         <option>START TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -691,7 +692,7 @@
                     </select>
                 </div>
                 <div class="three columns omega">
-                    <select id="selectList">
+                    <select id="selectList" class="sat-end">
                         <option>END TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -741,7 +742,7 @@
                     <label>SUNDAY</label>
                 </div>
                 <div class="three columns">
-                    <select id="selectList">
+                    <select id="selectList" class="sun-start">
                         <option>START TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -786,7 +787,7 @@
                     </select>
                 </div>
                 <div class="three columns omega">
-                    <select id="selectList">
+                    <select id="selectList" class="sun-end">
                         <option>END TIME</option>
                         <option>OPEN</option>
                         <option>UNAVAILABLE</option>
@@ -836,22 +837,22 @@
             <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" placeholder="High School or Prep School Name"/>
+                    <input type="text" id="regularInput" class="eh-1"  placeholder="High School or Prep School Name"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Major"/>
+                    <input type="text" id="regularInput" class="eh-2" placeholder="Major"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                    <input type="text" id="regularInput" class="eh-3" placeholder="Type of Degree or Diploma"/>
                 </div>
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="eh-4" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="eh-5" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -859,22 +860,22 @@
             <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" placeholder="College"/>
+                    <input type="text" id="regularInput" class="eh-6" placeholder="College"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Major"/>
+                    <input type="text" id="regularInput" class="eh-7" placeholder="Major"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                    <input type="text" id="regularInput" class="eh-8" placeholder="Type of Degree or Diploma"/>
                 </div>
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="eh-9" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="eh-10" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -882,22 +883,22 @@
             <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" placeholder="College or Graduate"/>
+                    <input type="text" id="regularInput" class="eh-11" placeholder="College or Graduate"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Major"/>
+                    <input type="text" id="regularInput" class="eh-12" placeholder="Major"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                    <input type="text" id="regularInput" class="eh-13" placeholder="Type of Degree or Diploma"/>
                 </div>
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="eh-14" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="eh-15" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -905,22 +906,22 @@
             <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" placeholder="Other"/>
+                    <input type="text" id="regularInput" class="eh-16" placeholder="Other"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Major"/>
+                    <input type="text" id="regularInput" class="eh-17" placeholder="Major"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Type of Degree or Diploma"/>
+                    <input type="text" id="regularInput" class="eh-18" placeholder="Type of Degree or Diploma"/>
                 </div>
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="eh-19" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="eh-20" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -932,22 +933,22 @@
                 <div class="eight columns alpha">
                     <label for="">Have you applied to PA before?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="ph-1" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="ph-2" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
                 <div class="eight columns omega">
                     <label for="">Are you currently employed?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="ph-3" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="ph-4" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -956,11 +957,11 @@
                 <div class="sixteen columns alpha">
                     <label for="">Do you feel that you are capable of performing the essential functions of the job/position for which you are applying for, with or without reasonable accommodation?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="ph-5" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="ph-6" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -972,22 +973,22 @@
             <br>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                    <input type="text" id="regularInput" class="re-1" placeholder="Date Begin"/>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                    <input type="text" id="regularInput" class="re-2" placeholder="Date Ended"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Name of Business"/>
+                    <input type="text" id="regularInput" class="re-3" placeholder="Name of Business"/>
                 </div>
                 <div class="eight columns omega">
                     <label for="">Was the termination of this employment voluntary?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="re-4" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="re-5" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -995,28 +996,28 @@
             <div class="row">
                 <div class="sixteen columns alpha">
                     <label for="regularTextarea">If yes, please explain:</label>
-                    <textarea id="regularTextarea"></textarea>
+                    <textarea id="regularTextarea" class="re-6" ></textarea>
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                    <input type="text" id="regularInput" class="re-7" placeholder="Date Begin"/>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                    <input type="text" id="regularInput" class="re-8" placeholder="Date Ended"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Name of Business"/>
+                    <input type="text" id="regularInput" class="re-9" placeholder="Name of Business"/>
                 </div>
                 <div class="eight columns omega">
                     <label for="">Was the termination of this employment voluntary?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="re-10" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="re-11" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -1024,28 +1025,28 @@
             <div class="row">
                 <div class="sixteen columns alpha">
                     <label for="regularTextarea">If yes, please explain:</label>
-                    <textarea id="regularTextarea"></textarea>
+                    <textarea id="regularTextarea" class="re-12" ></textarea>
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                    <input type="text" id="regularInput" class="re-13" placeholder="Date Begin"/>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                    <input type="text" id="regularInput" class="re-14" placeholder="Date Ended"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" placeholder="Name of Business"/>
+                    <input type="text" id="regularInput" class="re-15" placeholder="Name of Business"/>
                 </div>
                 <div class="eight columns omega">
                     <label for="">Was the termination of this employment voluntary?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radios" class="re-16" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radios" class="re-17" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -1053,7 +1054,7 @@
             <div class="row">
                 <div class="sixteen columns alpha">
                     <label for="regularTextarea">If yes, please explain:</label>
-                    <textarea id="regularTextarea"></textarea>
+                    <textarea id="regularTextarea" class="re-18" ></textarea>
                 </div>
             </div>
             <br>
@@ -1062,61 +1063,61 @@
             <p>Please list all periods of unemployment.</p>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                    <input type="text" id="regularInput" class="ru-1" placeholder="Date Begin"/>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                    <input type="text" id="regularInput" class="ru-2" placeholder="Date Ended"/>
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="regularInput" placeholder="How was this time spent?"/>
+                    <input type="text" id="regularInput" class="ru-3" placeholder="How was this time spent?"/>
                 </div>
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                    <input type="text" id="regularInput" class="ru-4" placeholder="Date Begin"/>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                    <input type="text" id="regularInput" class="ru-5" placeholder="Date Ended"/>
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="regularInput" placeholder="How was this time spent?"/>
+                    <input type="text" id="regularInput" class="ru-6" placeholder="How was this time spent?"/>
                 </div>
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" placeholder="Date Begin"/>
+                    <input type="text" id="regularInput" class="ru-7" placeholder="Date Begin"/>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" placeholder="Date Ended"/>
+                    <input type="text" id="regularInput" class="ru-8" placeholder="Date Ended"/>
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="regularInput" placeholder="How was this time spent?"/>
+                    <input type="text" id="regularInput" class="ru-9" placeholder="How was this time spent?"/>
                 </div>
             </div>
             <br>
-            
+
             <h3>Professional References</h3>
             <hr>
             <div class="row">
                 <div class="one-third column alpha">
-                    <input type="text" id="regularInput" placeholder="Reference Name"/>
+                    <input type="text" id="regularInput" class="pr-1" placeholder="Reference Name"/>
                 </div>
                 <div class="one-third column">
-                    <input type="text" id="regularInput" placeholder="Home Phone"/>
+                    <input type="text" id="regularInput" class="pr-2" placeholder="Home Phone"/>
                 </div>
                 <div class="one-third column omega">
-                    <input type="text" id="regularInput" placeholder="Relation or Comapny"/>
+                    <input type="text" id="regularInput" class="pr-3" placeholder="Relation or Comapny"/>
                 </div>
             </div>
             <div class="row">
                 <div class="one-third column alpha">
-                    <input type="text" id="regularInput" placeholder="Reference Name"/>
+                    <input type="text" id="regularInput" class="pr-4" placeholder="Reference Name"/>
                 </div>
                 <div class="one-third column">
-                    <input type="text" id="regularInput" placeholder="Home Phone"/>
+                    <input type="text" id="regularInput" class="pr-5" placeholder="Home Phone"/>
                 </div>
                 <div class="one-third column omega">
-                    <input type="text" id="regularInput" placeholder="Relation or Comapny"/>
+                    <input type="text" id="regularInput" class="pr-6" placeholder="Relation or Comapny"/>
                 </div>
             </div>
             <br>
@@ -1132,16 +1133,384 @@
             <p><strong>I understand that this application is not an employment contract for any specific length of time between Protect America, Inc. and myself, and that in the event I am hired, my employment will be "at will" and either Protect America, Inc. or I can terminate my employment with or without cause and with or without notice at any time. Nothing contained in any handbook, manual, policy and the like, distributed by Protect America, Inc. to its employees is intended to or can create an employment contract, an offer of employment or any obligation on the part of Protect America, Inc. Protect America, Inc. may, at its sole discretion, hold in abeyance or revoke, amend, abridge, or change any benefit, policy practice, condition or process affecting its employees.</strong></p>
             <p>By signing below, I acknowledge that I have read all of the above statements, and that I understand them.</p>
             <div class="six columns alpha">
-                <input type="text" id="regularInput" placeholder="First and Last Name"/>
+                <input type="text" id="regularInput" class="prc-1" placeholder="First and Last Name"/>
             </div>
             <div class="three columns">
-                <input type="text" id="regularInput" placeholder="Date"/>
+                <input type="text" id="regularInput" class="prc-2" placeholder="Date"/>
             </div>
             <div class="clear"><br><br></div>
             <br><br>
-            <button type="submit" class="yellow">Submit</button>
+            <button type="button" class="yellow">Submit</button>
         </form>
     </div>
+
+
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.yellow').on('click',function(){
+            // class names used to reference fields are pi,ed,eh,ph,re, etc
+            // format is first letters of section name - (dash) field number
+            // ex section Education Historys third field would be eh-3
+
+
+            //$('#employ-form button').attr('disabled',true);
+
+            // Personal Information
+
+            var data = {};
+            var $form = $(this).closest('#employ-form');
+            var first_name = $form.find(".pi-1").val();
+            var middle_name = $form.find(".pi-2").val();
+            var last_name = $form.find(".pi-3").val();
+            var address = $form.find(".pi-4").val();
+            var apt_number = $form.find(".pi-5").val();
+            var city = $form.find(".pi-6").val();
+            var state = $form.find(".pi-7").val();
+            var zip = $form.find(".pi-8").val();
+            var home_phone = $form.find(".pi-9").val();
+            var cell_phone = $form.find(".pi-10").val();
+            var email = $form.find(".pi-11").val();
+            var ssn = $form.find(".pi-12").val();
+                // are you under the age of 18?
+                var under_18 = "";
+                if ($('.pi-13').is(':checked')){
+                    under_18 = false;
+                }
+                else if ($('.pi-14').is(':checked')){
+                    under_18 = true;
+                }
+
+                // how did you hear about us?
+                var hear_about = $form.find(".pi-15").val();
+                // ever been convicted of a felony?
+                var convicted = ""
+                if ($('.pi-16').is(':checked')){
+                    convicted = false
+                }
+                else if ($('.pi-17').is(':checked')){
+                    convicted = true
+                }
+
+            data['personal_information'] = {'first_name':first_name,
+                                        'middle_name':middle_name,
+                                        'last_name':last_name,
+                                        'address':address,
+                                        'apt_number':apt_number,
+                                        'city':city,
+                                        'state':state,
+                                        'zip':zip,
+                                        'home_phone':home_phone,
+                                        'cell_phone':cell_phone,
+                                        'email':email,
+                                        'ssn':ssn,
+                                        'under_18':under_18,
+                                        'hear_about':hear_about,
+                                        'convicted':convicted
+                                            }
+
+
+            // Employment Desired
+
+            var date_to_start = $form.find(".ed-1").val();
+            var position = $form.find(".ed-2").val();
+            var pay_rate = $form.find(".ed-3").val();
+
+            data['employment_desired'] = {'start_date':date_to_start,
+                                        'position':position,
+                                        'pay_rate':pay_rate
+                                      }
+
+
+            // Availability
+
+            var mon_start = $form.find(".mon-start").val();
+            var mon_end = $form.find(".mon-end").val();
+            var tue_start = $form.find(".tue-start").val();
+            var tue_end = $form.find(".tue-end").val();
+            var wed_start = $form.find(".wed_start").val();
+            var wed_end = $form.find(".wed-end").val();
+            var thur_start = $form.find(".thur-start").val();
+            var thur_end = $form.find(".thur-end").val();
+            var fri_start = $form.find(".fri-start").val();
+            var fri_end = $form.find(".fir-end").val();
+            var sat_start = $form.find(".sat-start").val();
+            var sat_end = $form.find(".sat-end").val();
+            var sun_start = $form.find(".sun-start").val();
+            var sun_end = $form.find(".sun-end").val();
+
+            data['availability'] = {'mon_start':mon_start,
+                                'mon_end':mon_end,
+                                'tue_start':tue_start,
+                                'tue_end':tue_end,
+                                'wed_start':wed_start,
+                                'wed_end':wed_end,
+                                'thur_start':thur_start,
+                                'thur_end':thur_end,
+                                'fri_start':fri_start,
+                                'fri_end':fri_end,
+                                'sat_start':sat_start,
+                                'sat_end':sat_end,
+                                'sun_start':sun_start,
+                                'sun_end':sun_end
+                              }
+
+
+            // Education History
+            var hs_name = $form.find(".eh-1").val();
+            var hs_major = $form.find(".eh-2").val();
+            var hs_degree = $form.find(".eh-3").val();
+                // did you graduate high school?
+                var hs_graduate = "";
+                if ($('.eh-4').is(':checked')){
+                    hs_graduate = true;
+                }
+                else if ($('.eh-5').is(':checked')){
+                    hs_graduate = false;
+                }
+
+            var co_name = $form.find(".eh-6").val();
+            var co_major = $form.find(".eh-7").val();
+            var co_degree = $form.find(".eh-8").val();
+                // did you graduate college?
+                var co_graduate = "";
+                if ($('.eh-9').is(':checked')){
+                    co_graduate = true;
+                }
+                else if ($('.eh-10').is(':checked')){
+                    co_graduate = false;
+                }
+
+            var co2_name = $form.find(".eh-11").val();
+            var co2_major = $form.find(".eh-12").val();
+            var co2_degree = $form.find(".eh-13").val();
+                // did you graduate college (graduate)?
+                var co2_graduate = "";
+                if ($('.eh-14').is(':checked')){
+                    co2_graduate = true;
+                }
+                else if ($('.eh-15').is(':checked')){
+                    co2_graduate = false;
+                }
+
+            var other_name = $form.find(".eh-16").val();
+            var other_major = $form.find(".eh-17").val();
+            var other_degree = $form.find(".eh-18").val();
+                // did you graduate other?
+                var other_graduate = "";
+                if ($('.eh-19').is(':checked')){
+                    other_graduate = true;
+                }
+                else if ($('.eh-20').is(':checked')){
+                    other_graduate = false;
+                }
+
+
+            data['education_history'] = {'hs_name':hs_name,
+                                        'hs_major':hs_major,
+                                        'hs_degree':hs_degree,
+                                        'hs_graduate':hs_graduate,
+                                        'co_name':co_name,
+                                        'co_major':co_major,
+                                        'co_degree':co_degree,
+                                        'co_graduate':co_graduate,
+                                        'co2_name':co2_name,
+                                        'co2_major':co2_major,
+                                        'co2_degree':co2_degree,
+                                        'co2_graduate':co2_graduate}
+
+
+            // Professional History
+
+                // have you applied to PA before?
+                var applied_b4 = "";
+                if ($('.ph-1').is(':checked')){
+                    applied_b4 = true;
+                }
+                else if ($('.ph-2').is(':checked')){
+                    applied_b4 = false;
+                }
+
+                // are you currently employed?
+                var employed = "";
+                if ($('.ph-3').is(':checked')){
+                    employed = true;
+                }
+                else if ($('.ph-4').is(':checked')){
+                    employed = false;
+                }
+
+                // can perform the essential functions of the job/position
+                var can_perform = "";
+                if ($('.ph-5').is(':checked')){
+                    can_perform = true;
+                }
+                else if ($('.ph-6').is(':checked')){
+                    can_perform = false;
+                }
+
+                data['professional_history'] = {'applied_b4':applied_b4,
+                                                'employed':employed,
+                                                'can_perform':can_perform}
+
+            // Recent Employment
+
+            var date_start1 = $form.find(".re-1").val();
+            var date_end1 = $form.find(".re-2").val();
+            var company1 = $form.find(".re-3").val();
+                // was the termination voluntary?
+                var termination1 = "";
+                if ($('.re-4').is(':checked')){
+                    termination1 = true;
+                }
+                else if ($('.re-5').is(':checked')){
+                    termination1 = false;
+                }
+
+                // if yes explain
+                var explain1 = $form.find(".re-6").val();
+
+            var date_start2 = $form.find(".re-7").val();
+            var date_end2 = $form.find(".re-8").val();
+            var company2 = $form.find(".re-9").val();
+                // was the termination voluntary?
+                var termination2 = "";
+                if ($('.re-10').is(':checked')){
+                    termination2 = true;
+                }
+                else if ($('.re-11').is(':checked')){
+                    termination2 = false;
+                }
+
+                // if yes explain
+                var explain2 = $form.find(".re-12").val();
+
+            var date_start3 = $form.find(".re-13").val();
+            var date_end3 = $form.find(".re-14").val();
+            var company3 = $form.find(".re-15").val();
+                // was the termination voluntary?
+                var termination3 = "";
+                if ($('.re-16').is(':checked')){
+                    termination3 = true;
+                }
+                else if ($('.re-17').is(':checked')){
+                    termination3 = false;
+                }
+
+                // if yes explain
+                var explain3 = $form.find(".re-6").val();
+
+
+            data['recent_employment'] = {'date_start1':date_start1,
+                                    'date_end1':date_end1,
+                                    'company1':company1,
+                                    'termination1':termination1,
+                                    'explain1':explain1,
+                                    'date_start2':date_start2,
+                                    'date_end2':date_end2,
+                                    'company2':company2,
+                                    'termination2':termination2,
+                                    'explain2':explain2,
+                                    'date_start3':date_start3,
+                                    'date_end3':date_end3,
+                                    'company3':company3,
+                                    'termination3':termination3,
+                                    'explain3':explain3,
+
+                                        }
+
+
+
+
+            // Recent Unemployment
+            var date_start1 = $form.find(".ru-1").val();
+            var date_end1 = $form.find(".ru-2").val();
+                // how was the time spent?
+                var spent1 = $form.find(".ru-3").val();
+
+            var date_start2 = $form.find(".ru-4").val();
+            var date_end2 = $form.find(".ru-5").val();
+                // how was the time spent?
+                var spent2 = $form.find(".ru-6").val();
+
+            var date_start3 = $form.find(".ru-7").val();
+            var date_end3 = $form.find(".ru-8").val();
+                // how was the time spent?
+                var spent3 = $form.find(".ru-9").val();
+
+
+            data['recent_unemployment'] = {'date_start1':date_start1,
+                                        'date_end1':date_end1,
+                                        'spent1':spent1,
+                                        'date_start2':date_start2,
+                                        'date_end2':date_end2,
+                                        'spent2':spent2,
+                                        'date_start3':date_start3,
+                                        'date_end3':date_end3,
+                                        'spent3':spent3}
+
+
+            // Professional References
+
+            var reference_name = $form.find(".pr-1").val();
+            var reference_phone = $form.find(".pr-2").val();
+            var reference_relation = $form.find(".pr-3").val();
+            var reference_name2 = $form.find(".pr-4").val();
+            var reference_phone2 = $form.find(".pr-5").val();
+            var reference_relation2 = $form.find(".pr-6").val();
+
+            data['professional_references'] = {'reference_name':reference_name,
+                                        'reference_phone':reference_phone,
+                                        'reference_relation':reference_relation,
+                                        'reference_name2':reference_name2,
+                                        'reference_phone2':reference_phone2,
+                                        'reference_relation2':reference_relation2}
+
+            // END (Please Read Carefully)
+            var signed_name = $form.find(".prc-1").val();
+            var signed_date = $form.find(".prc-2").val();
+
+            data['end'] = {'signed_name':signed_name,
+                           'signed_date':signed_date}
+
+
+
+
+
+
+         $.ajax({
+                    type: "POST",
+                    url: "{% url ajax-employment %}",
+                    data: {'data':JSON.stringify(data)},
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: FormSuccess,
+                    error: FormError,
+
+                    });
+
+
+         function FormSuccess(){
+            window.location = "http://www.protectamerica.com/thank-you"
+
+         }
+
+         function FormError(){
+            alert('error');
+         }
+
+
+
+
+
+        });
+    });
+</script>
+
+{% endblock %}
+{% endaddtoblock "js" %}
 
 
 {% endblock %}

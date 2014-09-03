@@ -111,6 +111,7 @@ urlpatterns = patterns('',
     url(r'^contact/agent/ajaxpost/?$', 'apps.contact.views.ajax_post_agent',name='contact-ajax-agent'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     url(r'^ajax/log/?$', 'apps.contact.views.ajax_log', name='ajax-log'),
+    url(r'^ajax/employment/?$', 'apps.contact.views.ajax_employment', name='ajax-employment'),
 
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
 
