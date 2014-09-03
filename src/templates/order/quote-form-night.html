@@ -9,7 +9,7 @@
         {% endblock %}
         <div class="form-shadow">
         {% block formfields %}
-            <select>
+            <select id="callme">
               <option value="morning">Call me in the morning</option>
               <option value="afternoon">Call me in the afternoon</option>
               <option value="evening">Call me in the evening</option>
@@ -57,6 +57,7 @@
 {% addtoblock "js" %}
 {% block javascript %}
 <script type="text/javascript">
+$(document).ready(function() { $("#callme").select2(); });
 $(document).ready(function() {
     function getParameterByName( name ){
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
