@@ -1,6 +1,6 @@
+
 {% load content_tags content_filters sekizai_tags %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/select2.js"></script>
-<form id="quote-form" class="sleepy-night quote-form-white {% if not request.COOKIES.refer_id == 'BINGPPC' or not request.session.refer_id == 'BINGPPC' or not request.GET.agent == 'BINGPPC' %}no-email{% endif %}"  method="post" action="">
+<form id="quote-form" class="sleepy quote-form-white {% if not request.COOKIES.refer_id == 'BINGPPC' or not request.session.refer_id == 'BINGPPC' or not request.GET.agent == 'BINGPPC' %}no-email{% endif %}"  method="post" action="">
     {% block form-extra %}{% endblock %}
     {% csrf_token %}
 <div>
@@ -9,7 +9,7 @@
         {% endblock %}
         <div class="form-shadow">
         {% block formfields %}
-            <select class="callme" id="callme">
+            <select>
               <option value="morning">Call me in the morning</option>
               <option value="afternoon">Call me in the afternoon</option>
               <option value="evening">Call me in the evening</option>
@@ -57,7 +57,6 @@
 {% addtoblock "js" %}
 {% block javascript %}
 <script type="text/javascript">
-$(document).ready(function() { $(".callme").select2(); });
 $(document).ready(function() {
     function getParameterByName( name ){
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -87,7 +86,7 @@ $(document).ready(function() {
 }
 
 
-$('.sleepy-night input, .droopy input').keypress(function(e){
+$('.sleepy input, .droopy input').keypress(function(e){
         if(e.which == 13){
             var $form = $(this).closest('#quote-form');
             $form.find('button').click();
@@ -95,9 +94,9 @@ $('.sleepy-night input, .droopy input').keypress(function(e){
     });
     var submitting = false;
 
-    $('.sleepy-night').on('click','button',function() {
+    $('.sleepy, .droopy').on('click','button',function() {
         $('#quote-form button').attr('disabled',true);
-        var $form = $(this).closest('.quote-form-white');
+        var $form = $(this).closest('#quote-form');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
         var device = getParameterByName('device');
         if (!trusted){
@@ -116,9 +115,6 @@ $('.sleepy-night input, .droopy input').keypress(function(e){
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
         var business_name = $form.find("#id_business_name").val();
-        var callme = $form.find("#callme").val();
-
-
         /*
         if (name == ''){
             alert('Please include your name before proceeding.');
@@ -141,7 +137,7 @@ $('.sleepy-night input, .droopy input').keypress(function(e){
                     'operating_system':(window.OSName + "_PA"),
                     'device':device,
                     'gclid':$("[name='gclid']").val(),
-                    'form_js': 't/o/2'
+                    'form_js': 't/o/q-f.h'
                     }
 
 
@@ -150,12 +146,6 @@ $('.sleepy-night input, .droopy input').keypress(function(e){
         if (business_name){
             data['business_name'] = business_name;
         }
-
-        if (callme){
-            data['call_me'] = callme;
-
-        }
-
 
 
         if (trusted){
