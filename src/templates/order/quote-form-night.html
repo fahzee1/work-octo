@@ -1,0 +1,235 @@
+
+{% load content_tags content_filters sekizai_tags %}
+<form id="quote-form" class="sleepy quote-form-white {% if not request.COOKIES.refer_id == 'BINGPPC' or not request.session.refer_id == 'BINGPPC' or not request.GET.agent == 'BINGPPC' %}no-email{% endif %}"  method="post" action="">
+    {% block form-extra %}{% endblock %}
+    {% csrf_token %}
+<div>
+	    {% block form-title %}
+        <p class="form-title">Free Security Quote</p>
+        {% endblock %}
+        <div class="form-shadow">
+        {% block formfields %}
+            <select>
+              <option value="morning">Call me in the morning</option>
+              <option value="afternoon">Call me in the afternoon</option>
+              <option value="evening">Call me in the evening</option>
+            </select>
+            <label>Name</label>
+                {{ form.name }}
+
+            {% if request.session.is_bing or request.COOKIES.is_bing %}
+                <label>Email</label>
+                {{ form.email }}
+            {% endif %}
+            <label>{% block phone-num %}Phone Number{% endblock %}</label>
+            {{ form.phone }}
+
+        {% endblock %}
+
+	<button type="button" class="redbutton" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);" style="position: relative;">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}<img id='form-loading' {% if page_name = "index" %}style="position:absolute;top:50%;right:24px;margin-top:-10px;right:0px;display:none;width:20px;height:20px;"{% else %}style="position:absolute;top:50%;right:24px;margin-top:-10px;display:none;width:20px;height:20px;" {% endif %}height='20px' width='20px' src="{{ STATIC_URL }}img/loading2.gif"></button>
+
+    </div>
+</div>
+        {% block consent %}
+             <div class="consent-box">
+            <label class="consent-label" for="id_consent" style="display: block; font-size: 8px;">By clicking this button, you consent to receive calls using automated technology from Protect America at the number provided and understand this is not a condition of purchase.</label>
+            <div class="clear"></div>
+        </div>
+        {% endblock %}
+    {% block privacy-policy %}
+    <a href="http://www.protectamerica.com/help/privacy-policy" title="View our Privacy Policy">Your privacy is important and safe with us.</a>
+
+    {% endblock %}
+    {% block quote-validation %}
+    <div id="third-party-container" class="v">
+{% comment %}
+        <div class="third-party-badge vsign">
+            <table width="135" border="0" cellpadding="2" cellspacing="0" title="Click to Verify - This site chose VeriSign Trust Seal to promote trust online with consumers."><tr><td width="135" align="center" valign="top"><script type="text/javascript" src="https://seal.verisign.com/getseal?host_name={% if request.get_host == '127.0.0.1:5001' %}www.protectamerica.com{% else %}{{ request.get_host }}{% endif %}&amp;size=S&amp;use_flash=NO&amp;use_transparent=NO&amp;lang=en"></script></td> </tr></table>
+        </div>
+{% endcomment %}
+        <div class="third-party-badge truste" style="width: 140px; margin: 0 auto; float:none!important;">
+            <div id="4d9e197b-b560-4855-8a81-060da2587fb0"> <script type="text/javascript" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/asc?rid=4d9e197b-b560-4855-8a81-060da2587fb0"></script><a href="//privacy.truste.com/privacy-seal/Protect-America,-Inc-/validation?rid=a32fda55-5b8a-4a07-b143-f23589641269" title="TRUSTe online privacy certification" target="_blank"><img style="border: none" src="//privacy-policy.truste.com/privacy-seal/Protect-America,-Inc-/seal?rid=a32fda55-5b8a-4a07-b143-f23589641269" alt="TRUSTe online privacy certification"/></a></div>
+        </div>
+    </div>
+    {% endblock %}
+</form>
+
+{% addtoblock "js" %}
+{% block javascript %}
+<script type="text/javascript">
+$(document).ready(function() {
+    function getParameterByName( name ){
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+    function validateEmail(email){
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+    }
+
+   function getParameterByName( name ){
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexS = "[\\?&]"+name+"=([^&#]*)";
+  var regex = new RegExp( regexS );
+  var results = regex.exec( window.location.href );
+  if( results == null )
+    return "";
+  else
+    return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+
+$('.sleepy input, .droopy input').keypress(function(e){
+        if(e.which == 13){
+            var $form = $(this).closest('#quote-form');
+            $form.find('button').click();
+        }
+    });
+    var submitting = false;
+
+    $('.sleepy, .droopy').on('click','button',function() {
+        $('#quote-form button').attr('disabled',true);
+        var $form = $(this).closest('#quote-form');
+        var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
+        var device = getParameterByName('device');
+        if (!trusted){
+            $('#quote-form button').attr('disabled',false);
+            var phone_number = $(".dynamic-phone-number").first().text();
+            if (phone_number){
+                alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
+            }
+            else{
+                alert("Sorry your form can't be submitted at this time. Please call us at the number above.");
+            }
+            return;
+        }
+
+        var name = $form.find("#id_name").val();
+        var email = $form.find("#id_email").val();
+        var phone = $form.find("#id_phone").val();
+        var business_name = $form.find("#id_business_name").val();
+        /*
+        if (name == ''){
+            alert('Please include your name before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Name Error', '{{ page_name }']);
+            return false;
+        }
+        if (phone == ''){
+            alert('Please include your phone number before proceeding.');
+            _gaq.push(['_trackEvent', 'Form Error', 'Phone Error', '{{ page_name }}']);
+            return false;
+        }
+        */
+        var data = {'name':name,
+                    'email': email,
+                    'phone': phone,
+                    'trusted_form': trusted,
+                    'form': 'basic',
+                    'referer_page':window.location.href,
+                    'form_values':$form.serialize(),
+                    'operating_system':(window.OSName + "_PA"),
+                    'device':device,
+                    'gclid':$("[name='gclid']").val(),
+                    'form_js': 't/o/q-f.h'
+                    }
+
+
+
+
+        if (business_name){
+            data['business_name'] = business_name;
+        }
+
+
+        if (trusted){
+            $.ajax({
+                    type: "POST",
+                    url: "/contact/ajaxpost/",
+                    data: data,
+                    dataType: "json",
+                    success: newFormSuccess,
+                    error: newFormError,
+                    beforeSend:function(){
+                        $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").hide();
+                        $(".sleepy #form-loading, .droopy #form-loading").show();
+                        $('#quote-form button').attr('disabled',true);
+                        }
+                    });
+        }
+
+
+         function newFormError(){
+            $(".sleepy #form-loading, .droopy #form-loading").hide();
+            $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
+            $('#quote-form button').attr('disabled',false);
+            if (!name && !phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Name and Phone Number.');
+            }
+            if (!phone && name){
+                $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
+                alert('Please Enter Your Phone Number.');
+            }
+            if (!name && phone){
+                $('#id_name').css('border-color','red').attr('placeholder','Please Enter Your Name');
+                alert('Please Enter Your Name.');
+            }
+            if (name){
+                $('#id_name').css('border-color','');
+            }
+            if (phone){
+                $('#id_phone').css('border-color','');
+            }
+        }
+
+        function newFormSuccess(json) {
+            $('#form-loading').hide();
+            submitting = false;
+            try
+            {
+                var acn = $('.form-fields').data('acn');
+                if (acn){
+                    var url = $('.form-fields').data('thank-you');
+                    window.location = url;
+                    return;
+                    }
+            }
+            catch(err){var acn = false;}
+            if(json.success) {
+                var is_mobile = "{{ request.session.is_mobile }}";
+
+                {% if request.session.is_mobile %}
+                    window.location = "http://m.protectamerica.com/thank-you"
+                {% endif %}
+
+                {% if thank_you and not request.session.is_mobile %}
+                window.location = '{{ thank_you }}';
+                {% else %}
+                    {% if not thank_you and not request.session.is_mobile %}
+                        url = json.thank_you
+                        window.location = "http://www.protectamerica.com" + url;
+                    {% endif %}
+                {% endif %}
+                _gaq.push([
+                    '_trackEvent',
+                    'Form Click',
+                    'Form Events',
+                    '{{ page_name }}'
+                ]);
+                return;
+            }
+        }
+        return false;
+        });
+    });
+</script>
+{% endblock %}
+{% endaddtoblock "js" %}
