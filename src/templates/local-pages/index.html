@@ -20,23 +20,30 @@
 <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
+{% block header %}
+    {% include "_partials/new-header.html" with form=forms.basic %}
+{% endblock %}
 {% block content %}
 </div>
-<div id="hero-wrapper" class="">
+<div id="hero" class="plain">
     <div class="container">
-        <div class="left"
         {% include "order/quote-form-white.html" with form=forms.basic %}
-        </div>
-        <div class="right">
-        	<div class="heading">
-        		<h1>{{ city }}, Your Security Should be Simple</h1>
-                 <p>When looking to find peace of mind when it comes to your family, an alarm system can help make the difference to make your home feel secure. And we realize that importance of feeling safe. With over 20 years in the security industry, Protect America offers various security equipment pieces to customize your security system to your home and budget.</p>
-                 <a href="" class="button">Get Started Now</a>
-        	</div>
+        <div class="heading">
+            <h1>{{ city }}, your security should be simple.<span>And it starts for less than a dollar per day.</span></h1>
+            <ul class="list">
+                <li><i class="fa fa-check"></i> 24/7 security monitoring</li>
+                <li><i class="fa fa-check"></i> Easy to setup &ndash; no tools required</li>
+                <li><i class="fa fa-check"></i> Free equipment and no installation fees</li>
+            </ul>
+            <a href="" class="button">Get Started Now</a>
         </div>
     </div>
 </div>
-{% include "order/call-box.html" %}
+<div class="clear"></div>
+<div id="call-box">
+    {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Get Started Now, <strong>Call Today! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></a></p>
+</div>
+<div class="clear"></div>
 <div id="featured-on">
     <small>Proudly Featured on:</small>
     <div id="featured-badges">
@@ -153,21 +160,47 @@
     </div>
     {% if demographics %}
     <div class="community-slide people container">
-        <div class="eight columns">
+        <div class="eight columns headline-area">
 
             <h4>About The Area</h4>
             <p>Welcome to the neighborhood!</p>
         </div>
         <div class="eight columns">
-            <ul>
-                <li>Average Time it takes someone to get to work: <strong>{{ demographics.avg_commute_time }} min.</strong></li>
-                <li>Average citizen age: <strong>{{ demographics.median_age }}</strong></li>
-                <li>Average Household Income: <strong>${{ demographics.median_household_income }}</strong></li>
-                <li>Average Home Size: <strong>{{ demographics.median_home_size }} sq. ft.</strong></li>
-                <li>Average Home List Price: <strong>{{ demographics.median_list_price }}</strong></li>
-    
-    
-    
+            <ul class="neighborhood-stats">
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/car-icon.png" />
+                    <strong>{{ demographics.avg_commute_time|slice:"5" }} min.</strong>
+                    <span>Average time drive time to work</span>
+                </li>
+                <div class="clear"></div>
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/person-icon.png" />
+                    <strong>{{ demographics.median_age }}</strong>
+                    <span>Average citizen age</span>
+                </li>
+                <div class="clear"></div>
+
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/bank-icon.png" />
+                    <strong>${{ demographics.median_household_income|intcomma }}</strong>
+                    <span>Average household income</span>
+                </li>
+                <div class="clear"></div>
+
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/blueprint-icon.png" />
+                    <strong>{{ demographics.median_home_size|intcomma }} sq. ft.</strong>
+                    <span>Average home size</span>
+                </li>
+                <div class="clear"></div>
+
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/for-sale-icon.png" />
+                    <strong>{{ demographics.median_list_price|intcomma }}</strong>
+                    <span>Average home list price</span>
+                </li>
+                <div class="clear"></div>
+
             </ul>
         </div>
     </div>
@@ -191,32 +224,32 @@
     {% endif %}
     {% if farmersmarkets %}
     <div class="community-slide farmers container">
-        <div class="eight columns">
+        <div class="eight columns headline-area">
             <h4>Enjoy your community.</h4>
             <p>Check out some of the great community Farmer's Markets located throughout the city</p>
         </div>
-        <div class="eight columns">
-            <ul>
-                {% for market in farmersmarkets %}
-                <li>
-                    {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
-                    <span>{{ market.address }}</span>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <div class="clear"></div>
+        <ul class="market">
+            {% for market in farmersmarkets %}
+            <li class="five columns">
+                {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
+                <span>{{ market.address }}</span>
+            </li>
+            {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
+            {% endfor %}
+        </ul>
     </div>
     {% endif %}
     {% if farmersmarkets %}
     <div class="community-slide farmers container">
-        <div class="eight columns">
+        <div class="eight columns headline-area">
             <h4>Online Resources.</h4>
             <p>Check out some of the great community Farmer's Markets located throughout the city</p>
         </div>
         <div class="eight columns">
             <ul>
                 {% for market in farmersmarkets %}
-                <li>
+                <li class="">
                     {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
                     <span>{{ market.address }}</span>
                 </li>
@@ -271,8 +304,7 @@
 <div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}">
     <div class="container">
         <div id="home-content">
-            {% block lifestyle-headline %}<h2 >The perfect alarm system <span>for your home.</span></h2>{% endblock %}
-            {% block lifestyle-subhead %}<p><strong>An alarm system built for you.</strong> Don't have a phone line? Our cellular monitoring is 100% wireless. Have more than two windows? Easy, our packages are built to provide coverage for your entire home.</p>{% endblock %}
+            {% block lifestyle-subhead %}<p>{% content_spinner "para2" "Our systems don't just stop at security, they improve quality of life. Whether it's home automation technology controllable through your smartphone like lights and door locks, or next generation smoke and carbon monoxide detectors that immediately reach out for help &ndash; a smart home is easily within anyone's reach.|Home security has evolved into something so much more &ndash; it's now improving the quality of life. Wireless technology allows the Protect America customer to dim lights and lock the front door from a smartphone. Monitored smoke and carbon monoxide detectors immediately seek help from the authorities during an emergency. Freeze and flood sensors can protect homes from the elements, and wireless cameras begin to film once an alarm is triggered. The advent of the smart home has arrived, and it's absolutely within anyone's reach.|Home security shouldn't just arm your home and give you peace of mind &ndash; it should improve the quality of life. Wireless technology allows our customers to set their alarm, from a smartphone &ndash; even lock doors and dim lights from anywhere through the same app. Imagine smoke and carbon monoxide detectors that contact the authorities automatically, and a security system that sends you a text message immediately if there is a problem. " %}</p>{% endblock %}
             <a href="" class="button  yellow order-button hide-mobile no-desktop">Order Now</a>
             <a href="tel:{{ phone_number|format_number }}" class="button yellow hide-desktop no-mobile">Order Now</a>
 
@@ -281,20 +313,20 @@
 </div>
 <div id="main-benefits" class="container">
     <div class="four columns">
-        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
+        <h3><i class="fa fa-home"></i>Simply Peace of Mind</h3>
         <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
     </div>
     <div class="four columns">
-        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
-        <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
+        <h3><i class="fa fa-user"></i>Security Designed for You</h3>
+        <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
     </div>
     <div class="four columns">
-        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
-        <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
+        <h3><i class="fa fa-rss"></i>Easy Wireless Set-Up</h3>
+        <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
     </div>
     <div class="four columns">
-        <h3><i class="fa fa-home"></i>Simply Peace of Mind.</h3>
-        <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
+        <h3><i class="fa fa-dollar"></i>The Best Price, Period</h3>
+        <p>Protect America makes it easy to secure and protect your home and family.</p>
     </div>
 
 </div>
@@ -324,6 +356,50 @@
 
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
+    <script type="text/javascript">
+
+        var $menu = $(".dropdown-menu");
+
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu,
+        });
+
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = 240,
+                width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: width - 3,  // main should overlay submenu
+                height: height - 4  // padding for main dropdown's arrow
+            });
+
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+        
+        $(".dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $(".dropdown-toggle").click(function(e) {
+            return false;
+        });
+
+    </script>
 
 <script type="text/javascript">
 
@@ -356,7 +432,7 @@
           paginationSpeed : 400,
           singleItem: true,
           autoHeight: true,
-          pagination: false,
+          pagination: true,
           stopOnHover: true,
     
         });

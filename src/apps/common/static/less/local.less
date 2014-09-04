@@ -1,4 +1,98 @@
 @import "2014-refresh/style-new.less";
+.owl-controls {
+    text-align: center;
+    .owl-page {
+        width: 10px;
+        height: 10px;
+        background: #ccc;
+        .border-radius(50%,50%,50%,50%);
+        border: 1px solid #ccc;
+        display: inline-block;
+        margin: 3px;
+        .fade-slow;
+        &:hover {
+            background: @v-light-grey;
+            .fade-fast;
+        }
+        &.active {
+            background: none;
+            .fade-fast;
+        }
+    }
+}
+#hero.plain {
+    height: 462px;
+    background: #80766f url(/static/img/hero-backgrounds/local-bg.jpg) center center no-repeat;
+
+    .container {
+        #quote-form {
+            margin-left: 0;
+            .form-title {
+                line-height: 48px;
+            }
+            &.quote-form-white {
+                height: auto;
+                display: block;
+                top: 0;
+                right: auto;
+                input {
+                    height: 20px;
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+    .heading {
+        h1 {
+            color: #fff;
+            text-align: center;
+            padding-top: 48px;
+            padding-bottom: 16px;
+            font-weight: 100;
+            .san-serif-font;
+            text-shadow: 0 2px 0 @black;
+            text-transform: inherit;
+            font-size: 42px;
+            width: 75%;
+            margin: 0 auto;
+            span {
+                font-weight: bold;
+                font-size: 20px;
+                display: block;
+                text-shadow: none;
+                .condensed-font;
+                text-transform: uppercase;
+                
+            }
+        }
+        ul {
+            color: @white;
+            font-size: 18px;
+            width: 50%;
+            margin: 24px auto;
+            padding-bottom: 12px;
+            li {
+                i {
+                    padding-right: 8px;
+                }
+            }
+        }
+        .button {
+            width: 200px;
+            margin: 0 auto;
+            float: none;
+            text-align: center;
+            display: block;
+            background: @yellow;
+            border-bottom: 4px solid @dark-yellow;
+            color: @navy;
+            &:hover {
+                background: @light-yellow;
+                border-bottom: 4px solid @yellow;
+            }
+        }
+    }
+}
 #quote-form {
     width: 376px;
     background: @navy;
@@ -224,6 +318,7 @@
     }
 
 }
+
 #main-benefits {
     i {
         display: block;
@@ -553,7 +648,6 @@
 }
 #hero-wrapper {
     height: 462px;
-    background: #80766f url(/static/img/hero-backgrounds/local-bg.jpg) center center no-repeat;
 
     .container {
     }
@@ -565,6 +659,41 @@
 
     .community-slide {
         height: 400px;
+        .headline-area {
+            p {
+                padding-left: 16px;
+            }
+        }
+        .neighborhood-stats {
+            img {
+                float: left;
+                width: 67px;
+                height: 67px;
+                
+            }
+            span {
+                display: block;
+                float: left;
+                width: 200px;
+                height: 67px;
+                padding: 20px;
+                padding-bottom: 0;
+                padding-right: 0;
+                padding-top: 27px;
+                &.double {
+                    padding-top: 10px;
+                }
+            }
+            strong {
+                display: block;
+                float: left;
+                height: 67px;
+                font-size: 28px;
+                padding-top: 27px;
+                padding-left: 20px;
+
+            }
+        }
         h4 {
             .slab-font;
             font-size: 60px;
@@ -620,11 +749,20 @@
                 }
             }
         }
+        .market {
+            padding-top: 24px;
+            margin-left: 16px;
+        }
     }
 }
 #lifestyle-shot {
     background: #333 url(/static/img/affiliates/sem-landing-page/automation.jpg) center center no-repeat;
     background-size: cover; 
+    #home-content {
+        p {
+            padding-top: 24px;
+        }
+    }
 }
 #order-footer {
     width: 100%;
