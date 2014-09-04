@@ -48,6 +48,20 @@ def send_leadimport(data):
 
     return True
 
+def send_employment_email(data):
+    subject = 'Application for Employment'
+    from_email = 'fahzee1@gmail.com'
+    to_email = ['cjogbuehi@protectamerica.com']
+    html_content = render_to_string('emails/employment.html',data)
+    msg = EmailMultiAlternatives(subject,html_content,from_email,to_email)
+    msg.attach_alternative(html_content,'text/html')
+    try:
+        msg.send()
+        return True
+    except:
+        return False
+
+
 
 def send_bizdev_email(data):
     subject = 'New Lead From Dealers Page!'
@@ -841,7 +855,9 @@ def ajax_employment(request):
             professional_references = data['professional_references']
             end = data['end']
 
-
+            email = send_employment_email(data)
+            if not email:
+                return HttpResponseBadRequest()
         return HttpResponse()
 
     return HttpResponseBadRequest()

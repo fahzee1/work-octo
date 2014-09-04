@@ -1,0 +1,112 @@
+<html>
+<head>
+    <title></title>
+
+<style type="text/css">
+body {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 100%;
+    width: 640px;
+}
+
+img {
+    padding: 0; margin: 0; border: 0; outline: 0;
+}
+table {
+    margin: 0 auto; border: 0;  outline: 0;
+}
+
+br {
+   display: block;
+   margin: 10px 0;
+   line-height: 20px;
+}
+
+</style>
+</head>
+<body>
+    <div width="568px" style="margin: 0 auto;">
+        <h3>Personal Information</h3>
+            <b>First Name:</b> {{ personal_information.first_name }}
+            <b>Middle Name:</b> {{ personal_information.middle_name }}
+            <b>Last Name:</b> {{ personal_information.last_name }}</br>
+            <b>Street Address:</b> {{ personal_information.address }}
+            <b>Apt #:</b> {{ personal_information.apt_number }}</br>
+            <b>City:</b> {{ personal_information.city }}
+            <b>State:</b> {{ personal_information.state }}
+            <b>Zip:</b> {{ personal_information.zip }}</br>
+            <b>Home Phone:</b> {{ personal_information.home_phone }}
+            <b>Cell Phone:</b> {{ personal_information.cell_phone }}
+            <b>Email:</b> {{ personal_information.email }}
+            <b>Social Security #:</b> {{ personal_information.ssn }}
+            <b>Under 18?:</b> {{ personal_information.under_18 }}</br>
+            <b>How did you hear about us?:</b> {{ personal_information.hear_about }}</br>
+            <b>Convicted of any felonies (last 7 years)?:</b> {{ personal_information.convicted }}
+            {% if personal_information.convicted_explain %}<b>If yes, please explain:</b> {{ personal_information.convicted_explain }} {% endif %}
+
+            </br></br></br><hr>
+
+
+        <h3>Employment Desired</h3>
+            <b>Date Available to Start:</b> {{ employment_desired.start_date }}
+            <b>Position Applied For:</b> {{ employment_desired.position }}
+            <b>Rate of Pay:</b> {{ employment_desired.pay_rate }}
+
+            </br></br></br><hr>
+
+        <h3>Availability (start time/end time)</h3>
+            <b>Monday:</b> {{ availability.mon_start }}/{{ availability.mon_end }}</br>
+            <b>Tuesday:</b> {{ availability.tue_start }}/{{ availability.tue_end }}</br>
+            <b>Wednesday:</b> {{ availability.wed_start }}/{{ availability.wed_end }}</br>
+            <b>Thursday:</b> {{ availability.thur_start }}/{{ availability.thur_end }}</br>
+            <b>Friday:</b> {{ availability.fri_start }}/{{ availability.fri_end }}</br>
+            <b>Saturday:</b> {{ availability.sat_start }}/{{ availability.sat_end }}</br>
+            <b>Sunday:</b> {{ availability.sun_start }}/{{ availability.sun_end }}
+
+            </br></br></br><hr>
+
+
+        <h3>Education History</h3>
+            <b>High School:</b> {{ education_history.hs_name }}
+            <b>Major:</b> {{ education_history.hs_major }}
+            <b>Degree:</b> {{ education_history.hs_degree }}
+            <b>Graduate High School?:</b> {{ education_history.hs_graduate }}</br>
+            <b>College:</b> {{ education_history.co_name }}
+            <b>Major:</b> {{ education_history.co_major }}
+            <b>Degree:</b> {{ education_history.co_degree }}
+            <b>Graduate College?:</b> {{ education_history.co_graduate }}</br>
+            {% if education_history.co2_name %}
+                <b>College or Graduate:</b> {{ education_history.co2_name }}
+                <b>Major:</b> {{ education_history.co2_major }}
+                <b>Degree:</b> {{ education_history.co2_degree }}
+                <b>Graduate College or Graduate?:</b> {{ education_history.co2_graduate }}</br>
+            {% endif %}
+            {% if education_history.other_name %}
+                <b>Other:</b> {{ education_history.other_name }}
+                <b>Major:</b> {{ education_history.other_major }}
+                <b>Degree:</b> {{ education_history.other_degree }}
+                <b>Graduate College or Graduate?:</b> {{ education_history.other_graduate }}
+            {% endif %}
+
+
+            </br></br></br><hr>
+
+        <h3>Professional History</h3>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+</body>
+</html>

@@ -1147,6 +1147,7 @@
 
 {% addtoblock "js" %}
 {% block javascript %}
+
 <script type="text/javascript">
 
     $(document).ready(function() {
@@ -1187,12 +1188,15 @@
                 var hear_about = $form.find(".pi-15").val();
                 // ever been convicted of a felony?
                 var convicted = ""
+                var convicted_explain = false
                 if ($('.pi-16').is(':checked')){
                     convicted = false
                 }
                 else if ($('.pi-17').is(':checked')){
                     convicted = true
+                    convicted_explain = $form.find(".pi-18").val();
                 }
+
 
             data['personal_information'] = {'first_name':first_name,
                                         'middle_name':middle_name,
@@ -1208,7 +1212,8 @@
                                         'ssn':ssn,
                                         'under_18':under_18,
                                         'hear_about':hear_about,
-                                        'convicted':convicted
+                                        'convicted':convicted,
+                                        'convicted_explain':convicted_explain
                                             }
 
 
@@ -1230,12 +1235,12 @@
             var mon_end = $form.find(".mon-end").val();
             var tue_start = $form.find(".tue-start").val();
             var tue_end = $form.find(".tue-end").val();
-            var wed_start = $form.find(".wed_start").val();
+            var wed_start = $form.find(".wed-start").val();
             var wed_end = $form.find(".wed-end").val();
             var thur_start = $form.find(".thur-start").val();
             var thur_end = $form.find(".thur-end").val();
             var fri_start = $form.find(".fri-start").val();
-            var fri_end = $form.find(".fir-end").val();
+            var fri_end = $form.find(".fri-end").val();
             var sat_start = $form.find(".sat-start").val();
             var sat_end = $form.find(".sat-end").val();
             var sun_start = $form.find(".sun-start").val();
@@ -1319,7 +1324,12 @@
                                         'co2_name':co2_name,
                                         'co2_major':co2_major,
                                         'co2_degree':co2_degree,
-                                        'co2_graduate':co2_graduate}
+                                        'co2_graduate':co2_graduate,
+                                        'other_name':other_name,
+                                        'other_major':other_major,
+                                        'other_degree':other_degree,
+                                        'other_graduate':other_graduate,
+                                    }
 
 
             // Professional History
