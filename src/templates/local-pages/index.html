@@ -135,17 +135,19 @@
     </div>
 
 </div>
-<h3 class="title center">In the Community</h3>
-
 <div id="community-section">
     <div class="community-slide moving container">
+        <div class="sixteen columns">
+            <h4>Welcome to {{ city }}</h4>
+            <p>Typical commute time in your city? Average home size? Maybe you'd like to learn more about the most common demographics, or your local farmer's market location? Look within to discover more.</p>
+            <p>Just click and drag this section left and right to navigate!</p>
+        </div>
         <div class="eight columns">
             {% if local_video %}
                 {{ local_video.video_embed|safe }}
             {% endif %}
         </div>
         <div class="eight columns">
-
             {% if articles %}
                 <ul>
                     {% for article in articles %}
@@ -156,51 +158,57 @@
                 </ul>
             {% endif %}
         </div>
-
     </div>
     {% if demographics %}
     <div class="community-slide people container">
-        <div class="eight columns headline-area">
-
-            <h4>About The Area</h4>
+        <div class="eight columns">
+            <h4>About the area</h4>
             <p>Welcome to the neighborhood!</p>
+            <img src="{{ STATIC_URL }}img/local-pages/community-about-the-area.png" class="about" />
         </div>
         <div class="eight columns">
             <ul class="neighborhood-stats">
                 <li>
                     <img src="{{ STATIC_URL }}img/local-pages/car-icon.png" />
-                    <strong>{{ demographics.avg_commute_time|slice:"5" }} min.</strong>
-                    <span>Average time drive time to work</span>
+                    <div>
+                        <span class="strong">{{ demographics.avg_commute_time|slice:"5" }} min.</span>
+                        <span>Average time drive time to work</span>
+                    </div>
                 </li>
                 <div class="clear"></div>
                 <li>
                     <img src="{{ STATIC_URL }}img/local-pages/person-icon.png" />
-                    <strong>{{ demographics.median_age }}</strong>
-                    <span>Average citizen age</span>
+                    <div>
+                        <span class="strong">{{ demographics.median_age }}</span>
+                        <span>Average citizen age</span>
+                    </div>
                 </li>
                 <div class="clear"></div>
-
                 <li>
                     <img src="{{ STATIC_URL }}img/local-pages/bank-icon.png" />
-                    <strong>${{ demographics.median_household_income|intcomma }}</strong>
-                    <span>Average household income</span>
+                    <div>
+                        <span class="strong">${{ demographics.median_household_income|intcomma }}</span>
+                        <span>Average household income</span>
+                    </div>
                 </li>
                 <div class="clear"></div>
 
                 <li>
                     <img src="{{ STATIC_URL }}img/local-pages/blueprint-icon.png" />
-                    <strong>{{ demographics.median_home_size|intcomma }} sq. ft.</strong>
-                    <span>Average home size</span>
+                    <div>
+                        <span class="strong">{{ demographics.median_home_size|intcomma }} sq. ft.</span>
+                        <span>Average home size</span>
+                    </div>
                 </li>
                 <div class="clear"></div>
-
                 <li>
                     <img src="{{ STATIC_URL }}img/local-pages/for-sale-icon.png" />
-                    <strong>{{ demographics.median_list_price|intcomma }}</strong>
-                    <span>Average home list price</span>
+                    <div>
+                        <span class="strong">{{ demographics.median_list_price|intcomma }}</span>
+                        <span>Average home list price</span>
+                    </div>
                 </li>
                 <div class="clear"></div>
-
             </ul>
         </div>
     </div>
@@ -208,15 +216,15 @@
     {% if liveshere %}
     <div class="community-slide people container">
 
-        <h4 class="center">Who Lives Here?</h4>
-        {% for data in liveshere %}
-            <div class="four columns liveshere">
+        <h4 class="center less-padding">Who lives here?</h4>
+        {% for data in liveshere|slice:":5" %}
+            <div class="three columns liveshere">
                 <i class="fa fa-users"></i>
                 <strong>{{ data.title }}</strong>
                 <span>{{ data.name }}</span>
                 <p>{{ data.description }}</p>
             </div>
-            {% if forloop.counter|divisibleby:4 %}
+            {% if forloop.counter|divisibleby:5 %}
             <div class="clear"></div>
             {% endif %}
         {% endfor %}
@@ -224,13 +232,13 @@
     {% endif %}
     {% if farmersmarkets %}
     <div class="community-slide farmers container">
-        <div class="eight columns headline-area">
-            <h4>Enjoy your community.</h4>
-            <p>Check out some of the great community Farmer's Markets located throughout the city</p>
+        <div class="sixteen columns headline-area">
+            <h4>Enjoy your community</h4>
+            <p>Check out some of the great community farmer's markets located throughout the city.</p>
         </div>
         <div class="clear"></div>
         <ul class="market">
-            {% for market in farmersmarkets %}
+            {% for market in farmersmarkets|slice:":12" %}
             <li class="five columns">
                 {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
                 <span>{{ market.address }}</span>
@@ -248,11 +256,12 @@
         </div>
         <div class="eight columns">
             <ul>
-                {% for market in farmersmarkets %}
+                {% for market in farmersmarkets|slice:":12" %}=0
                 <li class="">
                     {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
                     <span>{{ market.address }}</span>
                 </li>
+                {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
                 {% endfor %}
             </ul>
         </div>
@@ -431,10 +440,10 @@
           slideSpeed : 300,
           paginationSpeed : 400,
           singleItem: true,
-          autoHeight: true,
+          autoHeight: false,
           pagination: true,
           stopOnHover: true,
-    
+          navigation: true,    
         });
         $('.square').click(function() {
             var link = $(this).data("link");
