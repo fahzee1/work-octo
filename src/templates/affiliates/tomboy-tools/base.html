@@ -20,7 +20,7 @@ License: http://creativecommons.org/licenses/MIT
 <head>
 <meta charset="utf-8">
 
-<title>{% block page-title %}Home Security | Alarm Systems{% endblock %} | Tomboy Tools Home Security Systems</title>
+<title>{% block page-title %}Home Security | Alarm Systems{% endblock %} | Project Home Security Systems</title>
 <meta name="description" content="{% block page-description %}{% endblock %}">
 <meta name="keywords" content="{% block page_keywords %}{% endblock %}" />
 <meta name="ROBOTS" content="INDEX,FOLLOW"/>
@@ -96,10 +96,18 @@ License: http://creativecommons.org/licenses/MIT
 
     <div class="header">
         <div class="container">
-            <div class="four columns">
-                <a href="/"><img src="{{ STATIC_URL }}img/affiliates/tomboy-tools/tomboy-tools-logo.png" alt="Tomboy Tools Home Security Systems" width="100%" /></a>
-            </div>
-            <div class="eight columns">
+
+                <div class="six columns">
+                    <a href="/"><img src="{{ STATIC_URL }}img/affiliates/tomboy-tools/tomboy-tools-logo.jpg" alt="Tomboy Tools Home Security Systems" width="100%" /></a>
+                </div>
+                <div class="ten columns">
+                    <p>{% if request.GET.affkey %}Consultant ID Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID Number: {{ request.COOKIES.affkey }}{% else %}{% endif %}{% endif %}</p>
+                    <p style="margin: 0; text-align: right;">Protect your family now:</p>
+                    <h2 style="margin: 0; text-align: right;">1-888-648-9606</h2>
+                    <p style="margin: 0; text-align: right;">{% if request.GET.affkey %}Consultant ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}Consultant ID: {{ affkey }}{% else %}Consultant ID: L100000{% endif %}{% endif %}{% endif %}</p>
+                </div>
+
+            <div class="sixteen columns">
                 <ul class="main-navigation">
                     <li><a href="#" id="mobile-menu"><i class="fa fa-bars" title="Menu"></i><strong>Menu</strong></a></li>
                     <li class="alpha"><a href="tel:1-888-648-9606"><i class="fa fa-phone"></i><strong>Call Us</strong></a></li>
@@ -111,12 +119,6 @@ License: http://creativecommons.org/licenses/MIT
                     <li><a href="{% url gps %}" class="{% if 'gps' in active_pages %}active{% endif %}">GPS</a></li>
                     <li><a href="{% url order %}" class="{% if 'order' in active_pages %}active{% endif %}">Order now</a></li>
                 </ul>
-            </div>
-            <div class="three columns">
-                <p>{% if request.GET.affkey %}Consultant ID Number: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID Number: {{ request.COOKIES.affkey }}{% else %}{% endif %}{% endif %}</p>
-                <p style="margin: 0; text-align: right;">Protect your family now:</p>
-                <h2 style="margin: 0; text-align: right;">1-888-648-9606</h2>
-                <p style="margin: 0; text-align: right;">{% if request.GET.affkey %}Consultant ID: {{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}Consultant ID: {{ request.COOKIES.affkey }}{% else %}{% if affkey %}Consultant ID: {{ affkey }}{% else %}Consultant ID: L100000{% endif %}{% endif %}{% endif %}</p>
             </div>
         </div>
     </div>
@@ -260,7 +262,7 @@ License: http://creativecommons.org/licenses/MIT
 
             </a>
 
-            <div class="triple-guarantee">
+            <!--<div class="triple-guarantee">
                 <h2>Protect America<br>
                 <strong>Triple Guarantee<strong></h2>
                 <ul>
@@ -268,7 +270,7 @@ License: http://creativecommons.org/licenses/MIT
                     <li><i class="fa fa-check-circle"></i>No equipment fees</li>
                     <li class="last"><i class="fa fa-check-circle"></i>Lifetime replacement plan</li>
                 </ul>
-            </div>
+            </div>-->
         </div>
     </div>
     {% endblock %}
@@ -279,7 +281,7 @@ License: http://creativecommons.org/licenses/MIT
         <div class="container">
             <h2 class="title white">Security is an amazing conversation piece</h2>
             <div class="seven columns">
-                <p class="white">Get a home security system for your home or business! Simply order one of our award-winning monitoring solutions and a wireless home security system will be sent to your door for FREE. Give us a call to start the conversation with one of our home security experts. We’ll go over the security specifics of your home to determine which security package best fits your needs. There’s no time to wait! In the United States, a home is attacked by burglars every 14 seconds. Call Tomboy Tools Home Security Systems now to secure your home and family!</p>
+                <p class="white">Get a home security system for your home or business! Simply order one of our award-winning monitoring solutions and a wireless home security system will be sent to your door for FREE. Give us a call to start the conversation with one of our home security experts. We’ll go over the security specifics of your home to determine which security package best fits your needs. There’s no time to wait! In the United States, a home is attacked by burglars every 14 seconds. Call Project Home now to secure your home and family!</p>
                 <h4 class="white">Call today!</h4>
                 <h2 class="white">1-888-648-9606</h2>
             </div>
