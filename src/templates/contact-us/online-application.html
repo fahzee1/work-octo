@@ -18,7 +18,7 @@
         <br>
         <form action="" method="POST" id="employ-form">
             {% csrf_token %}
-            <h3>Personal Information</h3>
+            <h3>Personal Information</h3><small class="required">All fields are required</small>
             <hr>
             <div class="row">
                 <div class="one-third column alpha">
@@ -138,11 +138,11 @@
                 <div class="sixteen columns alpha">
                     <label for="selectList">Have you ever been convicted of or pleaded guilty to any misdemeanor or felony within the past seven (7) years*?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" class="pi-16" value="No" />
+                        <input type="radio" name="radiosConvicted" id="regularRadio" class="pi-16" value="No" />
                         <span>No</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" class="pi-17" value="Yes" />
+                        <input type="radio" name="radiosConvicted" id="secondRegularRadio" class="pi-17" value="Yes" />
                         <span>Yes</span>
                     </label>
                 </div>
@@ -848,11 +848,11 @@
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="eh-4" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosGraduate-1" class="eh-4" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="eh-5" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosGraduate-1" class="eh-5" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -871,11 +871,11 @@
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="eh-9" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosGraduate-2" class="eh-9" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="eh-10" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosGraduate-2" class="eh-10" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -894,11 +894,11 @@
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="eh-14" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosGraduate-3" class="eh-14" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="eh-15" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosGraduate-3" class="eh-15" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -917,11 +917,11 @@
                 <div class="four columns omega">
                     <label for="">Did you Graduate?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="eh-19" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosGraduate-4" class="eh-19" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="eh-20" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosGraduate-4" class="eh-20" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -933,22 +933,22 @@
                 <div class="eight columns alpha">
                     <label for="">Have you applied to PA before?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="ph-1" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosApplied" class="ph-1" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="ph-2" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosApplied" class="ph-2" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
                 <div class="eight columns omega">
                     <label for="">Are you currently employed?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="ph-3" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosEmployed" class="ph-3" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="ph-4" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosEmployed" class="ph-4" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -957,11 +957,11 @@
                 <div class="sixteen columns alpha">
                     <label for="">Do you feel that you are capable of performing the essential functions of the job/position for which you are applying for, with or without reasonable accommodation?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="ph-5" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosCapable" class="ph-5" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="ph-6" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosCapable" class="ph-6" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -984,11 +984,11 @@
                 <div class="eight columns omega">
                     <label for="">Was the termination of this employment voluntary?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="re-4" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosVoluntary-1" class="re-4" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="re-5" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosVoluntary-1" class="re-5" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -1013,11 +1013,11 @@
                 <div class="eight columns omega">
                     <label for="">Was the termination of this employment voluntary?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="re-10" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosVoluntary-2" class="re-10" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="re-11" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosVoluntary-2" class="re-11" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -1042,11 +1042,11 @@
                 <div class="eight columns omega">
                     <label for="">Was the termination of this employment voluntary?</label>
                     <label for="regularRadio">
-                        <input type="radio" name="radios" class="re-16" id="regularRadio" value="Yes" />
+                        <input type="radio" name="radiosVoluntary-3" class="re-16" id="regularRadio" value="Yes" />
                         <span>Yes</span>
                     </label>
                     <label for="secondRegularRadio">
-                        <input type="radio" name="radios" class="re-17" id="secondRegularRadio" value="No" />
+                        <input type="radio" name="radiosVoluntary-3" class="re-17" id="secondRegularRadio" value="No" />
                         <span>No</span>
                     </label>
                 </div>
@@ -1503,7 +1503,7 @@
 
 
          function FormSuccess(){
-            window.location = "http://www.protectamerica.com/thank-you"
+            window.location = "/support/careers/jobs/thank-you"
 
          }
 
