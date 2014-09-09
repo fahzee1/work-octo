@@ -7,8 +7,8 @@
                 </div>
                 <ul>
                     <li class=""><a href="tel:{{ phone_number|format_number }}"><i class="fa fa-phone not-mobile-v"></i>{{ phone_number|format_number }}</a></li>
-                    <li class="not-mobile"><a href=""><i class="fa fa-comment alt"></i>Live Chat</a></li>
-                    <li class="not-mobile-v"><a href=""><i class="fa fa-user alt"></i>Login</a></li>
+                    <li class="not-mobile"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1"><i class="fa fa-comment alt"></i>Live Chat</a></li>
+                    <li class="not-mobile-v"><a href="http://www.myprotectamerica.com"><i class="fa fa-user alt"></i>Login</a></li>
                     <li class="not-mobile"><form action="http://www.protectamerica.com/search/" method="get"><input type="text" id="q" name="q" autocomplete="off" autocorrect="off" autocapitalize="off" class="expanding-search"></form></li>
                     <li class="not-desktop"><a href="" id="mobile-menu"><i class="fa fa-reorder alt"></i></a></li>
                     <li class="not-mobile-v">&nbsp;</li>
@@ -101,12 +101,11 @@
 
                             </ul>
                         </li>
-                        <li><a href="{% url how-it-works %}">How It Works</a></li>
 
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Security Solutions</a>
                             <ul class="dropdown-menu dropdown-security-solutions" id="dropdown-equipment" role="equipment">
                                 <li data-submenu-id="submenu-alarm-systems">
-                                    <a href="">Alarm Systems<i class="fa fa-chevron-right"></i></a>
+                                    <a href="{% url home-security-equipment %}">Alarm Systems<i class="fa fa-chevron-right"></i></a>
                                     <div id="submenu-alarm-systems" class="popover">
                                         <h3 class="popover-title">Alarm Systems</h3>
                                         <div class="popover-content">
@@ -125,14 +124,13 @@
                                                 <li><a href="{% url mini-pinpad %}">Mini Pinpad</a></li>
                                                 <li><a href="{% url two-button-panic %}">Two Button Panic Alarm</a></li>
                                                 <li><a href="{% url talking-wireless-keypad %}">Talking Wireless Keypad</a></li>
-                                                <li><a href="">Keychain Remote</a></li>
                                                 <li><a href="{% url accessories %}">Security Accessories</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </li>
                                 <li data-submenu-id="submenu-home-automation">
-                                    <a href="">Home Automation<i class="fa fa-chevron-right"></i></a>
+                                    <a href="{% url home-automation-equipment %}">Home Automation<i class="fa fa-chevron-right"></i></a>
                                     <div id="submenu-home-automation" class="popover home-automation">
                                         <h3 class="popover-title">Home Automation</h3>
                                         <div class="popover-content">
@@ -149,7 +147,7 @@
                                     </div>
                                 </li>
                                 <li data-submenu-id="submenu-life-safety">
-                                    <a href="">Life Safety<i class="fa fa-chevron-right"></i></a>
+                                    <a href="{% url life-safety-equipment %}">Life Safety<i class="fa fa-chevron-right"></i></a>
                                     <div id="submenu-life-safety" class="popover">
                                         <h3 class="popover-title">Life Safety</h3>
                                         <div class="popover-content">
@@ -166,19 +164,7 @@
                                     </div>
                                 </li>
                                 <li data-submenu-id="submenu-automotive">
-                                    <a href="">Automotive<i class="fa fa-chevron-right"></i></a>
-                                    <div id="submenu-automotive" class="popover automotive">
-                                        <h3 class="popover-title">Automotive</h3>
-                                        <div class="popover-content">
-                                            <ul>
-                                                <li><a href="{% url gps %}">GPS Vehicle Tracker</a></li>
-
-                                            </ul>
-
-                                        </div>
-                                        <div class="bg-tile">&nbsp;</div>
-
-                                    </div>
+                                    <a href="{% url gps %}">Automotive<i class="fa fa-chevron-right"></i></a>
                                 </li>
 
                             </ul>
@@ -223,6 +209,9 @@
                                     <div id="submenu-advantage" class="popover advantage">
                                         <h3 class="popover-title">Advantage over ADT</h3>
                                         <div class="popover-content">
+
+                                            <p class="smaller">Learn why so many homeowners choose Protect America over companies like ADT, and why many have even made the switch!</p>
+                                            <a href="{% url advantage %}" class="button">Our Advantage over ADT</a>
                                         </div>
                                         <div class="bg-tile">&nbsp;</div>
 
@@ -233,6 +222,11 @@
                                     <div id="submenu-blog" class="popover">
                                         <h3 class="popover-title">Home and Life Blog</h3>
                                         <div class="popover-content">
+
+                                            <p class="smaller">The official Protect America blog covers everything from security, home life, news and beyond!
+
+</p>
+                                            <a href="/home-security-blog/" class="button">Read our Blog</a>
                                         </div>
                                     </div>
                                 </li>
@@ -241,6 +235,9 @@
                                     <div id="submenu-news" class="popover">
                                         <h3 class="popover-title">Security News</h3>
                                         <div class="popover-content">
+
+                                            <p class="smaller">We search the web for relevant stories that could help you protect your home and family. Read the latest in security and burglary-related news.</p>
+                                            <a href="{% url find-us %}" class="button">Security News</a>
                                         </div>
                                     </div>
                                 </li>
@@ -267,18 +264,35 @@
                                     <a href="{% url installation %}">Installation<i class="fa fa-chevron-right"></i></a>
                                     <div id="submenu-installation" class="popover">
                                         <h3 class="popover-title">Installation</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">Ready to install your security system? Have some questions about specific products? We’re here to help!
+
+</p>
+                                            <a href="{% url find-us %}" class="button">Installation</a>
+                                        </div>
                                     </div>
                                 </li>
                                 <li data-submenu-id="submenu-find-us">
                                     <a href="{% url find-us %}">Find us<i class="fa fa-chevron-right"></i></a>
                                     <div id="submenu-find-us" class="popover">
                                         <h3 class="popover-title">Find us</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">Locate the Protect America headquarters in beautiful Austin, Texas. Don’t hesitate to give us a call!</p>
+                                            <a href="{% url find-us %}" class="button">Find Us</a>
+                                        </div>
                                     </div>
                                 </li>
                                 <li data-submenu-id="submenu-careers">
                                     <a href="{% url careers %}">Careers<i class="fa fa-chevron-right"></i></a>
                                     <div id="submenu-careers" class="popover">
                                         <h3 class="popover-title">Careers</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">Join a talented team within a lively company culture &ndash; all in the heart of the Texas hill country! Learn more about Protect America and view a list of open positions!</p>
+                                            <a href="{% url careers %}" class="button">Careers</a>
+                                        </div>
                                     </div>
                                 </li>
                                 <li data-submenu-id="submenu-dealer-programs">

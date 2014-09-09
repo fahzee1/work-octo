@@ -81,7 +81,7 @@
         #quote-form {
             margin-left: 0;
             .form-title {
-                line-height: 48px;
+                line-height: 32px;
             }
             &.quote-form-white {
                 height: auto;
@@ -92,14 +92,38 @@
                     height: 20px;
                     line-height: 20px;
                 }
+                button {
+                    border-bottom: 3px solid @dark-yellow;
+                    color: @navy;
+                    &:hover {
+                        background: @light-yellow;
+                        border-bottom: 3px solid @yellow;
+                        color: #555;
+                        
+                    }
+                }
+            }
+            .consent-box {
+                label.consent-label {
+                    padding: 0 8px;
+                }
             }
         }
     }
     .heading {
         h1 {
+            text-align: center;
+            color: #eee;
+            font-size: 10px;
+            font-weight: 400;
+            text-shadow: none;
+            text-transform: uppercase;
+            padding: 10px 0 0;
+            letter-spacing: 1px;
+        }
+        h2 {
             color: #fff;
             text-align: center;
-            padding-top: 48px;
             padding-bottom: 16px;
             font-weight: 100;
             .san-serif-font;
@@ -108,6 +132,7 @@
             font-size: 42px;
             width: 75%;
             margin: 0 auto;
+            line-height: 45px;
             span {
                 font-weight: bold;
                 font-size: 20px;
@@ -145,6 +170,16 @@
             }
         }
     }
+}
+#crime-stats {
+    padding: 48px 0;
+}
+.extra-paragraph {
+    padding-top: 48px;
+    text-align: center;
+}
+.padding-top {
+    padding-top: 32px;
 }
 #quote-form {
     width: 376px;
@@ -740,10 +775,14 @@ h3.community {
             margin-top: 150px;
             li {
                 height: 60px;
+                background: @white;
+                .border-radius(5px,5px,5px,5px);
+                border: 1px solid #ccc;
                 div {
                     float: left;
                     display: block;
                     padding-left: 20px;
+                    padding-top: 7px;
                     span {
                         display: block;
                         float: left;
@@ -768,8 +807,7 @@ h3.community {
                 float: left;
                 width: 50px;
                 height: 50px;
-                border: 1px solid #ddd;
-                
+                padding: 5px;
             }
         }
         h4 {
@@ -803,8 +841,7 @@ h3.community {
             background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 3px;
-            padding: 15px 10px 0 10px;
-            width: 150px;
+            margin-bottom: 8px;
             i {
                 font-size: 48px;
                 color: @light-grey;
@@ -812,6 +849,7 @@ h3.community {
                 display: block;
                 text-align: center;
                 padding-bottom: 16px;
+                padding-top: 15px;
             }
             strong {
                 display: block;
@@ -819,6 +857,7 @@ h3.community {
                 color: @navy;
                 font-size: 18px;
                 line-height: 20px;
+                padding: 0 10px;
             }
             span {
                 display: block;
@@ -835,9 +874,12 @@ h3.community {
                 padding: 0;
                 margin-top: 10px;
                 text-align: center;
+                padding: 0 10px;
+
             }
         }
         &.farmers {
+            background: url(/static/img/local-pages/farmers-community.png) center bottom no-repeat;
             li {
                 span {
                     font-size: 10px;
@@ -868,13 +910,12 @@ h3.community {
             }
         }
         .market {
-            padding-top: 24px;
             margin-left: 16px;
             li {
                 margin: 15px;
                 font-size: 14px;
                 font-weight: 600;
-                line-height: 22px;
+                line-height: 18px;
                 color: #333;
                 border-bottom: 1px solid #ccc;
                 a {
@@ -1150,3 +1191,133 @@ h3.community {
         }
     }
 }
+@media only screen and (max-width: 959px) {
+    #hero {
+        &.plain {
+            .heading {
+                h2 {
+                    width: 100%;
+                }
+                ul {
+                    width: 75%;
+                }
+            }
+        }
+    }
+    #advantage-table-wrapper {
+        #advantage-table {
+            width: 100%;
+            tbody {
+                tr {
+                    td {
+                        &.na {
+                            line-height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #community-section {
+        .community-slide {
+            &.moving {
+                h4 {
+                    padding-top: 125px;
+                }
+            }
+        }
+    }
+    #call-box {
+        p {
+            width: 100%;
+        }
+    }
+    #order-footer {
+        #footer-call-now {
+            width: 90%;
+        }
+    }
+}
+@media only screen and (max-width: 767px) {
+    #mobile-menu {
+        display: none;
+    }
+    #hero.plain {
+        .container {
+            #quote-form {
+                &.quote-form-white {
+                    display: none;
+                }
+            }
+            .heading {
+                margin-left: 0;
+                width: 100%;
+                h2 {
+                    font-size: 36px;
+                    line-height: 40px;
+                    span {
+                        font-size: 18px;
+                        line-height: 24px;
+                        padding-top: 16px;
+                    }
+                }
+                ul {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    #lifestyle-shot {
+        height: auto;
+        #home-content {
+            width: auto;
+            margin-bottom: 24px;
+            p {
+                font-size: 16px;
+                line-height: 19px;
+            }
+        }
+    }
+    #community-section {
+        display: none !important;
+    }
+    footer {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    #advantage-table-wrapper {
+        #advantage-table {
+            .extra {
+                display: none;
+            }
+        }
+    }
+    #call-box {
+        p {
+            width: 100%;
+            strong {
+                display: block;
+            }
+        }
+    }
+
+    #main-benefits {
+    }
+
+    #local-video, #community-section {
+        display: none !important;
+    }
+    #order-footer {
+        #footer-call-now {
+            width: 300px;
+            padding-top: 30px;
+            .button-link {
+                display: none;
+            }
+        }
+    }
+
+}
+

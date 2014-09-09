@@ -29,13 +29,14 @@
     <div class="container">
         {% include "order/quote-form-white.html" with form=forms.basic %}
         <div class="heading">
-            <h1>{{ city }}, your security should be simple.<span>And it starts for less than a dollar per day.</span></h1>
+            <h1>{{ city }} home security systems</h1>
+            <h2>{{ city }}, your security should be simple.<span>And it starts for less than a dollar per day.</span></h2>
             <ul class="list">
                 <li><i class="fa fa-check"></i> 24/7 security monitoring</li>
                 <li><i class="fa fa-check"></i> Easy to setup &ndash; no tools required</li>
                 <li><i class="fa fa-check"></i> Free equipment and no installation fees</li>
             </ul>
-            <a href="" class="button">Get Started Now</a>
+            <a href="{% url order-package %}" class="button">Get Started Now</a>
         </div>
     </div>
 </div>
@@ -64,15 +65,21 @@
 </div>
 <div class="container">
     <h2 class="title center">Protect what matters most.</h2>
-    <div class="seven columns">
-		<p>With Protect America, you get more than just home security. {% content_spinner "para1" "You get a commitment. It's why Protect America is a Consumers Digest Best Buy and why we continue to serve more families and households every day. We have a responsibility to provide you with the security and peace of mind you deserve.|You get a commitment. We have a responsibility to provide you with the security and peace of mind you deserve, and we take that responsibility seriously. It's why Protect America is a Consumers Digest Best Buy!|You get a commitment. It's no wonder Consumers Digest named Protect America as a Best Buy. Our customer service and pledge to excellence are unrivaled in the industry, because we know we have a responsibility to your security and peace of mind." %}</p>
-
-    </div>
-    <div class="seven columns offset-by-two">
-        <p>{% content_spinner "closer-para1" "Our award-winning security experts take time to learn about your specific needs before helping you create a security system that perfectly fits your home. It doesn't end there, however. Professionals are constantly standing by to answer any questions you might have about home security, wireless technology and beyond. We take the well-being of your home seriously: as if it is our own.|We take the well-being of your home personally: as if it is our own. Your household deserves the same safety and quality of life afforded to every home across the nation. Experience wireless security that goes above and beyond with Protect America!|Our security experts are specially trained to listen and learn before making any recommendations, because no two homes or homeowners are the same. Our service doesn't end there, however. We are with you every step of the way &ndash; always available by phone or chat to answer questions about wireless technology, home security, home automation and beyond. " %}</p>
-    </div>
+    {% if local_video %}
+        <div id="local-video" class="nine columns">
+            {{ local_video.video_embed|safe }}
+        </div>
+    {% endif %}
+        <div class="seven columns">
+    		<p>With Protect America, you get more than just home security. {% content_spinner "para1" "You get a commitment. It's why Protect America is a Consumers Digest Best Buy and why we continue to serve more families and households every day. We have a responsibility to provide you with the security and peace of mind you deserve.|You get a commitment. We have a responsibility to provide you with the security and peace of mind you deserve, and we take that responsibility seriously. It's why Protect America is a Consumers Digest Best Buy!|You get a commitment. It's no wonder Consumers Digest named Protect America as a Best Buy. Our customer service and pledge to excellence are unrivaled in the industry, because we know we have a responsibility to your security and peace of mind." %}</p>
+        {% if not local_video %}
+        </div>
+        <div class="{% if local_video %}sixteen columns padding-top extra-paragraph{% else %} seven columns offset-by-two{% endif %}">
+        {% endif %}
+            <p>{% content_spinner "closer-para1" "Our award-winning security experts take time to learn about your specific needs before helping you create a security system that perfectly fits your home. It doesn't end there, however. Professionals are constantly standing by to answer any questions you might have about home security, wireless technology and beyond. We take the well-being of your home seriously: as if it is our own.|We take the well-being of your home personally: as if it is our own. Your household deserves the same safety and quality of life afforded to every home across the nation. Experience wireless security that goes above and beyond with Protect America!|Our security experts are specially trained to listen and learn before making any recommendations, because no two homes or homeowners are the same. Our service doesn't end there, however. We are with you every step of the way &ndash; always available by phone or chat to answer questions about wireless technology, home security, home automation and beyond. " %}</p>
+        </div>
     <div class="clear"></div>
-    <a href="" class="button center">Shop Our Packages</a>
+    <a href="{% url shop %}" class="button center">Shop Our Packages</a>
 </div>
 <div id="advantage-table-wrapper">
     <div id="advantage-table">
@@ -85,11 +92,11 @@
 
                 <tr>
                     <th>&nbsp;</th>
-                    <th>Equipment & Activation Fees</th>
+                    <th>Door / Window Protection</th>
                     <th>24/7 Alarm Monitoring</th>
-                    <th>Lowest Price Guaranteed</th>
+                    <th>Free Security Equipment</th>
+                    <th class="extra">No Installation <br />Fees</th>
                     <th class="extra">Lifetime Equipment Warranty</th>
-                    <th class="extra">Locked-In Rate</th>
                     <th>Monthly Cost</th>
                 </tr>
                 {% endblock %}
@@ -99,19 +106,19 @@
 
                 <tr class="alpha">
                     <td class="title">Protect America</td>
-                    <td class="price">$0</td>
-                    <td>Included</td>
-                    <td>Included</td>
-                    <td class="extra">Included</td>
-                    <td class="extra">Included</td>
+                    <td class="price">3</td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td class="extra"><i class="fa fa-check"></i></td>
+                    <td class="extra"><i class="fa fa-check"></i></td>
                     <td class="price">$19.99</td>
                 </tr>
                 {% endblock %}
                 {% block advantage-competitor-1 %}
                 <tr>
                     <td class="title">ADT</td>
-                    <td class="price">$99</td>
-                    <td>Included</td>
+                    <td class="price">2</td>
+                    <td><i class="fa fa-check"></i></td>
                     <td class="na">Not Available</td>
                     <td class="na extra">Not Available</td>
                     <td class="na extra">Not Available</td>
@@ -119,15 +126,27 @@
                 </tr>
                 {% endblock %}
                 {% block advantage-competitor-2 %}
-                <tr>
-				    <td class="title">ADT Pulse</td>
-				    <td class="price">$99</td>
-				    <td>Included</td>
-				    <td class="na">Not Available</td>
-				    <td class="na extra">Not Available</td>
-				    <td class="na extra">Not Available</td>
-				    <td class="price">$52.99</td>
-				</tr>
+                    {% if local_rival %}
+                    <tr>
+    				    <td class="title">{{ local_rival.rival }}</td>
+    				    <td class="price">{{ local_rival.door_window }}</td>
+    				    <td class="na" >{% if local_rival.alarm_monitoring %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="na">{% if local_rival.free_equipment %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="na extra">{% if local_rival.no_fees %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="na extra">{% if local_rival.warranty %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="price">{{ local_rival.monthly_cost }}</td>
+    				</tr>
+    				{% else %}
+    				<tr>
+                        <td class="title">Vivint</td>
+                        <td class="price">2</td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td class="na">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="price">$49.99</td>
+                    </tr>
+                    {% endif %}
                 {% endblock %}
             </tbody>
         </table>
@@ -142,6 +161,7 @@
             <p>Typical commute time in your city? Average home size? Maybe you'd like to learn more about the most common demographics, or your local farmer's market location? Look within to discover more.</p>
             <p>Just click and drag this section left and right to navigate!</p>
         </div>
+        {% comment %}
         <div class="eight columns">
             {% if local_video %}
                 {{ local_video.video_embed|safe }}
@@ -158,6 +178,7 @@
                 </ul>
             {% endif %}
         </div>
+        {% endcomment %}
     </div>
     {% if demographics %}
     <div class="community-slide people container">
@@ -204,7 +225,7 @@
                 <li>
                     <img src="{{ STATIC_URL }}img/local-pages/for-sale-icon.png" />
                     <div>
-                        <span class="strong">{{ demographics.median_list_price|intcomma }}</span>
+                        <span class="strong">${{ demographics.median_list_price|intcomma }}</span>
                         <span>Average home list price</span>
                     </div>
                 </li>
@@ -214,27 +235,31 @@
     </div>
     {% endif %}
     {% if liveshere %}
-    <div class="community-slide people container">
-
-        <h4 class="center less-padding">Who lives here?</h4>
-        {% for data in liveshere|slice:":5" %}
-            <div class="three columns liveshere">
-                <i class="fa fa-users"></i>
-                <strong>{{ data.title }}</strong>
-                <span>{{ data.name }}</span>
-                <p>{{ data.description }}</p>
+    <div class="community-slide people">
+            <iframe width="115%" class="map-background" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q={{ city }}%2B{{ state_long }}&ie=UTF8&z=13&iwloc=near&scrollwheel=false&maptypecontrol=false&disabledefaultUI=true&iwloc=near&navigationcontrol=false&output=embed" style="position: absolute; top: -100px; height: 800px; width: 100%; z-index: -1; opacity: .3;"></iframe>
+        <div class="container">
+            <div class="headline-area">
+                <h4 class="center">Who lives here?</h4>
             </div>
-            {% if forloop.counter|divisibleby:5 %}
-            <div class="clear"></div>
-            {% endif %}
-        {% endfor %}
+            {% for data in liveshere|slice:":5" %}
+                <div class="three columns liveshere">
+                    <i class="fa fa-users"></i>
+                    <strong>{{ data.title }}</strong>
+                    <span>{{ data.name }}</span>
+                    <p>{{ data.description }}</p>
+                </div>
+                {% if forloop.counter|divisibleby:5 %}
+                <div class="clear"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
     {% endif %}
     {% if farmersmarkets %}
     <div class="community-slide farmers container">
         <div class="sixteen columns headline-area">
-            <h4>Enjoy your community</h4>
-            <p>Check out some of the great community farmer's markets located throughout the city.</p>
+            <h4>Support local farmers</h4>
+            <p>Check out some of the great {{ city }} farmers' markets.</p>
         </div>
         <div class="clear"></div>
         <ul class="market">
@@ -248,23 +273,22 @@
         </ul>
     </div>
     {% endif %}
-    {% if farmersmarkets %}
+    {% if resources %}
     <div class="community-slide farmers container">
-        <div class="eight columns headline-area">
-            <h4>Online Resources.</h4>
-            <p>Check out some of the great community Farmer's Markets located throughout the city</p>
+        <div class="sixteen columns headline-area">
+            <h4>Online Resources</h4>
+            <p>Check out some of the great community farmer's markets located throughout the city.</p>
         </div>
-        <div class="eight columns">
-            <ul>
-                {% for market in farmersmarkets|slice:":12" %}=0
-                <li class="">
-                    {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
-                    <span>{{ market.address }}</span>
-                </li>
-                {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
-                {% endfor %}
-            </ul>
-        </div>
+        <div class="clear"></div>
+        <ul class="market">
+            {% for resource in resources|slice:":12" %}
+            <li class="five columns">
+                {{ resource.name }}
+                <span><a href="{{ resource.url }}" target="_blank" title="{{ resource.name }}">{{ resource.url }}</a></span>
+            </li>
+            {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
+            {% endfor %}
+        </ul>
     </div>
     {% endif %}
 </div>
@@ -310,11 +334,11 @@
         <div class="clear"></div>
     </div>
 </div>
-<div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}">
+<div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}" {% if lifestyles.image %}style="background: url({{ lifestyles.image.url }}) no-repeat;"{% endif %}>
     <div class="container">
         <div id="home-content">
             {% block lifestyle-subhead %}<p>{% content_spinner "para2" "Our systems don't just stop at security, they improve quality of life. Whether it's home automation technology controllable through your smartphone like lights and door locks, or next generation smoke and carbon monoxide detectors that immediately reach out for help &ndash; a smart home is easily within anyone's reach.|Home security has evolved into something so much more &ndash; it's now improving the quality of life. Wireless technology allows the Protect America customer to dim lights and lock the front door from a smartphone. Monitored smoke and carbon monoxide detectors immediately seek help from the authorities during an emergency. Freeze and flood sensors can protect homes from the elements, and wireless cameras begin to film once an alarm is triggered. The advent of the smart home has arrived, and it's absolutely within anyone's reach.|Home security shouldn't just arm your home and give you peace of mind &ndash; it should improve the quality of life. Wireless technology allows our customers to set their alarm, from a smartphone &ndash; even lock doors and dim lights from anywhere through the same app. Imagine smoke and carbon monoxide detectors that contact the authorities automatically, and a security system that sends you a text message immediately if there is a problem. " %}</p>{% endblock %}
-            <a href="" class="button  yellow order-button hide-mobile no-desktop">Order Now</a>
+            <a href="{% url order-package %}" class="button  yellow order-button hide-mobile no-desktop">Order Now</a>
             <a href="tel:{{ phone_number|format_number }}" class="button yellow hide-desktop no-mobile">Order Now</a>
 
         </div>
@@ -339,6 +363,7 @@
     </div>
 
 </div>
+{% if reviews %}
 <div>
     <h2 class="title center bottom">What People are Saying</h2>
     <h4 class="subhead">Rated {{ review_avg|floatformat }} out of 5 stars based on over <span itemprop="reviewCount"> {{ review_total }} </span> Protect America {{ state_long }} Customer Reviews</h4>
@@ -362,7 +387,7 @@
         {% endif %}
     </div>
 </div>
-
+{% endif %}
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
@@ -479,4 +504,72 @@
 
 </div>
 {% endblock %}
+{% block footer %}
+    {% block main-footer %}
+<!-- Footer navigation -->
+<footer>
+    <div class="container">
+        <ul class="four columns">
+            <li><a href="{% url shop %}">Shop</a></li>
+            <li><a href="{% url how-it-works %}">How It Works</a></li>
+            <li><a href="{% url customer-service %}">Customer Service</a></li>
+            <li><a href="/home-security-blog/">Home and Life Blog</a></li>
+            <li><a href="">Sitemap</a></li>
+        </ul>
+        <ul class="four columns">
+            
+            <li><a href="{% url privacy-policy %}">Privacy Policy</a></li>
+            <li><a href="{% url return-policy %}">Return Policy</a></li>
+            <li><a href="{% url state-licenses %}">State Licenses</a></li>
+            <li><a href="{% url do-not-call %}">Do Not Call</a></li>
+            <li><a href="{% url careers %}">Careers</a></li>
+        </ul>
+        <ul class="five columns hours-area">
+            <li><strong>Telephone</strong></li>
+            <li>{{ phone_number|format_number }}</li>
+            <li>M-F 7am - 11pm ct</li>
+            <li>Sat 8am - 8pm ct</li>
+            <li>Sun 9am - 9pm ct</li>
+        </ul>
+        <ul class="two columns offset-by-one">
+            <li class="facebook"><a href="http://www.facebook.com/ProtectAmerica"><i class="fa fa-facebook"></i></a></li>
+            <li class="googleplus"><a href="https://plus.google.com/+ProtectAmerica/"><i class="fa fa-google-plus"></i></a></li>
+            <div class="clear"></div>
+            <li class="twitter"><a href="http://www.twitter.com/ProtectAmerica"><i class="fa fa-twitter"></i></a></li>
+            <li class="youtube"><a href="http://www.youtube.com/user/ProtectAmerica"><i class="fa fa-youtube"></i></a></li>
+            <div class="clear"></div>
+            <li class="linkedin"><a href="http://www.linkedin.com/company/protect-america"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+    </div>
+</footer>
+<!-- End footer navigation -->
+
+
+
+    <!-- Terms and conditions -->
+    <div id="terms">
+        <div class="container">
+            <div class="eight columns">
+                <p class="small">* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+                <p class="small">* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan".</p>
+                <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
+
+            </div>
+            <div class="seven columns">
+                {% if local_street %}
+                <div id="local-address" itemscope itemtype="http://schema.org/LocalBusiness">
+                {{ local_street.googleplus_url }}
+                    <p class="copyright">{% if local_street.googleplus_url %}<a href="{{ local_street.googleplus_url }}" title="{{ city }} Protect America">{% endif %}<span itemprop="name">{{ city }} Protect America</span> &ndash; <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><b itemprop="streetAddress">{{ local_street }}</b> <b itemprop="addressLocality">{{ local_city }}</b>, <b itemprop="addressRegion">{{ local_state }}</b> <b itemprop="postalCode">{{ local_zipcode }}</b></span></p>{% if local_street.googleplus_url %}</a>{% endif %}
+                </div>
+                {% endif %}
+                <p class="copyright">The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.<br><br>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
+            </div>
+        </div>
+    </div>
+    <!-- End terms and conditions -->
+    {% endblock %}
+
+
+{% endblock %}
+
 
