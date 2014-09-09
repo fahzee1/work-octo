@@ -1157,7 +1157,7 @@
             // ex section Education Historys third field would be eh-3
 
 
-            //$('#employ-form button').attr('disabled',true);
+            $('#employ-form button').attr('disabled',true);
 
             // Personal Information
 
@@ -1176,24 +1176,24 @@
             var email = $form.find(".pi-11").val();
             var ssn = $form.find(".pi-12").val();
                 // are you under the age of 18?
-                var under_18 = "";
+                var under_18 = "no answer";
                 if ($('.pi-13').is(':checked')){
-                    under_18 = false;
+                    under_18 = 'no';
                 }
                 else if ($('.pi-14').is(':checked')){
-                    under_18 = true;
+                    under_18 = 'yes';
                 }
 
                 // how did you hear about us?
                 var hear_about = $form.find(".pi-15").val();
                 // ever been convicted of a felony?
-                var convicted = ""
+                var convicted = "no"
                 var convicted_explain = false
                 if ($('.pi-16').is(':checked')){
-                    convicted = false
+                    convicted = 'no'
                 }
                 else if ($('.pi-17').is(':checked')){
-                    convicted = true
+                    convicted = 'yes'
                     convicted_explain = $form.find(".pi-18").val();
                 }
 
@@ -1215,6 +1215,7 @@
                                         'convicted':convicted,
                                         'convicted_explain':convicted_explain
                                             }
+
 
 
             // Employment Desired
@@ -1268,48 +1269,48 @@
             var hs_major = $form.find(".eh-2").val();
             var hs_degree = $form.find(".eh-3").val();
                 // did you graduate high school?
-                var hs_graduate = "";
+                var hs_graduate = "no answer";
                 if ($('.eh-4').is(':checked')){
-                    hs_graduate = true;
+                    hs_graduate = "yes";
                 }
                 else if ($('.eh-5').is(':checked')){
-                    hs_graduate = false;
+                    hs_graduate = "no";
                 }
 
             var co_name = $form.find(".eh-6").val();
             var co_major = $form.find(".eh-7").val();
             var co_degree = $form.find(".eh-8").val();
                 // did you graduate college?
-                var co_graduate = "";
+                var co_graduate = "no answer";
                 if ($('.eh-9').is(':checked')){
-                    co_graduate = true;
+                    co_graduate = "yes";
                 }
                 else if ($('.eh-10').is(':checked')){
-                    co_graduate = false;
+                    co_graduate = "no";
                 }
 
             var co2_name = $form.find(".eh-11").val();
             var co2_major = $form.find(".eh-12").val();
             var co2_degree = $form.find(".eh-13").val();
                 // did you graduate college (graduate)?
-                var co2_graduate = "";
+                var co2_graduate = "no answer";
                 if ($('.eh-14').is(':checked')){
-                    co2_graduate = true;
+                    co2_graduate = "yes";
                 }
                 else if ($('.eh-15').is(':checked')){
-                    co2_graduate = false;
+                    co2_graduate = "no";
                 }
 
             var other_name = $form.find(".eh-16").val();
             var other_major = $form.find(".eh-17").val();
             var other_degree = $form.find(".eh-18").val();
                 // did you graduate other?
-                var other_graduate = "";
+                var other_graduate = "no answer";
                 if ($('.eh-19').is(':checked')){
-                    other_graduate = true;
+                    other_graduate = "yes";
                 }
                 else if ($('.eh-20').is(':checked')){
-                    other_graduate = false;
+                    other_graduate = "no";
                 }
 
 
@@ -1335,30 +1336,30 @@
             // Professional History
 
                 // have you applied to PA before?
-                var applied_b4 = "";
+                var applied_b4 = "no answer";
                 if ($('.ph-1').is(':checked')){
-                    applied_b4 = true;
+                    applied_b4 = "yes";
                 }
                 else if ($('.ph-2').is(':checked')){
-                    applied_b4 = false;
+                    applied_b4 = "no";
                 }
 
                 // are you currently employed?
-                var employed = "";
+                var employed = "no answer";
                 if ($('.ph-3').is(':checked')){
-                    employed = true;
+                    employed = "yes";
                 }
                 else if ($('.ph-4').is(':checked')){
-                    employed = false;
+                    employed = "no";
                 }
 
                 // can perform the essential functions of the job/position
-                var can_perform = "";
+                var can_perform = "no answer";
                 if ($('.ph-5').is(':checked')){
-                    can_perform = true;
+                    can_perform = "yes";
                 }
                 else if ($('.ph-6').is(':checked')){
-                    can_perform = false;
+                    can_perform = "no";
                 }
 
                 data['professional_history'] = {'applied_b4':applied_b4,
@@ -1371,12 +1372,12 @@
             var date_end1 = $form.find(".re-2").val();
             var company1 = $form.find(".re-3").val();
                 // was the termination voluntary?
-                var termination1 = "";
+                var termination1 = "no answer";
                 if ($('.re-4').is(':checked')){
-                    termination1 = true;
+                    termination1 = "yes";
                 }
                 else if ($('.re-5').is(':checked')){
-                    termination1 = false;
+                    termination1 = "no";
                 }
 
                 // if yes explain
@@ -1386,12 +1387,12 @@
             var date_end2 = $form.find(".re-8").val();
             var company2 = $form.find(".re-9").val();
                 // was the termination voluntary?
-                var termination2 = "";
+                var termination2 = "no answer";
                 if ($('.re-10').is(':checked')){
-                    termination2 = true;
+                    termination2 = "yes";
                 }
                 else if ($('.re-11').is(':checked')){
-                    termination2 = false;
+                    termination2 = "no";
                 }
 
                 // if yes explain
@@ -1401,12 +1402,12 @@
             var date_end3 = $form.find(".re-14").val();
             var company3 = $form.find(".re-15").val();
                 // was the termination voluntary?
-                var termination3 = "";
+                var termination3 = "no answer";
                 if ($('.re-16').is(':checked')){
-                    termination3 = true;
+                    termination3 = "yes";
                 }
                 else if ($('.re-17').is(':checked')){
-                    termination3 = false;
+                    termination3 = "no";
                 }
 
                 // if yes explain
@@ -1498,17 +1499,27 @@
                     contentType: "application/json",
                     success: FormSuccess,
                     error: FormError,
-
                     });
 
 
          function FormSuccess(){
-            window.location = "/support/careers/jobs/thank-you"
+            window.location = "{% url application-thank-you %}"
 
          }
 
-         function FormError(){
-            alert('error');
+         function FormError(json){
+            $('#employ-form button').attr('disabled',false);
+            var data = $.parseJSON(json.responseText);
+            if (!data.success){
+                if (data.reason == 'required'){
+                    alert('Fill out all fields in section:' + ' ' + data.section);
+                }
+                else if (data.reason == 'email' || data.reason == 'ajax'){
+                    alert('There was an error submitting your application. Please try again.');
+                }
+
+            }
+
          }
 
 

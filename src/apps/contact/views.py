@@ -840,6 +840,7 @@ def ajax_post_agent(request):
 
 def ajax_employment(request):
     import json
+    response = {}
     if request.is_ajax():
         data = request.POST.get('data',None)
         if data:
@@ -850,17 +851,90 @@ def ajax_employment(request):
             availability = data['availability']
             education_history = data['education_history']
             professional_history = data['professional_history']
-            recent_employment = data['recent_employment']
-            recent_unemployment = data['recent_unemployment']
             professional_references = data['professional_references']
             end = data['end']
 
+            # not required lists or other type of check
+            _personal_info = ['convicted_explain','apt_number']
+            _employment_desired = []
+            _availability = ['START TIME', 'END TIME']
+            _education_history = ['co_name','co_major','co_degree','co_graduate',
+                                  'co2_name','co2_major','co2_degree','co2_graduate',
+                                  'other_name','other_major','other_degree','other_graduate']
+            _professional_history = []
+            _professional_references = []
+            _end = []
+
+
+            for k,v in personal_info.iteritems():
+                if k not in _personal_info and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Personal Information'
+                    return HttpResponseBadRequest(json.dumps(response))
+
+            for k,v in employment_desired.iteritems():
+                if k not in _employment_desired and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Employment Desired'
+                    return HttpResponseBadRequest(json.dumps(response))
+
+            for k,v in availability.iteritems():
+                if v in _availability:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Availability'
+                    return HttpResponseBadRequest(json.dumps(response))
+
+            for k,v in education_history.iteritems():
+                if k not in _education_history and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Education History'
+                    return HttpResponseBadRequest(json.dumps(response))
+
+            for k,v in professional_history.iteritems():
+                if k not in _professional_history:
+                    if v == 'no answer':
+                        response['success'] = False
+                        response['reason'] = 'required'
+                        response['section'] = 'Professional History'
+                        return HttpResponseBadRequest(json.dumps(response))
+
+
+            for k,v in professional_references.iteritems():
+                if k not in _professional_references and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Professional References'
+                    return HttpResponseBadRequest(json.dumps(response))
+
+
+            for k,v in end.iteritems():
+                if not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Please Read Carefully'
+                    return HttpResponseBadRequest(json.dumps(response))
+
+
+
+
             email = send_employment_email(data)
             if not email:
-                return HttpResponseBadRequest()
-        return HttpResponse()
+                response['success'] = False
+                response['reason'] = 'email'
+                return HttpResponseBadRequest(json.dumps(response))
 
-    return HttpResponseBadRequest()
+
+            response['success'] = True
+            response['reason'] = ''
+        return HttpResponse(json.dumps(response))
+
+    response['success'] = False
+    response['reason'] = 'ajax'
+    return HttpResponseBadRequest(json.dumps(response))
 
 
 

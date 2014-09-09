@@ -41,7 +41,7 @@ br {
             <b>Zip:</b> {{ personal_information.zip }}</br>
             <b>Home Phone:</b> {{ personal_information.home_phone }}
             <b>Cell Phone:</b> {{ personal_information.cell_phone }}
-            <b>Email:</b> {{ personal_information.email }}
+            <b>Email:</b> {{ personal_information.email }}</br>
             <b>Social Security #:</b> {{ personal_information.ssn }}
             <b>Under 18?:</b> {{ personal_information.under_18 }}</br>
             <b>How did you hear about us?:</b> {{ personal_information.hear_about }}</br>
@@ -96,6 +96,103 @@ br {
             </br></br></br><hr>
 
         <h3>Professional History</h3>
+            <b>Have you applied to PA before?:</b> {{ professional_history.applied_b4 }}
+            <b>Are you currently employed?:</b> {{ professional_history.employed }}</br>
+            <b>Do you feel that you are capable of performing the essential functions of the job/position for which you are applying for, with or without reasonable accommodation?:</b> {{ professional_history.can_perform }}
+
+
+            </br></br></br><hr>
+
+
+        <h3>Recent Employment</h3>
+            <b>List the 3 most recent places of employment beginning with your most recent employer:</b></br></br>
+            {% if recent_employment.date_start1 %}
+                <b>Date Begin:</b> {{ recent_employment.date_start1 }}
+                <b>Date Ended:</b> {{ recent_employment.date_end1 }}
+                <b>Name of Business:</b> {{ recent_employment.company1 }}
+                <b>Was the termination voluntary?:</b> {{ recent_employment.termination1 }}
+                {% if recent_employment.termination1 == 'yes' %}
+                <b>If yes, explain:</b> {{ recent_employment.explain1 }}
+                {% endif %}
+            </br></br>
+
+            {% endif %}
+
+            {% if recent_employment.date_start2 %}
+                <b>Date Begin:</b> {{ recent_employment.date_start2 }}
+                <b>Date Ended:</b> {{ recent_employment.date_end2 }}
+                <b>Name of Business:</b> {{ recent_employment.company2 }}
+                <b>Was the termination voluntary?:</b> {{ recent_employment.termination2 }}
+                {% if recent_employment.termination2 == 'yes' %}
+                <b>If yes, explain:</b> {{ recent_employment.explain2 }}
+                {% endif %}
+            </br></br>
+
+            {% endif %}
+
+            {% if recent_employment.date_start3 %}
+                <b>Date Begin:</b> {{ recent_employment.date_start3 }}
+                <b>Date Ended:</b> {{ recent_employment.date_end3 }}
+                <b>Name of Business:</b> {{ recent_employment.company3 }}
+                <b>Was the termination voluntary?:</b> {{ recent_employment.termination3 }}
+                {% if recent_employment.termination3 == 'yes' %}
+                <b>If yes, explain:</b> {{ recent_employment.explain3 }}
+                {% endif %}
+            </br></br>
+
+            {% endif %}
+
+            </br></br></br><hr>
+
+        <h3>Recent Unemployment</h3>
+            <b>List all periods of unemployment:</b></br></br>
+            {% if recent_unemployment.date_start1 %}
+                <b>Date Begin:</b> {{ recent_unemployment.date_start1 }}
+                <b>Date Ended:</b> {{ recent_unemployment.date_end1 }}
+                <b>How was this time spent?:</b> {{ recent_unemployment.spent1 }}
+               </br>
+
+            {% endif %}
+
+            {% if recent_unemployment.date_start2 %}
+                <b>Date Begin:</b> {{ recent_unemployment.date_start2 }}
+                <b>Date Ended:</b> {{ recent_unemployment.date_end2 }}
+                <b>How was this time spent?:</b> {{ recent_unemployment.spent2 }}
+               </br>
+
+            {% endif %}
+
+            {% if recent_unemployment.date_start3 %}
+                <b>Date Begin:</b> {{ recent_unemployment.date_start3 }}
+                <b>Date Ended:</b> {{ recent_unemployment.date_end3 }}
+                <b>How was this time spent?:</b> {{ recent_unemployment.spent3 }}
+               </br>
+
+            {% endif %}
+
+            </br></br></br><hr>
+
+        <h3>Professional References</h3>
+            <b>Reference Name:</b> {{ professional_references.reference_name }}
+            <b>Home Phone:</b> {{ professional_references.reference_phone }}
+            <b>Relation or Company:</b> {{ professional_references.reference_relation }}
+        </br>
+            <b>Reference Name:</b> {{ professional_references.reference_name2 }}
+            <b>Home Phone:</b> {{ professional_references.reference_phone2 }}
+            <b>Relation or Company:</b> {{ professional_references.reference_relation2 }}
+
+
+            </br></br></br><hr>
+
+        <h3>Signed</h3>
+            <b>First and Last Name:</b> {{ end.signed_name }}
+            <b>Date:</b> {{ end.signed_date }}
+
+
+
+
+
+
 
 
 
