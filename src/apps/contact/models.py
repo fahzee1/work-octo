@@ -25,6 +25,8 @@ FEEDBACK_CHOICES = (
     ('other', 'Other'),
 )
 
+
+
 class Submission(models.Model):
 
     HOMEOWNER_CHOICES = (
@@ -117,6 +119,7 @@ class Lead(models.Model):
     ip_address = models.CharField(max_length=256, blank=True, null=True)
     retry = models.BooleanField(default=False,blank=True,help_text="Lead needs to be resent to Lead Conduit")
     number_of_retries = models.IntegerField(default=0,blank=True)
+    call_me = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
         ordering = ['-date_created']
