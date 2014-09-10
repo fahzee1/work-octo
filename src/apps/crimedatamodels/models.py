@@ -493,6 +493,9 @@ class LivesHere(models.Model):
     title = models.CharField(max_length=255,blank=True,null=True)
     name = models.CharField(max_length=255,blank=True,null=True)
     description = models.CharField(max_length=255,blank=True,null=True)
+    image = models.ImageField(default='',upload_to='liveshere',height_field='image_height',width_field='image_width',blank=True,null=True)
+    image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
+    image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
 
     def __unicode__(self):
         return '%s -- liveshere' % (self.name)
