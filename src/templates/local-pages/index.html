@@ -29,7 +29,7 @@
     <div class="container">
         {% include "order/quote-form-white.html" with form=forms.basic %}
         <div class="heading">
-            <h1>{{ city }} home security systems</h1>
+            <h1>{{ city }} {% content_spinner "homesecuritysystems" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems" %}</h1>
             <h2>{{ city }}, your security should be simple.<span>And it starts for less than a dollar per day.</span></h2>
             <ul class="list">
                 <li><i class="fa fa-check"></i> 24/7 security monitoring</li>
@@ -71,12 +71,12 @@
         </div>
     {% endif %}
         <div class="seven columns">
-    		<p>With Protect America, you get more than just home security. {% content_spinner "para1" "You get a commitment. It's why Protect America is a Consumers Digest Best Buy and why we continue to serve more families and households every day. We have a responsibility to provide you with the security and peace of mind you deserve.|You get a commitment. We have a responsibility to provide you with the security and peace of mind you deserve, and we take that responsibility seriously. It's why Protect America is a Consumers Digest Best Buy!|You get a commitment. It's no wonder Consumers Digest named Protect America as a Best Buy. Our customer service and pledge to excellence are unrivaled in the industry, because we know we have a responsibility to your security and peace of mind." %}</p>
+    		<p>With {% content_spinner "name" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %}, you get more than just home security in {{ city }}. {% content_spinner "para1" "You get a commitment. It's why {% content_spinner "name1" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %} is a Consumers Digest Best Buy and why we continue to serve more {{ city }} families and households every day. We have a responsibility to provide you with the security and peace of mind you deserve.|You get a commitment. We have a responsibility to provide {{ state }} families with the security and peace of mind they deserve, and we take that responsibility seriously. It's why {% content_spinner "name2" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %} is a Consumers Digest Best Buy!|You get a commitment. It's no wonder Consumers Digest named {% content_spinner "name3" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %} as a Best Buy. Our customer service and pledge to excellence are unrivaled in the {{ city }}, because we know we have a responsibility to your security and peace of mind." %}</p>
         {% if not local_video %}
         </div>
         <div class="{% if local_video %}sixteen columns padding-top extra-paragraph{% else %} seven columns offset-by-two{% endif %}">
         {% endif %}
-            <p>{% content_spinner "closer-para1" "Our award-winning security experts take time to learn about your specific needs before helping you create a security system that perfectly fits your home. It doesn't end there, however. Professionals are constantly standing by to answer any questions you might have about home security, wireless technology and beyond. We take the well-being of your home seriously: as if it is our own.|We take the well-being of your home personally: as if it is our own. Your household deserves the same safety and quality of life afforded to every home across the nation. Experience wireless security that goes above and beyond with Protect America!|Our security experts are specially trained to listen and learn before making any recommendations, because no two homes or homeowners are the same. Our service doesn't end there, however. We are with you every step of the way &ndash; always available by phone or chat to answer questions about wireless technology, home security, home automation and beyond. " %}</p>
+            <p>{% content_spinner "closer-para1" "Our award-winning security experts take time to learn about your specific needs in {{ city }} before helping you create a {% content_spinner "homesecuritysystems2" "home security system|security system|alarm system|home alarm system|burglar alarm system|wireless home security system" %} that perfectly fits your home. It doesn't end there, however. Professionals are constantly standing by to answer any questions you might have about {% content_spinner "homesecuritysystems3" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|wireless home security systems|systems" %}, wireless technology and beyond. We take the well-being of your home seriously: as if it is our own.|We take the well-being of your home personally: as if it is our own. Your household deserves the same safety and quality of life afforded to every home in {{ city }}, {{ state }}. Experience wireless security that goes above and beyond with {% content_spinner "name4" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %}!|Our security experts are specially trained to listen and learn before making any recommendations, because no two homes or homeowners in {{ city }} are the same. Our service doesn't end there, however. We are with you every step of the way &ndash; always available by phone or chat to answer questions about wireless technology, {% content_spinner "homesecuritysystems4" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|wireless home security systems|systems" %}, home automation and beyond. " %}</p>
         </div>
     <div class="clear"></div>
     <a href="{% url shop %}" class="button center">Shop Our Packages</a>
@@ -158,7 +158,7 @@
     <div class="community-slide moving container">
         <div class="sixteen columns">
             <h4>Welcome to {{ city }}</h4>
-            <p>Typical commute time in your city? Average home size? Maybe you'd like to learn more about the most common demographics, or your local farmer's market location? Look within to discover more.</p>
+            <p>Typical commute time in {{ city }}, {{ state }}? Average home size? Maybe you'd like to learn more about the most common demographics, or your local farmer's market location? Look within to discover more.</p>
             <p>Just click and drag this section left and right to navigate!</p>
         </div>
         {% comment %}
@@ -184,7 +184,7 @@
     <div class="community-slide people container">
         <div class="eight columns">
             <h4>About the area</h4>
-            <p>Welcome to the neighborhood!</p>
+            <p>Welcome to your neighborhood!</p>
             <img src="{{ STATIC_URL }}img/local-pages/community-about-the-area.png" class="about" />
         </div>
         <div class="eight columns">
@@ -277,7 +277,7 @@
     <div class="community-slide farmers container">
         <div class="sixteen columns headline-area">
             <h4>Online Resources</h4>
-            <p>Check out some of the great community farmer's markets located throughout the city.</p>
+            <p>Check out some of the great community farmer's markets located throughout {{ city }}.</p>
         </div>
         <div class="clear"></div>
         <ul class="market">
@@ -296,7 +296,7 @@
     <div class="container basic-stats">
 
         <h2 class="title center bottom">{{ city }}, {{ state }} Basic Crime Statistics</h2>
-        <p class="center">{% content_spinner "diff7" "FBI crime statistics about {{ city }} speak volumes. As you can see, burglaries take up a significant portion of crime in your area.|Crime statistics from the FBI are very telling. Burglary is a substantial portion of crime in {{ city }}.|{{ city }} crime statistics are an interesting glimpse into the types of challenges America faces." %} {% content_spinner "diff8" "While many cities in {{ state }} are great places to live (including {{ city }}), the danger of burglary is an ever-present reality.| While {{ city }} is a great place to live (along with many places in {{ state }} for that matter), burglary remains a reality.| While {{ city }} and many other cities in the great state of {{ state }} are fantastic places to live, the reality of burglary cannot be ignored." %} {% content_spinner "diff9" "Whether you know someone who has been victimized or you yourself have suffered a burglary, you know how traumatizing they can be.|We all know someone who has been victimized and how traumatizing the experience can be.|Whether you have experienced a break-in or know someone who has fallen victim, you know how traumatizing they can be." %} {% content_spinner "diff10" "A proactive approach to combatting burglary is the best method of defending your home, and a wireless security system is one of the greatest investments you can make for your household and family.|A proactive approach is the best way to combat burglary and defend your home and family.|Taking a proactive approach with a wireless alarm system can make all the difference in defending your home and family.|" %}
+        <p class="center">{% content_spinner "diff7" "FBI crime statistics about {{ city }}, {{ state }} speak volumes. As you can see, burglaries take up a significant portion of crime in your area.|Crime statistics from the FBI are very telling. Burglary is a substantial portion of crime in {{ city }}, {{ state }}.|{{ city }} crime statistics are an interesting glimpse into the types of challenges America faces." %} {% content_spinner "diff8" "While many cities in {{ state }} are great places to live (including {{ city }}), the danger of burglary is an ever-present reality.| While {{ city }} is a great place to live (along with many places in {{ state }} for that matter), burglary remains a reality.| While {{ city }}, {{ state }} and many other cities in the great state of {{ state }} are fantastic places to live, the reality of burglary cannot be ignored.|" %} {% content_spinner "diff9" "Whether you know someone who has been victimized or you yourself have suffered a burglary, you know how traumatizing they can be.|We all know someone who has been victimized and how traumatizing the experience can be.|Whether you have experienced a break-in or know someone who has fallen victim, you know how traumatizing they can be.|" %} {% content_spinner "diff10" "A proactive approach to combatting burglary in {{ city }} is the best method of defending your home, and a wireless security system is one of the greatest investments you can make for your household and family.|A proactive approach is the best way to combat burglary and defend your home and family.|Taking a proactive approach with a wireless alarm system can make all the difference in defending your home and family.|" %}
         </p>
         <div class="four columns center margin-vertical plus">
     		{% if city_per100k %} 
@@ -340,7 +340,7 @@
 <div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}" {% if lifestyles.image %}style="background: url({{ lifestyles.image.url }}) no-repeat;"{% endif %}>
     <div class="container">
         <div id="home-content">
-            {% block lifestyle-subhead %}<p>{% content_spinner "para2" "Our systems don't just stop at security, they improve quality of life. Whether it's home automation technology controllable through your smartphone like lights and door locks, or next generation smoke and carbon monoxide detectors that immediately reach out for help &ndash; a smart home is easily within anyone's reach.|Home security has evolved into something so much more &ndash; it's now improving the quality of life. Wireless technology allows the Protect America customer to dim lights and lock the front door from a smartphone. Monitored smoke and carbon monoxide detectors immediately seek help from the authorities during an emergency. Freeze and flood sensors can protect homes from the elements, and wireless cameras begin to film once an alarm is triggered. The advent of the smart home has arrived, and it's absolutely within anyone's reach.|Home security shouldn't just arm your home and give you peace of mind &ndash; it should improve the quality of life. Wireless technology allows our customers to set their alarm, from a smartphone &ndash; even lock doors and dim lights from anywhere through the same app. Imagine smoke and carbon monoxide detectors that contact the authorities automatically, and a security system that sends you a text message immediately if there is a problem. " %}</p>{% endblock %}
+            {% block lifestyle-subhead %}<p>{% content_spinner "para2" "Our {% content_spinner "homesecuritysystems5" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|wireless home security systems|systems" %} don't just stop at security, they improve quality of life in {{ city }}. Whether it's home automation technology controllable through your smartphone like lights and door locks, or next generation smoke and carbon monoxide detectors that immediately reach out for help &ndash; a smart home is easily within anyone's reach.|Home security in {{ city }} has evolved into something so much more &ndash; it's now improving the quality of life. Wireless technology allows the {% content_spinner "name5" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %} customer to dim lights and lock the front door from a smartphone. Monitored smoke and carbon monoxide detectors immediately seek help from the authorities during an emergency. Freeze and flood sensors can protect homes from the elements, and wireless cameras begin to film once an alarm is triggered. The advent of the smart home has arrived, and it's absolutely within anyone's reach.|Home security shouldn't just arm your home and give you peace of mind &ndash; it should improve the quality of life in {{ city }}. Wireless technology allows our customers to set their alarm, from a smartphone &ndash; even lock doors and dim lights from anywhere through the same app. Imagine smoke and carbon monoxide detectors that contact the authorities automatically, and a {% content_spinner "homesecuritysystems6" "home security system|security system|alarm system|home alarm system|burglar alarm system|wireless home security system|system" %} that sends you a text message immediately if there is a problem. " %}</p>{% endblock %}
             <a href="{% url order-package %}" class="button  yellow order-button hide-mobile no-desktop">Order Now</a>
             <a href="tel:{{ phone_number|format_number }}" class="button yellow hide-desktop no-mobile">Order Now</a>
 
@@ -350,15 +350,15 @@
 <div id="main-benefits" class="container">
     <div class="four columns">
         <h3><i class="fa fa-home"></i>Simply Peace of Mind</h3>
-        <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
+        <p>Our {% content_spinner "homesecuritysystems7" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|wireless home security systems|systems" %} provide state-of-the-art security so you don"t have to worry about a thing.</p>
     </div>
     <div class="four columns">
         <h3><i class="fa fa-user"></i>Security Designed for You</h3>
-        <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
+        <p>Each {% content_spinner "homesecuritysystems8" "home security system|security system|alarm system|home alarm system|burglar alarm system|wireless home security system|system" %} is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
     </div>
     <div class="four columns">
         <h3><i class="fa fa-rss"></i>Easy Wireless Set-Up</h3>
-        <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
+        <p>Our {% content_spinner "homesecuritysystems9" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|wireless home security systems|systems" %} make installation a snap without holes or destruction to your home.</p>
     </div>
     <div class="four columns">
         <h3><i class="fa fa-dollar"></i>The Best Price, Period</h3>
@@ -523,7 +523,7 @@
             {% endif %}
 
             {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
-            <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
+            <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
         </div>
 
     </div>
@@ -620,5 +620,3 @@
 </div>
 
 {% endblock %}
-
-
