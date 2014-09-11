@@ -44,6 +44,8 @@
 <div id="call-box">
     {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Get Started Now, <strong>Call Today! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></a></p>
 </div>
+dog:
+{{ crime_stats_ctx }}
 <div class="clear"></div>
 <div id="featured-on">
     <small>Proudly Featured on:</small>
@@ -160,37 +162,21 @@
             <h4>Welcome to {{ city }}</h4>
             <p>Typical commute time in {{ city }}, {{ state }}? Average home size? Maybe you'd like to learn more about {{ city }}'s demographics, or your local farmer's market location? Look within to discover more.</p>
             <p>Just click and drag this section left and right to navigate!</p>
+            <p class="forward-button"><i class="fa fa-arrow-circle-right"></i></p>
         </div>
-        {% comment %}
-        <div class="eight columns">
-            {% if local_video %}
-                {{ local_video.video_embed|safe }}
-            {% endif %}
-        </div>
-        <div class="eight columns">
-            {% if articles %}
-                <ul>
-                    {% for article in articles %}
-                        <li>
-                            <div class=""></div>
-                        {{ article.heading }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </div>
-        {% endcomment %}
+
     </div>
     {% if demographics %}
     <div class="community-slide people container">
         <div class="eight columns">
             <h4>About the area</h4>
-            <p>Welcome to your neighborhood!</p>
-            <img src="{{ STATIC_URL }}img/local-pages/community-about-the-area.png" class="about" />
+            <p>Whether you're from {{ city }} or just moving to {{ state_long }}, let us be the first to welcome you home.</p>
+            <img src="{{ STATIC_URL }}img/local-pages/community-about-the-area.png" alt="About the Community" class="about" />
         </div>
         <div class="eight columns">
             <ul class="neighborhood-stats">
                 <li>
-                    <img src="{{ STATIC_URL }}img/local-pages/car-icon.png" />
+                    <img src="{{ STATIC_URL }}img/local-pages/car-icon.png" alt="Average Drive Time" />
                     <div>
                         <span class="strong">{{ demographics.avg_commute_time|slice:"5" }} min.</span>
                         <span>Average time drive time to work</span>
@@ -198,7 +184,7 @@
                 </li>
                 <div class="clear"></div>
                 <li>
-                    <img src="{{ STATIC_URL }}img/local-pages/person-icon.png" />
+                    <img src="{{ STATIC_URL }}img/local-pages/person-icon.png" alt="Average citizen age" />
                     <div>
                         <span class="strong">{{ demographics.median_age }}</span>
                         <span>Average citizen age</span>
@@ -206,16 +192,16 @@
                 </li>
                 <div class="clear"></div>
                 <li>
-                    <img src="{{ STATIC_URL }}img/local-pages/bank-icon.png" />
+                    <img src="{{ STATIC_URL }}img/local-pages/bank-icon.png" alt="Average Household Income" />
                     <div>
-                        <span class="strong">${{ demographics.median_household_income|intcomma }}</span>
+                        <span class="strong">${{ demographics.median_household_income|floatformat:"0"|intcomma }}</span>
                         <span>Average household income</span>
                     </div>
                 </li>
                 <div class="clear"></div>
 
                 <li>
-                    <img src="{{ STATIC_URL }}img/local-pages/blueprint-icon.png" />
+                    <img src="{{ STATIC_URL }}img/local-pages/blueprint-icon.png" title="Average home size" />
                     <div>
                         <span class="strong">{{ demographics.median_home_size|intcomma }} sq. ft.</span>
                         <span>Average home size</span>
@@ -223,7 +209,7 @@
                 </li>
                 <div class="clear"></div>
                 <li>
-                    <img src="{{ STATIC_URL }}img/local-pages/for-sale-icon.png" />
+                    <img src="{{ STATIC_URL }}img/local-pages/for-sale-icon.png" title="Average home price" />
                     <div>
                         <span class="strong">${{ demographics.median_list_price|intcomma }}</span>
                         <span>Average home list price</span>
@@ -243,7 +229,11 @@
             </div>
             {% for data in liveshere|slice:":5" %}
                 <div class="three columns liveshere">
-                    <i class="fa fa-users"></i>
+                    {% if data.img %}
+                        <img src="{{ data.img.url }}" width="64" height="64" title="{{ data.title }}" class="liveshere-img" />
+                    {% else %}
+                        <i class="fa fa-users"></i>
+                    {% endif %}
                     <strong>{{ data.title }}</strong>
                     <span>{{ data.name }}</span>
                     <p>{{ data.description }}</p>
@@ -436,6 +426,7 @@
             return false;
         });
 
+
     </script>
 
 <script type="text/javascript">
@@ -472,6 +463,7 @@
         })
         var owl = $("#featured-badges");
         var outreach = $("#community-outreach-squares");
+        var community = $("#community-section");
     
         owl.owlCarousel({
           autoPlay: 7000,
@@ -497,11 +489,13 @@
           stopOnHover: true,
           navigation: true,    
         });
-        $('.square').click(function() {
-            var link = $(this).data("link");
-            $(this).attr(link, '_blank');
-    
+        var community = $("#community-section").data('owlCarousel');
+        $(".forward-button i").click(function(e) {
+            community.next();
+            return false;
+
         });
+
     });
 </script>
 {% endaddtoblock "js" %}
@@ -605,14 +599,14 @@
 
         <div class="lightbox-info">
             <span>Three reasons people choose</span>
-            <img src="{{ STATIC_URL }}img/base/protect-america-logo.png" width="212" height="36"  />
+            <img src="{{ STATIC_URL }}img/base/protect-america-logo.png" title="Protect America Home Security" width="212" height="36"  />
             <ul>
                 <li><i class="fa fa-check-circle"></i> Free Security Equipment</li>
                 <li><i class="fa fa-check-circle"></i> Lowest Price Guaranteed</li>
                 <li><i class="fa fa-check-circle"></i> Lifetime Warranty</li>
             </ul>
             <span>Award Winning Security</span>
-            <img src="{{ STATIC_URL }}img/base/awards.png" class="award" width="248" height="70"  />
+            <img src="{{ STATIC_URL }}img/base/awards.png" title="Protect America Awards" class="award" width="248" height="70"  />
         </div>
 
     </div>
