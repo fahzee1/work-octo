@@ -1,6 +1,6 @@
 {% load content_tags content_filters sekizai_tags %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/select2.js"></script>
-<form id="quote-form" class="sleepy quote-form-white {% if not request.COOKIES.refer_id == 'BINGPPC' or not request.session.refer_id == 'BINGPPC' or not request.GET.agent == 'BINGPPC' %}no-email{% endif %}"  method="post" action="">
+<form id="quote-form" class="sleepy-night quote-form-white {% if not request.COOKIES.refer_id == 'BINGPPC' or not request.session.refer_id == 'BINGPPC' or not request.GET.agent == 'BINGPPC' %}no-email{% endif %}"  method="post" action="">
     {% block form-extra %}{% endblock %}
     {% csrf_token %}
 <div>
@@ -87,7 +87,7 @@ $(document).ready(function() {
 }
 
 
-$('.sleepy input, .droopy input').keypress(function(e){
+$('.sleepy-night input, .droopy input').keypress(function(e){
         if(e.which == 13){
             var $form = $(this).closest('#quote-form');
             $form.find('button').click();
@@ -95,7 +95,7 @@ $('.sleepy input, .droopy input').keypress(function(e){
     });
     var submitting = false;
 
-    $('.sleepy, .droopy').on('click','button',function() {
+    $('.sleepy-night').on('click','button',function() {
         $('#quote-form button').attr('disabled',true);
         var $form = $(this).closest('.quote-form-white');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
@@ -117,6 +117,7 @@ $('.sleepy input, .droopy input').keypress(function(e){
         var phone = $form.find("#id_phone").val();
         var business_name = $form.find("#id_business_name").val();
         var callme = $form.find("#callme").val();
+
 
         /*
         if (name == ''){
@@ -140,7 +141,7 @@ $('.sleepy input, .droopy input').keypress(function(e){
                     'operating_system':(window.OSName + "_PA"),
                     'device':device,
                     'gclid':$("[name='gclid']").val(),
-                    'form_js': 't/o/q-f.h'
+                    'form_js': 't/o/2'
                     }
 
 
