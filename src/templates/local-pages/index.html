@@ -44,7 +44,6 @@
 <div id="call-box">
     {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Get Started Now, <strong>Call Today! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></a></p>
 </div>
-dog:
 {{ crime_stats_ctx }}
 <div class="clear"></div>
 <div id="featured-on">
@@ -289,7 +288,7 @@ dog:
         <p class="center">{% content_spinner "diff7" "FBI crime statistics about {{ city }}, {{ state }} speak volumes. As you can see, burglaries take up a significant portion of crime in your area.|Crime statistics from the FBI are very telling. Burglary is a substantial portion of crime in {{ city }}.|{{ city }} crime statistics are an interesting glimpse into the types of challenges America faces." %} {% content_spinner "diff8" "While many cities in {{ state_long }} are great places to live (including {{ city }}), the danger of burglary is an ever-present reality.| While {{ city }} is a great place to live (along with many places in {{ state_long }} for that matter), burglary remains a reality.| While {{ city }}, {{ state }} and many other cities in the great state of {{ state_long }} are fantastic places to live, the reality of burglary cannot be ignored.|" %} {% content_spinner "diff9" "Whether you know someone who has been victimized or you yourself have suffered a burglary, you know how traumatizing they can be.|We all know someone who has been victimized and how traumatizing the experience can be.|Whether you have experienced a break-in or know someone who has fallen victim, you know how traumatizing they can be.|" %} {% content_spinner "diff10" "A proactive approach to combatting burglary in {{ city }} is the best method of defending your home, and a wireless security system is one of the greatest investments you can make for your household and family.|A proactive approach is the best way to combat burglary and defend your home and family.|Taking a proactive approach with a wireless alarm system can make all the difference in defending your home and family.|" %}
         </p>
         <div class="four columns center margin-vertical plus">
-    		{% if city_per100k %} 
+    		{% if city_per100k %}
     			<p id="stat1" data-stat="{{ city_per100k.burglary_rank_per100k }}" class="big-number inactive">{{ city_per100k.burglary_rank_per100k }}</p>
     		{% else %}
     			<em>no stats available</em>
@@ -298,7 +297,7 @@ dog:
     		<p>per 100k</p>
         </div>
         <div class="four columns center margin-vertical plus">
-    		{% if city_per100k %} 
+    		{% if city_per100k %}
     			<p id="stat2" data-stat="{{ city_per100k.robbery_rank_per100k }}" class="big-number inactive">{{ city_per100k.robbery_rank_per100k }}</p>
     		{% else %}
     			<em>no stats available</em>
@@ -307,7 +306,7 @@ dog:
     		<p>per 100k</p>
         </div>
         <div class="four columns center margin-vertical plus">
-    		{% if city_per100k %} 
+    		{% if city_per100k %}
     			<p id="stat3" data-stat="{{ city_per100k.larceny_theft_rank_per100k }}" class="big-number inactive">{{ city_per100k.larceny_theft_rank_per100k }}</p>
     		{% else %}
     			<em>no stats available</em>
@@ -316,7 +315,7 @@ dog:
     		<p>per 100k</p>
         </div>
         <div class="four columns center margin-vertical plus">
-    		{% if city_per100k %} 
+    		{% if city_per100k %}
     			<p id="stat4" data-stat="{{ city_per100k.motor_vehicle_theft_rank_per100k }}" class="big-number inactive">{{ city_per100k.motor_vehicle_theft_rank_per100k }}</p>
     		{% else %}
     			<em>no stats available</em>
@@ -418,7 +417,7 @@ dog:
             $submenu.css("display", "none");
             $row.find("a").removeClass("maintainHover");
         }
-        
+
         $(".dropdown-menu li").click(function(e) {
             e.stopPropagation();
         });
@@ -448,9 +447,9 @@ dog:
             var iframe = $(this).parent('.lightbox').children('.lightcard').children('iframe').attr('src');
             $('.video').attr('src',iframe);
             $('.lightbox').fadeOut();
-            
+
             return false;
-    
+
         })
         $('.closebox').click(function(e) {
             e.preventDefault();
@@ -459,12 +458,12 @@ dog:
             $('.lightbox').fadeOut();
 
             return false;
-    
+
         })
         var owl = $("#featured-badges");
         var outreach = $("#community-outreach-squares");
         var community = $("#community-section");
-    
+
         owl.owlCarousel({
           autoPlay: 7000,
           items : 12,
@@ -487,7 +486,7 @@ dog:
           autoHeight: false,
           pagination: true,
           stopOnHover: true,
-          navigation: true,    
+          navigation: true,
         });
         var community = $("#community-section").data('owlCarousel');
         $(".forward-button i").click(function(e) {
@@ -538,7 +537,7 @@ dog:
             <li><a href="">Sitemap</a></li>
         </ul>
         <ul class="four columns">
-            
+
             <li><a href="{% url privacy-policy %}">Privacy Policy</a></li>
             <li><a href="{% url return-policy %}">Return Policy</a></li>
             <li><a href="{% url state-licenses %}">State Licenses</a></li>
@@ -592,7 +591,7 @@ dog:
 <div class="lightbox request-quote">
     <div class="lightcard">
         <div class="closebox">
-            close        
+            close
             <i class="fa fa-times-circle"></i>
         </div>
         {% include "order/quote-form-partial.html" with form=forms.basic %}

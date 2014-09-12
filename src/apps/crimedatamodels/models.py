@@ -498,7 +498,7 @@ class LivesHere(models.Model):
     image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
 
     def __unicode__(self):
-        return '%s -- liveshere' % (self.name)
+        return '%s -- %s' % (self.title, self.name)
 
 
 class Demographics(CityAndState):
@@ -624,7 +624,6 @@ class Demographics(CityAndState):
                     demographics.state = state
                     demographics.save()
 
-                    #pdb.set_trace()
                     # get who lives here data
                     liveshere = soup.find_all('liveshere')
                     for person in liveshere:
@@ -632,11 +631,15 @@ class Demographics(CityAndState):
                         name = person.find('name').string
                         description = person.description.string
 
-                        obj = LivesHere()
-                        obj.title = title
-                        obj.name = name
-                        obj.description = description
-                        obj.save()
+                        obj = LivesHere.objects.filter(title=title,name=name,description=description)
+                        if not obj:
+                            obj = LivesHere()
+                            obj.title = title
+                            obj.name = name
+                            obj.description = description
+                            obj.save()
+                        else:
+                            obj = obj[0]
 
                         print 'adding %s to LivesHere' % name
                         demographics.liveshere.add(obj)
@@ -757,7 +760,7 @@ class LocalEducation(CityAndState):
                         print 'University name %s' % name
 
                         if state_abbr == state.abbreviation:
-                            education = Education.objects.get_or_create(name=name,
+                            education = LocalEducation.objects.get_or_create(name=name,
                                                                         state=state,
                                                                         city=city,
                                                                         zip=zipcode)
