@@ -2,6 +2,7 @@ import re
 import pdb
 import requests
 import traceback
+import datetime
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -560,116 +561,154 @@ class Demographics(CityAndState):
 
 
         from bs4 import BeautifulSoup
-        try:
-            r = requests.get('http://www.zillow.com/webservice/GetDemographics.htm?zws-id=%s&state=%s&city=%s' % (settings.ZILLOW,state.name,city.city_name), timeout=10)
-            if r.status_code == 200:
-                soup = BeautifulSoup(r.text)
-                code = int(soup.message.code.contents[0])
-                if code == 0:
-                    # success
-
-                    # add to database for later use
-                    demographics = Demographics()
+        from django.core.cache import cache
 
 
-                    # get charts (soup.charts.chart)
-                    for chart in soup.find_all('chart'):
-                        chart_url = None
-                        if chart.find('name').contents[0] == 'Median Home Value':
-                            chart_url = chart.find('url').contents[0]
-                            demographics.chart_avgHomeValue = chart_url
+        # rate limit code for zillow api
+        # 100 requests an hour
 
-                        if chart.find('name').contents[0] == 'Home Size in Square Feet':
-                            chart_url = chart.find('url').contents[0]
-                            demographics.chart_homeSize = chart_url
-
-                        if chart.find('name').contents[0] == 'Owners vs. Renters':
-                            chart_url = chart.find('url').contents[0]
-                            demographics.chart_ownVsRent = chart_url
+        limit = cache.get('zillow_limit')
+        zillow_hour = cache.get('zillow_hour')
+        do_fetch = False
+        if not zillow_hour and not limit:
+            do_fetch = True
+            zillow_hour = datetime.datetime.now().hour
+            limit = 1
+            cache.set('zillow_hour',zillow_hour,60*60)
+            cache.set('zillow_limit',limit,60*60)
 
 
 
-                        #save this
+        hour = datetime.datetime.now().hour
+        if hour > zillow_hour:
+            do_fetch = True
+            limit = 1
+            cache.set('zillow_hour',zillow_hour,60*60)
+            cache.set('zillow_limit',limit,60*60)
 
-                    # get pages
-                    median_list_price = soup.find(get_median_list_price)
-                    if median_list_price:
-                        siblings = median_list_price.next_sibling
-                        median_list_price = siblings.contents[0].string
-
-                    median_home_size = soup.find(get_median_home_size)
-                    if median_home_size:
-                        siblings = median_home_size.next_sibling
-                        median_home_size = siblings.contents[0].string
-
-                    median_household_income = soup.find(get_median_household_income)
-                    if median_household_income:
-                        siblings = median_household_income.next_sibling
-                        median_household_income = siblings.contents[0].string
-
-                    median_age = soup.find(get_median_age)
-                    if median_age:
-                        siblings = median_age.next_sibling
-                        median_age = siblings.contents[0].string
-
-                    avg_commute_time = soup.find(get_average_commute_time)
-                    if avg_commute_time:
-                        siblings = avg_commute_time.next_sibling
-                        avg_commute_time = siblings.contents[0].string
-
-                    forsale = soup.find('forSale').string
+        elif hour == zillow_hour:
+            if int(limit) < 100:
+                do_fetch = True
+                cache.incr('zillow_limit')
 
 
 
 
+        if do_fetch:
+            try:
+                r = requests.get('http://www.zillow.com/webservice/GetDemographics.htm?zws-id=%s&state=%s&city=%s' % (settings.ZILLOW,state.name,city.city_name), timeout=10)
+                if r.status_code == 200:
+                    soup = BeautifulSoup(r.text)
+                    code = int(soup.message.code.contents[0])
+                    if code == 0:
+                        # success
+
+                        # add to database for later use
+                        demographics = Demographics()
 
 
-                    demographics.avg_commute_time = avg_commute_time
-                    demographics.median_age = median_age
-                    demographics.median_household_income = median_household_income
-                    demographics.median_home_size = median_home_size
-                    demographics.median_list_price = median_list_price
-                    demographics.forsale = forsale
-                    demographics.city = city
-                    demographics.state = state
-                    demographics.save()
+                        # get charts (soup.charts.chart)
+                        for chart in soup.find_all('chart'):
+                            chart_url = None
+                            if chart.find('name').contents[0] == 'Median Home Value':
+                                chart_url = chart.find('url').contents[0]
+                                demographics.chart_avgHomeValue = chart_url
 
-                    # get who lives here data
-                    liveshere = soup.find_all('liveshere')
-                    for person in liveshere:
-                        title = person.title.string
-                        name = person.find('name').string
-                        description = person.description.string
+                            if chart.find('name').contents[0] == 'Home Size in Square Feet':
+                                chart_url = chart.find('url').contents[0]
+                                demographics.chart_homeSize = chart_url
 
-                        obj = LivesHere.objects.filter(title=title,name=name,description=description)
-                        if not obj:
-                            obj = LivesHere()
-                            obj.title = title
-                            obj.name = name
-                            obj.description = description
-                            obj.save()
-                        else:
-                            obj = obj[0]
-
-                        print 'adding %s to LivesHere' % name
-                        demographics.liveshere.add(obj)
+                            if chart.find('name').contents[0] == 'Owners vs. Renters':
+                                chart_url = chart.find('url').contents[0]
+                                demographics.chart_ownVsRent = chart_url
 
 
-                    return demographics
 
+                            #save this
+
+                        # get pages
+                        median_list_price = soup.find(get_median_list_price)
+                        if median_list_price:
+                            siblings = median_list_price.next_sibling
+                            median_list_price = siblings.contents[0].string
+
+                        median_home_size = soup.find(get_median_home_size)
+                        if median_home_size:
+                            siblings = median_home_size.next_sibling
+                            median_home_size = siblings.contents[0].string
+
+                        median_household_income = soup.find(get_median_household_income)
+                        if median_household_income:
+                            siblings = median_household_income.next_sibling
+                            median_household_income = siblings.contents[0].string
+
+                        median_age = soup.find(get_median_age)
+                        if median_age:
+                            siblings = median_age.next_sibling
+                            median_age = siblings.contents[0].string
+
+                        avg_commute_time = soup.find(get_average_commute_time)
+                        if avg_commute_time:
+                            siblings = avg_commute_time.next_sibling
+                            avg_commute_time = siblings.contents[0].string
+
+                        forsale = soup.find('forSale').string
+
+
+
+
+
+
+                        demographics.avg_commute_time = avg_commute_time
+                        demographics.median_age = median_age
+                        demographics.median_household_income = median_household_income
+                        demographics.median_home_size = median_home_size
+                        demographics.median_list_price = median_list_price
+                        demographics.forsale = forsale
+                        demographics.city = city
+                        demographics.state = state
+                        demographics.save()
+
+                        # get who lives here data
+                        liveshere = soup.find_all('liveshere')
+                        for person in liveshere:
+                            title = person.title.string
+                            name = person.find('name').string
+                            description = person.description.string
+
+                            obj = LivesHere.objects.filter(title=title,name=name,description=description)
+                            if not obj:
+                                obj = LivesHere()
+                                obj.title = title
+                                obj.name = name
+                                obj.description = description
+                                obj.save()
+                            else:
+                                obj = obj[0]
+
+                            print 'adding %s to LivesHere' % name
+                            demographics.liveshere.add(obj)
+
+
+                        return demographics
+
+
+                    return None
 
                 return None
 
-            return None
-
-        except requests.exceptions.Timeout:
-            print 'demographics api timed out'
-            return None
+            except requests.exceptions.Timeout:
+                print 'demographics api timed out'
+                return None
 
 
-        except:
-            print 'unkown error'
-            traceback.print_exc()
+            except:
+                print 'unkown error'
+                traceback.print_exc()
+                return None
+
+        #end if do_fetch
+        else:
             return None
 
 
