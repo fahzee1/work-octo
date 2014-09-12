@@ -488,6 +488,9 @@ class LifeStyles(CityAndState):
     image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
     image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
 
+    def __unicode__(self):
+        return '%s life styles' % (self.city)
+
 
 class LivesHere(models.Model):
     title = models.CharField(max_length=255,blank=True,null=True)
@@ -519,7 +522,9 @@ class Demographics(CityAndState):
     chart_avgHomeValue = models.CharField(max_length=255,blank=True,null=True)
     chart_homeSize = models.CharField(max_length=255,blank=True,null=True)
     chart_ownVsRent = models.CharField(max_length=255,blank=True,null=True)
+    forsale = models.CharField(max_length=255,blank=True,null=True)
     liveshere = models.ManyToManyField(LivesHere,related_name='demographics',blank=True,null=True)
+
 
 
     def __unicode__(self):
@@ -551,6 +556,7 @@ class Demographics(CityAndState):
 
         def get_average_commute_time(tag):
             return tag.string == 'Average Commute Time (Minutes)'
+
 
 
         from bs4 import BeautifulSoup
@@ -611,6 +617,9 @@ class Demographics(CityAndState):
                         siblings = avg_commute_time.next_sibling
                         avg_commute_time = siblings.contents[0].string
 
+                    forsale = soup.find('forSale').string
+
+
 
 
 
@@ -620,6 +629,7 @@ class Demographics(CityAndState):
                     demographics.median_household_income = median_household_income
                     demographics.median_home_size = median_home_size
                     demographics.median_list_price = median_list_price
+                    demographics.forsale = forsale
                     demographics.city = city
                     demographics.state = state
                     demographics.save()

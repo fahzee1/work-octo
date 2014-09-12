@@ -174,14 +174,19 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
             if not localeducation:
                 localeducation = LocalEducation.call_data(city=city,state=state)
 
-            try:
-                demographics = Demographics.objects.get(city=city,state=state)
-            except Demographics.DoesNotExist:
-                demographics = Demographics.call_data(city=city,state=state)
 
-            liveshere = None
-            if demographics:
-                liveshere = demographics.liveshere.all()
+            if settings.USE_ZILLOW:
+                try:
+                    demographics = Demographics.objects.get(city=city,state=state)
+                except Demographics.DoesNotExist:
+                    demographics = Demographics.call_data(city=city,state=state)
+
+                liveshere = None
+                if demographics:
+                    liveshere = demographics.liveshere.all()
+            else:
+                demographics = None
+                liveshere = None
 
 
             lifestyles = LifeStyles.objects.filter(city=city,state=state)

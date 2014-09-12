@@ -73,11 +73,18 @@ class ResourcesAdmin(admin.ModelAdmin):
 
 admin.site.register(Resources,ResourcesAdmin)
 
+
+class LifeStylesAdmin(admin.ModelAdmin):
+    model = LifeStyles
+    raw_id_fields = ('city',)
+
+admin.site.register(LifeStyles,LifeStylesAdmin)
+
+
 admin.site.register(Permits)
 admin.site.register(Demographics)
 admin.site.register(Universities)
 admin.site.register(LocalEducation)
 admin.site.register(FarmersMarket)
-admin.site.register(LifeStyles)
 admin.site.register(LivesHere)
 
