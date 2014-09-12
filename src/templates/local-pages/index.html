@@ -216,13 +216,14 @@
                 </li>
                 <div class="clear"></div>
             </ul>
+            <a href="http://www.zillow.com" title="See Real Estate on Zillow"><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_150x40_rounded.gif" class="zillow-logo" width="150" height="40" alt="Zillow Real Estate Search" /></a>
         </div>
     </div>
     {% endif %}
     {% if liveshere %}
     <div class="community-slide people">
             <iframe width="115%" class="map-background" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q={{ city }}%2B{{ state_long }}&ie=UTF8&z=13&iwloc=near&scrollwheel=false&maptypecontrol=false&disabledefaultUI=true&iwloc=near&navigationcontrol=false&output=embed" style="position: absolute; top: -100px; height: 800px; width: 100%; z-index: -1; opacity: .3;"></iframe>
-        <div class="container">
+        <div class="container people-inner">
             <div class="headline-area">
                 <h4 class="center">Who lives here?</h4>
             </div>
@@ -241,6 +242,7 @@
                 <div class="clear"></div>
                 {% endif %}
             {% endfor %}
+            <img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_150x40_rounded.gif" class="zillow-logo" width="150" height="40" alt="Zillow Real Estate Search" />
         </div>
     </div>
     {% endif %}
@@ -262,6 +264,26 @@
         </ul>
     </div>
     {% endif %}
+    {% comment %}
+    {% if universities %}
+    <div class="community-slide farmers container">
+        <div class="sixteen columns headline-area">
+            <h4>Support local farmers</h4>
+            <p>Check out some of the great {{ city }} farmers' markets.</p>
+        </div>
+        <div class="clear"></div>
+        <ul class="market">
+            {% for university in universities|slice:":12" %}
+            <li class="five columns">
+                {{ university.name }} (<a href="{{ university.website }}" target="_blank" title="Directions to {{ university.name }}">Map It!</a>)
+                <span>{{ university.address }}</span>
+            </li>
+            {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endcomment %}
     {% if resources %}
     <div class="community-slide farmers container">
         <div class="sixteen columns headline-area">
@@ -281,6 +303,7 @@
     </div>
     {% endif %}
 </div>
+{% if city_per100k %}
 <div id="crime-stats">
     <div class="container basic-stats">
 
@@ -326,6 +349,9 @@
         <div class="clear"></div>
     </div>
 </div>
+{% else %}
+<br /><br />
+{% endif %}
 <div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}" {% if lifestyles.image %}style="background: url({{ lifestyles.image.url }}) no-repeat;"{% endif %}>
     <div class="container">
         <div id="home-content">
@@ -584,6 +610,7 @@
                 </div>
                 {% endif %}
                 <p class="copyright">The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.<br><br>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
+                <p class="copyright">Neighborhood data is provided by: <br/>&copy; Zillow, Inc., 2006-2014. Use is subject to <br/><a href="http://www.zillow.com/corp/Terms.htm">Terms of Use</a></p>
             </div>
         </div>
     </div>
