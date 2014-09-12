@@ -20,12 +20,15 @@ class Article(models.Model):
     heading = models.CharField(max_length=128)
     content = models.TextField()
     summary = models.TextField()
-    
+
     image = models.ImageField(upload_to='brafton/',max_length=256, blank=True, null=True)
     image_caption = models.CharField(max_length=128, blank=True, null=True)
 
     categories = models.ManyToManyField(Category)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    city = models.ForeignKey("crimedatamodels.CityLocation",blank=True,null=True)
+    state = models.ForeignKey("crimedatamodels.State",blank=True,null=True)
 
     def related(self):
         articles = []

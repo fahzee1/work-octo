@@ -1,0 +1,354 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+        <!-- Logo and top section -->
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <a href="/"><img src="{{ STATIC_URL }}img/protect-america-logo.png" class="logo" alt="protect-america-logo"></a>
+                </div>
+                <ul>
+                    <li class=""><a href="tel:{{ phone_number|format_number }}"><i class="fa fa-phone not-mobile-v"></i>{{ phone_number|format_number }}</a></li>
+                    <li class="not-mobile"><a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" target="_blank"><i class="fa fa-comment alt"></i>Live Chat</a></li>
+                    <li class="not-mobile-v"><a href="http://www.myprotectamerica.com" target="_blank"><i class="fa fa-user alt"></i>Login</a></li>
+                    <li class="not-mobile"><form action="http://www.protectamerica.com/search/" method="get"><input type="text" id="q" name="q" autocomplete="off" autocorrect="off" autocapitalize="off" class="expanding-search"></form></li>
+                    <li class="not-desktop"><a href="" id="mobile-menu"><i class="fa fa-reorder alt"></i></a></li>
+                    <li class="not-mobile-v">&nbsp;</li>
+                </ul>
+            </div>
+        </header>
+        <!-- End logo and top section -->
+
+        <!-- Navigation -->
+        <nav>
+            <ul class="container">
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Shop</a>
+                            <ul class="dropdown-menu dropdown-shop" id="dropdown-shop" role="shop">
+                                <li data-submenu-id="submenu-security-packages">
+                                    <a href="{% url shop %}">Security Packages<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-security-packages" class="popover">
+                                        <h3 class="popover-title">Home Security</h3>
+                                        <div class="popover-content">
+                                            <p>Our systems are designed from the ground up to provide complete, affordable, and customizable protection for your family.  And it all starts at just $19.99 per month.</p>
+                                            <a href="{% url shop %}" class="button">Home Security Packages</a>
+                                            <div class="clear"></div>
+                                            <ul class="smaller">
+                                                Explore Each Package:
+                                                <div class="clear"></div>
+                                                <li><a href="{% url copper %}">Copper Package</a></li>
+                                                <li><a href="{% url bronze %}">Bronze Package</a></li>
+
+                                                <li><a href="{% url silver %}">Silver Package</a></li>
+
+                                                <li><a href="{% url gold %}">Gold Package</a></li>
+                                                <li><a href="{% url platinum %}">Platinum Package</a></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                {% comment %}
+                                <li data-submenu-id="submenu-technology-package">
+                                    <a href="#">Technology Package<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-technology-package" class="popover">
+                                        <h3 class="popover-title">Technology Package</h3>
+                                        <div class="popover-content">
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endcomment %}
+                                <li data-submenu-id="submenu-business-package">
+                                    <a href="{% url business %}">Business Package<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-business-package" class="popover business-package">
+                                        <h3 class="popover-title">Business Package</h3>
+                                        <div class="popover-content">
+                                            <p >Adding security to your small business or restaurant has never been easier. Live video, Door Sensors, and Glass Break Detection all starting at 46.99 per month.</p>
+                                            <a href="{% url business %}" class="button">Business Security</a>
+                                        </div>
+                                        <div class="bg-tile">&nbsp;</div>
+
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-existing-systems">
+                                    <a href="{% url cell-takeover %}">Existing Hardwired Security<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-existing-systems" class="popover existing-system">
+                                        <h3 class="popover-title">Existing Hardwired Security</h3>
+                                        <div class="popover-content">
+                                            <p>Already have an existing security system in your home? Keep your equipment and save with Protect America when you monitor through us.</p>
+                                            <a href="{% url cell-takeover %}" class="button">Existing Hardwired Security</a>
+                                        </div>
+                                        <div class="bg-tile">&nbsp;</div>
+
+                                    </div>
+                                </li>
+                               <li data-submenu-id="submenu-monitoring-options">
+                                    <a href="{% url monitoring %}">Monitoring Options<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-monitoring-options" class="popover">
+                                        <h3 class="popover-title">Monitoring Options</h3>
+                                        <div class="popover-content">
+                                            <ul>
+                                                <li><a href="{% url landline %}">Landline Monitoring</a></li>
+                                                <li><a href="{% url broadband %}">Broadband Monitoring</a></li>
+                                                <li><a href="{% url cellular %}">Cellular Monitoring</a></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-order-now">
+                                    <a href="{% url order-package %}">Order now</a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Security Solutions</a>
+                            <ul class="dropdown-menu dropdown-security-solutions" id="dropdown-equipment" role="equipment">
+                                <li data-submenu-id="submenu-alarm-systems">
+                                    <a href="{% url home-security-equipment %}">Alarm Systems<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-alarm-systems" class="popover">
+                                        <h3 class="popover-title">Alarm Systems</h3>
+                                        <div class="popover-content">
+                                            <ul>
+                                                <li><a href="{% url simon-xt %}">Simon XT Control Panel</a></li>
+                                                <li><a href="{% url door-window-sensor %}">Door / Window Sensor</a></li>
+                                                <li><a href="{% url motion-detector %}">Motion Detector</a></li>
+                                                <li><a href="{% url video %}">Video Security Camera</a></li>
+                                                <li><a href="{% url touchscreen %}">Simon XT Touchscreen</a></li>
+                                                <li><a href="{% url garage-door-sensor %}">Garage Door Sensor</a></li>
+
+
+                                            </ul>
+                                            <ul>
+                                                <li><a href="{% url glassbreak-sensor %}">Glass Break Sensor</a></li>
+                                                <li><a href="{% url mini-pinpad %}">Mini Pinpad</a></li>
+                                                <li><a href="{% url two-button-panic %}">Two Button Panic Alarm</a></li>
+                                                <li><a href="{% url talking-wireless-keypad %}">Talking Wireless Keypad</a></li>
+                                                <li><a href="{% url accessories %}">Security Accessories</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-home-automation">
+                                    <a href="{% url home-automation-equipment %}">Home Automation<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-home-automation" class="popover home-automation">
+                                        <h3 class="popover-title">Home Automation</h3>
+                                        <div class="popover-content">
+                                            <ul>
+                                                <li><a href="{% url interactive-control %}">SMART Connect iPhone / Android App</a></li>
+                                                <li><a href="{% url door-lock %}">Yale Z-Wave Door Lock</a></li>
+                                                <li><a href="{% url appliance-module %}">Z-Wave Appliance Module</a></li>
+
+                                            </ul>
+
+                                        </div>
+                                        <div class="bg-tile">&nbsp;</div>
+
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-life-safety">
+                                    <a href="{% url life-safety-equipment %}">Life Safety<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-life-safety" class="popover">
+                                        <h3 class="popover-title">Life Safety</h3>
+                                        <div class="popover-content">
+                                            <ul>
+                                                <li><a href="{% url smoke-detector %}">Monitored Smoke Detector</a></li>
+                                                <li><a href="{% url medical-pendant %}">Medical Panic Pendant</a></li>
+
+                                                <li><a href="{% url carbon-monoxide-detector %}">Carbon Monoxide Detector</a></li>
+                                                <li><a href="{% url flood-sensor %}">Flood Sensor</a></li>
+                                                <li><a href="{% url freeze-sensor %}">Freeze Sensor</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-automotive">
+                                    <a href="{% url gps %}">Automotive<i class="fa fa-chevron-right"></i></a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Learn</a>
+                            <ul class="dropdown-menu dropdown-learn" role="learn">
+                                <li data-submenu-id="submenu-about-us">
+                                    <a href="{% url about-us %}">About Protect America<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-about-us" class="popover protect-america">
+                                        <h3 class="popover-title">About Protect America</h3>
+                                        <div class="popover-content">
+                                            <ul>
+                                                <li><a href="{% url testimonials %}">Protect America Reviews</a></li>
+                                                <li><a href="{% url family %}">Family of Companies</a></li>
+                                                {% comment %}
+
+                                                <li><a href="#">Protect America Cares</a></li>
+                                                {% endcomment %}
+                                                <li><a href="{% url payitforward %}">Pay It Forward</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-tile">&nbsp;</div>
+
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-security-101">
+                                    <a href="{% url learn-about-security %}">Security 101<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-security-101" class="popover">
+                                        <h3 class="popover-title">Security 101</h3>
+                                        <div class="popover-content">
+                                            <ul>
+                                                <li><a href="/crime-rate/">Local Crime Stats</a></li>
+                                                <li><a href="{% url complete-home-security %}">Complete Home Security</a></li>
+                                                <li><a href="{% url glossary %}">Glossary</a></li>
+                                                <li><a href="{% url resources-101 %}">Resources</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-advantage">
+                                    <a href="{% url advantage %}">Advantage over ADT<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-advantage" class="popover advantage">
+                                        <h3 class="popover-title">Advantage over ADT</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">Learn why so many homeowners choose Protect America over companies like ADT, and why many have even made the switch!</p>
+                                            <a href="{% url advantage %}" class="button">Our Advantage over ADT</a>
+                                        </div>
+                                        <div class="bg-tile">&nbsp;</div>
+
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-blog">
+                                    <a href="/home-security-blog/">Home and Life Blog<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-blog" class="popover">
+                                        <h3 class="popover-title">Home and Life Blog</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">The official Protect America blog covers everything from security, home life, news and beyond!
+
+</p>
+                                            <a href="/home-security-blog/" class="button">Read our Blog</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-news">
+                                    <a href="{% url news:news-home %}">Security News<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-news" class="popover">
+                                        <h3 class="popover-title">Security News</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">We search the web for relevant stories that could help you protect your home and family. Read the latest in security and burglary-related news.</p>
+                                            <a href="{% url find-us %}" class="button">Security News</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle support" data-toggle="dropdown" href="#">Support</a>
+                            <ul class="dropdown-menu dropdown-support" id="dropdown-support" role="menu">
+                                <li data-submenu-id="submenu-customer-service">
+                                    <a href="{% url customer-service %}">Customer service<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-customer-service" class="popover customer-service">
+                                        <h3 class="popover-title">Customer service</h3>
+                                        <div class="popover-content">
+                                            <ul>
+                                                <li><a href="{% url operation %}">Operation</a></li>
+                                                <li><a href="{% url troubleshooting %}">Troubleshooting</a></li>
+                                                <li><a href="{% url faq %}">FAQs</a></li>
+                                                <li><a href="{% url moving-kit %}">EasyMove Kit</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-tile">&nbsp;</div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-installation">
+                                    <a href="{% url installation %}">Installation<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-installation" class="popover">
+                                        <h3 class="popover-title">Installation</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">Ready to install your security system? Have some questions about specific products? We’re here to help!
+
+</p>
+                                            <a href="{% url find-us %}" class="button">Installation</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-find-us">
+                                    <a href="{% url find-us %}">Find us<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-find-us" class="popover">
+                                        <h3 class="popover-title">Find us</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">Locate the Protect America headquarters in beautiful Austin, Texas. Don’t hesitate to give us a call!</p>
+                                            <a href="{% url find-us %}" class="button">Find Us</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-careers">
+                                    <a href="{% url careers %}">Careers<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-careers" class="popover">
+                                        <h3 class="popover-title">Careers</h3>
+                                        <div class="popover-content">
+
+                                            <p class="smaller">Join a talented team within a lively company culture &ndash; all in the heart of the Texas hill country! Learn more about Protect America and view a list of open positions!</p>
+                                            <a href="{% url careers %}" class="button">Careers</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li data-submenu-id="submenu-dealer-programs">
+                                    <a href="{% url agent-two %}">Dealer program<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-dealer-programs" class="popover dealer-program">
+                                        <h3 class="popover-title">Dealer program</h3>
+                                        <div class="popover-content">
+                                            <p class="smaller">Fed up with your home security dealer program? Join a leader in quality and affordability with the most successful Home Security Dealers in the security industry today.</p>
+                                            <a href="{% url agent-two %}" class="button">Dealer Program</a>
+                                            <ul class="smaller">
+                                                Other Ways to Sell Protect America:
+                                                <div class="clear"></div>
+                                                <li><a href="{% url affiliate-program %}">Affiliate Program</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="bg-tile">&nbsp;</div>
+
+                                    </div>
+                                </li>
+                                {% comment %}
+                                <li data-submenu-id="submenu-affiliates">
+                                    <a href="{% url affiliate-program %}">Affiliates<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-affiliates" class="popover">
+                                        <h3 class="popover-title">Affiliates</h3>
+                                    </div>
+                                </li>
+                                {% endcomment %}
+                                <li data-submenu-id="submenu-contact-us">
+                                    <a href="{% url contact-us %}">Contact us<i class="fa fa-chevron-right"></i></a>
+                                    <div id="submenu-contact-us" class="popover">
+                                        <h3 class="popover-title">Contact Us</h3>
+                                        <div class="popover-content">
+                                            <p>Our security experts are happy to assist you with any questions you may have. Call us toll-free today at {{ phone_number|format_number }}.</p>
+                                            <a href="{% url contact-us %}" class="button">Contact Us</a>
+                                            <div class="clear"></div>
+                                            <ul class="smaller">
+                                                Other Ways to Reach Us:
+                                                <div class="clear"></div>
+                                                <li><a href="{% url copper %}">Live Chat</a></li>
+                                                <li><a href="{% url department-listing %}">Department Listings</a></li>
+
+                                                <li><a href="{% url feedback-ceo %}">Talk to the CEO</a></li>
+                                                <li><a href="{% url send-testimonial %}">Write a Review</a></li>
+
+                                            </ul>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <li class="quote"><a href="/quote" class="lb-button" data-link="request-quote">Request Quote</a></li>
+    
+            </ul>
+        </nav>
+        <i id="top-button" class="fa fa-chevron-up"></i>
+        
+        <!-- End nav -->

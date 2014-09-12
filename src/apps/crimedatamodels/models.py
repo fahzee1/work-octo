@@ -1,11 +1,16 @@
 import re
 import pdb
+import requests
+import traceback
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.db.models import Sum,Q
 from django.template.defaultfilters import slugify
 from geopy import geocoders
+from django.contrib.localflavor.us.models import (PhoneNumberField,
+    USStateField)
 
 GRADE_MAP = {'F':1, 'D':2, 'C':3, 'B':4, 'A':5}
 
@@ -24,6 +29,14 @@ POPULATION_TYPES = (
     ('CITY', 'City'),
     ('METROPOLIS', 'Metropolis'),
 )
+
+
+RESOURCE_CHOICES = (
+    ('1','Get from rylan 1'),
+    ('2','Get from rylan 2'),
+    ('cj','Get from rylan 3')
+
+    )
 
 
 class ZipCode(models.Model):
@@ -46,6 +59,7 @@ class State(models.Model):
     name = models.CharField(max_length=64, unique=True)
     slug = models.SlugField(max_length=64, unique=True)
     abbreviation = models.CharField(max_length=2, unique=True)
+    license = models.TextField(blank=True,null=True, help_text='License #')
 
     def __unicode__(self):
         return '%s %s' % (self.abbreviation, self.name)
@@ -359,6 +373,7 @@ class LocalAddress(models.Model):
     street_name = models.CharField(max_length=255,blank=True,null=True)
     city = models.CharField(max_length=255,blank=True,null=True)
     state = models.CharField(max_length=255,blank=True,null=True)
+    phone_number = models.CharField(max_length=255,blank=True,null=True)
     zip_code = models.IntegerField(max_length=5,blank=True,null=True)
     googleplus_url = models.CharField(max_length=255,blank=True,null=True)
 
@@ -407,10 +422,435 @@ class FeaturedIcon(FeaturedCommon):
         return "%s's icon" % self.city.city_name
 
 class CityCompetitor(FeaturedCommon):
-    rival = models.CharField(max_length=255)
+    rival = models.CharField(max_length=255,help_text='Name of our competitor?')
+    door_window = models.CharField(default='3',max_length=255,help_text='Door/Window protection?')
+    alarm_monitoring = models.BooleanField(default=False,help_text='24/7 Alarm Monitoring?')
+    free_equipment = models.BooleanField(default=False,help_text='Free security equipment?')
+    no_fees = models.BooleanField(default=False,help_text='No installation fees')
+    warranty = models.BooleanField(default=False,help_text='Lifetime equipment warrant?')
+    monthly_cost = models.CharField(default='19.99',max_length=255,help_text='How much a month?')
+
 
     def __unicode__(self):
         return "%s Competitor: %s" %(self.city.city_name,self.rival)
+
+
+
+
+class Resources(models.Model):
+    """
+    used to show resources section on local pages
+    """
+
+    city = models.ForeignKey("CityLocation",blank=True,null=True)
+    state = models.ForeignKey("State")
+    name = models.CharField(max_length=255)
+    url = models.TextField()
+    category = models.CharField(max_length=200,choices=RESOURCE_CHOICES)
+
+    def __unicode__(self):
+        return '%s - %s' % (self.name,self.city)
+
+
+class CityAndState(models.Model):
+    city = models.ForeignKey("CityLocation")
+    state = models.ForeignKey("State")
+    zip = models.CharField(max_length=5,blank=True,null=True)
+
+    class Meta:
+        abstract = True
+
+
+
+
+
+PROPERTY_CHOICES = (
+        ('r','residential'),
+        ('c','commerical'),
+
+    )
+class Permits(CityAndState):
+    permit_fee = models.CharField(max_length=255,blank=True,null=True)
+    permit_url = models.CharField(max_length=255,blank=True,null=True)
+    addendum_fee = models.CharField(max_length=255,blank=True,null=True)
+    addendum_template = models.CharField(max_length=255,blank=True,null=True)
+    property_type = models.CharField(max_length=255,blank=True,null=True, choices=PROPERTY_CHOICES)
+    no_tech_install = models.BooleanField(default=True)
+    no_self_install = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return '%s, %s permits' % (self.city,self.state)
+
+
+
+class LifeStyles(CityAndState):
+    image = models.ImageField(upload_to='lifestyles',height_field='image_height',width_field='image_width')
+    image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
+    image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
+
+
+class LivesHere(models.Model):
+    title = models.CharField(max_length=255,blank=True,null=True)
+    name = models.CharField(max_length=255,blank=True,null=True)
+    description = models.CharField(max_length=255,blank=True,null=True)
+    image = models.ImageField(default='',upload_to='liveshere',height_field='image_height',width_field='image_width',blank=True,null=True)
+    image_height = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated height of image')
+    image_width = models.CharField(max_length=255,blank=True,null=True,help_text='Auto populated width of image')
+
+    def __unicode__(self):
+        return '%s -- %s' % (self.title, self.name)
+
+
+class Demographics(CityAndState):
+    """
+    affordability_avgHomeValue, home_ownVsRent,home_homeSize
+    are charts.
+
+    home_ownVsRent is depreciated
+
+    Data pulled from Zillows API for local pages
+    """
+    avg_commute_time = models.CharField(max_length=255,blank=True,null=True)
+    median_age = models.CharField(max_length=255,blank=True,null=True)
+    median_household_income = models.CharField(max_length=255,blank=True,null=True)
+    median_home_size = models.CharField(max_length=255,blank=True,null=True)
+    median_list_price = models.CharField(max_length=255,blank=True,null=True)
+    owners_renters = models.CharField(max_length=255,blank=True,null=True,help_text='Percent of home owners to renters')
+    chart_avgHomeValue = models.CharField(max_length=255,blank=True,null=True)
+    chart_homeSize = models.CharField(max_length=255,blank=True,null=True)
+    chart_ownVsRent = models.CharField(max_length=255,blank=True,null=True)
+    liveshere = models.ManyToManyField(LivesHere,related_name='demographics',blank=True,null=True)
+
+
+    def __unicode__(self):
+        return '%s Demographics' % (self.city)
+
+
+    @classmethod
+    def call_data(cls,city,state,zipcode=None):
+        """
+        Graphs are charts.chart
+        Three pages of data..
+        Affordability -- median list price,
+        Homes & Real Estate -- median home size,median household income
+        People -- median age, average commute time
+
+        """
+
+        def get_median_list_price(tag):
+            return tag.string == 'Median List Price'
+
+        def get_median_home_size(tag):
+            return tag.string == 'Median Home Size (Sq. Ft.)'
+
+        def get_median_household_income(tag):
+            return tag.string == 'Median Household Income'
+
+        def get_median_age(tag):
+            return tag.string == 'Median Age'
+
+        def get_average_commute_time(tag):
+            return tag.string == 'Average Commute Time (Minutes)'
+
+
+        from bs4 import BeautifulSoup
+        try:
+            r = requests.get('http://www.zillow.com/webservice/GetDemographics.htm?zws-id=%s&state=%s&city=%s' % (settings.ZILLOW,state.name,city.city_name), timeout=10)
+            if r.status_code == 200:
+                soup = BeautifulSoup(r.text)
+                code = int(soup.message.code.contents[0])
+                if code == 0:
+                    # success
+
+                    # add to database for later use
+                    demographics = Demographics()
+
+
+                    # get charts (soup.charts.chart)
+                    for chart in soup.find_all('chart'):
+                        chart_url = None
+                        if chart.find('name').contents[0] == 'Median Home Value':
+                            chart_url = chart.find('url').contents[0]
+                            demographics.chart_avgHomeValue = chart_url
+
+                        if chart.find('name').contents[0] == 'Home Size in Square Feet':
+                            chart_url = chart.find('url').contents[0]
+                            demographics.chart_homeSize = chart_url
+
+                        if chart.find('name').contents[0] == 'Owners vs. Renters':
+                            chart_url = chart.find('url').contents[0]
+                            demographics.chart_ownVsRent = chart_url
+
+
+
+                        #save this
+
+                    # get pages
+                    median_list_price = soup.find(get_median_list_price)
+                    if median_list_price:
+                        siblings = median_list_price.next_sibling
+                        median_list_price = siblings.contents[0].string
+
+                    median_home_size = soup.find(get_median_home_size)
+                    if median_home_size:
+                        siblings = median_home_size.next_sibling
+                        median_home_size = siblings.contents[0].string
+
+                    median_household_income = soup.find(get_median_household_income)
+                    if median_household_income:
+                        siblings = median_household_income.next_sibling
+                        median_household_income = siblings.contents[0].string
+
+                    median_age = soup.find(get_median_age)
+                    if median_age:
+                        siblings = median_age.next_sibling
+                        median_age = siblings.contents[0].string
+
+                    avg_commute_time = soup.find(get_average_commute_time)
+                    if avg_commute_time:
+                        siblings = avg_commute_time.next_sibling
+                        avg_commute_time = siblings.contents[0].string
+
+
+
+
+
+                    demographics.avg_commute_time = avg_commute_time
+                    demographics.median_age = median_age
+                    demographics.median_household_income = median_household_income
+                    demographics.median_home_size = median_home_size
+                    demographics.median_list_price = median_list_price
+                    demographics.city = city
+                    demographics.state = state
+                    demographics.save()
+
+                    # get who lives here data
+                    liveshere = soup.find_all('liveshere')
+                    for person in liveshere:
+                        title = person.title.string
+                        name = person.find('name').string
+                        description = person.description.string
+
+                        obj = LivesHere.objects.filter(title=title,name=name,description=description)
+                        if not obj:
+                            obj = LivesHere()
+                            obj.title = title
+                            obj.name = name
+                            obj.description = description
+                            obj.save()
+                        else:
+                            obj = obj[0]
+
+                        print 'adding %s to LivesHere' % name
+                        demographics.liveshere.add(obj)
+
+
+                    return demographics
+
+
+                return None
+
+            return None
+
+        except requests.exceptions.Timeout:
+            print 'demographics api timed out'
+            return None
+
+
+        except:
+            print 'unkown error'
+            traceback.print_exc()
+            return None
+
+
+
+
+class Universities(CityAndState):
+    """
+    Data pulled from inventory.data.gov
+    """
+    instnm = models.CharField(max_length=255,blank=True,null=True, help_text='University Name')
+    website = models.CharField(max_length=255,blank=True,null=True, help_text='Website')
+    addr = models.CharField(max_length=255,blank=True,null=True, help_text='Address')
+
+    def __unicode__(self):
+        return '%s Universities' % (self.city)
+
+
+    @classmethod
+    def call_data(cls,city,state):
+        import json
+        resource_id = '38625c3d-5388-4c16-a30f-d105432553a4'
+        filters = {'STABBR':state.abbreviation,
+                   'CITY':city.city_name}
+        url = 'https://inventory.data.gov/api/action/datastore_search?resource_id=%s&filters=%s' % (resource_id,json.dumps(filters))
+        try:
+            r = requests.get(url,timeout=10)
+            if r.status_code == 200:
+                data = r.json()
+                if data['success']:
+                    print 'found %s matching records from inventory.data.gov (universities)' % len(data['result']['records'])
+                    #university_list = []
+                    for data_dict in data['result']['records']:
+                        website = data_dict['WEBADDR']
+                        name = data_dict['INSTNM']
+                        address = data_dict['ADDR']
+                        state_abbr = data_dict['STABBR']
+                        zipcode = data_dict['ZIP']
+                        print 'University name %s' % name
+
+                        if state_abbr == state.abbreviation:
+                            university = Universities.objects.get_or_create(instnm=name,
+                                                                            website=website,
+                                                                            addr=address,
+                                                                            city=city,
+                                                                            state=state,
+                                                                            zip=zipcode)
+                            #university_list.append(university)
+
+
+                    return Universities.objects.filter(city=city,state=state)
+
+                return None
+
+            return None
+
+
+        except requests.exceptions.Timeout:
+            print 'universities api timed out'
+            return None
+
+
+        except:
+            print 'unkown error'
+            traceback.print_exc()
+            return None
+
+
+class LocalEducation(CityAndState):
+    """
+    Data pulled from inventory.data.gov
+    """
+
+    name = models.CharField(max_length=255,blank=True,null=True, help_text='Local education name')
+
+    def __unicode__(self):
+        return '%s Local Education' % (self.city)
+
+
+    @classmethod
+    def call_data(cls,city,state):
+        import json
+
+        resource_id = '37e62816-d097-42c5-9ec9-6b56abe6c4c9'
+        filters = {'LSTATE09':state.abbreviation,
+                   'LCITY09':city.city_name.upper()}
+        url = 'https://inventory.data.gov/api/action/datastore_search?resource_id=%s&filters=%s' % (resource_id,json.dumps(filters))
+        try:
+            r = requests.get(url,timeout=10)
+            if r.status_code == 200:
+                data = r.json()
+                if data['success']:
+                    print 'found %s matching records from inventory.data.gov (local education)' % len(data['result']['records'])
+                    #education_list = []
+                    for data_dict in data['result']['records']:
+                        name = data_dict['NAME09']
+                        state_abbr = data_dict['LSTATE09']
+                        zipcode = data_dict['MZIP09']
+                        print 'University name %s' % name
+
+                        if state_abbr == state.abbreviation:
+                            education = LocalEducation.objects.get_or_create(name=name,
+                                                                        state=state,
+                                                                        city=city,
+                                                                        zip=zipcode)
+                            #education_list.append(education)
+
+
+                    return LocalEducation.objects.filter(city=city,state=state)
+
+                return None
+
+            return None
+
+
+        except requests.exceptions.Timeout:
+            print 'local education api timed out'
+            return None
+
+
+        except:
+            print 'unkown error'
+            traceback.print_exc()
+            return None
+
+
+
+
+
+class FarmersMarket(CityAndState):
+    """
+    Data pulled from search.ams.usda.gov
+    """
+    name = models.CharField(max_length=255,blank=True,null=True, help_text='Market name')
+    website = models.CharField(max_length=255,blank=True,null=True, help_text='Website')
+    address = models.CharField(max_length=255,blank=True,null=True)
+
+    def __unicode__(self):
+        return '%s, %s' % (self.name,self.city)
+
+
+    @classmethod
+    def call_data(cls,city,state):
+        try:
+            url = 'http://search.ams.usda.gov/farmersmarkets/v1/data.svc/locSearch?lat=%s&lng=%s' % (city.latitude,city.longitude)
+            r = requests.get(url,timeout=10)
+            if r.status_code == 200:
+                market_results = r.json()['results']
+                #farmersmarket_list = []
+                for market_dict in market_results:
+                    # name is in this format (6.0 Collin County Farmers Market)
+                    # so remove numbers
+                    name = market_dict['marketname'].split('.')[1][2:]
+                    print 'farmersmarket name is %s' % name
+                    detail_url = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=%s" % market_dict['id']
+                    r2 = requests.get(detail_url,timeout=10)
+                    if r2.status_code == 200:
+                        details = r2.json()['marketdetails']
+                        farmersmarket = FarmersMarket.objects.get_or_create(name=name,
+                                                                            website=details['GoogleLink'],
+                                                                            address=details['Address'],
+                                                                            city=city,
+                                                                            state=state)
+                        #farmersmarket_list.append(farmersmarket)
+
+
+
+
+                return FarmersMarket.objects.filter(city=city,state=state)
+
+            else:
+                return None
+
+        except requests.exceptions.Timeout:
+            print 'farmers market api timed out'
+            return None
+
+
+        except:
+            print 'unkown error'
+            traceback.print_exc()
+            return None
+
+
+
+
+
+
+
+
+
+
 
 
 
