@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.testimonials.models import Testimonial, Textimonial, Vidimonial
+from apps.testimonials.models import Testimonial, Textimonial, Vidimonial,TextimonialCityCache
 
 class TestimonialAdmin(admin.ModelAdmin):
     model = Testimonial
@@ -12,3 +12,8 @@ class TextimonialAdmin(admin.ModelAdmin):
     search_fields = ['message']
     list_filter = ('state',)
 admin.site.register(Textimonial, TextimonialAdmin)
+
+class TextimonialCityCacheAdmin(admin.ModelAdmin):
+    model = TextimonialCityCache
+
+admin.site.register(TextimonialCityCache, TextimonialCityCacheAdmin)

@@ -698,6 +698,7 @@ else:
                 # remove dtt(r'^products/interactive-video/business-video-cameras?$', 'products/video/video-business.html', 'video-business', 'video'),
                 # remove dtt(r'^pa/profile/home-alarm-systems/?$', 'about-us/profile.html', 'profile', 'about-us'),
 
+            dtt(r'^customer/refer-a-friend?$', 'contact-us/refer-a-friend.html', 'refer-a-friend'),
 
         # Support
             dtt(r'^support/?$', 'support/index.html', 'support'),

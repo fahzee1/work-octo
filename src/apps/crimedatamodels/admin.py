@@ -1,7 +1,9 @@
 from django.contrib import admin
-from apps.crimedatamodels.models import (CrimesByCity, CityCrimeStats, CrimeContent, 
+from apps.crimedatamodels.models import (CrimesByCity, CityCrimeStats, CrimeContent,
 										 State, CityLocation, ZipCode, MatchAddressLocation,LocalAddress,StateCrimeStats,
-										 FeaturedIcon,FeaturedVideo,CityCompetitor)
+										 FeaturedIcon,FeaturedVideo,CityCompetitor, Resources,Permits,
+                                         Demographics,Universities,LocalEducation, FarmersMarket,LifeStyles,
+                                         LivesHere)
 
 class CrimesByCityAdmin(admin.ModelAdmin):
     model = CrimesByCity
@@ -16,7 +18,7 @@ admin.site.register(CityCrimeStats, CityCrimeStatsAdmin)
 class CrimeContentAdmin(admin.ModelAdmin):
     model = CrimeContent
 admin.site.register(CrimeContent, CrimeContentAdmin)
-	
+
 class MatchAdressLocationAdmin(admin.ModelAdmin):
 	model = MatchAddressLocation
 	list_display = ('address','location',)
@@ -65,5 +67,17 @@ admin.site.register(CityCompetitor,CityCompeteAdmin)
 
 
 
+class ResourcesAdmin(admin.ModelAdmin):
+    model = Resources
+    raw_id_fields = ('city',)
 
+admin.site.register(Resources,ResourcesAdmin)
+
+admin.site.register(Permits)
+admin.site.register(Demographics)
+admin.site.register(Universities)
+admin.site.register(LocalEducation)
+admin.site.register(FarmersMarket)
+admin.site.register(LifeStyles)
+admin.site.register(LivesHere)
 

@@ -1,3 +1,8 @@
+@import "../pasecurity/skeleton/base.less";
+@import "../pasecurity/skeleton/skeleton.less";
+@import "../pasecurity/owl.less";
+
+
 @light-blue: #78b7fe;
 @blue: #418fde;
 @dark-blue: #0065aa;
@@ -30,6 +35,7 @@
 }
 .condensed-font {
     font-family: "proxima-nova-condensed",sans-serif;
+    font-weight: 600 !important;
 }
 .border-radius (@top-left-radius: 6px, @top-right-radius: 6px, @bottom-right-radius: 6px, @bottom-left-radius: 6px) {
     border-radius: @top-left-radius @top-right-radius @bottom-right-radius @bottom-left-radius;
@@ -38,6 +44,9 @@
     -webkit-border-top-right-radius: @top-right-radius;
     -webkit-border-bottom-left-radius: @bottom-left-radius;
     -webkit-border-bottom-right-radius: @bottom-right-radius;
+}
+.hide-desktop {
+    display: none !important;
 }
 .drop-shadow (@shadow-x: 0px, @shadow-y: 2px, @shadow-blur: 5px, @shadow-color: @dark-grey) {
     -moz-box-shadow: @shadow-x @shadow-y @shadow-blur @shadow-color;
@@ -81,6 +90,9 @@
     background-image: -webkit-gradient(linear,left top,left bottom,from(@top-color),to(@bottom-color));
 }
 
+html {
+    -webkit-font-smoothing: antialiased;
+}
 
 body {
     .san-serif-font;
@@ -278,12 +290,12 @@ a {
     color: @white;
     text-transform: uppercase;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
     line-height: 22px;
     text-shadow: none;
     border: 1px solid transparent;
     border-bottom: 4px solid @dark-blue;
-    padding: 8px 16px 6px;
+    padding: 6px 10px 4px;
     .fade-slow;
     a {
         font-weight: bold;
@@ -411,6 +423,9 @@ header {
         li {
             float: left;
             margin-bottom: 0;
+            form {
+                margin-bottom: 0;
+            }
             input {
                 &.expanding-search {
                     width: 36px;
@@ -542,9 +557,8 @@ header {
 nav {
     display: block;
     height: 51px;
-    background: @v-light-grey;
+    background: @white;
     border-bottom: 1px solid #d7d7d7;
-
     ul {
         &.container {
 
@@ -606,13 +620,13 @@ nav {
                                         left: 0px;
                                     }
                                     &.dropdown-security-solutions {
-                                        left: 219px;
+                                        left: 79px;
                                     }
                                     &.dropdown-learn {
-                                        left: 400px;
+                                        left: 254px;
                                     }
                                     &.dropdown-support {
-                                        left: 486px;
+                                        left: 338px;
                                     }
                                     li {
                                         a {
@@ -665,8 +679,62 @@ nav {
                                             background: @white;
                                             border: 1px solid #ddd;
                                             .drop-shadow(2px,2px,5px,rgba(0,0,0,.15));
+                                            .bg-tile {
+                                                position: absolute;
+                                                right: 0;
+                                                bottom: 0;
+                                                background: url(/static/img/header/header-sprite.png) 0 0 no-repeat;
+                                                width: 200px;
+                                                height: 160px;
+                                                z-index: 0;
+                                            }
                                             &.business-package {
-                                                background: @white url(/static/img/header/business-package.png) 200px bottom no-repeat;
+                                                .bg-tile {
+                                                    background-position-x: 0;
+                                                    background-position-y: -320px;
+                                                }
+                                            }
+                                            &.advantage {
+                                                .bg-tile {
+                                                    background-position-x: -400px;
+                                                    background-position-y: -160px;
+                                                }
+                                            }
+                                            &.dealer-program {
+                                                .bg-tile {
+                                                    background-position-x: -200px;
+                                                    background-position-y: -320px;
+                                                }
+                                            }
+                                            &.existing-system {
+                                                .bg-tile {
+                                                    background-position-x: -200px;
+                                                    background-position-y: 0px;
+                                                }
+                                            }
+                                            &.customer-service {
+                                                .bg-tile {
+                                                    background-position-x: 0;
+                                                    background-position-y: -160px;
+                                                }
+                                            }
+                                            &.home-automation {
+                                                .bg-tile {
+                                                    background-position-x: 0;
+                                                    background-position-y: 0px;
+                                                }
+                                            }
+                                            &.protect-america {
+                                                .bg-tile {
+                                                    background-position-x: -200px;
+                                                    background-position-y: -160px;
+                                                }
+                                            }
+                                            &.automotive {
+                                                .bg-tile {
+                                                    background-position-x: -400px;
+                                                    background-position-y: 0px;
+                                                }
                                             }
                                             h3 {
                                                 padding: 10px 25px;
@@ -676,6 +744,8 @@ nav {
                                                 color: @black;
                                             }
                                             .popover-content {
+                                                position: relative;
+                                                z-index: 1;
                                                 ul {
                                                     margin: 5px 0px 5px 20px;
                                                     float: left;
@@ -706,7 +776,7 @@ nav {
                                                             a {
                                                                 font-size: 12px;
                                                                 padding-left: 0;
-                                                                padding-right: 16px;
+                                                                padding-right: 14px;
                                                                 padding-bottom: 4px;
                                                                 line-height: 16px;
                                                             }
@@ -720,10 +790,12 @@ nav {
                                                     text-decoration: none;
                                                     text-transform: uppercase;
                                                     border-bottom: 4px solid @dark-blue;
-                                                    font-weight: bold;
-                                                    padding: 4px 14px;
+                                                    font-weight: 600;
+                                                    padding: 3px 8px 2px;
                                                     margin-left: 24px;
-                                                    margin-bottom: 8px;
+                                                    margin-bottom: 6px;
+                                                    margin-top: 0;
+                                                    font-size: 12px;
                                                     &:hover {
                                                         background: @light-blue;
                                                         border-bottom: 4px solid @blue;
@@ -739,7 +811,10 @@ nav {
                                                 p {
                                                     font-size: 12px;
                                                     padding: 0 25px;
-                                                    line-height: 14px;
+                                                    line-height: 18px;
+                                                    &.smaller {
+                                                        width: 65%;
+                                                    }
                                                 }
                                             }
                                         }
@@ -792,12 +867,14 @@ nav {
                     background: @yellow;
                     border-bottom: 4px solid @dark-yellow;
                     display: block;
-                    .border-radius(3px,3px,3px,3px);
+                    .border-radius(6px,6px,6px,6px);
                     cursor: pointer;
+                    .condensed-font;
                     .fade-slow;
                     &:hover {
-                        color: @white;
-                        background: @yellow;
+                        color: @grey;
+                        background: #ffe780;
+                        border-color: #ffdc41;
                         .fade-fast;
                     }
                 }
@@ -1244,42 +1321,23 @@ i.large-icon {
     .info {
         padding: 0;
         h3 {
-            font-size: 16px;
-        }
-        p {
-            font-size: 14px;
-            line-height: 20px;
-            &.extra-content {
-                font-size: 12px;
-                line-height: 18px;
-            }
+            font-size: 32px;
+            line-height: 38px;
+            font-weight: 300;
+            text-align: center;
+            padding: 0 65px 10px;
         }
         .customize {
-            background: url(/static/img/base/homepage-customize.jpg) top center no-repeat;
-            background-size: cover;
-            height: 280px;
-            padding: 35px 0;
-
-        }
-        .phone {
-            background: url(/static/img/base/homepage-app.jpg) top center no-repeat;
-            background-size: cover;
-            height: 280px;
-            padding: 35px 0;
-        }
-        .fob {
-            background: url(/static/img/base/homepage-fob.jpg) top center no-repeat;
-            background-size: cover;
-            height: 280px;
-            padding: 35px 0;
-        }
-        .panic {
-            background: url(/static/img/base/homepage-panic.jpg) top center no-repeat;
-            background-size: cover;
-            height: 280px;
-            padding: 35px 0;
+            margin: 60px 0;
+            a {
+                display: block;
+                margin: 0 auto;
+                width: 160px;
+                text-align: center;
+            }
         }
     }
+
 }
 #hero {
     background: @navy url(/static/img/base/gradient-bg.png) repeat-x;
@@ -1296,29 +1354,30 @@ i.large-icon {
         h2 {
             text-align: center;
             color: @white;
-            font-size: 30px;
-            line-height: 48px;
+            font-size: 28px;
+            line-height: 36px;
             padding-top: 75px;
-            font-weight: 300;
+            font-weight: 600;
             font-family: "proxima-nova-condensed";
             width: 75%;
             margin: 0 auto;
         }
     }
     &.index {
-        height: 595px;
-        background: #000;
+        height: 594px;
+        background: url(/static/img/base/safety-is-simple.jpg) #b4aeae no-repeat top center;
         .container {
             z-index: 999;
-            height: 595px;
+            height: 594px;
             h2 {
                 text-align: center;
                 color: @white;
-                font-size: 30px;
-                line-height: 48px;
-                padding-top: 100px;
+                font-size: 60px;
+                line-height: 66px;
+                padding-top: 60px;
                 font-weight: 300;
-                font-family: "proxima-nova-condensed";
+                text-transform: none;
+                font-family: "proxima-nova";
                 span {
                     display: block;
                     font-size: 42px;
@@ -1331,19 +1390,19 @@ i.large-icon {
             h1 {
                 text-align: center;
                 color: @white;
-                font-size: 20px;
-                line-height: 30px;
-                padding: 20px 0;
-                font-weight: 300;
-                font-family: "proxima-nova";
-                margin-bottom: 0;
+                font-size: 22px;
+                line-height: 28px;
+                padding: 0;
+                font-weight: 600;
+                font-family: "proxima-nova-condensed";
+                margin-bottom: 40px;
             }
             p {
                 text-align: center;
                 color: @white;
                 font-size: 30px;
                 line-height: 34px;
-                font-weight: 300;
+                font-weight: 600;
                 font-family: "proxima-nova-condensed";
                 text-transform: uppercase;
                 &.small {
@@ -1353,8 +1412,34 @@ i.large-icon {
                     font-family: "proxima-nova";
                 }
             }
+            ul {
+                width: 350px;
+                margin: 0 auto;
+                li {
+                    color: @white;
+                    font-size: 18px;
+                    line-height: 24px;
+                    i {
+                        margin-right: 10px;
+                    }
+                }
+            }
+            span {
+                color: @white;
+                text-align: center;
+                display: block;
+                margin: 0 auto;
+                strong {
+                    font-weight: 800;
+                    clear: both;
+                    display: block;
+                    color: @white;
+                    font-size: 16px;
+                }
+            }
             .button {
-                margin: 0 auto 10px;
+                margin: 40px auto 10px;
+                width: 200px;
             }
         }
     }
@@ -1440,6 +1525,8 @@ i.large-icon {
             button {
                 margin: 40px auto 0;
                 display: block;
+                font-weight: 600;
+                .condensed-font;
             }
             &.alt {
                 h1 {
@@ -1558,10 +1645,11 @@ i.large-icon {
                 text-decoration: none;
                 font-size: 14px;
                 font-weight: 600;
+                letter-spacing: 1px;
                 margin: 0 auto;
                 width: 182px;
                 float: none;
-                .san-serif-font;
+                .condensed-font;
                 .fade-slow;
                 cursor: pointer;
                 cursor: hand;
@@ -1783,7 +1871,10 @@ i.large-icon {
             background: #ccc url(/static/img/shop/bronze-hero.jpg) center center no-repeat;
         }
         .heading {
-            position: relative;
+            position: absolute;
+            right: 5px;
+            left: auto;
+            float: none;
             background: rgba(0,0,0,.75);
             padding: 0 24px;
             width: 560px;
@@ -1793,7 +1884,7 @@ i.large-icon {
                 padding-top: 32px;
             }
             p {
-                width: 75%;
+                width: 87%;
                 padding-bottom: 16px;
                 margin-bottom: 32px;
                 border-bottom: 1px solid @grey;
@@ -1823,7 +1914,7 @@ i.large-icon {
             }
             .extra-callout {
                 text-transform: uppercase;
-                font-size: 12px;
+                font-size: 14px;
                 color: @white;
             }
             .package-details {
@@ -2173,6 +2264,8 @@ i.large-icon {
         display: block;
         padding: 10px 24px;
         width: 400px;
+        font-weight: 600;
+        .condensed-font;
         margin: 40px auto 0;
         &:hover {
 
@@ -2375,9 +2468,17 @@ i.large-icon {
 .order-form-container {
     border-top: 1px solid #ddd;
     background: url(/static/img/base/order-bg.jpg) top center no-repeat;
+    background-size: cover;
     padding: 10px 0;
     .container {
         background: @white;
+        p {
+            strong{
+                span {
+                    color: @red;
+                }
+            }
+        }
         .steps {
             background: transparent;
             .get-started {
@@ -2458,6 +2559,29 @@ i.large-icon {
         color: #555;
     }
 }
+.ecomm-steps {
+    background: @blue;
+    ul {
+        li {
+            color: @navy;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            line-height: 48px;
+            i {
+                font-size: 24px;
+                line-height: 48px;
+                position: relative;
+                top: 3px;
+                padding-right: 4px;
+                padding-left: 8px;
+            }
+            &.done {
+                background: @light-blue;
+                color: @white;
+            }
+        }
+    }
+}
 .order-form {
     background: #fff;
     border: 1px solid #ddd;
@@ -2514,79 +2638,62 @@ i.large-icon {
     padding: 60px 0;
     .container {
         a {
+            text-decoration: none;
+            text-align: center;
+            h2 {
+                font-weight: bold;
+                color: @navy;
+                font-size: 26px;
+                letter-spacing: 1px;
+                line-height: 36px;
+                padding-top: 15px;
+            }
+            h3 {
+                font-size: 20px;
+                line-height: 22px;
+                padding-top: 4px;
+                .slab-font;
+                text-transform: uppercase;
+                span {
+                    font-size: 20px;
+                    line-height: 22px;
+                    clear: both;
+                    display: block;
+                }
+            }
+            h4 {
+                font-size: 30px;
+                padding: 0;
+                margin: 0;
+            }
+            p {
+                color: @navy;
+                font-size: 16px;
+                line-height: 22px;
+                margin: 0;
+                &.button {
+                    margin: 15px auto 0;
+                    display: block;
+                    width: 180px;
+                    color: @white;
+                    padding: 5px 5px 4px;
+                }
+            }
             span {
+                color: @dark-grey;
+                font-size: 38px;
                 i {
                     font-size: 30px;
                 }
             }
         }
     }
-    h2 {
-        font-weight: bold;
-        color: @navy;
-        font-size: 26px;
-        letter-spacing: 1px;
-        line-height: 36px;
-        padding-top: 15px;
-    }
-    p {
-        color: @navy;
-        font-size: 16px;
-        padding-bottom: 16px;
-    }
-    a {
-        text-decoration: none;
-        color: @navy;
-        font-size: 40px;
-        font-weight: 100;
-        letter-spacing: 0;
-        line-height: 52px;
-        display: block;
-    }
-    .button {
-        border-radius: 150px;
-        background: #fff;
-        width: 185px;
-        height: 135px;
-        float: right;
-        margin: 0;
-        padding: 45px 0 5px;
-        border-bottom: none;
-        color: @dark-grey;
-        text-align: center;
-        h3 {
-            font-size: 12px;
-            line-height: 16px;
-            padding-top: 5px;
-            span {
-                clear: both;
-                display: block;
-                font-size: 16px;
-                line-height: 14px;
-            }
-        }
-        h4 {
-            font-size: 40px;
-            padding: 0;
-            margin: 0;
-        }
-        p{
-            font-size: 10px;
-            line-height: 24px;
-            color: #999;
-            margin: 0;
-            padding: 0;
-            &.link {
-                color: @blue;
-                font-size: 18px;
-            }
-        }
-    }
 }
 #call-box {
-    background: @red;
+    background: @white url(/static/img/base/call-box-shadow.png) bottom center no-repeat;
     width: 100%;
     position: relative;
+    border-top: 1px solid #eee;
     &.alt {
         background: @dark-grey;
         p {
@@ -2597,19 +2704,20 @@ i.large-icon {
         .slab-font;
         width: 960px;
         margin: 0 auto;
-        color: @white;
-        font-weight: bold;
-        font-size: 30px;
-        line-height: 42px;
+        color: @dark-grey;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
         text-align: center;
-        padding: 12px 0px;
+        padding: 30px 0 35px;
         text-transform: uppercase;
-        text-shadow: 0 1px 1px @dark-red;
+        text-shadow: none;
         strong {
-            font-weight: bold;
+            font-weight: 900;
+            color: @red;
         }
         a {
-            color: @white;
+            color: @dark-grey;
             text-decoration: none;
             cursor: default;
         }
@@ -2710,6 +2818,12 @@ i.large-icon {
             font-size: 10px;
             line-height: 10px;
         }
+        em {
+            display: block;
+            font-size: 12px;
+            line-height: 12px;
+            color: @grey;
+        }
     }
     b {
         font-weight: 100;
@@ -2740,6 +2854,10 @@ i.large-icon {
             text-align: center;
             font-size: 14px;
             padding-top: 24px;
+        }
+        &.alt {
+            text-align: center;
+            font-size: 14px;
         }
     }
 }
@@ -2987,6 +3105,9 @@ i.large-icon {
 			    margin-top: 0;
 			    background-position: 0 -2px;
 			}
+			&.selected-package {
+    			
+			}
     	}
         .triple-guarantee {
             padding: 0;
@@ -2994,13 +3115,15 @@ i.large-icon {
             clear: both;
             h2 {
                 float: left;
-                font-size: 26px;
-                font-weight: 600;
+                font-size: 25px;
+                font-weight: 800;
                 line-height: 26px;
                 text-align: left;
                 color: #2e3849;
                 text-transform: uppercase;
+                margin-left: 30px;
                 strong {
+                    font-size: 26px;
                     color: @blue;
                     font-weight: 500;
                     text-transform: uppercase;
@@ -3628,7 +3751,7 @@ i.large-icon {
                         padding: 8px 0;
                         text-transform: uppercase;
                         i {
-                            color: @light-grey;
+                            color: @blue;
                             font-size: 32px;
                         }
                         &.y-axis {
@@ -3733,6 +3856,102 @@ i.large-icon {
             background: rgba(0,0,0,.75);
         }
     }
+    &.appliance-module {
+        background: #4c3119 url(/static/img/equipment/appliance-module-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.appliance-module {
+        background: #333 url(/static/img/equipment/appliance-module-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.carbon-monoxide {
+        background: #333 url(/static/img/equipment/carbon-monoxide-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.driveway-sensor {
+        background: #333 url(/static/img/equipment/driveway-sensor-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.flood-sensor {
+        background: #555 url(/static/img/equipment/flood-sensor-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.freeze-sensor {
+        background: #555 url(/static/img/equipment/freeze-sensor-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.garage-door {
+        background: #555 url(/static/img/equipment/garage-door-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.glass-break {
+        background: #555 url(/static/img/equipment/glass-break-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.gps {
+        background: #555 url(/static/img/equipment/gps-tracker-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.home-disaster {
+        background: #555 url(/static/img/equipment/home-disaster-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.medical-pendant {
+        background: #555 url(/static/img/equipment/medical-pendant-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.motion {
+        background: #555 url(/static/img/equipment/motion-sensor-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
     &.keychain {
         background: #4c3119 url(/static/img/equipment/keychain-lifestyle.jpg) no-repeat center center;
         background-size: cover;
@@ -3744,6 +3963,38 @@ i.large-icon {
     &.panic {
         background: #4c3119 url(/static/img/equipment/panic-button-lifestyle.jpg) no-repeat center center;
         background-size: cover;
+    }
+    &.smoke-detector {
+        background: #555 url(/static/img/equipment/smoke-detector-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.simon-xt {
+        background: #555 url(/static/img/equipment/simon-xt-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.talking-keypad {
+        background: #555 url(/static/img/equipment/talking-wireless-keypad-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.carbon-monoxide {
+        background: #555 url(/static/img/equipment/carbon-monoxide-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
     }
     &.copper {
         background: #7c8d05 url(/static/img/shop/copper-lifestyle.jpg) no-repeat center center;
@@ -3771,6 +4022,22 @@ i.large-icon {
     }
     &.gold {
         background: #7c8d05 url(/static/img/shop/gold-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.silver {
+        background: #7c8d05 url(/static/img/shop/silver-lifestyle.jpg) no-repeat center center;
+        background-size: cover;
+        #home-content {
+            background: rgb(0,0,0);
+            background: rgba(0,0,0,.75);
+        }
+    }
+    &.platinum {
+        background: #7c8d05 url(/static/img/shop/platinum-lifestyle.jpg) no-repeat center center;
         background-size: cover;
         #home-content {
             background: rgb(0,0,0);
@@ -3811,6 +4078,9 @@ i.large-icon {
         }
         p {
             color: @white;
+            strong {
+                color: @white;
+            }
         }
     }
     .box-container {
@@ -3885,7 +4155,6 @@ i.large-icon {
     }
 }
 #main-benefits {
-    width:960px;
     padding-top:32px;
     padding-bottom:32px;
     margin:0 auto;
@@ -4272,6 +4541,10 @@ footer {
 
 .info {
     padding-bottom: 24px;
+    a {
+        font-size: 16px;
+        font-weight: 600;
+    }
 }
 
 .equipment-pieces {

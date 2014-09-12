@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
-{% block page_title %}{{city}} Home Security Systems | Protect America{% endblock %}
+{% block page_title %}{{city}}, {{ state }} Home Security Systems | Protect America{% endblock %}
 
 {% block page_description %}Want a FREE {{ city }} home security system? Sign up for monitoring with Protect America and get a system at no cost. Call 888-936-3385 to learn more!{% endblock %}
 
@@ -12,265 +12,490 @@
 <meta name="geo.position" content="{{ lat }};{{ long }}" />
 <meta name="ICBM" content="{{ lat }}, {{ long }}" />
 <meta name = "viewport" content ="initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="{{ STATIC_URL }}css/local-generic.css">
-<link rel="stylesheet" href="{{ STATIC_URL }}css/style-responsive.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/local.css">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 {% endblock %}
-
+{% block typekit-code %}
+<script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+{% block header %}
+    {% include "_partials/new-header.html" with form=forms.basic %}
+{% endblock %}
 {% block content %}
+</div>
+<div id="hero" class="plain">
+    <div class="container">
+        {% include "order/quote-form-white.html" with form=forms.basic %}
+        <div class="heading">
+            <h1>{{ city }} {% content_spinner "homesecuritysystems" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|alarm systems|burglar security systems" %}</h1>
+            <h2>{{ city }}, your security should be simple.<span>And it starts for less than a dollar per day.</span></h2>
+            <ul class="list">
+                <li><i class="fa fa-check"></i> 24/7 security monitoring</li>
+                <li><i class="fa fa-check"></i> Easy to setup &ndash; no tools required</li>
+                <li><i class="fa fa-check"></i> Free equipment and no installation fees</li>
+            </ul>
+            <a href="{% url order-package %}" class="button">Get Started Now</a>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div id="call-box">
+    {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Get Started Now, <strong>Call Today! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong></a></p>
+</div>
+{{ crime_stats_ctx }}
+<div class="clear"></div>
+<div id="featured-on">
+    <small>Proudly Featured on:</small>
+    <div id="featured-badges">
+        <div class="featured abc">&nbsp;</div>
+        <div class="featured besty">&nbsp;</div>
+        <div class="featured npr">&nbsp;</div>
+        <div class="featured topconsumer">&nbsp;</div>
+        <div class="featured foxnews">&nbsp;</div>
+        <div class="featured consumerdigest">&nbsp;</div>
+        <div class="featured buzz">&nbsp;</div>
+        <div class="featured bbb">&nbsp;</div>
+        <div class="featured gadgeteer">&nbsp;</div>
+        <div class="featured toptens">&nbsp;</div>
+        <div class="featured cw">&nbsp;</div>
+        <div class="featured history">&nbsp;</div>
 
+    </div>
+</div>
+<div class="container">
+    <h2 class="title center">Protect what matters most.</h2>
+    {% if local_video %}
+        <div id="local-video" class="nine columns">
+            {{ local_video.video_embed|safe }}
+        </div>
+    {% endif %}
+        <div class="seven columns">
+    		<p>With {% content_spinner "name" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %}, you get more than just {% content_spinner "homesecuritysystems" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems" %} in {{ city }}. {% content_spinner "para1" "You get a commitment. It's why Protect America is a Consumers Digest Best Buy and why we continue to serve more {{ city }} families and households every day. We have a responsibility to provide you with the security and peace of mind you deserve.|You get a commitment. We have a responsibility to provide {{ state_long }} families with the security and peace of mind they deserve, and we take that responsibility seriously. It's why Protect America is a Consumers Digest Best Buy!|You get a commitment. It's no wonder Consumers Digest named Protect America as a Best Buy. Our customer service and pledge to excellence are unrivaled in {{ city }}, {{ state }} because we know we have a responsibility to your security and peace of mind." %}</p>
+        {% if not local_video %}
+        </div>
+        <div class="{% if local_video %}sixteen columns padding-top extra-paragraph{% else %} seven columns offset-by-two{% endif %}">
+        {% endif %}
+            <p>{% content_spinner "closer-para1" "Our award-winning security experts take time to learn about your specific needs in {{ city }}, {{ state }} before helping you create a home security system that perfectly fits your home. It doesn't end there, however. Professionals are constantly standing by to answer any questions you might have about home security systems, wireless technology and beyond. We take the well-being of your home seriously: as if it is our own.|We take the well-being of your {{ state_long }} home personally: as if it is our own. Your household deserves the same safety and quality of life afforded to every home in {{ city }}. Experience wireless security that goes above and beyond with Protect America!|Our security experts are specially trained to listen and learn before making any recommendations, because no two homes or homeowners in {{ city }} are the same. Our service doesn't end there, however. We are with you every step of the way &ndash; always available by phone or chat to answer questions about wireless technology, home security systems, home automation and beyond. " %}</p>
+        </div>
+    <div class="clear"></div>
+    <a href="{% url shop %}" class="button center">Shop Our Packages</a>
+</div>
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        {% block advantage-header %}
+        <h2>A Step above the rest <span>providing more safety and security for less</span></h2>
+        {% endblock %}
+        <table>
+            <thead>
+                {% block table-headers %}
+
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Door / Window Protection</th>
+                    <th>24/7 Alarm Monitoring</th>
+                    <th>Free Security Equipment</th>
+                    <th class="extra">No Installation <br />Fees</th>
+                    <th class="extra">Lifetime Equipment Warranty</th>
+                    <th>Monthly Cost</th>
+                </tr>
+                {% endblock %}
+            </thead>
+            <tbody>
+                {% block advantage-us %}
+
+                <tr class="alpha">
+                    <td class="title">Protect America</td>
+                    <td class="price">3</td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td class="extra"><i class="fa fa-check"></i></td>
+                    <td class="extra"><i class="fa fa-check"></i></td>
+                    <td class="price">$19.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-1 %}
+                <tr>
+                    <td class="title">ADT</td>
+                    <td class="price">2</td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td class="na">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="price">$42.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-2 %}
+                    {% if local_rival %}
+                    <tr>
+    				    <td class="title">{{ local_rival.rival }}</td>
+    				    <td class="price">{{ local_rival.door_window }}</td>
+    				    <td class="na" >{% if local_rival.alarm_monitoring %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="na">{% if local_rival.free_equipment %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="na extra">{% if local_rival.no_fees %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="na extra">{% if local_rival.warranty %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+    				    <td class="price">{{ local_rival.monthly_cost }}</td>
+    				</tr>
+    				{% else %}
+    				<tr>
+                        <td class="title">Vivint</td>
+                        <td class="price">2</td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td class="na">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="price">$49.99</td>
+                    </tr>
+                    {% endif %}
+                {% endblock %}
+            </tbody>
+        </table>
+        <div class="clear"></div>
+    </div>
 
 </div>
-	<div id="generic-banner">
-		<div class="wrapper">
-
-			<div class="left">
-				<h1>{{ city }}'s {% content_spinner "headline1" "Best|Top Rated|Leading|Most Reliable|Most Affordable" %} {% content_spinner "headline2" "Home|" %} {% content_spinner "headline3" "Alarm Systems| Alarm|Burglar Alarm| Security Automation|Security Equipment|Security Monitoring|Security Monitoring|Security System|Security Systems|Security|Alarm Monitoring|Alarm System|Alarm System|Alarm Systems|Alarm Systems|Alarm|Alarm|Cellular Alarm|Security Alarms Systems|Security Monitoring Service|Security Monitoring System|Security Monitoring Systems|Security System Alarms|Security System Monitoring|Security System|Security Systems Equipment|Security Systems|Simon XT Alarm System|Security Monitoring" %}</h1>
-				<p>{% content_spinner "diff1" "Over the past 20 years|For over 20 years|Since 1992" %}, {% content_spinner "diff2" "Protect America has revolutionized the home security industry.|Protect America has been a pioneer of wireless home security|Protect America has revolutionized the industry by pioneering wireless alarm systems." %} {% content_spinner "diff3" "It's now easier than ever to protect your family|Defending your family from burglary is now easier than ever|Protecting your family is now simple" %} with quality home security products at an affordable price.</p>
-				<h2>{% content_spinner "headline7" "Plans start|Security starts|Packages start|Starting" %} at only</h2>
-				<h3>$19.99</h3>
-				<a class="button-link" title="Shop now" href="/shop-home-security-packages">Shop now <i class="icon-chevron-right"></i></a>
-			</div>
-			<div class="right">
-				<div id="hero-content">
-					<div id="slide-form-area">
-        {% include "order/quote-form-white.html" with form=forms.basic %}
-					</div>
-				</div>
-			</div>
-		</div>
-        <iframe width="115%" class="map-background" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q={{ city }}%2B{{ state_long }}&ie=UTF8&z=13&iwloc=near&scrollwheel=false&maptypecontrol=false&disabledefaultUI=true&iwloc=near&navigationcontrol=false&output=embed"></iframe>
-
-	</div>
-{% include "order/call-box.html" %}
-
-<div class="wrapper">
-        <div id="featured-on">
-            <p>Featured On:</p>
-            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/abc.png" class="alpha" alt="Featured on ABC" width="96" height="96" />
-            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/best.png" alt="Featured on Best Home Security Companys" width="96" height="96" />
-
-            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/fox-news.png" alt="Featured on Fox News" width="96" height="96" />
-			{% if local_icon %}
-				<img src="{{ local_icon.icon.url }}"  width="96" height="96">
-			{% else %}
-                <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/cw.png" alt="Featured on The CW" width="96" height="96" />
-			{% endif %}
-
-            <img src="http://static.protectamericasecurity.net/img/extra/validation-icons/consumer-digest.png" alt="Rated a Consumer Digest Best Buy" width="96" height="96" />
+<div id="community-section">
+    <div class="community-slide moving container">
+        <div class="sixteen columns">
+            <h4>Welcome to {{ city }}</h4>
+            <p>Typical commute time in {{ city }}, {{ state }}? Average home size? Maybe you'd like to learn more about {{ city }}'s demographics, or your local farmer's market location? Look within to discover more.</p>
+            <p>Just click and drag this section left and right to navigate!</p>
+            <p class="forward-button"><i class="fa fa-arrow-circle-right"></i></p>
         </div>
 
-	<div id="local-first-paragraph" class="{% if local_video %}split{% endif %}">
-			<p>{% content_spinner "diff4" "Wireless technology is the future of home security, and that future is now.|Home security has gone wireless, and that's great news for {{ state_long }} homeowners.|Wireless home security is the simple solution for homeowners seeking protection." %} {% content_spinner "diff5" "Peace of mind shouldn't come at a great cost; neither should it involve installation fees or expensive equipment.|The goal in arming yourself is to avoid stressful situations, so the process of securing your home should be painless. Installation and equipment fees shouldn't even be a part of the equation." %} That is why our {% content_spinner "newdiff1" "wireless security packages|home security packages|alarm packages|home security systems|alarm systems" %} come with security equipment and have zero installation costs. {% content_spinner "diff6" "Safety and comfort are now within anyone's grasp, and that's how it should be.|A safe home is now within anyone's grasp.|A safe home isn't just attainable, it's affordable." %}</p>
+    </div>
+    {% if demographics %}
+    <div class="community-slide people container">
+        <div class="eight columns">
+            <h4>About the area</h4>
+            <p>Whether you're from {{ city }} or just moving to {{ state_long }}, let us be the first to welcome you home.</p>
+            <img src="{{ STATIC_URL }}img/local-pages/community-about-the-area.png" alt="About the Community" class="about" />
+        </div>
+        <div class="eight columns">
+            <ul class="neighborhood-stats">
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/car-icon.png" alt="Average Drive Time" />
+                    <div>
+                        <span class="strong">{{ demographics.avg_commute_time|slice:"5" }} min.</span>
+                        <span>Average time drive time to work</span>
+                    </div>
+                </li>
+                <div class="clear"></div>
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/person-icon.png" alt="Average citizen age" />
+                    <div>
+                        <span class="strong">{{ demographics.median_age }}</span>
+                        <span>Average citizen age</span>
+                    </div>
+                </li>
+                <div class="clear"></div>
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/bank-icon.png" alt="Average Household Income" />
+                    <div>
+                        <span class="strong">${{ demographics.median_household_income|floatformat:"0"|intcomma }}</span>
+                        <span>Average household income</span>
+                    </div>
+                </li>
+                <div class="clear"></div>
 
-	</div>
-    {% if local_video %}
-    <div id="local-video">
-    {{ local_video.video_embed|safe }}
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/blueprint-icon.png" title="Average home size" />
+                    <div>
+                        <span class="strong">{{ demographics.median_home_size|intcomma }} sq. ft.</span>
+                        <span>Average home size</span>
+                    </div>
+                </li>
+                <div class="clear"></div>
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/for-sale-icon.png" title="Average home price" />
+                    <div>
+                        <span class="strong">${{ demographics.median_list_price|intcomma }}</span>
+                        <span>Average home list price</span>
+                    </div>
+                </li>
+                <div class="clear"></div>
+            </ul>
+        </div>
     </div>
     {% endif %}
-    <div class="clear"></div>
-</div>
-
-	<div id="local-banner">
-		<div class="left">
-			<p>Get Started Now,<br>Call Today!<br><strong>1-800-936-3385</strong></p>
-		</div>
-		<div class="right">
-			<p>Protecting your home in {{ city }} has never been easier.</p>
-		</div>
-
-		<div class="clear"></div>
-	</div>
-
-<div class="wrapper">
-
-	<div id="protect-america-content">
-
-		<h2>With Protect America, you get more than just home security</h2>
-
-		<p>{% content_spinner "para1" "You get a commitment. It's why Protect America is a Consumers Digest Best Buy and why we continue to serve more families and households every day. We have a responsibility to provide you with the security and peace of mind you deserve.|You get a commitment. We have a responsibility to provide you with the security and peace of mind you deserve, and we take that responsibility seriously. It's why Protect America is a Consumers Digest Best Buy!|You get a commitment. It's no wonder Consumers Digest named Protect America as a Best Buy. Our customer service and pledge to excellence are unrivaled in the industry, because we know we have a responsibility to your security and peace of mind." %}</p>
-        <p>
-        {% paragraph_spinner "main" %}
-            <p>{% content_spinner "fill1" "Home security in {{ city }} has never been easier.|Achieving peace of mind in {{ city }} is easy.|Protecting your home in {{ city }} has never been easier.|In {{ city }}, a city where burglary happens every 15 seconds, " %} {% content_spinner "fill2" "And it's important to stay protected|And securing your home is extremely important" %}. Protect America offers {% content_spinner "fill3" "powerful|simple and effective|effective" %} security packages that fit any budget and any home.</p>
-            <p>{% content_spinner "fill4" "Safeguard your home and family|Defend your home|Protect yourself" %} with world class service from a wireless security pioneer. {% content_spinner "fill5" "Freedom from worry|peace of mind|reliable home defense" %} is only a click away. {% content_spinner "fill6" "Being proactive|a proactive approach|being proactive instead of reactive" %} is the best way to avoid {% content_spinner "fill7" "burglary|a devastating burglary|a traumatic burglary" %}. We're here to {% content_spinner "fill8" "guide you through your options|help in any way we can, whether it's equipment options or helpful tips to secure your home|help you explore your options" %}. Our security experts are {% content_spinner "fill9" "standing at the ready|an excellent resource in deciding what best suits your home|standing by to answer any questions" %}, so call today!</p>
-            <p></p>
-        {% endparagraph_spinner %}
-        </p>
-        <p>{% content_spinner "closer-para1" "Our award-winning security experts take time to learn about your specific needs before helping you create a security system that perfectly fits your home. It doesn't end there, however. Professionals are constantly standing by to answer any questions you might have about home security, wireless technology and beyond. We take the well-being of your home seriously: as if it is our own.|We take the well-being of your home personally: as if it is our own. Your household deserves the same safety and quality of life afforded to every home across the nation. Experience wireless security that goes above and beyond with Protect America!|Our security experts are specially trained to listen and learn before making any recommendations, because no two homes or homeowners are the same. Our service doesn't end there, however. We are with you every step of the way &ndash; always available by phone or chat to answer questions about wireless technology, home security, home automation and beyond. " %}
-        <div class="clear"></div>
-        <a class="button-link" title="Buy now" style="width: 100px; float: none; margin: 0 auto;" href="{% url order-package %}">Order Now <i class="icon-chevron-right"></i></a>
-
-
-
-
-		<div class="content-smart-connect">
-
-        <p>{% content_spinner "para2" "Our systems don't just stop at security, they improve quality of life. Whether it's home automation technology controllable through your smartphone like lights and door locks, or next generation smoke and carbon monoxide detectors that immediately reach out for help &ndash; a smart home is easily within anyone's reach.|Home security has evolved into something so much more &ndash; it's now improving the quality of life. Wireless technology allows the Protect America customer to dim lights and lock the front door from a smartphone. Monitored smoke and carbon monoxide detectors immediately seek help from the authorities during an emergency. Freeze and flood sensors can protect homes from the elements, and wireless cameras begin to film once an alarm is triggered. The advent of the smart home has arrived, and it's absolutely within anyone's reach.|Home security shouldn't just arm your home and give you peace of mind &ndash; it should improve the quality of life. Wireless technology allows our customers to set their alarm, from a smartphone &ndash; even lock doors and dim lights from anywhere through the same app. Imagine smoke and carbon monoxide detectors that contact the authorities automatically, and a security system that sends you a text message immediately if there is a problem. " %}
-            <br /><br />
-			<a class="button-link" title="Buy now" href="{% url interactive-control %}">Smart Connect <i class="icon-chevron-right"></i></a>
-		</p>
-
-		</div>
-
-	</div>
-
-	<div id="main-benefits">
-
-		<ul>
-	        <li>
-	            <h3><i class="icon-home"></i>Simply Peace of Mind.</h3>
-	            <p>Our systems provide state-of-the-art security so you don"t have to worry about a thing.</p>
-	        </li>
-	        <li>
-	            <h3><i class="icon-user"></i>Security Designed for your Life.</h3>
-	            <p>Each system is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
-	        </li>
-	        <li>
-	            <h3><i class="icon-rss"></i>Easy Wireless Set-Up</h3>
-	            <p>Our wireless security systems make installation a snap without holes or destruction to your home.</p>
-	        </li>
-	        <li id="omega">
-	            <h3><i class="icon-dollar"></i>The Best Price, Period.</h3>
-	            <p>Protect America makes it easy to secure and protect your home and family.</p>
-	        </li>
-	    </ul>
-
-	</div>
-
-	<div class="clear"></div>
-
-</div>
-
-	<div id="hero-testimonial">
-
-	    <div id="hero-testimonial-wrapper" class="wrapper">
-            <div class="reviews"  itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">Protect America Rated:
-                <meta itemprop="name" content="{{ city }} Home Security Systems" />
-                <span itemprop="ratingValue">{{ review_avg|floatformat }} </span> out of 5 stars based on over <span itemprop="reviewCount"> {{ review_total }} </span> Protect America {{ state_long }} Customer Reviews
+    {% if liveshere %}
+    <div class="community-slide people">
+            <iframe width="115%" class="map-background" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q={{ city }}%2B{{ state_long }}&ie=UTF8&z=13&iwloc=near&scrollwheel=false&maptypecontrol=false&disabledefaultUI=true&iwloc=near&navigationcontrol=false&output=embed" style="position: absolute; top: -100px; height: 800px; width: 100%; z-index: -1; opacity: .3;"></iframe>
+        <div class="container">
+            <div class="headline-area">
+                <h4 class="center">Who lives here?</h4>
             </div>
-	        <div id="review-cycle-container">
-                {% testimonial_search "" "limit=5&template=local&city={{ city }}&state={{ state }}&words=100" %}
+            {% for data in liveshere|slice:":5" %}
+                <div class="three columns liveshere">
+                    {% if data.img %}
+                        <img src="{{ data.img.url }}" width="64" height="64" title="{{ data.title }}" class="liveshere-img" />
+                    {% else %}
+                        <i class="fa fa-users"></i>
+                    {% endif %}
+                    <strong>{{ data.title }}</strong>
+                    <span>{{ data.name }}</span>
+                    <p>{{ data.description }}</p>
+                </div>
+                {% if forloop.counter|divisibleby:5 %}
+                <div class="clear"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if farmersmarkets %}
+    <div class="community-slide farmers container">
+        <div class="sixteen columns headline-area">
+            <h4>Support local farmers</h4>
+            <p>Check out some of the great {{ city }} farmers' markets.</p>
+        </div>
+        <div class="clear"></div>
+        <ul class="market">
+            {% for market in farmersmarkets|slice:":12" %}
+            <li class="five columns">
+                {{ market.name }} (<a href="{{ market.website }}" target="_blank" title="Directions to {{ market.name }}">Map It!</a>)
+                <span>{{ market.address }}</span>
+            </li>
+            {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% if resources %}
+    <div class="community-slide farmers container">
+        <div class="sixteen columns headline-area">
+            <h4>Online Resources</h4>
+            <p>Check out some of the great community farmer's markets located throughout {{ city }}.</p>
+        </div>
+        <div class="clear"></div>
+        <ul class="market">
+            {% for resource in resources|slice:":12" %}
+            <li class="five columns">
+                {{ resource.name }}
+                <span><a href="{{ resource.url }}" target="_blank" title="{{ resource.name }}">{{ resource.url }}</a></span>
+            </li>
+            {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+<div id="crime-stats">
+    <div class="container basic-stats">
 
-	        </div>
-	    </div>
-	</div>
-<div class="wrapper">
+        <h2 class="title center bottom">{{ city }}, {{ state }} Basic Crime Statistics</h2>
+        <p class="center">{% content_spinner "diff7" "FBI crime statistics about {{ city }}, {{ state }} speak volumes. As you can see, burglaries take up a significant portion of crime in your area.|Crime statistics from the FBI are very telling. Burglary is a substantial portion of crime in {{ city }}.|{{ city }} crime statistics are an interesting glimpse into the types of challenges America faces." %} {% content_spinner "diff8" "While many cities in {{ state_long }} are great places to live (including {{ city }}), the danger of burglary is an ever-present reality.| While {{ city }} is a great place to live (along with many places in {{ state_long }} for that matter), burglary remains a reality.| While {{ city }}, {{ state }} and many other cities in the great state of {{ state_long }} are fantastic places to live, the reality of burglary cannot be ignored.|" %} {% content_spinner "diff9" "Whether you know someone who has been victimized or you yourself have suffered a burglary, you know how traumatizing they can be.|We all know someone who has been victimized and how traumatizing the experience can be.|Whether you have experienced a break-in or know someone who has fallen victim, you know how traumatizing they can be.|" %} {% content_spinner "diff10" "A proactive approach to combatting burglary in {{ city }} is the best method of defending your home, and a wireless security system is one of the greatest investments you can make for your household and family.|A proactive approach is the best way to combat burglary and defend your home and family.|Taking a proactive approach with a wireless alarm system can make all the difference in defending your home and family.|" %}
+        </p>
+        <div class="four columns center margin-vertical plus">
+    		{% if city_per100k %}
+    			<p id="stat1" data-stat="{{ city_per100k.burglary_rank_per100k }}" class="big-number inactive">{{ city_per100k.burglary_rank_per100k }}</p>
+    		{% else %}
+    			<em>no stats available</em>
+    		{% endif %}
+    		<h3>Burglaries</h3>
+    		<p>per 100k</p>
+        </div>
+        <div class="four columns center margin-vertical plus">
+    		{% if city_per100k %}
+    			<p id="stat2" data-stat="{{ city_per100k.robbery_rank_per100k }}" class="big-number inactive">{{ city_per100k.robbery_rank_per100k }}</p>
+    		{% else %}
+    			<em>no stats available</em>
+    		{% endif %}
+    		<h3>Robberies</h3>
+    		<p>per 100k</p>
+        </div>
+        <div class="four columns center margin-vertical plus">
+    		{% if city_per100k %}
+    			<p id="stat3" data-stat="{{ city_per100k.larceny_theft_rank_per100k }}" class="big-number inactive">{{ city_per100k.larceny_theft_rank_per100k }}</p>
+    		{% else %}
+    			<em>no stats available</em>
+    		{% endif %}
+    		<h3>Larcenies</h3>
+    		<p>per 100k</p>
+        </div>
+        <div class="four columns center margin-vertical plus">
+    		{% if city_per100k %}
+    			<p id="stat4" data-stat="{{ city_per100k.motor_vehicle_theft_rank_per100k }}" class="big-number inactive">{{ city_per100k.motor_vehicle_theft_rank_per100k }}</p>
+    		{% else %}
+    			<em>no stats available</em>
+    		{% endif %}
+    		<h3>Auto Thefts</h3>
+    		<p>per 100k</p>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}" {% if lifestyles.image %}style="background: url({{ lifestyles.image.url }}) no-repeat;"{% endif %}>
+    <div class="container">
+        <div id="home-content">
+            {% block lifestyle-subhead %}<p>{% content_spinner "para2" "Our home security systems don't just stop at security, they improve quality of life in {{ city }}. Whether it's home automation technology controllable through your smartphone like lights and door locks, or next generation smoke and carbon monoxide detectors that immediately reach out for help &ndash; a smart home is easily within anyone's reach.|Home security in {{ city }} has evolved into something so much more &ndash; it's now improving the quality of life. Wireless technology allows the Protect America customer to dim lights and lock the front door from a smartphone. Monitored smoke and carbon monoxide detectors immediately seek help from {{ city }} authorities during an emergency. Freeze and flood sensors can protect homes from the elements, and wireless cameras begin to film once an alarm is triggered. The advent of the smart home has arrived, and it's absolutely within anyone's reach.|Home security shouldn't just arm your home and give you peace of mind &ndash; it should improve the quality of life in {{ city }}. Wireless technology allows our customers to set their alarm, from a smartphone &ndash; even lock doors and dim lights from anywhere through the same app. Imagine smoke and carbon monoxide detectors that contact the authorities automatically, and a home security system that sends you a text message immediately if there is a problem. " %}</p>{% endblock %}
+            <a href="{% url order-package %}" class="button  yellow order-button hide-mobile no-desktop">Order Now</a>
+            <a href="tel:{{ phone_number|format_number }}" class="button yellow hide-desktop no-mobile">Order Now</a>
 
-	<div id="crime-statistics">
-
-		<h2>{{ city }}</h2>
-		<h3>2012 Crime statistics</h3>
-		<div class="pie">
-			<canvas id="canvas" height="265" width="265"></canvas>
-			<script>
-
-					var pieData = [
-									{
-									value: {{ city_per100k.robbery_rank_per100k }},
-									color:"#cccccc"
-									},
-									{
-									value : {{ city_per100k.motor_vehicle_theft_rank_per100k }},
-									color : "#ffc000"
-									},
-									{
-									value : {{ city_per100k.burglary_rank_per100k }},
-									color : "#2f394a"
-									},
-									{
-									value : {{ city_per100k.larceny_theft_rank_per100k }},
-									color : "#eb292b"
-									}
-
-					];
-
-					var myPie = new Chart(document.getElementById("canvas").getContext("2d")).Pie(pieData);
-
-	        </script>
-	        <div class="pie-legend">
-				<table width="110" border="0">
-				  <tr>
-				    <td width="10" bgcolor="#2f394a">&nbsp;</td>
-				    <td width="100">Burglary</td>
-				  </tr>
-				  <tr>
-				    <td width="10" bgcolor="#cccccc">&nbsp;</td>
-				    <td width="100">Robbery</td>
-				  </tr>
-				  <tr>
-				    <td width="10" bgcolor="#ffc000">&nbsp;</td>
-				    <td width="100">Auto theft</td>
-				  </tr>
-				  <tr>
-				    <td width="10" bgcolor="#eb292b">&nbsp;</td>
-				    <td width="100">Larceny</td>
-				  </tr>
-				</table>
-	        </div>
-
-	        <p>{% content_spinner "diff7" "FBI crime statistics about {{ city }} speak volumes. As you can see, burglaries take up a significant portion of crime in your area.|Crime statistics from the FBI are very telling. Burglary is a substantial portion of crime in {{ city }}.|{{ city }} crime statistics are an interesting glimpse into the types of challenges America faces." %} {% content_spinner "diff8" "While many cities in {{ state }} are great places to live (including {{ city }}), the danger of burglary is an ever-present reality.| While {{ city }} is a great place to live (along with many places in {{ state }} for that matter), burglary remains a reality.| While {{ city }} and many other cities in the great state of {{ state }} are fantastic places to live, the reality of burglary cannot be ignored." %} {% content_spinner "diff9" "Whether you know someone who has been victimized or you yourself have suffered a burglary, you know how traumatizing they can be.|We all know someone who has been victimized and how traumatizing the experience can be.|Whether you have experienced a break-in or know someone who has fallen victim, you know how traumatizing they can be." %} {% content_spinner "diff10" "A proactive approach to combatting burglary is the best method of defending your home, and a wireless security system is one of the greatest investments you can make for your household and family.|A proactive approach is the best way to combat burglary and defend your home and family.|Taking a proactive approach with a wireless alarm system can make all the difference in defending your home and family.|" %}
-    	        <br /><br />
-    	        <a href="/crime-rate/{{ state }}/{{ city }}/" class="button-link">{{ city }} Crime Stats  <i class="icon-chevron-right"></i></a>
-
-	        </p>
-	    </div>
-			<div class="crime-tiles">
-				<div class="crime-tiles-four">
-					<h4>Burglary<h4>
-					<p>per 100k</p>
-					{% if city_per100k %}
-						<h3>{{ city_per100k.burglary_rank_per100k }}</h3>
-					{% else %}
-						<h5>no stats available</h5>
-					{% endif %}
-
-				</div>
-				<div class="crime-tiles-four">
-					<h4>Robbery<h4>
-					<p>per 100k</p>
-					{% if city_per100k %}
-						<h3>{{ city_per100k.robbery_rank_per100k }}</h3>
-					{% else %}
-						<h5>no stats available</h5>
-					{% endif %}
-				</div>
-				<div class="crime-tiles-four">
-					<h4>Auto theft<h4>
-					<p>per 100k</p>
-					{% if city_per100k %}
-					<h3>{{ city_per100k.motor_vehicle_theft_rank_per100k }}</h3>
-					{% else %}
-						<h5>no stats available</h5>
-					{% endif %}
-				</div>
-				<div class="crime-tiles-four" id="omega">
-					<h4>Larceny<h4>
-					<p>per 100k</p>
-					{% if city_per100k %}
-					<h3>{{ city_per100k.larceny_theft_rank_per100k }}</h3>
-					{% else %}
-						<h5>no stats available</h5>
-					{% endif %}
-				</div>
-			</div>
-		<div class="clear"></div>
-	</div>
+        </div>
+    </div>
+</div>
+<div id="main-benefits" class="container">
+    <div class="four columns">
+        <h3><i class="fa fa-home"></i>Simply Peace of Mind</h3>
+        <p>Our {% content_spinner "homesecuritysystems7" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|wireless home security systems|systems" %} provide state-of-the-art security so you don"t have to worry about a thing.</p>
+    </div>
+    <div class="four columns">
+        <h3><i class="fa fa-user"></i>Security Designed for You</h3>
+        <p>Each {% content_spinner "homesecuritysystems8" "home security system|security system|alarm system|home alarm system|burglar alarm system|wireless home security system|system" %} is built to fit you, including options like: home automation, fire protection, and iPhone control.</p>
+    </div>
+    <div class="four columns">
+        <h3><i class="fa fa-rss"></i>Easy Wireless Set-Up</h3>
+        <p>Our {% content_spinner "homesecuritysystems9" "home security systems|security systems|alarm systems|home alarm systems|burglar alarm systems|wireless home security systems|systems" %} make installation a snap without holes or destruction to your home.</p>
+    </div>
+    <div class="four columns">
+        <h3><i class="fa fa-dollar"></i>The Best Price, Period</h3>
+        <p>{% content_spinner "name11" "Protect America|Protect America, Inc.|Protect America home security|Protect America security" %} makes it easy to secure and protect your home and family.</p>
+    </div>
 
 </div>
-
+{% if reviews %}
+<div>
+    <h2 class="title center bottom">What People are Saying</h2>
+    <h4 class="subhead">Rated {{ review_avg|floatformat }} out of 5 stars based on over <span itemprop="reviewCount"> {{ review_total }} </span> Protect America {{ state_long }} Customer Reviews</h4>
+    <div class="container">
+        {% if reviews %}
+            {% for review in reviews %}
+            <div class="seven columns testimonial {% if forloop.counter|divisibleby:2 %}offset-by-two{% endif %}">
+                <p class="message">{{ review.message|safe }}</p>
+                <div class="five columns">
+                    <h4 class="name"><strong>{{ review.first_name }}</strong> of <strong> {{ review.city }}, {{ review.state }}</strong></p>
+                </div>
+                <div class="stars">
+                    {% if review.rating >= '1' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '2' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '3' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '4' %}<i class="fa fa-star"></i>{% endif %}
+                    {% if review.rating >= '5' %}<i class="fa fa-star"></i>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endif %}
 {% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
+    <script type="text/javascript">
+
+        var $menu = $(".dropdown-menu");
+
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu,
+        });
+
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = 240,
+                width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: width - 3,  // main should overlay submenu
+                height: height - 4  // padding for main dropdown's arrow
+            });
+
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+
+        $(".dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $(".dropdown-toggle").click(function(e) {
+            return false;
+        });
+
+
+    </script>
+
 <script type="text/javascript">
-$(document).ready(function() {
-	var check = '{{ multiple }}';
-	if (check == 'True'){
-	    $("#review-cycle-container").cycle({
-	                fx: "scrollRight",
-	                timeout:  15000,
-	            });
-	}else{
-		$("#review-cycle-container .review").css('display','block');
-	}
-});
+
+    $(document).ready(function() {
+        $( "#menu-button" ).click(function() {
+            $( "#mobile-menu-container" ).slideToggle( "slow", function() {
+        });
+    });
+        $('.lb-button').click(function(e) {
+            e.preventDefault();
+            var lblink = $(this).data('link');
+            $('.lightbox.'+lblink).fadeIn();
+            var player;
+            return false;
+        })
+        $('.lightbox-bg').click(function(e) {
+            e.preventDefault();
+            var iframe = $(this).parent('.lightbox').children('.lightcard').children('iframe').attr('src');
+            $('.video').attr('src',iframe);
+            $('.lightbox').fadeOut();
+
+            return false;
+
+        })
+        $('.closebox').click(function(e) {
+            e.preventDefault();
+            var iframe = $(this).parent('.lightcard').children('iframe').attr('src');
+            $('.video').attr('src',iframe);
+            $('.lightbox').fadeOut();
+
+            return false;
+
+        })
+        var owl = $("#featured-badges");
+        var outreach = $("#community-outreach-squares");
+        var community = $("#community-section");
+
+        owl.owlCarousel({
+          autoPlay: 7000,
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+        outreach.owlCarousel({
+          autoPlay: 7000,
+          stopOnHover: true,
+          items : 3, //10 items above 1000px browser width
+          itemsDesktop : [1000,3], //5 items between 1000px and 901px
+          itemsDesktopSmall : [930,2], // betweem 900px and 601px
+          itemsTablet: [660,1], //2 items between 600 and 0
+          itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+        });
+        $("#community-section").owlCarousel({
+          slideSpeed : 300,
+          paginationSpeed : 400,
+          singleItem: true,
+          autoHeight: false,
+          pagination: true,
+          stopOnHover: true,
+          navigation: true,
+        });
+        var community = $("#community-section").data('owlCarousel');
+        $(".forward-button i").click(function(e) {
+            community.next();
+            return false;
+
+        });
+
+    });
 </script>
 {% endaddtoblock "js" %}
 {% endblock %}
@@ -291,7 +516,7 @@ $(document).ready(function() {
             {% endif %}
 
             {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
-            <p>&copy; 1992 &mdash; 2013 Protect America, Inc. All rights reserved</p>
+            <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
         </div>
 
     </div>
@@ -299,4 +524,92 @@ $(document).ready(function() {
 
 </div>
 {% endblock %}
+{% block footer %}
+    {% block main-footer %}
+<!-- Footer navigation -->
+<footer>
+    <div class="container">
+        <ul class="four columns">
+            <li><a href="{% url shop %}">Shop</a></li>
+            <li><a href="{% url how-it-works %}">How It Works</a></li>
+            <li><a href="{% url customer-service %}">Customer Service</a></li>
+            <li><a href="/home-security-blog/">Home and Life Blog</a></li>
+            <li><a href="">Sitemap</a></li>
+        </ul>
+        <ul class="four columns">
 
+            <li><a href="{% url privacy-policy %}">Privacy Policy</a></li>
+            <li><a href="{% url return-policy %}">Return Policy</a></li>
+            <li><a href="{% url state-licenses %}">State Licenses</a></li>
+            <li><a href="{% url do-not-call %}">Do Not Call</a></li>
+            <li><a href="{% url careers %}">Careers</a></li>
+        </ul>
+        <ul class="five columns hours-area">
+            <li><strong>Telephone</strong></li>
+            <li>{{ phone_number|format_number }}</li>
+            <li>M-F 7am - 11pm ct</li>
+            <li>Sat 8am - 8pm ct</li>
+            <li>Sun 9am - 9pm ct</li>
+        </ul>
+        <ul class="two columns offset-by-one">
+            <li class="facebook"><a href="http://www.facebook.com/ProtectAmerica"><i class="fa fa-facebook"></i></a></li>
+            <li class="googleplus"><a href="https://plus.google.com/+ProtectAmerica/"><i class="fa fa-google-plus"></i></a></li>
+            <div class="clear"></div>
+            <li class="twitter"><a href="http://www.twitter.com/ProtectAmerica"><i class="fa fa-twitter"></i></a></li>
+            <li class="youtube"><a href="http://www.youtube.com/user/ProtectAmerica"><i class="fa fa-youtube"></i></a></li>
+            <div class="clear"></div>
+            <li class="linkedin"><a href="http://www.linkedin.com/company/protect-america"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+    </div>
+</footer>
+<!-- End footer navigation -->
+
+
+
+    <!-- Terms and conditions -->
+    <div id="terms">
+        <div class="container">
+            <div class="eight columns">
+                <p class="small">* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+                <p class="small">* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan".</p>
+                <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
+
+            </div>
+            <div class="seven columns">
+                {% if local_street %}
+                <div id="local-address" itemscope itemtype="http://schema.org/LocalBusiness">
+                {{ local_street.googleplus_url }}
+                    <p class="copyright">{% if local_street.googleplus_url %}<a href="{{ local_street.googleplus_url }}" title="{{ city }} Protect America">{% endif %}<span itemprop="name">{{ city }} Protect America</span> &ndash; <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><b itemprop="streetAddress">{{ local_street }}</b> <b itemprop="addressLocality">{{ local_city }}</b>, <b itemprop="addressRegion">{{ local_state }}</b> <b itemprop="postalCode">{{ local_zipcode }}</b></span></p>{% if local_street.googleplus_url %}</a>{% endif %}
+                </div>
+                {% endif %}
+                <p class="copyright">The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.<br><br>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
+            </div>
+        </div>
+    </div>
+    <!-- End terms and conditions -->
+    {% endblock %}
+<div class="lightbox request-quote">
+    <div class="lightcard">
+        <div class="closebox">
+            close
+            <i class="fa fa-times-circle"></i>
+        </div>
+        {% include "order/quote-form-partial.html" with form=forms.basic %}
+
+        <div class="lightbox-info">
+            <span>Three reasons people choose</span>
+            <img src="{{ STATIC_URL }}img/base/protect-america-logo.png" title="Protect America Home Security" width="212" height="36"  />
+            <ul>
+                <li><i class="fa fa-check-circle"></i> Free Security Equipment</li>
+                <li><i class="fa fa-check-circle"></i> Lowest Price Guaranteed</li>
+                <li><i class="fa fa-check-circle"></i> Lifetime Warranty</li>
+            </ul>
+            <span>Award Winning Security</span>
+            <img src="{{ STATIC_URL }}img/base/awards.png" title="Protect America Awards" class="award" width="248" height="70"  />
+        </div>
+
+    </div>
+    <div class="lightbox-bg">&nbsp;</div>
+</div>
+
+{% endblock %}
