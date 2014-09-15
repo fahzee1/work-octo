@@ -564,6 +564,7 @@ class Demographics(CityAndState):
         from django.core.cache import cache
 
 
+
         # rate limit code for zillow api
         # 100 requests an hour
 
@@ -652,7 +653,7 @@ class Demographics(CityAndState):
                             siblings = avg_commute_time.next_sibling
                             avg_commute_time = siblings.contents[0].string
 
-                        forsale = soup.find('forSale').string
+                        forsale = soup.find('forsale').string
 
 
 

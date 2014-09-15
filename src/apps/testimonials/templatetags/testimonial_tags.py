@@ -47,7 +47,7 @@ class TestimonialSearchNode(template.Node):
     def filter_states(self,context,testimonials=None,city=None,state=None):
         # filter the testimonials by state
 
-        if testimonials:
+        if testimonials and state:
             testimonials = testimonials.filter(state__iexact=state)
 
             if testimonials.count() < 4:
