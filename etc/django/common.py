@@ -385,6 +385,6 @@ sp_logger.addHandler(handler)
 
 # Zillow api
 ZILLOW = 'X1-ZWz1dw15d6veh7_8469v'
-USE_ZILLOW = False
+USE_ZILLOW = True
 
 
