@@ -247,12 +247,23 @@ def query_by_state_city(state, city=None, get_content=True, local=False, freecri
 
             try:
                 #try to see if the local page has an address associated with it
-                location_match=MatchAddressLocation.objects.select_related().get(location=city)
+                location_match = MatchAddressLocation.objects.select_related().get(location=city)
                 context.update(local_street=location_match.address.street_name,
                            local_city=location_match.address.city,
                            local_state=location_match.address.state,
                            local_zipcode=location_match.address.zip_code,
                            local_phone=location_match.address.phone_number)
+
+            except MatchAddressLocation.MultipleObjectsReturned:
+                location_match = MatchAddressLocation.objects.select_related().filter(location=city)
+                if location_match:
+                    location_match = location_match[0]
+                    context.update(local_street=location_match.address.street_name,
+                               local_city=location_match.address.city,
+                               local_state=location_match.address.state,
+                               local_zipcode=location_match.address.zip_code,
+                               local_phone=location_match.address.phone_number)
+
             except MatchAddressLocation.DoesNotExist:
                 pass
 
