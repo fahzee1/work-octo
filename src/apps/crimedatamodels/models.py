@@ -579,6 +579,17 @@ class Demographics(CityAndState):
             cache.set('zillow_limit',limit,60*60)
 
 
+        elif not limit:
+            do_fetch = True
+            limit = 1
+            cache.set('zillow_limit',limit,60*60)
+
+        elif not zillow_hour:
+            zillow_hour = datetime.datetime.now().hour
+            cache.set('zillow_hour',zillow_hour,60*60)
+
+
+
 
         hour = datetime.datetime.now().hour
         if hour > zillow_hour:
