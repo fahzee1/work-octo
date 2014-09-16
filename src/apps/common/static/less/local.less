@@ -78,7 +78,7 @@
     right: 12px;
     bottom: 8px;
 }
-.forward-button {
+.forward-button, .share-icon {
     display: block;
 
     margin: 0 auto;
@@ -95,6 +95,7 @@
         -ms-transition: opacity 0.5s ease-in-out;
         -o-transition: opacity 0.5s ease-in-out;
         transition: opacity 0.5s ease-in-out;
+
         &:hover {
             zoom: 1;
             filter: alpha(opacity=100);
@@ -102,6 +103,17 @@
         }
     }
     
+}
+.share-buttons {
+    margin-top: 48px;
+    i {
+        .border-radius(50%,50%,50%,50%);
+        padding: 16px;
+        background: #fff;
+        width: 70px;
+        border: 1px solid #ccc;
+        color: @blue;
+    }
 }
 .big-number {
     color: @black;
@@ -846,6 +858,21 @@ h3.community {
                 padding: 5px;
             }
         }
+        .educationlist {
+            margin-top: 100px;
+            li {
+                img {
+                    float: left;
+                }
+                div {
+                    float: left;
+                    strong {
+                        display: block;
+                        margin: 24px 24px;
+                    }
+                }
+            }
+        }
         h4 {
             .san-serif-font;
             font-size: 42px;
@@ -918,13 +945,49 @@ h3.community {
 
             }
         }
-        &.farmers {
+        &.farmers, &.universities {
             background: url(/static/img/local-pages/farmers-community.png) center bottom no-repeat;
             li {
                 span {
                     font-size: 10px;
                     display: block;
                     padding-bottom: 8px;
+                }
+            }
+        }
+        &.localeducation {
+            h4 {
+                padding-top: 100px !important;
+            }
+            .guide-button {
+                width: 275px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+        &.universities {
+            background: url(/static/img/local-pages/university.jpg) center center no-repeat;
+            background-size: cover;
+            .headline-area {
+                h4 {
+                    color: @white;
+                }
+                p {
+                    color: @v-light-grey;
+                }
+            }
+            .market {
+                li {
+                    border-bottom: none;
+                    background: #fff;
+                    .border-radius(5px,5px,5px,5px);
+                    border: 1px solid #ccc;
+                    a {
+                        padding: 4px 4px 0 4px;
+                    }
+                    span {
+                        padding: 0 4px 4px;
+                    }
                 }
             }
         }
