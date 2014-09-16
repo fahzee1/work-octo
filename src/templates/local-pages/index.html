@@ -216,7 +216,7 @@
                 </li>
                 <div class="clear"></div>
             </ul>
-            <a href="http://www.zillow.com" title="See Real Estate on Zillow"><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_150x40_rounded.gif" class="zillow-logo" width="150" height="40" alt="Zillow Real Estate Search" /></a>
+            <a href="http://www.zillow.com" target="_blank" title="See Real Estate on Zillow"><img src="http://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_150x40_rounded.gif" class="zillow-logo" width="150" height="40" alt="Zillow Real Estate Search" /></a>
         </div>
     </div>
     {% endif %}
@@ -230,7 +230,7 @@
             {% for data in liveshere|slice:":5" %}
                 <div class="three columns liveshere">
                     {% if data.img %}
-                        <img src="{{ data.img.url }}" width="64" height="64" title="{{ data.title }}" class="liveshere-img" />
+                        <img src="{{ data.all.0.img.url }}" width="64" height="64" title="{{ data.title }}" class="liveshere-img" />
                     {% else %}
                         <i class="fa fa-users"></i>
                     {% endif %}
@@ -264,26 +264,47 @@
         </ul>
     </div>
     {% endif %}
-    {% comment %}
     {% if universities %}
-    <div class="community-slide farmers container">
-        <div class="sixteen columns headline-area">
-            <h4>Support local farmers</h4>
-            <p>Check out some of the great {{ city }} farmers' markets.</p>
+    <div class="community-slide universities">
+        <div class="container">
+            <div class="sixteen columns headline-area">
+                <h4>Universities & higher education</h4>
+                <p>Universities bring a spark of culture and energy to community life. Which ones are in your area? Work for a university in {{ city }}? We appreciate what you do, call us at {{ phone_number|format_number }} and ask about our special discounts created just for you.</p>
+            </div>
+            <div class="clear"></div>
+            <ul class="market">
+                {% for university in universities|slice:":12" %}
+                <li class="five columns">
+                    <a href="http://{{ university.website }}" target="_blank" title="Learn more about {{ university.instnm }} in {{ city }}">{{ university.instnm }}</a>
+                    <span>{{ university.addr }}</span>
+                </li>
+                {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
+                {% endfor %}
+            </ul>
         </div>
-        <div class="clear"></div>
-        <ul class="market">
-            {% for university in universities|slice:":12" %}
-            <li class="five columns">
-                {{ university.name }} (<a href="{{ university.website }}" target="_blank" title="Directions to {{ university.name }}">Map It!</a>)
-                <span>{{ university.address }}</span>
-            </li>
-            {% if forloop.counter|divisibleby:3 %}<div class="clear"></div>{% endif %}
-            {% endfor %}
-        </ul>
     </div>
     {% endif %}
-    {% endcomment %}
+    {% if localeducation %}
+    <div class="community-slide localeducation container">
+        <div class="eight columns">
+            <h4>Local school districts</h4>
+            <p>Your local school districts are a foundation for families and quality of life! Here is a list of districts in your area.</p>
+            <a href="http://www.protectamerica.com/static/pdf/homesafe-yale-logo.pdf" title="Download our after school safety guide"><img src="{{ STATIC_URL }}img/local-pages/safety-guide.png" class="guide-button" target="_blank" /></a>
+        </div>
+        <div class="eight columns">
+            <ul class="educationlist">
+                {% for school in localeducation|slice:":7"  %}
+                <li>
+                    <img src="{{ STATIC_URL }}img/local-pages/school-district.png" alt="Average Drive Time" />
+                    <div>
+                        <strong>{{ school.name }}</strong>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
     {% if resources %}
     <div class="community-slide farmers container">
         <div class="sixteen columns headline-area">
@@ -302,6 +323,23 @@
         </ul>
     </div>
     {% endif %}
+    <div class="community-slide moving container">
+        <div class="sixteen columns">
+            <h4>Love {{ city }}?</h4>
+            <p>Tweet, like, or share your love by clicking one of the options below. <br />Ready to secure your home? Give us a call at: {{ phone_number|format_number }}</p>
+
+            
+        </div>
+        <div class="clear"></div>
+        <div class="container share-buttons">
+            <div class="five columns offset-by-three">
+                <p class="share-icon"><a href="https://twitter.com/share?text={{city}}+is+pretty+great.+And+by+%e2%80%9cpretty+great%e2%80%9d%2c+I+mean+awesome!+Well%2c+it%e2%80%99s+official.+I+love+{{ city }}!&url=http://www.protectamerica.com/home-security/{{ state }}/{{ city }}" class="twitter" target="_blank" title="Share {{ look.name }} on Twitter"><i class="fa fa-twitter"></i></a></p>
+            </div>
+            <div class="five columns">
+                <p class="share-icon"><a href="http://www.facebook.com/plugins/like.php?href=http://www.protectamerica.com/home-security/{{ state }}/{{ city }}&action=like&show_faces=true&share=true&height=80&appId=512130795527490" class="facebook" target="_blank" title="Share {{ look.name }} on Facebook"><i class="fa fa-facebook"></i></a></p>
+            </div>
+        </div>
+    </div>
 </div>
 {% if city_per100k %}
 <div id="crime-stats">
@@ -352,7 +390,7 @@
 {% else %}
 <br /><br />
 {% endif %}
-<div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}" {% if lifestyles.image %}style="background: url({{ lifestyles.image.url }}) no-repeat;"{% endif %}>
+<div id="lifestyle-shot" class="{% block lifestyle-class %}{% endblock %}" {% if lifestyles.image %}style="background: url({{ lifestyles.all.0.image.url }}) no-repeat;"{% endif %}>
     <div class="container">
         <div id="home-content">
             {% block lifestyle-subhead %}<p>{% content_spinner "para2" "Our home security systems don't just stop at security, they improve quality of life in {{ city }}. Whether it's home automation technology controllable through your smartphone like lights and door locks, or next generation smoke and carbon monoxide detectors that immediately reach out for help &ndash; a smart home is easily within anyone's reach.|Home security in {{ city }} has evolved into something so much more &ndash; it's now improving the quality of life. Wireless technology allows the Protect America customer to dim lights and lock the front door from a smartphone. Monitored smoke and carbon monoxide detectors immediately seek help from {{ city }} authorities during an emergency. Freeze and flood sensors can protect homes from the elements, and wireless cameras begin to film once an alarm is triggered. The advent of the smart home has arrived, and it's absolutely within anyone's reach.|Home security shouldn't just arm your home and give you peace of mind &ndash; it should improve the quality of life in {{ city }}. Wireless technology allows our customers to set their alarm, from a smartphone &ndash; even lock doors and dim lights from anywhere through the same app. Imagine smoke and carbon monoxide detectors that contact the authorities automatically, and a home security system that sends you a text message immediately if there is a problem. " %}</p>{% endblock %}
