@@ -229,8 +229,9 @@
             </div>
             {% for data in liveshere|slice:":5" %}
                 <div class="three columns liveshere">
+
                     {% if data.image %}
-                        <img src="{{ data.all.0.img.url }}" width="64" height="64" title="{{ data.title }}" class="liveshere-img" />
+                        <img src="{{ data.image.url }}" width="64" height="64" title="{{ data.title }}" class="liveshere-img" />
                     {% else %}
                         <i class="fa fa-users"></i>
                     {% endif %}
@@ -334,7 +335,7 @@
         <div class="clear"></div>
         <div class="container share-buttons">
             <div class="five columns offset-by-three">
-                <p class="share-icon"><a href="https://twitter.com/share?text={{city}}+is+pretty+great.+And+by+%e2%80%9cpretty+great%e2%80%9d%2c+I+mean+awesome!+Well%2c+it%e2%80%99s+official.+I+love+{{ city }}!&url=http://www.protectamerica.com/home-security/{{ state }}/{{ city }}" class="twitter" target="_blank" title="Share {{ look.name }} on Twitter"><i class="fa fa-twitter"></i></a></p>
+                <p class="share-icon"><a href="https://twitter.com/share?text={{city}}+is+pretty+great.+And+by+%e2%80%9cpretty+great%e2%80%9d%2c+I+mean+awesome!&url=http://www.protectamerica.com/home-security/{{ state }}/{{ city }}" class="twitter" target="_blank" title="Share {{ look.name }} on Twitter"><i class="fa fa-twitter"></i></a></p>
             </div>
             <div class="five columns">
                 <p class="share-icon"><a href="http://www.facebook.com/plugins/like.php?href=http://www.protectamerica.com/home-security/{{ state }}/{{ city }}&action=like&show_faces=true&share=true&height=80&appId=512130795527490" class="facebook" target="_blank" title="Share {{ look.name }} on Facebook"><i class="fa fa-facebook"></i></a></p>
