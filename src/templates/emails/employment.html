@@ -5,48 +5,97 @@
 <style type="text/css">
 body {
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     border: 0;
     outline: 0;
     font-family: "Helvetica", "Arial", sans-serif;
-    font-size: 100%;
-    width: 640px;
+    font-size: 14px;
+    width: 800px;
+    color: #555;
 }
-
+h3 {
+    font-size: 18px;
+    color: #333;
+}
 img {
     padding: 0; margin: 0; border: 0; outline: 0;
 }
 table {
     margin: 0 auto; border: 0;  outline: 0;
 }
-
 br {
    display: block;
    margin: 10px 0;
    line-height: 20px;
 }
-
+div {
+    margin: 10px 0;
+    display: block;
+}
+b {
+    display: block;
+    float: left;
+    padding: 3px 0;
+}
+span.result {
+    border: 1px solid #ccc;
+    padding: 3px;
+    margin: 0 15px 0 5px;
+    text-transform: capitalize;
+    width: 18%;
+    display: block;
+    float: left;
+}
+span.result-short {
+    border: 1px solid #ccc;
+    padding: 3px;
+    margin: 0 15px 0 5px;
+    text-transform: capitalize;
+    width: 8%;
+    display: block;
+    float: left;
+}
+span.result-long {
+    border: 1px solid #ccc;
+    padding: 3px;
+    margin: 0 15px 0 5px;
+    text-transform: capitalize;
+    width: 27%;
+    display: block;
+    float: left;
+}
 </style>
 </head>
 <body>
-    <div width="568px" style="margin: 0 auto;">
+    <div width="800px" style="margin: 20px auto;">
+        <img src="http://www.protectamerica.com/django-media/email_images/email_222/online-app-logo.png">
         <h3>Personal Information</h3>
-            <b>First Name:</b> {{ personal_information.first_name }}
-            <b>Middle Name:</b> {{ personal_information.middle_name }}
-            <b>Last Name:</b> {{ personal_information.last_name }}</br>
-            <b>Street Address:</b> {{ personal_information.address }}
-            <b>Apt #:</b> {{ personal_information.apt_number }}</br>
-            <b>City:</b> {{ personal_information.city }}
-            <b>State:</b> {{ personal_information.state }}
-            <b>Zip:</b> {{ personal_information.zip }}</br>
-            <b>Home Phone:</b> {{ personal_information.home_phone }}
-            <b>Cell Phone:</b> {{ personal_information.cell_phone }}
+        <div>
+            <b>First Name:</b><span class="result">{{ personal_information.first_name }}</span>
+            <b>Middle Name:</b><span class="result-short">{{ personal_information.middle_name }}</span>
+            <b>Last Name:</b><span class="result-long">{{ personal_information.last_name }}</span>
+        </div>
+        <div>
+            <b>Street Address:</b><span class="result-long">{{ personal_information.address }}</span>
+            <b>Apt #:</b><span class="result-short">{{ personal_information.apt_number }}</span>
+        </div>
+        <div>
+            <b>City:</b><span class="result">{{ personal_information.city }}</span>
+            <b>State:</b><span class="result-short">{{ personal_information.state }}</span>
+            <b>Zip:</b><span class="result">{{ personal_information.zip }}</span>
+        </div>
+        <div>
+            <b>Home Phone:</b><span class="result">{{ personal_information.home_phone }}</span>
+            <b>Cell Phone:</b><span class="result">{{ personal_information.cell_phone }}</span><br>
             <b>Email:</b> {{ personal_information.email }}</br>
             <b>Social Security #:</b> {{ personal_information.ssn }}
+        </div>
+        <div>
             <b>Under 18?:</b> {{ personal_information.under_18 }}</br>
             <b>How did you hear about us?:</b> {{ personal_information.hear_about }}</br>
             <b>Convicted of any felonies (last 7 years)?:</b> {{ personal_information.convicted }}
             {% if personal_information.convicted_explain %}<b>If yes, please explain:</b> {{ personal_information.convicted_explain }} {% endif %}
+        </div>
 
             </br></br></br><hr>
 

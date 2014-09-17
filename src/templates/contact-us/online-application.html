@@ -16,24 +16,25 @@
 
         <h2>Application for Employment</h2>
         <br>
-        <form action="" method="POST" id="employ-form">
+        <form class="cmxform" id="employ-form" method="get" action="">
             {% csrf_token %}
+        <div class="personal-info">
             <h3>Personal Information</h3><small class="required">All fields are required</small>
             <hr>
             <div class="row">
                 <div class="one-third column alpha">
-                    <input type="text" id="regularInput" class="pi-1" placeholder="First Name"/>
+                    <input type="text" id="firstname" class="pi-1" name="firstname" placeholder="First Name"/>
                 </div>
                 <div class="one-third column">
-                    <input type="text" id="regularInput" class="pi-2" placeholder="Middle Name"/>
+                    <input type="text" id="regularInput" class="pi-2" placeholder="Middle Initial"/>
                 </div>
                 <div class="one-third column omega">
-                    <input type="text" id="regularInput" class="pi-3" placeholder="Last Name"/>
+                    <input type="text" id="lastname" class="pi-3" name="lastname" placeholder="Last Name"/>
                 </div>
             </div>
             <div class="row">
                 <div class="two-thirds column alpha">
-                    <input type="text" id="regularInput" class="pi-4" placeholder="Street Address"/>
+                    <input type="text" id="streetaddress" class="pi-4" name="streetaddress" placeholder="Street Address"/>
                 </div>
                 <div class="one-third column">
                     <input type="text" id="regularInput" class="pi-5" placeholder="Apartment #"/>
@@ -41,10 +42,10 @@
             </div>
             <div class="row">
                 <div class="one-third column alpha">
-                    <input type="text" id="regularInput" class="pi-6" placeholder="City"/>
+                    <input type="text" id="city" class="pi-6" name="city" placeholder="City"/>
                 </div>
                 <div class="one-third column">
-                    <select id="selectList" class="pi-7">
+                    <select id="state" name="state" class="required state">
                         <option>Alabama</option>
                         <option>Alaska</option>
                         <option>Arizona</option>
@@ -98,34 +99,35 @@
                     </select>
                 </div>
                 <div class="one-third column omega">
-                    <input type="text" id="regularInput" class="pi-8" placeholder="Zip"/>
+                    <input type="text" id="zipcode" name="zipcode" class="pi-8" placeholder="Zip"/>
                 </div>
             </div>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" class="pi-9" placeholder="Home Phone"/>
+                    <input type="text" id="homephone" maxlength="14" name="homephone" class="required homephone" value="" placeholder="Home phone"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="pi-10" placeholder="Cell Phone"/>
+                    <input type="text" id="cellphone" maxlength="14" name="cellphone" class="required cellphone"  value="" placeholder="Cell phone"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="pi-11" placeholder="Email"/>
+                    <input type="text" id="email" name="email" class="pi-11" placeholder="Email"/>
                 </div>
                 <div class="four columns omega">
-                    <input type="text" id="regularInput" class="pi-12" placeholder="Social Security #"/>
+                    <input type="text" id="socialsecurity" name="socialsecurity" class="pi-12" placeholder="Social Security #"/>
                 </div>
             </div>
             <div class="row">
                 <div class="sixteen columns alpha">
-                    <label for="">Are you under the age of 18?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radios" id="regularRadio" class="pi-13" value="No" />
-                        <span>No</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radios" id="secondRegularRadio" class="pi-14" value="Yes" />
-                        <span>Yes</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Are you under the age of 18?</label>
+                        <label for="ageNo">
+                            <input type="radio" name="age" id="ageNo" class="pi-13" value="No" required>No
+                        </label>
+                        <label for="ageYes">
+                            <input type="radio" name="age" id="ageYes" class="pi-14" value="Yes">Yes
+                        </label>
+                        <label for="age" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
             <div class="row">
@@ -136,15 +138,16 @@
             </div>
             <div class="row">
                 <div class="sixteen columns alpha">
-                    <label for="selectList">Have you ever been convicted of or pleaded guilty to any misdemeanor or felony within the past seven (7) years*?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosConvicted" id="regularRadio" class="pi-16" value="No" />
-                        <span>No</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosConvicted" id="secondRegularRadio" class="pi-17" value="Yes" />
-                        <span>Yes</span>
-                    </label>
+                    <fieldset>
+                        <label for="selectList">Have you ever been convicted of or pleaded guilty to any misdemeanor or felony within the past seven (7) years*?</label>
+                        <label for="notconvicted">
+                            <input type="radio" name="radiosConvicted" id="notconvicted" class="pi-16" value="No" required>No
+                        </label>
+                        <label for="convicted">
+                            <input type="radio" name="radiosConvicted" id="convicted" class="pi-17" value="Yes">Yes
+                        </label>
+                        <label for="radiosConvicted" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
             <div class="row">
@@ -155,20 +158,23 @@
                 </div>
             </div>
             <br>
+        </div>
+        <div class="employment-desired">
             <h3>Employment Desired</h3>
             <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" class="ed-1" placeholder="Date Available to Start"/>
+                    <input type="text" id="dateavailable" class="ed-1" name="dateavailable" placeholder="Date Available to Start"/>
                 </div>
                 <div class="eight columns">
-                    <input type="text" id="regularInput" class="ed-2" placeholder="Position Applied For"/>
+                    <input type="text" id="positionapplied" class="ed-2" name="positionapplied" placeholder="Position Applied For"/>
                 </div>
                 <div class="four columns omega">
-                    <input type="text" id="regularInput" class="ed-3" placeholder="Rate of Pay"/>
+                    <input type="text" id="rateofpay" class="ed-3" name="rateofpay" placeholder="Rate of Pay"/>
                 </div>
             </div>
-            <br>
+        </div>
+        <div class="availability">
             <h3>Availability</h3>
             <hr>
             <p>Please list the times you are available to work. If you are available to begin or end at any time for that day, please list your availability as 'OPEN'. If you are unable to work on that day, please list your availability as 'UNAVAILABLE'.</p>
@@ -832,165 +838,165 @@
                     </select>
                 </div>
             </div>
-            <br>
+        </div>
+        <div class="education-history">
             <h3>Education History</h3>
             <hr>
             <div class="row">
-                <div class="four columns alpha">
-                    <input type="text" id="regularInput" class="eh-1"  placeholder="High School or Prep School Name"/>
-                </div>
-                <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-2" placeholder="Major"/>
-                </div>
-                <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-3" placeholder="Type of Degree or Diploma"/>
+                <div class="twelve columns alpha">
+                    <input type="text" id="regularInput" class="eh-1" name="highschool"  placeholder="High School or Prep School Name"/>
                 </div>
                 <div class="four columns omega">
-                    <label for="">Did you Graduate?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosGraduate-1" class="eh-4" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosGraduate-1" class="eh-5" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Did you Graduate?</label>
+                        <label for="adiosGraduate-1">
+                            <input type="radio" name="highschoolgraduate" class="eh-4" id="regularRadio" value="Yes" required>Yes</span>
+                        </label>
+                        <label for="secondadiosGraduate-1">
+                            <input type="radio" name="highschoolgraduate" class="eh-5" id="secondRegularRadio" value="No">No</span>
+                        </label>
+                        <label for="highschoolgraduate" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
-            <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" class="eh-6" placeholder="College"/>
+                    <input type="text" id="collegename" class="eh-6" name="collegename" placeholder="College"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-7" placeholder="Major"/>
+                    <input type="text" id="collegemajor" class="eh-7" name="collegemajor" placeholder="Major"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-8" placeholder="Type of Degree or Diploma"/>
+                    <input type="text" id="collegediploma" class="eh-8" name="collegediploma" placeholder="Type of Degree or Diploma"/>
                 </div>
                 <div class="four columns omega">
-                    <label for="">Did you Graduate?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosGraduate-2" class="eh-9" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosGraduate-2" class="eh-10" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Did you Graduate?</label>
+                        <label for="radiosGraduate-2">
+                            <input type="radio" name="collegegraduate" class="eh-9" id="regularRadio" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosGraduate-2">
+                            <input type="radio" name="collegegraduate" class="eh-10" id="secondRegularRadio" value="No">No
+                        </label>
+                        <label for="collegegraduate" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
-            <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" class="eh-11" placeholder="College or Graduate"/>
+                    <input type="text" id="graduatename" class="eh-11" name="graduatename" placeholder="College or Graduate"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-12" placeholder="Major"/>
+                    <input type="text" id="graduatemajor" class="eh-12" name="graduatemajor" placeholder="Major"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-13" placeholder="Type of Degree or Diploma"/>
+                    <input type="text" id="graduatediploma" class="eh-13" name="graduatediploma" placeholder="Type of Degree or Diploma"/>
                 </div>
                 <div class="four columns omega">
-                    <label for="">Did you Graduate?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosGraduate-3" class="eh-14" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosGraduate-3" class="eh-15" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Did you Graduate?</label>
+                        <label for="radiosGraduate-3">
+                            <input type="radio" name="graduategraduate" class="eh-14" id="regularRadio" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosGraduate-3">
+                            <input type="radio" name="graduategraduate" class="eh-15" id="secondRegularRadio" value="No">No
+                        </label>
+                        <label for="graduategraduate" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
-            <hr>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="regularInput" class="eh-16" placeholder="Other"/>
+                    <input type="text" id="othername" class="eh-16" name="othername" placeholder="Other"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-17" placeholder="Major"/>
+                    <input type="text" id="othermajor" class="eh-17" name="othermajor" placeholder="Major"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="eh-18" placeholder="Type of Degree or Diploma"/>
+                    <input type="text" id="otherdiploma" class="eh-18" name="otherdiploma" placeholder="Type of Degree or Diploma"/>
                 </div>
                 <div class="four columns omega">
-                    <label for="">Did you Graduate?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosGraduate-4" class="eh-19" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosGraduate-4" class="eh-20" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Did you Graduate?</label>
+                        <label for="radiosGraduate-4">
+                            <input type="radio" name="othergraduate" class="eh-19" id="regularRadio" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosGraduate-4">
+                            <input type="radio" name="othergraduate" class="eh-20" id="secondRegularRadio" value="No">No
+                        </label>
+                        <label for="othergraduate" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
-            <br>
+        </div>
+        <div class="professional-history">
             <h3>Professional History</h3>
             <hr>
             <div class="row">
-                <div class="eight columns alpha">
-                    <label for="">Have you applied to PA before?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosApplied" class="ph-1" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosApplied" class="ph-2" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
-                </div>
-                <div class="eight columns omega">
-                    <label for="">Are you currently employed?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosEmployed" class="ph-3" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosEmployed" class="ph-4" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
-                </div>
-            </div>
-            <div class="row">
                 <div class="sixteen columns alpha">
-                    <label for="">Do you feel that you are capable of performing the essential functions of the job/position for which you are applying for, with or without reasonable accommodation?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosCapable" class="ph-5" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosCapable" class="ph-6" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset class="appliedbefore">
+                        <label for="">Have you applied to PA before?</label>
+                        <label for="radiosApplied">
+                            <input type="radio" name="appliedbefore" class="ph-1" id="appliedbefore" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosApplied">
+                            <input type="radio" name="appliedbefore" class="ph-2" id="appliedbefore" value="No">No
+                        </label>
+                        <label for="appliedbefore" class="error">Please choose yes or no</label>
+                    </fieldset>
+                </div>
+                <div class="sixteen columns alpha">
+                    <fieldset class="currentlyemployed">
+                        <label for="">Are you currently employed?</label>
+                        <label for="radiosEmployed">
+                            <input type="radio" name="currentlyemployed" class="ph-3" id="currentlyemployed" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosEmployed">
+                            <input type="radio" name="currentlyemployed" class="ph-4" id="currentlyemployed" value="No">No
+                        </label>
+                        <label for="currentlyemployed" class="error">Please choose yes or no</label>
+                    </fieldset>
+                </div>
+                <div class="sixteen columns alpha">
+                    <fieldset>
+                        <label for="">Do you feel that you are capable of performing the essential functions of the job/position for which you are applying for, with or without reasonable accommodation?</label>
+                        <label for="radiosCapable">
+                            <input type="radio" name="capable" class="ph-5" id="capable" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosCapable">
+                            <input type="radio" name="capable" class="ph-6" id="capable" value="No">No
+                        </label>
+                        <label for="capable" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
-            <br>
+        </div>
+        <div class="recent-employment">
             <h3>Recent Employment</h3>
             <hr>
-            <p>List the 3 most recent places of employment beginning with your most recent employer (month &amp; year):</p>
+            <p>List the 3 most recent places of employment beginning with your last employer (month &amp; year):</p>
             <br>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" class="re-1" placeholder="Date Begin"/>
+                    <input type="text" id="employbegan1" name="employbegan1" class="re-1" placeholder="Date Began" required>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" class="re-2" placeholder="Date Ended"/>
+                    <input type="text" id="employended1" name="employended1" class="re-2" placeholder="Date Ended" required>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="re-3" placeholder="Name of Business"/>
+                    <input type="text" id="employbusiness1" name="employbusiness1" class="re-3" placeholder="Name of Business" required>
                 </div>
                 <div class="eight columns omega">
-                    <label for="">Was the termination of this employment voluntary?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosVoluntary-1" class="re-4" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosVoluntary-1" class="re-5" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Was the termination of this employment voluntary?</label>
+                        <label for="radiosVoluntary-1">
+                            <input type="radio" name="termination1" class="re-4" id="termination1" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosVoluntary-1">
+                            <input type="radio" name="termination1" class="re-5" id="termination1" value="No">No
+                        </label>
+                        <label for="termination1" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
             <div class="row">
@@ -999,27 +1005,27 @@
                     <textarea id="regularTextarea" class="re-6" ></textarea>
                 </div>
             </div>
-            <hr>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" class="re-7" placeholder="Date Begin"/>
+                    <input type="text" id="employbegan2" name="employbegan2" class="re-7" placeholder="Date Began" required>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" class="re-8" placeholder="Date Ended"/>
+                    <input type="text"id="employended2" name="employended2" class="re-8" placeholder="Date Ended" required>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="re-9" placeholder="Name of Business"/>
+                    <input type="text" id="employbusiness2" name="employbusiness2" class="re-9" placeholder="Name of Business" required>
                 </div>
                 <div class="eight columns omega">
-                    <label for="">Was the termination of this employment voluntary?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosVoluntary-2" class="re-10" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosVoluntary-2" class="re-11" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Was the termination of this employment voluntary?</label>
+                        <label for="radiosVoluntary-2">
+                            <input type="radio" name="termination2" class="re-10" id="termination2" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosVoluntary-2">
+                            <input type="radio" name="termination2" class="re-11" id="termination2" value="No">No
+                        </label>
+                        <label for="termination2" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
             <div class="row">
@@ -1028,27 +1034,27 @@
                     <textarea id="regularTextarea" class="re-12" ></textarea>
                 </div>
             </div>
-            <hr>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" class="re-13" placeholder="Date Begin"/>
+                    <input type="text" id="employbegan3" name="employbegan3" class="re-13" placeholder="Date Began" required>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" class="re-14" placeholder="Date Ended"/>
+                    <input type="text" id="employended3" name="employended3" class="re-14" placeholder="Date Ended" required>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="regularInput" class="re-15" placeholder="Name of Business"/>
+                    <input type="text" id="employbusiness3" name="employbusiness3" class="re-15" placeholder="Name of Business" required>
                 </div>
                 <div class="eight columns omega">
-                    <label for="">Was the termination of this employment voluntary?</label>
-                    <label for="regularRadio">
-                        <input type="radio" name="radiosVoluntary-3" class="re-16" id="regularRadio" value="Yes" />
-                        <span>Yes</span>
-                    </label>
-                    <label for="secondRegularRadio">
-                        <input type="radio" name="radiosVoluntary-3" class="re-17" id="secondRegularRadio" value="No" />
-                        <span>No</span>
-                    </label>
+                    <fieldset>
+                        <label for="">Was the termination of this employment voluntary?</label>
+                        <label for="radiosVoluntary-3">
+                            <input type="radio" name="termination3" class="re-16" id="termination3" value="Yes" required>Yes
+                        </label>
+                        <label for="secondradiosVoluntary-3">
+                            <input type="radio" name="termination3" class="re-17" id="termination3" value="No">No
+                        </label>
+                        <label for="termination3" class="error">Please choose yes or no</label>
+                    </fieldset>
                 </div>
             </div>
             <div class="row">
@@ -1057,56 +1063,58 @@
                     <textarea id="regularTextarea" class="re-18" ></textarea>
                 </div>
             </div>
-            <br>
+        </div>
+        <div class="recent-unemployment">
             <h3>Recent Unemployment</h3>
             <hr>
             <p>Please list all periods of unemployment.</p>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" class="ru-1" placeholder="Date Begin"/>
+                    <input type="text" id="datebegan1" name="datebegan1" class="ru-1" placeholder="Date Began" required>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" class="ru-2" placeholder="Date Ended"/>
+                    <input type="text" id="dateended1" name="dateended1" class="ru-2" placeholder="Date Ended" required>
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="regularInput" class="ru-3" placeholder="How was this time spent?"/>
+                    <input type="text" id="timespent1" name="timespent1" class="ru-3" placeholder="How was this time spent?" required>
                 </div>
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" class="ru-4" placeholder="Date Begin"/>
+                    <input type="text" id="datebegan2" name="datebegan2" class="ru-4" placeholder="Date Began" required>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" class="ru-5" placeholder="Date Ended"/>
+                    <input type="text" id="dateended2" name="dateended2" class="ru-5" placeholder="Date Ended" required>
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="regularInput" class="ru-6" placeholder="How was this time spent?"/>
+                    <input type="text" id="timespent2" name="timespent2" class="ru-6" placeholder="How was this time spent?" required>
                 </div>
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="regularInput" class="ru-7" placeholder="Date Begin"/>
+                    <input type="text" id="datebegan3" name="datebegan3" class="ru-7" placeholder="Date Began" required>
                 </div>
                 <div class="two columns">
-                    <input type="text" id="regularInput" class="ru-8" placeholder="Date Ended"/>
+                    <input type="text" id="dateended3" name="dateended3" class="ru-8" placeholder="Date Ended" required>
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="regularInput" class="ru-9" placeholder="How was this time spent?"/>
+                    <input type="text" id="timespent3" name="timespent3" class="ru-9" placeholder="How was this time spent?" required>
                 </div>
             </div>
-            <br>
-
+        </div>
+        <div class="professional-references">
             <h3>Professional References</h3>
             <hr>
+            <p>Please enter at least one reference.</p>
             <div class="row">
                 <div class="one-third column alpha">
-                    <input type="text" id="regularInput" class="pr-1" placeholder="Reference Name"/>
+                    <input type="text" id="refrencename" name="refrencename" class="pr-1" placeholder="Reference Name" required>
                 </div>
                 <div class="one-third column">
-                    <input type="text" id="regularInput" class="pr-2" placeholder="Home Phone"/>
+                    <input type="text" id="refrencephone" name="refrencephone" class="pr-2" placeholder="Home Phone" required>
                 </div>
                 <div class="one-third column omega">
-                    <input type="text" id="regularInput" class="pr-3" placeholder="Relation or Comapny"/>
+                    <input type="text" id="refrencecompany" name="refrencecompany" class="pr-3" placeholder="Relation or Comapny" required>
                 </div>
             </div>
             <div class="row">
@@ -1120,7 +1128,7 @@
                     <input type="text" id="regularInput" class="pr-6" placeholder="Relation or Comapny"/>
                 </div>
             </div>
-            <br>
+        </div>
             <h3>Equal Opportunity Employer</h3>
             <hr>
             <p>Protect America, Inc. is an equal opportunity employer and does not discriminate against any applicant or employee because of race, color, religion, sex, national origin, disability, age, or military or veteran status in accordance with federal law. In addition, Protect America, Inc. complies with applicable state and local laws governing non-discrimination in employment in every jurisdiction in which it maintains facilities. Protect America, Inc. also provides reasonable accommodation to qualified individuals with disabilities in accordance with applicable laws.</p>
@@ -1133,401 +1141,85 @@
             <p><strong>I understand that this application is not an employment contract for any specific length of time between Protect America, Inc. and myself, and that in the event I am hired, my employment will be "at will" and either Protect America, Inc. or I can terminate my employment with or without cause and with or without notice at any time. Nothing contained in any handbook, manual, policy and the like, distributed by Protect America, Inc. to its employees is intended to or can create an employment contract, an offer of employment or any obligation on the part of Protect America, Inc. Protect America, Inc. may, at its sole discretion, hold in abeyance or revoke, amend, abridge, or change any benefit, policy practice, condition or process affecting its employees.</strong></p>
             <p>By signing below, I acknowledge that I have read all of the above statements, and that I understand them.</p>
             <div class="six columns alpha">
-                <input type="text" id="regularInput" class="prc-1" placeholder="First and Last Name"/>
+                <input type="text" id="firstandlast" name="firstandlast" class="prc-1" placeholder="First and Last Name" required>
             </div>
             <div class="three columns">
-                <input type="text" id="regularInput" class="prc-2" placeholder="Date"/>
+                <input type="text" id="todaydate" name="todaydate" class="prc-2" placeholder="Date" required>
             </div>
             <div class="clear"><br><br></div>
             <br><br>
-            <button type="button" class="yellow">Submit</button>
+            <input class="submit" type="submit" value="Submit">
         </form>
     </div>
 
 
 {% addtoblock "js" %}
 {% block javascript %}
-
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        $('.yellow').on('click',function(){
-            // class names used to reference fields are pi,ed,eh,ph,re, etc
-            // format is first letters of section name - (dash) field number
-            // ex section Education Historys third field would be eh-3
-
-
-            $('#employ-form button').attr('disabled',true);
-
-            // Personal Information
-
-            var data = {};
-            var $form = $(this).closest('#employ-form');
-            var first_name = $form.find(".pi-1").val();
-            var middle_name = $form.find(".pi-2").val();
-            var last_name = $form.find(".pi-3").val();
-            var address = $form.find(".pi-4").val();
-            var apt_number = $form.find(".pi-5").val();
-            var city = $form.find(".pi-6").val();
-            var state = $form.find(".pi-7").val();
-            var zip = $form.find(".pi-8").val();
-            var home_phone = $form.find(".pi-9").val();
-            var cell_phone = $form.find(".pi-10").val();
-            var email = $form.find(".pi-11").val();
-            var ssn = $form.find(".pi-12").val();
-                // are you under the age of 18?
-                var under_18 = "no answer";
-                if ($('.pi-13').is(':checked')){
-                    under_18 = 'no';
-                }
-                else if ($('.pi-14').is(':checked')){
-                    under_18 = 'yes';
-                }
-
-                // how did you hear about us?
-                var hear_about = $form.find(".pi-15").val();
-                // ever been convicted of a felony?
-                var convicted = "no"
-                var convicted_explain = false
-                if ($('.pi-16').is(':checked')){
-                    convicted = 'no'
-                }
-                else if ($('.pi-17').is(':checked')){
-                    convicted = 'yes'
-                    convicted_explain = $form.find(".pi-18").val();
-                }
-
-
-            data['personal_information'] = {'first_name':first_name,
-                                        'middle_name':middle_name,
-                                        'last_name':last_name,
-                                        'address':address,
-                                        'apt_number':apt_number,
-                                        'city':city,
-                                        'state':state,
-                                        'zip':zip,
-                                        'home_phone':home_phone,
-                                        'cell_phone':cell_phone,
-                                        'email':email,
-                                        'ssn':ssn,
-                                        'under_18':under_18,
-                                        'hear_about':hear_about,
-                                        'convicted':convicted,
-                                        'convicted_explain':convicted_explain
-                                            }
-
-
-
-            // Employment Desired
-
-            var date_to_start = $form.find(".ed-1").val();
-            var position = $form.find(".ed-2").val();
-            var pay_rate = $form.find(".ed-3").val();
-
-            data['employment_desired'] = {'start_date':date_to_start,
-                                        'position':position,
-                                        'pay_rate':pay_rate
-                                      }
-
-
-            // Availability
-
-            var mon_start = $form.find(".mon-start").val();
-            var mon_end = $form.find(".mon-end").val();
-            var tue_start = $form.find(".tue-start").val();
-            var tue_end = $form.find(".tue-end").val();
-            var wed_start = $form.find(".wed-start").val();
-            var wed_end = $form.find(".wed-end").val();
-            var thur_start = $form.find(".thur-start").val();
-            var thur_end = $form.find(".thur-end").val();
-            var fri_start = $form.find(".fri-start").val();
-            var fri_end = $form.find(".fri-end").val();
-            var sat_start = $form.find(".sat-start").val();
-            var sat_end = $form.find(".sat-end").val();
-            var sun_start = $form.find(".sun-start").val();
-            var sun_end = $form.find(".sun-end").val();
-
-            data['availability'] = {'mon_start':mon_start,
-                                'mon_end':mon_end,
-                                'tue_start':tue_start,
-                                'tue_end':tue_end,
-                                'wed_start':wed_start,
-                                'wed_end':wed_end,
-                                'thur_start':thur_start,
-                                'thur_end':thur_end,
-                                'fri_start':fri_start,
-                                'fri_end':fri_end,
-                                'sat_start':sat_start,
-                                'sat_end':sat_end,
-                                'sun_start':sun_start,
-                                'sun_end':sun_end
-                              }
-
-
-            // Education History
-            var hs_name = $form.find(".eh-1").val();
-            var hs_major = $form.find(".eh-2").val();
-            var hs_degree = $form.find(".eh-3").val();
-                // did you graduate high school?
-                var hs_graduate = "no answer";
-                if ($('.eh-4').is(':checked')){
-                    hs_graduate = "yes";
-                }
-                else if ($('.eh-5').is(':checked')){
-                    hs_graduate = "no";
-                }
-
-            var co_name = $form.find(".eh-6").val();
-            var co_major = $form.find(".eh-7").val();
-            var co_degree = $form.find(".eh-8").val();
-                // did you graduate college?
-                var co_graduate = "no answer";
-                if ($('.eh-9').is(':checked')){
-                    co_graduate = "yes";
-                }
-                else if ($('.eh-10').is(':checked')){
-                    co_graduate = "no";
-                }
-
-            var co2_name = $form.find(".eh-11").val();
-            var co2_major = $form.find(".eh-12").val();
-            var co2_degree = $form.find(".eh-13").val();
-                // did you graduate college (graduate)?
-                var co2_graduate = "no answer";
-                if ($('.eh-14').is(':checked')){
-                    co2_graduate = "yes";
-                }
-                else if ($('.eh-15').is(':checked')){
-                    co2_graduate = "no";
-                }
-
-            var other_name = $form.find(".eh-16").val();
-            var other_major = $form.find(".eh-17").val();
-            var other_degree = $form.find(".eh-18").val();
-                // did you graduate other?
-                var other_graduate = "no answer";
-                if ($('.eh-19').is(':checked')){
-                    other_graduate = "yes";
-                }
-                else if ($('.eh-20').is(':checked')){
-                    other_graduate = "no";
-                }
-
-
-            data['education_history'] = {'hs_name':hs_name,
-                                        'hs_major':hs_major,
-                                        'hs_degree':hs_degree,
-                                        'hs_graduate':hs_graduate,
-                                        'co_name':co_name,
-                                        'co_major':co_major,
-                                        'co_degree':co_degree,
-                                        'co_graduate':co_graduate,
-                                        'co2_name':co2_name,
-                                        'co2_major':co2_major,
-                                        'co2_degree':co2_degree,
-                                        'co2_graduate':co2_graduate,
-                                        'other_name':other_name,
-                                        'other_major':other_major,
-                                        'other_degree':other_degree,
-                                        'other_graduate':other_graduate,
-                                    }
-
-
-            // Professional History
-
-                // have you applied to PA before?
-                var applied_b4 = "no answer";
-                if ($('.ph-1').is(':checked')){
-                    applied_b4 = "yes";
-                }
-                else if ($('.ph-2').is(':checked')){
-                    applied_b4 = "no";
-                }
-
-                // are you currently employed?
-                var employed = "no answer";
-                if ($('.ph-3').is(':checked')){
-                    employed = "yes";
-                }
-                else if ($('.ph-4').is(':checked')){
-                    employed = "no";
-                }
-
-                // can perform the essential functions of the job/position
-                var can_perform = "no answer";
-                if ($('.ph-5').is(':checked')){
-                    can_perform = "yes";
-                }
-                else if ($('.ph-6').is(':checked')){
-                    can_perform = "no";
-                }
-
-                data['professional_history'] = {'applied_b4':applied_b4,
-                                                'employed':employed,
-                                                'can_perform':can_perform}
-
-            // Recent Employment
-
-            var date_start1 = $form.find(".re-1").val();
-            var date_end1 = $form.find(".re-2").val();
-            var company1 = $form.find(".re-3").val();
-                // was the termination voluntary?
-                var termination1 = "no answer";
-                if ($('.re-4').is(':checked')){
-                    termination1 = "yes";
-                }
-                else if ($('.re-5').is(':checked')){
-                    termination1 = "no";
-                }
-
-                // if yes explain
-                var explain1 = $form.find(".re-6").val();
-
-            var date_start2 = $form.find(".re-7").val();
-            var date_end2 = $form.find(".re-8").val();
-            var company2 = $form.find(".re-9").val();
-                // was the termination voluntary?
-                var termination2 = "no answer";
-                if ($('.re-10').is(':checked')){
-                    termination2 = "yes";
-                }
-                else if ($('.re-11').is(':checked')){
-                    termination2 = "no";
-                }
-
-                // if yes explain
-                var explain2 = $form.find(".re-12").val();
-
-            var date_start3 = $form.find(".re-13").val();
-            var date_end3 = $form.find(".re-14").val();
-            var company3 = $form.find(".re-15").val();
-                // was the termination voluntary?
-                var termination3 = "no answer";
-                if ($('.re-16').is(':checked')){
-                    termination3 = "yes";
-                }
-                else if ($('.re-17').is(':checked')){
-                    termination3 = "no";
-                }
-
-                // if yes explain
-                var explain3 = $form.find(".re-6").val();
-
-
-            data['recent_employment'] = {'date_start1':date_start1,
-                                    'date_end1':date_end1,
-                                    'company1':company1,
-                                    'termination1':termination1,
-                                    'explain1':explain1,
-                                    'date_start2':date_start2,
-                                    'date_end2':date_end2,
-                                    'company2':company2,
-                                    'termination2':termination2,
-                                    'explain2':explain2,
-                                    'date_start3':date_start3,
-                                    'date_end3':date_end3,
-                                    'company3':company3,
-                                    'termination3':termination3,
-                                    'explain3':explain3,
-
-                                        }
-
-
-
-
-            // Recent Unemployment
-            var date_start1 = $form.find(".ru-1").val();
-            var date_end1 = $form.find(".ru-2").val();
-                // how was the time spent?
-                var spent1 = $form.find(".ru-3").val();
-
-            var date_start2 = $form.find(".ru-4").val();
-            var date_end2 = $form.find(".ru-5").val();
-                // how was the time spent?
-                var spent2 = $form.find(".ru-6").val();
-
-            var date_start3 = $form.find(".ru-7").val();
-            var date_end3 = $form.find(".ru-8").val();
-                // how was the time spent?
-                var spent3 = $form.find(".ru-9").val();
-
-
-            data['recent_unemployment'] = {'date_start1':date_start1,
-                                        'date_end1':date_end1,
-                                        'spent1':spent1,
-                                        'date_start2':date_start2,
-                                        'date_end2':date_end2,
-                                        'spent2':spent2,
-                                        'date_start3':date_start3,
-                                        'date_end3':date_end3,
-                                        'spent3':spent3}
-
-
-            // Professional References
-
-            var reference_name = $form.find(".pr-1").val();
-            var reference_phone = $form.find(".pr-2").val();
-            var reference_relation = $form.find(".pr-3").val();
-            var reference_name2 = $form.find(".pr-4").val();
-            var reference_phone2 = $form.find(".pr-5").val();
-            var reference_relation2 = $form.find(".pr-6").val();
-
-            data['professional_references'] = {'reference_name':reference_name,
-                                        'reference_phone':reference_phone,
-                                        'reference_relation':reference_relation,
-                                        'reference_name2':reference_name2,
-                                        'reference_phone2':reference_phone2,
-                                        'reference_relation2':reference_relation2}
-
-            // END (Please Read Carefully)
-            var signed_name = $form.find(".prc-1").val();
-            var signed_date = $form.find(".prc-2").val();
-
-            data['end'] = {'signed_name':signed_name,
-                           'signed_date':signed_date}
-
-
-
-
-
-
-         $.ajax({
-                    type: "POST",
-                    url: "{% url ajax-employment %}",
-                    data: {'data':JSON.stringify(data)},
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: FormSuccess,
-                    error: FormError,
-                    });
-
-
-         function FormSuccess(){
-            window.location = "{% url application-thank-you %}"
-
-         }
-
-         function FormError(json){
-            $('#employ-form button').attr('disabled',false);
-            var data = $.parseJSON(json.responseText);
-            if (!data.success){
-                if (data.reason == 'required'){
-                    alert('Fill out all fields in section:' + ' ' + data.section);
-                }
-                else if (data.reason == 'email' || data.reason == 'ajax'){
-                    alert('There was an error submitting your application. Please try again.');
-                }
-
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.maskedinput.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.js"></script>
+<script>
+    $().ready(function() {
+        // validate signup form on keyup and submit
+        $("#employ-form").validate({
+            rules: {
+                firstname: "required",
+                lastname: "required",
+                streetaddress: "required",
+                city: "required",
+                state: "required",
+                zipcode: {
+                    required: true,
+                    minlength: 5
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                socialsecurity: "required",
+                dateavailable: "required",
+                positionapplied: "required",
+                rateofpay: "required",
+                highschool: "required",
+                collegename: "required",
+                collegemajor: "required",
+                collegediploma: "required",
+                graduatename: "required",
+                graduatemajor: "required",
+                graduatediploma: "required",
+                othername: "required",
+                othermajor: "required",
+                otherdiploma: "required",
+            },
+            messages: {
+                firstname: "Please enter your firstname",
+                lastname: "Please enter your lastname",
+                streetaddress: "Please enter your street address",
+                city: "Please enter your city",
+                state: "Plese select your state",
+                zipcode: {
+                    required: "Please enter your zipcode",
+                    minlength: "Your zipcode must be at least 5 characters long"
+                },
+                email: "Please enter a valid email address",
+                socialsecurity: "Please enter your social security number",
+                dateavailable: "Please enter your available start date",
+                positionapplied: "Please let us know what position you applied for",
+                rateofpay: "Please enter your desired rate of pay",
+                highschool: "Please enter the name of your high school",
+                collegename: "Please enter the name of your college",
+                collegemajor: "Please enter your major",
+                collegediploma: "Please enter the degree or diploma earned",
+                graduatename: "Please enter the name of your gradate school",
+                graduatemajor: "Please enter your major",
+                graduatediploma: "Please enter the degree or diploma earned",
+                othername: "Please enter the name of your other school",
+                othermajor: "Please enter your major",
+                otherdiploma: "Please enter the degree or diplmoa earned",
             }
-
-         }
-
-
-
-
-
         });
     });
+    $("input.homephone").mask("(999) 999-9999");
+    $("input.cellphone").mask("(999) 999-9999");
 </script>
 
 {% endblock %}
