@@ -50,8 +50,8 @@ def send_leadimport(data):
 
 def send_employment_email(data):
     subject = 'Application for Employment'
-    from_email = 'waldyp@gmail.com'
-    to_email = ['waldyprzybyslawski@protectamerica.com']
+    from_email = 'fahzee1@gmail.com'
+    to_email = ['cjogbuehi@protectamerica.com']
     html_content = render_to_string('emails/employment.html',data)
     msg = EmailMultiAlternatives(subject,html_content,from_email,to_email)
     msg.attach_alternative(html_content,'text/html')
@@ -935,4 +935,3 @@ def ajax_employment(request):
     response['success'] = False
     response['reason'] = 'ajax'
     return HttpResponseBadRequest(json.dumps(response))
-    
