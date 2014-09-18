@@ -3,8 +3,7 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/home-b.css">
-
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/home.css?v71">
 {% if not debug %}
 {% if request.GET.agent == 'a01986' or request.COOKIES.refer_id == 'a01986' %}
 <script> 
@@ -129,15 +128,6 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block page_keywords %}home alarm system, home alarm systems, security, security system, security systems, home security, home security system, home security systems, home security monitoring{% endblock %}
 {% block page_description %}Want a FREE home security system? Sign up for monitoring with Protect America and get a security system at no cost. Call 800-951-5190 today to learn more!{% endblock %}
 
-{% block typekit-code %}
-<script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
-<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-{% endblock %}
-
-{% block header %}
-    {% include "_partials/new-header.html" with form=forms.basic %}
-{% endblock %}
-
 {% block subnav %}
 {% endblock %}
 {% block bing-conversion-code %}<meta name="google-site-verification" content="OSo3lFTITOYd9b2_wfgqZbQaQvE-OYsg6rpUzFY7-HQ" />
@@ -146,7 +136,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 {% block content %}
 {% block hero_banner_area %}
     {% comment %}{% include "banners/spring-savings.html" %}{% endcomment %}
-    {% include "banners/sept-deals.html" %}
+    {% include "banners/july-deals.html" %}
 {% endblock %}
 {% include "order/call-box.html" %}
 
@@ -222,51 +212,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
 <div class="clear"></div>
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
-    <script type="text/javascript">
 
-        var $menu = $(".dropdown-menu");
-
-        $menu.menuAim({
-            activate: activateSubmenu,
-            deactivate: deactivateSubmenu,
-        });
-
-        function activateSubmenu(row) {
-            var $row = $(row),
-                submenuId = $row.data("submenuId"),
-                $submenu = $("#" + submenuId),
-                height = 240,
-                width = $menu.outerWidth();
-            $submenu.css({
-                display: "block",
-                top: -1,
-                left: width - 3,  // main should overlay submenu
-                height: height - 4  // padding for main dropdown's arrow
-            });
-
-            $row.find("a").addClass("maintainHover");
-        }
-
-        function deactivateSubmenu(row) {
-            var $row = $(row),
-                submenuId = $row.data("submenuId"),
-                $submenu = $("#" + submenuId);
-
-            // Hide the submenu and remove the row's highlighted look
-            $submenu.css("display", "none");
-            $row.find("a").removeClass("maintainHover");
-        }
-
-        $(".dropdown-menu li").click(function(e) {
-            e.stopPropagation();
-        });
-        $(".dropdown-toggle").click(function(e) {
-            return false;
-        });
-
-
-    </script>
     <script type="text/javascript">
     $(document).ready(function() {
     	$( "#menu-button" ).click(function() {
