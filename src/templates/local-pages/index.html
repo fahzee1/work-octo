@@ -67,7 +67,12 @@
 <div class="container">
     <h2 class="title center">Protect what matters most.</h2>
 
-    {% start_ab request 'Cjs test' %}
+    {% if request.refer_id == 'HOMESITE' %}
+        {% start_ab request 'Cjs test' %}
+
+    {% else %}
+        <h1>Not here</h1>
+    {% endif %}
 
     {% if local_video %}
         <div id="local-video" class="nine columns">
