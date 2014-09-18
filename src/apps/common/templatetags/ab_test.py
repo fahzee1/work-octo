@@ -1,7 +1,7 @@
 from django import template
 from django.utils.safestring import SafeString
 from apps.common.models import AbTest, AbTestCode
-from django.template import Context, Template
+from django.template import Template, RequestContext
 from random import choice
 
 
@@ -53,8 +53,7 @@ def start_ab(request,test=None):
 
 
         t = Template(code)
-        c = Context({})
-        code = t.render(c)
+        code = t.render(RequestContext(request))
 
         ctx = {'code':code,
            'name':test}

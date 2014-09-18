@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load content_filters content_tags sekizai_tags testimonial_tags humanize ab_test %}
+{% load content_filters content_tags sekizai_tags testimonial_tags humanize ab_test static %}
 {% block page_title %}{{city}}, {{ state }} Home Security Systems | Protect America{% endblock %}
 
 {% block page_description %}Want a FREE {{ city }} home security system? Sign up for monitoring with Protect America and get a system at no cost. Call 888-936-3385 to learn more!{% endblock %}
@@ -67,6 +67,7 @@
 <div class="container">
     <h2 class="title center">Protect what matters most.</h2>
 
+    {% start_ab request 'Cjs test' %}
 
     {% if local_video %}
         <div id="local-video" class="nine columns">
