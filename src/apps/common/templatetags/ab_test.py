@@ -9,6 +9,8 @@ register = template.Library()
 
 @register.inclusion_tag('tests/ab.html')
 def start_ab(request,test=None):
+    #import pdb
+    #pdb.set_trace()
     code = None
     agent_id = request.session.get('refer_id',None)
     if agent_id == 'HOMESITE':
@@ -52,6 +54,8 @@ def start_ab(request,test=None):
 
 
 
+        firstline = "{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}\n{% load url from future %}\n"
+        code = firstline + code
         t = Template(code)
         code = t.render(RequestContext(request))
 
