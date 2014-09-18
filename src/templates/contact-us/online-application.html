@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/online-app.css">
 {% endblock %}
 
+{% block header %}
+{% endblock %}
 
+{% block subnav %}
+{% endblock %}
 
 {% block content %}
 
 <div class="container">
 
+    <img src="{{ STATIC_URL }}img/logo/logo-on-white.png" style="margin: 40px 0 0 0;">
         <h2>Application for Employment</h2>
         <br>
         <form class="cmxform" id="employ-form" method="get" action="">
@@ -45,7 +50,8 @@
                     <input type="text" id="city" class="pi-6" name="city" placeholder="City"/>
                 </div>
                 <div class="one-third column">
-                    <select id="state" name="state" class="required state">
+                    <select id="state" name="state" class="required state" required>
+                        <option value=""></option>
                         <option>Alabama</option>
                         <option>Alaska</option>
                         <option>Arizona</option>
@@ -97,6 +103,7 @@
                         <option>Wisconsin</option>
                         <option>Wyoming</option>
                     </select>
+
                 </div>
                 <div class="one-third column omega">
                     <input type="text" id="zipcode" name="zipcode" class="pi-8" placeholder="Zip"/>
@@ -873,7 +880,7 @@
                     <fieldset>
                         <label for="">Did you Graduate?</label>
                         <label for="radiosGraduate-2">
-                            <input type="radio" name="collegegraduate" class="eh-9" id="regularRadio" value="Yes" required>Yes
+                            <input type="radio" name="collegegraduate" class="eh-9" id="regularRadio" value="Yes">Yes
                         </label>
                         <label for="secondradiosGraduate-2">
                             <input type="radio" name="collegegraduate" class="eh-10" id="secondRegularRadio" value="No">No
@@ -896,7 +903,7 @@
                     <fieldset>
                         <label for="">Did you Graduate?</label>
                         <label for="radiosGraduate-3">
-                            <input type="radio" name="graduategraduate" class="eh-14" id="regularRadio" value="Yes" required>Yes
+                            <input type="radio" name="graduategraduate" class="eh-14" id="regularRadio" value="Yes">Yes
                         </label>
                         <label for="secondradiosGraduate-3">
                             <input type="radio" name="graduategraduate" class="eh-15" id="secondRegularRadio" value="No">No
@@ -919,7 +926,7 @@
                     <fieldset>
                         <label for="">Did you Graduate?</label>
                         <label for="radiosGraduate-4">
-                            <input type="radio" name="othergraduate" class="eh-19" id="regularRadio" value="Yes" required>Yes
+                            <input type="radio" name="othergraduate" class="eh-19" id="regularRadio" value="Yes">Yes
                         </label>
                         <label for="secondradiosGraduate-4">
                             <input type="radio" name="othergraduate" class="eh-20" id="secondRegularRadio" value="No">No
@@ -1007,19 +1014,19 @@
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="employbegan2" name="employbegan2" class="re-7" placeholder="Date Began" required>
+                    <input type="text" id="employbegan2" name="employbegan2" class="re-7" placeholder="Date Began">
                 </div>
                 <div class="two columns">
-                    <input type="text"id="employended2" name="employended2" class="re-8" placeholder="Date Ended" required>
+                    <input type="text"id="employended2" name="employended2" class="re-8" placeholder="Date Ended">
                 </div>
                 <div class="four columns">
-                    <input type="text" id="employbusiness2" name="employbusiness2" class="re-9" placeholder="Name of Business" required>
+                    <input type="text" id="employbusiness2" name="employbusiness2" class="re-9" placeholder="Name of Business">
                 </div>
                 <div class="eight columns omega">
                     <fieldset>
                         <label for="">Was the termination of this employment voluntary?</label>
                         <label for="radiosVoluntary-2">
-                            <input type="radio" name="termination2" class="re-10" id="termination2" value="Yes" required>Yes
+                            <input type="radio" name="termination2" class="re-10" id="termination2" value="Yes">Yes
                         </label>
                         <label for="secondradiosVoluntary-2">
                             <input type="radio" name="termination2" class="re-11" id="termination2" value="No">No
@@ -1036,19 +1043,19 @@
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="employbegan3" name="employbegan3" class="re-13" placeholder="Date Began" required>
+                    <input type="text" id="employbegan3" name="employbegan3" class="re-13" placeholder="Date Began">
                 </div>
                 <div class="two columns">
-                    <input type="text" id="employended3" name="employended3" class="re-14" placeholder="Date Ended" required>
+                    <input type="text" id="employended3" name="employended3" class="re-14" placeholder="Date Ended">
                 </div>
                 <div class="four columns">
-                    <input type="text" id="employbusiness3" name="employbusiness3" class="re-15" placeholder="Name of Business" required>
+                    <input type="text" id="employbusiness3" name="employbusiness3" class="re-15" placeholder="Name of Business">
                 </div>
                 <div class="eight columns omega">
                     <fieldset>
                         <label for="">Was the termination of this employment voluntary?</label>
                         <label for="radiosVoluntary-3">
-                            <input type="radio" name="termination3" class="re-16" id="termination3" value="Yes" required>Yes
+                            <input type="radio" name="termination3" class="re-16" id="termination3" value="Yes">Yes
                         </label>
                         <label for="secondradiosVoluntary-3">
                             <input type="radio" name="termination3" class="re-17" id="termination3" value="No">No
@@ -1070,35 +1077,35 @@
             <p>Please list all periods of unemployment.</p>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="datebegan1" name="datebegan1" class="ru-1" placeholder="Date Began" required>
+                    <input type="text" id="datebegan1" name="datebegan1" class="ru-1" placeholder="Date Began">
                 </div>
                 <div class="two columns">
-                    <input type="text" id="dateended1" name="dateended1" class="ru-2" placeholder="Date Ended" required>
+                    <input type="text" id="dateended1" name="dateended1" class="ru-2" placeholder="Date Ended">
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="timespent1" name="timespent1" class="ru-3" placeholder="How was this time spent?" required>
+                    <input type="text" id="timespent1" name="timespent1" class="ru-3" placeholder="How was this time spent?">
                 </div>
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="datebegan2" name="datebegan2" class="ru-4" placeholder="Date Began" required>
+                    <input type="text" id="datebegan2" name="datebegan2" class="ru-4" placeholder="Date Began">
                 </div>
                 <div class="two columns">
-                    <input type="text" id="dateended2" name="dateended2" class="ru-5" placeholder="Date Ended" required>
+                    <input type="text" id="dateended2" name="dateended2" class="ru-5" placeholder="Date Ended">
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="timespent2" name="timespent2" class="ru-6" placeholder="How was this time spent?" required>
+                    <input type="text" id="timespent2" name="timespent2" class="ru-6" placeholder="How was this time spent?">
                 </div>
             </div>
             <div class="row">
                 <div class="two columns alpha">
-                    <input type="text" id="datebegan3" name="datebegan3" class="ru-7" placeholder="Date Began" required>
+                    <input type="text" id="datebegan3" name="datebegan3" class="ru-7" placeholder="Date Began">
                 </div>
                 <div class="two columns">
-                    <input type="text" id="dateended3" name="dateended3" class="ru-8" placeholder="Date Ended" required>
+                    <input type="text" id="dateended3" name="dateended3" class="ru-8" placeholder="Date Ended">
                 </div>
                 <div class="twelve columns omega">
-                    <input type="text" id="timespent3" name="timespent3" class="ru-9" placeholder="How was this time spent?" required>
+                    <input type="text" id="timespent3" name="timespent3" class="ru-9" placeholder="How was this time spent?">
                 </div>
             </div>
         </div>
@@ -1148,10 +1155,11 @@
             </div>
             <div class="clear"><br><br></div>
             <br><br>
-            <input class="submit" type="submit" value="Submit">
+            <input class="button" type="submit" value="Submit">
         </form>
     </div>
 
+<p>&nbsp;</p>
 
 {% addtoblock "js" %}
 {% block javascript %}
@@ -1166,7 +1174,6 @@
                 lastname: "required",
                 streetaddress: "required",
                 city: "required",
-                state: "required",
                 zipcode: {
                     required: true,
                     minlength: 5
@@ -1180,22 +1187,12 @@
                 positionapplied: "required",
                 rateofpay: "required",
                 highschool: "required",
-                collegename: "required",
-                collegemajor: "required",
-                collegediploma: "required",
-                graduatename: "required",
-                graduatemajor: "required",
-                graduatediploma: "required",
-                othername: "required",
-                othermajor: "required",
-                otherdiploma: "required",
             },
             messages: {
                 firstname: "Please enter your firstname",
                 lastname: "Please enter your lastname",
                 streetaddress: "Please enter your street address",
                 city: "Please enter your city",
-                state: "Plese select your state",
                 zipcode: {
                     required: "Please enter your zipcode",
                     minlength: "Your zipcode must be at least 5 characters long"
@@ -1206,15 +1203,6 @@
                 positionapplied: "Please let us know what position you applied for",
                 rateofpay: "Please enter your desired rate of pay",
                 highschool: "Please enter the name of your high school",
-                collegename: "Please enter the name of your college",
-                collegemajor: "Please enter your major",
-                collegediploma: "Please enter the degree or diploma earned",
-                graduatename: "Please enter the name of your gradate school",
-                graduatemajor: "Please enter your major",
-                graduatediploma: "Please enter the degree or diploma earned",
-                othername: "Please enter the name of your other school",
-                othermajor: "Please enter your major",
-                otherdiploma: "Please enter the degree or diplmoa earned",
             }
         });
     });
@@ -1226,4 +1214,10 @@
 {% endaddtoblock "js" %}
 
 
+{% endblock %}
+
+{% block order-footer %}
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
