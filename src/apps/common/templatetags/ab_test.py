@@ -13,27 +13,31 @@ def start_ab(request,test=None):
     agent_id = request.session.get('refer_id',None)
     if agent_id == 'HOMESITE':
         try:
-            abtest = request.session.get('abtest',None)
+            abtest = request.session.get(test,None)
             test = AbTest.objects.get(name=test)
             if not abtest:
                 if test.code_choices:
                     all = test.code_choices.all()
                     code = choice(all)
-                    agent_id = code.aff_id
+                    aff_id = code.aff_id
                     name = code.name
                     code = code.code
 
-                    request.session['abtest'] = True
-                    request.session['abtest_name'] = [name]
-                    request.session['refer_id'] = agent_id
+                    # set the chosen to test code with the test as the key
+                    request.session[test.name] = name
+
+                    # if agent_id isnt HOMESITE, set it to aff_id value
+                    if aff_id != agent_id:
+                        request.session['refer_id'] = agent_id
+                        request.session['ab_refer_id'] = agent_id
 
                 else:
                     code = '<b>A/B test error. Test name %s doesnt have code choices set, go create AbTestCode in the admin' % test
 
             else:
-                if test.code_choices and agent_id:
+                if test.code_choices:
                     try:
-                        code = test.code_choices.get(aff_id=agent_id)
+                        code = test.code_choices.get(name=abtest)
                         code = code.code
 
                     except AbTestCode.DoesNotExist:
@@ -45,6 +49,8 @@ def start_ab(request,test=None):
 
         except AbTest.DoesNotExist:
             code = '<b>A/B test error. Test name %s doesnt exist, go create it in the admin' % (test if test else "'N/A'")
+
+
 
         t = Template(code)
         c = Context({})
