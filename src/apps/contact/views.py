@@ -837,7 +837,8 @@ def ajax_post_agent(request):
     send_mail(subject,message,from_email,[to_email])
     return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
 
-
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def ajax_employment(request):
     import json
     response = {}
@@ -871,20 +872,29 @@ def ajax_employment(request):
                     response['success'] = False
                     response['reason'] = 'required'
                     response['section'] = 'Personal Information'
+                    print '%s missing' % k
                     return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _personal_info and not v:
+                    data['personal_information'][k] = 'blank'
 
             for k,v in employment_desired.iteritems():
                 if k not in _employment_desired and not v:
                     response['success'] = False
                     response['reason'] = 'required'
                     response['section'] = 'Employment Desired'
+                    print '%s missing' % k
                     return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _employment_desired and not v:
+                    data['employment_desired'][k] = 'blank'
 
             for k,v in availability.iteritems():
                 if v in _availability:
                     response['success'] = False
                     response['reason'] = 'required'
                     response['section'] = 'Availability'
+                    print '%s missing'.upper() % k
                     return HttpResponseBadRequest(json.dumps(response))
 
             for k,v in education_history.iteritems():
@@ -892,14 +902,20 @@ def ajax_employment(request):
                     response['success'] = False
                     response['reason'] = 'required'
                     response['section'] = 'Education History'
+                    print '%s missing'.upper() % k
                     return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _education_history and not v:
+                    data['education_history'][k] = 'blank'
+
 
             for k,v in professional_history.iteritems():
                 if k not in _professional_history:
-                    if v == 'no answer':
+                    if v == 'blank':
                         response['success'] = False
                         response['reason'] = 'required'
                         response['section'] = 'Professional History'
+                        print '%s missing'.upper() % k
                         return HttpResponseBadRequest(json.dumps(response))
 
 
@@ -908,7 +924,11 @@ def ajax_employment(request):
                     response['success'] = False
                     response['reason'] = 'required'
                     response['section'] = 'Professional References'
+                    print '%s missing'.upper() % k
                     return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _professional_references and not v:
+                    data['professional_references'][k] = 'blank'
 
 
             for k,v in end.iteritems():
@@ -916,6 +936,7 @@ def ajax_employment(request):
                     response['success'] = False
                     response['reason'] = 'required'
                     response['section'] = 'Please Read Carefully'
+                    print '%s missing'.upper() % k
                     return HttpResponseBadRequest(json.dumps(response))
 
 

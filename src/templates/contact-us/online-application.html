@@ -50,7 +50,7 @@
                     <input type="text" id="city" class="pi-6" name="city" placeholder="City"/>
                 </div>
                 <div class="one-third column">
-                    <select id="state" name="state" class="required state" required>
+                    <select id="state" name="state" class="required state pi-7" required>
                         <option value=""></option>
                         <option>Alabama</option>
                         <option>Alaska</option>
@@ -111,10 +111,10 @@
             </div>
             <div class="row">
                 <div class="four columns alpha">
-                    <input type="text" id="homephone" maxlength="14" name="homephone" class="required homephone" value="" placeholder="Home phone"/>
+                    <input type="text" id="homephone" maxlength="14" name="homephone" class="required homephone pi-9" value="" placeholder="Home phone"/>
                 </div>
                 <div class="four columns">
-                    <input type="text" id="cellphone" maxlength="14" name="cellphone" class="required cellphone"  value="" placeholder="Cell phone"/>
+                    <input type="text" id="cellphone" maxlength="14" name="cellphone" class="required cellphone pi-10"  value="" placeholder="Cell phone"/>
                 </div>
                 <div class="four columns">
                     <input type="text" id="email" name="email" class="pi-11" placeholder="Email"/>
@@ -1155,7 +1155,7 @@
             </div>
             <div class="clear"><br><br></div>
             <br><br>
-            <input class="button" type="submit" value="Submit">
+            <input class="button cancel" type="submit" value="Submit">
         </form>
     </div>
 
@@ -1203,11 +1203,379 @@
                 positionapplied: "Please let us know what position you applied for",
                 rateofpay: "Please enter your desired rate of pay",
                 highschool: "Please enter the name of your high school",
+            },
+            submitHandler:function(form){
+                SubmitForm(form);
             }
         });
     });
     $("input.homephone").mask("(999) 999-9999");
     $("input.cellphone").mask("(999) 999-9999");
+
+
+    function SubmitForm(form){
+        var $form = $('#employ-form');
+        var data = {}
+        var first_name = $form.find(".pi-1").val();
+        var middle_name = $form.find(".pi-2").val();
+        var last_name = $form.find(".pi-3").val();
+        var address = $form.find(".pi-4").val();
+        var apt_number = $form.find(".pi-5").val();
+        var city = $form.find(".pi-6").val();
+        var state = $form.find(".pi-7").val();
+        var zip = $form.find(".pi-8").val();
+        var home_phone = $form.find(".pi-9").val();
+        var cell_phone = $form.find(".pi-10").val();
+        var email = $form.find(".pi-11").val();
+        var ssn = $form.find(".pi-12").val();
+            // are you under the age of 18?
+            var under_18 = "blank";
+            if ($('.pi-13').is(':checked')){
+                under_18 = 'no';
+            }
+            else if ($('.pi-14').is(':checked')){
+                under_18 = 'yes';
+            }
+
+            // how did you hear about us?
+            var hear_about = $form.find(".pi-15").val();
+            // ever been convicted of a felony?
+            var convicted = "no"
+            var convicted_explain = false
+            if ($('.pi-16').is(':checked')){
+                convicted = 'no'
+            }
+            else if ($('.pi-17').is(':checked')){
+                convicted = 'yes'
+                convicted_explain = $form.find(".pi-18").val();
+            }
+
+
+            data['personal_information'] = {'first_name':first_name,
+                                        'middle_name':middle_name,
+                                        'last_name':last_name,
+                                        'address':address,
+                                        'apt_number':apt_number,
+                                        'city':city,
+                                        'state':state,
+                                        'zip':zip,
+                                        'home_phone':home_phone,
+                                        'cell_phone':cell_phone,
+                                        'email':email,
+                                        'ssn':ssn,
+                                        'under_18':under_18,
+                                        'hear_about':hear_about,
+                                        'convicted':convicted,
+                                        'convicted_explain':convicted_explain
+                                            }
+
+
+
+            // Employment Desired
+
+            var date_to_start = $form.find(".ed-1").val();
+            var position = $form.find(".ed-2").val();
+            var pay_rate = $form.find(".ed-3").val();
+
+            data['employment_desired'] = {'start_date':date_to_start,
+                                        'position':position,
+                                        'pay_rate':pay_rate
+                                      }
+
+
+            // Availability
+
+            var mon_start = $form.find(".mon-start").val();
+            var mon_end = $form.find(".mon-end").val();
+            var tue_start = $form.find(".tue-start").val();
+            var tue_end = $form.find(".tue-end").val();
+            var wed_start = $form.find(".wed-start").val();
+            var wed_end = $form.find(".wed-end").val();
+            var thur_start = $form.find(".thur-start").val();
+            var thur_end = $form.find(".thur-end").val();
+            var fri_start = $form.find(".fri-start").val();
+            var fri_end = $form.find(".fri-end").val();
+            var sat_start = $form.find(".sat-start").val();
+            var sat_end = $form.find(".sat-end").val();
+            var sun_start = $form.find(".sun-start").val();
+            var sun_end = $form.find(".sun-end").val();
+
+            data['availability'] = {'mon_start':mon_start,
+                                'mon_end':mon_end,
+                                'tue_start':tue_start,
+                                'tue_end':tue_end,
+                                'wed_start':wed_start,
+                                'wed_end':wed_end,
+                                'thur_start':thur_start,
+                                'thur_end':thur_end,
+                                'fri_start':fri_start,
+                                'fri_end':fri_end,
+                                'sat_start':sat_start,
+                                'sat_end':sat_end,
+                                'sun_start':sun_start,
+                                'sun_end':sun_end
+                              }
+
+
+            // Education History
+            var hs_name = $form.find(".eh-1").val();
+            var hs_major = $form.find(".eh-2").val();
+            var hs_degree = $form.find(".eh-3").val();
+                // did you graduate high school?
+                var hs_graduate = "blank";
+                if ($('.eh-4').is(':checked')){
+                    hs_graduate = "yes";
+                }
+                else if ($('.eh-5').is(':checked')){
+                    hs_graduate = "no";
+                }
+
+            var co_name = $form.find(".eh-6").val();
+            var co_major = $form.find(".eh-7").val();
+            var co_degree = $form.find(".eh-8").val();
+                // did you graduate college?
+                var co_graduate = "blank";
+                if ($('.eh-9').is(':checked')){
+                    co_graduate = "yes";
+                }
+                else if ($('.eh-10').is(':checked')){
+                    co_graduate = "no";
+                }
+
+            var co2_name = $form.find(".eh-11").val();
+            var co2_major = $form.find(".eh-12").val();
+            var co2_degree = $form.find(".eh-13").val();
+                // did you graduate college (graduate)?
+                var co2_graduate = "blank";
+                if ($('.eh-14').is(':checked')){
+                    co2_graduate = "yes";
+                }
+                else if ($('.eh-15').is(':checked')){
+                    co2_graduate = "no";
+                }
+
+            var other_name = $form.find(".eh-16").val();
+            var other_major = $form.find(".eh-17").val();
+            var other_degree = $form.find(".eh-18").val();
+                // did you graduate other?
+                var other_graduate = "blank";
+                if ($('.eh-19').is(':checked')){
+                    other_graduate = "yes";
+                }
+                else if ($('.eh-20').is(':checked')){
+                    other_graduate = "no";
+                }
+
+
+            data['education_history'] = {'hs_name':hs_name,
+                                        'hs_major':hs_major,
+                                        'hs_degree':hs_degree,
+                                        'hs_graduate':hs_graduate,
+                                        'co_name':co_name,
+                                        'co_major':co_major,
+                                        'co_degree':co_degree,
+                                        'co_graduate':co_graduate,
+                                        'co2_name':co2_name,
+                                        'co2_major':co2_major,
+                                        'co2_degree':co2_degree,
+                                        'co2_graduate':co2_graduate,
+                                        'other_name':other_name,
+                                        'other_major':other_major,
+                                        'other_degree':other_degree,
+                                        'other_graduate':other_graduate,
+                                    }
+
+
+            // Professional History
+
+                // have you applied to PA before?
+                var applied_b4 = "blank";
+                if ($('.ph-1').is(':checked')){
+                    applied_b4 = "yes";
+                }
+                else if ($('.ph-2').is(':checked')){
+                    applied_b4 = "no";
+                }
+
+                // are you currently employed?
+                var employed = "blank";
+                if ($('.ph-3').is(':checked')){
+                    employed = "yes";
+                }
+                else if ($('.ph-4').is(':checked')){
+                    employed = "no";
+                }
+
+                // can perform the essential functions of the job/position
+                var can_perform = "blank";
+                if ($('.ph-5').is(':checked')){
+                    can_perform = "yes";
+                }
+                else if ($('.ph-6').is(':checked')){
+                    can_perform = "no";
+                }
+
+                data['professional_history'] = {'applied_b4':applied_b4,
+                                                'employed':employed,
+                                                'can_perform':can_perform}
+
+            // Recent Employment
+
+            var date_start1 = $form.find(".re-1").val();
+            var date_end1 = $form.find(".re-2").val();
+            var company1 = $form.find(".re-3").val();
+                // was the termination voluntary?
+                var termination1 = "blank";
+                if ($('.re-4').is(':checked')){
+                    termination1 = "yes";
+                }
+                else if ($('.re-5').is(':checked')){
+                    termination1 = "no";
+                }
+
+                // if yes explain
+                var explain1 = $form.find(".re-6").val();
+
+            var date_start2 = $form.find(".re-7").val();
+            var date_end2 = $form.find(".re-8").val();
+            var company2 = $form.find(".re-9").val();
+                // was the termination voluntary?
+                var termination2 = "blank";
+                if ($('.re-10').is(':checked')){
+                    termination2 = "yes";
+                }
+                else if ($('.re-11').is(':checked')){
+                    termination2 = "no";
+                }
+
+                // if yes explain
+                var explain2 = $form.find(".re-12").val();
+
+            var date_start3 = $form.find(".re-13").val();
+            var date_end3 = $form.find(".re-14").val();
+            var company3 = $form.find(".re-15").val();
+                // was the termination voluntary?
+                var termination3 = "blank";
+                if ($('.re-16').is(':checked')){
+                    termination3 = "yes";
+                }
+                else if ($('.re-17').is(':checked')){
+                    termination3 = "no";
+                }
+
+                // if yes explain
+                var explain3 = $form.find(".re-6").val();
+
+
+            data['recent_employment'] = {'date_start1':date_start1,
+                                    'date_end1':date_end1,
+                                    'company1':company1,
+                                    'termination1':termination1,
+                                    'explain1':explain1,
+                                    'date_start2':date_start2,
+                                    'date_end2':date_end2,
+                                    'company2':company2,
+                                    'termination2':termination2,
+                                    'explain2':explain2,
+                                    'date_start3':date_start3,
+                                    'date_end3':date_end3,
+                                    'company3':company3,
+                                    'termination3':termination3,
+                                    'explain3':explain3,
+
+                                        }
+
+
+
+
+            // Recent Unemployment
+            var date_start1 = $form.find(".ru-1").val();
+            var date_end1 = $form.find(".ru-2").val();
+                // how was the time spent?
+                var spent1 = $form.find(".ru-3").val();
+
+            var date_start2 = $form.find(".ru-4").val();
+            var date_end2 = $form.find(".ru-5").val();
+                // how was the time spent?
+                var spent2 = $form.find(".ru-6").val();
+
+            var date_start3 = $form.find(".ru-7").val();
+            var date_end3 = $form.find(".ru-8").val();
+                // how was the time spent?
+                var spent3 = $form.find(".ru-9").val();
+
+
+            data['recent_unemployment'] = {'date_start1':date_start1,
+                                        'date_end1':date_end1,
+                                        'spent1':spent1,
+                                        'date_start2':date_start2,
+                                        'date_end2':date_end2,
+                                        'spent2':spent2,
+                                        'date_start3':date_start3,
+                                        'date_end3':date_end3,
+                                        'spent3':spent3}
+
+
+            // Professional References
+
+            var reference_name = $form.find(".pr-1").val();
+            var reference_phone = $form.find(".pr-2").val();
+            var reference_relation = $form.find(".pr-3").val();
+            var reference_name2 = $form.find(".pr-4").val();
+            var reference_phone2 = $form.find(".pr-5").val();
+            var reference_relation2 = $form.find(".pr-6").val();
+
+            data['professional_references'] = {'reference_name':reference_name,
+                                        'reference_phone':reference_phone,
+                                        'reference_relation':reference_relation,
+                                        'reference_name2':reference_name2,
+                                        'reference_phone2':reference_phone2,
+                                        'reference_relation2':reference_relation2}
+
+            // END (Please Read Carefully)
+            var signed_name = $form.find(".prc-1").val();
+            var signed_date = $form.find(".prc-2").val();
+
+            data['end'] = {'signed_name':signed_name,
+                           'signed_date':signed_date}
+
+
+            //data['csrfmiddlewaretoken'] = {% csrf_token %};
+
+            $.ajax({
+                    type: "POST",
+                    url: "{% url ajax-employment %}",
+                    data: {'data':JSON.stringify(data)},
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: FormSuccess,
+                    error: FormError,
+                });
+
+
+
+    }
+
+    function FormSuccess(){
+            window.location = "{% url application-thank-you %}"
+
+        }
+
+
+     function FormError(json){
+            $('#employ-form button').attr('disabled',false);
+            var data = $.parseJSON(json.responseText);
+            if (!data.success){
+                if (data.reason == 'required'){
+                    alert('Fill out all fields in section:' + ' ' + data.section);
+                }
+                else if (data.reason == 'email' || data.reason == 'ajax'){
+                    alert('There was an error submitting your application. Please try again.');
+                }
+
+            }
+
+         }
 </script>
 
 {% endblock %}
