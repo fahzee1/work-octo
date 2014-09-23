@@ -166,60 +166,95 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
         <div class="featured toptens">&nbsp;</div>
     </div>
 </div>
-<div class="wrapper">
+<div class="container">
 
     <div id="categories">
-        <h2>The Protect America advantage</h2>
-        <div class="category">
-            <i class="category-img" style="float: right;"></i>
-            <div class="category-info">
-                <h2>Home security systems designed just for you.</h2>
-                <p>It’s important to feel safe in your home. We know protection for your home and family is not an easy decision. Our home security systems are custom built to combine the best price with the best equipment and service.</p>
-                <p class="extra-content"  style="display:none;">Our home security systems are customized to fit your home and family’s needs.  Securing your home has never been easier! Protect America provides all the help, equipment and resources you need to protect your home.</p>
-
-
-                <a href="{% url home-security-equipment %}" title="Home Security Equipment" class="button-link">Home Security</a>
-            </div>
+        <h2>Protect what matters most</h2>
+        <div class="seven columns">
+            <p>We are proud to provide reliable security for your entire home at the most affordable rate in the industry, simple as that. We believe in protecting you, your home, and your family with trusted, easy-to-use 24/7 home security monitoring.</p>
         </div>
-        <div class="category">
-            <i class="category-img life-safety"></i>
-
-            <div class="category-info right">
-                <h2>Protecting against more than home break-ins.</h2>
-                <p>Home security systems have evolved beyond the ability to just prevent burglary. Each one of our systems has the ability to add important sensors including life saving devices like: <a href="{% url smoke-detector %}" title="Smoke Detector">Smoke Detectors</a>, <a href="{% url medical-pendant %}" title="Medical Panic Alert">Medical Panic Alert</a>, and more.</p>
-                <p class="extra-content"  style="display:none;">Our home alarm systems can be programmed to have various life-saving sensors. Home security is not just being able to protect your home; it’s about being able to protect your life. Our life safety sensors provide security against smoke and fires, help for medical situations, as well as detection of carbon monoxide leaks.</p>
-                <a href="{% url life-safety-equipment %}" title="Life Safety Equipment" class="button-link">Life Safety</a>
-            </div>
+        <div class="seven columns offset-by-two">
+            <p>Protect all the windows, doors, and areas of your home - that's how effective security works. Protect America provides all the help, equpiment, and resources you need to easily protect your home.</p>
         </div>
-        <div class="clear"></div>
-        <div class="category">
-            <i class="category-img home-automation" style="float: right;"></i>
-
-            <div class="category-info">
-                <h2>Simple and easy; complete home control.</h2>
-                <p>Compatible with advanced <a href="{% url appliance-module %}" title="Z-Wave Home Automation">Z-Wave technology</a>, we create a complete home security and management system that puts you in control of your home from home, work, or anywhere you happen to be.</p>
-                <p class="extra-content"  style="display:none;">Controlling your home alarm system has never been easier. Our home automation products offer solutions to make your home security complete. The convenience of controlling other electronic devices and adding security features such as our wireless Indoor Siren will provide with you additional peace of mind.</p>
-
-
-
-                <a href="{% url home-automation-equipment %}" title="Home Automation Equipment" class="button-link">Home Automation</a>
-            </div>
-        </div>
-        <div class="category">
-            <i class="category-img smart-connect"></i>
-
-            <div class="category-info right">
-                <h2>Check in from anywhere with SMART Connect.</h2>
-                <p>Control your home while you’re away with our free <a href="{% url interactive-control %}" title="SMART Connect iPhone Alarm Control">SMART Connect app</a>. Arm your system, conserve energy, and control lights at any time through your computer or smartphone.</p>
-                <p class="extra-content" style="display:none;">SMART Connect is compatible with our broadband and cellular home security monitoring solutions. Control your home security system on the go with convenience and ease. Check your alarm system while you’re at work or on vacation and enjoy the comfort SMART Connect provides.</p>
-
-                <a href="{% url interactive-control %}" title="SMART Connect Interactive App" class="button-link">Interactive App</a>
-            </div>
-        </div>
-        <div class="clear"></div>
     </div>
 </div>
 <div class="clear"></div>
+
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        {% block advantage-header %}
+        <h2>A Step above the rest <span>providing more safety and security for less</span></h2>
+        {% endblock %}
+        <table>
+            <thead>
+                {% block table-headers %}
+
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Door / Window Protection</th>
+                    <th>24/7 Alarm Monitoring</th>
+                    <th>Free Security Equipment</th>
+                    <th class="extra">No Installation <br />Fees</th>
+                    <th class="extra">Lifetime Equipment Warranty</th>
+                    <th>Monthly Cost</th>
+                </tr>
+                {% endblock %}
+            </thead>
+            <tbody>
+                {% block advantage-us %}
+
+                <tr class="alpha">
+                    <td class="title">Protect America</td>
+                    <td class="price">3</td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td class="extra"><i class="fa fa-check"></i></td>
+                    <td class="extra"><i class="fa fa-check"></i></td>
+                    <td class="price">$19.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-1 %}
+                <tr>
+                    <td class="title">ADT</td>
+                    <td class="price">2</td>
+                    <td><i class="fa fa-check"></i></td>
+                    <td class="na">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="price">$42.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-2 %}
+                    {% if local_rival %}
+                    <tr>
+                        <td class="title">{{ local_rival.rival }}</td>
+                        <td class="price">{{ local_rival.door_window }}</td>
+                        <td class="na" >{% if local_rival.alarm_monitoring %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+                        <td class="na">{% if local_rival.free_equipment %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+                        <td class="na extra">{% if local_rival.no_fees %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+                        <td class="na extra">{% if local_rival.warranty %}<i class="fa fa-check"></i>{% else %}Not Available{% endif %}</td>
+                        <td class="price">{{ local_rival.monthly_cost }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td class="title">Vivint</td>
+                        <td class="price">2</td>
+                        <td><i class="fa fa-check"></i></td>
+                        <td class="na">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="price">$49.99</td>
+                    </tr>
+                    {% endif %}
+                {% endblock %}
+            </tbody>
+        </table>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
@@ -300,6 +335,8 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </script>
 {% endaddtoblock "js" %}
 {% endblock %}
-{% comment %}
+
+
+{% block footer %}{% endblock %}
 {% block order-footer %}{% endblock %}
-{% endcomment %}
+
