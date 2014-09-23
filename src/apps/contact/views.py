@@ -2,6 +2,7 @@ import urls
 import pdb
 import requests
 import logging
+import traceback
 from datetime import datetime, timedelta
 from string import Template
 from django.http import HttpResponseRedirect
@@ -9,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.template import RequestContext, loader, Context
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import send_mail, EmailMultiAlternatives,EmailMessage
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 from django.conf import settings
@@ -48,18 +49,59 @@ def send_leadimport(data):
 
     return True
 
-def send_employment_email(data):
+
+def link_callback(uri, rel):
+    # use short variable names
+    sUrl = settings.STATIC_URL      # Typically /static/
+    sRoot = settings.STATIC_ROOT    # Typically /home/userX/project_static/
+    mUrl = settings.MEDIA_URL       # Typically /static/media/
+    mRoot = settings.MEDIA_ROOT     # Typically /home/userX/project_static/media/
+
+    # convert URIs to absolute system paths
+    if uri.startswith(mUrl):
+        path = os.path.join(mRoot, uri.replace(mUrl, ""))
+    elif uri.startswith(sUrl):
+        path = os.path.join(sRoot, uri.replace(sUrl, ""))
+
+    # make sure that file exists
+    if not os.path.isfile(path):
+            raise Exception(
+                    'media URI must start with %s or %s' % \
+                    (sUrl, mUrl))
+    return path
+
+
+def send_employment_email(request,data):
+    from django.template.loader import get_template
+    from django.template import RequestContext
+    import cStringIO
+    from xhtml2pdf import pisa
+
+    #pdb.set_trace()
+
     subject = 'Application for Employment'
     from_email = 'fahzee1@gmail.com'
     to_email = ['cjogbuehi@protectamerica.com']
-    html_content = render_to_string('emails/employment.html',data)
-    msg = EmailMultiAlternatives(subject,html_content,from_email,to_email)
-    msg.attach_alternative(html_content,'text/html')
+    message = 'Attached PDF'
+    msg = EmailMessage(subject,message,from_email,to_email)
+
+    template = get_template('emails/employment.html')
+    data['size'] = 'A4 portrait'
+    context = RequestContext(request,data)
+    html = template.render(context)
+
+    result = cStringIO.StringIO()
     try:
-        msg.send()
-        return True
+        pisaStatus = pisa.pisaDocument(cStringIO.StringIO(html.encode("ISO-8859-1")),result)
+        if not pisaStatus.err:
+            msg.attach('application.pdf',result.getvalue(),'application/pdf')
+            try:
+                msg.send()
+                return True
+            except:
+                return False
     except:
-        return False
+        traceback.print_exc()
 
 
 
@@ -847,6 +889,7 @@ def ajax_employment(request):
         if data:
             #pdb.set_trace()
             data = json.loads(data)
+
             personal_info = data['personal_information']
             employment_desired = data['employment_desired']
             availability = data['availability']
@@ -894,7 +937,7 @@ def ajax_employment(request):
                     response['success'] = False
                     response['reason'] = 'required'
                     response['section'] = 'Availability'
-                    print '%s missing'.upper() % k
+                    print '%s missing' % k
                     return HttpResponseBadRequest(json.dumps(response))
 
             for k,v in education_history.iteritems():
@@ -942,7 +985,9 @@ def ajax_employment(request):
 
 
 
-            email = send_employment_email(data)
+
+            email = send_employment_email(request,data)
+
             if not email:
                 response['success'] = False
                 response['reason'] = 'email'

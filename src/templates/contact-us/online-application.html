@@ -5,6 +5,7 @@
 {% block page_description %}Come grow with us! Voted as one of the top places to work in Austin, Protect America provides state-of-the-art security systems to 1000s of families.{% endblock %}
 
 {% block css %}
+
     <link rel="stylesheet" href="{{ STATIC_URL }}css/online-app.css">
 {% endblock %}
 
@@ -1155,7 +1156,7 @@
             </div>
             <div class="clear"><br><br></div>
             <br><br>
-            <input class="button cancel" type="submit" value="Submit">
+            <input class="button" type="submit" value="Submit">
         </form>
     </div>
 
@@ -1211,9 +1212,25 @@
     });
     $("input.homephone").mask("(999) 999-9999");
     $("input.cellphone").mask("(999) 999-9999");
-
+    $("input#dateavailable").mask("9/99/99");
+    $("input#employbegan1").mask("9/99/99");
+    $("input#employended1").mask("9/99/99");
+    $("input#employbegan2").mask("9/99/99");
+    $("input#employended2").mask("9/99/99");
+    $("input#employbegan3").mask("9/99/99");
+    $("input#employended3").mask("9/99/99");
+    $("input#datebegan1").mask("9/99/99");
+    $("input#dateended1").mask("9/99/99");
+    $("input#datebegan2").mask("9/99/99");
+    $("input#dateended2").mask("9/99/99");
+    $("input#datebegan3").mask("9/99/99");
+    $("input#dateended3").mask("9/99/99");
+    $("input#refrencephone").mask("(999) 999-9999");
+    $("input.pr-5").mask("(999) 999-9999");
+    $("input#todaydate").mask("9/99/99");
 
     function SubmitForm(form){
+
         var $form = $('#employ-form');
         var data = {}
         var first_name = $form.find(".pi-1").val();
@@ -1540,7 +1557,6 @@
                            'signed_date':signed_date}
 
 
-            //data['csrfmiddlewaretoken'] = {% csrf_token %};
 
             $.ajax({
                     type: "POST",
@@ -1550,10 +1566,15 @@
                     contentType: "application/json",
                     success: FormSuccess,
                     error: FormError,
+                    beforeSend:FormBefore
                 });
 
 
 
+    }
+
+    function FormBefore(){
+        $('input:submit').attr('value','Sending...');
     }
 
     function FormSuccess(){
@@ -1563,7 +1584,9 @@
 
 
      function FormError(json){
-            $('#employ-form button').attr('disabled',false);
+            $('input:submit').attr('disabled',false);
+            $('input:submit').attr('value','Submit');
+
             var data = $.parseJSON(json.responseText);
             if (!data.success){
                 if (data.reason == 'required'){
