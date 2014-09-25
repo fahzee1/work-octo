@@ -20,23 +20,26 @@
 <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
-<!-- remove mobile redirect on local pages as well -->
 {% block header %}
-    {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
-        {% start_ab request 'new_nav2' %}
-        start homesite
-    {% else %}
-        {% if not request.GET.agent %}
-            {% if not request.COOKIES.refer_id and not request.session.refer_id %}
-                {% start_ab request 'new_nav2' %}
-                first load
-            {% else %}
-                cookie not homesite
-            {% endif %}
+    {% include "_partials/new-header.html" with form=forms.basic %}
+
+    {% comment %}
+        {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
+            {% start_ab request 'new_nav2' %}
+            start homesite
         {% else %}
-            agent in get
+            {% if not request.GET.agent %}
+                {% if not request.COOKIES.refer_id and not request.session.refer_id %}
+                    {% start_ab request 'new_nav2' %}
+                    first load
+                {% else %}
+                    cookie not homesite
+                {% endif %}
+            {% else %}
+                agent in get
+            {% endif %}
         {% endif %}
-    {% endif %}
+    {% endcomment %}
 {% endblock %}
 
 
