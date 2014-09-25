@@ -20,9 +20,26 @@
 <script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
+<!-- remove mobile redirect on local pages as well -->
 {% block header %}
-    {% start_ab request 'new_nav2' %}
+    {% if request.COOKIES.refer_id == 'HOMESITE' %}
+        {% start_ab request 'new_nav2' %}
+        start homesite
+    {% else %}
+        {% if not request.GET.agent %}
+            {% if not request.COOKIES.refer_id %}
+                {% start_ab request 'new_nav2' %}
+                first load
+            {% else %}
+                cookie not homesite
+            {% endif %}
+        {% else %}
+            agent in get
+        {% endif %}
+    {% endif %}
 {% endblock %}
+
+
 {% block content %}
 </div>
 <div id="hero" class="plain">
@@ -67,12 +84,7 @@
 <div class="container">
     <h2 class="title center">Protect what matters most.</h2>
 
-    {% if request.refer_id == 'HOMESITE' %}
-        {% start_ab request 'new_nav2' %}
 
-    {% else %}
-        <h1>Not here</h1>
-    {% endif %}
 
     {% if local_video %}
         <div id="local-video" class="nine columns">
