@@ -1,0 +1,14 @@
+{% extends "order/quote-form.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+{% block form-title %}
+        <p class="form-title">Free security quote</p>
+        {% if business_time %}
+        <div class="quote-content">
+        	<p>Security experts are standing by, give us a call today!</p>
+        	<strong>{{ phone_number|format_number }}</strong>
+        </div>
+        {% else %}
+        <div class="quote-content" style="padding-bottom: 16px;"><b>Secure your home today,</b> please provide your information below.</div>
+        {% endif %}
+{% endblock %}
+{% block quote-button %}Call me{% endblock %}
