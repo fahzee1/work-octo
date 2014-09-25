@@ -10,7 +10,8 @@ register = template.Library()
 @register.inclusion_tag('tests/ab.html')
 def start_ab(request,test=None):
     code = None
-    agent_id = request.session.get('refer_id',None)
+    cookie = request.COOKIES.get('refer_id',None)
+    agent_id = request.session.get('refer_id',cookie)
     if agent_id == 'HOMESITE':
         try:
             abtest = request.session.get(test,None)
