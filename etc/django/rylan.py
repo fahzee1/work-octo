@@ -60,7 +60,8 @@ STATICFILES_DIRS = (
 )
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache',
     }
 }
 

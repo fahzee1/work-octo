@@ -9,7 +9,7 @@ class SpunContent(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.url, self.name,)
 
-# 5LINX conference 
+# 5LINX conference
 class LinxContext(models.Model):
     name = models.CharField(max_length=256)
     email = models.EmailField(max_length=128)
@@ -26,3 +26,20 @@ class BlackFriday(models.Model):
 
     def __unicode__(self):
         return self.email
+
+
+class AbTestCode(models.Model):
+    name = models.CharField(max_length=255)
+    aff_id = models.CharField(max_length=255,help_text='Agent id to be associated with this test')
+    code = models.TextField(help_text='Html code used in this A/B test')
+
+    def __unicode__(self):
+        return self.name
+
+class AbTest(models.Model):
+    name = models.CharField(max_length=255)
+    code_choices = models.ManyToManyField(AbTestCode,related_name='abtest')
+
+    def __unicode__(self):
+        return self.name
+
