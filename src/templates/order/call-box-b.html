@@ -1,0 +1,80 @@
+{% load sekizai_tags content_tags content_filters %}
+{% if phone_number %}
+<div class="clear"></div>
+<div id="call-box">
+
+    {% if no_promo = True %}
+
+    {% else %}
+        {% if cyber_promo == "shop" %}
+        <div id="main-promo" style="background: #2c3c56;">
+            <a href="http://www.protectamerica.com/products/order-package?promo=june-deals" id="main-promo-content">
+                <img src="{{ STATIC_URL }}img/promo/great-deal.png" alt="Great deal of the month" width="180" height="56" style="position: absolute; bottom: 0; left: 100px;" />
+                    <img src="{{ STATIC_URL }}img/promo/spring-savings/simon-touch.png" style="position: absolute; right: 532px; bottom: 0;" alt="Simon XT Touchscreen" width="90" height="64" />
+                    <img src="{{ STATIC_URL }}img/promo/spring-savings/act-now.gif" style="float: right; margin-right: 100px;" alt="Act now" width="390" height="56" />
+            </a>
+        </div>    
+        {% endif %}
+        {% if cyber_promo == "camera" %}
+        <div id="main-promo" style="background: #2f394a;">
+            <a href="http://www.protectamerica.com/products/order-package?promo=june-deals" id="main-promo-content">
+                <img src="{{ STATIC_URL }}img/promo/great-deal.png" alt="Great deal of the month" width="180" height="56" style="position: absolute; bottom: 0; left: 100px;" />
+                <img src="{{ STATIC_URL }}img/promo/spring-savings/camera.png" style="position: absolute; left: 325px; bottom: 0;" alt="Security camera" />
+                <img src="{{ STATIC_URL }}img/promo/spring-savings/act-now-small.gif" style="float: right; margin-right: 100px;" alt="Act now" width="288" height="56" />
+            </a>
+        </div>    
+        {% endif %}
+        {% comment %}
+        {% if cyber_promo == "pendant" %}
+        <div id="main-promo" style="background: #2f394a;">
+            <a href="http://www.protectamerica.com/products/order-package?promo=june-deals" id="main-promo-content">
+                <img src="{{ STATIC_URL }}img/promo/great-deal.png" alt="Great deal of the month" width="180" height="56" style="position: absolute; bottom: 0; left: 100px;" />
+                <img src="{{ STATIC_URL }}img/promo/mothers-day/pendant.png" style="position: absolute; left: 325px; bottom: 0;" alt="Security camera" />
+                <img src="{{ STATIC_URL }}img/promo/spring-savings/act-now-small.gif" style="float: right; margin-right: 100px;" alt="Act now" width="288" height="56" />
+            </a>
+        </div>
+        {% endif %}
+        {% endcomment %}
+
+        {% if cyber_promo == "keychain" %}
+        <div id="main-promo" style="background: #2f394a;">
+            <a href="http://www.protectamerica.com/products/order-package?promo=june-deals" id="main-promo-content">
+                <img src="{{ STATIC_URL }}img/promo/great-deal.png" alt="Great deal of the month" width="180" height="56" style="position: absolute; bottom: 0; left: 100px;" />
+                <img src="{{ STATIC_URL }}img/promo/memorial-day/keychain.png" style="position: absolute; left: 305px; bottom: 0;" alt="Keychain family pack" />
+                <img src="{{ STATIC_URL }}img/promo/spring-savings/act-now-small.gif" style="float: right; margin-right: 100px;" alt="Act now" width="288" height="56" />
+            </a>
+        </div>    
+        {% endif %}
+        {% if cyber_promo == "smoke" %}
+        <div id="main-promo" style="background: #2f394a;">
+            <a href="http://www.protectamerica.com/products/order-package?promo=june-deals" id="main-promo-content">
+                <img src="{{ STATIC_URL }}img/promo/great-deal.png" alt="Great deal of the month" width="180" height="56" style="position: absolute; bottom: 0; left: 100px;" />
+                <img src="{{ STATIC_URL }}img/promo/memorial-day/smoke-detector.png" style="position: absolute; left: 335px; bottom: 0;" alt="Smoke Detector for only 9.99 a month" />
+                <img src="{{ STATIC_URL }}img/promo/spring-savings/act-now-small.gif" style="float: right; margin-right: 100px;" alt="Act now" width="288" height="56" />
+            </a>
+        </div>
+        {% endif %}
+        {% if cyber_promo == "smart" %}
+        <div id="main-promo" style="background: #2f394a;">
+            <a href="http://www.protectamerica.com/products/order-package?promo=june-deals" id="main-promo-content">
+                <img src="{{ STATIC_URL }}img/promo/great-deal.png" alt="Great deal of the month" width="180" height="56" style="position: absolute; bottom: 0; left: 100px;" />
+                <img src="{{ STATIC_URL }}img/promo/spring-savings/no-landline.png" style="position: absolute; left: 315px; bottom: 0;" alt="No landline required" />
+                <img src="{{ STATIC_URL }}img/promo/spring-savings/act-now-small.gif" style="float: right; margin-right: 100px;" alt="Act now" width="288" height="56" />
+            </a>
+        </div>    
+        {% endif %}
+        {% if cyber_promo == Null %}
+            <div id="main-promo" style="background: #2f394a;">
+                <a href="http://www.protectamerica.com/products/order-package?promo=june-deals" id="main-promo-content">
+                <img src="{{ STATIC_URL }}img/promo/great-deal.png" alt="Great deal of the month" width="180" height="56" style="position: absolute; bottom: 0; left: 100px;" />
+                    <img src="{{ STATIC_URL }}img/promo/spring-savings/simon-touch.png" style="position: absolute; right: 532px; bottom: 0;" alt="Simon XT Touchscreen" width="90" height="64" />
+                    <img src="{{ STATIC_URL }}img/promo/spring-savings/act-now.gif" style="float: right; margin-right: 100px;" alt="Act now" width="390" height="56" />
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+    {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Speak with a security expert today! {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+</div>
+<div class="clear"></div>
+
+{% endif %}
