@@ -50,58 +50,23 @@ def send_leadimport(data):
     return True
 
 
-def link_callback(uri, rel):
-    # use short variable names
-    sUrl = settings.STATIC_URL      # Typically /static/
-    sRoot = settings.STATIC_ROOT    # Typically /home/userX/project_static/
-    mUrl = settings.MEDIA_URL       # Typically /static/media/
-    mRoot = settings.MEDIA_ROOT     # Typically /home/userX/project_static/media/
 
-    # convert URIs to absolute system paths
-    if uri.startswith(mUrl):
-        path = os.path.join(mRoot, uri.replace(mUrl, ""))
-    elif uri.startswith(sUrl):
-        path = os.path.join(sRoot, uri.replace(sUrl, ""))
+def send_employment_email(data):
 
-    # make sure that file exists
-    if not os.path.isfile(path):
-            raise Exception(
-                    'media URI must start with %s or %s' % \
-                    (sUrl, mUrl))
-    return path
-
-
-def send_employment_email(request,data):
-    from django.template.loader import get_template
-    from django.template import RequestContext
-    import cStringIO
-    from xhtml2pdf import pisa
-
-    #pdb.set_trace()
 
     subject = 'Application for Employment'
     from_email = 'fahzee1@gmail.com'
     to_email = ['cjogbuehi@protectamerica.com']
-    message = 'Attached PDF'
-    msg = EmailMessage(subject,message,from_email,to_email)
-
-    template = get_template('emails/employment.html')
-    data['size'] = 'A4 portrait'
-    context = RequestContext(request,data)
-    html = template.render(context)
-
-    result = cStringIO.StringIO()
+    html_content = render_to_string('emails/employment.html',data)
+    message = 'Protect America Online Application'
+    msg = EmailMultiAlternatives(subject,html_content,from_email,to_email)
+    msg.attach_alternative(html_content, "text/html")
     try:
-        pisaStatus = pisa.pisaDocument(cStringIO.StringIO(html.encode("ISO-8859-1")),result)
-        if not pisaStatus.err:
-            msg.attach('application.pdf',result.getvalue(),'application/pdf')
-            try:
-                msg.send()
-                return True
-            except:
-                return False
+        msg.send()
+        return True
     except:
         traceback.print_exc()
+        return False
 
 
 
@@ -887,7 +852,6 @@ def ajax_employment(request):
     if request.is_ajax():
         data = request.POST.get('data',None)
         if data:
-            #pdb.set_trace()
             data = json.loads(data)
 
             personal_info = data['personal_information']
@@ -986,7 +950,7 @@ def ajax_employment(request):
 
 
 
-            email = send_employment_email(request,data)
+            email = send_employment_email(data)
 
             if not email:
                 response['success'] = False
@@ -996,7 +960,14 @@ def ajax_employment(request):
 
             response['success'] = True
             response['reason'] = ''
-        return HttpResponse(json.dumps(response))
+            return HttpResponse(json.dumps(response))
+
+        else:
+            response['success'] = False
+            response['reason'] = 'no data'
+            return HttpResponseBadRequest(json.dumps(response))
+
+
 
     response['success'] = False
     response['reason'] = 'ajax'
