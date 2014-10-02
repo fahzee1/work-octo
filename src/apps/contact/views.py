@@ -2,6 +2,7 @@ import urls
 import pdb
 import requests
 import logging
+import traceback
 from datetime import datetime, timedelta
 from string import Template
 from django.http import HttpResponseRedirect
@@ -9,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response,redirect
 from django.http import HttpResponse,HttpResponseBadRequest
 from django.template import RequestContext, loader, Context
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import send_mail, EmailMultiAlternatives,EmailMessage
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import simplejson
 from django.conf import settings
@@ -47,6 +48,26 @@ def send_leadimport(data):
         ['leadimport@protectamerica.com','cjogbuehi@protectamerica.com'], fail_silently=False)
 
     return True
+
+
+
+def send_employment_email(data):
+
+
+    subject = 'Application for Employment'
+    from_email = 'fahzee1@gmail.com'
+    to_email = ['melissa@protectamerica.com','miriam@protectamerica.com']
+    html_content = render_to_string('emails/employment.html',data)
+    message = 'Protect America Online Application'
+    msg = EmailMultiAlternatives(subject,html_content,from_email,to_email)
+    msg.attach_alternative(html_content, "text/html")
+    try:
+        msg.send()
+        return True
+    except:
+        traceback.print_exc()
+        return False
+
 
 
 def send_bizdev_email(data):
@@ -823,12 +844,131 @@ def ajax_post_agent(request):
     send_mail(subject,message,from_email,[to_email])
     return HttpResponse(simplejson.dumps({"success":True,'thank_you':'/thank-you'}))
 
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def ajax_employment(request):
+    import json
+    response = {}
+    if request.is_ajax():
+        data = request.POST.get('data',None)
+        if data:
+            data = json.loads(data)
+
+            personal_info = data['personal_information']
+            employment_desired = data['employment_desired']
+            availability = data['availability']
+            education_history = data['education_history']
+            professional_history = data['professional_history']
+            professional_references = data['professional_references']
+            end = data['end']
+
+            # not required lists or other type of check
+            _personal_info = ['convicted_explain','apt_number']
+            _employment_desired = []
+            _availability = ['START TIME', 'END TIME']
+            _education_history = ['co_name','co_major','co_degree','co_graduate',
+                                  'co2_name','co2_major','co2_degree','co2_graduate',
+                                  'other_name','other_major','other_degree','other_graduate']
+            _professional_history = []
+            _professional_references = []
+            _end = []
+
+
+            for k,v in personal_info.iteritems():
+                if k not in _personal_info and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Personal Information'
+                    print '%s missing' % k
+                    return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _personal_info and not v:
+                    data['personal_information'][k] = 'blank'
+
+            for k,v in employment_desired.iteritems():
+                if k not in _employment_desired and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Employment Desired'
+                    print '%s missing' % k
+                    return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _employment_desired and not v:
+                    data['employment_desired'][k] = 'blank'
+
+            for k,v in availability.iteritems():
+                if v in _availability:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Availability'
+                    print '%s missing' % k
+                    return HttpResponseBadRequest(json.dumps(response))
+
+            for k,v in education_history.iteritems():
+                if k not in _education_history and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Education History'
+                    print '%s missing'.upper() % k
+                    return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _education_history and not v:
+                    data['education_history'][k] = 'blank'
+
+
+            for k,v in professional_history.iteritems():
+                if k not in _professional_history:
+                    if v == 'blank':
+                        response['success'] = False
+                        response['reason'] = 'required'
+                        response['section'] = 'Professional History'
+                        print '%s missing'.upper() % k
+                        return HttpResponseBadRequest(json.dumps(response))
+
+
+            for k,v in professional_references.iteritems():
+                if k not in _professional_references and not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Professional References'
+                    print '%s missing'.upper() % k
+                    return HttpResponseBadRequest(json.dumps(response))
+
+                elif k in _professional_references and not v:
+                    data['professional_references'][k] = 'blank'
+
+
+            for k,v in end.iteritems():
+                if not v:
+                    response['success'] = False
+                    response['reason'] = 'required'
+                    response['section'] = 'Please Read Carefully'
+                    print '%s missing'.upper() % k
+                    return HttpResponseBadRequest(json.dumps(response))
 
 
 
 
 
+            email = send_employment_email(data)
+
+            if not email:
+                response['success'] = False
+                response['reason'] = 'email'
+                return HttpResponseBadRequest(json.dumps(response))
+
+
+            response['success'] = True
+            response['reason'] = ''
+            return HttpResponse(json.dumps(response))
+
+        else:
+            response['success'] = False
+            response['reason'] = 'no data'
+            return HttpResponseBadRequest(json.dumps(response))
 
 
 
-
+    response['success'] = False
+    response['reason'] = 'ajax'
+    return HttpResponseBadRequest(json.dumps(response))
