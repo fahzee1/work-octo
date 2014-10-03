@@ -1,4 +1,4 @@
-{% load content_tags content_filters sekizai_tags %}
+{% load content_tags content_filters sekizai_tags ab_test %}
 {% load url from future %}
 {% block doctype %}
 <!DOCTYPE html>
@@ -146,10 +146,24 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
 <!-- Page Header -->
 {% block header %}
 
+        {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
+            {% start_ab request 'new_nav2' %}
+            start homesite
+        {% else %}
+            {% if not request.GET.agent %}
+                {% if not request.COOKIES.refer_id and not request.session.refer_id %}
+                    {% start_ab request 'new_nav2' %}
+                    first load
+                {% else %}
+                    cookie not homesite
+                {% endif %}
+            {% else %}
+                agent in get
+            {% endif %}
+        {% endif %}
+    {% comment %}
     <div id="top-section-wrapper">
         <div id="top-section">
-            <ul id="newsfeed">
-            </ul>
 
             <div id="company-links">
                 <a href="http://www.myprotectamerica.com" class="interactive-customer" target="blank">Interactive Customers</a>
@@ -216,7 +230,7 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
             <div class="clear"></div>
         </div>
     </div>
-
+    {% endcomment %}
 {% endblock %}
 
 <!-- Sub Navigation -->
@@ -244,6 +258,7 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
 <!-- Footer -->
 {% block footer %}
     {% block main-footer %}
+<<<<<<< HEAD
     <div id="footer-wrapper">
         <div id="footer">
             <ul id="footer-main-navigation">
@@ -277,47 +292,96 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
                 {% block social-icons %}
                 <li id="footer-social-icons">
                     <a href="https://plus.google.com/+ProtectAmerica/" title="Visit Protect Americ on Google +"><i class="icon-google-plus"></i></a>
+=======
+<!-- Footer navigation -->
+<footer>
+    <div class="container">
+        <ul class="four columns">
+            <li><a href="http://www.protectamerica.com/shop-home-security-systems">Shop</a></li>
+            <li><a href="http://www.protectamerica.com/learn/security-101/how-it-works">How It Works</a></li>
+            <li><a href="http://www.protectamerica.com/support/customer-service">Customer Service</a></li>
+            <li><a href="http://www.protectamerica.com/home-security-blog/">Home and Life Blog</a></li>
+            <li><a href="http://www.protectamerica.com/sitemap/">Sitemap</a></li>
+        </ul>
+        <ul class="four columns">
 
-                    <a href="http://www.facebook.com/ProtectAmerica" title="Visit Protect America's Facebook Page"><i class="icon-facebook"></i>
-                    <div class="clear" style="padding-bottom: 16px;"></div>
-                    <a href="http://www.twitter.com/ProtectAmerica" title="Visit Protect America's Twitter Page"><i class="icon-twitter"></i></a>
-
-                    <a href="http://www.youtube.com/user/ProtectAmerica" title="Watch our Tutorials and Videos on our YouTube Page"><i class="icon-youtube"></i></a>
-                    <a href="http://www.linkedin.com/company/protect-america" title="Visit Protect America's LinkedIn Page"><i class="icon-linkedin"></i></a>
-
-
-                </li>
-                {% endblock %}
-            </ul>
-            <div id="footer-awards" style="padding-left: 24px;">
-                <img src="{{ STATIC_URL }}img/base/besty-award.png" alt="Best Home Security Comapnys #1 Choice Overall" />
-            </div>
+            <li><a href="http://www.protectamerica.com/help/privacy-policy/">Privacy Policy</a></li>
+            <li><a href="http://www.protectamerica.com/help/return-policy/">Return Policy</a></li>
+            <li><a href="http://www.protectamerica.com/help/state-licenses/">State Licenses</a></li>
+            <li><a href="http://www.protectamerica.com/help/do-not-call/">Do Not Call</a></li>
+            <li><a href="http://www.protectamerica.com/support/careers/">Careers</a></li>
+        </ul>
+        <ul class="five columns hours-area">
+            <li><strong>Telephone</strong></li>
+            <li>{{ phone_number|format_number }}</li>
+            <li>M-F 7am - 11pm ct</li>
+            <li>Sat 8am - 8pm ct</li>
+            <li>Sun 9am - 9pm ct</li>
+        </ul>
+        <ul class="two columns offset-by-one">
+            <li class="facebook"><a href="http://www.facebook.com/ProtectAmerica"><i class="fa fa-facebook"></i></a></li>
+            <li class="googleplus"><a href="https://plus.google.com/+ProtectAmerica/"><i class="fa fa-google-plus"></i></a></li>
             <div class="clear"></div>
-        </div>
+            <li class="twitter"><a href="http://www.twitter.com/ProtectAmerica"><i class="fa fa-twitter"></i></a></li>
+            <li class="youtube"><a href="http://www.youtube.com/user/ProtectAmerica"><i class="fa fa-youtube"></i></a></li>
+            <div class="clear"></div>
+            <li class="linkedin"><a href="http://www.linkedin.com/company/protect-america"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
     </div>
-    {% endblock %}
-    {% block terms %}
-    <div id="terms-wrapper">
-        <div id="terms">
-            <div id="terms-conditions">
-                <p>* <a href="https://secure.protectamerica.com/sample/en" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
-                <p>* Information used for home security alarm system comparisons was obtained November 2013 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
+</footer>
+<!-- End footer navigation -->
+>>>>>>> adding the ab test
+
+
+
+    <!-- Terms and conditions -->
+    <div id="terms">
+        <div class="container">
+            <div class="eight columns">
+                <p class="small">* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+                <p class="small">* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan".</p>
                 <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
-                {% block extra_terms %}
-                {% endblock %}
-            </div>
-            <div id="copyrights">
 
-                {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
-                <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
+            </div>
+            <div class="seven columns">
+                {% if local_street %}
+                <div id="local-address" itemscope itemtype="http://schema.org/LocalBusiness">
+                {{ local_street.googleplus_url }}
+                    <p class="copyright">{% if local_street.googleplus_url %}<a href="{{ local_street.googleplus_url }}" title="{{ city }} Protect America">{% endif %}<span itemprop="name">{{ city }} Protect America</span> &ndash; <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><b itemprop="streetAddress">{{ local_street }}</b> <b itemprop="addressLocality">{{ local_city }}</b>, <b itemprop="addressRegion">{{ local_state }}</b> <b itemprop="postalCode">{{ local_zipcode }}</b></span></p>{% if local_street.googleplus_url %}</a>{% endif %}
+                </div>
+                {% endif %}
+                <p class="copyright">The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.<br><br>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
             </div>
         </div>
-        <div class="clear"></div>
+    </div>
+    <!-- End terms and conditions -->
+    {% endblock %}
+<div class="lightbox request-quote">
+    <div class="lightcard">
+        <div class="closebox">
+            close
+            <i class="fa fa-times-circle"></i>
+        </div>
+        {% include "order/quote-form-partial.html" with form=forms.basic %}
+
+        <div class="lightbox-info">
+            <span>Three reasons people choose</span>
+            <img src="{{ STATIC_URL }}img/base/protect-america-logo.png" title="Protect America Home Security" width="212" height="36"  />
+            <ul>
+                <li><i class="fa fa-check-circle"></i> Free Security Equipment</li>
+                <li><i class="fa fa-check-circle"></i> Lowest Price Guaranteed</li>
+                <li><i class="fa fa-check-circle"></i> Lifetime Warranty</li>
+            </ul>
+            <span>Award Winning Security</span>
+            <img src="{{ STATIC_URL }}img/base/awards.png" title="Protect America Awards" class="award" width="248" height="70"  />
+        </div>
 
     </div>
-    {% endblock %}
+    <div class="lightbox-bg">&nbsp;</div>
+</div>
 
 {% endblock %}
+
 {% addtoblock "js" %}
 {% comment %}
 <script type="text/javascript">
@@ -405,7 +469,6 @@ $(document).ready(function() {
 
 
     </script>
-
     <!--[if !IE]><!-->
     <script type="text/javascript">
 
@@ -417,6 +480,8 @@ $(document).ready(function() {
 	<!--<![endif]-->
 {% endblock %}
 {% block extra_javascript %}
+
+
 
 {% if use_call_measurement %}
 
