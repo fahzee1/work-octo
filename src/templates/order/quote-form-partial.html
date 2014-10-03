@@ -20,7 +20,7 @@
             {{ form.phone }}
         {% endblock %}
 	
-	<button type="button" class="yellow" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);" style="position: relative;">{% block quote-button %}Get Quote <i class="icon-chevron-right"></i>{% endblock %}<img id='form-loading' {% if page_name = "index" %}style="position:absolute;top:50%;right:24px;margin-top:-10px;right:0px;display:none;width:20px;height:20px;"{% else %}style="position:absolute;top:50%;right:24px;margin-top:-10px;display:none;width:20px;height:20px;" {% endif %}height='20px' width='20px' src="{{ STATIC_URL }}img/loading2.gif"></button>
+	<button type="button" class="yellow" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);" style="position: relative;">{% block quote-button %}Get Quote{% endblock %}<img id='form-loading' {% if page_name = "index" %}style="position:absolute;top:50%;right:24px;margin-top:-10px;right:0px;display:none;width:20px;height:20px;"{% else %}style="position:absolute;top:50%;right:24px;margin-top:-10px;display:none;width:20px;height:20px;" {% endif %}height='20px' width='20px' src="{{ STATIC_URL }}img/loading2.gif"></button>
     </div>
         {% block consent %}
              <div class="consent-box">
