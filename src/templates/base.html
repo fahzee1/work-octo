@@ -128,8 +128,8 @@
 {% endblock %}
 
 {% block typekit-code %}
-    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
 {% block bing-conversion-code %}{% endblock %}
 
@@ -148,17 +148,13 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
 
         {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
             {% start_ab request 'new_nav2' %}
-            start homesite
         {% else %}
             {% if not request.GET.agent %}
                 {% if not request.COOKIES.refer_id and not request.session.refer_id %}
                     {% start_ab request 'new_nav2' %}
-                    first load
                 {% else %}
-                    cookie not homesite
                 {% endif %}
             {% else %}
-                agent in get
             {% endif %}
         {% endif %}
     {% comment %}
@@ -234,7 +230,6 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
 {% endblock %}
 
 <!-- Sub Navigation -->
-{% block subnav %}{% endblock %}
 
 <!-- Main Content -->
 {% block content %}
@@ -258,81 +253,44 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
 <!-- Footer -->
 {% block footer %}
     {% block main-footer %}
-<<<<<<< HEAD
-    <div id="footer-wrapper">
-        <div id="footer">
-            <ul id="footer-main-navigation">
-                <li class="{% if 'shop' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/shop-home-security-systems/" title="Shop Home Security Packages">Shop</a></li>
-                <li class="{% if 'equipment' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/security-equipment/" title="View Equipment and Products">Equipment</a></li>
-
-                <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/learn/" title="Learn about Home Security">Learn</a></li>
-                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/" title="Get Help for your Home Security System">Support</a></li>
-                <li class=""><a href="http://www.protectamerica.com/home-security-blog/" title="Order Home Security Today">Security Blog</a></li>
-                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/state-licenses/" title="View our Licenses for Each State">State Licenses</a></li>
-                <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/sitemap/" title="View our Sitemap">Sitemap</a></li>
-
+    <!-- Footer navigation -->
+    <footer>
+        <div class="container">
+            <ul class="four columns">
+                <li><a href="http://www.protectamerica.com/shop-home-security-systems">Shop</a></li>
+                <li><a href="http://www.protectamerica.com/learn/security-101/how-it-works">How It Works</a></li>
+                <li><a href="http://www.protectamerica.com/support/customer-service">Customer Service</a></li>
+                <li><a href="http://www.protectamerica.com/home-security-blog/">Home and Life Blog</a></li>
+                <li><a href="http://www.protectamerica.com/sitemap/">Sitemap</a></li>
             </ul>
-            <ul id="footer-care-nav">
-
-                <li class="{% if 'customer-service' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/customer-service/" title="Customer Service">Customer Service</a></li>
-                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/privacy-policy/" title="View our Privacy Policy">Privacy Policy</a></li>
-                <li class="{% if 'return-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/return-policy/" title="View our Return Policy">Return Policy</a></li>
-
-                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
-                <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
-                <li class="{% if 'dealer-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/dealers" title="Interested in Selling Home Security? Join our Dealer Program">Dealer Program</a></li>
-                <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
+            <ul class="four columns">
+    
+                <li><a href="http://www.protectamerica.com/help/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="http://www.protectamerica.com/help/return-policy/">Return Policy</a></li>
+                <li><a href="http://www.protectamerica.com/help/state-licenses/">State Licenses</a></li>
+                <li><a href="http://www.protectamerica.com/help/do-not-call/">Do Not Call</a></li>
+                <li><a href="http://www.protectamerica.com/support/careers/">Careers</a></li>
             </ul>
-            <ul id="footer-contact-info">
+            <ul class="five columns hours-area">
                 <li><strong>Telephone</strong></li>
-                <li><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></li>
-                <li><span>M-F</span> 7AM - 11PM CT</li>
-                <li><span>SAT</span> 8AM - 8PM CT</li>
-                <li><span>SUN</span> 11AM - 7PM CT</li>
-                {% block social-icons %}
-                <li id="footer-social-icons">
-                    <a href="https://plus.google.com/+ProtectAmerica/" title="Visit Protect Americ on Google +"><i class="icon-google-plus"></i></a>
-=======
-<!-- Footer navigation -->
-<footer>
-    <div class="container">
-        <ul class="four columns">
-            <li><a href="http://www.protectamerica.com/shop-home-security-systems">Shop</a></li>
-            <li><a href="http://www.protectamerica.com/learn/security-101/how-it-works">How It Works</a></li>
-            <li><a href="http://www.protectamerica.com/support/customer-service">Customer Service</a></li>
-            <li><a href="http://www.protectamerica.com/home-security-blog/">Home and Life Blog</a></li>
-            <li><a href="http://www.protectamerica.com/sitemap/">Sitemap</a></li>
-        </ul>
-        <ul class="four columns">
-
-            <li><a href="http://www.protectamerica.com/help/privacy-policy/">Privacy Policy</a></li>
-            <li><a href="http://www.protectamerica.com/help/return-policy/">Return Policy</a></li>
-            <li><a href="http://www.protectamerica.com/help/state-licenses/">State Licenses</a></li>
-            <li><a href="http://www.protectamerica.com/help/do-not-call/">Do Not Call</a></li>
-            <li><a href="http://www.protectamerica.com/support/careers/">Careers</a></li>
-        </ul>
-        <ul class="five columns hours-area">
-            <li><strong>Telephone</strong></li>
-            <li>{{ phone_number|format_number }}</li>
-            <li>M-F 7am - 11pm ct</li>
-            <li>Sat 8am - 8pm ct</li>
-            <li>Sun 9am - 9pm ct</li>
-        </ul>
-        <ul class="two columns offset-by-one">
-            <li class="facebook"><a href="http://www.facebook.com/ProtectAmerica"><i class="fa fa-facebook"></i></a></li>
-            <li class="googleplus"><a href="https://plus.google.com/+ProtectAmerica/"><i class="fa fa-google-plus"></i></a></li>
-            <div class="clear"></div>
-            <li class="twitter"><a href="http://www.twitter.com/ProtectAmerica"><i class="fa fa-twitter"></i></a></li>
-            <li class="youtube"><a href="http://www.youtube.com/user/ProtectAmerica"><i class="fa fa-youtube"></i></a></li>
-            <div class="clear"></div>
-            <li class="linkedin"><a href="http://www.linkedin.com/company/protect-america"><i class="fa fa-linkedin"></i></a></li>
-        </ul>
-    </div>
-</footer>
-<!-- End footer navigation -->
->>>>>>> adding the ab test
-
-
+                <li>{{ phone_number|format_number }}</li>
+                <li>M-F 7am - 11pm ct</li>
+                <li>Sat 8am - 8pm ct</li>
+                <li>Sun 9am - 9pm ct</li>
+            </ul>
+            <ul class="two columns offset-by-one">
+                <li class="facebook"><a href="http://www.facebook.com/ProtectAmerica"><i class="fa fa-facebook"></i></a></li>
+                <li class="googleplus"><a href="https://plus.google.com/+ProtectAmerica/"><i class="fa fa-google-plus"></i></a></li>
+                <div class="clear"></div>
+                <li class="twitter"><a href="http://www.twitter.com/ProtectAmerica"><i class="fa fa-twitter"></i></a></li>
+                <li class="youtube"><a href="http://www.youtube.com/user/ProtectAmerica"><i class="fa fa-youtube"></i></a></li>
+                <div class="clear"></div>
+                <li class="linkedin"><a href="http://www.linkedin.com/company/protect-america"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+    <!-- End footer navigation -->
+    {% endblock %}
 
     <!-- Terms and conditions -->
     <div id="terms">
@@ -355,7 +313,6 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
         </div>
     </div>
     <!-- End terms and conditions -->
-    {% endblock %}
 <div class="lightbox request-quote">
     <div class="lightcard">
         <div class="closebox">
@@ -480,6 +437,75 @@ $(document).ready(function() {
 	<!--<![endif]-->
 {% endblock %}
 {% block extra_javascript %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
+    <script type="text/javascript">
+
+        var $menu = $(".dropdown-menu");
+
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu,
+        });
+
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = 240,
+                width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: width - 3,  // main should overlay submenu
+                height: height - 4  // padding for main dropdown's arrow
+            });
+
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+
+        $(".dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $(".dropdown-toggle").click(function(e) {
+            return false;
+        });
+        $('.lb-button').click(function(e) {
+            e.preventDefault();
+            var lblink = $(this).data('link');
+            $('.lightbox.'+lblink).fadeIn();
+            var player;
+            return false;
+        })
+        $('.lightbox-bg').click(function(e) {
+            e.preventDefault();
+            var iframe = $(this).parent('.lightbox').children('.lightcard').children('iframe').attr('src');
+            $('.video').attr('src',iframe);
+            $('.lightbox').fadeOut();
+
+            return false;
+
+        })
+        $('.closebox').click(function(e) {
+            e.preventDefault();
+            var iframe = $(this).parent('.lightcard').children('iframe').attr('src');
+            $('.video').attr('src',iframe);
+            $('.lightbox').fadeOut();
+
+            return false;
+
+        })
+
+    </script>
 
 
 

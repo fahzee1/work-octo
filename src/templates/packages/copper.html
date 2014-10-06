@@ -196,38 +196,39 @@
             </tbody>
         </table>
         <div class="clear"></div>
-        
-        <div id="monitoring-options">
-            <h2>Flexible Monitoring Options:</h2>
-            <ul id="monitoring-rates">
-                <li>
-                    <img src="{{ STATIC_URL }}img/products/monitoring/landline-icon-big.png" alt="Landline Monitoring" width="128" height="128" />
-                    <h3>Landline</h3>
-                    <p><sup>$</sup>19<span>99</span><strong>/mo</strong></p>
-                    <a href="{% url landline %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
-                </li>
-                <li>
-                    <img src="{{ STATIC_URL }}img/products/monitoring/homepulse-icon-big.png" alt="Broadband Monitoring" width="128" height="128" />
-                    <h3>Broadband</h3>
-                    <p><sup>$</sup>41<span>99</span><strong>/mo</strong></p>
-                    <a href="{% url broadband %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>           
-                </li>
-                <li>
-                    <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="Cellular Monitoring" width="128" height="128" />
-                    <h3>Cellular</h3>
-                    <p><sup>$</sup>41<span>99</span><strong>/mo</strong></p>
-                    <a href="{% url cellular %}" class="button-link">Learn More <i class="icon-chevron-right"></i></a>
-                </li>
-        
-
-                <div class="clear"></div>
-            
-            </ul>
-        </div>
-        <div class="clear"></div>
     </div>
 </div>
 <div class="clear"></div>
+<div class="extra-block">
+    <h2 class="title center bottom">Flexible Monitoring Options</h2>
+    <h4 class="subhead">Security that perfectly fits your home and budget</h4>
+    <div class="container">
+        <div class="five columns monitoring-option">
+            <img src="{{ STATIC_URL }}img/products/monitoring/landline-icon-big.png" alt="Landline Monitoring" width="128" height="128">
+            <h3>Landline Monitoring <em>&nbsp;</em></h3>
+            <b><em>$19.99</em> <span>per month</span></b>
+            <a href="{% url order-package %}?package=copper" class="button">Select Landline</a>
+            <p class="alt"><a href="{% url landline %}">Learn about landline monitoring</a></p>
+
+        </div>
+        <div class="five columns monitoring-option">
+            <img src="{{ STATIC_URL }}img/products/monitoring/homepulse-icon-big.png" alt="Broadband Monitoring" width="128" height="128">
+            <h3>Broadband Monitoring <em>with Interactive Features</em></h3>
+            <b><em>+$8</em> <span>per month</span></b>
+            <a href="{% url order-package %}?package=copper" class="button">Select Broadband</a>
+            <p class="alt"><a href="{% url broadband %}">Learn about broadband monitoring</a></p>
+
+        </div>
+        <div class="five columns monitoring-option">
+            <img src="{{ STATIC_URL }}img/products/monitoring/cellular-icon-big.png" alt="Cellular Monitoring" width="128" height="128">
+            <h3>Cellular Monitoring <em>with Interactive Features</em></h3>
+            <b><em>+$12</em> <span>per month</span></b>
+            <a href="{% url order-package %}?package=copper" class="button">Select Cellular</a>
+            <p class="alt"><a href="{% url cellular %}">Learn about cellular monitoring</a></p>
+
+        </div>
+    </div>
+</div>
 <div class="wrapper">
     {% testimonial_search "copper" "limit=3" %}
 </div>
