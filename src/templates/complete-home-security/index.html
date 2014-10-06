@@ -6,86 +6,193 @@
 
 
 {% block content %}
-<div id="package-fan-wrapper">
-    <div id="package-fan">
-        <h1><strong>Which House is Yours?</strong> Protection for all doors and windows at an affordable price.</h1>
-        <div id="copper-card" class="card">
-            <img src="{{ STATIC_URL }}img/extra/copper-home-icon.png" alt="Copper Package House (3 Doors / Windows)" width="176" height="160" />
-            <h3>3 Doors <br/> or Windows</h3>
-            <p>The <strong>most affordable</strong> way to secure peace of mind.</p>
-    
-            <h4>Monthly Price: <strong>{{ pricetable.COPPER.standard_monitoring }}</strong></h4>
-            <a href="{% url order-package %}?package=platinum" title="Order Platinum Package" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-        </div>
-    
-        <div id="bronze-card" class="card">
-            <img src="{{ STATIC_URL }}img/extra/bronze-home-icon.png" alt="Bronze Package House (7 Doors / Windows)" width="176" height="160" />
-            <h3>6 Doors <br/> or Windows</h3>
-            <p>The <strong>perfect solution</strong> to secure your starter home.</p>
-    
-    
-            <h4>Monthly Price: <strong>{{ pricetable.BRONZE.standard_monitoring }}</strong></h4>
+<div id="shop">
+    <div class="container">
+    <h1>Which house is yours?</h1>
+    <h2>Complete home protection at an affordable price.</h2>
+        <a href="{% url copper %}" class="copper package three columns">
+            <h3>3 doors or windows</h3>
+            <img src="{{ STATIC_URL }}img/base/house-3.gif" alt="3 doors and windows" />
+            <ul>
+                <li>The most affordable security solution</li>
+                <h4><strong>$29.99/mo</strong></h4>
+            </ul>
+            <div class="button" data-link="copper">Order now</div>
 
-            </h4>
-            <a href="{% url order-package %}?package=bronze" title="Order Bronze Package"class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-        </div>
-    
-        <div id="silver-card" class="card">
-            <img src="{{ STATIC_URL }}img/extra/silver-home-icon.png" alt="Silver Package House (10 Doors / Windows)" width="176" height="160" />
-            <h3>9 Doors <br/> or Windows</h3>
-            <p><strong>Perimeter protection</strong> for the average American home</p>
-            <h4>Monthly Price: <strong>{{ pricetable.SILVER.standard_monitoring }}</strong></h4>
+        </a>
+        <a href="{% url bronze %}" class="package three columns">
+            <h3>7 doors or windows</h3>
+            <img src="{{ STATIC_URL }}img/base/house-7.gif" alt="7 doors and windows" />
+            <ul>
+                <li>The perfect solution to secure your starter home.</li>
+                <h4><strong>$35.99/mo</strong></h4>
+            </ul>
+            <div class="button" data-link="copper">Order now</div>
 
-    
-            <a href="{% url order-package %}?package=silver" title="Order Silver Package" class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-        </div>
-        
-        <div id="gold-card" class="card">
-            <img src="{{ STATIC_URL }}img/extra/gold-home-icon.png" alt="Gold Package House (12 Doors / Windows)" width="176" height="160" />
-            <h3>11 Doors <br/> or Windows</h3>
-            <p><strong>Unmatched security</strong> for larger sized homes</p>
-    
-            <h4>Monthly Price: <strong>{{ pricetable.GOLD.standard_monitoring }}</strong></h4>
+        </a>
+        <a href="{% url silver %}" class="package three columns">
+            <h3>10 doors or windows</h3>
+            <img src="{{ STATIC_URL }}img/base/house-10.gif" alt="10 doors and windows" />
+            <ul>
+                <li>Perimeter protection for the average American home</li>
+                <h4><strong>$37.99/mo</strong></h4>
+            </ul>
+            <div class="button" data-link="copper">Order now</div>
 
-            <a href="{% url order-package %}?package=gold" title="Order Gold Package"class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-        </div>
-        
-        <div id="platinum-card" class="card">
-            <img src="{{ STATIC_URL }}img/extra/platinum-home-icon.png" alt="Platinum Package House (15 Doors / Windows)" width="176" height="160" />
-            <h3>14 Doors <br/> or Windows</h3>
-    
-            <p>Our <strong>most comprehensive</strong> security system package</strong></p>
-    
-            <h4>Monthly Price: <strong>{{ pricetable.PLATINUM.standard_monitoring }}</strong></h4>
+        </a>
+        <a href="{% url gold %}" class="package three columns">
+            <h3>12 doors or windows</h3>
+            <img src="{{ STATIC_URL }}img/base/house-12.gif" alt="12 doors and windows" />
+            <ul>
+                <li>Unmatched security for<br>larger sized homes.</li>
+                <h4><strong>$39.99/mo</strong></h4>
+            </ul>
+            <div class="button" data-link="copper">Order now</div>
 
-            <a href="{% url order-package %}?package=platinum" title="Order Platinum Package"class="button-link">Order Now <i class="icon-chevron-right"></i></a>
-        </div>
-        <div class="clear"></div>
+        </a>
+        <a href="{% url platinum %}" class="package three columns">
+            <h3>15 doors or windows</h3>
+            <img src="{{ STATIC_URL }}img/base/house-15.gif" alt="15 doors and windows" />
+            <ul>
+                <li>Our most comprehensive security system package</li>
+                <h4><strong>$42.99/mo</strong></h4>
+            </ul>
+            <div class="button" data-link="copper">Order now</div>
+
+        </a>
     </div>
 </div>
 {% include "order/call-box.html" %}
 
-<div class="wrapper">
+<div class="container">
 
-    {% testimonial_search "trust" "limit=3" %}
-    
-    <div id="trusted-name">
-        <div id="trusted-name-content">
-            <h2>The Name You Can Trust</h2>
-            <p>Protect America is proud to use certified wireless home security for our alarm system panels — meaning we use the same trusted and recognized security systems as other leading security companies such as ADT, but sell them for a great deal less. We are confident that you can't find a better home security system anywhere else. And our prices are the best in the industry — we guarantee it!</p>
+    <h2 class="title center bottom">Protect America: a company you can trust.</h2>
+    <h4 class="subhead">Over 4,000 happy reviews and counting</h4>
+    <div id="customer-testimonial-boxes">
+        <div class="testimonial_page">
+
+            <div class="testimonial-column left">
+                <div class="testimonial alt">
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>Anthony's personal commitment to excellent customer service far exceeded all expectations. If I must say he went beyond the call of duty... I trust he will continue to be successful with this company.</p>
+                    <i class="fa fa-caret-down"></i>
+                    <h3>Cassandra <span>of Kinston, NC
+                    </span></h3>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="testimonial-column">
+                <div class="testimonial alt">
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>Bryce turned this seemingly daunting task of setting up our security system into a cake walk! Easy Breezy! He was so polite, so patient (and trust me, we tested his patience, I'm sure of it), and has a great sense of humor so things went smoothly. He put us at ease and handled things clearly, professionally and politely. I wish you offered a 10 star rating, he deserves it! Thank you so much!</p>
+                    <i class="fa fa-caret-down"></i>
+                    <h3>Robin <span>of Hendersonville, TN
+                    </span></h3>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="testimonial-column right">
+                <div class="testimonial alt">
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <p>Appreciated the ability to use the "chat" feature. I did not have a lot of time today and just needed a certificate of monitoring sent to my insurance company. Rather than calling, I was able to contact Jackie, submit my request and within 3 minutes I was done and trust that the certificates are on their way.</p>
+                    <i class="fa fa-caret-down"></i>
+                    <h3>Ben <span>of Jamison, PA
+                    </span></h3>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
         </div>
-        <div id="trusted-awards"><img src="{{ STATIC_URL }}img/external/consumer-digest-top-consumer-review.png" alt="Consumer Digest Top Consumer Review" width="352" height="176" /></div>
-    <div class="clear"></div>
-    
     </div>
-    <div id="house-diagram">
-        
-        <div id="diagram-content">
-            <h2>A Security System that Does More, and Protects More. Yep, Even the Garage.</h2>
-            <p>With the Simon XT Control Panel, you can have up to forty detection points. So, Protect America offers a variety of special sensors to protect your home. This includes: Garage Door Sensors, Flood Sensors, Wireless Cameras, Fire and Smoke Detectors, and Motion Sensors. Unlike out dated, wired systems, our sensors require no mess, wires or modifications. And of course, being Protect America, we offer them at an unbeatable price.</p>
-        </div>
+
+    <div class="seven columns">
+        <h3>The name you can trust</h3>
+        <p>Protect America is proud to use certified wireless home security for our alarm system panels — meaning we use the same trusted and recognized security systems as other leading security companies such as ADT, but sell them for a great deal less. We are confident that you won’t find a better home security system anywhere else! Not only that, our prices are the best in the industry — we guarantee it!</p>
     </div>
-    <div class="clear"></div>
+
+    <div class="seven columns offset-by-two">
+        <h3>A System that Does More and Protects More. Yep, Even the Garage.</h3>
+        <p>The Simon XT Control Panel you can secure up to forty detection points. Protect America offers a variety of special sensors to protect your home. This includes: Garage Door Sensors, Flood Sensors, Wireless Cameras, Fire and Smoke Detectors and Motion Sensors. Unlike outdated, wired systems; our sensors require no mess, wires or modifications. And of course, we offer them at an unbeatable price.</p>
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block faq %}
+<div id="faq">
+    <div class="container clearfix">
+    <h2>Frequently Asked Questions</h2>
+        <ul>
+            <li class="faq">
+                <div>
+                    <i class="fa fa-chevron-down"></i>
+                    <h3>How do I know which package is right for me?</h3>
+                    <p>Our packages vary in size to secure any home from small to large and anything in between. To learn which package is best for you, call Protect America and speak with a security expert! To get an idea of which package matches your home, think about how many windows and doors you'd like to arm. Review the different amounts of door/window sensors that are included in each package and see which number closely corresponds with yours. Keep in mind that every package is fully customizable. Swap equipment for free and add coverage in areas that need it!</p>
+                </div>
+            </li>
+            <li class="faq">
+                <div>
+                    <i class="fa fa-chevron-down"></i>
+                    <h3>How does my equipment get installed?</h3>
+                    <p>Our technology is so simple; it requires nothing but an easy DIY installation process. This only takes an average of 30 minutes! A home security system expert walks you through the entire process over the phone for a professional installation without professional fees. Wireless design makes our systems incredibly user-friendly and efficient for every home.</p>
+                </div>
+            </li>
+            <li  class="faq">
+                <div>
+                    <i class="fa fa-chevron-down"></i>
+                    <h3>Why Protect America?</h3>
+                    <p>Security is extremely important, but it shouldn't be expensive. Period. Protect America has secured over half a million homes in all 50 states because our wireless security technology is affordable, simple, interactive and user-friendly. We've perfected security and made it accessible for anyone seeking to protect their home and family. We're happy to help explore your best options and will match any price with our Lowest Price Guarantee!</p>
+                </div>
+            </li>
+
+        </ul>
+        <ul class="col2">
+            <li class="faq">
+                <div>
+                    <i class="fa fa-chevron-down"></i>
+                    <h3>How does Protect America compare to ADT and other companies?</h3>
+                    <p>Protect America has the lowest price in the industry, plus no installation cost and free equipment with every package. Compare our $19.99 per month to ADT's $42.99 monthly fee for the same coverage, plus their installation fees. You could save up to $612. We also never change contract monitoring rates. ADT and other companies can increase monthly fees at will. We're dedicated to homeowners everywhere, because everyone should be able to protect their home and their wallet.</p>
+                </div>
+            </li>
+            <li class="faq">
+                <div>
+                    <i class="fa fa-chevron-down"></i>
+                    <h3>What if there's a problem with my equipment?</h3>
+                    <p>Other companies could charge hundreds of dollars for the replacement of parts. If any part of your system breaks, we replace it. Take comfort in knowing your home is safe and sound with our Lifetime Replacement Parts warranty.</p>
+                </div>
+            </li>
+            <li class="faq">
+                <div>
+                    <i class="fa fa-chevron-down"></i>
+                    <h3>How do I customize my package?</h3>
+                    <p>We know that no two homes are alike, so our approach is to listen and learn your situation before making an affordable recommendation. Other companies can make recommendations too, but we can't guarantee they will be affordable.</p>
+                </div>
+            </li>
+
+        </ul>
+    </div>
 </div>
 {% addtoblock "js" %}
     <script type="text/javascript">
@@ -114,10 +221,4 @@
 {% endaddtoblock "js" %}
 
 {% endblock %}  
-{% block page-product %}
-    <h2>Platinum Security Package</h2>
-    <p><span>Price Today: <strong>FREE*</strong></span>monthly monitoring starting at $42.99/mo</p>
-    <div class="button-submit">
-        <a href="{% url order-package %}?package=platinum" onClick="_gaq.push(['_trackEvent', 'Order Now', 'Order Now Package Footer Click', 'Platinum-B']);">Order Now ></a>
-    </div>
-{% endblock %}
+
