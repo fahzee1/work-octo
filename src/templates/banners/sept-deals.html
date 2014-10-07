@@ -13,18 +13,14 @@
                 <li><i class="fa fa-check"></i>Free equipment and no installation fees</li>
             </ul>
             <a href="{% url shop %}">Start shopping today</a>
-            {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
-                {% start_ab request 'deal_breaker' %}
-            {% else %}
-                {% if not request.GET.agent %}
-                    {% if not request.COOKIES.refer_id and not request.session.refer_id %}
-                        {% start_ab request 'deal_breaker' %}
-                    {% else %}
-                    {% endif %}
-                {% else %}
-                {% endif %}
-            {% endif %}
-
+            <div class="deal-box">
+                <a href="{% url shop %}" class="deal-img">
+                    <img src="{{ STATIC_URL }}img/banners/hero-banners/sept-deals/security-deal.png" />
+                </a>
+                <a href="{% url smoke-detector %}" class="deal-img">
+                    <img src="{{ STATIC_URL }}img/banners/hero-banners/sept-deals/fire-deal.png" />
+                </a>
+            </div>
         </div>
     </div>
 </div>

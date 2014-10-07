@@ -104,12 +104,27 @@ def get_affiliate_from_request(request):
 
 def phone_number(request):
     try:
+
+
+
         if request.GET.get('who'):
             print 'phone_number, %r' % request.get_full_path()
             print "session[refer_id] = %r" % request.session.get('refer_id')
             print "session[affiliate] = %r" % request.session.get('affiliate')
             if request.session.get('affiliate'):
                 print request.session.get('affiliate').__dict__
+
+
+        abtest_aff = request.session.get('ab_refer_id',None)
+        if abtest_aff:
+            try:
+                affiliate = Affiliate.objects.get(agent_id=abtest_aff)
+                ctx = {}
+                ctx['use_call_measurement'] = True
+                ctx['phone_number'] = affiliate.phone
+                return ctx
+            except Affiliate.DoesNotExist:
+                pass
 
         from django.conf import settings
         ctx = {'phone_number': settings.DEFAULT_PHONE,
@@ -125,6 +140,8 @@ def phone_number(request):
         if request.GET.get('who'):
             print 'Phone number in session: %r' % session_num
             print 'agent in GET: %r' % check_affiliate
+
+
 
 
         if session_num is not None and session_call_measurement is not None and session_num != '':
@@ -143,16 +160,6 @@ def phone_number(request):
         # the GET var. If neither of those exist, there is no affiliate
 
 
-        abtest_aff = request.session.get('ab_refer_id',None)
-        if abtest_aff:
-            try:
-                affiliate = Affiliate.objects.get(agent_id=abtest_aff)
-                ctx = {}
-                ctx['use_call_measurement'] = True
-                ctx['phone_number'] = affiliate.phone
-                return ctx
-            except Affiliate.DoesNotExist:
-                pass
 
         # Has some other middleware figured out your affiliate?  If so, use that.
         affiliate = request.session.get('affiliate')
