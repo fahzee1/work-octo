@@ -473,51 +473,6 @@
 {% endif %}
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
-    <script type="text/javascript">
-
-        var $menu = $(".dropdown-menu");
-
-        $menu.menuAim({
-            activate: activateSubmenu,
-            deactivate: deactivateSubmenu,
-        });
-
-        function activateSubmenu(row) {
-            var $row = $(row),
-                submenuId = $row.data("submenuId"),
-                $submenu = $("#" + submenuId),
-                height = 240,
-                width = $menu.outerWidth();
-            $submenu.css({
-                display: "block",
-                top: -1,
-                left: width - 3,  // main should overlay submenu
-                height: height - 4  // padding for main dropdown's arrow
-            });
-
-            $row.find("a").addClass("maintainHover");
-        }
-
-        function deactivateSubmenu(row) {
-            var $row = $(row),
-                submenuId = $row.data("submenuId"),
-                $submenu = $("#" + submenuId);
-
-            // Hide the submenu and remove the row's highlighted look
-            $submenu.css("display", "none");
-            $row.find("a").removeClass("maintainHover");
-        }
-
-        $(".dropdown-menu li").click(function(e) {
-            e.stopPropagation();
-        });
-        $(".dropdown-toggle").click(function(e) {
-            return false;
-        });
-
-
-    </script>
 
 <script type="text/javascript">
 
@@ -526,31 +481,7 @@
             $( "#mobile-menu-container" ).slideToggle( "slow", function() {
         });
     });
-        $('.lb-button').click(function(e) {
-            e.preventDefault();
-            var lblink = $(this).data('link');
-            $('.lightbox.'+lblink).fadeIn();
-            var player;
-            return false;
-        })
-        $('.lightbox-bg').click(function(e) {
-            e.preventDefault();
-            var iframe = $(this).parent('.lightbox').children('.lightcard').children('iframe').attr('src');
-            $('.video').attr('src',iframe);
-            $('.lightbox').fadeOut();
 
-            return false;
-
-        })
-        $('.closebox').click(function(e) {
-            e.preventDefault();
-            var iframe = $(this).parent('.lightcard').children('iframe').attr('src');
-            $('.video').attr('src',iframe);
-            $('.lightbox').fadeOut();
-
-            return false;
-
-        })
         var owl = $("#featured-badges");
         var outreach = $("#community-outreach-squares");
         var community = $("#community-section");

@@ -32,6 +32,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 @dark-blue: #023269;
 @link-blue: #3f99fe;
 @navy-blue: #2f394a;
+@light-navy: #6d7f80;
+@navy: #2f394a;
+@dark-navy: #273347;
 
 // Shades of Blood
 @light-red: #ffdfdf;
@@ -45,7 +48,17 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 @yellow: #ffc000;
 @light-yellow: #ffe28a;
+.slab-font {
+    font-family: "museo-slab",sans-serif;
 
+}
+.san-serif-font {
+    font-family: "proxima-nova",sans-serif;
+}
+.condensed-font {
+    font-family: "proxima-nova-condensed",sans-serif;
+    font-weight: 600 !important;
+}
 
 /********** Mix-ins ***********/
 
@@ -243,6 +256,7 @@ table#licenses-table {
             float: right;
             width: 600px;
             position: relative;
+            height: 32px;
             #international-selection {
                 margin-top: 6px;
                 float: left;
@@ -350,12 +364,16 @@ table#licenses-table {
                 }
 
             }
+            form {
+                margin-bottom: 0;
+            }
             input {
                 background: #646464;
                 .border-radius();
                 border: 1px solid #6e6e6e;
                 height: 16px;
                 line-height: 16px;
+                padding: 1px;
                 padding-left: 24px;
                 float: right;
                 margin: 6px 0 5px 8px;
@@ -363,6 +381,7 @@ table#licenses-table {
                 font-size: 9px;
                 background: url(/static/img/base/base-sprite-new.png) -78px 0px no-repeat;
                 width: 86px;
+                
             }
         }
     }
@@ -371,6 +390,7 @@ table#licenses-table {
     background: @black;
     position: relative;
     z-index: 900;
+    height: 52px;
     #header {
         .wrapper;
         #company-logo {
@@ -384,9 +404,12 @@ table#licenses-table {
         #main-navigation {
             float: right;
             width: 464px;
+            margin-bottom: 0;
+            height: 52px;
+            
             li {
                 color: @white;
-                font-weight: 100;
+                font-weight: 600;
                 display: block;
                 float: left;
                 width: 100px;
@@ -465,9 +488,10 @@ table#licenses-table {
         left: 0;
         z-index: 9999;
         width: 100%;
+        height: 52px;
         .drop-shadow;
         #header {
-            height: 54px;
+            height: 52px;
             #main-navigation {
                 display: none;
             }
@@ -498,6 +522,7 @@ table#licenses-table {
     #subnav {
         margin: 0 auto;
         width: 960px;
+        font-weight: 600;
         li {
             color: @white;
             display: block;
@@ -515,7 +540,7 @@ table#licenses-table {
                 width: 960px;
                 background: @grey;
                 position: absolute;
-                top: 36px;
+                top: 34px;
                 left: 50%;
                 margin-left: -480px;
                 .border-radius(0,0,5px,5px);
@@ -627,7 +652,7 @@ table#licenses-table {
         }
         small {
             display: block;
-            font-size: 10px;
+            font-size: 12px;
             line-height: 18px;
             color: #ccc;
         }
@@ -977,7 +1002,7 @@ body.alternate {
     background: #fad20f;
     border: none;
     padding: 0px;
-    margin: 20px auto 0;
+    margin: 0px auto 0;
     float: none;
     .fade-fast;
     h3 {
@@ -1096,6 +1121,269 @@ body.alternate {
     }
 
 }
+footer {
+    background: @white;
+    padding: 60px 0;
+    .container {
+        ul {
+            li {
+                margin-bottom: 6px;
+                a {
+                    color: @dark-grey;
+                    font-size: 12px;
+                    line-height: 18px;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    &:hover {
+                        color: @red;
+                    }
+                }
+            }
+            &.three.columns {
+            }
+            &.hours-area {
+                text-align: right;
+                text-transform: uppercase;
+                font-size: 12px;
+                li {
+                    margin: 0;
+                }
+            }
+            &.two.columns {
+                float: right;
+                text-align: right;
+                li {
+                    position: relative;
+                    width: 24px;
+                    height: 24px;
+                    margin-left: 6px;
+                    overflow: hidden;
+                    float: left;
+                    text-align: center;
+                    i {
+                        display: block;
+                        text-align: center;
+                        height: 24px;
+                        width: 24px;
+                        font-size: 20px;
+                        line-height: 20px;
+                    }
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        &.googleplus {
+                            top: 0;
+                            left: -25px;
+                        }
+                        &.twitter {
+                            top: -25px;
+                        }
+                        &.youtube {
+                            top: -25px;
+                            left: -25px;
+                        }
+                        &.linkedin {
+                            top: -50px;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+#terms {
+    background: @v-light-grey;
+    padding: 60px 0;
+    p {
+        font-size: 12px;
+        line-height: 18px;
+        &.copyright {
+            padding-left: 100px;
+        }
+    }
+}
+.lightbox {
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    z-index: 9997;
+    top: 0;
+    left: 0;
+    display: none;
+    .lightcard {
+        background: @white;
+        width: 630px;
+        height: 470px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 9998;
+        margin-left: -315px;
+        margin-top: -235px;
+        overflow: hidden;
+        
+        .closebox {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            text-transform: uppercase;
+            display: block;
+            cursor: pointer;
+            cursor: hand;
+            &:hover {
+                color: @red;
+            }
+        }
+        .lightbox-info {
+            width: 50%;
+            background: #eee;
+            float: right;
+            height: 100%;
+            padding-top: 48px;
+            span {
+                .slab-font;
+                font-size: 15px;
+                padding: 8px 8px 0;
+                text-align: center;
+                text-transform: uppercase;
+                display: block;
+            }
+            img {
+                display: block;
+                margin: 12px auto;
+                &.award {
+                    padding: 16px 0;
+                }
+            }
+            ul {
+                width: 230px;
+                margin: 8px auto;
+                padding: 16px 0;
+                border: 1px solid #ccc;
+                border-left: none;
+                border-right: none;
+                li {
+                    text-transform: uppercase;
+                    line-height: 24px;
+                    i {
+                        color: @blue;
+                        font-size: 24px;
+                        line-height: 24px;
+                        position: relative;
+                        top: 3px;
+                        padding-right: 8px;
+                    }
+                }
+            }
+        }
+        .quote-form-white {
+            width: 50%;
+            height: 100%;
+            float: left;
+            position: relative;
+            .drop-shadow(0, 0, 10px, #ccc);
+            .form-title {
+                text-transform: uppercase;
+                font-size: 18px;
+                line-height: 44px;
+                padding: 5px;
+                background: @yellow;
+                color: @navy;
+                font-weight: 700;
+                text-align: center;
+                height: 44px;
+            }
+            .quote-content {
+                font-size: 14px;
+                line-height: 16px;
+                padding: 0px 42px 8px;
+                text-align: center;
+                strong {
+                    display: block;
+                    color: @red;
+                    padding: 8px 0 4px;
+                    font-size: 30px;
+                    line-height: 32px;
+                    font-weight: bold;
+                }
+                span {
+                    font-size: 10px;
+                    color: @grey;
+                    display: block;
+                }
+                .info {
+                    font-size: 10px;
+                    padding: 4px 0 0;
+                    color: @grey;
+                }
+
+            }
+            label {
+                display: none;
+            }
+            input {
+                display: block;
+                margin: 0 auto 8px;
+                width: 230px;
+            }
+            i {
+                color: @yellow;
+                font-size: 56px;
+                line-height: 24px;
+                padding: 0;
+                margin: 0 auto;
+                position: absolute;
+                top: 47px;
+                left: 45%;
+            }
+            button {
+                display: block;
+                padding: 10px 10px 4px;
+                .border-radius(3px,3px,3px,3px);
+                color: @black;
+                background: @yellow;
+                text-decoration: none;
+                border: none;
+                font-size: 14px;
+                font-weight: 600;
+                .san-serif-font;
+                margin: 0 auto;
+                width: 252px;
+                float: none;
+                .fade-slow;
+                cursor: pointer;
+                border-bottom: 4px solid #ccaf29;
+            }
+            .consent-label {
+                font-size: 9px !important;
+                line-height: 12px;
+                padding: 8px 30px;
+                text-align: center;
+                color: @grey;
+            }
+            a {
+                color: @blue;
+                font-size: 12px;
+                text-align: center;
+                display: block;
+            }
+            #third-party-container {
+                margin: 8px auto;
+            }
+        }
+    }
+    .lightbox-bg {
+        background: rgb(0,0,0);
+        background: rgba(0,0,0,.75);
+        width: 100%;
+        position: fixed;
+        height: 100%;
+        z-index: 9997;
+        
+    }
+}
 #footer-wrapper {
     background: @black;
     #footer {
@@ -1188,39 +1476,6 @@ body.alternate {
         }
     }
 }
-#terms-wrapper {
-    background: @grey;
-    #terms {
-        width: 960px;
-        margin: 0 auto;
-        padding-top: 8px;
-        #terms-conditions {
-            float: left;
-            width: 50%;
-            p {
-                font-size: 10px;
-                line-height: 14px;
-                padding-bottom: 8px;
-                color: @light-grey;
-                text-align: justify;
-                a {
-                    color: @light-grey;
-                }
-            }
-        }
-        #copyrights {
-            width: 45%;
-            float: right;
-            p {
-                text-align: right;
-                font-size: 10px;
-                line-height: 14px;
-                padding-bottom: 8px;
-                color: @light-grey;
-            }
-        }
-    }
-}
 
 
 
@@ -1300,10 +1555,13 @@ body.alternate {
         position: relative;
         height: 496px;
         z-index: 0;
+        #hero-content {
+            margin-top: 24px;
+        }
         .icon-smart-connect, .icon-automotive, .icon-home-automation, .icon-home-security, .icon-life-safety, .icon-customer-care {
             width: 48px;
             height: 48px;
-            display: block;
+            display: none;
             background: url(/static/img/base/base-sprite-new.png) -48px -48px no-repeat;
             
         }
@@ -1325,7 +1583,7 @@ body.alternate {
         h2 {
             font-weight: 300;
             color: @white;
-            font-size: 24px;
+            font-size: 20px;
             line-height: 36px;
         }
         h1 {
@@ -1340,7 +1598,6 @@ body.alternate {
             color: @light-yellow;
             font-size: 15px;
             text-shadow: 1px 1px 1px rgba(0,0,0,.4);
-            padding-top: 48px;
             font-weight: bold;
         }
         p {
@@ -1850,6 +2107,7 @@ body.alternate {
         border-left: 1px solid #6598b9;
         padding: 4px 0 4px 8px;
         margin-left: 4px;
+        display: none;
     }
 }
 .order-link {
@@ -1863,50 +2121,4 @@ body.alternate {
     }
 }
 /************ Testimonials ************/
-.testimonials {
-    margin: 16px 0;
-    .testimonial {
-        width: 304px;
-        position: relative;
-        float: left;
-        h3 {
-            font-size: 24px;
-            color: @grey;
-            font-weight: bold;
-            line-height: 26px;
-            height: 66px;
-            span {
-                display: block;
-                font-weight: normal;
-                font-style: italic;
-                font-size: 16px;
-                line-height: 20px;
-            }
-            .rating {
-                position: absolute;
-                right: 0;
-                top: 26px;
-                color: @yellow;
-            }
-        }
-        i.icon-caret-up {
-            position: absolute;
-            left: 24px;
-            top: 32px;
-            line-height: 56px;
-            font-size: 56px;
-            color: @light-blue;
-        }
-        p {
-            display: block;
-            background: @light-blue;
-            .border-radius(5px,5px,5px,5px);
-            padding: 16px;
-            text-align: justify;
-            font-size: 13px;
-        }
-        &.mid {
-            margin: 0 24px;
-        }
-    }
-}
+
