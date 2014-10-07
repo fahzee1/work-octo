@@ -67,6 +67,7 @@ def mobile_check(request):
 
 def get_affiliate_from_request(request):
 
+
     affiliate = None
     # 0. GET_agent if it's on GET and super
 
@@ -140,6 +141,18 @@ def phone_number(request):
         # `source` GET var is set), or they do not have a source
         # So, first we check the cookie. If it doesn't exist, we check
         # the GET var. If neither of those exist, there is no affiliate
+
+
+        abtest_aff = request.session.get('ab_refer_id',None)
+        if abtest_aff:
+            try:
+                affiliate = Affiliate.objects.get(agent_id=abtest_aff)
+                ctx = {}
+                ctx['use_call_measurement'] = True
+                ctx['phone_number'] = affiliate.phone
+                return ctx
+            except Affiliate.DoesNotExist:
+                pass
 
         # Has some other middleware figured out your affiliate?  If so, use that.
         affiliate = request.session.get('affiliate')
