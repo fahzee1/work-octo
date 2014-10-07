@@ -23,6 +23,18 @@ class DetectMobileBrowser():
         check_agent = request.path
         if check_agent == '/getsmart':
             return None
+
+
+        # dont redirect local pages to mobile site
+        url = request.path.rstrip('/').lstrip('/')
+        #city page and state page
+        match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
+        match_cp2 = re.compile(r'home-security/[-\w]{2}/[-\w]+')
+        match_sp = re.compile(r'home-security/[-\w]{2}')
+
+        if match_cp.match(url) or match_cp2.match(url) or match_sp.match(url):
+            return None
+
         if 'no_mobile' in request.GET:
             current_cookie = True
             request.session['redirect_mobile'] = True
@@ -245,7 +257,7 @@ class LocalPageRedirect(object):
         #city page and state page
         match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
         match_cp2 = re.compile(r'home-security/[-\w]{2}/[-\w]+')
-        match_sp = re.compile(r'home-security/[-\w]{3,}')
+        match_sp = re.compile(r'home-security/[-\w]{2}')
 
         # redirect /rep/get-quote to homesecurity.protectamerica.com/rep/get-quote
         match_quote = re.compile(r'rep/get-quot')

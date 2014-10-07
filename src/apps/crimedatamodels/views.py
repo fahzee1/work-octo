@@ -29,7 +29,7 @@ def query_weather(latitude, longitude, city, state):
     if weather_info is None:
         try:
             url = 'http://api.worldweatheronline.com/free/v1//weather.ashx?q=%s,%s&format=json&num_of_days=2&key=7gbd7u87jtjddb5jsaq959v5' % (float(latitude), float(longitude))
-            result = simplejson.load(urllib.urlopen(url))
+            result = simplejson.load(urllib.urlopen(url,timeout=10))
         except:
             return None
         if 'error' in result['data'].keys():
@@ -367,12 +367,12 @@ def choose_state(request):
     forms['basic'] = PAContactForm()
     if not settings.DEBUG:
         try:
-            ip=request.META['REMOTE_ADDR']
-            r=requests.get('http://freegeoip.net/json/'+ip)
-            resp=r.json()
-            city=resp['city']
-            state_abbr=resp['region_code']
-            state_long=resp['region_name']
+            ip = request.META['REMOTE_ADDR']
+            r = requests.get('http://freegeoip.net/json/'+ip,timeout=10)
+            resp = r.json()
+            city = resp['city']
+            state_abbr = resp['region_code']
+            state_long = resp['region_name']
         except:
             city=None
             state_abbr=None

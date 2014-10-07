@@ -1,20 +1,19 @@
-
 <div class="testimonial {% cycle 'alt' '' %}">
     {% if test.type == 'Textimonial' %}
-        <h3>{{ testimonial.first_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}
-       {% if testimonial.rating > '0' %}
+
+        {% if testimonial.rating > '0' %}
             <div class="rating">
-                {% if testimonial.rating >= '1' %}<i class="icon-star"></i>{% endif %}
-                {% if testimonial.rating >= '2' %}<i class="icon-star"></i>{% endif %}
-                {% if testimonial.rating >= '3' %}<i class="icon-star"></i>{% endif %}
-                {% if testimonial.rating >= '4' %}<i class="icon-star"></i>{% endif %}
-                {% if testimonial.rating >= '5' %}<i class="icon-star"></i>{% endif %}
+                {% if testimonial.rating >= '1' %}<i class="fa fa-star"></i>{% endif %}
+                {% if testimonial.rating >= '2' %}<i class="fa fa-star"></i>{% endif %}
+                {% if testimonial.rating >= '3' %}<i class="fa fa-star"></i>{% endif %}
+                {% if testimonial.rating >= '4' %}<i class="fa fa-star"></i>{% endif %}
+                {% if testimonial.rating >= '5' %}<i class="fa fa-star"></i>{% endif %}
             </div>
         {% endif %}
-        </span></h3>
-        <i class="icon-caret-up"></i>
         <p>{{ testimonial.message|safe }}</p>
- 
+        <i class="fa fa-caret-down"></i>
+        <h3>{{ testimonial.first_name }} <span>of {{ testimonial.city }}, {{ testimonial.state }}
+        </span></h3>
         <div class="clear"></div>
     {% else %}
         {% if test.type == 'Vidimonial' %}

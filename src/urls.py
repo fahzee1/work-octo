@@ -111,6 +111,7 @@ urlpatterns = patterns('',
     url(r'^contact/agent/ajaxpost/?$', 'apps.contact.views.ajax_post_agent',name='contact-ajax-agent'),
     url(r'^contact-us/?$', 'apps.contact.views.main', name='contact-us'),
     url(r'^ajax/log/?$', 'apps.contact.views.ajax_log', name='ajax-log'),
+    url(r'^ajax/employment/?$', 'apps.contact.views.ajax_employment', name='ajax-employment'),
 
     url(r'^contact-us/find-us/?$', 'apps.contact.views.find_us', name='find-us'),
 
@@ -736,7 +737,10 @@ else:
                 # > url(r'^contact/careers/?$', 'apps.events.views.careers', name='careers'),
 
                     dtt(r'^support/careers/jobs/?$', 'contact-us/jobs.html', 'jobs', 'careers'),
+                    dtt(r'^support/careers/jobs/application?$', 'contact-us/online-application.html', 'application', 'careers'),
+                    dtt(r'^support/careers/jobs/thank-you/?$', 'contact-us/app-thank-you.html', 'application-thank-you', 'careers'),
                     # > dtt(r'^contact/careers/job-openings?$', 'contact-us/jobs.html', 'jobs', 'careers'),
+
 
 
 

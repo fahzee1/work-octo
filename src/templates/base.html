@@ -1,4 +1,4 @@
-{% load content_tags content_filters sekizai_tags %}
+{% load content_tags content_filters sekizai_tags ab_test %}
 {% load url from future %}
 {% block doctype %}
 <!DOCTYPE html>
@@ -86,6 +86,8 @@
 <meta name="viewport" content="width=1024">
 {% endblock %}
 <meta http-equiv="cleartype" content="on">
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
 {% block css %}
     <!-- For all browsers -->
     <link rel="stylesheet" media="screen" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/responsive/320.css">
@@ -110,25 +112,22 @@
 {% endblock %}
 
 {% block google_analytics %}
-    <script type="text/javascript">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-     var _gaq = _gaq || [];
-     _gaq.push(['_setAccount', 'UA-5441302-2']);
-     _gaq.push(['_setDomainName', 'protectamerica.com']);
-     {% block ga_custom_variables %}{% endblock %}
-     _gaq.push(['_trackPageview']);
+  ga('create', 'UA-5441302-2', 'auto');
+  {% block ga_custom_variables %}{% endblock %}
+  ga('send', 'pageview');
 
-     (function() {
-       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-       ga.src = ('http:' == document.location.protocol ? 'http://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-     })();
-
-    </script>
+</script>
 {% endblock %}
+
 {% block typekit-code %}
-    <script type="text/javascript" src="//use.typekit.net/lgm4msi.js"></script>
-    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+<script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
 {% block bing-conversion-code %}{% endblock %}
 
@@ -145,10 +144,22 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
 <!-- Page Header -->
 {% block header %}
 
+    {% comment %}
+
+        {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
+            {% start_ab request 'new_nav2' %}
+        {% else %}
+            {% if not request.GET.agent %}
+                {% if not request.COOKIES.refer_id and not request.session.refer_id %}
+                    {% start_ab request 'new_nav2' %}
+                {% else %}
+                {% endif %}
+            {% else %}
+            {% endif %}
+        {% endif %}
+    {% endcomment %}
     <div id="top-section-wrapper">
         <div id="top-section">
-            <ul id="newsfeed">
-            </ul>
 
             <div id="company-links">
                 <a href="http://www.myprotectamerica.com" class="interactive-customer" target="blank">Interactive Customers</a>
@@ -215,12 +226,10 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
             <div class="clear"></div>
         </div>
     </div>
-
 {% endblock %}
 
 <!-- Sub Navigation -->
 {% block subnav %}{% endblock %}
-
 <!-- Main Content -->
 {% block content %}
 {% endblock %}
@@ -243,102 +252,95 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
 <!-- Footer -->
 {% block footer %}
     {% block main-footer %}
-    <div id="footer-wrapper">
-        <div id="footer">
-            <ul id="footer-main-navigation">
-                <li class="{% if 'shop' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/shop-home-security-systems/" title="Shop Home Security Packages">Shop</a></li>
-                <li class="{% if 'equipment' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/security-equipment/" title="View Equipment and Products">Equipment</a></li>
-
-                <li class="{% if 'learn' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/learn/" title="Learn about Home Security">Learn</a></li>
-                <li class="{% if 'support' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/" title="Get Help for your Home Security System">Support</a></li>
-                <li class=""><a href="http://www.protectamerica.com/home-security-blog/" title="Order Home Security Today">Security Blog</a></li>
-                <li class="{% if 'sitemap' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/sitemap/" title="View our Sitemap">Sitemap</a></li>
+    <!-- Footer navigation -->
+    <footer>
+        <div class="container">
+            <ul class="four columns">
+                <li><a href="http://www.protectamerica.com/shop-home-security-systems">Shop</a></li>
+                <li><a href="http://www.protectamerica.com/learn/security-101/how-it-works">How It Works</a></li>
+                <li><a href="http://www.protectamerica.com/support/customer-service">Customer Service</a></li>
+                <li><a href="http://www.protectamerica.com/home-security-blog/">Home and Life Blog</a></li>
+                <li><a href="http://www.protectamerica.com/help/state-licenses/">State Licenses</a></li>
+                <li><a href="http://www.protectamerica.com/sitemap/">Sitemap</a></li>
             </ul>
-            <ul id="footer-care-nav">
+            <ul class="four columns">
+    
+                <li><a href="http://www.protectamerica.com/help/privacy-policy/">Privacy Policy</a></li>
+                <li><a href="http://www.protectamerica.com/help/return-policy/">Return Policy</a></li>
+                <li><a href="http://www.protectamerica.com/help/do-not-call/">Do Not Call</a></li>
+                <li><a href="http://www.protectamerica.com/support/affiliates/">Affiliates</a></li>
+                <li><a href="http://www.protectamerica.com/support/dealers">Dealer Program</a></li>
 
-                <li class="{% if 'customer-service' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/customer-service/" title="Customer Service">Customer Service</a></li>
-                <li class="{% if 'privacy-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/privacy-policy/" title="View our Privacy Policy">Privacy Policy</a></li>
-                <li class="{% if 'return-policy' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/return-policy/" title="View our Return Policy">Return Policy</a></li>
-
-                <li class="{% if 'state-licenses' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/state-licenses/" title="View our Licenses for Each State">State Licenses</a></li>
-                <li class="{% if 'do-not-call' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/help/do-not-call/" title="Add your Number to our Do Not Call List">Do Not Call</a></li>
-                <li class="{% if 'careers' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/careers/" title="Start your Career at Protect America">Careers</a></li>
-                <li class="{% if 'dealer-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/dealers" title="Interested in Selling Home Security? Join our Dealer Program">Dealer Program</a></li>
-                {% comment %}
-                <li class="{% if 'affiliate-program' in active_pages %}active{% endif %}"><a href="http://www.protectamerica.com/support/affiliates/" title="Interested in Selling Home Security? Join our Affiliate Program">Affiliates</a></li>
-                {% endcomment %}
             </ul>
-            <ul id="footer-contact-info">
+            <ul class="five columns hours-area">
                 <li><strong>Telephone</strong></li>
-                <li><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}><a href="tel:{{ phone_number|format_number }}">{{ phone_number|format_number }}</a></span></li>
-                <li><span>M-F</span> 7AM - 11PM CT</li>
-                <li><span>SAT</span> 8AM - 8PM CT</li>
-                <li><span>SUN</span> 11AM - 7PM CT</li>
-                {% block social-icons %}
-                <li id="footer-social-icons">
-                    <a href="https://plus.google.com/+ProtectAmerica/" title="Visit Protect Americ on Google +"><i class="icon-google-plus"></i></a>
-
-                    <a href="http://www.facebook.com/ProtectAmerica" title="Visit Protect America's Facebook Page"><i class="icon-facebook"></i>
-                    <div class="clear" style="padding-bottom: 16px;"></div>
-                    <a href="http://www.twitter.com/ProtectAmerica" title="Visit Protect America's Twitter Page"><i class="icon-twitter"></i></a>
-
-                    <a href="http://www.youtube.com/user/ProtectAmerica" title="Watch our Tutorials and Videos on our YouTube Page"><i class="icon-youtube"></i></a>
-                    <a href="http://www.linkedin.com/company/protect-america" title="Visit Protect America's LinkedIn Page"><i class="icon-linkedin"></i></a>
-
-
-                </li>
-                {% endblock %}
+                <li>{{ phone_number|format_number }}</li>
+                <li>M-F 7am - 11pm ct</li>
+                <li>Sat 8am - 8pm ct</li>
+                <li>Sun 9am - 9pm ct</li>
             </ul>
-            <div id="footer-awards" style="padding-left: 24px;">
-                <img src="{{ STATIC_URL }}img/base/besty-award.png" alt="Best Home Security Comapnys #1 Choice Overall" />
-            </div>
-            <div class="clear"></div>
+            <ul class="two columns offset-by-one">
+                <li class="facebook"><a href="http://www.facebook.com/ProtectAmerica"><i class="fa fa-facebook"></i></a></li>
+                <li class="googleplus"><a href="https://plus.google.com/+ProtectAmerica/"><i class="fa fa-google-plus"></i></a></li>
+                <div class="clear"></div>
+                <li class="twitter"><a href="http://www.twitter.com/ProtectAmerica"><i class="fa fa-twitter"></i></a></li>
+                <li class="youtube"><a href="http://www.youtube.com/user/ProtectAmerica"><i class="fa fa-youtube"></i></a></li>
+                <div class="clear"></div>
+                <li class="linkedin"><a href="http://www.linkedin.com/company/protect-america"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
         </div>
-    </div>
+    </footer>
+    <!-- End footer navigation -->
     {% endblock %}
-    {% block terms %}
-    <div id="terms-wrapper">
-        <div id="terms">
-            <div id="terms-conditions">
-                <p>* <a href="https://secure.protectamerica.com/sample/en" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
-                <p>* Information used for home security alarm system comparisons was obtained November 2013 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
+
+    <!-- Terms and conditions -->
+    <div id="terms">
+        <div class="container">
+            <div class="eight columns">
+                <p class="small">* Standard home security alarm monitoring agreement required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+                <p class="small">* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan".</p>
                 <p>We provide security in all 50 states. <a href="http://www.protectamerica.com/help/state-licenses/">Click here for licensing information</a></p>
-                {% block extra_terms %}
-                {% endblock %}
-            </div>
-            <div id="copyrights">
 
-                {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
-                <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
+            </div>
+            <div class="seven columns">
+                {% if local_street %}
+                <div id="local-address" itemscope itemtype="http://schema.org/LocalBusiness">
+                {{ local_street.googleplus_url }}
+                    <p class="copyright">{% if local_street.googleplus_url %}<a href="{{ local_street.googleplus_url }}" title="{{ city }} Protect America">{% endif %}<span itemprop="name">{{ city }} Protect America</span> &ndash; <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><b itemprop="streetAddress">{{ local_street }}</b> <b itemprop="addressLocality">{{ local_city }}</b>, <b itemprop="addressRegion">{{ local_state }}</b> <b itemprop="postalCode">{{ local_zipcode }}</b></span></p>{% if local_street.googleplus_url %}</a>{% endif %}
+                </div>
+                {% endif %}
+                <p class="copyright">The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.<br><br>&copy; 1992 &ndash; 2014 Protect America, Inc. All rights reserved</p>
             </div>
         </div>
-        <div class="clear"></div>
+    </div>
+    <!-- End terms and conditions -->
+<div class="lightbox request-quote">
+    <div class="lightcard">
+        <div class="closebox">
+            close
+            <i class="fa fa-times-circle"></i>
+        </div>
+        {% include "order/quote-form-partial.html" with form=forms.basic %}
+
+        <div class="lightbox-info">
+            <span>Three reasons people choose</span>
+            <img src="{{ STATIC_URL }}img/base/protect-america-logo.png" title="Protect America Home Security" width="212" height="36"  />
+            <ul>
+                <li><i class="fa fa-check-circle"></i> Free Security Equipment</li>
+                <li><i class="fa fa-check-circle"></i> Lowest Price Guaranteed</li>
+                <li><i class="fa fa-check-circle"></i> Lifetime Warranty</li>
+            </ul>
+            <span>Award Winning Security</span>
+            <img src="{{ STATIC_URL }}img/base/awards.png" title="Protect America Awards" class="award" width="248" height="70"  />
+        </div>
 
     </div>
-    {% endblock %}
+    <div class="lightbox-bg">&nbsp;</div>
+</div>
 
 {% endblock %}
-{% addtoblock "js" %}
-{% comment %}
-<script type="text/javascript">
-$(document).ready(function() {
-    $('.next-row-button').click(function() {
-        var current_row = $(this).parent().children('.slide-row:visible');
-        var row_count = $(this).parent().children('.slide-row').length;
-        if(current_row.index() == (row_count - 1) ) {
-            var next_slide = $(this).parent().children('.slide-row:eq(0)');
-        } else {
-            var next_slide = $(this).parent().children('.slide-row:eq('+(current_row.index() + 1)+')');
-        }
-        $(this).parent().children('.slide-row:visible').removeClass('active')
-        next_slide.addClass('active');
-    });
-});
-</script>
-{% endcomment %}
-{% endaddtoblock "js" %}
 <!-- Javascript -->
-
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}js/common.js"></script>
 
 
@@ -389,14 +391,6 @@ $(document).ready(function() {
             };
             return false;
         });
-        /*
-        $('#newsfeed').cycle({
-           fx:     'blindY',
-           speed:   500,
-           timeout: 6000,
-           delay:  -3000
-        });
-        */
         $('.easy-chat-click').click(function() {
             window.open('https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1', 'chatter', "height=465,width=400");
             return false;
@@ -405,7 +399,6 @@ $(document).ready(function() {
 
 
     </script>
-
     <!--[if !IE]><!-->
     <script type="text/javascript">
 
@@ -417,6 +410,94 @@ $(document).ready(function() {
 	<!--<![endif]-->
 {% endblock %}
 {% block extra_javascript %}
+    <script type="text/javascript">
+
+        var $menu = $(".dropdown-menu");
+
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu,
+        });
+
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = 240,
+                width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: width - 3,  // main should overlay submenu
+                height: height - 4  // padding for main dropdown's arrow
+            });
+
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+
+        $(".dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $(".dropdown-toggle").click(function(e) {
+            return false;
+        });
+        $('.lb-button').click(function(e) {
+            e.preventDefault();
+            var lblink = $(this).data('link');
+            $('.lightbox.'+lblink).fadeIn();
+            var player;
+            return false;
+        })
+        $('.lightbox-bg').click(function(e) {
+            e.preventDefault();
+            var iframe = $(this).parent('.lightbox').children('.lightcard').children('iframe').attr('src');
+            $('.video').attr('src',iframe);
+            $('.lightbox').fadeOut();
+
+            return false;
+
+        })
+        $('.closebox').click(function(e) {
+            e.preventDefault();
+            var iframe = $(this).parent('.lightcard').children('iframe').attr('src');
+            $('.video').attr('src',iframe);
+            $('.lightbox').fadeOut();
+
+            return false;
+
+        })
+        $('.item-icon').click(function(e) {
+            e.preventDefault();
+            if($(this).hasClass('fa-plus-circle')) {
+                $(this).parent('.item-box').children('.item-description').slideDown('fast');
+                $(this).addClass('fa-times-circle');
+                $(this).parent('.item-box').css('z-index','999')
+                $(this).removeClass('fa-plus-circle');
+                
+            } else {
+                $(this).parent('.item-box').children('.item-description').slideUp('fast');
+                $(this).parent('.item-box').css('z-index','0')
+
+                $(this).removeClass('fa-times-circle');
+                $(this).addClass('fa-plus-circle');
+            };
+
+            return false;
+    
+        })
+</script>
+
+
 
 {% if use_call_measurement %}
 
@@ -505,49 +586,20 @@ $(document).ready(function() {
 {{ pixels|default_if_none:""|safe }}
 {% endblock %}
 {% if DEBUG == False %}
-{% block remarketing-one %}
-<!-- Google Code for Home Page Visit Remarketing List -->
-<script type="text/javascript">
-<!--
-var google_conversion_id = 1072079179;
-var google_conversion_language = "en";
-var google_conversion_format = "1";
-var google_conversion_color = "666666";
-var google_conversion_label = "uM2WCO38wAEQy8Ka_wM";
-var google_conversion_value = 0;
-//-->
-</script>
-<!-- Google + -->
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
-{% endblock %}
-{% block remarketing %}
-<script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
-</script>
-<noscript>
-<div style="display:inline;">
-<img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1072079179/?label=uM2WCO38wAEQy8Ka_wM&amp;guid=ON&amp;script=0"/>
-</div>
-</noscript>
+    {% block remarketing-one %}
+    {% endblock %}
+    {% block remarketing %}
+    {% endblock %}
 
-<!-- End Remarketing Code -->
-
-{% endblock %}
-
-<!-- End of segment tag -->
-{% block liveperson-two %}
- <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
-<script type="text/javascript">
-$(function() {
-//document.write('<script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"><'+ '/script>');
-});
-</script>
-{% endblock %}
+    <!-- End of segment tag -->
+    {% block liveperson-two %}
+     <script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"></script>
+    <script type="text/javascript">
+    $(function() {
+    //document.write('<script type="text/javascript" charset="UTF-8" src="https://server.iad.liveperson.net/hc/34774121/?cmd=mTagRepstate&site=34774121&buttonID=12&divID=lpButDivID-1363884338049&bt=3&c=1"><'+ '/script>');
+    });
+    </script>
+    {% endblock %}
 {% endif %}
 {% block geo-pixel %}
 <!-- Google Code for Remarketing Tag -->
@@ -567,46 +619,46 @@ var google_remarketing_only = true;
 </noscript>
 {% endblock %}
 {% block offline-tracking %}
-<script type="text/javascript">
-  function setCookie(a,d,b){
-        var c=new Date;
-        c.setTime(c.getTime()+864E5*b);
-        b=";expires="+c.toUTCString();
-        document.cookie=a+"="+d+b
-    }
-  function getParam(a){
-        return (a=RegExp("[?&]"+a+"=([^&]*)").exec(window.location.search)) && decodeURIComponent(a[1].replace(/\+/g," "))
-    }
-  var gclid=getParam("gclid");
-  if(gclid){
-        var gclsrc=getParam("gclsrc");
-        (!gclsrc||-1!==gclsrc.indexOf("aw")) && setCookie("gclid",gclid,90)
-    };
-
-</script>
- <script type="text/javascript">
-  function readCookie(name) {
-  var n = name + "=";
-  var cookie = document.cookie.split(';');
-  for(var i=0;i < cookie.length;i++) {
-      var c = cookie[i];
-      while (c.charAt(0)==' '){
-            c = c.substring(1,c.length);
+    <script type="text/javascript">
+      function setCookie(a,d,b){
+            var c=new Date;
+            c.setTime(c.getTime()+864E5*b);
+            b=";expires="+c.toUTCString();
+            document.cookie=a+"="+d+b
         }
-      if (c.indexOf(n) == 0){
-        return c.substring(n.length,c.length);
+      function getParam(a){
+            return (a=RegExp("[?&]"+a+"=([^&]*)").exec(window.location.search)) && decodeURIComponent(a[1].replace(/\+/g," "))
         }
-    }
-  return null;
-  }
-
-  window.onload = function() {
-      var gclid = document.getElementById('gclid')
-      if (gclid){
-            gclid.value = readCookie('gclid');
+      var gclid=getParam("gclid");
+      if(gclid){
+            var gclsrc=getParam("gclsrc");
+            (!gclsrc||-1!==gclsrc.indexOf("aw")) && setCookie("gclid",gclid,90)
+        };
+    
+    </script>
+     <script type="text/javascript">
+      function readCookie(name) {
+      var n = name + "=";
+      var cookie = document.cookie.split(';');
+      for(var i=0;i < cookie.length;i++) {
+          var c = cookie[i];
+          while (c.charAt(0)==' '){
+                c = c.substring(1,c.length);
             }
-  }
-  </script>
+          if (c.indexOf(n) == 0){
+            return c.substring(n.length,c.length);
+            }
+        }
+      return null;
+      }
+    
+      window.onload = function() {
+          var gclid = document.getElementById('gclid')
+          if (gclid){
+                gclid.value = readCookie('gclid');
+                }
+      }
+      </script>
 
 {% endblock %}
 
@@ -628,31 +680,31 @@ var google_remarketing_only = true;
 </noscript>
 {% endblock %}
 {% block OS %}
-<script type="text/javascript">
- window.OSName="Unknown OS";
-if (navigator.appVersion.indexOf("Win")!=-1){
-    window.OSName="Windows";
-} else if (navigator.appVersion.indexOf("Mac")!=-1){
-    window.OSName="MacOS";
-} else if (navigator.appVersion.indexOf("X11")!=-1){
-    window.OSName="UNIX";
-} else if (navigator.appVersion.indexOf("Linux")!=-1){
-    window.OSName="Linux";
-} else {
-    window.OSName = 'Unknown--' + navigator.appVersion;
-}
-function getParameterByName( name ){
-  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-  var regexS = "[\\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var results = regex.exec( window.location.href );
-  if( results == null )
-    return "";
-  else
-    return decodeURIComponent(results[1].replace(/\+/g, " "));
-
-}
-</script>
+    <script type="text/javascript">
+     window.OSName="Unknown OS";
+    if (navigator.appVersion.indexOf("Win")!=-1){
+        window.OSName="Windows";
+    } else if (navigator.appVersion.indexOf("Mac")!=-1){
+        window.OSName="MacOS";
+    } else if (navigator.appVersion.indexOf("X11")!=-1){
+        window.OSName="UNIX";
+    } else if (navigator.appVersion.indexOf("Linux")!=-1){
+        window.OSName="Linux";
+    } else {
+        window.OSName = 'Unknown--' + navigator.appVersion;
+    }
+    function getParameterByName( name ){
+      name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+      var regexS = "[\\?&]"+name+"=([^&#]*)";
+      var regex = new RegExp( regexS );
+      var results = regex.exec( window.location.href );
+      if( results == null )
+        return "";
+      else
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+    
+    }
+    </script>
 {% endblock %}
 
 </body>

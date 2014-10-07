@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load content_filters content_tags sekizai_tags testimonial_tags humanize %}
+{% load content_filters content_tags sekizai_tags testimonial_tags humanize ab_test %}
 {% block page_title %}{{city}}, {{ state }} Home Security Systems | Protect America{% endblock %}
 
 {% block page_description %}Want a FREE {{ city }} home security system? Sign up for monitoring with Protect America and get a system at no cost. Call 888-936-3385 to learn more!{% endblock %}
@@ -22,7 +22,27 @@
 {% endblock %}
 {% block header %}
     {% include "_partials/new-header.html" with form=forms.basic %}
+
+    {% comment %}
+        {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
+            {% start_ab request 'new_nav2' %}
+            start homesite
+        {% else %}
+            {% if not request.GET.agent %}
+                {% if not request.COOKIES.refer_id and not request.session.refer_id %}
+                    {% start_ab request 'new_nav2' %}
+                    first load
+                {% else %}
+                    cookie not homesite
+                {% endif %}
+            {% else %}
+                agent in get
+            {% endif %}
+        {% endif %}
+    {% endcomment %}
 {% endblock %}
+
+
 {% block content %}
 </div>
 <div id="hero" class="plain">
@@ -66,6 +86,9 @@
 </div>
 <div class="container">
     <h2 class="title center">Protect what matters most.</h2>
+
+
+
     {% if local_video %}
         <div id="local-video" class="nine columns">
             {{ local_video.video_embed|safe }}
@@ -222,7 +245,8 @@
     {% endif %}
     {% if liveshere %}
     <div class="community-slide people">
-            <iframe width="115%" class="map-background" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q={{ city }}%2B{{ state_long }}&ie=UTF8&z=13&iwloc=near&scrollwheel=false&maptypecontrol=false&disabledefaultUI=true&iwloc=near&navigationcontrol=false&output=embed" style="position: absolute; top: -100px; height: 800px; width: 100%; z-index: -1; opacity: .3;"></iframe>
+            <img src="http://maps.googleapis.com/maps/api/staticmap?center={{ city }}+{{ state_long }}&zoom=12&scale=2&size=640x320&maptype=roadmap&sensor=false&format=jpg&visual_refresh=true" alt="Google Map of {{ city }}, {{ state }}" style=" width: 100%; height: auto; position: absolute; top: 0px; z-index: -1; opacity: .2;">
+
         <div class="container people-inner">
             <div class="headline-area">
                 <h4 class="center">Who lives here?</h4>
@@ -449,51 +473,6 @@
 {% endif %}
 {% addtoblock "js" %}
     <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
-    <script type="text/javascript">
-
-        var $menu = $(".dropdown-menu");
-
-        $menu.menuAim({
-            activate: activateSubmenu,
-            deactivate: deactivateSubmenu,
-        });
-
-        function activateSubmenu(row) {
-            var $row = $(row),
-                submenuId = $row.data("submenuId"),
-                $submenu = $("#" + submenuId),
-                height = 240,
-                width = $menu.outerWidth();
-            $submenu.css({
-                display: "block",
-                top: -1,
-                left: width - 3,  // main should overlay submenu
-                height: height - 4  // padding for main dropdown's arrow
-            });
-
-            $row.find("a").addClass("maintainHover");
-        }
-
-        function deactivateSubmenu(row) {
-            var $row = $(row),
-                submenuId = $row.data("submenuId"),
-                $submenu = $("#" + submenuId);
-
-            // Hide the submenu and remove the row's highlighted look
-            $submenu.css("display", "none");
-            $row.find("a").removeClass("maintainHover");
-        }
-
-        $(".dropdown-menu li").click(function(e) {
-            e.stopPropagation();
-        });
-        $(".dropdown-toggle").click(function(e) {
-            return false;
-        });
-
-
-    </script>
 
 <script type="text/javascript">
 
@@ -502,31 +481,7 @@
             $( "#mobile-menu-container" ).slideToggle( "slow", function() {
         });
     });
-        $('.lb-button').click(function(e) {
-            e.preventDefault();
-            var lblink = $(this).data('link');
-            $('.lightbox.'+lblink).fadeIn();
-            var player;
-            return false;
-        })
-        $('.lightbox-bg').click(function(e) {
-            e.preventDefault();
-            var iframe = $(this).parent('.lightbox').children('.lightcard').children('iframe').attr('src');
-            $('.video').attr('src',iframe);
-            $('.lightbox').fadeOut();
 
-            return false;
-
-        })
-        $('.closebox').click(function(e) {
-            e.preventDefault();
-            var iframe = $(this).parent('.lightcard').children('iframe').attr('src');
-            $('.video').attr('src',iframe);
-            $('.lightbox').fadeOut();
-
-            return false;
-
-        })
         var owl = $("#featured-badges");
         var outreach = $("#community-outreach-squares");
         var community = $("#community-section");

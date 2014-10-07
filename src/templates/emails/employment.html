@@ -1,0 +1,298 @@
+<html>
+<head>
+    <title></title>
+
+<style type="text/css">
+
+body {
+    padding: 0;
+    margin: 0 auto;
+    border: 0;
+    outline: 0;
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+    width: 800px;
+    color: #555;
+}
+h3 {
+    font-size: 20px;
+    color: #333;
+}
+h4{
+    margin: 7px 0px;
+    font-size: 18px;
+}
+img {
+    padding: 0; margin: 0; border: 0; outline: 0;
+}
+table {
+    margin: 0 auto; border: 0;  outline: 0;
+}
+br {
+   margin: 0;
+   line-height: 20px;
+   clear:both;
+}
+div {
+    margin: 15px 0;
+    display: block;
+    clear: both;
+    min-height: 23px;
+}
+div.item-ed {
+    background: #F3F3F3;
+    padding: 15px 20px;
+    height: 90px;
+}
+div.item-jobs {
+    background: #F3F3F3;
+    padding: 15px 20px;
+    height: 123px;
+}
+b {
+    display: block;
+    float: left;
+    padding: 3px 0;
+}
+span.result {
+    border: 1px solid #ccc;
+    padding: 3px;
+    margin: 0px 15px 5px 5px;
+    min-width: 20%;
+    display: block;
+    float: left;
+    height: 15px;
+}
+span.result-short {
+    border: 1px solid #ccc;
+    padding: 3px;
+    margin: 0px 15px 5px 5px;
+    min-width: 8%;
+    display: block;
+    float: left;
+    height: 15px;
+}
+span.result-long {
+    border: 1px solid #ccc;
+    padding: 3px;
+    margin: 0px 15px 5px 5px;
+    min-width: 30%;
+    display: block;
+    float: left;
+    height: 15px;
+}
+span.result-text-box {
+    border: 1px solid #ccc;
+    padding: 8px 0px 8px 8px;
+    margin: 3px -8px 3px 0px;
+    width: 97%;
+    display: block;
+    float: left;
+    min-height: 45px;
+}
+hr {
+    margin:30px 0px;
+    clear: both;
+    background: #D1D1D1;
+    border: none;
+    height: 1px;
+}
+</style>
+</head>
+<body>
+    <div width="800px" style="margin: 20px auto;">
+        <img src="http://www.protectamerica.com/django-media/email_images/email_222/online-app-logo.png">
+        <h3>Personal Information</h3>
+        <div>
+            <b>First Name:</b><span class="result">{{ personal_information.first_name }}</span>
+            <b>Middle Name:</b><span class="result-short">{{ personal_information.middle_name }}</span>
+            <b>Last Name:</b><span class="result-long">{{ personal_information.last_name }}</span>
+        </div>
+        <div>
+            <b>Street Address:</b><span class="result-long">{{ personal_information.address }}</span>
+            <b>Apt #:</b><span class="result-short">{{ personal_information.apt_number }}</span>
+        </div>
+        <div>
+            <b>City:</b><span class="result-long">{{ personal_information.city }}</span>
+            <b>State:</b><span class="result-short">{{ personal_information.state }}</span>
+            <b>Zip:</b><span class="result">{{ personal_information.zip }}</span>
+        </div>
+        <div>
+            <b>Home Phone:</b><span class="result">{{ personal_information.home_phone }}</span>
+            <b>Cell Phone:</b><span class="result">{{ personal_information.cell_phone }}</span>
+            <b>Email:</b><span class="result">{{ personal_information.email }}</span>
+        </div>
+        <div>
+            <b>Social Security #:</b><span class="result-long">{{ personal_information.ssn }}</span>
+            <b>Under 18?:</b><span class="result-short">{{ personal_information.under_18 }}</span>
+        </div>
+        <div>
+            <b>How did you hear about us?:</b><span class="result">{{ personal_information.hear_about }}</span>
+            <b>Convicted of any felonies (last 7 years)?:</b><span class="result-short">{{ personal_information.first_name }}</span>
+            {% if personal_information.convicted_explain %}
+            <b>If yes, please explain:</b><span class="result-text-box">{{ personal_information.convicted_explain }}</span>
+            {% endif %}
+
+        </div>
+        <br>
+        <hr>
+        <h3>Employment Desired</h3>
+        <div>
+            <b>Date Available to Start:</b> <span class="result-short">{{ employment_desired.start_date }}</span>
+            <b>Position Applied For:</b> <span class="result">{{ employment_desired.position }}</span>
+            <b>Rate of Pay:</b><span class="result-short">{{ employment_desired.pay_rate }}</span>
+        </div>
+        <hr>
+
+        <h3>Availability (start time/end time)</h3>
+        <table width="100%">
+            <tr>
+                <td width="5%"><b>Monday:</b></td>
+                <td><span class="result">{{ availability.mon_start }}/{{ availability.mon_end }}</span></td>
+            </tr>
+            <tr>
+                <td><b>Tuesday:</b></td>
+                <td><span class="result">{{ availability.tue_start }}/{{ availability.tue_end }}</span></td>
+            </tr>
+            <tr>
+                <td><b>Wednesday:</b></td>
+                <td><span class="result">{{ availability.wed_start }}/{{ availability.wed_end }}</span></td>
+            </tr>
+            <tr>
+                <td><b>Thursday:</b></td>
+                <td><span class="result">{{ availability.thur_start }}/{{ availability.thur_end }}</span></td>
+            </tr>
+            <tr>
+                <td><b>Friday:</b></td>
+                <td><span class="result">{{ availability.fri_start }}/{{ availability.fri_end }}</span></td>
+            </tr>
+            <tr>
+                <td><b>Saturday:</b></td>
+                <td><span class="result">{{ availability.sat_start }}/{{ availability.sat_end }}</span></td>
+            </tr>
+            <tr>
+                <td><b>Sunday:</b></td>
+                <td><span class="result">{{ availability.sun_start }}/{{ availability.sun_end }}</span></td>
+            </tr>
+        </table>
+        <hr>
+
+        <h3>Education History</h3>
+            <div class="item-ed">
+                <h4>High School Information:</h4>
+                <b>High School Name:</b><span class="result-long">{{ education_history.hs_name }}</span>
+                <b>Graduatation Date:</b> <span class="result-short">{{ education_history.hs_graduate }}</span>
+            </div>
+            <div class="item-ed">
+                <h4>College Information:</h4>
+                <b>College Name:</b><span class="result-long">{{ education_history.co_name }}</span>
+                <b>Major:</b><span class="result">{{ education_history.co_major }}</span>
+                <b>Degree:</b><span class="result-short">{{ education_history.co_degree }}</span>
+                <b>Graduatation Date:</b><span class="result-short">{{ education_history.co_graduate }}</span>
+            </div>
+            {% if education_history.co2_name %}
+            <div class="item-ed">
+                <h4>Graduate School Information:</h4>
+                <b>College Name:</b><span class="result-long"><{{ education_history.co2_name }}/span>
+                <b>Major:</b><span class="result">{{ education_history.co2_major }}</span>
+                <b>Degree:</b><span class="result-short">{{ education_history.co2_degree }}</span>
+                <b>Graduatation Date:</b><span class="result-short">{{ education_history.co2_graduate }}</span>
+            </div>
+            {% endif %}
+            <hr>
+
+        <h3>Professional History</h3>
+            <div>
+                <b>Have you applied to PA before?:</b><span class="result-short"> {{ professional_history.applied_b4 }}</span>
+                <b>Are you currently employed?:</b><span class="result-short"> {{ professional_history.employed }}</span>
+                <b style="width: 620px;">Do you feel that you are capable of performing the essential functions of the job/position for which you are applying for, with or without reasonable accommodation?:</b><span class="result-short">{{ professional_history.can_perform }}</span>
+            </div>
+            <br>
+            <hr>
+
+        <h3>Recent Employment</h3>
+            <h4 style="margin-bottom:15px;">List the 3 most recent places of employment beginning with your most recent employer:</h4>
+            {% if recent_employment.date_start1 %}
+            <div class="item-jobs">
+                <b>Date Begin:</b></b><span class="result-short">{{ recent_employment.date_start1 }}</span>
+                <b>Date Ended:</b></b><span class="result-short">{{ recent_employment.date_end1 }}</span>
+                <b>Name of Business:</b></b><span class="result-long">{{ recent_employment.company1 }}</span>
+                <b>Was the termination voluntary?:</b><span class="result-short">{{ recent_employment.termination1 }}</span>
+                <b>If yes, explain:</b><span class="result-text-box">{{ recent_employment.explain1 }}</span>
+            </div>
+            {% endif %}
+            {% if recent_employment.date_start2 %}
+            <div class="item-jobs">
+                <b>Date Begin:</b></b><span class="result-short">{{ recent_employment.date_start2 }}</span>
+                <b>Date Ended:</b></b><span class="result-short">{{ recent_employment.date_end2 }}</span>
+                <b>Name of Business:</b></b><span class="result-long">{{ recent_employment.company2 }}</span>
+                <b>Was the termination voluntary?:</b><span class="result-short">{{ recent_employment.termination2 }}</span>
+                <b>If yes, explain:</b><span class="result-text-box">{{ recent_employment.explain2 }}</span>
+            </div>
+            {% endif %}
+            {% if recent_employment.date_start3 %}
+            <div class="item-jobs">
+                <b>Date Begin:</b></b><span class="result-short">{{ recent_employment.date_start3 }}</span>
+                <b>Date Ended:</b></b><span class="result-short">{{ recent_employment.date_end2 }}</span>
+                <b>Name of Business:</b></b><span class="result-long">{{ recent_employment.company3 }}</span>
+                <b>Was the termination voluntary?:</b><span class="result-short">{{ recent_employment.termination2 }}</span>
+                <b>If yes, explain:</b><span class="result-text-box">{{ recent_employment.explain3 }}</span>
+            </div>
+            {% endif %}
+            <hr>
+
+            <h3>Recent Unemployment</h3>
+            <h4 style="margin-bottom:15px;">List all periods of unemployment:</h4>
+
+            {% if recent_unemployment.date_start1 %}
+            <div class="item-jobs">
+                <b>Date Begin:</b></b><span class="result-short">{{ recent_unemployment.date_start1 }}</span>
+                <b>Date Ended:</b></b><span class="result-short">{{ recent_unemployment.date_end1 }}</span><br>
+                <b>How was this time spent?</b><span class="result-text-box">{{ recent_unemployment.spent1 }}</span>
+            </div>
+            {% endif %}
+            {% if recent_unemployment.date_start2 %}
+            <div class="item-jobs">
+                <b>Date Begin:</b></b><span class="result-short">{{ recent_unemployment.date_start2 }}</span>
+                <b>Date Ended:</b></b><span class="result-short">{{ recent_unemployment.date_end2 }}</span><br>
+                <b>How was this time spent?</b><span class="result-text-box">{{ recent_unemployment.spent2 }}</span>
+            </div>
+            {% endif %}
+            {% if recent_unemployment.date_start3 %}
+            <div class="item-jobs">
+                <b>Date Begin:</b></b><span class="result-short">{{ recent_unemployment.date_start3 }}</span>
+                <b>Date Ended:</b></b><span class="result-short">{{ recent_unemployment.date_end2 }}</span><br>
+                <b>How was this time spent?</b><span class="result-text-box">{{ recent_unemployment.spent3 }}</span>
+            </div>
+            {% endif %}
+            <hr>
+
+            <h3>Professional References</h3>
+            <div class="item-ed">
+                <h4>Reference One:</h4>
+                <b>Reference Name:</b></b><span class="result-long">{{ professional_references.reference_name }}</span>
+                <b>Home Phone:</b></b><span class="result">{{ professional_references.reference_phone }}</span><br>
+                <b>Relation or Company:</b><span class="result-long">{{ professional_references.reference_relation }}</span>
+            </div>
+            <div class="item-ed">
+                <h4>Reference Two:</h4>
+                <b>Reference Name:</b></b><span class="result-long">{{ professional_references.reference_name2 }}</span>
+                <b>Home Phone:</b></b><span class="result">{{ professional_references.reference_phone2 }}</span><br>
+                <b>Relation or Company:</b><span class="result-long">{{ professional_references.reference_relation2 }}</span>
+            </div>
+            <hr>
+            <h3>Signature</h3>
+            <p style="margin-bottom:15px;">By signing below, I acknowledge that I have read all of the above statements, and that I understand them.</p>
+            <div>
+                <b>First and Last Name:</b></b><span class="result-long">{{ end.signed_name }}</span>
+                <b>Date:</b></b><span class="result-short">{{ end.signed_date }}</span><br>
+            </div>
+            <br>
+
+
+    </div>
+
+
+
+</body>
+</html>
