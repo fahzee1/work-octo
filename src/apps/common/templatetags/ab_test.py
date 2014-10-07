@@ -1,3 +1,4 @@
+import pdb
 from django import template
 from django.utils.safestring import SafeString
 from apps.common.models import AbTest, AbTestCode
@@ -40,8 +41,8 @@ def start_ab(request,test=None):
 
                         # if agent_id isnt HOMESITE, set it to aff_id value
                         if aff_id != agent_id:
-                            request.session['refer_id'] = agent_id
-                            request.session['ab_refer_id'] = agent_id
+                            request.session['refer_id'] = aff_id
+                            request.session['ab_refer_id'] = aff_id
 
                 else:
                     code = '<b>A/B test error. Test name %s doesnt have code choices set, go create AbTestCode in the admin' % test
@@ -50,7 +51,13 @@ def start_ab(request,test=None):
                 if test_obj.code_choices:
                     try:
                         code = test_obj.code_choices.get(name=abtest)
+                        aff_id = code.aff_id
                         code = code.code
+                        # if agent_id isnt HOMESITE, set it to aff_id value
+                        if aff_id != agent_id:
+                            request.session['refer_id'] = aff_id
+                            request.session['ab_refer_id'] = aff_id
+
 
                     except AbTestCode.DoesNotExist:
                         code = '<b>A/B test error. Test name %s doesnt have code choices with agent_id %s' % (test,agent_id)
