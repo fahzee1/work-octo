@@ -20,7 +20,7 @@
             {{ form.phone }}
         {% endblock %}
 	
-	<button type="button" class="yellow" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);" style="position: relative;">{% block quote-button %}Get Quote{% endblock %}<img id='form-loading' {% if page_name = "index" %}style="position:absolute;top:50%;right:24px;margin-top:-10px;right:0px;display:none;width:20px;height:20px;"{% else %}style="position:absolute;top:50%;right:24px;margin-top:-10px;display:none;width:20px;height:20px;" {% endif %}height='20px' width='20px' src="{{ STATIC_URL }}img/loading2.gif"></button>
+	<button type="button" class="yellow" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);" style="position: relative;">{% block quote-button %}Get Quote{% endblock %}<i id='form-loading' class='fa fa-spinner fa-spin' style="color: rgba(155,155,155) !important; color: rgba(0,0,0,.5) !important; !important; font-size: 56px; position: absolute; left: 50%; top: 0%; border: none; margin-left: -34px; display:none;" height='20px' width='20px'></i></button>
     </div>
         {% block consent %}
              <div class="consent-box">
