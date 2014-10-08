@@ -215,7 +215,7 @@ def payitforward(request):
 
 @cache_page(60 * 60 * 4)
 def index(request):
-    return index_render(request, 'index-night.html', {})
+    return index_render(request, 'index.html', {})
 
 
 @cache_page(60 * 60 * 4)

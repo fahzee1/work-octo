@@ -1,4 +1,4 @@
-{% load sekizai_tags content_tags content_filters %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% if phone_number %}
 <div class="clear"></div>
 <div id="call-box">
@@ -73,7 +73,14 @@
             </div>
         {% endif %}
     {% endif %}
-    {% block call-box-text %}<p><a href="tel:{{ phone_number|format_number }}">Secure your Home Today, Call Now: {% endblock %}<span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+    {% block call-box-text %}
+        {% if business_time %}
+            <p><a href="tel:{{ phone_number|format_number }}">Speak with a security expert today! Call Now: <span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a></p>
+        {% else %}
+            <p><a href="#" class="lb-button night-button" data-link="request-quote">Click here <span>to request a quote</span></a></p>
+        {% endif %}
+    {% endblock %}
+        </div>
 </div>
 <div class="clear"></div>
 
