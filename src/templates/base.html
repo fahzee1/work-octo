@@ -194,7 +194,7 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
             <a href="{% url 'home' %}">
                 <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="company-logo">
             </a>
-            <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button">Request Quote</a>
+            <a href="{% url 'order-package' %}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button-link request-quote-button">Request Quote</a>
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today and Save!
@@ -381,7 +381,7 @@ window.lpTag=window.lpTag||{};if(typeof window.lpTag._tagCount==='undefined'){wi
             }
             return false;
         });
-        $(".request-quote-button").click(function(){
+        $(".request-quote-button-link").click(function(){
             if ($(this).hasClass('active')) {
                 $('#quote-form').hide();
                 $(this).removeClass('active');
