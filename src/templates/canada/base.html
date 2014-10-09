@@ -54,14 +54,17 @@
         </div>
     </div>
     <div id="header-wrapper">
-        <div id="header">
+        <div id="header" class="container">
             <a href="">
                 <img src="{{ STATIC_URL }}img/canada/logo-canada.png" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="canada-logo">
             </a>
             <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button lb-button" data-link="request-quote">Request Quote</a>
             {% if phone_number %}
                 <div class="stuck-phone">
-                    Call Today and Save!
+                    Call Today &amp; Save!
+                    <a href="tel:1-877-459-7521" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+                <div class="stuck-phone-number">
                     <a href="tel:1-877-459-7521" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
                 </div>
             {% endif %}
