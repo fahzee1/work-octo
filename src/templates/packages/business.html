@@ -65,11 +65,10 @@
 <div class="clear"></div>
     <div id="lifestyle-shot" class="{% block lifestyle-class %}business{% endblock %}">
         <div class="container">
-            <div id="home-content" class="alt">
+            <div id="home-content" style="z-index: 999; position: relative;" class="alt">
                 {% block lifestyle-headline %}<h2>Explore Inside The Business</h2>{% endblock %}
                 <span>Press the "+" Buttons to Learn More about how security works in your home</span>
                 {% block lifestyle-subhead %}<p>Connecting into your current high speed internet connection, your alarm system uses Broadband monitoring for lightning quick alarms signals. Also with the Interactive Broadband, you have free access to our interactive services meaning you can watch your business from anywhere with your smartphone or personal computer.</p>{% endblock %}
-                <a href="" class="button  yellow order-button hide-mobile no-desktop">Order Now</a>
                 <a href="tel:{{ phone_number|format_number }}" class="button yellow hide-desktop no-mobile">Order Now</a>
 
             </div>
@@ -106,70 +105,5 @@
     </div>
 
 <div class="clear"></div>
-{% addtoblock "js" %}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(".home-icon").click(function() {
-                if ($(this).data("info")) {
-                    var info = $(this).data("info");
-                    $('.home-img > .home-icon-base').fadeOut();
-                    $('.home-img > .home-icon').fadeOut();
-                    $('.home-img > .learn-more').fadeOut();
-                    $('.home-img > .main').fadeOut(300, function () {
-                        $('.home-img > .alt-img.' + info).fadeIn();
-                        $('.home-img > .back').fadeIn();
 
-                    });
-                    $('.home-content > .main').fadeOut(300, function () {
-                        $('.home-content > .alt-content.' + info).fadeIn();
-                    });
-                }
-            });
-            $(".home-icon-base").click(function() {
-                if ($(this).data("info")) {
-                    var info = $(this).data("info");
-                    $('.home-img > .home-icon-base').fadeOut();
-                    $('.home-img > .home-icon').fadeOut();
-                    $('.home-img > .learn-more').fadeOut();
-                    $('.home-img > .main').fadeOut(300, function () {
-                        $('.home-img > .alt-img.' + info).fadeIn();
-                        $('.home-img > .back').fadeIn();
-
-                    });
-                    $('.home-content > .main').fadeOut(300, function () {
-                        $('.home-content > .alt-content.' + info).fadeIn();
-
-                    });
-                }
-            });
-            $(".home-img > .alt-img").click(function() {
-                $('.home-img > .back').fadeOut();
-                $('.home-img > .alt-img').fadeOut(300, function () {
-                    $('.home-img > .main').fadeIn();
-                    $('.home-img > .home-icon-base').fadeIn();
-                    $('.home-img > .home-icon').fadeIn();
-                    $('.home-img > .learn-more').fadeIn();
-
-                });
-                $('.home-content > .alt-content').fadeOut(300, function () {
-                    $('.home-content > .main').fadeIn();
-                });
-            });
-            $(".home-img > .back").click(function() {
-                $('.home-img > .back').fadeOut();
-                $('.home-img > .alt-img').fadeOut(300, function () {
-                    $('.home-img > .main').fadeIn();
-                    $('.home-img > .home-icon-base').fadeIn();
-                    $('.home-img > .home-icon').fadeIn();
-                    $('.home-img > .learn-more').fadeIn();
-
-                });
-                $('.home-content > .alt-content').fadeOut(300, function () {
-                    $('.home-content > .main').fadeIn();
-                });
-            });
-
-        });
-    </script>
-{% endaddtoblock "js" %}
 {% endblock %}
