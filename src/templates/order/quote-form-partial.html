@@ -1,6 +1,6 @@
 
 {% load content_tags content_filters sekizai_tags %}
-<form class="quote-form-white"  method="post" action="">
+<form class="quote-form-white sleepy-night"  method="post" action="">
     {% block form-extra %}{% endblock %}
     {% csrf_token %}
 	    {% block form-title %}
@@ -28,7 +28,7 @@
             <label>{% block phone-num %}Phone Number{% endblock %}</label>
             {{ form.phone }}
         {% endblock %}
-	
+
 	<button type="button" class="yellow" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Request Quote Submit', '{{ page_name }}']);" style="position: relative;">{% block quote-button %}Get Quote{% endblock %}<i id='form-loading' class='fa fa-spinner fa-spin' style="color: rgba(155,155,155) !important; color: rgba(0,0,0,.5) !important; !important; font-size: 56px; position: absolute; left: 50%; top: 0%; border: none; margin-left: -34px; display:none;" height='20px' width='20px'></i></button>
     </div>
         {% block consent %}
@@ -59,6 +59,23 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     function getParameterByName( name ){
   name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
   var regexS = "[\\?&]"+name+"=([^&#]*)";
@@ -87,7 +104,7 @@ $(document).ready(function() {
 }
 
 
-$('.sleepy input, .droopy input').keypress(function(e){
+$('.sleepy-night input, .droopy input').keypress(function(e){
         if(e.which == 13){
             var $form = $(this).closest('#quote-form');
             $form.find('button').click();
@@ -95,13 +112,13 @@ $('.sleepy input, .droopy input').keypress(function(e){
     });
     var submitting = false;
 
-    $('.sleepy, .droopy').on('click','button',function() {
-        $('#quote-form button').attr('disabled',true);
-        var $form = $(this).closest('#quote-form');
+    $('.sleepy-night, .droopy').on('click','button',function() {
+        $('.quote-form-white button').attr('disabled',true);
+        var $form = $(this).closest('.quote-form-white');
         var trusted = $form.find("[name ='xxTrustedFormToken']").val() || $form.find("[name ='CertUrl']").val();
         var device = getParameterByName('device');
         if (!trusted){
-            $('#quote-form button').attr('disabled',false);
+            $('.quote-form-white button').attr('disabled',false);
             var phone_number = $(".dynamic-phone-number").first().text();
             if (phone_number){
                 alert("Sorry your form can't be submitted at this time. Please call us at" +" " + phone_number + " " +".");
@@ -116,6 +133,9 @@ $('.sleepy input, .droopy input').keypress(function(e){
         var email = $form.find("#id_email").val();
         var phone = $form.find("#id_phone").val();
         var business_name = $form.find("#id_business_name").val();
+        var callme = $("#callme").val();
+        var csrf = getCookie('csrftoken');
+
         /*
         if (name == ''){
             alert('Please include your name before proceeding.');
@@ -138,7 +158,9 @@ $('.sleepy input, .droopy input').keypress(function(e){
                     'operating_system':(window.OSName + "_PA"),
                     'device':device,
                     'gclid':$("[name='gclid']").val(),
-                    'form_js': 't/o/q-f.h'
+                    'form_js': 't/o/q-f.h',
+                    'callme':callme,
+                    'csrfmiddlewaretoken':csrf
                     }
 
 
@@ -169,7 +191,7 @@ $('.sleepy input, .droopy input').keypress(function(e){
          function newFormError(){
             $(".sleepy #form-loading, .droopy #form-loading").hide();
             $(".sleepy .icon-chevron-right, .droopy .icon-chevron-right").show();
-            $('#quote-form button').attr('disabled',false);
+            $('.quote-form-white button').attr('disabled',false);
             if (!name && !phone){
                 $('#id_name').css('border-color','red').attr('placeholder','Please Enter Name');
                 $('#id_phone').css('border-color','red').attr('placeholder','Please Enter Phone Number');
