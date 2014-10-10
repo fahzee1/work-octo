@@ -4,12 +4,31 @@
 {% endblock %}
 {% block formfields %}
 	<div class="form-fields" data-acn="true" data-thank-you="http://acnsecuritysystems.com/thank-you/">
-       <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name">
-       <input id="id_business_name" type="text" maxlength="128" name="business_name" placeholder="Business Name">
-       <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email">
-       <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone">
-       <input id="id_business" type="text" maxlength="20" name="business_id" value="{% if request.GET.affkey %}{{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}{{ request.COOKIES.affkey }}{% else %}{% if affkey %}{{ affkey }}{% endif %}{% endif %}{% endif %}" placeholder="Business ID">       
+      <input id="id_name" type="text" maxlength="128" name="name" placeholder="Name">
+      <input id="id_email" type="text" maxlength="128" name="email" placeholder="Email">
+      <input id="id_phone" type="text" maxlength="20" name="phone" placeholder="Phone">
+      <label for="home" id="radio-btn">
+        <input type="radio" name="radios" id="regularRadio" checked="checked" value="noBusiness" />
+        <span>Home</span>
+      </label>
+      <label for="business" id="radio-btn">
+        <input type="radio" name="radios" id="regularRadio" value="yesBusiness" />
+        <span>Business</span>
+      </label>
+      <div id="yesBusiness" class="business_show" style="display: none;">
+        <input id="id_business_name" type="text" maxlength="128" name="business_name" placeholder="Business Name">
+        <input id="id_business" type="text" maxlength="20" name="business_id" value="{% if request.GET.affkey %}{{ request.GET.affkey }}{% else %}{% if request.COOKIES.affkey %}{{ request.COOKIES.affkey }}{% else %}{% if affkey %}{{ affkey }}{% endif %}{% endif %}{% endif %}" placeholder="Business ID">
+      </div>
    </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("input[name$='radios']").click(function() {
+          var test = $(this).val();
+          $("div.business_show").hide();
+          $("#" + test).show();
+      });
+  });
+</script>
 {% endblock %}
 {% block quote-button %}Contact Me <i class="icon-chevron-right"></i>{% endblock %}
 {% block privacy-policy %}

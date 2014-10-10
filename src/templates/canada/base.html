@@ -3,7 +3,9 @@
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/canada.css">
 {% endblock %}
-
+{% block viewport %}
+<meta name = "viewport" content ="initial-scale=1, user-scalable=no">
+{% endblock %}
 {% block google_experiment %}
 
     {% endblock %}
@@ -58,8 +60,8 @@
             <a href="">
                 <img src="{{ STATIC_URL }}img/canada/logo-canada.png" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="canada-logo">
             </a>
-            <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button lb-button not-desktop" data-link="request-quote">Request Quote</a>
             <a href="" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button lb-button not-mobile" data-link="request-quote">Request Quote</a>
+            <a href="tel:{{ phone_number|format_number }}" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button not-desktop" data-link="request-quote"><i class="fa fa-phone"></i></a>
             {% if phone_number %}
                 <div class="stuck-phone">
                     Call Today &amp; Save!
