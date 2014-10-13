@@ -119,11 +119,12 @@ def send_conduit_error(data,title='LeadConduit Error',message=None,test=False,no
 
 
 
-def post_to_leadconduit(data,test=False,retry=False):
+def post_to_leadconduit(data,test=False,retry=False,timeofday=True):
     try:
         lead = Lead.objects.get(id=data['lead_id'])
     except Lead.DoesNotExist:
         lead = None
+
 
     # items lead conduit needs
     params = {'xxAccountId':settings.LEAD_ACCOUNT_ID,
@@ -454,6 +455,7 @@ def basic_post_login(request):
     device_name = device_type(request,device_letter)
     lead_data = {'trusted_url': trusted_url}
     acn_business_name = request.POST.get('business_name')
+    callme = request.POST.get('callme',None)
 
 
     # for new search_engine param
@@ -500,6 +502,10 @@ def basic_post_login(request):
         if searchkeywords is None and cikw is not None:
             searchkeywords = cikw
 
+
+        if callme:
+            formset.call_me = callme
+
         formset.search_engine = new_se
         formset.search_keywords = searchkeywords
         formset.form_values = f_values
@@ -539,6 +545,10 @@ def basic_post_login(request):
         visited_pages = request.session.get('vpages', None)
         if visited_pages is not None:
             notes_list.append('Pages Visited: %s' % visited_pages)
+
+        if not formset.call_now():
+            notes_list.append('***AFTER HOURS LEAD***')
+
         notes = '\n'.join(notes_list)
         notes = notes.replace('\'', '')
         emaildata = {

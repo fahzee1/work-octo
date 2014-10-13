@@ -1,0 +1,24 @@
+{% load content_filters content_tags sekizai_tags testimonial_tags ab_test %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/night.css">
+
+<div id="hero-wrapper" class="night">
+    <div id="hero-image" class="cmonday">
+        {% include "order/quote-form-night.html" with form=forms.basic %}
+        <div id="sept-deals">
+            <h1>Home security systems</h1>
+            <h2>Something keeping you up?</h2>
+            <h3>Worry-free home security starting <br>at less than a dollar a day.</h3>
+            <ul>
+                <li><i class="fa fa-check"></i>24/7 security monitoring</i></li>
+                <li><i class="fa fa-check"></i>Easy to setup - no tools required</li>
+                <li><i class="fa fa-check"></i>Free equipment and no installation fees</li>
+            </ul>
+            <a href="{% url shop %}" class="lb-button" data-link="request-quote">Set your security wake-up call</a>
+            <div class="deal-box">
+                    <img src="{{ STATIC_URL }}img/banners/hero-banners/sept-deals/night-owl-deal.png" />
+            </div>
+        </div>
+    </div>
+</div>
+{% include "order/call-box-night.html" %}
+

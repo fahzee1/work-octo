@@ -1,0 +1,24 @@
+{% extends "order/quote-form-white-refresh.html" %}
+{% block form-title %}
+        <p class="form-title">Free security quote</p>
+        <div class="quote-content" style="padding-bottom: 16px;"><p>Choose the best time for a security specialist to get in touch with you.</p></div>
+{% endblock %}
+{% block formfields %}
+    <select class="callme" id="callme">
+      <option value="morning">Call me in the morning</option>
+      <option value="afternoon">Call me in the afternoon</option>
+      <option value="evening">Call me in the evening</option>
+    </select>
+    <label>Name</label>
+        {{ form.name }}
+
+    {% if request.session.is_bing or request.COOKIES.is_bing %}
+        <label>Email</label>
+        {{ form.email }}
+    {% endif %}
+    <label>{% block phone-num %}Phone Number{% endblock %}</label>
+    {{ form.phone }}
+
+
+{% endblock %}
+{% block quote-button %}Call me later{% endblock %}

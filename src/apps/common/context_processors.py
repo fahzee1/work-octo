@@ -34,6 +34,7 @@ def business_time(request):
     except:
         return ctx
 
+
 def last_day_of_month(request):
     #get final date of each month
     _now=str(datetime.now())

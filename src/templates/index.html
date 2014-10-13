@@ -11,7 +11,7 @@
 
         <!-- Google Analytics Content Experiment code -->
         <!-- Google Analytics Content Experiment code -->
-        <script> 
+        <script>
         _udn = "protectamerica.com";
         </script>
         <!-- Google Analytics Content Experiment code -->
@@ -49,10 +49,12 @@
 
 {% block content %}
 {% block hero_banner_area %}
-    {% comment %}{% include "banners/spring-savings.html" %}{% endcomment %}
+    {% if business_time %}
     {% include "banners/sept-deals.html" %}
+    {% else %}
+    {% include "banners/nighttime.html" %}
+    {% endif %}
 {% endblock %}
-{% include "order/call-box-b.html" %}
 
 <div id="featured-on">
     <small>Proudly Featured on:</small>
@@ -221,9 +223,9 @@
 			$( "#mobile-menu-container" ).slideToggle( "slow", function() {
 			});
 		});
-    	
+
         var owl = $("#featured-badges");
-        
+
         owl.owlCarousel({
           autoPlay: 7000,
           items : 12,

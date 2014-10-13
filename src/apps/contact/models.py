@@ -25,6 +25,8 @@ FEEDBACK_CHOICES = (
     ('other', 'Other'),
 )
 
+
+
 class Submission(models.Model):
 
     HOMEOWNER_CHOICES = (
@@ -117,6 +119,8 @@ class Lead(models.Model):
     ip_address = models.CharField(max_length=256, blank=True, null=True)
     retry = models.BooleanField(default=False,blank=True,help_text="Lead needs to be resent to Lead Conduit")
     number_of_retries = models.IntegerField(default=0,blank=True)
+    call_me = models.CharField(max_length=200, blank=True, null=True)
+    retry_call_me = models.BooleanField(default=False,blank=True,help_text="Retry based on call_me")
 
     class Meta:
         ordering = ['-date_created']
@@ -125,6 +129,75 @@ class Lead(models.Model):
     def __unicode__(self):
         return '%s | %s - %s : %s %s' % (self.id,
             self.agent_id, self.source, self.name, self.phone)
+
+
+    def call_now(self):
+        """
+        Check if its a good time to add to lead tracking based
+        on call_me on lead model. (morning, afternoon, evening)
+        """
+
+        evening = [19] #7pm
+        morning = [9,10,11,12] #9am,10am,11am,12pm
+
+        weekday = [1,2,3,4,5]
+        saturday = [6]
+        sunday = [7]
+
+        day = datetime.now().isoweekday()
+        if day in weekday:
+            evening.extend((20,21,22,23)) #add 8pm,9pm,10pm,11pm
+
+        elif day in saturday:
+            evening.append(20) #add 8pm
+
+
+        elif day in sunday:
+            morning = [11] #open at 11am
+
+
+
+        time_chart = {
+                    'morning':morning,
+                    'afternoon':[13,14,15,16,17,18], #1pm,3pm,4pm,5pm,6pm
+                    'evening':evening
+        }
+
+        if not self.call_me:
+            return True
+
+        pa_open = None
+        timeofday = None
+        hour = datetime.now().time().hour
+
+        for time in time_chart:
+            if hour in time_chart[time]:
+                pa_open = True
+                timeofday = time
+                break
+
+        if pa_open:
+            if self.call_me == timeofday:
+                if self.retry_call_me:
+                    self.retry_call_me = False
+                    self.save()
+                return True
+
+            else:
+                if not self.retry_call_me:
+                    self.retry_call_me = True
+                    self.save()
+                return False
+
+        else:
+            if not self.retry_call_me:
+                self.retry_call_me = True
+                self.save()
+            return False
+
+
+
+
 
 
 class EcomLead(Lead):
