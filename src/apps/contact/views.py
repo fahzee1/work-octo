@@ -545,6 +545,10 @@ def basic_post_login(request):
         visited_pages = request.session.get('vpages', None)
         if visited_pages is not None:
             notes_list.append('Pages Visited: %s' % visited_pages)
+
+        if not formset.call_now():
+            notes_list.append('***AFTER HOURS LEAD***')
+
         notes = '\n'.join(notes_list)
         notes = notes.replace('\'', '')
         emaildata = {

@@ -137,8 +137,8 @@ class Lead(models.Model):
         on call_me on lead model. (morning, afternoon, evening)
         """
 
-        evening = [17,18,19] #5pm,6pm,7pm
-        morning = [7,8,9,10,11] #7am,8am,9am,10am,11am
+        evening = [19] #7pm
+        morning = [9,10,11] #9am,10am,11am
 
         weekday = [1,2,3,4,5]
         saturday = [6]
@@ -150,7 +150,7 @@ class Lead(models.Model):
 
         elif day in saturday:
             evening.append(20) #add 8pm
-            morning.pop(0) #remove 7am
+
 
         elif day in sunday:
             morning = [11] #open at 11am
@@ -159,7 +159,7 @@ class Lead(models.Model):
 
         time_chart = {
                     'morning':morning,
-                    'afternoon':[12,13,14,15,16], #12pm,1pm,3pm,4pm
+                    'afternoon':[13,14,15,16], #1pm,3pm,4pm
                     'evening':evening
         }
 
