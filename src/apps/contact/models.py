@@ -138,7 +138,7 @@ class Lead(models.Model):
         """
 
         evening = [19] #7pm
-        morning = [9,10,11] #9am,10am,11am
+        morning = [9,10,11,12] #9am,10am,11am,12pm
 
         weekday = [1,2,3,4,5]
         saturday = [6]
@@ -159,7 +159,7 @@ class Lead(models.Model):
 
         time_chart = {
                     'morning':morning,
-                    'afternoon':[13,14,15,16], #1pm,3pm,4pm
+                    'afternoon':[13,14,15,16,17,18], #1pm,3pm,4pm,5pm,6pm
                     'evening':evening
         }
 
