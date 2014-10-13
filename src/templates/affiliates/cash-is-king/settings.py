@@ -3,7 +3,9 @@
 # All templates require a index template.
 TEMPLATE_PAGES = (
     ('index', 'index.html'),
-    ('index2', 'index2.html'),
+    ('lp1', 'index2.html'),
+    ('lp2', 'index3.html'),
+    ('lp3', 'index4.html'),
 
 
 )
