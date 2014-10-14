@@ -150,6 +150,7 @@ class Lead(models.Model):
 
         elif day in saturday:
             #evening.append(20) #add 8pm
+            pass
 
         elif day in sunday:
             morning = [11] #open at 11am
