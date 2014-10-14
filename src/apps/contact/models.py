@@ -146,14 +146,14 @@ class Lead(models.Model):
 
         day = datetime.now().isoweekday()
         if day in weekday:
-            evening.extend((20,21,22,23)) #add 8pm,9pm,10pm,11pm
+            evening.extend((20,21,22)) #add 8pm,9pm,10pm,10:59pm
 
         elif day in saturday:
-            evening.append(20) #add 8pm
-
+            #evening.append(20) #add 8pm
 
         elif day in sunday:
             morning = [11] #open at 11am
+            evening.append(20) #add 8pm-8:59pm
 
 
 
