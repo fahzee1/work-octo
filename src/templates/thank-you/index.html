@@ -2,66 +2,90 @@
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
 {% block content %}
-
-<div id="hero-wrapper" class="blue">
-    <div id="hero-image">
-        <div id="hero-content">
-            <i class="icon-home-security"></i>
-            <h2>Go Ahead, Get Excited</h2>
-            <h1>You are one step closer to <br/> securing your home!</h1>
-            <p>Thanks for choosing Protect America for your family's security. We've received your request for a free security quote and one of our security professionals will be contacting you within 24 hours. In the meantime, you can always call us directly at <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong>. When you do, be sure to ask about our "Lowest Price Guarantee" that ensures your family is well-protected at an affordable price.</p>
+    <div id="hero" class="thank-you">
+        <div class="container">
+            {% block hero-heading %}
+            <div class="ten columns offset-by-six margin-vertical thanks-content">
+                <h1>Congratulations!</h1>
+                <h3>You are one step closer to securing your home.</h3>
+                <p>Thanks for choosing Protect America for your family's security. We will be contacting you within 24 hours. If you need to reach us immediately, call us directly at <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong>. We appreciate your business and look forward to protecting your home.</p>
+    
+            </div>
+    
+            {% endblock %}
         </div>
-        <img src="{{ STATIC_URL }}img/base/thank-you-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
-
     </div>
-</div>
-{% include "order/call-box.html" %}
-<div class="wrapper">
-    <div id="recommend-us">
-        <h2>Recommend Us</h2>
-        <div id="facebook">
-            <div id="social-button">
-                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fprotectamerica&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:90px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Recommend Us', 'Thank You Page']);"></iframe>
-            </div>
-            <div class="social-text">
-                <h3>Like Us on Facebook.</h3>
-                <p>Enjoy protecting your home? <strong>Like us on Facebook</strong> to tell the world how great we are.</p>
-            </div>
-        </div>
-        <div id="google-plus">
-            <div id="social-button">
-                <g:plusone size="tall" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Recommend Us', 'Thank You Page']);"></g:plusone>
-            </div>
-            <div class="social-text">
-                <h3>+1 Us on Google.</h3>
-                <p>Recommending us is easy. Just <strong>click the +1</strong> as a way of saying, "Nice job, way to go!"</p>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div id="what-next">
-        <h2>What's Next</h2>
-        <div id="security-professional">
-            <img src="{{ STATIC_URL }}img/thank-you-pages/security-professional.png" alt="Security Professional will contact you within 24 Hours" width="200" height="160" />
-            <h3>Step One:</h3>
-            <p>A Security Professional will contact you within 24 hours</p>
-        </div>
-        <div id="build-system">
-            <img src="{{ STATIC_URL }}img/thank-you-pages/house-blueprint.png" alt="A Free Security System that fits your Home and Budget" width="200" height="160" />
-            <h3>Step Two:</h3>
-            <p>Together we will create your free system that fits your home and budget</p>
-        </div>
-        <div id="secured-home">
-            <img src="{{ STATIC_URL }}img/thank-you-pages/secured-home.jpg" alt="Home Security in 7 - 10 Days" width="200" height="160" />
-            <h3>Step Three:</h3>
-            <p>Your home will be secured and protected within 7 - 10 days</p>
+    <div id="featured-on">
+        <small>Proudly Featured on:</small>
+        <div id="featured-badges">
+            <div class="featured abc">&nbsp;</div>
+            <div class="featured besty">&nbsp;</div>
+            <div class="featured npr">&nbsp;</div>
+            <div class="featured topconsumer">&nbsp;</div>
+            <div class="featured foxnews">&nbsp;</div>
+            <div class="featured consumerdigest">&nbsp;</div>
+            <div class="featured buzz">&nbsp;</div>
+            <div class="featured bbb">&nbsp;</div>
+            <div class="featured gadgeteer">&nbsp;</div>
+            <div class="featured toptens">&nbsp;</div>
+            <div class="featured cw">&nbsp;</div>
+            <div class="featured history">&nbsp;</div>
 
         </div>
-        <div class="clear"></div>
     </div>
-    <div class="clear"></div>
+<h2 class="title center bottom">{% block rated-headline %}Rated the Best Home Security Company{% endblock %}</h2>
+<h4 class="subhead">{% block rated-subhead %}We help protect neighborhoods every day. See why homeowners choose us!{% endblock %}</h4>
+<div class="container">
+    <div class="five columns">
+        <div id="customer-testimonial-boxes">
+            <div class="testimonial_page">
+                <div class="testimonial-column">
+                    <div class="testimonial">
+
+                        <p>This is our first home, and first home security system, and Sarah made the installation process very easy! She explained everything very well, and was able to answer all questions that I had. Thank you!!</p>
+                        <h3>Corey <span>of Charlotte, NC</span></h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nine columns offset-by-two ">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/JwXtsOCIN6M?list=PL46D9D6B0F5E6135E" frameborder="0" allowfullscreen></iframe>
+    </div>
 </div>
 {% include "_partials/thank_you_scripts.html" %}
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+
+
+
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    	$( "#menu-button" ).click(function() {
+			$( "#mobile-menu-container" ).slideToggle( "slow", function() {
+			});
+		});
+
+        var owl = $("#featured-badges");
+
+        owl.owlCarousel({
+          autoPlay: 7000,
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}
 
 {% block extra_pixels %}
