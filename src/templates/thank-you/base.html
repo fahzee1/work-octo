@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/thank-you.css">
 {% endblock %}
@@ -7,6 +9,93 @@
 {% endblock %}
 
 {% block subnav_child %}
+{% endblock %}
+{% block content %}
+{% block hero %} 
+    <div id="hero" class="thank-you">
+        <div class="container">
+            {% block hero-heading %}
+            <div class="ten columns offset-by-six margin-vertical thanks-content">
+                <h1>Congratulations!</h1>
+                <h3>You are one step closer to securing your home.</h3>
+                <p>Thanks for choosing Protect America for your family's security. We will be contacting you within 24 hours. If you need to reach us immediately, call us directly at <strong><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></strong>. We appreciate your business and look forward to protecting your home.</p>
+    
+            </div>
+    
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+    <div id="featured-on">
+        <small>Proudly Featured on:</small>
+        <div id="featured-badges">
+            <div class="featured abc">&nbsp;</div>
+            <div class="featured besty">&nbsp;</div>
+            <div class="featured npr">&nbsp;</div>
+            <div class="featured topconsumer">&nbsp;</div>
+            <div class="featured foxnews">&nbsp;</div>
+            <div class="featured consumerdigest">&nbsp;</div>
+            <div class="featured buzz">&nbsp;</div>
+            <div class="featured bbb">&nbsp;</div>
+            <div class="featured gadgeteer">&nbsp;</div>
+            <div class="featured toptens">&nbsp;</div>
+            <div class="featured cw">&nbsp;</div>
+            <div class="featured history">&nbsp;</div>
+
+        </div>
+    </div>
+<h2 class="title center bottom">{% block rated-headline %}Rated the Best Home Security Company{% endblock %}</h2>
+<h4 class="subhead">{% block rated-subhead %}We help protect neighborhoods every day. See why homeowners choose us!{% endblock %}</h4>
+<div class="container">
+    <div class="five columns">
+        <div id="customer-testimonial-boxes">
+            <div class="testimonial_page">
+                <div class="testimonial-column">
+                    <div class="testimonial">
+
+                        <p>This is our first home, and first home security system, and Sarah made the installation process very easy! She explained everything very well, and was able to answer all questions that I had. Thank you!!</p>
+                        <h3>Corey <span>of Charlotte, NC</span></h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nine columns offset-by-two ">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/JwXtsOCIN6M?list=PL46D9D6B0F5E6135E" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+
+
+
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    	$( "#menu-button" ).click(function() {
+			$( "#mobile-menu-container" ).slideToggle( "slow", function() {
+			});
+		});
+
+        var owl = $("#featured-badges");
+
+        owl.owlCarousel({
+          autoPlay: 7000,
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
 {% endblock %}
 {% block geo-pixel %}{% endblock %}
 {% block quantcast-pixel %}{% endblock %}

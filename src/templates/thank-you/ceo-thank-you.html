@@ -1,47 +1,18 @@
 {% extends "thank-you/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
-{% block content %}
-<div id="hero-wrapper" class="v-light-grey">
-    <div id="hero-image">
-        <div id="hero-content">
-            <i class="icon-customer-care"></i>
-            <h2>Thank you.</h2>
-            <h1>I Have received your message.</h1>
-            <p>As the CEO of Protect America, I enjoy hearing from customers, no matter if its good or bad. I read each comment personally, and your comments and insight greatly improve our company. Protect America is dedicated to quality and affordable home security that includes convenient customer service. If we fail to meet these expectations, let me know personally and I’ll take care of it. Thanks again for taking the time to write. You should receive a response from me with 24 to 48 hours.</p>
-            <img src="/static/img/external/tp-signature.png" alt="Thad Paschall, Protect America CEO" style="margin-top: 16px;" />
-
+{{% block hero %}
+    <div id="hero" class="thank-you basic">
+        <div class="container">
+            {% block hero-heading %}
+            <div class="ten columns offset-by-six margin-vertical thanks-content">
+                <h1>Thank you.</h1>
+                <h3>I have received your message.</h3>
+                <p>As the CEO of Protect America, I enjoy hearing from customers &ndash; no matter if it’s good or bad. Your comments and insight greatly improve our company, and I read each comment personally. Protect America is dedicated to quality and affordable home security that includes convenient customer service. If we fail to meet these expectations, let me know personally and I’ll take care of it. Thanks again for taking the time to write. You should receive a response from me with 24 to 48 hours.</p>
+            </div>
+            {% endblock %}
         </div>
-        <img src="{{ STATIC_URL }}img/base/protect-america-hero.jpg" class="main-hero-image" alt="Protect America Logo" />
-
     </div>
-</div>
-<div class="wrapper">
-
-    <div id="recommend-us">
-        <h2>Recommend Us</h2>
-        <div id="facebook">
-            <div id="social-button">
-                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fprotectamerica&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:90px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Recommend Us', 'Thank You Page']);"></iframe>
-            </div>
-            <div class="social-text">
-                <h3>Like Us on Facebook.</h3>
-                <p>Enjoy the experience of protecting your home? <strong>Like us on Facebook</strong> and spread security awareness!</p>
-            </div>
-        </div>
-        <div id="google-plus">
-            <div id="social-button">
-                <g:plusone size="tall" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Recommend Us', 'Thank You Page']);"></g:plusone>
-            </div>
-            <div class="social-text">
-                <h3>+1 Us on Google.</h3>
-                <p>Recommend us! Simply <strong>press the +1 button</strong> and let us know we’re doing a great job.</p>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-</div>
 {% addtoblock "css" %}
 {% endaddtoblock "css" %}
 {% if request.META.REMOTE_ADDR != '12.201.194.50' and request.META.REMOTE_ADDR != '207.200.35.18' and request.META.REMOTE_ADDR != '127.0.0.1' %}

@@ -1,46 +1,20 @@
 {% extends "thank-you/base.html" %}
 {% load content_filters content_tags sekizai_tags testimonial_tags %}
 {% block page_title %}Home Security Systems | Alarm Systems | Protect America{% endblock %}
-{% block content %}
-<div id="hero-wrapper" class="blue">
-    <div id="hero-image">
-        <div id="hero-content">
-            <i class="icon-home-security"></i>
-            <h2>Thanks!</h2>
-            <h1>We have received your application.</h1>
-            <p>Thanks for your interest in Protect America’s affiliate program. We’ve received your request to become a Protect America affiliate and someone in our marketing department will be contacting you shortly. Our affiliate program is an amazing opportunity for marketers to improve their bottom line. In the meantime, check out our amazing product line and start getting familiar with Protect America!</p>
+{% block hero %}
+    <div id="hero" class="thank-you affiliate">
+        <div class="container">
+            {% block hero-heading %}
+            <div class="ten columns offset-by-six margin-vertical thanks-content">
+                <h1>Thanks!</h1>
+                <h3>We have received your application.</h3>
+                <p>Thank you for your interest in Protect America’s affiliate program. We’ve received your request to become a Protect America affiliate and a program representative will be contacting you shortly. Our affiliate program is an amazing opportunity for marketers to improve their bottom line. In the meantime, check out our amazing product line and start getting familiar with Protect America!</p>
+            </div>
+    
+            {% endblock %}
         </div>
-        <img src="{{ STATIC_URL }}img/base/thank-you-hero.jpg" class="main-hero-image" alt="smart-connect-interactive-app" />
-
     </div>
-</div>
-{% include "order/call-box.html" %}
-<div class="wrapper">
 
-    <div id="recommend-us">
-        <h2>Recommend Us</h2>
-        <div id="facebook">
-            <div id="social-button">
-                <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fprotectamerica&amp;send=false&amp;layout=box_count&amp;width=90&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=90" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:90px;" allowTransparency="true" onClick="_gaq.push(['_trackEvent', 'Like Us', 'Recommend Us', 'Thank You Page']);"></iframe>
-            </div>
-            <div class="social-text">
-                <h3>Like Us on Facebook.</h3>
-                <p>Like us on Facebook</strong> to follow the latest in Protect America News!</p>
-            </div>
-        </div>
-        <div id="google-plus">
-            <div id="social-button">
-                <g:plusone size="tall" href="http://www.protectamerica.com" onClick="_gaq.push(['_trackEvent', '+1 Us', 'Recommend Us', 'Thank You Page']);"></g:plusone>
-            </div>
-            <div class="social-text">
-                <h3>+1 Us on Google.</h3>
-                <p>Start Recommending us! Simply <strong>press the +1 button</strong>.</p>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="clear"></div>
-</div>
 {% addtoblock "css" %}
 {% endaddtoblock "css" %}
 {% if request.META.REMOTE_ADDR != '12.201.194.50' and request.META.REMOTE_ADDR != '207.200.35.18' and request.META.REMOTE_ADDR != '127.0.0.1' %}
