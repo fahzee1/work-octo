@@ -580,7 +580,7 @@ else:
                     dtt(r'^equipment/home-security/motion-sensors/?$', 'products/equipment/motion-detector.html', 'motion-detector', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/touch-screen/?$', 'products/equipment/touchscreen.html', 'touchscreen', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/security-camera/?$', 'products/equipment/video.html', 'video', 'home-security-equipment'),
-                    dtt(r'^equipment/home-security/wireless-keypad/?$', 'products/equipment/talking-wireless-keypad.html', 'talking-wireless-keypad', 'home-security-equipment'),
+                    # dtt(r'^equipment/home-security/wireless-keypad/?$', 'products/equipment/talking-wireless-keypad.html', 'talking-wireless-keypad', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/garage-security/?$', 'products/equipment/garage-door-sensor.html', 'garage-door-sensor', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/glass-breaking/?$', 'products/equipment/glassbreak-sensor.html', 'glassbreak-sensor', 'home-security-equipment'),
                     dtt(r'^equipment/home-security/mini-pin-pad/?$', 'products/equipment/mini-pinpad.html', 'mini-pinpad', 'home-security-equipment'),
