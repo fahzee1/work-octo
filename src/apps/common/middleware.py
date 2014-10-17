@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.conf import settings
 from django.contrib.localflavor.us.us_states import US_STATES
 from apps.local.views import get_statecode, strip_city
+from apps.crimedatamodels.models import CityLocation
 from django.shortcuts import redirect
 
 reg_b = re.compile(r"android.+mobile|avantgo|bada\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\/|plucker|pocket|psp|symbian|treo|up\\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino", re.I|re.M)
@@ -252,8 +253,7 @@ class LocalPageRedirect(object):
 
     def process_request(self,request):
         #lets fist grab the url and check if its a local page
-        url = request.path.rstrip('/').lstrip('/')
-
+        url = request.path.lstrip('/')
         #city page and state page
         match_cp = re.compile(r'home-security/[-\w]{3,}/[-\w]+')
         match_cp2 = re.compile(r'home-security/[-\w]{2}/[-\w]+')
@@ -279,23 +279,36 @@ class LocalPageRedirect(object):
         if match_cp.match(url):
             # city page so lets redirect
             chop_up = url.split('/')
-            state, city = chop_up[1].replace('-',' '), strip_city(chop_up[2])
+            state, city = chop_up[1].replace('-',' '),chop_up[2]
             for x in state_space:
                 for y in state_nospace:
                     if x.upper() == state.upper() or y.upper() == state.upper():
                         statecode = get_statecode(state)
-                        return redirect('/home-security/%s/%s' % (statecode,city.replace(' ','-').title()))
+                        city = city.replace(' ','-').replace('%20','-')
+                        return redirect('/home-security/%s/%s' % (statecode,city.title()))
 
 
         elif match_cp2.match(url):
             # city page so lets redirect
             chop_up = url.split('/')
-            state, city = chop_up[1].replace('-',' '), strip_city(chop_up[2])
+            state, city = chop_up[1].replace('-',' '), chop_up[2]
+            temp = CityLocation.match_me(city)
+            if temp:
+                city = temp
             if state.islower() or city.islower():
                 return redirect('/home-security/%s/%s' % (state.upper(),city.replace(' ','-').title()))
 
             elif state.islower():
                 return redirect('/home-security/%s/%s' % (state.upper(),city.replace(' ','-')))
+
+            if '%20' in city or ' ' in city:
+                #if url has a space replace it with a dash
+                city = city.replace('%20','-').replace(' ','-')
+                return redirect('/home-security/%s/%s' % (state,city))
+
+            if url[-1] == '/':
+                #if url ends with slash remove it
+                return redirect('/home-security/%s/%s' % (state,city))
 
         elif match_sp.match(url):
             #state page so lets redirect
@@ -305,7 +318,10 @@ class LocalPageRedirect(object):
                 for y in state_nospace:
                     if x.upper() == state.upper() or y.upper() == state.upper():
                         statecode = get_statecode(state)
-                        return redirect('/home-security/%s/' % (statecode))
+                        return redirect('/home-security/%s/' % (statecode.upper()))
+
+            if state.islower():
+                return redirect('/home-security/%s/' % (state.upper()))
 
         elif ' ' in url:
             url = re.sub("\s+","-",url)

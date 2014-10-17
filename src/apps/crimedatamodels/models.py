@@ -94,6 +94,17 @@ class CityLocation(models.Model):
         return reverse('crime-rate:crime-stats', args=[self.state,
             self.city_name])
 
+    @classmethod
+    def match_me(cls,name):
+        # used in middleware to use correct city names in url
+        # ex turns /home-security/CA/SanJose to /home-security/CA/San-Jose
+        all_objs = CityLocation.objects.all()
+        for city in all_objs:
+            city_name = city.city_name.lower().replace(' ','')
+            if name.lower() == city_name:
+                return city.city_name
+        return None
+
     def join_name(self,local=False):
         kv = {}
         slug = self.city_name_slug
