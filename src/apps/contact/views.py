@@ -755,7 +755,7 @@ def order_form(request):
                                'parent':'packages',
                                'formset': formset,
                                'pages': ['contact-us'],
-                               'page_name': 'moving-kit'})
+                               'page_name': 'order-package'})
 
 
 
