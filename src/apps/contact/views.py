@@ -52,10 +52,8 @@ def send_leadimport(data):
 
 
 def send_employment_email(data):
-
-
     subject = 'Application for Employment'
-    from_email = 'fahzee1@gmail.com'
+    from_email = 'Protect America <noreply@protectamerica.com>'
     to_email = ['melissa@protectamerica.com','miriam@protectamerica.com']
     html_content = render_to_string('emails/employment.html',data)
     message = 'Protect America Online Application'
