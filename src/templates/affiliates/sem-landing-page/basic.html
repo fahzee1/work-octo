@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags adspace %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/affiliates/sem-landing-page/refresh.css">
+
+{% if not debug %}
+    {% comment %}
+    {% if request.COOKIES.refer_id == 'GOOGLEPPC' or request.COOKIES.refer_id == 'BINGPPC' or request.COOKIES.refer_id == 'HOMESITE' or not request.COOKIES.refer_id %}
+
+        <!-- Google Analytics Content Experiment code -->
+        <!-- Google Analytics Content Experiment code -->
+        <script>
+        _udn = "protectamerica.com";
+        </script>
+        <!-- Google Analytics Content Experiment code -->
+        <script>function utmx_section(){}function utmx(){}(function(){var
+        k='61445283-90',d=document,l=d.location,c=d.cookie;
+        if(l.search.indexOf('utm_expid='+k)>0)return;
+        function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+        indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+        length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+        '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+        '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+        '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+        valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+        '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+        </script><script>utmx('url','A/B');</script>
+        <!-- End of Google Analytics Content Experiment code -->
+    {% endif %}
+    {% endcomment %}
+{% endif %}
+{% endblock %}
+{% block page_title %}Home Security Systems - Alarm Monitoring | Protect America{% endblock %}
+{% block page_keywords %}home alarm system, home alarm systems, security, security system, security systems, home security, home security system, home security systems, home security monitoring{% endblock %}
+{% block page_description %}Want a FREE home security system? Sign up for monitoring with Protect America and get a security system at no cost. Call 800-951-5190 today to learn more!{% endblock %}
+
+{% block typekit-code %}
+<script type="text/javascript" src="//use.typekit.net/wsu1mxq.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+{% endblock %}
+
+{% block header %}
+
+    {% comment %}
+
+        {% if request.COOKIES.refer_id == 'HOMESITE' or request.session.refer_id == 'HOMESITE' %}
+            {% start_ab request 'new_nav2' %}
+        {% else %}
+            {% if not request.GET.agent %}
+                {% if not request.COOKIES.refer_id and not request.session.refer_id %}
+                    {% start_ab request 'new_nav2' %}
+                {% else %}
+                {% endif %}
+            {% else %}
+            {% endif %}
+        {% endif %}
+    {% endcomment %}
+    <div id="top-section-wrapper">
+        <div id="top-section">
+
+            <div id="company-links">
+                <a href="http://www.myprotectamerica.com" class="interactive-customer" target="blank">Interactive Customers</a>
+
+                <a href="https://server.iad.liveperson.net/hc/34774121/?cmd=file&file=visitorWantsToChat&site=34774121&byhref=1" class="easy-chat-click" id="online-chat-button" target="blank">Online Chat</a>
+
+                <form action="http://www.protectamerica.com/search/" method='get'>
+                    {% csrf_token %}
+                     <input type="text" id="q" name="q" placeholder="SEARCH THE SITE"></input>
+                </form>
+                <div id="main-phone">
+                    <i class="icon-phone-sign"></i>
+                    {% block main-phone %}
+                        {% if phone_number %}
+                            <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div id="header-wrapper">
+        <div id="header">
+
+            <a href="http://www.protectamerica.com">
+                <img src="http://static.protectamericasecurity.net/img/base/protect-america-grey.png" width="192" height="32" title="Home Security Systems by Protect America" alt="Protect America Home Security" id="company-logo">
+            </a>
+            <a href="http://www.protectamerica.com/products/order-package" onClick="_gaq.push(['_trackEvent', 'Request Quote Click', 'Menu Request Quote', '{{ page_name }}']);" class="request-quote-button {% if not business_time %} lb-button" data-link="request-quote{% else %}request-quote-button-link{% endif %}">Request Quote</a>
+            {% if phone_number %}
+                <div class="stuck-phone">
+                    Call Today and Save!
+                    <a href="tel:{{ phone_number|format_number }}" class="" onClick="_gaq.push(['_trackEvent', 'Phone Call Click', 'Top Call', '{{ page_name }}']);"><span{% if use_call_measurement %} class="dynamic-phone-number"{% endif %}>{{ phone_number|format_number }}</span></a>
+                </div>
+            {% endif %}
+            {% block navigation %}
+            <ul id="main-navigation">
+                <li {% if 'shop' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/shop-home-security-systems">Shop</a>
+                    {% if 'shop' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'equipment' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/security-equipment">Equipment</a>
+                    {% if 'equipment' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'learn' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/learn">Learn</a>
+                    {% if 'learn' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+                <li {% if 'support' in active_pages %}class="active"{% endif %}>
+                    <a href="http://www.protectamerica.com/support">Support</a>
+                    {% if 'support' in active_pages %}<i class="icon-caret-down"></i>{% endif %}
+                </li>
+            </ul>
+            {% endblock %}
+            {% include "order/quote-form-refresh.html" with form=forms.basic %}
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block subnav %}
+{% endblock %}
+{% block bing-conversion-code %}<meta name="google-site-verification" content="OSo3lFTITOYd9b2_wfgqZbQaQvE-OYsg6rpUzFY7-HQ" />
+<meta name="msvalidate.01" content="AEAA46163DE3E7323225885EAAF6CB36" />{% endblock %}
+
+{% block content %}
+{% block hero_banner_area %}
+
+<div id="hero-wrapper" class="sept-deals">
+
+    <div id="hero-image" class="cmonday">
+        {% include "order/quote-form-white-refresh.html" with form=forms.basic %}
+        <div id="sept-deals">
+            <h1>Home security systems</h1>
+            <h2>Your security<br>should be simple.</h2>
+            <h3>And it starts at just $19.99 per month</h3>
+            <ul>
+                <li><i class="fa fa-check"></i>24/7 security monitoring</i></li>
+                <li><i class="fa fa-check"></i>Easy to setup - no tools required</li>
+                <li><i class="fa fa-check"></i>Free equipment and no installation fees</li>
+            </ul>
+            <a href="http://www.protectamerica.com/shop-home-security-systems?hero">Get started now</a>
+
+            <div class="deals">
+                <a href="http://www.protectamerica.com/shop-home-security-systems?heropromo" class="deal-img">
+                    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/security-system-deal.png" />
+                </a>
+                <a href="http://www.protectamerica.com/equipment/life-safety/smoke-detector?heropromo" class="deal-img2">
+                    <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/free-camera-deal.png" />
+                </a>
+            </div>
+
+        </div>
+    </div>
+    <div class="deal-box">
+
+    </div>
+</div>
+{% include "order/call-box-b.html" %}
+
+{% endblock %}
+
+<div class="container">
+    <h2 class="title center">Protect what matters most</h2>
+    <div class="seven columns">
+        <p>We are proud to provide reliable security for your entire home at the <strong>most affordable rate in the industry, simple as that.</strong> We believe in protecting you, your home, and your family with trusted, easy-to-use 24/7 home security monitoring.</p>
+        <ul class="advantages">
+            <li><i class="fa fa-check-circle"></i> Complete 24/7 Triple Redundant Security Monitoring</li>
+            <li><i class="fa fa-check-circle"></i> Sets up in Minutes with No Installations Fees</li>
+            <li><i class="fa fa-check-circle"></i> Lowest Price Guaranteed</li>
+        </ul>
+    </div>
+    <div class="eight columns offset-by-one">
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/awards.png" />
+        <div id="customer-testimonial-boxes">
+            <div class="testimonial_page">
+                <div class="testimonial-column full">
+                    <div class="testimonial">
+
+                        <p>I have been a satisfied customer for 11 years now. I've upgraded my alarm system twice and my experience with the sales, set up, activation and customer service have been nothing short of excellent! Protect America has the best customer service in the business. No doubt about it. Everyone is pleasant and a true professional. Protect America has the best equipment and the lowest monthly monitoring fee out there.</p>
+                        <i class="fa fa-caret-down"></i>
+                        <h3>Michael <span>of Seattle, WA</span></h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+
+<div id="advantage-table-wrapper">
+    <div id="advantage-table">
+        {% block advantage-header %}
+        <h2>Powerful and Affordable &ndash; The Perfect Solution <span>providing real safety and security for less</span></h2>
+        {% endblock %}
+        <table>
+            <thead>
+                {% block table-headers %}
+
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Equipment & Installation Fees</th>
+                    <th>24/7 Alarm Monitoring</th>
+                    <th>Lowest Price Guaranteed</th>
+                    <th class="extra">Locked-in Rate</th>
+                    <th class="extra">Lifetime Equipment Warranty</th>
+                    <th>Monthly Cost</th>
+                </tr>
+                {% endblock %}
+            </thead>
+            <tbody>
+                {% block advantage-us %}
+                <tr class="alpha">
+                    <td class="title">Protect America</td>
+                    <td class="price">$0</td>
+                    <td>included</td>
+                    <td>included</td>
+                    <td class="extra">included</td>
+                    <td class="extra">included</td>
+                    <td class="price">$19.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-1 %}
+                <tr>
+                    <td class="title">ADT</td>
+                    <td class="price">$99</td>
+                    <td>Included</td>
+                    <td class="na">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="na extra">Not Available</td>
+                    <td class="price">$42.99</td>
+                </tr>
+                {% endblock %}
+                {% block advantage-competitor-2 %}
+                    <tr>
+                        <td class="title">ADT PULSE</td>
+                        <td class="price">$99</td>
+                        <td>Included</td>
+                        <td class="na">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="na extra">Not Available</td>
+                        <td class="price">$49.99</td>
+                    </tr>
+                {% endblock %}
+            </tbody>
+        </table>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="container extra-area" style="margin: 60px auto;">
+    <div class="seven columns">
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/home-automation.png" class="center" />
+
+        <h3>Home automation made easy</h3>
+        <p>With the touch of a button, you become the master of your home by controlling your alarm, locks, lights, appliances and more from the ease of your smartphone.</p>
+        <p>Our Z-Wave technology transforms your house into something more - a smart house. While some other companies charge up to $20 more per month, we provide our home automation and interactive services free with your broadband or cellular monitored home.</p>
+        <a href="http://www.protectamerica.com/equipment/home-automation">Learn about home automation</a>
+    </div>
+    <div class="seven columns offset-by-two">
+        <img src="{{ STATIC_URL }}img/affiliates/sem-landing-page/life-safety.png" class="center" />
+
+        <h3>Security from every angle</h3>
+        <p>Home security is not just about being able to protect your home; it's about being able to protect your entire life. Our systems easily add fire and smoke protection, carbon monoxide detectors, medical panic alerts, and more. We make it easy to customize and fit your alarm system to your home and family's needs.</p>
+        <a href="http://www.protectamerica.com/equipment/life-safety">Learn about life safety</a>
+    </div>
+</div>
+
+{% addtoblock "js" %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.menu-aim.js"></script>
+    <script type="text/javascript">
+
+        var $menu = $(".dropdown-menu");
+
+        $menu.menuAim({
+            activate: activateSubmenu,
+            deactivate: deactivateSubmenu,
+        });
+
+        function activateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId),
+                height = 240,
+                width = $menu.outerWidth();
+            $submenu.css({
+                display: "block",
+                top: -1,
+                left: width - 3,  // main should overlay submenu
+                height: height - 4  // padding for main dropdown's arrow
+            });
+
+            $row.find("a").addClass("maintainHover");
+        }
+
+        function deactivateSubmenu(row) {
+            var $row = $(row),
+                submenuId = $row.data("submenuId"),
+                $submenu = $("#" + submenuId);
+
+            // Hide the submenu and remove the row's highlighted look
+            $submenu.css("display", "none");
+            $row.find("a").removeClass("maintainHover");
+        }
+
+        $(".dropdown-menu li").click(function(e) {
+            e.stopPropagation();
+        });
+        $(".dropdown-toggle").click(function(e) {
+            return false;
+        });
+
+
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+    	$( "#menu-button" ).click(function() {
+			$( "#mobile-menu-container" ).slideToggle( "slow", function() {
+			});
+		});
+
+        var owl = $("#featured-badges");
+
+        owl.owlCarousel({
+          autoPlay: 7000,
+          items : 12,
+          pagination: false,
+          itemsCustom: [[0, 2], [480, 3], [640, 4], [800, 5], [960, 6], [1120, 7], [1280, 8], [1440, 9], [1600, 10]]
+        });
+    });
+    </script>
+{% endaddtoblock "js" %}
+{% endblock %}
+
+{% block terms %}
+<div id="terms-wrapper">
+    <div id="terms">
+        <div id="terms-conditions">
+            <p>* <a href="https://secure.protectamerica.com/sample/en" >Standard home security alarm monitoring agreement</a> required with approved credit. Offer subject to change. Void where prohibited. Offer Expires: {{ final_date|date:"SHORT_DATE_FORMAT" }}</p>
+            <p>* Information used for home security alarm system comparisons was obtained November 2011 through telephone and online research. ADT prices: based on total out-of-pocket expense to obtain services; installation based on fees for similar home security equipment packages; "Monitoring" price listed includes the additional "warranty" or "extended service plan". </p>
+            {% block extra_terms %}
+            {% endblock %}
+        </div>
+        <div id="copyrights">
+            {% if local_street %}
+            <div id="local-address" itemscope itemtype="http://schema.org/LocalBusiness">
+                <p><span itemprop="name">{{ city }} Protect America</span>: <span itemprop="address" itemscope itemtype="http://schema.org/PostalAddress"><b itemprop="streetAddress">{{ local_street }}</b> <b itemprop="addressLocality">{{ local_city }}</b>, <b itemprop="addressRegion">{{ local_state }}</b> <b itemprop="postalCode">{{ local_zipcode }}</b></span></p>
+            </div>
+            {% endif %}
+
+            {% block consumer-digest-term %}<p>The BEST BUY SEAL is a registered trademark of Consumers Digest Communications, LLC, used under license.</p>{% endblock %}
+            <p>&copy; 1992 &mdash; 2014 Protect America, Inc. All rights reserved</p>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+
+</div>
+{% endblock %}
+
+

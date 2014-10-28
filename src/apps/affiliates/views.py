@@ -276,7 +276,7 @@ def semlanding_response(request):
 
     forms = {}
     forms['basic'] = PAContactForm()
-    response = render_to_response('affiliates/sem-landing-page/alarm.html',
+    response = render_to_response('affiliates/sem-landing-page/basic.html',
                                   {'forms': forms},
                                   context_instance=RequestContext(request))
 
