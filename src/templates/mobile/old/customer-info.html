@@ -1,0 +1,113 @@
+{% extends "mobile/base.html" %}
+
+{% load content_filters content_tags sekizai_tags testimonial_tags %}
+
+
+{% block content %}
+{% if not request.GET.noaddress %}
+{% addtoblock "css" %}
+<script> 
+_udn = "protectamerica.com";
+</script> 
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='61445283-29',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
+{% endaddtoblock "css" %}
+{% endif %}
+<h1>Customer Information</h1>
+<form id="contact-form" method="POST" action="">
+    {% csrf_token %}
+    <fieldset id="name-information">
+        <div class="form-wrapper">
+            <div class="alpha">
+                {% include "mobile/_partial/formfield.html" with field=form.first_name %}
+            </div>
+            <div>
+                {% include "mobile/_partial/formfield.html" with field=form.last_name %}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </fieldset>
+    <fieldset id="content-information">
+        <div class="form-wrapper">
+            <h3>Contact Information</h3>
+            {% include "mobile/_partial/formfield.html" with field=form.email %}
+            {% include "mobile/_partial/formfield.html" with field=form.phone %}
+        </div>
+    </fieldset>
+    {% if not request.GET.noaddress %}
+    <fieldset id="address-information">
+        <div class="form-wrapper">
+            <h3>Customer Address</h3>
+
+            {% include "mobile/_partial/formfield.html" with field=form.address %}
+            {% include "mobile/_partial/formfield.html" with field=form.address_2 %}
+            <div class="clear"></div>
+            <div class="ctrlHolder {% if form.city.errors or form.state.errors or form.zipcode.errors %}error{% endif %}">
+                <div class="city-label">
+                    <label>{{ form.city.label }}:</label>
+                    {{ form.city }}
+                </div>
+                <div class="state-label">
+                    <label>{{ form.state.label }}:</label>
+                    {{ form.state }}                
+                </div>
+                <div class="zip-label">
+                    <label>{{ form.zipcode.label }}:</label>
+                    {{ form.zipcode }}
+                </div>
+                <div class="clear"></div>
+                {% if form.city.errors or form.state.errors or form.zipcode.errors %}
+                    <ul class="formHint">
+                    {% for error in form.city.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    {% for error in form.state.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    {% for error in form.zipcode.errors %}
+                        <li><strong>{{ error }}</strong></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </fieldset>
+    {% endif %}
+    <fieldset>
+        <div class="form-wrapper">
+            <div class="ctrlHolder {% if form.consent.errors %}error{% endif %}">
+                {{ form.consent }}
+                <label for="tcbox" class="checkbox">By checking this box, you agree to our <a href="http://www.protectamerica.com/help/privacy-policy" title="terms and conditions">terms and conditions</a></label>
+                {% if form.consent.errors %}
+                <ul class="formHint">
+                {% for error in form.consent.errors %}
+                    <li><strong>{{ error }}</strong></li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="clear"></div>
+        </div>
+    </fieldset>
+    <div class="button-submit">
+        <button type="submit">Complete Order ></button>
+    </div>
+</form>
+    {% include "mobile/_partial/summary.html" %}
+
+{% endblock %}
+{% block bottom-nav %}
+{% endblock %}
