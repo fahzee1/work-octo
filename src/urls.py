@@ -23,10 +23,8 @@ LOCAL_KEYWORDS = settings.LOCAL_KEYWORDS
 # a simple direct_to_template wrapper
 def dtt(pattern, template, name, parent=None, ctx=None):
     ctx = ctx or {}
-
     context = dict(page_name=name, parent=parent)
     context.update(ctx)
-
     return url(pattern, cache_page(60 * 60 * 4)(simple_dtt),
         dict(template=template, extra_context=context),
         name=name)

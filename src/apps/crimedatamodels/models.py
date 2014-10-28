@@ -95,14 +95,28 @@ class CityLocation(models.Model):
             self.city_name])
 
     @classmethod
-    def match_me(cls,name):
+    def match_me(cls,name,state=None):
         # used in middleware to use correct city names in url
         # ex turns /home-security/CA/SanJose to /home-security/CA/San-Jose
-        all_objs = CityLocation.objects.all()
+        if state:
+            all_objs = CityLocation.objects.filter(state__iexact=state)
+        else:
+            all_objs = CityLocation.objects.all()
+
         for city in all_objs:
             city_name = city.city_name.lower().replace(' ','')
-            if name.lower() == city_name:
-                return city.city_name
+            if name.lower().replace('-','') == city_name:
+                blob = {'city':city.city_name.replace(' ','-')}
+                if '-' in name:
+                    if '-' not in city.city_name and ' ' not in city.city_name:
+                        blob['dash'] = 'reverse'
+                    else:
+                        blob['dash'] = True
+                else:
+                    blob['dash'] = False
+                return blob
+
+
         return None
 
     def join_name(self,local=False):

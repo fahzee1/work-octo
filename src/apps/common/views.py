@@ -123,6 +123,23 @@ def get_active(urllist, name, pages=None):
     return pages
 
 
+def add_url(names):
+    pages = []
+    for i in names:
+        for url in urls.urlpatterns:
+            try:
+                if i == url.name:
+                    regex_url = url.regex.pattern.replace('?','').replace('$','').replace('^','')
+                    blob = {'name':i.replace('-',' ').title(),
+                            'url':regex_url}
+
+                    pages.append(blob)
+                    continue
+            except:
+                pass
+
+    return pages
+
 def simple_dtt(request, template, extra_context, expire_days=90):
     expire_time = timedelta(days=expire_days)
 
@@ -139,10 +156,10 @@ def simple_dtt(request, template, extra_context, expire_days=90):
     forms = {}
     forms['basic'] = LeadForm()
     forms['long'] = AffiliateLongForm()
-
+    url_name = add_url(pages)
     extra_context['forms'] = forms
     extra_context['active_pages'] = pages
-
+    extra_context['active_pages2'] = url_name
     extra_context['affkey'] = request.session.get('affkey')
 
     affiliate = request.COOKIES.get('refer_id', None)

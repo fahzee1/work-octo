@@ -252,6 +252,9 @@ class LocalPageRedirect(object):
     """
 
     def process_request(self,request):
+        import string
+        import copy
+
         #lets fist grab the url and check if its a local page
         url = request.path.lstrip('/')
         #city page and state page
@@ -292,14 +295,24 @@ class LocalPageRedirect(object):
             # city page so lets redirect
             chop_up = url.split('/')
             state, city = chop_up[1].replace('-',' '), chop_up[2]
-            temp = CityLocation.match_me(city)
-            if temp:
-                city = temp
-            if state.islower() or city.islower():
-                return redirect('/home-security/%s/%s' % (state.upper(),city.replace(' ','-').title()))
 
-            elif state.islower():
-                return redirect('/home-security/%s/%s' % (state.upper(),city.replace(' ','-')))
+            temp = CityLocation.match_me(city,state.upper())
+            dash = None
+            city2 = ''
+            if temp:
+                city2 = copy.copy(city) #hold copy to compare old city before getting temp
+                city = temp['city']
+                dash = temp['dash']
+
+            if state.islower() or city.islower():
+                if "'" in city and '-' in city:
+                    # Lee's-Summit, do it so we can captitalize properly
+                    city = city.replace('-',' ')
+
+                city = string.capwords(city)
+                city = city.replace(' ','-')
+                return redirect('/home-security/%s/%s' % (state.upper(),city))
+
 
             if '%20' in city or ' ' in city:
                 #if url has a space replace it with a dash
@@ -309,6 +322,24 @@ class LocalPageRedirect(object):
             if url[-1] == '/':
                 #if url ends with slash remove it
                 return redirect('/home-security/%s/%s' % (state,city))
+
+            if "-" in city2:
+                # this checks to fix Los-angeles to Los-Angeles
+                split_all = city2.split('-')
+                split1, split2 = split_all[0], split_all[1]
+                if split1.islower() or split2.islower():
+                    city = city.replace('-',' ')
+                    city = string.capwords(city)
+                    city = city.replace(' ','-')
+                    return redirect('/home-security/%s/%s' % (state.upper(),city))
+
+            if dash == 'reverse':
+                return redirect('/home-security/%s/%s' % (state.upper(),city))
+
+            if city != city2:
+                return redirect('/home-security/%s/%s' % (state.upper(),city))
+
+
 
         elif match_sp.match(url):
             #state page so lets redirect

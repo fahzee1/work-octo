@@ -49,6 +49,7 @@ def query_weather(latitude, longitude, city, state):
 
 def query_by_state_city(state, city=None, get_content=True, local=False, freecrime=False):
     # validate city and state
+    #pdb.set_trace()
     try:
         state = State.objects.get(abbreviation=state)
         city_id = None
@@ -365,6 +366,7 @@ def choose_state(request):
     states = State.objects.order_by('name')
     forms = {}
     forms['basic'] = PAContactForm()
+    """
     if not settings.DEBUG:
         try:
             ip = request.META['REMOTE_ADDR']
@@ -382,6 +384,7 @@ def choose_state(request):
                 return HttpResponseRedirect(reverse('crime-rate:crime-stats',kwargs={'city':city,'state':state_abbr}))
             except:
                 return render(request,'crime-stats/choose-state.html',{'states':states,'forms':forms})
+    """
     return render(request,'crime-stats/choose-state.html',
                               {'states': states,
                                'forms': forms})

@@ -91,6 +91,8 @@ def strip_city(city):
         city = city.replace(',','')
     if '/' in city:
         city = city.replace('/','')
+    if "'" in city:
+        city = city.replace("'","")
     return city
 
 
@@ -244,7 +246,6 @@ def local_city(request, state):
 
 def local_page_wrapper2(request,state,city=None):
     statecode = get_statecode(state)
-    #pdb.set_trace()
     if not statecode:
         raise Http404
     if city:
